@@ -62,10 +62,11 @@
         <statusbarpanel id="UpdateScanStatusbar" 
                         class="statusbarpanel-iconic"
 			tooltiptext="&UpdateScan.tooltip;"
-			observes="viewUpdateScanSidebar"
-			onclick="toggleSidebar('viewUpdateScanSidebar');"
+			onmousedown="toggleSidebar('viewUpdateScanSidebar');"
                         status="0"/>
     </statusbar>
+
+
 
 </overlay>
 
