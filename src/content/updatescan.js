@@ -31,8 +31,6 @@ function unloadUpdateScan()
     refresh.stop();
 }
 
-
-
 function scanButtonClick()
 {
     var id;
@@ -90,6 +88,7 @@ function scanChangedCallback(id, content, status)
     } else {
 	modifyRDFitem(id, "error", "1");
     }
+    saveRDF();
     refreshTree();
     refresh.request();
 }
@@ -108,13 +107,21 @@ function scanFinishedCallback(errors)
     if (errors != "") {
 	setStatus(statusError);
         alert(errors);
-    } else if (numChanges == 0)
+    } else if (numChanges == 0) {
 	setStatus(statusNoChanges);
-    else if (numChanges == 1)
-	setStatus(statusOneChange);
-    else
-	setStatus(numChanges+" "+statusManyChanges);
-    
+    } else {
+	if (numChanges == 1) {
+	    setStatus(statusOneChange);
+	    message = "A webpage has been updated";
+	} else {
+	    setStatus(numChanges+" "+statusManyChanges);
+	    message = numChanges+" webpages have been updated";
+	}
+	window.openDialog("chrome://updatescan/content/alert.xul",
+			  "alert:alert",
+			  "chrome,dialog=yes,titlebar=no,popup=yes",
+			  message);
+    }
     hideProgress();
     showScanButton();
 }
@@ -165,6 +172,7 @@ function openNewDialogNoRefresh(title, url)
         modifyRDFitem(id, "content", result[5]);
 	modifyRDFitem(id, "error", result[6]);
 	modifyRDFitem(id, "scanratemins", result[7]);
+	saveRDF();
     }
 }
 
@@ -208,6 +216,7 @@ function openEditDialog()
 	    modifyRDFitem(id, "error", result[6]);
 	    modifyRDFitem(id, "scanratemins", result[7]);
         }
+	saveRDF();
     }
     refreshTree();
     refresh.request();
@@ -218,6 +227,7 @@ function openSelectedItem()
     var id;
     id = getSelectedItemID();
     modifyRDFitem(id, "changed", "0");
+    saveRDF();
     openTopWin(queryRDFitem(id, "url"));
     refreshTree();
     refresh.request();
@@ -226,6 +236,7 @@ function openSelectedItem()
 function deleteSelectedItem()
 {
     deleteRDFitem(getSelectedItemID());
+    saveRDF();
     refreshTree();
     refresh.request();
 }

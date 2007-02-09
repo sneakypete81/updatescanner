@@ -19,7 +19,7 @@ version = "%d.%d.%d%s" % (
     in_development and "+" or ""
 )
 
-homepageURL = "http://www.peteburgers.fastmail.fm/%(app)s" % vars()
+homepageURL = "http://updatescanner.mozdev.org"
 
 allowUpdate = False
 updateURL = "%(homepageURL)s/update.rdf" % vars()

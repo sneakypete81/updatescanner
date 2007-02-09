@@ -10,6 +10,11 @@ function initRDF(rdffile)
         rootnode.makeSeq();
 }
 
+function saveRDF(rdffile)
+{
+    dsource.save()
+}
+
 function getRDFuri()
 {
     // Get path to the user's extension install directory

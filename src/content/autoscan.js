@@ -53,6 +53,7 @@ function Autoscan()
 		lastScan = new Date(lastScan);
 		if (now - lastScan > scanRate*1000*60) {
 		    modifyRDFitem(id, "lastscan", now.toString());
+		    saveRDF();
 		    doScan = true;
 		    scan.addURL(id, queryRDFitem(id, "title", "No Title"), 
 				    queryRDFitem(id, "url", ""), 
@@ -85,6 +86,7 @@ function Autoscan()
 	} else {
 	    modifyRDFitem(id, "error", "1");
 	}
+	saveRDF();
     }
 
     this.scanFinished = function(errors)

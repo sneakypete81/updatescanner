@@ -17,8 +17,8 @@ ID=`python -c 'from config import *; print uid'`
 # presuming that you're on a single-user system,
 #  you won't need to run this pkill as root
 pkill firefox-bin
-touch ~/.mozilla/firefox/*.dev/extensions/{$ID}
-pwd > ~/.mozilla/firefox/*.dev/extensions/{$ID}
+touch ~/.mozilla/firefox/dev/extensions/{$ID}
+pwd > ~/.mozilla/firefox/dev/extensions/{$ID}
 firefox -P dev&
 
 

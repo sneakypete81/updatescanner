@@ -86,11 +86,10 @@ function onAlertLoad()
 
 function onAlertClick()
 {
-    var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
-                   .getService(Components.interfaces.nsIWindowMediator);
-    var win = wm.getMostRecentWindow("navigator:browser");
-
-    win.focus();
+    if (opener.openSidebar) {
+	opener.openSidebar('viewUpdateScanSidebar');
+    }
+    opener.focus()
 }
 
 
