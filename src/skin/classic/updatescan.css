@@ -1,0 +1,11 @@
+@import url(chrome://global/skin/);
+
+treechildren::-moz-tree-cell-text(error)
+{
+    color: darkgrey;
+}
+
+treechildren::-moz-tree-cell-text(changed)
+{
+    font-weight: bold;
+}

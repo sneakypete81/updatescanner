@@ -1,0 +1,19 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+#tools-updatescan-button {
+  list-style-image: url("chrome://updatescan/skin/updatescan.png");
+}
+
+toolbar[iconsize="small"] #tools-updatescan-button {
+  list-style-image: url("chrome://updatescan/skin/updatescan_sm.png");
+}
+
+statusbarpanel#UpdateScanStatusbar[status="0"]
+{
+    list-style-image: url("chrome://updatescan/skin/updatescan_grey_sm.png");
+}
+
+statusbarpanel#UpdateScanStatusbar[status="1"]
+{
+    list-style-image: url("chrome://updatescan/skin/updatescan_sm.png");
+}

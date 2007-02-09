@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE overlay SYSTEM "chrome://updatescan/locale/updatescanoverlay.dtd">
+<?xml-stylesheet href="chrome://updatescan/skin/updatescanoverlay.css" type="text/css"?>
+
+<overlay id="UpdateScanOverlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <stringbundle id="strings" 
+		src="chrome://updatescan/locale/updatescanoverlay.properties"/>
+
+    <script src="rdf/rdfds.js"/>
+    <script src="rdf/rdf.js"/>
+    <script src="mydump.js"/>
+    <script src="updatescanoverlay.js"/>
+    <script src="updatescan.js"/>
+    <script src="autoscan.js"/>
+    <script src="scan.js"/>
+    <script src="fuzzy.js"/>
+    <script src="refresher.js"/>
+    <script src="statusbar.js"/>
+
+    <popup id="contentAreaContextMenu">
+      <menuitem id="AddToUpdateScan"
+                insertafter="context-bookmarkpage"
+                label="&AddToUpdateScan.label;"
+                accesskey="&AddToUpdateScan.accesskey;"
+                oncommand="addToUpdateScan(document.getElementById('content'));"/>
+
+    </popup>
+
+    <toolbarpalette id="BrowserToolbarPalette">
+        <toolbarbutton id="tools-updatescan-button"
+                       label="&UpdateScanSidebar.label;"
+                       tooltiptext="&UpdateScan.tooltip;"
+                       observes="viewUpdateScanSidebar"
+                       class="toolbarbutton-1" />
+    </toolbarpalette>
+
+    <menupopup id="viewSidebarMenu">
+        <menuitem  observes="viewUpdateScanSidebar" />
+    </menupopup>
+
+    <menupopup id="menu_ToolsPopup">
+        <menuitem observes="viewUpdateScanSidebar" 
+                  insertbefore="devToolsSeparator" />	  
+    </menupopup>
+
+
+    <broadcasterset id="mainBroadcasterSet">
+        <broadcaster id="viewUpdateScanSidebar"
+                     autoCheck="false"
+                     label="&UpdateScanSidebar.label;"
+                     type="checkbox"
+                     group="sidebar"
+                     sidebarurl="chrome://updatescan/content/updatescan.xul"
+                     sidebartitle="&UpdateScanSidebar.label;"
+                     oncommand="toggleSidebar('viewUpdateScanSidebar');"/>
+    </broadcasterset>
+
+    <statusbar id="status-bar">
+        <statusbarpanel id="UpdateScanStatusbar" 
+                        class="statusbarpanel-iconic"
+			tooltiptext="&UpdateScan.tooltip;"
+			observes="viewUpdateScanSidebar"
+			onclick="toggleSidebar('viewUpdateScanSidebar');"
+                        status="0"/>
+    </statusbar>
+
+</overlay>
+
+
+

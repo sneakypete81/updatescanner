@@ -1,0 +1,21 @@
+Things to do:
+
+Features:
+**Add timeout to scan?
+drag n drop
+bookmark menu item?
+Handle frames
+Rightclick on link
+**Autoscan every x minutes
+Get strings into locale
+Check rdf file integrity (remove empty urls)
+**Timeout on scan
+
+Bugs:
+Uninstall should delete rdf?
+Multiple windows tree update is funny in Linux
+Doesn't display title when firefox is started with sidebar open
+Windows statusbar requires rightclick, not left
+**Need to handle scanning errors better
+Problem on my work PC - rdf won't update
+Need to handle .getstrings properly in scan.js

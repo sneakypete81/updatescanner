@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+APP=updatescan
+
+JAR="chrome/$APP.jar"
+[ -f $JAR ] && rm $JAR
+echo $JAR
+find content locale skin \
+    | grep -v '/.svn' \
+    | grep -v '.build$' \
+    | xargs zip -q $JAR
+
+XPI="$APP.xpi"
+[ -f $XPI ] && rm $XPI
+echo $XPI
+find install.rdf chrome.manifest chrome defaults \
+    | grep -v /.svn \
+    | grep -v '.build$' \
+    | xargs zip -q $XPI
+

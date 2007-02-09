@@ -1,0 +1,1 @@
+pref("updatescan.useVagueJargon", true);

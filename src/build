@@ -1,0 +1,8 @@
+#!/bin/bash
+
+APP=updatescan
+
+./install.rdf.build
+./chrome.manifest.build
+rm -f $APP.xpi
+./xpi.build

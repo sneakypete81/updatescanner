@@ -1,0 +1,31 @@
+<?xml-stylesheet href="chrome://global/skin/alerts/alert.css" type="text/css"?>
+
+<window id="alertNotification"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        windowtype="alert:alert"
+        xmlns:xhtml2="http://www.w3.org/TR/xhtml2"
+        xmlns:wairole="http://www.w3.org/2005/01/wai-rdf/GUIRoleTaxonomy#"
+        xhtml2:role="wairole:alert"
+        align="start"
+        onload="onAlertLoad()">
+  
+<script type="application/x-javascript" 
+	src="chrome://updatescan/content/alert.js" />
+
+<vbox id="alertBox" class="alertBox" onclick="onAlertClick();">
+<spacer height="4px"/>
+<hbox>
+  <vbox>
+    <image src='chrome://updatescan/skin/updatescan_big.png'/>
+  </vbox>
+
+  <vbox>
+    <label value="Update Scanner" style="font-weight:bold"/>
+    <vbox><label id="message" value="" /></vbox>
+  </vbox>
+</hbox>
+</vbox>
+<!-- This method is called inline because we want to make sure we establish the width
+     and height of the alert before we fire the onload handler. -->
+<script type="application/x-javascript">prefillAlertInfo();</script>
+</window>

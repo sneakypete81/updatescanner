@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://updatescan/skin/updatescan.css" 
+		 type="text/css"?>
+
+<!DOCTYPE window SYSTEM "chrome://updatescan/locale/updatescan.dtd">
+
+<window id="UpdateScan-window"
+	onload="loadUpdateScan()"
+	onunload="unloadUpdateScan()"
+	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+	xmlns:UPDATESCAN="http://www.updatescan.com/rdf/updatescan#">
+
+  <stringbundle id="strings" 
+		src="chrome://updatescan/locale/updatescan.properties"/>
+    
+  <script src="rdf/rdfds.js"/>
+  <script src="rdf/rdf.js"/>
+  <script src="mydump.js"/>
+  <script src="updatescan.js"/>
+  <script src="scan.js"/>
+  <script src="fuzzy.js"/>
+  <script src="refresher.js"/>
+  <script src="opentopwin.js"/>
+
+  <vbox flex="1">
+    <hbox pack="left">
+      <button label="&newbutton.label;" oncommand="openNewDialog();"/>
+      <button observes="scanbutton" />
+    </hbox>
+
+    <tree id="UpdateTree" flex="1" datasources="rdf://null" 
+	  hidecolumnpicker="true" 
+	  ref="http://www.updatescan.com/rdf/updatescan/all">
+      <treecols>
+        <treecol hideheader="true" flex="1" id="title"/>
+        <treecol id="url" hidden="true"/>
+        <treecol id="scanrate" hidden="true"/>
+	<treecol id="threshold" hidden="true" />
+        <treecol id="lastscan" hidden="true"/>
+        <treecol id="changed" hidden="true"/>
+	<treecol id="error" hidden="true"/>
+      </treecols>
+           
+      <template>
+	<rule UPDATESCAN:error="1">
+          <treechildren ondblclick="openSelectedItem();" context="contextmenu">
+            <treeitem uri="rdf:*"><treerow>
+              <treecell properties="error" 
+                label="rdf:http://www.updatescan.com/rdf/updatescan#title"/>
+              <treecell 
+		label="rdf:http://www.updatescan.com/rdf/updatescan#url"/>
+              <treecell 
+		label="rdf:http://www.updatescan.com/rdf/updatescan#threshold"/>
+              <treecell 
+		label="rdf:http://www.updatescan.com/rdf/updatescan#lastscan"/>
+              <treecell 
+		label="rdf:http://www.updatescan.com/rdf/updatescan#changed"/>
+              <treecell 
+		label="rdf:http://www.updatescan.com/rdf/updatescan#error"/>
+            </treerow></treeitem>
+          </treechildren>
+        </rule>
+	<rule UPDATESCAN:changed="1">
+          <treechildren ondblclick="openSelectedItem();" context="contextmenu">
+            <treeitem uri="rdf:*"><treerow>
+              <treecell properties="changed"
+                src="chrome://updatescan/skin/updatescan_sm.png" 
+                label=" rdf:http://www.updatescan.com/rdf/updatescan#title"/>
+              <treecell 
+		label="rdf:http://www.updatescan.com/rdf/updatescan#url"/>
+              <treecell 
+		label="rdf:http://www.updatescan.com/rdf/updatescan#threshold"/>
+              <treecell 
+		label="rdf:http://www.updatescan.com/rdf/updatescan#lastscan"/>
+              <treecell 
+		label="rdf:http://www.updatescan.com/rdf/updatescan#changed"/>
+              <treecell 
+		label="rdf:http://www.updatescan.com/rdf/updatescan#error"/>
+            </treerow></treeitem>
+          </treechildren>
+        </rule>
+        <rule>
+          <treechildren ondblclick="openSelectedItem();" context="contextmenu">
+            <treeitem uri="rdf:*"><treerow>
+              <treecell 
+		label="rdf:http://www.updatescan.com/rdf/updatescan#title"/>
+              <treecell 
+		label="rdf:http://www.updatescan.com/rdf/updatescan#url"/>
+              <treecell 
+		label="rdf:http://www.updatescan.com/rdf/updatescan#threshold"/>
+              <treecell 
+		label="rdf:http://www.updatescan.com/rdf/updatescan#lastscan"/>
+              <treecell 
+		label="rdf:http://www.updatescan.com/rdf/updatescan#changed"/>
+              <treecell 
+		label="rdf:http://www.updatescan.com/rdf/updatescan#error"/>
+            </treerow></treeitem>
+          </treechildren>
+        </rule>
+      </template>
+    </tree>
+    <hbox>
+      <progressmeter id="Progress" mode="normal" value="0" 
+		     collapsed="true" flex="1"/>
+    </hbox>
+    <hbox>
+      <label id="StatusText" value=""/>
+    </hbox>
+
+  </vbox>
+    
+  <popupset>
+    <popup id="contextmenu">
+      <menuitem style="font-weight:bold;" label="&openmenu.label;" 
+		oncommand="openSelectedItem();"/>
+      <menuitem label="&editmenu.label;" oncommand="openEditDialog();"/>
+      <menuitem label="&deletemenu.label;" oncommand="deleteSelectedItem();" 
+		key="deleteKey"/>
+    </popup>
+  </popupset>
+
+  <keyset>
+    <key id="deleteKey" keycode="VK_DELETE" oncommand="deleteSelectedItem();"/>
+    <key id="enterKey" keycode="VK_ENTER" oncommand="openSelectedItem();"/>
+  </keyset>
+
+  <broadcasterset>
+    <broadcaster id="scanbutton" label="&scanbutton.label;" 
+		 oncommand="scanButtonClick()" 
+		 scanbuttonlabel="&scanbutton.label;" 
+		 scanbuttoncommand="scanButtonClick()"
+                 stopbuttonlabel="&stopbutton.label;" 
+		 stopbuttoncommand="stopButtonClick()"/>
+  </broadcasterset>
+    
+</window>
+

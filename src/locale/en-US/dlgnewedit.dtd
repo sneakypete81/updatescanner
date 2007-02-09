@@ -1,0 +1,14 @@
+<!ENTITY url.label "URL:">
+<!ENTITY title.label "Title:">
+<!ENTITY scan.label "Scan:">
+<!ENTITY manual.label "Manual">
+<!ENTITY every.label "Every:">
+
+<!ENTITY min5.label "5 Minutes">
+<!ENTITY min10.label "10 Minutes">
+<!ENTITY min30.label "30 Minutes">
+<!ENTITY hour1.label "1 Hour">
+<!ENTITY hour12.label "12 Hours">
+<!ENTITY day1.label "1 Day">
+<!ENTITY week1.label "1 Week">
+
