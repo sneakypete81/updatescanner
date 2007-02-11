@@ -88,6 +88,8 @@ function onAlertClick()
 {
     if (opener.openSidebar) {
 	opener.openSidebar('viewUpdateScanSidebar');
+    } else {
+	alert("can't open");
     }
     opener.focus()
 }
