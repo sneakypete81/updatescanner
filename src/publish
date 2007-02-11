@@ -6,13 +6,12 @@ from shutil import copy
 
 v = vars()
 
-system("./www/update.rdf.build")
+#system("./releases/update.rdf.build")
 
-copy("%(app)s.xpi" % v, "www/%(app)s.xpi" % v)
-copy("%(app)s.xpi" % v, "www/%(updateFile)s" % v)
+copy("%(app)s.xpi" % v, "releases/%(app)s.xpi" % v)
+copy("%(app)s.xpi" % v, "releases/%(updateFile)s" % v)
 
-comment = "Published "+app+" "+version+" build"
-
-system("svn add www/%(updateFile)s" % v)
-system("svn ci -m '"+comment+"' " +
-    "www/%(app)s.xpi www/%(updateFile)s www/update.rdf" % v)
+#comment = "Published "+app+" "+version+" build"
+#system("svn add releases/%(updateFile)s" % v)
+#system("svn ci -m '"+comment+"' " +
+#    "releases/%(app)s.xpi releases/%(updateFile)s releases/update.rdf" % v)
