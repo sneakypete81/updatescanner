@@ -24,12 +24,15 @@
 
   <vbox flex="1">
     <hbox pack="left">
-      <button label="&newbutton.label;" oncommand="openNewDialog();"/>
+      <toolbarbutton id="new-button" oncommand="openNewDialog()" tooltiptext="New Entry"/>
+      <toolbarbutton id="read-button" oncommand="markAllAsVisited()" tooltiptext="Mark all as visited"/>
+      <toolbarbutton id="delete-button" oncommand="deleteSelectedItem()" tooltiptext="Delete"/>
+      <toolbarspring />
       <button observes="scanbutton" />
     </hbox>
 
     <tree id="UpdateTree" flex="1" datasources="rdf://null" 
-	  hidecolumnpicker="true" 
+	  hidecolumnpicker="true" seltype="single"
 	  ref="http://www.updatescan.com/rdf/updatescan/all">
       <treecols>
         <treecol hideheader="true" flex="1" id="title"/>
@@ -43,7 +46,7 @@
            
       <template>
 	<rule UPDATESCAN:error="1">
-          <treechildren ondblclick="openSelectedItem();" context="contextmenu">
+          <treechildren context="contextmenu">
             <treeitem uri="rdf:*"><treerow>
               <treecell properties="error" 
                 label="rdf:http://www.updatescan.com/rdf/updatescan#title"/>
@@ -61,7 +64,7 @@
           </treechildren>
         </rule>
 	<rule UPDATESCAN:changed="1">
-          <treechildren ondblclick="openSelectedItem();" context="contextmenu">
+          <treechildren context="contextmenu">
             <treeitem uri="rdf:*"><treerow>
               <treecell properties="changed"
                 src="chrome://updatescan/skin/updatescan_sm.png" 
@@ -80,7 +83,7 @@
           </treechildren>
         </rule>
         <rule>
-          <treechildren ondblclick="openSelectedItem();" context="contextmenu">
+          <treechildren context="contextmenu">
             <treeitem uri="rdf:*"><treerow>
               <treecell 
 		label="rdf:http://www.updatescan.com/rdf/updatescan#title"/>
@@ -113,9 +116,13 @@
     <popup id="contextmenu">
       <menuitem style="font-weight:bold;" label="&openmenu.label;" 
 		oncommand="openSelectedItem();"/>
-      <menuitem label="&editmenu.label;" oncommand="openEditDialog();"/>
+      <menuitem label="&opentabmenu.label;" 
+		oncommand="openSelectedItemNewTab();"/>
+      <menuseparator />
       <menuitem label="&deletemenu.label;" oncommand="deleteSelectedItem();" 
 		key="deleteKey"/>
+      <menuseparator />
+      <menuitem label="&editmenu.label;" oncommand="openEditDialog();"/>
     </popup>
   </popupset>
 

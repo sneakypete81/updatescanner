@@ -6,6 +6,7 @@
 <!ENTITY stopbutton.label "Cancel">
 
 <!ENTITY openmenu.label "Open">
-<!ENTITY editmenu.label "Edit">
-<!ENTITY newmenu.label "New">
+<!ENTITY opentabmenu.label "Open in new tab">
+<!ENTITY newmenu.label "New Item">
 <!ENTITY deletemenu.label "Delete">
+<!ENTITY editmenu.label "Properties">

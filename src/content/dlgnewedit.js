@@ -1,7 +1,7 @@
 const sliderThresholdValues = 5;
-const sliderThresholdMax = 20;
+const sliderThresholdMax = 100;
 const sliderAutoscanValues = 5;
-const sliderAutoscanMax = 20;
+const sliderAutoscanMax = 100;
 
 function initDialog()
 {
@@ -94,19 +94,19 @@ function sliderThresholdChange()
 	label2.value=""
     } else if (pos == 1) {
 	label1.value="Cosmetic changes are ignored";
-	label2.value="(about 10 characters)";
+	label2.value="(less than about 10 characters)";
     } else if (pos == 2) {
 	label1.value="Minor changes are ignored";
-	label2.value="(about 50 characters)";
+	label2.value="(less than about 50 characters)";
     } else if (pos == 3) {
 	label1.value="Small changes are ignored";
-	label2.value="(about 100 characters)";
+	label2.value="(less than about 100 characters)";
     } else if (pos == 4) {
 	label1.value="Medium changes are ignored";
-	label2.value="(about 500 characters)";
+	label2.value="(less than about 500 characters)";
     } else if (pos == 5) {
 	label1.value="Major changes are ignored";
-	label2.value="(about 1000 characters)";
+	label2.value="(less than about 1000 characters)";
     }
 }
 
@@ -170,7 +170,7 @@ function sliderAutoscanChange()
     } else if (pos == 4) {
 	label3.value="Scan every day";
     } else if (pos == 5) {
-	label3.value="No autoscan - manual scan required";
+	label3.value="Manual scan only";
     }
 }
 

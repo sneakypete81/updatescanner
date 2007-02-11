@@ -19,6 +19,7 @@ function loadUpdateScan()
     // link to the listbox
     var tree=document.getElementById("UpdateTree");
     tree.datasources=rdffile;
+    tree.ondblclick=treeDblClick;
     refreshTree();
 
     // Check for refresh requests
@@ -29,6 +30,18 @@ function loadUpdateScan()
 function unloadUpdateScan()
 {
     refresh.stop();
+}
+
+function treeDblClick(event)
+{
+    switch (event.button) {
+    case 0:
+	openSelectedItem();
+	break;
+    case 1:
+	openSelectedItemNewTab();
+	break;
+    }
 }
 
 function scanButtonClick()
@@ -231,6 +244,51 @@ function openSelectedItem()
     openTopWin(queryRDFitem(id, "url"));
     refreshTree();
     refresh.request();
+}
+
+function openSelectedItemNewTab()
+{
+    var mainWindow = window.QueryInterface(
+	Components.interfaces.nsIInterfaceRequestor)
+    .getInterface(Components.interfaces.nsIWebNavigation)
+    .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
+    .rootTreeItem
+    .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+    .getInterface(Components.interfaces.nsIDOMWindow);
+
+    var id;
+    id = getSelectedItemID();
+    modifyRDFitem(id, "changed", "0");
+    saveRDF();
+    mainWindow.getBrowser().addTab(queryRDFitem(id, "url"));
+    refreshTree();
+    refresh.request();
+}
+
+function markAllAsVisited()
+{
+    var tree = document.getElementById("UpdateTree");
+
+    try {
+        numitems = tree.contentView.rowCount;
+    } catch(e) {
+        numitems = 0;
+    }
+
+    if (numitems > 0)
+    {
+        for (var i=0; i<numitems; i++)
+        {
+            id = tree.contentView.getItemAtIndex(i).id;
+	    if (queryRDFitem(id, "changed") != "0") {
+		modifyRDFitem(id, "changed", "0");
+		refreshTree();
+	    }
+        }
+	saveRDF();
+	refreshTree();
+	refresh.request();
+    }
 }
 
 function deleteSelectedItem()

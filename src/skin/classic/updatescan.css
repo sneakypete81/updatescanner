@@ -1,5 +1,21 @@
 @import url(chrome://global/skin/);
 
+#new-button {
+  list-style-image: url("chrome://updatescan/skin/document-new.png");
+}
+
+#read-button {
+  list-style-image: url("chrome://updatescan/skin/document-checked.png");
+}
+
+#delete-button {
+  list-style-image: url("chrome://updatescan/skin/edit-delete.png");
+}
+
+#scan-button {
+  list-style-image: url("chrome://updatescan/skin/updatescan.png");
+}
+
 treechildren::-moz-tree-cell-text(error)
 {
     color: darkgrey;
