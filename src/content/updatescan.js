@@ -293,10 +293,15 @@ function markAllAsVisited()
 
 function deleteSelectedItem()
 {
-    deleteRDFitem(getSelectedItemID());
-    saveRDF();
-    refreshTree();
-    refresh.request();
+    id=getSelectedItemID(); 
+    title = queryRDFitem(id, "title", "untitled");
+
+    if (confirm("Are you sure you want to delete "+title+"?")) {
+	deleteRDFitem(id);
+	saveRDF();
+	refreshTree();
+	refresh.request();
+    }
 }
 
 function getSelectedItemID()
