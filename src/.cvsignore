@@ -1,0 +1,4 @@
+*.pyc
+chrome.manifest
+install.rdf
+updatescan.xpi
