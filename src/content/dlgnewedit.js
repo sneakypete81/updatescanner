@@ -85,28 +85,29 @@ function sliderThresholdSetPos(value)
 
 function sliderThresholdChange() 
 {
+    strings=document.getElementById("strings");
     slider=document.getElementById("sliderThreshold");
     label1=document.getElementById("label1");
     label2=document.getElementById("label2");
     pos = sliderThresholdGetPos();
     if (pos == 0) {
-	label1.value="All webpage changes cause a notification";
-	label2.value=""
+	label1.value=strings.getString("thresholdLabel0a");
+	label2.value=strings.getString("thresholdLabel0b");
     } else if (pos == 1) {
-	label1.value="Cosmetic changes are ignored";
-	label2.value="(less than about 10 characters)";
+	label1.value=strings.getString("thresholdLabel1a");
+	label2.value=strings.getString("thresholdLabel1b");
     } else if (pos == 2) {
-	label1.value="Minor changes are ignored";
-	label2.value="(less than about 50 characters)";
+	label1.value=strings.getString("thresholdLabel2a");
+	label2.value=strings.getString("thresholdLabel2b");
     } else if (pos == 3) {
-	label1.value="Small changes are ignored";
-	label2.value="(less than about 100 characters)";
+	label1.value=strings.getString("thresholdLabel3a");
+	label2.value=strings.getString("thresholdLabel3b");
     } else if (pos == 4) {
-	label1.value="Medium changes are ignored";
-	label2.value="(less than about 500 characters)";
+	label1.value=strings.getString("thresholdLabel4a");
+	label2.value=strings.getString("thresholdLabel4b");
     } else if (pos == 5) {
-	label1.value="Major changes are ignored";
-	label2.value="(less than about 1000 characters)";
+	label1.value=strings.getString("thresholdLabel5a");
+	label2.value=strings.getString("thresholdLabel5b");
     }
 }
 
@@ -156,21 +157,22 @@ function sliderAutoscanSetPos(value)
 
 function sliderAutoscanChange() 
 {
+    strings=document.getElementById("strings");
     slider=document.getElementById("sliderAutoscan");
     label3=document.getElementById("label3");
     pos = sliderAutoscanGetPos();
     if (pos == 0) {
-	label3.value="Scan every 15 minutes";
+	label3.value=strings.getString("autoscanLabel0");
     } else if (pos == 1) {
-	label3.value="Scan every 30 minutes";
+	label3.value=strings.getString("autoscanLabel1");
     } else if (pos == 2) {
-	label3.value="Scan every hour";
+	label3.value=strings.getString("autoscanLabel2");
     } else if (pos == 3) {
-	label3.value="Scan every 6 hours";
+	label3.value=strings.getString("autoscanLabel3");
     } else if (pos == 4) {
-	label3.value="Scan every day";
+	label3.value=strings.getString("autoscanLabel4");
     } else if (pos == 5) {
-	label3.value="Manual scan only";
+	label3.value=strings.getString("autoscanLabel5");
     }
 }
 

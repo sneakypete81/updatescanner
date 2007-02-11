@@ -39,9 +39,9 @@
 </grid>
 
 <groupbox>
-    <caption label="Change Threshold" />
+    <caption label="&threshold.label;" />
     <hbox>
-        <label>Low</label>
+        <label value="&low.label;" />
         <slider id="sliderThreshold"
                 height="10" flex="100%" 
                 style="background-color: lightgray; border: 1px solid black;"
@@ -49,7 +49,7 @@
 		onclick="sliderThresholdChange();">
             <thumb width="20"/>
         </slider>
-        <label>High</label>
+        <label value="&high.label;" />
     </hbox>
     <vbox align="center">
         <label id="label1" value="" />
@@ -58,9 +58,9 @@
 </groupbox>
 
 <groupbox>
-    <caption label="Autoscan" />
+    <caption label="&autoscan.label;" />
     <hbox>
-        <label>Often</label>
+        <label value="&often.label;" />
         <slider id="sliderAutoscan"
                 height="10" flex="100%" 
                 style="background-color: lightgray; border: 1px solid black;"
@@ -68,7 +68,7 @@
 		onclick="sliderAutoscanChange();">
             <thumb width="20"/>
         </slider>
-        <label>Never</label>
+        <label value="&never.label;" />
     </hbox>
     <vbox align="center">
         <label id="label3" value="" />
