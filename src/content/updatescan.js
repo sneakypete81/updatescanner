@@ -4,6 +4,7 @@
 //           fuzzy.js
 //           refresh.js
 //           opentopwin.js
+//           updatescanoverlay.js
 var numChanges;
 var refresh;
 var scan;
@@ -152,9 +153,14 @@ function stopButtonClick()
 
 function openNewDialog()
 {
-    var titleNewItem=document.getElementById("strings").getString(
-	                                     "titleNewItem");
-    openNewDialogNoRefresh(titleNewItem, "");
+    var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+                   .getInterface(Components.interfaces.nsIWebNavigation)
+                   .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
+                   .rootTreeItem
+                   .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+                   .getInterface(Components.interfaces.nsIDOMWindow) 
+
+    addToUpdateScan(mainWindow.document.getElementById('content'))
     refreshTree();
     refresh.request();
 }

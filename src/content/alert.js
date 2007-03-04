@@ -86,12 +86,15 @@ function onAlertLoad()
 
 function onAlertClick()
 {
+/* This really doesn't work reliably. bump to next rev?
+
     if (opener.openSidebar) {
 	opener.openSidebar('viewUpdateScanSidebar');
     } else {
-	alert("can't open");
+	alert("opener");
     }
     opener.focus()
+*/
 }
 
 
