@@ -86,15 +86,14 @@ function onAlertLoad()
 
 function onAlertClick()
 {
-/* This really doesn't work reliably. bump to next rev?
+    var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
+                       .getService(Components.interfaces.nsIWindowMediator);
+    var win = wm.getMostRecentWindow("navigator:browser");
 
-    if (opener.openSidebar) {
-	opener.openSidebar('viewUpdateScanSidebar');
-    } else {
-	alert("opener");
+    if (win.toggleSidebar) {
+	win.toggleSidebar('viewUpdateScanSidebar');
     }
-    opener.focus()
-*/
+    win.content.document.focus()
 }
 
 
