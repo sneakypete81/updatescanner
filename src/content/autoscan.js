@@ -45,7 +45,7 @@ function Autoscan()
 	while (pages.hasMoreElements()) {
 	    id = pages.getNext().getValue();
 	    scanRate = queryRDFitem(id, "scanratemins", "0");
-	    if (scanRate) {
+	    if (scanRate != "0") {
 		lastScan = queryRDFitem(id, "lastscan", "");
 		if (lastScan == "") {
 		    lastScan = "5/11/1978";
