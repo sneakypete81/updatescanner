@@ -93,7 +93,7 @@ function onAlertClick()
     if (win.toggleSidebar) {
 	win.toggleSidebar('viewUpdateScanSidebar');
     }
-    win.content.document.focus()
+    win.focus()
 }
 
 
