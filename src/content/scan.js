@@ -102,13 +102,14 @@ function Scanner()
 
 	    try {
 	        if (httpreq.status == 200) {
+                    oldContent = stripNonAlphaNum(stripTags(stripScript(page.content)))
 		    newContent = stripNonAlphaNum(stripTags(stripScript(
 			    	                  httpreq.responseText)));
-		    if (!checkSame(newContent, page.content, page.threshold)) {
+		    if (!checkSame(newContent, oldContent, page.threshold)) {
 		        if (page.content == "**NEW**")
-			    changedCallback(page.id, newContent, STATUS_NEW);
+			    changedCallback(page.id, httpreq.responseText, STATUS_NEW);
 		        else
-			    changedCallback(page.id, newContent, STATUS_CHANGE);
+			    changedCallback(page.id, httpreq.responseText, STATUS_CHANGE);
 		    } else {
 		        changedCallback(page.id, "", STATUS_NO_CHANGE);
 		    }
@@ -193,7 +194,8 @@ function stripTags(content)
 
 function stripScript(content)
 {
-    return content.replace(/<script([\r\n]|.)*?>([\r\n]|.)*?<\/script>/gi,"");
+    content = content.replace(/<script([\r\n]|.)*?>([\r\n]|.)*?<\/script>/gi,"");
+    return    content//.replace(/<script([\r\n]|.)*?\/>/gi,"");
 }
 
 function stripNonAlphaNum(content)

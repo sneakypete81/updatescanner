@@ -37,7 +37,7 @@ function treeDblClick(event)
 {
     switch (event.button) {
     case 0:
-	openSelectedItem();
+	diffSelectedItem();
 	break;
     case 1:
 	openSelectedItemNewTab();
@@ -47,10 +47,6 @@ function treeDblClick(event)
 
 function scanButtonClick()
 {
-    diffTest();
-
-    return;
-
     var id;
     var numitems;
     var treeEmptyAlert=document.getElementById("strings").getString(
@@ -256,6 +252,19 @@ function openSelectedItem()
     refresh.request();
 }
 
+function diffSelectedItem()
+{
+    var id;
+    id = getSelectedItemID();
+    modifyRDFitem(id, "changed", "0");
+    saveRDF();
+
+    displayDiffs(queryRDFitem(id, "title"), queryRDFitem(id, "url"), 
+                 queryRDFitem(id, "content"));
+
+    refreshTree();
+    refresh.request();
+}
 function openSelectedItemNewTab()
 {
     var mainWindow = window.QueryInterface(

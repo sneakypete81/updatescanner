@@ -11,8 +11,7 @@ function diffTest()
     diff0 = readFile("c:\\Projects\\search.htm");
     diff1 = readFile("c:\\Projects\\search2.htm");
 
-    displayDiffs("Political Compass", "http://www.politicalcompass.org/", diff0, diff1);
-
+    displayDiffs("Political Compass", "http://www.politicalcompass.org/", diff0);
 }
 
 function readFile(str_Filename) 
@@ -41,40 +40,56 @@ function readFile(str_Filename)
     return str;
 }
 
-function displayDiffs(title, url, string0, string1)
+var d_doc;
+var d_httpreq;
+var d_oldContent;
+function displayDiffs(title, url, oldContent)
+{ 
+    d_oldContent = oldContent;
+    var win = getTopWin();
+    d_doc = win.content.document
+
+    d_doc.writeln("<base href='"+url+"'>");
+    d_doc.writeln("<table bgcolor=#ffffff color=#ffffff>");
+    d_doc.writeln("<td><img src='file:///c|/updatescan.png'></td>");
+    d_doc.writeln("<td><font face='' color=black size=-1>");
+    d_doc.writeln("The page below (<b>"+title+"</b>) has changed since the last scan.");
+    d_doc.writeln("The changes are <b style='color:black;background-color:#ffff66'>highlighted</b>.");
+    d_doc.writeln("</font></td>");
+    d_doc.writeln("<td><font face='' color=black size=-1>");
+    d_doc.writeln("<a href='"+url+"'><font color=blue>[Remove highlighting]</font></a>");
+    d_doc.writeln("</font></td></table>");
+    d_doc.writeln("<hr>");
+
+    d_httpreq = new XMLHttpRequest();
+    d_httpreq.open("GET", url);
+    d_httpreq.onreadystatechange=displayDiffs_callback;
+    displayDiffs_callback();
+    d_httpreq.send(null);
+}
+
+function displayDiffs_callback()
 {
+    if (d_httpreq == null || d_httpreq.readyState != 4 || d_httpreq.status != 200) 
+        return;
+
+    var string0 = d_oldContent;
+    var string1 = d_httpreq.responseText;
+
     string0 = stripScript(string0);
     string1 = stripScript(string1);
+
+    alert(string0);
+    alert(string1);
 
     words0 = string0.split(" ");
     words1 = string1.split(" ");
 
-    var win = getTopWin();
-    var doc = win.content.document
+    var htmlText = WDiffString(string0, string1);
 
-    diffs = getDiffs(words0, words1);
-
-    doc.writeln("<table><td><img src='file:///c|/updatescan.png'></td>");
-    doc.writeln("<td>The page below (<b>"+title+"</b>) has changed since the last scan.");
-    doc.writeln("The changes are <b style='color:black;background-color:#ffff66'>highlighted</b>.</td>");
-    doc.writeln("<td><a href='"+url+"'>[Remove highlighting]</a></td></table>");
-    doc.writeln("<hr>");
-
-    word = 0;
-    for (var i in diffs) {
-        while (word<diffs[i][1]) {
-            doc.write(" "+words1[word]);
-            word++;
-        }
-        doc.writeln("<b ");
-        doc.write("style='color:black;background-color:#ffff66'> ")
-        while (word<diffs[i][3]) {
-            doc.write(" "+words1[word]);
-            word++;
-        }
-        doc.writeln("</b>");
-    }
-    doc.close();    
+    d_doc.writeln(htmlText);
+    d_doc.close();
+    d_httpreq = null;
 }
 
 function getDiffs(words0, words1)
