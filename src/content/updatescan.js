@@ -47,6 +47,10 @@ function treeDblClick(event)
 
 function scanButtonClick()
 {
+    diffTest();
+
+    return;
+
     var id;
     var numitems;
     var treeEmptyAlert=document.getElementById("strings").getString(
