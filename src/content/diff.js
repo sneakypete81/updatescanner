@@ -8,7 +8,37 @@ function diffTest()
     diff1="Hello this is a to <script>does this get cut? </script>see how well Pete's fantastic diff engine will work the. This quick first test has only <i> words </i> with no lines or <b>tags</b>, so might not work too well.";
 //14   15   16    17    18   19  20   21    22   23 24    25 26    27 28    29  30   31  32
 
-    displayDiffs("Test strings", "http://www.test.com", diff0, diff1);
+    diff0 = readFile("c:\\Projects\\search.htm");
+    diff1 = readFile("c:\\Projects\\search2.htm");
+
+    displayDiffs("Political Compass", "http://www.politicalcompass.org/", diff0, diff1);
+
+}
+
+function readFile(str_Filename) 
+{ 
+    try { 
+        var obj_File = Components.classes["@mozilla.org/file/local;1"].
+               createInstance(Components.interfaces.nsILocalFile); 
+        obj_File.initWithPath(str_Filename); 
+        var obj_InputStream = Components.classes["@mozilla.org/network/file-input-stream;1"].
+               createInstance(Components.interfaces.nsIFileInputStream); 
+        obj_InputStream.init(obj_File,0x01,0444,null); 
+        var obj_ScriptableIO = Components.classes["@mozilla.org/scriptableinputstream;1"].
+               createInstance(Components.interfaces.nsIScriptableInputStream); 
+        obj_ScriptableIO.init(obj_InputStream); 
+    } catch (e) { 
+        alert(e); 
+    } 
+
+    try { 
+        var str = obj_ScriptableIO.read(obj_File.fileSize-1); 
+    } catch (e) { 
+        dump(e); 
+    } 
+    obj_ScriptableIO.close(); 
+    obj_InputStream.close(); 
+    return str;
 }
 
 function displayDiffs(title, url, string0, string1)
