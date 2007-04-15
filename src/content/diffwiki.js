@@ -1,4 +1,10 @@
 /*
+Cacycle's Wikipedia diff code, modified for use with UpdateScanner
+
+Licence:
+I, the creator of this work, hereby release it into the public domain. This applies worldwide.
+In case this is not legally possible, I grant any entity the right to use this work for any purpose, without any conditions, unless such conditions are required by law.
+
 
 Name:    diff.js
 Version: 0.9.2a (April 14, 2007)
@@ -101,13 +107,13 @@ var wDiffHtmlInsertEnd   = wDiffHtmlInsertEnd   || '</span>';
 var wDiffBlockMinLength = wDiffBlockMinLength || 3;
 
 // exclude identical sequence starts and endings from change marking
-var wDiffWordDiff = wDiffWordDiff || true;
+var wDiffWordDiff = wDiffWordDiff || false;
 
 // enable recursive diff to resolve problematic sequences
 var wDiffRecursiveDiff = wDiffRecursiveDiff || true;
 
 // enable block move display
-var wDiffShowBlockMoves = wDiffShowBlockMoves || true;
+var wDiffShowBlockMoves = wDiffShowBlockMoves || false
 
 // compatibility fix for old name of main function
 var StringDiff = WDiffString;
@@ -180,7 +186,7 @@ function WDiffString(oldText, newText) {
 //		outText = wDiffHtmlDeleteStart + outText + wDiffHtmlDeleteEnd;
 		return(outText);
 	}
-
+ 
 // split new and old text into words
 	WDiffSplitText(oldText, newText, text);
 
@@ -193,6 +199,8 @@ function WDiffString(oldText, newText) {
 // process diff data into formatted html text
 	outText = WDiffToHtml(text, block);
 
+	outText = unescapeTagSpaces(outText);
+
 	return(outText);
 }
 
@@ -200,17 +208,27 @@ function WDiffString(oldText, newText) {
 // WDiffSplitText: split new and old text into words
 // input: oldText, newText, strings containing the texts
 // changes: text.newWords and text.oldWords, arrays containing the texts in arrays of words
-
+// UpdateScanner: Now ensures that tags are not split up into multiple words
 function WDiffSplitText(oldText, newText, text) {
 
 // convert strange spaces
 	oldText = oldText.replace(/[\t\v\u00A0\u2028\u2029]+/g, ' ');
 	newText = newText.replace(/[\t\v\u00A0\u2028\u2029]+/g, ' ');
 
+// Make sure all tags have spaces around them, so they appear a seperate words
+        oldText = oldText.replace(/</g," <");
+	oldText = oldText.replace(/>/g,"> ");
+        newText = newText.replace(/</g," <");
+	newText = newText.replace(/>/g,"> ");
+
+// Escape out spaces within a tag, so it appears as a single word
+        oldText = escapeTagSpaces(oldText);
+        newText = escapeTagSpaces(newText);
+
 // split old text into words
 
 //              /     |    |    |    |    |   |  |     |   |  |  |    |    |    | /
-	var pattern = /[\w]+|\[\[|\]\]|\{\{|\}\}|\n+| +|&\w+;|'''|''|=+|\{\||\|\}|\|\-|./g;
+	var pattern = /[\s]+|[^\s]+/g;
 	var result;
 	do {
 		result = pattern.exec(oldText);
@@ -226,7 +244,6 @@ function WDiffSplitText(oldText, newText, text) {
 			text.newWords.push(result[0]);
 		}
 	} while (result != null);
-
 	return;
 }
 
@@ -644,7 +661,6 @@ function WDiffEscape(text) {
 
 	return(text);
 }
-
 
 // HtmlCustomize: customize indicator html: replace {number} with the block number, {block} with the block style
 
@@ -1072,4 +1088,23 @@ function WDiffShortenOutput(diffText) {
 	outText = outText.replace(/\n/g, '<br />');
 
 	return(outText);
+}
+
+function escapeTagSpaces(content)
+{
+        result = "";
+        lastmatch = 0;
+	re=/<[^<]+>/g;
+	while ((match = re.exec(content)) != null) {
+                escmatch = match[0].replace(/\s/g,"___UPDATESCAN___SPACE___");
+		result += content.substring(lastmatch, match.index) + escmatch;
+                lastmatch = re.lastIndex;
+	}
+	result += content.substring(lastmatch);
+	return result;
+}
+
+function unescapeTagSpaces(content)
+{
+	return content.replace(/___UPDATESCAN___SPACE___/g," ");
 }
