@@ -49,52 +49,43 @@ function readFile(str_Filename)
     return str;
 }
 
-var d_doc;
-var d_httpreq;
-var d_oldContent;
-function displayDiffs(title, url, oldContent)
+function displayDiffs(title, url, oldContent, newContent)
 { 
-    d_oldContent = oldContent;
+    string0 = stripScript(oldContent);
+    string1 = stripScript(newContent);
+
+    myDump("old:\n"+string0);
+    myDump("new:\n"+string1);
+
+    var htmlText = WDiffString(string0, string1);
+
     var win = getTopWin();
     d_doc = win.content.document
+
+
 
     d_doc.writeln("<base href='"+url+"'>");
     d_doc.writeln("<table bgcolor=#e5e5ff color=#ffffff cellpadding=5 width=100%>");
     d_doc.writeln("<td><img src='chrome://updatescan/skin/updatescan_big.png'></td>");
     d_doc.writeln("<td><font face='verdana' color=black size=-1>");
-    d_doc.writeln("The page below (<b>"+title+"</b>) has changed since the last scan.");
-    d_doc.writeln("The changes are <b style='color:black;background-color:#ffff66'>highlighted</b>.");
+
+    if (oldContent == "**NEW**" || oldContent == "") {
+	d_doc.writeln("The page below (<b>"+title+"</b>) has just been scanned for the first time.");       htmlText = "New";//newContent;
+    } else if (newContent == "**NEW**" || newContent == "") {
+	d_doc.writeln(title+" has not yet been scanned.");
+        htmlText = "";	
+    } else {
+        d_doc.writeln("The page below (<b>"+title+"</b>) has changed since the last scan.");
+        d_doc.writeln("The changes are <b style='color:black;background-color:#ffff66'>highlighted</b>.");
+    }
+
     d_doc.writeln("</font></td>");
     d_doc.writeln("<td><font face='verdana' color=black size=-1>");
     d_doc.writeln("<a href='"+url+"'><font color=blue>[Remove&nbsp;highlighting]</font></a>");
     d_doc.writeln("</font></td></table>");
     d_doc.writeln("<hr>");
 
-    d_httpreq = new XMLHttpRequest();
-    d_httpreq.open("GET", url);
-    d_httpreq.onreadystatechange=displayDiffs_callback;
-    displayDiffs_callback();
-    d_httpreq.send(null);
-}
-
-function displayDiffs_callback()
-{
-    if (d_httpreq == null || d_httpreq.readyState != 4 || d_httpreq.status != 200) 
-        return;
-
-    var string0 = d_oldContent;
-    var string1 = d_httpreq.responseText;
-
-    string0 = stripScript(string0);
-    string1 = stripScript(string1);
-
-    myDump(string0);
-    myDump(string1);
-
-    var htmlText = WDiffString(string0, string1);
-
     d_doc.writeln(htmlText);
     d_doc.close();
-    d_httpreq = null;
 }
 

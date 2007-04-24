@@ -87,17 +87,23 @@ function scanButtonClick()
 
 }
 
-function scanChangedCallback(id, content, status)
+function scanChangedCallback(id, new_content, status)
 {
     if (status == STATUS_CHANGE) {
 	numChanges++;
+	if (queryRDFitem(id, "changed") == "0") {
+            // If this is a new change, save the previous state for diffing
+	    old_content = queryRDFitem(id, "content", "");
+	    modifyRDFitem(id, "old_content", old_content);
+	}
+
 	modifyRDFitem(id, "changed", "1");
-	modifyRDFitem(id, "content", content);
+	modifyRDFitem(id, "content", new_content);
 	modifyRDFitem(id, "error", "0");
     } else if (status == STATUS_NO_CHANGE) {
 	modifyRDFitem(id, "error", "0");
     } else if (status == STATUS_NEW) {
-	modifyRDFitem(id, "content", content);
+	modifyRDFitem(id, "content", new_content);
 	modifyRDFitem(id, "error", "0");
     } else {
 	modifyRDFitem(id, "error", "1");
@@ -259,8 +265,8 @@ function diffSelectedItem()
     modifyRDFitem(id, "changed", "0");
     saveRDF();
 
-    displayDiffs(queryRDFitem(id, "title"), queryRDFitem(id, "url"), 
-                 queryRDFitem(id, "content"));
+    displayDiffs(queryRDFitem(id, "title", "No Title"), queryRDFitem(id, "url", ""), 
+                 queryRDFitem(id, "old_content", ""), queryRDFitem(id, "content", ""));
 
     refreshTree();
     refresh.request();
@@ -299,6 +305,7 @@ function markAllAsVisited()
         for (var i=0; i<numitems; i++)
         {
             id = tree.contentView.getItemAtIndex(i).id;
+
 	    if (queryRDFitem(id, "changed") != "0") {
 		modifyRDFitem(id, "changed", "0");
 		refreshTree();
