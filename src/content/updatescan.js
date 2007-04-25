@@ -265,6 +265,8 @@ function diffSelectedItem()
     modifyRDFitem(id, "changed", "0");
     saveRDF();
 
+//    openTopWin("chrome://updatescan/content/diff.xul?"+encodeURIComponent(id))
+
     displayDiffs(queryRDFitem(id, "title", "No Title"), queryRDFitem(id, "url", ""), 
                  queryRDFitem(id, "old_content", ""), queryRDFitem(id, "content", ""));
 

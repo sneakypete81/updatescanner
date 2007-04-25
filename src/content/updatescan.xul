@@ -20,6 +20,7 @@
   <script src="scan.js"/>
   <script src="fuzzy.js"/>
   <script src="diff.js"/>
+  <script src="io.js"/>
 
 
 

@@ -1,3 +1,32 @@
+var doc_loaded = false;
+
+function loadDiff()
+{
+    var rdffile;
+
+    if (doc_loaded == false) {
+	doc_loaded = true;
+
+	// Connect to the RDF file
+	rdffile = getRDFuri();
+	initRDF(rdffile);
+
+	win = document.getElementById("diff-content");
+	id = decodeURIComponent(document.location.search.substr(1));
+
+	title       = queryRDFitem(id, "title", "No Title");
+	url         = queryRDFitem(id, "url", "");
+	content     = queryRDFitem(id, "content", "");
+	old_content = queryRDFitem(id, "old_content", "");
+
+	myDump(title);
+	myDump(content);
+	myDump(win.contentDocument);
+
+	win.loadURI = "file:///c|/temp/Status-Q.htm";
+    }
+}
+
 function diffTest() 
 {
 //         0     1    2  3 4    5  6   7   8    9   10   11   12    13   14    
@@ -54,38 +83,48 @@ function displayDiffs(title, url, oldContent, newContent)
     string0 = stripScript(oldContent);
     string1 = stripScript(newContent);
 
-    myDump("old:\n"+string0);
-    myDump("new:\n"+string1);
+ //   myDump("old:\n"+string0);
+ //   myDump("new:\n"+string1);
 
     var htmlText = WDiffString(string0, string1);
 
     var win = getTopWin();
-    d_doc = win.content.document
+    var doc = win.content.document
 
-
-
-    d_doc.writeln("<base href='"+url+"'>");
-    d_doc.writeln("<table bgcolor=#e5e5ff color=#ffffff cellpadding=5 width=100%>");
-    d_doc.writeln("<td><img src='chrome://updatescan/skin/updatescan_big.png'></td>");
-    d_doc.writeln("<td><font face='verdana' color=black size=-1>");
+    var file = FileIO.openTemp("UpdatescanDiff.htm");
+    
+    var ios = Components.classes["@mozilla.org/network/io-service;1"]
+                        .getService(Components.interfaces.nsIIOService);
+    var fileHandler = ios.getProtocolHandler("file")
+                         .QueryInterface(Components.interfaces.nsIFileProtocolHandler);
+    var URL = fileHandler.getURLSpecFromFile(file);
+    
+    data = "<base href='"+url+"'>\n";
+    data += "<table bgcolor=#e5e5ff color=#ffffff cellpadding=5 width=100%>\n";
+    data += "<td><img src='chrome://updatescan/skin/updatescan_big.png'></td>\n";
+    data += "<td><font face='verdana' color=black size=-1>\n";
 
     if (oldContent == "**NEW**" || oldContent == "") {
-	d_doc.writeln("The page below (<b>"+title+"</b>) has just been scanned for the first time.");       htmlText = "New";//newContent;
+	data += "The page below (<b>"+title+"</b>) has just been scanned for the first time.\n";
+	htmlText = "New";//newContent;
     } else if (newContent == "**NEW**" || newContent == "") {
-	d_doc.writeln(title+" has not yet been scanned.");
+	data += title+" has not yet been scanned.\n";
         htmlText = "";	
     } else {
-        d_doc.writeln("The page below (<b>"+title+"</b>) has changed since the last scan.");
-        d_doc.writeln("The changes are <b style='color:black;background-color:#ffff66'>highlighted</b>.");
+        data += "The page below (<b>"+title+"</b>) has changed since the last scan.\n";
+        data += "The changes are <b style='color:black;background-color:#ffff66'>highlighted</b>.\n";
     }
 
-    d_doc.writeln("</font></td>");
-    d_doc.writeln("<td><font face='verdana' color=black size=-1>");
-    d_doc.writeln("<a href='"+url+"'><font color=blue>[Remove&nbsp;highlighting]</font></a>");
-    d_doc.writeln("</font></td></table>");
-    d_doc.writeln("<hr>");
+    data += "</font></td>\n";
+    data += "<td><font face='verdana' color=black size=-1>\n";
+    data += "<a href='"+url+"'><font color=blue>[Remove&nbsp;highlighting]</font></a>\n";
+    data += "</font></td></table>\n";
+    data += "<hr>\n";
 
-    d_doc.writeln(htmlText);
-    d_doc.close();
+    data += htmlText;
+    data += "<hr>\n";
+    FileIO.write(file, data);
+
+    doc.location=URL;
 }
 
