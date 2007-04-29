@@ -100,8 +100,8 @@ var wDiffHtmlBlockEnd    = wDiffHtmlBlockEnd    || '</span>';
 var wDiffHtmlDeleteStart = wDiffHtmlDeleteStart || '<span style="' + wDiffStyleDelete + '">';
 var wDiffHtmlDeleteEnd   = wDiffHtmlDeleteEnd   || '</span>';
 
-var wDiffHtmlInsertStart = wDiffHtmlInsertStart || '<span style="' + wDiffStyleInsert + '">';
-var wDiffHtmlInsertEnd   = wDiffHtmlInsertEnd   || '</span>';
+var wDiffHtmlInsertStart = wDiffHtmlInsertStart || '<span style="' + wDiffStyleInsert + '">[[[';
+var wDiffHtmlInsertEnd   = wDiffHtmlInsertEnd   || ']]]</span>';
 
 // minimal number of real words for a moved block (0 for always displaying block move indicators)
 var wDiffBlockMinLength = wDiffBlockMinLength || 3;
