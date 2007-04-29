@@ -76,7 +76,7 @@ block: an object that holds block move information
 
 // css for change indicators
 var wDiffStyleDelete = wDiffStyleDelete || 'font-weight: bold; text-decoration: none; color: #000000; background-color: #ffff66;';
-var wDiffStyleInsert = wDiffStyleInsert || 'font-weight: bold; text-decoration: none; color: #000000; background-color: #ffff66;';
+var wDiffStyleInsert = wDiffStyleInsert || /*'font-weight: bold; text-decoration: none; */'color: #000000; background-color: #ffff66;';
 var wDiffStyleMoved  = wDiffStyleMoved  || 'font-weight: bold; vertical-align: text-bottom; font-size: xx-small; padding: 0; border: solid 1px;';
 var wDiffStyleBlock  = wDiffStyleBlock  || [
 	'background-color: #66ffff;',
@@ -100,8 +100,8 @@ var wDiffHtmlBlockEnd    = wDiffHtmlBlockEnd    || '</span>';
 var wDiffHtmlDeleteStart = wDiffHtmlDeleteStart || '<span style="' + wDiffStyleDelete + '">';
 var wDiffHtmlDeleteEnd   = wDiffHtmlDeleteEnd   || '</span>';
 
-var wDiffHtmlInsertStart = wDiffHtmlInsertStart || '<span style="' + wDiffStyleInsert + '">[[[';
-var wDiffHtmlInsertEnd   = wDiffHtmlInsertEnd   || ']]]</span>';
+var wDiffHtmlInsertStart = wDiffHtmlInsertStart || '<span style="' + wDiffStyleInsert + '">';//'[[[';
+var wDiffHtmlInsertEnd   = wDiffHtmlInsertEnd   || /*']]]';*/'</span>';
 
 // minimal number of real words for a moved block (0 for always displaying block move indicators)
 var wDiffBlockMinLength = wDiffBlockMinLength || 3;
@@ -113,7 +113,7 @@ var wDiffWordDiff = wDiffWordDiff || false;
 var wDiffRecursiveDiff = wDiffRecursiveDiff || true;
 
 // enable block move display
-var wDiffShowBlockMoves = wDiffShowBlockMoves || false
+var wDiffShowBlockMoves = wDiffShowBlockMoves || false;
 
 // compatibility fix for old name of main function
 var StringDiff = WDiffString;
@@ -148,6 +148,11 @@ var wDiffNoChange     = wDiffNoChange     || '\n<i>(…)</i>\n';
 // WDiffString: main program
 // input: oldText, newText, strings containing the texts
 // returns: html diff
+
+String.prototype.trim = function() {
+// Strip leading and trailing white-space
+return this.replace(/^\s*|\s*$/g, "");
+}
 
 function WDiffString(oldText, newText) {
 
@@ -631,13 +636,33 @@ function WDiffToHtml(text, block) {
 	if (delText != '') {
 //		delText = wDiffHtmlDeleteStart + WDiffEscape(delText) + wDiffHtmlDeleteEnd;
 //		delText = delText.replace(/\n/g, '&para;<br>');
-		delText = wDiffHtmlDeleteStart + " " + wDiffHtmlDeleteEnd;
-		outText += delText;
+//		delText = wDiffHtmlDeleteStart + " " + wDiffHtmlDeleteEnd;
+//		outText += delText;
 	}
 	if (insText != '') {
-		insText = wDiffHtmlInsertStart + WDiffEscape(insText) + wDiffHtmlInsertEnd;
-//		insText = insText.replace(/\n/g, '&para;<br>');
-		outText += insText;
+
+//	    myDump("before:"+insText);
+	    tagSplits = insText.split("<");
+	    // Rebuild insText, stopping highlighting before tags, and restarting afterwards.
+	    insText = "";
+	    if (tagSplits[0].trim() != "")
+		insText += wDiffHtmlInsertStart+tagSplits[0]+wDiffHtmlInsertEnd;
+	    for (splitIndex=1; splitIndex<tagSplits.length; splitIndex++) {
+		tagSplit = tagSplits[splitIndex];
+		pos = tagSplit.lastIndexOf(">");
+		if (pos < 0)
+		    pos = tagSplit.length;
+		insText += "<"+tagSplit.substring(0, pos+1);
+		if (tagSplit.substring(pos+1).trim() != "") {
+		    insText += wDiffHtmlInsertStart;
+		    insText += tagSplit.substring(pos+1);
+		    insText += wDiffHtmlInsertEnd;
+		}
+	    }
+//	    myDump("after:"+insText);
+	    //insText = wDiffHtmlInsertStart + WDiffEscape(insText) + wDiffHtmlInsertEnd;
+	    //insText = insText.replace(/\n/g, '&para;<br>');
+	    outText += insText;
 	}
 	outText += postText;
 
