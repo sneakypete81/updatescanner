@@ -32,7 +32,7 @@ function Autoscan()
     {
 	var id;
 	var pages;
-	var lastScan;
+	var lastAutoScan;
 	var scanRate;
 	var now;
 	var doScan = false;
@@ -46,13 +46,13 @@ function Autoscan()
 	    id = pages.getNext().getValue();
 	    scanRate = queryRDFitem(id, "scanratemins", "0");
 	    if (scanRate != "0") {
-		lastScan = queryRDFitem(id, "lastscan", "");
-		if (lastScan == "") {
-		    lastScan = "5/11/1978";
+		lastAutoScan = queryRDFitem(id, "lastautoscan", "");
+		if (lastAutoScan == "") {
+		    lastAutoScan = "5/11/1978";
 		}
-		lastScan = new Date(lastScan);
-		if (now - lastScan > scanRate*1000*60) {
-		    modifyRDFitem(id, "lastscan", now.toString());
+		lastAutoScan = new Date(lastAutoScan);
+		if (now - lastAutoScan > scanRate*1000*60) {
+		    modifyRDFitem(id, "lastautoscan", now.toString());
 		    saveRDF();
 		    doScan = true;
 		    scan.addURL(id, queryRDFitem(id, "title", "No Title"), 
@@ -71,17 +71,29 @@ function Autoscan()
 	}
     }
 
-    this.scanChanged = function(id, content, status)
+    this.scanChanged = function(id, new_content, status)
     {
+	var now = new Date();
 	if (status == STATUS_CHANGE) {
 	    numChanges++;
+	    if (queryRDFitem(id, "changed") == "0") {
+		// If this is a new change, save the previous state for diffing
+		old_content = queryRDFitem(id, "content", "");
+		modifyRDFitem(id, "old_content", old_content);
+		old_lastscan = queryRDFitem(id, "lastscan", "");
+		modifyRDFitem(id, "old_lastscan", old_lastscan);
+	    }
+
 	    modifyRDFitem(id, "changed", "1");
-	    modifyRDFitem(id, "content", content);
+	    modifyRDFitem(id, "content", new_content);
+	    modifyRDFitem(id, "lastscan", now.toString());
 	    modifyRDFitem(id, "error", "0");
 	} else if (status == STATUS_NO_CHANGE) {
 	    modifyRDFitem(id, "error", "0");
+	    modifyRDFitem(id, "lastscan", now.toString());
 	} else if (status == STATUS_NEW) {
-	    modifyRDFitem(id, "content", content);
+	    modifyRDFitem(id, "content", new_content);
+	    modifyRDFitem(id, "lastscan", now.toString());
 	    modifyRDFitem(id, "error", "0");
 	} else {
 	    modifyRDFitem(id, "error", "1");

@@ -54,7 +54,7 @@ function readFile(str_Filename)
     return str;
 }
 
-function displayDiffs(title, sourceURL, oldContent, newContent)
+function displayDiffs(title, sourceURL, oldContent, newContent, oldDate, newDate)
 { 
     oldContent = stripScript(oldContent);
     newContent = stripScript(newContent);
@@ -85,15 +85,15 @@ function displayDiffs(title, sourceURL, oldContent, newContent)
     } else {
 */
 
-    data = generateHeader(kOldView, title, "2 days ago", sourceURL, diffURL, oldURL, newURL);    
+    data = generateHeader(kOldView, title, oldDate, sourceURL, diffURL, oldURL, newURL);    
     data += oldContent;
     FileIO.write(oldFile, data);
 
-    data = generateHeader(kNewView, title, "2 minutes ago", sourceURL, diffURL, oldURL, newURL);    
+    data = generateHeader(kNewView, title, newDate, sourceURL, diffURL, oldURL, newURL);    
     data += newContent;
     FileIO.write(newFile, data);
 
-    data = generateHeader(kDiffView, title, "2 minutes ago", sourceURL, diffURL, oldURL, newURL);    
+    data = generateHeader(kDiffView, title, newDate, sourceURL, diffURL, oldURL, newURL);    
     data += diffContent;
     FileIO.write(diffFile, data);
 

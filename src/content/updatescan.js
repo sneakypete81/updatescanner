@@ -89,21 +89,28 @@ function scanButtonClick()
 
 function scanChangedCallback(id, new_content, status)
 {
+    var now = new Date();
+
     if (status == STATUS_CHANGE) {
 	numChanges++;
 	if (queryRDFitem(id, "changed") == "0") {
             // If this is a new change, save the previous state for diffing
 	    old_content = queryRDFitem(id, "content", "");
 	    modifyRDFitem(id, "old_content", old_content);
+	    old_lastscan = queryRDFitem(id, "lastscan", "");
+	    modifyRDFitem(id, "old_lastscan", old_lastscan);
 	}
 
 	modifyRDFitem(id, "changed", "1");
 	modifyRDFitem(id, "content", new_content);
+	modifyRDFitem(id, "lastscan", now.toString());
 	modifyRDFitem(id, "error", "0");
     } else if (status == STATUS_NO_CHANGE) {
 	modifyRDFitem(id, "error", "0");
+	modifyRDFitem(id, "lastscan", now.toString());
     } else if (status == STATUS_NEW) {
 	modifyRDFitem(id, "content", new_content);
+	modifyRDFitem(id, "lastscan", now.toString());
 	modifyRDFitem(id, "error", "0");
     } else {
 	modifyRDFitem(id, "error", "1");
@@ -261,18 +268,80 @@ function openSelectedItem()
 function diffSelectedItem()
 {
     var id;
+    var now = new Date();
     id = getSelectedItemID();
     modifyRDFitem(id, "changed", "0");
     saveRDF();
 
 //    openTopWin("chrome://updatescan/content/diff.xul?"+encodeURIComponent(id))
 
-    displayDiffs(queryRDFitem(id, "title", "No Title"), queryRDFitem(id, "url", ""), 
-                 queryRDFitem(id, "old_content", ""), queryRDFitem(id, "content", ""));
+    old_lastScan = new Date(queryRDFitem(id, "old_lastscan", "5/11/1978"));
+    oldDate = dateDiffString(old_lastScan, now);
+    lastScan = new Date(queryRDFitem(id, "lastscan", "5/11/1978"));
+    newDate = dateDiffString(lastScan, now);
+
+    displayDiffs(queryRDFitem(id, "title", "No Title"), 
+		 queryRDFitem(id, "url", ""), 
+                 queryRDFitem(id, "old_content", ""), 
+		 queryRDFitem(id, "content", ""),
+		 oldDate, 
+		 newDate);
 
     refreshTree();
     refresh.request();
 }
+
+function dateDiffString(oldDate, newDate)
+{
+    diff = newDate.getTime() - oldDate.getTime();
+    diff = diff / 1000; // convert to seconds
+    if (diff < 60) {
+	diff = Math.floor(diff);
+	if (diff == 1)
+	    return diff+" second ago";
+	else
+	    return diff+" seconds ago";
+    }
+    diff = diff / 60;
+    if (diff < 60) {
+	diff = Math.floor(diff);
+	if (diff == 1)
+	    return diff+" minute ago";
+	else
+	    return diff+" minutes ago";
+    }
+    diff = diff / 60;
+    if (diff < 24) {
+	diff = Math.floor(diff);
+	if (diff == 1)
+	    return diff+" hour ago";
+	else
+	    return diff+" hours ago";
+    }
+    diff = diff / 24;
+    if (diff < 7) {
+	diff = Math.floor(diff);
+	if (diff == 1)
+	    return diff+" day ago";
+	else
+	    return diff+" days ago";
+    }
+    diff = diff / 7;
+    if (diff < 52) {
+	diff = Math.floor(diff);
+	if (diff == 1)
+	    return diff+" week ago";
+	else
+	    return diff+" weeks ago";
+    }
+    diff = diff / 52;
+    diff = Math.floor(diff);
+    if (diff == 1)
+	return diff+" year ago";
+    else
+	return diff+" years ago";
+}
+
 function openSelectedItemNewTab()
 {
     var mainWindow = window.QueryInterface(
