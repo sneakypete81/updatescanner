@@ -118,6 +118,9 @@ var wDiffShowBlockMoves = wDiffShowBlockMoves || false;
 // compatibility fix for old name of main function
 var StringDiff = WDiffString;
 
+// if there are less than x consecutive identical words, highlight them anyway. 
+var wMinBreakBetweenDiffs = 5;
+
 // remove unchanged parts from final output
 
 // characters before diff tag to search for previous heading, paragraph, line break, cut characters
@@ -172,7 +175,7 @@ function WDiffString(oldText, newText) {
 		outText = WDiffHtmlFormat(outText);
 		return(outText);
 	}
-
+/*
 // trap trivial changes: old text deleted
 	if ( (oldText == null) || (oldText.length == 0) ) {
 		outText = newText;
@@ -191,7 +194,7 @@ function WDiffString(oldText, newText) {
 //		outText = wDiffHtmlDeleteStart + outText + wDiffHtmlDeleteEnd;
 		return(outText);
 	}
- 
+ */
 // split new and old text into words
 	WDiffSplitText(oldText, newText, text);
 
@@ -579,6 +582,7 @@ function WDiffToHtml(text, block) {
 	}
 
 // collect consecutive identical text
+        identCount = 0;
 	while ( (i < text.newWords.length) && (j < text.oldWords.length) ) {
 		if ( (text.newToOld[i] == null) || (text.oldToNew[j] == null) ) {
 			break;
@@ -589,6 +593,12 @@ function WDiffToHtml(text, block) {
 		identText += text.newWords[i];
 		i ++;
 		j ++;
+	        identCount ++;
+	}
+// Ignore small amounts of identical text 
+	if (identCount < wMinBreakBetweenDiffs) {
+	    insText += identText;
+	    identText = "";
 	}
 
 // collect consecutive deletions
