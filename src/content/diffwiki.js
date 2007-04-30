@@ -175,26 +175,18 @@ function WDiffString(oldText, newText) {
 		outText = WDiffHtmlFormat(outText);
 		return(outText);
 	}
-/*
-// trap trivial changes: old text deleted
-	if ( (oldText == null) || (oldText.length == 0) ) {
-		outText = newText;
-		outText = WDiffEscape(outText);
-		outText = WDiffHtmlFormat(outText);
-		outText = wDiffHtmlInsertStart + outText + wDiffHtmlInsertEnd;
-		return(outText);
-	}
 
-// trap trivial changes: new text deleted
-	if ( (newText == null) || (newText.length == 0) ) {
-		outText = oldText;
-		outText = WDiffEscape(outText);
-		outText = WDiffHtmlFormat(outText);
-                outText = wDiffHtmlDeleteStart + " " + wDiffHtmlDeleteEnd;
-//		outText = wDiffHtmlDeleteStart + outText + wDiffHtmlDeleteEnd;
-		return(outText);
-	}
- */
+// remove everything up to the body start
+	bodyPos = newText.search(/<body/i);
+	if (bodyPos < 0) bodyPos = 0;
+	newHead = newText.substr(0, bodyPos);
+	newText = newText.substr(bodyPos);
+
+	bodyPos = oldText.search(/<body/i);
+	if (bodyPos < 0) bodyPos = 0;
+	oldHead = oldText.substr(0, bodyPos);
+	oldText = oldText.substr(bodyPos);
+
 // split new and old text into words
 	WDiffSplitText(oldText, newText, text);
 
@@ -207,9 +199,9 @@ function WDiffString(oldText, newText) {
 // process diff data into formatted html text
 	outText = WDiffToHtml(text, block);
 
-	outText = unescapeTagSpaces(outText);
+	outText = unescapeSpaces(outText);
 
-	return(outText);
+	return(newHead + outText);
 }
 
 
@@ -229,7 +221,9 @@ function WDiffSplitText(oldText, newText, text) {
         newText = newText.replace(/</g," <");
 	newText = newText.replace(/>/g,"> ");
 
-// Escape out spaces within a tag, so it appears as a single word
+// Escape out spaces within a tag (and script), so it appears as a single word
+	oldText = escapeScriptSpaces(oldText);
+	newText = escapeScriptSpaces(newText);
         oldText = escapeTagSpaces(oldText);
         newText = escapeTagSpaces(newText);
 
@@ -1125,6 +1119,21 @@ function WDiffShortenOutput(diffText) {
 	return(outText);
 }
 
+function escapeScriptSpaces(content)
+{
+    result = ""
+        lastmatch = 0;
+	re=/<style([\r\n]|.)*?>([\r\n]|.)*?<\/style>/gi;
+	while ((match = re.exec(content)) != null) {
+                escmatch = match[0].replace(/\s/g,"___UPDATESCAN___SPACE___");
+		result += content.substring(lastmatch, match.index) + escmatch;
+                lastmatch = re.lastIndex;
+	}
+	result += content.substring(lastmatch);
+	return result;
+
+}
+
 function escapeTagSpaces(content)
 {
         result = "";
@@ -1139,7 +1148,7 @@ function escapeTagSpaces(content)
 	return result;
 }
 
-function unescapeTagSpaces(content)
+function unescapeSpaces(content)
 {
 	return content.replace(/___UPDATESCAN___SPACE___/g," ");
 }

@@ -3,56 +3,6 @@ const kDiffView = 0;
 const kNewView = 1;
 const kOldView = 2;
 
-function diffTest() 
-{
-//         0     1    2  3 4    5  6   7   8    9   10   11   12    13   14    
-    diff0="Hello ths is a <tag goes here />test to see how well the diff will work. This quick first test has only words with no lines or tags, so might not work too well.";
-//15 16   17  18   19    20   21 22    23 24    25 26    27  28   29  30
-
-//         0     1    2  3 4  5   6   7    8      9         10   11     12   13
-    diff1="Hello this is a to <script>does this get cut? </script>see how well Pete's fantastic diff engine will work the. This quick first test has only <i> words </i> with no lines or <b>tags</b>, so might not work too well.";
-//14   15   16    17    18   19  20   21    22   23 24    25 26    27 28    29  30   31  32
-
-    diff2="Hello this is a <tag shouldall here />test to see how well the diff will work. This quick first test has only words with no lines or tags, so might not work too well.";
-
-//    diff0 = readFile("c:\\Projects\\search.htm");
-//    diff1 = readFile("c:\\Projects\\search2.htm");
-
-    var win = getTopWin();
-    d_doc = win.content.document;
-
-    var htmlText = WDiffString(diff0, diff2);
-
-    d_doc.writeln(htmlText);
-    d_doc.close();
-
-}
-
-function readFile(str_Filename) 
-{ 
-    try { 
-        var obj_File = Components.classes["@mozilla.org/file/local;1"].
-               createInstance(Components.interfaces.nsILocalFile); 
-        obj_File.initWithPath(str_Filename); 
-        var obj_InputStream = Components.classes["@mozilla.org/network/file-input-stream;1"].
-               createInstance(Components.interfaces.nsIFileInputStream); 
-        obj_InputStream.init(obj_File,0x01,0444,null); 
-        var obj_ScriptableIO = Components.classes["@mozilla.org/scriptableinputstream;1"].
-               createInstance(Components.interfaces.nsIScriptableInputStream); 
-        obj_ScriptableIO.init(obj_InputStream); 
-    } catch (e) { 
-        alert(e); 
-    } 
-
-    try { 
-        var str = obj_ScriptableIO.read(obj_File.fileSize-1); 
-    } catch (e) { 
-        dump(e); 
-    } 
-    obj_ScriptableIO.close(); 
-    obj_InputStream.close(); 
-    return str;
-}
 
 function displayDiffs(title, sourceURL, oldContent, newContent, oldDate, newDate)
 { 
@@ -76,14 +26,6 @@ function displayDiffs(title, sourceURL, oldContent, newContent, oldDate, newDate
     var oldURL  = fileHandler.getURLSpecFromFile(oldFile);
     var newURL  = fileHandler.getURLSpecFromFile(newFile);
 
-/*    if (oldContent == "**NEW**" || oldContent == "") {
-	data += "The page below (<b>"+title+"</b>) has just been scanned for the first time.\n";
-	htmlText = "New";//newContent;
-    } else if (newContent == "**NEW**" || newContent == "") {
-	data += title+" has not yet been scanned.\n";
-        htmlText = "";	
-    } else {
-*/
 
     data = generateHeader(kOldView, title, oldDate, sourceURL, diffURL, oldURL, newURL);    
     data += oldContent;
