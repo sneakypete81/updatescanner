@@ -73,7 +73,6 @@ block: an object that holds block move information
 
 */
 
-
 // css for change indicators
 var wDiffStyleDelete = wDiffStyleDelete || 'font-weight: bold; text-decoration: none; color: #000000; background-color: #ffff66;';
 var wDiffStyleInsert = wDiffStyleInsert || /*'font-weight: bold; text-decoration: none; */'color: #000000; background-color: #ffff66;';
@@ -211,25 +210,28 @@ function WDiffString(oldText, newText) {
 // UpdateScanner: Now ensures that tags are not split up into multiple words
 function WDiffSplitText(oldText, newText, text) {
 
-// convert strange spaces
-	oldText = oldText.replace(/[\t\v\u00A0\u2028\u2029]+/g, ' ');
-	newText = newText.replace(/[\t\v\u00A0\u2028\u2029]+/g, ' ');
+    // Remove dos carriage returns
+    oldText = oldText.replace(/\r\n/g,"\n");
+    newText = newText.replace(/\r\n/g,"\n");
 
-// Make sure all tags have spaces around them, so they appear a seperate words
-        oldText = oldText.replace(/</g," <");
-	oldText = oldText.replace(/>/g,"> ");
-        newText = newText.replace(/</g," <");
-	newText = newText.replace(/>/g,"> ");
+    // convert tabs to normal spaces
+    oldText = oldText.replace(/\t/g,"        ");
+    newText = newText.replace(/\t/g,"        ");
+
+// If a tag doesn't have a space around it, add a tab 
+// so it appears as a seperate word. Tabs will be stripped at the end.
+	oldText = oldText.replace(/([^\s])</g,"$1\t<");
+	oldText = oldText.replace(/>([^\s])/g,">\t$1");
+	newText = newText.replace(/([^\s])</g,"$1\t<");
+	newText = newText.replace(/>([^\s])/g,">\t$1");
 
 // Escape out spaces within a tag (and script), so it appears as a single word
 	oldText = escapeScriptSpaces(oldText);
 	newText = escapeScriptSpaces(newText);
         oldText = escapeTagSpaces(oldText);
-        newText = escapeTagSpaces(newText);
+	newText = escapeTagSpaces(newText);
 
 // split old text into words
-
-//              /     |    |    |    |    |   |  |     |   |  |  |    |    |    | /
 	var pattern = /[\s]+|[^\s]+/g;
 	var result;
 	do {
@@ -1125,7 +1127,7 @@ function escapeScriptSpaces(content)
         lastmatch = 0;
 	re=/<style([\r\n]|.)*?>([\r\n]|.)*?<\/style>/gi;
 	while ((match = re.exec(content)) != null) {
-                escmatch = match[0].replace(/\s/g,"___UPDATESCAN___SPACE___");
+	    escmatch = match[0].replace(/\s/g,"___UPDATESCAN___SPACE___");
 		result += content.substring(lastmatch, match.index) + escmatch;
                 lastmatch = re.lastIndex;
 	}
@@ -1149,6 +1151,9 @@ function escapeTagSpaces(content)
 }
 
 function unescapeSpaces(content)
+// Replace escaped spaces (ie in tags or scripts) with normal spaces.
+// Remove tabs.
 {
-	return content.replace(/___UPDATESCAN___SPACE___/g," ");
+    result = content.replace(/___UPDATESCAN___SPACE___/g," ");
+    return    result.replace(/\t/g,"");
 }
