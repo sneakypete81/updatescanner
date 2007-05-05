@@ -20,7 +20,7 @@ function loadUpdateScan()
     // link to the listbox
     var tree=document.getElementById("UpdateTree");
     tree.datasources=rdffile;
-    tree.ondblclick=treeDblClick;
+    tree.onclick=treeClick;
     refreshTree();
 
     // Check for refresh requests
@@ -33,14 +33,14 @@ function unloadUpdateScan()
     refresh.stop();
 }
 
-function treeDblClick(event)
+function treeClick(event)
 {
     switch (event.button) {
     case 0:
-	diffSelectedItem();
+	diffSelectedItemThisWindow();
 	break;
     case 1:
-	openSelectedItemNewTab();
+	diffSelectedItemNewTab();
 	break;
     }
 }
@@ -267,28 +267,46 @@ function openSelectedItem()
 
 function diffSelectedItem()
 {
-    var id;
     var now = new Date();
     id = getSelectedItemID();
     modifyRDFitem(id, "changed", "0");
     saveRDF();
 
-//    openTopWin("chrome://updatescan/content/diff.xul?"+encodeURIComponent(id))
-
+    refreshTree();
+    refresh.request();
+    
     old_lastScan = new Date(queryRDFitem(id, "old_lastscan", "5/11/1978"));
     oldDate = dateDiffString(old_lastScan, now);
     lastScan = new Date(queryRDFitem(id, "lastscan", "5/11/1978"));
     newDate = dateDiffString(lastScan, now);
 
-    displayDiffs(queryRDFitem(id, "title", "No Title"), 
-		 queryRDFitem(id, "url", ""), 
-                 queryRDFitem(id, "old_content", ""), 
-		 queryRDFitem(id, "content", ""),
-		 oldDate, 
-		 newDate);
+    return displayDiffs(queryRDFitem(id, "title", "No Title"), 
+			queryRDFitem(id, "url", ""), 
+			queryRDFitem(id, "old_content", ""), 
+			queryRDFitem(id, "content", ""),
+			oldDate, 
+			newDate);
+}
 
-    refreshTree();
-    refresh.request();
+function diffSelectedItemThisWindow()
+{
+    diffURL = diffSelectedItem()
+    openTopWin(diffURL);
+
+}
+
+function diffSelectedItemNewTab()
+{
+    var mainWindow = window.QueryInterface(
+	Components.interfaces.nsIInterfaceRequestor)
+	.getInterface(Components.interfaces.nsIWebNavigation)
+	.QueryInterface(Components.interfaces.nsIDocShellTreeItem)
+	.rootTreeItem
+	.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+	.getInterface(Components.interfaces.nsIDOMWindow);
+
+    diffURL = diffSelectedItem();
+    mainWindow.getBrowser().addTab(diffURL);
 }
 
 function dateDiffString(oldDate, newDate)
@@ -340,25 +358,6 @@ function dateDiffString(oldDate, newDate)
 	return diff+" year ago";
     else
 	return diff+" years ago";
-}
-
-function openSelectedItemNewTab()
-{
-    var mainWindow = window.QueryInterface(
-	Components.interfaces.nsIInterfaceRequestor)
-    .getInterface(Components.interfaces.nsIWebNavigation)
-    .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
-    .rootTreeItem
-    .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
-    .getInterface(Components.interfaces.nsIDOMWindow);
-
-    var id;
-    id = getSelectedItemID();
-    modifyRDFitem(id, "changed", "0");
-    saveRDF();
-    mainWindow.getBrowser().addTab(queryRDFitem(id, "url"));
-    refreshTree();
-    refresh.request();
 }
 
 function markAllAsVisited()

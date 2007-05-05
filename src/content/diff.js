@@ -11,8 +11,6 @@ function displayDiffs(title, sourceURL, oldContent, newContent, oldDate, newDate
 
     var diffContent = WDiffString(oldContent, newContent);
 
-    var win = getTopWin();
-    var doc = win.content.document
 
     var diffFile = FileIO.openTemp("UpdatescanDiff.htm");
     var oldFile  = FileIO.openTemp("UpdatescanOld.htm");
@@ -39,7 +37,7 @@ function displayDiffs(title, sourceURL, oldContent, newContent, oldDate, newDate
     data += diffContent;
     FileIO.write(diffFile, data);
 
-    doc.location=diffURL;
+    return diffURL;
 }
 
 function generateHeader(currentView, title, date, sourceURL, diffURL, oldURL, newURL)
