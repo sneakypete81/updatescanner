@@ -1,30 +1,32 @@
 Things to do:
 
 Features:
-**Add timeout to scan?
-drag n drop
-bookmark menu item?
-Handle frames
-Rightclick on link
-**Autoscan every x minutes
-Get strings into locale
-Check rdf file integrity (remove empty urls)
-**Timeout on scan
-Add to tab context menu
-Auto place on toolbar
-Hotkey shortcut - ctrl-c??
-New button inserts current URL/title
-Export .rdf file
-Default threshold/scan settings
-**Middle button double click = open in new tab
-Highlight changes
+1Sort list (autosort or manual?)
+1Open all changed pages in new tabs
+2drag n drop
+2bookmark menu item?
+2Rightclick on link
+2Get strings into locale
+2Export .rdf file
+2Preferences page:
+  2Default threshold/scan settings
+  2Notify disable option
+  3Hotkey
+  2Disable scan on start (wait for 5 minutes maybe?)
+3Handle frames
+3Check rdf file integrity (remove empty urls)
+3Add to tab context menu
+3Auto place on toolbar
+3Hotkey shortcut - ctrl-c??
+3Add subfolders in tree
+3Only notify when specific text appears?
+
 
 Bugs:
-Uninstall should delete rdf?
-**Multiple windows tree update is funny in Linux
-Doesn't display title when firefox is started with sidebar open (can't reproduce)
-**Windows statusbar requires rightclick, not left
-**Need to handle scanning errors better
-**Problem on my work PC - rdf won't update
-Need to handle .getstrings properly in scan.js
-Get rid of refresher?
+1NaN displayed when item is diffed before being scanned
+1Need to import old pages when upgrading
+1Getting slow - should move pages out of .rdf into seperate files.
+2Need to handle .getstrings properly in scan.js
+2Notify doesn't work on Mac - disable, or use 2.0 method
+3Uninstall should delete rdf?
+3Get rid of refresher?
