@@ -138,7 +138,7 @@
 
   <keyset>
     <key id="deleteKey" keycode="VK_DELETE" oncommand="deleteSelectedItem();"/>
-    <key id="enterKey" keycode="VK_ENTER" oncommand="openSelectedItem();"/>
+    <key id="enterKey" keycode="VK_RETURN" oncommand="diffSelectedItemThisWindow();"/>
   </keyset>
 
   <broadcasterset>

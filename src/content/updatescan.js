@@ -319,6 +319,7 @@ function diffItemThisWindow(id)
 {
     diffURL = diffItem(id)
     openTopWin(diffURL);
+    focusTree();
 }
 
 function diffSelectedItemNewTab()
@@ -457,6 +458,12 @@ function refreshTree()
     savedRow = tree.currentIndex;
     tree.builder.rebuild();    
     tree.view.selection.select(savedRow);
+}
+
+function focusTree()
+{
+    var tree=document.getElementById("UpdateTree");
+    tree.focus();
 }
 
 function setStatus(status)
