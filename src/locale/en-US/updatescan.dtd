@@ -1,12 +1,11 @@
 <!ENTITY title.heading "Page">
 <!ENTITY modifydate.heading "Changed">
 
-<!ENTITY newbutton.label "New...">
 <!ENTITY scanbutton.label "Scan">
 <!ENTITY stopbutton.label "Cancel">
 
-<!ENTITY openmenu.label "Open">
-<!ENTITY opentabmenu.label "Open in new tab">
+<!ENTITY openmenu.label "Show Changes">
+<!ENTITY opentabmenu.label "Show Changes in New Tab">
 <!ENTITY newmenu.label "New Item">
 <!ENTITY deletemenu.label "Delete">
 <!ENTITY editmenu.label "Properties">
