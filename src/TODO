@@ -23,7 +23,6 @@ Features:
 
 
 Bugs:
-1NaN displayed when item is diffed before being scanned
 1Need to import old pages when upgrading
 1Getting slow - should move pages out of .rdf into seperate files.
 2Need to handle .getstrings properly in scan.js
