@@ -132,7 +132,9 @@ function scanChangedCallback(id, new_content, status)
 	modifyRDFitem(id, "lastscan", now.toString());
     } else if (status == STATUS_NEW) {
 	modifyRDFitem(id, "content", new_content);
+	modifyRDFitem(id, "old_content", new_content);
 	modifyRDFitem(id, "lastscan", now.toString());
+	modifyRDFitem(id, "old_lastscan", now.toString());
 	modifyRDFitem(id, "error", "0");
     } else {
 	modifyRDFitem(id, "error", "1");
