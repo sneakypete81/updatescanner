@@ -35,12 +35,34 @@ function unloadUpdateScan()
 
 function treeClick(event)
 {
+    // Code from http://xul.andreashalter.ch/
+    //get original target (element user clicked on) 
+    var str_OrigTarget = event.originalTarget; 
+    //if target is a treechildren, we're right 
+    if (str_OrigTarget.localName == "treechildren") { 
+	//create storage containers for results values 
+	var obj_Row = new Object; 
+	var obj_Col = new Object; 
+	var obj_Child = new Object; 
+	//find tree holder 
+	var tree = document.getElementById('UpdateTree'); 
+	//get cell at x/y coords from tree 
+	tree.treeBoxObject.getCellAt(event.clientX, event.clientY, obj_Row, obj_Col, obj_Child); 
+	//if row < 0, we didn't find the row selected in this tree 
+	if (obj_Row.value == -1) 
+	{
+	    return; 
+	}
+    } 
+
+    id = tree.contentView.getItemAtIndex(obj_Row.value).id;
+
     switch (event.button) {
     case 0:
-	diffSelectedItemThisWindow();
+	diffItemThisWindow(id);
 	break;
     case 1:
-	diffSelectedItemNewTab();
+	diffItemNewTab(id);
 	break;
     }
 }
@@ -256,8 +278,6 @@ function openEditDialog()
 
 function openSelectedItem()
 {
-    var id;
-    id = getSelectedItemID();
     modifyRDFitem(id, "changed", "0");
     saveRDF();
     openTopWin(queryRDFitem(id, "url"));
@@ -265,7 +285,7 @@ function openSelectedItem()
     refresh.request();
 }
 
-function diffSelectedItem()
+function diffItem(id)
 {
     var now = new Date();
     id = getSelectedItemID();
@@ -290,12 +310,21 @@ function diffSelectedItem()
 
 function diffSelectedItemThisWindow()
 {
-    diffURL = diffSelectedItem()
-    openTopWin(diffURL);
+    diffItemThisWindow(getSelectedItemID);
+}
 
+function diffItemThisWindow(id)
+{
+    diffURL = diffItem(id)
+    openTopWin(diffURL);
 }
 
 function diffSelectedItemNewTab()
+{
+    diffItemNewTab(getSelectedItemID);    
+}
+
+function diffItemNewTab(id)
 {
     var mainWindow = window.QueryInterface(
 	Components.interfaces.nsIInterfaceRequestor)
@@ -305,7 +334,7 @@ function diffSelectedItemNewTab()
 	.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
 	.getInterface(Components.interfaces.nsIDOMWindow);
 
-    diffURL = diffSelectedItem();
+    diffURL = diffItem(id);
     mainWindow.getBrowser().addTab(diffURL);
 }
 
@@ -422,9 +451,10 @@ function showScanButton()
 
 function refreshTree()
 {
-//    myDump("refresh");
     var tree=document.getElementById("UpdateTree");
+    savedRow = tree.currentIndex;
     tree.builder.rebuild();    
+    tree.view.selection.select(savedRow);
 }
 
 function setStatus(status)

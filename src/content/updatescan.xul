@@ -125,9 +125,9 @@
   <popupset>
     <popup id="contextmenu">
       <menuitem style="font-weight:bold;" label="&openmenu.label;" 
-		oncommand="openSelectedItem();"/>
+		oncommand="diffSelectedItemThisWindow();"/>
       <menuitem label="&opentabmenu.label;" 
-		oncommand="openSelectedItemNewTab();"/>
+		oncommand="diffSelectedItemNewTab();"/>
       <menuseparator />
       <menuitem label="&deletemenu.label;" oncommand="deleteSelectedItem();" 
 		key="deleteKey"/>
