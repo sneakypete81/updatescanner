@@ -4,8 +4,8 @@
   list-style-image: url("chrome://updatescan/skin/document-new.png");
 }
 
-#read-button {
-  list-style-image: url("chrome://updatescan/skin/document-checked.png");
+#new-tab-button {
+  list-style-image: url("chrome://updatescan/skin/tab-new.png");
 }
 
 #delete-button {
