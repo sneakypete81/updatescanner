@@ -24,8 +24,8 @@ function displayDiffs(title, sourceURL, oldContent, newContent, oldDate, newDate
     }
 	
 
-    //    oldContent = stripScript(oldContent);
-    //    newContent = stripScript(newContent)
+    oldContent = stripScript(oldContent);
+    newContent = stripScript(newContent)
 
     var diffContent = WDiffString(oldContent, newContent);
 

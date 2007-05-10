@@ -3,6 +3,7 @@ Things to do:
 Features:
 1Sort list (autosort or manual?)
 1Open all changed pages in new tabs
+1Add Mark all as read to context menu
 2drag n drop
 2bookmark menu item?
 2Rightclick on link
@@ -13,6 +14,7 @@ Features:
   2Notify disable option
   3Hotkey
   2Disable scan on start (wait for 5 minutes maybe?)
+  2Options to enable scripts when viewing diffs
 3Handle frames
 3Check rdf file integrity (remove empty urls)
 3Add to tab context menu
@@ -23,6 +25,7 @@ Features:
 
 
 Bugs:
+1Still some strange diff things happening
 1Need to import old pages when upgrading
 1Getting slow - should move pages out of .rdf into seperate files.
 2Need to handle .getstrings properly in scan.js
