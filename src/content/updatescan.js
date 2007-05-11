@@ -318,7 +318,7 @@ function diffItem(id)
 
 function diffSelectedItemThisWindow()
 {
-    diffItemThisWindow(getSelectedItemID);
+    diffItemThisWindow(getSelectedItemID());
 }
 
 function diffItemThisWindow(id)
@@ -330,7 +330,7 @@ function diffItemThisWindow(id)
 
 function diffSelectedItemNewTab()
 {
-    diffItemNewTab(getSelectedItemID);    
+    diffItemNewTab(getSelectedItemID());    
 }
 
 function diffItemNewTab(id)
@@ -351,28 +351,10 @@ function dateDiffString(oldDate, newDate)
 {
     diff = newDate.getTime() - oldDate.getTime();
     diff = diff / 1000; // convert to seconds
-    if (diff < 60) {
-	diff = Math.floor(diff);
-	if (diff == 1)
-	    return diff+" second ago";
-	else
-	    return diff+" seconds ago";
-    }
-    diff = diff / 60;
-    if (diff < 60) {
-	diff = Math.floor(diff);
-	if (diff == 1)
-	    return diff+" minute ago";
-	else
-	    return diff+" minutes ago";
-    }
-    diff = diff / 60;
+    diff = diff / 60;   // minutes
+    diff = diff / 60;   // hours
     if (diff < 24) {
-	diff = Math.floor(diff);
-	if (diff == 1)
-	    return diff+" hour ago";
-	else
-	    return diff+" hours ago";
+	return " at "+oldDate.getHours()+":"+oldDate.getMinutes()
     }
     diff = diff / 24;
     if (diff < 7) {

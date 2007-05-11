@@ -71,9 +71,9 @@ function generateHeader(currentView, title, date, sourceURL, diffURL, oldURL, ne
 	data += "was last scanned "+date+". The changes are ";
 	data += "<b style='color:black;background-color:#ffff66'>highlighted</b>.\n";
     } else if (currentView == kOldView) {
-	data += "is the old version of the webpage, from "+date+".\n";
+	data += "is the old version of the webpage, scanned "+date+".\n";
     } else if (currentView == kNewView) {
-	data += "is the new version of the webpage, from "+date+".\n";
+	data += "is the new version of the webpage, scanned "+date+".\n";
     } else if (currentView == kUnscannedView) {
 	data += "has not yet been checked. ";
 	data += "Please click the <b>'Scan'</b> button on the left, and try again."; 
