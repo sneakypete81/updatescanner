@@ -55,9 +55,10 @@ function Autoscan()
 		    modifyRDFitem(id, "lastautoscan", now.toString());
 		    saveRDF();
 		    doScan = true;
+		    filebase = id.substr(6);
 		    scan.addURL(id, queryRDFitem(id, "title", "No Title"), 
 				    queryRDFitem(id, "url", ""), 
-				    queryRDFitem(id, "content", ""), 
+				    readFile(filebase+".new"),
 				    queryRDFitem(id, "threshold", 100));
 		}
 	    }
@@ -74,25 +75,27 @@ function Autoscan()
     this.scanChanged = function(id, new_content, status)
     {
 	var now = new Date();
+	filebase = id.substr(6);
 	if (status == STATUS_CHANGE) {
 	    numChanges++;
 	    if (queryRDFitem(id, "changed") == "0") {
 		// If this is a new change, save the previous state for diffing
-		old_content = queryRDFitem(id, "content", "");
-		modifyRDFitem(id, "old_content", old_content);
+		rmFile(filebase+".old");
+		mvFile(filebase+".new", filebase+".old");
 		old_lastscan = queryRDFitem(id, "lastscan", "");
 		modifyRDFitem(id, "old_lastscan", old_lastscan);
 	    }
 
+	    writeFile(filebase+".new", new_content);
 	    modifyRDFitem(id, "changed", "1");
-	    modifyRDFitem(id, "content", new_content);
 	    modifyRDFitem(id, "lastscan", now.toString());
 	    modifyRDFitem(id, "error", "0");
 	} else if (status == STATUS_NO_CHANGE) {
 	    modifyRDFitem(id, "error", "0");
 	    modifyRDFitem(id, "lastscan", now.toString());
 	} else if (status == STATUS_NEW) {
-	    modifyRDFitem(id, "content", new_content);
+	    writeFile(filebase+".new", new_content);
+	    writeFile(filebase+".old", new_content);
 	    modifyRDFitem(id, "lastscan", now.toString());
 	    modifyRDFitem(id, "error", "0");
 	} else {

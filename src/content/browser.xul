@@ -19,6 +19,8 @@
     <script src="fuzzy.js"/>
     <script src="refresher.js"/>
     <script src="statusbar.js"/>
+    <script src="io.js"/>
+    <script src="file.js"/>
 
     <popup id="contentAreaContextMenu">
       <menuitem id="AddToUpdateScan"

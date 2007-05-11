@@ -21,7 +21,7 @@
   <script src="fuzzy.js"/>
   <script src="diff.js"/>
   <script src="io.js"/>
-
+  <script src="file.js"/>
 
 
   <script src="diffwiki.js"/>

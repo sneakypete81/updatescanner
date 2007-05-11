@@ -26,8 +26,8 @@ Features:
 
 Bugs:
 1Still some strange diff things happening
-1Need to import old pages when upgrading
-1Getting slow - should move pages out of .rdf into seperate files.
+1Need to import old pages and clean up rdf when upgrading
+2Unicode doesn't work in diff
 2Need to handle .getstrings properly in scan.js
 2Notify doesn't work on Mac - disable, or use 2.0 method
 3Uninstall should delete rdf?

@@ -13,6 +13,8 @@ function loadUpdateScan()
 {
     var rdffile;
 
+    createUpdatescanDirectory();
+
     // Connect to the RDF file
     rdffile = getRDFuri();
     initRDF(rdffile);
@@ -92,9 +94,10 @@ function scanButtonClick()
         for (var i=0; i<numitems; i++)
         {
             id = tree.contentView.getItemAtIndex(i).id;
+	    filebase = id.substr(6);
             scan.addURL(id, queryRDFitem(id, "title", "No Title"), 
 			queryRDFitem(id, "url", ""), 
-			queryRDFitem(id, "content", ""), 
+			readFile(filebase+".new"),
 			queryRDFitem(id, "threshold", 100));
         }
 
@@ -113,26 +116,27 @@ function scanChangedCallback(id, new_content, status)
 {
     var now = new Date();
 
+    filebase = id.substr(6);
     if (status == STATUS_CHANGE) {
 	numChanges++;
 	if (queryRDFitem(id, "changed") == "0") {
             // If this is a new change, save the previous state for diffing
-	    old_content = queryRDFitem(id, "content", "");
-	    modifyRDFitem(id, "old_content", old_content);
+	    rmFile(filebase+".old");
+	    mvFile(filebase+".new", filebase+".old");
 	    old_lastscan = queryRDFitem(id, "lastscan", "");
 	    modifyRDFitem(id, "old_lastscan", old_lastscan);
 	}
 
+	writeFile(filebase+".new", new_content);
 	modifyRDFitem(id, "changed", "1");
-	modifyRDFitem(id, "content", new_content);
 	modifyRDFitem(id, "lastscan", now.toString());
 	modifyRDFitem(id, "error", "0");
     } else if (status == STATUS_NO_CHANGE) {
 	modifyRDFitem(id, "error", "0");
 	modifyRDFitem(id, "lastscan", now.toString());
     } else if (status == STATUS_NEW) {
-	modifyRDFitem(id, "content", new_content);
-	modifyRDFitem(id, "old_content", new_content);
+	writeFile(filebase+".new", new_content);
+	writeFile(filebase+".old", new_content);
 	modifyRDFitem(id, "lastscan", now.toString());
 	modifyRDFitem(id, "old_lastscan", now.toString());
 	modifyRDFitem(id, "error", "0");
@@ -220,12 +224,13 @@ function openNewDialogNoRefresh(title, url)
 		      result);
     if (result[0] != null) {
 	id = addRDFitem();
+	filebase = id.substr(6);
+	writeFile(filebase+".new", result[5]);	
         modifyRDFitem(id, "url", result[0]);
         modifyRDFitem(id, "title", result[1]);
         modifyRDFitem(id, "threshold", result[2]);
         modifyRDFitem(id, "lastscan", result[3]);
         modifyRDFitem(id, "changed", result[4]);
-        modifyRDFitem(id, "content", result[5]);
 	modifyRDFitem(id, "error", result[6]);
 	modifyRDFitem(id, "scanratemins", result[7]);
 	saveRDF();
@@ -263,12 +268,13 @@ function openEditDialog()
 	    modifyRDFitem(id, "threshold", result[2]);
 	    modifyRDFitem(id, "scanratemins", result[7]);
         } else {
+	    filebase = id.substr(6);
+	    writeFile(filebase+".new", result[5]);	
             modifyRDFitem(id, "url", result[0]);
             modifyRDFitem(id, "title", result[1]);
             modifyRDFitem(id, "threshold", result[2]);
             modifyRDFitem(id, "lastscan", result[3]);
             modifyRDFitem(id, "changed", result[4]);
-            modifyRDFitem(id, "content", result[5]);
 	    modifyRDFitem(id, "error", result[6]);
 	    modifyRDFitem(id, "scanratemins", result[7]);
         }
@@ -302,10 +308,11 @@ function diffItem(id)
     lastScan = new Date(queryRDFitem(id, "lastscan", "5/11/1978"));
     newDate = dateDiffString(lastScan, now);
 
+    filebase = id.substr(6);
     return displayDiffs(queryRDFitem(id, "title", "No Title"), 
 			queryRDFitem(id, "url", ""), 
-			queryRDFitem(id, "old_content", ""), 
-			queryRDFitem(id, "content", ""),
+			readFile(filebase+".old"),
+			readFile(filebase+".new"),
 			oldDate, 
 			newDate);
 }
