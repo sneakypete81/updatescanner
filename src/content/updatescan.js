@@ -354,7 +354,11 @@ function dateDiffString(oldDate, newDate)
     diff = diff / 60;   // minutes
     diff = diff / 60;   // hours
     if (diff < 24) {
-	return " at "+oldDate.getHours()+":"+oldDate.getMinutes()
+	ret = " at "+oldDate.getHours()+":";
+	mins = oldDate.getMinutes().toString();
+	if (mins.length == 1)
+	    mins = "0" + mins;
+	return ret+mins;
     }
     diff = diff / 24;
     if (diff < 7) {
@@ -378,6 +382,33 @@ function dateDiffString(oldDate, newDate)
 	return diff+" year ago";
     else
 	return diff+" years ago";
+}
+
+function markAllAsVisited()
+{
+    var tree = document.getElementById("UpdateTree");
+
+    try {
+        numitems = tree.contentView.rowCount;
+    } catch(e) {
+        numitems = 0;
+    }
+
+    if (numitems > 0)
+    {
+        for (var i=0; i<numitems; i++)
+        {
+            id = tree.contentView.getItemAtIndex(i).id;
+
+	    if (queryRDFitem(id, "changed") != "0") {
+		modifyRDFitem(id, "changed", "0");
+		refreshTree();
+	    }
+        }
+	saveRDF();
+	refreshTree();
+	refresh.request();
+    }
 }
 
 function showAllChangesInNewTabs()

@@ -128,9 +128,14 @@
 		oncommand="diffSelectedItemThisWindow();"/>
       <menuitem label="&opentabmenu.label;" 
 		oncommand="diffSelectedItemNewTab();"/>
-      <menuseparator />
-      <menuitem label="&deletemenu.label;" oncommand="deleteSelectedItem();" 
+      <menuitem label="&deletemenu.label;" 
+		oncommand="deleteSelectedItem();" 
 		key="deleteKey"/>
+      <menuseparator />
+      <menuitem label="&showallchangesinnewtabsmenu.label;" 
+		oncommand="showAllChangesInNewTabs();"/>
+      <menuitem label="&markvisitedmenu.label;"
+		oncommand="markAllAsVisited();"/>
       <menuseparator />
       <menuitem label="&editmenu.label;" oncommand="openEditDialog();"/>
     </popup>
