@@ -296,7 +296,6 @@ function openSelectedItem()
 function diffItem(id)
 {
     var now = new Date();
-    id = getSelectedItemID();
     modifyRDFitem(id, "changed", "0");
     saveRDF();
 
@@ -399,10 +398,9 @@ function dateDiffString(oldDate, newDate)
 	return diff+" years ago";
 }
 
-function markAllAsVisited()
+function showAllChangesInNewTabs()
 {
     var tree = document.getElementById("UpdateTree");
-
     try {
         numitems = tree.contentView.rowCount;
     } catch(e) {
@@ -414,15 +412,10 @@ function markAllAsVisited()
         for (var i=0; i<numitems; i++)
         {
             id = tree.contentView.getItemAtIndex(i).id;
-
 	    if (queryRDFitem(id, "changed") != "0") {
-		modifyRDFitem(id, "changed", "0");
-		refreshTree();
+		diffItemNewTab(id);
 	    }
         }
-	saveRDF();
-	refreshTree();
-	refresh.request();
     }
 }
 

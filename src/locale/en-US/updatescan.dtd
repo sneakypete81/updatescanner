@@ -4,6 +4,10 @@
 <!ENTITY scanbutton.label "Scan">
 <!ENTITY stopbutton.label "Cancel">
 
+<!ENTITY newbutton.tooltip "New Entry">
+<!ENTITY showallchangesinnewtabsbutton.tooltip "Show All Changes in New Tabs">
+<!ENTITY deletebutton.tooltip "Delete">
+
 <!ENTITY openmenu.label "Show Changes">
 <!ENTITY opentabmenu.label "Show Changes in New Tab">
 <!ENTITY newmenu.label "New Item">

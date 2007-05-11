@@ -34,9 +34,9 @@
 
   <vbox flex="1">
     <hbox pack="left">
-      <toolbarbutton id="new-button" oncommand="openNewDialog()" tooltiptext="New Entry"/>
-      <toolbarbutton id="new-tab-button" oncommand="markAllAsVisited()" tooltiptext="Mark all as visited"/>
-      <toolbarbutton id="delete-button" oncommand="deleteSelectedItem()" tooltiptext="Delete"/>
+      <toolbarbutton id="new-button" oncommand="openNewDialog()" tooltiptext="&newbutton.tooltip;"/>
+      <toolbarbutton id="new-tab-button" oncommand="showAllChangesInNewTabs()" tooltiptext="&showallchangesinnewtabsbutton.tooltip;"/>
+      <toolbarbutton id="delete-button" oncommand="deleteSelectedItem()" tooltiptext="&deletebutton.tooltip;"/>
       <toolbarspring />
       <button observes="scanbutton" />
     </hbox>
