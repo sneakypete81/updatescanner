@@ -354,11 +354,16 @@ function dateDiffString(oldDate, newDate)
     diff = diff / 60;   // minutes
     diff = diff / 60;   // hours
     if (diff < 24) {
-	ret = " at "+oldDate.getHours()+":";
+	if (oldDate.getDate() != newDate.getDate())
+	    ret = " yesterday at ";
+	else
+	    ret = " today at ";
+	ret += oldDate.getHours()+":";
 	mins = oldDate.getMinutes().toString();
 	if (mins.length == 1)
 	    mins = "0" + mins;
-	return ret+mins;
+	ret += mins;
+	return ret;
     }
     diff = diff / 24;
     if (diff < 7) {
