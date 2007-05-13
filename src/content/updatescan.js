@@ -437,10 +437,50 @@ function showAllChangesInNewTabs()
     }
 }
 
+function sortByName()
+{
+    var items = new Array();
+    var title;
+    var tree = document.getElementById("UpdateTree");
+    try {
+        numitems = tree.contentView.rowCount;
+    } catch(e) {
+        numitems = 0;
+    }
+
+    // Get a list of ids
+    if (numitems > 0)
+    {
+        for (var i=0; i<numitems; i++)
+        {
+	    items.push(tree.contentView.getItemAtIndex(i).id);
+        }
+    }
+
+    // Move each item to the top of the list, starting with the last name
+    var count = items.length
+    for (i = 0; i<count; i++) {
+	lastTitle = "";
+	lastIndex = 0;
+	for (j in items) {
+	    title = queryRDFitem(items[j], "title");
+	    if (title > lastTitle) {
+		lastTitle = title;
+		lastIndex = j;
+	    }
+	}
+	moveRDFitem(items[lastIndex], 0); // Move to the top
+	items.splice(lastIndex, 1);       // Remove from the list
+    }
+    saveRDF();
+    refreshTree();
+    refresh.request();
+}
+
 function deleteSelectedItem()
 {
     id=getSelectedItemID(); 
-    title = queryRDFitem(id, "title", "untitled");
+    var title = queryRDFitem(id, "title", "untitled");
 
     if (confirm("Are you sure you want to delete "+title+"?")) {
 	deleteRDFitem(id);

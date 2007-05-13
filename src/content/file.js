@@ -7,7 +7,6 @@ function createUpdatescanDirectory()
 
 function writeFile(filename, data)
 {
-    myDump(prependUpdatescanPath(filename));
     var outFile = FileIO.open(prependUpdatescanPath(filename));
     return FileIO.write(outFile, data);    
 }

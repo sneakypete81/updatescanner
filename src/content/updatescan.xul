@@ -136,6 +136,8 @@
 		oncommand="showAllChangesInNewTabs();"/>
       <menuitem label="&markvisitedmenu.label;"
 		oncommand="markAllAsVisited();"/>
+      <menuitem label="&sortbynamemenu.label;"
+		oncommand="sortByName();"/>
       <menuseparator />
       <menuitem label="&editmenu.label;" oncommand="openEditDialog();"/>
     </popup>

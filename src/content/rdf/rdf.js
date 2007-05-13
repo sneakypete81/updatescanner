@@ -66,6 +66,14 @@ function targetExists(id, field)
     return true;
 }
 
+function moveRDFitem(id, newIndex)
+{
+    var item = dsource.getNode(id);
+    rootnode.removeChild(item);
+    rootnode.addChildAt(item, newIndex+1); //rdfds index starts at 1, not 0
+    dsource.save();
+}
+
 function getRDFroot()
 {
     return dsource.getNode(namespace+"/all");

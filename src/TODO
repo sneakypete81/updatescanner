@@ -1,7 +1,6 @@
 Things to do:
 
 Features:
-1Sort list (autosort or manual?)
 2drag n drop
 2bookmark menu item?
 2Rightclick on link
@@ -23,8 +22,8 @@ Features:
 
 
 Bugs:
-1Still some strange diff things happening
 1Need to import old pages and clean up rdf when upgrading
+2Still some strange diff things happening
 2Unicode doesn't work in diff
 2Need to handle .getstrings properly in scan.js
 2Notify doesn't work on Mac - disable, or use 2.0 method

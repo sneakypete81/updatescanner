@@ -12,5 +12,6 @@
 <!ENTITY opentabmenu.label "Show Changes in New Tab">
 <!ENTITY showallchangesinnewtabsmenu.label "Show All Changed Pages in New Tabs">
 <!ENTITY markvisitedmenu.label "Mark All as Visited">
+<!ENTITY sortbynamemenu.label "Sort by Name">
 <!ENTITY deletemenu.label "Delete">
 <!ENTITY editmenu.label "Properties">
