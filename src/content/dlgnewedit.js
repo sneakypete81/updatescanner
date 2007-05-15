@@ -1,6 +1,6 @@
 const sliderThresholdValues = 5;
 const sliderThresholdMax = 100;
-const sliderAutoscanValues = 5;
+const sliderAutoscanValues = 6;
 const sliderAutoscanMax = 100;
 
 function initDialog()
@@ -33,8 +33,14 @@ function Ok()
     var txtTitle=document.getElementById("txtTitle");
     var noDataAlert=document.getElementById("strings").getString(
                                             "noDataAlert");
+    var fiveMinuteAlert=document.getElementById("strings").getString(
+						"fiveMinuteAlert");
     var httpexists = /^[A-Za-z]+:\/\//;
     var restexists = /^[A-Za-z]+:\/\/\W*\w/;
+
+    if (sliderAutoscanDecode(sliderAutoscanGetPos()) == 5)
+	if (!confirm(fiveMinuteAlert))
+	    return false;
 
     if (!httpexists.test(txtURL.value.toLowerCase()))
         txtURL.value="http://" + txtURL.value;
@@ -160,49 +166,63 @@ function sliderAutoscanChange()
     strings=document.getElementById("strings");
     slider=document.getElementById("sliderAutoscan");
     label3=document.getElementById("label3");
+    label4=document.getElementById("label4");
     pos = sliderAutoscanGetPos();
     if (pos == 0) {
-	label3.value=strings.getString("autoscanLabel0");
+	label3.value=strings.getString("autoscanLabel0a");
+	label4.value=strings.getString("autoscanLabel0b");
     } else if (pos == 1) {
-	label3.value=strings.getString("autoscanLabel1");
+	label3.value=strings.getString("autoscanLabel1a");
+	label4.value=strings.getString("autoscanLabel1b");
     } else if (pos == 2) {
-	label3.value=strings.getString("autoscanLabel2");
+	label3.value=strings.getString("autoscanLabel2a");
+	label4.value=strings.getString("autoscanLabel2b");
     } else if (pos == 3) {
-	label3.value=strings.getString("autoscanLabel3");
+	label3.value=strings.getString("autoscanLabel3a");
+	label4.value=strings.getString("autoscanLabel3b");
     } else if (pos == 4) {
-	label3.value=strings.getString("autoscanLabel4");
+	label3.value=strings.getString("autoscanLabel4a");
+	label4.value=strings.getString("autoscanLabel4b");
     } else if (pos == 5) {
-	label3.value=strings.getString("autoscanLabel5");
+	label3.value=strings.getString("autoscanLabel5a");
+	label4.value=strings.getString("autoscanLabel5b");
+    } else if (pos == 6) {
+	label3.value=strings.getString("autoscanLabel6a");
+	label4.value=strings.getString("autoscanLabel6b");
     }
 }
 
 function sliderAutoscanEncode(scanratemins)
 {
     if (scanratemins == 0)      // Manual
-	return 5;
-    if (scanratemins < 20)
+	return 6;
+    if (scanratemins < 10)
 	return 0;
-    if (scanratemins < 45)
+    if (scanratemins < 20)
 	return 1;
-    if (scanratemins < 60 * 3)
+    if (scanratemins < 45)
 	return 2;
-    if (scanratemins < 60 * 12)
+    if (scanratemins < 60 * 3)
 	return 3;
-    else
+    if (scanratemins < 60 * 12)
 	return 4;
+    else
+	return 5;
 }
 
 function sliderAutoscanDecode(slider)
 {
     if (slider == 0)
-	return 15;       // 15 minutes
+	return 5;        // 5 minutes
     if (slider == 1)
-	return 30;       // 30 minutes
+	return 15;       // 15 minutes
     if (slider == 2)
-	return 60;       // Hourly
+	return 30;       // 30 minutes
     if (slider == 3)
-	return 60 * 6;   // 6 Hours
+	return 60;       // Hourly
     if (slider == 4)
+	return 60 * 6;   // 6 Hours
+    if (slider == 5)
 	return 60 * 24;  // Daily
     else
 	return 0;        // Manual

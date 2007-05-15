@@ -13,8 +13,6 @@ function loadUpdateScan()
 {
     var rdffile;
 
-    createUpdatescanDirectory();
-
     // Connect to the RDF file
     rdffile = getRDFuri();
     initRDF(rdffile);
@@ -24,6 +22,24 @@ function loadUpdateScan()
     tree.datasources=rdffile;
     tree.onclick=treeClick;
     refreshTree();
+
+    // Handle new installations/upgrades
+    if (!updatescanDirExists()) {
+	createUpdatescanDir();
+	numItems = getNumItems();
+	myDump(numItems);
+	for (i=0; i<numItems; i++) {
+            id = tree.contentView.getItemAtIndex(i).id;
+	    modifyRDFitem(id, "content", ""); // Not using this anymore
+	    modifyRDFitem(id, "changed", "0");
+	    modifyRDFitem(id, "error", "0");
+	    filebase = id.substr(6);
+	    myDump(filebase);
+	    writeFile(filebase+".new", "**NEW**"); // Mark as new
+	}
+	saveRDF();
+	refreshTree();
+    }	    
 
     // Check for refresh requests
     refresh = new Refresher("refreshTreeRequest", refreshTree);
@@ -81,12 +97,7 @@ function scanButtonClick()
     
     var tree = document.getElementById("UpdateTree");
 
-    try {
-        numitems = tree.contentView.rowCount;
-    } catch(e) {
-        numitems = 0;
-    }
-
+    numitems = getNumItems();
     if (numitems > 0)
     {
 	scan = new Scanner()
@@ -393,12 +404,7 @@ function markAllAsVisited()
 {
     var tree = document.getElementById("UpdateTree");
 
-    try {
-        numitems = tree.contentView.rowCount;
-    } catch(e) {
-        numitems = 0;
-    }
-
+    numitems = getNumItems();
     if (numitems > 0)
     {
         for (var i=0; i<numitems; i++)
@@ -419,12 +425,8 @@ function markAllAsVisited()
 function showAllChangesInNewTabs()
 {
     var tree = document.getElementById("UpdateTree");
-    try {
-        numitems = tree.contentView.rowCount;
-    } catch(e) {
-        numitems = 0;
-    }
 
+    numitems = getNumItems();
     if (numitems > 0)
     {
         for (var i=0; i<numitems; i++)
@@ -442,11 +444,8 @@ function sortByName()
     var items = new Array();
     var title;
     var tree = document.getElementById("UpdateTree");
-    try {
-        numitems = tree.contentView.rowCount;
-    } catch(e) {
-        numitems = 0;
-    }
+
+    numitems = getNumItems();
 
     // Get a list of ids
     if (numitems > 0)
@@ -539,4 +538,14 @@ function showProgress(value, max)
 function hideProgress()
 {   
     document.getElementById("Progress").collapsed=true;
+}
+
+function getNumItems()
+{
+    var tree = document.getElementById("UpdateTree");
+    try {
+        return tree.contentView.rowCount;
+    } catch(e) {
+        return 0;
+    }
 }

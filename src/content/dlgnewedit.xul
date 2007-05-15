@@ -5,11 +5,10 @@
 
 <dialog id="dlgNewEdit" 
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-        buttons="accept,cancel,disclosure"
+        buttons="accept,cancel"
         onload="initDialog();"
         ondialogaccept="return Ok();"
-        ondialogcancel="return Cancel();"
-        ondialogdisclosure="return Help();">
+        ondialogcancel="return Cancel();">
 
 <stringbundle id="strings" src="chrome://updatescan/locale/dlgnewedit.properties"/>
 

@@ -1,7 +1,13 @@
-function createUpdatescanDirectory()
+function updatescanDirExists()
 {
     var dir = DirIO.open(prependUpdatescanPath(""));
-    if (!dir.exists())
+    return (dir.exists()) 
+}
+
+function createUpdatescanDir()
+{
+    var dir = DirIO.open(prependUpdatescanPath(""));
+    if (!dir.exists()) 
 	DirIO.create(dir);
 }
 
