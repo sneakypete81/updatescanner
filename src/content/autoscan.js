@@ -58,7 +58,7 @@ function Autoscan()
 		    filebase = id.substr(6);
 		    scan.addURL(id, queryRDFitem(id, "title", "No Title"), 
 				    queryRDFitem(id, "url", ""), 
-				    readFile(filebase+".new"),
+  				    readFile(escapeFilename(filebase)+".new"),
 				    queryRDFitem(id, "threshold", 100));
 		}
 	    }
@@ -86,7 +86,7 @@ function Autoscan()
 		modifyRDFitem(id, "old_lastscan", old_lastscan);
 	    }
 
-	    writeFile(filebase+".new", new_content);
+	    writeFile(escapeFilename(filebase)+".new", new_content);
 	    modifyRDFitem(id, "changed", "1");
 	    modifyRDFitem(id, "lastscan", now.toString());
 	    modifyRDFitem(id, "error", "0");
@@ -94,8 +94,8 @@ function Autoscan()
 	    modifyRDFitem(id, "error", "0");
 	    modifyRDFitem(id, "lastscan", now.toString());
 	} else if (status == STATUS_NEW) {
-	    writeFile(filebase+".new", new_content);
-	    writeFile(filebase+".old", new_content);
+	    writeFile(escapeFilename(filebase)+".new", new_content);
+	    writeFile(escapeFilename(filebase)+".old", new_content);
 	    modifyRDFitem(id, "lastscan", now.toString());
 	    modifyRDFitem(id, "error", "0");
 	} else {

@@ -24,6 +24,7 @@ Features:
 
 Bugs:
 1Need to import old pages and clean up rdf when upgrading
+1Sort needs to be case insensitive
 2Still some strange diff things happening
 2Unicode doesn't work in diff
 2Need to handle .getstrings properly in scan.js

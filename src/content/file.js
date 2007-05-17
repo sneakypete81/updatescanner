@@ -85,3 +85,19 @@ function prependUpdatescanPath(filename)
     dir.append(filename);
     return dir.path;
 }
+
+function escapeFilename(filename)
+// Convert non-characters to ascii codes (" " => "_32")
+{
+    var output = ""
+    var char
+    for (var i=0; i<filename.length; i++) {
+	char = filename[i]
+	if (char.match(/[0-9a-zA-Z]/)) {
+	    output += char;
+	} else {
+            output += "_"+char.charCodeAt(0);
+	}
+    }
+    return output
+}
