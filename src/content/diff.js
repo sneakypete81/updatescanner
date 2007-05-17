@@ -60,7 +60,7 @@ function generateHeader(currentView, title, date, sourceURL, diffURL, oldURL, ne
     data += "<table bgcolor=#e5e5ff color=#ffffff cellpadding=5 width=100%>\n";
     data += "<td><img src='chrome://updatescan/skin/updatescan_big.png'></td>\n";
     data += "<td>\n";
-    data += "<span style='font: 12px verdana';>\n";
+    data += "<span style='font: 12px verdana;color:black'>\n";
     if (currentView == kUnscannedView) {
 	data += "The selected page ";
     } else {
@@ -83,17 +83,17 @@ function generateHeader(currentView, title, date, sourceURL, diffURL, oldURL, ne
 	if (currentView == kOldView)
 	    data += "<b>Old Page</b> |\n";
 	else
-	    data += "<a href='"+oldURL+"'>Old Page</a> |\n";
+	    data += "<a style='color:black;font-weight:normal' href='"+oldURL+"'>Old Page</a> |\n";
 	if (currentView == kNewView)
 	    data += "<b>New Page</b> |\n";
 	else
-	    data += "<a href='"+newURL+"'>New Page</a> |\n";
+	    data += "<a style='color:black;font-weight:normal' href='"+newURL+"'>New Page</a> |\n";
 	if (currentView == kDiffView)
 	    data += "<b>Changes</b> |\n";
 	else
-	    data += "<a href='"+diffURL+"'>Changes</a> |\n";
+	    data += "<a style='color:black;font-weight:normal' href='"+diffURL+"'>Changes</a> |\n";
     }
-    data += "<a href='"+sourceURL+"'>"+sourceURL+"</a> ]\n"
+    data += "<a style='color:black;font-weight:normal' href='"+sourceURL+"'>"+sourceURL+"</a> ]\n"
     data += "</span></td></table>\n";
     data += "<hr>\n";
     return data;
