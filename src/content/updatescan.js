@@ -469,7 +469,7 @@ function sortByName()
 	lastTitle = "";
 	lastIndex = 0;
 	for (j in items) {
-	    title = queryRDFitem(items[j], "title");
+	    title = queryRDFitem(items[j], "title").toLowerCase();
 	    if (title > lastTitle) {
 		lastTitle = title;
 		lastIndex = j;

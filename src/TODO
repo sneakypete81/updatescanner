@@ -1,7 +1,7 @@
 Things to do:
 
 Features:
-1Yellow icon background?
+1Yellow icon background? Outline grey icon?
 2drag n drop
 2bookmark menu item?
 2Rightclick on link
@@ -23,7 +23,6 @@ Features:
 
 
 Bugs:
-1Sort needs to be case insensitive
 2Still some strange diff things happening
 2Unicode doesn't work in diff
 2Need to handle .getstrings properly in scan.js
