@@ -83,17 +83,17 @@ function generateHeader(currentView, title, date, sourceURL, diffURL, oldURL, ne
 	if (currentView == kOldView)
 	    data += "<b>Old Page</b> |\n";
 	else
-	    data += "<a style='color:black;font-weight:normal' href='"+oldURL+"'>Old Page</a> |\n";
+	    data += "<a style='color:blue;font-weight:normal' href='"+oldURL+"'>Old Page</a> |\n";
 	if (currentView == kNewView)
 	    data += "<b>New Page</b> |\n";
 	else
-	    data += "<a style='color:black;font-weight:normal' href='"+newURL+"'>New Page</a> |\n";
+	    data += "<a style='color:blue;font-weight:normal' href='"+newURL+"'>New Page</a> |\n";
 	if (currentView == kDiffView)
 	    data += "<b>Changes</b> |\n";
 	else
-	    data += "<a style='color:black;font-weight:normal' href='"+diffURL+"'>Changes</a> |\n";
+	    data += "<a style='color:blue;font-weight:normal' href='"+diffURL+"'>Changes</a> |\n";
     }
-    data += "<a style='color:black;font-weight:normal' href='"+sourceURL+"'>"+sourceURL+"</a> ]\n"
+    data += "<a style='color:blue;font-weight:normal' href='"+sourceURL+"'>"+sourceURL+"</a> ]\n"
     data += "</span></td></table>\n";
     data += "<hr>\n";
     return data;
