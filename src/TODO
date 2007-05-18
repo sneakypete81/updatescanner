@@ -23,6 +23,7 @@ Features:
 
 
 Bugs:
+1Ignore blank scan pages?
 2Still some strange diff things happening
 2Unicode doesn't work in diff
 2Need to handle .getstrings properly in scan.js
