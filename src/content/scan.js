@@ -105,13 +105,14 @@ function Scanner()
                     oldContent = stripNonAlphaNum(stripTags(stripScript(page.content)))
 		    newContent = stripNonAlphaNum(stripTags(stripScript(
 			    	                  httpreq.responseText)));
-		    if (!checkSame(newContent, oldContent, page.threshold)) {
+		    if (newContent == "" || 
+			checkSame(newContent, oldContent, page.threshold)) {
+		        changedCallback(page.id, "", STATUS_NO_CHANGE);
+		    } else {
 		        if (page.content == "**NEW**")
 			    changedCallback(page.id, httpreq.responseText, STATUS_NEW);
 		        else
 			    changedCallback(page.id, httpreq.responseText, STATUS_CHANGE);
-		    } else {
-		        changedCallback(page.id, "", STATUS_NO_CHANGE);
 		    }
 	        } else {
 		    changedCallback(page.id, "", STATUS_ERROR);

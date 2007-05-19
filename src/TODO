@@ -24,6 +24,8 @@ Features:
 
 Bugs:
 1Ignore blank scan pages?
+1If page is error & changed, display changed not error
+1Don't autoscan on startup - wait 1 minute
 2Still some strange diff things happening
 2Unicode doesn't work in diff
 2Need to handle .getstrings properly in scan.js

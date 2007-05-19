@@ -55,6 +55,7 @@
       </treecols>
            
       <template>
+<!-- Removed - does this actually help at all?
 	<rule UPDATESCAN:error="1">
           <treechildren context="contextmenu">
             <treeitem uri="rdf:*"><treerow>
@@ -73,6 +74,7 @@
             </treerow></treeitem>
           </treechildren>
         </rule>
+-->
 	<rule UPDATESCAN:changed="1">
           <treechildren context="contextmenu">
             <treeitem uri="rdf:*"><treerow>
