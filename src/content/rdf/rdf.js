@@ -8,9 +8,10 @@ function initRDF(rdffile)
     rootnode=dsource.getNode(namespace+"/all");
     if (!rootnode.isSeq())
         rootnode.makeSeq();
+    saveRDF();
 }
 
-function saveRDF(rdffile)
+function saveRDF()
 {
     dsource.save()
 }

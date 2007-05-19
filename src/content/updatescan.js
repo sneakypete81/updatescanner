@@ -24,7 +24,6 @@ function loadUpdateScan()
     var tree=document.getElementById("UpdateTree");
     tree.datasources=rdffile;
     tree.onclick=treeClick;
-    refreshTree();
 
     // Handle new installations/upgrades
     if (!updatescanDirExists()) {
@@ -45,12 +44,12 @@ function loadUpdateScan()
 	    writeFile(escapeFilename(filebase)+".new", "**NEW**"); // Mark as new
 	}
 	saveRDF();
-	refreshTree();
     }	    
 
     // Check for refresh requests
     refresh = new Refresher("refreshTreeRequest", refreshTree);
     refresh.start();
+    refresh.request();
 }
 
 function unloadUpdateScan()
