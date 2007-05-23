@@ -81,8 +81,8 @@ function Autoscan()
 	    numChanges++;
 	    if (queryRDFitem(id, "changed") == "0") {
 		// If this is a new change, save the previous state for diffing
-		rmFile(filebase+".old");
-		mvFile(filebase+".new", filebase+".old");
+		rmFile(escapeFilename(filebase)+".old");
+		mvFile(escapeFilename(filebase)+".new", escapeFilename(filebase)+".old");
 		old_lastscan = queryRDFitem(id, "lastscan", "");
 		modifyRDFitem(id, "old_lastscan", old_lastscan);
 	    }
