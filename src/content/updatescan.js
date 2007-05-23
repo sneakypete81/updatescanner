@@ -59,6 +59,9 @@ function unloadUpdateScan()
 
 function treeClick(event)
 {
+    if (getNumItems() == 0)
+	return;
+
     // Code from http://xul.andreashalter.ch/
     //get original target (element user clicked on) 
     var str_OrigTarget = event.originalTarget; 
@@ -262,7 +265,10 @@ function openEditDialog()
     var id;
     var oldurl;
     
-    id=getSelectedItemID(); 
+    id=getSelectedItemID();
+    if (id == "")
+	return;
+
     result[0] = queryRDFitem(id, "url", "");
     result[1] = queryRDFitem(id, "title", "No Title");
     result[2] = queryRDFitem(id, "threshold", "100");
@@ -335,7 +341,10 @@ function diffItem(id)
 
 function diffSelectedItemThisWindow()
 {
-    diffItemThisWindow(getSelectedItemID());
+    item = getSelectedItemID();
+    if (item == "")
+	return;
+    diffItemThisWindow(item);
 }
 
 function diffItemThisWindow(id)
@@ -347,7 +356,10 @@ function diffItemThisWindow(id)
 
 function diffSelectedItemNewTab()
 {
-    diffItemNewTab(getSelectedItemID());    
+    item = getSelectedItemID();
+    if (item == "")
+	return;
+    diffItemNewTab(item);    
 }
 
 function diffItemNewTab(id)
@@ -484,7 +496,9 @@ function sortByName()
 
 function deleteSelectedItem()
 {
-    id=getSelectedItemID(); 
+    id=getSelectedItemID();
+    if (id == "")
+	return;
     var title = queryRDFitem(id, "title", "untitled");
 
     if (confirm("Are you sure you want to delete "+title+"?")) {
@@ -498,7 +512,10 @@ function deleteSelectedItem()
 function getSelectedItemID()
 {
     var tree = document.getElementById("UpdateTree");
-    return tree.contentView.getItemAtIndex(tree.currentIndex).id;
+    if (getNumItems() == 0)
+	return "";
+    else
+	return tree.contentView.getItemAtIndex(tree.currentIndex).id;
 }
 
 function showStopButton()
@@ -517,10 +534,14 @@ function showScanButton()
 
 function refreshTree()
 {
-    var tree=document.getElementById("UpdateTree");
-    savedRow = tree.currentIndex;
-    tree.builder.rebuild();    
-    tree.view.selection.select(savedRow);
+    try {
+	var tree=document.getElementById("UpdateTree");
+	savedRow = tree.currentIndex;
+	tree.builder.rebuild();    
+	tree.view.selection.select(savedRow);
+    } catch (e) {
+	;
+    }
 }
 
 function focusTree()
