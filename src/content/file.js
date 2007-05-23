@@ -14,7 +14,7 @@ function createUpdatescanDir()
 function writeFile(filename, data)
 {
     var outFile = FileIO.open(prependUpdatescanPath(filename));
-    return FileIO.write(outFile, data);    
+    return FileIO.write(outFile, data, "","UTF-8");    
 }
 
 function readFile(filename)
@@ -23,7 +23,7 @@ function readFile(filename)
     if (!inFile.exists())
 	return "";
 
-    var data = FileIO.read(inFile);    
+    var data = FileIO.read(inFile, "UTF-8");    
     if (data == false)
 	return "";
     return data;

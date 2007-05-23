@@ -18,7 +18,7 @@ function displayDiffs(title, sourceURL, oldContent, newContent, oldDate, newDate
 
 	data = generateHeader(kUnscannedView, title, "", 
 			      sourceURL, "", "", "");    
-	FileIO.write(diffFile, data);
+	FileIO.write(diffFile, data, "", "UTF-8");
 
 	return diffURL;
     }
@@ -39,24 +39,25 @@ function displayDiffs(title, sourceURL, oldContent, newContent, oldDate, newDate
     data = generateHeader(kOldView, title, oldDate, 
 			  sourceURL, diffURL, oldURL, newURL);    
     data += oldContent;
-    FileIO.write(oldFile, data);
+    FileIO.write(oldFile, data, "", "UTF-8");
 
     data = generateHeader(kNewView, title, newDate, 
 			  sourceURL, diffURL, oldURL, newURL);    
     data += newContent;
-    FileIO.write(newFile, data);
+    FileIO.write(newFile, data, "", "UTF-8");
 
     data = generateHeader(kDiffView, title, newDate, 
 			  sourceURL, diffURL, oldURL, newURL);    
     data += diffContent;
-    FileIO.write(diffFile, data);
+    FileIO.write(diffFile, data, "", "UTF-8");
 
     return diffURL;
 }
 
 function generateHeader(currentView, title, date, sourceURL, diffURL, oldURL, newURL)
 {
-    data = "<base href='"+sourceURL+"'>\n";
+    data = "<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>"
+    data += "<base href='"+sourceURL+"'>\n";
     data += "<table bgcolor=#e5e5ff color=#ffffff cellpadding=5 width=100%>\n";
     data += "<td><img src='chrome://updatescan/skin/updatescan_big.png'></td>\n";
     data += "<td>\n";
