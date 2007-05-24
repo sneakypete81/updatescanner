@@ -11,17 +11,20 @@ var scan;
 
 function loadUpdateScan()
 {
+    var tree;
     var rdffile;
     var nodes;
     var node;
     var id;
+    var numItems;
+    var filebase;
 
     // Connect to the RDF file
     rdffile = getRDFuri();
     initRDF(rdffile);
 
     // link to the listbox
-    var tree=document.getElementById("UpdateTree");
+    tree = document.getElementById("UpdateTree");
     tree.datasources=rdffile;
     tree.onclick=treeClick;
 
@@ -82,7 +85,7 @@ function treeClick(event)
 	}
     } 
 
-    id = tree.contentView.getItemAtIndex(obj_Row.value).id;
+    var id = tree.contentView.getItemAtIndex(obj_Row.value).id;
 
     switch (event.button) {
     case 0:
@@ -97,6 +100,7 @@ function treeClick(event)
 function scanButtonClick()
 {
     var id;
+    var filebase;
     var numitems;
     var treeEmptyAlert=document.getElementById("strings").getString(
 	                                       "treeEmptyAlert");
@@ -135,6 +139,8 @@ function scanButtonClick()
 function scanChangedCallback(id, new_content, status)
 {
     var now = new Date();
+    var filebase;
+    var old_lastscan;
 
     filebase = id.substr(6);
     if (status == STATUS_CHANGE) {
@@ -229,6 +235,7 @@ function openNewDialog()
 function openNewDialogNoRefresh(title, url)
 {
     var id;
+    var filebase;
     var result = new Array(8);
     result[0] = url;
     result[1] = title;
@@ -325,12 +332,12 @@ function diffItem(id)
     refreshTree();
     refresh.request();
     
-    old_lastScan = new Date(queryRDFitem(id, "old_lastscan", "5/11/1978"));
-    oldDate = dateDiffString(old_lastScan, now);
-    lastScan = new Date(queryRDFitem(id, "lastscan", "5/11/1978"));
-    newDate = dateDiffString(lastScan, now);
+    var old_lastScan = new Date(queryRDFitem(id, "old_lastscan", "5/11/1978"));
+    var oldDate = dateDiffString(old_lastScan, now);
+    var lastScan = new Date(queryRDFitem(id, "lastscan", "5/11/1978"));
+    var newDate = dateDiffString(lastScan, now);
 
-    filebase = id.substr(6);
+    var filebase = id.substr(6);
     return displayDiffs(queryRDFitem(id, "title", "No Title"), 
 			queryRDFitem(id, "url", ""), 
 			readFile(escapeFilename(filebase)+".old"),
@@ -341,7 +348,7 @@ function diffItem(id)
 
 function diffSelectedItemThisWindow()
 {
-    item = getSelectedItemID();
+    var item = getSelectedItemID();
     if (item == "")
 	return;
     diffItemThisWindow(item);
@@ -349,14 +356,14 @@ function diffSelectedItemThisWindow()
 
 function diffItemThisWindow(id)
 {
-    diffURL = diffItem(id)
+    var diffURL = diffItem(id)
     openTopWin(diffURL);
     focusTree();
 }
 
 function diffSelectedItemNewTab()
 {
-    item = getSelectedItemID();
+    var item = getSelectedItemID();
     if (item == "")
 	return;
     diffItemNewTab(item);    
@@ -372,13 +379,14 @@ function diffItemNewTab(id)
 	.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
 	.getInterface(Components.interfaces.nsIDOMWindow);
 
-    diffURL = diffItem(id);
+    var diffURL = diffItem(id);
     mainWindow.getBrowser().addTab(diffURL);
 }
 
 function dateDiffString(oldDate, newDate)
 {
-    diff = newDate.getTime() - oldDate.getTime();
+    var ret;
+    var diff = newDate.getTime() - oldDate.getTime();
     diff = diff / 1000; // convert to seconds
     diff = diff / 60;   // minutes
     diff = diff / 60;   // hours
@@ -388,7 +396,7 @@ function dateDiffString(oldDate, newDate)
 	else
 	    ret = " today at ";
 	ret += oldDate.getHours()+":";
-	mins = oldDate.getMinutes().toString();
+	var mins = oldDate.getMinutes().toString();
 	if (mins.length == 1)
 	    mins = "0" + mins;
 	ret += mins;
@@ -422,12 +430,12 @@ function markAllAsVisited()
 {
     var tree = document.getElementById("UpdateTree");
 
-    numitems = getNumItems();
+    var numitems = getNumItems();
     if (numitems > 0)
     {
         for (var i=0; i<numitems; i++)
         {
-            id = tree.contentView.getItemAtIndex(i).id;
+            var id = tree.contentView.getItemAtIndex(i).id;
 
 	    if (queryRDFitem(id, "changed") != "0") {
 		modifyRDFitem(id, "changed", "0");
@@ -444,12 +452,12 @@ function showAllChangesInNewTabs()
 {
     var tree = document.getElementById("UpdateTree");
 
-    numitems = getNumItems();
+    var numitems = getNumItems();
     if (numitems > 0)
     {
         for (var i=0; i<numitems; i++)
         {
-            id = tree.contentView.getItemAtIndex(i).id;
+            var id = tree.contentView.getItemAtIndex(i).id;
 	    if (queryRDFitem(id, "changed") != "0") {
 		diffItemNewTab(id);
 	    }
@@ -461,9 +469,10 @@ function sortByName()
 {
     var items = new Array();
     var title;
+    var lastTitle;
+    var lastIndex;
     var tree = document.getElementById("UpdateTree");
-
-    numitems = getNumItems();
+    var numitems = getNumItems();
 
     // Get a list of ids
     if (numitems > 0)
@@ -476,10 +485,10 @@ function sortByName()
 
     // Move each item to the top of the list, starting with the last name
     var count = items.length
-    for (i = 0; i<count; i++) {
+    for (var i = 0; i<count; i++) {
 	lastTitle = "";
 	lastIndex = 0;
-	for (j in items) {
+	for (var j in items) {
 	    title = queryRDFitem(items[j], "title").toLowerCase();
 	    if (title > lastTitle) {
 		lastTitle = title;
@@ -496,7 +505,7 @@ function sortByName()
 
 function deleteSelectedItem()
 {
-    id=getSelectedItemID();
+    var id=getSelectedItemID();
     if (id == "")
 	return;
     var title = queryRDFitem(id, "title", "untitled");
@@ -536,7 +545,7 @@ function refreshTree()
 {
     try {
 	var tree=document.getElementById("UpdateTree");
-	savedRow = tree.currentIndex;
+	var savedRow = tree.currentIndex;
 	tree.builder.rebuild();    
 	tree.view.selection.select(savedRow);
     } catch (e) {
