@@ -55,12 +55,12 @@
       </treecols>
            
       <template>
-<!-- Removed - does this actually help at all?
-	<rule UPDATESCAN:error="1">
+	<rule UPDATESCAN:changed="1">
           <treechildren context="contextmenu">
             <treeitem uri="rdf:*"><treerow>
-              <treecell properties="error" 
-                label="rdf:http://www.updatescan.com/rdf/updatescan#title"/>
+              <treecell properties="changed"
+                src="chrome://updatescan/skin/updatescan_sm.png" 
+                label=" rdf:http://www.updatescan.com/rdf/updatescan#title"/>
               <treecell 
 		label="rdf:http://www.updatescan.com/rdf/updatescan#url"/>
               <treecell 
@@ -74,13 +74,11 @@
             </treerow></treeitem>
           </treechildren>
         </rule>
--->
-	<rule UPDATESCAN:changed="1">
+	<rule UPDATESCAN:error="1">
           <treechildren context="contextmenu">
             <treeitem uri="rdf:*"><treerow>
-              <treecell properties="changed"
-                src="chrome://updatescan/skin/updatescan_sm.png" 
-                label=" rdf:http://www.updatescan.com/rdf/updatescan#title"/>
+              <treecell properties="error" 
+                label="rdf:http://www.updatescan.com/rdf/updatescan#title"/>
               <treecell 
 		label="rdf:http://www.updatescan.com/rdf/updatescan#url"/>
               <treecell 
