@@ -98,6 +98,7 @@ function Autoscan()
 	    writeFile(escapeFilename(filebase)+".new", new_content);
 	    writeFile(escapeFilename(filebase)+".old", new_content);
 	    modifyRDFitem(id, "lastscan", now.toString());
+	    modifyRDFitem(id, "old_lastscan", now.toString());
 	    modifyRDFitem(id, "error", "0");
 	} else {
 	    modifyRDFitem(id, "error", "1");
