@@ -33,17 +33,14 @@ function loadUpdateScan()
 	createUpdatescanDir();
 	nodes = getRDFroot().getChildren();
 	numItems = getRDFroot().getChildCount();
-	myDump(numItems);
 	while (nodes.hasMoreElements()) {
 	    node = nodes.getNext()
-	    myDump(node.getValue());
             id = node.getValue();
 	    modifyRDFitem(id, "content", ""); // Not using this anymore
 	    modifyRDFitem(id, "changed", "0");
 	    modifyRDFitem(id, "error", "0");
 	    modifyRDFitem(id, "lastautoscan", "5 November 1978");
 	    filebase = id.substr(6);
-	    myDump(filebase);
 	    writeFile(escapeFilename(filebase)+".new", "**NEW**"); // Mark as new
 	}
 	saveRDF();
@@ -521,10 +518,14 @@ function deleteSelectedItem()
 function getSelectedItemID()
 {
     var tree = document.getElementById("UpdateTree");
-    if (getNumItems() == 0)
-	return "";
-    else
-	return tree.contentView.getItemAtIndex(tree.currentIndex).id;
+    var id;
+    try {
+	id = tree.contentView.getItemAtIndex(tree.currentIndex).id;
+    } catch (e) {
+	id = "";
+    }
+
+    return id;
 }
 
 function showStopButton()
