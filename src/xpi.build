@@ -2,6 +2,7 @@
 
 APP=updatescan
 
+mkdir -p chrome
 JAR="chrome/$APP.jar"
 [ -f $JAR ] && rm $JAR
 echo $JAR

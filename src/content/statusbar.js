@@ -28,13 +28,14 @@ function autoscanFinished(numChanges)
 //    var alertsService = Components.classes["@mozilla.org/alerts-service;1"]
 //                        .getService(Components.interfaces.nsIAlertsService); 
     var message;
+    var str = document.getElementById("updatescanStrings")
 
     refresh.request();
     if (numChanges) {
 	if (numChanges == 1) {
-	    message = "A webpage has been updated";
+	    message = str.getString("alertOneChange")
 	} else {
-	    message = numChanges+" webpages have been updated";
+	    message = numChanges + " " + str.getString("alertManyChanges")
 	}
 	window.openDialog("chrome://updatescan/content/alert.xul",
 			  "alert:alert",

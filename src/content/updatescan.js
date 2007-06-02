@@ -99,10 +99,8 @@ function scanButtonClick()
     var id;
     var filebase;
     var numitems;
-    var treeEmptyAlert=document.getElementById("strings").getString(
-	                                       "treeEmptyAlert");
-    var statusScanning=document.getElementById("strings").getString(
-                                               "statusScanning");
+    var str=document.getElementById("updatescanStrings")
+
     showStopButton();
     
     var tree = document.getElementById("UpdateTree");
@@ -122,13 +120,13 @@ function scanButtonClick()
 			queryRDFitem(id, "threshold", 100));
         }
 
-        setStatus(statusScanning);
+        setStatus(str.getString("statusScanning"));
 	numChanges=0;
         scan.start(scanChangedCallback, scanFinishedCallback, showProgress);
     }
     else
     {
-        scanFinishedCallback(treeEmptyAlert);
+        scanFinishedCallback(str.getString("treeEmptyAlert"));
     }
 
 }
@@ -173,27 +171,20 @@ function scanChangedCallback(id, new_content, status)
 
 function scanFinishedCallback(errors)
 {
-    var statusError=document.getElementById("strings").getString(
-	                                    "statusError");
-    var statusNoChanges=document.getElementById("strings").getString(
-	                                        "statusNoChanges");
-    var statusOneChange=document.getElementById("strings").getString(
-	                                        "statusOneChange");
-    var statusManyChanges=document.getElementById("strings").getString(
-	                                          "statusManyChanges");
+    var str=document.getElementById("updatescanStrings");
 
     if (errors != "") {
-	setStatus(statusError);
+	setStatus(str.getString("statusError"));
         alert(errors);
     } else if (numChanges == 0) {
-	setStatus(statusNoChanges);
+	setStatus(str.getString("statusNoChanges"));
     } else {
 	if (numChanges == 1) {
-	    setStatus(statusOneChange);
-	    message = "A webpage has been updated";
+	    setStatus(str.getString("statusOneChange"));
+	    message = str.getString("alertOneChange");
 	} else {
-	    setStatus(numChanges+" "+statusManyChanges);
-	    message = numChanges+" webpages have been updated";
+	    setStatus(numChanges+" "+str.getString("statusManyChanges"));
+	    message = numChanges+" "+str.getString("alertManyChanges");
 	}
 	window.openDialog("chrome://updatescan/content/alert.xul",
 			  "alert:alert",
@@ -206,13 +197,13 @@ function scanFinishedCallback(errors)
 
 function stopButtonClick()
 {
-    var statusCancel=document.getElementById("strings").getString(
-	                                     "statusCancel");
+    var str=document.getElementById("updatescanStrings");
+
     if (scan != null) {
 	scan.cancel();
     }
     showScanButton();
-    setStatus(statusCancel);
+    setStatus(str.getString("statusCancel"));
 }
 
 function openNewDialog()
@@ -263,8 +254,8 @@ function openNewDialogNoRefresh(title, url)
 
 function openEditDialog()
 {
-    var titleEditItem=document.getElementById("strings").getString(
-	                                     "titleEditItem");
+    var titleEditItem=document.getElementById("updatescanStrings")
+	                      .getString("titleEditItem");
     var result = new Array(8);
     var id;
     var oldurl;
@@ -382,16 +373,18 @@ function diffItemNewTab(id)
 
 function dateDiffString(oldDate, newDate)
 {
-    var ret;
+    var ret; 
+    var str=document.getElementById("updatescanStrings")
+
     var diff = newDate.getTime() - oldDate.getTime();
     diff = diff / 1000; // convert to seconds
     diff = diff / 60;   // minutes
     diff = diff / 60;   // hours
     if (diff < 24) {
 	if (oldDate.getDate() != newDate.getDate())
-	    ret = " yesterday at ";
+	    ret = " "+str.getString("yesterdayAt")+" ";
 	else
-	    ret = " today at ";
+	    ret = " "+str.getString("todayAt")+" ";
 	ret += oldDate.getHours()+":";
 	var mins = oldDate.getMinutes().toString();
 	if (mins.length == 1)
@@ -403,24 +396,24 @@ function dateDiffString(oldDate, newDate)
     if (diff < 7) {
 	diff = Math.floor(diff);
 	if (diff == 1)
-	    return diff+" day ago";
+	    return diff+" "+str.getString("dayAgo");
 	else
-	    return diff+" days ago";
+	    return diff+" "+str.getString("daysAgo");
     }
     diff = diff / 7;
     if (diff < 52) {
 	diff = Math.floor(diff);
 	if (diff == 1)
-	    return diff+" week ago";
+	    return diff+" "+str.getString("weekAgo");
 	else
-	    return diff+" weeks ago";
+	    return diff+" "+str.getString("weeksAgo");
     }
     diff = diff / 52;
     diff = Math.floor(diff);
     if (diff == 1)
-	return diff+" year ago";
+	    return diff+" "+str.getString("yearAgo");
     else
-	return diff+" years ago";
+	    return diff+" "+str.getString("yearsAgo");
 }
 
 function markAllAsVisited()

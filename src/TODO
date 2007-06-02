@@ -1,17 +1,17 @@
 Things to do:
 
 Features:
-2drag n drop
-2bookmark menu item?
-2Rightclick on link
-2Get strings into locale
-2Export .rdf file
-2Preferences page:
-  2Default threshold/scan settings
-  2Notify disable option
+error on file:///
+drag n drop
+bookmark menu item?
+Rightclick on link
+Export .rdf file
+Preferences page:
+  Default threshold/scan settings
+  Notify disable option
   3Hotkey
-  2Disable scan on start (wait for 5 minutes maybe?)
-  2Options to enable scripts when viewing diffs
+  Disable scan on start (wait for 5 minutes maybe?)
+  Options to enable scripts when viewing diffs
 3Handle frames
 3Check rdf file integrity (remove empty urls)
 3Add to tab context menu
@@ -22,9 +22,13 @@ Features:
 
 
 Bugs:
-2Still some strange diff things happening
-2Unicode doesn't work in diff
-2Need to handle .getstrings properly in scan.js
-2Notify doesn't work on Mac - disable, or use 2.0 method
+Still some strange diff things happening
+Notify doesn't work on Mac - disable, or use 2.0 method
 3Uninstall should delete rdf?
 3Get rid of refresher?
+
+
+Done:
+Need to handle .getstrings properly in scan.js
+Unicode doesn't work in diff
+Get strings into locale

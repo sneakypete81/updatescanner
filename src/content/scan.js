@@ -6,6 +6,7 @@ const STATUS_NEW       = 3;
 function Scanner()
 {
     var me = this;
+    var doc;
     var httpreq;
     var itemlist = new Array();
     var scanning = false;
@@ -63,20 +64,16 @@ function Scanner()
 	itemlist.push(page);
     }
     
-    this.start = function(changedCallbackarg, finishedCallbackarg, 
-		       progressCallbackarg)
+    this.start = function(changedCallbackarg, finishedCallbackarg,
+			  progressCallbackarg)
     {
-// Doesn't work now - why not? where is document?
-	var treeEmptyAlert="No webpages to scan. Click New to add a page.";
-//	var treeEmptyAlert=document.getElementById("strings")
-//                                  .getString("treeEmptyAlert");
 	changedCallback = changedCallbackarg;
 	finishedCallback = finishedCallbackarg;
 	progressCallback = progressCallbackarg;
 	
 	if (itemlist.length == 0)
 	{
-	    finishedCallback(treeEmptyAlert);
+	    finishedCallback("");
 	    return;
 	}
    

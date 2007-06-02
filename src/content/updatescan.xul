@@ -10,7 +10,7 @@
 	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
 	xmlns:UPDATESCAN="http://www.updatescan.com/rdf/updatescan#">
 
-  <stringbundle id="strings" 
+  <stringbundle id="updatescanStrings" 
 		src="chrome://updatescan/locale/updatescan.properties"/>
     
   <script src="rdf/rdfds.js"/>

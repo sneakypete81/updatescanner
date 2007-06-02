@@ -6,8 +6,8 @@
 <overlay id="UpdateScanOverlay"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
-  <stringbundle id="updatescanOverlayStrings" 
-		src="chrome://updatescan/locale/updatescanoverlay.properties"/>
+  <stringbundle id="updatescanStrings" 
+		src="chrome://updatescan/locale/updatescan.properties"/>
 
     <script src="rdf/rdfds.js"/>
     <script src="rdf/rdf.js"/>
