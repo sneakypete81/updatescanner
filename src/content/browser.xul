@@ -24,7 +24,7 @@
 
     <popup id="contentAreaContextMenu">
       <menuitem id="AddToUpdateScan"
-                insertafter="context-bookmarkpage"
+		insertbefore="#context-sep-paste"                
                 label="&AddToUpdateScan.label;"
                 accesskey="&AddToUpdateScan.accesskey;"
                 oncommand="addToUpdateScan(document.getElementById('content'));"/>

@@ -5,6 +5,26 @@
 
 var initRDFdone = false;
 
+window.addEventListener("load", updatescan_overlay_init, false);
+
+function updatescan_overlay_init() 
+{
+    // Eventlistener for the contextmenu
+    var menu = document.getElementById("contentAreaContextMenu");
+    menu.addEventListener("popupshowing", updatescan_showMenu, false);
+}
+
+// Don't show context menu item when text is selected.
+function updatescan_showMenu() 
+{
+    if(gContextMenu.isTextSelected) {
+	// selected text = don't show menu item
+	document.getElementById("AddToUpdateScan").hidden = true;
+    } else {
+	document.getElementById("AddToUpdateScan").hidden = false;
+    }
+}
+
 function addToUpdateScan(aBrowser)
 {
     var rdffile;
