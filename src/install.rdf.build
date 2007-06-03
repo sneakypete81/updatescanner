@@ -14,6 +14,11 @@ skin_list = "\n\t\t".join(
     for skin in skins.keys()
 )
 
+translator_list = "".join("<em:translator>%s</em:translator>\n" % translator 
+                          for translator in translators
+)
+
+
 if allowUpdate:
     updateURLprint = "<em:updateURL>"+updateURL+"</em:updateURL>"
 else:
@@ -45,6 +50,7 @@ print >> file('install.rdf', 'w'), """\
 <em:description>%(description)s</em:description>
 <em:creator>%(author)s</em:creator>
 <em:homepageURL>%(homepageURL)s</em:homepageURL>
+%(translator_list)s
 %(updateURLprint)s
 
 <!-- Front End Integration Hooks (used by Extension Manager)-->
@@ -54,11 +60,11 @@ print >> file('install.rdf', 'w'), """\
 
 <!-- Packages, Skins and Locales that this extension registers -->
 <em:file>
-    <Description about="urn:mozilla:extension:file:%(app)s.jar">
-        %(package_list)s
-        %(locale_list)s
-        %(skin_list)s
-    </Description>
+	<Description about="urn:mozilla:extension:file:%(app)s.jar">
+		%(package_list)s
+		%(locale_list)s
+		%(skin_list)s
+	</Description>
 </em:file>
 </Description>
 

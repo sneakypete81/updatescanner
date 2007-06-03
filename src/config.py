@@ -4,13 +4,14 @@ app = 'updatescan'
 name = 'Update Scanner'
 description = 'Monitors webpages for updates'
 author = 'Pete Burgers'
+translators = ['SlovakSoft (sk-SK)']
 authorURL = "http://updatescanner.mozdev.org"
 uid = 'c07d1a49-9894-49ff-a594-38960ede8fb9'
 
 major_version = 2
 minor_version = 0
 build_version = 9
-in_development = True
+in_development = False
 
 version = "%d.%d.%d%s" % (
     major_version,
@@ -51,6 +52,10 @@ locales = {
     'en-US': {
         'locale_version': '1.0',
         'display_name': 'English (US)',
+    },
+    'sk-SK': {
+        'locale_version': '1.0',
+        'display_name': 'Slovak',
     },
 }
 

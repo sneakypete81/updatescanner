@@ -29,6 +29,10 @@ Notify doesn't work on Mac - disable, or use 2.0 method
 
 
 Done:
+-- Unreleased --
+Added slovak translations
+Remove from select context menu.
 Need to handle .getstrings properly in scan.js
-Unicode doesn't work in diff
 Get strings into locale
+-- 2.0.8 --
+Unicode doesn't work in diff

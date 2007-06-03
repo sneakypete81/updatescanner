@@ -1,0 +1,4 @@
+<!ENTITY UpdateScan.tooltip "Kontrola aktualizácií webových stránok">
+<!ENTITY UpdateScanSidebar.label "Update Scan">
+<!ENTITY AddToUpdateScan.label "Kontrola aktualizácie stránky...">
+<!ENTITY AddToUpdateScan.accesskey "U">
