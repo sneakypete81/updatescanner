@@ -1,6 +1,9 @@
 Things to do:
 
 Features:
+Write help pages
+"don't highlihgt changes" option
+Alert sounds
 error on file:///
 drag n drop
 bookmark menu item?
@@ -8,7 +11,10 @@ Rightclick on link
 Export .rdf file
 Preferences page:
   Default threshold/scan settings
-  Notify disable option
+  Notify disable option 
+  Notify display time
+  Change notification text
+  Notification time / click to dismiss
   3Hotkey
   Disable scan on start (wait for 5 minutes maybe?)
   Options to enable scripts when viewing diffs
@@ -19,11 +25,15 @@ Preferences page:
 3Hotkey shortcut - ctrl-c??
 3Add subfolders in tree
 3Only notify when specific text appears?
-
+3Only scan a small part of the page
+3Only notify if a link changes
+4Allow customisation of alert text?
+4Email alerts?
 
 Bugs:
 Still some strange diff things happening
 Notify doesn't work on Mac - disable, or use 2.0 method
+Occasionally status icon doesn't update
 3Uninstall should delete rdf?
 3Get rid of refresher?
 
@@ -34,5 +44,6 @@ Added slovak translations
 Remove from select context menu.
 Need to handle .getstrings properly in scan.js
 Get strings into locale
+Temp folder not tidied up on Windows
 -- 2.0.8 --
 Unicode doesn't work in diff

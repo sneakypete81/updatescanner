@@ -10,8 +10,10 @@ window.addEventListener("load", updatescan_overlay_init, false);
 function updatescan_overlay_init() 
 {
     // Eventlistener for the contextmenu
-    var menu = document.getElementById("contentAreaContextMenu");
-    menu.addEventListener("popupshowing", updatescan_showMenu, false);
+    try {
+        var menu = document.getElementById("contentAreaContextMenu");
+        menu.addEventListener("popupshowing", updatescan_showMenu, false);
+    } catch (e) {}
 }
 
 // Don't show context menu item when text is selected.
