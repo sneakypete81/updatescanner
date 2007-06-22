@@ -13,7 +13,8 @@ function displayDiffs(title, sourceURL, oldContent, newContent, oldDate, newDate
                          .QueryInterface(Components.interfaces.nsIFileProtocolHandler);
 
     if (newContent == "**NEW**") {
-	var diffFile = FileIO.openTemp("UpdatescanDiff.htm");
+	var diffFile = openTempFile("UpdatescanDiff","htm");
+	incrementTempFile();
 	var diffURL = fileHandler.getURLSpecFromFile(diffFile);
 
 	data = generateHeader(kUnscannedView, title, "", 
@@ -29,9 +30,10 @@ function displayDiffs(title, sourceURL, oldContent, newContent, oldDate, newDate
 
     var diffContent = WDiffString(oldContent, newContent);
 
-    var newFile  = FileIO.openTemp("UpdatescanNew.htm");
-    var oldFile  = FileIO.openTemp("UpdatescanOld.htm"); 
-    var diffFile = FileIO.openTemp("UpdatescanDiff.htm");
+    var newFile  = openTempFile("UpdatescanNew","htm");
+    var oldFile  = openTempFile("UpdatescanOld","htm"); 
+    var diffFile = openTempFile("UpdatescanDiff","htm");
+    incrementTempFile();
     var newURL  = fileHandler.getURLSpecFromFile(newFile);
     var oldURL  = fileHandler.getURLSpecFromFile(oldFile);
     var diffURL = fileHandler.getURLSpecFromFile(diffFile);

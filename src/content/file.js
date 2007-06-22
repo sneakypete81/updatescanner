@@ -86,6 +86,16 @@ function prependUpdatescanPath(filename)
     return dir.path;
 }
 
+function prependTempPath(filename)
+{
+  // get the path to the temp directory
+    var dir = Components.classes["@mozilla.org/file/directory_service;1"]
+                     .getService( Components.interfaces.nsIProperties)
+                     .get("TmpD", Components.interfaces.nsIFile);
+    dir.append(filename);
+    return dir.path;
+}
+
 function escapeFilename(filename)
 // Convert non-characters to ascii codes (" " => "_32")
 {
@@ -100,4 +110,43 @@ function escapeFilename(filename)
 	}
     }
     return output
+}
+
+function openTempFile(fileBase, fileExt)
+// Creates a temporary file with the specified base filename.
+// The suffix of the filename is stored as a preference.
+// This means temp files can be rotated, and don't accumulate!
+{
+    var prefs = Components.classes["@mozilla.org/preferences-service;1"].
+                 getService(Components.interfaces.nsIPrefService).
+                 getBranch("extensions.updatescan.");
+
+    try {
+	var suffix = prefs.getIntPref("tempSuffix");
+    } catch (e) { // pref doesn't exist - create it!
+	var suffix = 0;
+	prefs.setIntPref("tempSuffix", suffix);
+    }
+
+    var filename = fileBase + String(suffix);
+    return FileIO.open(prependTempPath(filename)+"."+fileExt);
+
+}
+
+function incrementTempFile()
+// Increment the temp filename suffix 0,1...8,9,0...
+{
+    var prefs = Components.classes["@mozilla.org/preferences-service;1"].
+                 getService(Components.interfaces.nsIPrefService).
+                 getBranch("extensions.updatescan.");
+
+    try {
+	var suffix = prefs.getIntPref("tempSuffix");
+    } catch (e) { // pref doesn't exist - create it!
+	var suffix = 0;
+    }
+    suffix = suffix + 1;
+    if (suffix > 9) 
+        suffix = 0;
+    prefs.setIntPref("tempSuffix", suffix);
 }
