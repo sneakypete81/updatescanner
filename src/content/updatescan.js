@@ -495,12 +495,13 @@ function sortByName()
 
 function deleteSelectedItem()
 {
+    var str=document.getElementById("updatescanStrings")
     var id=getSelectedItemID();
     if (id == "")
 	return;
     var title = queryRDFitem(id, "title", "untitled");
 
-    if (confirm("Are you sure you want to delete "+title+"?")) {
+    if (confirm(str.getString("confirmDelete") + " " + title + "?")) {
 	deleteRDFitem(id);
 	saveRDF();
 	refreshTree();
