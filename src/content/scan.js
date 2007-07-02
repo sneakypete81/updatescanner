@@ -60,7 +60,7 @@ function Scanner()
 
     this.addURL = function(id, title, url, content, threshold)
     {
-	var page = new item(id, title, url, content, threshold);
+	var page = new uscanItem(id, title, url, content, threshold);
 	itemlist.push(page);
     }
     
@@ -154,7 +154,7 @@ function Scanner()
     }
 }
 
-function item(id, title, url, content, threshold) 
+function uscanItem(id, title, url, content, threshold) 
 {
     this.id = id;
     this.title = title;

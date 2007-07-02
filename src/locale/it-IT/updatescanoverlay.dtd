@@ -1,0 +1,4 @@
+<!ENTITY UpdateScan.tooltip "Controlla le pagine selezionate in cerca di aggiornamenti">
+<!ENTITY UpdateScanSidebar.label "Update Scanner">
+<!ENTITY AddToUpdateScan.label "Ricerca nuove modifiche...">
+<!ENTITY AddToUpdateScan.accesskey "U">

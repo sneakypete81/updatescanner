@@ -1,0 +1,14 @@
+<!ENTITY scanbutton.label "Controlla">
+<!ENTITY stopbutton.label "Cancella">
+
+<!ENTITY newbutton.tooltip "Nuova pagina">
+<!ENTITY showallchangesinnewtabsbutton.tooltip "Mostra tutte le pagine aggiornate in nuove schede">
+<!ENTITY deletebutton.tooltip "Elimina">
+
+<!ENTITY openmenu.label "Mostra le modifiche">
+<!ENTITY opentabmenu.label "Mostra le modifiche in una nuova scheda">
+<!ENTITY showallchangesinnewtabsmenu.label "Mostra tutte le pagine aggiornate in nuove schede">
+<!ENTITY markvisitedmenu.label "Segna tutte le pagine come lette">
+<!ENTITY sortbynamemenu.label "Ordina le pagine per nome">
+<!ENTITY deletemenu.label "Elimina">
+<!ENTITY editmenu.label "Proprietà">
