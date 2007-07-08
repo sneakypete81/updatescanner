@@ -1,6 +1,7 @@
 Things to do:
 
 Features:
+Support more character encodings (autodetect?) 
 Write help pages
 "don't highlihgt changes" option
 Alert sounds
@@ -27,6 +28,7 @@ Preferences page:
 3Only notify when specific text appears?
 3Only scan a small part of the page
 3Only notify if a link changes
+3Search marker beside scrollbar?
 4Allow customisation of alert text?
 4Email alerts?
 
@@ -40,6 +42,10 @@ Occasionally status icon doesn't update
 
 Done:
 -- Unreleased --
+Italian locale
+Alert box broken on autoscan - locale strings problem
+
+-- 2.0.10 --
 Added slovak translations
 Remove from select context menu.
 Need to handle .getstrings properly in scan.js

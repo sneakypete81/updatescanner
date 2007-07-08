@@ -107,10 +107,11 @@ function Scanner()
 			checkSame(newContent, oldContent, page.threshold)) {
 		        changedCallback(page.id, "", STATUS_NO_CHANGE);
 		    } else {
-		        if (page.content == "**NEW**")
+		        if (page.content == "**NEW**") {
 			    changedCallback(page.id, httpreq.responseText, STATUS_NEW);
-		        else
+		        } else {
 			    changedCallback(page.id, httpreq.responseText, STATUS_CHANGE);
+			}
 		    }
 	        } else {
 		    changedCallback(page.id, "", STATUS_ERROR);

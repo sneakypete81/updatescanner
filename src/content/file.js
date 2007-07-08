@@ -100,13 +100,13 @@ function escapeFilename(filename)
 // Convert non-characters to ascii codes (" " => "_32")
 {
     var output = ""
-    var char
+    var ch;
     for (var i=0; i<filename.length; i++) {
-	char = filename[i]
-	if (char.match(/[0-9a-zA-Z]/)) {
-	    output += char;
+	ch = filename[i]
+	if (ch.match(/[0-9a-zA-Z]/)) {
+	    output += ch;
 	} else {
-            output += "_"+char.charCodeAt(0);
+            output += "_"+ch.charCodeAt(0);
 	}
     }
     return output

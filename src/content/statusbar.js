@@ -27,15 +27,21 @@ function autoscanFinished(numChanges)
 {
 //    var alertsService = Components.classes["@mozilla.org/alerts-service;1"]
 //                        .getService(Components.interfaces.nsIAlertsService); 
-    var message;
-    var str = document.getElementById("updatescanStrings")
+
+    var gBundle = Components.classes["@mozilla.org/intl/stringbundle;1"].getService(Components.interfaces.nsIStringBundleService);
+    var strings = gBundle.createBundle("chrome://updatescan/locale/updatescan.properties");
+
+    var alertOneChange = strings.GetStringFromName("alertOneChange");
+    var alertManyChanges = strings.GetStringFromName("alertManyChanges");
+
+    var message
 
     refresh.request();
     if (numChanges) {
 	if (numChanges == 1) {
-	    message = str.getString("alertOneChange")
+	    message = alertOneChange;
 	} else {
-	    message = numChanges + " " + str.getString("alertManyChanges")
+	    message = numChanges + " " + alertManyChanges;
 	}
 	window.openDialog("chrome://updatescan/content/alert.xul",
 			  "alert:alert",

@@ -37,6 +37,7 @@ function Autoscan()
 	var scanRate;
 	var now;
 	var doScan = false;
+	var filebase;
 
 	pages = getRDFroot().getChildren();
 
@@ -70,6 +71,8 @@ function Autoscan()
 	    scan.start(auto.scanChanged, 
 		       auto.scanFinished, 
 		       auto.scanShowProgress);
+	} else {
+	    callback(0); // No changes
 	}
     }
 

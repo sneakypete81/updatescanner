@@ -10,6 +10,7 @@ v = vars()
 
 copy("%(app)s.xpi" % v, "releases/%(app)s.xpi" % v)
 copy("%(app)s.xpi" % v, "releases/%(updateFile)s" % v)
+print "releases/%(updateFile)s" % v
 
 #comment = "Published "+app+" "+version+" build"
 #system("svn add releases/%(updateFile)s" % v)
