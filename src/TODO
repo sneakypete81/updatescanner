@@ -1,6 +1,7 @@
 Things to do:
 
 Features:
+Speed up click response by diffing during scan
 Support more character encodings (autodetect?) 
 Write help pages
 "don't highlihgt changes" option
@@ -33,6 +34,7 @@ Preferences page:
 4Email alerts?
 
 Bugs:
+Support display of >10 changes
 Still some strange diff things happening
 Notify doesn't work on Mac - disable, or use 2.0 method
 Occasionally status icon doesn't update
