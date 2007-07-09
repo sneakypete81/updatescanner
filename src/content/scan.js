@@ -92,6 +92,8 @@ function Scanner()
 	var response;
 	var page;
 	var newContent;
+	var status = STATUS_ERROR;
+	var responseText = "";
 
 	if (httpreq != null && httpreq.readyState == 4) {
 	    me.stopTimeout();
@@ -99,26 +101,38 @@ function Scanner()
 
 	    try {
 	        if (httpreq.status == 200) {
-                    oldContent = stripWhitespace(stripTags(stripScript(
-						 page.content)));
-		    newContent = stripWhitespace(stripTags(stripScript(
-						 httpreq.responseText)));
-		    if (newContent == "" || 
-			checkSame(newContent, oldContent, page.threshold)) {
-		        changedCallback(page.id, "", STATUS_NO_CHANGE);
-		    } else {
-		        if (page.content == "**NEW**") {
-			    changedCallback(page.id, httpreq.responseText, STATUS_NEW);
+                oldContent = stripWhitespace(stripTags(stripScript(
+						                               page.content)));
+		        newContent = stripWhitespace(stripTags(stripScript(
+						                               httpreq.responseText)));
+		        if (newContent == "" || 
+			               checkSame(newContent, oldContent, page.threshold)) {
+		            status = STATUS_NO_CHANGE;
+		            //changedCallback(page.id, "", STATUS_NO_CHANGE);
 		        } else {
-			    changedCallback(page.id, httpreq.responseText, STATUS_CHANGE);
-			}
-		    }
+                    responseText = httpreq.responseText;
+		            if (page.content == "**NEW**") {
+			            status = STATUS_NEW;
+			            //changedCallback(page.id, httpreq.responseText, 
+			            //                STATUS_NEW);
+		            } else {
+		                status = STATUS_CHANGE;
+			            //changedCallback(page.id, httpreq.responseText, 
+			            //                STATUS_CHANGE);
+			        }
+		        }
 	        } else {
-		    changedCallback(page.id, "", STATUS_ERROR);
+	            myDump("E1");
+	            status = STATUS_ERROR;
+		        //changedCallback(page.id, "", STATUS_ERROR);
 	        }
 	    } catch (e) {
-		changedCallback(page.id, "", STATUS_ERROR);
+            myDump(e);
+            status = STATUS_ERROR;
+		    //changedCallback(page.id, "", STATUS_ERROR);
 	    }
+	    
+	    changedCallback(page.id, responseText, status)
 	
 	    me.getNextPage();
 	}
@@ -137,6 +151,8 @@ function Scanner()
 	        me.stopTimeout();
 		page = itemlist.shift();      // extract the next item
 		changedCallback(page.id, "", STATUS_ERROR);
+        myDump("E1");
+		
 		currentitem++;
 	    	progressCallback(currentitem, numitems);
 		me.getNextPage();
@@ -201,4 +217,52 @@ function stripScript(content)
 function stripWhitespace(content)
 {
     return content.replace(/\s+/g,"");
+}
+
+function processScanChange(id, newContent, status)
+// Updates the specified item based on the new content.
+// * Updates RDF tree
+// * Writes content to file
+// * Performs diff on old content
+{
+    var now = new Date();
+    var filebase;
+    var oldLastscan;
+    var oldContent;
+    var diffContent
+
+    filebase = escapeFilename(id.substr(6));
+    if (status == STATUS_CHANGE) {
+        numChanges++;
+	    if (queryRDFitem(id, "changed") == "0") {
+            // If this is a new change, save the previous state for diffing
+            rmFile(filebase+".old");
+            mvFile(filebase+".new", filebase+".old");
+            oldLastscan = queryRDFitem(id, "lastscan", "");
+            modifyRDFitem(id, "old_lastscan", oldLastscan);
+        }
+
+        oldContent  = readFile(filebase+".old");
+        diffContent = createDiffs(oldContent, newContent);   
+
+        writeFile(filebase+".dif", diffContent);
+        writeFile(filebase+".new", newContent);
+
+	    modifyRDFitem(id, "changed", "1");
+        modifyRDFitem(id, "lastscan", now.toString());
+	    modifyRDFitem(id, "error", "0");
+    } else if (status == STATUS_NO_CHANGE) {
+	    modifyRDFitem(id, "error", "0");
+	    modifyRDFitem(id, "lastscan", now.toString());
+    } else if (status == STATUS_NEW) {
+	    writeFile(filebase+".dif", newContent);
+	    writeFile(filebase+".old", newContent);
+	    writeFile(filebase+".new", newContent);
+	    modifyRDFitem(id, "lastscan", now.toString());
+	    modifyRDFitem(id, "old_lastscan", now.toString());
+	    modifyRDFitem(id, "error", "0");
+    } else {
+	    modifyRDFitem(id, "error", "1");
+    }
+	saveRDF();    
 }

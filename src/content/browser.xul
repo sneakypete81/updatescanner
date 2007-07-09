@@ -9,18 +9,22 @@
   <stringbundle id="updatescanStrings" 
 		src="chrome://updatescan/locale/updatescan.properties"/>
 
-    <script src="rdf/rdfds.js"/>
-    <script src="rdf/rdf.js"/>
-    <script src="mydump.js"/>
-    <script src="updatescanoverlay.js"/>
-    <script src="updatescan.js"/>
-    <script src="autoscan.js"/>
-    <script src="scan.js"/>
-    <script src="fuzzy.js"/>
-    <script src="refresher.js"/>
-    <script src="statusbar.js"/>
-    <script src="io.js"/>
-    <script src="file.js"/>
+  <script src="rdf/rdfds.js"/>
+  <script src="rdf/rdf.js"/>
+  <script src="mydump.js"/>
+  <script src="updatescan.js"/>
+  <script src="scan.js"/>
+  <script src="fuzzy.js"/>
+  <script src="diff.js"/>
+  <script src="diffwiki.js"/>
+  <script src="io.js"/>
+  <script src="file.js"/>
+  <script src="autoscan.js"/>
+  <script src="refresher.js"/>
+  <script src="opentopwin.js"/>
+  <script src="updatescanoverlay.js"/>
+
+  <script src="statusbar.js"/>
 
     <popup id="contentAreaContextMenu">
       <menuitem id="AddToUpdateScan"

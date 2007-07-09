@@ -20,14 +20,10 @@
   <script src="scan.js"/>
   <script src="fuzzy.js"/>
   <script src="diff.js"/>
+  <script src="diffwiki.js"/>
   <script src="io.js"/>
   <script src="file.js"/>
-
-
-  <script src="diffwiki.js"/>
-
-
-
+  <script src="autoscan.js"/>
   <script src="refresher.js"/>
   <script src="opentopwin.js"/>
   <script src="updatescanoverlay.js"/>

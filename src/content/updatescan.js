@@ -5,6 +5,10 @@
 //           refresh.js
 //           opentopwin.js
 //           updatescanoverlay.js
+const VERSION_MAJOR = 2;
+const VERSION_MINOR = 0;
+const VERSION_REVISION = 12;
+
 var numChanges;
 var refresh;
 var scan;
@@ -16,8 +20,15 @@ function loadUpdateScan()
     var nodes;
     var node;
     var id;
-    var numItems;
     var filebase;
+    var version;
+    var filebase;
+    var oldContent;
+    var newContent;
+    var diffContent;
+    var prefs = Components.classes["@mozilla.org/preferences-service;1"].
+                 getService(Components.interfaces.nsIPrefService).
+                 getBranch("extensions.updatescan.");
 
     // Connect to the RDF file
     rdffile = getRDFuri();
@@ -29,23 +40,50 @@ function loadUpdateScan()
     tree.onclick=treeClick;
 
     // Handle new installations/upgrades
+    try {
+        versionMajor = getIntPref("versionMajor");
+        versionMinor = getIntPref("versionMinor");
+        versionRevision = getIntPref("versionRevision");
+    } catch (e) {
+        versionMajor = 0;
+        versionMinor = 0;
+        versionRevision = 0;
+    }
     if (!updatescanDirExists()) {
-	createUpdatescanDir();
-	nodes = getRDFroot().getChildren();
-	numItems = getRDFroot().getChildCount();
-	while (nodes.hasMoreElements()) {
-	    node = nodes.getNext()
+        // Version 2.0.0+ expects webpage data to be in files, 
+        // not embedded in RDF
+        createUpdatescanDir();
+        nodes = getRDFroot().getChildren();
+        while (nodes.hasMoreElements()) {
+            node = nodes.getNext();
             id = node.getValue();
-	    modifyRDFitem(id, "content", ""); // Not using this anymore
-	    modifyRDFitem(id, "changed", "0");
-	    modifyRDFitem(id, "error", "0");
-	    modifyRDFitem(id, "lastautoscan", "5 November 1978");
-	    filebase = id.substr(6);
-	    writeFile(escapeFilename(filebase)+".new", "**NEW**"); // Mark as new
-	}
-	saveRDF();
-    }	    
-
+            modifyRDFitem(id, "content", ""); // Not using this anymore
+            modifyRDFitem(id, "changed", "0");
+            modifyRDFitem(id, "error", "0");
+            modifyRDFitem(id, "lastautoscan", "5 November 1978");
+            filebase = id.substr(6);
+            writeFile(escapeFilename(filebase)+".new", "**NEW**"); // Mark as new
+        }
+        saveRDF();
+    }
+    if (versionMajor <= 2 && versionMinor <= 0 && versionRevision <= 11) {
+        // 2.0.12+ expects diffs to be done during scan, not during display
+        // Need to generate diffs now.
+        nodes = getRDFroot().getChildren();
+        while (nodes.hasMoreElements()) {
+            node = nodes.getNext();
+            id = node.getValue();
+            filebase = escapeFilename(id.substr(6));
+            oldContent = readFile(filebase+".old")
+            newContent = readFile(filebase+".new")
+            diffContent = createDiffs(oldContent, newContent)   
+            writeFile(filebase+".dif", diffContent)
+        }
+        prefs.setIntPref("versionMajor", VERSION_MAJOR);
+        prefs.setIntPref("versionMinor", VERSION_MINOR);
+        prefs.setIntPref("versionRevision", VERSION_REVISION);
+    }
+    
     // Check for refresh requests
     refresh = new Refresher("refreshTreeRequest", refreshTree);
     refresh.start();
@@ -133,38 +171,7 @@ function scanButtonClick()
 
 function scanChangedCallback(id, new_content, status)
 {
-    var now = new Date();
-    var filebase;
-    var old_lastscan;
-
-    filebase = id.substr(6);
-    if (status == STATUS_CHANGE) {
-	numChanges++;
-	if (queryRDFitem(id, "changed") == "0") {
-            // If this is a new change, save the previous state for diffing
-	    rmFile(escapeFilename(filebase)+".old");
-	    mvFile(escapeFilename(filebase)+".new", escapeFilename(filebase)+".old");
-	    old_lastscan = queryRDFitem(id, "lastscan", "");
-	    modifyRDFitem(id, "old_lastscan", old_lastscan);
-	}
-
-	writeFile(escapeFilename(filebase)+".new", new_content);
-	modifyRDFitem(id, "changed", "1");
-	modifyRDFitem(id, "lastscan", now.toString());
-	modifyRDFitem(id, "error", "0");
-    } else if (status == STATUS_NO_CHANGE) {
-	modifyRDFitem(id, "error", "0");
-	modifyRDFitem(id, "lastscan", now.toString());
-    } else if (status == STATUS_NEW) {
-	writeFile(escapeFilename(filebase)+".new", new_content);
-	writeFile(escapeFilename(filebase)+".old", new_content);
-	modifyRDFitem(id, "lastscan", now.toString());
-	modifyRDFitem(id, "old_lastscan", now.toString());
-	modifyRDFitem(id, "error", "0");
-    } else {
-	modifyRDFitem(id, "error", "1");
-    }
-    saveRDF();
+    processScanChange(id, new_content, status)
     refreshTree();
     refresh.request();
 }
@@ -325,11 +332,12 @@ function diffItem(id)
     var lastScan = new Date(queryRDFitem(id, "lastscan", "5/11/1978"));
     var newDate = dateDiffString(lastScan, now);
 
-    var filebase = id.substr(6);
+    var filebase = escapeFilename(id.substr(6));
     return displayDiffs(queryRDFitem(id, "title", "No Title"), 
 			queryRDFitem(id, "url", ""), 
-			readFile(escapeFilename(filebase)+".old"),
-			readFile(escapeFilename(filebase)+".new"),
+			readFile(filebase+".old"),
+			readFile(filebase+".new"),
+			readFile(filebase+".dif"),
 			oldDate, 
 			newDate);
 }

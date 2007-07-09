@@ -1,7 +1,8 @@
 Things to do:
 
 Features:
-Speed up click response by diffing during scan
+Remove blank locale strings
+Remove UpdateScan title from locale strings
 Support more character encodings (autodetect?) 
 Write help pages
 "don't highlihgt changes" option
@@ -46,6 +47,7 @@ Done:
 -- Unreleased --
 Italian locale
 Alert box broken on autoscan - locale strings problem
+Speed up click response by diffing during scan
 
 -- 2.0.10 --
 Added slovak translations

@@ -78,35 +78,7 @@ function Autoscan()
 
     this.scanChanged = function(id, new_content, status)
     {
-	var now = new Date();
-	filebase = id.substr(6);
-	if (status == STATUS_CHANGE) {
-	    numChanges++;
-	    if (queryRDFitem(id, "changed") == "0") {
-		// If this is a new change, save the previous state for diffing
-		rmFile(escapeFilename(filebase)+".old");
-		mvFile(escapeFilename(filebase)+".new", escapeFilename(filebase)+".old");
-		old_lastscan = queryRDFitem(id, "lastscan", "");
-		modifyRDFitem(id, "old_lastscan", old_lastscan);
-	    }
-
-	    writeFile(escapeFilename(filebase)+".new", new_content);
-	    modifyRDFitem(id, "changed", "1");
-	    modifyRDFitem(id, "lastscan", now.toString());
-	    modifyRDFitem(id, "error", "0");
-	} else if (status == STATUS_NO_CHANGE) {
-	    modifyRDFitem(id, "error", "0");
-	    modifyRDFitem(id, "lastscan", now.toString());
-	} else if (status == STATUS_NEW) {
-	    writeFile(escapeFilename(filebase)+".new", new_content);
-	    writeFile(escapeFilename(filebase)+".old", new_content);
-	    modifyRDFitem(id, "lastscan", now.toString());
-	    modifyRDFitem(id, "old_lastscan", now.toString());
-	    modifyRDFitem(id, "error", "0");
-	} else {
-	    modifyRDFitem(id, "error", "1");
-	}
-	saveRDF();
+        processScanChange(id, new_content, status)
     }
 
     this.scanFinished = function(errors)
