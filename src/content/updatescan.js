@@ -41,9 +41,9 @@ function loadUpdateScan()
 
     // Handle new installations/upgrades
     try {
-        versionMajor = getIntPref("versionMajor");
-        versionMinor = getIntPref("versionMinor");
-        versionRevision = getIntPref("versionRevision");
+        versionMajor = prefs.getIntPref("versionMajor");
+        versionMinor = prefs.getIntPref("versionMinor");
+        versionRevision = prefs.getIntPref("versionRevision");
     } catch (e) {
         versionMajor = 0;
         versionMinor = 0;
