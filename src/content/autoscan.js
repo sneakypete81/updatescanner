@@ -70,7 +70,9 @@ function Autoscan()
 	    numChanges = 0;
 	    scan.start(auto.scanChanged, 
 		       auto.scanFinished, 
-		       auto.scanShowProgress);
+		       auto.scanShowProgress, 
+		       false); // doTimeout=false, since timeouts within timeouts seem not to work
+	                       // reliably.
 	} else {
 	    callback(0); // No changes
 	}
@@ -78,7 +80,9 @@ function Autoscan()
 
     this.scanChanged = function(id, new_content, status)
     {
-        processScanChange(id, new_content, status)
+        if (processScanChange(id, new_content, status)) {
+	    numChanges++;
+	}
     }
 
     this.scanFinished = function(errors)

@@ -65,11 +65,12 @@ function Scanner()
     }
     
     this.start = function(changedCallbackarg, finishedCallbackarg,
-			  progressCallbackarg)
+			  progressCallbackarg, doTimeoutarg)
     {
 	changedCallback = changedCallbackarg;
 	finishedCallback = finishedCallbackarg;
 	progressCallback = progressCallbackarg;
+	doTimeout = doTimeoutarg;
 	
 	if (itemlist.length == 0)
 	{
@@ -122,13 +123,12 @@ function Scanner()
 			        }
 		        }
 	        } else {
-	            myDump("E1");
 	            status = STATUS_ERROR;
 		        //changedCallback(page.id, "", STATUS_ERROR);
 	        }
 	    } catch (e) {
-            myDump(e);
-            status = STATUS_ERROR;
+                myDump(e);
+                status = STATUS_ERROR;
 		    //changedCallback(page.id, "", STATUS_ERROR);
 	    }
 	    
@@ -146,12 +146,13 @@ function Scanner()
 	        httpreq.open("GET", itemlist[0].url,true);
 	        httpreq.onreadystatechange=me.next;
 	        httpreq.send(null);
-	        me.startTimeout();
+	        if (doTimeout) {
+		    me.startTimeout();
+		}
 	    } catch (e) {
 	        me.stopTimeout();
 		page = itemlist.shift();      // extract the next item
 		changedCallback(page.id, "", STATUS_ERROR);
-        myDump("E1");
 		
 		currentitem++;
 	    	progressCallback(currentitem, numitems);
@@ -229,11 +230,12 @@ function processScanChange(id, newContent, status)
     var filebase;
     var oldLastscan;
     var oldContent;
-    var diffContent
+    var diffContent;
+    var retVal = false;
 
     filebase = escapeFilename(id.substr(6));
     if (status == STATUS_CHANGE) {
-        numChanges++;
+        retVal = true;
 	    if (queryRDFitem(id, "changed") == "0") {
             // If this is a new change, save the previous state for diffing
             rmFile(filebase+".old");
@@ -265,4 +267,5 @@ function processScanChange(id, newContent, status)
 	    modifyRDFitem(id, "error", "1");
     }
 	saveRDF();    
+    return retVal;
 }

@@ -160,7 +160,8 @@ function scanButtonClick()
 
         setStatus(str.getString("statusScanning"));
 	numChanges=0;
-        scan.start(scanChangedCallback, scanFinishedCallback, showProgress);
+        scan.start(scanChangedCallback, scanFinishedCallback, showProgress,
+		   true); // doTimeout=true, for a 10-second timeout for each webpage
     }
     else
     {
@@ -171,7 +172,9 @@ function scanButtonClick()
 
 function scanChangedCallback(id, new_content, status)
 {
-    processScanChange(id, new_content, status)
+    if (processScanChange(id, new_content, status)) {
+	numChanges++;
+    }
     refreshTree();
     refresh.request();
 }
