@@ -109,27 +109,20 @@ function Scanner()
 		        if (newContent == "" || 
 			               checkSame(newContent, oldContent, page.threshold)) {
 		            status = STATUS_NO_CHANGE;
-		            //changedCallback(page.id, "", STATUS_NO_CHANGE);
 		        } else {
                     responseText = httpreq.responseText;
 		            if (page.content == "**NEW**") {
 			            status = STATUS_NEW;
-			            //changedCallback(page.id, httpreq.responseText, 
-			            //                STATUS_NEW);
 		            } else {
 		                status = STATUS_CHANGE;
-			            //changedCallback(page.id, httpreq.responseText, 
-			            //                STATUS_CHANGE);
 			        }
 		        }
 	        } else {
 	            status = STATUS_ERROR;
-		        //changedCallback(page.id, "", STATUS_ERROR);
 	        }
 	    } catch (e) {
-                myDump(e);
+                //myDump(e);
                 status = STATUS_ERROR;
-		    //changedCallback(page.id, "", STATUS_ERROR);
 	    }
 	    
 	    changedCallback(page.id, responseText, status)

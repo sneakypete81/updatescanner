@@ -6,7 +6,8 @@ name = 'Update Scanner'
 description = 'Monitors webpages for updates'
 author = 'Pete Burgers'
 translators = ['SlovakSoft (Slovenčina)',
-               'Almotasim (Italiano)']
+               'Almotasim (Italiano)',
+               'myahoo (Français)']
 authorURL = "http://updatescanner.mozdev.org"
 uid = 'c07d1a49-9894-49ff-a594-38960ede8fb9'
 
@@ -62,6 +63,10 @@ locales = {
     'it-IT': {
         'locale_version': '1.0',
         'display_name': 'Italiano',
+    },
+    'fr-FR': {
+        'locale_version': '1.0',
+        'display_name': 'Français',
     },
 }
 
