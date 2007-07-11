@@ -13,15 +13,25 @@ uid = 'c07d1a49-9894-49ff-a594-38960ede8fb9'
 
 major_version = 2
 minor_version = 0
+revision_version = 11
 build_version = 12
 in_development = False
 
-version = "%d.%d.%d%s" % (
-    major_version,
-    minor_version,
-    build_version,
-    in_development and "+" or ""
-)
+if build_version:
+    version = "%d.%d.%d.%d%s" % (
+        major_version,
+        minor_version,
+        revision_version,
+        build_version,
+        in_development and "+" or ""
+    )
+else:
+    version = "%d.%d.%d%s" % (
+        major_version,
+        minor_version,
+        revision_version,
+        in_development and "+" or ""
+    )
 
 homepageURL = "http://updatescanner.mozdev.org"
 
