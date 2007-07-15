@@ -7,10 +7,11 @@ function initDialog()
 {
     var titleUpdateScanner=document.getElementById("strings").getString(
                                                    "titleUpdateScanner");
-    if (window.arguments[0] != "")
-	document.title = window.arguments[0];
-    else
-	document.title = titleUpdateScanner;
+    if (window.arguments[0] != "") {
+	   document.title = window.arguments[0];
+    } else {
+	   document.title = titleUpdateScanner;
+    }
     var results = window.arguments[1];
     document.getElementById("txtURL").value = results[0];
     document.getElementById("txtTitle").value = results[1];
@@ -24,6 +25,24 @@ function initDialog()
             .setAttribute("maxpos", sliderAutoscanMax);
     sliderAutoscanSetPos(sliderAutoscanEncode(results[7]));
     sliderAutoscanChange();
+
+    loadAvailableCharSets();
+    charEncodingChanged()
+    
+    if (results[8] != "Manual") {
+        document.getElementById("autoCharEncoding")
+                .selectedIndex = 0;
+    } else {
+        document.getElementById("autoCharEncoding")
+                .selectedIndex = 1;
+    }
+
+    encoding = document.getElementById(results[9])
+    if (encoding == null) {
+        encoding = document.getElementById("UTF-8");
+    }
+    document.getElementById("encodingMenu").selectedItem = encoding; 
+    
 }
 
 function Ok()
@@ -56,7 +75,15 @@ function Ok()
     results[1] = txtTitle.value;
     results[2] = String(sliderThresholdDecode(sliderThresholdGetPos()));
     results[7] = String(sliderAutoscanDecode(sliderAutoscanGetPos()));
-
+    if (document.getElementById("autoCharEncoding").selectedIndex == 0) {
+        results[8] = "Auto";
+    } else {
+        results[8] = "Manual";
+    }
+    alert(document.getElementById("encodingMenu").selectedItem);
+    alert(document.getElementById("encodingMenu").selectedIndex);
+    alert(document.getElementById("encodingMenu").selectedItem.value);
+    results[9] = document.getElementById("encodingMenu").selectedItem.id;
     return true;
 }
 
@@ -226,4 +253,66 @@ function sliderAutoscanDecode(slider)
 	return 60 * 24;  // Daily
     else
 	return 0;        // Manual
+}
+
+function charEncodingChanged()
+{
+    auto=document.getElementById("autoCharEncoding");
+    encodingMenu = document.getElementById("encodingMenu");
+    if  (auto.selectedIndex == 1) {
+        encodingMenu.disabled = false;
+    } else {
+        encodingMenu.disabled = true;
+    }
+}
+
+function readRDFString(aDS,aRes,aProp) 
+{
+  var n = aDS.GetTarget(aRes, aProp, true);
+  if (n)
+    return n.QueryInterface(Components.interfaces.nsIRDFLiteral).Value;
+  else 
+    return "";
+}
+
+function loadAvailableCharSets()
+{
+    var availCharsetDict     = [];
+    var encodingPopup = document.getElementById('encodingPopup');
+    var rdf=Components.classes["@mozilla.org/rdf/rdf-service;1"].getService(Components.interfaces.nsIRDFService); 
+    var kNC_Root = rdf.GetResource("NC:DecodersRoot");
+    var kNC_name = rdf.GetResource("http://home.netscape.com/NC-rdf#Name");
+    var rdfDataSource = rdf.GetDataSource("rdf:charset-menu"); 
+    var rdfContainer = Components.classes["@mozilla.org/rdf/container;1"].getService(Components.interfaces.nsIRDFContainer);
+
+    // Need the following to populate the RDF source?
+    var observerService = Components.classes["@mozilla.org/observer-service;1"].getService(Components.interfaces.nsIObserverService);
+    observerService.notifyObservers(null, "charsetmenu-selected", "other");
+
+    rdfContainer.Init(rdfDataSource, kNC_Root);
+    var availableCharsets = rdfContainer.GetElements();
+    var charset;
+
+    for (var i = 0; i < rdfContainer.GetCount(); i++) {
+      charset = availableCharsets.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
+      availCharsetDict[i] = new Array(2);
+      availCharsetDict[i][0] = readRDFString(rdfDataSource, charset, kNC_name);
+      availCharsetDict[i][1] = charset.Value;
+      AddMenuItem(document,
+                  encodingPopup,
+                  availCharsetDict[i][1],
+                  availCharsetDict[i][0]);
+    }
+}
+
+function AddMenuItem(doc, menu, ID, UIstring)
+{
+  // Create a treerow for the new item
+  var item = doc.createElement('menuitem');
+
+  // Copy over the attributes
+  item.setAttribute('label', UIstring);
+  item.setAttribute('id', ID);
+
+  menu.appendChild(item);
 }

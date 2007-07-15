@@ -243,22 +243,26 @@ function openNewDialogNoRefresh(title, url)
     result[5] = "**NEW**"; // content flagged as new
     result[6] = "0";       // error = 0 by default
     result[7] = "60";      // scan once an hour by default
+    result[8] = "Auto";    // Auto-detect encoding by default
+    result[9] = "UTF-8";   // UTF-8 encoding by default
 
     window.openDialog('chrome://updatescan/content/dlgnewedit.xul', 'dlgNew', 
                       'chrome,dialog,modal,centrescreen', '', 
 		      result);
     if (result[0] != null) {
-	id = addRDFitem();
-	filebase = id.substr(6);
-	writeFile(escapeFilename(filebase)+".new", result[5]);	
+        id = addRDFitem();
+        filebase = id.substr(6);
+        writeFile(escapeFilename(filebase)+".new", result[5]);	
         modifyRDFitem(id, "url", result[0]);
         modifyRDFitem(id, "title", result[1]);
         modifyRDFitem(id, "threshold", result[2]);
         modifyRDFitem(id, "lastscan", result[3]);
         modifyRDFitem(id, "changed", result[4]);
-	modifyRDFitem(id, "error", result[6]);
-	modifyRDFitem(id, "scanratemins", result[7]);
-	saveRDF();
+        modifyRDFitem(id, "error", result[6]);
+        modifyRDFitem(id, "scanratemins", result[7]);
+        modifyRDFitem(id, "encodingDetect", result[8]);
+        modifyRDFitem(id, "encoding", result[9]);
+        saveRDF();
     }
 }
 
@@ -282,6 +286,8 @@ function openEditDialog()
     result[5] = "**NEW**"; // content flagged as new
     result[6] = "0";       // error = 0 by default
     result[7] = queryRDFitem(id, "scanratemins", "0"); 
+    result[8] = queryRDFitem(id, "encodingDetect", "Auto");
+    result[9] = queryRDFitem(id, "encoding", "UTF-8");
 
     oldurl = result[0];
 
@@ -293,20 +299,24 @@ function openEditDialog()
     if (result[0] != null) {
         if (oldurl == result[0]) { // URL not changed - don't reset changes
             modifyRDFitem(id, "title", result[1]);
-	    modifyRDFitem(id, "threshold", result[2]);
-	    modifyRDFitem(id, "scanratemins", result[7]);
+            modifyRDFitem(id, "threshold", result[2]);
+            modifyRDFitem(id, "scanratemins", result[7]);
+            modifyRDFitem(id, "encodingDetect", result[8]);
+            modifyRDFitem(id, "encoding", result[9]);            
         } else {
-	    filebase = id.substr(6);
-	    writeFile(escapeFilename(filebase)+".new", result[5]);	
+            filebase = id.substr(6);
+            writeFile(escapeFilename(filebase)+".new", result[5]);	
             modifyRDFitem(id, "url", result[0]);
             modifyRDFitem(id, "title", result[1]);
             modifyRDFitem(id, "threshold", result[2]);
             modifyRDFitem(id, "lastscan", result[3]);
             modifyRDFitem(id, "changed", result[4]);
-	    modifyRDFitem(id, "error", result[6]);
-	    modifyRDFitem(id, "scanratemins", result[7]);
+            modifyRDFitem(id, "error", result[6]);
+            modifyRDFitem(id, "scanratemins", result[7]);        
+            modifyRDFitem(id, "encodingDetect", result[8]);
+            modifyRDFitem(id, "encoding", result[9]);            
         }
-	saveRDF();
+    	saveRDF();
     }
     refreshTree();
     refresh.request();

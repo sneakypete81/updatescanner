@@ -13,6 +13,7 @@
 <stringbundle id="strings" src="chrome://updatescan/locale/dlgnewedit.properties"/>
 
 <script src="dlgnewedit.js"/>
+<script src="mydump.js"/>
 
 <spacer class="margintopbottom"/>
 <grid>
@@ -75,5 +76,21 @@
     </vbox>
 </groupbox>
 
+<groupbox>
+    <caption label="Character Encoding" />
+    <radiogroup id="autoCharEncoding" onselect="charEncodingChanged();">
+        <radio label="Auto-detect" selected="true"/>
+        <hbox align="center">
+            <radio label="Use"/>
+            <menulist id="encodingMenu" disabled="True">
+                <menupopup id="encodingPopup">
+                    <menuitem value="UTF-8" label="Unicode (UTF-8)"/>
+                    <menuseparator/>
+                </menupopup>
+            </menulist>
+        </hbox>
+    </radiogroup>
+</groupbox>    
+   
 <spacer class="margintopbottom" />
 </dialog>

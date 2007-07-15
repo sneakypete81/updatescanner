@@ -45,6 +45,9 @@ Occasionally status icon doesn't update
 
 Done:
 -- Unreleased --
+Add relative div after header (wikipedia bug)
+
+-- 2.0.12 --
 Italian & French locale
 Alert box broken on autoscan - locale strings problem
 Speed up click response by diffing during scan
