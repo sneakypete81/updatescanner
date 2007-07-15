@@ -132,6 +132,7 @@ function generateHeader(currentView, title, date, sourceURL, diffURL, oldURL, ne
     data += "<a style='color:blue;font-weight:normal' href='"+sourceURL+"'>"+sourceURL+"</a> ]\n"
     data += "</span></td></table>\n";
     data += "<hr>\n";
+    data += "<div style='position:relative'>\n";
     return data;
 }
 
