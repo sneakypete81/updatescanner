@@ -1,0 +1,8 @@
+<!ENTITY url.label "URL:">
+<!ENTITY title.label "Titel:">
+<!ENTITY threshold.label "Drempel wijzigen">
+<!ENTITY autoscan.label "Automatisch scannen">
+<!ENTITY low.label "Laag">
+<!ENTITY high.label "Hoog">
+<!ENTITY often.label "Vaak">
+<!ENTITY never.label "Nooit">
