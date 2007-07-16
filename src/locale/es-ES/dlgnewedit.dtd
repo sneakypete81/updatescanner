@@ -1,0 +1,8 @@
+<!ENTITY url.label "Dirección:">
+<!ENTITY title.label "Título:">
+<!ENTITY threshold.label "Umbral de cambios">
+<!ENTITY autoscan.label "Buscar automáticamente">
+<!ENTITY low.label "Bajo">
+<!ENTITY high.label "Alto">
+<!ENTITY often.label "Con frecuencia">
+<!ENTITY never.label "Nunca">
