@@ -35,6 +35,7 @@ Preferences page:
 4Email alerts?
 
 Bugs:
+Scanning - delay between sites to ease CPU loading?
 Support display of >10 changes
 Still some strange diff things happening
 Notify doesn't work on Mac - disable, or use 2.0 method
@@ -44,13 +45,16 @@ Occasionally status icon doesn't update
 
 
 Done:
--- Unreleased --
+-- Removed --
+Speed up click response by diffing during scan
+
+-- 2.0.13 --
+Spanish & Dutch Locales
 Add relative div after header (wikipedia bug)
 
 -- 2.0.12 --
 Italian & French locale
 Alert box broken on autoscan - locale strings problem
-Speed up click response by diffing during scan
 
 -- 2.0.10 --
 Added slovak translations

@@ -5,10 +5,6 @@
 //           refresh.js
 //           opentopwin.js
 //           updatescanoverlay.js
-const VERSION_MAJOR = 2;
-const VERSION_MINOR = 0;
-const VERSION_REVISION = 12;
-
 var numChanges;
 var refresh;
 var scan;
@@ -20,15 +16,8 @@ function loadUpdateScan()
     var nodes;
     var node;
     var id;
+    var numItems;
     var filebase;
-    var version;
-    var filebase;
-    var oldContent;
-    var newContent;
-    var diffContent;
-    var prefs = Components.classes["@mozilla.org/preferences-service;1"].
-                 getService(Components.interfaces.nsIPrefService).
-                 getBranch("extensions.updatescan.");
 
     // Connect to the RDF file
     rdffile = getRDFuri();
@@ -40,50 +29,23 @@ function loadUpdateScan()
     tree.onclick=treeClick;
 
     // Handle new installations/upgrades
-    try {
-        versionMajor = prefs.getIntPref("versionMajor");
-        versionMinor = prefs.getIntPref("versionMinor");
-        versionRevision = prefs.getIntPref("versionRevision");
-    } catch (e) {
-        versionMajor = 0;
-        versionMinor = 0;
-        versionRevision = 0;
-    }
     if (!updatescanDirExists()) {
-        // Version 2.0.0+ expects webpage data to be in files, 
-        // not embedded in RDF
-        createUpdatescanDir();
-        nodes = getRDFroot().getChildren();
-        while (nodes.hasMoreElements()) {
-            node = nodes.getNext();
+    createUpdatescanDir();
+    nodes = getRDFroot().getChildren();
+    numItems = getRDFroot().getChildCount();
+    while (nodes.hasMoreElements()) {
+        node = nodes.getNext()
             id = node.getValue();
-            modifyRDFitem(id, "content", ""); // Not using this anymore
-            modifyRDFitem(id, "changed", "0");
-            modifyRDFitem(id, "error", "0");
-            modifyRDFitem(id, "lastautoscan", "5 November 1978");
-            filebase = id.substr(6);
-            writeFile(escapeFilename(filebase)+".new", "**NEW**"); // Mark as new
-        }
-        saveRDF();
+        modifyRDFitem(id, "content", ""); // Not using this anymore
+        modifyRDFitem(id, "changed", "0");
+        modifyRDFitem(id, "error", "0");
+        modifyRDFitem(id, "lastautoscan", "5 November 1978");
+        filebase = id.substr(6);
+        writeFile(escapeFilename(filebase)+".new", "**NEW**"); // Mark as new
     }
-    if (versionMajor <= 2 && versionMinor <= 0 && versionRevision <= 11) {
-        // 2.0.12+ expects diffs to be done during scan, not during display
-        // Need to generate diffs now.
-        nodes = getRDFroot().getChildren();
-        while (nodes.hasMoreElements()) {
-            node = nodes.getNext();
-            id = node.getValue();
-            filebase = escapeFilename(id.substr(6));
-            oldContent = readFile(filebase+".old")
-            newContent = readFile(filebase+".new")
-            diffContent = createDiffs(oldContent, newContent)   
-            writeFile(filebase+".dif", diffContent)
-        }
-        prefs.setIntPref("versionMajor", VERSION_MAJOR);
-        prefs.setIntPref("versionMinor", VERSION_MINOR);
-        prefs.setIntPref("versionRevision", VERSION_REVISION);
-    }
-    
+    saveRDF();
+    }       
+
     // Check for refresh requests
     refresh = new Refresher("refreshTreeRequest", refreshTree);
     refresh.start();
@@ -98,37 +60,37 @@ function unloadUpdateScan()
 function treeClick(event)
 {
     if (getNumItems() == 0)
-	return;
+    return;
 
     // Code from http://xul.andreashalter.ch/
     //get original target (element user clicked on) 
     var str_OrigTarget = event.originalTarget; 
     //if target is a treechildren, we're right 
     if (str_OrigTarget.localName == "treechildren") { 
-	//create storage containers for results values 
-	var obj_Row = new Object; 
-	var obj_Col = new Object; 
-	var obj_Child = new Object; 
-	//find tree holder 
-	var tree = document.getElementById('UpdateTree'); 
-	//get cell at x/y coords from tree 
-	tree.treeBoxObject.getCellAt(event.clientX, event.clientY, obj_Row, obj_Col, obj_Child); 
-	//if row < 0, we didn't find the row selected in this tree 
-	if (obj_Row.value == -1) 
-	{
-	    return; 
-	}
+    //create storage containers for results values 
+    var obj_Row = new Object; 
+    var obj_Col = new Object; 
+    var obj_Child = new Object; 
+    //find tree holder 
+    var tree = document.getElementById('UpdateTree'); 
+    //get cell at x/y coords from tree 
+    tree.treeBoxObject.getCellAt(event.clientX, event.clientY, obj_Row, obj_Col, obj_Child); 
+    //if row < 0, we didn't find the row selected in this tree 
+    if (obj_Row.value == -1) 
+    {
+        return; 
+    }
     } 
 
     var id = tree.contentView.getItemAtIndex(obj_Row.value).id;
 
     switch (event.button) {
     case 0:
-	diffItemThisWindow(id);
-	break;
+    diffItemThisWindow(id);
+    break;
     case 1:
-	diffItemNewTab(id);
-	break;
+    diffItemNewTab(id);
+    break;
     }
 }
 
@@ -146,22 +108,21 @@ function scanButtonClick()
     numitems = getNumItems();
     if (numitems > 0)
     {
-	scan = new Scanner()
+    scan = new Scanner()
         
         for (var i=0; i<numitems; i++)
         {
             id = tree.contentView.getItemAtIndex(i).id;
-	    filebase = id.substr(6);
+        filebase = id.substr(6);
             scan.addURL(id, queryRDFitem(id, "title", "No Title"), 
-			queryRDFitem(id, "url", ""), 
-			readFile(escapeFilename(filebase)+".new"),
-			queryRDFitem(id, "threshold", 100));
+            queryRDFitem(id, "url", ""), 
+            readFile(escapeFilename(filebase)+".new"),
+            queryRDFitem(id, "threshold", 100));
         }
 
         setStatus(str.getString("statusScanning"));
-	numChanges=0;
-        scan.start(scanChangedCallback, scanFinishedCallback, showProgress,
-		   true); // doTimeout=true, for a 10-second timeout for each webpage
+    numChanges=0;
+        scan.start(scanChangedCallback, scanFinishedCallback, showProgress);
     }
     else
     {
@@ -172,9 +133,38 @@ function scanButtonClick()
 
 function scanChangedCallback(id, new_content, status)
 {
-    if (processScanChange(id, new_content, status)) {
-	numChanges++;
+    var now = new Date();
+    var filebase;
+    var old_lastscan;
+
+    filebase = id.substr(6);
+    if (status == STATUS_CHANGE) {
+    numChanges++;
+    if (queryRDFitem(id, "changed") == "0") {
+            // If this is a new change, save the previous state for diffing
+        rmFile(escapeFilename(filebase)+".old");
+        mvFile(escapeFilename(filebase)+".new", escapeFilename(filebase)+".old");
+        old_lastscan = queryRDFitem(id, "lastscan", "");
+        modifyRDFitem(id, "old_lastscan", old_lastscan);
     }
+
+    writeFile(escapeFilename(filebase)+".new", new_content);
+    modifyRDFitem(id, "changed", "1");
+    modifyRDFitem(id, "lastscan", now.toString());
+    modifyRDFitem(id, "error", "0");
+    } else if (status == STATUS_NO_CHANGE) {
+    modifyRDFitem(id, "error", "0");
+    modifyRDFitem(id, "lastscan", now.toString());
+    } else if (status == STATUS_NEW) {
+    writeFile(escapeFilename(filebase)+".new", new_content);
+    writeFile(escapeFilename(filebase)+".old", new_content);
+    modifyRDFitem(id, "lastscan", now.toString());
+    modifyRDFitem(id, "old_lastscan", now.toString());
+    modifyRDFitem(id, "error", "0");
+    } else {
+    modifyRDFitem(id, "error", "1");
+    }
+    saveRDF();
     refreshTree();
     refresh.request();
 }
@@ -184,22 +174,22 @@ function scanFinishedCallback(errors)
     var str=document.getElementById("updatescanStrings");
 
     if (errors != "") {
-	setStatus(str.getString("statusError"));
+    setStatus(str.getString("statusError"));
         alert(errors);
     } else if (numChanges == 0) {
-	setStatus(str.getString("statusNoChanges"));
+    setStatus(str.getString("statusNoChanges"));
     } else {
-	if (numChanges == 1) {
-	    setStatus(str.getString("statusOneChange"));
-	    message = str.getString("alertOneChange");
-	} else {
-	    setStatus(numChanges+" "+str.getString("statusManyChanges"));
-	    message = numChanges+" "+str.getString("alertManyChanges");
-	}
-	window.openDialog("chrome://updatescan/content/alert.xul",
-			  "alert:alert",
-			  "chrome,dialog=yes,titlebar=no,popup=yes",
-			  message);
+    if (numChanges == 1) {
+        setStatus(str.getString("statusOneChange"));
+        message = str.getString("alertOneChange");
+    } else {
+        setStatus(numChanges+" "+str.getString("statusManyChanges"));
+        message = numChanges+" "+str.getString("alertManyChanges");
+    }
+    window.openDialog("chrome://updatescan/content/alert.xul",
+              "alert:alert",
+              "chrome,dialog=yes,titlebar=no,popup=yes",
+              message);
     }
     hideProgress();
     showScanButton();
@@ -210,7 +200,7 @@ function stopButtonClick()
     var str=document.getElementById("updatescanStrings");
 
     if (scan != null) {
-	scan.cancel();
+    scan.cancel();
     }
     showScanButton();
     setStatus(str.getString("statusCancel"));
@@ -243,40 +233,36 @@ function openNewDialogNoRefresh(title, url)
     result[5] = "**NEW**"; // content flagged as new
     result[6] = "0";       // error = 0 by default
     result[7] = "60";      // scan once an hour by default
-    result[8] = "Auto";    // Auto-detect encoding by default
-    result[9] = "UTF-8";   // UTF-8 encoding by default
 
     window.openDialog('chrome://updatescan/content/dlgnewedit.xul', 'dlgNew', 
                       'chrome,dialog,modal,centrescreen', '', 
-		      result);
+              result);
     if (result[0] != null) {
-        id = addRDFitem();
-        filebase = id.substr(6);
-        writeFile(escapeFilename(filebase)+".new", result[5]);	
+    id = addRDFitem();
+    filebase = id.substr(6);
+    writeFile(escapeFilename(filebase)+".new", result[5]);  
         modifyRDFitem(id, "url", result[0]);
         modifyRDFitem(id, "title", result[1]);
         modifyRDFitem(id, "threshold", result[2]);
         modifyRDFitem(id, "lastscan", result[3]);
         modifyRDFitem(id, "changed", result[4]);
-        modifyRDFitem(id, "error", result[6]);
-        modifyRDFitem(id, "scanratemins", result[7]);
-        modifyRDFitem(id, "encodingDetect", result[8]);
-        modifyRDFitem(id, "encoding", result[9]);
-        saveRDF();
+    modifyRDFitem(id, "error", result[6]);
+    modifyRDFitem(id, "scanratemins", result[7]);
+    saveRDF();
     }
 }
 
 function openEditDialog()
 {
     var titleEditItem=document.getElementById("updatescanStrings")
-	                      .getString("titleEditItem");
+                          .getString("titleEditItem");
     var result = new Array(8);
     var id;
     var oldurl;
     
     id=getSelectedItemID();
     if (id == "")
-	return;
+    return;
 
     result[0] = queryRDFitem(id, "url", "");
     result[1] = queryRDFitem(id, "title", "No Title");
@@ -286,37 +272,31 @@ function openEditDialog()
     result[5] = "**NEW**"; // content flagged as new
     result[6] = "0";       // error = 0 by default
     result[7] = queryRDFitem(id, "scanratemins", "0"); 
-    result[8] = queryRDFitem(id, "encodingDetect", "Auto");
-    result[9] = queryRDFitem(id, "encoding", "UTF-8");
 
     oldurl = result[0];
 
     window.openDialog('chrome://updatescan/content/dlgnewedit.xul', 
-		      'dlgEdit', 
+              'dlgEdit', 
                       'chrome,dialog,modal,centrescreen', 
-		      titleEditItem, 
-		      result);
+              titleEditItem, 
+              result);
     if (result[0] != null) {
         if (oldurl == result[0]) { // URL not changed - don't reset changes
             modifyRDFitem(id, "title", result[1]);
-            modifyRDFitem(id, "threshold", result[2]);
-            modifyRDFitem(id, "scanratemins", result[7]);
-            modifyRDFitem(id, "encodingDetect", result[8]);
-            modifyRDFitem(id, "encoding", result[9]);            
+        modifyRDFitem(id, "threshold", result[2]);
+        modifyRDFitem(id, "scanratemins", result[7]);
         } else {
-            filebase = id.substr(6);
-            writeFile(escapeFilename(filebase)+".new", result[5]);	
+        filebase = id.substr(6);
+        writeFile(escapeFilename(filebase)+".new", result[5]);  
             modifyRDFitem(id, "url", result[0]);
             modifyRDFitem(id, "title", result[1]);
             modifyRDFitem(id, "threshold", result[2]);
             modifyRDFitem(id, "lastscan", result[3]);
             modifyRDFitem(id, "changed", result[4]);
-            modifyRDFitem(id, "error", result[6]);
-            modifyRDFitem(id, "scanratemins", result[7]);        
-            modifyRDFitem(id, "encodingDetect", result[8]);
-            modifyRDFitem(id, "encoding", result[9]);            
+        modifyRDFitem(id, "error", result[6]);
+        modifyRDFitem(id, "scanratemins", result[7]);
         }
-    	saveRDF();
+    saveRDF();
     }
     refreshTree();
     refresh.request();
@@ -345,21 +325,20 @@ function diffItem(id)
     var lastScan = new Date(queryRDFitem(id, "lastscan", "5/11/1978"));
     var newDate = dateDiffString(lastScan, now);
 
-    var filebase = escapeFilename(id.substr(6));
+    var filebase = id.substr(6);
     return displayDiffs(queryRDFitem(id, "title", "No Title"), 
-			queryRDFitem(id, "url", ""), 
-			readFile(filebase+".old"),
-			readFile(filebase+".new"),
-			readFile(filebase+".dif"),
-			oldDate, 
-			newDate);
+            queryRDFitem(id, "url", ""), 
+            readFile(escapeFilename(filebase)+".old"),
+            readFile(escapeFilename(filebase)+".new"),
+            oldDate, 
+            newDate);
 }
 
 function diffSelectedItemThisWindow()
 {
     var item = getSelectedItemID();
     if (item == "")
-	return;
+    return;
     diffItemThisWindow(item);
 }
 
@@ -374,19 +353,19 @@ function diffSelectedItemNewTab()
 {
     var item = getSelectedItemID();
     if (item == "")
-	return;
+    return;
     diffItemNewTab(item);    
 }
 
 function diffItemNewTab(id)
 {
     var mainWindow = window.QueryInterface(
-	Components.interfaces.nsIInterfaceRequestor)
-	.getInterface(Components.interfaces.nsIWebNavigation)
-	.QueryInterface(Components.interfaces.nsIDocShellTreeItem)
-	.rootTreeItem
-	.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
-	.getInterface(Components.interfaces.nsIDOMWindow);
+    Components.interfaces.nsIInterfaceRequestor)
+    .getInterface(Components.interfaces.nsIWebNavigation)
+    .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
+    .rootTreeItem
+    .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+    .getInterface(Components.interfaces.nsIDOMWindow);
 
     var diffURL = diffItem(id);
     mainWindow.getBrowser().addTab(diffURL);
@@ -402,39 +381,39 @@ function dateDiffString(oldDate, newDate)
     diff = diff / 60;   // minutes
     diff = diff / 60;   // hours
     if (diff < 24) {
-	if (oldDate.getDate() != newDate.getDate())
-	    ret = " "+str.getString("yesterdayAt")+" ";
-	else
-	    ret = " "+str.getString("todayAt")+" ";
-	ret += oldDate.getHours()+":";
-	var mins = oldDate.getMinutes().toString();
-	if (mins.length == 1)
-	    mins = "0" + mins;
-	ret += mins;
-	return ret;
+    if (oldDate.getDate() != newDate.getDate())
+        ret = " "+str.getString("yesterdayAt")+" ";
+    else
+        ret = " "+str.getString("todayAt")+" ";
+    ret += oldDate.getHours()+":";
+    var mins = oldDate.getMinutes().toString();
+    if (mins.length == 1)
+        mins = "0" + mins;
+    ret += mins;
+    return ret;
     }
     diff = diff / 24;
     if (diff < 7) {
-	diff = Math.floor(diff);
-	if (diff == 1)
-	    return diff+" "+str.getString("dayAgo");
-	else
-	    return diff+" "+str.getString("daysAgo");
+    diff = Math.floor(diff);
+    if (diff == 1)
+        return diff+" "+str.getString("dayAgo");
+    else
+        return diff+" "+str.getString("daysAgo");
     }
     diff = diff / 7;
     if (diff < 52) {
-	diff = Math.floor(diff);
-	if (diff == 1)
-	    return diff+" "+str.getString("weekAgo");
-	else
-	    return diff+" "+str.getString("weeksAgo");
+    diff = Math.floor(diff);
+    if (diff == 1)
+        return diff+" "+str.getString("weekAgo");
+    else
+        return diff+" "+str.getString("weeksAgo");
     }
     diff = diff / 52;
     diff = Math.floor(diff);
     if (diff == 1)
-	    return diff+" "+str.getString("yearAgo");
+        return diff+" "+str.getString("yearAgo");
     else
-	    return diff+" "+str.getString("yearsAgo");
+        return diff+" "+str.getString("yearsAgo");
 }
 
 function markAllAsVisited()
@@ -448,14 +427,14 @@ function markAllAsVisited()
         {
             var id = tree.contentView.getItemAtIndex(i).id;
 
-	    if (queryRDFitem(id, "changed") != "0") {
-		modifyRDFitem(id, "changed", "0");
-		refreshTree();
-	    }
+        if (queryRDFitem(id, "changed") != "0") {
+        modifyRDFitem(id, "changed", "0");
+        refreshTree();
         }
-	saveRDF();
-	refreshTree();
-	refresh.request();
+        }
+    saveRDF();
+    refreshTree();
+    refresh.request();
     }
 }
 
@@ -469,9 +448,9 @@ function showAllChangesInNewTabs()
         for (var i=0; i<numitems; i++)
         {
             var id = tree.contentView.getItemAtIndex(i).id;
-	    if (queryRDFitem(id, "changed") != "0") {
-		diffItemNewTab(id);
-	    }
+        if (queryRDFitem(id, "changed") != "0") {
+        diffItemNewTab(id);
+        }
         }
     }
 }
@@ -490,24 +469,24 @@ function sortByName()
     {
         for (var i=0; i<numitems; i++)
         {
-	    items.push(tree.contentView.getItemAtIndex(i).id);
+        items.push(tree.contentView.getItemAtIndex(i).id);
         }
     }
 
     // Move each item to the top of the list, starting with the last name
     var count = items.length
     for (var i = 0; i<count; i++) {
-	lastTitle = "";
-	lastIndex = 0;
-	for (var j in items) {
-	    title = queryRDFitem(items[j], "title").toLowerCase();
-	    if (title > lastTitle) {
-		lastTitle = title;
-		lastIndex = j;
-	    }
-	}
-	moveRDFitem(items[lastIndex], 0); // Move to the top
-	items.splice(lastIndex, 1);       // Remove from the list
+    lastTitle = "";
+    lastIndex = 0;
+    for (var j in items) {
+        title = queryRDFitem(items[j], "title").toLowerCase();
+        if (title > lastTitle) {
+        lastTitle = title;
+        lastIndex = j;
+        }
+    }
+    moveRDFitem(items[lastIndex], 0); // Move to the top
+    items.splice(lastIndex, 1);       // Remove from the list
     }
     saveRDF();
     refreshTree();
@@ -519,14 +498,14 @@ function deleteSelectedItem()
     var str=document.getElementById("updatescanStrings")
     var id=getSelectedItemID();
     if (id == "")
-	return;
+    return;
     var title = queryRDFitem(id, "title", "untitled");
 
     if (confirm(str.getString("confirmDelete") + " " + title + "?")) {
-	deleteRDFitem(id);
-	saveRDF();
-	refreshTree();
-	refresh.request();
+    deleteRDFitem(id);
+    saveRDF();
+    refreshTree();
+    refresh.request();
     }
 }
 
@@ -535,9 +514,9 @@ function getSelectedItemID()
     var tree = document.getElementById("UpdateTree");
     var id;
     try {
-	id = tree.contentView.getItemAtIndex(tree.currentIndex).id;
+    id = tree.contentView.getItemAtIndex(tree.currentIndex).id;
     } catch (e) {
-	id = "";
+    id = "";
     }
 
     return id;
@@ -560,12 +539,12 @@ function showScanButton()
 function refreshTree()
 {
     try {
-	var tree=document.getElementById("UpdateTree");
-	var savedRow = tree.currentIndex;
-	tree.builder.rebuild();    
-	tree.view.selection.select(savedRow);
+    var tree=document.getElementById("UpdateTree");
+    var savedRow = tree.currentIndex;
+    tree.builder.rebuild();    
+    tree.view.selection.select(savedRow);
     } catch (e) {
-	;
+    ;
     }
 }
 
