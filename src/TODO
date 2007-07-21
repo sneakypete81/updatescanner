@@ -1,6 +1,8 @@
 Things to do:
 
 Features:
+"Scan this page now" context menu item
+Add status to Properties dialog (last changed, last scanned etc.)
 Remove blank locale strings
 Remove UpdateScan title from locale strings
 Support more character encodings (autodetect?) 
@@ -21,6 +23,7 @@ Preferences page:
   3Hotkey
   Disable scan on start (wait for 5 minutes maybe?)
   Options to enable scripts when viewing diffs
+  Toolbar customisation
 3Handle frames
 3Check rdf file integrity (remove empty urls)
 3Add to tab context menu
@@ -35,11 +38,15 @@ Preferences page:
 4Email alerts?
 
 Bugs:
+Greyed out item that loads ok in browser
+Escape lower case letters - windows filenames are case insensitive?
+Upgrade needs handling properly
 Scanning - delay between sites to ease CPU loading?
 Support display of >10 changes
 Still some strange diff things happening
 Notify doesn't work on Mac - disable, or use 2.0 method
 Occasionally status icon doesn't update
+3Conflict with Hyperwords extension?
 3Uninstall should delete rdf?
 3Get rid of refresher?
 
@@ -48,14 +55,15 @@ Done:
 -- Removed --
 Speed up click response by diffing during scan
 
+-- Unreleased --
+Added Korean locale
+
 -- 2.0.13 --
 Spanish & Dutch Locales
 Add relative div after header (wikipedia bug)
-
 -- 2.0.12 --
 Italian & French locale
 Alert box broken on autoscan - locale strings problem
-
 -- 2.0.10 --
 Added slovak translations
 Remove from select context menu.

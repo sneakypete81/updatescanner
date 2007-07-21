@@ -1,0 +1,8 @@
+<!ENTITY url.label "URL:">
+<!ENTITY title.label "제목:">
+<!ENTITY threshold.label "변경 허용치">
+<!ENTITY autoscan.label "자동으로 검사">
+<!ENTITY low.label "낮음">
+<!ENTITY high.label "높음">
+<!ENTITY often.label "자주">
+<!ENTITY never.label "하지 않음">
