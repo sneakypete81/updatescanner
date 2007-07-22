@@ -13,6 +13,7 @@
 <stringbundle id="strings" src="chrome://updatescan/locale/dlgnewedit.properties"/>
 
 <script src="dlgnewedit.js"/>
+<script src="mydump.js"/>
 
 <spacer class="margintopbottom"/>
 <grid>

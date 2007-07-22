@@ -7,10 +7,11 @@ function initDialog()
 {
     var titleUpdateScanner=document.getElementById("strings").getString(
                                                    "titleUpdateScanner");
-    if (window.arguments[0] != "")
+    if (window.arguments[0] != "") {
     document.title = window.arguments[0];
-    else
+    } else {
     document.title = titleUpdateScanner;
+    }
     var results = window.arguments[1];
     document.getElementById("txtURL").value = results[0];
     document.getElementById("txtTitle").value = results[1];
