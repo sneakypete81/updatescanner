@@ -38,38 +38,37 @@ function unloadUpdateScan()
 
 function treeClick(event)
 {
-    if (getNumItems() == 0)
-    return;
+    if (getNumItems() == 0) return;
 
     // Code from http://xul.andreashalter.ch/
     //get original target (element user clicked on) 
     var str_OrigTarget = event.originalTarget; 
     //if target is a treechildren, we're right 
     if (str_OrigTarget.localName == "treechildren") { 
-    //create storage containers for results values 
-    var obj_Row = new Object; 
-    var obj_Col = new Object; 
-    var obj_Child = new Object; 
-    //find tree holder 
-    var tree = document.getElementById('UpdateTree'); 
-    //get cell at x/y coords from tree 
-    tree.treeBoxObject.getCellAt(event.clientX, event.clientY, obj_Row, obj_Col, obj_Child); 
-    //if row < 0, we didn't find the row selected in this tree 
-    if (obj_Row.value == -1) 
-    {
-        return; 
-    }
+        //create storage containers for results values 
+        var obj_Row = new Object; 
+        var obj_Col = new Object; 
+        var obj_Child = new Object; 
+        //find tree holder 
+        var tree = document.getElementById('UpdateTree'); 
+        //get cell at x/y coords from tree 
+        tree.treeBoxObject.getCellAt(event.clientX, event.clientY, obj_Row, obj_Col, obj_Child); 
+        //if row < 0, we didn't find the row selected in this tree 
+        if (obj_Row.value == -1) 
+        {
+            return; 
+        }
     } 
 
     var id = tree.contentView.getItemAtIndex(obj_Row.value).id;
 
     switch (event.button) {
-    case 0:
-    diffItemThisWindow(id);
-    break;
-    case 1:
-    diffItemNewTab(id);
-    break;
+        case 0:
+            diffItemThisWindow(id);
+            break;
+        case 1:
+            diffItemNewTab(id);
+            break;
     }
 }
 
@@ -85,14 +84,12 @@ function scanButtonClick()
     var tree = document.getElementById("UpdateTree");
 
     numitems = getNumItems();
-    if (numitems > 0)
-    {
-    scan = new Scanner()
+    if (numitems > 0) {
+        scan = new Scanner()
         
-        for (var i=0; i<numitems; i++)
-        {
+        for (var i=0; i<numitems; i++) {
             id = tree.contentView.getItemAtIndex(i).id;
-        filebase = id.substr(6);
+            filebase = id.substr(6);
             scan.addURL(id, queryRDFitem(id, "title", "No Title"), 
             queryRDFitem(id, "url", ""), 
             readFile(escapeFilename(filebase)+".new"),
@@ -100,14 +97,11 @@ function scanButtonClick()
         }
 
         setStatus(str.getString("statusScanning"));
-    numChanges=0;
+        numChanges=0;
         scan.start(scanChangedCallback, scanFinishedCallback, showProgress);
-    }
-    else
-    {
+    } else {
         scanFinishedCallback(str.getString("treeEmptyAlert"));
     }
-
 }
 
 function scanChangedCallback(id, new_content, status)
@@ -118,30 +112,31 @@ function scanChangedCallback(id, new_content, status)
 
     filebase = id.substr(6);
     if (status == STATUS_CHANGE) {
-    numChanges++;
-    if (queryRDFitem(id, "changed") == "0") {
+        numChanges++;
+        if (queryRDFitem(id, "changed") == "0") {
             // If this is a new change, save the previous state for diffing
-        rmFile(escapeFilename(filebase)+".old");
-        mvFile(escapeFilename(filebase)+".new", escapeFilename(filebase)+".old");
-        old_lastscan = queryRDFitem(id, "lastscan", "");
-        modifyRDFitem(id, "old_lastscan", old_lastscan);
-    }
-
-    writeFile(escapeFilename(filebase)+".new", new_content);
-    modifyRDFitem(id, "changed", "1");
-    modifyRDFitem(id, "lastscan", now.toString());
-    modifyRDFitem(id, "error", "0");
+            rmFile(escapeFilename(filebase)+".old");
+            mvFile(escapeFilename(filebase)+".new", 
+                   escapeFilename(filebase)+".old");
+            old_lastscan = queryRDFitem(id, "lastscan", "");
+            modifyRDFitem(id, "old_lastscan", old_lastscan);
+        }
+    
+        writeFile(escapeFilename(filebase)+".new", new_content);
+        modifyRDFitem(id, "changed", "1");
+        modifyRDFitem(id, "lastscan", now.toString());
+        modifyRDFitem(id, "error", "0");
     } else if (status == STATUS_NO_CHANGE) {
-    modifyRDFitem(id, "error", "0");
-    modifyRDFitem(id, "lastscan", now.toString());
+        modifyRDFitem(id, "error", "0");
+        modifyRDFitem(id, "lastscan", now.toString());
     } else if (status == STATUS_NEW) {
-    writeFile(escapeFilename(filebase)+".new", new_content);
-    writeFile(escapeFilename(filebase)+".old", new_content);
-    modifyRDFitem(id, "lastscan", now.toString());
-    modifyRDFitem(id, "old_lastscan", now.toString());
-    modifyRDFitem(id, "error", "0");
+        writeFile(escapeFilename(filebase)+".new", new_content);
+        writeFile(escapeFilename(filebase)+".old", new_content);
+        modifyRDFitem(id, "lastscan", now.toString());
+        modifyRDFitem(id, "old_lastscan", now.toString());
+        modifyRDFitem(id, "error", "0");
     } else {
-    modifyRDFitem(id, "error", "1");
+        modifyRDFitem(id, "error", "1");
     }
     saveRDF();
     refreshTree();
@@ -153,22 +148,22 @@ function scanFinishedCallback(errors)
     var str=document.getElementById("updatescanStrings");
 
     if (errors != "") {
-    setStatus(str.getString("statusError"));
+        setStatus(str.getString("statusError"));
         alert(errors);
     } else if (numChanges == 0) {
-    setStatus(str.getString("statusNoChanges"));
+        setStatus(str.getString("statusNoChanges"));
     } else {
-    if (numChanges == 1) {
-        setStatus(str.getString("statusOneChange"));
-        message = str.getString("alertOneChange");
-    } else {
-        setStatus(numChanges+" "+str.getString("statusManyChanges"));
-        message = numChanges+" "+str.getString("alertManyChanges");
-    }
-    window.openDialog("chrome://updatescan/content/alert.xul",
-              "alert:alert",
-              "chrome,dialog=yes,titlebar=no,popup=yes",
-              message);
+        if (numChanges == 1) {
+            setStatus(str.getString("statusOneChange"));
+            message = str.getString("alertOneChange");
+        } else {
+            setStatus(numChanges+" "+str.getString("statusManyChanges"));
+            message = numChanges+" "+str.getString("alertManyChanges");
+        }
+        window.openDialog("chrome://updatescan/content/alert.xul",
+                  "alert:alert",
+                  "chrome,dialog=yes,titlebar=no,popup=yes",
+                  message);
     }
     hideProgress();
     showScanButton();
@@ -179,7 +174,7 @@ function stopButtonClick()
     var str=document.getElementById("updatescanStrings");
 
     if (scan != null) {
-    scan.cancel();
+        scan.cancel();
     }
     showScanButton();
     setStatus(str.getString("statusCancel"));
@@ -217,17 +212,17 @@ function openNewDialogNoRefresh(title, url)
                       'chrome,dialog,modal,centrescreen', '', 
               result);
     if (result[0] != null) {
-    id = addRDFitem();
-    filebase = id.substr(6);
-    writeFile(escapeFilename(filebase)+".new", result[5]);  
+        id = addRDFitem();
+        filebase = id.substr(6);
+        writeFile(escapeFilename(filebase)+".new", result[5]);  
         modifyRDFitem(id, "url", result[0]);
         modifyRDFitem(id, "title", result[1]);
         modifyRDFitem(id, "threshold", result[2]);
         modifyRDFitem(id, "lastscan", result[3]);
         modifyRDFitem(id, "changed", result[4]);
-    modifyRDFitem(id, "error", result[6]);
-    modifyRDFitem(id, "scanratemins", result[7]);
-    saveRDF();
+        modifyRDFitem(id, "error", result[6]);
+        modifyRDFitem(id, "scanratemins", result[7]);
+        saveRDF();
     }
 }
 
@@ -240,8 +235,7 @@ function openEditDialog()
     var oldurl;
     
     id=getSelectedItemID();
-    if (id == "")
-    return;
+    if (id == "") return;
 
     result[0] = queryRDFitem(id, "url", "");
     result[1] = queryRDFitem(id, "title", "No Title");
@@ -262,18 +256,18 @@ function openEditDialog()
     if (result[0] != null) {
         if (oldurl == result[0]) { // URL not changed - don't reset changes
             modifyRDFitem(id, "title", result[1]);
-        modifyRDFitem(id, "threshold", result[2]);
-        modifyRDFitem(id, "scanratemins", result[7]);
+            modifyRDFitem(id, "threshold", result[2]);
+            modifyRDFitem(id, "scanratemins", result[7]);
         } else {
-        filebase = id.substr(6);
-        writeFile(escapeFilename(filebase)+".new", result[5]);  
+            filebase = id.substr(6);
+            writeFile(escapeFilename(filebase)+".new", result[5]);  
             modifyRDFitem(id, "url", result[0]);
             modifyRDFitem(id, "title", result[1]);
             modifyRDFitem(id, "threshold", result[2]);
             modifyRDFitem(id, "lastscan", result[3]);
             modifyRDFitem(id, "changed", result[4]);
-        modifyRDFitem(id, "error", result[6]);
-        modifyRDFitem(id, "scanratemins", result[7]);
+            modifyRDFitem(id, "error", result[6]);
+            modifyRDFitem(id, "scanratemins", result[7]);
         }
     saveRDF();
     }
@@ -316,8 +310,7 @@ function diffItem(id)
 function diffSelectedItemThisWindow()
 {
     var item = getSelectedItemID();
-    if (item == "")
-    return;
+    if (item == "") return;
     diffItemThisWindow(item);
 }
 
@@ -331,8 +324,7 @@ function diffItemThisWindow(id)
 function diffSelectedItemNewTab()
 {
     var item = getSelectedItemID();
-    if (item == "")
-    return;
+    if (item == "") return;
     diffItemNewTab(item);    
 }
 
@@ -360,39 +352,44 @@ function dateDiffString(oldDate, newDate)
     diff = diff / 60;   // minutes
     diff = diff / 60;   // hours
     if (diff < 24) {
-    if (oldDate.getDate() != newDate.getDate())
-        ret = " "+str.getString("yesterdayAt")+" ";
-    else
-        ret = " "+str.getString("todayAt")+" ";
-    ret += oldDate.getHours()+":";
-    var mins = oldDate.getMinutes().toString();
-    if (mins.length == 1)
-        mins = "0" + mins;
-    ret += mins;
-    return ret;
+        if (oldDate.getDate() != newDate.getDate()) {
+            ret = " "+str.getString("yesterdayAt")+" ";
+        } else {
+            ret = " "+str.getString("todayAt")+" ";
+        }
+        ret += oldDate.getHours()+":";
+        var mins = oldDate.getMinutes().toString();
+        if (mins.length == 1) {
+            mins = "0" + mins;
+        }
+        ret += mins;
+        return ret;
     }
     diff = diff / 24;
     if (diff < 7) {
-    diff = Math.floor(diff);
-    if (diff == 1)
-        return diff+" "+str.getString("dayAgo");
-    else
-        return diff+" "+str.getString("daysAgo");
+        diff = Math.floor(diff);
+        if (diff == 1) {
+            return diff+" "+str.getString("dayAgo");
+        } else {
+            return diff+" "+str.getString("daysAgo");
+        }
     }
     diff = diff / 7;
     if (diff < 52) {
-    diff = Math.floor(diff);
-    if (diff == 1)
-        return diff+" "+str.getString("weekAgo");
-    else
-        return diff+" "+str.getString("weeksAgo");
+        diff = Math.floor(diff);
+        if (diff == 1) {
+            return diff+" "+str.getString("weekAgo");
+        } else {
+            return diff+" "+str.getString("weeksAgo");
+        }
     }
     diff = diff / 52;
     diff = Math.floor(diff);
-    if (diff == 1)
+    if (diff == 1) {
         return diff+" "+str.getString("yearAgo");
-    else
+    } else {
         return diff+" "+str.getString("yearsAgo");
+    }
 }
 
 function markAllAsVisited()
@@ -400,20 +397,17 @@ function markAllAsVisited()
     var tree = document.getElementById("UpdateTree");
 
     var numitems = getNumItems();
-    if (numitems > 0)
-    {
-        for (var i=0; i<numitems; i++)
-        {
+    if (numitems > 0) {
+        for (var i=0; i<numitems; i++) {
             var id = tree.contentView.getItemAtIndex(i).id;
-
-        if (queryRDFitem(id, "changed") != "0") {
-        modifyRDFitem(id, "changed", "0");
+            if (queryRDFitem(id, "changed") != "0") {
+                modifyRDFitem(id, "changed", "0");
+                refreshTree();
+            }
+        }
+        saveRDF();
         refreshTree();
-        }
-        }
-    saveRDF();
-    refreshTree();
-    refresh.request();
+        refresh.request();
     }
 }
 
@@ -422,14 +416,12 @@ function showAllChangesInNewTabs()
     var tree = document.getElementById("UpdateTree");
 
     var numitems = getNumItems();
-    if (numitems > 0)
-    {
-        for (var i=0; i<numitems; i++)
-        {
+    if (numitems > 0) {
+        for (var i=0; i<numitems; i++) {
             var id = tree.contentView.getItemAtIndex(i).id;
-        if (queryRDFitem(id, "changed") != "0") {
-        diffItemNewTab(id);
-        }
+            if (queryRDFitem(id, "changed") != "0") {
+                diffItemNewTab(id);
+            }
         }
     }
 }
@@ -494,15 +486,14 @@ function deleteSelectedItem()
 {
     var str=document.getElementById("updatescanStrings")
     var id=getSelectedItemID();
-    if (id == "")
-    return;
+    if (id == "") return;
     var title = queryRDFitem(id, "title", "untitled");
 
     if (confirm(str.getString("confirmDelete") + " " + title + "?")) {
-    deleteRDFitem(id);
-    saveRDF();
-    refreshTree();
-    refresh.request();
+        deleteRDFitem(id);
+        saveRDF();
+        refreshTree();
+        refresh.request();
     }
 }
 
@@ -511,9 +502,9 @@ function getSelectedItemID()
     var tree = document.getElementById("UpdateTree");
     var id;
     try {
-    id = tree.contentView.getItemAtIndex(tree.currentIndex).id;
+        id = tree.contentView.getItemAtIndex(tree.currentIndex).id;
     } catch (e) {
-    id = "";
+        id = "";
     }
 
     return id;
@@ -536,12 +527,12 @@ function showScanButton()
 function refreshTree()
 {
     try {
-    var tree=document.getElementById("UpdateTree");
-    var savedRow = tree.currentIndex;
-    tree.builder.rebuild();    
-    tree.view.selection.select(savedRow);
+        var tree=document.getElementById("UpdateTree");
+        var savedRow = tree.currentIndex;
+        tree.builder.rebuild();    
+        tree.view.selection.select(savedRow);
     } catch (e) {
-    ;
+        ;
     }
 }
 

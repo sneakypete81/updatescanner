@@ -8,7 +8,7 @@ function createUpdatescanDir()
 {
     var dir = DirIO.open(prependUpdatescanPath(""));
     if (!dir.exists()) 
-	DirIO.create(dir);
+    DirIO.create(dir);
 }
 
 function writeFile(filename, data)
@@ -20,12 +20,14 @@ function writeFile(filename, data)
 function readFile(filename)
 {
     var inFile = FileIO.open(prependUpdatescanPath(filename));
-    if (!inFile.exists())
-	return "";
+    if (!inFile.exists()) {
+       return "";
+    }
 
     var data = FileIO.read(inFile, "UTF-8");    
-    if (data == false)
-	return "";
+    if (data == false) {
+       return "";
+    }
     return data;
 }
 
@@ -35,13 +37,13 @@ function rmFile(filename)
 
     var aFile = Components.classes["@mozilla.org/file/local;1"].createInstance();
     if ( aFile instanceof Components.interfaces.nsILocalFile) {
-	try {
-	    aFile.initWithPath(file);
-	    aFile.remove(false);
-	} catch (err) {
-	    return false;
-	}
-	return true;
+        try {
+            aFile.initWithPath(file);
+            aFile.remove(false);
+        } catch (err) {
+            return false;
+        }
+        return true;
     }
     return false;
 }
@@ -50,29 +52,28 @@ function mvFile(sourcefile, destfile)
 {
     // get a component for the file to copy
     var aFile = Components.classes["@mozilla.org/file/local;1"]
-	.createInstance(Components.interfaces.nsILocalFile);
+    .createInstance(Components.interfaces.nsILocalFile);
     if (!aFile) return false;
 
     // get a component for the directory to copy to
     var aDir = Components.classes["@mozilla.org/file/local;1"]
-	.createInstance(Components.interfaces.nsILocalFile);
+    .createInstance(Components.interfaces.nsILocalFile);
     if (!aDir) return false;
 
     try {
-	sourcefile = prependUpdatescanPath(sourcefile);
-	destpath = prependUpdatescanPath("");
-
-	// next, assign URLs to the file components
-	aFile.initWithPath(sourcefile);
-	aDir.initWithPath(destpath);
-
-	// finally, move the file, and rename it
-	aFile.moveTo(aDir,destfile);
+        sourcefile = prependUpdatescanPath(sourcefile);
+        destpath = prependUpdatescanPath("");
+    
+        // next, assign URLs to the file components
+        aFile.initWithPath(sourcefile);
+        aDir.initWithPath(destpath);
+    
+        // finally, move the file, and rename it
+        aFile.moveTo(aDir,destfile);
     } catch (err) {
-	return false;
+        return false;
     }
-
-    return true;	
+    return true;
 }
 
 function prependUpdatescanPath(filename)
@@ -102,14 +103,14 @@ function escapeFilename(filename)
     var output = ""
     var ch;
     for (var i=0; i<filename.length; i++) {
-	ch = filename[i]
-	if (ch.match(/[0-9a-zA-Z]/)) {
-	    output += ch;
-	} else {
+        ch = filename[i]
+        if (ch.match(/[0-9a-zA-Z]/)) {
+            output += ch;
+        } else {
             output += "_"+ch.charCodeAt(0);
-	}
+        }
     }
-    return output
+    return output;
 }
 
 function openTempFile(fileBase, fileExt)
@@ -122,15 +123,14 @@ function openTempFile(fileBase, fileExt)
                  getBranch("extensions.updatescan.");
 
     try {
-	var suffix = prefs.getIntPref("tempSuffix");
+        var suffix = prefs.getIntPref("tempSuffix");
     } catch (e) { // pref doesn't exist - create it!
-	var suffix = 0;
-	prefs.setIntPref("tempSuffix", suffix);
+        var suffix = 0;
+        prefs.setIntPref("tempSuffix", suffix);
     }
 
     var filename = fileBase + String(suffix);
     return FileIO.open(prependTempPath(filename)+"."+fileExt);
-
 }
 
 function incrementTempFile()
@@ -141,12 +141,13 @@ function incrementTempFile()
                  getBranch("extensions.updatescan.");
 
     try {
-	var suffix = prefs.getIntPref("tempSuffix");
+        var suffix = prefs.getIntPref("tempSuffix");
     } catch (e) { // pref doesn't exist - create it!
-	var suffix = 0;
+        var suffix = 0;
     }
     suffix = suffix + 1;
-    if (suffix > 9) 
+    if (suffix > 9) {
         suffix = 0;
+    }
     prefs.setIntPref("tempSuffix", suffix);
 }

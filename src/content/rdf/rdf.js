@@ -6,8 +6,9 @@ function initRDF(rdffile)
 {
     dsource=new RDFDataSource(rdffile);
     rootnode=dsource.getNode(namespace+"/all");
-    if (!rootnode.isSeq())
+    if (!rootnode.isSeq()) {
         rootnode.makeSeq();
+    }
     saveRDF();
 }
 
@@ -51,10 +52,11 @@ function deleteRDFitem(id)
 
 function queryRDFitem(id, field, defaultValue)
 {
-    if (targetExists(id, field))
-	return dsource.getNode(id).getTarget(namespace+"#"+field).getValue();
-    else
-	return defaultValue;
+    if (targetExists(id, field)) {
+        return dsource.getNode(id).getTarget(namespace+"#"+field).getValue();
+    } else {
+        return defaultValue;
+    }
 }
 
 function targetExists(id, field)
@@ -62,8 +64,8 @@ function targetExists(id, field)
     var item;
 
     item = dsource.getNode(id).getTarget(namespace+"#"+field);
-    if (item == null)
-	return false;
+    if (item == null) {
+        return false;
     return true;
 }
 

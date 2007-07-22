@@ -40,7 +40,6 @@ Preferences page:
 Bugs:
 Greyed out item that loads ok in browser
 Escape lower case letters - windows filenames are case insensitive?
-Upgrade needs handling properly
 Scanning - delay between sites to ease CPU loading?
 Support display of >10 changes
 Still some strange diff things happening
@@ -56,6 +55,8 @@ Done:
 Speed up click response by diffing during scan
 
 -- Unreleased --
+Sort now uses progress dialog
+Upgrade needs handling properly (progress dialog)
 Added Korean locale
 
 -- 2.0.13 --

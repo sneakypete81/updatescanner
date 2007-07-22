@@ -8,9 +8,9 @@ function initDialog()
     var titleUpdateScanner=document.getElementById("strings").getString(
                                                    "titleUpdateScanner");
     if (window.arguments[0] != "") {
-    document.title = window.arguments[0];
+        document.title = window.arguments[0];
     } else {
-    document.title = titleUpdateScanner;
+        document.title = titleUpdateScanner;
     }
     var results = window.arguments[1];
     document.getElementById("txtURL").value = results[0];
@@ -40,12 +40,12 @@ function Ok()
     var restexists = /^[A-Za-z]+:\/\/\W*\w/;
 
     if (sliderAutoscanDecode(sliderAutoscanGetPos()) == 5)
-    if (!confirm(fiveMinuteAlert))
+    if (!confirm(fiveMinuteAlert)) {
         return false;
-
-    if (!httpexists.test(txtURL.value.toLowerCase()))
+    }
+    if (!httpexists.test(txtURL.value.toLowerCase())) {
         txtURL.value="http://" + txtURL.value;
-
+    }
     if (txtTitle.value == "" || !restexists(txtURL.value))
     {
         alert(noDataAlert);
@@ -71,7 +71,6 @@ function Cancel()
 function Help()
 {
     var addPageTip=document.getElementById("strings").getString("addPageTip");
-
     alert(addPageTip);
     return true;
 }
@@ -98,53 +97,53 @@ function sliderThresholdChange()
     label2=document.getElementById("label2");
     pos = sliderThresholdGetPos();
     if (pos == 0) {
-    label1.value=strings.getString("thresholdLabel0a");
-    label2.value=strings.getString("thresholdLabel0b");
+        label1.value=strings.getString("thresholdLabel0a");
+        label2.value=strings.getString("thresholdLabel0b");
     } else if (pos == 1) {
-    label1.value=strings.getString("thresholdLabel1a");
-    label2.value=strings.getString("thresholdLabel1b");
+        label1.value=strings.getString("thresholdLabel1a");
+        label2.value=strings.getString("thresholdLabel1b");
     } else if (pos == 2) {
-    label1.value=strings.getString("thresholdLabel2a");
-    label2.value=strings.getString("thresholdLabel2b");
+        label1.value=strings.getString("thresholdLabel2a");
+        label2.value=strings.getString("thresholdLabel2b");
     } else if (pos == 3) {
-    label1.value=strings.getString("thresholdLabel3a");
-    label2.value=strings.getString("thresholdLabel3b");
+        label1.value=strings.getString("thresholdLabel3a");
+        label2.value=strings.getString("thresholdLabel3b");
     } else if (pos == 4) {
-    label1.value=strings.getString("thresholdLabel4a");
-    label2.value=strings.getString("thresholdLabel4b");
+        label1.value=strings.getString("thresholdLabel4a");
+        label2.value=strings.getString("thresholdLabel4b");
     } else if (pos == 5) {
-    label1.value=strings.getString("thresholdLabel5a");
-    label2.value=strings.getString("thresholdLabel5b");
+        label1.value=strings.getString("thresholdLabel5a");
+        label2.value=strings.getString("thresholdLabel5b");
     }
 }
 
 function sliderThresholdEncode(threshold)
 {
     if (threshold < 5)
-    return 0;
+        return 0;
     if (threshold < 30)
-    return 1;
+        return 1;
     if (threshold < 75)
-    return 2;
+        return 2;
     if (threshold < 300)
-    return 3;
+        return 3;
     if (threshold < 750)
-    return 4;
+        return 4;
     return 5;
 }
 
 function sliderThresholdDecode(slider)
 {
     if (slider == 0)
-    return 0;
+        return 0;
     if (slider == 1)
-    return 10;
+        return 10;
     if (slider == 2)
-    return 50;
+        return 50;
     if (slider == 3)
-    return 100;
+        return 100;
     if (slider == 4)
-    return 500;
+        return 500;
     return 1000;
 }
 
@@ -170,61 +169,61 @@ function sliderAutoscanChange()
     label4=document.getElementById("label4");
     pos = sliderAutoscanGetPos();
     if (pos == 0) {
-    label3.value=strings.getString("autoscanLabel0a");
-    label4.value=strings.getString("autoscanLabel0b");
+        label3.value=strings.getString("autoscanLabel0a");
+        label4.value=strings.getString("autoscanLabel0b");
     } else if (pos == 1) {
-    label3.value=strings.getString("autoscanLabel1a");
-    label4.value=strings.getString("autoscanLabel1b");
+        label3.value=strings.getString("autoscanLabel1a");
+        label4.value=strings.getString("autoscanLabel1b");
     } else if (pos == 2) {
-    label3.value=strings.getString("autoscanLabel2a");
-    label4.value=strings.getString("autoscanLabel2b");
+        label3.value=strings.getString("autoscanLabel2a");
+        label4.value=strings.getString("autoscanLabel2b");
     } else if (pos == 3) {
-    label3.value=strings.getString("autoscanLabel3a");
-    label4.value=strings.getString("autoscanLabel3b");
+        label3.value=strings.getString("autoscanLabel3a");
+        label4.value=strings.getString("autoscanLabel3b");
     } else if (pos == 4) {
-    label3.value=strings.getString("autoscanLabel4a");
-    label4.value=strings.getString("autoscanLabel4b");
+        label3.value=strings.getString("autoscanLabel4a");
+        label4.value=strings.getString("autoscanLabel4b");
     } else if (pos == 5) {
-    label3.value=strings.getString("autoscanLabel5a");
-    label4.value=strings.getString("autoscanLabel5b");
+        label3.value=strings.getString("autoscanLabel5a");
+        label4.value=strings.getString("autoscanLabel5b");
     } else if (pos == 6) {
-    label3.value=strings.getString("autoscanLabel6a");
-    label4.value=strings.getString("autoscanLabel6b");
+        label3.value=strings.getString("autoscanLabel6a");
+        label4.value=strings.getString("autoscanLabel6b");
     }
 }
 
 function sliderAutoscanEncode(scanratemins)
 {
     if (scanratemins == 0)      // Manual
-    return 6;
+        return 6;
     if (scanratemins < 10)
-    return 0;
+        return 0;
     if (scanratemins < 20)
-    return 1;
+        return 1;
     if (scanratemins < 45)
-    return 2;
+        return 2;
     if (scanratemins < 60 * 3)
-    return 3;
+        return 3;
     if (scanratemins < 60 * 12)
-    return 4;
+        return 4;
     else
-    return 5;
+        return 5;
 }
 
 function sliderAutoscanDecode(slider)
 {
     if (slider == 0)
-    return 5;        // 5 minutes
+        return 5;        // 5 minutes
     if (slider == 1)
-    return 15;       // 15 minutes
+        return 15;       // 15 minutes
     if (slider == 2)
-    return 30;       // 30 minutes
+        return 30;       // 30 minutes
     if (slider == 3)
-    return 60;       // Hourly
+        return 60;       // Hourly
     if (slider == 4)
-    return 60 * 6;   // 6 Hours
+        return 60 * 6;   // 6 Hours
     if (slider == 5)
-    return 60 * 24;  // Daily
+        return 60 * 24;  // Daily
     else
-    return 0;        // Manual
+        return 0;        // Manual
 }

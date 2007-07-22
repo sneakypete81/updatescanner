@@ -38,24 +38,24 @@ function autoscanFinished(numChanges)
 
     refresh.request();
     if (numChanges) {
-	if (numChanges == 1) {
-	    message = alertOneChange;
-	} else {
-	    message = numChanges + " " + alertManyChanges;
-	}
-	window.openDialog("chrome://updatescan/content/alert.xul",
-			  "alert:alert",
-			  "chrome,dialog=yes,titlebar=no,popup=yes",
-			  message);
-
-/*	alertsService.showAlertNotification(
-	    "chrome://updatescan/skin/updatescan_big.png", 
-	    "Update Scanner", 
-	    message, 
-	    false, 
-	    "", 
-	    null);
-*/	
+        if (numChanges == 1) {
+            message = alertOneChange;
+        } else {
+            message = numChanges + " " + alertManyChanges;
+        }
+        window.openDialog("chrome://updatescan/content/alert.xul",
+                  "alert:alert",
+                  "chrome,dialog=yes,titlebar=no,popup=yes",
+                  message);
+    
+    /*    alertsService.showAlertNotification(
+            "chrome://updatescan/skin/updatescan_big.png", 
+            "Update Scanner", 
+            message, 
+            false, 
+            "", 
+            null);
+    */    
     }
 }
 
@@ -69,16 +69,17 @@ function refreshStatusbar()
 
     pages = getRDFroot().getChildren();
     while (pages.hasMoreElements()) {
-	page = pages.getNext().getValue();
-	if (queryRDFitem(page, "changed", "0") == "1") {
-	    changed=true;
-	    break;
-	}
+        page = pages.getNext().getValue();
+        if (queryRDFitem(page, "changed", "0") == "1") {
+            changed=true;
+            break;
+        }
     }
 
-    if (changed)
-	statusbar.setAttribute("status", "1");
-    else
-	statusbar.setAttribute("status", "0");
+    if (changed) {
+        statusbar.setAttribute("status", "1");
+    } else {
+       statusbar.setAttribute("status", "0");
+    }
 }
 

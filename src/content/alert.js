@@ -51,7 +51,7 @@ function prefillAlertInfo()
 {
     var label = document.getElementById("message");
     label.value=window.arguments[0];
-			  
+              
 }
 
 function onAlertLoad()
@@ -71,7 +71,7 @@ function onAlertLoad()
 
   gFinalHeight = window.outerHeight;  //134  5 lines - 152 6 lines
   if ( gFinalHeight > g_MAX_HEIGHT ) {
-  	gFinalHeight = g_MAX_HEIGHT;
+      gFinalHeight = g_MAX_HEIGHT;
   }
 
   window.outerHeight = 1;
@@ -91,7 +91,7 @@ function onAlertClick()
     var win = wm.getMostRecentWindow("navigator:browser");
 
     if (win.toggleSidebar) {
-	win.toggleSidebar('viewUpdateScanSidebar');
+       win.toggleSidebar('viewUpdateScanSidebar');
     }
     win.focus()
 }
