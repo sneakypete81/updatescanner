@@ -27,6 +27,7 @@
   <script src="refresher.js"/>
   <script src="opentopwin.js"/>
   <script src="updatescanoverlay.js"/>
+  <script src="upgrade.js"/>
 
   <vbox flex="1">
     <hbox pack="left">

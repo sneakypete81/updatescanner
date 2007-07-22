@@ -4,6 +4,11 @@ const kNewView = 1;
 const kOldView = 2;
 const kUnscannedView = 3;
 
+function createDiffs(oldContent, newContent)
+{
+    oldContent = stripScript(oldContent);
+    newContent = stripScript(newContent);
+}
 
 function displayDiffs(title, sourceURL, oldContent, newContent, oldDate, newDate)
 { 

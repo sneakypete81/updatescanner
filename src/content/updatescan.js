@@ -9,22 +9,10 @@ var numChanges;
 var refresh;
 var scan;
 
-/*    var params = {label:"Upgrading...", callback:callback, data:[120,134,123,143,32,"yep"],
-                  cancelPrompt:"Are you sure you want to abort the upgrade?"};       
-    window.openDialog('chrome://updatescan/content/progress.xul', 
-                      'dlgProgress', 
-                      'chrome,dialog,modal,centrescreen', params);
-*/
-
 function loadUpdateScan()
 {
     var tree;
     var rdffile;
-    var nodes;
-    var node;
-    var id;
-    var numItems;
-    var filebase;
 
     // Connect to the RDF file
     rdffile = getRDFuri();
@@ -35,23 +23,7 @@ function loadUpdateScan()
     tree.datasources=rdffile;
     tree.onclick=treeClick;
 
-    // Handle new installations/upgrades
-    if (!updatescanDirExists()) {
-    createUpdatescanDir();
-    nodes = getRDFroot().getChildren();
-    numItems = getRDFroot().getChildCount();
-    while (nodes.hasMoreElements()) {
-        node = nodes.getNext()
-            id = node.getValue();
-        modifyRDFitem(id, "content", ""); // Not using this anymore
-        modifyRDFitem(id, "changed", "0");
-        modifyRDFitem(id, "error", "0");
-        modifyRDFitem(id, "lastautoscan", "5 November 1978");
-        filebase = id.substr(6);
-        writeFile(escapeFilename(filebase)+".new", "**NEW**"); // Mark as new
-    }
-    saveRDF();
-    }       
+    upgradeCheck(); // See if we need to upgrade something
 
     // Check for refresh requests
     refresh = new Refresher("refreshTreeRequest", refreshTree);
@@ -464,40 +436,58 @@ function showAllChangesInNewTabs()
 
 function sortByName()
 {
-    var items = new Array();
-    var title;
-    var lastTitle;
-    var lastIndex;
+    var i;
+    var id;
+    var item;
     var tree = document.getElementById("UpdateTree");
     var numitems = getNumItems();
+    var data = new Array();
+    var indexes = new Array();
+    var params;
+    var str=document.getElementById("updatescanStrings");
 
-    // Get a list of ids
+    // Get a list of ids & titles
     if (numitems > 0)
     {
         for (var i=0; i<numitems; i++)
         {
-        items.push(tree.contentView.getItemAtIndex(i).id);
+            id = tree.contentView.getItemAtIndex(i).id;
+            item = {id:id, title:queryRDFitem(id, "title").toLowerCase()}
+            data.push(item);
+            indexes.push(i);
         }
-    }
 
-    // Move each item to the top of the list, starting with the last name
-    var count = items.length
-    for (var i = 0; i<count; i++) {
-    lastTitle = "";
-    lastIndex = 0;
-    for (var j in items) {
-        title = queryRDFitem(items[j], "title").toLowerCase();
-        if (title > lastTitle) {
-        lastTitle = title;
-        lastIndex = j;
+        params = {label:str.getString("sortLabel"), callback:sortItem, 
+                  items:indexes, data:data, 
+                  cancelPrompt:str.getString("sortCancel"), retVal:null};       
+        window.openDialog('chrome://updatescan/content/progress.xul', 
+                          'dlgProgress', 
+                          'chrome,dialog,modal,centrescreen', params);
+
+        saveRDF();
+        refreshTree();
+        refresh.request();
+    }
+    
+}
+
+function sortItem(index, data)
+// Passed the current index and the remaining items to sort.
+// Finds the smallest item, moves it into position, removes it from the 
+// data array.
+{
+    var i;
+    var smallestIndex = 0;
+    var smallestTitle = data[0].title;
+    var count = data.length;
+    for (i=1; i<count; i++) {
+        if (data[i].title < smallestTitle) {
+            smallestIndex = i;
+            smallestTitle = data[i].title;
         }
     }
-    moveRDFitem(items[lastIndex], 0); // Move to the top
-    items.splice(lastIndex, 1);       // Remove from the list
-    }
-    saveRDF();
-    refreshTree();
-    refresh.request();
+    moveRDFitem(data[smallestIndex].id, index); // Move into position
+    data.splice(smallestIndex, 1);              // Remove from data array    
 }
 
 function deleteSelectedItem()
