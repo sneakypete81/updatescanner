@@ -37,7 +37,7 @@
 
     <toolbarpalette id="BrowserToolbarPalette">
         <toolbarbutton id="tools-updatescan-button"
-                       label="&UpdateScanSidebar.label;"
+                       label="Update Scanner"
                        tooltiptext="&UpdateScan.tooltip;"
                        observes="viewUpdateScanSidebar"
                        class="toolbarbutton-1" />

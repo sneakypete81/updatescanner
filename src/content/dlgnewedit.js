@@ -5,12 +5,10 @@ const sliderAutoscanMax = 100;
 
 function initDialog()
 {
-    var titleUpdateScanner=document.getElementById("strings").getString(
-                                                   "titleUpdateScanner");
     if (window.arguments[0] != "") {
         document.title = window.arguments[0];
     } else {
-        document.title = titleUpdateScanner;
+        document.title = "Update Scanner";
     }
     var results = window.arguments[1];
     document.getElementById("txtURL").value = results[0];
@@ -98,7 +96,7 @@ function sliderThresholdChange()
     pos = sliderThresholdGetPos();
     if (pos == 0) {
         label1.value=strings.getString("thresholdLabel0a");
-        label2.value=strings.getString("thresholdLabel0b");
+        label2.value=""
     } else if (pos == 1) {
         label1.value=strings.getString("thresholdLabel1a");
         label2.value=strings.getString("thresholdLabel1b");
@@ -173,22 +171,22 @@ function sliderAutoscanChange()
         label4.value=strings.getString("autoscanLabel0b");
     } else if (pos == 1) {
         label3.value=strings.getString("autoscanLabel1a");
-        label4.value=strings.getString("autoscanLabel1b");
+        label4.value="";
     } else if (pos == 2) {
         label3.value=strings.getString("autoscanLabel2a");
-        label4.value=strings.getString("autoscanLabel2b");
+        label4.value="";
     } else if (pos == 3) {
         label3.value=strings.getString("autoscanLabel3a");
-        label4.value=strings.getString("autoscanLabel3b");
+        label4.value="";
     } else if (pos == 4) {
         label3.value=strings.getString("autoscanLabel4a");
-        label4.value=strings.getString("autoscanLabel4b");
+        label4.value="";
     } else if (pos == 5) {
         label3.value=strings.getString("autoscanLabel5a");
-        label4.value=strings.getString("autoscanLabel5b");
+        label4.value="";
     } else if (pos == 6) {
         label3.value=strings.getString("autoscanLabel6a");
-        label4.value=strings.getString("autoscanLabel6b");
+        label4.value="";
     }
 }
 
