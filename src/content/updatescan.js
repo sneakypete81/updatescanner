@@ -9,6 +9,13 @@ var numChanges;
 var refresh;
 var scan;
 
+/*    var params = {label:"Upgrading...", callback:callback, data:[120,134,123,143,32,"yep"],
+                  cancelPrompt:"Are you sure you want to abort the upgrade?"};       
+    window.openDialog('chrome://updatescan/content/progress.xul', 
+                      'dlgProgress', 
+                      'chrome,dialog,modal,centrescreen', params);
+*/
+
 function loadUpdateScan()
 {
     var tree;

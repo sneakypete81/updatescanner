@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://updatescan/skin/progress.css" type="text/css"?>
+
+<dialog id="dlgProgress" 
+        title = "Update Scanner"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        buttons="cancel"
+        onload="initDialowindowg();"
+        ondialogcancel="return cancel();">
+
+<script src="progress.js"/>
+<spacer class="margintopbottom"/>
+<vbox>
+  <label id="progressLabel"/>
+  <progressmeter id="progressMeter" width="400" value="0"/>
+</vbox>
+<spacer class="margintopbottom" />
+</dialog>
