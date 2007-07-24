@@ -8,9 +8,11 @@ function createDiffs(oldContent, newContent)
 {
     oldContent = stripScript(oldContent);
     newContent = stripScript(newContent);
+    return WDiffString(oldContent, newContent);
 }
 
-function displayDiffs(title, sourceURL, oldContent, newContent, oldDate, newDate)
+function displayDiffs(title, sourceURL, oldContent, newContent, diffContent,
+                      oldDate, newDate)
 { 
     var ios = Components.classes["@mozilla.org/network/io-service;1"]
                         .getService(Components.interfaces.nsIIOService);
@@ -29,11 +31,8 @@ function displayDiffs(title, sourceURL, oldContent, newContent, oldDate, newDate
         return diffURL;
     }
     
-
     oldContent = stripScript(oldContent);
     newContent = stripScript(newContent)
-
-    var diffContent = WDiffString(oldContent, newContent);
 
     var newFile  = openTempFile("UpdatescanNew","htm");
     var oldFile  = openTempFile("UpdatescanOld","htm"); 
