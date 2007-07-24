@@ -448,7 +448,7 @@ function sortByName()
             data.push(item);
             indexes.push(i);
         }
-
+        // Open the progress dialog and perform the sort
         params = {label:str.getString("sortLabel"), callback:sortItem, 
                   items:indexes, data:data, 
                   cancelPrompt:str.getString("sortCancel"), retVal:null};       
@@ -478,7 +478,9 @@ function sortItem(index, data)
             smallestTitle = data[i].title;
         }
     }
-    moveRDFitem(data[smallestIndex].id, index); // Move into position
+    if (smallestIndex != 0) {
+        moveRDFitem(data[smallestIndex].id, index); // Move into position
+    }
     data.splice(smallestIndex, 1);              // Remove from data array    
 }
 

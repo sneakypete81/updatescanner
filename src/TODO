@@ -1,10 +1,9 @@
 Things to do:
 
 Features:
+Ignore numbers during fuzzy compare?
 "Scan this page now" context menu item
 Add status to Properties dialog (last changed, last scanned etc.)
-Remove blank locale strings
-Remove UpdateScan title from locale strings
 Support more character encodings (autodetect?) 
 Write help pages
 "don't highlihgt changes" option
@@ -55,6 +54,9 @@ Done:
 Speed up click response by diffing during scan
 
 -- Unreleased --
+Remove blank locale strings
+Remove UpdateScan title from locale strings
+Faster sort when low entropy
 Sort now uses progress dialog
 Upgrade needs handling properly (progress dialog)
 Added Korean locale

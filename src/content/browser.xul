@@ -56,11 +56,11 @@
     <broadcasterset id="mainBroadcasterSet">
         <broadcaster id="viewUpdateScanSidebar"
                      autoCheck="false"
-                     label="&UpdateScanSidebar.label;"
+                     label="Update Scanner"
                      type="checkbox"
                      group="sidebar"
                      sidebarurl="chrome://updatescan/content/updatescan.xul"
-                     sidebartitle="&UpdateScanSidebar.label;"
+                     sidebartitle="Update Scanner"
                      oncommand="toggleSidebar('viewUpdateScanSidebar');"/>
     </broadcasterset>
 

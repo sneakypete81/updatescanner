@@ -66,6 +66,7 @@ function targetExists(id, field)
     item = dsource.getNode(id).getTarget(namespace+"#"+field);
     if (item == null) {
         return false;
+    }
     return true;
 }
 
