@@ -77,7 +77,7 @@
 </groupbox>
 
 <groupbox>
-    <caption label="Character Encoding" />
+    <caption label="Character Encoding (**needs localising)" />
     <radiogroup id="autoCharEncoding" onselect="charEncodingChanged();">
         <radio label="Auto-detect" selected="true"/>
         <hbox align="center">

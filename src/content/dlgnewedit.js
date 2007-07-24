@@ -79,9 +79,9 @@ function Ok()
     } else {
         results[8] = "Manual";
     }
-    alert(document.getElementById("encodingMenu").selectedItem);
-    alert(document.getElementById("encodingMenu").selectedIndex);
-    alert(document.getElementById("encodingMenu").selectedItem.value);
+//    alert(document.getElementById("encodingMenu").selectedItem);
+//    alert(document.getElementById("encodingMenu").selectedIndex);
+//    alert(document.getElementById("encodingMenu").selectedItem.value);
     results[9] = document.getElementById("encodingMenu").selectedItem.id;
     return true;
 }

@@ -50,10 +50,9 @@ Occasionally status icon doesn't update
 
 
 Done:
--- Removed --
-Speed up click response by diffing during scan
-
 -- Unreleased --
+**STARTED DUPLICATE CHECK, BUT NO RENAME YET**
+Speed up click response by diffing during scan
 Remove blank locale strings
 Remove UpdateScan title from locale strings
 Faster sort when low entropy

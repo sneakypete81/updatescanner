@@ -273,9 +273,14 @@ function diffItem(id)
     refreshTree();
     refresh.request();
     
-    var old_lastScan = new Date(queryRDFitem(id, "old_lastscan", "5/11/1978"));
+    var old_lastScan = queryRDFitem(id, "old_lastscan", "")
+    if (old_lastScan == "") old_lastScan = "5 November 1978";
+    old_lastScan = new Date(old_lastScan);
     var oldDate = dateDiffString(old_lastScan, now);
-    var lastScan = new Date(queryRDFitem(id, "lastscan", "5/11/1978"));
+
+    var lastScan =queryRDFitem(id, "lastscan", "");
+    if (lastScan == "") lastScan = "5 November 1978";
+    lastScan = new Date(lastScan);
     var newDate = dateDiffString(lastScan, now);
 
     var filebase = escapeFilename(id.substr(6));
