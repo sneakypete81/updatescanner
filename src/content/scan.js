@@ -53,7 +53,7 @@ function Scanner()
 
     this.timeout = function()
     {
-        if (httpreq) { // Abort the request
+        if (httpreq) { // Abort the request - this triggers an error 
             httpreq.abort();
         }
     }
@@ -94,22 +94,27 @@ function Scanner()
         var newContent;
         var status = STATUS_ERROR;
         var responseText = "";
+        var httpreqStatus;
+        var httpreqResponseText;
     
         if (httpreq != null && httpreq.readyState == 4) {
+            httpreqStatus = httpreq.status;
+            httpreqResponseText = httpreq.responseText;
+            httpreq = null;
             me.stopTimeout();
             page = itemlist.shift();      // extract the next item
     
             try {
-                if (httpreq.status == 200) {
+                if (httpreqStatus == 200) {
                     oldContent = stripWhitespace(stripTags(stripScript(
                                  page.content)));
                     newContent = stripWhitespace(stripTags(stripScript(
-                                 httpreq.responseText)));
+                                 httpreqResponseText)));
                     if (newContent == "" || 
                         checkSame(newContent, oldContent, page.threshold)) {
                         status = STATUS_NO_CHANGE;
                     } else {
-                        responseText = httpreq.responseText;
+                        responseText = httpreqResponseText;
                         if (page.content == "**NEW**") {
                             status = STATUS_NEW;
                         } else {
@@ -125,29 +130,29 @@ function Scanner()
             }
 
             changedCallback(page.id, responseText, status)
-
             me.getNextPage();
         }
     }
 
     this.getNextPage = function()
     {
+        var page;
+        
         if (itemlist.length > 0) {
-            try {
-                httpreq = new XMLHttpRequest();
-                httpreq.open("GET", itemlist[0].url,true);
-                httpreq.onreadystatechange=me.next;
-                httpreq.send(null);
-                me.startTimeout();
-            } catch (e) {
+            while (!me.attemptGet(itemlist[0].url)) {
                 me.stopTimeout();
                 page = itemlist.shift();      // extract the next item
                 changedCallback(page.id, "", STATUS_ERROR);
                 currentitem++;
                 progressCallback(currentitem, numitems);
-                me.getNextPage();
-                return;
+                if (itemlist.length == 0) {
+                    finishedCallback(errors);
+                    me.clear();
+                    scanning = false;
+                    return;
+                }
             }
+            me.startTimeout();
             currentitem++;
             progressCallback(currentitem, numitems);
         }
@@ -159,6 +164,20 @@ function Scanner()
             return;
         }
     }
+    
+    this.attemptGet = function(url)
+    {
+        try {
+            httpreq = new XMLHttpRequest();
+            httpreq.open("GET", url, true);
+            httpreq.onreadystatechange=me.next;
+            httpreq.send(null);
+            return true;
+        } catch (e) {
+            return false;
+        }        
+    }
+    
 }
 
 function uscanItem(id, title, url, content, threshold) 
