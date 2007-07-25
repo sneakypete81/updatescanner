@@ -437,7 +437,8 @@ function sortByName()
         // Open the progress dialog and perform the sort
         params = {label:str.getString("sortLabel"), callback:sortItem, 
                   items:indexes, data:data, 
-                  cancelPrompt:str.getString("sortCancel"), retVal:null};       
+                  cancelPrompt:str.getString("sortCancel"), 
+                  retVal:null, retData:null};       
         window.openDialog('chrome://updatescan/content/progress.xul', 
                           'dlgProgress', 
                           'chrome,dialog,modal,centrescreen', params);
@@ -467,7 +468,8 @@ function sortItem(index, data)
     if (smallestIndex != 0) {
         moveRDFitem(data[smallestIndex].id, index); // Move into position
     }
-    data.splice(smallestIndex, 1);              // Remove from data array    
+    data.splice(smallestIndex, 1);              // Remove from data array
+    return null;    
 }
 
 function deleteSelectedItem()

@@ -1,14 +1,18 @@
-var timeoutID = null;
-var callback = null;
-var items = null;
-var data = null;
-var cancelPrompt = "";
+var timeoutID;
+var callback;
+var items;
+var data;
+var cancelPrompt;
 var count;
-var cancelling = false;
+var cancelling;
+var retData;
 
 // Pass in a label, an array of items, a data parameter and a callback function.
 // A dialog is displayed, and every 10ms the callback is invoked
 // with an item from the array (and the data parameter).
+// If the callback returns a value, it is added to retData array, and returned
+// once all items are finished.
+// retVal is true if all items were processed, false if the user cancelled.
 
 function initDialog()
 {
@@ -19,20 +23,27 @@ function initDialog()
     callback = window.arguments[0].callback;
     cancelPrompt = window.arguments[0].cancelPrompt;
     count = 0;
+    cancelling = false;
+    retData = new Array();
     timeoutID = setTimeout(timeout, 10) 
     window.arguments[0].retVal = false;
 }
 
 function timeout()
 {
+    var retVal;
     if (cancelling) {
         // Cancel prompt is open - spin until it closes
         timeoutID = setTimeout(timeout, 1000);
     } else {
-        callback(items[count], data);
+        retVal = callback(items[count], data);
+        if (retVal != null) {
+            retData.push(retVal);
+        }
         count++;
         document.getElementById("progressMeter").value =count*100/items.length;
         if (count >= items.length) {
+            window.arguments[0].retData = retData;
             window.arguments[0].retVal = true;
             document.getElementById("dlgProgress").acceptDialog();
         } else {
