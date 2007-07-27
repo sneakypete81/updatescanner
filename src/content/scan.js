@@ -38,7 +38,13 @@ function Scanner()
 
     this.startTimeout = function()
     {
-        me.stopTimeout();
+	var prefs = Components.classes["@mozilla.org/preferences-service;1"].
+	            getService(Components.interfaces.nsIPrefService).
+                    getBranch("extensions.updatescan.");
+
+	versionMajor = prefs.getIntPref("versionMajor");
+***UPTOHERE***
+	me.stopTimeout();
         scanTimerRunning = true;
         scanTimerID = setTimeout(me.timeout, 10000); // Give it 10 seconds
     }
