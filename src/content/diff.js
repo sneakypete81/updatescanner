@@ -13,7 +13,8 @@ function createDiffs(oldContent, newContent)
 
 function displayDiffs(title, sourceURL, oldContent, newContent, diffContent,
                       oldDate, newDate)
-{ 
+{
+    var data; 
     var ios = Components.classes["@mozilla.org/network/io-service;1"]
                         .getService(Components.interfaces.nsIIOService);
     var fileHandler = ios.getProtocolHandler("file")

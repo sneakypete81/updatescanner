@@ -1,14 +1,29 @@
 Things to do:
 
 Features:
+Add string supplant:
+param = {domain: 'valvion.com', media: 'http://media.valvion.com/'};
+url = "{media}logo.gif".supplant(param);
+
+
+String.prototype.supplant = function (o) {
+    return this.replace(/{([^{}]*)}/g,
+        function (a, b) {
+            var r = o[b];
+            return typeof r === 'string' || typeof r === 'number' ? r : a;
+        }
+    );
+};
+
+Update locale to include dummy amo in .properties
+Update amo description to include highlighting (and screenshots)
 Ignore numbers during fuzzy compare?
 "Scan this page now" context menu item
-Add status to Properties dialog (last changed, last scanned etc.)
+Add error display to page header
 Support more character encodings (autodetect?) 
 Write help pages
 "don't highlihgt changes" option
 Alert sounds
-error on file:///
 drag n drop
 bookmark menu item?
 Rightclick on link
@@ -23,6 +38,7 @@ Preferences page:
   Disable scan on start (wait for 5 minutes maybe?)
   Options to enable scripts when viewing diffs
   Toolbar customisation
+  Adjust scan timeout
 3Handle frames
 3Check rdf file integrity (remove empty urls)
 3Add to tab context menu
@@ -52,6 +68,9 @@ Occasionally status icon doesn't update
 Done:
 -- Unreleased --
 **STARTED DUPLICATE CHECK, BUT NO RENAME YET**
+Allow timeout adjustment via about:config
+file:/// is now supported
+Fixed httpreq callback reentry bug, and other scan logic problems
 Speed up click response by diffing during scan
 Remove blank locale strings
 Remove UpdateScan title from locale strings

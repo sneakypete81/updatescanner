@@ -13,21 +13,23 @@ function Scanner()
     var changedCallback;
     var finishedCallback;
     var progressCallback;
-    var errors;
+    var timeoutError = false;
 
     var numitems;
     var currentitem;
     var scanTimerID = null;
     var scanTimerRunning = false;
-
+ 
     this.clear = function()
     {
+//        myDump("Clear");
         itemlist.length = 0;
     }
 
     this.cancel = function()
     {
         if (scanning) {
+//            myDump("Cancel");
             scanning = false;
             me.stopTimeout();
             hideProgress();
@@ -38,29 +40,42 @@ function Scanner()
 
     this.startTimeout = function()
     {
-	var prefs = Components.classes["@mozilla.org/preferences-service;1"].
-	            getService(Components.interfaces.nsIPrefService).
+        var prefs = Components.classes["@mozilla.org/preferences-service;1"].
+                    getService(Components.interfaces.nsIPrefService).
                     getBranch("extensions.updatescan.");
 
-	versionMajor = prefs.getIntPref("versionMajor");
-***UPTOHERE***
-	me.stopTimeout();
+        var scanTimeout;
+        try { 
+            scanTimeout = prefs.getIntPref("scanTimeout");
+	    } catch (e) {
+            scanTimeout = 10;
+        }
+	    if (scanTimeout < 10) scanTimeout = 10;
+        me.stopTimeout();
+//        myDump("Start Timeout:"+scanTimeout);
         scanTimerRunning = true;
-        scanTimerID = setTimeout(me.timeout, 10000); // Give it 10 seconds
+        timeoutError = false;
+        scanTimerID = setTimeout(me.timeout, scanTimeout*1000);
     }
 
     this.stopTimeout = function()
     {
+//        myDump("Stop Timeout");
         if (scanTimerRunning) {
             clearTimeout(scanTimerID);
             scanTimerRunning = false;
+            timeoutError = false;
         }
     }
 
     this.timeout = function()
     {
         if (httpreq) { // Abort the request - this triggers an error 
-            httpreq.abort();
+//            myDump("timeout");
+            timeoutError = true;
+            httpreq.abort(); // Triggers this.next with status undefined
+//        } else {
+//            myDump("Timeout with no httpreq")
         }
     }
 
@@ -73,6 +88,7 @@ function Scanner()
     this.start = function(changedCallbackarg, finishedCallbackarg,
               progressCallbackarg)
     {
+//        myDump("Start");         
         changedCallback = changedCallbackarg;
         finishedCallback = finishedCallbackarg;
         progressCallback = progressCallbackarg;
@@ -87,7 +103,6 @@ function Scanner()
         currentitem = 0;
         progressCallback(currentitem, numitems);
         
-        errors = "";
         scanning = true;
         me.getNextPage();
     }
@@ -101,41 +116,65 @@ function Scanner()
         var status = STATUS_ERROR;
         var responseText = "";
         var httpreqStatus;
+        var httpreqStatusText;
         var httpreqResponseText;
     
         if (httpreq != null && httpreq.readyState == 4) {
-            httpreqStatus = httpreq.status;
-            httpreqResponseText = httpreq.responseText;
+            try {
+                httpreqStatus = httpreq.status;
+                httpreqStatusText = httpreq.statusText;
+                httpreqResponseText = httpreq.responseText;
+            } catch (e) {
+               var strings = Components.classes["@mozilla.org/intl/stringbundle;1"]
+                   .getService(Components.interfaces.nsIStringBundleService)
+                   .createBundle("chrome://updatescan/locale/updatescan.properties");
+                httpreqStatus = 99999
+                if (timeoutError) {
+                    httpreqStatusText = strings.
+                                        GetStringFromName("timeoutError");
+                } else {
+                    httpreqStatusText = strings.
+                                        GetStringFromName("unknownError");
+                }
+                httpreqResponseText = "";
+            }
             httpreq = null;
             me.stopTimeout();
             page = itemlist.shift();      // extract the next item
     
             try {
-                if (httpreqStatus == 200) {
+                if (httpreqStatus == 200 || httpreqStatus == 0) {
+                    // 200 = OK, 0 = FTP/FILE finished
+//                    myDump("StatusText="+httpreqStatusText)
                     oldContent = stripWhitespace(stripTags(stripScript(
                                  page.content)));
                     newContent = stripWhitespace(stripTags(stripScript(
                                  httpreqResponseText)));
                     if (newContent == "" || 
                         checkSame(newContent, oldContent, page.threshold)) {
+//                        myDump("Same");
                         status = STATUS_NO_CHANGE;
                     } else {
                         responseText = httpreqResponseText;
                         if (page.content == "**NEW**") {
+//                            myDump("New");
                             status = STATUS_NEW;
                         } else {
+//                            myDump("Change");
                             status = STATUS_CHANGE;
                         }
                     }
                 } else {
+//                    myDump("Error status="+httpreqStatus);
+//                    myDump("StatusText="+httpreqStatusText);                    
                     status = STATUS_ERROR;
                 }
             } catch (e) {
-                //myDump(e);
+//                myDump("Error except="+e);                    
                 status = STATUS_ERROR;
             }
-
-            changedCallback(page.id, responseText, status)
+            
+            changedCallback(page.id, responseText, status, httpreqStatusText)
             me.getNextPage();
         }
     }
@@ -143,16 +182,19 @@ function Scanner()
     this.getNextPage = function()
     {
         var page;
-        
         if (itemlist.length > 0) {
             while (!me.attemptGet(itemlist[0].url)) {
-                me.stopTimeout();
                 page = itemlist.shift();      // extract the next item
-                changedCallback(page.id, "", STATUS_ERROR);
+                changedCallback(page.id, "", STATUS_ERROR, 
+                    Components.classes["@mozilla.org/intl/stringbundle;1"]
+                   .getService(Components.interfaces.nsIStringBundleService)
+                   .createBundle("chrome://updatescan/locale/updatescan.properties")
+                   .GetStringFromName("getError"));
+
                 currentitem++;
                 progressCallback(currentitem, numitems);
                 if (itemlist.length == 0) {
-                    finishedCallback(errors);
+                    finishedCallback();
                     me.clear();
                     scanning = false;
                     return;
@@ -164,7 +206,7 @@ function Scanner()
         }
         else
         {
-            finishedCallback(errors);
+            finishedCallback();
             me.clear();
             scanning = false;
             return;
@@ -174,12 +216,14 @@ function Scanner()
     this.attemptGet = function(url)
     {
         try {
+//            myDump("Get "+url)
             httpreq = new XMLHttpRequest();
             httpreq.open("GET", url, true);
             httpreq.onreadystatechange=me.next;
             httpreq.send(null);
             return true;
         } catch (e) {
+//            myDump("Get Error: "+e)
             return false;
         }        
     }
@@ -235,7 +279,7 @@ function stripWhitespace(content)
     return content.replace(/\s+/g,"");
 }
 
-function processScanChange(id, newContent, status)
+function processScanChange(id, newContent, status, statusText)
 // Updates the specified item based on the new content.
 // * Updates RDF tree
 // * Writes content to file
@@ -268,9 +312,11 @@ function processScanChange(id, newContent, status)
 	    modifyRDFitem(id, "changed", "1");
         modifyRDFitem(id, "lastscan", now.toString());
 	    modifyRDFitem(id, "error", "0");
+        modifyRDFitem(id, "statusText", statusText)
     } else if (status == STATUS_NO_CHANGE) {
 	    modifyRDFitem(id, "error", "0");
 	    modifyRDFitem(id, "lastscan", now.toString());
+        modifyRDFitem(id, "statusText", statusText)
     } else if (status == STATUS_NEW) {
 	    writeFile(filebase+".dif", newContent);
 	    writeFile(filebase+".old", newContent);
@@ -278,8 +324,10 @@ function processScanChange(id, newContent, status)
 	    modifyRDFitem(id, "lastscan", now.toString());
 	    modifyRDFitem(id, "old_lastscan", now.toString());
 	    modifyRDFitem(id, "error", "0");
+        modifyRDFitem(id, "statusText", statusText)
     } else {
 	    modifyRDFitem(id, "error", "1");
+        modifyRDFitem(id, "statusText", statusText)
     }
 	saveRDF();    
     return retVal;

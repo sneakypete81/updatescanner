@@ -104,23 +104,20 @@ function scanButtonClick()
     }
 }
 
-function scanChangedCallback(id, new_content, status)
+function scanChangedCallback(id, new_content, status, statusText)
 {
-    if (processScanChange(id, new_content, status)) {
+    if (processScanChange(id, new_content, status, statusText)) {
         numChanges++;
     }
     refreshTree();
     refresh.request();
 }
 
-function scanFinishedCallback(errors)
+function scanFinishedCallback()
 {
     var str=document.getElementById("updatescanStrings");
 
-    if (errors != "") {
-        setStatus(str.getString("statusError"));
-        alert(errors);
-    } else if (numChanges == 0) {
+    if (numChanges == 0) {
         setStatus(str.getString("statusNoChanges"));
     } else {
         if (numChanges == 1) {

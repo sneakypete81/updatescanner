@@ -77,14 +77,14 @@ function Autoscan()
         }
     }
 
-    this.scanChanged = function(id, new_content, status)
+    this.scanChanged = function(id, new_content, status, statusText)
     {
-        if (processScanChange(id, new_content, status)) {
+        if (processScanChange(id, new_content, status, statusText)) {
             numChanges++;
         }
     }
 
-    this.scanFinished = function(errors)
+    this.scanFinished = function()
     {
         callback(numChanges);
     }
