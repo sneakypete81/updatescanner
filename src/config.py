@@ -18,7 +18,7 @@ major_version = 2
 minor_version = 0
 revision_version = 13
 build_version = 5
-in_development = False
+in_development = True
 
 if build_version:
     version = "%d.%d.%d.%d%s" % (

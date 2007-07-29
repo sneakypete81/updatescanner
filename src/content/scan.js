@@ -292,7 +292,7 @@ function processScanChange(id, newContent, status, statusText)
     var diffContent;
     var retVal = false;
 
-    filebase = escapeFilename(id.substr(6));
+    filebase=urlToFilename(queryRDFitem(id, "url", ""))
     if (status == STATUS_CHANGE) {
         retVal = true;
 	    if (queryRDFitem(id, "changed") == "0") {

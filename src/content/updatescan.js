@@ -89,11 +89,11 @@ function scanButtonClick()
         
         for (var i=0; i<numitems; i++) {
             id = tree.contentView.getItemAtIndex(i).id;
-            filebase = id.substr(6);
+            filebase=urlToFilename(queryRDFitem(id, "url", ""))
             scan.addURL(id, queryRDFitem(id, "title", "No Title"), 
-            queryRDFitem(id, "url", ""), 
-            readFile(escapeFilename(filebase)+".new"),
-            queryRDFitem(id, "threshold", 100));
+                        queryRDFitem(id, "url", ""), 
+                        readFile(filebase+".new"),
+                        queryRDFitem(id, "threshold", 100));
         }
 
         setStatus(str.getString("statusScanning"));
@@ -182,8 +182,8 @@ function openNewDialogNoRefresh(title, url)
               result);
     if (result[0] != null) {
         id = addRDFitem();
-        filebase = id.substr(6);
-        writeFile(escapeFilename(filebase)+".new", result[5]);
+        filebase = urlToFilename(queryRDFitem(id, "url", ""));
+        writeFile(filebase+".new", result[5]);
         modifyRDFitem(id, "url", result[0]);
         modifyRDFitem(id, "title", result[1]);
         modifyRDFitem(id, "threshold", result[2]);
@@ -234,8 +234,8 @@ function openEditDialog()
             modifyRDFitem(id, "encodingDetect", result[8]);
             modifyRDFitem(id, "encoding", result[9]);            
         } else {
-            filebase = id.substr(6);
-            writeFile(escapeFilename(filebase)+".new", result[5]);
+            filebase = urlToFilename(queryRDFitem(id, "url", ""));
+            writeFile(filebase+".new", result[5]);
             modifyRDFitem(id, "url", result[0]);
             modifyRDFitem(id, "title", result[1]);
             modifyRDFitem(id, "threshold", result[2]);
@@ -280,7 +280,7 @@ function diffItem(id)
     lastScan = new Date(lastScan);
     var newDate = dateDiffString(lastScan, now);
 
-    var filebase = escapeFilename(id.substr(6));
+    var filebase = urlToFilename(queryRDFitem(id, "url", ""));
     return displayDiffs(queryRDFitem(id, "title", "No Title"), 
             queryRDFitem(id, "url", ""), 
             readFile(filebase+".old"),
@@ -473,10 +473,15 @@ function deleteSelectedItem()
 {
     var str=document.getElementById("updatescanStrings")
     var id=getSelectedItemID();
+    var fileBase=urlToFilename(queryRDFitem(id, "url", ""))
+
     if (id == "") return;
     var title = queryRDFitem(id, "title", "untitled");
 
     if (confirm(str.getString("confirmDelete") + " " + title + "?")) {
+        rmFile(fileBase+".old");
+        rmFile(fileBase+".new");
+        rmFile(fileBase+".dif");
         deleteRDFitem(id);
         saveRDF();
         refreshTree();

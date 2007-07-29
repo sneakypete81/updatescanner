@@ -113,6 +113,12 @@ function escapeFilename(filename)
     return output;
 }
 
+function urlToFilename(url)
+// Remove non-ascii from a url
+{
+    return url.replace(/\W/g,"").toLowerCase();
+}
+
 function openTempFile(fileBase, fileExt)
 // Creates a temporary file with the specified base filename.
 // The suffix of the filename is stored as a preference.

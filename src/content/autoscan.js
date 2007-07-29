@@ -58,10 +58,10 @@ function Autoscan()
                     modifyRDFitem(id, "lastautoscan", now.toString());
                     saveRDF();
                     doScan = true;
-                    filebase = id.substr(6);
+                    filebase=urlToFilename(queryRDFitem(id, "url", ""))
                     scan.addURL(id, queryRDFitem(id, "title", "No Title"), 
                             queryRDFitem(id, "url", ""), 
-                            readFile(escapeFilename(filebase)+".new"),
+                            readFile(filebase+".new"),
                             queryRDFitem(id, "threshold", 100));
                 }
             }

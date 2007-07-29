@@ -40,7 +40,7 @@ Preferences page:
   Toolbar customisation
   Adjust scan timeout
 3Handle frames
-3Check rdf file integrity (remove empty urls)
+3??Check rdf file integrity (remove empty urls)
 3Add to tab context menu
 3Auto place on toolbar
 3Hotkey shortcut - ctrl-c??
@@ -53,21 +53,21 @@ Preferences page:
 4Email alerts?
 
 Bugs:
+Get rid of refresher?
+Need to check for duplicate URLs
 Greyed out item that loads ok in browser
-Escape lower case letters - windows filenames are case insensitive?
-Scanning - delay between sites to ease CPU loading?
+??Scanning - delay between sites to ease CPU loading?
 Support display of >10 changes
 Still some strange diff things happening
-Notify doesn't work on Mac - disable, or use 2.0 method
+??Notify doesn't work on Mac - disable, or use 2.0 method
 Occasionally status icon doesn't update
 3Conflict with Hyperwords extension?
 3Uninstall should delete rdf?
-3Get rid of refresher?
 
 
 Done:
 -- Unreleased --
-**STARTED DUPLICATE CHECK, BUT NO RENAME YET**
+Changed to url-based filenames, since id-based were case sensitive
 Allow timeout adjustment via about:config
 file:/// is now supported
 Fixed httpreq callback reentry bug, and other scan logic problems

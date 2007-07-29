@@ -36,8 +36,8 @@ function upgradeCheck()
             modifyRDFitem(id, "changed", "0");
             modifyRDFitem(id, "error", "0");
             modifyRDFitem(id, "lastautoscan", "5 November 1978");
-            filebase = id.substr(6);
-            writeFile(escapeFilename(filebase)+".new", "**NEW**");// Mark as new
+            filebase = urlToFilename(queryRDFitem(id, "url", ""));
+            writeFile(filebase+".new", "**NEW**");// Mark as new
         }
         saveRDF();
     }
@@ -77,7 +77,7 @@ function upgrade_2_0_14()
         files.push(file);
         ucaseFiles.push(file.toUpperCase());
     }      
-    label = str.getString("upgradeLabel")+" (1/3)..."  
+    label = str.getString("upgradeLabel")+" (1/2)..."  
     params = {label:label, 
               callback:upgradeCheckDup, 
               items:files, 
@@ -94,7 +94,6 @@ function upgrade_2_0_14()
     
     // Delete the cache files for duplicate entries (might be corrupt)
     for (i in params.retData) {
-        alert(params.retData[i]);
         rmFile(params.retData[i]+".old");
         rmFile(params.retData[i]+".new");
         rmFile(params.retData[i]+".dif");
@@ -102,13 +101,17 @@ function upgrade_2_0_14()
 
     // Rename existing cache files to use URL filebase instead of id
     for (i in files) {
-  ;//      mvFile(*****)
+        var file = urlToFilename(queryRDFitem(ids[i], "url", ""));
+        mvFile(files[i]+".old", file+".old");
+        mvFile(files[i]+".new", file+".new");
+        mvFile(files[i]+".dif", file+".dif");
+        files[i] = file; // Used in the next step...
     }
 
 
     // 2.0.14+ expects diffs to be done during scan, not during display
     // Need to generate diffs now.
-    label = str.getString("upgradeLabel")+" (3/3)..."  
+    label = str.getString("upgradeLabel")+" (2/2)..."  
     params = {label:label, 
               callback:upgradeDiff, 
               items:files, 
@@ -140,7 +143,6 @@ function upgradeCheckDup(item, data)
     // Check if the item appears twice in the data
     if (data.indexOf(item.toUpperCase()) != 
         data.lastIndexOf(item.toUpperCase())) {
-        alert(item);
         return item;
     }
     return null;
