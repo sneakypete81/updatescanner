@@ -12,7 +12,7 @@ function createDiffs(oldContent, newContent)
 }
 
 function displayDiffs(title, sourceURL, oldContent, newContent, diffContent,
-                      oldDate, newDate)
+                      oldDate, newDate, numItems)
 {
     var data; 
     var ios = Components.classes["@mozilla.org/network/io-service;1"]
@@ -20,9 +20,11 @@ function displayDiffs(title, sourceURL, oldContent, newContent, diffContent,
     var fileHandler = ios.getProtocolHandler("file")
                          .QueryInterface(Components.interfaces.nsIFileProtocolHandler);
 
+    if (numItems < 10) numItems = 10; // 10 temp files minimum
+
     if (newContent == "**NEW**") {
         var diffFile = openTempFile("UpdatescanDiff","htm");
-        incrementTempFile();
+        incrementTempFile(numItems);
         var diffURL = fileHandler.getURLSpecFromFile(diffFile);
     
         data = generateHeader(kUnscannedView, title, "", 
@@ -38,7 +40,7 @@ function displayDiffs(title, sourceURL, oldContent, newContent, diffContent,
     var newFile  = openTempFile("UpdatescanNew","htm");
     var oldFile  = openTempFile("UpdatescanOld","htm"); 
     var diffFile = openTempFile("UpdatescanDiff","htm");
-    incrementTempFile();
+    incrementTempFile(numItems);
     var newURL  = fileHandler.getURLSpecFromFile(newFile);
     var oldURL  = fileHandler.getURLSpecFromFile(oldFile);
     var diffURL = fileHandler.getURLSpecFromFile(diffFile);

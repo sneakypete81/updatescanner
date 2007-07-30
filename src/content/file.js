@@ -139,8 +139,8 @@ function openTempFile(fileBase, fileExt)
     return FileIO.open(prependTempPath(filename)+"."+fileExt);
 }
 
-function incrementTempFile()
-// Increment the temp filename suffix 0,1...8,9,0...
+function incrementTempFile(numItems)
+// Increment the temp filename suffix 0,1... up to maximum of "numItems"
 {
     var prefs = Components.classes["@mozilla.org/preferences-service;1"].
                  getService(Components.interfaces.nsIPrefService).
@@ -152,7 +152,7 @@ function incrementTempFile()
         var suffix = 0;
     }
     suffix = suffix + 1;
-    if (suffix > 9) {
+    if (suffix > numItems) {
         suffix = 0;
     }
     prefs.setIntPref("tempSuffix", suffix);

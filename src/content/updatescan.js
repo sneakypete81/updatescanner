@@ -64,10 +64,10 @@ function treeClick(event)
 
     switch (event.button) {
         case 0:
-            diffItemThisWindow(id);
+            diffItemThisWindow(id, 1);
             break;
         case 1:
-            diffItemNewTab(id);
+            diffItemNewTab(id, 1);
             break;
     }
 }
@@ -261,7 +261,7 @@ function openSelectedItem()
     refresh.request();
 }
 
-function diffItem(id)
+function diffItem(id, numItems)
 {
     var now = new Date();
     modifyRDFitem(id, "changed", "0");
@@ -286,20 +286,19 @@ function diffItem(id)
             readFile(filebase+".old"),
             readFile(filebase+".new"),
             readFile(filebase+".dif"),
-            oldDate, 
-            newDate);
+            oldDate, newDate, numItems);
 }
 
 function diffSelectedItemThisWindow()
 {
     var item = getSelectedItemID();
     if (item == "") return;
-    diffItemThisWindow(item);
+    diffItemThisWindow(item, 1);
 }
 
-function diffItemThisWindow(id)
+function diffItemThisWindow(id, numItems)
 {
-    var diffURL = diffItem(id)
+    var diffURL = diffItem(id, numItems)
     openTopWin(diffURL);
     focusTree();
 }
@@ -308,10 +307,10 @@ function diffSelectedItemNewTab()
 {
     var item = getSelectedItemID();
     if (item == "") return;
-    diffItemNewTab(item);    
+    diffItemNewTab(item, 1);    
 }
 
-function diffItemNewTab(id)
+function diffItemNewTab(id, maxItems)
 {
     var mainWindow = window.QueryInterface(
     Components.interfaces.nsIInterfaceRequestor)
@@ -321,7 +320,7 @@ function diffItemNewTab(id)
     .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
     .getInterface(Components.interfaces.nsIDOMWindow);
 
-    var diffURL = diffItem(id);
+    var diffURL = diffItem(id, maxItems);
     mainWindow.getBrowser().addTab(diffURL);
 }
 
@@ -398,12 +397,12 @@ function showAllChangesInNewTabs()
 {
     var tree = document.getElementById("UpdateTree");
 
-    var numitems = getNumItems();
-    if (numitems > 0) {
-        for (var i=0; i<numitems; i++) {
+    var numItems = getNumItems();
+    if (numItems > 0) {
+        for (var i=0; i<numItems; i++) {
             var id = tree.contentView.getItemAtIndex(i).id;
             if (queryRDFitem(id, "changed") != "0") {
-                diffItemNewTab(id);
+                diffItemNewTab(id, numItems);
             }
         }
     }

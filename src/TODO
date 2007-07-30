@@ -57,7 +57,6 @@ Get rid of refresher?
 Need to check for duplicate URLs
 Greyed out item that loads ok in browser
 ??Scanning - delay between sites to ease CPU loading?
-Support display of >10 changes
 Still some strange diff things happening
 ??Notify doesn't work on Mac - disable, or use 2.0 method
 Occasionally status icon doesn't update
@@ -67,6 +66,7 @@ Occasionally status icon doesn't update
 
 Done:
 -- Unreleased --
+Support display of >10 changes
 Changed to url-based filenames, since id-based were case sensitive
 Allow timeout adjustment via about:config
 file:/// is now supported
