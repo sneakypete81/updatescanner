@@ -117,6 +117,7 @@ function Scanner()
         var responseText = "";
         var httpreqStatus;
         var httpreqStatusText;
+        var httpreqHeaderText;
         var httpreqResponseText;
     
         if (httpreq != null && httpreq.readyState == 4) {
@@ -124,6 +125,8 @@ function Scanner()
                 httpreqStatus = httpreq.status;
                 httpreqStatusText = httpreq.statusText;
                 httpreqResponseText = httpreq.responseText;
+                httpreqHeaderText = httpreq.getAllResponseHeaders();
+                if (httpreqHeaderText == null) httpreqHeaderText = "";
             } catch (e) {
                var strings = Components.classes["@mozilla.org/intl/stringbundle;1"]
                    .getService(Components.interfaces.nsIStringBundleService)
@@ -137,6 +140,7 @@ function Scanner()
                                         GetStringFromName("unknownError");
                 }
                 httpreqResponseText = "";
+                httpreqHeaderText = "";
             }
             httpreq = null;
             me.stopTimeout();
@@ -174,7 +178,8 @@ function Scanner()
                 status = STATUS_ERROR;
             }
             
-            changedCallback(page.id, responseText, status, httpreqStatusText)
+            changedCallback(page.id, responseText, status, 
+                            httpreqStatusText, httpreqHeaderText);
             me.getNextPage();
         }
     }
@@ -189,7 +194,7 @@ function Scanner()
                     Components.classes["@mozilla.org/intl/stringbundle;1"]
                    .getService(Components.interfaces.nsIStringBundleService)
                    .createBundle("chrome://updatescan/locale/updatescan.properties")
-                   .GetStringFromName("getError"));
+                   .GetStringFromName("getError"), "");
 
                 currentitem++;
                 progressCallback(currentitem, numitems);
@@ -279,7 +284,7 @@ function stripWhitespace(content)
     return content.replace(/\s+/g,"");
 }
 
-function processScanChange(id, newContent, status, statusText)
+function processScanChange(id, newContent, status, statusText, headerText)
 // Updates the specified item based on the new content.
 // * Updates RDF tree
 // * Writes content to file
@@ -312,11 +317,13 @@ function processScanChange(id, newContent, status, statusText)
 	    modifyRDFitem(id, "changed", "1");
         modifyRDFitem(id, "lastscan", now.toString());
 	    modifyRDFitem(id, "error", "0");
-        modifyRDFitem(id, "statusText", statusText)
+        modifyRDFitem(id, "statusText", statusText);
+        modifyRDFitem(id, "headerText", headerText);        
     } else if (status == STATUS_NO_CHANGE) {
 	    modifyRDFitem(id, "error", "0");
 	    modifyRDFitem(id, "lastscan", now.toString());
-        modifyRDFitem(id, "statusText", statusText)
+        modifyRDFitem(id, "statusText", statusText);
+        modifyRDFitem(id, "headerText", headerText);       
     } else if (status == STATUS_NEW) {
 	    writeFile(filebase+".dif", newContent);
 	    writeFile(filebase+".old", newContent);
@@ -324,10 +331,12 @@ function processScanChange(id, newContent, status, statusText)
 	    modifyRDFitem(id, "lastscan", now.toString());
 	    modifyRDFitem(id, "old_lastscan", now.toString());
 	    modifyRDFitem(id, "error", "0");
-        modifyRDFitem(id, "statusText", statusText)
+        modifyRDFitem(id, "statusText", statusText);
+        modifyRDFitem(id, "headerText", headerText);       
     } else {
 	    modifyRDFitem(id, "error", "1");
-        modifyRDFitem(id, "statusText", statusText)
+        modifyRDFitem(id, "statusText", statusText);
+        modifyRDFitem(id, "headerText", headerText);       
     }
 	saveRDF();    
     return retVal;

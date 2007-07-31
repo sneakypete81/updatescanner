@@ -77,9 +77,9 @@ function Autoscan()
         }
     }
 
-    this.scanChanged = function(id, new_content, status, statusText)
+    this.scanChanged = function(id, new_content, status, statusText, headerText)
     {
-        if (processScanChange(id, new_content, status, statusText)) {
+        if (processScanChange(id, new_content, status, statusText, headerText)) {
             numChanges++;
         }
     }

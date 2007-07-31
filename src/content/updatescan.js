@@ -104,9 +104,9 @@ function scanButtonClick()
     }
 }
 
-function scanChangedCallback(id, new_content, status, statusText)
+function scanChangedCallback(id, new_content, status, statusText, headerText)
 {
-    if (processScanChange(id, new_content, status, statusText)) {
+    if (processScanChange(id, new_content, status, statusText, headerText)) {
         numChanges++;
     }
     refreshTree();
