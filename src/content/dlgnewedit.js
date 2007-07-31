@@ -5,29 +5,30 @@ const sliderAutoscanMax = 100;
 
 function initDialog()
 {
-    if (window.arguments[0] != "") {
-        document.title = window.arguments[0];
+    var args = window.arguments[0];
+    
+    if (args.winTitle != "") {
+        document.title = args.winTitle;
     } else {
         document.title = "Update Scanner";
     }
-    var results = window.arguments[1];
-    document.getElementById("txtURL").value = results[0];
-    document.getElementById("txtTitle").value = results[1];
+    document.getElementById("txtTitle").value = args.title;
+    document.getElementById("txtURL").value = args.url;
 
     document.getElementById("sliderThreshold")
             .setAttribute("maxpos", sliderThresholdMax);
-    sliderThresholdSetPos(sliderThresholdEncode(results[2]));
+    sliderThresholdSetPos(sliderThresholdEncode(args.threshold));
     sliderThresholdChange();
 
     document.getElementById("sliderAutoscan")
             .setAttribute("maxpos", sliderAutoscanMax);
-    sliderAutoscanSetPos(sliderAutoscanEncode(results[7]));
+    sliderAutoscanSetPos(sliderAutoscanEncode(args.scanRateMins));
     sliderAutoscanChange();
 
     loadAvailableCharSets();
     charEncodingChanged()
     
-    if (results[8] != "Manual") {
+    if (args.encodingDetect != "Manual") {
         document.getElementById("autoCharEncoding")
                 .selectedIndex = 0;
     } else {
@@ -35,16 +36,24 @@ function initDialog()
                 .selectedIndex = 1;
     }
 
-    encoding = document.getElementById(results[9])
+    var encoding = document.getElementById(args.encoding)
     if (encoding == null) {
         encoding = document.getElementById("UTF-8");
     }
     document.getElementById("encodingMenu").selectedItem = encoding; 
+
+    var advSection = document.getElementById("advSection");
+    var advLabel = document.getElementById("advLabel");
     
+    if (args.advanced) {
+        advSection.hidden = false;
+        advLabel.hidden = true;
+    }
 }
 
 function Ok()
 {
+    var args = window.arguments[0];
     var scanrate;
     var txtURL=document.getElementById("txtURL");
     var txtTitle=document.getElementById("txtTitle");
@@ -68,28 +77,26 @@ function Ok()
         return false;
     }
     
-    var results = window.arguments[1];
-    results[0] = txtURL.value;
-    results[1] = txtTitle.value;
-    results[2] = String(sliderThresholdDecode(sliderThresholdGetPos()));
-    results[7] = String(sliderAutoscanDecode(sliderAutoscanGetPos()));
+    args.title = txtTitle.value;
+    args.url = txtURL.value;
+    args.threshold = String(sliderThresholdDecode(sliderThresholdGetPos()));
+    args.scanRateMins = String(sliderAutoscanDecode(sliderAutoscanGetPos()));
 
     if (document.getElementById("autoCharEncoding").selectedIndex == 0) {
-        results[8] = "Auto";
+        args.encodingDetect = "Auto";
     } else {
-        results[8] = "Manual";
+        args.encodingDetect = "Manual";
     }
-//    alert(document.getElementById("encodingMenu").selectedItem);
-//    alert(document.getElementById("encodingMenu").selectedIndex);
-//    alert(document.getElementById("encodingMenu").selectedItem.value);
-    results[9] = document.getElementById("encodingMenu").selectedItem.id;
+    args.encoding = document.getElementById("encodingMenu").selectedItem.id;
+
+    args.ok = true;
+
     return true;
 }
 
 function Cancel()
 {
-    var results = window.arguments[1];
-    results[0] = null;
+    window.arguments[0].ok = false;
     return true;
 }
 
@@ -100,27 +107,38 @@ function Help()
     return true;
 }
 
+function advancedClick()
+{
+    var advLabel = document.getElementById("advLabel");
+    var advSection = document.getElementById("advSection");
+    
+    advLabel.hidden = true;
+    advSection.hidden = false;
+    
+    window.sizeToContent();
+}
+
 function sliderThresholdGetPos()
 {
-    slider=document.getElementById("sliderThreshold");
+    var slider=document.getElementById("sliderThreshold");
     return Math.round(slider.getAttribute("curpos") /
               sliderThresholdMax*sliderThresholdValues);
 }
 
 function sliderThresholdSetPos(value)
 {
-    slider=document.getElementById("sliderThreshold");
+    var slider=document.getElementById("sliderThreshold");
     slider.setAttribute("curpos",value*sliderThresholdMax /
             sliderThresholdValues);
 }
 
 function sliderThresholdChange() 
 {
-    strings=document.getElementById("strings");
-    slider=document.getElementById("sliderThreshold");
-    label1=document.getElementById("label1");
-    label2=document.getElementById("label2");
-    pos = sliderThresholdGetPos();
+    var strings=document.getElementById("strings");
+    var slider=document.getElementById("sliderThreshold");
+    var label1=document.getElementById("label1");
+    var label2=document.getElementById("label2");
+    var pos = sliderThresholdGetPos();
     if (pos == 0) {
         label1.value=strings.getString("thresholdLabel0a");
         label2.value=""
@@ -174,46 +192,38 @@ function sliderThresholdDecode(slider)
 
 function sliderAutoscanGetPos()
 {
-    slider=document.getElementById("sliderAutoscan");
+    var slider=document.getElementById("sliderAutoscan");
     return Math.round(slider.getAttribute("curpos") /
               sliderAutoscanMax*sliderAutoscanValues);
 }
 
 function sliderAutoscanSetPos(value)
 {
-    slider=document.getElementById("sliderAutoscan");
+    var slider=document.getElementById("sliderAutoscan");
     slider.setAttribute("curpos",value*sliderAutoscanMax /
             sliderAutoscanValues);
 }
 
 function sliderAutoscanChange() 
 {
-    strings=document.getElementById("strings");
-    slider=document.getElementById("sliderAutoscan");
-    label3=document.getElementById("label3");
-    label4=document.getElementById("label4");
-    pos = sliderAutoscanGetPos();
+    var strings=document.getElementById("strings");
+    var slider=document.getElementById("sliderAutoscan");
+    var label3=document.getElementById("label3");
+    var pos = sliderAutoscanGetPos();
     if (pos == 0) {
         label3.value=strings.getString("autoscanLabel0a");
-        label4.value=strings.getString("autoscanLabel0b");
     } else if (pos == 1) {
         label3.value=strings.getString("autoscanLabel1a");
-        label4.value="";
     } else if (pos == 2) {
         label3.value=strings.getString("autoscanLabel2a");
-        label4.value="";
     } else if (pos == 3) {
         label3.value=strings.getString("autoscanLabel3a");
-        label4.value="";
     } else if (pos == 4) {
         label3.value=strings.getString("autoscanLabel4a");
-        label4.value="";
     } else if (pos == 5) {
         label3.value=strings.getString("autoscanLabel5a");
-        label4.value="";
     } else if (pos == 6) {
         label3.value=strings.getString("autoscanLabel6a");
-        label4.value="";
     }
 }
 
@@ -255,8 +265,8 @@ function sliderAutoscanDecode(slider)
 
 function charEncodingChanged()
 {
-    auto=document.getElementById("autoCharEncoding");
-    encodingMenu = document.getElementById("encodingMenu");
+    var auto=document.getElementById("autoCharEncoding");
+    var encodingMenu = document.getElementById("encodingMenu");
     if  (auto.selectedIndex == 1) {
         encodingMenu.disabled = false;
     } else {

@@ -33,7 +33,7 @@ function readFile(filename)
 
 function rmFile(filename) 
 {
-    file = prependUpdatescanPath(filename);
+    var file = prependUpdatescanPath(filename);
 
     var aFile = Components.classes["@mozilla.org/file/local;1"].createInstance();
     if ( aFile instanceof Components.interfaces.nsILocalFile) {

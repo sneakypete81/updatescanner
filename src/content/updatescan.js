@@ -165,35 +165,36 @@ function openNewDialogNoRefresh(title, url)
 {
     var id;
     var filebase;
-    var result = new Array(8);
-    result[0] = url;
-    result[1] = title;
-    result[2] = "100";     // threshold = 100 by default
-    result[3] = "";        // lastscan not defined by default
-    result[4] = "0";       // changed = 0 by default
-    result[5] = "**NEW**"; // content flagged as new
-    result[6] = "0";       // error = 0 by default
-    result[7] = "60";      // scan once an hour by default
-    result[8] = "Auto";    // Auto-detect encoding by default
-    result[9] = "UTF-8";   // UTF-8 encoding by default
+    var args = {
+        winTitle:"", 
+        title:          title, 
+        url:            url, 
+        threshold:      "100",      // threshold = 100 by default
+        scanRateMins:   "60",       // scan once an hour by default
+        encodingDetect: "Auto",     // Auto-detect encoding by default 
+        encoding:       "UTF-8",    // UTF-8 encoding by default
+        advanced:       false
+    };
 
     window.openDialog('chrome://updatescan/content/dlgnewedit.xul', 'dlgNew', 
-                      'chrome,dialog,modal,centrescreen', '', 
-              result);
-    if (result[0] != null) {
+                      'chrome,dialog,modal,centrescreen', args);
+    if (args.ok) {
         id = addRDFitem();
-        filebase = urlToFilename(queryRDFitem(id, "url", ""));
-        writeFile(filebase+".new", result[5]);
-        modifyRDFitem(id, "url", result[0]);
-        modifyRDFitem(id, "title", result[1]);
-        modifyRDFitem(id, "threshold", result[2]);
-        modifyRDFitem(id, "lastscan", result[3]);
-        modifyRDFitem(id, "changed", result[4]);
-        modifyRDFitem(id, "error", result[6]);
-        modifyRDFitem(id, "scanratemins", result[7]);
-        modifyRDFitem(id, "encodingDetect", result[8]);
-        modifyRDFitem(id, "encoding", result[9]);
+        modifyRDFitem(id, "title", args.title);
+        modifyRDFitem(id, "url", args.url);
+        modifyRDFitem(id, "threshold", args.threshold);
+        modifyRDFitem(id, "scanratemins", args.scanRateMins);
+        modifyRDFitem(id, "encodingDetect", args.encodingDetect);
+        modifyRDFitem(id, "encoding", args.encoding);
+
+        filebase = urlToFilename(args.url);
+        writeFile(filebase+".new", "**NEW**");
+
+        modifyRDFitem(id, "lastscan", "");  // lastscan not defined
+        modifyRDFitem(id, "changed", "0");  // not changed 
+        modifyRDFitem(id, "error", "0");    // no error
         saveRDF();
+
     }
 }
 
@@ -201,52 +202,44 @@ function openEditDialog()
 {
     var titleEditItem=document.getElementById("updatescanStrings")
                           .getString("titleEditItem");
-    var result = new Array(8);
-    var id;
-    var oldurl;
     
-    id=getSelectedItemID();
+    var id=getSelectedItemID();
     if (id == "") return;
 
-    result[0] = queryRDFitem(id, "url", "");
-    result[1] = queryRDFitem(id, "title", "No Title");
-    result[2] = queryRDFitem(id, "threshold", "100");
-    result[3] = "";        // lastscan not defined by default
-    result[4] = "0";       // changed = 0 by default
-    result[5] = "**NEW**"; // content flagged as new
-    result[6] = "0";       // error = 0 by default
-    result[7] = queryRDFitem(id, "scanratemins", "0"); 
-    result[8] = queryRDFitem(id, "encodingDetect", "Auto");
-    result[9] = queryRDFitem(id, "encoding", "UTF-8");
+    var args = {
+        winTitle:   document.getElementById("updatescanStrings")
+                            .getString("titleEditItem"),
+        title:          queryRDFitem(id, "title", "No Title"),
+        url:            queryRDFitem(id, "url", ""),
+        threshold:      queryRDFitem(id, "threshold", "100"),
+        scanRateMins:   queryRDFitem(id, "scanratemins", "0"),
+        encodingDetect: queryRDFitem(id, "encodingDetect", "Auto"),
+        encoding:       queryRDFitem(id, "encoding", "UTF-8"),
+        advanced:       false
+    }
 
-    oldurl = result[0];
+    var oldurl = args.url;
 
-    window.openDialog('chrome://updatescan/content/dlgnewedit.xul', 
-              'dlgEdit', 
-                      'chrome,dialog,modal,centrescreen', 
-              titleEditItem, 
-              result);
-    if (result[0] != null) {
-        if (oldurl == result[0]) { // URL not changed - don't reset changes
-            modifyRDFitem(id, "title", result[1]);
-            modifyRDFitem(id, "threshold", result[2]);
-            modifyRDFitem(id, "scanratemins", result[7]);
-            modifyRDFitem(id, "encodingDetect", result[8]);
-            modifyRDFitem(id, "encoding", result[9]);            
-        } else {
-            filebase = urlToFilename(queryRDFitem(id, "url", ""));
-            writeFile(filebase+".new", result[5]);
-            modifyRDFitem(id, "url", result[0]);
-            modifyRDFitem(id, "title", result[1]);
-            modifyRDFitem(id, "threshold", result[2]);
-            modifyRDFitem(id, "lastscan", result[3]);
-            modifyRDFitem(id, "changed", result[4]);
-            modifyRDFitem(id, "error", result[6]);
-            modifyRDFitem(id, "scanratemins", result[7]);
-            modifyRDFitem(id, "encodingDetect", result[8]);
-            modifyRDFitem(id, "encoding", result[9]);
+    window.openDialog('chrome://updatescan/content/dlgnewedit.xul', 'dlgEdit', 
+                      'chrome,dialog,modal,centrescreen', args);
+                      
+    if (args.ok) {
+        modifyRDFitem(id, "title", args.title);
+        modifyRDFitem(id, "url", args.url);
+        modifyRDFitem(id, "threshold", args.threshold);
+        modifyRDFitem(id, "scanratemins", args.scanRateMins);
+        modifyRDFitem(id, "encodingDetect", args.encodingDetect);
+        modifyRDFitem(id, "encoding", args.encoding);
+
+        if (oldurl != args.url) {   // URL changed - reset all values
+            filebase = urlToFilename(args.url);
+            writeFile(filebase+".new", "**NEW**");
+
+            modifyRDFitem(id, "lastscan", "");  // lastscan not defined
+            modifyRDFitem(id, "changed", "0");  // not changed
+            modifyRDFitem(id, "error", "0");    // no error
         }
-    saveRDF();
+        saveRDF();
     }
     refreshTree();
     refresh.request();
