@@ -57,13 +57,14 @@ Preferences page:
 4Email alerts?
 
 Bugs:
-Get rid of refresher?
-Need to check for duplicate URLs
+Get rid of refresher where possible
+Change back to ID based filenames (or...
+Need to check for duplicate URLs)
 Greyed out item that loads ok in browser
 ??Scanning - delay between sites to ease CPU loading?
 Still some strange diff things happening
 ??Notify doesn't work on Mac - disable, or use 2.0 method
-Occasionally status icon doesn't update
+Occasionally status icon doesn't update - use pref observer
 3Conflict with Hyperwords extension?
 3Uninstall should delete rdf?
 
