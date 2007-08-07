@@ -2,24 +2,9 @@ Things to do:
 
 Features:
 Add http header logging option
-
-Add string supplant:
-param = {domain: 'valvion.com', media: 'http://media.valvion.com/'};
-url = "{media}logo.gif".supplant(param);
-
-
-String.prototype.supplant = function (o) {
-    return this.replace(/{([^{}]*)}/g,
-        function (a, b) {
-            var r = o[b];
-            return typeof r === 'string' || typeof r === 'number' ? r : a;
-        }
-    );
-};
-
+Add string supplant for localisation
 Update locale to include dummy amo in .properties
 Update amo description to include highlighting (and screenshots)
-Ignore numbers during fuzzy compare?
 "Scan this page now" context menu item
 Add error display to page header
 Support more character encodings (autodetect?) 
@@ -58,12 +43,8 @@ Preferences page:
 
 Bugs:
 Get rid of refresher where possible
-Change back to ID based filenames (or...
-Need to check for duplicate URLs)
 Greyed out item that loads ok in browser
-??Scanning - delay between sites to ease CPU loading?
 Still some strange diff things happening
-??Notify doesn't work on Mac - disable, or use 2.0 method
 Occasionally status icon doesn't update - use pref observer
 3Conflict with Hyperwords extension?
 3Uninstall should delete rdf?
@@ -71,9 +52,11 @@ Occasionally status icon doesn't update - use pref observer
 
 Done:
 -- Unreleased --
+"Ignore numbers" option added
+No longer scrolls wildly when item clicked
+Change to ucase-escaped ID based filenames
 Added "Advanced" section to new/edit dialog
 Support display of >10 changes
-Changed to url-based filenames, since id-based were case sensitive
 Allow timeout adjustment via about:config
 file:/// is now supported
 Fixed httpreq callback reentry bug, and other scan logic problems

@@ -79,9 +79,9 @@ function Scanner()
         }
     }
 
-    this.addURL = function(id, title, url, content, threshold)
+    this.addURL = function(id, title, url, content, threshold, ignoreNumbers)
     {
-        var page = new uscanItem(id, title, url, content, threshold);
+        var page = new uscanItem(id, title, url, content, threshold, ignoreNumbers);
         itemlist.push(page);
     }
     
@@ -154,6 +154,10 @@ function Scanner()
                                  page.content)));
                     newContent = stripWhitespace(stripTags(stripScript(
                                  httpreqResponseText)));
+                    if (page.ignoreNumbers) {
+                        oldContent = stripNumbers(oldContent);
+                        newContent = stripNumbers(newContent);
+                    }
                     if (newContent == "" || 
                         checkSame(newContent, oldContent, page.threshold)) {
 //                        myDump("Same");
@@ -235,13 +239,14 @@ function Scanner()
     
 }
 
-function uscanItem(id, title, url, content, threshold) 
+function uscanItem(id, title, url, content, threshold, ignoreNumbers) 
 {
     this.id = id;
     this.title = title;
     this.url = url;
     this.content = content;
     this.threshold = threshold;
+    this.ignoreNumbers = ignoreNumbers;
 } 
 
 // Returns true if the content is the same
@@ -250,8 +255,7 @@ function checkSame(content1, content2, maxthreshold)
 {
     var threshold;
     
-    if (maxthreshold == 0)
-    return (content1 == content2);
+    if (maxthreshold == 0) return (content1 == content2);
 
     // Slowly increase the threshold until it reaches the maximum
     threshold=0;
@@ -282,6 +286,11 @@ function stripScript(content)
 function stripWhitespace(content)
 {
     return content.replace(/\s+/g,"");
+}
+
+function stripNumbers(content)
+{
+    return content.replace(/[0-9]*/g,"")
 }
 
 function processScanChange(id, newContent, status, statusText, headerText)

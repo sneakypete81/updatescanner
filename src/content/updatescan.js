@@ -78,6 +78,7 @@ function scanButtonClick()
     var filebase;
     var numitems;
     var str=document.getElementById("updatescanStrings")
+    var ignoreNumbers
 
     showStopButton();
     
@@ -90,10 +91,16 @@ function scanButtonClick()
         for (var i=0; i<numitems; i++) {
             id = tree.contentView.getItemAtIndex(i).id;
             filebase=escapeFilename(id)
+            if (queryRDFitem(id, "ignoreNumbers", "False") == "True") {
+                ignoreNumbers = true;
+            } else {
+                ignoreNumbers = false;
+            }
             scan.addURL(id, queryRDFitem(id, "title", "No Title"), 
                         queryRDFitem(id, "url", ""), 
                         readFile(filebase+".new"),
-                        queryRDFitem(id, "threshold", 100));
+                        queryRDFitem(id, "threshold", 100),
+                        ignoreNumbers);
         }
 
         setStatus(str.getString("statusScanning"));
@@ -173,6 +180,7 @@ function openNewDialogNoRefresh(title, url)
         scanRateMins:   "60",       // scan once an hour by default
         encodingDetect: "Auto",     // Auto-detect encoding by default 
         encoding:       "UTF-8",    // UTF-8 encoding by default
+        ignoreNumbers:  "True",     // Ignore number changes by default
         advanced:       false
     };
 
@@ -186,6 +194,7 @@ function openNewDialogNoRefresh(title, url)
         modifyRDFitem(id, "scanratemins", args.scanRateMins);
         modifyRDFitem(id, "encodingDetect", args.encodingDetect);
         modifyRDFitem(id, "encoding", args.encoding);
+        modifyRDFitem(id, "ignoreNumbers", args.ignoreNumbers);
 
         filebase = escapeFilename(id);
         writeFile(filebase+".new", "**NEW**");
@@ -215,6 +224,9 @@ function openEditDialog()
         scanRateMins:   queryRDFitem(id, "scanratemins", "0"),
         encodingDetect: queryRDFitem(id, "encodingDetect", "Auto"),
         encoding:       queryRDFitem(id, "encoding", "UTF-8"),
+        ignoreNumbers:  queryRDFitem(id, "ignoreNumbers", "False"),
+        // Although ignoreNumbers is true by default, behaviour of pages
+        // upgraded from previous version shouldn't be modified
         advanced:       false
     }
 
@@ -230,6 +242,7 @@ function openEditDialog()
         modifyRDFitem(id, "scanratemins", args.scanRateMins);
         modifyRDFitem(id, "encodingDetect", args.encodingDetect);
         modifyRDFitem(id, "encoding", args.encoding);
+        modifyRDFitem(id, "ignoreNumbers", args.ignoreNumbers);
 
         if (oldurl != args.url) {   // URL changed - reset all values
             filebase = escapeFilename(id);
@@ -513,8 +526,10 @@ function refreshTree()
     try {
         var tree=document.getElementById("UpdateTree");
         var savedRow = tree.currentIndex;
+        var scrollRow = tree.boxObject.getFirstVisibleRow();
         tree.builder.rebuild();    
         tree.view.selection.select(savedRow);
+        tree.boxObject.scrollToRow(scrollRow);
     } catch (e) {
         ;
     }

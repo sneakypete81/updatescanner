@@ -39,6 +39,7 @@ function Autoscan()
         var now;
         var doScan = false;
         var filebase;
+        var ignoreNumbers;
     
         pages = getRDFroot().getChildren();
     
@@ -59,10 +60,17 @@ function Autoscan()
                     saveRDF();
                     doScan = true;
                     filebase=escapeFilename(id)
+                    if (queryRDFitem(id, "ignoreNumbers", "False") == "True") {
+                        ignoreNumbers = true;
+                    } else {
+                        ignoreNumbers = false;
+                    }
+                    
                     scan.addURL(id, queryRDFitem(id, "title", "No Title"), 
                             queryRDFitem(id, "url", ""), 
                             readFile(filebase+".new"),
-                            queryRDFitem(id, "threshold", 100));
+                            queryRDFitem(id, "threshold", 100),
+                            ignoreNumbers);
                 }
             }
         }

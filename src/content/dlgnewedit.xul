@@ -62,7 +62,7 @@
 <vbox id="advSection" hidden="true">
 <groupbox>
     <caption label="&threshold.label;" />
-    <checkbox label="&ignoreNumbers.label;"/>
+    <checkbox id="ignoreNumbers" label="&ignoreNumbers.label;"/>
     <separator />
     <hbox>
         <label value="&low.label;" />

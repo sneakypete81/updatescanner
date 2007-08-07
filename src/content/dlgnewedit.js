@@ -25,6 +25,12 @@ function initDialog()
     sliderAutoscanSetPos(sliderAutoscanEncode(args.scanRateMins));
     sliderAutoscanChange();
 
+    if (args.ignoreNumbers == "True") {
+        document.getElementById("ignoreNumbers").checked = true;
+    } else {
+        document.getElementById("ignoreNumbers").checked = false;
+    }
+
     loadAvailableCharSets();
     charEncodingChanged()
     
@@ -82,6 +88,11 @@ function Ok()
     args.threshold = String(sliderThresholdDecode(sliderThresholdGetPos()));
     args.scanRateMins = String(sliderAutoscanDecode(sliderAutoscanGetPos()));
 
+    if (document.getElementById("ignoreNumbers").checked) {
+        args.ignoreNumbers="True";
+    } else {
+        args.ignoreNumbers="False";
+    }
     if (document.getElementById("autoCharEncoding").selectedIndex == 0) {
         args.encodingDetect = "Auto";
     } else {
