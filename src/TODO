@@ -1,7 +1,6 @@
 Things to do:
 
 Features:
-Add http header logging option
 Add string supplant for localisation
 Update locale to include dummy amo in .properties
 Update amo description to include highlighting (and screenshots)
@@ -18,14 +17,13 @@ Export .rdf file
 Preferences page:
   Default threshold/scan settings
   Notify disable option 
-  Notify display time
   Change notification text
   Notification time / click to dismiss
   3Hotkey
-  Disable scan on start (wait for 5 minutes maybe?)
-  Options to enable scripts when viewing diffs
   Toolbar customisation
   Adjust scan timeout
+
+??Options to enable scripts when viewing diffs
 3Handle frames
 3??Check rdf file integrity (remove empty urls)
 3Add to tab context menu
@@ -52,6 +50,7 @@ Occasionally status icon doesn't update - use pref observer
 
 Done:
 -- Unreleased --
+Add http header logging option
 "Ignore numbers" option added
 No longer scrolls wildly when item clicked
 Change to ucase-escaped ID based filenames

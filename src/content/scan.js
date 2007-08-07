@@ -305,7 +305,12 @@ function processScanChange(id, newContent, status, statusText, headerText)
     var oldContent;
     var diffContent;
     var retVal = false;
+    var prefs = Components.classes["@mozilla.org/preferences-service;1"].
+                getService(Components.interfaces.nsIPrefService).
+                getBranch("extensions.updatescan.");
 
+    var logHeaders = prefs.getBoolPref("logHeaders")
+    
     filebase=escapeFilename(id)
     if (status == STATUS_CHANGE) {
         retVal = true;
@@ -327,12 +332,12 @@ function processScanChange(id, newContent, status, statusText, headerText)
         modifyRDFitem(id, "lastscan", now.toString());
 	    modifyRDFitem(id, "error", "0");
         modifyRDFitem(id, "statusText", statusText);
-        modifyRDFitem(id, "headerText", headerText);        
+        if (logHeaders) modifyRDFitem(id, "headerText", headerText);        
     } else if (status == STATUS_NO_CHANGE) {
 	    modifyRDFitem(id, "error", "0");
 	    modifyRDFitem(id, "lastscan", now.toString());
         modifyRDFitem(id, "statusText", statusText);
-        modifyRDFitem(id, "headerText", headerText);       
+        if (logHeaders) modifyRDFitem(id, "headerText", headerText);        
     } else if (status == STATUS_NEW) {
 	    writeFile(filebase+".dif", newContent);
 	    writeFile(filebase+".old", newContent);
@@ -341,11 +346,11 @@ function processScanChange(id, newContent, status, statusText, headerText)
 	    modifyRDFitem(id, "old_lastscan", now.toString());
 	    modifyRDFitem(id, "error", "0");
         modifyRDFitem(id, "statusText", statusText);
-        modifyRDFitem(id, "headerText", headerText);       
+        if (logHeaders) modifyRDFitem(id, "headerText", headerText);        
     } else {
 	    modifyRDFitem(id, "error", "1");
         modifyRDFitem(id, "statusText", statusText);
-        modifyRDFitem(id, "headerText", headerText);       
+        if (logHeaders) modifyRDFitem(id, "headerText", headerText);        
     }
 	saveRDF();    
     return retVal;
