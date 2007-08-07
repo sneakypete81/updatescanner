@@ -58,7 +58,7 @@ function Autoscan()
                     modifyRDFitem(id, "lastautoscan", now.toString());
                     saveRDF();
                     doScan = true;
-                    filebase=urlToFilename(queryRDFitem(id, "url", ""))
+                    filebase=escapeFilename(id)
                     scan.addURL(id, queryRDFitem(id, "title", "No Title"), 
                             queryRDFitem(id, "url", ""), 
                             readFile(filebase+".new"),

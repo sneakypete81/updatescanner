@@ -89,7 +89,7 @@ function scanButtonClick()
         
         for (var i=0; i<numitems; i++) {
             id = tree.contentView.getItemAtIndex(i).id;
-            filebase=urlToFilename(queryRDFitem(id, "url", ""))
+            filebase=escapeFilename(id)
             scan.addURL(id, queryRDFitem(id, "title", "No Title"), 
                         queryRDFitem(id, "url", ""), 
                         readFile(filebase+".new"),
@@ -187,7 +187,7 @@ function openNewDialogNoRefresh(title, url)
         modifyRDFitem(id, "encodingDetect", args.encodingDetect);
         modifyRDFitem(id, "encoding", args.encoding);
 
-        filebase = urlToFilename(args.url);
+        filebase = escapeFilename(id);
         writeFile(filebase+".new", "**NEW**");
 
         modifyRDFitem(id, "lastscan", "");  // lastscan not defined
@@ -232,7 +232,7 @@ function openEditDialog()
         modifyRDFitem(id, "encoding", args.encoding);
 
         if (oldurl != args.url) {   // URL changed - reset all values
-            filebase = urlToFilename(args.url);
+            filebase = escapeFilename(id);
             writeFile(filebase+".new", "**NEW**");
 
             modifyRDFitem(id, "lastscan", "");  // lastscan not defined
@@ -273,7 +273,7 @@ function diffItem(id, numItems)
     lastScan = new Date(lastScan);
     var newDate = dateDiffString(lastScan, now);
 
-    var filebase = urlToFilename(queryRDFitem(id, "url", ""));
+    var filebase = escapeFilename(id);
     return displayDiffs(queryRDFitem(id, "title", "No Title"), 
             queryRDFitem(id, "url", ""), 
             readFile(filebase+".old"),
@@ -465,7 +465,7 @@ function deleteSelectedItem()
 {
     var str=document.getElementById("updatescanStrings")
     var id=getSelectedItemID();
-    var fileBase=urlToFilename(queryRDFitem(id, "url", ""))
+    var fileBase=escapeFilename(id)
 
     if (id == "") return;
     var title = queryRDFitem(id, "title", "untitled");

@@ -36,7 +36,7 @@ function upgradeCheck()
             modifyRDFitem(id, "changed", "0");
             modifyRDFitem(id, "error", "0");
             modifyRDFitem(id, "lastautoscan", "5 November 1978");
-            filebase = urlToFilename(queryRDFitem(id, "url", ""));
+            filebase = escapeFilename(id);
             writeFile(filebase+".new", "**NEW**");// Mark as new
         }
         saveRDF();
@@ -73,7 +73,7 @@ function upgrade_2_0_14()
         node = nodes.getNext();
         id = node.getValue();
         ids.push(id);
-        file = escapeFilename(id.substr(6))
+        file = oldEscapeFilename(id.substr(6))
         files.push(file);
         ucaseFiles.push(file.toUpperCase());
     }      
@@ -99,9 +99,9 @@ function upgrade_2_0_14()
         rmFile(params.retData[i]+".dif");
     }
 
-    // Rename existing cache files to use URL filebase instead of id
+    // Rename existing cache files to use escaped uppercase id
     for (i in files) {
-        var file = urlToFilename(queryRDFitem(ids[i], "url", ""));
+        var file = escapeFilename(ids[i]);
         mvFile(files[i]+".old", file+".old");
         mvFile(files[i]+".new", file+".new");
         mvFile(files[i]+".dif", file+".dif");
