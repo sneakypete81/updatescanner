@@ -123,6 +123,7 @@ function scanChangedCallback(id, new_content, status, statusText, headerText)
 function scanFinishedCallback()
 {
     var str=document.getElementById("updatescanStrings");
+    var param;
 
     if (numChanges == 0) {
         setStatus(str.getString("statusNoChanges"));
@@ -131,8 +132,9 @@ function scanFinishedCallback()
             setStatus(str.getString("statusOneChange"));
             message = str.getString("alertOneChange");
         } else {
-            setStatus(numChanges+" "+str.getString("statusManyChanges"));
-            message = numChanges+" "+str.getString("alertManyChanges");
+            param = {numChanges:numChanges};
+            setStatus(str.getString("statusManyChanges").supplant(param));
+            message = str.getString("alertManyChanges").supplant(param);
         }
         window.openDialog("chrome://updatescan/content/alert.xul",
                   "alert:alert",
@@ -333,6 +335,7 @@ function diffItemNewTab(id, maxItems)
 function dateDiffString(oldDate, newDate)
 {
     var ret; 
+    var time;
     var str=document.getElementById("updatescanStrings")
 
     var diff = newDate.getTime() - oldDate.getTime();
@@ -340,43 +343,35 @@ function dateDiffString(oldDate, newDate)
     diff = diff / 60;   // minutes
     diff = diff / 60;   // hours
     if (diff < 24) {
-        if (oldDate.getDate() != newDate.getDate()) {
-            ret = " "+str.getString("yesterdayAt")+" ";
-        } else {
-            ret = " "+str.getString("todayAt")+" ";
-        }
-        ret += oldDate.getHours()+":";
+        time = oldDate.getHours()+":";
         var mins = oldDate.getMinutes().toString();
         if (mins.length == 1) {
             mins = "0" + mins;
         }
-        ret += mins;
-        return ret;
+        time += mins;
+
+        if (oldDate.getDate() != newDate.getDate()) {
+            return str.getString("yesterdayAt").supplant({time:time});
+        } else {
+            return str.getString("todayAt").supplant({time:time});
+        }
     }
+
     diff = diff / 24;
     if (diff < 7) {
         diff = Math.floor(diff);
         if (diff == 1) {
-            return diff+" "+str.getString("dayAgo");
+            return str.getString("dayAgo");
         } else {
-            return diff+" "+str.getString("daysAgo");
+            return str.getString("daysAgo").supplant({numDays:diff});
         }
     }
     diff = diff / 7;
-    if (diff < 52) {
-        diff = Math.floor(diff);
-        if (diff == 1) {
-            return diff+" "+str.getString("weekAgo");
-        } else {
-            return diff+" "+str.getString("weeksAgo");
-        }
-    }
-    diff = diff / 52;
     diff = Math.floor(diff);
     if (diff == 1) {
-        return diff+" "+str.getString("yearAgo");
+        return str.getString("weekAgo");
     } else {
-        return diff+" "+str.getString("yearsAgo");
+        return str.getString("weeksAgo").supplant({numWeeks:diff});
     }
 }
 

@@ -1,9 +1,9 @@
 Things to do:
 
 Features:
-Add string supplant for localisation
 Update locale to include dummy amo in .properties
 Update amo description to include highlighting (and screenshots)
+Update non-english locales
 "Scan this page now" context menu item
 Add error display to page header
 Support more character encodings (autodetect?) 
@@ -50,6 +50,7 @@ Occasionally status icon doesn't update - use pref observer
 
 Done:
 -- Unreleased --
+Add string supplant for localisation
 Add http header logging option
 "Ignore numbers" option added
 No longer scrolls wildly when item clicked

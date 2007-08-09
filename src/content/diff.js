@@ -67,30 +67,34 @@ function generateHeader(currentView, title, date, sourceURL, diffURL, oldURL, ne
 {
     var data;
     var str = document.getElementById("updatescanStrings");
+    var param;
     data = "<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>"
     data += "<base href='"+sourceURL+"'>\n";
     data += "<table bgcolor=#e5e5ff color=#ffffff cellpadding=5 width=100%>\n";
     data += "<td><img src='chrome://updatescan/skin/updatescan_big.png'></td>\n";
     data += "<td>\n";
     data += "<span style='font: 12px verdana;color:black'>\n";
-    if (currentView == kUnscannedView) {
-        data += str.getString("theSelectedPage")+" ";
-    } else {
-        data += str.getString("thePageBelow")+" ";
+
+    switch (currentView) {
+    case kDiffView:
+        param = {title:title, timeDiff:date, 
+                 highlightOn:"<b style='color:black;background-color:#ffff66'>",
+                 highlightOff:"</b>"};
+        data += str.getString("headerDiff").supplant(param);
+        break;
+    case kOldView:
+        param = {title:title, timeDiff:date};
+        data += str.getString("headerOld").supplant(param);
+        break;
+    case kNewView:
+        param = {title:title, timeDiff:date};
+        data += str.getString("headerNew").supplant(param);
+        break;
+    default:
+        param = {title:title};
+        data += str.getString("headerNotChecked").supplant(param);
     }
-    data += "(<b>"+title+"</b>) ";
-    if (currentView == kDiffView) {
-        data += str.getString("wasLastScanned")+" "+date+". ";
-        data += str.getString("theChangesAre")+" ";
-        data += "<b style='color:black;background-color:#ffff66'>";
-        data += str.getString("highlighted")+"</b>.\n";
-    } else if (currentView == kOldView) {
-        data += str.getString("oldVersion")+" "+date+".\n";
-    } else if (currentView == kNewView) {
-        data += str.getString("newVersion")+" "+date+".\n";
-    } else if (currentView == kUnscannedView) {
-        data += str.getString("notChecked");
-    }
+    
     data += "<br><b>"+str.getString("view")+":</b> [\n";
     if (currentView != kUnscannedView) {
         if (currentView == kOldView) {

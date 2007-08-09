@@ -28,6 +28,7 @@
   <script src="opentopwin.js"/>
   <script src="updatescanoverlay.js"/>
   <script src="upgrade.js"/>
+  <script src="string.js"/>
 
   <vbox flex="1">
     <hbox pack="left">

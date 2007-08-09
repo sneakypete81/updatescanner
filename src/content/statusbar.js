@@ -32,16 +32,18 @@ function autoscanFinished(numChanges)
     var strings = gBundle.createBundle("chrome://updatescan/locale/updatescan.properties");
 
     var alertOneChange = strings.GetStringFromName("alertOneChange");
+    var param;
     var alertManyChanges = strings.GetStringFromName("alertManyChanges");
 
-    var message
+    var message;
 
     refresh.request();
     if (numChanges) {
         if (numChanges == 1) {
             message = alertOneChange;
         } else {
-            message = numChanges + " " + alertManyChanges;
+            param = {numChanges:numChanges};
+            message = alertManyChanges.supplant(param);
         }
         window.openDialog("chrome://updatescan/content/alert.xul",
                   "alert:alert",
