@@ -7,11 +7,7 @@ function initDialog()
 {
     var args = window.arguments[0];
     
-    if (args.winTitle != "") {
-        document.title = args.winTitle;
-    } else {
-        document.title = "Update Scanner";
-    }
+    document.title = "Update Scanner";
     document.getElementById("txtTitle").value = args.title;
     document.getElementById("txtURL").value = args.url;
 

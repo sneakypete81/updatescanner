@@ -175,7 +175,6 @@ function openNewDialogNoRefresh(title, url)
     var id;
     var filebase;
     var args = {
-        winTitle:"", 
         title:          title, 
         url:            url, 
         threshold:      "100",      // threshold = 100 by default
@@ -211,15 +210,10 @@ function openNewDialogNoRefresh(title, url)
 
 function openEditDialog()
 {
-    var titleEditItem=document.getElementById("updatescanStrings")
-                          .getString("titleEditItem");
-    
     var id=getSelectedItemID();
     if (id == "") return;
 
     var args = {
-        winTitle:   document.getElementById("updatescanStrings")
-                            .getString("titleEditItem"),
         title:          queryRDFitem(id, "title", "No Title"),
         url:            queryRDFitem(id, "url", ""),
         threshold:      queryRDFitem(id, "threshold", "100"),

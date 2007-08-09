@@ -1,3 +1,9 @@
+<!-- Note to translators:
+
+     This file contains strings for the "New Entry" and "Properties" dialog.
+     Right-click in the main browser and click "Scan Page for Updates" to 
+     see what it looks like. 
+-->
 <!ENTITY url.label "URL:">
 <!ENTITY title.label "Title:">
 <!ENTITY threshold.label "Change Threshold">
