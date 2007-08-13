@@ -1,12 +1,11 @@
 Things to do:
 
 Features:
-Update locale to include dummy amo in .properties
 Update amo description to include highlighting (and screenshots)
 Update non-english locales
 "Scan this page now" context menu item
 Add error display to page header
-Support more character encodings (autodetect?) 
+Autodetect character encodings 
 Write help pages
 "don't highlihgt changes" option
 Alert sounds
@@ -50,6 +49,8 @@ Occasionally status icon doesn't update - use pref observer
 
 Done:
 -- Unreleased --
+Support more character encodings (autodetect?) 
+Update locale to include dummy amo in .properties
 Add string supplant for localisation
 Add http header logging option
 "Ignore numbers" option added

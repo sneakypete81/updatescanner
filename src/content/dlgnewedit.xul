@@ -89,7 +89,7 @@
             <radio label="&use.label;"/>
             <menulist id="encodingMenu" disabled="True">
                 <menupopup id="encodingPopup">
-                    <menuitem value="UTF-8" label="Unicode (UTF-8)"/>
+                    <menuitem id="UTF-8" label="Unicode (UTF-8)"/>
                     <menuseparator/>
                 </menupopup>
             </menulist>

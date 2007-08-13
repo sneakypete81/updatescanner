@@ -30,19 +30,16 @@ function initDialog()
     loadAvailableCharSets();
     charEncodingChanged()
     
-    if (args.encodingDetect != "Manual") {
+    var encoding = document.getElementById(args.encoding)
+
+    if (args.encoding == "Auto") {
         document.getElementById("autoCharEncoding")
                 .selectedIndex = 0;
     } else {
+        document.getElementById("encodingMenu").selectedItem = encoding; 
         document.getElementById("autoCharEncoding")
                 .selectedIndex = 1;
     }
-
-    var encoding = document.getElementById(args.encoding)
-    if (encoding == null) {
-        encoding = document.getElementById("UTF-8");
-    }
-    document.getElementById("encodingMenu").selectedItem = encoding; 
 
     var advSection = document.getElementById("advSection");
     var advLabel = document.getElementById("advLabel");
@@ -90,11 +87,10 @@ function Ok()
         args.ignoreNumbers="False";
     }
     if (document.getElementById("autoCharEncoding").selectedIndex == 0) {
-        args.encodingDetect = "Auto";
+        args.encoding = "Auto";
     } else {
-        args.encodingDetect = "Manual";
+        args.encoding = document.getElementById("encodingMenu").selectedItem.id;
     }
-    args.encoding = document.getElementById("encodingMenu").selectedItem.id;
 
     args.ok = true;
 

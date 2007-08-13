@@ -78,7 +78,8 @@ function scanButtonClick()
     var filebase;
     var numitems;
     var str=document.getElementById("updatescanStrings")
-    var ignoreNumbers
+    var ignoreNumbers;
+    var encoding;
 
     showStopButton();
     
@@ -91,6 +92,7 @@ function scanButtonClick()
         for (var i=0; i<numitems; i++) {
             id = tree.contentView.getItemAtIndex(i).id;
             filebase=escapeFilename(id)
+            encoding = queryRDFitem(id, "encoding", "UTF-8");
             if (queryRDFitem(id, "ignoreNumbers", "False") == "True") {
                 ignoreNumbers = true;
             } else {
@@ -100,7 +102,8 @@ function scanButtonClick()
                         queryRDFitem(id, "url", ""), 
                         readFile(filebase+".new"),
                         queryRDFitem(id, "threshold", 100),
-                        ignoreNumbers);
+                        ignoreNumbers,
+                        queryRDFitem(id, "encoding", "Auto"));
         }
 
         setStatus(str.getString("statusScanning"));
@@ -179,8 +182,7 @@ function openNewDialogNoRefresh(title, url)
         url:            url, 
         threshold:      "100",      // threshold = 100 by default
         scanRateMins:   "60",       // scan once an hour by default
-        encodingDetect: "Auto",     // Auto-detect encoding by default 
-        encoding:       "UTF-8",    // UTF-8 encoding by default
+        encoding:       "Auto",     // Auto encoding by default
         ignoreNumbers:  "True",     // Ignore number changes by default
         advanced:       false
     };
@@ -193,7 +195,6 @@ function openNewDialogNoRefresh(title, url)
         modifyRDFitem(id, "url", args.url);
         modifyRDFitem(id, "threshold", args.threshold);
         modifyRDFitem(id, "scanratemins", args.scanRateMins);
-        modifyRDFitem(id, "encodingDetect", args.encodingDetect);
         modifyRDFitem(id, "encoding", args.encoding);
         modifyRDFitem(id, "ignoreNumbers", args.ignoreNumbers);
 
@@ -218,8 +219,7 @@ function openEditDialog()
         url:            queryRDFitem(id, "url", ""),
         threshold:      queryRDFitem(id, "threshold", "100"),
         scanRateMins:   queryRDFitem(id, "scanratemins", "0"),
-        encodingDetect: queryRDFitem(id, "encodingDetect", "Auto"),
-        encoding:       queryRDFitem(id, "encoding", "UTF-8"),
+        encoding:       queryRDFitem(id, "encoding", "Auto"),
         ignoreNumbers:  queryRDFitem(id, "ignoreNumbers", "False"),
         // Although ignoreNumbers is true by default, behaviour of pages
         // upgraded from previous version shouldn't be modified
@@ -236,7 +236,6 @@ function openEditDialog()
         modifyRDFitem(id, "url", args.url);
         modifyRDFitem(id, "threshold", args.threshold);
         modifyRDFitem(id, "scanratemins", args.scanRateMins);
-        modifyRDFitem(id, "encodingDetect", args.encodingDetect);
         modifyRDFitem(id, "encoding", args.encoding);
         modifyRDFitem(id, "ignoreNumbers", args.ignoreNumbers);
 

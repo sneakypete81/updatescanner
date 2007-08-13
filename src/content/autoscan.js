@@ -70,7 +70,8 @@ function Autoscan()
                             queryRDFitem(id, "url", ""), 
                             readFile(filebase+".new"),
                             queryRDFitem(id, "threshold", 100),
-                            ignoreNumbers);
+                            ignoreNumbers,
+                            queryRDFitem(id, "encoding", "Auto"));
                 }
             }
         }

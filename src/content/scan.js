@@ -79,9 +79,11 @@ function Scanner()
         }
     }
 
-    this.addURL = function(id, title, url, content, threshold, ignoreNumbers)
+    this.addURL = function(id, title, url, content, threshold, 
+                           ignoreNumbers, encoding)
     {
-        var page = new uscanItem(id, title, url, content, threshold, ignoreNumbers);
+        var page = new uscanItem(id, title, url, content, threshold, 
+                                 ignoreNumbers, encoding);
         itemlist.push(page);
     }
     
@@ -119,7 +121,7 @@ function Scanner()
         var httpreqStatusText;
         var httpreqHeaderText;
         var httpreqResponseText;
-    
+
         if (httpreq != null && httpreq.readyState == 4) {
             try {
                 httpreqStatus = httpreq.status;
@@ -181,7 +183,6 @@ function Scanner()
 //                myDump("Error except="+e);                    
                 status = STATUS_ERROR;
             }
-            
             changedCallback(page.id, responseText, status, 
                             httpreqStatusText, httpreqHeaderText);
             me.getNextPage();
@@ -192,7 +193,7 @@ function Scanner()
     {
         var page;
         if (itemlist.length > 0) {
-            while (!me.attemptGet(itemlist[0].url)) {
+            while (!me.attemptGet(itemlist[0].url, itemlist[0].encoding)) {
                 page = itemlist.shift();      // extract the next item
                 changedCallback(page.id, "", STATUS_ERROR, 
                     Components.classes["@mozilla.org/intl/stringbundle;1"]
@@ -222,12 +223,15 @@ function Scanner()
         }
     }
     
-    this.attemptGet = function(url)
+    this.attemptGet = function(url, encoding)
     {
         try {
 //            myDump("Get "+url)
             httpreq = new XMLHttpRequest();
             httpreq.open("GET", url, true);
+            if (encoding != "Auto") { // Force parser to use a specific encoding
+                httpreq.overrideMimeType('text/html; charset='+encoding);
+            }
             httpreq.onreadystatechange=me.next;
             httpreq.send(null);
             return true;
@@ -239,7 +243,8 @@ function Scanner()
     
 }
 
-function uscanItem(id, title, url, content, threshold, ignoreNumbers) 
+function uscanItem(id, title, url, content, threshold, 
+                   ignoreNumbers, encoding) 
 {
     this.id = id;
     this.title = title;
@@ -247,6 +252,7 @@ function uscanItem(id, title, url, content, threshold, ignoreNumbers)
     this.content = content;
     this.threshold = threshold;
     this.ignoreNumbers = ignoreNumbers;
+    this.encoding = encoding;
 } 
 
 // Returns true if the content is the same
@@ -309,7 +315,7 @@ function processScanChange(id, newContent, status, statusText, headerText)
                 getService(Components.interfaces.nsIPrefService).
                 getBranch("extensions.updatescan.");
 
-    var logHeaders = prefs.getBoolPref("logHeaders")
+    var logHeaders = prefs.getBoolPref("logHeaders");
     
     filebase=escapeFilename(id)
     if (status == STATUS_CHANGE) {
