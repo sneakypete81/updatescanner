@@ -2,12 +2,12 @@ Things to do:
 
 Features:
 Update amo description to include highlighting (and screenshots)
-Update non-english locales
+Update non-english locales with new substitution scheme
 "Scan this page now" context menu item
 Add error display to page header
 Autodetect character encodings 
 Write help pages
-"don't highlihgt changes" option
+"don't highlight changes" option
 Alert sounds
 drag n drop
 bookmark menu item?
@@ -23,7 +23,7 @@ Preferences page:
   Adjust scan timeout
 
 ??Options to enable scripts when viewing diffs
-3Handle frames
+3Handle frames or display error
 3??Check rdf file integrity (remove empty urls)
 3Add to tab context menu
 3Auto place on toolbar

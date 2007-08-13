@@ -21,7 +21,7 @@ function initDialog()
     sliderAutoscanSetPos(sliderAutoscanEncode(args.scanRateMins));
     sliderAutoscanChange();
 
-    if (args.ignoreNumbers == "True") {
+    if (args.ignoreNumbers.toLower() == "true") {
         document.getElementById("ignoreNumbers").checked = true;
     } else {
         document.getElementById("ignoreNumbers").checked = false;
@@ -32,7 +32,7 @@ function initDialog()
     
     var encoding = document.getElementById(args.encoding)
 
-    if (args.encoding == "Auto") {
+    if (args.encoding.toLower() == "auto") {
         document.getElementById("autoCharEncoding")
                 .selectedIndex = 0;
     } else {
@@ -82,12 +82,12 @@ function Ok()
     args.scanRateMins = String(sliderAutoscanDecode(sliderAutoscanGetPos()));
 
     if (document.getElementById("ignoreNumbers").checked) {
-        args.ignoreNumbers="True";
+        args.ignoreNumbers = "true";
     } else {
-        args.ignoreNumbers="False";
+        args.ignoreNumbers = "false";
     }
     if (document.getElementById("autoCharEncoding").selectedIndex == 0) {
-        args.encoding = "Auto";
+        args.encoding = "auto";
     } else {
         args.encoding = document.getElementById("encodingMenu").selectedItem.id;
     }

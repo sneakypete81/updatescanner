@@ -93,7 +93,7 @@ function scanButtonClick()
             id = tree.contentView.getItemAtIndex(i).id;
             filebase=escapeFilename(id)
             encoding = queryRDFitem(id, "encoding", "UTF-8");
-            if (queryRDFitem(id, "ignoreNumbers", "False") == "True") {
+            if (queryRDFitem(id, "ignoreNumbers", "false").toLower() == "true") {
                 ignoreNumbers = true;
             } else {
                 ignoreNumbers = false;
@@ -182,8 +182,8 @@ function openNewDialogNoRefresh(title, url)
         url:            url, 
         threshold:      "100",      // threshold = 100 by default
         scanRateMins:   "60",       // scan once an hour by default
-        encoding:       "Auto",     // Auto encoding by default
-        ignoreNumbers:  "True",     // Ignore number changes by default
+        encoding:       "auto",     // Auto encoding by default
+        ignoreNumbers:  "true",     // Ignore number changes by default
         advanced:       false
     };
 
@@ -219,8 +219,8 @@ function openEditDialog()
         url:            queryRDFitem(id, "url", ""),
         threshold:      queryRDFitem(id, "threshold", "100"),
         scanRateMins:   queryRDFitem(id, "scanratemins", "0"),
-        encoding:       queryRDFitem(id, "encoding", "Auto"),
-        ignoreNumbers:  queryRDFitem(id, "ignoreNumbers", "False"),
+        encoding:       queryRDFitem(id, "encoding", "auto"),
+        ignoreNumbers:  queryRDFitem(id, "ignoreNumbers", "false"),
         // Although ignoreNumbers is true by default, behaviour of pages
         // upgraded from previous version shouldn't be modified
         advanced:       false

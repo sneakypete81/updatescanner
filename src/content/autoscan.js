@@ -60,18 +60,18 @@ function Autoscan()
                     saveRDF();
                     doScan = true;
                     filebase=escapeFilename(id)
-                    if (queryRDFitem(id, "ignoreNumbers", "False") == "True") {
+                    if (queryRDFitem(id, "ignoreNumbers", "false").toLower == "true") {
                         ignoreNumbers = true;
                     } else {
                         ignoreNumbers = false;
                     }
-                    
+
                     scan.addURL(id, queryRDFitem(id, "title", "No Title"), 
-                            queryRDFitem(id, "url", ""), 
-                            readFile(filebase+".new"),
-                            queryRDFitem(id, "threshold", 100),
-                            ignoreNumbers,
-                            queryRDFitem(id, "encoding", "Auto"));
+                                queryRDFitem(id, "url", ""), 
+                                readFile(filebase+".new"),
+
+                                ignoreNumbers,
+                                queryRDFitem(id, "encoding", "auto"));
                 }
             }
         }
