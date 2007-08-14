@@ -6,3 +6,8 @@
 <!ENTITY high.label "Vysoký">
 <!ENTITY often.label "Často">
 <!ENTITY never.label "Nikdy">
+<!ENTITY ignoreNumbers.label "Ignorovať číselné zmeny">
+<!ENTITY advanced.label "Spresniť...">
+<!ENTITY charEncoding.label "Kódovanie znakov">
+<!ENTITY autoDetect.label "Zistiť automaticky">
+<!ENTITY use.label "Použiť:">

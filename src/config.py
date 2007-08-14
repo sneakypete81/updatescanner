@@ -10,7 +10,10 @@ translators = ['SlovakSoft (Slovenčina)',
                'myahoo (Français)',
                'Mark Heijl (Nederlands)',
                'Proyecto Nave (Español)',
-               'jeongsw (Korean)']
+               'jeongsw (Korean)',
+               'Team erweiterungen.de (Deutsch)',
+               'JZsolt (Magyar)',
+               'Edvard Borovskij (Russian)']
 authorURL = "http://updatescanner.mozdev.org"
 uid = 'c07d1a49-9894-49ff-a594-38960ede8fb9'
 
@@ -65,33 +68,61 @@ skins = {
 }
 
 locales = {
+    'de-DE': {
+        'locale_version': '1.0',
+        'display_name': name,
+    },           
     'en-US': {
         'locale_version': '1.0',
-        'display_name': 'English (US)',
-    },
-    'sk-SK': {
-        'locale_version': '1.0',
-        'display_name': 'Slovenčina',
-    },
-    'it-IT': {
-        'locale_version': '1.0',
-        'display_name': 'Italiano',
-    },
-    'fr-FR': {
-        'locale_version': '1.0',
-        'display_name': 'Français',
-    },
-    'nl-NL': {
-        'locale_version': '1.0',
-        'display_name': 'Nederlands',
+        'display_name': name,
     },
     'es-ES': {
         'locale_version': '1.0',
-        'display_name': 'Español',
+        'display_name': name,
+    },
+    'fr-FR': {
+        'locale_version': '1.0',
+        'display_name': name,
+    },
+    'hu-HU': {
+        'locale_version': '1.0',
+        'display_name': name,
+    },
+    'it-IT': {
+        'locale_version': '1.0',
+        'display_name': name,
+    },
+    'ja-JP': {
+        'locale_version': '1.0',
+        'display_name': name,
     },
     'ko-KR': {
         'locale_version': '1.0',
-        'display_name': 'Korean',
+        'display_name': name,
+    },
+    'ms-MY': {
+        'locale_version': '1.0',
+        'display_name': name,
+    },
+    'nl-NL': {
+        'locale_version': '1.0',
+        'display_name': name,
+    },
+    'pl-PL': {
+        'locale_version': '1.0',
+        'display_name': name,
+    },
+    'ru-RU': {
+        'locale_version': '1.0',
+        'display_name': name,
+    },
+    'sk-SK': {
+        'locale_version': '1.0',
+        'display_name': name,
+    },
+    'tr-TR': {
+        'locale_version': '1.0',
+        'display_name': name,
     },
 }
 
