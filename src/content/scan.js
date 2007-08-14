@@ -226,7 +226,7 @@ function Scanner()
     this.attemptGet = function(url, encoding)
     {
         try {
-//            myDump("Get "+url)
+//            myDump("Get "+url+" ("+encoding+")")
             httpreq = new XMLHttpRequest();
             httpreq.open("GET", url, true);
             if (encoding != "auto") { 

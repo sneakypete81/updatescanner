@@ -69,7 +69,7 @@ function Autoscan()
                     scan.addURL(id, queryRDFitem(id, "title", "No Title"), 
                                 queryRDFitem(id, "url", ""), 
                                 readFile(filebase+".new"),
-
+                                queryRDFitem(id, "threshold", 100),                                
                                 ignoreNumbers,
                                 queryRDFitem(id, "encoding", "auto"));
                 }
