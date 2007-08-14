@@ -1,8 +1,1 @@
-<!ENTITY url.label "URL:">
 <!ENTITY title.label "Tajuk:">
-<!ENTITY threshold.label "Change Threshold">
-<!ENTITY autoscan.label "Autoscan">
-<!ENTITY low.label "Low">
-<!ENTITY high.label "High">
-<!ENTITY often.label "Often">
-<!ENTITY never.label "Never">
