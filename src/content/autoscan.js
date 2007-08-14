@@ -60,7 +60,7 @@ function Autoscan()
                     saveRDF();
                     doScan = true;
                     filebase=escapeFilename(id)
-                    if (queryRDFitem(id, "ignoreNumbers", "false").toLower == "true") {
+                    if (queryRDFitem(id, "ignoreNumbers", "false") == "true") {
                         ignoreNumbers = true;
                     } else {
                         ignoreNumbers = false;

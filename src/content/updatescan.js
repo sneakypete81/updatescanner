@@ -93,7 +93,7 @@ function scanButtonClick()
             id = tree.contentView.getItemAtIndex(i).id;
             filebase=escapeFilename(id)
             encoding = queryRDFitem(id, "encoding", "UTF-8");
-            if (queryRDFitem(id, "ignoreNumbers", "false").toLower() == "true") {
+            if (queryRDFitem(id, "ignoreNumbers", "false") == "true") {
                 ignoreNumbers = true;
             } else {
                 ignoreNumbers = false;

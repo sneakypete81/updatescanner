@@ -229,7 +229,7 @@ function Scanner()
 //            myDump("Get "+url)
             httpreq = new XMLHttpRequest();
             httpreq.open("GET", url, true);
-            if (encoding.toLower() != "auto") { 
+            if (encoding != "auto") { 
                 // Force parser to use a specific encoding
                 httpreq.overrideMimeType('text/html; charset='+encoding);
             }

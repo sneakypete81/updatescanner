@@ -21,7 +21,7 @@ function initDialog()
     sliderAutoscanSetPos(sliderAutoscanEncode(args.scanRateMins));
     sliderAutoscanChange();
 
-    if (args.ignoreNumbers.toLower() == "true") {
+    if (args.ignoreNumbers == "true") {
         document.getElementById("ignoreNumbers").checked = true;
     } else {
         document.getElementById("ignoreNumbers").checked = false;
@@ -32,7 +32,7 @@ function initDialog()
     
     var encoding = document.getElementById(args.encoding)
 
-    if (args.encoding.toLower() == "auto") {
+    if (args.encoding == "auto") {
         document.getElementById("autoCharEncoding")
                 .selectedIndex = 0;
     } else {
