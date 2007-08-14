@@ -1,0 +1,8 @@
+<!ENTITY url.label "Adresse:">
+<!ENTITY title.label "Titel:">
+<!ENTITY threshold.label "Schwellenwert ändern">
+<!ENTITY autoscan.label "Intervall für automatische Überprüfung">
+<!ENTITY low.label "Niedrig">
+<!ENTITY high.label "Hoch">
+<!ENTITY often.label "Oft">
+<!ENTITY never.label "Nie">

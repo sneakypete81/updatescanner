@@ -1,0 +1,12 @@
+<!ENTITY scanbutton.label "Сканировать">
+<!ENTITY stopbutton.label "Отменить">
+<!ENTITY newbutton.tooltip "Новая запись">
+<!ENTITY showallchangesinnewtabsbutton.tooltip "Просмотреть все изменённые страницы в новых вкладках">
+<!ENTITY deletebutton.tooltip "Удалить">
+<!ENTITY openmenu.label "Просмотреть изменения">
+<!ENTITY opentabmenu.label "Просмотреть изменение в новой вкладке">
+<!ENTITY showallchangesinnewtabsmenu.label "Просмотреть все измененные страницы в новых вкладках">
+<!ENTITY markvisitedmenu.label "Пометить всё как просмотренное">
+<!ENTITY sortbynamemenu.label "Отсортировать по имени">
+<!ENTITY deletemenu.label "Удалить">
+<!ENTITY editmenu.label "Параметры">

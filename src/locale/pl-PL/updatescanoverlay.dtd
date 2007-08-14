@@ -1,0 +1,4 @@
+<!ENTITY UpdateScan.tooltip "Otwórz skaner w panelu">
+<!ENTITY UpdateScanSidebar.label "Skaner stron">
+<!ENTITY AddToUpdateScan.label "Dodaj stronę do skanera">
+<!ENTITY AddToUpdateScan.accesskey "D">

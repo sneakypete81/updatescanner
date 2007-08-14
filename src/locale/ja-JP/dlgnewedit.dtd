@@ -1,0 +1,8 @@
+<!ENTITY url.label "URL:">
+<!ENTITY title.label "タイトル:">
+<!ENTITY threshold.label "変更の閾値">
+<!ENTITY autoscan.label "自動更新">
+<!ENTITY low.label "低い">
+<!ENTITY high.label "高い">
+<!ENTITY often.label "頻繁">
+<!ENTITY never.label "なし">

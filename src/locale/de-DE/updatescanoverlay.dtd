@@ -1,0 +1,4 @@
+<!ENTITY UpdateScan.tooltip "Webseiten auf Aktualisierungen überprüfen">
+<!ENTITY UpdateScanSidebar.label "Update Scanner">
+<!ENTITY AddToUpdateScan.label "Webseite auf Aktualisierung überprüfen...">
+<!ENTITY AddToUpdateScan.accesskey "A">

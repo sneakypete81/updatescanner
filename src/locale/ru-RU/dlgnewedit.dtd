@@ -1,0 +1,8 @@
+<!ENTITY url.label "URL:">
+<!ENTITY title.label "Заголовок:">
+<!ENTITY threshold.label "Изменение порога чувствительности">
+<!ENTITY autoscan.label "Автосканирование">
+<!ENTITY low.label "Ниже">
+<!ENTITY high.label "Выше">
+<!ENTITY often.label "Часто">
+<!ENTITY never.label "Никогда">

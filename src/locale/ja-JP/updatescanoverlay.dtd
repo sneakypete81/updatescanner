@@ -1,0 +1,4 @@
+<!ENTITY UpdateScan.tooltip "ウェブページに更新がないか確認します">
+<!ENTITY UpdateScanSidebar.label "更新をスキャン">
+<!ENTITY AddToUpdateScan.label "ページの更新をスキャン...">
+<!ENTITY AddToUpdateScan.accesskey "U">

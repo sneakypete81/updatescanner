@@ -1,3 +1,4 @@
 <!ENTITY UpdateScan.tooltip "Comprobar actualizaciones en las páginas">
+<!ENTITY UpdateScanSidebar.label "Comprobar actualizaciones">
 <!ENTITY AddToUpdateScan.label "Comprobar actualizaciones en la página...">
 <!ENTITY AddToUpdateScan.accesskey "C">

@@ -1,0 +1,4 @@
+<!ENTITY UpdateScan.tooltip "Güncellemeler için web sayfalarını tara">
+<!ENTITY UpdateScanSidebar.label "Güncelleme tarama">
+<!ENTITY AddToUpdateScan.label "Güncellemeler için sayfayı tara...">
+<!ENTITY AddToUpdateScan.accesskey "U">
