@@ -30,10 +30,11 @@
  * the terms of any one of the MPL, the GPL or the LGPL.  
  * ***** END LICENSE BLOCK ***** */
 
-const STATUS_NO_CHANGE = 0;
-const STATUS_CHANGE    = 1;
-const STATUS_ERROR     = 2;
-const STATUS_NEW       = 3;
+const STATUS_NO_CHANGE    = 0;
+const STATUS_CHANGE       = 1;
+const STATUS_ERROR        = 2;
+const STATUS_NEW          = 3;
+const STATUS_MINOR_CHANGE = 4;
 
 function Scanner()
 {
@@ -150,7 +151,6 @@ function Scanner()
         var page;
         var newContent;
         var status = STATUS_ERROR;
-        var responseText = "";
         var httpreqStatus;
         var httpreqStatusText;
         var httpreqHeaderText;
@@ -194,7 +194,6 @@ function Scanner()
                         // If encoding is not defined anywhere, use whatever
                         // the XMLHttpRequest method decided to do.
                    
-                        myDump(page.url+": ScanEncoding="+page.encoding);
                         if (page.encoding != "") {
                             encodingCallback(page.id, page.encoding);
                             // Download again with the correct encoding                            
@@ -212,12 +211,13 @@ function Scanner()
                         oldContent = stripNumbers(oldContent);
                         newContent = stripNumbers(newContent);
                     }
-                    if (newContent == "" || 
-                        checkSame(newContent, oldContent, page.threshold)) {
-//                        myDump("Same");
+                    if (newContent == "" || page.content == httpreqResponseText) {
+//                          myDump("No Change");
                         status = STATUS_NO_CHANGE;
+                    } else if (checkSame(newContent, oldContent, page.threshold)) {
+//                          myDump("Minor Change");
+                          status = STATUS_MINOR_CHANGE;
                     } else {
-                        responseText = httpreqResponseText;
                         if (page.content == "**NEW**") {
 //                            myDump("New");
                             status = STATUS_NEW;
@@ -235,7 +235,7 @@ function Scanner()
 //                myDump("Error except="+e);                    
                 status = STATUS_ERROR;
             }
-            changedCallback(page.id, responseText, status, 
+            changedCallback(page.id, httpreqResponseText, status, 
                             httpreqStatusText, httpreqHeaderText);
             me.getNextPage();
         }
@@ -399,13 +399,23 @@ function processScanChange(id, newContent, status, statusText, headerText)
 
         oldContent  = readFile(filebase+".old");
         diffContent = createDiffs(oldContent, newContent);   
-
         writeFile(filebase+".dif", diffContent);
         writeFile(filebase+".new", newContent);
 
 	    modifyRDFitem(id, "changed", "1");
         modifyRDFitem(id, "lastscan", now.toString());
 	    modifyRDFitem(id, "error", "0");
+        modifyRDFitem(id, "statusText", statusText);
+        if (logHeaders) modifyRDFitem(id, "headerText", headerText);        
+    } else if (status == STATUS_MINOR_CHANGE) {
+        // Minor change: don't notify, but save new page and diff
+        oldContent  = readFile(filebase+".old");
+        diffContent = createDiffs(oldContent, newContent);   
+        writeFile(filebase+".dif", diffContent);
+        writeFile(filebase+".new", newContent);
+
+        modifyRDFitem(id, "error", "0");
+        modifyRDFitem(id, "lastscan", now.toString());
         modifyRDFitem(id, "statusText", statusText);
         if (logHeaders) modifyRDFitem(id, "headerText", headerText);        
     } else if (status == STATUS_NO_CHANGE) {

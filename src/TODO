@@ -1,6 +1,7 @@
 Things to do:
 
 Features:
+Start Bugzilla
 Update amo description to include highlighting (and screenshots)
 "Scan this page now" context menu item
 Add error display to page header
@@ -36,7 +37,6 @@ Preferences page:
 4Email alerts?
 
 Bugs:
-Update stored files even if change threshold not triggered
 Get rid of refresher where possible
 Greyed out item that loads ok in browser
 Still some strange diff highlight things happening
@@ -47,6 +47,7 @@ Occasionally status icon doesn't update - use pref observer
 
 Done:
 -- Unreleased --
+Update stored files even if change threshold not triggered
 Autodetect character encodings 
 Update non-english locales with new substitution scheme
 Support more character encodings (autodetect?) 
