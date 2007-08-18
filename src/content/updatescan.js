@@ -135,12 +135,13 @@ function scanButtonClick()
                         readFile(filebase+".new"),
                         queryRDFitem(id, "threshold", 100),
                         ignoreNumbers,
-                        queryRDFitem(id, "encoding", "Auto"));
+                        queryRDFitem(id, "encoding", "auto"));
         }
 
         setStatus(str.getString("statusScanning"));
         numChanges=0;
-        scan.start(scanChangedCallback, scanFinishedCallback, showProgress);
+        scan.start(scanChangedCallback, scanFinishedCallback, showProgress,
+                   scanEncodingCallback);
     } else {
         scanFinishedCallback(str.getString("treeEmptyAlert"));
     }
@@ -153,6 +154,12 @@ function scanChangedCallback(id, new_content, status, statusText, headerText)
     }
     refreshTree();
     refresh.request();
+}
+
+function scanEncodingCallback(id, encoding)
+// Called when encoding is detected for a page marked for auto-detect encoding
+{
+    modifyRDFitem(id, "encoding", encoding);
 }
 
 function scanFinishedCallback()

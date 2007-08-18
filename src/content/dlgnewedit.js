@@ -62,13 +62,15 @@ function initDialog()
     loadAvailableCharSets();
     charEncodingChanged()
     
-    var encoding = document.getElementById(args.encoding)
 
     if (args.encoding == "auto") {
         document.getElementById("autoCharEncoding")
                 .selectedIndex = 0;
     } else {
-        document.getElementById("encodingMenu").selectedItem = encoding; 
+        try {
+            document.getElementById("encodingMenu").selectedItem = 
+                           document.getElementById(args.encoding.toLowerCase())
+        } catch (e) {} 
         document.getElementById("autoCharEncoding")
                 .selectedIndex = 1;
     }
@@ -319,6 +321,7 @@ function readRDFString(aDS,aRes,aProp)
 }
 
 function loadAvailableCharSets()
+// From Firefox source:
 {
     var availCharsetDict     = [];
     var encodingPopup = document.getElementById('encodingPopup');
@@ -350,12 +353,14 @@ function loadAvailableCharSets()
 
 function AddMenuItem(doc, menu, ID, UIstring)
 {
-  // Create a treerow for the new item
-  var item = doc.createElement('menuitem');
+    try {
+        // Create a treerow for the new item
+        var item = doc.createElement('menuitem');
 
-  // Copy over the attributes
-  item.setAttribute('label', UIstring);
-  item.setAttribute('id', ID);
+        // Copy over the attributes
+        item.setAttribute('label', UIstring);
+        item.setAttribute('id', ID.toLowerCase());
 
-  menu.appendChild(item);
+        menu.appendChild(item);
+    } catch(e) {}
 }

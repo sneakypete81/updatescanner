@@ -112,7 +112,8 @@ function Autoscan()
             numChanges = 0;
             scan.start(auto.scanChanged, 
                    auto.scanFinished, 
-                   auto.scanShowProgress);
+                   auto.scanShowProgress,
+                   auto.scanEncoding);
         } else {
             callback(0); // No changes
         }
@@ -124,6 +125,13 @@ function Autoscan()
             numChanges++;
         }
     }
+
+    this. scanEncoding = function(id, encoding)
+    // Called when encoding is detected for a page marked for auto-detect encoding
+    {
+        modifyRDFitem(id, "encoding", encoding);
+    }
+
 
     this.scanFinished = function()
     {

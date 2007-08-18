@@ -45,6 +45,7 @@ function Scanner()
     var changedCallback;
     var finishedCallback;
     var progressCallback;
+    var encodingCallback;
     var timeoutError = false;
 
     var numitems;
@@ -120,12 +121,13 @@ function Scanner()
     }
     
     this.start = function(changedCallbackarg, finishedCallbackarg,
-              progressCallbackarg)
+              progressCallbackarg, encodingCallbackarg)
     {
 //        myDump("Start");         
         changedCallback = changedCallbackarg;
         finishedCallback = finishedCallbackarg;
         progressCallback = progressCallbackarg;
+        encodingCallback = encodingCallbackarg;
         
         if (itemlist.length == 0)
         {
@@ -184,6 +186,24 @@ function Scanner()
                 if (httpreqStatus == 200 || httpreqStatus == 0) {
                     // 200 = OK, 0 = FTP/FILE finished
 //                    myDump("StatusText="+httpreqStatusText)
+
+                    if (page.encoding == "auto") {
+                        // Scan the response for encoding
+                        page.encoding = getEncoding(httpreqHeaderText, 
+                                                    httpreqResponseText);
+                        // If encoding is not defined anywhere, use whatever
+                        // the XMLHttpRequest method decided to do.
+                   
+                        myDump(page.url+": ScanEncoding="+page.encoding);
+                        if (page.encoding != "") {
+                            encodingCallback(page.id, page.encoding);
+                            // Download again with the correct encoding                            
+                            itemlist.unshift(page);
+                            me.getNextPage();
+                            return;
+                        }
+                    }
+
                     oldContent = stripWhitespace(stripTags(stripScript(
                                  page.content)));
                     newContent = stripWhitespace(stripTags(stripScript(
@@ -330,6 +350,22 @@ function stripWhitespace(content)
 function stripNumbers(content)
 {
     return content.replace(/[0-9]*/g,"")
+}
+
+function getEncoding(header, content)
+// Searches through the header for Content-Type: text/html; charset=xxxxx
+//
+// If not found, scans content for <META http-equiv="Content-Type" 
+// content="text/html; charset=xxxxx">
+{
+    var result;
+    result = /content-type[^\n]*charset[^\S\n]*=[^\S\n]*([^\s;]*)/i(header)
+    if (result != null) return result[1];
+    
+    result = /<meta[^>]+charset\s*=\s*([^>"';]+)/i(content)
+    if (result != null) return result[1];
+    
+    return ""
 }
 
 function processScanChange(id, newContent, status, statusText, headerText)
