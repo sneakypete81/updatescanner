@@ -1,4 +1,7 @@
-// Fromhttp://javascript.crockford.com/remedial.html
+// From http://javascript.crockford.com/remedial.html
+// There is no license, but the website states:
+//   "You can put these functions in your code library 
+//    and copy them individually into your projects as you need them."
 
 // example:
 // param = {domain: 'valvion.com', media: 'http://media.valvion.com/'};
