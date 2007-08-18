@@ -1,0 +1,12 @@
+<!ENTITY scanbutton.label "Tara">
+<!ENTITY stopbutton.label "İptal">
+<!ENTITY newbutton.tooltip "Yeni Giriş">
+<!ENTITY showallchangesinnewtabsbutton.tooltip "Bütün Değişiklikleri Yeni Sekmede Göster">
+<!ENTITY deletebutton.tooltip "Sil">
+<!ENTITY openmenu.label "Değişiklikleri Göster">
+<!ENTITY opentabmenu.label "Değişiklikleri Yeni Sekmede Göster">
+<!ENTITY showallchangesinnewtabsmenu.label "Tüm Değişen Sayfaları Yeni Sekmede Göster">
+<!ENTITY markvisitedmenu.label "Bütün Ziyaret Edilenleri İşaretle">
+<!ENTITY sortbynamemenu.label "İsimle Göre Sırala">
+<!ENTITY deletemenu.label "Sil">
+<!ENTITY editmenu.label "Özellikler">

@@ -92,26 +92,26 @@ locales = {
         'locale_version': '1.0',
         'display_name': name,
     },
-    'ja-JP': {
-        'locale_version': '1.0',
-        'display_name': name,
-    },
+#    'ja-JP': {
+#        'locale_version': '1.0',
+#        'display_name': name,
+#    },
     'ko-KR': {
         'locale_version': '1.0',
         'display_name': name,
     },
-    'ms-MY': {
-        'locale_version': '1.0',
-        'display_name': name,
-    },
+#    'ms-MY': {
+#        'locale_version': '1.0',
+#        'display_name': name,
+#    },
     'nl-NL': {
         'locale_version': '1.0',
         'display_name': name,
     },
-    'pl-PL': {
-        'locale_version': '1.0',
-        'display_name': name,
-    },
+ #   'pl-PL': {
+ #       'locale_version': '1.0',
+ #       'display_name': name,
+ #   },
     'ru-RU': {
         'locale_version': '1.0',
         'display_name': name,
@@ -120,9 +120,9 @@ locales = {
         'locale_version': '1.0',
         'display_name': name,
     },
-    'tr-TR': {
-        'locale_version': '1.0',
-        'display_name': name,
-    },
+#    'tr-TR': {
+#        'locale_version': '1.0',
+#        'display_name': name,
+#    },
 }
 

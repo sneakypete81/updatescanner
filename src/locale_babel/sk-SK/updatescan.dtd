@@ -1,0 +1,12 @@
+<!ENTITY scanbutton.label "Kontrola">
+<!ENTITY stopbutton.label "Zrušiť">
+<!ENTITY newbutton.tooltip "Nová položka">
+<!ENTITY showallchangesinnewtabsbutton.tooltip "Zobraziť všetky zmenené stránky na nových kartách">
+<!ENTITY deletebutton.tooltip "Odstrániť">
+<!ENTITY openmenu.label "Zobraziť zmeny">
+<!ENTITY opentabmenu.label "Zobraziť zmeny na novej karte">
+<!ENTITY showallchangesinnewtabsmenu.label "Zobraziť všetky zmenené stránky na nových kartách">
+<!ENTITY markvisitedmenu.label "Označiť všetky ako navštívené">
+<!ENTITY sortbynamemenu.label "Zoradiť podľa názvu">
+<!ENTITY deletemenu.label "Odstrániť">
+<!ENTITY editmenu.label "Vlastnosti">

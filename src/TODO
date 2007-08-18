@@ -47,6 +47,11 @@ Occasionally status icon doesn't update - use pref observer
 
 Done:
 -- Unreleased --
+Spanish locale updated.amo
+Korean locale updated.amo
+Dutch locale updated.amo
+Russian locale updated.amo
+Slovak locale updated.amo
 Update stored files even if change threshold not triggered
 Autodetect character encodings 
 Update non-english locales with new substitution scheme

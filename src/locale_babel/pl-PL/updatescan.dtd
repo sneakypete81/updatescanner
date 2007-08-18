@@ -1,0 +1,12 @@
+<!ENTITY scanbutton.label "Skanuj">
+<!ENTITY stopbutton.label "Anuluj">
+<!ENTITY newbutton.tooltip "Dodaj nowy wpis">
+<!ENTITY showallchangesinnewtabsbutton.tooltip "Wyświetl wszystkie zmienione strony w nowych kartach">
+<!ENTITY deletebutton.tooltip "Usuń">
+<!ENTITY openmenu.label "Wyświetl zmiany">
+<!ENTITY opentabmenu.label "Wyświetl zmiany w nowych kartach">
+<!ENTITY showallchangesinnewtabsmenu.label "Wyświetl wszystkie zmienione strony w kartach">
+<!ENTITY markvisitedmenu.label "Oznacz jako sprawdzone">
+<!ENTITY sortbynamemenu.label "Sortuj wg nazwy">
+<!ENTITY deletemenu.label "Usuń">
+<!ENTITY editmenu.label "Ustawienia skanowania">

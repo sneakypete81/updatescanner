@@ -1,0 +1,12 @@
+<!ENTITY scanbutton.label "Ellenőrzés">
+<!ENTITY stopbutton.label "Mégsem">
+<!ENTITY newbutton.tooltip "Új elem hozzáadása">
+<!ENTITY showallchangesinnewtabsbutton.tooltip "Minden megváltozott oldal mutatása új füleken">
+<!ENTITY deletebutton.tooltip "Törlés a listáról">
+<!ENTITY openmenu.label "Változások mutatása">
+<!ENTITY opentabmenu.label "Változások mutatása új fülön">
+<!ENTITY showallchangesinnewtabsmenu.label "Minden megváltozott oldal mutatása új füleken">
+<!ENTITY markvisitedmenu.label "Megjelölés megnézettként">
+<!ENTITY sortbynamemenu.label "Név szerinti rendezés">
+<!ENTITY deletemenu.label "Törlés a listáról">
+<!ENTITY editmenu.label "Tulajdonságok">

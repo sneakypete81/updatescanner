@@ -1,0 +1,13 @@
+<!ENTITY url.label "URL:">
+<!ENTITY title.label "Nazwa:">
+<!ENTITY threshold.label "Ustawienia progu">
+<!ENTITY autoscan.label "Skanowanie automatycznie">
+<!ENTITY low.label "Niski">
+<!ENTITY high.label "Wysoki">
+<!ENTITY often.label "Często">
+<!ENTITY never.label "Nigdy">
+<!ENTITY ignoreNumbers.label "Ignore Changes to Numbers">
+<!ENTITY advanced.label "Advanced...">
+<!ENTITY charEncoding.label "Character Encoding">
+<!ENTITY autoDetect.label "Auto-detect">
+<!ENTITY use.label "Use">
