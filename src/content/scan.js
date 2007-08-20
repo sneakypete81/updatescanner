@@ -158,6 +158,7 @@ function Scanner()
 
         if (httpreq != null && httpreq.readyState == 4) {
             try {
+                if (timeoutError) throw "TimeoutError"
                 httpreqStatus = httpreq.status;
                 httpreqStatusText = httpreq.statusText;
                 httpreqResponseText = httpreq.responseText;
@@ -170,10 +171,10 @@ function Scanner()
                 httpreqStatus = 99999
                 if (timeoutError) {
                     httpreqStatusText = strings.
-                                        GetStringFromName("timeoutError");
+                                 GetStringFromName("timeoutError");
                 } else {
                     httpreqStatusText = strings.
-                                        GetStringFromName("unknownError");
+                                 GetStringFromName("unknownError")+" ("+e+")";
                 }
                 httpreqResponseText = "";
                 httpreqHeaderText = "";

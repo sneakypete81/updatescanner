@@ -37,8 +37,6 @@ Preferences page:
 4Email alerts?
 
 Bugs:
-Make timeout 30 seconds?
-Don't store partial pages if timeout occurs
 Get rid of refresher where possible
 Greyed out item that loads ok in browser
 Still some strange diff highlight things happening
@@ -48,7 +46,9 @@ Occasionally status icon doesn't update - use pref observer
 
 
 Done:
--- Unreleased --
+-- Unreleased 2.1--
+Make default timeout 30 seconds
+Don't store partial pages if timeout occurs
 Spanish locale updated.amo
 Korean locale updated.amo
 Dutch locale updated.amo
