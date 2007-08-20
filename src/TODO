@@ -1,7 +1,7 @@
 Things to do:
 
 Features:
-Start Bugzilla
+Add title to status during manual scan
 Update amo description to include highlighting (and screenshots)
 "Scan this page now" context menu item
 Add error display to page header
@@ -35,6 +35,7 @@ Preferences page:
 3Search marker beside scrollbar?
 4Allow customisation of alert text?
 4Email alerts?
+4Uninstall should delete rdf?
 
 Bugs:
 Get rid of refresher where possible
@@ -42,7 +43,7 @@ Greyed out item that loads ok in browser
 Still some strange diff highlight things happening
 Occasionally status icon doesn't update - use pref observer
 3Conflict with Hyperwords extension?
-3Uninstall should delete rdf?
+
 
 
 Done:

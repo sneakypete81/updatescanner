@@ -101,6 +101,9 @@ function upgrade_2_0_14()
     // Previous versions had bug where multiple items used the same file.
     // First, check for duplications
     nodes = getRDFroot().getChildren();
+    if (!nodes.hasMoreElements()) {
+        return true; // No need to do anything - nothing in the tree
+    }
     while (nodes.hasMoreElements()) { // Get a list of filename bases
         node = nodes.getNext();
         id = node.getValue();
