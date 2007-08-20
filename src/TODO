@@ -38,6 +38,7 @@ Preferences page:
 
 Bugs:
 Make timeout 30 seconds?
+Don't store partial pages if timeout occurs
 Get rid of refresher where possible
 Greyed out item that loads ok in browser
 Still some strange diff highlight things happening
