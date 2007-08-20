@@ -37,6 +37,7 @@ Preferences page:
 4Email alerts?
 
 Bugs:
+Make timeout 30 seconds?
 Get rid of refresher where possible
 Greyed out item that loads ok in browser
 Still some strange diff highlight things happening
