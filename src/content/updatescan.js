@@ -143,6 +143,7 @@ function scanButtonClick()
         scan.start(scanChangedCallback, scanFinishedCallback, showProgress,
                    scanEncodingCallback);
     } else {
+        numChanges = 0;
         scanFinishedCallback(str.getString("treeEmptyAlert"));
     }
 }
