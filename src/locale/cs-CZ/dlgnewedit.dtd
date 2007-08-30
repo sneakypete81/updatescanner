@@ -1,0 +1,13 @@
+<!ENTITY url.label "Adresa:">
+<!ENTITY title.label "Název:">
+<!ENTITY threshold.label "Citlivost na změny">
+<!ENTITY autoscan.label "Automatické prohledávání">
+<!ENTITY low.label "Nízká">
+<!ENTITY high.label "Vysoká">
+<!ENTITY often.label "Často">
+<!ENTITY never.label "Nikdy">
+<!ENTITY ignoreNumbers.label "Ignorovat změny čísel">
+<!ENTITY advanced.label "Pokročilé...">
+<!ENTITY charEncoding.label "Znaková sada">
+<!ENTITY autoDetect.label "Automatické rozpoznání">
+<!ENTITY use.label "Použít">

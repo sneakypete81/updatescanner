@@ -1,0 +1,12 @@
+<!ENTITY scanbutton.label "Prohledat">
+<!ENTITY stopbutton.label "Zrušit">
+<!ENTITY newbutton.tooltip "Nová položka">
+<!ENTITY showallchangesinnewtabsbutton.tooltip "Zobrazit všechny změněné stránky v nových panelech">
+<!ENTITY deletebutton.tooltip "Odstranit">
+<!ENTITY openmenu.label "Zobrazit změny">
+<!ENTITY opentabmenu.label "Zobrazit změny v nových panelech">
+<!ENTITY showallchangesinnewtabsmenu.label "Zobrazit všechny změněné stránky v nových panelech">
+<!ENTITY markvisitedmenu.label "Označit vše za prohlédnuté">
+<!ENTITY sortbynamemenu.label "Seřadit podle názvu">
+<!ENTITY deletemenu.label "Odstranit">
+<!ENTITY editmenu.label "Vlastnosti">
