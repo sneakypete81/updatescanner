@@ -1,6 +1,6 @@
 <!ENTITY scanbutton.label "Skanuj">
 <!ENTITY stopbutton.label "Anuluj">
-<!ENTITY newbutton.tooltip "Dodaj nowy wpis">
+<!ENTITY newbutton.tooltip "Dodaj nową stronę">
 <!ENTITY showallchangesinnewtabsbutton.tooltip "Wyświetl wszystkie zmienione strony w nowych kartach">
 <!ENTITY deletebutton.tooltip "Usuń">
 <!ENTITY openmenu.label "Wyświetl zmiany">
