@@ -50,6 +50,12 @@ Done:
 -- Unreleased 2.1--
 Make default timeout 30 seconds
 Don't store partial pages if timeout occurs
+Czech locale added+amo
+Polish locale updated+amo
+Italian locale updated+amo
+Hungarian locale updated (amo not supported)
+French locale updated+amo
+German locale updated+amo
 Spanish locale updated+amo
 Korean locale updated+amo
 Dutch locale updated+amo
