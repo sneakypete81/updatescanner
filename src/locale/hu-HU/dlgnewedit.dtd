@@ -2,7 +2,12 @@
 <!ENTITY title.label "Cím:">
 <!ENTITY threshold.label "Jelzett változások mértéke:">
 <!ENTITY autoscan.label "Automatikus ellenőrzés gyakorisága:">
-<!ENTITY low.label "Alacsony">
-<!ENTITY high.label "Magas">
-<!ENTITY often.label "Gyakran">
-<!ENTITY never.label "Soha">
+<!ENTITY low.label "Kevés">
+<!ENTITY high.label "Sok">
+<!ENTITY often.label "Gyakori">
+<!ENTITY never.label "Ritka">
+<!ENTITY ignoreNumbers.label "Kihagyható változások száma">
+<!ENTITY advanced.label "Haladó...">
+<!ENTITY charEncoding.label "Karakterkódolás">
+<!ENTITY autoDetect.label "Automatikus felismerés">
+<!ENTITY use.label "Alkalmaz">

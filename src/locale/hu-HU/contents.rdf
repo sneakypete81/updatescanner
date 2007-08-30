@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
 <RDF:RDF
     xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:chrome="http://www.mozilla.org/rdf/chrome#"
->
+    xmlns:chrome="http://www.mozilla.org/rdf/chrome#">
     <RDF:Seq about="urn:mozilla:locale:root">
         <RDF:li resource="urn:mozilla:locale:hu-HU"/>
     </RDF:Seq>
@@ -11,8 +10,7 @@
         chrome:displayName="Magyar (HU)"
         chrome:author="JZsolt"
         chrome:name="hu-HU"
-        chrome:previewURL="http://www.mozilla.org/locales/hu-HU.gif"
-    >
+        chrome:previewURL="http://www.mozilla.org/locales/hu-HU.gif">
         <chrome:packages>
             <RDF:Seq about="urn:mozilla:locale:hu-HU:packages">
                 <RDF:li resource="urn:mozilla:locale:hu-HU:updatescan"/>
