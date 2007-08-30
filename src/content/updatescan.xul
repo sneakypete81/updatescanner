@@ -147,10 +147,7 @@
       <progressmeter id="Progress" mode="normal" value="0" 
 		     collapsed="true" flex="1"/>
     </hbox>
-    <hbox>
-      <label id="StatusText" value=""/>
-    </hbox>
-
+    <label id="StatusText" crop="end" value=""/>
   </vbox>
     
   <popupset>
