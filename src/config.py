@@ -20,8 +20,8 @@ uid = 'c07d1a49-9894-49ff-a594-38960ede8fb9'
 major_version = 2
 minor_version = 0
 revision_version = 13
-build_version = 11
-in_development = False
+build_version = 12
+in_development = True
 
 if build_version:
     version = "%d.%d.%d.%d%s" % (

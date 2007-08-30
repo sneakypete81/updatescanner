@@ -96,6 +96,7 @@ function upgrade_2_0_14()
     var ucaseFiles = new Array();
     var params;
     var label;
+    var label2;
     var str=document.getElementById("updatescanStrings");
 
     // Previous versions had bug where multiple items used the same file.
@@ -112,8 +113,11 @@ function upgrade_2_0_14()
         files.push(file);
         ucaseFiles.push(file.toUpperCase());
     }      
-    label = str.getString("upgradeLabel")+" (1/2)..."  
+    label =  str.getString("upgradeLabel")+" (1/2)...";
+//    label2 = str.getString("timeWarning");
+    label2 = "This may take several minutes.";
     params = {label:label, 
+              label2:label2,
               callback:upgradeCheckDup, 
               items:files, 
               data:ucaseFiles, 
@@ -146,8 +150,11 @@ function upgrade_2_0_14()
 
     // 2.0.14+ expects diffs to be done during scan, not during display
     // Need to generate diffs now.
-    label = str.getString("upgradeLabel")+" (2/2)..."  
+    label = str.getString("upgradeLabel")+" (2/2)...";
+//    label2 = str.getString("timeWarning");
+    label2 = "This may take several minutes.";
     params = {label:label, 
+              label2:label2,
               callback:upgradeDiff, 
               items:files, 
               data:null, 

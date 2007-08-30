@@ -224,7 +224,7 @@ function openNewDialogNoRefresh(title, url)
         scanRateMins:   "60",       // scan once an hour by default
         encoding:       "auto",     // Auto encoding by default
         ignoreNumbers:  "true",     // Ignore number changes by default
-        advanced:       false
+        advanced:       true
     };
 
     window.openDialog('chrome://updatescan/content/dlgnewedit.xul', 'dlgNew', 
@@ -263,7 +263,7 @@ function openEditDialog()
         ignoreNumbers:  queryRDFitem(id, "ignoreNumbers", "false"),
         // Although ignoreNumbers is true by default, behaviour of pages
         // upgraded from previous version shouldn't be modified
-        advanced:       false
+        advanced:       true
     }
 
     var oldurl = args.url;

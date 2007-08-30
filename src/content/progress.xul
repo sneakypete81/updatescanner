@@ -47,6 +47,7 @@
 <spacer class="margintopbottom"/>
 <vbox>
   <label id="progressLabel"/>
+  <label id="progressLabel2" hidden="true"/>
   <progressmeter id="progressMeter" width="400" value="0"/>
 </vbox>
 <spacer class="margintopbottom" />

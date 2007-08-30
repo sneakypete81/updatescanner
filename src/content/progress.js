@@ -54,6 +54,12 @@ function initDialog()
     data =     window.arguments[0].data;
     callback = window.arguments[0].callback;
     cancelPrompt = window.arguments[0].cancelPrompt;
+    var label2 = window.arguments[0].label2;
+    if (label2) {
+        document.getElementById("progressLabel2").value = label2
+        document.getElementById("progressLabel2").hidden = false;
+    }
+
     count = 0;
     cancelling = false;
     retData = new Array();

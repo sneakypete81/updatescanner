@@ -50,11 +50,11 @@ Done:
 -- Unreleased 2.1--
 Make default timeout 30 seconds
 Don't store partial pages if timeout occurs
-Spanish locale updated.amo
-Korean locale updated.amo
-Dutch locale updated.amo
-Russian locale updated.amo
-Slovak locale updated.amo
+Spanish locale updated+amo
+Korean locale updated+amo
+Dutch locale updated+amo
+Russian locale updated+amo
+Slovak locale updated+amo
 Update stored files even if change threshold not triggered
 Autodetect character encodings 
 Update non-english locales with new substitution scheme
