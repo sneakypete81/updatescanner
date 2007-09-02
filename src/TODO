@@ -47,7 +47,8 @@ Occasionally status icon doesn't update - use pref observer
 
 
 Done:
--- Unreleased 2.1--
+-- 2.0.14--
+Scan button no longer jumps around when status bar text is too long
 Make default timeout 30 seconds
 Don't store partial pages if timeout occurs
 Czech locale added+amo
