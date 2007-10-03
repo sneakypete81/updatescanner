@@ -23,8 +23,7 @@ major_version = 2
 minor_version = 0
 revision_version = 14
 build_version = 1
-in_development = True
-
+in_development = False# Don't forget to update helpLocale in all locales!
 if build_version:
     version = "%d.%d.%d.%d%s" % (
         major_version,

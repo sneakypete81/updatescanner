@@ -1,52 +1,11 @@
-Things to do:
-
-Features:
-Add title to status during manual scan
-Update amo description to include highlighting (and screenshots)
-"Scan this page now" context menu item
-Add error display to page header
-Write help pages
-"don't highlight changes" option
-Alert sounds
-drag n drop
-bookmark menu item?
-Rightclick on link
-Export .rdf file
-Preferences page:
-  Default threshold/scan settings
-  Notify disable option 
-  Change notification text
-  Notification time / click to dismiss
-  3Hotkey
-  Toolbar customisation
-  Adjust scan timeout
-
-??Options to enable scripts when viewing diffs
-3Handle frames or display error
-3??Check rdf file integrity (remove empty urls)
-3Add to tab context menu
-3Auto place on toolbar
-3Hotkey shortcut - ctrl-c??
-3Add subfolders in tree
-3Only scan a small part of the page
-3Ignore certain div sections?
-3Only if specified text appears/disappears?
-3Only notify if a link changes
-3Search marker beside scrollbar?
-4Allow customisation of alert text?
-4Email alerts?
-4Uninstall should delete rdf?
-
-Bugs:
-Get rid of refresher where possible
-Greyed out item that loads ok in browser
-Still some strange diff highlight things happening
-Occasionally status icon doesn't update - use pref observer
-3Conflict with Hyperwords extension?
 
 
 
 Done:
+-- Unreleased --
+Help button links to website
+Autobackup to prevent rdf corruption
+
 -- 2.0.14--
 Scan button no longer jumps around when status bar text is too long
 Make default timeout 30 seconds

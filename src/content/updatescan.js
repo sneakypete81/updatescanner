@@ -502,6 +502,14 @@ function sortItem(index, data)
     return null;    
 }
 
+function openHelp()
+{
+    var str=document.getElementById("updatescanStrings")
+    var locale=str.getString("helpLocale");
+    var helpURL="http://updatescanner.mozdev.org/redirect.php?page=help.html&from=toolbar&locale="+locale;
+    openTopWin(helpURL);
+}
+
 function deleteSelectedItem()
 {
     var str=document.getElementById("updatescanStrings")

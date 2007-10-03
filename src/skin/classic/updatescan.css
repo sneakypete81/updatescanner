@@ -12,6 +12,10 @@
   list-style-image: url("chrome://updatescan/skin/edit-delete.png");
 }
 
+#help-button {
+  list-style-image: url("chrome://updatescan/skin/help-browser.png");
+}
+
 #scan-button {
   list-style-image: url("chrome://updatescan/skin/updatescan.png");
 }
