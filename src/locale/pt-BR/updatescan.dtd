@@ -1,0 +1,12 @@
+<!ENTITY scanbutton.label "Verificar">
+<!ENTITY stopbutton.label "Cancelar">
+<!ENTITY newbutton.tooltip "Nova entrada">
+<!ENTITY showallchangesinnewtabsbutton.tooltip "Mostrar as páginas alteradas em novas abas">
+<!ENTITY deletebutton.tooltip "Apagar">
+<!ENTITY openmenu.label "Mostrar alterações">
+<!ENTITY opentabmenu.label "Mostrar alterações em uma nova aba">
+<!ENTITY showallchangesinnewtabsmenu.label "Mostrar as páginas alteradas em novas abas">
+<!ENTITY markvisitedmenu.label "Marcar todas como já visitadas">
+<!ENTITY sortbynamemenu.label "Organizar por nome">
+<!ENTITY deletemenu.label "Apagar">
+<!ENTITY editmenu.label "Propriedades">
