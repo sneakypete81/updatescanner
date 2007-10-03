@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-APP=updatescan
-
 mkdir -p chrome
 JAR="chrome/$APP.jar"
 [ -f $JAR ] && rm $JAR
