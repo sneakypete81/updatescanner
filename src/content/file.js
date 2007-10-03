@@ -108,6 +108,36 @@ function mvFile(sourcefile, destfile)
     return true;
 }
 
+function cpFile(sourcefile, destfile)
+{
+    return cpFileGeneric(prependUpdatescanPath(sourcefile), 
+                         prependUpdatescanPath(destfile));
+}
+
+function cpFileGeneric(sourcefile, destfile)
+{
+    // get a component for the file to copy
+    var aSrc = Components.classes["@mozilla.org/file/local;1"]
+    .createInstance(Components.interfaces.nsILocalFile);
+    if (!aSrc) return false;
+
+    // get a component for the file to copy to
+    var aDest = Components.classes["@mozilla.org/file/local;1"]
+    .createInstance(Components.interfaces.nsILocalFile);
+    if (!aDest) return false;
+
+    try {
+        // next, assign URLs to the file components
+        aSrc.initWithPath(sourcefile);
+        aDest.initWithPath(destfile);
+    
+        // finally, copy the file
+        aSrc.copyTo(aDest.parent, aDest.leafName);
+    } catch (err) {
+        return false;
+    }
+    return true;
+}
 function prependUpdatescanPath(filename)
 {
   // get the path to the user's home (profile) directory

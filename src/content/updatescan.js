@@ -47,12 +47,12 @@ function loadUpdateScan()
     var rdffile;
 
     // Connect to the RDF file
-    rdffile = getRDFuri();
-    initRDF(rdffile);
+    rdffile = getRDFpath();
+    initRDF(getURI(rdffile));
 
     // link to the listbox
     tree = document.getElementById("UpdateTree");
-    tree.datasources=rdffile;
+    tree.datasources=getURI(rdffile);
     tree.onclick=treeClick;
 
     upgradeCheck(); // See if we need to upgrade something

@@ -48,6 +48,9 @@ if (typeof(JSIO) != 'boolean') {
         sinstreamCID  : '@mozilla.org/scriptableinputstream;1',
         sinstreamIID  : Components.interfaces.nsIScriptableInputStream,
 
+        binstreamCID  : '@mozilla.org/binaryinputstream;1',
+        binstreamIID  : Components.interfaces.nsIBinaryInputStream,
+
         suniconvCID   : '@mozilla.org/intl/scriptableunicodeconverter',
         suniconvIID   : Components.interfaces.nsIScriptableUnicodeConverter,
 
@@ -98,6 +101,27 @@ if (typeof(JSIO) != 'boolean') {
                 return false;
             }
         },
+
+        readBinary : function(file) {
+            try {
+                var bytes    = new String();
+                var fiStream = Components.classes[this.finstreamCID]
+                                    .createInstance(this.finstreamIID);
+                var biStream = Components.classes[this.binstreamCID]
+                                    .createInstance(this.binstreamIID);
+                fiStream.init(file, -1, -1, false);
+                biStream.setInputStream(fiStream);
+                bytes = biStream.readBytes(biStream.available());
+                biStream.close();
+                fiStream.close();
+                return bytes;
+            }
+            catch(e) {
+                return false;
+            }
+        },
+
+
 
         write  : function(file, data, mode, charset) {
             try {

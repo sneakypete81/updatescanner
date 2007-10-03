@@ -71,8 +71,8 @@ function addToUpdateScan(aBrowser)
     var rdffile;
 
     if (!initRDFdone) {
-        rdffile = getRDFuri();
-        initRDF(rdffile);
+        rdffile = getRDFpath();
+        initRDF(getURI(rdffile));
         initRDFdone = true;
     }
 

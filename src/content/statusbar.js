@@ -38,10 +38,24 @@ var autoscan;
 function loadStatusbar()
 {
     var rdffile;
-
+    var backupfile;
+    var corruptfile;
     // Connect to the RDF file
-    rdffile = getRDFuri();
-    initRDF(rdffile);
+    rdffile = getRDFpath();
+
+    backupfile = rdffile.parent
+    backupfile.append("updatescan_backup.rdf")
+    corruptfile = rdffile.parent
+    corruptfile.append("updatescan_corrupt.rdf")
+  
+    if (checkRDF(rdffile.path)) {
+        cpFileGeneric(rdffile.path, backupfile.path)
+    } else {
+        cpFileGeneric(rdffile.path, corruptfile.path)
+        cpFileGeneric(backupfile.path, rdffile.path)
+    }
+
+    initRDF(getURI(rdffile));
 
     // Check for refresh requests
     refresh = new Refresher("refreshTreeRequest", refreshStatusbar);
