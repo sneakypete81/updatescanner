@@ -68,7 +68,7 @@
       <toolbarbutton id="new-button" oncommand="openNewDialog()" tooltiptext="&newbutton.tooltip;"/>
       <toolbarbutton id="new-tab-button" oncommand="showAllChangesInNewTabs()" tooltiptext="&showallchangesinnewtabsbutton.tooltip;"/>
       <toolbarbutton id="delete-button" oncommand="deleteSelectedItem()" tooltiptext="&deletebutton.tooltip;"/>
-      <toolbarbutton id="help-button" oncommand="openHelp()"/><!-- tooltiptext="&helpbutton.tooltip;"/>-->
+      <toolbarbutton id="help-button" oncommand="openHelp()" tooltiptext="&helpbutton.tooltip;"/>
       <toolbarspring />
       <button observes="scanbutton" />
     </hbox>

@@ -23,8 +23,8 @@ uid = 'c07d1a49-9894-49ff-a594-38960ede8fb9'
 major_version = 2
 minor_version = 0
 revision_version = 14
-build_version = 1
-in_development = False# Don't forget to update helpLocale in all locales!
+build_version = 2
+in_development = False
 if build_version:
     version = "%d.%d.%d.%d%s" % (
         major_version,

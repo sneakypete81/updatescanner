@@ -505,8 +505,11 @@ function sortItem(index, data)
 function openHelp()
 {
     var str=document.getElementById("updatescanStrings")
-    var locale=str.getString("helpLocale");
-    var helpURL="http://updatescanner.mozdev.org/redirect.php?page=help.html&from=toolbar&locale="+locale;
+    var locale = Components.classes["@mozilla.org/preferences-service;1"].
+                 getService(Components.interfaces.nsIPrefService).
+                 getBranch("general.").
+                 getCharPref("useragent.locale");
+    var helpURL="http://updatescanner.mozdev.org/redirect.php?page=help.html&locale="+locale;
     openTopWin(helpURL);
 }
 

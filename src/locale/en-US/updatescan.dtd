@@ -10,6 +10,7 @@
 <!ENTITY newbutton.tooltip "New Entry">
 <!ENTITY showallchangesinnewtabsbutton.tooltip "Show All Changed Pages in New Tabs">
 <!ENTITY deletebutton.tooltip "Delete">
+<!ENTITY helpbutton.tooltip "Update Scanner Help">
 <!-- Menu strings (right-click in the sidebar list to view) -->
 <!ENTITY openmenu.label "Show Changes">
 <!ENTITY opentabmenu.label "Show Changes in New Tab">

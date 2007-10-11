@@ -114,8 +114,7 @@ function upgrade_2_0_14()
         ucaseFiles.push(file.toUpperCase());
     }      
     label =  str.getString("upgradeLabel")+" (1/2)...";
-//    label2 = str.getString("timeWarning");
-    label2 = "This may take several minutes.";
+    label2 = str.getString("timeWarning");
     params = {label:label, 
               label2:label2,
               callback:upgradeCheckDup, 
