@@ -6,3 +6,8 @@
 <!ENTITY high.label "高い">
 <!ENTITY often.label "頻繁">
 <!ENTITY never.label "なし">
+<!ENTITY ignoreNumbers.label "">
+<!ENTITY advanced.label "">
+<!ENTITY charEncoding.label "">
+<!ENTITY autoDetect.label "">
+<!ENTITY use.label "">

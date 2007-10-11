@@ -134,5 +134,9 @@ locales = {
 #        'locale_version': '1.0',
 #        'display_name': name,
 #    },
+#    'zh-CN': {
+#        'locale_version': '1.0',
+#        'display_name': name,
+#    },
 }
 

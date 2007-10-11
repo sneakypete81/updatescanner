@@ -6,3 +6,8 @@
 <!ENTITY high.label "Yüksek">
 <!ENTITY often.label "Sık">
 <!ENTITY never.label "Hiçbir zaman">
+<!ENTITY ignoreNumbers.label "">
+<!ENTITY advanced.label "">
+<!ENTITY charEncoding.label "">
+<!ENTITY autoDetect.label "">
+<!ENTITY use.label "">
