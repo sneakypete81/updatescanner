@@ -3,6 +3,7 @@
 <!ENTITY newbutton.tooltip "Új elem hozzáadása">
 <!ENTITY showallchangesinnewtabsbutton.tooltip "Minden megváltozott oldal mutatása új füleken">
 <!ENTITY deletebutton.tooltip "Törlés a listáról">
+<!ENTITY helpbutton.tooltip "Frissítés ellenőrző súgó">
 <!ENTITY openmenu.label "Változások mutatása">
 <!ENTITY opentabmenu.label "Változások mutatása új fülön">
 <!ENTITY showallchangesinnewtabsmenu.label "Minden megváltozott oldal mutatása új füleken">

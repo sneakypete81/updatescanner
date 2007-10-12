@@ -3,6 +3,7 @@
 <!ENTITY newbutton.tooltip "Nueva entrada">
 <!ENTITY showallchangesinnewtabsbutton.tooltip "Ver todas las páginas cambiadas en pestañas nuevas">
 <!ENTITY deletebutton.tooltip "Borrar">
+<!ENTITY helpbutton.tooltip "Update Scanner - Ayuda">
 <!ENTITY openmenu.label "Ver cambios">
 <!ENTITY opentabmenu.label "Ver los cambios en una pestaña nueva">
 <!ENTITY showallchangesinnewtabsmenu.label "Ver todas las páginas cambiadas en pestañas nuevas">
