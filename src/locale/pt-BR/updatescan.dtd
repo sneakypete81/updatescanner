@@ -3,6 +3,7 @@
 <!ENTITY newbutton.tooltip "Nova entrada">
 <!ENTITY showallchangesinnewtabsbutton.tooltip "Mostrar as páginas alteradas em novas abas">
 <!ENTITY deletebutton.tooltip "Apagar">
+<!ENTITY helpbutton.tooltip "Ajuda do UpdateScanner">
 <!ENTITY openmenu.label "Mostrar alterações">
 <!ENTITY opentabmenu.label "Mostrar alterações em uma nova aba">
 <!ENTITY showallchangesinnewtabsmenu.label "Mostrar as páginas alteradas em novas abas">

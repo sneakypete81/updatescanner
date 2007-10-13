@@ -3,6 +3,7 @@
 <!ENTITY newbutton.tooltip "Новая запись">
 <!ENTITY showallchangesinnewtabsbutton.tooltip "Показать все изменённые страницы в новых вкладках">
 <!ENTITY deletebutton.tooltip "Удалить">
+<!ENTITY helpbutton.tooltip "Справка Update Scanner">
 <!ENTITY openmenu.label "Показать изменения">
 <!ENTITY opentabmenu.label "Показать изменение в новой вкладке">
 <!ENTITY showallchangesinnewtabsmenu.label "Показать все изменённые страницы в новых вкладках">
