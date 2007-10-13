@@ -15,7 +15,7 @@ translators = ['SlovakSoft (Slovenčina)',
                'JZsolt (Magyar)',
                'Edvard Borovskij (Russian)',
                'Leszek(teo)Życzkowski (Polski)',
-               'PetrTwo (Čeština)'
+               'PetrTwo (Čeština)',
                'Raryel Costa Souza (português brasileiro)']
 authorURL = "http://updatescanner.mozdev.org"
 uid = 'c07d1a49-9894-49ff-a594-38960ede8fb9'
@@ -23,8 +23,10 @@ uid = 'c07d1a49-9894-49ff-a594-38960ede8fb9'
 major_version = 2
 minor_version = 0
 revision_version = 14
-build_version = 2
-in_development = False
+build_version = 3
+in_development = True
+publish_babelzilla = False
+
 if build_version:
     version = "%d.%d.%d.%d%s" % (
         major_version,
@@ -98,18 +100,10 @@ locales = {
         'locale_version': '1.0',
         'display_name': name,
     },
-#    'ja-JP': {
-#        'locale_version': '1.0',
-#        'display_name': name,
-#    },
     'ko-KR': {
         'locale_version': '1.0',
         'display_name': name,
     },
-#    'ms-MY': {
-#        'locale_version': '1.0',
-#        'display_name': name,
-#    },
     'nl-NL': {
         'locale_version': '1.0',
         'display_name': name,
@@ -130,13 +124,30 @@ locales = {
         'locale_version': '1.0',
         'display_name': name,
     },
-#    'tr-TR': {
-#        'locale_version': '1.0',
-#        'display_name': name,
-#    },
-#    'zh-CN': {
-#        'locale_version': '1.0',
-#        'display_name': name,
-#    },
 }
 
+incomplete_locales = {
+    'ja-JP': {
+        'locale_version': '1.0',
+        'display_name': name,
+    },
+    'ms-MY': {
+        'locale_version': '1.0',
+        'display_name': name,
+    },
+    'tr-TR': {
+        'locale_version': '1.0',
+        'display_name': name,
+    },
+    'zh-CN': {
+        'locale_version': '1.0',
+        'display_name': name,
+    },
+}
+
+# Only include incomplete locales if we're building for babelzilla
+if publish_babelzilla:
+    print "*** Babelzilla version - includes incomplete locales ***"
+    locales.update(incomplete_locales)
+else:
+    print "  Excluding incomplete locales"
