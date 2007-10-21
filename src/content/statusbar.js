@@ -43,16 +43,19 @@ function loadStatusbar()
     // Connect to the RDF file
     rdffile = getRDFpath();
 
-    backupfile = rdffile.parent
-    backupfile.append("updatescan_backup.rdf")
-    corruptfile = rdffile.parent
-    corruptfile.append("updatescan_corrupt.rdf")
+    // Backup the RDF file, in case of corruption
+    backupfile = rdffile.parent;
+    backupfile.append("updatescan_backup.rdf");
+    corruptfile = rdffile.parent;
+    corruptfile.append("updatescan_corrupt.rdf");
   
     if (checkRDF(rdffile.path)) {
-        cpFileGeneric(rdffile.path, backupfile.path)
+        cpFileGeneric(rdffile.path, backupfile.path);
     } else {
-        cpFileGeneric(rdffile.path, corruptfile.path)
-        cpFileGeneric(backupfile.path, rdffile.path)
+        // RDF is corrupt - restore from last backup
+        cpFileGeneric(rdffile.path, corruptfile.path);
+        rmFileGeneric(rdffile.path);
+        cpFileGeneric(backupfile.path, rdffile.path);
     }
 
     initRDF(getURI(rdffile));

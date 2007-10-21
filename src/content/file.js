@@ -63,14 +63,17 @@ function readFile(filename)
     return data;
 }
 
-function rmFile(filename) 
+function rmFile(filename)
 {
-    var file = prependUpdatescanPath(filename);
+    rmFileGeneric(prependUpdatescanPath(filename));
+}
 
+function rmFileGeneric(filename)
+{
     var aFile = Components.classes["@mozilla.org/file/local;1"].createInstance();
     if ( aFile instanceof Components.interfaces.nsILocalFile) {
         try {
-            aFile.initWithPath(file);
+            aFile.initWithPath(filename);
             aFile.remove(false);
         } catch (err) {
             return false;

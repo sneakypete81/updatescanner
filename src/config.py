@@ -24,7 +24,7 @@ major_version = 2
 minor_version = 0
 revision_version = 14
 build_version = 3
-in_development = True
+in_development = False
 publish_babelzilla = False
 
 if build_version:
