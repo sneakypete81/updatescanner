@@ -43,13 +43,13 @@ function createUpdatescanDir()
     DirIO.create(dir);
 }
 
-function writeFile(filename, data)
+function USwriteFile(filename, data)
 {
     var outFile = FileIO.open(prependUpdatescanPath(filename));
     return FileIO.write(outFile, data, "","UTF-8");    
 }
 
-function readFile(filename)
+function USreadFile(filename)
 {
     var inFile = FileIO.open(prependUpdatescanPath(filename));
     if (!inFile.exists()) {

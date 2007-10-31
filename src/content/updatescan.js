@@ -132,7 +132,7 @@ function scanButtonClick()
             }
             scan.addURL(id, queryRDFitem(id, "title", "No Title"), 
                         queryRDFitem(id, "url", ""), 
-                        readFile(filebase+".new"),
+                        USreadFile(filebase+".new"),
                         queryRDFitem(id, "threshold", 100),
                         ignoreNumbers,
                         queryRDFitem(id, "encoding", "auto"));
@@ -239,7 +239,7 @@ function openNewDialogNoRefresh(title, url)
         modifyRDFitem(id, "ignoreNumbers", args.ignoreNumbers);
 
         filebase = escapeFilename(id);
-        writeFile(filebase+".new", "**NEW**");
+        USwriteFile(filebase+".new", "**NEW**");
 
         modifyRDFitem(id, "lastscan", "");  // lastscan not defined
         modifyRDFitem(id, "changed", "0");  // not changed 
@@ -281,7 +281,7 @@ function openEditDialog()
 
         if (oldurl != args.url) {   // URL changed - reset all values
             filebase = escapeFilename(id);
-            writeFile(filebase+".new", "**NEW**");
+            USwriteFile(filebase+".new", "**NEW**");
 
             modifyRDFitem(id, "lastscan", "");  // lastscan not defined
             modifyRDFitem(id, "changed", "0");  // not changed
@@ -324,9 +324,9 @@ function diffItem(id, numItems)
     var filebase = escapeFilename(id);
     return displayDiffs(queryRDFitem(id, "title", "No Title"), 
             queryRDFitem(id, "url", ""), 
-            readFile(filebase+".old"),
-            readFile(filebase+".new"),
-            readFile(filebase+".dif"),
+            USreadFile(filebase+".old"),
+            USreadFile(filebase+".new"),
+            USreadFile(filebase+".dif"),
             oldDate, newDate, numItems);
 }
 

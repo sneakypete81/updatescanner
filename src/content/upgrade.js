@@ -69,7 +69,7 @@ function upgradeCheck()
             modifyRDFitem(id, "error", "0");
             modifyRDFitem(id, "lastautoscan", "5 November 1978");
             filebase = escapeFilename(id);
-            writeFile(filebase+".new", "**NEW**");// Mark as new
+            USwriteFile(filebase+".new", "**NEW**");// Mark as new
         }
         saveRDF();
     }
@@ -172,10 +172,10 @@ function upgrade_2_0_14()
 function upgradeDiff(filebase, data)
 {
     // Create a diff file for the specified filebase
-    var oldContent = readFile(filebase+".old");
-    var newContent = readFile(filebase+".new");
+    var oldContent = USreadFile(filebase+".old");
+    var newContent = USreadFile(filebase+".new");
     var diffContent = createDiffs(oldContent, newContent);
-    writeFile(filebase+".dif", diffContent);
+    USwriteFile(filebase+".dif", diffContent);
     return null;
 }
 

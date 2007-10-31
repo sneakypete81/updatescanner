@@ -398,10 +398,10 @@ function processScanChange(id, newContent, status, statusText, headerText)
             modifyRDFitem(id, "old_lastscan", oldLastscan);
         }
 
-        oldContent  = readFile(filebase+".old");
+        oldContent  = USreadFile(filebase+".old");
         diffContent = createDiffs(oldContent, newContent);   
-        writeFile(filebase+".dif", diffContent);
-        writeFile(filebase+".new", newContent);
+        USwriteFile(filebase+".dif", diffContent);
+        USwriteFile(filebase+".new", newContent);
 
 	    modifyRDFitem(id, "changed", "1");
         modifyRDFitem(id, "lastscan", now.toString());
@@ -410,10 +410,10 @@ function processScanChange(id, newContent, status, statusText, headerText)
         if (logHeaders) modifyRDFitem(id, "headerText", headerText);        
     } else if (status == STATUS_MINOR_CHANGE) {
         // Minor change: don't notify, but save new page and diff
-        oldContent  = readFile(filebase+".old");
+        oldContent  = USreadFile(filebase+".old");
         diffContent = createDiffs(oldContent, newContent);   
-        writeFile(filebase+".dif", diffContent);
-        writeFile(filebase+".new", newContent);
+        USwriteFile(filebase+".dif", diffContent);
+        USwriteFile(filebase+".new", newContent);
 
         modifyRDFitem(id, "error", "0");
         modifyRDFitem(id, "lastscan", now.toString());
@@ -425,9 +425,9 @@ function processScanChange(id, newContent, status, statusText, headerText)
         modifyRDFitem(id, "statusText", statusText);
         if (logHeaders) modifyRDFitem(id, "headerText", headerText);        
     } else if (status == STATUS_NEW) {
-	    writeFile(filebase+".dif", newContent);
-	    writeFile(filebase+".old", newContent);
-	    writeFile(filebase+".new", newContent);
+	    USwriteFile(filebase+".dif", newContent);
+	    USwriteFile(filebase+".old", newContent);
+	    USwriteFile(filebase+".new", newContent);
 	    modifyRDFitem(id, "lastscan", now.toString());
 	    modifyRDFitem(id, "old_lastscan", now.toString());
 	    modifyRDFitem(id, "error", "0");
