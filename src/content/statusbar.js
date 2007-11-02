@@ -40,25 +40,27 @@ function loadStatusbar()
     var rdffile;
     var backupfile;
     var corruptfile;
-    // Connect to the RDF file
+
     rdffile = getRDFpath();
 
-    // Backup the RDF file, in case of corruption
     backupfile = rdffile.parent;
     backupfile.append("updatescan_backup.rdf");
     corruptfile = rdffile.parent;
     corruptfile.append("updatescan_corrupt.rdf");
   
-    if (checkRDF(rdffile.path)) {
-        cpFileGeneric(rdffile.path, backupfile.path);
-    } else {
+    if (!checkRDF(rdffile.path)) {
         // RDF is corrupt - restore from last backup
+        rmFileGeneric(corruptfile.path);
         cpFileGeneric(rdffile.path, corruptfile.path);
         rmFileGeneric(rdffile.path);
         cpFileGeneric(backupfile.path, rdffile.path);
     }
 
     initRDF(getURI(rdffile));
+
+    // Backup the rdf file in case of corruption
+    rmFileGeneric(backupfile.path);
+    cpFileGeneric(rdffile.path, backupfile.path);
 
     // Check for refresh requests
     refresh = new Refresher("refreshTreeRequest", refreshStatusbar);
