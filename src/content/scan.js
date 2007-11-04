@@ -56,14 +56,12 @@ function Scanner()
  
     this.clear = function()
     {
-//        myDump("Clear");
         itemlist.length = 0;
     }
 
     this.cancel = function()
     {
         if (scanning) {
-//            myDump("Cancel");
             scanning = false;
             me.stopTimeout();
             hideProgress();
@@ -86,7 +84,6 @@ function Scanner()
         }
 	    if (scanTimeout < 10) scanTimeout = 10;
         me.stopTimeout();
-//        myDump("Start Timeout:"+scanTimeout);
         scanTimerRunning = true;
         timeoutError = false;
         scanTimerID = setTimeout(me.timeout, scanTimeout*1000);
@@ -94,7 +91,6 @@ function Scanner()
 
     this.stopTimeout = function()
     {
-//        myDump("Stop Timeout");
         if (scanTimerRunning) {
             clearTimeout(scanTimerID);
             scanTimerRunning = false;
@@ -105,11 +101,8 @@ function Scanner()
     this.timeout = function()
     {
         if (httpreq) { // Abort the request - this triggers an error 
-//            myDump("timeout");
             timeoutError = true;
             httpreq.abort(); // Triggers this.next with status undefined
-//        } else {
-//            myDump("Timeout with no httpreq")
         }
     }
 
@@ -124,7 +117,6 @@ function Scanner()
     this.start = function(changedCallbackarg, finishedCallbackarg,
               progressCallbackarg, encodingCallbackarg)
     {
-//        myDump("Start");         
         changedCallback = changedCallbackarg;
         finishedCallback = finishedCallbackarg;
         progressCallback = progressCallbackarg;
@@ -186,7 +178,6 @@ function Scanner()
             try {
                 if (httpreqStatus == 200 || httpreqStatus == 0) {
                     // 200 = OK, 0 = FTP/FILE finished
-//                    myDump("StatusText="+httpreqStatusText)
 
                     if (page.encoding == "auto") {
                         // Scan the response for encoding
@@ -213,27 +204,20 @@ function Scanner()
                         newContent = stripNumbers(newContent);
                     }
                     if (newContent == "" || page.content == httpreqResponseText) {
-//                          myDump("No Change");
                         status = STATUS_NO_CHANGE;
                     } else if (checkSame(newContent, oldContent, page.threshold)) {
-//                          myDump("Minor Change");
                           status = STATUS_MINOR_CHANGE;
                     } else {
                         if (page.content == "**NEW**") {
-//                            myDump("New");
                             status = STATUS_NEW;
                         } else {
-//                            myDump("Change");
                             status = STATUS_CHANGE;
                         }
                     }
                 } else {
-//                    myDump("Error status="+httpreqStatus);
-//                    myDump("StatusText="+httpreqStatusText);                    
                     status = STATUS_ERROR;
                 }
             } catch (e) {
-//                myDump("Error except="+e);                    
                 status = STATUS_ERROR;
             }
             changedCallback(page.id, httpreqResponseText, status, 
@@ -279,7 +263,6 @@ function Scanner()
     this.attemptGet = function(url, encoding)
     {
         try {
-//            myDump("Get "+url+" ("+encoding+")")
             httpreq = new XMLHttpRequest();
             httpreq.open("GET", url, true);
             if (encoding != "auto") { 
@@ -290,7 +273,6 @@ function Scanner()
             httpreq.send(null);
             return true;
         } catch (e) {
-//            myDump("Get Error: "+e)
             return false;
         }        
     }
@@ -340,7 +322,7 @@ function stripTags(content)
 function stripScript(content)
 {
     content = content.replace(/<script([\r\n]|.)*?>([\r\n]|.)*?<\/script>/gi,"");
-    return    content//.replace(/<script([\r\n]|.)*?\/>/gi,"");
+    return    content
 }
 
 function stripWhitespace(content)

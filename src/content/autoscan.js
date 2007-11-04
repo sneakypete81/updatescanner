@@ -48,9 +48,6 @@ function Autoscan()
         }
         checkTimerID = setInterval(auto.check, 60*1000);
         checkTimerRunning = true;
-    
-        //Don't check straight away - wait for 1 minute.
-        //auto.check();
     }
 
     // Stop checking

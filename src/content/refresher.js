@@ -83,9 +83,7 @@
     // Called every second to see if a refresh is required
     this.refresh = function()
     {
-    //    myDump(".");
         if (prefs.getBoolPref(boolPrefName)) {
-    //        myDump("ref\n");
             callback();
     
             // Clear the request 1 second later, just in case
@@ -101,7 +99,6 @@
     this.clear = function()
     {
         clearTimerRunning = false;
-    //    myDump("clear\n");
         prefs.setBoolPref(boolPrefName, false);
     }
 }
