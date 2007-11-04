@@ -6,7 +6,7 @@
 <!ENTITY high.label "Alto">
 <!ENTITY often.label "Con frecuencia">
 <!ENTITY never.label "Nunca">
-<!ENTITY ignoreNumbers.label "Ignorar cambios">
+<!ENTITY ignoreNumbers.label "Ignorar cambios en los números">
 <!ENTITY advanced.label "Avanzadas...">
 <!ENTITY charEncoding.label "Codificación de caracteres">
 <!ENTITY autoDetect.label "Detectar automáticamente">

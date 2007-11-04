@@ -10,20 +10,23 @@ translators = ['SlovakSoft (Slovenčina)',
                'myahoo (Français)',
                'Mark Heijl (Nederlands)',
                'Proyecto Nave (Español)',
-               'jeongsw (Korean)',
+               'jeongsw (한국어)',
                'Team erweiterungen.de (Deutsch)',
                'JZsolt (Magyar)',
-               'Edvard Borovskij (Russian)',
+               'Edvard Borovskij (Русский)',
                'Leszek(teo)Życzkowski (Polski)',
                'PetrTwo (Čeština)',
-               'Raryel Costa Souza (português brasileiro)']
+               'Raryel Costa Souza (português brasileiro)',
+               '123tp (Dansk)',
+               'Kenan Balamir (Türkçe)',
+               'Wang King (Simplified Chinese)']
 authorURL = "http://updatescanner.mozdev.org"
 uid = 'c07d1a49-9894-49ff-a594-38960ede8fb9'
 
 major_version = 2
 minor_version = 0
-revision_version = 14
-build_version = 5
+revision_version = 15
+build_version = False
 in_development = False
 publish_babelzilla = False
 
@@ -76,6 +79,10 @@ locales = {
         'locale_version': '1.0',
         'display_name': name,
     },                      
+    'da-DK': {
+        'locale_version': '1.0',
+        'display_name': name,
+    },           
     'de-DE': {
         'locale_version': '1.0',
         'display_name': name,
@@ -124,6 +131,14 @@ locales = {
         'locale_version': '1.0',
         'display_name': name,
     },
+    'tr-TR': {
+        'locale_version': '1.0',
+        'display_name': name,
+    },
+    'zh-CN': {
+        'locale_version': '1.0',
+        'display_name': name,
+    },
 }
 
 incomplete_locales = {
@@ -132,14 +147,6 @@ incomplete_locales = {
         'display_name': name,
     },
     'ms-MY': {
-        'locale_version': '1.0',
-        'display_name': name,
-    },
-    'tr-TR': {
-        'locale_version': '1.0',
-        'display_name': name,
-    },
-    'zh-CN': {
         'locale_version': '1.0',
         'display_name': name,
     },

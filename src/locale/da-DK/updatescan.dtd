@@ -1,0 +1,13 @@
+<!ENTITY scanbutton.label "Scan">
+<!ENTITY stopbutton.label "Fortryd">
+<!ENTITY newbutton.tooltip "Ny">
+<!ENTITY showallchangesinnewtabsbutton.tooltip "Vis alle ændrede sider i nye faneblade">
+<!ENTITY deletebutton.tooltip "Slet">
+<!ENTITY helpbutton.tooltip "Hjælp til Opdaterings scanner">
+<!ENTITY openmenu.label "Vis Ændringer">
+<!ENTITY opentabmenu.label "Vis ændringer i nyt faneblad">
+<!ENTITY showallchangesinnewtabsmenu.label "Vis alle ændrede sider i nye faneblade">
+<!ENTITY markvisitedmenu.label "Marker som besøgt">
+<!ENTITY sortbynamemenu.label "Sorter efter navn">
+<!ENTITY deletemenu.label "Slet">
+<!ENTITY editmenu.label "Egenskaber">

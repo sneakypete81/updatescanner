@@ -3,6 +3,7 @@
 <!ENTITY newbutton.tooltip "Ajouter l&apos;adresse d&apos;une page Web à analyser">
 <!ENTITY showallchangesinnewtabsbutton.tooltip "Voir dans de nouveaux onglets toutes les pages ayant changé">
 <!ENTITY deletebutton.tooltip "Supprimer">
+<!ENTITY helpbutton.tooltip "Aide d&apos;Update Scanner">
 <!ENTITY openmenu.label "Voir les changements">
 <!ENTITY opentabmenu.label "Voir les changements dans un nouvel onglet">
 <!ENTITY showallchangesinnewtabsmenu.label "Voir dans de nouveaux onglets toutes les pages ayant changé">

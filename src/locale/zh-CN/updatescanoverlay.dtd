@@ -1,3 +1,3 @@
-<!ENTITY UpdateScan.tooltip "">
-<!ENTITY AddToUpdateScan.label "">
-<!ENTITY AddToUpdateScan.accesskey "">
+<!ENTITY UpdateScan.tooltip "扫描网页更新">
+<!ENTITY AddToUpdateScan.label "扫描网页更新...">
+<!ENTITY AddToUpdateScan.accesskey "U">

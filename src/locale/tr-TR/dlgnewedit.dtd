@@ -1,13 +1,13 @@
 <!ENTITY url.label "URL:">
 <!ENTITY title.label "Başlık:">
-<!ENTITY threshold.label "Eşik değeri değiştir">
-<!ENTITY autoscan.label "Otomatik tarama">
+<!ENTITY threshold.label "Eşik Değerini Değiştir">
+<!ENTITY autoscan.label "Otomatik Tarama">
 <!ENTITY low.label "Düşük">
 <!ENTITY high.label "Yüksek">
 <!ENTITY often.label "Sık">
 <!ENTITY never.label "Hiçbir zaman">
-<!ENTITY ignoreNumbers.label "">
-<!ENTITY advanced.label "">
-<!ENTITY charEncoding.label "">
-<!ENTITY autoDetect.label "">
-<!ENTITY use.label "">
+<!ENTITY ignoreNumbers.label "Belirttiğim karakter sayısı kadar güncelleme gerçekleşirse yoksay">
+<!ENTITY advanced.label "Gelişmiş..">
+<!ENTITY charEncoding.label "Karakter Çözümlemesi">
+<!ENTITY autoDetect.label "Otomatik-algıla">
+<!ENTITY use.label "Seçeyim">

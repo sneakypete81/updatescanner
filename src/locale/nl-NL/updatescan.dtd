@@ -1,8 +1,9 @@
 <!ENTITY scanbutton.label "Scannen">
 <!ENTITY stopbutton.label "Stoppen">
-<!ENTITY newbutton.tooltip "Nieuwe ingave">
+<!ENTITY newbutton.tooltip "Nieuwe pagina">
 <!ENTITY showallchangesinnewtabsbutton.tooltip "Alle gewijzigde pagina&apos;s in nieuwe tabbladen weergeven">
 <!ENTITY deletebutton.tooltip "Verwijderen">
+<!ENTITY helpbutton.tooltip "Update Scanner Help">
 <!ENTITY openmenu.label "Wijzigingen weergeven">
 <!ENTITY opentabmenu.label "Wijzigingen weergeven in nieuw tabblad">
 <!ENTITY showallchangesinnewtabsmenu.label "Alle gewijzigde pagina&apos;s in nieuwe tabbladen weergeven">
