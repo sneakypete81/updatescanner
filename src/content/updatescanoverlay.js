@@ -108,7 +108,7 @@ function addToUpdateScanForTabBrowser(aTabBrowser)
             currentTabInfo = tabsInfo[i];
         }
     }
-    openNewDialogNoRefresh(currentTabInfo.name, currentTabInfo.url)
+    USc_updatescan.openNewDialogNoRefresh(currentTabInfo.name, currentTabInfo.url)
 }
 
 function addToUpdateScanForBrowser(aDocShell)
@@ -126,5 +126,5 @@ function addToUpdateScanForBrowser(aDocShell)
     } catch (e) {
         title = url;
     }
-    openNewDialogNoRefresh(title, url);
+    USc_updatescan.openNewDialogNoRefresh(title, url);
 }

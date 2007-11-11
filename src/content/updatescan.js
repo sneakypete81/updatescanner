@@ -30,19 +30,17 @@
  * the terms of any one of the MPL, the GPL or the LGPL.  
  * ***** END LICENSE BLOCK ***** */
  
- // Requires: rdf/rdfds.js
-//           rdf/rdf.js
-//           scan.js
-//           fuzzy.js
-//           refresh.js
-//           opentopwin.js
-//           updatescanoverlay.js
-var numChanges;
-var refresh;
-var scan;
+if (typeof(USc_updatescan_exists) != 'boolean') {
+var USc_updatescan_exists = true;
+var USc_updatescan = {    
 
-function loadUpdateScan()
+numChanges : 0,
+refresh : null,
+scan: null,
+
+load : function()
 {
+    var me = USc_updatescan;
     var tree;
     var rdffile;
 
@@ -53,24 +51,26 @@ function loadUpdateScan()
     // link to the listbox
     tree = document.getElementById("UpdateTree");
     tree.datasources=getURI(rdffile);
-    tree.onclick=treeClick;
+    tree.onclick=me._treeClick;
 
     upgradeCheck(); // See if we need to upgrade something
 
     // Check for refresh requests
-    refresh = new USc_refresher();
-    refresh.register("refreshTreeRequest", refreshTree);
-    refresh.request();
-}
+    me.refresh = new USc_refresher();
+    me.refresh.register("refreshTreeRequest", me._refreshTree);
+    me.refresh.request();
+},
 
-function unloadUpdateScan()
+unload : function()
 {
-    refresh.unregister();
-}
+    var me = USc_updatescan;
+    me.refresh.unregister();
+},
 
-function treeClick(event)
+_treeClick : function(event)
 {
-    if (getNumItems() == 0) return;
+    var me = USc_updatescan;
+    if (me._getNumItems() == 0) return;
 
     // Code from http://xul.andreashalter.ch/
     //get original target (element user clicked on) 
@@ -96,16 +96,17 @@ function treeClick(event)
 
     switch (event.button) {
         case 0:
-            diffItemThisWindow(id, 1);
+            me._diffItemThisWindow(id, 1);
             break;
         case 1:
-            diffItemNewTab(id, 1);
+            me._diffItemNewTab(id, 1);
             break;
     }
-}
+},
 
-function scanButtonClick()
+scanButtonClick : function()
 {
+    var me = USc_updatescan;    
     var id;
     var filebase;
     var numitems;
@@ -113,13 +114,13 @@ function scanButtonClick()
     var ignoreNumbers;
     var encoding;
 
-    showStopButton();
+    me._showStopButton();
     
     var tree = document.getElementById("UpdateTree");
 
-    numitems = getNumItems();
+    numitems = me._getNumItems();
     if (numitems > 0) {
-        scan = new USc_scanner()
+        me.scan = new USc_scanner()
         
         for (var i=0; i<numitems; i++) {
             id = tree.contentView.getItemAtIndex(i).id;
@@ -130,7 +131,7 @@ function scanButtonClick()
             } else {
                 ignoreNumbers = false;
             }
-            scan.addURL(id, queryRDFitem(id, "title", "No Title"), 
+            me.scan.addURL(id, queryRDFitem(id, "title", "No Title"), 
                         queryRDFitem(id, "url", ""), 
                         USc_file.USreadFile(filebase+".new"),
                         queryRDFitem(id, "threshold", 100),
@@ -138,45 +139,47 @@ function scanButtonClick()
                         queryRDFitem(id, "encoding", "auto"));
         }
 
-        setStatus(str.getString("statusScanning"));
-        numChanges=0;
-        scan.start(scanChangedCallback, scanFinishedCallback, showProgress,
-                   scanEncodingCallback);
+        me._setStatus(str.getString("statusScanning"));
+        me.numChanges=0;
+        me.scan.start(me._scanChangedCallback, me._scanFinishedCallback, me._showProgress,
+                                               me._scanEncodingCallback);
     } else {
-        numChanges = 0;
-        scanFinishedCallback(str.getString("treeEmptyAlert"));
+        me.numChanges = 0;
+        me._scanFinishedCallback(str.getString("treeEmptyAlert"));
     }
-}
+},
 
-function scanChangedCallback(id, new_content, status, statusText, headerText)
+_scanChangedCallback : function(id, new_content, status, statusText, headerText)
 {
+    var me = USc_updatescan;
     if (USc_processScanChange(id, new_content, status, statusText, headerText)) {
-        numChanges++;
+        me.numChanges++;
     }
-    refreshTree();
-    refresh.request();
-}
+    me._refreshTree();
+    me.refresh.request();
+},
 
-function scanEncodingCallback(id, encoding)
+_scanEncodingCallback : function(id, encoding)
 // Called when encoding is detected for a page marked for auto-detect encoding
 {
     modifyRDFitem(id, "encoding", encoding);
-}
+},
 
-function scanFinishedCallback()
+_scanFinishedCallback : function()
 {
+    var me = USc_updatescan;
     var str=document.getElementById("updatescanStrings");
     var param;
 
-    if (numChanges == 0) {
-        setStatus(str.getString("statusNoChanges"));
+    if (me.numChanges == 0) {
+        me._setStatus(str.getString("statusNoChanges"));
     } else {
-        if (numChanges == 1) {
-            setStatus(str.getString("statusOneChange"));
+        if (me.numChanges == 1) {
+            me._setStatus(str.getString("statusOneChange"));
             message = str.getString("alertOneChange");
         } else {
-            param = {numChanges:numChanges};
-            setStatus(str.getString("statusManyChanges").USc_supplant(param));
+            param = {numChanges:me.numChanges};
+            me._setStatus(str.getString("statusManyChanges").USc_supplant(param));
             message = str.getString("alertManyChanges").USc_supplant(param);
         }
         window.openDialog("chrome://updatescan/content/alert.xul",
@@ -184,23 +187,25 @@ function scanFinishedCallback()
                   "chrome,dialog=yes,titlebar=no,popup=yes",
                   message);
     }
-    hideProgress();
-    showScanButton();
-}
+    me._hideProgress();
+    me._showScanButton();
+},
 
-function stopButtonClick()
+stopButtonClick : function()
 {
+    var me = USc_updatescan;
     var str=document.getElementById("updatescanStrings");
 
-    if (scan != null) {
-        scan.cancel();
+    if (me.scan != null) {
+        me.scan.cancel();
     }
-    showScanButton();
-    setStatus(str.getString("statusCancel"));
-}
+    me._showScanButton();
+    me._setStatus(str.getString("statusCancel"));
+},
 
-function openNewDialog()
+openNewDialog : function()
 {
+    var me = USc_updatescan;
     var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
                    .getInterface(Components.interfaces.nsIWebNavigation)
                    .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
@@ -209,11 +214,11 @@ function openNewDialog()
                    .getInterface(Components.interfaces.nsIDOMWindow) 
 
     addToUpdateScan(mainWindow.document.getElementById('content'))
-    refreshTree();
-    refresh.request();
-}
+    me._refreshTree();
+    me.refresh.request();
+},
 
-function openNewDialogNoRefresh(title, url)
+openNewDialogNoRefresh : function(title, url)
 {
     var id;
     var filebase;
@@ -247,11 +252,12 @@ function openNewDialogNoRefresh(title, url)
         saveRDF();
 
     }
-}
+},
 
-function openEditDialog()
+openEditDialog : function()
 {
-    var id=getSelectedItemID();
+    var me = USc_updatescan;
+    var id = me._getSelectedItemID();
     if (id == "") return;
 
     var args = {
@@ -289,37 +295,39 @@ function openEditDialog()
         }
         saveRDF();
     }
-    refreshTree();
-    refresh.request();
-}
+    me._refreshTree();
+    me.refresh.request();
+},
 
-function openSelectedItem()
-{
+openSelectedItem : function()
+{ // Not currently used - clicking now opens a diff instead
+    var me = USc_updatescan;
     modifyRDFitem(id, "changed", "0");
     saveRDF();
     USc_topWin.open(queryRDFitem(id, "url"));
-    refreshTree();
-    refresh.request();
-}
+    me._refreshTree();
+    me.refresh.request();
+},
 
-function diffItem(id, numItems)
+_diffItem : function(id, numItems)
 {
+    var me = USc_updatescan;
     var now = new Date();
     modifyRDFitem(id, "changed", "0");
     saveRDF();
 
-    refreshTree();
-    refresh.request();
+    me._refreshTree();
+    me.refresh.request();
     
     var old_lastScan = queryRDFitem(id, "old_lastscan", "")
     if (old_lastScan == "") old_lastScan = "5 November 1978";
     old_lastScan = new Date(old_lastScan);
-    var oldDate = dateDiffString(old_lastScan, now);
+    var oldDate = me._dateDiffString(old_lastScan, now);
 
     var lastScan =queryRDFitem(id, "lastscan", "");
     if (lastScan == "") lastScan = "5 November 1978";
     lastScan = new Date(lastScan);
-    var newDate = dateDiffString(lastScan, now);
+    var newDate = me._dateDiffString(lastScan, now);
 
     var filebase = USc_file.escapeFilename(id);
     return USc_diff.display(queryRDFitem(id, "title", "No Title"), 
@@ -328,31 +336,35 @@ function diffItem(id, numItems)
             USc_file.USreadFile(filebase+".new"),
             USc_file.USreadFile(filebase+".dif"),
             oldDate, newDate, numItems);
-}
+},
 
-function diffSelectedItemThisWindow()
+diffSelectedItemThisWindow : function()
 {
-    var item = getSelectedItemID();
+    var me = USc_updatescan;
+    var item = me._getSelectedItemID();
     if (item == "") return;
-    diffItemThisWindow(item, 1);
-}
+    me._diffItemThisWindow(item, 1);
+},
 
-function diffItemThisWindow(id, numItems)
+_diffItemThisWindow : function(id, numItems)
 {
-    var diffURL = diffItem(id, numItems)
+    var me = USc_updatescan;
+    var diffURL = me._diffItem(id, numItems)
     USc_topWin.open(diffURL);
-    focusTree();
-}
+    me._focusTree();
+},
 
-function diffSelectedItemNewTab()
+diffSelectedItemNewTab : function()
 {
-    var item = getSelectedItemID();
+    var me = USc_updatescan;
+    var item = me._getSelectedItemID();
     if (item == "") return;
-    diffItemNewTab(item, 1);    
-}
+    me._diffItemNewTab(item, 1);    
+},
 
-function diffItemNewTab(id, maxItems)
+_diffItemNewTab : function(id, maxItems)
 {
+    var me = USc_updatescan;
     var mainWindow = window.QueryInterface(
     Components.interfaces.nsIInterfaceRequestor)
     .getInterface(Components.interfaces.nsIWebNavigation)
@@ -361,11 +373,11 @@ function diffItemNewTab(id, maxItems)
     .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
     .getInterface(Components.interfaces.nsIDOMWindow);
 
-    var diffURL = diffItem(id, maxItems);
+    var diffURL = me._diffItem(id, maxItems);
     mainWindow.getBrowser().addTab(diffURL);
-}
+},
 
-function dateDiffString(oldDate, newDate)
+_dateDiffString : function(oldDate, newDate)
 {
     var ret; 
     var time;
@@ -406,49 +418,52 @@ function dateDiffString(oldDate, newDate)
     } else {
         return str.getString("weeksAgo").USc_supplant({numWeeks:diff});
     }
-}
+},
 
-function markAllAsVisited()
+markAllAsVisited : function()
 {
+    var me = USc_updatescan;
     var tree = document.getElementById("UpdateTree");
 
-    var numitems = getNumItems();
+    var numitems = me._getNumItems();
     if (numitems > 0) {
         for (var i=0; i<numitems; i++) {
             var id = tree.contentView.getItemAtIndex(i).id;
             if (queryRDFitem(id, "changed") != "0") {
                 modifyRDFitem(id, "changed", "0");
-                refreshTree();
+                me._refreshTree();
             }
         }
         saveRDF();
-        refreshTree();
-        refresh.request();
+        me._refreshTree();
+        me.refresh.request();
     }
-}
+},
 
-function showAllChangesInNewTabs()
+showAllChangesInNewTabs : function()
 {
+    var me = USc_updatescan;
     var tree = document.getElementById("UpdateTree");
 
-    var numItems = getNumItems();
+    var numItems = me._getNumItems();
     if (numItems > 0) {
         for (var i=0; i<numItems; i++) {
             var id = tree.contentView.getItemAtIndex(i).id;
             if (queryRDFitem(id, "changed") != "0") {
-                diffItemNewTab(id, numItems);
+                me._diffItemNewTab(id, numItems);
             }
         }
     }
-}
+},
 
-function sortByName()
+sortByName : function()
 {
+    var me = USc_updatescan;
     var i;
     var id;
     var item;
     var tree = document.getElementById("UpdateTree");
-    var numitems = getNumItems();
+    var numitems = me._getNumItems();
     var data = new Array();
     var indexes = new Array();
     var params;
@@ -465,7 +480,7 @@ function sortByName()
             indexes.push(i);
         }
         // Open the progress dialog and perform the sort
-        params = {label:str.getString("sortLabel"), callback:sortItem, 
+        params = {label:str.getString("sortLabel"), callback:me._sortItem, 
                   items:indexes, data:data, 
                   cancelPrompt:str.getString("sortCancel"), 
                   retVal:null, retData:null};       
@@ -474,13 +489,13 @@ function sortByName()
                           'chrome,dialog,modal,centrescreen', params);
 
         saveRDF();
-        refreshTree();
-        refresh.request();
+        me._refreshTree();
+        me.refresh.request();
     }
     
-}
+},
 
-function sortItem(index, data)
+_sortItem : function(index, data)
 // Passed the current index and the remaining items to sort.
 // Finds the smallest item, moves it into position, removes it from the 
 // data array.
@@ -500,9 +515,9 @@ function sortItem(index, data)
     }
     data.splice(smallestIndex, 1);              // Remove from data array
     return null;    
-}
+},
 
-function openHelp()
+openHelp : function()
 {
     var str=document.getElementById("updatescanStrings")
     var locale = Components.classes["@mozilla.org/preferences-service;1"].
@@ -511,12 +526,13 @@ function openHelp()
                  getCharPref("useragent.locale");
     var helpURL="http://updatescanner.mozdev.org/redirect.php?page=help.html&locale="+locale;
     USc_topWin.open(helpURL);
-}
+},
 
-function deleteSelectedItem()
+deleteSelectedItem : function()
 {
+    var me = USc_updatescan;
     var str=document.getElementById("updatescanStrings")
-    var id=getSelectedItemID();
+    var id=me._getSelectedItemID();
     var fileBase=USc_file.escapeFilename(id)
 
     if (id == "") return;
@@ -528,12 +544,12 @@ function deleteSelectedItem()
         USc_file.USrmFile(fileBase+".dif");
         deleteRDFitem(id);
         saveRDF();
-        refreshTree();
-        refresh.request();
+        me._refreshTree();
+        me.refresh.request();
     }
-}
+},
 
-function getSelectedItemID()
+_getSelectedItemID : function()
 {
     var tree = document.getElementById("UpdateTree");
     var id;
@@ -544,23 +560,23 @@ function getSelectedItemID()
     }
 
     return id;
-}
+},
 
-function showStopButton()
+_showStopButton : function()
 {
     var scanbutton = document.getElementById("scanbutton");
     scanbutton.setAttribute("label", scanbutton.getAttribute("stopbuttonlabel"));
     scanbutton.setAttribute("oncommand", scanbutton.getAttribute("stopbuttoncommand"));
-}
+},
 
-function showScanButton()
+_showScanButton : function()
 {
     var scanbutton = document.getElementById("scanbutton");
     scanbutton.setAttribute("label", scanbutton.getAttribute("scanbuttonlabel"));
     scanbutton.setAttribute("oncommand", scanbutton.getAttribute("scanbuttoncommand"));
-}
+},
 
-function refreshTree()
+_refreshTree : function()
 {
     try {
         var tree=document.getElementById("UpdateTree");
@@ -572,32 +588,32 @@ function refreshTree()
     } catch (e) {
         ;
     }
-}
+},
 
-function focusTree()
+_focusTree : function()
 {
     var tree=document.getElementById("UpdateTree");
     tree.focus();
-}
+},
 
-function setStatus(status)
+_setStatus : function (status)
 {
     document.getElementById("StatusText").value = status;
-}
+},
 
-function showProgress(value, max)
+_showProgress : function(value, max)
 {
     var progress = document.getElementById("Progress");
     progress.collapsed = false;
     progress.value = 100*value/max;
-}
+},
 
-function hideProgress()
+_hideProgress : function()
 {   
     document.getElementById("Progress").collapsed=true;
-}
+},
 
-function getNumItems()
+_getNumItems : function()
 {
     var tree = document.getElementById("UpdateTree");
     try {
@@ -605,4 +621,6 @@ function getNumItems()
     } catch(e) {
         return 0;
     }
+}
+}
 }

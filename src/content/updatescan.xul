@@ -38,8 +38,8 @@
 <!DOCTYPE window SYSTEM "chrome://updatescan/locale/updatescan.dtd">
 
 <window id="UpdateScan-window"
-	onload="loadUpdateScan()"
-	onunload="unloadUpdateScan()"
+	onload="USc_updatescan.load()"
+	onunload="USc_updatescan.unload()"
 	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
 	xmlns:UPDATESCAN="http://www.updatescan.com/rdf/updatescan#">
 
@@ -65,10 +65,10 @@
 
   <vbox flex="1">
     <hbox pack="left">
-      <toolbarbutton id="new-button" oncommand="openNewDialog()" tooltiptext="&newbutton.tooltip;"/>
-      <toolbarbutton id="new-tab-button" oncommand="showAllChangesInNewTabs()" tooltiptext="&showallchangesinnewtabsbutton.tooltip;"/>
-      <toolbarbutton id="delete-button" oncommand="deleteSelectedItem()" tooltiptext="&deletebutton.tooltip;"/>
-      <toolbarbutton id="help-button" oncommand="openHelp()" tooltiptext="&helpbutton.tooltip;"/>
+      <toolbarbutton id="new-button" oncommand="USc_updatescan.openNewDialog()" tooltiptext="&newbutton.tooltip;"/>
+      <toolbarbutton id="new-tab-button" oncommand="USc_updatescan.showAllChangesInNewTabs()" tooltiptext="&showallchangesinnewtabsbutton.tooltip;"/>
+      <toolbarbutton id="delete-button" oncommand="USc_updatescan.deleteSelectedItem()" tooltiptext="&deletebutton.tooltip;"/>
+      <toolbarbutton id="help-button" oncommand="USc_updatescan.openHelp()" tooltiptext="&helpbutton.tooltip;"/>
       <toolbarspring />
       <button observes="scanbutton" />
     </hbox>
@@ -154,36 +154,36 @@
   <popupset>
     <popup id="contextmenu">
       <menuitem style="font-weight:bold;" label="&openmenu.label;" 
-		oncommand="diffSelectedItemThisWindow();"/>
+		oncommand="USc_updatescan.diffSelectedItemThisWindow();"/>
       <menuitem label="&opentabmenu.label;" 
-		oncommand="diffSelectedItemNewTab();"/>
+		oncommand="USc_updatescan.diffSelectedItemNewTab();"/>
       <menuitem label="&deletemenu.label;" 
-		oncommand="deleteSelectedItem();" 
+		oncommand="USc_updatescan.deleteSelectedItem();" 
 		key="deleteKey"/>
       <menuseparator />
       <menuitem label="&showallchangesinnewtabsmenu.label;" 
-		oncommand="showAllChangesInNewTabs();"/>
+		oncommand="USc_updatescan.showAllChangesInNewTabs();"/>
       <menuitem label="&markvisitedmenu.label;"
-		oncommand="markAllAsVisited();"/>
+		oncommand="USc_updatescan.markAllAsVisited();"/>
       <menuitem label="&sortbynamemenu.label;"
-		oncommand="sortByName();"/>
+		oncommand="USc_updatescan.sortByName();"/>
       <menuseparator />
-      <menuitem label="&editmenu.label;" oncommand="openEditDialog();"/>
+      <menuitem label="&editmenu.label;" oncommand="USc_updatescan.openEditDialog();"/>
     </popup>
   </popupset>
 
   <keyset>
-    <key id="deleteKey" keycode="VK_DELETE" oncommand="deleteSelectedItem();"/>
-    <key id="enterKey" keycode="VK_RETURN" oncommand="diffSelectedItemThisWindow();"/>
+    <key id="deleteKey" keycode="VK_DELETE" oncommand="USc_updatescan.deleteSelectedItem();"/>
+    <key id="enterKey" keycode="VK_RETURN" oncommand="USc_updatescan.diffSelectedItemThisWindow();"/>
   </keyset>
 
   <broadcasterset>
     <broadcaster id="scanbutton" label="&scanbutton.label;" 
-		 oncommand="scanButtonClick()" 
+		 oncommand="USc_updatescan.scanButtonClick()" 
 		 scanbuttonlabel="&scanbutton.label;" 
-		 scanbuttoncommand="scanButtonClick()"
+		 scanbuttoncommand="USc_updatescan.scanButtonClick()"
                  stopbuttonlabel="&stopbutton.label;" 
-		 stopbuttoncommand="stopButtonClick()"/>
+		 stopbuttoncommand="USc_updatescan.stopButtonClick()"/>
   </broadcasterset>
     
 </window>
