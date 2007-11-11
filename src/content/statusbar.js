@@ -30,13 +30,21 @@
  * the terms of any one of the MPL, the GPL or the LGPL.  
  * ***** END LICENSE BLOCK ***** */
 
-window.addEventListener("load", loadStatusbar, false);
-window.addEventListener("unload", unloadStatusbar, false);
 
-var refresh;
 
-function loadStatusbar()
+// See the end of the file for load/unload observers!
+
+
+
+if (typeof(USc_statusbar_exists) != 'boolean') {
+var USc_statusbar_exists = true;
+var USc_statusbar = {    
+
+refresh : null,
+
+load : function()
 {
+    var me = USc_statusbar;
     var rdffile;
     var backupfile;
     var corruptfile;
@@ -63,27 +71,29 @@ function loadStatusbar()
     USc_file.cpFile(rdffile.path, backupfile.path);
 
     // Check for refresh requests
-    refresh = new USc_refresher();
-    refresh.register("refreshTreeRequest", refreshStatusbar);
+    me.refresh = new USc_refresher();
+    me.refresh.register("refreshTreeRequest", me.refreshStatusbar);
 
     // Start autoscanner
-    USc_autoscan.start(autoscanFinished);
+    USc_autoscan.start(me.autoscanFinished);
 
     // Update the status bar icon
-    refreshStatusbar();
-}
+    me.refreshStatusbar();
+},
 
-function unloadStatusbar()
+unload : function()
 {
+    var me = USc_statusbar;
     try { 
-        refresh.unregister(); 
+        me.refresh.unregister(); 
     } catch(e) {}
-}
+},
 
-function autoscanFinished(numChanges)
+autoscanFinished : function(numChanges)
 {
 //    var alertsService = Components.classes["@mozilla.org/alerts-service;1"]
 //                        .getService(Components.interfaces.nsIAlertsService); 
+    var me = USc_statusbar;
 
     var gBundle = Components.classes["@mozilla.org/intl/stringbundle;1"].getService(Components.interfaces.nsIStringBundleService);
     var strings = gBundle.createBundle("chrome://updatescan/locale/updatescan.properties");
@@ -94,7 +104,7 @@ function autoscanFinished(numChanges)
 
     var message;
 
-    refresh.request();
+    me.refresh.request();
     if (numChanges) {
         if (numChanges == 1) {
             message = alertOneChange;
@@ -116,10 +126,10 @@ function autoscanFinished(numChanges)
             null);
     */    
     }
-}
+},
 
 // Called when a refresh is requested by the autoscanner or the sidebar
-function refreshStatusbar()
+refreshStatusbar : function()
 {
     var statusbar = document.getElementById("UpdateScanStatusbar");
     var pages;
@@ -141,4 +151,9 @@ function refreshStatusbar()
        statusbar.setAttribute("status", "0");
     }
 }
+}
+}
+
+window.addEventListener("load", USc_statusbar.load, false);
+window.addEventListener("unload", USc_statusbar.unload, false);
 
