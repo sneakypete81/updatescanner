@@ -65,7 +65,7 @@ display : function(title, sourceURL, oldContent, newContent, diffContent,
     
         data = me._generateHeader(me.kUnscannedView, title, "", 
                               sourceURL, "", "", "");    
-        FileIO.write(diffFile, data, "", "UTF-8");
+        USc_io.write(diffFile, data, "", "UTF-8");
     
         return diffURL;
     }
@@ -84,17 +84,17 @@ display : function(title, sourceURL, oldContent, newContent, diffContent,
     data = me._generateHeader(me.kOldView, title, oldDate, 
                           sourceURL, diffURL, oldURL, newURL);    
     data += oldContent;
-    FileIO.write(oldFile, data, "", "UTF-8");
+    USc_io.write(oldFile, data, "", "UTF-8");
 
     data = me._generateHeader(me.kNewView, title, newDate, 
                           sourceURL, diffURL, oldURL, newURL);    
     data += newContent;
-    FileIO.write(newFile, data, "", "UTF-8");
+    USc_io.write(newFile, data, "", "UTF-8");
 
     data = me._generateHeader(me.kDiffView, title, newDate, 
                           sourceURL, diffURL, oldURL, newURL);    
     data += diffContent;
-    FileIO.write(diffFile, data, "", "UTF-8");
+    USc_io.write(diffFile, data, "", "UTF-8");
 
     return diffURL;
 },

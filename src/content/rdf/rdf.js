@@ -17,11 +17,11 @@ function checkRDF(rdffile)
 // See if the RDF file is corrupted (if the first byte is 0x00)
 // Workaround for bug #17952 until bookmark integration is implemented
 {
-    var inFile = FileIO.open(rdffile);
+    var inFile = USc_io.open(rdffile);
     if (!inFile.exists()) {
        return true; // It's ok if the file doesn't exist yet
     }
-    var data = FileIO.readBinary(inFile);
+    var data = USc_io.readBinary(inFile);
     if (data == false || data.length == 0) {
         return true; // It's ok if the file is empty or can't be read (I guess)
     }

@@ -7,10 +7,10 @@
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 
+if (typeof(USc_io_exists) != 'boolean') {
+var USc_io_exists = true;
+var USc_io = {    
 
-if (typeof(JSIO) != 'boolean') {
-
-    var JSIO = true;
 
     /////////////////////////////////////////////////
     // Basic file IO object based on Mozilla source 
@@ -30,14 +30,12 @@ if (typeof(JSIO) != 'boolean') {
     //     alert('File unlink: ' + rv);
     // }
 
-    var FileIO = {
-
         localfileCID  : '@mozilla.org/file/local;1',
         localfileIID  : Components.interfaces.nsILocalFile,
 
-            dirserviceCID : '@mozilla.org/file/directory_service;1',
-            propertiesIID : Components.interfaces.nsIProperties,
-              fileIID       : Components.interfaces.nsIFile,
+        dirserviceCID : '@mozilla.org/file/directory_service;1',
+        propertiesIID : Components.interfaces.nsIProperties,
+        fileIID       : Components.interfaces.nsIFile,
 
         finstreamCID  : '@mozilla.org/network/file-input-stream;1',
         finstreamIID  : Components.interfaces.nsIFileInputStream,
@@ -266,7 +264,7 @@ if (typeof(JSIO) != 'boolean') {
         },
 
         open   : function(path) {
-            return FileIO.open(path);
+            return USc_io.open(path);
         },
 
         create : function(dir) {
@@ -301,7 +299,7 @@ if (typeof(JSIO) != 'boolean') {
             try {
                 while (dirEntry.hasMoreElements()) {
                     list.push(dirEntry.getNext()
-                                    .QueryInterface(FileIO.localfileIID));
+                                    .QueryInterface(USc_io.localfileIID));
                 }
                 if (recursive) {
                     var list2 = new Array();
@@ -336,7 +334,7 @@ if (typeof(JSIO) != 'boolean') {
         },
 
         path   : function (dir) {
-            return FileIO.path(dir);
+            return USc_io.path(dir);
         },
 
         split  : function(str, join) {

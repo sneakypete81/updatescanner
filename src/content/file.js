@@ -52,19 +52,19 @@ createUpdatescanDir : function()
 USwriteFile : function(filename, data)
 {
     var me = USc_file;
-    var outFile = FileIO.open(me._prependUpdatescanPath(filename));
-    return FileIO.write(outFile, data, "","UTF-8");    
+    var outFile = USc_io.open(me._prependUpdatescanPath(filename));
+    return USc_io.write(outFile, data, "","UTF-8");    
 },
 
 USreadFile : function(filename)
 {
     var me = USc_file;
-    var inFile = FileIO.open(me._prependUpdatescanPath(filename));
+    var inFile = USc_io.open(me._prependUpdatescanPath(filename));
     if (!inFile.exists()) {
        return "";
     }
 
-    var data = FileIO.read(inFile, "UTF-8");    
+    var data = USc_io.read(inFile, "UTF-8");    
     if (data == false) {
        return "";
     }
@@ -226,7 +226,7 @@ openTempFile : function(fileBase, fileExt)
     }
 
     var filename = fileBase + String(suffix);
-    return FileIO.open(me._prependTempPath(filename)+"."+fileExt);
+    return USc_io.open(me._prependTempPath(filename)+"."+fileExt);
 },
 
 incrementTempFile : function(numItems)
