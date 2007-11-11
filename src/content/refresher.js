@@ -30,76 +30,41 @@
  * the terms of any one of the MPL, the GPL or the LGPL.  
  * ***** END LICENSE BLOCK ***** */
 
+function USc_refresher()
+{    
+  var me = this;
+  
+  var prefService = Components.classes["@mozilla.org/preferences-service;1"]
+                          .getService(Components.interfaces.nsIPrefService);
+  var prefName = ""
+  var _branch = null;
+  var callback = null;
 
-function USc_refresher(boolPrefNamearg, callbackarg)
-{
-    var me = this;
-    var checkTimerRunning = false;
-    var clearTimerRunning = false;
-    var checkTimerID = null;
-    var clearTimerID = null;
-    var boolPrefName = boolPrefNamearg;
-    var callback = callbackarg;
+  this.register = function(prefNamearg, callbackarg)
+  {
+    callback = callbackarg;
+    prefName = prefNamearg;
+    _branch = prefService.getBranch("extensions.updatescan.");
+    _branch.QueryInterface(Components.interfaces.nsIPrefBranch2);
+    _branch.addObserver("", this, false);
+  }
+  
+  this.unregister = function()
+  {
+    if(!_branch) return;
+    _branch.removeObserver("", this);
+  }
 
-    var prefs = Components.classes["@mozilla.org/preferences-service;1"].
-                 getService(Components.interfaces.nsIPrefService).
-                 getBranch("extensions.updatescan.");
-
-    try {
-        prefs.getBoolPref(boolPrefName);
-    } catch (e) { // pref doesn't exist - create it!
-        prefs.setBoolPref(boolPrefName, false);
+  this.observe = function(aSubject, aTopic, aData)
+  {
+    if(aData == prefName && aTopic == "nsPref:changed") {
+      callback();
     }
+  }
 
-    // Check for a refresh request every second
-    this.start = function()
-    {
-        if (checkTimerRunning)
-            me.stop();
-        checkTimerID = setInterval(me.refresh, 1000);
-        checkTimerRunning = true;
-    }
-
-    // Stop checking for refreshes
-    this.stop = function()
-    {
-        clearInterval(checkTimerID);
-        checkTimerRunning = false;
-    }
-
-    // Request a refresh across all browser windows
-    this.request = function() 
-    {
-    //    myDump("req");
-        prefs.setBoolPref(boolPrefName, true);
-    
-        // Clear the request 1 second later
-        if (clearTimerRunning) {
-            clearTimeout(clearTimerID);
-        }
-        clearTimerRunning = true;
-        clearTimerID = setTimeout(me.clear, 1000);
-    }
-
-    // Called every second to see if a refresh is required
-    this.refresh = function()
-    {
-        if (prefs.getBoolPref(boolPrefName)) {
-            callback();
-    
-            // Clear the request 1 second later, just in case
-            if (!clearTimerRunning) {
-            clearTimerRunning = true;
-            clearTimerID = setTimeout(me.clear, 1000);
-            }
-        }
-        return false;
-    }
-
-    // Clear any pending refresh requests
-    this.clear = function()
-    {
-        clearTimerRunning = false;
-        prefs.setBoolPref(boolPrefName, false);
-    }
+  this.request = function()
+  {
+    var value = _branch.getBoolPref(prefName);
+    _branch.setBoolPref(prefName, !value); // Invert the refresher preference
+  }
 }

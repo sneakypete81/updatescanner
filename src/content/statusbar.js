@@ -31,6 +31,7 @@
  * ***** END LICENSE BLOCK ***** */
 
 window.addEventListener("load", loadStatusbar, false);
+window.addEventListener("unload", unloadStatusbar, false);
 
 var refresh;
 
@@ -62,14 +63,21 @@ function loadStatusbar()
     USc_file.cpFile(rdffile.path, backupfile.path);
 
     // Check for refresh requests
-    refresh = new USc_refresher("refreshTreeRequest", refreshStatusbar);
-    refresh.start();
+    refresh = new USc_refresher();
+    refresh.register("refreshTreeRequest", refreshStatusbar);
 
     // Start autoscanner
     USc_autoscan.start(autoscanFinished);
 
     // Update the status bar icon
     refreshStatusbar();
+}
+
+function unloadStatusbar()
+{
+    try { 
+        refresh.unregister(); 
+    } catch(e) {}
 }
 
 function autoscanFinished(numChanges)

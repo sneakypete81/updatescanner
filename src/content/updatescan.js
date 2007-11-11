@@ -58,14 +58,14 @@ function loadUpdateScan()
     upgradeCheck(); // See if we need to upgrade something
 
     // Check for refresh requests
-    refresh = new USc_refresher("refreshTreeRequest", refreshTree);
-    refresh.start();
+    refresh = new USc_refresher();
+    refresh.register("refreshTreeRequest", refreshTree);
     refresh.request();
 }
 
 function unloadUpdateScan()
 {
-    refresh.stop();
+    refresh.unregister();
 }
 
 function treeClick(event)
