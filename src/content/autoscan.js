@@ -92,7 +92,7 @@ _check : function()
                 modifyRDFitem(id, "lastautoscan", now.toString());
                 saveRDF();
                 doScan = true;
-                filebase=escapeFilename(id)
+                filebase=USc_file.escapeFilename(id)
                 if (queryRDFitem(id, "ignoreNumbers", "false") == "true") {
                     ignoreNumbers = true;
                 } else {
@@ -101,7 +101,7 @@ _check : function()
 
                 me.scan.addURL(id, queryRDFitem(id, "title", "No Title"), 
                             queryRDFitem(id, "url", ""), 
-                            USreadFile(filebase+".new"),
+                            USc_file.USreadFile(filebase+".new"),
                             queryRDFitem(id, "threshold", 100),                                
                             ignoreNumbers,
                             queryRDFitem(id, "encoding", "auto"));

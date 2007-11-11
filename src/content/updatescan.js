@@ -123,7 +123,7 @@ function scanButtonClick()
         
         for (var i=0; i<numitems; i++) {
             id = tree.contentView.getItemAtIndex(i).id;
-            filebase=escapeFilename(id)
+            filebase=USc_file.escapeFilename(id)
             encoding = queryRDFitem(id, "encoding", "UTF-8");
             if (queryRDFitem(id, "ignoreNumbers", "false") == "true") {
                 ignoreNumbers = true;
@@ -132,7 +132,7 @@ function scanButtonClick()
             }
             scan.addURL(id, queryRDFitem(id, "title", "No Title"), 
                         queryRDFitem(id, "url", ""), 
-                        USreadFile(filebase+".new"),
+                        USc_file.USreadFile(filebase+".new"),
                         queryRDFitem(id, "threshold", 100),
                         ignoreNumbers,
                         queryRDFitem(id, "encoding", "auto"));
@@ -238,8 +238,8 @@ function openNewDialogNoRefresh(title, url)
         modifyRDFitem(id, "encoding", args.encoding);
         modifyRDFitem(id, "ignoreNumbers", args.ignoreNumbers);
 
-        filebase = escapeFilename(id);
-        USwriteFile(filebase+".new", "**NEW**");
+        filebase = USc_file.escapeFilename(id);
+        USc_file.USwriteFile(filebase+".new", "**NEW**");
 
         modifyRDFitem(id, "lastscan", "");  // lastscan not defined
         modifyRDFitem(id, "changed", "0");  // not changed 
@@ -280,8 +280,8 @@ function openEditDialog()
         modifyRDFitem(id, "ignoreNumbers", args.ignoreNumbers);
 
         if (oldurl != args.url) {   // URL changed - reset all values
-            filebase = escapeFilename(id);
-            USwriteFile(filebase+".new", "**NEW**");
+            filebase = USc_file.escapeFilename(id);
+            USc_file.USwriteFile(filebase+".new", "**NEW**");
 
             modifyRDFitem(id, "lastscan", "");  // lastscan not defined
             modifyRDFitem(id, "changed", "0");  // not changed
@@ -321,12 +321,12 @@ function diffItem(id, numItems)
     lastScan = new Date(lastScan);
     var newDate = dateDiffString(lastScan, now);
 
-    var filebase = escapeFilename(id);
+    var filebase = USc_file.escapeFilename(id);
     return USc_diff.display(queryRDFitem(id, "title", "No Title"), 
             queryRDFitem(id, "url", ""), 
-            USreadFile(filebase+".old"),
-            USreadFile(filebase+".new"),
-            USreadFile(filebase+".dif"),
+            USc_file.USreadFile(filebase+".old"),
+            USc_file.USreadFile(filebase+".new"),
+            USc_file.USreadFile(filebase+".dif"),
             oldDate, newDate, numItems);
 }
 
@@ -517,15 +517,15 @@ function deleteSelectedItem()
 {
     var str=document.getElementById("updatescanStrings")
     var id=getSelectedItemID();
-    var fileBase=escapeFilename(id)
+    var fileBase=USc_file.escapeFilename(id)
 
     if (id == "") return;
     var title = queryRDFitem(id, "title", "untitled");
 
     if (confirm(str.getString("confirmDelete") + " " + title + "?")) {
-        rmFile(fileBase+".old");
-        rmFile(fileBase+".new");
-        rmFile(fileBase+".dif");
+        USc_file.USrmFile(fileBase+".old");
+        USc_file.USrmFile(fileBase+".new");
+        USc_file.USrmFile(fileBase+".dif");
         deleteRDFitem(id);
         saveRDF();
         refreshTree();

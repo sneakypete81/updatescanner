@@ -369,21 +369,21 @@ function processScanChange(id, newContent, status, statusText, headerText)
 
     var logHeaders = prefs.getBoolPref("logHeaders");
     
-    filebase=escapeFilename(id)
+    filebase=USc_file.escapeFilename(id)
     if (status == STATUS_CHANGE) {
         retVal = true;
 	    if (queryRDFitem(id, "changed") == "0") {
             // If this is a new change, save the previous state for diffing
-            rmFile(filebase+".old");
-            mvFile(filebase+".new", filebase+".old");
+            USc_file.USrmFile(filebase+".old");
+            USc_file.USmvFile(filebase+".new", filebase+".old");
             oldLastscan = queryRDFitem(id, "lastscan", "");
             modifyRDFitem(id, "old_lastscan", oldLastscan);
         }
 
-        oldContent  = USreadFile(filebase+".old");
+        oldContent  = USc_file.USreadFile(filebase+".old");
         diffContent = USc_diff.create(oldContent, newContent);   
-        USwriteFile(filebase+".dif", diffContent);
-        USwriteFile(filebase+".new", newContent);
+        USc_file.USwriteFile(filebase+".dif", diffContent);
+        USc_file.USwriteFile(filebase+".new", newContent);
 
 	    modifyRDFitem(id, "changed", "1");
         modifyRDFitem(id, "lastscan", now.toString());
@@ -392,10 +392,10 @@ function processScanChange(id, newContent, status, statusText, headerText)
         if (logHeaders) modifyRDFitem(id, "headerText", headerText);        
     } else if (status == STATUS_MINOR_CHANGE) {
         // Minor change: don't notify, but save new page and diff
-        oldContent  = USreadFile(filebase+".old");
+        oldContent  = USc_file.USreadFile(filebase+".old");
         diffContent = USc_diff.create(oldContent, newContent);   
-        USwriteFile(filebase+".dif", diffContent);
-        USwriteFile(filebase+".new", newContent);
+        USc_file.USwriteFile(filebase+".dif", diffContent);
+        USc_file.USwriteFile(filebase+".new", newContent);
 
         modifyRDFitem(id, "error", "0");
         modifyRDFitem(id, "lastscan", now.toString());
@@ -407,9 +407,9 @@ function processScanChange(id, newContent, status, statusText, headerText)
         modifyRDFitem(id, "statusText", statusText);
         if (logHeaders) modifyRDFitem(id, "headerText", headerText);        
     } else if (status == STATUS_NEW) {
-	    USwriteFile(filebase+".dif", newContent);
-	    USwriteFile(filebase+".old", newContent);
-	    USwriteFile(filebase+".new", newContent);
+	    USc_file.USwriteFile(filebase+".dif", newContent);
+	    USc_file.USwriteFile(filebase+".old", newContent);
+	    USc_file.USwriteFile(filebase+".new", newContent);
 	    modifyRDFitem(id, "lastscan", now.toString());
 	    modifyRDFitem(id, "old_lastscan", now.toString());
 	    modifyRDFitem(id, "error", "0");

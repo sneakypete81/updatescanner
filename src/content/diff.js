@@ -59,8 +59,8 @@ display : function(title, sourceURL, oldContent, newContent, diffContent,
     if (numItems < 10) numItems = 10; // 10 temp files minimum
 
     if (newContent == "**NEW**") {
-        var diffFile = openTempFile("UpdatescanDiff","htm");
-        incrementTempFile(numItems);
+        var diffFile = USc_file.openTempFile("UpdatescanDiff","htm");
+        USc_file.incrementTempFile(numItems);
         var diffURL = fileHandler.getURLSpecFromFile(diffFile);
     
         data = me._generateHeader(me.kUnscannedView, title, "", 
@@ -73,10 +73,10 @@ display : function(title, sourceURL, oldContent, newContent, diffContent,
     oldContent = stripScript(oldContent);
     newContent = stripScript(newContent)
 
-    var newFile  = openTempFile("UpdatescanNew","htm");
-    var oldFile  = openTempFile("UpdatescanOld","htm"); 
-    var diffFile = openTempFile("UpdatescanDiff","htm");
-    incrementTempFile(numItems);
+    var newFile  = USc_file.openTempFile("UpdatescanNew","htm");
+    var oldFile  = USc_file.openTempFile("UpdatescanOld","htm"); 
+    var diffFile = USc_file.openTempFile("UpdatescanDiff","htm");
+    USc_file.incrementTempFile(numItems);
     var newURL  = fileHandler.getURLSpecFromFile(newFile);
     var oldURL  = fileHandler.getURLSpecFromFile(oldFile);
     var diffURL = fileHandler.getURLSpecFromFile(diffFile);

@@ -56,10 +56,10 @@ function upgradeCheck()
         versionMinor = 0;
         versionRevision = 0;
     }
-    if (!updatescanDirExists()) {
+    if (!USc_file.updatescanDirExists()) {
         // Version 2.0.0+ expects webpage data to be in files, 
         // not embedded in RDF
-        createUpdatescanDir();
+        USc_file.createUpdatescanDir();
         nodes = getRDFroot().getChildren();
         while (nodes.hasMoreElements()) {
             node = nodes.getNext();
@@ -68,8 +68,8 @@ function upgradeCheck()
             modifyRDFitem(id, "changed", "0");
             modifyRDFitem(id, "error", "0");
             modifyRDFitem(id, "lastautoscan", "5 November 1978");
-            filebase = escapeFilename(id);
-            USwriteFile(filebase+".new", "**NEW**");// Mark as new
+            filebase = USc_file.escapeFilename(id);
+            USc_file.USwriteFile(filebase+".new", "**NEW**");// Mark as new
         }
         saveRDF();
     }
@@ -109,7 +109,7 @@ function upgrade_2_0_14()
         node = nodes.getNext();
         id = node.getValue();
         ids.push(id);
-        file = oldEscapeFilename(id.substr(6))
+        file = USc_file.oldEscapeFilename(id.substr(6))
         files.push(file);
         ucaseFiles.push(file.toUpperCase());
     }      
@@ -132,17 +132,17 @@ function upgrade_2_0_14()
     
     // Delete the cache files for duplicate entries (might be corrupt)
     for (i in params.retData) {
-        rmFile(params.retData[i]+".old");
-        rmFile(params.retData[i]+".new");
-        rmFile(params.retData[i]+".dif");
+        USc_file.USrmFile(params.retData[i]+".old");
+        USc_file.USrmFile(params.retData[i]+".new");
+        USc_file.USrmFile(params.retData[i]+".dif");
     }
 
     // Rename existing cache files to use escaped uppercase id
     for (i in files) {
-        var file = escapeFilename(ids[i]);
-        mvFile(files[i]+".old", file+".old");
-        mvFile(files[i]+".new", file+".new");
-        mvFile(files[i]+".dif", file+".dif");
+        var file = USc_file.escapeFilename(ids[i]);
+        USc_file.USmvFile(files[i]+".old", file+".old");
+        USc_file.USmvFile(files[i]+".new", file+".new");
+        USc_file.USmvFile(files[i]+".dif", file+".dif");
         files[i] = file; // Used in the next step...
     }
 
@@ -172,10 +172,10 @@ function upgrade_2_0_14()
 function upgradeDiff(filebase, data)
 {
     // Create a diff file for the specified filebase
-    var oldContent = USreadFile(filebase+".old");
-    var newContent = USreadFile(filebase+".new");
+    var oldContent = USc_file.USreadFile(filebase+".old");
+    var newContent = USc_file.USreadFile(filebase+".new");
     var diffContent = USc_diff.create(oldContent, newContent);
-    USwriteFile(filebase+".dif", diffContent);
+    USc_file.USwriteFile(filebase+".dif", diffContent);
     return null;
 }
 

@@ -49,17 +49,17 @@ function loadStatusbar()
   
     if (!checkRDF(rdffile.path)) {
         // RDF is corrupt - restore from last backup
-        rmFileGeneric(corruptfile.path);
-        cpFileGeneric(rdffile.path, corruptfile.path);
-        rmFileGeneric(rdffile.path);
-        cpFileGeneric(backupfile.path, rdffile.path);
+        USc_file.rmFile(corruptfile.path);
+        USc_file.cpFile(rdffile.path, corruptfile.path);
+        USc_file.rmFile(rdffile.path);
+        USc_file.cpFile(backupfile.path, rdffile.path);
     }
 
     initRDF(getURI(rdffile));
 
     // Backup the rdf file in case of corruption
-    rmFileGeneric(backupfile.path);
-    cpFileGeneric(rdffile.path, backupfile.path);
+    USc_file.rmFile(backupfile.path);
+    USc_file.cpFile(rdffile.path, backupfile.path);
 
     // Check for refresh requests
     refresh = new Refresher("refreshTreeRequest", refreshStatusbar);

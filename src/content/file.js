@@ -30,28 +30,36 @@
  * the terms of any one of the MPL, the GPL or the LGPL.  
  * ***** END LICENSE BLOCK ***** */
 
-function updatescanDirExists()
-{
-    var dir = DirIO.open(prependUpdatescanPath(""));
-    return (dir.exists()) 
-}
+if (typeof(USc_file_exists) != 'boolean') {
+var USc_file_exists = true;
+var USc_file = {    
 
-function createUpdatescanDir()
+updatescanDirExists : function()
 {
-    var dir = DirIO.open(prependUpdatescanPath(""));
+    var me = USc_file;
+    var dir = DirIO.open(me._prependUpdatescanPath(""));
+    return (dir.exists()) 
+},
+
+createUpdatescanDir : function()
+{
+    var me = USc_file;
+    var dir = DirIO.open(me._prependUpdatescanPath(""));
     if (!dir.exists()) 
     DirIO.create(dir);
-}
+},
 
-function USwriteFile(filename, data)
+USwriteFile : function(filename, data)
 {
-    var outFile = FileIO.open(prependUpdatescanPath(filename));
+    var me = USc_file;
+    var outFile = FileIO.open(me._prependUpdatescanPath(filename));
     return FileIO.write(outFile, data, "","UTF-8");    
-}
+},
 
-function USreadFile(filename)
+USreadFile : function(filename)
 {
-    var inFile = FileIO.open(prependUpdatescanPath(filename));
+    var me = USc_file;
+    var inFile = FileIO.open(me._prependUpdatescanPath(filename));
     if (!inFile.exists()) {
        return "";
     }
@@ -61,14 +69,15 @@ function USreadFile(filename)
        return "";
     }
     return data;
-}
+},
 
-function rmFile(filename)
+USrmFile : function(filename)
 {
-    rmFileGeneric(prependUpdatescanPath(filename));
-}
+    var me = USc_file;
+    me.rmFile(me._prependUpdatescanPath(filename));
+},
 
-function rmFileGeneric(filename)
+rmFile : function(filename)
 {
     var aFile = Components.classes["@mozilla.org/file/local;1"].createInstance();
     if ( aFile instanceof Components.interfaces.nsILocalFile) {
@@ -81,10 +90,11 @@ function rmFileGeneric(filename)
         return true;
     }
     return false;
-}
+},
 
-function mvFile(sourcefile, destfile)
+USmvFile : function(sourcefile, destfile)
 {
+    var me = USc_file;
     // get a component for the file to copy
     var aFile = Components.classes["@mozilla.org/file/local;1"]
     .createInstance(Components.interfaces.nsILocalFile);
@@ -96,8 +106,8 @@ function mvFile(sourcefile, destfile)
     if (!aDir) return false;
 
     try {
-        sourcefile = prependUpdatescanPath(sourcefile);
-        destpath = prependUpdatescanPath("");
+        sourcefile = me._prependUpdatescanPath(sourcefile);
+        destpath = me._prependUpdatescanPath("");
     
         // next, assign URLs to the file components
         aFile.initWithPath(sourcefile);
@@ -109,15 +119,16 @@ function mvFile(sourcefile, destfile)
         return false;
     }
     return true;
-}
+},
 
-function cpFile(sourcefile, destfile)
+UScpFile : function(sourcefile, destfile)
 {
-    return cpFileGeneric(prependUpdatescanPath(sourcefile), 
-                         prependUpdatescanPath(destfile));
-}
+    var me = USc_file;
+    return cpFile(me._prependUpdatescanPath(sourcefile), 
+                         me._prependUpdatescanPath(destfile));
+},
 
-function cpFileGeneric(sourcefile, destfile)
+cpFile : function(sourcefile, destfile)
 {
     // get a component for the file to copy
     var aSrc = Components.classes["@mozilla.org/file/local;1"]
@@ -140,8 +151,9 @@ function cpFileGeneric(sourcefile, destfile)
         return false;
     }
     return true;
-}
-function prependUpdatescanPath(filename)
+},
+
+_prependUpdatescanPath : function(filename)
 {
   // get the path to the user's home (profile) directory
     var dir = Components.classes["@mozilla.org/file/directory_service;1"]
@@ -150,9 +162,9 @@ function prependUpdatescanPath(filename)
     dir.append("updatescanner");
     dir.append(filename);
     return dir.path;
-}
+},
 
-function prependTempPath(filename)
+_prependTempPath : function(filename)
 {
   // get the path to the temp directory
     var dir = Components.classes["@mozilla.org/file/directory_service;1"]
@@ -160,9 +172,9 @@ function prependTempPath(filename)
                      .get("TmpD", Components.interfaces.nsIFile);
     dir.append(filename);
     return dir.path;
-}
+},
 
-function escapeFilename(filename)
+escapeFilename : function(filename)
 // Convert non-numeric/lowercase characters to ascii codes (" " => "_32")
 {
     var output = ""
@@ -176,9 +188,9 @@ function escapeFilename(filename)
         }
     }
     return output;
-}
+},
 
-function oldEscapeFilename(filename)
+oldEscapeFilename : function(filename)
 // Convert non-alphanumeric characters to ascii codes (" " => "_32")
 // This is an old escaping function - the problem is that Windows doesn't 
 // handle case-sensitive filenames! 
@@ -194,13 +206,14 @@ function oldEscapeFilename(filename)
         }
     }
     return output;
-}
+},
 
-function openTempFile(fileBase, fileExt)
+openTempFile : function(fileBase, fileExt)
 // Creates a temporary file with the specified base filename.
 // The suffix of the filename is stored as a preference.
 // This means temp files can be rotated, and don't accumulate!
 {
+    var me = USc_file;
     var prefs = Components.classes["@mozilla.org/preferences-service;1"].
                  getService(Components.interfaces.nsIPrefService).
                  getBranch("extensions.updatescan.");
@@ -213,10 +226,10 @@ function openTempFile(fileBase, fileExt)
     }
 
     var filename = fileBase + String(suffix);
-    return FileIO.open(prependTempPath(filename)+"."+fileExt);
-}
+    return FileIO.open(me._prependTempPath(filename)+"."+fileExt);
+},
 
-function incrementTempFile(numItems)
+incrementTempFile : function(numItems)
 // Increment the temp filename suffix 0,1... up to maximum of "numItems"
 {
     var prefs = Components.classes["@mozilla.org/preferences-service;1"].
@@ -233,4 +246,6 @@ function incrementTempFile(numItems)
         suffix = 0;
     }
     prefs.setIntPref("tempSuffix", suffix);
+}
+}
 }
