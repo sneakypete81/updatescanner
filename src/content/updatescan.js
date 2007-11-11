@@ -213,7 +213,7 @@ openNewDialog : function()
                    .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
                    .getInterface(Components.interfaces.nsIDOMWindow) 
 
-    addToUpdateScan(mainWindow.document.getElementById('content'))
+    USc_overlay.addToUpdateScan(mainWindow.document.getElementById('content'))
     me._refreshTree();
     me.refresh.request();
 },

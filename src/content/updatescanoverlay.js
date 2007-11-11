@@ -36,27 +36,35 @@
  * ***** END LICENSE BLOCK ***** */
  
 // This code is copied from the "AddToBookmarks" context menu item.
-// Requires: rdf/rdfds.js
-//           rdf/rdf.js
-//           updatescan.js
 
-var initRDFdone = false;
 
-window.addEventListener("load", updatescan_overlay_init, false);
 
-function updatescan_overlay_init() 
+// See the end of the file for load/unload observers!
+
+
+
+
+if (typeof(USc_overlay_exists) != 'boolean') {
+var USc_overlay_exists = true;
+var USc_overlay = {    
+
+initRDFdone : false,
+
+
+load : function() 
 {
+    var me = USc_overlay;
     // Eventlistener for the contextmenu
     try {
         var menu = document.getElementById("contentAreaContextMenu");
-        menu.addEventListener("popupshowing", updatescan_showMenu, false);
+        menu.addEventListener("popupshowing", me._showMenu, false);
     } catch (e) {
         ;
     }
-}
+},
 
 // Don't show context menu item when text is selected.
-function updatescan_showMenu() 
+_showMenu : function() 
 {
     if(gContextMenu.isTextSelected) {
         // selected text = don't show menu item
@@ -64,33 +72,34 @@ function updatescan_showMenu()
     } else {
         document.getElementById("AddToUpdateScan").hidden = false;
     }
-}
+},
 
-function addToUpdateScan(aBrowser)
+addToUpdateScan : function(aBrowser)
 {
+    var me = USc_overlay;
     var rdffile;
 
-    if (!initRDFdone) {
+    if (!me.initRDFdone) {
         rdffile = getRDFpath();
         initRDF(getURI(rdffile));
-        initRDFdone = true;
+        me.initRDFdone = true;
     }
 
-    const browsers = aBrowser.browsers;
+    var browsers = aBrowser.browsers;
     if (browsers && browsers.length > 1) {
-        addToUpdateScanForTabBrowser(aBrowser);
+        me._addToUpdateScanForTabBrowser(aBrowser);
     } else {
-        addToUpdateScanForBrowser(aBrowser.webNavigation);
+        me._addToUpdateScanForBrowser(aBrowser.webNavigation);
     }
-}
+},
 
-function addToUpdateScanForTabBrowser(aTabBrowser)
+_addToUpdateScanForTabBrowser : function(aTabBrowser)
 {
     var tabsInfo = [];
     var currentTabInfo = { name: "", url: "", charset: null };
 
-    const activeBrowser = aTabBrowser.selectedBrowser;
-    const browsers = aTabBrowser.browsers;
+    var activeBrowser = aTabBrowser.selectedBrowser;
+    var browsers = aTabBrowser.browsers;
     for (var i = 0; i < browsers.length; ++i) {
         var webNav = browsers[i].webNavigation;
         var url = webNav.currentURI.spec;
@@ -109,9 +118,9 @@ function addToUpdateScanForTabBrowser(aTabBrowser)
         }
     }
     USc_updatescan.openNewDialogNoRefresh(currentTabInfo.name, currentTabInfo.url)
-}
+},
 
-function addToUpdateScanForBrowser(aDocShell)
+_addToUpdateScanForBrowser : function(aDocShell)
 {
     // Bug 52536: We obtain the URL and title from the nsIWebNavigation
     // associated with a <browser/> rather than from a DOMWindow.
@@ -128,3 +137,8 @@ function addToUpdateScanForBrowser(aDocShell)
     }
     USc_updatescan.openNewDialogNoRefresh(title, url);
 }
+
+}
+}
+
+window.addEventListener("load", USc_overlay.load, false);
