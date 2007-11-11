@@ -76,7 +76,7 @@ _check : function()
 
     pages = getRDFroot().getChildren();
 
-    me.scan = new Scanner();
+    me.scan = new USc_scanner();
     now = new Date();
 
     while (pages.hasMoreElements()) {
@@ -123,7 +123,7 @@ _check : function()
 _scanChanged : function(id, new_content, status, statusText, headerText)
 {
     var me = USc_autoscan;    
-    if (processScanChange(id, new_content, status, statusText, headerText)) {
+    if (USc_processScanChange(id, new_content, status, statusText, headerText)) {
         me.numChanges++;
     }
 },

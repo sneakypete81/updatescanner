@@ -119,7 +119,7 @@ function scanButtonClick()
 
     numitems = getNumItems();
     if (numitems > 0) {
-        scan = new Scanner()
+        scan = new USc_scanner()
         
         for (var i=0; i<numitems; i++) {
             id = tree.contentView.getItemAtIndex(i).id;
@@ -150,7 +150,7 @@ function scanButtonClick()
 
 function scanChangedCallback(id, new_content, status, statusText, headerText)
 {
-    if (processScanChange(id, new_content, status, statusText, headerText)) {
+    if (USc_processScanChange(id, new_content, status, statusText, headerText)) {
         numChanges++;
     }
     refreshTree();

@@ -41,8 +41,9 @@ kUnscannedView : 3,
 
 create : function(oldContent, newContent)
 {
-    oldContent = stripScript(oldContent);
-    newContent = stripScript(newContent);
+    var me = USc_diff;
+    oldContent = me._stripScript(oldContent);
+    newContent = me._stripScript(newContent);
     return USc_diffWiki.WDiffString(oldContent, newContent);
 },
 
@@ -70,8 +71,8 @@ display : function(title, sourceURL, oldContent, newContent, diffContent,
         return diffURL;
     }
     
-    oldContent = stripScript(oldContent);
-    newContent = stripScript(newContent)
+    oldContent = me._stripScript(oldContent);
+    newContent = me._stripScript(newContent)
 
     var newFile  = USc_file.openTempFile("UpdatescanNew","htm");
     var oldFile  = USc_file.openTempFile("UpdatescanOld","htm"); 
@@ -161,6 +162,13 @@ _generateHeader : function(currentView, title, date, sourceURL, diffURL, oldURL,
     data += "<hr>\n";
     data += "<div style='position:relative'>\n";
     return data;
+},
+
+_stripScript : function(content)
+{
+    content = content.replace(/<script([\r\n]|.)*?>([\r\n]|.)*?<\/script>/gi,"");
+    return    content;
 }
+
 }
 }
