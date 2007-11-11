@@ -58,7 +58,7 @@ function loadUpdateScan()
     upgradeCheck(); // See if we need to upgrade something
 
     // Check for refresh requests
-    refresh = new Refresher("refreshTreeRequest", refreshTree);
+    refresh = new USc_refresher("refreshTreeRequest", refreshTree);
     refresh.start();
     refresh.request();
 }
@@ -297,7 +297,7 @@ function openSelectedItem()
 {
     modifyRDFitem(id, "changed", "0");
     saveRDF();
-    openTopWin(queryRDFitem(id, "url"));
+    USc_topWin.open(queryRDFitem(id, "url"));
     refreshTree();
     refresh.request();
 }
@@ -340,7 +340,7 @@ function diffSelectedItemThisWindow()
 function diffItemThisWindow(id, numItems)
 {
     var diffURL = diffItem(id, numItems)
-    openTopWin(diffURL);
+    USc_topWin.open(diffURL);
     focusTree();
 }
 
@@ -510,7 +510,7 @@ function openHelp()
                  getBranch("general.").
                  getCharPref("useragent.locale");
     var helpURL="http://updatescanner.mozdev.org/redirect.php?page=help.html&locale="+locale;
-    openTopWin(helpURL);
+    USc_topWin.open(helpURL);
 }
 
 function deleteSelectedItem()

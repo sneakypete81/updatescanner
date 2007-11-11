@@ -62,7 +62,7 @@ function loadStatusbar()
     USc_file.cpFile(rdffile.path, backupfile.path);
 
     // Check for refresh requests
-    refresh = new Refresher("refreshTreeRequest", refreshStatusbar);
+    refresh = new USc_refresher("refreshTreeRequest", refreshStatusbar);
     refresh.start();
 
     // Start autoscanner

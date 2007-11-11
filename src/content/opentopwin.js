@@ -37,8 +37,12 @@
  * ***** END LICENSE BLOCK ***** */
  
  /* These functions are from the Thunderbird source (utilityOverlay.js) */
+
+if (typeof(USc_topWin_exists) != 'boolean') {
+var USc_topWin_exists = true;
+var USc_topWin = {    
  
- function getTopWin()
+get : function()
 {
     var windowManager = Components.classes['@mozilla.org/appshell/window-mediator;1'].getService();
     var windowManagerInterface = windowManager.QueryInterface( Components.interfaces.nsIWindowMediator);
@@ -48,9 +52,9 @@
         return topWindowOfType;
     }
     return null;
-}
+},
 
-function openTopWin( url )
+open : function(url)
 {
     if ((url == null) || (url == "")) return null;
 
@@ -65,7 +69,7 @@ function openTopWin( url )
         url = "about:blank";
     }
 
-    var topWindowOfType = getTopWin();
+    var topWindowOfType = USc_topWin.get();
     if ( topWindowOfType )
     {
         topWindowOfType.focus();
@@ -73,4 +77,6 @@ function openTopWin( url )
         return topWindowOfType;
     }
     return window.openDialog( getBrowserURL(), "_blank", "chrome,all,dialog=no", url );
+}
+}
 }
