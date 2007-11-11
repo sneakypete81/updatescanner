@@ -30,13 +30,18 @@
  * the terms of any one of the MPL, the GPL or the LGPL.  
  * ***** END LICENSE BLOCK ***** */
 
+if (typeof(USc_fuzzy_exists) != 'boolean') {
+var USc_fuzzy_exists = true;
+var USc_fuzzy = {    
+
 // Returns true if the content is the same (or within a certain number of characters)
-function compareFuzzy(content1, content2, threshold)
+compare : function(content1, content2, threshold)
 {
+    var me = USc_fuzzy;
     var index;
     var i;
     
-    String.prototype.diffIndex = str_diffIndex; // register new string method
+    String.prototype.diffIndex = me._diffIndex; // register new string method
 
     shortest = Math.min(content1.length, content2.length);
     if (shortest+threshold < Math.max(content1.length, content2.length)) {
@@ -77,11 +82,11 @@ function compareFuzzy(content1, content2, threshold)
     }
 
     return true;
-}
+},
 
 // new method for String the returns the first index where the two strings
 // don't match
-function str_diffIndex(string2)
+_diffIndex : function(string2)
 {
     var i, minlen;
 
@@ -94,4 +99,6 @@ function str_diffIndex(string2)
     }
 
     return minlen;
+}
+}
 }

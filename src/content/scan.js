@@ -307,7 +307,7 @@ function checkSame(content1, content2, maxthreshold)
         } else {
             threshold += 100;
         }
-        if (compareFuzzy(content1, content2, threshold)) {
+        if (USc_fuzzy.compare(content1, content2, threshold)) {
             return true;
         }
     }
