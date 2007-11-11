@@ -118,19 +118,19 @@ _generateHeader : function(currentView, title, date, sourceURL, diffURL, oldURL,
         param = {title:title, timeDiff:date, 
                  highlightOn:"<b style='color:black;background-color:#ffff66'>",
                  highlightOff:"</b>"};
-        data += str.getString("headerDiff").supplant(param);
+        data += str.getString("headerDiff").USc_supplant(param);
         break;
     case me.kOldView:
         param = {title:title, timeDiff:date};
-        data += str.getString("headerOld").supplant(param);
+        data += str.getString("headerOld").USc_supplant(param);
         break;
     case me.kNewView:
         param = {title:title, timeDiff:date};
-        data += str.getString("headerNew").supplant(param);
+        data += str.getString("headerNew").USc_supplant(param);
         break;
     default:
         param = {title:title};
-        data += str.getString("headerNotChecked").supplant(param);
+        data += str.getString("headerNotChecked").USc_supplant(param);
     }
     
     data += "<br><b>"+str.getString("view")+":</b> [\n";

@@ -110,7 +110,7 @@ autoscanFinished : function(numChanges)
             message = alertOneChange;
         } else {
             param = {numChanges:numChanges};
-            message = alertManyChanges.supplant(param);
+            message = alertManyChanges.USc_supplant(param);
         }
         window.openDialog("chrome://updatescan/content/alert.xul",
                   "alert:alert",

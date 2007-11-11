@@ -176,8 +176,8 @@ function scanFinishedCallback()
             message = str.getString("alertOneChange");
         } else {
             param = {numChanges:numChanges};
-            setStatus(str.getString("statusManyChanges").supplant(param));
-            message = str.getString("alertManyChanges").supplant(param);
+            setStatus(str.getString("statusManyChanges").USc_supplant(param));
+            message = str.getString("alertManyChanges").USc_supplant(param);
         }
         window.openDialog("chrome://updatescan/content/alert.xul",
                   "alert:alert",
@@ -384,9 +384,9 @@ function dateDiffString(oldDate, newDate)
         time += mins;
 
         if (oldDate.getDate() != newDate.getDate()) {
-            return str.getString("yesterdayAt").supplant({time:time});
+            return str.getString("yesterdayAt").USc_supplant({time:time});
         } else {
-            return str.getString("todayAt").supplant({time:time});
+            return str.getString("todayAt").USc_supplant({time:time});
         }
     }
 
@@ -396,7 +396,7 @@ function dateDiffString(oldDate, newDate)
         if (diff == 1) {
             return str.getString("dayAgo");
         } else {
-            return str.getString("daysAgo").supplant({numDays:diff});
+            return str.getString("daysAgo").USc_supplant({numDays:diff});
         }
     }
     diff = diff / 7;
@@ -404,7 +404,7 @@ function dateDiffString(oldDate, newDate)
     if (diff == 1) {
         return str.getString("weekAgo");
     } else {
-        return str.getString("weeksAgo").supplant({numWeeks:diff});
+        return str.getString("weeksAgo").USc_supplant({numWeeks:diff});
     }
 }
 

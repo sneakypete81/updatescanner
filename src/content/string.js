@@ -7,7 +7,7 @@
 // param = {domain: 'valvion.com', media: 'http://media.valvion.com/'};
 // url = "{media}logo.gif".supplant(param);
 
-String.prototype.supplant = function (o) {
+String.prototype.USc_supplant = function (o) {
     return this.replace(/{([^{}]*)}/g,
         function (a, b) {
             var r = o[b];
