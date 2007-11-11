@@ -73,11 +73,16 @@ block: an object that holds block move information
 
 */
 
+if (typeof(USc_diffWiki_exists) != 'boolean') {
+var USc_diffWiki_exists = true;
+var USc_diffWiki = {    
+
+
 // css for change indicators
-var wDiffStyleDelete = wDiffStyleDelete || 'font-weight: bold; text-decoration: none; color: #000000; background-color: #ffff66;';
-var wDiffStyleInsert = wDiffStyleInsert || /*'font-weight: bold; text-decoration: none; */'color: #000000; background-color: #ffff66;';
-var wDiffStyleMoved  = wDiffStyleMoved  || 'font-weight: bold; vertical-align: text-bottom; font-size: xx-small; padding: 0; border: solid 1px;';
-var wDiffStyleBlock  = wDiffStyleBlock  || [
+wDiffStyleDelete : 'font-weight: bold; text-decoration: none; color: #000000; background-color: #ffff66;',
+wDiffStyleInsert : 'color: #000000; background-color: #ffff66;',
+wDiffStyleMoved  : 'font-weight: bold; vertical-align: text-bottom; font-size: xx-small; padding: 0; border: solid 1px;',
+wDiffStyleBlock  : [
     'background-color: #66ffff;',
     'background-color: #ff66ff;',
     'background-color: #ffff66;',
@@ -87,77 +92,76 @@ var wDiffStyleBlock  = wDiffStyleBlock  || [
     'background-color: #aaffaa;',
     'background-color: #aaaaff;',
     'background-color: #ffaaaa;'
-];
+],
 
 // html for change indicators, {number} is replaced by the block number, {block} is replaced by the block style
-var wDiffHtmlMovedRight  = wDiffHtmlMovedRight  || '<input type="button" value="&gt;" style="' + wDiffStyleMoved + ' {block}">';
-var wDiffHtmlMovedLeft   = wDiffHtmlMovedLeft   || '<input type="button" value="&lt;" style="' + wDiffStyleMoved + ' {block}">';
+wDiffHtmlMovedRight  : '<input type="button" value="&gt;" style="font-weight: bold; vertical-align: text-bottom; font-size: xx-small; padding: 0; border: solid 1px; {block}">',
+wDiffHtmlMovedLeft   : '<input type="button" value="&lt;" style="font-weight: bold; vertical-align: text-bottom; font-size: xx-small; padding: 0; border: solid 1px; {block}">',
 
-var wDiffHtmlBlockStart  = wDiffHtmlBlockStart  || '<span style="{block}">';
-var wDiffHtmlBlockEnd    = wDiffHtmlBlockEnd    || '</span>';
+wDiffHtmlBlockStart  : '<span style="{block}">',
+wDiffHtmlBlockEnd    : '</span>',
 
-var wDiffHtmlDeleteStart = wDiffHtmlDeleteStart || '<span style="' + wDiffStyleDelete + '">';
-var wDiffHtmlDeleteEnd   = wDiffHtmlDeleteEnd   || '</span>';
+wDiffHtmlDeleteStart : '<span style="font-weight: bold; text-decoration: none; color: #000000; background-color: #ffff66;">',
+wDiffHtmlDeleteEnd   : '</span>',
 
-var wDiffHtmlInsertStart = wDiffHtmlInsertStart || '<span style="' + wDiffStyleInsert + '">';//'[[[';
-var wDiffHtmlInsertEnd   = wDiffHtmlInsertEnd   || /*']]]';*/'</span>';
+wDiffHtmlInsertStart : '<span style="color: #000000; background-color: #ffff66;">',
+wDiffHtmlInsertEnd   : '</span>',
 
 // minimal number of real words for a moved block (0 for always displaying block move indicators)
-var wDiffBlockMinLength = wDiffBlockMinLength || 3;
+wDiffBlockMinLength : 3,
 
 // exclude identical sequence starts and endings from change marking
-var wDiffWordDiff = wDiffWordDiff || false;
+wDiffWordDiff : false,
 
 // enable recursive diff to resolve problematic sequences
-var wDiffRecursiveDiff = wDiffRecursiveDiff || true;
+wDiffRecursiveDiff : true,
 
 // enable block move display
-var wDiffShowBlockMoves = wDiffShowBlockMoves || false;
-
-// compatibility fix for old name of main function
-var StringDiff = WDiffString;
+wDiffShowBlockMoves : false,
 
 // if there are less than x consecutive identical words, highlight them anyway. 
-var wMinBreakBetweenDiffs = 5;
+wMinBreakBetweenDiffs : 5,
 
 // remove unchanged parts from final output
 
 // characters before diff tag to search for previous heading, paragraph, line break, cut characters
-var wDiffHeadingBefore   = wDiffHeadingBefore   || 1500;
-var wDiffParagraphBefore = wDiffParagraphBefore || 1500;
-var wDiffLineBeforeMax   = wDiffLineBeforeMax   || 1000;
-var wDiffLineBeforeMin   = wDiffLineBeforeMin   || 500;
-var wDiffBlankBeforeMax  = wDiffBlankBeforeMax  || 1000;
-var wDiffBlankBeforeMin  = wDiffBlankBeforeMin  || 500;
-var wDiffCharsBefore     = wDiffCharsBefore     || 500;
+wDiffHeadingBefore   : 1500,
+wDiffParagraphBefore : 1500,
+wDiffLineBeforeMax   : 1000,
+wDiffLineBeforeMin   : 500,
+wDiffBlankBeforeMax  : 1000,
+wDiffBlankBeforeMin  : 500,
+wDiffCharsBefore     : 500,
 
 // characters after diff tag to search for next heading, paragraph, line break, or characters
-var wDiffHeadingAfter   = wDiffHeadingAfter   || 1500;
-var wDiffParagraphAfter = wDiffParagraphAfter || 1500;
-var wDiffLineAfterMax   = wDiffLineAfterMax   || 1000;
-var wDiffLineAfterMin   = wDiffLineAfterMin   || 500;
-var wDiffBlankAfterMax  = wDiffBlankAfterMax  || 1000;
-var wDiffBlankAfterMin  = wDiffBlankAfterMin  || 500;
-var wDiffCharsAfter     = wDiffCharsAfter     || 500;
+wDiffHeadingAfter   : 1500,
+wDiffParagraphAfter : 1500,
+wDiffLineAfterMax   : 1000,
+wDiffLineAfterMin   : 500,
+wDiffBlankAfterMax  : 1000,
+wDiffBlankAfterMin  : 500,
+wDiffCharsAfter     : 500,
 
 // maximal fragment distance to join close fragments
-var wDiffFragmentJoin = wDiffFragmentJoin || 1000;
-var wDiffOmittedChars = wDiffOmittedChars || '…';
-var wDiffOmittedLines = wDiffOmittedLines || '\n\n<small><i>(…)</i></small>\n\n';
-var wDiffNoChange     = wDiffNoChange     || '\n<i>(…)</i>\n';
+wDiffFragmentJoin : 1000,
+wDiffOmittedChars : '…',
+wDiffOmittedLines : '\n\n<small><i>(…)</i></small>\n\n',
+wDiffNoChange     : '\n<i>(…)</i>\n',
 
 
 // WDiffString: main program
 // input: oldText, newText, strings containing the texts
 // returns: html diff
 
-String.prototype.trim = function() {
+_trim : function(text)
+{
 // Strip leading and trailing white-space
-return this.replace(/^\s*|\s*$/g, "");
-}
+return text.replace(/^\s*|\s*$/g, "");
+},
 
-function WDiffString(oldText, newText) {
-
+WDiffString : function(oldText, newText)
+{
+    var me = USc_diffWiki;
     var text = {};
     text.newWords = [];
     text.oldWords = [];
@@ -170,46 +174,47 @@ function WDiffString(oldText, newText) {
 // trap trivial changes: no change
     if (oldText == newText) {
         outText = newText;
-        outText = WDiffEscape(outText);
-        outText = WDiffHtmlFormat(outText);
+        outText = me._WDiffEscape(outText);
+        outText = me._WDiffHtmlFormat(outText);
         return(outText);
     }
 
 // remove everything up to the body start
-    bodyPos = newText.search(/<body/i);
+    var bodyPos = newText.search(/<body/i);
     if (bodyPos < 0) bodyPos = 0;
-    newHead = newText.substr(0, bodyPos);
+    var newHead = newText.substr(0, bodyPos);
     newText = newText.substr(bodyPos);
 
     bodyPos = oldText.search(/<body/i);
     if (bodyPos < 0) bodyPos = 0;
-    oldHead = oldText.substr(0, bodyPos);
+    var oldHead = oldText.substr(0, bodyPos);
     oldText = oldText.substr(bodyPos);
 
 // split new and old text into words
-    WDiffSplitText(oldText, newText, text);
+    me._WDiffSplitText(oldText, newText, text);
 
 // calculate diff information
-    WDiffText(text);
+    me._WDiffText(text);
 
 //detect block borders and moved blocks
-    WDiffDetectBlocks(text, block);
+    me._WDiffDetectBlocks(text, block);
 
 // process diff data into formatted html text
-    outText = WDiffToHtml(text, block);
+    outText = me._WDiffToHtml(text, block);
 
-    outText = unescapeSpaces(outText);
+    outText = me._unescapeSpaces(outText);
 
     return(newHead + outText);
-}
+},
 
 
 // WDiffSplitText: split new and old text into words
 // input: oldText, newText, strings containing the texts
 // changes: text.newWords and text.oldWords, arrays containing the texts in arrays of words
 // UpdateScanner: Now ensures that tags are not split up into multiple words
-function WDiffSplitText(oldText, newText, text) {
-
+ _WDiffSplitText: function(oldText, newText, text) 
+ {
+    var me = USc_diffWiki;
     // Remove dos carriage returns
     oldText = oldText.replace(/\r\n/g,"\n");
     newText = newText.replace(/\r\n/g,"\n");
@@ -226,10 +231,10 @@ function WDiffSplitText(oldText, newText, text) {
     newText = newText.replace(/>([^\s])/g,">\t$1");
 
 // Escape out spaces within a tag (and script), so it appears as a single word
-    oldText = escapeScriptSpaces(oldText);
-    newText = escapeScriptSpaces(newText);
-        oldText = escapeTagSpaces(oldText);
-    newText = escapeTagSpaces(newText);
+    oldText = me._escapeScriptSpaces(oldText);
+    newText = me._escapeScriptSpaces(newText);
+    oldText = me._escapeTagSpaces(oldText);
+    newText = me._escapeTagSpaces(newText);
 
 // split old text into words
     var pattern = /[\s]+|[^\s]+/g;
@@ -249,7 +254,7 @@ function WDiffSplitText(oldText, newText, text) {
         }
     } while (result != null);
     return;
-}
+},
 
 
 // WDiffText: calculate diff information
@@ -257,7 +262,9 @@ function WDiffSplitText(oldText, newText, text) {
 // optionally for recursive calls: newStart, newEnd, oldStart, oldEnd, recursionLevel
 // changes: text.newToOld and text.oldToNew, containing the line numbers in the other version
 
-function WDiffText(text, newStart, newEnd, oldStart, oldEnd, recursionLevel) {
+_WDiffText : function(text, newStart, newEnd, oldStart, oldEnd, recursionLevel) 
+{
+    var me = USc_diffWiki;
 
     symbol = new Object();
     symbol.newCtr = [];
@@ -373,7 +380,7 @@ function WDiffText(text, newStart, newEnd, oldStart, oldEnd, recursionLevel) {
 
 // recursively diff still unresolved regions downwards
 
-    if (wDiffRecursiveDiff) {
+    if (me._wDiffRecursiveDiff) {
         i = newStart;
         j = oldStart;
         while (i < newEnd) {
@@ -403,7 +410,7 @@ function WDiffText(text, newStart, newEnd, oldStart, oldEnd, recursionLevel) {
                 if ( (iLength > 0) && (jLength > 0) ) {
                     if ( (iLength > 1) || (jLength > 1) ) {
                         if ( (iStart != newStart) || (iEnd != newEnd) || (jStart != oldStart) || (jEnd != oldEnd) ) {
-                            WDiffText(text, iStart, iEnd, jStart, jEnd, recursionLevel + 1);
+                            me._WDiffText(text, iStart, iEnd, jStart, jEnd, recursionLevel + 1);
                         }
                     }
                 }
@@ -417,7 +424,7 @@ function WDiffText(text, newStart, newEnd, oldStart, oldEnd, recursionLevel) {
 
 // recursively diff still unresolved regions upwards
 
-    if (wDiffRecursiveDiff) {
+    if (me._wDiffRecursiveDiff) {
         i = newEnd - 1;
         j = oldEnd - 1;
         while (i >= newStart) {
@@ -447,7 +454,7 @@ function WDiffText(text, newStart, newEnd, oldStart, oldEnd, recursionLevel) {
                 if ( (iLength > 0) && (jLength > 0) ) {
                     if ( (iLength > 1) || (jLength > 1) ) {
                         if ( (iStart != newStart) || (iEnd != newEnd) || (jStart != oldStart) || (jEnd != oldEnd) ) {
-                            WDiffText(text, iStart, iEnd, jStart, jEnd, recursionLevel + 1);
+                            me._WDiffText(text, iStart, iEnd, jStart, jEnd, recursionLevel + 1);
                         }
                     }
                 }
@@ -459,7 +466,7 @@ function WDiffText(text, newStart, newEnd, oldStart, oldEnd, recursionLevel) {
         }
     }
     return;
-}
+},
 
 
 // WDiffToHtml: process diff data into formatted html text
@@ -468,8 +475,9 @@ function WDiffText(text, newStart, newEnd, oldStart, oldEnd, recursionLevel) {
 //   block data structure
 // returns: outText, a html string
 
-function WDiffToHtml(text, block) {
-
+_WDiffToHtml : function(text, block) 
+{
+    var me = USc_diffWiki;
     var outText = text.message;
 
     var blockNumber = 0;
@@ -513,18 +521,18 @@ function WDiffToHtml(text, block) {
             if (moved > 0) {
 
 // mark block as inserted text
-                if (block.newWords[blockNumber] < wDiffBlockMinLength) {
-                    identStart = wDiffHtmlInsertStart;
-                    identEnd = wDiffHtmlInsertEnd;
+                if (block.newWords[blockNumber] < me.wDiffBlockMinLength) {
+                    identStart = me.wDiffHtmlInsertStart;
+                    identEnd = me.wDiffHtmlInsertEnd;
                 }
 
 // mark block by color
                 else {
-                    if (moved > wDiffStyleBlock.length) {
-                        moved = wDiffStyleBlock.length;
+                    if (moved > me.wDiffStyleBlock.length) {
+                        moved = me.wDiffStyleBlock.length;
                     }
-                    identStart = WDiffHtmlCustomize(wDiffHtmlBlockStart, moved - 1);
-                    identEnd = wDiffHtmlBlockEnd;
+                    identStart = me._WDiffHtmlCustomize(me.wDiffHtmlBlockStart, moved - 1);
+                    identEnd = me.wDiffHtmlBlockEnd;
                 }
             }
 
@@ -551,7 +559,7 @@ function WDiffToHtml(text, block) {
     for (var m = 0; m < movedIndex.length; m ++) {
 
 // insert the block as deleted text
-        if (block.newWords[ movedIndex[m] ] < wDiffBlockMinLength) {
+        if (block.newWords[ movedIndex[m] ] < me.wDiffBlockMinLength) {
             var movedStart = block.newStart[ movedIndex[m] ];
             var movedLength = block.newLength[ movedIndex[m] ];
             var str = '';
@@ -559,20 +567,20 @@ function WDiffToHtml(text, block) {
                 str += text.newWords[n];
             }
 //            str = str.replace(/\n/g, '&para;<br>');
-            blockText += wDiffHtmlDeleteStart + " " + wDiffHtmlDeleteEnd;
+            blockText += me.wDiffHtmlDeleteStart + " " + me.wDiffHtmlDeleteEnd;
 //            blockText += wDiffHtmlDeleteStart + WDiffEscape(str) + wDiffHtmlDeleteEnd;
         }
 
 // add a placeholder / move direction indicator
         else {
-            if (movedBlock[m] > wDiffStyleBlock.length) {
-                movedBlock[m] = wDiffStyleBlock.length;
+            if (movedBlock[m] > me.wDiffStyleBlock.length) {
+                movedBlock[m] = me.wDiffStyleBlock.length;
             }
             if (movedLeft[m]) {
-                blockText += WDiffHtmlCustomize(wDiffHtmlMovedLeft, movedBlock[m] - 1);
+                blockText += me._WDiffHtmlCustomize(me.wDiffHtmlMovedLeft, movedBlock[m] - 1);
             }
             else {
-                blockText += WDiffHtmlCustomize(wDiffHtmlMovedRight, movedBlock[m] - 1);
+                blockText += me._WDiffHtmlCustomize(me.wDiffHtmlMovedRight, movedBlock[m] - 1);
             }
         }
     }
@@ -592,7 +600,7 @@ function WDiffToHtml(text, block) {
             identCount ++;
     }
 // Ignore small amounts of identical text 
-    if (identCount < wMinBreakBetweenDiffs) {
+    if (identCount < me.wMinBreakBetweenDiffs) {
         insText += identText;
         identText = "";
     }
@@ -612,7 +620,7 @@ function WDiffToHtml(text, block) {
 // remove leading and trailing similarities betweein delText and ins from highlighting
     var preText = '';
     var postText = '';
-    if (wDiffWordDiff) {
+    if (me.wDiffWordDiff) {
         if ( (delText != '') && (insText != '') ) {
 
 // remove leading similarities
@@ -636,7 +644,7 @@ function WDiffToHtml(text, block) {
         outText += blockText;
     }
     if (identText != '') {
-        outText += identStart + WDiffEscape(identText) + identEnd;
+        outText += identStart + me._WDiffEscape(identText) + identEnd;
     }
     outText += preText;
     if (delText != '') {
@@ -651,18 +659,18 @@ function WDiffToHtml(text, block) {
         tagSplits = insText.split("<");
         // Rebuild insText, stopping highlighting before tags, and restarting afterwards.
         insText = "";
-        if (tagSplits[0].trim() != "")
-        insText += wDiffHtmlInsertStart+tagSplits[0]+wDiffHtmlInsertEnd;
+        if (me._trim(tagSplits[0]) != "")
+        insText += me.wDiffHtmlInsertStart+tagSplits[0]+me.wDiffHtmlInsertEnd;
         for (splitIndex=1; splitIndex<tagSplits.length; splitIndex++) {
         tagSplit = tagSplits[splitIndex];
         pos = tagSplit.lastIndexOf(">");
         if (pos < 0)
             pos = tagSplit.length;
         insText += "<"+tagSplit.substring(0, pos+1);
-        if (tagSplit.substring(pos+1).trim() != "") {
-            insText += wDiffHtmlInsertStart;
+        if (me._trim(tagSplit.substring(pos+1)) != "") {
+            insText += me.wDiffHtmlInsertStart;
             insText += tagSplit.substring(pos+1);
-            insText += wDiffHtmlInsertEnd;
+            insText += me.wDiffHtmlInsertEnd;
         }
         }
 //        myDump("after:"+insText);
@@ -675,15 +683,15 @@ function WDiffToHtml(text, block) {
     } while (i <= text.newWords.length);
 
     outText += '\n';
-    outText = WDiffHtmlFormat(outText);
+    outText = me._WDiffHtmlFormat(outText);
 
     return(outText);
-}
+},
 
 
 // WDiffEscape: replaces html-sensitive characters in output text with character entities
 
-function WDiffEscape(text) {
+_WDiffEscape : function(text) {
 
 //    text = text.replace(/&/g, "&amp;");
 //    text = text.replace(/</g, "&lt;");
@@ -691,36 +699,36 @@ function WDiffEscape(text) {
 //    text = text.replace(/"/g, "&quot;"); //"
 
     return(text);
-}
+},
 
 // HtmlCustomize: customize indicator html: replace {number} with the block number, {block} with the block style
 
-function WDiffHtmlCustomize(text, block) {
+_WDiffHtmlCustomize : function(text, block) 
+{
+    var me = USc_diffWiki;
 
     text = text.replace(/\{number\}/, block);
-    text = text.replace(/\{block\}/, wDiffStyleBlock[block]);
+    text = text.replace(/\{block\}/, me.wDiffStyleBlock[block]);
 
     return(text);
-}
-
-
-
+},
 
 // HtmlFormat: replaces newlines and multiple spaces in text with html code
 
-function WDiffHtmlFormat(text) {
+_WDiffHtmlFormat : function(text) {
 
 //    text = text.replace(/  /g, ' &nbsp;');
 //    text = text.replace(/\n/g, '<br>');
 
     return(text);
-}
+},
 
 
 // WDiffDetectBlocks: detect block borders and moved blocks
 // input: text object, block object
 
-function WDiffDetectBlocks(text, block) {
+_WDiffDetectBlocks : function(text, block) {
+    var me = USc_diffWiki;
 
     block.oldStart  = [];
     block.oldToNew  = [];
@@ -741,7 +749,7 @@ function WDiffDetectBlocks(text, block) {
     var realWordCounter = 0;
 
 // get old text block order
-    if (wDiffShowBlockMoves) {
+    if (me.wDiffShowBlockMoves) {
         j = 0;
         i = 0;
         do {
@@ -880,14 +888,16 @@ function WDiffDetectBlocks(text, block) {
         }
     }
     return;
-}
+},
 
 
 // WDiffShortenOutput: remove unchanged parts from final output
 // input: the output of WDiffString
 // returns: the text with removed unchanged passages indicated by (...)
 
-function WDiffShortenOutput(diffText) {
+_WDiffShortenOutput : function(diffText) 
+{
+    var me = USc_diffWiki;
 
 // html <br/> to newlines
     diffText = diffText.replace(/<br[^>]*>/g, '\n');
@@ -912,7 +922,7 @@ function WDiffShortenOutput(diffText) {
     }
 // no diff tags detected
     if (tagStart.length == 0) {
-        return(wDiffNoChange);
+        return(me.wDiffNoChange);
     }
 
 // define regexps
@@ -930,7 +940,7 @@ function WDiffShortenOutput(diffText) {
         var found;
 
 // find last heading before diff tag
-        var lastPos = tagStart[i] - wDiffHeadingBefore;
+        var lastPos = tagStart[i] - me.wDiffHeadingBefore;
         if (lastPos < 0) {
             lastPos = 0;
         }
@@ -945,7 +955,7 @@ function WDiffShortenOutput(diffText) {
 
 // find last paragraph before diff tag
         if (rangeStart[i] == null) {
-            lastPos = tagStart[i] - wDiffParagraphBefore;
+            lastPos = tagStart[i] - me.wDiffParagraphBefore;
             if (lastPos < 0) {
                 lastPos = 0;
             }
@@ -961,13 +971,13 @@ function WDiffShortenOutput(diffText) {
 
 // find line break before diff tag
         if (rangeStart[i] == null) {
-            lastPos = tagStart[i] - wDiffLineBeforeMax;
+            lastPos = tagStart[i] - me.wDiffLineBeforeMax;
             if (lastPos < 0) {
                 lastPos = 0;
             }
             regExpLine.lastIndex = lastPos;
             while ( (found = regExpLine.exec(diffText)) != null ) {
-                if (found.index > tagStart[i] - wDiffLineBeforeMin) {
+                if (found.index > tagStart[i] - me.wDiffLineBeforeMin) {
                     break;
                 }
                 rangeStart[i] = found.index;
@@ -977,13 +987,13 @@ function WDiffShortenOutput(diffText) {
 
 // find blank before diff tag
         if (rangeStart[i] == null) {
-            lastPos = tagStart[i] - wDiffBlankBeforeMax;
+            lastPos = tagStart[i] - me.wDiffBlankBeforeMax;
             if (lastPos < 0) {
                 lastPos = 0;
             }
             regExpBlank.lastIndex = lastPos;
             while ( (found = regExpBlank.exec(diffText)) != null ) {
-                if (found.index > tagStart[i] - wDiffBlankBeforeMin) {
+                if (found.index > tagStart[i] - me.wDiffBlankBeforeMin) {
                     break;
                 }
                 rangeStart[i] = found.index;
@@ -993,7 +1003,7 @@ function WDiffShortenOutput(diffText) {
 
 // fixed number of chars before diff tag
         if (rangeStart[i] == null) {
-            rangeStart[i] = tagStart[i] - wDiffCharsBefore;
+            rangeStart[i] = tagStart[i] - me.wDiffCharsBefore;
             rangeStartType[i] = 'chars';
             if (rangeStart[i] < 0) {
                 rangeStart[i] = 0;
@@ -1003,7 +1013,7 @@ function WDiffShortenOutput(diffText) {
 // find first heading after diff tag
         regExpHeading.lastIndex = tagEnd[i];
         if ( (found = regExpHeading.exec(diffText)) != null ) {
-            if (found.index < tagEnd[i] + wDiffHeadingAfter) {
+            if (found.index < tagEnd[i] + me.wDiffHeadingAfter) {
                 rangeEnd[i] = found.index + found[0].length;
                 rangeEndType[i] = 'heading';
             }
@@ -1013,7 +1023,7 @@ function WDiffShortenOutput(diffText) {
         if (rangeEnd[i] == null) {
             regExpParagraph.lastIndex = tagEnd[i];
             if ( (found = regExpParagraph.exec(diffText)) != null ) {
-                if (found.index < tagEnd[i] + wDiffParagraphAfter) {
+                if (found.index < tagEnd[i] + me.wDiffParagraphAfter) {
                     rangeEnd[i] = found.index;
                     rangeEndType[i] = 'paragraph';
                 }
@@ -1022,9 +1032,9 @@ function WDiffShortenOutput(diffText) {
 
 // find first line break after diff tag
         if (rangeEnd[i] == null) {
-            regExpLine.lastIndex = tagEnd[i] + wDiffLineAfterMin;
+            regExpLine.lastIndex = tagEnd[i] + me.wDiffLineAfterMin;
             if ( (found = regExpLine.exec(diffText)) != null ) {
-                if (found.index < tagEnd[i] + wDiffLineAfterMax) {
+                if (found.index < tagEnd[i] + me.wDiffLineAfterMax) {
                     rangeEnd[i] = found.index;
                     rangeEndType[i] = 'break';
                 }
@@ -1033,9 +1043,9 @@ function WDiffShortenOutput(diffText) {
 
 // find blank after diff tag
         if (rangeEnd[i] == null) {
-            regExpBlank.lastIndex = tagEnd[i] + wDiffBlankAfterMin;
+            regExpBlank.lastIndex = tagEnd[i] + me.wDiffBlankAfterMin;
             if ( (found = regExpBlank.exec(diffText)) != null ) {
-                if (found.index < tagEnd[i] + wDiffBlankAfterMax) {
+                if (found.index < tagEnd[i] + me.wDiffBlankAfterMax) {
                     rangeEnd[i] = found.index;
                     rangeEndType[i] = 'blank';
                 }
@@ -1044,7 +1054,7 @@ function WDiffShortenOutput(diffText) {
 
 // fixed number of chars after diff tag
         if (rangeEnd[i] == null) {
-            rangeEnd[i] = tagEnd[i] + wDiffCharsAfter;
+            rangeEnd[i] = tagEnd[i] + me.wDiffCharsAfter;
             if (rangeEnd[i] > diffText.length) {
                 rangeEnd[i] = diffText.length;
                 rangeEndType[i] = 'chars';
@@ -1063,7 +1073,7 @@ function WDiffShortenOutput(diffText) {
     fragmentEndType[0] = rangeEndType[0];
     var j = 1;
     for (var i = 1; i < rangeStart.length; i ++) {
-        if (rangeStart[i] > fragmentEnd[j - 1] + wDiffFragmentJoin) {
+        if (rangeStart[i] > fragmentEnd[j - 1] + me.wDiffFragmentJoin) {
             fragmentStart[j] = rangeStart[i];
             fragmentEnd[j] = rangeEnd[i];
             fragmentStartType[j] = rangeStartType[i];
@@ -1087,31 +1097,31 @@ function WDiffShortenOutput(diffText) {
 // add inline marks for omitted chars and words
         if (fragmentStart[i] > 0) {
             if (fragmentStartType[i] == 'chars') {
-                fragment = wDiffOmittedChars + fragment;
+                fragment = me.wDiffOmittedChars + fragment;
             }
             else if (fragmentStartType[i] == 'blank') {
-                fragment = wDiffOmittedChars + ' ' + fragment;
+                fragment = me.wDiffOmittedChars + ' ' + fragment;
             }
         }
         if (fragmentEnd[i] < diffText.length) {
             if (fragmentStartType[i] == 'chars') {
-                fragment = fragment + wDiffOmittedChars;
+                fragment = fragment + me.wDiffOmittedChars;
             }
             else if (fragmentStartType[i] == 'blank') {
-                fragment = fragment + ' ' + wDiffOmittedChars;
+                fragment = fragment + ' ' + me.wDiffOmittedChars;
             }
         }
 
 // add omitted line separator
         if (fragmentStart[i] > 0) {
-            outText += wDiffOmittedLines;
+            outText += me.wDiffOmittedLines;
         }
         outText += fragment;
     }
 
 // add trailing omitted line separator
     if (fragmentEnd[i - 1] < diffText.length) {
-        outText = outText + wDiffOmittedLines;
+        outText = outText + me.wDiffOmittedLines;
     }
     outText = outText.replace(/^\n+|\n+$/g, '');
 
@@ -1119,9 +1129,9 @@ function WDiffShortenOutput(diffText) {
     outText = outText.replace(/\n/g, '<br />');
 
     return(outText);
-}
+},
 
-function escapeScriptSpaces(content)
+_escapeScriptSpaces : function(content)
 {
     result = ""
         lastmatch = 0;
@@ -1133,10 +1143,9 @@ function escapeScriptSpaces(content)
     }
     result += content.substring(lastmatch);
     return result;
+},
 
-}
-
-function escapeTagSpaces(content)
+_escapeTagSpaces : function(content)
 {
         result = "";
         lastmatch = 0;
@@ -1148,12 +1157,14 @@ function escapeTagSpaces(content)
     }
     result += content.substring(lastmatch);
     return result;
-}
+},
 
-function unescapeSpaces(content)
+_unescapeSpaces : function(content)
 // Replace escaped spaces (ie in tags or scripts) with normal spaces.
 // Remove tabs.
 {
     result = content.replace(/___UPDATESCAN___SPACE___/g," ");
     return    result.replace(/\t/g,"");
+}
+}
 }

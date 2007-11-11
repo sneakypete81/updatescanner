@@ -43,7 +43,7 @@ create : function(oldContent, newContent)
 {
     oldContent = stripScript(oldContent);
     newContent = stripScript(newContent);
-    return WDiffString(oldContent, newContent);
+    return USc_diffWiki.WDiffString(oldContent, newContent);
 },
 
 display : function(title, sourceURL, oldContent, newContent, diffContent,
