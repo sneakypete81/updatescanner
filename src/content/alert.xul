@@ -45,12 +45,12 @@
         xmlns:wairole="http://www.w3.org/2005/01/wai-rdf/GUIRoleTaxonomy#"
         xhtml2:role="wairole:alert"
         align="start"
-        onload="onAlertLoad()">
+        onload="USc_alert.onAlertLoad()">
   
 <script type="application/x-javascript" 
 	src="chrome://updatescan/content/alert.js" />
 
-<vbox id="alertBox" class="alertBox" onclick="onAlertClick();">
+<vbox id="alertBox" class="alertBox" onclick="USc_alert.onAlertClick();">
 <spacer height="4px"/>
 <hbox>
   <vbox>
@@ -65,5 +65,5 @@
 </vbox>
 <!-- This method is called inline because we want to make sure we establish the width
      and height of the alert before we fire the onload handler. -->
-<script type="application/x-javascript">prefillAlertInfo();</script>
+<script type="application/x-javascript">USc_alert.prefillAlertInfo();</script>
 </window>

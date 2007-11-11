@@ -37,25 +37,29 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-var gFinalHeight = 50;
-var gSlideIncrement = 1;
-var gSlideTime = 10;
-var gOpenTime = 3000; 
-// total time the alert should stay up once we are done animating.
+if (typeof(USc_alert_exists) != 'boolean') {
+var USc_alert_exists = true;
+var USc_alert = {    
 
-var gAlertListener = null;
-var gAlertTextClickable = false;
-var gAlertCookie = "";
+gFinalHeight : 50,
+gSlideIncrement : 1,
+gSlideTime : 10,
+gOpenTime : 3000, // total time the alert should stay up once we are done animating.
 
-var g_MAX_HEIGHT = 134;
-function prefillAlertInfo() 
+gAlertListener : null,
+gAlertTextClickable : false,
+gAlertCookie : "",
+
+g_MAX_HEIGHT : 134,
+
+prefillAlertInfo : function() 
 {
     var label = document.getElementById("message");
     label.value=window.arguments[0];
               
-}
+},
 
-function onAlertLoad()
+onAlertLoad : function()
 {
   // read out our initial settings from prefs.
   try 
@@ -63,16 +67,16 @@ function onAlertLoad()
     var prefService = Components.classes["@mozilla.org/preferences-service;1"].getService();
     prefService = prefService.QueryInterface(Components.interfaces.nsIPrefService);
     var prefBranch = prefService.getBranch(null);
-    gSlideIncrement = prefBranch.getIntPref("alerts.slideIncrement");
-    gSlideTime = prefBranch.getIntPref("alerts.slideIncrementTime");
-    gOpenTime = prefBranch.getIntPref("alerts.totalOpenTime");
+    this.gSlideIncrement = prefBranch.getIntPref("alerts.slideIncrement");
+    this.gSlideTime = prefBranch.getIntPref("alerts.slideIncrementTime");
+    this.gOpenTime = prefBranch.getIntPref("alerts.totalOpenTime");
   } catch (ex) {}
 
   sizeToContent();
 
-  gFinalHeight = window.outerHeight;  //134  5 lines - 152 6 lines
-  if ( gFinalHeight > g_MAX_HEIGHT ) {
-      gFinalHeight = g_MAX_HEIGHT;
+  this.gFinalHeight = window.outerHeight;  //134  5 lines - 152 6 lines
+  if ( this.gFinalHeight > this.g_MAX_HEIGHT ) {
+      this.gFinalHeight = this.g_MAX_HEIGHT;
   }
 
   window.outerHeight = 1;
@@ -80,12 +84,12 @@ function onAlertLoad()
   // be sure to offset the alert by 10 pixels from the far right edge of the screen
   window.moveTo( (screen.availLeft + screen.availWidth - window.outerWidth) - 10, screen.availTop + screen.availHeight - window.outerHeight);
 
-  setTimeout(animateAlert, gSlideTime);
+  setTimeout(this.animateAlert, this.gSlideTime);
  
-}
+},
 
 
-function onAlertClick()
+onAlertClick : function()
 {
     var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
                        .getService(Components.interfaces.nsIWindowMediator);
@@ -95,33 +99,37 @@ function onAlertClick()
        win.toggleSidebar('viewUpdateScanSidebar');
     }
     win.focus()
-}
+},
 
 
-function animateAlert()
+animateAlert : function()
 {
-  if (window.outerHeight < gFinalHeight)
+  var me = USc_alert;
+  if (window.outerHeight < me.gFinalHeight)
   {
-    window.screenY -= gSlideIncrement;
-    window.outerHeight += gSlideIncrement;
-    setTimeout(animateAlert, gSlideTime);
+    window.screenY -= me.gSlideIncrement;
+    window.outerHeight += me.gSlideIncrement;
+    setTimeout(me.animateAlert, me.gSlideTime);
   }
   else
-    setTimeout(closeAlert, gOpenTime);  
-}
+    setTimeout(me.closeAlert, me.gOpenTime);  
+},
 
-function closeAlert()
+closeAlert : function()
 {
+  var me = USc_alert;
   if (window.outerHeight > 1)
   {
-    window.screenY += gSlideIncrement;
-    window.outerHeight -= gSlideIncrement;
-    setTimeout(closeAlert, gSlideTime);
+    window.screenY += me.gSlideIncrement;
+    window.outerHeight -= me.gSlideIncrement;
+    setTimeout(me.closeAlert, me.gSlideTime);
   }
   else
   {
-    if (gAlertListener)
-      gAlertListener.observe(null, "alertfinished", gAlertCookie); 
+    if (me.gAlertListener)
+      me.gAlertListener.observe(null, "alertfinished", me.gAlertCookie); 
     window.close(); 
   }
+}
+}
 }
