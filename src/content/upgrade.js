@@ -174,7 +174,7 @@ function upgradeDiff(filebase, data)
     // Create a diff file for the specified filebase
     var oldContent = USreadFile(filebase+".old");
     var newContent = USreadFile(filebase+".new");
-    var diffContent = createDiffs(oldContent, newContent);
+    var diffContent = USc_diff.create(oldContent, newContent);
     USwriteFile(filebase+".dif", diffContent);
     return null;
 }

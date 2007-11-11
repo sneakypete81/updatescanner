@@ -85,7 +85,7 @@ onAlertLoad : function()
   // be sure to offset the alert by 10 pixels from the far right edge of the screen
   window.moveTo( (screen.availLeft + screen.availWidth - window.outerWidth) - 10, screen.availTop + screen.availHeight - window.outerHeight);
 
-  setTimeout(me.animateAlert, me.gSlideTime);
+  setTimeout(me._animateAlert, me.gSlideTime);
  
 },
 
@@ -103,27 +103,27 @@ onAlertClick : function()
 },
 
 
-animateAlert : function()
+_animateAlert : function()
 {
   var me = USc_alert;
   if (window.outerHeight < me.gFinalHeight)
   {
     window.screenY -= me.gSlideIncrement;
     window.outerHeight += me.gSlideIncrement;
-    setTimeout(me.animateAlert, me.gSlideTime);
+    setTimeout(me._animateAlert, me.gSlideTime);
   }
   else
-    setTimeout(me.closeAlert, me.gOpenTime);  
+    setTimeout(me._closeAlert, me.gOpenTime);  
 },
 
-closeAlert : function()
+_closeAlert : function()
 {
   var me = USc_alert;
   if (window.outerHeight > 1)
   {
     window.screenY += me.gSlideIncrement;
     window.outerHeight -= me.gSlideIncrement;
-    setTimeout(me.closeAlert, me.gSlideTime);
+    setTimeout(me._closeAlert, me.gSlideTime);
   }
   else
   {

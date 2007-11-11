@@ -48,7 +48,7 @@ start : function(callbackarg)
     if (me.checkTimerRunning) {
         me.stop();
     }
-    me.checkTimerID = setInterval(me.check, 60*1000);
+    me.checkTimerID = setInterval(me._check, 60*1000);
     me.checkTimerRunning = true;
 },
 
@@ -62,7 +62,7 @@ stop : function()
 },
 
 // Called every minute to see if a scan is required
-check : function()
+_check : function()
 {
     var me = USc_autoscan;
     var id;
@@ -111,16 +111,16 @@ check : function()
 
     if (doScan) {
         me.numChanges = 0;
-        me.scan.start(me.scanChanged, 
-               me.scanFinished, 
-               me.scanShowProgress,
-               me.scanEncoding);
+        me.scan.start(me._scanChanged, 
+               me._scanFinished, 
+               me._scanFinished,
+               me._scanChanged);
     } else {
         me.callback(0); // No changes
     }
 },
 
-scanChanged : function(id, new_content, status, statusText, headerText)
+_scanChanged : function(id, new_content, status, statusText, headerText)
 {
     var me = USc_autoscan;    
     if (processScanChange(id, new_content, status, statusText, headerText)) {
@@ -128,20 +128,20 @@ scanChanged : function(id, new_content, status, statusText, headerText)
     }
 },
 
-scanEncoding : function(id, encoding)
+_scanChanged : function(id, encoding)
 // Called when encoding is detected for a page marked for auto-detect encoding
 {
     modifyRDFitem(id, "encoding", encoding);
 },
 
 
-scanFinished : function()
+_scanFinished : function()
 {
     var me = USc_autoscan;    
     me.callback(me.numChanges);
 },
 
-scanShowProgress : function(value, max)
+_scanFinished : function(value, max)
 {
 }
 

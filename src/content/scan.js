@@ -381,7 +381,7 @@ function processScanChange(id, newContent, status, statusText, headerText)
         }
 
         oldContent  = USreadFile(filebase+".old");
-        diffContent = createDiffs(oldContent, newContent);   
+        diffContent = USc_diff.create(oldContent, newContent);   
         USwriteFile(filebase+".dif", diffContent);
         USwriteFile(filebase+".new", newContent);
 
@@ -393,7 +393,7 @@ function processScanChange(id, newContent, status, statusText, headerText)
     } else if (status == STATUS_MINOR_CHANGE) {
         // Minor change: don't notify, but save new page and diff
         oldContent  = USreadFile(filebase+".old");
-        diffContent = createDiffs(oldContent, newContent);   
+        diffContent = USc_diff.create(oldContent, newContent);   
         USwriteFile(filebase+".dif", diffContent);
         USwriteFile(filebase+".new", newContent);
 

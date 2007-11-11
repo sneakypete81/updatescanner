@@ -94,7 +94,6 @@ function autoscanFinished(numChanges)
             param = {numChanges:numChanges};
             message = alertManyChanges.supplant(param);
         }
-        alert("hello2");
         window.openDialog("chrome://updatescan/content/alert.xul",
                   "alert:alert",
                   "chrome,dialog=yes,titlebar=no,popup=yes",

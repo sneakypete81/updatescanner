@@ -30,21 +30,26 @@
  * the terms of any one of the MPL, the GPL or the LGPL.  
  * ***** END LICENSE BLOCK ***** */
 
-const kDiffView = 0;
-const kNewView = 1;
-const kOldView = 2;
-const kUnscannedView = 3;
+if (typeof(USc_diff_exists) != 'boolean') {
+var USc_diff_exists = true;
+var USc_diff = {    
 
-function createDiffs(oldContent, newContent)
+kDiffView : 0,
+kNewView : 1,
+kOldView : 2,
+kUnscannedView : 3,
+
+create : function(oldContent, newContent)
 {
     oldContent = stripScript(oldContent);
     newContent = stripScript(newContent);
     return WDiffString(oldContent, newContent);
-}
+},
 
-function displayDiffs(title, sourceURL, oldContent, newContent, diffContent,
+display : function(title, sourceURL, oldContent, newContent, diffContent,
                       oldDate, newDate, numItems)
 {
+    var me = USc_diff;
     var data; 
     var ios = Components.classes["@mozilla.org/network/io-service;1"]
                         .getService(Components.interfaces.nsIIOService);
@@ -58,7 +63,7 @@ function displayDiffs(title, sourceURL, oldContent, newContent, diffContent,
         incrementTempFile(numItems);
         var diffURL = fileHandler.getURLSpecFromFile(diffFile);
     
-        data = generateHeader(kUnscannedView, title, "", 
+        data = me._generateHeader(me.kUnscannedView, title, "", 
                               sourceURL, "", "", "");    
         FileIO.write(diffFile, data, "", "UTF-8");
     
@@ -76,26 +81,27 @@ function displayDiffs(title, sourceURL, oldContent, newContent, diffContent,
     var oldURL  = fileHandler.getURLSpecFromFile(oldFile);
     var diffURL = fileHandler.getURLSpecFromFile(diffFile);
 
-    data = generateHeader(kOldView, title, oldDate, 
+    data = me._generateHeader(me.kOldView, title, oldDate, 
                           sourceURL, diffURL, oldURL, newURL);    
     data += oldContent;
     FileIO.write(oldFile, data, "", "UTF-8");
 
-    data = generateHeader(kNewView, title, newDate, 
+    data = me._generateHeader(me.kNewView, title, newDate, 
                           sourceURL, diffURL, oldURL, newURL);    
     data += newContent;
     FileIO.write(newFile, data, "", "UTF-8");
 
-    data = generateHeader(kDiffView, title, newDate, 
+    data = me._generateHeader(me.kDiffView, title, newDate, 
                           sourceURL, diffURL, oldURL, newURL);    
     data += diffContent;
     FileIO.write(diffFile, data, "", "UTF-8");
 
     return diffURL;
-}
+},
 
-function generateHeader(currentView, title, date, sourceURL, diffURL, oldURL, newURL)
+_generateHeader : function(currentView, title, date, sourceURL, diffURL, oldURL, newURL)
 {
+    var me = USc_diff;
     var data;
     var str = document.getElementById("updatescanStrings");
     var param;
@@ -107,17 +113,17 @@ function generateHeader(currentView, title, date, sourceURL, diffURL, oldURL, ne
     data += "<span style='font: 12px verdana;color:black'>\n";
 
     switch (currentView) {
-    case kDiffView:
+    case me.kDiffView:
         param = {title:title, timeDiff:date, 
                  highlightOn:"<b style='color:black;background-color:#ffff66'>",
                  highlightOff:"</b>"};
         data += str.getString("headerDiff").supplant(param);
         break;
-    case kOldView:
+    case me.kOldView:
         param = {title:title, timeDiff:date};
         data += str.getString("headerOld").supplant(param);
         break;
-    case kNewView:
+    case me.kNewView:
         param = {title:title, timeDiff:date};
         data += str.getString("headerNew").supplant(param);
         break;
@@ -127,22 +133,22 @@ function generateHeader(currentView, title, date, sourceURL, diffURL, oldURL, ne
     }
     
     data += "<br><b>"+str.getString("view")+":</b> [\n";
-    if (currentView != kUnscannedView) {
-        if (currentView == kOldView) {
+    if (currentView != me.kUnscannedView) {
+        if (currentView == me.kOldView) {
             data += "<b>"+str.getString("oldPage")+"</b> |\n";
         } else {
             data += "<a style='color:blue;font-weight:normal' ";
             data += "href='"+oldURL+"'>";
             data += str.getString("oldPage")+"</a> |\n";
         }
-        if (currentView == kNewView) {
+        if (currentView == me.kNewView) {
             data += "<b>"+str.getString("newPage")+"</b> |\n";
         } else {
             data += "<a style='color:blue;font-weight:normal' ";
             data += "href='"+newURL+"'>";
             data += str.getString("newPage")+"</a> |\n";
         }
-        if (currentView == kDiffView) {
+        if (currentView == me.kDiffView) {
             data += "<b>"+str.getString("changes")+"</b> |\n";
         } else {
             data += "<a style='color:blue;font-weight:normal' ";
@@ -156,4 +162,5 @@ function generateHeader(currentView, title, date, sourceURL, diffURL, oldURL, ne
     data += "<div style='position:relative'>\n";
     return data;
 }
-
+}
+}

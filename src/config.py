@@ -24,10 +24,10 @@ authorURL = "http://updatescanner.mozdev.org"
 uid = 'c07d1a49-9894-49ff-a594-38960ede8fb9'
 
 major_version = 2
-minor_version = 0
-revision_version = 15
-build_version = False
-in_development = False
+minor_version = 1
+revision_version = 0
+build_version = 1
+in_development = True
 publish_babelzilla = False
 
 if build_version:

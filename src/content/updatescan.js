@@ -322,7 +322,7 @@ function diffItem(id, numItems)
     var newDate = dateDiffString(lastScan, now);
 
     var filebase = escapeFilename(id);
-    return displayDiffs(queryRDFitem(id, "title", "No Title"), 
+    return USc_diff.display(queryRDFitem(id, "title", "No Title"), 
             queryRDFitem(id, "url", ""), 
             USreadFile(filebase+".old"),
             USreadFile(filebase+".new"),
