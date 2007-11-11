@@ -30,114 +30,120 @@
  * the terms of any one of the MPL, the GPL or the LGPL.  
  * ***** END LICENSE BLOCK ***** */
  
-function Autoscan()
+if (typeof(USc_autoscan_exists) != 'boolean') {
+var USc_autoscan_exists = true;
+var USc_autoscan = {    
+
+checkTimerRunning : false,
+checkTimerID : null,
+scan : null,
+numChanges : 0,
+callback : null,
+
+// Start checking if scanning is required every minute
+start : function(callbackarg)
 {
-    var auto = this;
-    var checkTimerRunning = false;
-    var checkTimerID = null;
-    var scan = null;
-    var numChanges;
-    var callback;
-
-    // Start checking if scanning is required every minute
-    this.start = function(callbackarg)
-    {
-        callback = callbackarg;
-        if (checkTimerRunning) {
-            auto.stop();
-        }
-        checkTimerID = setInterval(auto.check, 60*1000);
-        checkTimerRunning = true;
+    var me = USc_autoscan;    
+    me.callback = callbackarg;
+    if (me.checkTimerRunning) {
+        me.stop();
     }
+    me.checkTimerID = setInterval(me.check, 60*1000);
+    me.checkTimerRunning = true;
+},
 
-    // Stop checking
-    this.stop = function()
-    {
-        callback=null;
-        clearInterval(checkTimerID);
-        checkTimerRunning = false;
-    }
+// Stop checking
+stop : function()
+{
+    var me = USc_autoscan;    
+    me.callback=null;
+    clearInterval(me.checkTimerID);
+    me.checkTimerRunning = false;
+},
 
-    // Called every minute to see if a scan is required
-    this.check = function()
-    {
-        var id;
-        var pages;
-        var lastAutoScan;
-        var scanRate;
-        var now;
-        var doScan = false;
-        var filebase;
-        var ignoreNumbers;
-    
-        pages = getRDFroot().getChildren();
-    
-        scan = new Scanner();
-        now = new Date();
-    
-        while (pages.hasMoreElements()) {
-            id = pages.getNext().getValue();
-            scanRate = queryRDFitem(id, "scanratemins", "0");
-            if (scanRate != "0") {
-                lastAutoScan = queryRDFitem(id, "lastautoscan", "");
-                if (lastAutoScan == "") {
-                    lastAutoScan = "5/11/1978";
+// Called every minute to see if a scan is required
+check : function()
+{
+    var me = USc_autoscan;
+    var id;
+    var pages;
+    var lastAutoScan;
+    var scanRate;
+    var now;
+    var doScan = false;
+    var filebase;
+    var ignoreNumbers;
+
+    pages = getRDFroot().getChildren();
+
+    me.scan = new Scanner();
+    now = new Date();
+
+    while (pages.hasMoreElements()) {
+        id = pages.getNext().getValue();
+        scanRate = queryRDFitem(id, "scanratemins", "0");
+        if (scanRate != "0") {
+            lastAutoScan = queryRDFitem(id, "lastautoscan", "");
+            if (lastAutoScan == "") {
+                lastAutoScan = "5/11/1978";
+            }
+            lastAutoScan = new Date(lastAutoScan);
+            if (now - lastAutoScan > scanRate*1000*60) {
+                modifyRDFitem(id, "lastautoscan", now.toString());
+                saveRDF();
+                doScan = true;
+                filebase=escapeFilename(id)
+                if (queryRDFitem(id, "ignoreNumbers", "false") == "true") {
+                    ignoreNumbers = true;
+                } else {
+                    ignoreNumbers = false;
                 }
-                lastAutoScan = new Date(lastAutoScan);
-                if (now - lastAutoScan > scanRate*1000*60) {
-                    modifyRDFitem(id, "lastautoscan", now.toString());
-                    saveRDF();
-                    doScan = true;
-                    filebase=escapeFilename(id)
-                    if (queryRDFitem(id, "ignoreNumbers", "false") == "true") {
-                        ignoreNumbers = true;
-                    } else {
-                        ignoreNumbers = false;
-                    }
 
-                    scan.addURL(id, queryRDFitem(id, "title", "No Title"), 
-                                queryRDFitem(id, "url", ""), 
-                                USreadFile(filebase+".new"),
-                                queryRDFitem(id, "threshold", 100),                                
-                                ignoreNumbers,
-                                queryRDFitem(id, "encoding", "auto"));
-                }
+                me.scan.addURL(id, queryRDFitem(id, "title", "No Title"), 
+                            queryRDFitem(id, "url", ""), 
+                            USreadFile(filebase+".new"),
+                            queryRDFitem(id, "threshold", 100),                                
+                            ignoreNumbers,
+                            queryRDFitem(id, "encoding", "auto"));
             }
         }
-    
-        if (doScan) {
-            numChanges = 0;
-            scan.start(auto.scanChanged, 
-                   auto.scanFinished, 
-                   auto.scanShowProgress,
-                   auto.scanEncoding);
-        } else {
-            callback(0); // No changes
-        }
     }
 
-    this.scanChanged = function(id, new_content, status, statusText, headerText)
-    {
-        if (processScanChange(id, new_content, status, statusText, headerText)) {
-            numChanges++;
-        }
+    if (doScan) {
+        me.numChanges = 0;
+        me.scan.start(me.scanChanged, 
+               me.scanFinished, 
+               me.scanShowProgress,
+               me.scanEncoding);
+    } else {
+        me.callback(0); // No changes
     }
+},
 
-    this. scanEncoding = function(id, encoding)
-    // Called when encoding is detected for a page marked for auto-detect encoding
-    {
-        modifyRDFitem(id, "encoding", encoding);
+scanChanged : function(id, new_content, status, statusText, headerText)
+{
+    var me = USc_autoscan;    
+    if (processScanChange(id, new_content, status, statusText, headerText)) {
+        me.numChanges++;
     }
+},
+
+scanEncoding : function(id, encoding)
+// Called when encoding is detected for a page marked for auto-detect encoding
+{
+    modifyRDFitem(id, "encoding", encoding);
+},
 
 
-    this.scanFinished = function()
-    {
-        callback(numChanges);
-    }
+scanFinished : function()
+{
+    var me = USc_autoscan;    
+    me.callback(me.numChanges);
+},
 
-    this.scanShowProgress = function(value, max)
-    {
-    }
-
+scanShowProgress : function(value, max)
+{
 }
 
+}
+}

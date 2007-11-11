@@ -61,22 +61,23 @@ prefillAlertInfo : function()
 
 onAlertLoad : function()
 {
+  var me = USc_alert;
   // read out our initial settings from prefs.
   try 
   {
     var prefService = Components.classes["@mozilla.org/preferences-service;1"].getService();
     prefService = prefService.QueryInterface(Components.interfaces.nsIPrefService);
     var prefBranch = prefService.getBranch(null);
-    this.gSlideIncrement = prefBranch.getIntPref("alerts.slideIncrement");
-    this.gSlideTime = prefBranch.getIntPref("alerts.slideIncrementTime");
-    this.gOpenTime = prefBranch.getIntPref("alerts.totalOpenTime");
+    me.gSlideIncrement = prefBranch.getIntPref("alerts.slideIncrement");
+    me.gSlideTime = prefBranch.getIntPref("alerts.slideIncrementTime");
+    me.gOpenTime = prefBranch.getIntPref("alerts.totalOpenTime");
   } catch (ex) {}
 
   sizeToContent();
 
-  this.gFinalHeight = window.outerHeight;  //134  5 lines - 152 6 lines
-  if ( this.gFinalHeight > this.g_MAX_HEIGHT ) {
-      this.gFinalHeight = this.g_MAX_HEIGHT;
+  me.gFinalHeight = window.outerHeight;  //134  5 lines - 152 6 lines
+  if ( me.gFinalHeight > me.g_MAX_HEIGHT ) {
+      me.gFinalHeight = me.g_MAX_HEIGHT;
   }
 
   window.outerHeight = 1;
@@ -84,7 +85,7 @@ onAlertLoad : function()
   // be sure to offset the alert by 10 pixels from the far right edge of the screen
   window.moveTo( (screen.availLeft + screen.availWidth - window.outerWidth) - 10, screen.availTop + screen.availHeight - window.outerHeight);
 
-  setTimeout(this.animateAlert, this.gSlideTime);
+  setTimeout(me.animateAlert, me.gSlideTime);
  
 },
 

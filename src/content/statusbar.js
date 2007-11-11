@@ -33,7 +33,6 @@
 window.addEventListener("load", loadStatusbar, false);
 
 var refresh;
-var autoscan;
 
 function loadStatusbar()
 {
@@ -67,8 +66,7 @@ function loadStatusbar()
     refresh.start();
 
     // Start autoscanner
-    autoscan = new Autoscan();
-    autoscan.start(autoscanFinished);
+    USc_autoscan.start(autoscanFinished);
 
     // Update the status bar icon
     refreshStatusbar();
@@ -96,6 +94,7 @@ function autoscanFinished(numChanges)
             param = {numChanges:numChanges};
             message = alertManyChanges.supplant(param);
         }
+        alert("hello2");
         window.openDialog("chrome://updatescan/content/alert.xul",
                   "alert:alert",
                   "chrome,dialog=yes,titlebar=no,popup=yes",
