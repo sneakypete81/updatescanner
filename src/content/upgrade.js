@@ -30,12 +30,18 @@
  * the terms of any one of the MPL, the GPL or the LGPL.  
  * ***** END LICENSE BLOCK ***** */
 
-const VERSION_MAJOR = 2;
-const VERSION_MINOR = 0;
-const VERSION_REVISION = 14;
+if (typeof(USc_upgrade_exists) != 'boolean') {
+var USc_upgrade_exists = true;
+var USc_upgrade = {    
 
-function upgradeCheck()
+
+kVERSION_MAJOR : 2,
+kVERSION_MINOR : 1,
+kVERSION_REVISION : 0,
+
+check : function()
 {
+    var me = USc_upgrade;
     var nodes;
     var node;
     var id;
@@ -77,16 +83,17 @@ function upgradeCheck()
     if (      versionMajor < 2 || 
               versionMajor == 2 && versionMinor < 0 ||
               versionMajor == 2 && versionMinor == 0 && versionRevision < 14) {       
-        if (upgrade_2_0_14()) {
-            prefs.setIntPref("versionMajor", VERSION_MAJOR);
-            prefs.setIntPref("versionMinor", VERSION_MINOR);
-            prefs.setIntPref("versionRevision", VERSION_REVISION);
+        if (me.upgrade_2_0_14()) {
+            prefs.setIntPref("versionMajor", me.kVERSION_MAJOR);
+            prefs.setIntPref("versionMinor", me.kVERSION_MINOR);
+            prefs.setIntPref("versionRevision", me.kVERSION_REVISION);
         }
     }
-}
+},
 
-function upgrade_2_0_14()
+upgrade_2_0_14 : function()
 {
+    var me = USc_upgrade;
     var nodes;
     var node;
     var id;
@@ -117,7 +124,7 @@ function upgrade_2_0_14()
     label2 = str.getString("timeWarning");
     params = {label:label, 
               label2:label2,
-              callback:upgradeCheckDup, 
+              callback:me.upgradeCheckDup, 
               items:files, 
               data:ucaseFiles, 
               cancelPrompt:str.getString("upgradeCancel"), 
@@ -150,11 +157,10 @@ function upgrade_2_0_14()
     // 2.0.14+ expects diffs to be done during scan, not during display
     // Need to generate diffs now.
     label = str.getString("upgradeLabel")+" (2/2)...";
-//    label2 = str.getString("timeWarning");
-    label2 = "This may take several minutes.";
+    label2 = str.getString("timeWarning");
     params = {label:label, 
               label2:label2,
-              callback:upgradeDiff, 
+              callback:me.upgradeDiff, 
               items:files, 
               data:null, 
               cancelPrompt:str.getString("upgradeCancel"), 
@@ -167,9 +173,9 @@ function upgrade_2_0_14()
         return false;// Upgrade was cancelled
     }
     return true;
-}
+},
 
-function upgradeDiff(filebase, data)
+upgradeDiff : function(filebase, data)
 {
     // Create a diff file for the specified filebase
     var oldContent = USc_file.USreadFile(filebase+".old");
@@ -177,9 +183,9 @@ function upgradeDiff(filebase, data)
     var diffContent = USc_diff.create(oldContent, newContent);
     USc_file.USwriteFile(filebase+".dif", diffContent);
     return null;
-}
+},
 
-function upgradeCheckDup(item, data)
+upgradeCheckDup : function(item, data)
 {
     // Check if the item appears twice in the data
     if (data.indexOf(item.toUpperCase()) != 
@@ -188,4 +194,6 @@ function upgradeCheckDup(item, data)
     }
     return null;
 }
-    
+
+}
+}

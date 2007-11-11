@@ -53,7 +53,7 @@ load : function()
     tree.datasources=getURI(rdffile);
     tree.onclick=me._treeClick;
 
-    upgradeCheck(); // See if we need to upgrade something
+    USc_upgrade.check(); // See if we need to upgrade something
 
     // Check for refresh requests
     me.refresh = new USc_refresher();
