@@ -113,8 +113,8 @@ _check : function()
         me.numChanges = 0;
         me.scan.start(me._scanChanged, 
                me._scanFinished, 
-               me._scanFinished,
-               me._scanChanged);
+               me._scanProgress,
+               me._encodingChanged);
     } else {
         me.callback(0); // No changes
     }
@@ -128,7 +128,7 @@ _scanChanged : function(id, new_content, status, statusText, headerText)
     }
 },
 
-_scanChanged : function(id, encoding)
+_encodingChanged : function(id, encoding)
 // Called when encoding is detected for a page marked for auto-detect encoding
 {
     modifyRDFitem(id, "encoding", encoding);
@@ -141,7 +141,7 @@ _scanFinished : function()
     me.callback(me.numChanges);
 },
 
-_scanFinished : function(value, max)
+_scanProgress : function(value, max)
 {
 }
 
