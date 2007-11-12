@@ -538,7 +538,7 @@ deleteSelectedItem : function()
     if (id == "") return;
     var title = USc_rdf.queryItem(id, "title", "untitled");
 
-    if (confirm(str.getString("confirmDelete") + " " + title + "?")) {
+//    if (confirm(str.getString("confirmDelete") + " " + title + "?")) {
         USc_file.USrmFile(fileBase+".old");
         USc_file.USrmFile(fileBase+".new");
         USc_file.USrmFile(fileBase+".dif");
@@ -546,7 +546,7 @@ deleteSelectedItem : function()
         USc_rdf.save();
         me._refreshTree();
         me.refresh.request();
-    }
+//    }
 },
 
 _getSelectedItemID : function()
