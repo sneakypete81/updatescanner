@@ -130,7 +130,7 @@ function USc_scanner()
        
         numitems = itemlist.length + 1;
         currentitem = 0;
-        progressCallback(currentitem, numitems);
+        progressCallback(me._nextTitleText(), currentitem, numitems);
         
         scanning = true;
         me._getNextPage();
@@ -239,7 +239,7 @@ function USc_scanner()
                    .GetStringFromName("getError"), "");
 
                 currentitem++;
-                progressCallback(currentitem, numitems);
+                progressCallback(me._nextTitleText(), currentitem, numitems);
                 if (itemlist.length == 0) {
                     finishedCallback();
                     me.clear();
@@ -249,7 +249,7 @@ function USc_scanner()
             }
             me._startTimeout();
             currentitem++;
-            progressCallback(currentitem, numitems);
+            progressCallback(me._nextTitleText(), currentitem, numitems);
         }
         else
         {
@@ -347,6 +347,20 @@ function USc_scanner()
         if (result != null) return result[1];
         
         return ""
+    }
+    
+    this._nextTitleText = function()
+    {
+        var item;
+        if (itemlist.length == 0) {
+            item = "";
+        } else {
+            item = itemlist[0].title;
+//            if (item.length > 15) {
+//                item = item.slice(0,14);
+//            }
+        }
+        return item;
     }
 }
 

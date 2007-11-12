@@ -141,7 +141,7 @@ _scanFinished : function()
     me.callback(me.numChanges);
 },
 
-_scanProgress : function(value, max)
+_scanProgress : function(title,value, max)
 {
 }
 

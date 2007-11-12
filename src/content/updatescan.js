@@ -139,7 +139,6 @@ scanButtonClick : function()
                         USc_rdf.queryItem(id, "encoding", "auto"));
         }
 
-        me._setStatus(str.getString("statusScanning"));
         me.numChanges=0;
         me.scan.start(me._scanChangedCallback, me._scanFinishedCallback, me._showProgress,
                                                me._scanEncodingCallback);
@@ -601,8 +600,13 @@ _setStatus : function (status)
     document.getElementById("StatusText").value = status;
 },
 
-_showProgress : function(value, max)
+_showProgress : function(title, value, max)
 {
+    var me = USc_updatescan;
+    var str=document.getElementById("updatescanStrings")
+    var param = {title:title};
+    me._setStatus(str.getString("statusScanning").USc_supplant(param));
+
     var progress = document.getElementById("Progress");
     progress.collapsed = false;
     progress.value = 100*value/max;
