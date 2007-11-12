@@ -423,19 +423,42 @@ markAllAsVisited : function()
 {
     var me = USc_updatescan;
     var tree = document.getElementById("UpdateTree");
+    var ids = new Array();
+    var str=document.getElementById("updatescanStrings")
 
     var numitems = me._getNumItems();
     if (numitems > 0) {
+
         for (var i=0; i<numitems; i++) {
             var id = tree.contentView.getItemAtIndex(i).id;
-            if (USc_rdf.queryItem(id, "changed") != "0") {
-                USc_rdf.modifyItem(id, "changed", "0");
-                me._refreshTree();
-            }
+            ids.push(id);
+
+//            if (USc_rdf.queryItem(id, "changed") != "0") {
+//                USc_rdf.modifyItem(id, "changed", "0");
+//                me._refreshTree();
+//            }
         }
+
+        params = {label:str.getString("markLabel"), 
+                  callback:me._markAsVisited, 
+                  items:ids, 
+                  data:null, 
+                  cancelPrompt:str.getString("markCancel"), 
+                  retVal:null, 
+                  retData:null};       
+        window.openDialog('chrome://updatescan/content/progress.xul', 
+                          'dlgProgress', 
+                          'chrome,dialog,modal,centrescreen', params);
         USc_rdf.save();
         me._refreshTree();
         me.refresh.request();
+    }
+},
+
+_markAsVisited : function(item, data)
+{
+    if (USc_rdf.queryItem(item, "changed") != "0") {
+        USc_rdf.modifyItem(item, "changed", "0");
     }
 },
 
