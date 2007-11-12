@@ -63,7 +63,7 @@
 		insertbefore="#context-sep-paste"                
                 label="&AddToUpdateScan.label;"
                 accesskey="&AddToUpdateScan.accesskey;"
-                oncommand="addToUpdateScan(document.getElementById('content'));"/>
+                oncommand="USc_overlay.addToUpdateScan(document.getElementById('content'));"/>
 
     </popup>
 
