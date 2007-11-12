@@ -49,14 +49,14 @@ load : function()
     var backupfile;
     var corruptfile;
 
-    rdffile = getRDFpath();
+    rdffile = USc_rdf.getPath();
 
     backupfile = rdffile.parent;
     backupfile.append("updatescan_backup.rdf");
     corruptfile = rdffile.parent;
     corruptfile.append("updatescan_corrupt.rdf");
   
-    if (!checkRDF(rdffile.path)) {
+    if (!USc_rdf.check(rdffile.path)) {
         // RDF is corrupt - restore from last backup
         USc_file.rmFile(corruptfile.path);
         USc_file.cpFile(rdffile.path, corruptfile.path);
@@ -64,7 +64,7 @@ load : function()
         USc_file.cpFile(backupfile.path, rdffile.path);
     }
 
-    initRDF(getURI(rdffile));
+    USc_rdf.init(USc_rdf.getURI(rdffile));
 
     // Backup the rdf file in case of corruption
     USc_file.rmFile(backupfile.path);
@@ -136,10 +136,10 @@ refreshStatusbar : function()
     var page;
     var changed = false;
 
-    pages = getRDFroot().getChildren();
+    pages = USc_rdf.getRoot().getChildren();
     while (pages.hasMoreElements()) {
         page = pages.getNext().getValue();
-        if (queryRDFitem(page, "changed", "0") == "1") {
+        if (USc_rdf.queryItem(page, "changed", "0") == "1") {
             changed=true;
             break;
         }

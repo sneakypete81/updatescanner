@@ -1,11 +1,14 @@
-Spanish screenshots from Carlos
-Italian screenshots from Andrea
-Slovak screenshots from Peter
 FAQ entry for adding button to toolbar
-Last click on changed item doesn't clear statusbar icon
+
+-- Unreleased --
+Refresher now runs off observer
+Shifted functions into uniquely names classes to prevent clashes
+
 
 Done:
--- Unreleased --
+-- 2.0.15 --
+Added screenshots for ES, IT & SK
+Added Danish, Turkish and simplified chinese
 Added português brasileiro (Raryel Costa Souza)
 Help button links to website
 Autobackup to prevent rdf corruption

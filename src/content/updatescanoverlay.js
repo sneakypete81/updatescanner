@@ -80,8 +80,8 @@ addToUpdateScan : function(aBrowser)
     var rdffile;
 
     if (!me.initRDFdone) {
-        rdffile = getRDFpath();
-        initRDF(getURI(rdffile));
+        rdffile = USc_rdf.getPath();
+        USc_rdf.init(USc_rdf.getURI(rdffile));
         me.initRDFdone = true;
     }
 

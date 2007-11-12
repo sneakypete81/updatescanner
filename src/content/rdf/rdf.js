@@ -1,19 +1,25 @@
-var dsource = null;
-var rootnode = null;
-var namespace = "http://www.updatescan.com/rdf/updatescan"
+if (typeof(USc_rdf_exists) != 'boolean') {
+var USc_rdf_exists = true;
+var USc_rdf = {    
 
-function initRDF(rdffile)
+
+dsource : null,
+rootnode : null,
+namespace : "http://www.updatescan.com/rdf/updatescan",
+
+init : function(rdffile)
 {
-    dsource=new RDFDataSource(rdffile);
-    rootnode=dsource.getNode(namespace+"/all");
-    if (!rootnode.isSeq()) {
-        rootnode.makeSeq();
+    var me = USc_rdf;
+    me.dsource=new USc_RDFDataSource(rdffile);
+    me.rootnode=me.dsource.getNode(me.namespace+"/all");
+    if (!me.rootnode.isSeq()) {
+        me.rootnode.makeSeq();
     }
-    saveRDF();
-}
+    me.save();
+},
 
 
-function checkRDF(rdffile)
+check : function(rdffile)
 // See if the RDF file is corrupted (if the first byte is 0x00)
 // Workaround for bug #17952 until bookmark integration is implemented
 {
@@ -30,14 +36,15 @@ function checkRDF(rdffile)
     } else {
         return true;  // File is ok
     }
-}
+},
 
-function saveRDF()
+save : function()
 {
-    dsource.save()
-}
+    var me = USc_rdf;
+    me.dsource.save()
+},
 
-function getRDFpath()
+getPath : function()
 // gt the path to the user's home (profile) directory
 {
     var rdffile = Components.classes["@mozilla.org/file/directory_service;1"]
@@ -45,62 +52,71 @@ function getRDFpath()
                             .get("ProfD", Components.interfaces.nsIFile);
     rdffile.append("updatescan.rdf");
     return rdffile;
-}
+},
 
-function getURI(file)
+getURI : function(file)
 {
     var uri = Components.classes["@mozilla.org/network/io-service;1"]
                     .getService(Components.interfaces.nsIIOService)
                     .newFileURI(file);
     return uri.spec;
-}
+},
  
-function addRDFitem()
+addItem : function()
 {
-    var node=dsource.getAnonymousNode();
-    rootnode.addChild(node,true);
-    dsource.save();
+    var me = USc_rdf;
+    var node=me.dsource.getAnonymousNode();
+    me.rootnode.addChild(node,true);
+    me.dsource.save();
     return node.getValue();
-}
+},
 
-function modifyRDFitem(id, field, value)
+modifyItem : function(id, field, value)
 {
-    dsource.getNode(id).addTargetOnce(namespace+"#"+field, value);
-}
+    var me = USc_rdf;
+    me.dsource.getNode(id).addTargetOnce(me.namespace+"#"+field, value);
+},
 
-function deleteRDFitem(id)
+deleteItem : function(id)
 {
-    dsource.deleteRecursive(id);
-}
+    var me = USc_rdf;
+    me.dsource.deleteRecursive(id);
+},
 
-function queryRDFitem(id, field, defaultValue)
+queryItem : function(id, field, defaultValue)
 {
-    if (targetExists(id, field)) {
-        return dsource.getNode(id).getTarget(namespace+"#"+field).getValue();
+    var me = USc_rdf;
+    if (me.targetExists(id, field)) {
+        return me.dsource.getNode(id).getTarget(me.namespace+"#"+field).getValue();
     } else {
         return defaultValue;
     }
-}
+},
 
-function targetExists(id, field)
+targetExists : function(id, field)
 {
+    var me = USc_rdf;
     var item;
 
-    item = dsource.getNode(id).getTarget(namespace+"#"+field);
+    item = me.dsource.getNode(id).getTarget(me.namespace+"#"+field);
     if (item == null) {
         return false;
     }
     return true;
-}
+},
 
-function moveRDFitem(id, newIndex)
+moveItem : function(id, newIndex)
 {
-    var item = dsource.getNode(id);
-    rootnode.removeChild(item);
-    rootnode.addChildAt(item, newIndex+1); //rdfds index starts at 1, not 0
-}
+    var me = USc_rdf;
+    var item = me.dsource.getNode(id);
+    me.rootnode.removeChild(item);
+    me.rootnode.addChildAt(item, newIndex+1); //rdfds index starts at 1, not 0
+},
 
-function getRDFroot()
+getRoot : function()
 {
-    return dsource.getNode(namespace+"/all");
+    var me = USc_rdf;
+    return me.dsource.getNode(me.namespace+"/all");
+}
+}
 }

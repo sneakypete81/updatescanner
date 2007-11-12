@@ -30,10 +30,10 @@
  * the terms of any one of the MPL, the GPL or the LGPL.  
  * ***** END LICENSE BLOCK ***** */
 
-const sliderThresholdValues = 5;
-const sliderThresholdMax = 100;
-const sliderAutoscanValues = 6;
-const sliderAutoscanMax = 100;
+var ksliderThresholdValues = 5;
+var ksliderThresholdMax = 100;
+var ksliderAutoscanValues = 6;
+var ksliderAutoscanMax = 100;
 
 function initDialog()
 {
@@ -44,12 +44,12 @@ function initDialog()
     document.getElementById("txtURL").value = args.url;
 
     document.getElementById("sliderThreshold")
-            .setAttribute("maxpos", sliderThresholdMax);
+            .setAttribute("maxpos", ksliderThresholdMax);
     sliderThresholdSetPos(sliderThresholdEncode(args.threshold));
     sliderThresholdChange();
 
     document.getElementById("sliderAutoscan")
-            .setAttribute("maxpos", sliderAutoscanMax);
+            .setAttribute("maxpos", ksliderAutoscanMax);
     sliderAutoscanSetPos(sliderAutoscanEncode(args.scanRateMins));
     sliderAutoscanChange();
 
@@ -159,14 +159,14 @@ function sliderThresholdGetPos()
 {
     var slider=document.getElementById("sliderThreshold");
     return Math.round(slider.getAttribute("curpos") /
-              sliderThresholdMax*sliderThresholdValues);
+              ksliderThresholdMax*ksliderThresholdValues);
 }
 
 function sliderThresholdSetPos(value)
 {
     var slider=document.getElementById("sliderThreshold");
-    slider.setAttribute("curpos",value*sliderThresholdMax /
-            sliderThresholdValues);
+    slider.setAttribute("curpos",value*ksliderThresholdMax /
+            ksliderThresholdValues);
 }
 
 function sliderThresholdChange() 
@@ -231,14 +231,14 @@ function sliderAutoscanGetPos()
 {
     var slider=document.getElementById("sliderAutoscan");
     return Math.round(slider.getAttribute("curpos") /
-              sliderAutoscanMax*sliderAutoscanValues);
+              ksliderAutoscanMax*ksliderAutoscanValues);
 }
 
 function sliderAutoscanSetPos(value)
 {
     var slider=document.getElementById("sliderAutoscan");
-    slider.setAttribute("curpos",value*sliderAutoscanMax /
-            sliderAutoscanValues);
+    slider.setAttribute("curpos",value*ksliderAutoscanMax /
+            ksliderAutoscanValues);
 }
 
 function sliderAutoscanChange() 

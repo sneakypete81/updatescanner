@@ -45,12 +45,12 @@ load : function()
     var rdffile;
 
     // Connect to the RDF file
-    rdffile = getRDFpath();
-    initRDF(getURI(rdffile));
+    rdffile = USc_rdf.getPath();
+    USc_rdf.init(USc_rdf.getURI(rdffile));
 
     // link to the listbox
     tree = document.getElementById("UpdateTree");
-    tree.datasources=getURI(rdffile);
+    tree.datasources=USc_rdf.getURI(rdffile);
     tree.onclick=me._treeClick;
 
     USc_upgrade.check(); // See if we need to upgrade something
@@ -125,18 +125,18 @@ scanButtonClick : function()
         for (var i=0; i<numitems; i++) {
             id = tree.contentView.getItemAtIndex(i).id;
             filebase=USc_file.escapeFilename(id)
-            encoding = queryRDFitem(id, "encoding", "UTF-8");
-            if (queryRDFitem(id, "ignoreNumbers", "false") == "true") {
+            encoding = USc_rdf.queryItem(id, "encoding", "UTF-8");
+            if (USc_rdf.queryItem(id, "ignoreNumbers", "false") == "true") {
                 ignoreNumbers = true;
             } else {
                 ignoreNumbers = false;
             }
-            me.scan.addURL(id, queryRDFitem(id, "title", "No Title"), 
-                        queryRDFitem(id, "url", ""), 
+            me.scan.addURL(id, USc_rdf.queryItem(id, "title", "No Title"), 
+                        USc_rdf.queryItem(id, "url", ""), 
                         USc_file.USreadFile(filebase+".new"),
-                        queryRDFitem(id, "threshold", 100),
+                        USc_rdf.queryItem(id, "threshold", 100),
                         ignoreNumbers,
-                        queryRDFitem(id, "encoding", "auto"));
+                        USc_rdf.queryItem(id, "encoding", "auto"));
         }
 
         me._setStatus(str.getString("statusScanning"));
@@ -162,7 +162,7 @@ _scanChangedCallback : function(id, new_content, status, statusText, headerText)
 _scanEncodingCallback : function(id, encoding)
 // Called when encoding is detected for a page marked for auto-detect encoding
 {
-    modifyRDFitem(id, "encoding", encoding);
+    USc_rdf.modifyItem(id, "encoding", encoding);
 },
 
 _scanFinishedCallback : function()
@@ -235,21 +235,21 @@ openNewDialogNoRefresh : function(title, url)
     window.openDialog('chrome://updatescan/content/dlgnewedit.xul', 'dlgNew', 
                       'chrome,dialog,modal,centrescreen', args);
     if (args.ok) {
-        id = addRDFitem();
-        modifyRDFitem(id, "title", args.title);
-        modifyRDFitem(id, "url", args.url);
-        modifyRDFitem(id, "threshold", args.threshold);
-        modifyRDFitem(id, "scanratemins", args.scanRateMins);
-        modifyRDFitem(id, "encoding", args.encoding);
-        modifyRDFitem(id, "ignoreNumbers", args.ignoreNumbers);
+        id = USc_rdf.addItem();
+        USc_rdf.modifyItem(id, "title", args.title);
+        USc_rdf.modifyItem(id, "url", args.url);
+        USc_rdf.modifyItem(id, "threshold", args.threshold);
+        USc_rdf.modifyItem(id, "scanratemins", args.scanRateMins);
+        USc_rdf.modifyItem(id, "encoding", args.encoding);
+        USc_rdf.modifyItem(id, "ignoreNumbers", args.ignoreNumbers);
 
         filebase = USc_file.escapeFilename(id);
         USc_file.USwriteFile(filebase+".new", "**NEW**");
 
-        modifyRDFitem(id, "lastscan", "");  // lastscan not defined
-        modifyRDFitem(id, "changed", "0");  // not changed 
-        modifyRDFitem(id, "error", "0");    // no error
-        saveRDF();
+        USc_rdf.modifyItem(id, "lastscan", "");  // lastscan not defined
+        USc_rdf.modifyItem(id, "changed", "0");  // not changed 
+        USc_rdf.modifyItem(id, "error", "0");    // no error
+        USc_rdf.save();
 
     }
 },
@@ -261,12 +261,12 @@ openEditDialog : function()
     if (id == "") return;
 
     var args = {
-        title:          queryRDFitem(id, "title", "No Title"),
-        url:            queryRDFitem(id, "url", ""),
-        threshold:      queryRDFitem(id, "threshold", "100"),
-        scanRateMins:   queryRDFitem(id, "scanratemins", "0"),
-        encoding:       queryRDFitem(id, "encoding", "auto"),
-        ignoreNumbers:  queryRDFitem(id, "ignoreNumbers", "false"),
+        title:          USc_rdf.queryItem(id, "title", "No Title"),
+        url:            USc_rdf.queryItem(id, "url", ""),
+        threshold:      USc_rdf.queryItem(id, "threshold", "100"),
+        scanRateMins:   USc_rdf.queryItem(id, "scanratemins", "0"),
+        encoding:       USc_rdf.queryItem(id, "encoding", "auto"),
+        ignoreNumbers:  USc_rdf.queryItem(id, "ignoreNumbers", "false"),
         // Although ignoreNumbers is true by default, behaviour of pages
         // upgraded from previous version shouldn't be modified
         advanced:       true
@@ -278,22 +278,22 @@ openEditDialog : function()
                       'chrome,dialog,modal,centrescreen', args);
                       
     if (args.ok) {
-        modifyRDFitem(id, "title", args.title);
-        modifyRDFitem(id, "url", args.url);
-        modifyRDFitem(id, "threshold", args.threshold);
-        modifyRDFitem(id, "scanratemins", args.scanRateMins);
-        modifyRDFitem(id, "encoding", args.encoding);
-        modifyRDFitem(id, "ignoreNumbers", args.ignoreNumbers);
+        USc_rdf.modifyItem(id, "title", args.title);
+        USc_rdf.modifyItem(id, "url", args.url);
+        USc_rdf.modifyItem(id, "threshold", args.threshold);
+        USc_rdf.modifyItem(id, "scanratemins", args.scanRateMins);
+        USc_rdf.modifyItem(id, "encoding", args.encoding);
+        USc_rdf.modifyItem(id, "ignoreNumbers", args.ignoreNumbers);
 
         if (oldurl != args.url) {   // URL changed - reset all values
             filebase = USc_file.escapeFilename(id);
             USc_file.USwriteFile(filebase+".new", "**NEW**");
 
-            modifyRDFitem(id, "lastscan", "");  // lastscan not defined
-            modifyRDFitem(id, "changed", "0");  // not changed
-            modifyRDFitem(id, "error", "0");    // no error
+            USc_rdf.modifyItem(id, "lastscan", "");  // lastscan not defined
+            USc_rdf.modifyItem(id, "changed", "0");  // not changed
+            USc_rdf.modifyItem(id, "error", "0");    // no error
         }
-        saveRDF();
+        USc_rdf.save();
     }
     me._refreshTree();
     me.refresh.request();
@@ -302,9 +302,9 @@ openEditDialog : function()
 openSelectedItem : function()
 { // Not currently used - clicking now opens a diff instead
     var me = USc_updatescan;
-    modifyRDFitem(id, "changed", "0");
-    saveRDF();
-    USc_topWin.open(queryRDFitem(id, "url"));
+    USc_rdf.modifyItem(id, "changed", "0");
+    USc_rdf.save();
+    USc_topWin.open(USc_rdf.queryItem(id, "url"));
     me._refreshTree();
     me.refresh.request();
 },
@@ -313,25 +313,25 @@ _diffItem : function(id, numItems)
 {
     var me = USc_updatescan;
     var now = new Date();
-    modifyRDFitem(id, "changed", "0");
-    saveRDF();
+    USc_rdf.modifyItem(id, "changed", "0");
+    USc_rdf.save();
 
     me._refreshTree();
     me.refresh.request();
     
-    var old_lastScan = queryRDFitem(id, "old_lastscan", "")
+    var old_lastScan = USc_rdf.queryItem(id, "old_lastscan", "")
     if (old_lastScan == "") old_lastScan = "5 November 1978";
     old_lastScan = new Date(old_lastScan);
     var oldDate = me._dateDiffString(old_lastScan, now);
 
-    var lastScan =queryRDFitem(id, "lastscan", "");
+    var lastScan =USc_rdf.queryItem(id, "lastscan", "");
     if (lastScan == "") lastScan = "5 November 1978";
     lastScan = new Date(lastScan);
     var newDate = me._dateDiffString(lastScan, now);
 
     var filebase = USc_file.escapeFilename(id);
-    return USc_diff.display(queryRDFitem(id, "title", "No Title"), 
-            queryRDFitem(id, "url", ""), 
+    return USc_diff.display(USc_rdf.queryItem(id, "title", "No Title"), 
+            USc_rdf.queryItem(id, "url", ""), 
             USc_file.USreadFile(filebase+".old"),
             USc_file.USreadFile(filebase+".new"),
             USc_file.USreadFile(filebase+".dif"),
@@ -429,12 +429,12 @@ markAllAsVisited : function()
     if (numitems > 0) {
         for (var i=0; i<numitems; i++) {
             var id = tree.contentView.getItemAtIndex(i).id;
-            if (queryRDFitem(id, "changed") != "0") {
-                modifyRDFitem(id, "changed", "0");
+            if (USc_rdf.queryItem(id, "changed") != "0") {
+                USc_rdf.modifyItem(id, "changed", "0");
                 me._refreshTree();
             }
         }
-        saveRDF();
+        USc_rdf.save();
         me._refreshTree();
         me.refresh.request();
     }
@@ -449,7 +449,7 @@ showAllChangesInNewTabs : function()
     if (numItems > 0) {
         for (var i=0; i<numItems; i++) {
             var id = tree.contentView.getItemAtIndex(i).id;
-            if (queryRDFitem(id, "changed") != "0") {
+            if (USc_rdf.queryItem(id, "changed") != "0") {
                 me._diffItemNewTab(id, numItems);
             }
         }
@@ -475,7 +475,7 @@ sortByName : function()
         for (var i=0; i<numitems; i++)
         {
             id = tree.contentView.getItemAtIndex(i).id;
-            item = {id:id, title:queryRDFitem(id, "title").toLowerCase()}
+            item = {id:id, title:USc_rdf.queryItem(id, "title").toLowerCase()}
             data.push(item);
             indexes.push(i);
         }
@@ -488,7 +488,7 @@ sortByName : function()
                           'dlgProgress', 
                           'chrome,dialog,modal,centrescreen', params);
 
-        saveRDF();
+        USc_rdf.save();
         me._refreshTree();
         me.refresh.request();
     }
@@ -511,7 +511,7 @@ _sortItem : function(index, data)
         }
     }
     if (smallestIndex != 0) {
-        moveRDFitem(data[smallestIndex].id, index); // Move into position
+        USc_rdf.moveItem(data[smallestIndex].id, index); // Move into position
     }
     data.splice(smallestIndex, 1);              // Remove from data array
     return null;    
@@ -536,14 +536,14 @@ deleteSelectedItem : function()
     var fileBase=USc_file.escapeFilename(id)
 
     if (id == "") return;
-    var title = queryRDFitem(id, "title", "untitled");
+    var title = USc_rdf.queryItem(id, "title", "untitled");
 
     if (confirm(str.getString("confirmDelete") + " " + title + "?")) {
         USc_file.USrmFile(fileBase+".old");
         USc_file.USrmFile(fileBase+".new");
         USc_file.USrmFile(fileBase+".dif");
-        deleteRDFitem(id);
-        saveRDF();
+        USc_rdf.deleteItem(id);
+        USc_rdf.save();
         me._refreshTree();
         me.refresh.request();
     }

@@ -19,11 +19,11 @@
  */
 
 /* This is a library for easier access to RDF datasources and resources.
- * It contains four objects, RDFDataSource, RDFNode, RDFLiteral. and
- * RDFEnumerator.
+ * It contains four objects, USc_RDFDataSource, USc_RDFNode, USc_RDFLiteral. and
+ * USc_RDFEnumerator.
  *
  * An RDF DataSource is a graph of nodes and literals. The constructor
- * for RDFDataSource takes one argument, a URI of an RDF file to use.
+ * for USc_RDFDataSource takes one argument, a URI of an RDF file to use.
  * If the URI exists, the contents of the RDF file are loaded. If it
  * does not exist, resources can be added to it and then written using
  * this save method. If the URL argument is null, a blank datasource
@@ -36,7 +36,7 @@
  *
  * Example:
  *
- * var ds=new RDFDataSource("file:///main/mozilla/mimtest.rdf");
+ * var ds=new USc_RDFDataSource("file:///main/mozilla/mimtest.rdf");
  * var node=ds.getNode("http://www.example.com/sample");
  * var child=ds.getNode("http://www.example.com/child");
  * child=node.addChild(child);
@@ -45,22 +45,22 @@
  *
  */
 
-var RDFService = "@mozilla.org/rdf/rdf-service;1";
-RDFService = Components.classes[RDFService].getService();
-RDFService = RDFService.QueryInterface(Components.interfaces.nsIRDFService);
+var USc_RDFService = "@mozilla.org/rdf/rdf-service;1";
+USc_RDFService = Components.classes[USc_RDFService].getService();
+USc_RDFService = USc_RDFService.QueryInterface(Components.interfaces.nsIRDFService);
 
-var RDFContainerUtilsService = "@mozilla.org/rdf/container-utils;1";
-RDFContainerUtilsService = Components.classes[RDFContainerUtilsService].getService();
-RDFContainerUtilsService = RDFContainerUtilsService.QueryInterface(Components.interfaces.nsIRDFContainerUtils);
+var USc_RDFContainerUtilsService = "@mozilla.org/rdf/container-utils;1";
+USc_RDFContainerUtilsService = Components.classes[USc_RDFContainerUtilsService].getService();
+USc_RDFContainerUtilsService = USc_RDFContainerUtilsService.QueryInterface(Components.interfaces.nsIRDFContainerUtils);
 
 /* RDFLoadObserver
  *   this object is necessary to listen to RDF files being loaded. The Init
  *   function should be called to initialize the callback when the RDF file is
  *   loaded.
  */
-function RDFLoadObserver(){}
+function USc_RDFLoadObserver(){}
   
-RDFLoadObserver.prototype =
+USc_RDFLoadObserver.prototype =
 {
   callback: null,
   callbackDataSource: null,
@@ -85,13 +85,13 @@ RDFLoadObserver.prototype =
   }
 };  
 
-function RDFDataSource(uri,callbackFn)
+function USc_RDFDataSource(uri,callbackFn)
 {
   if (uri==null) this.datasource=null;
   else this.load(uri,callbackFn);
 }
 
-RDFDataSource.prototype.load=
+USc_RDFDataSource.prototype.load=
   function(uri,callbackFn)
 {
   if (uri.indexOf(":") == -1){
@@ -101,10 +101,10 @@ RDFDataSource.prototype.load=
   }
 
   if (callbackFn == null){
-    this.datasource=RDFService.GetDataSourceBlocking(uri);
+    this.datasource=USc_RDFService.GetDataSourceBlocking(uri);
   }
   else {
-    this.datasource=RDFService.GetDataSource(uri);
+    this.datasource=USc_RDFService.GetDataSource(uri);
     var ds;
     try {
       ds=this.datasource.QueryInterface(Components.interfaces.nsIRDFRemoteDataSource);
@@ -118,7 +118,7 @@ RDFDataSource.prototype.load=
       return;
     }
 
-    var packObserver=new RDFLoadObserver();
+    var packObserver=new USc_RDFLoadObserver();
     packObserver.Init(callbackFn,this);
 
     var rawsource=this.datasource;
@@ -127,13 +127,13 @@ RDFDataSource.prototype.load=
   }
 }
 
-RDFDataSource.prototype.Init=
+USc_RDFDataSource.prototype.Init=
   function (dsource)
 {
   this.datasource=dsource;
 }
 
-RDFDataSource.prototype.parseFromString=
+USc_RDFDataSource.prototype.parseFromString=
   function (str,baseUri)
 {
   if (this.datasource==null) this.makeemptyds();
@@ -145,7 +145,7 @@ RDFDataSource.prototype.parseFromString=
   xmlParser.parseString(this.datasource,baseUri,str);
 }
 
-RDFDataSource.prototype.serializeToString=
+USc_RDFDataSource.prototype.serializeToString=
   function ()
 {
   var outputStream = {
@@ -163,7 +163,7 @@ RDFDataSource.prototype.serializeToString=
   return outputStream.data;
 }
 
-RDFDataSource.prototype.serializeToStream=
+USc_RDFDataSource.prototype.serializeToStream=
   function (outputStream)
 {
   var ser=Components.classes["@mozilla.org/rdf/xml-serializer;1"]
@@ -172,55 +172,55 @@ RDFDataSource.prototype.serializeToStream=
   ser.QueryInterface(Components.interfaces.nsIRDFXMLSource).Serialize(outputStream);
 }
 
-RDFDataSource.prototype.makeemptyds=
+USc_RDFDataSource.prototype.makeemptyds=
   function (uri)
 {
   this.datasource=Components.classes["@mozilla.org/rdf/datasource;1?name=in-memory-datasource"]
-                            .createInstance(Components.interfaces.nsIRDFDataSource);
+                            .createInstance(Components.interfaces.nsIUSc_RDFDataSource);
 }
 
-RDFDataSource.prototype.getAllResources=
+USc_RDFDataSource.prototype.getAllResources=
   function ()
 {
   if (this.datasource==null) return null;
-  return new RDFEnumerator(this.datasource.GetAllResources(),this.datasource);
+  return new USc_RDFEnumerator(this.datasource.GetAllResources(),this.datasource);
 }
 
-RDFDataSource.prototype.getRawDataSource=
+USc_RDFDataSource.prototype.getRawDataSource=
   function ()
 {
   if (this.datasource==null) this.makeemptyds();
   return this.datasource;
 }
 
-RDFDataSource.prototype.getNode=
+USc_RDFDataSource.prototype.getNode=
   function (uri)
 {
   if (this.datasource==null) this.makeemptyds();
-  var node=new RDFNode(uri,this);
+  var node=new USc_RDFNode(uri,this);
   return node;
 }
 
-RDFDataSource.prototype.getAnonymousNode=
+USc_RDFDataSource.prototype.getAnonymousNode=
   function ()
 {
   if (this.datasource==null) this.makeemptyds();
 
-  var anon=RDFService.GetAnonymousResource();
-  var node=new RDFNode();
+  var anon=USc_RDFService.GetAnonymousResource();
+  var node=new USc_RDFNode();
   node.Init(anon,this.datasource);
   return node;
 }
 
-RDFDataSource.prototype.getLiteral=
+USc_RDFDataSource.prototype.getLiteral=
   function (uri)
 {
   if (this.datasource==null) this.makeemptyds();
 
-  return new RDFLiteral(uri,this);
+  return new USc_RDFLiteral(uri,this);
 }
 
-RDFDataSource.prototype.refresh=
+USc_RDFDataSource.prototype.refresh=
   function (sync)
 {
   try {
@@ -233,7 +233,7 @@ RDFDataSource.prototype.refresh=
   }
 }
 
-RDFDataSource.prototype.save=
+USc_RDFDataSource.prototype.save=
   function ()
 {
   try {
@@ -246,7 +246,7 @@ RDFDataSource.prototype.save=
   }
 }
 
-RDFDataSource.prototype.copyAllToDataSource=
+USc_RDFDataSource.prototype.copyAllToDataSource=
   function (dsource2)
 {
   if (this.datasource==null) this.makeemptyds();
@@ -268,7 +268,7 @@ RDFDataSource.prototype.copyAllToDataSource=
   }
 }
 
-RDFDataSource.prototype.deleteRecursive=
+USc_RDFDataSource.prototype.deleteRecursive=
   function (val)
 {
   var node;
@@ -276,7 +276,7 @@ RDFDataSource.prototype.deleteRecursive=
 
   if (dsource==null) return;
 
-  if (typeof val == "string") node=RDFService.GetResource(val);
+  if (typeof val == "string") node=USc_RDFService.GetResource(val);
   else node=val.source;
 
   this.deleteRecursiveH(dsource,node); // remove descendants
@@ -290,7 +290,7 @@ RDFDataSource.prototype.deleteRecursive=
   }
 }
 
-RDFDataSource.prototype.deleteRecursiveH=
+USc_RDFDataSource.prototype.deleteRecursiveH=
   function (dsource,node)
 {
   var props=dsource.ArcLabelsOut(node);
@@ -306,10 +306,10 @@ RDFDataSource.prototype.deleteRecursiveH=
   }
 }
 
-function RDFNode(uri,dsource)
+function USc_RDFNode(uri,dsource)
 {
   if (uri==null) this.source=null;
-  else this.source=RDFService.GetResource(uri);
+  else this.source=USc_RDFService.GetResource(uri);
 
   if (dsource==null) this.datasource=null;
   else this.datasource=dsource.datasource;
@@ -317,7 +317,7 @@ function RDFNode(uri,dsource)
   this.container=null;
 }
 
-RDFNode.prototype.Init=
+USc_RDFNode.prototype.Init=
   function (source,dsource)
 {
   this.source=source;
@@ -325,13 +325,13 @@ RDFNode.prototype.Init=
   this.container=null;
 }
 
-RDFNode.prototype.getValue=
+USc_RDFNode.prototype.getValue=
   function ()
 {
   return this.source.Value;
 }
 
-RDFNode.prototype.rlify=
+USc_RDFNode.prototype.rlify=
   function (val)
 {
   var res=null;
@@ -339,13 +339,13 @@ RDFNode.prototype.rlify=
   if (val!=null){
     try {
       val=val.QueryInterface(Components.interfaces.nsIRDFResource);
-      res=new RDFNode();
+      res=new USc_RDFNode();
       res.Init(val,this.datasource);
     }
     catch (ex){
       try {
         val=val.QueryInterface(Components.interfaces.nsIRDFLiteral);
-        res=new RDFLiteral();
+        res=new USc_RDFLiteral();
         res.Init(val,this.datasource);
       }
       catch (ex2){
@@ -355,21 +355,21 @@ RDFNode.prototype.rlify=
   return res;
 }
 
-RDFNode.prototype.makeres=
+USc_RDFNode.prototype.makeres=
   function (val)
 {
-  if (typeof val == "string") return RDFService.GetResource(val);
+  if (typeof val == "string") return USc_RDFService.GetResource(val);
   else return val.source;
 }
 
-RDFNode.prototype.makelit=
+USc_RDFNode.prototype.makelit=
   function (val)
 {
-  if (typeof val == "string") return RDFService.GetLiteral(val);
+  if (typeof val == "string") return USc_RDFService.GetLiteral(val);
   else return val.source;
 }
 
-RDFNode.prototype.makecontain=
+USc_RDFNode.prototype.makecontain=
   function ()
 {
   if (this.container!=null) return true;
@@ -388,7 +388,7 @@ RDFNode.prototype.makecontain=
   }
 }
 
-RDFNode.prototype.addTarget=
+USc_RDFNode.prototype.addTarget=
   function (prop,target)
 {
   prop=this.makeres(prop);
@@ -396,7 +396,7 @@ RDFNode.prototype.addTarget=
   this.datasource.Assert(this.source,prop,target,true);
 }
 
-RDFNode.prototype.addTargetOnce=
+USc_RDFNode.prototype.addTargetOnce=
   function (prop,target)
 {
   prop=this.makeres(prop);
@@ -411,7 +411,7 @@ RDFNode.prototype.addTargetOnce=
   }
 }
 
-RDFNode.prototype.modifyTarget=
+USc_RDFNode.prototype.modifyTarget=
   function (prop,oldtarget,newtarget)
 {
   prop=this.makeres(prop);
@@ -420,7 +420,7 @@ RDFNode.prototype.modifyTarget=
   this.datasource.Change(this.source,prop,oldtarget,newtarget);
 }
 
-RDFNode.prototype.modifySource=
+USc_RDFNode.prototype.modifySource=
   function (prop,oldsource,newsource)
 {
   prop=this.makeres(prop);
@@ -429,7 +429,7 @@ RDFNode.prototype.modifySource=
   this.datasource.Move(oldsource,newsource,prop,this.source);
 }
 
-RDFNode.prototype.targetExists=
+USc_RDFNode.prototype.targetExists=
   function (prop,target)
 {
   prop=this.makeres(prop);
@@ -437,7 +437,7 @@ RDFNode.prototype.targetExists=
   return this.datasource.HasAssertion(this.source,prop,target,true);
 }
 
-RDFNode.prototype.removeTarget=
+USc_RDFNode.prototype.removeTarget=
   function (prop,target)
 {
   prop=this.makeres(prop);
@@ -445,109 +445,109 @@ RDFNode.prototype.removeTarget=
   this.datasource.Unassert(this.source,prop,target);
 }
 
-RDFNode.prototype.getProperties=
+USc_RDFNode.prototype.getProperties=
   function ()
 {
-  return new RDFEnumerator(this.datasource.ArcLabelsOut(this.source),this.datasource);
+  return new USc_RDFEnumerator(this.datasource.ArcLabelsOut(this.source),this.datasource);
 }
 
-RDFNode.prototype.getInProperties=
+USc_RDFNode.prototype.getInProperties=
   function ()
 {
-  return new RDFEnumerator(this.datasource.ArcLabelsIn(this.source),this.datasource);
+  return new USc_RDFEnumerator(this.datasource.ArcLabelsIn(this.source),this.datasource);
 }
 
-RDFNode.prototype.propertyExists=
+USc_RDFNode.prototype.propertyExists=
   function (prop)
 {
   prop=this.makeres(prop);
   return this.datasource.hasArcOut(this.source,prop);
 }
 
-RDFNode.prototype.inPropertyExists=
+USc_RDFNode.prototype.inPropertyExists=
   function (prop)
 {
   prop=this.makeres(prop);
   return this.datasource.hasArcIn(this.source,prop);
 }
 
-RDFNode.prototype.getTarget=
+USc_RDFNode.prototype.getTarget=
   function (prop)
 {
   prop=this.makeres(prop);
   return this.rlify(this.datasource.GetTarget(this.source,prop,true));
 }
 
-RDFNode.prototype.getSource=
+USc_RDFNode.prototype.getSource=
   function (prop)
 {
   prop=this.makeres(prop);
   var src=this.datasource.GetSource(prop,this.source,true);
   if (src==null) return null;
-  var res=new RDFNode();
+  var res=new USc_RDFNode();
   res.Init(src,this.datasource);
   return res;
 }
 
-RDFNode.prototype.getTargets=
+USc_RDFNode.prototype.getTargets=
   function (prop)
 {
   prop=this.makeres(prop);
-  return new RDFEnumerator(
+  return new USc_RDFEnumerator(
     this.datasource.GetTargets(this.source,prop,true),this.datasource);
 }
 
-RDFNode.prototype.getSources=
+USc_RDFNode.prototype.getSources=
   function (prop)
 {
   prop=this.makeres(prop);
-  return new RDFEnumerator(
+  return new USc_RDFEnumerator(
     this.datasource.GetSources(prop,this.source,true),this.datasource);
 }
 
-RDFNode.prototype.makeBag=
+USc_RDFNode.prototype.makeBag=
   function ()
 {
-  this.container=RDFContainerUtilsService.MakeBag(this.datasource,this.source);
+  this.container=USc_RDFContainerUtilsService.MakeBag(this.datasource,this.source);
 }
 
-RDFNode.prototype.makeSeq=
+USc_RDFNode.prototype.makeSeq=
   function ()
 {
-  this.container=RDFContainerUtilsService.MakeSeq(this.datasource,this.source);
+  this.container=USc_RDFContainerUtilsService.MakeSeq(this.datasource,this.source);
 }
 
-RDFNode.prototype.makeAlt=
+USc_RDFNode.prototype.makeAlt=
   function ()
 {
-  this.container=RDFContainerUtilsService.MakeAlt(this.datasource,this.source);
+  this.container=USc_RDFContainerUtilsService.MakeAlt(this.datasource,this.source);
 }
 
-RDFNode.prototype.isBag=
+USc_RDFNode.prototype.isBag=
   function ()
 {
-  return RDFContainerUtilsService.IsBag(this.datasource,this.source);
+  return USc_RDFContainerUtilsService.IsBag(this.datasource,this.source);
 }
 
-RDFNode.prototype.isSeq=
+USc_RDFNode.prototype.isSeq=
   function ()
 {
-  return RDFContainerUtilsService.IsSeq(this.datasource,this.source);
+  return USc_RDFContainerUtilsService.IsSeq(this.datasource,this.source);
 }
 
-RDFNode.prototype.isAlt=
+USc_RDFNode.prototype.isAlt=
   function ()
 {
-  return RDFContainerUtilsService.IsAlt(this.datasource,this.source);
+  return USc_RDFContainerUtilsService.IsAlt(this.datasource,this.source);
 }
 
-RDFNode.prototype.isContainer=
+USc_RDFNode.prototype.isContainer=
   function ()
 {
-  return RDFContainerUtilsService.IsContainer(this.datasource,this.source);
+  return USc_RDFContainerUtilsService.IsContainer(this.datasource,this.source);
 }
 
-RDFNode.prototype.getChildCount=
+USc_RDFNode.prototype.getChildCount=
   function ()
 {
   if (this.makecontain()){
@@ -556,23 +556,23 @@ RDFNode.prototype.getChildCount=
   return -1;
 }
 
-RDFNode.prototype.getChildren=
+USc_RDFNode.prototype.getChildren=
   function ()
 {
   if (this.makecontain()){
-    return new RDFEnumerator(this.container.GetElements(),this.datasource);
+    return new USc_RDFEnumerator(this.container.GetElements(),this.datasource);
   }
   else return null;
 }
 
-RDFNode.prototype.addChild=
+USc_RDFNode.prototype.addChild=
   function (child,exists)
 {
   if (this.makecontain()){
     var childres=null;
     if (typeof child == "string"){
-      childres=RDFService.GetResource(child);
-      child=new RDFNode();
+      childres=USc_RDFService.GetResource(child);
+      child=new USc_RDFNode();
       child.Init(childres,this.datasource);
     }
     else childres=child.source;
@@ -585,14 +585,14 @@ RDFNode.prototype.addChild=
   else return null;
 }
 
-RDFNode.prototype.addChildAt=
+USc_RDFNode.prototype.addChildAt=
   function (child,idx)
 {
   if (this.makecontain()){
     var childres=null;
     if (typeof child == "string"){
-      childres=RDFService.GetResource(child);
-      child=new RDFNode();
+      childres=USc_RDFService.GetResource(child);
+      child=new USc_RDFNode();
       child.Init(childres,this.datasource);
     }
     else childres=child.source;
@@ -602,14 +602,14 @@ RDFNode.prototype.addChildAt=
   else return null;
 }
 
-RDFNode.prototype.removeChild=
+USc_RDFNode.prototype.removeChild=
   function (child)
 {
   if (this.makecontain()){
     var childres=null;
     if (typeof child == "string"){
-      childres=RDFService.GetResource(child);
-      child=new RDFNode();
+      childres=USc_RDFService.GetResource(child);
+      child=new USc_RDFNode();
       child.Init(childres,this.datasource);
     }
     else childres=child.source;
@@ -619,7 +619,7 @@ RDFNode.prototype.removeChild=
   else return null;
 }
 
-RDFNode.prototype.removeChildAt=
+USc_RDFNode.prototype.removeChildAt=
   function (idx)
 {
   if (this.makecontain()){
@@ -629,7 +629,7 @@ RDFNode.prototype.removeChildAt=
   else return null;
 }
 
-RDFNode.prototype.getChildIndex=
+USc_RDFNode.prototype.getChildIndex=
   function (child)
 {
   if (this.makecontain()){
@@ -638,46 +638,46 @@ RDFNode.prototype.getChildIndex=
   else return -1;
 }
 
-RDFNode.prototype.type="Node";
+USc_RDFNode.prototype.type="Node";
 
 
-function RDFLiteral(val,dsource)
+function USc_RDFLiteral(val,dsource)
 {
   if (val==null) this.source=null;
-  else this.source=RDFService.GetLiteral(val);
+  else this.source=USc_RDFService.GetLiteral(val);
 
   if (dsource==null) this.datasource=null;
   else this.datasource=dsource.datasource;
 }
 
-RDFLiteral.prototype.Init=
+USc_RDFLiteral.prototype.Init=
   function (source,dsource)
 {
   this.source=source;
   this.datasource=dsource;
 }
 
-RDFLiteral.prototype.getValue=
+USc_RDFLiteral.prototype.getValue=
   function ()
 {
   return this.source.Value;
 }
 
-RDFLiteral.prototype.makeres=
+USc_RDFLiteral.prototype.makeres=
   function (val)
 {
-  if (typeof val == "string") return RDFService.GetResource(val);
+  if (typeof val == "string") return USc_RDFService.GetResource(val);
   else return val.source;
 }
 
-RDFLiteral.prototype.makelit=
+USc_RDFLiteral.prototype.makelit=
   function (val)
 {
-  if (typeof val == "string") return RDFService.GetLiteral(val);
+  if (typeof val == "string") return USc_RDFService.GetLiteral(val);
   else return val.source;
 }
 
-RDFLiteral.prototype.modifySource=
+USc_RDFLiteral.prototype.modifySource=
   function (prop,oldsource,newsource)
 {
   prop=this.makeres(prop);
@@ -686,54 +686,54 @@ RDFLiteral.prototype.modifySource=
   this.datasource.Move(oldsource,newsource,prop,this.source);
 }
 
-RDFLiteral.prototype.getInProperties=
+USc_RDFLiteral.prototype.getInProperties=
   function (prop)
 {
-  return new RDFEnumerator(this.datasource.ArcLabelsIn(this.source),this.datasource);
+  return new USc_RDFEnumerator(this.datasource.ArcLabelsIn(this.source),this.datasource);
 }
 
-RDFLiteral.prototype.inPropertyExists=
+USc_RDFLiteral.prototype.inPropertyExists=
   function (prop)
 {
   prop=this.makeres(prop);
   return this.datasource.hasArcIn(this.source,prop);
 }
 
-RDFLiteral.prototype.getSource=
+USc_RDFLiteral.prototype.getSource=
   function (prop)
 {
   prop=this.makeres(prop);
   var src=this.datasource.GetSource(prop,this.source,true);
   if (src==null) return null;
-  var res=new RDFNode();
+  var res=new USc_RDFNode();
   res.Init(src,this.datasource);
   return res;
 }
 
-RDFLiteral.prototype.getSources=
+USc_RDFLiteral.prototype.getSources=
   function (prop)
 {
   prop=this.makeres(prop);
-  return new RDFEnumerator(
+  return new USc_RDFEnumerator(
     this.datasource.GetSources(prop,this.source,true),this.datasource);
 }
 
-RDFLiteral.prototype.type="Literal";
+USc_RDFLiteral.prototype.type="Literal";
 
 
-function RDFEnumerator(enumeration,dsource)
+function USc_RDFEnumerator(enumeration,dsource)
 {
   this.enumeration=enumeration;
   this.datasource=dsource;
 }
 
-RDFEnumerator.prototype.hasMoreElements=
+USc_RDFEnumerator.prototype.hasMoreElements=
   function ()
 {
   return this.enumeration.hasMoreElements();
 }
 
-RDFEnumerator.prototype.getNext=
+USc_RDFEnumerator.prototype.getNext=
   function ()
 {
   var res=null;
@@ -742,13 +742,13 @@ RDFEnumerator.prototype.getNext=
   if (val!=null){
     try {
       val=val.QueryInterface(Components.interfaces.nsIRDFResource);
-      res=new RDFNode();
+      res=new USc_RDFNode();
       res.Init(val,this.datasource);
     }
     catch (ex){
       try {
         val=val.QueryInterface(Components.interfaces.nsIRDFLiteral);
-        res=new RDFLiteral();
+        res=new USc_RDFLiteral();
         res.Init(val,this.datasource);
       }
       catch (ex2){

@@ -74,37 +74,37 @@ _check : function()
     var filebase;
     var ignoreNumbers;
 
-    pages = getRDFroot().getChildren();
+    pages = USc_rdf.getRoot().getChildren();
 
     me.scan = new USc_scanner();
     now = new Date();
 
     while (pages.hasMoreElements()) {
         id = pages.getNext().getValue();
-        scanRate = queryRDFitem(id, "scanratemins", "0");
+        scanRate = USc_rdf.queryItem(id, "scanratemins", "0");
         if (scanRate != "0") {
-            lastAutoScan = queryRDFitem(id, "lastautoscan", "");
+            lastAutoScan = USc_rdf.queryItem(id, "lastautoscan", "");
             if (lastAutoScan == "") {
                 lastAutoScan = "5/11/1978";
             }
             lastAutoScan = new Date(lastAutoScan);
             if (now - lastAutoScan > scanRate*1000*60) {
-                modifyRDFitem(id, "lastautoscan", now.toString());
-                saveRDF();
+                USc_rdf.modifyItem(id, "lastautoscan", now.toString());
+                USc_rdf.save();
                 doScan = true;
                 filebase=USc_file.escapeFilename(id)
-                if (queryRDFitem(id, "ignoreNumbers", "false") == "true") {
+                if (USc_rdf.queryItem(id, "ignoreNumbers", "false") == "true") {
                     ignoreNumbers = true;
                 } else {
                     ignoreNumbers = false;
                 }
 
-                me.scan.addURL(id, queryRDFitem(id, "title", "No Title"), 
-                            queryRDFitem(id, "url", ""), 
+                me.scan.addURL(id, USc_rdf.queryItem(id, "title", "No Title"), 
+                            USc_rdf.queryItem(id, "url", ""), 
                             USc_file.USreadFile(filebase+".new"),
-                            queryRDFitem(id, "threshold", 100),                                
+                            USc_rdf.queryItem(id, "threshold", 100),                                
                             ignoreNumbers,
-                            queryRDFitem(id, "encoding", "auto"));
+                            USc_rdf.queryItem(id, "encoding", "auto"));
             }
         }
     }
@@ -131,7 +131,7 @@ _scanChanged : function(id, new_content, status, statusText, headerText)
 _encodingChanged : function(id, encoding)
 // Called when encoding is detected for a page marked for auto-detect encoding
 {
-    modifyRDFitem(id, "encoding", encoding);
+    USc_rdf.modifyItem(id, "encoding", encoding);
 },
 
 

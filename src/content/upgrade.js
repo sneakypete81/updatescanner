@@ -66,18 +66,18 @@ check : function()
         // Version 2.0.0+ expects webpage data to be in files, 
         // not embedded in RDF
         USc_file.createUpdatescanDir();
-        nodes = getRDFroot().getChildren();
+        nodes = USc_rdf.getRoot().getChildren();
         while (nodes.hasMoreElements()) {
             node = nodes.getNext();
             id = node.getValue();
-            modifyRDFitem(id, "content", ""); // Not using this anymore
-            modifyRDFitem(id, "changed", "0");
-            modifyRDFitem(id, "error", "0");
-            modifyRDFitem(id, "lastautoscan", "5 November 1978");
+            USc_rdf.modifyItem(id, "content", ""); // Not using this anymore
+            USc_rdf.modifyItem(id, "changed", "0");
+            USc_rdf.modifyItem(id, "error", "0");
+            USc_rdf.modifyItem(id, "lastautoscan", "5 November 1978");
             filebase = USc_file.escapeFilename(id);
             USc_file.USwriteFile(filebase+".new", "**NEW**");// Mark as new
         }
-        saveRDF();
+        USc_rdf.save();
     }
 
     if (      versionMajor < 2 || 
@@ -108,7 +108,7 @@ upgrade_2_0_14 : function()
 
     // Previous versions had bug where multiple items used the same file.
     // First, check for duplications
-    nodes = getRDFroot().getChildren();
+    nodes = USc_rdf.getRoot().getChildren();
     if (!nodes.hasMoreElements()) {
         return true; // No need to do anything - nothing in the tree
     }
