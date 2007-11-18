@@ -42,8 +42,8 @@ var USc_alert_exists = true;
 var USc_alert = {    
 
 gFinalHeight : 50,
-gSlideIncrement : 1,
-gSlideTime : 10,
+gSlideIncrement : 4,
+gSlideTime : 20,
 
 gOpenTime : 3000,   // total time the alert should stay up once we are done animating.
 gPermanent : false, // should the window stay open permanently (until manually closed)
@@ -87,7 +87,30 @@ onAlertLoad : function()
   window.moveTo( (screen.availLeft + screen.availWidth - window.outerWidth) - 10, screen.availTop + screen.availHeight - window.outerHeight);
 
   setTimeout(me._animateAlert, me.gSlideTime);
- 
+
+},
+
+_playSound : function()
+{
+  var prefService = Components.classes["@mozilla.org/preferences-service;1"].getService();
+  prefService = prefService.QueryInterface(Components.interfaces.nsIPrefService);
+  var prefBranch = prefService.getBranch("extensions.updatescan.notifications.");
+  var ioService = Components.classes["@mozilla.org/network/io-service;1"]
+                            .getService(Components.interfaces.nsIIOService)
+  var url;
+  var player = Components.classes["@mozilla.org/sound;1"]
+                         .createInstance(Components.interfaces.nsISound);
+
+  try {
+      if (prefBranch.getBoolPref("defaultSound")) {
+          url = ioService.newURI("chrome://updatescan/content/defaultNotification.wav",null,null);
+      } else {
+          var file = prefBranch.getComplexValue("soundFile", Components.interfaces.nsILocalFile);
+          url = ioService.newFileURI(file);
+      }          
+      player.init();
+      player.play(url);
+  } catch(ex) { }
 },
 
 
@@ -112,16 +135,16 @@ onAlertClose: function()
 _animateAlert : function()
 {
   var me = USc_alert;
-  if (window.outerHeight < me.gFinalHeight)
-  {
+  if (window.outerHeight < me.gFinalHeight) {
     window.screenY -= me.gSlideIncrement;
     window.outerHeight += me.gSlideIncrement;
     setTimeout(me._animateAlert, me.gSlideTime);
-  }
-  else
+  } else {
+    me._playSound();
     if (!me.gPermanent) {
       setTimeout(me._closeAlert, me.gOpenTime);
-    }  
+    }
+  }
 },
 
 _closeAlert : function()

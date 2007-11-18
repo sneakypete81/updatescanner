@@ -1,5 +1,7 @@
 FAQ entry for adding button to toolbar
 Remind translators: statusScanning string in updatescan.properties has had {title} added - please check that it is correct.
+Config toolbar button
+Default preferences
 
 Notifications:
  * Enable/disable notifications
@@ -25,7 +27,9 @@ Toolbar:
 Mark all as visited now has a progress dialog
 Refresher now runs off observer
 Shifted functions into uniquely names classes to prevent clashes
-
+Added config dialog
+Notification is now configurable, and has close button
+Added sound notification
 
 Done:
 -- 2.0.15 --
