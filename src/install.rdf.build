@@ -50,6 +50,7 @@ print >> file('install.rdf', 'w'), """\
 <em:description>%(description)s</em:description>
 <em:creator>%(author)s</em:creator>
 <em:homepageURL>%(homepageURL)s</em:homepageURL>
+<em:optionsURL>%(optionsChrome)s</em:optionsURL>
 %(translator_list)s
 %(updateURLprint)s
 

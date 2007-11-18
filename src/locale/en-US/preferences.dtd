@@ -1,0 +1,18 @@
+<!-- Note to translators:
+
+     This file contains strings for the Preferences dialog.
+     Open the updatescanner sidebar and click the Preferences toolbar icon 
+     to see what it looks like. 
+-->
+<!ENTITY preferences.title "Update Scanner Preferences">
+<!ENTITY notifications.title "Notifications">
+<!ENTITY scanning.title "Scanning">
+<!ENTITY toolbar.title "Toolbar">
+
+<!ENTITY notifications.enable.label "Show notification popup when a webpage changes">
+<!ENTITY notifications.timed.label1 "Show for">
+<!ENTITY notifications.timed.label2 "seconds">
+<!ENTITY notifications.permanent.label "Show until manually closed">
+<!ENTITY notifications.playSound.label "Play a sound when a webpage changes">
+<!ENTITY notifications.defaultSound.label "Default Sound">
+<!ENTITY notifications.browse.label "Browse...">

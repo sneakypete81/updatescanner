@@ -1,7 +1,28 @@
 FAQ entry for adding button to toolbar
 Remind translators: statusScanning string in updatescan.properties has had {title} added - please check that it is correct.
 
+Notifications:
+ * Enable/disable notifications
+ * Display notification for x seconds
+ * Or until closed by user
+ * Play a sound
+ 
+Properties Dialog
+ * Default scan threshold
+ * Default scan rate
+ * warn when < 5 minutes
+ * Display Advanced options
+ * Sliders/Numbers
+
+Scanning:
+ * Scan timeout
+ 
+Toolbar:
+ * Display/hide icons
+
+
 -- Unreleased --
+Mark all as visited now has a progress dialog
 Refresher now runs off observer
 Shifted functions into uniquely names classes to prevent clashes
 
