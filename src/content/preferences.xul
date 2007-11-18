@@ -43,7 +43,8 @@
      title="&preferences.title;"
      xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
  
-<prefpane id="notifications" label="&notifications.title;">
+<prefpane id="notifications" label="&notifications.title;"
+          image="chrome://updatescan/skin/dialog-information.png">
   <preferences>
     <preference id="notifications.enable" 
                 name="extensions.updatescan.notifications.enable" 
@@ -108,9 +109,11 @@
   </radiogroup>
 
 </prefpane>
-<prefpane id="scanning" label="&scanning.title;">
+<prefpane id="scanning" label="&scanning.title;"
+          image="chrome://updatescan/skin/updatescan_big.png">
 </prefpane> 
-<prefpane id="toolbar" label="&toolbar.title;">
+<prefpane id="toolbar" label="&toolbar.title;"
+          image="chrome://updatescan/skin/preferences-system.png">
 </prefpane> 
 <script type="application/x-javascript" src="chrome://updatescan/content/preferences.js"/>
 </prefwindow>

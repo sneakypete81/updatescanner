@@ -169,10 +169,13 @@ _scanFinishedCallback : function()
     var me = USc_updatescan;
     var str=document.getElementById("updatescanStrings");
     var param;
+    var prefService = Components.classes["@mozilla.org/preferences-service;1"].getService();
+    prefService = prefService.QueryInterface(Components.interfaces.nsIPrefService);
+    var prefBranch = prefService.getBranch("extensions.updatescan.");
 
     if (me.numChanges == 0) {
         me._setStatus(str.getString("statusNoChanges"));
-    } else {
+    } else if (prefBranch.getBoolPref("notifications.enable")) {
         if (me.numChanges == 1) {
             me._setStatus(str.getString("statusOneChange"));
             message = str.getString("alertOneChange");
@@ -439,13 +442,13 @@ markAllAsVisited : function()
 //            }
         }
 
-        params = {label:str.getString("markLabel"), 
-                  callback:me._markAsVisited, 
-                  items:ids, 
-                  data:null, 
-                  cancelPrompt:str.getString("markCancel"), 
-                  retVal:null, 
-                  retData:null};       
+        var params = {label:str.getString("markLabel"), 
+                      callback:me._markAsVisited, 
+                      items:ids, 
+                      data:null, 
+                      cancelPrompt:str.getString("markCancel"), 
+                      retVal:null, 
+                      retData:null};       
         window.openDialog('chrome://updatescan/content/progress.xul', 
                           'dlgProgress', 
                           'chrome,dialog,modal,centrescreen', params);

@@ -38,6 +38,8 @@
  *
  * ***** END LICENSE BLOCK ***** -->
 
+<?xml-stylesheet href="chrome://updatescan/skin/alert.css" type="text/css"?>
+
 <window id="alertNotification"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         windowtype="alert:alert"
@@ -50,16 +52,23 @@
 <script type="application/x-javascript" 
 	src="chrome://updatescan/content/alert.js" />
 
-<vbox id="alertBox" class="alertBox" onclick="USc_alert.onAlertClick();">
-<spacer height="4px"/>
+<vbox id="alertBox" class="alertBox">
 <hbox>
-  <vbox>
+  <vbox onclick="USc_alert.onAlertClick();">
+    <spacer height="4px"/>
     <image src='chrome://updatescan/skin/updatescan_big.png'/>
   </vbox>
 
-  <vbox>
+  <vbox onclick="USc_alert.onAlertClick();">
+    <spacer height="4px"/>
     <label value="Update Scanner" style="font-weight:bold"/>
     <vbox><label id="message" value="" /></vbox>
+  </vbox>
+  
+  <vbox>
+  <toolbarbutton align="top" id='alert-closebutton' 
+                 onclick="USc_alert.onAlertClose();"/>
+  <spacer flex="1" onclick="USc_alert.onAlertClick();"/>
   </vbox>
 </hbox>
 </vbox>

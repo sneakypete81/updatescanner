@@ -102,10 +102,14 @@ autoscanFinished : function(numChanges)
     var param;
     var alertManyChanges = strings.GetStringFromName("alertManyChanges");
 
+    var prefService = Components.classes["@mozilla.org/preferences-service;1"].getService();
+    prefService = prefService.QueryInterface(Components.interfaces.nsIPrefService);
+    var prefBranch = prefService.getBranch("extensions.updatescan.");
+
     var message;
 
     me.refresh.request();
-    if (numChanges) {
+    if (numChanges && prefBranch.getBoolPref("notifications.enable")) {
         if (numChanges == 1) {
             message = alertOneChange;
         } else {
@@ -116,15 +120,6 @@ autoscanFinished : function(numChanges)
                   "alert:alert",
                   "chrome,dialog=yes,titlebar=no,popup=yes",
                   message);
-    
-    /*    alertsService.showAlertNotification(
-            "chrome://updatescan/skin/updatescan_big.png", 
-            "Update Scanner", 
-            message, 
-            false, 
-            "", 
-            null);
-    */    
     }
 },
 

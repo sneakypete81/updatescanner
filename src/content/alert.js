@@ -44,7 +44,9 @@ var USc_alert = {
 gFinalHeight : 50,
 gSlideIncrement : 1,
 gSlideTime : 10,
-gOpenTime : 3000, // total time the alert should stay up once we are done animating.
+
+gOpenTime : 3000,   // total time the alert should stay up once we are done animating.
+gPermanent : false, // should the window stay open permanently (until manually closed)
 
 gAlertListener : null,
 gAlertTextClickable : false,
@@ -67,11 +69,10 @@ onAlertLoad : function()
   {
     var prefService = Components.classes["@mozilla.org/preferences-service;1"].getService();
     prefService = prefService.QueryInterface(Components.interfaces.nsIPrefService);
-    var prefBranch = prefService.getBranch(null);
-    me.gSlideIncrement = prefBranch.getIntPref("alerts.slideIncrement");
-    me.gSlideTime = prefBranch.getIntPref("alerts.slideIncrementTime");
-    me.gOpenTime = prefBranch.getIntPref("alerts.totalOpenTime");
-  } catch (ex) {}
+    var prefBranch = prefService.getBranch("extensions.updatescan.notifications.");
+    me.gOpenTime = prefBranch.getIntPref("displayTime")*1000;
+    me.gPermanent = prefBranch.getBoolPref("permanent");
+  } catch (ex) { }
 
   sizeToContent();
 
@@ -102,6 +103,11 @@ onAlertClick : function()
     win.focus()
 },
 
+onAlertClose: function()
+{
+    var me = USc_alert;
+    me._closeAlert();
+},
 
 _animateAlert : function()
 {
@@ -113,7 +119,9 @@ _animateAlert : function()
     setTimeout(me._animateAlert, me.gSlideTime);
   }
   else
-    setTimeout(me._closeAlert, me.gOpenTime);  
+    if (!me.gPermanent) {
+      setTimeout(me._closeAlert, me.gOpenTime);
+    }  
 },
 
 _closeAlert : function()
