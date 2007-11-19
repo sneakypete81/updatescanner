@@ -52,13 +52,13 @@ var USc_pref = {
   readNotificationsPermanent: function()
   {
     var prefPermanent = document.getElementById("notifications.permanent");
-    return prefPermanent.value ? 1 : 0;
+    return prefPermanent.value ? "permanent" : "timed";
   },
 
   writeNotificationsPermanent: function()
   {
     var displayRadio = document.getElementById("notificationsDisplayRadio");
-    return displayRadio.selectedIndex == 1;
+    return displayRadio.selectedItem.value == "permanent";
   },
   
   readNotificationsPlaySound: function()
@@ -75,13 +75,13 @@ var USc_pref = {
   readNotificationsDefaultSound: function()
   {
     var prefDefaultSound = document.getElementById("notifications.defaultSound");
-    return prefDefaultSound.value ? 0 : 1;
+    return prefDefaultSound.value ? "default" : "file";
   },
 
   writeNotificationsDefaultSound: function()
   {
     var soundRadio = document.getElementById("notificationsSoundRadio");
-    return soundRadio.selectedIndex == 0;
+    return soundRadio.selectedItem.value == "default";
   },
 
   readNotificationsSoundFile: function()

@@ -35,11 +35,11 @@
 <?xml-stylesheet href="chrome://global/skin/global.css"?>
 <?xml-stylesheet href="chrome://mozapps/content/preferences/preferences.css"?>
 <?xml-stylesheet href="chrome://browser/skin/preferences/preferences.css"?>
-<!-- <?xml-stylesheet href="chrome://updatescan/skin/preferences.css" type="text/css"?>-->
+<?xml-stylesheet href="chrome://updatescan/skin/preferences.css" type="text/css"?>
 
 <!DOCTYPE dialog SYSTEM "chrome://updatescan/locale/preferences.dtd">
 
-<prefwindow id="updatescanner-prefs"
+<prefwindow id="updatescanneP-prefs"
      title="&preferences.title;"
      xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
  
@@ -75,14 +75,14 @@
               onsyncfrompreference="return USc_pref.readNotificationsPermanent();"
               onsynctopreference="return USc_pref.writeNotificationsPermanent();">
    <hbox align="center">-->
-    <radio label="&notifications.timed.label1;" value="0"/>
+    <radio label="&notifications.timed.label1;" value="timed"/>
     <textbox id="notificationsDisplayTimeEntry"
              preference="notifications.displayTime" 
              size="2" maxlength="2"/>
     <label id="notificationsDisplayTimeEntryLabel"
            value="&notifications.timed.label2;"/>
   </hbox>
-  <radio label="&notifications.permanent.label;" value="1" />
+  <radio label="&notifications.permanent.label;" value="permanent" />
   </radiogroup>
 
   <separator/>
@@ -95,9 +95,9 @@
               preference="notifications.defaultSound" 
               onsyncfrompreference="return USc_pref.readNotificationsDefaultSound();"
               onsynctopreference="return USc_pref.writeNotificationsDefaultSound();">
-  <radio label="&notifications.defaultSound.label;" value="0"/>
+  <radio label="&notifications.defaultSound.label;" value="default"/>
   <hbox>
-    <radio value="1" />
+    <radio value="file" />
     <filefield id="notificationsSoundFile" flex="1"
                preference="notifications.soundFile"
                preference-editable="true"
@@ -111,9 +111,56 @@
 </prefpane>
 <prefpane id="scanning" label="&scanning.title;"
           image="chrome://updatescan/skin/updatescan_big.png">
+<groupbox>
+<caption label="Page Properties"/>
+<hbox align="center">
+<label value="Select scan rate and threshold using"/>
+<menulist>
+<menupopup>
+  <menuitem label="Sliders" value="Sliders"/>
+  <menuitem label="Numbers" value="Numbers"/>
+</menupopup>
+</menulist>
+</hbox>
+<checkbox label="Warn when scan time is too short"
+          preference="scan.warnScanShort"/>
+<checkbox label="Always display advanced options"
+          preference="scan.displayAdvanced"/>
+
+</groupbox>
+<groupbox>
+<caption label="Advanced"/>
+<hbox align="center">
+<label value="Timeout if scan takes longer than"/>
+<textbox preference="scanTimeout" 
+         size="2" maxlength="2"/>
+<label value="seconds"/>
+</hbox>
+</groupbox>
 </prefpane> 
 <prefpane id="toolbar" label="&toolbar.title;"
           image="chrome://updatescan/skin/preferences-system.png">
+<groupbox>
+<caption label="Toolbar Icons"/>
+<hbox align="center">
+<checkbox id="new-button"/><label value="New Item"/>
+</hbox>
+<hbox align="center">
+<checkbox id="new-tab-button"/><label value="Show all changed pages in new tab"/>
+</hbox>
+<hbox align="center">
+<checkbox id="checked-button"/><label value="Mark all as visited"/>
+</hbox>
+<hbox align="center">
+<checkbox id="delete-button"/><label value="Delete"/>
+</hbox>
+<hbox align="center">
+<checkbox id="settings-button"/><label value="Settings"/>
+</hbox>
+<hbox align="center">
+<checkbox id="help-button"/><label value="Help"/>
+</hbox>
+</groupbox>
 </prefpane> 
 <script type="application/x-javascript" src="chrome://updatescan/content/preferences.js"/>
 </prefwindow>

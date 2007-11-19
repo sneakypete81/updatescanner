@@ -1,17 +1,12 @@
 FAQ entry for adding button to toolbar
 Remind translators: statusScanning string in updatescan.properties has had {title} added - please check that it is correct.
+Change "Scanning every 5 minutes is not recommended" to "Scanning more often than 15 minutes..."
 Config toolbar button
 Default preferences
 
-Notifications:
- * Enable/disable notifications
- * Display notification for x seconds
- * Or until closed by user
- * Play a sound
- 
 Properties Dialog
- * Default scan threshold
- * Default scan rate
+ no* Default scan threshold
+ no* Default scan rate
  * warn when < 5 minutes
  * Display Advanced options
  * Sliders/Numbers
@@ -21,6 +16,11 @@ Scanning:
  
 Toolbar:
  * Display/hide icons
+
+
+
+Prefs done, just need hooking up.
+
 
 
 -- Unreleased --

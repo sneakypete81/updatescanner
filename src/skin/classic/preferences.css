@@ -1,0 +1,25 @@
+@import url(chrome://global/skin/);
+
+#new-button {
+  list-style-image: url("chrome://updatescan/skin/document-new.png");
+}
+
+#new-tab-button {
+  list-style-image: url("chrome://updatescan/skin/tab-new.png");
+}
+
+#checked-button {
+  list-style-image: url("chrome://updatescan/skin/document-checked.png");
+}
+
+#delete-button {
+  list-style-image: url("chrome://updatescan/skin/edit-delete.png");
+}
+
+#help-button {
+  list-style-image: url("chrome://updatescan/skin/help-browser.png");
+}
+
+#settings-button {
+  list-style-image: url("chrome://updatescan/skin/preferences-system_sm.png");
+}
