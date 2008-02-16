@@ -105,18 +105,7 @@ var USc_pref = {
       prefSoundFile.value = filePicker.file;
       prefDefaultSound.value = false;
     }
-  }
-  
-
-/*    var file = document.getElementById("extensions.hoge.testDir").value;
-                if (file) {
-                    var fileField = document.getElementById("myFileField");
-                    fileField.file = file;
-                    fileField.label = file.path;
-                }
-            }
-            function selectDir() {
-*/
+  }  
 
 }    
 }

@@ -93,7 +93,6 @@ _treeClick : function(event)
     } 
 
     var id = tree.contentView.getItemAtIndex(obj_Row.value).id;
-
     switch (event.button) {
         case 0:
             me._diffItemThisWindow(id, 1);
@@ -299,6 +298,13 @@ openEditDialog : function()
     }
     me._refreshTree();
     me.refresh.request();
+},
+
+openPreferences : function()
+{
+    window.openDialog('chrome://updatescan/content/preferences.xul',
+                      'dlgUpdatescannerPreferences',
+                      'chrome,toolbar,dialog=no,resizable,centerscreen');
 },
 
 openSelectedItem : function()
@@ -547,8 +553,8 @@ openHelp : function()
     var str=document.getElementById("updatescanStrings")
     var locale = Components.classes["@mozilla.org/preferences-service;1"].
                  getService(Components.interfaces.nsIPrefService).
-                 getBranch("general.").
-                 getCharPref("useragent.locale");
+                 getBranch("general.useragent.").
+                 getCharPref("locale");
     var helpURL="http://updatescanner.mozdev.org/redirect.php?page=help.html&locale="+locale;
     USc_topWin.open(helpURL);
 },

@@ -9,7 +9,9 @@
 <!-- Tooltip strings (hover mouse over buttons to view) -->
 <!ENTITY newbutton.tooltip "New Entry">
 <!ENTITY showallchangesinnewtabsbutton.tooltip "Show All Changed Pages in New Tabs">
+<!ENTITY markallasvisitedbutton.tooltip "Mark All as Visited">
 <!ENTITY deletebutton.tooltip "Delete">
+<!ENTITY preferencesbutton.tooltip "Update Scanner Preferences">
 <!ENTITY helpbutton.tooltip "Update Scanner Help">
 <!-- Menu strings (right-click in the sidebar list to view) -->
 <!ENTITY openmenu.label "Show Changes">

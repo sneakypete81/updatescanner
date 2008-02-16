@@ -65,7 +65,7 @@
                 name="extensions.updatescan.notifications.soundFile" 
                 type="file"/>
   </preferences>
- 
+ <groupbox>
   <checkbox label="&notifications.enable.label;" 
             preference="notifications.enable"
             onsyncfrompreference="return USc_pref.readNotificationsEnable();"/>
@@ -84,9 +84,8 @@
   </hbox>
   <radio label="&notifications.permanent.label;" value="permanent" />
   </radiogroup>
-
-  <separator/>
-
+  </groupbox>
+  <groupbox>
   <checkbox label="&notifications.playSound.label;"
             preference="notifications.playSound"
             onsyncfrompreference="return USc_pref.readNotificationsPlaySound()"/>
@@ -107,60 +106,103 @@
             oncommand="USc_pref.soundBrowseClick();"/>
   </hbox>
   </radiogroup>
-
+  </groupbox>
 </prefpane>
 <prefpane id="scanning" label="&scanning.title;"
           image="chrome://updatescan/skin/updatescan_big.png">
+  <preferences>
+    <preference id="scan.useSliders" 
+                name="extensions.updatescan.scan.useSliders" 
+                type="bool"/>
+    <preference id="scan.warnScanShort" 
+                name="extensions.updatescan.scan.warnScanShort"
+                type="bool"/>
+    <preference id="scan.displayAdvanced" 
+                name="extensions.updatescan.scan.displayAdvanced"
+                type="bool"/>
+    <preference id="scanTimeout" 
+                name="extensions.updatescan.scanTimeout"
+                type="int"/>
+  </preferences>
 <groupbox>
-<caption label="Page Properties"/>
+<caption label="&scan.pageProperties.label;"/>
 <hbox align="center">
-<label value="Select scan rate and threshold using"/>
-<menulist>
+<label value="&scan.selectUsing.label;"/>
+<menulist id="scanUseSliders"
+	  preference="scan.useSliders">
 <menupopup>
-  <menuitem label="Sliders" value="Sliders"/>
-  <menuitem label="Numbers" value="Numbers"/>
+  <menuitem label="&scan.sliders.label;" value="true"/>
+  <menuitem label="&scan.numbers.label;" value="false"/>
 </menupopup>
 </menulist>
 </hbox>
-<checkbox label="Warn when scan time is too short"
+<checkbox label="&scan.warnScanShort.label;"
           preference="scan.warnScanShort"/>
+<!--
 <checkbox label="Always display advanced options"
           preference="scan.displayAdvanced"/>
-
+-->
 </groupbox>
 <groupbox>
-<caption label="Advanced"/>
+<caption label="&scan.advanced.label;"/>
 <hbox align="center">
-<label value="Timeout if scan takes longer than"/>
+<label value="&scan.timeoutIfLonger.label;"/>
 <textbox preference="scanTimeout" 
          size="2" maxlength="2"/>
-<label value="seconds"/>
+<label value="&scan.seconds.label;"/>
 </hbox>
 </groupbox>
 </prefpane> 
 <prefpane id="toolbar" label="&toolbar.title;"
           image="chrome://updatescan/skin/preferences-system.png">
+  <preferences>
+    <preference id="toolbar.new" 
+                name="extensions.updatescan.toolbar.new" 
+                type="bool"/>
+    <preference id="toolbar.newTab" 
+                name="extensions.updatescan.toolbar.newTab" 
+                type="bool"/>
+    <preference id="toolbar.markVisited" 
+                name="extensions.updatescan.toolbar.markVisited" 
+                type="bool"/>
+    <preference id="toolbar.delete" 
+                name="extensions.updatescan.toolbar.delete" 
+                type="bool"/>
+    <preference id="toolbar.preferences" 
+                name="extensions.updatescan.toolbar.preferences" 
+                type="bool"/>
+    <preference id="toolbar.help" 
+                name="extensions.updatescan.toolbar.help" 
+                type="bool"/>
+  </preferences>
 <groupbox>
-<caption label="Toolbar Icons"/>
+<caption label="&toolbar.toolbarIcons.label;"/>
 <hbox align="center">
-<checkbox id="new-button"/><label value="New Item"/>
+<checkbox id="new-button" preference="toolbar.new"/>
+<label value="&toolbar.new.label;"/>
 </hbox>
 <hbox align="center">
-<checkbox id="new-tab-button"/><label value="Show all changed pages in new tab"/>
+<checkbox id="new-tab-button" preference="toolbar.newTab"/>
+<label value="&toolbar.showNewTab.label;"/>
 </hbox>
 <hbox align="center">
-<checkbox id="checked-button"/><label value="Mark all as visited"/>
+<checkbox id="checked-button" preference="toolbar.markVisited"/>
+<label value="&toolbar.markVisited.label;"/>
 </hbox>
 <hbox align="center">
-<checkbox id="delete-button"/><label value="Delete"/>
+<checkbox id="delete-button" preference="toolbar.delete"/>
+<label value="&toolbar.delete.label;"/>
 </hbox>
 <hbox align="center">
-<checkbox id="settings-button"/><label value="Settings"/>
+<checkbox id="settings-button" preference="toolbar.preferences"/>
+<label value="&toolbar.preferences.label;"/>
 </hbox>
 <hbox align="center">
-<checkbox id="help-button"/><label value="Help"/>
+<checkbox id="help-button" preference="toolbar.help"/>
+<label value="&toolbar.help.label;"/>
 </hbox>
 </groupbox>
 </prefpane> 
 <script type="application/x-javascript" src="chrome://updatescan/content/preferences.js"/>
 </prefwindow>
+
