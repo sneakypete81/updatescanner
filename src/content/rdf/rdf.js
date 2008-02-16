@@ -74,7 +74,7 @@ addItem : function()
 modifyItem : function(id, field, value)
 {
     var me = USc_rdf;
-    me.dsource.getNode(id).addTargetOnce(me.namespace+"#"+field, value);
+    me.dsource.getNode(id).addTargetOnce(me.namespace+"#"+field, String(value));
 },
 
 deleteItem : function(id)
