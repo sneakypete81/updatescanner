@@ -38,6 +38,9 @@ var ksliderAutoscanMax = 100;
 function initDialog()
 {
     var args = window.arguments[0];
+    var prefService = Components.classes["@mozilla.org/preferences-service;1"].getService();
+    prefService = prefService.QueryInterface(Components.interfaces.nsIPrefService);
+    var prefBranch = prefService.getBranch("extensions.updatescan.");
     
     document.title = "Update Scanner";
     document.getElementById("txtTitle").value = args.title;
@@ -48,10 +51,27 @@ function initDialog()
     sliderThresholdSetPos(sliderThresholdEncode(args.threshold));
     sliderThresholdChange();
 
+    document.getElementById("textThreshold").value = args.threshold;
+
+    if (args.scanRateMins < 5) {
+	args.scanRateMins = 5;
+    }
+
     document.getElementById("sliderAutoscan")
             .setAttribute("maxpos", ksliderAutoscanMax);
     sliderAutoscanSetPos(sliderAutoscanEncode(args.scanRateMins));
     sliderAutoscanChange();
+
+    if (args.scanRateMins % (60*24) == 0) {
+	document.getElementById("textAutoscan").value = args.scanRateMins/(60*24);
+	document.getElementById("menuAutoscanUnit").value = "Days";
+    } else if (args.scanRateMins % 60 == 0) {
+	document.getElementById("textAutoscan").value = args.scanRateMins/60;
+	document.getElementById("menuAutoscanUnit").value = "Hours";
+    } else {
+	document.getElementById("textAutoscan").value = args.scanRateMins;
+	document.getElementById("menuAutoscanUnit").value = "Minutes";
+    }
 
     if (args.ignoreNumbers == "true") {
         document.getElementById("ignoreNumbers").checked = true;
@@ -62,7 +82,6 @@ function initDialog()
     loadAvailableCharSets();
     charEncodingChanged()
     
-
     if (args.encoding == "auto") {
         document.getElementById("autoCharEncoding")
                 .selectedIndex = 0;
@@ -82,6 +101,13 @@ function initDialog()
         advSection.hidden = false;
         advLabel.hidden = true;
     }
+
+    var useSliders = prefBranch.getBoolPref("scan.useSliders");
+    document.getElementById("groupboxAutoscanSlider").hidden = !useSliders;
+    document.getElementById("groupboxThresholdSlider").hidden = !useSliders;
+    document.getElementById("groupboxAutoscanNumbers").hidden = useSliders;
+    document.getElementById("groupboxThresholdNumbers").hidden = useSliders;
+
 }
 
 function Ok()
@@ -93,13 +119,19 @@ function Ok()
     var noDataAlert=document.getElementById("strings").getString(
                                             "noDataAlert");
     var fiveMinuteAlert=document.getElementById("strings").getString(
-                        "fiveMinuteAlert");
+                        "shortScanAlert");
     var httpexists = /^[A-Za-z]+:\/\//;
     var restexists = /^[A-Za-z]+:\/\/\W*\w/;
+    var prefService = Components.classes["@mozilla.org/preferences-service;1"].getService();
+    prefService = prefService.QueryInterface(Components.interfaces.nsIPrefService);
+    var prefBranch = prefService.getBranch("extensions.updatescan.");
 
-    if (sliderAutoscanDecode(sliderAutoscanGetPos()) == 5)
-    if (!confirm(fiveMinuteAlert)) {
-        return false;
+
+    if (prefBranch.getBoolPref("scan.warnScanShort") &&
+        sliderAutoscanDecode(sliderAutoscanGetPos()) < 15) {
+        if (!confirm(fiveMinuteAlert)) {
+            return false;
+        }
     }
     if (!httpexists.test(txtURL.value.toLowerCase())) {
         txtURL.value="http://" + txtURL.value;
@@ -112,8 +144,21 @@ function Ok()
     
     args.title = txtTitle.value;
     args.url = txtURL.value;
-    args.threshold = String(sliderThresholdDecode(sliderThresholdGetPos()));
-    args.scanRateMins = String(sliderAutoscanDecode(sliderAutoscanGetPos()));
+    if (prefBranch.getBoolPref("scan.useSliders")) {
+	args.threshold = String(sliderThresholdDecode(sliderThresholdGetPos()));
+	args.scanRateMins = String(sliderAutoscanDecode(sliderAutoscanGetPos()));
+    } else {
+	args.threshold = document.getElementById("textThreshold").value;
+	args.scanRateMins = document.getElementById("textAutoscan").value;
+	if (document.getElementById("menuAutoscanUnit").value == "Hours") {
+	    args.scanRateMins = String(args.scanRateMins * 60);
+	} else 	if (document.getElementById("menuAutoscanUnit").value == "Days") {
+	    args.scanRateMins = String(args.scanRateMins * 60 * 24);
+	}
+	if (args.scanRateMins < 5) {
+	    args.scanRateMins = 5;
+	}
+    }
 
     if (document.getElementById("ignoreNumbers").checked) {
         args.ignoreNumbers = "true";

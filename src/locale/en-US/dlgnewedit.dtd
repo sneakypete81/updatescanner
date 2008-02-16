@@ -12,7 +12,13 @@
 <!ENTITY high.label "High">
 <!ENTITY often.label "Often">
 <!ENTITY never.label "Never">
-<!ENTITY ignoreNumbers.label "Ignore Changes to Numbers">
+<!ENTITY scanEvery.label "Scan every">
+<!ENTITY minutes.label "minutes">
+<!ENTITY hours.label "hours">
+<!ENTITY days.label "days">
+<!ENTITY ignoreChanges.label "Ignore changes less than about">
+<!ENTITY characters.label "characters">
+<!ENTITY ignoreNumbers.label "Ignore changes to numbers">
 <!ENTITY advanced.label "Advanced...">
 <!ENTITY charEncoding.label "Character Encoding">
 <!ENTITY autoDetect.label "Auto-detect">

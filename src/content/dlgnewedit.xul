@@ -71,7 +71,7 @@
     </rows>
 </grid>
 
-<groupbox>
+<groupbox id="groupboxAutoscanSlider">
     <caption label="&autoscan.label;" />
     <hbox>
         <label value="&often.label;" />
@@ -89,11 +89,26 @@
     </vbox>
 </groupbox>
 
+<groupbox id="groupboxAutoscanNumbers">
+  <caption label="&autoscan.label;" />
+  <hbox align="center">
+    <label value="&scanEvery.label;"/>
+    <textbox id="textAutoscan" size="3" maxlength="3"/>
+    <menulist id="menuAutoscanUnit">
+      <menupopup>
+	<menuitem label="&minutes.label;" value="Minutes"/>
+	<menuitem label="&hours.label;" value="Hours"/>
+	<menuitem label="&days.label;" value="Days"/>
+      </menupopup>
+    </menulist>
+  </hbox>
+</groupbox>
+
 <label id="advLabel" value="&advanced.label;" 
        onclick="advancedClick();" class="text-link" />
 
 <vbox id="advSection" hidden="true">
-<groupbox>
+<groupbox id="groupboxThresholdSlider">
     <caption label="&threshold.label;" />
     <checkbox id="ignoreNumbers" label="&ignoreNumbers.label;"/>
     <separator />
@@ -112,6 +127,15 @@
         <label id="label1" value="" />
         <label id="label2" value="" />
     </vbox>
+</groupbox>
+
+<groupbox id="groupboxThresholdNumbers">
+  <caption label="&threshold.label;" />
+  <hbox align="center">
+    <label value="&ignoreChanges.label;"/>
+    <textbox id="textThreshold" size="5" maxlength="5"/>
+    <label value="&characters.label;"/>
+  </hbox>
 </groupbox>
 
 <groupbox>
