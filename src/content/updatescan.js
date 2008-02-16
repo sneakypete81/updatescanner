@@ -37,6 +37,7 @@ var USc_updatescan = {
 numChanges : 0,
 refresh : null,
 scan: null,
+_branch: null,
 
 load : function()
 {
@@ -59,12 +60,31 @@ load : function()
     me.refresh = new USc_refresher();
     me.refresh.register("refreshTreeRequest", me._refreshTree);
     me.refresh.request();
+
+    // Check for toolbar button changes
+    me._branch = Components.classes["@mozilla.org/preferences-service;1"]
+    me._branch = me._branch.getService(Components.interfaces.nsIPrefService);
+    me._branch = me._branch.getBranch("extensions.updatescan.toolbar.");
+    me._branch.QueryInterface(Components.interfaces.nsIPrefBranch2);
+    me._branch.addObserver("", this, false);
+    me._updateToolbar();
 },
 
 unload : function()
 {
     var me = USc_updatescan;
     me.refresh.unregister();
+    if (me._branch) {
+	me._branch.removeObserver("", this);
+    }
+},
+
+observe: function(aSubject, aTopic, aData) // Observe toolbar button preference changes
+{
+    var me = USc_updatescan;
+    if (aTopic == "nsPref:changed") {
+	me._updateToolbar();
+    }
 },
 
 _treeClick : function(event)
@@ -657,6 +677,21 @@ _getNumItems : function()
     } catch(e) {
         return 0;
     }
+},
+
+_updateToolbar : function()
+{
+    var prefService = Components.classes["@mozilla.org/preferences-service;1"].getService();
+    prefService = prefService.QueryInterface(Components.interfaces.nsIPrefService);
+    var prefBranch = prefService.getBranch("extensions.updatescan.toolbar.");
+
+    document.getElementById("new-button").hidden = !prefBranch.getBoolPref("new");
+    document.getElementById("new-tab-button").hidden = !prefBranch.getBoolPref("newTab");
+    document.getElementById("checked-button").hidden = !prefBranch.getBoolPref("markVisited");
+    document.getElementById("delete-button").hidden = !prefBranch.getBoolPref("delete");
+    document.getElementById("settings-button").hidden = !prefBranch.getBoolPref("preferences");
+    document.getElementById("help-button").hidden = !prefBranch.getBoolPref("help");
 }
+
 }
 }
