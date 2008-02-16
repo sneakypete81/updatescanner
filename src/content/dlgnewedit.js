@@ -126,13 +126,6 @@ function Ok()
     prefService = prefService.QueryInterface(Components.interfaces.nsIPrefService);
     var prefBranch = prefService.getBranch("extensions.updatescan.");
 
-
-    if (prefBranch.getBoolPref("scan.warnScanShort") &&
-        sliderAutoscanDecode(sliderAutoscanGetPos()) < 15) {
-        if (!confirm(fiveMinuteAlert)) {
-            return false;
-        }
-    }
     if (!httpexists.test(txtURL.value.toLowerCase())) {
         txtURL.value="http://" + txtURL.value;
     }
@@ -145,19 +138,26 @@ function Ok()
     args.title = txtTitle.value;
     args.url = txtURL.value;
     if (prefBranch.getBoolPref("scan.useSliders")) {
-	args.threshold = String(sliderThresholdDecode(sliderThresholdGetPos()));
-	args.scanRateMins = String(sliderAutoscanDecode(sliderAutoscanGetPos()));
+	args.threshold = sliderThresholdDecode(sliderThresholdGetPos());
+	args.scanRateMins = sliderAutoscanDecode(sliderAutoscanGetPos());
     } else {
 	args.threshold = document.getElementById("textThreshold").value;
 	args.scanRateMins = document.getElementById("textAutoscan").value;
 	if (document.getElementById("menuAutoscanUnit").value == "Hours") {
-	    args.scanRateMins = String(args.scanRateMins * 60);
+	    args.scanRateMins = args.scanRateMins * 60;
 	} else 	if (document.getElementById("menuAutoscanUnit").value == "Days") {
-	    args.scanRateMins = String(args.scanRateMins * 60 * 24);
+	    args.scanRateMins = args.scanRateMins * 60 * 24;
 	}
 	if (args.scanRateMins < 5) {
 	    args.scanRateMins = 5;
 	}
+    }
+
+    if (prefBranch.getBoolPref("scan.warnScanShort") &&
+        args.scanRateMins < 15) {
+        if (!confirm(fiveMinuteAlert)) {
+            return false;
+        }
     }
 
     if (document.getElementById("ignoreNumbers").checked) {
