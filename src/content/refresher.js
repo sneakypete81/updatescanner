@@ -47,6 +47,12 @@ function USc_refresher()
     _branch = prefService.getBranch("extensions.updatescan.");
     _branch.QueryInterface(Components.interfaces.nsIPrefBranch2);
     _branch.addObserver("", this, false);
+
+    try { // See if the preference exists
+	_branch.getBoolPref(prefName);
+    } catch (e) {
+	_branch.setBoolPref(prefName, false);
+    }
   }
   
   this.unregister = function()
