@@ -115,10 +115,10 @@ _treeClick : function(event)
     var id = tree.contentView.getItemAtIndex(obj_Row.value).id;
     switch (event.button) {
         case 0:
-            me._diffItemThisWindow(id, 1);
+            me._diffItemThisWindow(id);
             break;
         case 1:
-            me._diffItemNewTab(id, 1);
+            me._diffItemNewTab(id);
             break;
     }
 },
@@ -337,7 +337,7 @@ openSelectedItem : function()
     me.refresh.request();
 },
 
-_diffItem : function(id, numItems)
+_diffItem : function(id)
 {
     var me = USc_updatescan;
     var now = new Date();
@@ -358,12 +358,11 @@ _diffItem : function(id, numItems)
     var newDate = me._dateDiffString(lastScan, now);
 
     var filebase = USc_file.escapeFilename(id);
-    return USc_diff.display(USc_rdf.queryItem(id, "title", "No Title"), 
-            USc_rdf.queryItem(id, "url", ""), 
-            USc_file.USreadFile(filebase+".old"),
-            USc_file.USreadFile(filebase+".new"),
-            USc_file.USreadFile(filebase+".dif"),
-            oldDate, newDate, numItems);
+    return "chrome://updatescan/content/diffPage.xul?id="+escape(id)+
+	   "&title="+escape(USc_rdf.queryItem(id, "title", "No Title"))+
+	   "&url="+escape(USc_rdf.queryItem(id, "url", ""))+
+           "&oldDate="+escape(oldDate)+
+	"&newDate="+escape(newDate);
 },
 
 diffSelectedItemThisWindow : function()
@@ -371,13 +370,13 @@ diffSelectedItemThisWindow : function()
     var me = USc_updatescan;
     var item = me._getSelectedItemID();
     if (item == "") return;
-    me._diffItemThisWindow(item, 1);
+    me._diffItemThisWindow(item);
 },
 
-_diffItemThisWindow : function(id, numItems)
+_diffItemThisWindow : function(id)
 {
     var me = USc_updatescan;
-    var diffURL = me._diffItem(id, numItems)
+    var diffURL = me._diffItem(id)
     USc_topWin.open(diffURL);
     me._focusTree();
 },
@@ -387,10 +386,10 @@ diffSelectedItemNewTab : function()
     var me = USc_updatescan;
     var item = me._getSelectedItemID();
     if (item == "") return;
-    me._diffItemNewTab(item, 1);    
+    me._diffItemNewTab(item);    
 },
 
-_diffItemNewTab : function(id, maxItems)
+_diffItemNewTab : function(id)
 {
     var me = USc_updatescan;
     var mainWindow = window.QueryInterface(
@@ -401,7 +400,7 @@ _diffItemNewTab : function(id, maxItems)
     .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
     .getInterface(Components.interfaces.nsIDOMWindow);
 
-    var diffURL = me._diffItem(id, maxItems);
+    var diffURL = me._diffItem(id);
     mainWindow.getBrowser().addTab(diffURL);
 },
 
@@ -501,7 +500,7 @@ showAllChangesInNewTabs : function()
         for (var i=0; i<numItems; i++) {
             var id = tree.contentView.getItemAtIndex(i).id;
             if (USc_rdf.queryItem(id, "changed") != "0") {
-                me._diffItemNewTab(id, numItems);
+                me._diffItemNewTab(id);
             }
         }
     }

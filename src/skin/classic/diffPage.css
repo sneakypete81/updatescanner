@@ -1,0 +1,10 @@
+@import url(chrome://global/skin/);
+
+.blue-box
+{
+ background-color: #e5e5ff;
+}
+.content
+{
+ background-color: white;
+}

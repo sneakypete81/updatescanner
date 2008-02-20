@@ -370,13 +370,11 @@ function USc_processScanChange(id, newContent, status, statusText, headerText)
 // Updates the specified item based on the new content.
 // * Updates RDF tree
 // * Writes content to file
-// * Performs diff on old content
 {
     var now = new Date();
     var filebase;
     var oldLastscan;
     var oldContent;
-    var diffContent;
     var retVal = false;
     var prefs = Components.classes["@mozilla.org/preferences-service;1"].
                 getService(Components.interfaces.nsIPrefService).
@@ -395,9 +393,6 @@ function USc_processScanChange(id, newContent, status, statusText, headerText)
             USc_rdf.modifyItem(id, "old_lastscan", oldLastscan);
         }
 
-        oldContent  = USc_file.USreadFile(filebase+".old");
-        diffContent = USc_diff.create(oldContent, newContent);   
-        USc_file.USwriteFile(filebase+".dif", diffContent);
         USc_file.USwriteFile(filebase+".new", newContent);
 
         USc_rdf.modifyItem(id, "changed", "1");
@@ -406,10 +401,7 @@ function USc_processScanChange(id, newContent, status, statusText, headerText)
         USc_rdf.modifyItem(id, "statusText", statusText);
         if (logHeaders) USc_rdf.modifyItem(id, "headerText", headerText);        
     } else if (status == kUSc_STATUS_MINOR_CHANGE) {
-        // Minor change: don't notify, but save new page and diff
-        oldContent  = USc_file.USreadFile(filebase+".old");
-        diffContent = USc_diff.create(oldContent, newContent);   
-        USc_file.USwriteFile(filebase+".dif", diffContent);
+        // Minor change: don't notify, but save new page
         USc_file.USwriteFile(filebase+".new", newContent);
 
         USc_rdf.modifyItem(id, "error", "0");
@@ -422,7 +414,6 @@ function USc_processScanChange(id, newContent, status, statusText, headerText)
         USc_rdf.modifyItem(id, "statusText", statusText);
         if (logHeaders) USc_rdf.modifyItem(id, "headerText", headerText);        
     } else if (status == kUSc_STATUS_NEW) {
-        USc_file.USwriteFile(filebase+".dif", newContent);
         USc_file.USwriteFile(filebase+".old", newContent);
         USc_file.USwriteFile(filebase+".new", newContent);
         USc_rdf.modifyItem(id, "lastscan", now.toString());

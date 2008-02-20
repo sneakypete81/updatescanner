@@ -153,36 +153,7 @@ upgrade_2_0_14 : function()
         files[i] = file; // Used in the next step...
     }
 
-
-    // 2.0.14+ expects diffs to be done during scan, not during display
-    // Need to generate diffs now.
-    label = str.getString("upgradeLabel")+" (2/2)...";
-    label2 = str.getString("timeWarning");
-    params = {label:label, 
-              label2:label2,
-              callback:me.upgradeDiff, 
-              items:files, 
-              data:null, 
-              cancelPrompt:str.getString("upgradeCancel"), 
-              retVal:null, 
-              retData:null};       
-    window.openDialog('chrome://updatescan/content/progress.xul', 
-                      'dlgProgress', 
-                      'chrome,dialog,modal,centrescreen', params);
-    if (!params.retVal) {
-        return false;// Upgrade was cancelled
-    }
     return true;
-},
-
-upgradeDiff : function(filebase, data)
-{
-    // Create a diff file for the specified filebase
-    var oldContent = USc_file.USreadFile(filebase+".old");
-    var newContent = USc_file.USreadFile(filebase+".new");
-    var diffContent = USc_diff.create(oldContent, newContent);
-    USc_file.USwriteFile(filebase+".dif", diffContent);
-    return null;
 },
 
 upgradeCheckDup : function(item, data)

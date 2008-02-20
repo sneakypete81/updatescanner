@@ -27,9 +27,10 @@ optionsChrome = 'chrome://updatescan/content/preferences.xul'
 major_version = 2
 minor_version = 1
 revision_version = 0
-build_version = 1
+build_version = 3
 in_development = True
 publish_babelzilla = False
+#Keyboard Shortcut to next version (Alt-U)
 
 if build_version:
     version = "%d.%d.%d.%d%s" % (

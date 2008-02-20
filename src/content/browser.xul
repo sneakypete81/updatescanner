@@ -84,6 +84,12 @@
                   insertbefore="devToolsSeparator" />	  
     </menupopup>
 
+    <keyset id="mainKeyset">
+      <key id="key_updatescan" 
+	   oncommand="toggleSidebar('viewUpdateScanSidebar');"
+	   key="U"
+	   modifiers="alt"/>
+    </keyset>
 
     <broadcasterset id="mainBroadcasterSet">
         <broadcaster id="viewUpdateScanSidebar"

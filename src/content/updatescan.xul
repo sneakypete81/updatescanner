@@ -52,7 +52,6 @@
   <script src="updatescan.js"/>
   <script src="scan.js"/>
   <script src="fuzzy.js"/>
-  <script src="diff.js"/>
   <script src="diffwiki.js"/>
   <script src="io.js"/>
   <script src="file.js"/>
