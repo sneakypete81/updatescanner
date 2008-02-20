@@ -3,26 +3,21 @@
      This file contains strings for the Updatescan sidebar.
      Select "Tools->Update Scanner" to view the sidebar.
 -->
-<!ENTITY headerOld1 "The page below (">
-<!ENTITY headerOld2 ") is the old version of the webpage, scanned ">
-<!ENTITY headerOld3 ".">
+<!ENTITY headerOld1 "The page below is the old version of the webpage, scanned ">
+<!ENTITY headerOld2 ".">
 
-<!ENTITY headerNew1 "The page below (">
-<!ENTITY headerNew2 ") is the new version of the webpage, scanned ">
-<!ENTITY headerNew3 ".">
+<!ENTITY headerNew1 "The page below is the new version of the webpage, scanned ">
+<!ENTITY headerNew2 ".">
 
-<!ENTITY headerDiff1 "The page below (">
-<!ENTITY headerDiff2 ") was last scanned ">
-<!ENTITY headerDiff3 ".">
-<!ENTITY headerDiff4 "The changes are ">
-<!ENTITY headerDiff5 "highlighted">
-<!ENTITY headerDiff6 ".">
+<!ENTITY headerDiff1 "The page below was last scanned ">
+<!ENTITY headerDiff2 ". The changes are ">
+<!ENTITY headerDiff3 "highlighted">
+<!ENTITY headerDiff4 ".">
 
-<!ENTITY headerNotChecked1 "The selected page (">
-<!ENTITY headerNotChecked2 ") has not yet been checked.">
-<!ENTITY headerNotChecked3 "Please click the ">
-<!ENTITY headerNotChecked4 "'Scan'">
-<!ENTITY headerNotChecked5 " button on the left, and try again.">
+<!ENTITY headerNotChecked1 "The selected page has not yet been checked.">
+<!ENTITY headerNotChecked2 " Please click the ">
+<!ENTITY headerNotChecked3 "'Scan'">
+<!ENTITY headerNotChecked4 " button on the left, and try again.">
 
 <!ENTITY view "View">
 <!ENTITY oldPage "Old Page">

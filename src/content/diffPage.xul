@@ -48,7 +48,6 @@
   <script src="rdf/rdfds.js"/>
   <script src="rdf/rdf.js"/>
   <script src="diffPage.js"/>
-  <script src="diff.js"/>
   <script src="diffwiki.js"/>
   <script src="file.js"/>
   <script src="io.js"/>
@@ -65,54 +64,39 @@
   <spacer width="20"/>
   <vbox>
     <vbox id="sectionOld" hidden="true">
+      <label class="plain" style="font-weight:bold;" id="titleOld"/>
       <hbox>
 	<label class="plain" value="&headerOld1;"/>
-	<label class="plain" style="font-weight:bold;" id="titleOld"/>
-	<label class="plain" value="&headerOld2;"/>
 	<label class="plain" id="dateOld" />
-	<label class="plain" value="&headerOld3;"/>
-      </hbox>
-      <hbox>
-	<label class="plain" value=" "/>
+	<label class="plain" value="&headerOld2;"/>
       </hbox>
     </vbox>
     <vbox id="sectionNew" hidden="true">
+      <label class="plain" style="font-weight:bold;" id="titleNew"/>
       <hbox>
 	<label class="plain" value="&headerNew1;"/>
-	<label class="plain" style="font-weight:bold;" id="titleNew"/>
-	<label class="plain" value="&headerNew2;"/>
 	<label class="plain" id="dateNew" />
-	<label class="plain" value="&headerNew3;"/>
-      </hbox>
-      <hbox>
-	<label class="plain" value=" "/>
+	<label class="plain" value="&headerNew2;"/>
       </hbox>
     </vbox>
     <vbox id="sectionDiff" hidden="true">
+      <label class="plain" style="font-weight:bold;" id="titleDiff"/>
       <hbox>
 	<label class="plain" value="&headerDiff1;"/>
-	<label class="plain" style="font-weight:bold;" id="titleDiff"/>
+	<label class="plain" id="dateDiff" />	
 	<label class="plain" value="&headerDiff2;"/>
-	<label class="plain" id="dateDiff" />
-	<label class="plain" value="&headerDiff3;"/>
-      </hbox>
-      <hbox>
-	<label class="plain" value="&headerDiff4;"/>
 	<label class="plain" style="font-weight:bold;background-color:yellow;" 
-                             value="&headerDiff5;"/>
-	<label class="plain" value="&headerDiff6;"/>
+                             value="&headerDiff3;"/>
+	<label class="plain" value="&headerDiff4;"/>
       </hbox>
     </vbox>
     <vbox id="sectionNotChecked" hidden="true">
-      <hbox>
-	<label class="plain" value="&headerNotChecked1;"/>
-	<label class="plain" style="font-weight:bold;" id="titleNotChecked"/>
+      <label class="plain" style="font-weight:bold;" id="titleNotChecked"/>
+      <label class="plain" value="&headerNotChecked1;"/>
+      <hbox>	
 	<label class="plain" value="&headerNotChecked2;"/>
-      </hbox>
-      <hbox>
-	<label class="plain" value="&headerNotChecked3;"/>
-	<label class="plain" style="font-weight:bold;" value="&headerNotChecked4;"/>
-	<label class="plain" value="&headerNotChecked5;"/>
+	<label class="plain" style="font-weight:bold;" value="&headerNotChecked3;"/>
+	<label class="plain" value="&headerNotChecked4;"/>
       </hbox>
     </vbox>
 
