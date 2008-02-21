@@ -10,18 +10,18 @@ pref("extensions.updatescan.notifications.defaultSound", true);
 pref("extensions.updatescan.notifications.soundFile", "");
 
 // Scan preferences
-pref("extensions.updatescan.scan.useSliders", True);
-pref("extensions.updatescan.scan.warnScanShort", True);
-pref("extensions.updatescan.scan.displayAdvanced", True);
+pref("extensions.updatescan.scan.useSliders", true);
+pref("extensions.updatescan.scan.warnScanShort", true);
+pref("extensions.updatescan.scan.displayAdvanced", true);
 pref("extensions.updatescan.scanTimeout", 30);
 
 // Toolbar button display preferences
-pref("extensions.updatescan.toolbar.new", True);
-pref("extensions.updatescan.toolbar.newTab", True);
-pref("extensions.updatescan.toolbar.markVisited", False);
-pref("extensions.updatescan.toolbar.delete", True);
-pref("extensions.updatescan.toolbar.preferences", True);
-pref("extensions.updatescan.toolbar.help", True);
+pref("extensions.updatescan.toolbar.new", true);
+pref("extensions.updatescan.toolbar.newTab", true);
+pref("extensions.updatescan.toolbar.markVisited", false);
+pref("extensions.updatescan.toolbar.delete", true);
+pref("extensions.updatescan.toolbar.preferences", true);
+pref("extensions.updatescan.toolbar.help", true);
 
 // Debug preferences
 pref("extensions.updatescan.logHeaders", false);
