@@ -1,27 +1,8 @@
 FAQ entry for adding button to toolbar
 Remind translators: statusScanning string in updatescan.properties has had {title} added - please check that it is correct.
-Change "Scanning every 5 minutes is not recommended" to "Scanning more often than 15 minutes..."
-Config toolbar button
-Default preferences
-
-Properties Dialog
- no* Default scan threshold
- no* Default scan rate
- * warn when < 5 minutes
- * Display Advanced options
- * Sliders/Numbers
-
-Scanning:
- * Scan timeout
+Key shortcut to tools & context menu?
+Default preferences - CHECK!!
  
-Toolbar:
- * Display/hide icons
-
-
-
-Prefs done, just need hooking up.
-
-
 
 -- Unreleased --
 Mark all as visited now has a progress dialog
@@ -30,6 +11,11 @@ Shifted functions into uniquely names classes to prevent clashes
 Added config dialog
 Notification is now configurable, and has close button
 Added sound notification
+Keyboard shortcut alt-U
+Allow number entry as well as sliders
+Don't diff during a scan
+No temp files - use xul and iframe instead
+Configurable toolbar
 
 Done:
 -- 2.0.15 --

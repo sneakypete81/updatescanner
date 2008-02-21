@@ -27,10 +27,10 @@ optionsChrome = 'chrome://updatescan/content/preferences.xul'
 major_version = 2
 minor_version = 1
 revision_version = 0
-build_version = 3
-in_development = True
+build_version = 6
+in_development = False
 publish_babelzilla = False
-#Keyboard Shortcut to next version (Alt-U)
+only_english = True
 
 if build_version:
     version = "%d.%d.%d.%d%s" % (
@@ -160,3 +160,8 @@ if publish_babelzilla:
     locales.update(incomplete_locales)
 else:
     print "  Excluding incomplete locales"
+
+if only_english:
+    locales = {
+        'en-US': {'locale_version': '1.0','display_name': name}
+        }
