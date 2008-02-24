@@ -134,13 +134,18 @@ onAlertClose: function()
 
 _animateAlert : function()
 {
+  var prefService = Components.classes["@mozilla.org/preferences-service;1"].getService();
+  prefService = prefService.QueryInterface(Components.interfaces.nsIPrefService);
+  var prefBranch = prefService.getBranch("extensions.updatescan.notifications.");
   var me = USc_alert;
   if (window.outerHeight < me.gFinalHeight) {
     window.screenY -= me.gSlideIncrement;
     window.outerHeight += me.gSlideIncrement;
     setTimeout(me._animateAlert, me.gSlideTime);
   } else {
-    me._playSound();
+      if (prefBranch.getBoolPref("playSound")) {
+	  me._playSound();
+      }
     if (!me.gPermanent) {
       setTimeout(me._closeAlert, me.gOpenTime);
     }

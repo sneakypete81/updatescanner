@@ -117,6 +117,6 @@
   </hbox>
 
   <separator class="groove-thin"/>
-  <iframe class="content" id="diffFrame" type="content-primary" flex="1" />
+  <iframe class="content" id="diffFrame" src="chrome://" type="content-primary" flex="1" />
 </window>
 

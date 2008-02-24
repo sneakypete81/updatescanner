@@ -74,7 +74,7 @@
               preference="notifications.permanent" 
               onsyncfrompreference="return USc_pref.readNotificationsPermanent();"
               onsynctopreference="return USc_pref.writeNotificationsPermanent();">
-   <hbox align="center">-->
+   <hbox align="center">
     <radio label="&notifications.timed.label1;" value="timed"/>
     <textbox id="notificationsDisplayTimeEntry"
              preference="notifications.displayTime" 
