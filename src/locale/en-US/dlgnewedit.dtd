@@ -12,6 +12,7 @@
 <!ENTITY high.label "High">
 <!ENTITY often.label "Often">
 <!ENTITY never.label "Never">
+<!ENTITY manualScan.label "Manual Scan">
 <!ENTITY scanEvery.label "Scan every">
 <!ENTITY minutes.label "minutes">
 <!ENTITY hours.label "hours">

@@ -46,31 +46,49 @@ function initDialog()
     document.getElementById("txtTitle").value = args.title;
     document.getElementById("txtURL").value = args.url;
 
-    document.getElementById("sliderThreshold")
-            .setAttribute("maxpos", ksliderThresholdMax);
-    sliderThresholdSetPos(sliderThresholdEncode(args.threshold));
-    sliderThresholdChange();
+    var useSliders = prefBranch.getBoolPref("scan.useSliders");
+    document.getElementById("groupboxAutoscanSlider").hidden = !useSliders;
+    document.getElementById("groupboxThresholdSlider").hidden = !useSliders;
+    document.getElementById("groupboxAutoscanNumbers").hidden = useSliders;
+    document.getElementById("groupboxThresholdNumbers").hidden = useSliders;
 
-    document.getElementById("textThreshold").value = args.threshold;
 
-    if (args.scanRateMins < 5) {
-	args.scanRateMins = 5;
-    }
+    if (useSliders) {
 
-    document.getElementById("sliderAutoscan")
-            .setAttribute("maxpos", ksliderAutoscanMax);
-    sliderAutoscanSetPos(sliderAutoscanEncode(args.scanRateMins));
-    sliderAutoscanChange();
+	document.getElementById("sliderThreshold")
+                .setAttribute("maxpos", ksliderThresholdMax);
+	sliderThresholdSetPos(sliderThresholdEncode(args.threshold));
+	sliderThresholdChange();
 
-    if (args.scanRateMins % (60*24) == 0) {
-	document.getElementById("textAutoscan").value = args.scanRateMins/(60*24);
-	document.getElementById("menuAutoscanUnit").value = "Days";
-    } else if (args.scanRateMins % 60 == 0) {
-	document.getElementById("textAutoscan").value = args.scanRateMins/60;
-	document.getElementById("menuAutoscanUnit").value = "Hours";
+	document.getElementById("sliderAutoscan")
+                .setAttribute("maxpos", ksliderAutoscanMax);
+	sliderAutoscanSetPos(sliderAutoscanEncode(args.scanRateMins));
+	sliderAutoscanChange();
+
     } else {
-	document.getElementById("textAutoscan").value = args.scanRateMins;
-	document.getElementById("menuAutoscanUnit").value = "Minutes";
+
+	document.getElementById("textThreshold").value = args.threshold;
+
+	if (args.scanRateMins == 0) { // Manual scan selected
+	    document.getElementById("manualScan").selectedIndex = 0;
+	    args.scanRateMins = 60; // Default to 1 hour
+	} else {
+	    document.getElementById("manualScan").selectedIndex = 1;
+	    if (args.scanRateMins < 5) {
+		args.scanRateMins = 5;
+	    }
+	}	
+
+	if (args.scanRateMins % (60*24) == 0) {
+	    document.getElementById("textAutoscan").value = args.scanRateMins/(60*24);
+	    document.getElementById("menuAutoscanUnit").value = "Days";
+	} else if (args.scanRateMins % 60 == 0) {
+	    document.getElementById("textAutoscan").value = args.scanRateMins/60;
+	    document.getElementById("menuAutoscanUnit").value = "Hours";
+	} else {
+	    document.getElementById("textAutoscan").value = args.scanRateMins;
+	    document.getElementById("menuAutoscanUnit").value = "Minutes";
+	}
     }
 
     if (args.ignoreNumbers == "true") {
@@ -102,11 +120,6 @@ function initDialog()
         advLabel.hidden = true;
     }
 
-    var useSliders = prefBranch.getBoolPref("scan.useSliders");
-    document.getElementById("groupboxAutoscanSlider").hidden = !useSliders;
-    document.getElementById("groupboxThresholdSlider").hidden = !useSliders;
-    document.getElementById("groupboxAutoscanNumbers").hidden = useSliders;
-    document.getElementById("groupboxThresholdNumbers").hidden = useSliders;
 
 }
 
@@ -142,19 +155,24 @@ function Ok()
 	args.scanRateMins = sliderAutoscanDecode(sliderAutoscanGetPos());
     } else {
 	args.threshold = document.getElementById("textThreshold").value;
-	args.scanRateMins = document.getElementById("textAutoscan").value;
-	if (document.getElementById("menuAutoscanUnit").value == "Hours") {
-	    args.scanRateMins = args.scanRateMins * 60;
-	} else 	if (document.getElementById("menuAutoscanUnit").value == "Days") {
-	    args.scanRateMins = args.scanRateMins * 60 * 24;
-	}
-	if (args.scanRateMins < 5) {
-	    args.scanRateMins = 5;
+
+	if (document.getElementById("manualScan").selectedIndex == 0) {
+	    args.scanRateMins = 0; // Manual scan
+	} else {
+	    args.scanRateMins = document.getElementById("textAutoscan").value;
+	    if (document.getElementById("menuAutoscanUnit").value == "Hours") {
+		args.scanRateMins = args.scanRateMins * 60;
+	    } else if (document.getElementById("menuAutoscanUnit").value == "Days") {
+		args.scanRateMins = args.scanRateMins * 60 * 24;
+	    }
+	    if (args.scanRateMins < 5) {
+		args.scanRateMins = 5;
+	    }
 	}
     }
 
-    if (prefBranch.getBoolPref("scan.warnScanShort") &&
-        args.scanRateMins < 15) {
+    if (args.scanRateMins > 0 && args.scanRateMins < 15 &&
+	prefBranch.getBoolPref("scan.warnScanShort")) {
         if (!confirm(fiveMinuteAlert)) {
             return false;
         }
@@ -198,6 +216,13 @@ function advancedClick()
     advSection.hidden = false;
     
     window.sizeToContent();
+}
+
+function manualScanChanged()
+{
+    var manualScan = (document.getElementById("manualScan").selectedIndex == 0);
+    document.getElementById("textAutoscan").disabled = manualScan
+    document.getElementById("menuAutoscanUnit").disabled = manualScan
 }
 
 function sliderThresholdGetPos()

@@ -43,6 +43,8 @@ load : function()
     var url = this._getUrlParameter("url", "");
     var view = this._getUrlParameter("view", "diff");
 
+    document.title = title;
+
     this.baseUrl = "chrome://updatescan/content/diffPage.xul?id="+escape(id) +
     "&title=" + escape(title) +
     "&newDate=" + escape(newDate) +
@@ -96,7 +98,7 @@ load : function()
 	    content = "";
 	}
 
-	var doc = frames[0].document;
+	var doc = document.getElementById("diffFrame").contentDocument;
 	doc.open();
 	doc.write("<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>\n");
 	doc.write("<base href='"+url+"' target='_parent'>\n");	    

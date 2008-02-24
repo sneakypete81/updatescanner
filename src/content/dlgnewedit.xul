@@ -91,17 +91,20 @@
 
 <groupbox id="groupboxAutoscanNumbers">
   <caption label="&autoscan.label;" />
-  <hbox align="center">
-    <label value="&scanEvery.label;"/>
-    <textbox id="textAutoscan" size="3" maxlength="3"/>
-    <menulist id="menuAutoscanUnit">
-      <menupopup>
-	<menuitem label="&minutes.label;" value="Minutes"/>
-	<menuitem label="&hours.label;" value="Hours"/>
-	<menuitem label="&days.label;" value="Days"/>
-      </menupopup>
-    </menulist>
-  </hbox>
+  <radiogroup id="manualScan" onselect="manualScanChanged()">
+    <radio label="&manualScan.label;"/>
+    <hbox align="center">
+      <radio label="&scanEvery.label;"/>
+      <textbox id="textAutoscan" size="3" maxlength="3"/>
+      <menulist id="menuAutoscanUnit">
+	<menupopup>
+	  <menuitem label="&minutes.label;" value="Minutes"/>
+	  <menuitem label="&hours.label;" value="Hours"/>
+	  <menuitem label="&days.label;" value="Days"/>
+	</menupopup>
+      </menulist>
+    </hbox>
+  </radiogroup>
 </groupbox>
 
 <label id="advLabel" value="&advanced.label;" 

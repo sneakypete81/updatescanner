@@ -28,7 +28,7 @@ major_version = 2
 minor_version = 1
 revision_version = 0
 build_version = 6
-in_development = False
+in_development = True
 publish_babelzilla = False
 only_english = True
 
@@ -59,6 +59,7 @@ iconPath = "skin/updatescan_big.png"
 firefoxUID = 'ec8030f7-c20a-464f-9b0e-13a3a9e97384'
 firefoxMinVersion = '2.0'
 firefoxMaxVersion = '2.0.0.*'
+#firefoxMaxVersion = '3.0b3'
 
 overlays = (
     # overlay this on that
