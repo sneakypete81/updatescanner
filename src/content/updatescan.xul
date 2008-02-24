@@ -158,6 +158,8 @@
 		oncommand="USc_updatescan.diffSelectedItemThisWindow();"/>
       <menuitem label="&opentabmenu.label;" 
 		oncommand="USc_updatescan.diffSelectedItemNewTab();"/>
+      <menuitem label="&scanThisPage.label;" 
+		oncommand="USc_updatescan.scanSelectedPage();"/>
       <menuitem label="&deletemenu.label;" 
 		oncommand="USc_updatescan.deleteSelectedItem();" 
 		key="deleteKey"/>

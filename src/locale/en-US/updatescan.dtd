@@ -21,3 +21,4 @@
 <!ENTITY sortbynamemenu.label "Sort by Name">
 <!ENTITY deletemenu.label "Delete">
 <!ENTITY editmenu.label "Properties">
+<!ENTITY scanThisPage.label "Scan This Page">

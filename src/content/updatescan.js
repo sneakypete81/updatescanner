@@ -167,6 +167,42 @@ scanButtonClick : function()
     }
 },
 
+scanSelectedPage : function()
+{
+    var me = USc_updatescan;    
+    var id;
+    var filebase;
+    var numitems;
+    var str=document.getElementById("updatescanStrings")
+    var ignoreNumbers;
+    var encoding;
+
+    var id = me._getSelectedItemID();
+    if (id == "") return;
+
+    me._showStopButton();
+    
+    me.scan = new USc_scanner();
+        
+    filebase=USc_file.escapeFilename(id);
+    encoding = USc_rdf.queryItem(id, "encoding", "UTF-8");
+    if (USc_rdf.queryItem(id, "ignoreNumbers", "false") == "true") {
+	ignoreNumbers = true;
+    } else {
+	ignoreNumbers = false;
+    }
+    me.scan.addURL(id, USc_rdf.queryItem(id, "title", "No Title"), 
+		   USc_rdf.queryItem(id, "url", ""), 
+		   USc_file.USreadFile(filebase+".new"),
+		   USc_rdf.queryItem(id, "threshold", 100),
+		   ignoreNumbers,
+		   USc_rdf.queryItem(id, "encoding", "auto"));
+
+    me.numChanges=0;
+    me.scan.start(me._scanChangedCallback, me._scanFinishedCallback, me._showProgress,
+		  me._scanEncodingCallback);
+},
+
 _scanChangedCallback : function(id, new_content, status, statusText, headerText)
 {
     var me = USc_updatescan;

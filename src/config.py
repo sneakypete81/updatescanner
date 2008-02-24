@@ -27,10 +27,10 @@ optionsChrome = 'chrome://updatescan/content/preferences.xul'
 major_version = 2
 minor_version = 1
 revision_version = 0
-build_version = 6
-in_development = True
+build_version = 7
+in_development = False
 publish_babelzilla = False
-only_english = True
+only_english = True########################
 
 if build_version:
     version = "%d.%d.%d.%d%s" % (
