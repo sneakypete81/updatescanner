@@ -2,9 +2,12 @@ FAQ entry for adding button to toolbar
 Remind translators: statusScanning string in updatescan.properties has had {title} added - please check that it is correct.
 Key shortcut to tools & context menu?
 Default preferences - CHECK!!
- 
+Fix Toolbar icon in FF3
 
 -- Unreleased --
+DiffPage now works in FF3
+Sound can be disabled
+
 Fixed manual scan
 Added page title to diffpage
 "Scan This Page" menu item

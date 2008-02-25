@@ -1,12 +1,12 @@
 <!ENTITY scanbutton.label "扫描">
 <!ENTITY stopbutton.label "取消">
 <!ENTITY newbutton.tooltip "新项目">
-<!ENTITY showallchangesinnewtabsbutton.tooltip "在新标签页显示所有更新了的页面">
+<!ENTITY showallchangesinnewtabsbutton.tooltip "在新标签页显示所有更新的页面">
 <!ENTITY deletebutton.tooltip "删除">
 <!ENTITY helpbutton.tooltip "帮助">
 <!ENTITY openmenu.label "显示改变">
 <!ENTITY opentabmenu.label "在新标签页显示改变">
-<!ENTITY showallchangesinnewtabsmenu.label "在新标签页显示所有更新了的页面">
+<!ENTITY showallchangesinnewtabsmenu.label "在新标签页显示所有更新的页面">
 <!ENTITY markvisitedmenu.label "标记所有为已访问的">
 <!ENTITY sortbynamemenu.label "按名称排列">
 <!ENTITY deletemenu.label "删除">

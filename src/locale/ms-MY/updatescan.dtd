@@ -3,6 +3,7 @@
 <!ENTITY newbutton.tooltip "">
 <!ENTITY showallchangesinnewtabsbutton.tooltip "">
 <!ENTITY deletebutton.tooltip "">
+<!ENTITY helpbutton.tooltip "">
 <!ENTITY openmenu.label "">
 <!ENTITY opentabmenu.label "">
 <!ENTITY showallchangesinnewtabsmenu.label "">

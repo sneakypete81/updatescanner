@@ -9,7 +9,7 @@
     <RDF:Description
         about="urn:mozilla:locale:de-DE"
         chrome:displayName="Deutsch (DE)"
-        chrome:author="Pete Burgers"
+        chrome:author="Archaeopteryx, Team erweiterungen.de"
         chrome:name="de-DE"
         chrome:previewURL="http://www.mozilla.org/locales/de-DE.gif"
     >

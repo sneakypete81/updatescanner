@@ -28,9 +28,9 @@ major_version = 2
 minor_version = 1
 revision_version = 0
 build_version = 8
-in_development = True
-publish_babelzilla = False
-only_english = True########################
+in_development = False
+publish_babelzilla = True
+only_english = False #True########################
 
 if build_version:
     version = "%d.%d.%d.%d%s" % (
