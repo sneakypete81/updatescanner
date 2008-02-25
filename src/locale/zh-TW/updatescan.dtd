@@ -1,0 +1,13 @@
+<!ENTITY scanbutton.label "檢查">
+<!ENTITY stopbutton.label "取消">
+<!ENTITY newbutton.tooltip "新增項目">
+<!ENTITY showallchangesinnewtabsbutton.tooltip "在新分頁標籤顯示所有有更動的頁面">
+<!ENTITY deletebutton.tooltip "刪除">
+<!ENTITY helpbutton.tooltip "Update Scanner 輔助說明">
+<!ENTITY openmenu.label "顯示更動">
+<!ENTITY opentabmenu.label "在新頁面顯示更動">
+<!ENTITY showallchangesinnewtabsmenu.label "在新分頁標籤顯示所有有更動的頁面">
+<!ENTITY markvisitedmenu.label "將所有頁面標示為已閱讀">
+<!ENTITY sortbynamemenu.label "以名稱排序">
+<!ENTITY deletemenu.label "刪除">
+<!ENTITY editmenu.label "內容">
