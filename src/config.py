@@ -19,8 +19,8 @@ translators = ['SlovakSoft (Slovenčina)',
                'Raryel Costa Souza (português brasileiro)',
                '123tp (Dansk)',
                'Kenan Balamir (Türkçe)',
-               'Wang King (简化字 - Simplified Chinese)'
-               'Peter Pin-Guang Chen (簡化字 - Traditional Chinese]
+               'Wang King (简化字 - Simplified Chinese)',
+               'Peter Pin-Guang Chen (簡化字 - Traditional Chinese)']
 authorURL = "http://updatescanner.mozdev.org"
 uid = 'c07d1a49-9894-49ff-a594-38960ede8fb9'
 optionsChrome = 'chrome://updatescan/content/preferences.xul'
