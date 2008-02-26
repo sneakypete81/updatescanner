@@ -94,6 +94,8 @@
         <broadcaster id="viewUpdateScanSidebar"
                      autoCheck="false"
                      label="Update Scanner"
+		     acceltext="Alt+U"
+		     accesskey="U"
                      type="checkbox"
                      group="sidebar"
                      sidebarurl="chrome://updatescan/content/updatescan.xul"
