@@ -1,3 +1,3 @@
-<!ENTITY UpdateScan.tooltip "Просканировать web-страницы на наличие обновлений">
+<!ENTITY UpdateScan.tooltip "Сканировать web-страницы на наличие обновлений">
 <!ENTITY AddToUpdateScan.label "Сканировать web-страницу на наличие обновлений...">
 <!ENTITY AddToUpdateScan.accesskey "к">

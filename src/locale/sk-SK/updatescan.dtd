@@ -2,7 +2,9 @@
 <!ENTITY stopbutton.label "Zrušiť">
 <!ENTITY newbutton.tooltip "Nová položka">
 <!ENTITY showallchangesinnewtabsbutton.tooltip "Zobraziť všetky zmenené stránky na nových kartách">
+<!ENTITY markallasvisitedbutton.tooltip "Označiť všetky ako prečítané">
 <!ENTITY deletebutton.tooltip "Odstrániť">
+<!ENTITY preferencesbutton.tooltip "Predvoľby rozšírenia Update Scanner">
 <!ENTITY helpbutton.tooltip "Update Scanner – Pomocník">
 <!ENTITY openmenu.label "Zobraziť zmeny">
 <!ENTITY opentabmenu.label "Zobraziť zmeny na novej karte">
@@ -11,3 +13,4 @@
 <!ENTITY sortbynamemenu.label "Zoradiť podľa názvu">
 <!ENTITY deletemenu.label "Odstrániť">
 <!ENTITY editmenu.label "Vlastnosti">
+<!ENTITY scanThisPage.label "Kontrola tejto stránky">

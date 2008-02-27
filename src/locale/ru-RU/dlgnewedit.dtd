@@ -6,6 +6,13 @@
 <!ENTITY high.label "Выше">
 <!ENTITY often.label "Часто">
 <!ENTITY never.label "Никогда">
+<!ENTITY manualScan.label "Ручное сканирование">
+<!ENTITY scanEvery.label "Сканировать каждые">
+<!ENTITY minutes.label "минуты">
+<!ENTITY hours.label "часы">
+<!ENTITY days.label "дни">
+<!ENTITY ignoreChanges.label "игнорировать изменения, меньшие чем">
+<!ENTITY characters.label "символы">
 <!ENTITY ignoreNumbers.label "Игнорировать изменения цифр">
 <!ENTITY advanced.label "Расширено...">
 <!ENTITY charEncoding.label "Кодировка">

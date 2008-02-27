@@ -6,6 +6,13 @@
 <!ENTITY high.label "Yüksek">
 <!ENTITY often.label "Sık">
 <!ENTITY never.label "Hiçbir zaman">
+<!ENTITY manualScan.label "El İle Tarama">
+<!ENTITY scanEvery.label "Hangi sıklıkta taransın">
+<!ENTITY minutes.label "dakika">
+<!ENTITY hours.label "saat">
+<!ENTITY days.label "gün">
+<!ENTITY ignoreChanges.label "Yoksayılacak karakter değişiklik sayısı">
+<!ENTITY characters.label "karakter">
 <!ENTITY ignoreNumbers.label "Belirttiğim karakter sayısı kadar güncelleme gerçekleşirse yoksay">
 <!ENTITY advanced.label "Gelişmiş..">
 <!ENTITY charEncoding.label "Karakter Çözümlemesi">

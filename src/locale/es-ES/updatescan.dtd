@@ -2,7 +2,9 @@
 <!ENTITY stopbutton.label "Cancelar">
 <!ENTITY newbutton.tooltip "Nueva entrada">
 <!ENTITY showallchangesinnewtabsbutton.tooltip "Ver todas las páginas cambiadas en pestañas nuevas">
+<!ENTITY markallasvisitedbutton.tooltip "Marcar todas como visitadas">
 <!ENTITY deletebutton.tooltip "Borrar">
+<!ENTITY preferencesbutton.tooltip "Update Scanner - Opciones">
 <!ENTITY helpbutton.tooltip "Update Scanner - Ayuda">
 <!ENTITY openmenu.label "Ver cambios">
 <!ENTITY opentabmenu.label "Ver los cambios en una pestaña nueva">
@@ -11,3 +13,4 @@
 <!ENTITY sortbynamemenu.label "Ordenar por nombre">
 <!ENTITY deletemenu.label "Borrar">
 <!ENTITY editmenu.label "Propiedades">
+<!ENTITY scanThisPage.label "Comprobar esta página">

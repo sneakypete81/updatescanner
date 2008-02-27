@@ -8,7 +8,7 @@
     </RDF:Seq>
     <RDF:Description
         about="urn:mozilla:locale:zh-TW"
-        chrome:displayName="中文 (台灣)"
+        chrome:displayName="Chinese (Traditional)"
         chrome:author="Peter Pin-Guang Chen"
         chrome:name="zh-TW"
         chrome:previewURL="http://www.mozilla.org/locales/zh-TW.gif"

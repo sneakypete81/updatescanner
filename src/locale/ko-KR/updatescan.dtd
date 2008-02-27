@@ -2,7 +2,9 @@
 <!ENTITY stopbutton.label "취소">
 <!ENTITY newbutton.tooltip "새로운 항목">
 <!ENTITY showallchangesinnewtabsbutton.tooltip "업데이트된 모든 페이지를 새 탭으로 열기">
+<!ENTITY markallasvisitedbutton.tooltip "모두 읽은 것으로 표시">
 <!ENTITY deletebutton.tooltip "삭제">
+<!ENTITY preferencesbutton.tooltip "Update Scanner 환경 설정">
 <!ENTITY helpbutton.tooltip "Update Scanner 도움말">
 <!ENTITY openmenu.label "변경된 내용 보기">
 <!ENTITY opentabmenu.label "변경된 내용을 새 탭으로 보기">
@@ -11,3 +13,4 @@
 <!ENTITY sortbynamemenu.label "이름으로 정렬">
 <!ENTITY deletemenu.label "삭제">
 <!ENTITY editmenu.label "속성">
+<!ENTITY scanThisPage.label "이 페이지 검사">

@@ -6,8 +6,15 @@
 <!ENTITY high.label "높음">
 <!ENTITY often.label "자주">
 <!ENTITY never.label "하지 않음">
+<!ENTITY manualScan.label "수동으로 검사">
+<!ENTITY scanEvery.label "검사 주기 :">
+<!ENTITY minutes.label "분">
+<!ENTITY hours.label "시간">
+<!ENTITY days.label "일">
+<!ENTITY ignoreChanges.label "다음 글자수 보다 작은 변화는 무시함 :">
+<!ENTITY characters.label "글자">
 <!ENTITY ignoreNumbers.label "숫자에 대한 변화를 무시">
 <!ENTITY advanced.label "고급...">
 <!ENTITY charEncoding.label "문자 인코딩">
 <!ENTITY autoDetect.label "자동 선택">
-<!ENTITY use.label "다음을 사용">
+<!ENTITY use.label "다음을 사용 :">

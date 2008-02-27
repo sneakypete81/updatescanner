@@ -1,11 +1,18 @@
 <!ENTITY url.label "URL:">
 <!ENTITY title.label "Nazwa:">
-<!ENTITY threshold.label "Ustawienia progu">
+<!ENTITY threshold.label "Ustawienia progu czułości">
 <!ENTITY autoscan.label "Skanowanie automatycznie">
 <!ENTITY low.label "Niski">
 <!ENTITY high.label "Wysoki">
 <!ENTITY often.label "Często">
 <!ENTITY never.label "Nigdy">
+<!ENTITY manualScan.label "Skanowanie ręczne">
+<!ENTITY scanEvery.label "Skanuj co">
+<!ENTITY minutes.label "min">
+<!ENTITY hours.label "godz.">
+<!ENTITY days.label "dni">
+<!ENTITY ignoreChanges.label "Ignoruj zmiany mniejsze niż">
+<!ENTITY characters.label "znaków">
 <!ENTITY ignoreNumbers.label "Ignoruj zmiany numerów">
 <!ENTITY advanced.label "Zaawansowane">
 <!ENTITY charEncoding.label "Kodowanie znaków">

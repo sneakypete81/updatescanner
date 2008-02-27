@@ -6,6 +6,13 @@
 <!ENTITY high.label "高">
 <!ENTITY often.label "有時">
 <!ENTITY never.label "從未">
+<!ENTITY manualScan.label "手動掃描">
+<!ENTITY scanEvery.label "每">
+<!ENTITY minutes.label "分鐘掃描一次">
+<!ENTITY hours.label "小時掃描一次">
+<!ENTITY days.label "天掃描一次">
+<!ENTITY ignoreChanges.label "忽略少於">
+<!ENTITY characters.label "字元數的變動">
 <!ENTITY ignoreNumbers.label "忽略數字的更動">
 <!ENTITY advanced.label "進階...">
 <!ENTITY charEncoding.label "頁面字元編碼">

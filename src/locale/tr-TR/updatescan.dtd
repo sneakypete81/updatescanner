@@ -2,7 +2,9 @@
 <!ENTITY stopbutton.label "İptal">
 <!ENTITY newbutton.tooltip "Yeni..">
 <!ENTITY showallchangesinnewtabsbutton.tooltip "Değişen Tüm Sayfaları Yeni Sekmede Göster">
+<!ENTITY markallasvisitedbutton.tooltip "Tüm Ziyaret Edilenleri İşaretle">
 <!ENTITY deletebutton.tooltip "Sil">
+<!ENTITY preferencesbutton.tooltip "Update Scanner Özellikleri">
 <!ENTITY helpbutton.tooltip "Update Scanner Yardım">
 <!ENTITY openmenu.label "Değişiklikleri Göster">
 <!ENTITY opentabmenu.label "Değişiklikleri Yeni Sekmede Göster">
@@ -11,3 +13,4 @@
 <!ENTITY sortbynamemenu.label "İsime Göre Sırala">
 <!ENTITY deletemenu.label "Sil">
 <!ENTITY editmenu.label "Özellikler">
+<!ENTITY scanThisPage.label "Bu Sayfayı Tara">

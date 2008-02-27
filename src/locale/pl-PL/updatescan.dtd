@@ -2,7 +2,9 @@
 <!ENTITY stopbutton.label "Anuluj">
 <!ENTITY newbutton.tooltip "Dodaj nową stronę">
 <!ENTITY showallchangesinnewtabsbutton.tooltip "Wyświetl wszystkie zmienione strony w nowych kartach">
+<!ENTITY markallasvisitedbutton.tooltip "Oznacz jako sprawdzone">
 <!ENTITY deletebutton.tooltip "Usuń">
+<!ENTITY preferencesbutton.tooltip "Update Scanner - ustawienia">
 <!ENTITY helpbutton.tooltip "Update Scanner - pomoc">
 <!ENTITY openmenu.label "Wyświetl zmiany">
 <!ENTITY opentabmenu.label "Wyświetl zmiany w nowych kartach">
@@ -11,3 +13,4 @@
 <!ENTITY sortbynamemenu.label "Sortuj wg nazwy">
 <!ENTITY deletemenu.label "Usuń">
 <!ENTITY editmenu.label "Ustawienia skanowania">
+<!ENTITY scanThisPage.label "Skanuj tę stronę">
