@@ -28,8 +28,8 @@ optionsChrome = 'chrome://updatescan/content/preferences.xul'
 major_version = 2
 minor_version = 1
 revision_version = 0
-build_version = 8
-in_development = True
+build_version = 9
+in_development = False
 publish_babelzilla = False
 only_english = True########################
 
@@ -60,7 +60,7 @@ iconPath = "skin/updatescan_big.png"
 firefoxUID = 'ec8030f7-c20a-464f-9b0e-13a3a9e97384'
 firefoxMinVersion = '2.0'
 #firefoxMaxVersion = '2.0.0.*'
-firefoxMaxVersion = '3.0b3'
+firefoxMaxVersion = '3.*'
 
 overlays = (
     # overlay this on that
