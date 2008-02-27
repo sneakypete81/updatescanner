@@ -10,6 +10,7 @@ Fixed manual scan
 Added page title to diffpage
 "Scan This Page" menu item
 
+Traditional chinese locale (Peter Pin-Guang Chen)
 Mark all as visited now has a progress dialog
 Refresher now runs off observer
 Shifted functions into uniquely names classes to prevent clashes
