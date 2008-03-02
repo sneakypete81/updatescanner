@@ -1,0 +1,17 @@
+<!ENTITY headerOld1 "아래의 페이지는">
+<!ENTITY headerOld2 "에 검사된 예전 페이지입니다.">
+<!ENTITY headerNew1 "아래의 페이지는">
+<!ENTITY headerNew2 "에 검사된 새로운 페이지입니다.">
+<!ENTITY headerDiff1 "아래의 페이지는">
+<!ENTITY headerDiff2 "에 마지막으로 검사되었습니다. 변경 내용은">
+<!ENTITY headerDiff3 "강조">
+<!ENTITY headerDiff4 "되어 있습니다.">
+<!ENTITY headerNotChecked1 "선택된 페이지는 아직 검사되지 않았습니다.">
+<!ENTITY headerNotChecked2 "왼쪽의">
+<!ENTITY headerNotChecked3 "&apos;검사&apos;">
+<!ENTITY headerNotChecked4 "버튼을 클릭하여, 다시 시도하시기 바랍니다.">
+<!ENTITY view "보기">
+<!ENTITY oldPage "예전 페이지">
+<!ENTITY newPage "새로운 페이지">
+<!ENTITY changes "변경 내용">
+<!ENTITY currentPage "현재 페이지">

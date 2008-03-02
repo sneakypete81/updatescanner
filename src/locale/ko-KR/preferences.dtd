@@ -1,0 +1,26 @@
+<!ENTITY preferences.title "Update Scanner 환경 설정">
+<!ENTITY notifications.title "알림">
+<!ENTITY scanning.title "검사">
+<!ENTITY toolbar.title "도구 모음">
+<!ENTITY notifications.enable.label "웹 페이지의 내용이 바뀌면 알림 창을 보여줍니다.">
+<!ENTITY notifications.timed.label1 "표시 시간 :">
+<!ENTITY notifications.timed.label2 "초">
+<!ENTITY notifications.permanent.label "수동으로 닫을 때까지 보여줌">
+<!ENTITY notifications.playSound.label "웹 페이지가 바뀌면 소리로 알려줌">
+<!ENTITY notifications.defaultSound.label "기본 소리">
+<!ENTITY notifications.browse.label "찾아보기...">
+<!ENTITY scan.pageProperties.label "페이지 속성">
+<!ENTITY scan.selectUsing.label "다음을 사용하여 검사율과 변경 허용치를 선택함 :">
+<!ENTITY scan.sliders.label "슬라이더">
+<!ENTITY scan.numbers.label "숫자">
+<!ENTITY scan.warnScanShort.label "검사 시간이 너무 짧은 경우 경고함">
+<!ENTITY scan.advanced.label "고급">
+<!ENTITY scan.timeoutIfLonger.label "최대 검사 시간 :">
+<!ENTITY scan.seconds.label "초">
+<!ENTITY toolbar.toolbarIcons.label "도구 모음 아이콘">
+<!ENTITY toolbar.new.label "새로운 항목">
+<!ENTITY toolbar.showNewTab.label "변경된 모든 페이지를 새 탭으로 열기">
+<!ENTITY toolbar.markVisited.label "모두 읽은 것으로 표시">
+<!ENTITY toolbar.delete.label "삭제">
+<!ENTITY toolbar.preferences.label "환경 설정">
+<!ENTITY toolbar.help.label "도움말">

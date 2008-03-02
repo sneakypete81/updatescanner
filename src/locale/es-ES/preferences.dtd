@@ -1,0 +1,26 @@
+<!ENTITY preferences.title "Update Scanner - Opciones">
+<!ENTITY notifications.title "Notificaciones">
+<!ENTITY scanning.title "Comprobando">
+<!ENTITY toolbar.title "Barra de herramientas">
+<!ENTITY notifications.enable.label "Mostrar una notificación emergente cuando haya algún cambio">
+<!ENTITY notifications.timed.label1 "Mostrar durante">
+<!ENTITY notifications.timed.label2 "segundos">
+<!ENTITY notifications.permanent.label "Mostrar hasta que se cierre manualmente">
+<!ENTITY notifications.playSound.label "Reproducir un sonido cuando alguna página cambie">
+<!ENTITY notifications.defaultSound.label "Sonido por defecto">
+<!ENTITY notifications.browse.label "Seleccionar...">
+<!ENTITY scan.pageProperties.label "Propiedades de la página">
+<!ENTITY scan.selectUsing.label "Seleccionar el promedio de comprobación y el umbral a usar">
+<!ENTITY scan.sliders.label "Sliders">
+<!ENTITY scan.numbers.label "Números">
+<!ENTITY scan.warnScanShort.label "Avisarme si el tiempo de comprobación es demasiado corto">
+<!ENTITY scan.advanced.label "Avanzados">
+<!ENTITY scan.timeoutIfLonger.label "Parar si la comprobación lleva más de">
+<!ENTITY scan.seconds.label "segundos">
+<!ENTITY toolbar.toolbarIcons.label "Iconos de la barra de herramientas">
+<!ENTITY toolbar.new.label "Nueva entrada">
+<!ENTITY toolbar.showNewTab.label "Mostrar todas las páginas cambiadas en pestañas nuevas">
+<!ENTITY toolbar.markVisited.label "Marcar todas como visitadas">
+<!ENTITY toolbar.delete.label "Borrar">
+<!ENTITY toolbar.preferences.label "Opciones">
+<!ENTITY toolbar.help.label "Ayuda">

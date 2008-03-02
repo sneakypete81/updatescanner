@@ -1,0 +1,26 @@
+<!ENTITY preferences.title "Predvoľby rozšírenia Update Scanner">
+<!ENTITY notifications.title "Oznamovanie">
+<!ENTITY scanning.title "Kontrola">
+<!ENTITY toolbar.title "Panel s nástrojmi">
+<!ENTITY notifications.enable.label "Zobraziť pri zmenách webstránky vysúvacie oznámenie">
+<!ENTITY notifications.timed.label1 "Zobraziť po dobu">
+<!ENTITY notifications.timed.label2 "s.">
+<!ENTITY notifications.permanent.label "Zobraziť, kým nebude zatvorené ručne">
+<!ENTITY notifications.playSound.label "Prehrať zvuk pri zmenách webstránky">
+<!ENTITY notifications.defaultSound.label "Predvolený zvuk">
+<!ENTITY notifications.browse.label "Prehľadávať...">
+<!ENTITY scan.pageProperties.label "Vlastnosti stránky">
+<!ENTITY scan.selectUsing.label "Vybrať frekvenciu kontroly a limity pomocou">
+<!ENTITY scan.sliders.label "posúvačov">
+<!ENTITY scan.numbers.label "čísiel">
+<!ENTITY scan.warnScanShort.label "Upozorniť, ak je interval kontroly príliš krátky">
+<!ENTITY scan.advanced.label "Spresnenie">
+<!ENTITY scan.timeoutIfLonger.label "Časový limit na kontrolu">
+<!ENTITY scan.seconds.label "s.">
+<!ENTITY toolbar.toolbarIcons.label "Ikony na paneli s nástrojmi">
+<!ENTITY toolbar.new.label "Nová položka">
+<!ENTITY toolbar.showNewTab.label "Zobraziť všetky zmenené stránky na nových kartách">
+<!ENTITY toolbar.markVisited.label "Označiť všetky ako navštívené">
+<!ENTITY toolbar.delete.label "Odstrániť">
+<!ENTITY toolbar.preferences.label "Predvoľby">
+<!ENTITY toolbar.help.label "Pomocník">

@@ -1,0 +1,17 @@
+<!ENTITY headerOld1 "下列是在">
+<!ENTITY headerOld2 "被掃描出的舊版頁面。">
+<!ENTITY headerNew1 "下列是在">
+<!ENTITY headerNew2 "被掃描出的新版頁面。">
+<!ENTITY headerDiff1 "最後一次掃描下列頁面的時間是">
+<!ENTITY headerDiff2 "。頁面上的更動">
+<!ENTITY headerDiff3 "都已被標示出來">
+<!ENTITY headerDiff4 "。">
+<!ENTITY headerNotChecked1 "被選擇的頁面還沒有被檢查過。">
+<!ENTITY headerNotChecked2 "請按下左邊的">
+<!ENTITY headerNotChecked3 "&apos;檢查&apos;">
+<!ENTITY headerNotChecked4 "按鈕並再試一次。">
+<!ENTITY view "檢視">
+<!ENTITY oldPage "舊頁面">
+<!ENTITY newPage "新頁面">
+<!ENTITY changes "更動">
+<!ENTITY currentPage "目前頁面">

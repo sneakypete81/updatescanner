@@ -1,0 +1,17 @@
+<!ENTITY headerOld1 "La siguiente página es la versión antigua de la página, comprobada">
+<!ENTITY headerOld2 ".">
+<!ENTITY headerNew1 "La siguiente página es la versión nueva de la página, comprobada">
+<!ENTITY headerNew2 ".">
+<!ENTITY headerDiff1 "La siguiente página fue escaneada por última vez">
+<!ENTITY headerDiff2 ". Los cambios están">
+<!ENTITY headerDiff3 "marcados">
+<!ENTITY headerDiff4 ".">
+<!ENTITY headerNotChecked1 "La página seleccionada no ha sido aún comprobada.">
+<!ENTITY headerNotChecked2 "Por favor, pulse el botón">
+<!ENTITY headerNotChecked3 "&apos;Comprobar&apos;">
+<!ENTITY headerNotChecked4 "de la izquierda, e inténtelo de nuevo.">
+<!ENTITY view "Ver">
+<!ENTITY oldPage "Página antigua">
+<!ENTITY newPage "Página nueva">
+<!ENTITY changes "Cambios">
+<!ENTITY currentPage "Página actual">

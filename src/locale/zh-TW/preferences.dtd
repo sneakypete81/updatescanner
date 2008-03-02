@@ -1,0 +1,26 @@
+<!ENTITY preferences.title "Update Scanner 選項">
+<!ENTITY notifications.title "通知">
+<!ENTITY scanning.title "掃描">
+<!ENTITY toolbar.title "工具列">
+<!ENTITY notifications.enable.label "在有頁面更動時顯示一個通知方塊">
+<!ENTITY notifications.timed.label1 "顯示">
+<!ENTITY notifications.timed.label2 "秒">
+<!ENTITY notifications.permanent.label "一直顯示到手動關閉">
+<!ENTITY notifications.playSound.label "當頁面有更動時播放聲音">
+<!ENTITY notifications.defaultSound.label "預設音效">
+<!ENTITY notifications.browse.label "瀏覽...">
+<!ENTITY scan.pageProperties.label "頁面設定">
+<!ENTITY scan.selectUsing.label "使用什麼來調整掃描頻率及門檻？">
+<!ENTITY scan.sliders.label "滑桿">
+<!ENTITY scan.numbers.label "輸入數字">
+<!ENTITY scan.warnScanShort.label "當兩次掃描時間太接近時警告">
+<!ENTITY scan.advanced.label "進階">
+<!ENTITY scan.timeoutIfLonger.label "超過">
+<!ENTITY scan.seconds.label "秒則視為逾時">
+<!ENTITY toolbar.toolbarIcons.label "工具列圖示">
+<!ENTITY toolbar.new.label "新項目">
+<!ENTITY toolbar.showNewTab.label "在新標籤顯示所有有更動的頁面">
+<!ENTITY toolbar.markVisited.label "標示所有為已開啟">
+<!ENTITY toolbar.delete.label "刪除">
+<!ENTITY toolbar.preferences.label "選項設定">
+<!ENTITY toolbar.help.label "說明">

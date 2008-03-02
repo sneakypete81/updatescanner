@@ -1,0 +1,26 @@
+<!ENTITY preferences.title "Update Scanner 选项">
+<!ENTITY notifications.title "通知窗口">
+<!ENTITY scanning.title "扫描">
+<!ENTITY toolbar.title "工具栏">
+<!ENTITY notifications.enable.label "发现页面更新时显示通知窗口">
+<!ENTITY notifications.timed.label1 "显示">
+<!ENTITY notifications.timed.label2 "秒后隐藏">
+<!ENTITY notifications.permanent.label "一直显示直到手动关闭">
+<!ENTITY notifications.playSound.label "发现页面更新时显示播放声音">
+<!ENTITY notifications.defaultSound.label "默认声音">
+<!ENTITY notifications.browse.label "浏览...">
+<!ENTITY scan.pageProperties.label "页面属性">
+<!ENTITY scan.selectUsing.label "设置扫描频率和范围使用">
+<!ENTITY scan.sliders.label "滑动条">
+<!ENTITY scan.numbers.label "数字">
+<!ENTITY scan.warnScanShort.label "警告过短的扫描时间">
+<!ENTITY scan.advanced.label "高级">
+<!ENTITY scan.timeoutIfLonger.label "扫描超时时间">
+<!ENTITY scan.seconds.label "秒">
+<!ENTITY toolbar.toolbarIcons.label "工具栏图标">
+<!ENTITY toolbar.new.label "新项目">
+<!ENTITY toolbar.showNewTab.label "在新标签页显示所有更新的页面">
+<!ENTITY toolbar.markVisited.label "标记所有为已访问">
+<!ENTITY toolbar.delete.label "删除">
+<!ENTITY toolbar.preferences.label "选项">
+<!ENTITY toolbar.help.label "帮助">

@@ -1,0 +1,26 @@
+<!ENTITY preferences.title "Update Scanner Özellikleri">
+<!ENTITY notifications.title "Hatırlatmalar">
+<!ENTITY scanning.title "Tarama">
+<!ENTITY toolbar.title "Araç Çubuğu">
+<!ENTITY notifications.enable.label "Bir web sayfasında değişiklik olursa, hatırlatma penceresini göster">
+<!ENTITY notifications.timed.label1 "Görüntüle">
+<!ENTITY notifications.timed.label2 "saniye">
+<!ENTITY notifications.permanent.label "El ile kapatıldığında göster">
+<!ENTITY notifications.playSound.label "Bir web sayfasında değişiklik olursa, ses çal">
+<!ENTITY notifications.defaultSound.label "Varsayılan Ses">
+<!ENTITY notifications.browse.label "Gözat...">
+<!ENTITY scan.pageProperties.label "Sayfa Özellikleri">
+<!ENTITY scan.selectUsing.label "Arama oranını seçin">
+<!ENTITY scan.sliders.label "Geçişler">
+<!ENTITY scan.numbers.label "Sayılar">
+<!ENTITY scan.warnScanShort.label "Tarama süresi kısa sürerse bildir">
+<!ENTITY scan.advanced.label "Gelişmiş">
+<!ENTITY scan.timeoutIfLonger.label "Tarama zaman aşımı">
+<!ENTITY scan.seconds.label "saniye">
+<!ENTITY toolbar.toolbarIcons.label "Araç Çubuğu Simgeleri">
+<!ENTITY toolbar.new.label "Yeni Girdi">
+<!ENTITY toolbar.showNewTab.label "Tüm Sayfa Değişikliklerini Yeni Sekmede Göster">
+<!ENTITY toolbar.markVisited.label "Tüm Ziyaret Edilenleri İşaretle">
+<!ENTITY toolbar.delete.label "Sil">
+<!ENTITY toolbar.preferences.label "Özellikler">
+<!ENTITY toolbar.help.label "Yardım">

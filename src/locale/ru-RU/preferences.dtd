@@ -1,0 +1,26 @@
+<!ENTITY preferences.title "Преднастройки Update Scanner">
+<!ENTITY notifications.title "Уведомления">
+<!ENTITY scanning.title "Сканирование">
+<!ENTITY toolbar.title "Панель инструментов">
+<!ENTITY notifications.enable.label "Показывать всплывающее уведомления, когда страница изменяна">
+<!ENTITY notifications.timed.label1 "Показывать в течении">
+<!ENTITY notifications.timed.label2 "секунд">
+<!ENTITY notifications.permanent.label "Показывать до выключения пользователем">
+<!ENTITY notifications.playSound.label "Проигрывать звук, когда страница изменена">
+<!ENTITY notifications.defaultSound.label "Звук по умолчанию">
+<!ENTITY notifications.browse.label "Выбрать...">
+<!ENTITY scan.pageProperties.label "Настройки страницы">
+<!ENTITY scan.selectUsing.label "Выбрать частоту сканирования">
+<!ENTITY scan.sliders.label "Ползунки">
+<!ENTITY scan.numbers.label "Цифры">
+<!ENTITY scan.warnScanShort.label "Предупреждать, когда время сканирования слишком короткое">
+<!ENTITY scan.advanced.label "Дополнительно">
+<!ENTITY scan.timeoutIfLonger.label "Останавливать сканирование по истечению">
+<!ENTITY scan.seconds.label "секунд">
+<!ENTITY toolbar.toolbarIcons.label "Иконки панели инструментов">
+<!ENTITY toolbar.new.label "Новая запись">
+<!ENTITY toolbar.showNewTab.label "Показать все изменённые страницы в новой вкладке">
+<!ENTITY toolbar.markVisited.label "Пометить всё прочитанным">
+<!ENTITY toolbar.delete.label "Удалить">
+<!ENTITY toolbar.preferences.label "Преднастройки">
+<!ENTITY toolbar.help.label "Помощь">

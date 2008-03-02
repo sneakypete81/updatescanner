@@ -1,0 +1,17 @@
+<!ENTITY headerOld1 "Poniższa strona jest starą wersją. Skanowana ">
+<!ENTITY headerOld2 ".">
+<!ENTITY headerNew1 "Poniższe strona jest nową wersją. Skanowana ">
+<!ENTITY headerNew2 ".">
+<!ENTITY headerDiff1 "Poniższa strona była ostatnio skanowana ">
+<!ENTITY headerDiff2 ". Zmiany są ">
+<!ENTITY headerDiff3 "wyróżnione">
+<!ENTITY headerDiff4 ".">
+<!ENTITY headerNotChecked1 "Wybrana strona nie była jeszcze skanowana">
+<!ENTITY headerNotChecked2 "Aby spróbować ponownie proszę nacisnąć przycisk">
+<!ENTITY headerNotChecked3 "&quot;Skanuj&quot;">
+<!ENTITY headerNotChecked4 "znajdujący się po lewej stronie">
+<!ENTITY view "Widok">
+<!ENTITY oldPage "Stara strona">
+<!ENTITY newPage "Nowa strona">
+<!ENTITY changes "Zmiany">
+<!ENTITY currentPage "Aktywna strona">
