@@ -2,18 +2,18 @@
 <!ENTITY notifications.title "Figyelmeztetés">
 <!ENTITY scanning.title "Ellenőrzés">
 <!ENTITY toolbar.title "Eszköztár">
-<!ENTITY notifications.enable.label "Jelenjen meg értesítőablak, amikor a weboldal megváltozik">
+<!ENTITY notifications.enable.label "Jelenjen meg egy értesítőablak, amikor a weboldal megváltozik">
 <!ENTITY notifications.timed.label1 "Mutassa">
 <!ENTITY notifications.timed.label2 "másodpercig">
 <!ENTITY notifications.permanent.label "Mutassa az ablak kézi bezárásáig">
-<!ENTITY notifications.playSound.label "Játszon le egy hangot, amikor a weboldal megváltozik">
+<!ENTITY notifications.playSound.label "Játsszon le egy hangot, amikor a weboldal megváltozik">
 <!ENTITY notifications.defaultSound.label "Alapértelmezett hang">
 <!ENTITY notifications.browse.label "Tallóz...">
 <!ENTITY scan.pageProperties.label "A weboldal tulajdonságai">
-<!ENTITY scan.selectUsing.label "Az ellenőrzési gyakoriság és a küszöbérték megadása">
+<!ENTITY scan.selectUsing.label "Az ellenőrzési gyakoriság és a változások küszöbértékének megadása">
 <!ENTITY scan.sliders.label "csúszkával">
 <!ENTITY scan.numbers.label "számokkal">
-<!ENTITY scan.warnScanShort.label "Figyelmeztessen, ha az ellenőrzési gyakoriság túl rövid">
+<!ENTITY scan.warnScanShort.label "Figyelmeztet, ha az ellenőrzési gyakoriság túl rövid">
 <!ENTITY scan.advanced.label "Haladó">
 <!ENTITY scan.timeoutIfLonger.label "Időtúllépés, ha az ellenőrzés tovább tart mint">
 <!ENTITY scan.seconds.label "másodperc">

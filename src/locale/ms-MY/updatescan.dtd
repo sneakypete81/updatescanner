@@ -2,7 +2,9 @@
 <!ENTITY stopbutton.label "">
 <!ENTITY newbutton.tooltip "">
 <!ENTITY showallchangesinnewtabsbutton.tooltip "">
+<!ENTITY markallasvisitedbutton.tooltip "">
 <!ENTITY deletebutton.tooltip "">
+<!ENTITY preferencesbutton.tooltip "">
 <!ENTITY helpbutton.tooltip "">
 <!ENTITY openmenu.label "">
 <!ENTITY opentabmenu.label "">
@@ -11,3 +13,4 @@
 <!ENTITY sortbynamemenu.label "">
 <!ENTITY deletemenu.label "">
 <!ENTITY editmenu.label "">
+<!ENTITY scanThisPage.label "">

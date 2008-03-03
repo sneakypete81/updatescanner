@@ -1,0 +1,17 @@
+<!ENTITY headerOld1 "Quella visualizzata di seguito è la versione precedente della pagina, controllata ">
+<!ENTITY headerOld2 ".">
+<!ENTITY headerNew1 "Quella visualizzata di seguito è la nuova versione della pagina, controllata ">
+<!ENTITY headerNew2 ".">
+<!ENTITY headerDiff1 "La pagina seguente è stata controllata per l&apos;ultima volta ">
+<!ENTITY headerDiff2 ". Le modifiche sono ">
+<!ENTITY headerDiff3 "evidenziate">
+<!ENTITY headerDiff4 ".">
+<!ENTITY headerNotChecked1 "La pagina selezionata non è ancora stata controllata.">
+<!ENTITY headerNotChecked2 " Fare clic sul pulsante ">
+<!ENTITY headerNotChecked3 "&apos;Controlla&apos;">
+<!ENTITY headerNotChecked4 " (a sinistra) e riprova.">
+<!ENTITY view "Visualizza">
+<!ENTITY oldPage "Versione precedente">
+<!ENTITY newPage "Versione attuale">
+<!ENTITY changes "Modifiche">
+<!ENTITY currentPage "Pagina corrente">

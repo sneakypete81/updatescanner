@@ -6,6 +6,13 @@
 <!ENTITY high.label "Vysoká">
 <!ENTITY often.label "Často">
 <!ENTITY never.label "Nikdy">
+<!ENTITY manualScan.label "Ruční prohledávání">
+<!ENTITY scanEvery.label "Prohledat každých">
+<!ENTITY minutes.label "minut">
+<!ENTITY hours.label "hodin">
+<!ENTITY days.label "dní">
+<!ENTITY ignoreChanges.label "Ignorovat změny menší než">
+<!ENTITY characters.label "znaků">
 <!ENTITY ignoreNumbers.label "Ignorovat změny čísel">
 <!ENTITY advanced.label "Pokročilé...">
 <!ENTITY charEncoding.label "Znaková sada">

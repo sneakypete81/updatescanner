@@ -1,0 +1,17 @@
+<!ENTITY headerOld1 "Stránka níže je starou verzí webové stránky, prohledané">
+<!ENTITY headerOld2 ".">
+<!ENTITY headerNew1 "Stránka níže je novou verzí webové stránky, prohledané">
+<!ENTITY headerNew2 ".">
+<!ENTITY headerDiff1 "Stránka níže byla naposledy prohledána">
+<!ENTITY headerDiff2 ". Změny jsou">
+<!ENTITY headerDiff3 "zvýrazněny">
+<!ENTITY headerDiff4 ".">
+<!ENTITY headerNotChecked1 "Zvolená stránka ještě nebyla zkontrolována.">
+<!ENTITY headerNotChecked2 "Prosím klepněte na tlačítko">
+<!ENTITY headerNotChecked3 "&apos;Prohledat&apos;">
+<!ENTITY headerNotChecked4 "na levé straně a zkuste to znova.">
+<!ENTITY view "Zobrazení">
+<!ENTITY oldPage "Stará verze">
+<!ENTITY newPage "Nová verze">
+<!ENTITY changes "Změny">
+<!ENTITY currentPage "Aktuální verze">

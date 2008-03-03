@@ -1,0 +1,17 @@
+<!ENTITY headerOld1 "Die unten dargestellte Seite ist die veraltete Version der Webseite. Überprüfungszeitpunkt: ">
+<!ENTITY headerOld2 ".">
+<!ENTITY headerNew1 "Die unten dargestellte Seite ist die aktuelle Version der Webseite. Überprüfungszeitpunkt: ">
+<!ENTITY headerNew2 ".">
+<!ENTITY headerDiff1 "Die unten dargestellte Seite wurde zuletzt überprüft: ">
+<!ENTITY headerDiff2 ". Die Änderungen sind ">
+<!ENTITY headerDiff3 "hervorgehoben">
+<!ENTITY headerDiff4 ".">
+<!ENTITY headerNotChecked1 "Die ausgewählte Seite wurde noch nicht überprüft.">
+<!ENTITY headerNotChecked2 " Bitte klicken Sie auf die ">
+<!ENTITY headerNotChecked3 "&apos;Überprüfen&apos;">
+<!ENTITY headerNotChecked4 " -Schaltfläche links und versuchen Sie es dann erneut.">
+<!ENTITY view "Ansicht">
+<!ENTITY oldPage "Alte Seite">
+<!ENTITY newPage "Neue Seite">
+<!ENTITY changes "Änderungen">
+<!ENTITY currentPage "Aktuelle Seite">

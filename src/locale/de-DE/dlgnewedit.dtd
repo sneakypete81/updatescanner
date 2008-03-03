@@ -6,7 +6,14 @@
 <!ENTITY high.label "Hoch">
 <!ENTITY often.label "Oft">
 <!ENTITY never.label "Nie">
-<!ENTITY ignoreNumbers.label "Änderungen von Zahlen ignorieren">
+<!ENTITY manualScan.label "Manuelle Überprüfung">
+<!ENTITY scanEvery.label "Überprüfung aller">
+<!ENTITY minutes.label "Minuten">
+<!ENTITY hours.label "Stunden">
+<!ENTITY days.label "Tage">
+<!ENTITY ignoreChanges.label "Änderungen von weniger als ">
+<!ENTITY characters.label "Zeichen ignorieren">
+<!ENTITY ignoreNumbers.label "Änderungen von Zahlenwerten ignorieren">
 <!ENTITY advanced.label "Erweitert...">
 <!ENTITY charEncoding.label "Zeichenkodierung">
 <!ENTITY autoDetect.label "Automatisch bestimmen">

@@ -1,0 +1,26 @@
+<!ENTITY preferences.title "Update Scanner voorkeuren">
+<!ENTITY notifications.title "Berichten">
+<!ENTITY scanning.title "Scannen">
+<!ENTITY toolbar.title "Werkbalk">
+<!ENTITY notifications.enable.label "Pop-upbericht geven wanneer een webpagina wijzigt">
+<!ENTITY notifications.timed.label1 "Gedurende">
+<!ENTITY notifications.timed.label2 "seconden weergeven">
+<!ENTITY notifications.permanent.label "Weergeven totdat handmatig gesloten">
+<!ENTITY notifications.playSound.label "Geluid afspelen wanneer een webpagina wijzigt">
+<!ENTITY notifications.defaultSound.label "Standaardgeluid">
+<!ENTITY notifications.browse.label "Bladeren...">
+<!ENTITY scan.pageProperties.label "Pagina-eigenschappen">
+<!ENTITY scan.selectUsing.label "Scanfrequentie en drempel selecteren met behulp van">
+<!ENTITY scan.sliders.label "schuifbalken">
+<!ENTITY scan.numbers.label "getallen">
+<!ENTITY scan.warnScanShort.label "Mij waarschuwen wanneer de scantijd te kort is">
+<!ENTITY scan.advanced.label "Geavanceerd">
+<!ENTITY scan.timeoutIfLonger.label "Afbreken wanneer de scan langer duurt dan">
+<!ENTITY scan.seconds.label "seconden">
+<!ENTITY toolbar.toolbarIcons.label "Werkbalkpictogrammen">
+<!ENTITY toolbar.new.label "Nieuwe ingave">
+<!ENTITY toolbar.showNewTab.label "Alle gewijzigde pagina&apos;s in nieuwe tabbladen weergeven">
+<!ENTITY toolbar.markVisited.label "Alles als bezocht markeren">
+<!ENTITY toolbar.delete.label "Verwijderen">
+<!ENTITY toolbar.preferences.label "Voorkeuren">
+<!ENTITY toolbar.help.label "Help">

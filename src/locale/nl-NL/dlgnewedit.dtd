@@ -6,6 +6,13 @@
 <!ENTITY high.label "Hoog">
 <!ENTITY often.label "Vaak">
 <!ENTITY never.label "Nooit">
+<!ENTITY manualScan.label "Handmatige scan">
+<!ENTITY scanEvery.label "Elke">
+<!ENTITY minutes.label "minuten scannen">
+<!ENTITY hours.label "uur scannen">
+<!ENTITY days.label "dagen scannen">
+<!ENTITY ignoreChanges.label "Wijzigen van minder dan ongeveer">
+<!ENTITY characters.label "karakters negeren">
 <!ENTITY ignoreNumbers.label "Wijzigingen aan getallen negeren">
 <!ENTITY advanced.label "Geavanceerd...">
 <!ENTITY charEncoding.label "Tekenset">

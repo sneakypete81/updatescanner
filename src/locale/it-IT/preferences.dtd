@@ -1,0 +1,26 @@
+<!ENTITY preferences.title "Opzioni di Update Scanner">
+<!ENTITY notifications.title "Notifiche">
+<!ENTITY scanning.title "Controllo aggiornamenti">
+<!ENTITY toolbar.title "Barra laterale">
+<!ENTITY notifications.enable.label "Mostra un avviso quando una pagina viene modificata">
+<!ENTITY notifications.timed.label1 "Mostralo per">
+<!ENTITY notifications.timed.label2 "secondi">
+<!ENTITY notifications.permanent.label "Mostralo sino a quando non viene chiuso manualmente">
+<!ENTITY notifications.playSound.label "Riproduci un suono quando una pagina viene modificata">
+<!ENTITY notifications.defaultSound.label "Suono predefinito">
+<!ENTITY notifications.browse.label "Sfoglia...">
+<!ENTITY scan.pageProperties.label "Proprietà controllo pagina">
+<!ENTITY scan.selectUsing.label "Per impostare la frequenza dei controlli e il valore di soglia per le notifiche utilizza">
+<!ENTITY scan.sliders.label "indicatori scorrevoli">
+<!ENTITY scan.numbers.label "campi numerici">
+<!ENTITY scan.warnScanShort.label "Mostra un avviso quando la durata impostata per il controllo è troppo breve">
+<!ENTITY scan.advanced.label "Avanzate">
+<!ENTITY scan.timeoutIfLonger.label "Interrompi il controllo della pagina se l&apos;operazione dura più di">
+<!ENTITY scan.seconds.label "secondi">
+<!ENTITY toolbar.toolbarIcons.label "Icone della barra laterale di Update Scanner">
+<!ENTITY toolbar.new.label "Nuova pagina">
+<!ENTITY toolbar.showNewTab.label "Mostra tutte le pagine aggiornate in nuove schede">
+<!ENTITY toolbar.markVisited.label "Segna tutte le pagine come lette">
+<!ENTITY toolbar.delete.label "Elimina">
+<!ENTITY toolbar.preferences.label "Opzioni">
+<!ENTITY toolbar.help.label "Guida in linea">

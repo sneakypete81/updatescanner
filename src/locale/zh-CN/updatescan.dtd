@@ -1,6 +1,6 @@
 <!ENTITY scanbutton.label "扫描">
 <!ENTITY stopbutton.label "取消">
-<!ENTITY newbutton.tooltip "新项目">
+<!ENTITY newbutton.tooltip "新页面">
 <!ENTITY showallchangesinnewtabsbutton.tooltip "在新标签页显示所有更新的页面">
 <!ENTITY markallasvisitedbutton.tooltip "标记所有为已访问">
 <!ENTITY deletebutton.tooltip "删除">

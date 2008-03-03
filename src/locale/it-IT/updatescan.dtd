@@ -1,8 +1,10 @@
 <!ENTITY scanbutton.label "Controlla">
-<!ENTITY stopbutton.label "Cancella">
+<!ENTITY stopbutton.label "Annulla">
 <!ENTITY newbutton.tooltip "Nuova pagina">
 <!ENTITY showallchangesinnewtabsbutton.tooltip "Mostra tutte le pagine aggiornate in nuove schede">
+<!ENTITY markallasvisitedbutton.tooltip "Segna tutte le pagine come lette">
 <!ENTITY deletebutton.tooltip "Elimina">
+<!ENTITY preferencesbutton.tooltip "Opzioni">
 <!ENTITY helpbutton.tooltip "Guida in linea">
 <!ENTITY openmenu.label "Mostra le modifiche">
 <!ENTITY opentabmenu.label "Mostra le modifiche in una nuova scheda">
@@ -11,3 +13,4 @@
 <!ENTITY sortbynamemenu.label "Ordina le pagine per nome">
 <!ENTITY deletemenu.label "Elimina">
 <!ENTITY editmenu.label "Proprietà controllo pagina">
+<!ENTITY scanThisPage.label "Controlla questa pagina">

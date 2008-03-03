@@ -2,7 +2,9 @@
 <!ENTITY stopbutton.label "キャンセル">
 <!ENTITY newbutton.tooltip "新規作成">
 <!ENTITY showallchangesinnewtabsbutton.tooltip "変更があったすべてのページを新しいタブに表示します">
+<!ENTITY markallasvisitedbutton.tooltip "">
 <!ENTITY deletebutton.tooltip "削除">
+<!ENTITY preferencesbutton.tooltip "">
 <!ENTITY helpbutton.tooltip "">
 <!ENTITY openmenu.label "変更を表示">
 <!ENTITY opentabmenu.label "新しいタブに変更を表示">
@@ -11,3 +13,4 @@
 <!ENTITY sortbynamemenu.label "タイトルで並び替え">
 <!ENTITY deletemenu.label "削除">
 <!ENTITY editmenu.label "プロパティ">
+<!ENTITY scanThisPage.label "">

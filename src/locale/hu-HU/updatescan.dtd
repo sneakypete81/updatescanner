@@ -9,7 +9,7 @@
 <!ENTITY openmenu.label "Változások mutatása">
 <!ENTITY opentabmenu.label "Változások mutatása új fülön">
 <!ENTITY showallchangesinnewtabsmenu.label "Minden megváltozott oldal mutatása új fülön">
-<!ENTITY markvisitedmenu.label "Megjelölés megnézettként">
+<!ENTITY markvisitedmenu.label "Mind megjelölése megnézettként">
 <!ENTITY sortbynamemenu.label "Név szerinti rendezés">
 <!ENTITY deletemenu.label "Törlés a listáról">
 <!ENTITY editmenu.label "Tulajdonságok">

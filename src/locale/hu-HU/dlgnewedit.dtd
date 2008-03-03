@@ -1,6 +1,6 @@
 <!ENTITY url.label "URL:">
-<!ENTITY title.label "Cím:">
-<!ENTITY threshold.label "A kijelzett változások küszöbértéke">
+<!ENTITY title.label "Név:">
+<!ENTITY threshold.label "A változások számának küszöbértéke">
 <!ENTITY autoscan.label "Automatikus ellenőrzés gyakorisága">
 <!ENTITY low.label "Kevés">
 <!ENTITY high.label "Sok">
@@ -11,9 +11,9 @@
 <!ENTITY minutes.label "percben">
 <!ENTITY hours.label "órában">
 <!ENTITY days.label "naponta">
-<!ENTITY ignoreChanges.label "A változások figyelmen kívül hagyása, ha kevesebb">
+<!ENTITY ignoreChanges.label "A változás figyelmen kívül hagyása, ha az kevesebb">
 <!ENTITY characters.label "karakternél">
-<!ENTITY ignoreNumbers.label "Kihagyható változások száma">
+<!ENTITY ignoreNumbers.label "Kihagyható változások száma:">
 <!ENTITY advanced.label "Haladó...">
 <!ENTITY charEncoding.label "Karakterkódolás">
 <!ENTITY autoDetect.label "Automatikus felismerés">

@@ -1,17 +1,17 @@
-<!ENTITY headerOld1 "  A lenti az oldal régebbi változata, ellenőrizve: ">
+<!ENTITY headerOld1 "A lenti az oldal régebbi változata. Ellenőrizve:">
 <!ENTITY headerOld2 ".">
-<!ENTITY headerNew1 "  A lenti az oldal újabb változata, ellenőrizve: ">
+<!ENTITY headerNew1 "A lenti az oldal újabb változata. Ellenőrizve:">
 <!ENTITY headerNew2 ".">
-<!ENTITY headerDiff1 "  A lenti az oldal legfrissebb állapota, ellenőrzve: ">
-<!ENTITY headerDiff2 ". A változások ">
-<!ENTITY headerDiff3 "sárgával kiemelve">
+<!ENTITY headerDiff1 "Az utolsó ellenőrzéskori állapot. Ellenőrizve:">
+<!ENTITY headerDiff2 ". A változások">
+<!ENTITY headerDiff3 "világító sárgával kiemelve">
 <!ENTITY headerDiff4 ".">
 <!ENTITY headerNotChecked1 "A kiválasztott oldal eddig még nem volt ellenőrizve.">
 <!ENTITY headerNotChecked2 "Kattints az">
 <!ENTITY headerNotChecked3 "&apos;Ellenőrzés&apos;">
-<!ENTITY headerNotChecked4 "gombra a baloldalon és próbáld újra.">
+<!ENTITY headerNotChecked4 "gombra a bal oldalon és próbáld újra.">
 <!ENTITY view "Megnézhető">
 <!ENTITY oldPage "A régi állapot">
-<!ENTITY newPage "Az új állapot">
+<!ENTITY newPage "Az újabb állapot">
 <!ENTITY changes "A változás">
 <!ENTITY currentPage "A pillanatnyi állapot">

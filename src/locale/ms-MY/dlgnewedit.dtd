@@ -6,6 +6,13 @@
 <!ENTITY high.label "">
 <!ENTITY often.label "">
 <!ENTITY never.label "">
+<!ENTITY manualScan.label "">
+<!ENTITY scanEvery.label "">
+<!ENTITY minutes.label "">
+<!ENTITY hours.label "">
+<!ENTITY days.label "">
+<!ENTITY ignoreChanges.label "">
+<!ENTITY characters.label "">
 <!ENTITY ignoreNumbers.label "">
 <!ENTITY advanced.label "">
 <!ENTITY charEncoding.label "">

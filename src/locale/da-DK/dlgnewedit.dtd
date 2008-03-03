@@ -6,6 +6,13 @@
 <!ENTITY high.label "Høj">
 <!ENTITY often.label "Ofte">
 <!ENTITY never.label "Aldrig">
+<!ENTITY manualScan.label "">
+<!ENTITY scanEvery.label "">
+<!ENTITY minutes.label "">
+<!ENTITY hours.label "">
+<!ENTITY days.label "">
+<!ENTITY ignoreChanges.label "">
+<!ENTITY characters.label "">
 <!ENTITY ignoreNumbers.label "Ignorer ændringer til nummer">
 <!ENTITY advanced.label "Avanceret...">
 <!ENTITY charEncoding.label "Ændringer fundet">

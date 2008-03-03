@@ -1,0 +1,26 @@
+<!ENTITY preferences.title "Update Scanner - Einstellungen">
+<!ENTITY notifications.title "Benachrichtigungen">
+<!ENTITY scanning.title "Überprüfen">
+<!ENTITY toolbar.title "Symbolleiste">
+<!ENTITY notifications.enable.label "Benachrichtigungsfenster bei Änderung einer Seite anzeigen">
+<!ENTITY notifications.timed.label1 "für">
+<!ENTITY notifications.timed.label2 "Sekunden">
+<!ENTITY notifications.permanent.label "bis durch Benutzer geschlossen">
+<!ENTITY notifications.playSound.label "Bei Veränderung einer Seite Klang abspielen">
+<!ENTITY notifications.defaultSound.label "Systemklang">
+<!ENTITY notifications.browse.label "Durchsuchen...">
+<!ENTITY scan.pageProperties.label "Seiteneigenschaften">
+<!ENTITY scan.selectUsing.label "Überprüfungsintervall und Mindeständerung festlegen mittels">
+<!ENTITY scan.sliders.label "Schieberegler">
+<!ENTITY scan.numbers.label "Zahlen">
+<!ENTITY scan.warnScanShort.label "Bei kurzem Überprüfungsintervall warnen">
+<!ENTITY scan.advanced.label "Erweitert">
+<!ENTITY scan.timeoutIfLonger.label "Laden der zu überprüfenden Seite nach">
+<!ENTITY scan.seconds.label "Sekunden abbrechen">
+<!ENTITY toolbar.toolbarIcons.label "Symbolleistenschaltflächen">
+<!ENTITY toolbar.new.label "Neue Eintrag">
+<!ENTITY toolbar.showNewTab.label "Alle geänderten Seiten in Tabs öffnen">
+<!ENTITY toolbar.markVisited.label "Alle als gelesen markieren">
+<!ENTITY toolbar.delete.label "Löschen">
+<!ENTITY toolbar.preferences.label "Einstellungen">
+<!ENTITY toolbar.help.label "Hilfe">
