@@ -721,7 +721,7 @@ _updateToolbar : function()
     var prefBranch = prefService.getBranch("extensions.updatescan.toolbar.");
 
     document.getElementById("new-button").hidden = !prefBranch.getBoolPref("new");
-    document.getElementById("new-tab-button").hidden = !prefBranch.getBoolPref("newTab");
+    document.getElementById("newtab-button").hidden = !prefBranch.getBoolPref("newTab");
     document.getElementById("checked-button").hidden = !prefBranch.getBoolPref("markVisited");
     document.getElementById("delete-button").hidden = !prefBranch.getBoolPref("delete");
     document.getElementById("settings-button").hidden = !prefBranch.getBoolPref("preferences");

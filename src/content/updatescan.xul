@@ -65,7 +65,7 @@
   <vbox flex="1">
     <hbox pack="left">
       <toolbarbutton id="new-button" oncommand="USc_updatescan.openNewDialog()" tooltiptext="&newbutton.tooltip;"/>
-      <toolbarbutton id="new-tab-button" oncommand="USc_updatescan.showAllChangesInNewTabs()" tooltiptext="&showallchangesinnewtabsbutton.tooltip;"/>
+      <toolbarbutton id="newtab-button" oncommand="USc_updatescan.showAllChangesInNewTabs()" tooltiptext="&showallchangesinnewtabsbutton.tooltip;"/>
       <toolbarbutton id="checked-button" oncommand="USc_updatescan.markAllAsVisited()" tooltiptext="&markallasvisitedbutton.tooltip;"/>
       <toolbarbutton id="delete-button" oncommand="USc_updatescan.deleteSelectedItem()" tooltiptext="&deletebutton.tooltip;"/>
       <toolbarbutton id="settings-button" oncommand="USc_updatescan.openPreferences()" tooltiptext="&preferencesbutton.tooltip;"/>

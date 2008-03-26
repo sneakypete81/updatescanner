@@ -182,7 +182,7 @@
 <label value="&toolbar.new.label;"/>
 </hbox>
 <hbox align="center">
-<checkbox id="new-tab-button" preference="toolbar.newTab"/>
+<checkbox id="newtab-button" preference="toolbar.newTab"/>
 <label value="&toolbar.showNewTab.label;"/>
 </hbox>
 <hbox align="center">

@@ -1,23 +1,3 @@
 @import url(chrome://global/skin/);
+@import url(chrome://browser/skin/);
 
-#alert-closebutton {
-  border: 1px solid transparent;
-  padding: 3px 2px 4px 2px !important;
-  list-style-image: url("chrome://global/skin/icons/close.png");
-  -moz-appearance: none;
-  -moz-image-region: rect(0px, 16px, 16px, 0px);
-}
-
-#alert-closebutton > .toolbarbutton-icon {
-  -moz-margin-end: 0px !important;
-  -moz-padding-end: 2px !important;
-  -moz-padding-start: 2px !important;
-}
-
-#alert-closebutton:hover {
-  -moz-image-region: rect(0px, 32px, 16px, 16px);
-}
-
-#alert-closebutton:hover:active {
-  -moz-image-region: rect(0px, 48px, 16px, 32px);
-}
