@@ -1,6 +1,15 @@
 #!/usr/bin/env python
 # coding=UTF-8
 
+major_version = 2
+minor_version = 1
+revision_version = 0
+build_version = 11
+in_development = True
+publish_babelzilla = False # True = include incomplete locales for babelzilla
+only_english = True # True = only include english for beta releases
+
+
 app = 'updatescan'
 name = 'Update Scanner'
 description = 'Monitors webpages for updates'
@@ -24,14 +33,6 @@ translators = ['SlovakSoft (Slovenčina)',
 authorURL = "http://updatescanner.mozdev.org"
 uid = 'c07d1a49-9894-49ff-a594-38960ede8fb9'
 optionsChrome = 'chrome://updatescan/content/preferences.xul'
-
-major_version = 2
-minor_version = 1
-revision_version = 0
-build_version = 11
-in_development = True
-publish_babelzilla = False
-only_english = True########################
 
 if build_version:
     version = "%d.%d.%d.%d%s" % (
@@ -164,10 +165,9 @@ incomplete_locales = {
 if publish_babelzilla:
     print "*** Babelzilla version - includes incomplete locales ***"
     locales.update(incomplete_locales)
-else:
-    print "  Excluding incomplete locales"
 
 if only_english:
+    print "*** English-only version - only use for betas! ***"
     locales = {
         'en-US': {'locale_version': '1.0','display_name': name}
         }
