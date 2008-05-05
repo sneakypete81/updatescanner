@@ -41,7 +41,8 @@
 
 <prefwindow id="updatescanneP-prefs"
      title="&preferences.title;"
-     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+     onload="USc_pref.onPrefLoad()">
  
 <prefpane id="notifications" label="&notifications.title;"
           image="chrome://updatescan/skin/dialog-information.png">
@@ -82,7 +83,9 @@
     <label id="notificationsDisplayTimeEntryLabel"
            value="&notifications.timed.label2;"/>
   </hbox>
-  <radio label="&notifications.permanent.label;" value="permanent" />
+  <radio id="notificationsDisplayRadioPermanent"
+         label="&notifications.permanent.label;"
+         value="permanent" />
   </radiogroup>
   </groupbox>
   <groupbox>

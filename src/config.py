@@ -4,8 +4,8 @@
 major_version = 2
 minor_version = 1
 revision_version = 0
-build_version = 11
-in_development = True
+build_version = 12
+in_development = False
 publish_babelzilla = False # True = include incomplete locales for babelzilla
 only_english = True # True = only include english for beta releases
 
@@ -14,6 +14,7 @@ app = 'updatescan'
 name = 'Update Scanner'
 description = 'Monitors webpages for updates'
 author = 'Pete Burgers'
+contributors = ['Karol (Icons)']
 translators = ['SlovakSoft (Slovenčina)',
                'Almotasim (Italiano)',
                'myahoo (Français)',
@@ -61,7 +62,7 @@ iconPath = "skin/updatescan_big.png"
 firefoxUID = 'ec8030f7-c20a-464f-9b0e-13a3a9e97384'
 firefoxMinVersion = '2.0'
 #firefoxMaxVersion = '2.0.0.*'
-firefoxMaxVersion = '3.0b4'
+firefoxMaxVersion = '3.0b5'
 
 overlays = (
     # overlay this on that

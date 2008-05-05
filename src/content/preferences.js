@@ -33,6 +33,25 @@
 if (typeof(USc_pref_exists) != 'boolean') {
 var USc_pref_exists = true;
 var USc_pref = {
+  
+  onPrefLoad: function ()
+  {
+    // Mac bug: popup window can't be closed - don't allow permanent notifications!
+    if (this.checkOS() == 'macintosh') {
+      this.disableRadioPermanent();
+    }
+  },
+  
+  disableRadioPermanent: function ()
+  {
+    var radioPermanent = document.getElementById("notificationsDisplayRadioPermanent");
+    var prefService = Components.classes["@mozilla.org/preferences-service;1"].getService();
+    prefService = prefService.QueryInterface(Components.interfaces.nsIPrefService);
+    var prefBranch = prefService.getBranch("extensions.updatescan.notifications.");
+
+    radioPermanent.disabled = true;
+    prefBranch.setBoolPref("permanent", false);
+  },
 
   readNotificationsEnable: function ()
   {
@@ -44,6 +63,11 @@ var USc_pref = {
     displayRadio.disabled = !prefEnable.value;
     displayTimeEntry.disabled = !prefEnable.value;
     displayTimeEntryLabel.disabled = !prefEnable.value;
+
+    // Mac bug: popup window can't be closed - don't allow permanent notifications!
+    if (this.checkOS() == 'macintosh') {
+      this.disableRadioPermanent();
+    }
 
     // don't override the preference's value in UI
     return undefined;
@@ -105,7 +129,24 @@ var USc_pref = {
       prefSoundFile.value = filePicker.file;
       prefDefaultSound.value = false;
     }
-  }  
+  },  
+
+  checkOS : function()
+  {
+    try {
+      var platform = window.navigator.platform.toLowerCase();
+      if (platform.indexOf('win') != -1)
+        return 'windows';
+      else if (platform.indexOf('mac') != -1)
+        return 'macintosh';
+      else if (platform.indexOf('linux') != -1)
+        return 'linux';
+     
+      return 'unknown (' + platform + ')';
+    }
+    catch (e) {}
+    return 'unknown';
+  }
 
 }    
 }

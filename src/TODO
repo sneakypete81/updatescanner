@@ -1,8 +1,12 @@
 Middleclick on link in diffpage causes strange behaviour
+Notification click doesn't work for mac
 Default preferences - CHECK!!
 Add help button to preferences
 
 -- Unreleased --
+New Icon
+Disable manual notification close for mac 
+
 Fix Toolbar icon in FF3
 Rename new-tab-button to us-newtab-button or something for foxdie
 
