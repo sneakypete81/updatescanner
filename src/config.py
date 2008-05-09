@@ -4,8 +4,8 @@
 major_version = 2
 minor_version = 1
 revision_version = 0
-build_version = 12
-in_development = False
+build_version = 13
+in_development = True
 publish_babelzilla = False # True = include incomplete locales for babelzilla
 only_english = True # True = only include english for beta releases
 
