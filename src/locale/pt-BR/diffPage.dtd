@@ -1,17 +1,17 @@
-<!ENTITY headerOld1 "">
-<!ENTITY headerOld2 "">
-<!ENTITY headerNew1 "">
-<!ENTITY headerNew2 "">
-<!ENTITY headerDiff1 "">
-<!ENTITY headerDiff2 "">
-<!ENTITY headerDiff3 "">
-<!ENTITY headerDiff4 "">
-<!ENTITY headerNotChecked1 "">
-<!ENTITY headerNotChecked2 "">
-<!ENTITY headerNotChecked3 "">
-<!ENTITY headerNotChecked4 "">
-<!ENTITY view "">
-<!ENTITY oldPage "">
-<!ENTITY newPage "">
-<!ENTITY changes "">
-<!ENTITY currentPage "">
+<!ENTITY headerOld1 "A página abaixo é uma versão mais velha do site, verificada">
+<!ENTITY headerOld2 ".">
+<!ENTITY headerNew1 "A página abaixo é uma nova versão do site, verificado">
+<!ENTITY headerNew2 ".">
+<!ENTITY headerDiff1 "A página abaixo foi a última verificada">
+<!ENTITY headerDiff2 ". As alterações estão">
+<!ENTITY headerDiff3 "sublinhadas">
+<!ENTITY headerDiff4 ".">
+<!ENTITY headerNotChecked1 "A página abaixo não pôde ser verificada.">
+<!ENTITY headerNotChecked2 "Por favor clique em">
+<!ENTITY headerNotChecked3 "&apos;Verificar&apos;">
+<!ENTITY headerNotChecked4 "o botão á esquerda, e tente novamente">
+<!ENTITY view "Visualizar">
+<!ENTITY oldPage "Página Antiga">
+<!ENTITY newPage "Nova Página">
+<!ENTITY changes "Alterações">
+<!ENTITY currentPage "Página Atual">

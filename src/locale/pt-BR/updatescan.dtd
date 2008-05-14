@@ -2,10 +2,10 @@
 <!ENTITY stopbutton.label "Cancelar">
 <!ENTITY newbutton.tooltip "Nova entrada">
 <!ENTITY showallchangesinnewtabsbutton.tooltip "Mostrar as páginas alteradas em novas abas">
-<!ENTITY markallasvisitedbutton.tooltip "">
+<!ENTITY markallasvisitedbutton.tooltip "Marcar Todos como Visitados">
 <!ENTITY deletebutton.tooltip "Apagar">
-<!ENTITY preferencesbutton.tooltip "">
-<!ENTITY helpbutton.tooltip "Ajuda do UpdateScanner">
+<!ENTITY preferencesbutton.tooltip "Preferências do Update Scanner">
+<!ENTITY helpbutton.tooltip "Ajuda do Update Scanner">
 <!ENTITY openmenu.label "Mostrar alterações">
 <!ENTITY opentabmenu.label "Mostrar alterações em uma nova aba">
 <!ENTITY showallchangesinnewtabsmenu.label "Mostrar as páginas alteradas em novas abas">
@@ -13,4 +13,4 @@
 <!ENTITY sortbynamemenu.label "Organizar por nome">
 <!ENTITY deletemenu.label "Apagar">
 <!ENTITY editmenu.label "Propriedades">
-<!ENTITY scanThisPage.label "">
+<!ENTITY scanThisPage.label "Verificar essa página">

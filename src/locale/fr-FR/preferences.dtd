@@ -1,26 +1,26 @@
-<!ENTITY preferences.title "">
+<!ENTITY preferences.title "Préférences d&apos;Update Scanner">
 <!ENTITY notifications.title "">
-<!ENTITY scanning.title "">
-<!ENTITY toolbar.title "">
+<!ENTITY scanning.title "Vérification">
+<!ENTITY toolbar.title "Barre d&apos;outils">
 <!ENTITY notifications.enable.label "">
-<!ENTITY notifications.timed.label1 "">
-<!ENTITY notifications.timed.label2 "">
-<!ENTITY notifications.permanent.label "">
-<!ENTITY notifications.playSound.label "">
-<!ENTITY notifications.defaultSound.label "">
-<!ENTITY notifications.browse.label "">
-<!ENTITY scan.pageProperties.label "">
+<!ENTITY notifications.timed.label1 "Afficher durant">
+<!ENTITY notifications.timed.label2 "secondes">
+<!ENTITY notifications.permanent.label "Afficher jusqu&apos;à une fermeture manuelle">
+<!ENTITY notifications.playSound.label "Jouer un son quand la page Web a changé">
+<!ENTITY notifications.defaultSound.label "Son par défaut">
+<!ENTITY notifications.browse.label "Parcourir…">
+<!ENTITY scan.pageProperties.label "Propriétés de la page">
 <!ENTITY scan.selectUsing.label "">
-<!ENTITY scan.sliders.label "">
-<!ENTITY scan.numbers.label "">
-<!ENTITY scan.warnScanShort.label "">
-<!ENTITY scan.advanced.label "">
-<!ENTITY scan.timeoutIfLonger.label "">
-<!ENTITY scan.seconds.label "">
-<!ENTITY toolbar.toolbarIcons.label "">
-<!ENTITY toolbar.new.label "">
-<!ENTITY toolbar.showNewTab.label "">
-<!ENTITY toolbar.markVisited.label "">
-<!ENTITY toolbar.delete.label "">
-<!ENTITY toolbar.preferences.label "">
-<!ENTITY toolbar.help.label "">
+<!ENTITY scan.sliders.label "Barres de défilement">
+<!ENTITY scan.numbers.label "Nombres">
+<!ENTITY scan.warnScanShort.label "Prévenir quand la durée de vérification est trop courte">
+<!ENTITY scan.advanced.label "Avancé">
+<!ENTITY scan.timeoutIfLonger.label "Abandonner si la vérification dure plus de">
+<!ENTITY scan.seconds.label "secondes">
+<!ENTITY toolbar.toolbarIcons.label "Icônes de la barre d&apos;outils">
+<!ENTITY toolbar.new.label "Nouvelle entrée">
+<!ENTITY toolbar.showNewTab.label "Voir toutes les pages modifiées dans de nouveaux onglets">
+<!ENTITY toolbar.markVisited.label "Tout marquer comme étant visité">
+<!ENTITY toolbar.delete.label "Effacer">
+<!ENTITY toolbar.preferences.label "Préférences">
+<!ENTITY toolbar.help.label "Aide">

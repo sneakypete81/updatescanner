@@ -52,16 +52,40 @@ check : function()
     var prefs = Components.classes["@mozilla.org/preferences-service;1"].
                  getService(Components.interfaces.nsIPrefService).
                  getBranch("extensions.updatescan.");
-
+    var locale = Components.classes["@mozilla.org/preferences-service;1"].
+                 getService(Components.interfaces.nsIPrefService).
+                 getBranch("general.useragent.").
+                 getCharPref("locale");
+    var updatescanURL="http://updatescanner.mozdev.org/redirect.php?page=index.html&source=scan&locale="+locale;
+    var filebase;
+    
     try {
         versionMajor = prefs.getIntPref("versionMajor");
         versionMinor = prefs.getIntPref("versionMinor");
         versionRevision = prefs.getIntPref("versionRevision");
     } catch (e) {
+        // New installation - create new updatescan.rdf file
         versionMajor = 0;
         versionMinor = 0;
         versionRevision = 0;
+
+        id = USc_rdf.addItem();
+        USc_rdf.modifyItem(id, "title", "Update Scanner Website");
+        USc_rdf.modifyItem(id, "url", updatescanURL);
+        USc_rdf.modifyItem(id, "threshold", "0");
+        USc_rdf.modifyItem(id, "scanratemins", 60*24);
+        USc_rdf.modifyItem(id, "encoding", "auto");
+        USc_rdf.modifyItem(id, "ignoreNumbers", "true");
+
+        filebase = USc_file.escapeFilename(id);
+        USc_file.USwriteFile(filebase+".new", "**NEW**");
+
+        USc_rdf.modifyItem(id, "lastscan", "");  // lastscan not defined
+        USc_rdf.modifyItem(id, "changed", "0");  // not changed 
+        USc_rdf.modifyItem(id, "error", "0");    // no error
+        USc_rdf.save();
     }
+
     if (!USc_file.updatescanDirExists()) {
         // Version 2.0.0+ expects webpage data to be in files, 
         // not embedded in RDF

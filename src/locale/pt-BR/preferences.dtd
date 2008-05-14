@@ -1,26 +1,26 @@
-<!ENTITY preferences.title "">
-<!ENTITY notifications.title "">
-<!ENTITY scanning.title "">
-<!ENTITY toolbar.title "">
-<!ENTITY notifications.enable.label "">
-<!ENTITY notifications.timed.label1 "">
-<!ENTITY notifications.timed.label2 "">
-<!ENTITY notifications.permanent.label "">
-<!ENTITY notifications.playSound.label "">
-<!ENTITY notifications.defaultSound.label "">
-<!ENTITY notifications.browse.label "">
-<!ENTITY scan.pageProperties.label "">
-<!ENTITY scan.selectUsing.label "">
-<!ENTITY scan.sliders.label "">
-<!ENTITY scan.numbers.label "">
-<!ENTITY scan.warnScanShort.label "">
-<!ENTITY scan.advanced.label "">
-<!ENTITY scan.timeoutIfLonger.label "">
-<!ENTITY scan.seconds.label "">
-<!ENTITY toolbar.toolbarIcons.label "">
-<!ENTITY toolbar.new.label "">
-<!ENTITY toolbar.showNewTab.label "">
-<!ENTITY toolbar.markVisited.label "">
-<!ENTITY toolbar.delete.label "">
-<!ENTITY toolbar.preferences.label "">
-<!ENTITY toolbar.help.label "">
+<!ENTITY preferences.title "Preferências do Update Scanner">
+<!ENTITY notifications.title "Notificações">
+<!ENTITY scanning.title "Verificando">
+<!ENTITY toolbar.title "Barra de Ferramentas">
+<!ENTITY notifications.enable.label "Mostrar popup de notificação quando detectar atualizações">
+<!ENTITY notifications.timed.label1 "Mostrar por">
+<!ENTITY notifications.timed.label2 "segundos">
+<!ENTITY notifications.permanent.label "Mostrar até ser fechado manualmente">
+<!ENTITY notifications.playSound.label "Tocar um som quando uma página dor atualizada">
+<!ENTITY notifications.defaultSound.label "Som padrão">
+<!ENTITY notifications.browse.label "Navegar...">
+<!ENTITY scan.pageProperties.label "Propriedades da Página">
+<!ENTITY scan.selectUsing.label "Selecionar freqüência de verificação e percentual de uso">
+<!ENTITY scan.sliders.label "Sliders">
+<!ENTITY scan.numbers.label "Números">
+<!ENTITY scan.warnScanShort.label "Alertar quando o intervalo de verificação é muito curto">
+<!ENTITY scan.advanced.label "Avançado">
+<!ENTITY scan.timeoutIfLonger.label "Tempo limite se a verificação demorar mais que">
+<!ENTITY scan.seconds.label "segundos">
+<!ENTITY toolbar.toolbarIcons.label "Ícones da Barra de Ferramentas">
+<!ENTITY toolbar.new.label "Nova Entrada">
+<!ENTITY toolbar.showNewTab.label "Mostrar todas as páginas atualizadas em novas abas">
+<!ENTITY toolbar.markVisited.label "Marcar todos como visitados">
+<!ENTITY toolbar.delete.label "Apagar">
+<!ENTITY toolbar.preferences.label "Preferências">
+<!ENTITY toolbar.help.label "Ajuda">

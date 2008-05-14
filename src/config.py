@@ -4,10 +4,10 @@
 major_version = 2
 minor_version = 1
 revision_version = 0
-build_version = 13
-in_development = True
+build_version = 14
+in_development = False
 publish_babelzilla = False # True = include incomplete locales for babelzilla
-only_english = True # True = only include english for beta releases
+only_english = False # True = only include english for beta releases
 
 
 app = 'updatescan'
@@ -85,10 +85,6 @@ locales = {
         'locale_version': '1.0',
         'display_name': name,
     },                      
-    'da-DK': {
-        'locale_version': '1.0',
-        'display_name': name,
-    },           
     'de-DE': {
         'locale_version': '1.0',
         'display_name': name,
@@ -98,10 +94,6 @@ locales = {
         'display_name': name,
     },
     'es-ES': {
-        'locale_version': '1.0',
-        'display_name': name,
-    },
-    'fr-FR': {
         'locale_version': '1.0',
         'display_name': name,
     },
@@ -152,6 +144,14 @@ locales = {
 }
 
 incomplete_locales = {
+    'da-DK': {
+        'locale_version': '1.0',
+        'display_name': name,
+    },           
+    'fr-FR': {
+        'locale_version': '1.0',
+        'display_name': name,
+    },
     'ja-JP': {
         'locale_version': '1.0',
         'display_name': name,

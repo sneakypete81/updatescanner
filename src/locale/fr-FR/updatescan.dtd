@@ -2,9 +2,9 @@
 <!ENTITY stopbutton.label "Annuler">
 <!ENTITY newbutton.tooltip "Ajouter l&apos;adresse d&apos;une page Web à analyser">
 <!ENTITY showallchangesinnewtabsbutton.tooltip "Voir dans de nouveaux onglets toutes les pages ayant changé">
-<!ENTITY markallasvisitedbutton.tooltip "">
+<!ENTITY markallasvisitedbutton.tooltip "Tout marqué comme étant visité">
 <!ENTITY deletebutton.tooltip "Supprimer">
-<!ENTITY preferencesbutton.tooltip "">
+<!ENTITY preferencesbutton.tooltip "Préférences d&apos;Update Scanner">
 <!ENTITY helpbutton.tooltip "Aide d&apos;Update Scanner">
 <!ENTITY openmenu.label "Voir les changements">
 <!ENTITY opentabmenu.label "Voir les changements dans un nouvel onglet">
@@ -13,4 +13,4 @@
 <!ENTITY sortbynamemenu.label "Trier par nom">
 <!ENTITY deletemenu.label "Supprimer">
 <!ENTITY editmenu.label "Propriétés">
-<!ENTITY scanThisPage.label "">
+<!ENTITY scanThisPage.label "Analyser cette page">
