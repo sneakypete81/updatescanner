@@ -252,10 +252,10 @@ stopButtonClick : function()
 {
     var me = USc_updatescan;
     var str=document.getElementById("updatescanStrings");
-
     if (me.scan != null) {
         me.scan.cancel();
     }
+    me._hideProgress();
     me._showScanButton();
     me._setStatus(str.getString("statusCancel"));
 },

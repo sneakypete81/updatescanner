@@ -64,7 +64,6 @@ function USc_scanner()
         if (scanning) {
             scanning = false;
             me._stopTimeout();
-            hideProgress();
             httpreq = null;
             me.clear()
         }
