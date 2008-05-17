@@ -14,7 +14,7 @@ app = 'updatescan'
 name = 'Update Scanner'
 description = 'Monitors webpages for updates'
 author = 'Pete Burgers'
-contributors = ['Karol (Icons)']
+contributors = ['Karol Misiura (Tango Desktop Project Icons)']
 translators = ['SlovakSoft (Slovenčina)',
                'Almotasim (Italiano)',
                'myahoo (Français)',
