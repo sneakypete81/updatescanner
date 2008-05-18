@@ -6,6 +6,7 @@ JAR="chrome/$APP.jar"
 echo $JAR
 find content locale skin \
     | grep -v '/.svn' \
+    | grep -v '/.#' \
     | grep -v '/CVS' \
     | grep -v '.cvsignore' \
     | grep -v '.build$' \
@@ -16,6 +17,7 @@ XPI="$APP.xpi"
 echo $XPI
 find install.rdf chrome.manifest chrome defaults \
     | grep -v /.svn \
+    | grep -v '/.#' \
     | grep -v '/CVS' \
     | grep -v '.cvsignore' \
     | grep -v '.build$' \
