@@ -36,7 +36,7 @@ var USc_upgrade = {
 
 
 kVERSION_MAJOR : 2,
-kVERSION_MINOR : 1,
+kVERSION_MINOR : 2,
 kVERSION_REVISION : 0,
 
 check : function()

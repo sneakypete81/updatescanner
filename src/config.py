@@ -2,9 +2,9 @@
 # coding=UTF-8
 
 major_version = 2
-minor_version = 1
+minor_version = 2
 revision_version = 0
-build_version = 14
+build_version = 0
 in_development = False
 publish_babelzilla = False # True = include incomplete locales for babelzilla
 only_english = False # True = only include english for beta releases
