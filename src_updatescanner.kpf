@@ -731,8 +731,6 @@
 </file>
 <file id="8a5d050a-df9d-4757-a48b-1cfb0a4fe92b" idref="91dc608a-b19f-456c-8c02-467eaf467777" name="install.rdf" url="src/www/testing/install.rdf">
 </file>
-<file id="9f5b07a7-f22f-4f52-a9b9-287ede6ff275" idref="91dc608a-b19f-456c-8c02-467eaf467777" name="template.htm" url="src/www/testing/template.htm">
-</file>
 <file id="ea0cf335-22a0-48b6-b3e5-b9d1c1d03ddf" idref="91dc608a-b19f-456c-8c02-467eaf467777" name="chrome.manifest" url="src/www/testing/chrome.manifest">
 </file>
 <folder id="f50d5119-36fd-43b0-b7e0-d963771cbfc2" idref="91dc608a-b19f-456c-8c02-467eaf467777" name="chrome" url="src/www/testing/chrome">
