@@ -6,13 +6,13 @@
 <!ENTITY high.label "Haut">
 <!ENTITY often.label "Souvent">
 <!ENTITY never.label "Jamais">
-<!ENTITY manualScan.label "">
-<!ENTITY scanEvery.label "">
-<!ENTITY minutes.label "">
-<!ENTITY hours.label "">
-<!ENTITY days.label "">
-<!ENTITY ignoreChanges.label "">
-<!ENTITY characters.label "">
+<!ENTITY manualScan.label "Analyse manuelle">
+<!ENTITY scanEvery.label "Fréquence d&apos;analyse :">
+<!ENTITY minutes.label "minutes">
+<!ENTITY hours.label "heures">
+<!ENTITY days.label "jours">
+<!ENTITY ignoreChanges.label "Ignorer les modifications inférieures à environ">
+<!ENTITY characters.label "caractères">
 <!ENTITY ignoreNumbers.label "Ignorer les modifications de nombres">
 <!ENTITY advanced.label "Avancé…">
 <!ENTITY charEncoding.label "Encodage des caractères">

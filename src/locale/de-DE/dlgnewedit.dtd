@@ -7,7 +7,7 @@
 <!ENTITY often.label "Oft">
 <!ENTITY never.label "Nie">
 <!ENTITY manualScan.label "Manuelle Überprüfung">
-<!ENTITY scanEvery.label "Überprüfung aller">
+<!ENTITY scanEvery.label "Überprüfung alle">
 <!ENTITY minutes.label "Minuten">
 <!ENTITY hours.label "Stunden">
 <!ENTITY days.label "Tage">

@@ -9,7 +9,7 @@
 <!ENTITY headerNotChecked1 "Die ausgewählte Seite wurde noch nicht überprüft.">
 <!ENTITY headerNotChecked2 " Bitte klicken Sie auf die ">
 <!ENTITY headerNotChecked3 "&apos;Überprüfen&apos;">
-<!ENTITY headerNotChecked4 " -Schaltfläche links und versuchen Sie es dann erneut.">
+<!ENTITY headerNotChecked4 " -Schaltfläche links und versuchen Sie es erneut.">
 <!ENTITY view "Ansicht">
 <!ENTITY oldPage "Alte Seite">
 <!ENTITY newPage "Neue Seite">

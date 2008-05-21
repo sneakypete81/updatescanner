@@ -27,7 +27,7 @@ translators = ['SlovakSoft (Slovenčina)',
                'Leszek(teo)Życzkowski (Polski)',
                'PetrTwo (Čeština)',
                'Raryel Costa Souza (português brasileiro)',
-               '123tp (Dansk)',
+#               '123tp (Dansk)',
                'Kenan Balamir (Türkçe)',
                'Wang King (简化字 - Simplified Chinese)',
                'Peter Pin-Guang Chen (簡化字 - Traditional Chinese)']
@@ -97,6 +97,10 @@ locales = {
         'locale_version': '1.0',
         'display_name': name,
     },
+    'fr-FR': {
+        'locale_version': '1.0',
+        'display_name': name,
+    },
     'hu-HU': {
         'locale_version': '1.0',
         'display_name': name,
@@ -148,10 +152,6 @@ incomplete_locales = {
         'locale_version': '1.0',
         'display_name': name,
     },           
-    'fr-FR': {
-        'locale_version': '1.0',
-        'display_name': name,
-    },
     'ja-JP': {
         'locale_version': '1.0',
         'display_name': name,

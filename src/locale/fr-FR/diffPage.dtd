@@ -1,17 +1,17 @@
-<!ENTITY headerOld1 "">
-<!ENTITY headerOld2 "">
-<!ENTITY headerNew1 "">
-<!ENTITY headerNew2 "">
-<!ENTITY headerDiff1 "">
-<!ENTITY headerDiff2 "">
-<!ENTITY headerDiff3 "">
-<!ENTITY headerDiff4 "">
-<!ENTITY headerNotChecked1 "">
-<!ENTITY headerNotChecked2 "">
-<!ENTITY headerNotChecked3 "">
-<!ENTITY headerNotChecked4 "">
-<!ENTITY view "">
-<!ENTITY oldPage "">
-<!ENTITY newPage "">
-<!ENTITY changes "">
-<!ENTITY currentPage "">
+<!ENTITY headerOld1 "La page ci-dessous est l&apos;ancienne version de la page Web, analysée">
+<!ENTITY headerOld2 ".">
+<!ENTITY headerNew1 "La page ci-dessous est la nouvelle version de la page Web, analysée">
+<!ENTITY headerNew2 ".">
+<!ENTITY headerDiff1 "La page ci-dessous a pour la dernière fois été analysée">
+<!ENTITY headerDiff2 ". Les différences sont">
+<!ENTITY headerDiff3 "en surbrillance">
+<!ENTITY headerDiff4 ".">
+<!ENTITY headerNotChecked1 "La page choisie n&apos;a pas encore été vérifiée.">
+<!ENTITY headerNotChecked2 "Merci de cliquer sur le bouton">
+<!ENTITY headerNotChecked3 "« Analyser »">
+<!ENTITY headerNotChecked4 "sur la gauche, puis de réessayer.">
+<!ENTITY view "Voir">
+<!ENTITY oldPage "Ancienne page">
+<!ENTITY newPage "Nouvelle page">
+<!ENTITY changes "Modifications">
+<!ENTITY currentPage "Page actuelle">
