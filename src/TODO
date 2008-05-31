@@ -1,17 +1,14 @@
+Middleclick on link in diffpage causes strange behaviour. Change back to HTML?
+
 Diffpage arrow hyperlink to mozdev.updatescanner.org
-Middleclick on link in diffpage causes strange behaviour
 Notification click doesn't work for mac
-Default preferences - CHECK!!
 Add help button to preferences
-Website updates
- - "Forums" text translate
- - "Install Now" button
- - Bug reports on forums, not email!
- - Contact page - not discussions&reviews!
- - amo : click on house!
-Up version in upgrade.js
 
 -- Unreleased --
+Ignore number changes doesn't appear when sliders are disabled.
+
+
+-- 2.2.0 --
 Updated locales 9may
 
 New Icon

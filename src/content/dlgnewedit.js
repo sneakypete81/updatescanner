@@ -93,8 +93,10 @@ function initDialog()
 
     if (args.ignoreNumbers == "true") {
         document.getElementById("ignoreNumbers").checked = true;
+        document.getElementById("ignoreNumbers2").checked = true;
     } else {
         document.getElementById("ignoreNumbers").checked = false;
+        document.getElementById("ignoreNumbers2").checked = false;
     }
 
     loadAvailableCharSets();
@@ -138,6 +140,7 @@ function Ok()
     var prefService = Components.classes["@mozilla.org/preferences-service;1"].getService();
     prefService = prefService.QueryInterface(Components.interfaces.nsIPrefService);
     var prefBranch = prefService.getBranch("extensions.updatescan.");
+    var ignoreNumbers;
 
     if (!httpexists.test(txtURL.value.toLowerCase())) {
         txtURL.value="http://" + txtURL.value;
@@ -153,6 +156,11 @@ function Ok()
     if (prefBranch.getBoolPref("scan.useSliders")) {
 	args.threshold = sliderThresholdDecode(sliderThresholdGetPos());
 	args.scanRateMins = sliderAutoscanDecode(sliderAutoscanGetPos());
+        if (document.getElementById("ignoreNumbers").checked) {
+	    ignoreNumbers = true;
+	} else {
+	    ignoreNumbers = false;
+	}
     } else {
 	args.threshold = document.getElementById("textThreshold").value;
 
@@ -169,6 +177,11 @@ function Ok()
 		args.scanRateMins = 5;
 	    }
 	}
+        if (document.getElementById("ignoreNumbers2").checked) {
+	    ignoreNumbers = true;
+	} else {
+	    ignoreNumbers = false;
+	}
     }
 
     if (args.scanRateMins > 0 && args.scanRateMins < 15 &&
@@ -177,8 +190,7 @@ function Ok()
             return false;
         }
     }
-
-    if (document.getElementById("ignoreNumbers").checked) {
+    if (ignoreNumbers) {
         args.ignoreNumbers = "true";
     } else {
         args.ignoreNumbers = "false";

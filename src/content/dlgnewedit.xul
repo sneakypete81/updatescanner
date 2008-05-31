@@ -139,6 +139,7 @@
     <textbox id="textThreshold" size="5" maxlength="5"/>
     <label value="&characters.label;"/>
   </hbox>
+  <checkbox id="ignoreNumbers2" label="&ignoreNumbers.label;"/>
 </groupbox>
 
 <groupbox>
