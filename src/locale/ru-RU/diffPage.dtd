@@ -10,8 +10,3 @@
 <!ENTITY headerNotChecked2 "Пожалуйста нажмите сюда">
 <!ENTITY headerNotChecked3 "&apos;Сканировать&apos;">
 <!ENTITY headerNotChecked4 "кнопку слева, и попробуйте снова.">
-<!ENTITY view "Вид">
-<!ENTITY oldPage "Старая страница">
-<!ENTITY newPage "Новая страница">
-<!ENTITY changes "Изменения">
-<!ENTITY currentPage "Нынешняя страница">

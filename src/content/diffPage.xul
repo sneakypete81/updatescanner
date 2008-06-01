@@ -44,6 +44,8 @@
 
   <stringbundle id="updatescanStrings" 
 		src="chrome://updatescan/locale/updatescan.properties"/>
+  <stringbundle id="diffPageStrings" 
+		src="chrome://updatescan/locale/diffPage.properties"/>
 
   <script src="rdf/rdfds.js"/>
   <script src="rdf/rdf.js"/>
@@ -100,6 +102,9 @@
       </hbox>
     </vbox>
 
+  <iframe id="sectionView" src="chrome://" type="content-primary" flex="1"
+          height="40"/>
+<!--
     <hbox id="sectionView">
       <label class="header" value="&view;:"/>
       <label class="text-link" value="&oldPage;" id="linkOld" 
@@ -110,7 +115,7 @@
              onclick="USc_diffPage.click('diff');"/>
       <label class="text-link" value="&currentPage;" id="linkCurrent"/>
     </hbox>
-    
+-->    
 
   </vbox>
   <spacer flex="1"/>

@@ -10,8 +10,3 @@
 <!ENTITY headerNotChecked2 "请点击左侧的">
 <!ENTITY headerNotChecked3 "[扫描]">
 <!ENTITY headerNotChecked4 "按钮后重试.">
-<!ENTITY view "查看">
-<!ENTITY oldPage "老版本">
-<!ENTITY newPage "新版本">
-<!ENTITY changes "更新的内容">
-<!ENTITY currentPage "当前页面">

@@ -10,8 +10,3 @@
 <!ENTITY headerNotChecked2 "왼쪽의">
 <!ENTITY headerNotChecked3 "&apos;검사&apos;">
 <!ENTITY headerNotChecked4 "버튼을 클릭하여, 다시 시도하시기 바랍니다.">
-<!ENTITY view "보기">
-<!ENTITY oldPage "예전 페이지">
-<!ENTITY newPage "새로운 페이지">
-<!ENTITY changes "변경 내용">
-<!ENTITY currentPage "현재 페이지">

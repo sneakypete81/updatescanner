@@ -10,8 +10,3 @@
 <!ENTITY headerNotChecked2 "Aby spróbować ponownie proszę nacisnąć przycisk">
 <!ENTITY headerNotChecked3 "&quot;Skanuj&quot;">
 <!ENTITY headerNotChecked4 "znajdujący się po lewej stronie">
-<!ENTITY view "Widok">
-<!ENTITY oldPage "Stara strona">
-<!ENTITY newPage "Nowa strona">
-<!ENTITY changes "Zmiany">
-<!ENTITY currentPage "Aktywna strona">

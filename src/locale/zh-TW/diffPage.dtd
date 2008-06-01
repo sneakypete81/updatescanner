@@ -10,8 +10,3 @@
 <!ENTITY headerNotChecked2 "請按下左邊的">
 <!ENTITY headerNotChecked3 "&apos;檢查&apos;">
 <!ENTITY headerNotChecked4 "按鈕並再試一次。">
-<!ENTITY view "檢視">
-<!ENTITY oldPage "舊頁面">
-<!ENTITY newPage "新頁面">
-<!ENTITY changes "更動">
-<!ENTITY currentPage "目前頁面">

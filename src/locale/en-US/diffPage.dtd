@@ -19,8 +19,3 @@
 <!ENTITY headerNotChecked3 "'Scan'">
 <!ENTITY headerNotChecked4 " button on the left, and try again.">
 
-<!ENTITY view "View">
-<!ENTITY oldPage "Old Page">
-<!ENTITY newPage "New Page">
-<!ENTITY changes "Changes">
-<!ENTITY currentPage "Current Page">

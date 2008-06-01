@@ -10,8 +10,3 @@
 <!ENTITY headerNotChecked2 "Por favor, pulse el botón">
 <!ENTITY headerNotChecked3 "&apos;Comprobar&apos;">
 <!ENTITY headerNotChecked4 "de la izquierda, e inténtelo de nuevo.">
-<!ENTITY view "Ver">
-<!ENTITY oldPage "Página antigua">
-<!ENTITY newPage "Página nueva">
-<!ENTITY changes "Cambios">
-<!ENTITY currentPage "Página actual">

@@ -36,59 +36,54 @@ var USc_diffPage = {
 
 load : function()
 {
-    var id = this._getUrlParameter("id", "");
-    var title = this._getUrlParameter("title", "");
-    var newDate = this._getUrlParameter("newDate", "");
-    var oldDate = this._getUrlParameter("oldDate", "");
-    var url = this._getUrlParameter("url", "");
-    var view = this._getUrlParameter("view", "diff");
-
-    document.title = title;
-
-    this.baseUrl = "chrome://updatescan/content/diffPage.xul?id="+escape(id) +
-    "&title=" + escape(title) +
-    "&newDate=" + escape(newDate) +
-    "&oldDate=" + escape(oldDate) +
-    "&url=" + escape(url) +
-    "&view=";
-
-    var content;
-
-    var filebase=USc_file.escapeFilename(id);
-    var oldContent  = USc_file.USreadFile(filebase+".old");
-    var newContent  = USc_file.USreadFile(filebase+".new");
-    oldContent = this._stripScript(oldContent);
-    newContent = this._stripScript(newContent);
-
-    if (newContent=="**NEW**") {
-	view="notChecked";
-    }
-
-    document.getElementById("linkCurrent").href=url;
-
     if (!this.loaded) {
         this.loaded = true;
+    
+        var id = this._getUrlParameter("id", "");
+        var title = this._getUrlParameter("title", "");
+        var newDate = this._getUrlParameter("newDate", "");
+        var oldDate = this._getUrlParameter("oldDate", "");
+        var url = this._getUrlParameter("url", "");
+        var view = this._getUrlParameter("view", "diff");
+
+        document.title = title;
+
+        this.baseUrl = "chrome://updatescan/content/diffPage.xul?id="+escape(id) +
+        "&title=" + escape(title) +
+        "&newDate=" + escape(newDate) +
+        "&oldDate=" + escape(oldDate) +
+        "&url=" + escape(url) +
+        "&view=";
+
+        var content;
+
+        var filebase=USc_file.escapeFilename(id);
+        var oldContent  = USc_file.USreadFile(filebase+".old");
+        var newContent  = USc_file.USreadFile(filebase+".new");
+        oldContent = this._stripScript(oldContent);
+        newContent = this._stripScript(newContent);
+
+    	if (newContent=="**NEW**") {
+	    view="notChecked";
+        }
 
 	switch (view) {
 	case "diff" :
 	    document.getElementById("sectionDiff").hidden=false;
 	    document.getElementById("titleDiff").value=title;
 	    document.getElementById("dateDiff").value=newDate;
-	    document.getElementById("linkDiff").className="header";
 	    content = USc_diffWiki.WDiffString(oldContent, newContent);
 	    break;
 	case "new":
 	    document.getElementById("sectionNew").hidden=false;
 	    document.getElementById("titleNew").value=title;
 	    document.getElementById("dateNew").value=newDate;
-	    document.getElementById("linkNew").className="header";
 	    content = newContent;
 	    break;
 	case "old":
 	    document.getElementById("sectionOld").hidden=false;
 	    document.getElementById("titleOld").value=title;
 	    document.getElementById("dateOld").value=oldDate;
-	    document.getElementById("linkOld").className="header";
 	    content = oldContent;
 	    break;
 	default:
@@ -97,7 +92,7 @@ load : function()
 	    document.getElementById("titleNotChecked").value=title;
 	    content = "";
 	}
-
+        this._writeViewFrame(view, url);
 	var doc = document.getElementById("diffFrame").contentDocument;
 	doc.open();
 	doc.write("<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>\n");
@@ -110,6 +105,41 @@ load : function()
 click : function(view) 
 {
     location.href = this.baseUrl+view;
+},
+
+_writeViewFrame : function (view, url)
+{
+    var str=document.getElementById("diffPageStrings")
+    
+    var viewFrame = document.getElementById("sectionView");
+    var viewDoc = viewFrame.contentDocument;
+
+    oldPage=str.getString("oldPage");
+    newPage=str.getString("newPage");
+    changes=str.getString("changes");
+    currentPage=str.getString("currentPage");
+
+    viewDoc.open();
+    viewDoc.write("<html><head>");
+    viewDoc.write("<style type=text/css><!--");
+    viewDoc.write("body {font-family: arial,sans-serif; font-size: 12px}");
+    viewDoc.write("//--></style></head><body>");
+    viewDoc.write("<b>View:</b>&nbsp;\n");
+    if (view == "old") 
+        viewDoc.write("<b>"+oldPage+"</b>&nbsp;\n");
+    else
+        viewDoc.write("<a href='"+this.baseUrl+"old' target='_top'>"+oldPage+"</a>&nbsp;\n");
+    if (view == "new") 
+        viewDoc.write("<b>"+newPage+"</b>&nbsp;\n");
+    else
+        viewDoc.write("<a href='"+this.baseUrl+"new' target='_top'>"+newPage+"</a>&nbsp;\n");
+    if (view == "diff") 
+        viewDoc.write("<b>"+changes+"</b>&nbsp;\n");
+    else
+        viewDoc.write("<a href='"+this.baseUrl+"diff' target='_top'>"+changes+"</a>\n&nbsp;");
+    viewDoc.write("<a href='"+url+"' target='_top'>"+currentPage+"</a>\n");
+    viewDoc.write("</body></html>");
+    viewDoc.close();
 },
 
 // Taken with permission from http://www.netlobo.com/url_query_string_javascript.html

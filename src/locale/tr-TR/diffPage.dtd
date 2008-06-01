@@ -10,8 +10,3 @@
 <!ENTITY headerNotChecked2 "Lütfen soldaki">
 <!ENTITY headerNotChecked3 "&apos;Tara&apos;">
 <!ENTITY headerNotChecked4 "düğmesine basarak, tekrar deneyin.">
-<!ENTITY view "Görünüm">
-<!ENTITY oldPage "Eski Sayfa">
-<!ENTITY newPage "Yeni Sayfa">
-<!ENTITY changes "Değişiklikler">
-<!ENTITY currentPage "Geçerli Sayfa">

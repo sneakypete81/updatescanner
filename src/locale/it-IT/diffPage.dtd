@@ -10,8 +10,3 @@
 <!ENTITY headerNotChecked2 " Fare clic sul pulsante ">
 <!ENTITY headerNotChecked3 "&apos;Controlla&apos;">
 <!ENTITY headerNotChecked4 " (a sinistra) e riprova.">
-<!ENTITY view "Visualizza">
-<!ENTITY oldPage "Versione precedente">
-<!ENTITY newPage "Versione attuale">
-<!ENTITY changes "Modifiche">
-<!ENTITY currentPage "Pagina corrente">

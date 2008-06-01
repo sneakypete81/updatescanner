@@ -10,8 +10,3 @@
 <!ENTITY headerNotChecked2 "Kattints az ">
 <!ENTITY headerNotChecked3 "&apos;Ellenőrzés&apos;">
 <!ENTITY headerNotChecked4 " gombra a bal oldalon és próbáld újra.">
-<!ENTITY view "Megnézhető">
-<!ENTITY oldPage "A régi állapot">
-<!ENTITY newPage "Az újabb állapot">
-<!ENTITY changes "A változás">
-<!ENTITY currentPage "A pillanatnyi állapot">
