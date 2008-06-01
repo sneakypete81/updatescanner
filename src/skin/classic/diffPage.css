@@ -1,5 +1,10 @@
 @import url(chrome://global/skin/);
 
+body {
+    font-family: sans-serif;
+    font-size: small;
+}
+
 .blue-box
 {
  background-color: #e5e5ff;

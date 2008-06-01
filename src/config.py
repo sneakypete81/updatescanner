@@ -3,9 +3,9 @@
 
 major_version = 2
 minor_version = 2
-revision_version = 0
-build_version = 1
-in_development = True
+revision_version = 1
+build_version = 0
+in_development = False
 publish_babelzilla = False # True = include incomplete locales for babelzilla
 only_english = False # True = only include english for beta releases
 
@@ -60,8 +60,7 @@ updateLink = "%(homepageURL)s/%(updateFile)s" % vars()
 iconPath = "skin/updatescan_big.png"
 
 firefoxUID = 'ec8030f7-c20a-464f-9b0e-13a3a9e97384'
-firefoxMinVersion = '2.0'
-#firefoxMaxVersion = '2.0.0.*'
+firefoxMinVersion = '3.0.*'
 firefoxMaxVersion = '3.0.*'
 
 overlays = (

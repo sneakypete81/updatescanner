@@ -114,16 +114,15 @@ _writeViewFrame : function (view, url)
     var viewFrame = document.getElementById("sectionView");
     var viewDoc = viewFrame.contentDocument;
 
-    oldPage=str.getString("oldPage");
-    newPage=str.getString("newPage");
-    changes=str.getString("changes");
-    currentPage=str.getString("currentPage");
+    var oldPage=str.getString("oldPage");
+    var newPage=str.getString("newPage");
+    var changes=str.getString("changes");
+    var currentPage=str.getString("currentPage");
 
     viewDoc.open();
     viewDoc.write("<html><head>");
-    viewDoc.write("<style type=text/css><!--");
-    viewDoc.write("body {font-family: arial,sans-serif; font-size: 12px}");
-    viewDoc.write("//--></style></head><body>");
+    viewDoc.write("<link rel='stylesheet' href='chrome://updatescan/skin/diffPage.css' type='text/css'/>");
+    viewDoc.write("</head><body>");
     viewDoc.write("<b>View:</b>&nbsp;\n");
     if (view == "old") 
         viewDoc.write("<b>"+oldPage+"</b>&nbsp;\n");

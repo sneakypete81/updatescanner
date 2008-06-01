@@ -1,12 +1,10 @@
-Middleclick on link in diffpage causes strange behaviour. Change back to HTML?
-
 Diffpage arrow hyperlink to mozdev.updatescanner.org
 Notification click doesn't work for mac
 Add help button to preferences
 
 -- Unreleased --
 Ignore number changes doesn't appear when sliders are disabled.
-
+Middleclick on link in diffpage causes strange behaviour. Changed back to HTML
 
 -- 2.2.0 --
 Updated locales 9may
