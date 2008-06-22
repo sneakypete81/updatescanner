@@ -3,7 +3,7 @@
 
 major_version = 2
 minor_version = 2
-revision_version = 1
+revision_version = 2
 build_version = 0
 in_development = False
 publish_babelzilla = False # True = include incomplete locales for babelzilla
