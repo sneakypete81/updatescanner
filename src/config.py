@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # coding=UTF-8
 
-major_version = 2
-minor_version = 2
-revision_version = 3
+major_version = 3
+minor_version = 0
+revision_version = 0
 build_version = 0
-in_development = False
+in_development = True
 publish_babelzilla = False # True = include incomplete locales for babelzilla
 only_english = False # True = only include english for beta releases
 
