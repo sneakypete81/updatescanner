@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # coding=UTF-8
 
-major_version = 2
-minor_version = 3
+major_version = 3
+minor_version = 0
 revision_version = 0
 build_version = 0
 in_development = True

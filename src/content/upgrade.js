@@ -35,9 +35,8 @@ var USc_upgrade_exists = true;
 var USc_upgrade = {    
 
 
-kVERSION_MAJOR : 2,
-kVERSION_MINOR : 3,
-kVERSION_REVISION : 0,
+kVERSION_MAJOR : 3,
+kVERSION_MINOR : 0,
 
 check : function()
 {
@@ -48,7 +47,6 @@ check : function()
     var filebase;
     var versionMajor;
     var versionMinor;
-    var versionRevision;
     var prefs = Components.classes["@mozilla.org/preferences-service;1"].
                  getService(Components.interfaces.nsIPrefService).
                  getBranch("extensions.updatescan.");
@@ -61,28 +59,25 @@ check : function()
     try {
         versionMajor = prefs.getIntPref("versionMajor");
         versionMinor = prefs.getIntPref("versionMinor");
-        versionRevision = prefs.getIntPref("versionRevision");
     } catch (e) {
         // New installation
         versionMajor = 0;
         versionMinor = 0;
-        versionRevision = 0;
     }
 
 // We should really just silently refuse to upgrade from really old installations,
 // just in case
 
-    if (      versionMajor < 2 || 
-              versionMajor == 2 && versionMinor < 3) {
-        if (me.upgrade_2_3_0()) {
+    if (      versionMajor < 3 || 
+              versionMajor == 3 && versionMinor < 0) {
+        if (me.upgrade_3_0()) {
 //            prefs.setIntPref("versionMajor", me.kVERSION_MAJOR);
 //            prefs.setIntPref("versionMinor", me.kVERSION_MINOR);
-//            prefs.setIntPref("versionRevision", me.kVERSION_REVISION);
         }
     }
 },
 
-upgrade_2_3_0 : function()
+upgrade_3_0 : function()
 {
     var me = USc_upgrade;
 
@@ -100,18 +95,21 @@ createRootBookmarks : function ()
     var updatescanURL="http://updatescanner.mozdev.org/redirect.php?page=index.html&source=scan&locale="+locale;
     var bookmarksService = Cc["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Ci.nsINavBookmarksService);
 
-    var folderId = bookmarksService.createFolder(bookmarksService.bookmarksMenuFolder, "Update Scanner's Pages", bookmarksService.DEFAULT_INDEX);
-    USc_places.setRootFolderId(folderId);
-    USc_places.addBookmark("Update Scanner Website", updatescanURL);
+    if (USc_places.getRootFolderId() == null) {
+        var folderId = bookmarksService.createFolder(bookmarksService.bookmarksMenuFolder, "Update Scanner's Pages", bookmarksService.DEFAULT_INDEX);
+        USc_places.setRootFolderId(folderId);
+        var bookmarkId = USc_places.addBookmark("Update Scanner Website", updatescanURL);
 
-    filebase = USc_file.escapeFilename(folderId);
-    USc_file.USwriteFile(filebase+".new", "**NEW**");
+
+        var filebase = USc_file.escapeFilename(updatescanURL);
+        USc_file.USwriteFile(filebase+".new", "**NEW**");
 /*
     USc_rdf.modifyItem(id, "lastscan", "");  // lastscan not defined
     USc_rdf.modifyItem(id, "changed", "0");  // not changed 
     USc_rdf.modifyItem(id, "error", "0");    // no error
     USc_rdf.save();
 */    
+    }
 }
 
 

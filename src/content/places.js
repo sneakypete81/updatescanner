@@ -62,6 +62,7 @@ var USc_places = {
     var folderId = this.getRootFolderId();
     var id = bookmarksService.insertBookmark(folderId, bookmarkURI, bookmarksService.DEFAULT_INDEX, title);
     annotationService.setItemAnnotation(id, this.ANNO_STATUS, "updated", 0, annotationService.EXPIRE_NEVER);
+    return id;
   },
 
   getRootFolderId : function() {

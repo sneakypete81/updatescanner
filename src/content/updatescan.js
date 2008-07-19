@@ -66,6 +66,7 @@ load : function()
     var me = USc_updatescan;
     var r;
 
+    USc_upgrade.check(); // See if we need to upgrade something
 
     me._extendPlacesTreeView();
     
@@ -91,8 +92,6 @@ load : function()
     me.refresh.register("refreshTreeRequest", me._refreshTree);
     me.refresh.request();
 */
-
-    USc_upgrade.check(); // See if we need to upgrade something
 
     // Check for toolbar button changes
     me._branch = Components.classes["@mozilla.org/preferences-service;1"]
