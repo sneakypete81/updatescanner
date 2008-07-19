@@ -175,6 +175,20 @@ _prependTempPath : function(filename)
 },
 
 escapeFilename : function(filename)
+// Remove all non-alphanumeric characters
+{
+    var output = ""
+    var ch;
+    for (var i=0; i<filename.length; i++) {
+        ch = filename[i]
+        if (ch.match(/[0-9a-zA-Z]/)) {
+            output += ch;
+        }
+    }
+    return output;
+},
+
+oldEscapeFilename : function(filename)
 // Convert non-numeric/lowercase characters to ascii codes (" " => "_32")
 {
     var output = ""
@@ -189,25 +203,6 @@ escapeFilename : function(filename)
     }
     return output;
 },
-
-oldEscapeFilename : function(filename)
-// Convert non-alphanumeric characters to ascii codes (" " => "_32")
-// This is an old escaping function - the problem is that Windows doesn't 
-// handle case-sensitive filenames! 
-{
-    var output = ""
-    var ch;
-    for (var i=0; i<filename.length; i++) {
-        ch = filename[i]
-        if (ch.match(/[0-9a-zA-Z]/)) {
-            output += ch;
-        } else {
-            output += "_"+ch.charCodeAt(0);
-        }
-    }
-    return output;
-},
-
 openTempFile : function(fileBase, fileExt)
 // Creates a temporary file with the specified base filename.
 // The suffix of the filename is stored as a preference.
