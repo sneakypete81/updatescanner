@@ -32,20 +32,42 @@
  * the terms of any one of the MPL, the GPL or the LGPL.  
  * ***** END LICENSE BLOCK ***** -->
 
+<!--START-->
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://browser/content/places/places.css"?>
+<?xml-stylesheet href="chrome://browser/skin/places/places.css"?>
+<?xul-overlay href="chrome://global/content/editMenuOverlay.xul"?>
+<?xul-overlay href="chrome://browser/content/places/placesOverlay.xul"?>
+
+<?xml-stylesheet href="chrome://browser/skin/browser.css" type="text/css"?>
+<?xml-stylesheet href="chrome://updatescan/skin/sage.css" type="text/css"?>
 <?xml-stylesheet href="chrome://updatescan/skin/updatescan.css" 
 		 type="text/css"?>
+
+<!--END-->
 
 <!DOCTYPE window SYSTEM "chrome://updatescan/locale/updatescan.dtd">
 
 <window id="UpdateScan-window"
-	onload="USc_updatescan.load()"
-	onunload="USc_updatescan.unload()"
+	onload="USc_updatescan.load();"
+	onunload="USc_updatescan.unload();"
 	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
 	xmlns:UPDATESCAN="http://www.updatescan.com/rdf/updatescan#">
-
+<!--	onload="USc_updatescan.load(); sidebarController.init();"
+	onunload="USc_updatescan.unload(); sidebarController.uninit();"
+-->
   <stringbundle id="updatescanStrings" 
 		src="chrome://updatescan/locale/updatescan.properties"/>
-    
+
+  <stringbundleset>
+    <stringbundle id="strRes" src="chrome://updatescan/locale/sage.properties"/>
+  </stringbundleset>
+
+  <commandset id="placesCommands"/>
+  <commandset id="editMenuCommands"/>
+  <popup id="placesContext"/>
+
   <script src="rdf/rdfds.js"/>
   <script src="rdf/rdf.js"/>
   <script src="mydump.js"/>
@@ -61,6 +83,13 @@
   <script src="updatescanoverlay.js"/>
   <script src="upgrade.js"/>
   <script src="string.js"/>
+  <script src="places.js"/>
+
+  <script type="application/x-javascript" src="chrome://browser/content/bookmarks/sidebarUtils.js"/>
+  <script type="application/x-javascript" src="chrome://global/content/contentAreaUtils.js"/>
+  <script type="application/x-javascript" src="chrome://updatescan/content/sage.js"/>
+  <script type="application/x-javascript" src="chrome://updatescan/content/commonfunc.js"/>
+  <script type="application/x-javascript" src="chrome://updatescan/content/feedloader.js"/>
 
   <vbox flex="1">
     <hbox pack="left">
@@ -73,7 +102,22 @@
       <toolbarspring />
       <button observes="scanbutton" />
     </hbox>
-
+      <tree id="bookmarks-view"
+        class="sidebar-placesTree"
+        type="places"
+        hidecolumnpicker="true"
+        context="placesContext"
+        flex="1"
+        onkeypress="SidebarUtils.handleTreeKeyPress(event);"
+        onclick="sidebarController.bookmarksTreeClick(event);"
+        onmousemove="SidebarUtils.handleTreeMouseMove(event);"
+        onmouseout="SidebarUtils.clearURLFromStatusBar();">
+        <treecols>
+          <treecol id="title" flex="1" primary="true" hideheader="true"/>
+        </treecols>
+        <treechildren id="bookmarks-view-children" class="sidebar-placesTreechildren" view="bookmarks-view" flex="1"/>
+      </tree>
+<!--
     <tree id="UpdateTree" flex="1" datasources="rdf://null" 
 	  hidecolumnpicker="true" seltype="single"
 	  ref="http://www.updatescan.com/rdf/updatescan/all">
@@ -145,6 +189,7 @@
         </rule>
       </template>
     </tree>
+-->  
     <hbox>
       <progressmeter id="Progress" mode="normal" value="0" 
 		     collapsed="true" flex="1"/>

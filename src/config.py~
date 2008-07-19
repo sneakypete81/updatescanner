@@ -2,10 +2,10 @@
 # coding=UTF-8
 
 major_version = 2
-minor_version = 3
-revision_version = 0
+minor_version = 2
+revision_version = 3
 build_version = 0
-in_development = True
+in_development = False
 publish_babelzilla = False # True = include incomplete locales for babelzilla
 only_english = False # True = only include english for beta releases
 
@@ -66,7 +66,6 @@ firefoxMaxVersion = '3.0.*'
 overlays = (
     # overlay this on that
     ('%(app)s/content/browser.xul' % vars(), 'browser/content/browser.xul' % vars()),
-    ('%(app)s/content/sage-Overlay.xul' % vars(), 'browser/content/browser.xul' % vars()),
 )
 stylesheets = (
     # overlay this on that

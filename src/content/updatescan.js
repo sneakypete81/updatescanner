@@ -29,6 +29,27 @@
  * the provisions above, a recipient may use your version of this file under
  * the terms of any one of the MPL, the GPL or the LGPL.  
  * ***** END LICENSE BLOCK ***** */
+
+var USc_annotationObserver = {
+  
+  onPageAnnotationSet : function(aURI, aName) { },
+  
+  onItemAnnotationSet : function(aItemId, aName) {
+    switch (aName) {
+      case SageUtils.ANNO_ROOT:
+        bookmarksTree.place = "place:queryType=1&folder=" + aItemId;
+        break;
+      case SageUtils.ANNO_STATUS:
+        bookmarksTree.getResultView().invalidateAll();
+        break;
+    }
+  },
+  
+  onPageAnnotationRemoved : function(aURI, aName) { },
+  
+  onItemAnnotationRemoved : function(aItemId, aName) { }
+  
+}
  
 if (typeof(USc_updatescan_exists) != 'boolean') {
 var USc_updatescan_exists = true;
@@ -38,13 +59,24 @@ numChanges : 0,
 refresh : null,
 scan: null,
 _branch: null,
+tree : null,
 
 load : function()
 {
     var me = USc_updatescan;
-    var tree;
-    var rdffile;
+    var r;
 
+
+    me._extendPlacesTreeView();
+    
+    me.tree = document.getElementById("bookmarks-view");
+    
+    var rootFolderId = USc_places.getRootFolderId();
+    me.tree.place = "place:queryType=1&folder=" + rootFolderId;
+    
+    PlacesUtils.annotations.addObserver(USc_annotationObserver);
+    
+/*
     // Connect to the RDF file
     rdffile = USc_rdf.getPath();
     USc_rdf.init(USc_rdf.getURI(rdffile));
@@ -54,12 +86,13 @@ load : function()
     tree.datasources=USc_rdf.getURI(rdffile);
     tree.onclick=me._treeClick;
 
-    USc_upgrade.check(); // See if we need to upgrade something
-
     // Check for refresh requests
     me.refresh = new USc_refresher();
     me.refresh.register("refreshTreeRequest", me._refreshTree);
     me.refresh.request();
+*/
+
+    USc_upgrade.check(); // See if we need to upgrade something
 
     // Check for toolbar button changes
     me._branch = Components.classes["@mozilla.org/preferences-service;1"]
@@ -73,7 +106,10 @@ load : function()
 unload : function()
 {
     var me = USc_updatescan;
-    me.refresh.unregister();
+    
+    PlacesUtils.annotations.removeObserver(USc_annotationObserver);
+    
+//    me.refresh.unregister();
     if (me._branch) {
 	me._branch.removeObserver("", this);
     }
@@ -726,7 +762,72 @@ _updateToolbar : function()
     document.getElementById("delete-button").hidden = !prefBranch.getBoolPref("delete");
     document.getElementById("settings-button").hidden = !prefBranch.getBoolPref("preferences");
     document.getElementById("help-button").hidden = !prefBranch.getBoolPref("help");
-}
+},
 
+_extendPlacesTreeView : function() {
+    PlacesTreeView.prototype.getCellPropertiesBase = PlacesTreeView.prototype.getCellProperties;
+    PlacesTreeView.prototype.getCellProperties =
+    function sage_getCellProperties(aRow, aColumn, aProperties) {
+      var properties = this._visibleElements[aRow].properties;
+      
+      var propertiesBase = Cc["@mozilla.org/supports-array;1"].createInstance(Ci.nsISupportsArray);
+      this.getCellPropertiesBase(aRow, aColumn, propertiesBase);
+      var proptery;
+      for (var i = 0; i < propertiesBase.Count(); i++) {
+        property = propertiesBase.GetElementAt(i);
+        if (property != this._getAtomFor("livemark")) {
+          aProperties.AppendElement(propertiesBase.GetElementAt(i));
+        }
+      }
+          
+      if (aColumn.id != "title")
+        return;
+      
+      if (!properties) {
+        properties = [];
+        var node = this._visibleElements[aRow].node;
+        var nodeType = node.type;
+        var itemId = node.itemId;
+        if (nodeType == Ci.nsINavHistoryResultNode.RESULT_TYPE_URI) {
+          if (!PlacesUtils.nodeIsLivemarkContainer(node.parent)) {
+            try {
+              var state = PlacesUtils.annotations.getItemAnnotation(itemId, SageUtils.ANNO_STATUS);
+              properties.push(this._getAtomFor("sage_state_" + state));
+            } catch (e) { }
+          }
+        } else if (nodeType == Ci.nsINavHistoryResultNode.RESULT_TYPE_FOLDER) {
+          if (PlacesUtils.nodeIsLivemarkContainer(node)) {
+            try {
+              var state = PlacesUtils.annotations.getItemAnnotation(itemId, SageUtils.ANNO_STATUS);
+              properties.push(this._getAtomFor("sage_state_" + state));
+            } catch (e) { }
+          }
+        }
+        for (var i = 0; i < properties.length; i++) {
+          aProperties.AppendElement(properties[i]);
+          this._visibleElements[aRow].properties.push(properties[i]);
+        }
+      }
+    }
+    PlacesTreeView.prototype.isContainerBase = PlacesTreeView.prototype.isContainer;
+    PlacesTreeView.prototype.isContainer =
+    function sage_isContainer(aRow) {
+      var baseValue = this.isContainerBase(aRow);
+       if (baseValue) {
+         var node = this._visibleElements[aRow].node;
+         if (PlacesUtils.annotations.itemHasAnnotation(node.itemId, LMANNO_FEEDURI)) {
+           return false;
+         } else {
+           return true;
+         }
+       } else {
+         return false;
+       }
+    }
+    PlacesTreeView.prototype.getImageSrc =
+    function sage_getImageSrc(aRow, aColumn) {
+      return "";
+    }  
+}
 }
 }

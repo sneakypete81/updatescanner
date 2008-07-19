@@ -36,7 +36,7 @@ var USc_upgrade = {
 
 
 kVERSION_MAJOR : 2,
-kVERSION_MINOR : 2,
+kVERSION_MINOR : 3,
 kVERSION_REVISION : 0,
 
 check : function()
@@ -56,7 +56,6 @@ check : function()
                  getService(Components.interfaces.nsIPrefService).
                  getBranch("general.useragent.").
                  getCharPref("locale");
-    var updatescanURL="http://updatescanner.mozdev.org/redirect.php?page=index.html&source=scan&locale="+locale;
     var filebase;
     
     try {
@@ -64,131 +63,57 @@ check : function()
         versionMinor = prefs.getIntPref("versionMinor");
         versionRevision = prefs.getIntPref("versionRevision");
     } catch (e) {
-        // New installation - create new updatescan.rdf file
+        // New installation
         versionMajor = 0;
         versionMinor = 0;
         versionRevision = 0;
-
-        id = USc_rdf.addItem();
-        USc_rdf.modifyItem(id, "title", "Update Scanner Website");
-        USc_rdf.modifyItem(id, "url", updatescanURL);
-        USc_rdf.modifyItem(id, "threshold", "0");
-        USc_rdf.modifyItem(id, "scanratemins", 60*24);
-        USc_rdf.modifyItem(id, "encoding", "auto");
-        USc_rdf.modifyItem(id, "ignoreNumbers", "true");
-
-        filebase = USc_file.escapeFilename(id);
-        USc_file.USwriteFile(filebase+".new", "**NEW**");
-
-        USc_rdf.modifyItem(id, "lastscan", "");  // lastscan not defined
-        USc_rdf.modifyItem(id, "changed", "0");  // not changed 
-        USc_rdf.modifyItem(id, "error", "0");    // no error
-        USc_rdf.save();
     }
 
-    if (!USc_file.updatescanDirExists()) {
-        // Version 2.0.0+ expects webpage data to be in files, 
-        // not embedded in RDF
-        USc_file.createUpdatescanDir();
-        nodes = USc_rdf.getRoot().getChildren();
-        while (nodes.hasMoreElements()) {
-            node = nodes.getNext();
-            id = node.getValue();
-            USc_rdf.modifyItem(id, "content", ""); // Not using this anymore
-            USc_rdf.modifyItem(id, "changed", "0");
-            USc_rdf.modifyItem(id, "error", "0");
-            USc_rdf.modifyItem(id, "lastautoscan", "5 November 1978");
-            filebase = USc_file.escapeFilename(id);
-            USc_file.USwriteFile(filebase+".new", "**NEW**");// Mark as new
-        }
-        USc_rdf.save();
-    }
+// We should really just silently refuse to upgrade from really old installations,
+// just in case
 
     if (      versionMajor < 2 || 
-              versionMajor == 2 && versionMinor < 0 ||
-              versionMajor == 2 && versionMinor == 0 && versionRevision < 14) {       
-        if (me.upgrade_2_0_14()) {
-            prefs.setIntPref("versionMajor", me.kVERSION_MAJOR);
-            prefs.setIntPref("versionMinor", me.kVERSION_MINOR);
-            prefs.setIntPref("versionRevision", me.kVERSION_REVISION);
+              versionMajor == 2 && versionMinor < 3) {
+        if (me.upgrade_2_3_0()) {
+//            prefs.setIntPref("versionMajor", me.kVERSION_MAJOR);
+//            prefs.setIntPref("versionMinor", me.kVERSION_MINOR);
+//            prefs.setIntPref("versionRevision", me.kVERSION_REVISION);
         }
     }
 },
 
-upgrade_2_0_14 : function()
+upgrade_2_3_0 : function()
 {
     var me = USc_upgrade;
-    var nodes;
-    var node;
-    var id;
-    var ids = new Array();
-    var file;
-    var files = new Array();
-    var ucaseFiles = new Array();
-    var params;
-    var label;
-    var label2;
-    var str=document.getElementById("updatescanStrings");
 
-    // Previous versions had bug where multiple items used the same file.
-    // First, check for duplications
-    nodes = USc_rdf.getRoot().getChildren();
-    if (!nodes.hasMoreElements()) {
-        return true; // No need to do anything - nothing in the tree
-    }
-    while (nodes.hasMoreElements()) { // Get a list of filename bases
-        node = nodes.getNext();
-        id = node.getValue();
-        ids.push(id);
-        file = USc_file.oldEscapeFilename(id.substr(6))
-        files.push(file);
-        ucaseFiles.push(file.toUpperCase());
-    }      
-    label =  str.getString("upgradeLabel")+" (1/2)...";
-    label2 = str.getString("timeWarning");
-    params = {label:label, 
-              label2:label2,
-              callback:me.upgradeCheckDup, 
-              items:files, 
-              data:ucaseFiles, 
-              cancelPrompt:str.getString("upgradeCancel"), 
-              retVal:null, 
-              retData:null};       
-    window.openDialog('chrome://updatescan/content/progress.xul', 
-                      'dlgProgress', 
-                      'chrome,dialog,modal,centrescreen', params);
-    if (!params.retVal) {
-        return false; // Upgrade was cancelled
-    }
+    me.createRootBookmarks();
     
-    // Delete the cache files for duplicate entries (might be corrupt)
-    for (i in params.retData) {
-        USc_file.USrmFile(params.retData[i]+".old");
-        USc_file.USrmFile(params.retData[i]+".new");
-        USc_file.USrmFile(params.retData[i]+".dif");
-    }
-
-    // Rename existing cache files to use escaped uppercase id
-    for (i in files) {
-        var file = USc_file.escapeFilename(ids[i]);
-        USc_file.USmvFile(files[i]+".old", file+".old");
-        USc_file.USmvFile(files[i]+".new", file+".new");
-        USc_file.USmvFile(files[i]+".dif", file+".dif");
-        files[i] = file; // Used in the next step...
-    }
-
     return true;
 },
 
-upgradeCheckDup : function(item, data)
+createRootBookmarks : function ()
 {
-    // Check if the item appears twice in the data
-    if (data.indexOf(item.toUpperCase()) != 
-        data.lastIndexOf(item.toUpperCase())) {
-        return item;
-    }
-    return null;
+    var locale = Components.classes["@mozilla.org/preferences-service;1"].
+                 getService(Components.interfaces.nsIPrefService).
+                 getBranch("general.useragent.").
+                 getCharPref("locale");
+    var updatescanURL="http://updatescanner.mozdev.org/redirect.php?page=index.html&source=scan&locale="+locale;
+    var bookmarksService = Cc["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Ci.nsINavBookmarksService);
+
+    var folderId = bookmarksService.createFolder(bookmarksService.bookmarksMenuFolder, "Update Scanner's Pages", bookmarksService.DEFAULT_INDEX);
+    USc_places.setRootFolderId(folderId);
+    USc_places.addBookmark("Update Scanner Website", updatescanURL);
+
+    filebase = USc_file.escapeFilename(folderId);
+    USc_file.USwriteFile(filebase+".new", "**NEW**");
+/*
+    USc_rdf.modifyItem(id, "lastscan", "");  // lastscan not defined
+    USc_rdf.modifyItem(id, "changed", "0");  // not changed 
+    USc_rdf.modifyItem(id, "error", "0");    // no error
+    USc_rdf.save();
+*/    
 }
+
 
 }
 }
