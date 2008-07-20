@@ -41,7 +41,6 @@
 <?xul-overlay href="chrome://browser/content/places/placesOverlay.xul"?>
 
 <?xml-stylesheet href="chrome://browser/skin/browser.css" type="text/css"?>
-<?xml-stylesheet href="chrome://updatescan/skin/sage.css" type="text/css"?>
 <?xml-stylesheet href="chrome://updatescan/skin/updatescan.css" 
 		 type="text/css"?>
 
@@ -59,10 +58,6 @@
 -->
   <stringbundle id="updatescanStrings" 
 		src="chrome://updatescan/locale/updatescan.properties"/>
-
-  <stringbundleset>
-    <stringbundle id="strRes" src="chrome://updatescan/locale/sage.properties"/>
-  </stringbundleset>
 
   <commandset id="placesCommands"/>
   <commandset id="editMenuCommands"/>
@@ -87,9 +82,6 @@
 
   <script type="application/x-javascript" src="chrome://browser/content/bookmarks/sidebarUtils.js"/>
   <script type="application/x-javascript" src="chrome://global/content/contentAreaUtils.js"/>
-  <script type="application/x-javascript" src="chrome://updatescan/content/sage.js"/>
-  <script type="application/x-javascript" src="chrome://updatescan/content/commonfunc.js"/>
-  <script type="application/x-javascript" src="chrome://updatescan/content/feedloader.js"/>
 
   <vbox flex="1">
     <hbox pack="left">

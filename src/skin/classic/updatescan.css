@@ -3,38 +3,38 @@
 #new-button {
   list-style-image: url("chrome://updatescan/skin/document-new.png");
 }
-
 #newtab-button {
   list-style-image: url("chrome://updatescan/skin/tab-new.png");
 }
-
 #checked-button {
   list-style-image: url("chrome://updatescan/skin/document-checked.png");
 }
-
 #delete-button {
   list-style-image: url("chrome://updatescan/skin/edit-delete.png");
 }
-
 #settings-button {
   list-style-image: url("chrome://updatescan/skin/preferences-system_sm.png");
 }
-
 #help-button {
   list-style-image: url("chrome://updatescan/skin/help-browser.png");
 }
-
 #scan-button {
   list-style-image: url("chrome://updatescan/skin/updatescan.png");
 }
 
-treechildren::-moz-tree-cell-text(error)
-{
+#bookmarks-view treechildren::-moz-tree-image(leaf),
+#bookmarks-view treechildren::-moz-tree-image(leaf, usc_state_no-updated) {
+}
+#bookmarks-view treechildren::-moz-tree-image(leaf, usc_state_updated) {
+  list-style-image: url("chrome://updatescan/skin/updatescan_sm.png");
+}
+#bookmarks-view treechildren::-moz-tree-image(leaf, usc_state_error) {
     color: darkgrey;
 }
-
-treechildren::-moz-tree-cell-text(changed)
-{
-    font-weight: bold;
+#bookmarks-view treechildren::-moz-tree-image(leaf, usc_state_checking) {
+  list-style-image: url("chrome://global/skin/icons/loading_16.png");
+}
+#bookmarks-view treechildren::-moz-tree-cell-text(usc_state_updated) {
+  font-weight: bold;
 }
 

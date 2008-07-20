@@ -88,6 +88,8 @@ upgrade_3_0 : function()
 
 createRootBookmarks : function ()
 {
+    var anno = Components.classes["@mozilla.org/browser/annotation-service;1"].getService(Ci.nsIAnnotationService);
+    
     var locale = Components.classes["@mozilla.org/preferences-service;1"].
                  getService(Components.interfaces.nsIPrefService).
                  getBranch("general.useragent.").
@@ -100,7 +102,7 @@ createRootBookmarks : function ()
         USc_places.setRootFolderId(folderId);
         var bookmarkId = USc_places.addBookmark("Update Scanner Website", updatescanURL);
 
-
+    anno.setItemAnnotation(bookmarkId, USc_places.ANNO_STATUS, USc_places.STATUS_UPDATE, 0, anno.EXPIRE_NEVER);
         var filebase = USc_file.escapeFilename(updatescanURL);
         USc_file.USwriteFile(filebase+".new", "**NEW**");
 /*

@@ -36,10 +36,10 @@ var USc_annotationObserver = {
   
   onItemAnnotationSet : function(aItemId, aName) {
     switch (aName) {
-      case SageUtils.ANNO_ROOT:
+      case USc_places.ANNO_ROOT:
         bookmarksTree.place = "place:queryType=1&folder=" + aItemId;
         break;
-      case SageUtils.ANNO_STATUS:
+      case USc_places.ANNO_STATUS:
         bookmarksTree.getResultView().invalidateAll();
         break;
     }
@@ -766,7 +766,7 @@ _updateToolbar : function()
 _extendPlacesTreeView : function() {
     PlacesTreeView.prototype.getCellPropertiesBase = PlacesTreeView.prototype.getCellProperties;
     PlacesTreeView.prototype.getCellProperties =
-    function sage_getCellProperties(aRow, aColumn, aProperties) {
+    function ext_getCellProperties(aRow, aColumn, aProperties) {
       var properties = this._visibleElements[aRow].properties;
       
       var propertiesBase = Cc["@mozilla.org/supports-array;1"].createInstance(Ci.nsISupportsArray);
@@ -790,15 +790,15 @@ _extendPlacesTreeView : function() {
         if (nodeType == Ci.nsINavHistoryResultNode.RESULT_TYPE_URI) {
           if (!PlacesUtils.nodeIsLivemarkContainer(node.parent)) {
             try {
-              var state = PlacesUtils.annotations.getItemAnnotation(itemId, SageUtils.ANNO_STATUS);
-              properties.push(this._getAtomFor("sage_state_" + state));
+              var state = PlacesUtils.annotations.getItemAnnotation(itemId, USc_places.ANNO_STATUS);
+              properties.push(this._getAtomFor("usc_state_" + state));
             } catch (e) { }
           }
         } else if (nodeType == Ci.nsINavHistoryResultNode.RESULT_TYPE_FOLDER) {
           if (PlacesUtils.nodeIsLivemarkContainer(node)) {
             try {
-              var state = PlacesUtils.annotations.getItemAnnotation(itemId, SageUtils.ANNO_STATUS);
-              properties.push(this._getAtomFor("sage_state_" + state));
+              var state = PlacesUtils.annotations.getItemAnnotation(itemId, USc_places.ANNO_STATUS);
+              properties.push(this._getAtomFor("usc_state_" + state));
             } catch (e) { }
           }
         }
@@ -810,7 +810,7 @@ _extendPlacesTreeView : function() {
     }
     PlacesTreeView.prototype.isContainerBase = PlacesTreeView.prototype.isContainer;
     PlacesTreeView.prototype.isContainer =
-    function sage_isContainer(aRow) {
+    function ext_isContainer(aRow) {
       var baseValue = this.isContainerBase(aRow);
        if (baseValue) {
          var node = this._visibleElements[aRow].node;
@@ -824,7 +824,7 @@ _extendPlacesTreeView : function() {
        }
     }
     PlacesTreeView.prototype.getImageSrc =
-    function sage_getImageSrc(aRow, aColumn) {
+    function ext_getImageSrc(aRow, aColumn) {
       return "";
     }  
 }

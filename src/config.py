@@ -66,7 +66,6 @@ firefoxMaxVersion = '3.0.*'
 overlays = (
     # overlay this on that
     ('%(app)s/content/browser.xul' % vars(), 'browser/content/browser.xul' % vars()),
-    ('%(app)s/content/sage-Overlay.xul' % vars(), 'browser/content/browser.xul' % vars()),
 )
 stylesheets = (
     # overlay this on that
