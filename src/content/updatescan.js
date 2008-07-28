@@ -71,7 +71,8 @@ load : function()
     me._extendPlacesTreeView();
     
     me.tree = document.getElementById("bookmarks-view");
-    
+    me.tree.onclick=me._treeClick;
+   
     var rootFolderId = USc_places.getRootFolderId();
     me.tree.place = "place:queryType=1&folder=" + rootFolderId;
     
@@ -85,8 +86,7 @@ load : function()
     // link to the listbox
     tree = document.getElementById("UpdateTree");
     tree.datasources=USc_rdf.getURI(rdffile);
-    tree.onclick=me._treeClick;
-
+ 
     // Check for refresh requests
     me.refresh = new USc_refresher();
     me.refresh.register("refreshTreeRequest", me._refreshTree);
@@ -122,38 +122,29 @@ observe: function(aSubject, aTopic, aData) // Observe toolbar button preference 
     }
 },
 
-_treeClick : function(event)
-{
+_treeClick : function(aEvent) {
     var me = USc_updatescan;
-    if (me._getNumItems() == 0) return;
+    if (aEvent.button == 2) {
+      return;
+    }
+    
+    var tbo = me.tree.treeBoxObject;
+    var row = { }, col = { }, obj = { };
+    tbo.getCellAt(aEvent.clientX, aEvent.clientY, row, col, obj);
 
-    // Code from http://xul.andreashalter.ch/
-    //get original target (element user clicked on) 
-    var str_OrigTarget = event.originalTarget; 
-    //if target is a treechildren, we're right 
-    if (str_OrigTarget.localName == "treechildren") { 
-        //create storage containers for results values 
-        var obj_Row = new Object; 
-        var obj_Col = new Object; 
-        var obj_Child = new Object; 
-        //find tree holder 
-        var tree = document.getElementById('UpdateTree'); 
-        //get cell at x/y coords from tree 
-        tree.treeBoxObject.getCellAt(event.clientX, event.clientY, obj_Row, obj_Col, obj_Child); 
-        //if row < 0, we didn't find the row selected in this tree 
-        if (obj_Row.value == -1) 
-        {
-            return; 
-        }
-    } 
+    if (row.value == -1 || obj.value == "twisty") {
+      return;
+    }
 
-    var id = tree.contentView.getItemAtIndex(obj_Row.value).id;
-    switch (event.button) {
+    var aNode = me.tree.selectedNode;
+    var itemId = aNode.itemId;
+
+    switch (aEvent.button) {
         case 0:
-            me._diffItemThisWindow(id);
+            me._diffItemThisWindow(itemId);
             break;
         case 1:
-            me._diffItemNewTab(id);
+            me._diffItemNewTab(itemId);
             break;
     }
 },
@@ -412,7 +403,7 @@ _diffItem : function(id)
 {
     var me = USc_updatescan;
     var now = new Date();
-    USc_rdf.modifyItem(id, "changed", "0");
+/*    USc_rdf.modifyItem(id, "changed", "0");
     USc_rdf.save();
 
     me._refreshTree();
@@ -421,19 +412,24 @@ _diffItem : function(id)
     var old_lastScan = USc_rdf.queryItem(id, "old_lastscan", "")
     if (old_lastScan == "") old_lastScan = "5 November 1978";
     old_lastScan = new Date(old_lastScan);
-    var oldDate = me._dateDiffString(old_lastScan, now);
+*/
+   var oldDate = "Whenever";
+   var newDate = "Otherwise";
+/* var oldDate = me._dateDiffString(old_lastScan, now);
 
     var lastScan =USc_rdf.queryItem(id, "lastscan", "");
     if (lastScan == "") lastScan = "5 November 1978";
     lastScan = new Date(lastScan);
+    
     var newDate = me._dateDiffString(lastScan, now);
 
     var filebase = USc_file.escapeFilename(id);
+*/
     return "chrome://updatescan/content/diffPage.xul?id="+escape(id)+
-	   "&title="+escape(USc_rdf.queryItem(id, "title", "No Title"))+
-	   "&url="+escape(USc_rdf.queryItem(id, "url", ""))+
+	   "&title="+escape(USc_places.getTitle(id))+
+	   "&url="+escape(USc_places.getURL(id))+
            "&oldDate="+escape(oldDate)+
-	"&newDate="+escape(newDate);
+           "&newDate="+escape(newDate);
 },
 
 diffSelectedItemThisWindow : function()
@@ -449,7 +445,7 @@ _diffItemThisWindow : function(id)
     var me = USc_updatescan;
     var diffURL = me._diffItem(id)
     USc_topWin.open(diffURL);
-    me._focusTree();
+    me.tree.focus();
 },
 
 diffSelectedItemNewTab : function()
@@ -463,6 +459,7 @@ diffSelectedItemNewTab : function()
 _diffItemNewTab : function(id)
 {
     var me = USc_updatescan;
+
     var mainWindow = window.QueryInterface(
     Components.interfaces.nsIInterfaceRequestor)
     .getInterface(Components.interfaces.nsIWebNavigation)
@@ -472,7 +469,8 @@ _diffItemNewTab : function(id)
     .getInterface(Components.interfaces.nsIDOMWindow);
 
     var diffURL = me._diffItem(id);
-    mainWindow.getBrowser().addTab(diffURL);
+    mainWindow.getBrowser().selectedTab = mainWindow.getBrowser().addTab(diffURL);
+    me.tree.focus();
 },
 
 _dateDiffString : function(oldDate, newDate)
@@ -711,12 +709,6 @@ _refreshTree : function()
     }
 },
 
-_focusTree : function()
-{
-    var tree=document.getElementById("UpdateTree");
-    tree.focus();
-},
-
 _setStatus : function (status)
 {
     document.getElementById("StatusText").value = status;
@@ -828,5 +820,7 @@ _extendPlacesTreeView : function() {
       return "";
     }  
 }
+
+
 }
 }

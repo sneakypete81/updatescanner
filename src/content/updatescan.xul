@@ -101,7 +101,6 @@
         context="placesContext"
         flex="1"
         onkeypress="SidebarUtils.handleTreeKeyPress(event);"
-        onclick="sidebarController.bookmarksTreeClick(event);"
         onmousemove="SidebarUtils.handleTreeMouseMove(event);"
         onmouseout="SidebarUtils.clearURLFromStatusBar();">
         <treecols>

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Komodo Project File - DO NOT EDIT -->
 <project id="2d527c45-7a8c-4ae9-b032-a97a6f940f48" kpf_version="4" name="src_updatescanner.kpf">
+<file id="01fcad14-12bb-435b-9fec-93404e6b9d5f" idref="025d7a8e-2375-47b9-9cdb-a0ac5d4f4909" name="diffPage.properties" url="src/locale/it-IT/diffPage.properties">
+</file>
 <file id="304b67ba-dd9d-4604-815a-abd6a8690ef0" idref="025d7a8e-2375-47b9-9cdb-a0ac5d4f4909" name="contents.rdf" url="src/locale/it-IT/contents.rdf">
 </file>
 <file id="3073668a-76b9-45d2-9f75-f3f076c93803" idref="025d7a8e-2375-47b9-9cdb-a0ac5d4f4909" name="updatescanoverlay.dtd" url="src/locale/it-IT/updatescanoverlay.dtd">
@@ -23,6 +25,8 @@
 </file>
 <file id="2a8b1deb-8c83-4177-8dc9-b2cbb5680091" idref="0346377e-a081-424e-9498-b0ff037e8197" name="preferences.dtd" url="src/locale/fr-FR/preferences.dtd">
 </file>
+<file id="2b43a1d6-2968-48ad-8cf6-6640940efce6" idref="0346377e-a081-424e-9498-b0ff037e8197" name="diffPage.properties" url="src/locale/fr-FR/diffPage.properties">
+</file>
 <file id="421d0585-e8ff-438c-87ef-9aaa6f06e8d4" idref="0346377e-a081-424e-9498-b0ff037e8197" name="amowebsite.properties" url="src/locale/fr-FR/amowebsite.properties">
 </file>
 <file id="425a6ee0-9116-4311-ab9b-a27992d4587b" idref="0346377e-a081-424e-9498-b0ff037e8197" name="updatescan.properties" url="src/locale/fr-FR/updatescan.properties">
@@ -39,6 +43,8 @@
 </file>
 <file id="0b3f7f67-dcf1-469a-b5d3-18463e6fb51c" idref="03ad9233-c134-4b8e-89e9-2fe60ccae922" name="updatescan_sm.png" url="src/skin/classic/updatescan_sm.png">
 </file>
+<file id="1386f653-0c02-4863-ad13-0f9a66809f10" idref="03ad9233-c134-4b8e-89e9-2fe60ccae922" name="sage_leaf_24.png" url="src/skin/classic/sage_leaf_24.png">
+</file>
 <file id="19b6f5b5-db32-4d09-a2fe-3551f47655c3" idref="03ad9233-c134-4b8e-89e9-2fe60ccae922" name="preferences-system_sm.png" url="src/skin/classic/preferences-system_sm.png">
 </file>
 <file id="360db0f0-5fa5-415e-baca-44a50e99cba4" idref="03ad9233-c134-4b8e-89e9-2fe60ccae922" name="dialog-information.png" url="src/skin/classic/dialog-information.png">
@@ -46,6 +52,8 @@
 <file id="37ec5d71-9f98-47ab-8232-ad19de2f4134" idref="03ad9233-c134-4b8e-89e9-2fe60ccae922" name="updatescan_big.png" url="src/skin/classic/updatescan_big.png">
 </file>
 <file id="4d62ba87-87f6-49e7-a262-d120303f8cb0" idref="03ad9233-c134-4b8e-89e9-2fe60ccae922" name="dlgnewedit.css" url="src/skin/classic/dlgnewedit.css">
+</file>
+<file id="4f95f204-0c05-49c0-8b47-2be4ca347ab8" idref="03ad9233-c134-4b8e-89e9-2fe60ccae922" name="toolbar.png" url="src/skin/classic/toolbar.png">
 </file>
 <file id="5095b688-2d8d-496b-8633-7ed8823a474a" idref="03ad9233-c134-4b8e-89e9-2fe60ccae922" name="updatescan_grey_sm.png" url="src/skin/classic/updatescan_grey_sm.png">
 </file>
@@ -55,7 +63,11 @@
 </file>
 <file id="5c4ce25e-b804-4048-9adb-447aba4f8ead" idref="03ad9233-c134-4b8e-89e9-2fe60ccae922" name="preferences-system.png" url="src/skin/classic/preferences-system.png">
 </file>
+<file id="66961cd9-6d78-4c85-9d4c-7ffe8e19213c" idref="03ad9233-c134-4b8e-89e9-2fe60ccae922" name="sage-button-mac.css" url="src/skin/classic/sage-button-mac.css">
+</file>
 <file id="66ef03e3-ba4c-47e6-a4e1-825899c7c701" idref="03ad9233-c134-4b8e-89e9-2fe60ccae922" name="document-new.png" url="src/skin/classic/document-new.png">
+</file>
+<file id="67e538ec-b736-4fa2-ac72-95c2b4b5b531" idref="03ad9233-c134-4b8e-89e9-2fe60ccae922" name="sage-button.css" url="src/skin/classic/sage-button.css">
 </file>
 <file id="6e277bf7-5d8f-427c-ad5e-4bd6648890da" idref="03ad9233-c134-4b8e-89e9-2fe60ccae922" name="help-browser.png" url="src/skin/classic/help-browser.png">
 </file>
@@ -63,13 +75,33 @@
 </file>
 <file id="7ebdfd24-0855-4674-a59e-2f6cd28c247a" idref="03ad9233-c134-4b8e-89e9-2fe60ccae922" name="tab-new.png" url="src/skin/classic/tab-new.png">
 </file>
+<file id="92fd8a66-0bf2-48c0-9353-7e93ac770ed1" idref="03ad9233-c134-4b8e-89e9-2fe60ccae922" name="sage_leaf_16.png" url="src/skin/classic/sage_leaf_16.png">
+</file>
+<file id="990bbe89-488d-4c18-b36a-70f839287adf" idref="03ad9233-c134-4b8e-89e9-2fe60ccae922" name="enclosure.png" url="src/skin/classic/enclosure.png">
+</file>
+<folder id="9a918de4-75cd-4f4b-afff-720fb5361e5c" idref="03ad9233-c134-4b8e-89e9-2fe60ccae922" name="icon" url="src/skin/classic/icon">
+</folder>
+<file id="a0c21cae-9aee-4f98-8550-1c2f12845d4c" idref="03ad9233-c134-4b8e-89e9-2fe60ccae922" name="sage-mac.css" url="src/skin/classic/sage-mac.css">
+</file>
 <file id="a4fc14f0-96be-43da-97d7-f36b469063ba" idref="03ad9233-c134-4b8e-89e9-2fe60ccae922" name="alert.css" url="src/skin/classic/alert.css">
 </file>
 <file id="a68de21d-f4ee-4227-99b7-380379073b66" idref="03ad9233-c134-4b8e-89e9-2fe60ccae922" name="updatescanoverlay.css" url="src/skin/classic/updatescanoverlay.css">
 </file>
 <file id="a97bfeab-0c6c-4edc-8cb4-cb5ea7a25dd0" idref="03ad9233-c134-4b8e-89e9-2fe60ccae922" name="preferences.css" url="src/skin/classic/preferences.css">
 </file>
+<file id="b0e5ed57-bc6a-4943-8e7a-2f6ef817260f" idref="03ad9233-c134-4b8e-89e9-2fe60ccae922" name="toolbar-small.png" url="src/skin/classic/toolbar-small.png">
+</file>
 <file id="b8aa814b-eef9-4efe-a933-7b0d1acb0f2e" idref="03ad9233-c134-4b8e-89e9-2fe60ccae922" name="document-checked.png" url="src/skin/classic/document-checked.png">
+</file>
+<file id="b9fbe4e4-2676-4223-8847-ad69cc85c089" idref="03ad9233-c134-4b8e-89e9-2fe60ccae922" name="sage_leaf_32.png" url="src/skin/classic/sage_leaf_32.png">
+</file>
+<file id="c0bd3581-1fa0-43ed-951a-850211bd4eff" idref="03ad9233-c134-4b8e-89e9-2fe60ccae922" name="sage.css" url="src/skin/classic/sage.css">
+</file>
+<file id="c2784bb9-85e6-4378-a8d1-872b2c577eb1" idref="03ad9233-c134-4b8e-89e9-2fe60ccae922" name="feedsummary.css" url="src/skin/classic/feedsummary.css">
+</file>
+<file id="cef2ea56-1026-4707-bd16-14be1552f4d1" idref="03ad9233-c134-4b8e-89e9-2fe60ccae922" name="updatescan_full.png" url="src/skin/classic/updatescan_full.png">
+</file>
+<file id="e54b4db0-f6a2-4273-a828-a1b3b62a22a0" idref="03ad9233-c134-4b8e-89e9-2fe60ccae922" name="sage-browser-mac.css" url="src/skin/classic/sage-browser-mac.css">
 </file>
 <file id="f67804c0-e289-48f8-a634-7b5d95b94eca" idref="03ad9233-c134-4b8e-89e9-2fe60ccae922" name="updatescan.css" url="src/skin/classic/updatescan.css">
 </file>
@@ -86,6 +118,8 @@
 <file id="93d228a8-a1f2-4cc7-ae70-1dd632fb8efc" idref="044b4621-c549-40cc-a075-301bbd6ee723" name="dlgnewedit.properties" url="src/locale/ru-RU/dlgnewedit.properties">
 </file>
 <file id="beadcc63-1ed4-4e41-a303-26ccce95de09" idref="044b4621-c549-40cc-a075-301bbd6ee723" name="diffPage.dtd" url="src/locale/ru-RU/diffPage.dtd">
+</file>
+<file id="d09b3b42-5c23-4927-be53-7422643e0ac4" idref="044b4621-c549-40cc-a075-301bbd6ee723" name="diffPage.properties" url="src/locale/ru-RU/diffPage.properties">
 </file>
 <file id="dab8a806-6123-478f-a9ce-94274b4137c1" idref="044b4621-c549-40cc-a075-301bbd6ee723" name="preferences.dtd" url="src/locale/ru-RU/preferences.dtd">
 </file>
@@ -150,6 +184,8 @@
 <file id="fdbebafa-f6ee-4808-9d5b-d17645ed4052" idref="0be34170-8b2c-4497-b958-145e42b7a36c" name="contact.properties" url="src/www/locale/cs-CZ/contact.properties">
 </file>
 <file id="ff483e6b-2b3a-434a-b1a0-e399d05102b2" idref="0be34170-8b2c-4497-b958-145e42b7a36c" name="not_found.properties" url="src/www/locale/cs-CZ/not_found.properties">
+</file>
+<file id="0fe18317-d1ea-4c4f-9536-87beb62c7dc8" idref="1831ade4-1786-49a8-a2a7-7c00c4c9ad34" name="diffPage.properties" url="src/locale/da-DK/diffPage.properties">
 </file>
 <file id="221d7ceb-3d64-4174-bd42-f866ea8f5292" idref="1831ade4-1786-49a8-a2a7-7c00c4c9ad34" name="dlgnewedit.dtd" url="src/locale/da-DK/dlgnewedit.dtd">
 </file>
@@ -217,6 +253,8 @@
 </file>
 <file id="d620129e-70bd-42c8-8586-2871ba008068" idref="220726d8-db6a-4dca-930a-74556a38f2f6" name="diffPage.dtd" url="src/locale/sk-SK/diffPage.dtd">
 </file>
+<file id="e23cbe9b-ee80-4ce5-9363-72826300d414" idref="220726d8-db6a-4dca-930a-74556a38f2f6" name="diffPage.properties" url="src/locale/sk-SK/diffPage.properties">
+</file>
 <file id="13728c88-be8a-4724-8fd9-adc48da88180" idref="24562847-1672-4103-87b9-f8c339269638" name="help-properties.tmpl" url="src/www/content/help-properties.tmpl">
 </file>
 <file id="15793e2e-f435-4993-9152-a548eee2b820" idref="24562847-1672-4103-87b9-f8c339269638" name="help-sidebar.tmpl" url="src/www/content/help-sidebar.tmpl">
@@ -241,16 +279,42 @@
 </file>
 <file id="fc8a6dcc-b0a0-4d2b-a6b1-25fbbeeeae86" idref="24562847-1672-4103-87b9-f8c339269638" name="_footer.tmpl" url="src/www/content/_footer.tmpl">
 </file>
+<file id="1fef54cc-763d-4b44-ac36-84ebfcca456e" idref="2d527c45-7a8c-4ae9-b032-a97a6f940f48" name="chrome.manifest.build" url="src/chrome.manifest.build">
+</file>
+<file id="362ece74-c6b0-404f-9378-8bec069aadb2" idref="2d527c45-7a8c-4ae9-b032-a97a6f940f48" name=".cvsignore" url="src/.cvsignore">
+</file>
 <folder id="385f096e-1133-4db5-b809-9628942a6256" idref="2d527c45-7a8c-4ae9-b032-a97a6f940f48" name="skin" url="src/skin">
 </folder>
 <folder id="5f44fd66-77ee-4919-b720-965e37410fe7" idref="2d527c45-7a8c-4ae9-b032-a97a6f940f48" name="content" url="src/content">
 </folder>
+<file id="65d911cb-e84b-4a46-8636-af1f286ca7af" idref="2d527c45-7a8c-4ae9-b032-a97a6f940f48" name="updatescan.xpi" url="src/updatescan.xpi">
+</file>
 <folder id="689309ef-1bd4-4072-ad15-b47f3568839b" idref="2d527c45-7a8c-4ae9-b032-a97a6f940f48" name="www" url="src/www">
 </folder>
 <folder id="768b03ba-6884-491a-b900-fde0497d15d7" idref="2d527c45-7a8c-4ae9-b032-a97a6f940f48" name="locale" url="src/locale">
 </folder>
+<file id="7b9e03f3-dc68-4ce8-b243-e4b1f3f3c8ef" idref="2d527c45-7a8c-4ae9-b032-a97a6f940f48" name="build" url="src/build">
+</file>
 <folder id="900038ca-cc6d-41b7-947a-ac377047302e" idref="2d527c45-7a8c-4ae9-b032-a97a6f940f48" name="defaults" url="src/defaults">
 </folder>
+<file id="9321ba47-d14b-4f53-b6d4-eedc6c0eae52" idref="2d527c45-7a8c-4ae9-b032-a97a6f940f48" name="install.rdf" url="src/install.rdf">
+</file>
+<folder id="99b7c97a-afc4-42f6-9bc5-08a79937bfac" idref="2d527c45-7a8c-4ae9-b032-a97a6f940f48" name="chrome" url="src/chrome">
+</folder>
+<file id="9b68fd3c-0984-4372-9d41-e30e85649c0a" idref="2d527c45-7a8c-4ae9-b032-a97a6f940f48" name="xpi.build" url="src/xpi.build">
+</file>
+<file id="b3ddee5e-cfc8-4ee6-a8b1-0d1487b7ac52" idref="2d527c45-7a8c-4ae9-b032-a97a6f940f48" name="install.rdf.build" url="src/install.rdf.build">
+</file>
+<file id="c16180cd-0561-4ba5-8540-c43e0245142b" idref="2d527c45-7a8c-4ae9-b032-a97a6f940f48" name="{c07d1a49-9894-49ff-a594-38960ede8fb9}" url="src/{c07d1a49-9894-49ff-a594-38960ede8fb9}">
+</file>
+<file id="c9b0a794-351f-448d-bbd8-c2dcffa3208a" idref="2d527c45-7a8c-4ae9-b032-a97a6f940f48" name="install" url="src/install">
+</file>
+<folder id="d17ef789-46e8-451b-bd1b-69a811d6f67a" idref="2d527c45-7a8c-4ae9-b032-a97a6f940f48" name="releases" url="src/releases">
+</folder>
+<file id="e66ad104-8aa5-4605-a5ea-df9297b39e8c" idref="2d527c45-7a8c-4ae9-b032-a97a6f940f48" name="publish" url="src/publish">
+</file>
+<file id="e75d60f5-66f7-4f6a-bcdd-8dcf2adc185d" idref="2d527c45-7a8c-4ae9-b032-a97a6f940f48" name="chrome.manifest" url="src/chrome.manifest">
+</file>
 <file id="f9372c4a-4557-4dcb-b21e-7d9b26bf47a8" idref="2d527c45-7a8c-4ae9-b032-a97a6f940f48" name="TODO" url="src/TODO">
 </file>
 <file id="fd9bec4e-c49b-4a2e-bc17-2b3b857f48dc" idref="2d527c45-7a8c-4ae9-b032-a97a6f940f48" name="config.py" url="src/config.py">
@@ -359,6 +423,8 @@
 </file>
 <file id="f11d84eb-4235-46c5-9b18-66c288d94250" idref="426ca73c-f95f-4718-9306-f5ff4dd34e82" name="updatescan.dtd" url="src/locale/cs-CZ/updatescan.dtd">
 </file>
+<file id="fea33980-10be-4ef6-8465-96f662319359" idref="426ca73c-f95f-4718-9306-f5ff4dd34e82" name="diffPage.properties" url="src/locale/cs-CZ/diffPage.properties">
+</file>
 <file id="66a288dc-4fc7-43c5-b14e-67f85fe7c030" idref="571cf027-206d-4f3d-9cb9-d43c714a881c" name="amowebsite.properties" url="src/www/testing/locale/ko-KR/amowebsite.properties">
 </file>
 <file id="4092929e-b77e-4236-90b9-20944e4161e9" idref="5d12f6ba-aa92-402b-828c-99f8d9d2c137" name="amowebsite.properties" url="src/www/testing/locale/it-IT/amowebsite.properties">
@@ -390,6 +456,8 @@
 <file id="e61bf46c-328b-4098-9e4e-62fe4ae1250a" idref="5d12f6ba-aa92-402b-828c-99f8d9d2c137" name="help-faq.properties" url="src/www/testing/locale/it-IT/help-faq.properties">
 </file>
 <file id="ebe0f14f-e551-4362-b497-b6716a879f30" idref="5d12f6ba-aa92-402b-828c-99f8d9d2c137" name="index.properties" url="src/www/testing/locale/it-IT/index.properties">
+</file>
+<file id="00898f7e-e454-47f0-9b7e-5a9ee5ecf15e" idref="5f44fd66-77ee-4919-b720-965e37410fe7" name="places.js" url="src/content/places.js">
 </file>
 <file id="07bb18ad-ca77-4f50-aad2-52081732a598" idref="5f44fd66-77ee-4919-b720-965e37410fe7" name="defaultNotification.wav" url="src/content/defaultNotification.wav">
 </file>
@@ -579,6 +647,8 @@
 </folder>
 <folder id="426ca73c-f95f-4718-9306-f5ff4dd34e82" idref="768b03ba-6884-491a-b900-fde0497d15d7" name="cs-CZ" url="src/locale/cs-CZ">
 </folder>
+<file id="5664eef2-a643-4520-bc69-a6d23979c456" idref="768b03ba-6884-491a-b900-fde0497d15d7" name="dtd2properties.py" url="src/locale/dtd2properties.py">
+</file>
 <folder id="816bfe70-c7b5-409a-8abe-d0401a66c79d" idref="768b03ba-6884-491a-b900-fde0497d15d7" name="hu-HU" url="src/locale/hu-HU">
 </folder>
 <folder id="89f831fc-bb7a-4ec5-bf15-d9cb8f6fbb12" idref="768b03ba-6884-491a-b900-fde0497d15d7" name="en-US" url="src/locale/en-US">
@@ -633,6 +703,8 @@
 </file>
 <file id="67622742-8a67-49de-8b32-8a5088714f0e" idref="816bfe70-c7b5-409a-8abe-d0401a66c79d" name="dlgnewedit.dtd" url="src/locale/hu-HU/dlgnewedit.dtd">
 </file>
+<file id="6a26ac4d-3fb0-4a11-bafa-34b3611780a5" idref="816bfe70-c7b5-409a-8abe-d0401a66c79d" name="diffPage.properties" url="src/locale/hu-HU/diffPage.properties">
+</file>
 <file id="91848dae-6550-4539-8cb9-bc81d04fa994" idref="816bfe70-c7b5-409a-8abe-d0401a66c79d" name="updatescanoverlay.dtd" url="src/locale/hu-HU/updatescanoverlay.dtd">
 </file>
 <file id="9a05a5a7-bca0-4908-9d70-d4f443b08470" idref="816bfe70-c7b5-409a-8abe-d0401a66c79d" name="updatescan.dtd" url="src/locale/hu-HU/updatescan.dtd">
@@ -659,11 +731,19 @@
 </file>
 <file id="8f996b21-14c0-4c22-9651-ded1f206acd5" idref="89f831fc-bb7a-4ec5-bf15-d9cb8f6fbb12" name="updatescan.dtd" url="src/locale/en-US/updatescan.dtd">
 </file>
+<file id="c0a8d2c9-7955-4a9c-b221-d1d130e909e3" idref="89f831fc-bb7a-4ec5-bf15-d9cb8f6fbb12" name="opml.dtd" url="src/locale/en-US/opml.dtd">
+</file>
 <file id="d1be2621-b4de-43ba-a465-9279b176cd31" idref="89f831fc-bb7a-4ec5-bf15-d9cb8f6fbb12" name="diffPage.dtd" url="src/locale/en-US/diffPage.dtd">
 </file>
 <file id="d2311f3a-8b9c-4202-a3f4-1296382f05b4" idref="89f831fc-bb7a-4ec5-bf15-d9cb8f6fbb12" name="dlgnewedit.dtd" url="src/locale/en-US/dlgnewedit.dtd">
 </file>
+<file id="e24c5479-366a-4e58-a870-939047012dba" idref="89f831fc-bb7a-4ec5-bf15-d9cb8f6fbb12" name="diffPage.properties" url="src/locale/en-US/diffPage.properties">
+</file>
 <file id="e52acf59-ad66-4c44-bbe0-9718770f8ad4" idref="89f831fc-bb7a-4ec5-bf15-d9cb8f6fbb12" name="contents.rdf" url="src/locale/en-US/contents.rdf">
+</file>
+<file id="f7a0375a-128d-46ce-95fe-28396e2993e9" idref="89f831fc-bb7a-4ec5-bf15-d9cb8f6fbb12" name="sage.properties" url="src/locale/en-US/sage.properties">
+</file>
+<file id="fa8e00db-b2bb-41a3-9877-9b801b8d84d4" idref="89f831fc-bb7a-4ec5-bf15-d9cb8f6fbb12" name="sage.dtd" url="src/locale/en-US/sage.dtd">
 </file>
 <file id="14ff8e2a-706c-489e-a671-8f4534f3394e" idref="8a2b2055-3364-441f-94ef-f0b548357439" name="preferences.dtd" url="src/locale/tr-TR/preferences.dtd">
 </file>
@@ -680,6 +760,8 @@
 <file id="6f172f41-01b9-46f1-8436-8b94190ed517" idref="8a2b2055-3364-441f-94ef-f0b548357439" name="updatescanoverlay.dtd" url="src/locale/tr-TR/updatescanoverlay.dtd">
 </file>
 <file id="7e039c07-2ddd-4026-b040-d10f379aaff6" idref="8a2b2055-3364-441f-94ef-f0b548357439" name="amowebsite.properties" url="src/locale/tr-TR/amowebsite.properties">
+</file>
+<file id="ae0436e0-a6c3-4910-b6f1-a07ea8f85971" idref="8a2b2055-3364-441f-94ef-f0b548357439" name="diffPage.properties" url="src/locale/tr-TR/diffPage.properties">
 </file>
 <file id="b47d9964-62ee-4147-8620-87c9afd2f2ea" idref="8a2b2055-3364-441f-94ef-f0b548357439" name="dlgnewedit.properties" url="src/locale/tr-TR/dlgnewedit.properties">
 </file>
@@ -817,9 +899,25 @@
 </file>
 <file id="c732e5d3-5e61-4774-a0b5-ff00dc9b1b2d" idref="98767af5-7c1a-4d32-8e48-ce162cef6431" name="diffPage.dtd" url="src/locale/pl-PL/diffPage.dtd">
 </file>
+<file id="c8ec1fb2-3295-43c8-8581-7fe52f61021c" idref="98767af5-7c1a-4d32-8e48-ce162cef6431" name="diffPage.properties" url="src/locale/pl-PL/diffPage.properties">
+</file>
 <file id="dafea930-e7cd-4a14-aeb0-6d063a342d82" idref="98767af5-7c1a-4d32-8e48-ce162cef6431" name="preferences.dtd" url="src/locale/pl-PL/preferences.dtd">
 </file>
 <file id="3bbe535d-6370-4096-9022-277089d75bf6" idref="98f041ed-a53a-4674-b82a-e1cc520fe2e5" name="amowebsite.properties" url="src/www/testing/locale/pl-PL/amowebsite.properties">
+</file>
+<file id="62279aac-568b-4822-a8b8-3f75124829bb" idref="99b7c97a-afc4-42f6-9bc5-08a79937bfac" name=".cvsignore" url="src/chrome/.cvsignore">
+</file>
+<file id="be468cf1-50e2-491e-8613-e52e7722c630" idref="99b7c97a-afc4-42f6-9bc5-08a79937bfac" name="updatescan.jar" url="src/chrome/updatescan.jar">
+</file>
+<file id="109362bd-f8c7-46e7-83b0-8af02ca883fc" idref="9a918de4-75cd-4f4b-afff-720fb5361e5c" name="unknown.png" url="src/skin/classic/icon/unknown.png">
+</file>
+<file id="502418a7-54a6-4120-a347-bbab264301a2" idref="9a918de4-75cd-4f4b-afff-720fb5361e5c" name="no-updated.png" url="src/skin/classic/icon/no-updated.png">
+</file>
+<file id="6baf55ce-e73c-429f-87d6-9cac8250a5b4" idref="9a918de4-75cd-4f4b-afff-720fb5361e5c" name="error.gif" url="src/skin/classic/icon/error.gif">
+</file>
+<file id="ce27affb-255b-47f2-9d1b-e18a1517d119" idref="9a918de4-75cd-4f4b-afff-720fb5361e5c" name="search-submit.gif" url="src/skin/classic/icon/search-submit.gif">
+</file>
+<file id="e94ef5c9-170a-450c-8db0-bcd299950738" idref="9a918de4-75cd-4f4b-afff-720fb5361e5c" name="updated.png" url="src/skin/classic/icon/updated.png">
 </file>
 <file id="12f67260-6f97-4833-ab06-307de1bd6157" idref="9db5afb9-543e-4946-95d2-f8acbdd4b27d" name="rdf.js" url="src/content/rdf/rdf.js">
 </file>
@@ -834,6 +932,8 @@
 <file id="5a90f7fb-ec3d-4c86-beec-be9590c880a0" idref="9dc23f8c-9f55-4ec3-8eab-43968c46550b" name="amowebsite.properties" url="src/locale/pt-BR/amowebsite.properties">
 </file>
 <file id="7b25792a-7a51-4116-9224-912505f08b8e" idref="9dc23f8c-9f55-4ec3-8eab-43968c46550b" name="diffPage.dtd" url="src/locale/pt-BR/diffPage.dtd">
+</file>
+<file id="88f51996-5e2f-441f-9da6-42ab79d0dcc7" idref="9dc23f8c-9f55-4ec3-8eab-43968c46550b" name="diffPage.properties" url="src/locale/pt-BR/diffPage.properties">
 </file>
 <file id="8bd2d203-11c0-47fa-808a-9e11777fa78b" idref="9dc23f8c-9f55-4ec3-8eab-43968c46550b" name="contents.rdf" url="src/locale/pt-BR/contents.rdf">
 </file>
@@ -854,6 +954,8 @@
 <file id="54a0786e-c3bb-4e31-a50f-8b60b6f5b7b3" idref="a1b33499-5df4-4352-a094-d4e8ffe5c890" name="updatescanoverlay.dtd" url="src/locale/ko-KR/updatescanoverlay.dtd">
 </file>
 <file id="94a5a09d-13d4-4b8f-856b-6e6f79bd7f0d" idref="a1b33499-5df4-4352-a094-d4e8ffe5c890" name="updatescan.dtd" url="src/locale/ko-KR/updatescan.dtd">
+</file>
+<file id="ad578274-ee74-4fce-b967-cbcf5413db1a" idref="a1b33499-5df4-4352-a094-d4e8ffe5c890" name="diffPage.properties" url="src/locale/ko-KR/diffPage.properties">
 </file>
 <file id="b878a016-2692-4752-90d8-6407f9ab7a0e" idref="a1b33499-5df4-4352-a094-d4e8ffe5c890" name="diffPage.dtd" url="src/locale/ko-KR/diffPage.dtd">
 </file>
@@ -878,6 +980,8 @@
 <file id="ae8e1e8a-668a-4492-acd8-4d2319d3a2a7" idref="a84380b2-df77-464c-8f5a-da2550f4df10" name="dlgnewedit.properties" url="src/locale/zh-TW/dlgnewedit.properties">
 </file>
 <file id="c9891d88-ecd1-4612-bede-1eb4aa78b18d" idref="a84380b2-df77-464c-8f5a-da2550f4df10" name="updatescan.dtd" url="src/locale/zh-TW/updatescan.dtd">
+</file>
+<file id="cdf583fd-5eaf-46d7-834c-b08a04371d8d" idref="a84380b2-df77-464c-8f5a-da2550f4df10" name="diffPage.properties" url="src/locale/zh-TW/diffPage.properties">
 </file>
 <file id="06840577-2d49-4854-9ab0-492f8f1a3abc" idref="ad088e51-71e0-414e-9cc6-8e356a38a074" name="_footer.properties" url="src/www/locale/ru-RU/_footer.properties">
 </file>
@@ -942,6 +1046,8 @@
 <file id="8099c20c-e14c-492c-bf5f-d45c0920802e" idref="b24254ad-fcfb-4a54-8fb9-252256f4821a" name="dlgnewedit.dtd" url="src/locale/de-DE/dlgnewedit.dtd">
 </file>
 <file id="b4d5067f-983e-4253-8389-d39e01460c78" idref="b24254ad-fcfb-4a54-8fb9-252256f4821a" name="diffPage.dtd" url="src/locale/de-DE/diffPage.dtd">
+</file>
+<file id="c85e6533-dc53-4911-8794-1aae9cbefd5f" idref="b24254ad-fcfb-4a54-8fb9-252256f4821a" name="diffPage.properties" url="src/locale/de-DE/diffPage.properties">
 </file>
 <file id="d0f3968f-c823-4d0a-894d-077425a8a483" idref="b24254ad-fcfb-4a54-8fb9-252256f4821a" name="contents.rdf" url="src/locale/de-DE/contents.rdf">
 </file>
@@ -1063,6 +1169,8 @@
 </file>
 <file id="0a844b6a-d640-4388-83f6-a7f5909b31f0" idref="c0baa68a-ed5c-41fa-9d4d-583d6606583b" name="contents.rdf" url="src/locale/ja-JP/contents.rdf">
 </file>
+<file id="2639002a-0d65-4945-9cc9-d380580ba4cd" idref="c0baa68a-ed5c-41fa-9d4d-583d6606583b" name="diffPage.properties" url="src/locale/ja-JP/diffPage.properties">
+</file>
 <file id="3a95fdbe-7fba-496f-89eb-689d829a55e7" idref="c0baa68a-ed5c-41fa-9d4d-583d6606583b" name="preferences.dtd" url="src/locale/ja-JP/preferences.dtd">
 </file>
 <file id="40c151c2-5bbe-4b2c-8748-e0d57768be2f" idref="c0baa68a-ed5c-41fa-9d4d-583d6606583b" name="dlgnewedit.properties" url="src/locale/ja-JP/dlgnewedit.properties">
@@ -1139,6 +1247,8 @@
 </file>
 <file id="c254d573-52c7-48ce-8d40-f8eb92b666ec" idref="c6111de2-9b14-48c7-9682-1e8812e025e9" name="not_found.properties" url="src/www/testing/locale/en-US/not_found.properties">
 </file>
+<file id="c9dc03d2-3360-41e0-aca0-9a31c7896c4f" idref="d17ef789-46e8-451b-bd1b-69a811d6f67a" name=".cvsignore" url="src/releases/.cvsignore">
+</file>
 <file id="23a58ed9-8847-40fa-938b-7f4200302626" idref="de3e8590-32b4-4e27-a85c-d65e54e54de4" name="diffPage.dtd" url="src/locale/es-ES/diffPage.dtd">
 </file>
 <file id="2deeccea-3ecd-4323-a534-21a2f18c0287" idref="de3e8590-32b4-4e27-a85c-d65e54e54de4" name="dlgnewedit.properties" url="src/locale/es-ES/dlgnewedit.properties">
@@ -1146,6 +1256,8 @@
 <file id="56bb9482-0473-411c-8802-caa1322ccb4a" idref="de3e8590-32b4-4e27-a85c-d65e54e54de4" name="updatescan.properties" url="src/locale/es-ES/updatescan.properties">
 </file>
 <file id="8dd46a28-0f20-4580-a6dc-b8c62e09308f" idref="de3e8590-32b4-4e27-a85c-d65e54e54de4" name="updatescan.dtd" url="src/locale/es-ES/updatescan.dtd">
+</file>
+<file id="a68459b3-a579-4b94-98da-92c2faedc7f8" idref="de3e8590-32b4-4e27-a85c-d65e54e54de4" name="diffPage.properties" url="src/locale/es-ES/diffPage.properties">
 </file>
 <file id="b41b7a92-86c0-4da0-bdae-4ba4b78a28d3" idref="de3e8590-32b4-4e27-a85c-d65e54e54de4" name="updatescanoverlay.dtd" url="src/locale/es-ES/updatescanoverlay.dtd">
 </file>
@@ -1195,6 +1307,8 @@
 </file>
 <file id="a8684277-486c-43e3-98ae-bb7642ba34e4" idref="e4021b7f-8c6a-41c2-82a6-a96a4041eb16" name="updatescanoverlay.dtd" url="src/locale/nl-NL/updatescanoverlay.dtd">
 </file>
+<file id="adfe8a9e-4c47-439e-8732-a69687da0e98" idref="e4021b7f-8c6a-41c2-82a6-a96a4041eb16" name="diffPage.properties" url="src/locale/nl-NL/diffPage.properties">
+</file>
 <file id="efb850a8-4d07-4937-8e99-4dec001c90f4" idref="e4021b7f-8c6a-41c2-82a6-a96a4041eb16" name="updatescan.properties" url="src/locale/nl-NL/updatescan.properties">
 </file>
 <file id="f0a2ed6c-4576-4a87-bbf4-27b28aea5f7f" idref="e4021b7f-8c6a-41c2-82a6-a96a4041eb16" name="contents.rdf" url="src/locale/nl-NL/contents.rdf">
@@ -1213,6 +1327,8 @@
 </file>
 <file id="59fd5704-a250-4425-b2ad-955fc7ad3152" idref="eba990eb-a6c9-410b-9fa4-f885c66a5368" name="preferences.dtd" url="src/locale/ms-MY/preferences.dtd">
 </file>
+<file id="6201a779-9a18-4560-8fd4-6a214eacdaae" idref="eba990eb-a6c9-410b-9fa4-f885c66a5368" name="diffPage.properties" url="src/locale/ms-MY/diffPage.properties">
+</file>
 <file id="81e69be1-8bd2-49aa-b414-dcf55fe7d920" idref="eba990eb-a6c9-410b-9fa4-f885c66a5368" name="contents.rdf" url="src/locale/ms-MY/contents.rdf">
 </file>
 <file id="83883f63-695e-41fe-85a1-53c8748ee03a" idref="eba990eb-a6c9-410b-9fa4-f885c66a5368" name="updatescanoverlay.dtd" url="src/locale/ms-MY/updatescanoverlay.dtd">
@@ -1230,6 +1346,8 @@
 <file id="66d95140-59b7-4ba9-9d81-997a6da0b96e" idref="f10def63-12ac-4ffb-b55e-f16a3e055061" name="diffPage.dtd" url="src/locale/zh-CN/diffPage.dtd">
 </file>
 <file id="7840921e-c329-436a-9450-19b8778266d2" idref="f10def63-12ac-4ffb-b55e-f16a3e055061" name="updatescan.dtd" url="src/locale/zh-CN/updatescan.dtd">
+</file>
+<file id="83909561-dd0b-48f3-b8a7-9eec4cdf5d4b" idref="f10def63-12ac-4ffb-b55e-f16a3e055061" name="diffPage.properties" url="src/locale/zh-CN/diffPage.properties">
 </file>
 <file id="96f45d20-a714-4b4a-878a-30c9e62d5fc1" idref="f10def63-12ac-4ffb-b55e-f16a3e055061" name="updatescan.properties" url="src/locale/zh-CN/updatescan.properties">
 </file>
@@ -1320,7 +1438,7 @@
 <preference-set id="New test plan #1">
   <string id="command_line"></string>
   <string relative="url" id="directory"></string>
-  <string id="language">Python</string>
+  <string id="language">Python - unittest</string>
 </preference-set>
 </preference-set>
 </preference-set>

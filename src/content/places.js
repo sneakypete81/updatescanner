@@ -105,6 +105,70 @@ var USc_places = {
     } else if (results.length > 1) {
       throw "Multiple root folders found";
     }
-  }  
+  },
+
+  getURL : function(id)
+  {
+    return PlacesUtils.bookmarks.getBookmarkURI(id).spec;
+  },
+  
+  getTitle : function(id)
+  {
+    return PlacesUtils.bookmarks.getItemTitle(id);
+  }
+
+
+/*  
+addItem : function()
+{
+    var me = USc_rdf;
+    var node=me.dsource.getAnonymousNode();
+    me.rootnode.addChild(node,true);
+    me.dsource.save();
+    return node.getValue();
+},
+
+modifyItem : function(id, field, value)
+{
+    var me = USc_rdf;
+    me.dsource.getNode(id).addTargetOnce(me.namespace+"#"+field, String(value));
+},
+
+deleteItem : function(id)
+{
+    var me = USc_rdf;
+    me.dsource.deleteRecursive(id);
+},
+
+queryItem : function(id, field, defaultValue)
+{
+    var me = USc_rdf;
+    if (me.targetExists(id, field)) {
+        return me.dsource.getNode(id).getTarget(me.namespace+"#"+field).getValue();
+    } else {
+        return defaultValue;
+    }
+},
+
+targetExists : function(id, field)
+{
+    var me = USc_rdf;
+    var item;
+
+    item = me.dsource.getNode(id).getTarget(me.namespace+"#"+field);
+    if (item == null) {
+        return false;
+    }
+    return true;
+},
+
+moveItem : function(id, newIndex)
+{
+    var me = USc_rdf;
+    var item = me.dsource.getNode(id);
+    me.rootnode.removeChild(item);
+    me.rootnode.addChildAt(item, newIndex+1); //rdfds index starts at 1, not 0
+},
+*/  
 }
 }
