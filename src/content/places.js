@@ -54,17 +54,6 @@ var USc_places = {
   STATUS_ERROR: "error",
   STATUS_CHECKING: "checking",
 
-  addBookmark : function(title, url) {
-    var bookmarksService = Cc["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Ci.nsINavBookmarksService);
-    var annotationService = Cc["@mozilla.org/browser/annotation-service;1"].getService(Ci.nsIAnnotationService);
-    var ioService = Cc["@mozilla.org/network/io-service;1"].getService(Ci.nsIIOService);
-    var bookmarkURI = ioService.newURI(url, null, null);
-    var folderId = this.getRootFolderId();
-    var id = bookmarksService.insertBookmark(folderId, bookmarkURI, bookmarksService.DEFAULT_INDEX, title);
-    annotationService.setItemAnnotation(id, this.ANNO_STATUS, "updated", 0, annotationService.EXPIRE_NEVER);
-    return id;
-  },
-
   getRootFolderId : function() {
     var annotationService = Cc["@mozilla.org/browser/annotation-service;1"].getService(Ci.nsIAnnotationService);
     var results = annotationService.getItemsWithAnnotation(this.ANNO_ROOT, {});
@@ -107,6 +96,21 @@ var USc_places = {
     }
   },
 
+  addBookmark : function(title, url) {
+    var bookmarksService = Cc["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Ci.nsINavBookmarksService);
+    var annotationService = Cc["@mozilla.org/browser/annotation-service;1"].getService(Ci.nsIAnnotationService);
+    var ioService = Cc["@mozilla.org/network/io-service;1"].getService(Ci.nsIIOService);
+    var bookmarkURI = ioService.newURI(url, null, null);
+    var folderId = this.getRootFolderId();
+    var id = bookmarksService.insertBookmark(folderId, bookmarkURI, bookmarksService.DEFAULT_INDEX, title);
+    return id;
+  },
+
+  deleteBookmark : function(id) {
+    var bookmarksService = Cc["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Ci.nsINavBookmarksService);
+    bookmarksService.removeItem(id);
+  },
+
   getURL : function(id)
   {
     return PlacesUtils.bookmarks.getBookmarkURI(id).spec;
@@ -115,60 +119,23 @@ var USc_places = {
   getTitle : function(id)
   {
     return PlacesUtils.bookmarks.getItemTitle(id);
-  }
+  },
 
+  modifyAnno : function(id, anno, value)
+  {
+    var annotationService = Cc["@mozilla.org/browser/annotation-service;1"].getService(Ci.nsIAnnotationService);
+    annotationService.setItemAnnotation(id, anno, value, 0, annotationService.EXPIRE_NEVER);
+  },
 
-/*  
-addItem : function()
-{
-    var me = USc_rdf;
-    var node=me.dsource.getAnonymousNode();
-    me.rootnode.addChild(node,true);
-    me.dsource.save();
-    return node.getValue();
-},
-
-modifyItem : function(id, field, value)
-{
-    var me = USc_rdf;
-    me.dsource.getNode(id).addTargetOnce(me.namespace+"#"+field, String(value));
-},
-
-deleteItem : function(id)
-{
-    var me = USc_rdf;
-    me.dsource.deleteRecursive(id);
-},
-
-queryItem : function(id, field, defaultValue)
-{
-    var me = USc_rdf;
-    if (me.targetExists(id, field)) {
-        return me.dsource.getNode(id).getTarget(me.namespace+"#"+field).getValue();
+  queryAnno : function(id, anno, defaultValue)
+  {
+    var annotationService = Cc["@mozilla.org/browser/annotation-service;1"].getService(Ci.nsIAnnotationService);
+    if (annotationService.itemHasAnnotation(id, anno)) {
+      return annotationService.getItemAnnotation(id, anno);
     } else {
-        return defaultValue;
+      return defaultValue;
     }
-},
-
-targetExists : function(id, field)
-{
-    var me = USc_rdf;
-    var item;
-
-    item = me.dsource.getNode(id).getTarget(me.namespace+"#"+field);
-    if (item == null) {
-        return false;
-    }
-    return true;
-},
-
-moveItem : function(id, newIndex)
-{
-    var me = USc_rdf;
-    var item = me.dsource.getNode(id);
-    me.rootnode.removeChild(item);
-    me.rootnode.addChildAt(item, newIndex+1); //rdfds index starts at 1, not 0
-},
-*/  
+  }
+  
 }
 }
