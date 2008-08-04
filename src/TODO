@@ -3,6 +3,18 @@ Diffpage arrow hyperlink to mozdev.updatescanner.org
 Notification click doesn't work for mac
 Add help button to preferences
 
+Middle-click on toolbar icons opens in new tab
+"open all in tabs" command opens in foreground, not background
+
+Super Notification
+ - show names of changed pages
+ - one click to show diffpage
+
+Click link to scroll diffpage to change
+Show deletions too
+
+Add "Current Page" link to error page
+
 -- Unreleased --
 Middle-click now focusses now tab too
 
