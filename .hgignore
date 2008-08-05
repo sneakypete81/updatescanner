@@ -1,2 +1,2 @@
-syntax: glob
-www/*
+syntax: regexp
+~/www/
