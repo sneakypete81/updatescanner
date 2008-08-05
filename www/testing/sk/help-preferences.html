@@ -1,0 +1,176 @@
+<?php 
+setcookie("locale", "sk", strtotime("+1 year"), "/");
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title>Update Scanner Nastavenia</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <style type="text/css" media="all">@import "/drupal/modules/aggregator/aggregator.css";</style>
+    <style type="text/css" media="all">@import "/drupal/modules/node/node.css";</style>
+    <style type="text/css" media="all">@import "/drupal/modules/system/defaults.css";</style>
+    <style type="text/css" media="all">@import "/drupal/modules/system/system.css";</style>
+    <style type="text/css" media="all">@import "/drupal/modules/user/user.css";</style>
+    <style type="text/css" media="all">@import "/drupal/modules/forum/forum.css";</style>
+    <style type="text/css" media="all">@import "/drupal/themes/garland/style.css";</style>
+    <style type="text/css" media="all">@import "/drupal/files/updatescanner/color/garland-03da2dc7/style.css";</style>
+    <script type="text/javascript" src="/drupal/misc/jquery.js"></script>
+    <script type="text/javascript" src="/drupal/misc/drupal.js"></script>
+    <script type="text/javascript" src="/drupal/sites/all/modules/jquery_update/compat-1.0.js"></script>
+    <style type="text/css" media="print">@import "/drupal/themes/garland/print.css";</style>
+    <!--[if lt IE 7]>
+    <style type="text/css" media="all">@import "/drupal/themes/garland/fix-ie.css";</style>
+    <![endif]-->
+    <style type="text/css" media="all">@import "../updatescan.css";</style>
+  </head>
+
+  <body class="sidebar-left">
+
+  <div id="header-region" class="clear-block"></div>
+  <div id="wrapper">
+    <div id="container" class="clear-block">
+<!-- Header -->
+      <div id="header">
+        <div id="logo-floater">
+          <h1><a title="Update Scanner" href="index.html">
+            <img src="/drupal/files/updatescanner/garland_logo.png" alt="Update Scanner" id="logo" />
+            <span>Update Scanner</span>
+          </a></h1>
+        </div>
+        <ul class="links primary-links">
+        <li class="first last menu-1-1-2">
+          <a href="https://addons.mozilla.org/firefox/addon/3362" class="menu-1-1-2">Inštalácia</a>
+        </li>
+        <li class="first last menu-1-1-2">
+          <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+            <input type="hidden" name="cmd" value="_s-xclick">
+            <input type="image" src="../img/donate.png" border="0" name="submit" alt="Donate">
+            <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----">
+          </form>
+        </li>
+
+        </ul>                
+      </div>
+
+<!-- Sidebar -->
+
+
+
+      <div id="sidebar-left" class="sidebar">
+        <div id="block-user-1" class="clear-block block block-user">
+          <h2></h2>
+          <div class="content">
+            <ul class="menu">
+            <li class="leaf"><a class="" href="./index.html">
+              Úvod</a></li>
+            <li class="leaf"><a href="https://addons.mozilla.org/firefox/addon/3362">
+              Inštalácia</a></li>
+
+            <li class="expanded"><a href="./help.html">
+              Pomocník a obrázky</a>
+              <ul class="menu">
+                <li class="leaf"><a class="" href="./help.html">
+                  Úvodom</a></li>
+                <li class="leaf"><a class="" href="./help-sidebar.html">
+                  Bočný panel</a></li>
+                <li class="leaf"><a class="" href="./help-properties.html">
+                  Vlastnosti stránky</a></li>
+                <li class="leaf"><a class="active" href="./help-preferences.html">
+                  Nastavenia</a></li>
+                <li class="leaf"><a class="" href="./help-faq.html">
+                  Časté otázky</a></li>
+              </ul>
+            </li>
+            <li class="leaf"><a href="/drupal/forum">
+              Fórum</a></li>
+            <li class="leaf"><a class="" href="./source.html">
+              Zdrojový kód</a></li>
+            <li class="leaf"><a class="" href="./bug_reports.html">
+              Hlásenie chýb</a></li>
+            <li class="leaf"><a class="" href="./contact.html">
+              Kontakt</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+
+      <div id="center">
+      <div id="squeeze">
+      <div class="right-corner">
+      <div class="left-corner">
+      <div class="breadcrumb">
+            <form dir="ltr" method="get" action="/redirect.php">
+              <input type="hidden" name="page" value="help-preferences.html">
+              <select id="language" name="locale" dir="ltr" onchange="this.form.submit()">
+                <option value="sk">Slovensky</option>
+                <option value="de">Deutsch</option>
+                <option value="en">English</option>
+                <option value="es">Español</option>
+                <option value="fr">Français</option>
+                <option value="it">Italiano</option>
+                <option value="hu">Magyar</option>
+                <option value="nl">Nederlands</option>
+                <option value="tr">Türkçe</option>
+                <option value="cs">Česky</option>
+                <option value="ru">Русский</option>
+                <option value="zh-CN">简体中文</option>
+              </select>
+              <noscript><input type="submit" value="Go" /></noscript>
+            </form>
+      </div>          
+
+    <div id="content">
+      <h1>Nastavenia notifikácie</h1>
+      <img class="preview" src="../img/pref_notifications.png"/><br/>
+
+      <h4>Vyskakovacie okno s notifikáciou</h4>
+      <p>Vyberte, či sa má zobraziť notifikácia pri zistení zmeny na stránke a ako dlho má byť zobrazená.</p>
+
+      <h4>Zvuk notifikácie</h4>
+      <p>Nastaviť zvuk, ktorý je prehratý pri zistení zmeny na stránke</p>
+ 
+      <br/>
+      <h1>Nastavenia kontroly</h1>
+      <img class="preview" src="../img/pref_scanning.png"/>
+
+      <h4>Vyberte metódu</h4>
+      <p>Intenzitu a úroveň kontroly je možné nastaviť buď pomocou <strong>posuvníkov</strong> alebo zadaním určitej <strong>hodnoty</strong>.</p>
+
+      <h4>Časový limit kontroly</h4>
+      <p>Nastaviť, ako dlho má skener čakať na načítanie stránky pred jej zobrazením.
+         Zvýšte toto číslo, ak máte pomalšie pripojenie k sieti Internet alebo stránka je v bočnom paneli Update Scanner šedá.</p>
+
+      <br/>
+      <h1>Nastavenia panelov s nástrojmi</h1>
+      <img class="preview" src="../img/pref_toolbar.png"/><br/>
+
+      <h4>Ikony panela s nástrojmi</h4>
+      <p>Vyberte, ktoré ikony sa majú zobraziť v paneli Update Scanner</p>
+
+      <div class="prevnext">
+        <table>
+        <td class="prev"><a href="./help-properties.html">&laquo; Predchádzajúce: Vlastnosti stránky</a></td>
+        <td class="next"><a href="./help-faq.html">Nasledujúce: Časté otázky &raquo;</a></td>
+        </table>
+      </div>
+    </div>
+        <div id="us_footer">
+          <a href="http://www.mozdev.org"><img border="0" src="http://www.mozdev.org/sharedimages/mozdev_tiny.png" align="top" alt="mozdev.org"/></a>
+        </div>
+      </div></div></div></div> <!-- /.left-corner, /.right-corner, /#squeeze, /#center -->
+    </div>
+  </div>
+
+  <script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+    _uacct = "UA-2705835-1";
+    urchinTracker();
+  </script>
+
+  </body>
+</html>
+

@@ -1,0 +1,28 @@
+    <ul id="side-bar">
+      <h1>$_helpPages</h1>
+#if $_thisSidebarPage == "gettingStarted"
+      <li class="highlight">$_gettingStarted</li>
+#else
+      <li><a href="./help.html">$_gettingStarted</a></li>
+#end if
+#if $_thisSidebarPage == "sidebar"
+      <li class="highlight">$_sidebar</li>
+#else
+      <li><a href="./help-sidebar.html">$_sidebar</a></li>
+#end if
+#if $_thisSidebarPage == "pageProperties"
+      <li class="highlight">$_pageProperties</li>
+#else
+      <li><a href="./help-properties.html">$_pageProperties</a></li>
+#end if
+#if $_thisSidebarPage == "preferences"
+      <li class="highlight">$_preferences</li>
+#else
+      <li><a href="./help-preferences.html">$_preferences</a></li>
+#end if
+#if $_thisSidebarPage == "faq"
+      <li class="highlight">$_faq</li>
+#else
+      <li><a href="./help-faq.html">$_faq</a></li>
+#end if
+    </ul>

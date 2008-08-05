@@ -1,0 +1,77 @@
+/*************************************************
+ * TITLE: Prosimii Alternative Screen Stylesheet * 
+ * URI  : prosimii/prosimii-screen-alt.css       *
+ * MODIF: 2004-Apr-28 21:56 +0800                *
+ *************************************************/
+
+@import "prosimii-screen.css";
+
+/* ##### Content ##### */
+
+#content {
+  margin: -0.5ex 1em 1em 14em;
+}
+
+/* ##### Side Menu ##### */
+
+#side-bar {
+  color: rgb(204,204,204);
+  background-color: transparent;
+  list-style-type: square;
+  list-style-position: outside;
+  width: 11em;
+  margin: 0;
+  padding: 1ex 1ex 1ex 3ex;
+  border: 1px solid rgb(204,204,204);
+  position: absolute;
+  left: 1.5ex;
+  top: 12em;
+}
+
+[id="side-bar"] {
+  position: fixed !important;  /* Makes the side menu scroll with the page. Doesn't work in MSIE */
+}
+
+#side-bar h1 {
+  margin: 0 0 1ex 0;
+  color: rgb(117,144,174);
+  font-size: 100%;    
+}
+
+#side-bar a {
+  text-decoration: none;
+}
+
+#side-bar:hover {
+  color: rgb(117,144,174);
+  background-color: transparent;
+  border-color: rgb(117,144,174);
+}
+
+#side-bar li {
+  margin: 0;
+}
+
+#side-bar li.highlight {
+  font-weight: bold;
+  color: black;
+}
+
+#side-bar li.highlight:hover {
+  color: black;
+}
+
+#side-bar li:hover {
+  color: rgb(61,92,122);
+  background-color: transparent;
+}
+
+
+#side-bar li a:hover {
+  text-decoration: underline;
+}
+
+
+
+
+

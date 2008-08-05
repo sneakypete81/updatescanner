@@ -1,0 +1,8 @@
+#!/bin/bash
+
+export APP=updatescan_www
+
+./install.rdf.build
+./chrome.manifest.build
+rm -f $APP.xpi
+./xpi.build

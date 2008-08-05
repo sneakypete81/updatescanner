@@ -1,0 +1,35 @@
+#set global $_stylesheet = "prosimii-screen-sidebar.css"
+#set global $_title = "Update Scanner %s" %($_faq)
+#set global $_thisPage = "help-faq"
+#set global $_helpPage = "true"
+#include "content/_header.tmpl"
+
+    <div id="content">
+      <h1>$_faq</h1>
+      <br/>
+      <h4>$exportQ</h4>
+      <p>$exportA</p>
+                 
+      <h4>$greyQ</h4>
+#set $greyA = $greyA.replace('{linkStart}','<a href="bug_reports.html">')
+#set $greyA = $greyA.replace('{linkEnd}','</a>')
+#set $greyA2 = $greyA2.replace('{linkStart}','<a href="help-preferences.html">')
+#set $greyA2 = $greyA2.replace('{linkEnd}','</a>')
+      <p>$greyA<br/>
+        $greyA2</p>
+              
+      <h4>$strangeCharsQ</h4>
+#set $strangeCharsA = $strangeCharsA.replace('{linkStart}','<a href="help-properties.html">')
+#set $strangeCharsA = $strangeCharsA.replace('{linkEnd}','</a>')
+      <p>$strangeCharsA</p>
+
+      <h4>$toolbarIconQ</h4>
+      <p>$toolbarIconA</p>
+ 
+      <div class="prevnext">
+        <table>
+        <td class="prev"><a href="./help-preferences.html">&laquo; $_prev $_preferences</a></td>
+        </table>
+      </div>
+    </div>
+#include "content/_footer.tmpl"

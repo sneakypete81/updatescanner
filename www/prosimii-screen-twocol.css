@@ -1,0 +1,83 @@
+/***************************************
+ * TITLE: Prosimii Screen Stylesheet   * 
+ * URI  : prosimii/prosimii-screen.css *
+ * MODIF: 2004-Apr-28 21:43 +0800      *
+ ***************************************/
+
+@import "prosimii-screen.css";
+
+/* ##### Main Copy ##### */
+
+#content {
+  margin: 0;
+}
+
+#content h1 {
+  padding: 0;
+}
+
+/* ##### Columns ##### */
+
+.rowOfBoxes {
+  clear: both;
+}
+
+.quarter, .oneThird, .half, .twoThirds, .fullWidth {
+  margin: 1em 0;
+  float: left;
+  border-left: 1px solid rgb(204,204,204);
+}
+
+.quarter {
+  width: 21%;
+  padding: 0 1.9%;
+}
+
+.oneThird {
+  width: 28%;
+  padding: 0 1.9%;
+}
+
+.half {
+  text-align: justify;
+  width: 46%;
+  padding: 0 1.9%;
+}
+
+.twoThirds {
+  text-align: justify;
+  width: 63%;
+  padding: 0 1.9%;
+}
+
+.fullWidth {
+  text-align: justify;
+  width: 96%;
+  padding: 0 1.2em;
+  border-left: none;
+}
+
+.filler {  /* use with an empty <p> element to add padding to the end of a text box */
+  border: 1px solid white;
+}
+ 
+.noBorderOnLeft {
+  border-left: none;
+}
+
+.dividingBorderAbove {
+  border-top: 1px solid rgb(204,204,204);
+}
+
+/* More elegant alternatives to .noBorderOnLeft & .dividingBorderAbove
+ * that don't require the creation of new classes - but which are not
+ * supported by MSIE - are the following:
+ *
+ * .rowOfBoxes > div:first-child {
+ *   border-left: none;
+ * }
+ *
+ * .rowOfBoxes + .rowOfBoxes {
+ *   border-top: 1px solid rgb(204,204,204);
+ * }
+ */

@@ -1,0 +1,23 @@
+.prevnext table {
+  width: 100%;
+}
+
+.prevnext td.prev {
+  text-align: left;
+  padding: 0;
+}
+
+.prevnext td.next {
+  text-align: right;
+  padding: 0;
+}
+
+#breadcrumb form {
+  margin: 0;
+  float: right;
+}
+
+#us_footer {
+  text-align: center;
+}
+

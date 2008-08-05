@@ -1,0 +1,69 @@
+#set global $_stylesheet = "prosimii-screen-sidebar.css"
+#set global $_title = "Update Scanner %s" %($_gettingStarted)
+#set global $_thisPage = "help"
+#set global $_helpPage = "true"
+#include "content/_header.tmpl"
+
+    <div id="content">
+      <h1>$_gettingStarted</h1>
+      <br/>
+      <h2>$installation</h2>
+#set $installPage2 = $installPage2.replace('{linkStart}','<a href="https://addons.mozilla.org/firefox/addon/3362">')
+#set $installPage2 = $installPage2.replace('{linkEnd}','</a>')
+      <p>$installPage2</p>
+      <br/>
+
+      <h2>$openSidebar</h2>
+      <img class="preview" src="$_img.statusbar"/>
+      <p>
+        $clickIcon<br/>
+        $shortcutKey
+      </p>
+      <br/>
+
+      <h2>$addWebpage</h2>
+      <a target="_blank" href="$_img.browser_context_menu">
+        <img class="preview" src="$_img.browser_context_menu_prv"/>
+      </a>
+      <p>
+        $goToWebpage<br/>
+        $rightClick
+      </p>
+      <br/>
+
+      <h2>$editProperties</h2>
+      <a target="_blank" href="$_img.properties_dialog">
+        <img class="preview" src="$_img.properties_dialog_prv"/>
+      </a>
+      <p>
+          $selectHowOften<br/>
+          $leftAtDefault 
+      </p>
+      <br/>
+      
+      <h2>$notifications</h2>
+      <img class="preview" src="$_img.notification_popup"/>
+      <p>
+         $popup<br/>
+         $iconBlue
+      </p>
+      <br/>
+      
+      <h2>$viewChanges</h2>
+      <a target="_blank" href="$_img.webpage_changes">
+         <img class="preview" src="$_img.webpage_changes_prv"/>
+      </a>
+      <p>
+         $updatedBold<br/>
+         $clickToView<br/> 
+         $changesHighlighted
+      </p>
+
+      <div class="prevnext">
+        <table>
+        <td class="prev"></td>
+        <td class="next"><a href="./help-sidebar.html">$_next $_sidebar &raquo;</a></td>
+        </table>
+      </div>
+    </div>
+#include "content/_footer.tmpl"

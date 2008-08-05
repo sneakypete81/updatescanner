@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+
+<Description about="urn:mozilla:install-manifest">
+<em:id>{093dbef3-87da-4d49-9836-b717b8196cb1}</em:id>
+<em:version>0.0.3</em:version>
+
+<!-- Target Application this extension can install into,
+    with minimum and maximum supported versions:
+    Firefox -->
+<em:targetApplication>
+    <Description>
+        <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+        <em:minVersion>2.0</em:minVersion>
+        <em:maxVersion>2.0.0.*</em:maxVersion>
+    </Description>
+</em:targetApplication>
+
+<!-- Front End MetaData -->
+<em:name>Update Scanner Web Pages</em:name>
+<em:description>Web pages for the Update Scanner extension. Note that this isn't actually an extension, just a placeholder for webpage translations on babelzilla</em:description>
+<em:creator>Pete Burgers</em:creator>
+<em:homepageURL>http://updatescanner.mozdev.org</em:homepageURL>
+
+<!-- AutoUpdate via URL is disabled -->
+
+<!-- Front End Integration Hooks (used by Extension Manager)-->
+<!--<em:optionsURL>chrome://updatescan_www/content/options.xul</em:optionsURL>-->
+<!--<em:aboutURL>chrome://updatescan_www/content/about.xul</em:aboutURL>-->
+<em:iconURL>chrome://updatescan_www/skin/updatescan_big.png</em:iconURL>
+
+<!-- Packages, Skins and Locales that this extension registers -->
+<em:file>
+	<Description about="urn:mozilla:extension:file:updatescan_www.jar">
+		<em:package>content/</em:package>
+		<em:locale>locale/da-DK/</em:locale>
+		<em:locale>locale/cs-CZ/</em:locale>
+		<em:locale>locale/sk-SK/</em:locale>
+		<em:locale>locale/zh-TW/</em:locale>
+		<em:locale>locale/it-IT/</em:locale>
+		<em:locale>locale/en-US/</em:locale>
+		<em:locale>locale/hu-HU/</em:locale>
+		<em:locale>locale/ko-KR/</em:locale>
+		<em:locale>locale/nl-NL/</em:locale>
+		<em:locale>locale/zh-CN/</em:locale>
+		<em:locale>locale/de-DE/</em:locale>
+		<em:locale>locale/fr-FR/</em:locale>
+		<em:locale>locale/tr-TR/</em:locale>
+		<em:locale>locale/pl-PL/</em:locale>
+		<em:locale>locale/pt-BR/</em:locale>
+		<em:locale>locale/es-ES/</em:locale>
+		<em:locale>locale/ru-RU/</em:locale>
+		
+	</Description>
+</em:file>
+</Description>
+
+</RDF>

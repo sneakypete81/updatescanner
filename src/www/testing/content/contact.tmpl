@@ -1,0 +1,22 @@
+#set global $_title = "Update Scanner %s" %($contactUs)
+#set global $_thisPage = "contact"
+#include "content/_header.tmpl"
+    <div id="content">
+      <h1>$contactUs</h1>
+
+#set $contactDetails2 = $contactDetails2.replace('{link1}','<a href="http://updatescanner.mozdev.org/drupal/forum">')
+#set $contactDetails2 = $contactDetails2.replace('{link2}','<a href="bug_reports.html">')
+#set $contactDetails2 = $contactDetails2.replace('{linkEnd}','</a>')
+      <p>$contactDetails2</p>
+      
+      <h1>$websiteTranslators</h1>
+      <p>
+#for $language in $_languages
+#if $language.path != 'en'
+        $language.translator <i>($language.name)</i><br/>
+#end if
+#end for
+      </p>
+      
+    </div>
+#include "content/_footer.tmpl"
