@@ -15,7 +15,7 @@ setcookie("locale", "en", strtotime("+1 year"), "/");
     <style type="text/css" media="all">@import "/drupal/modules/user/user.css";</style>
     <style type="text/css" media="all">@import "/drupal/modules/forum/forum.css";</style>
     <style type="text/css" media="all">@import "/drupal/themes/garland/style.css";</style>
-    <style type="text/css" media="all">@import "/drupal/files/updatescanner/color/garland-03da2dc7/style.css";</style>
+    <style type="text/css" media="all">@import "/drupal/files/updatescanner/color/garland-f195f441/style.css";</style>
     <script type="text/javascript" src="/drupal/misc/jquery.js"></script>
     <script type="text/javascript" src="/drupal/misc/drupal.js"></script>
     <script type="text/javascript" src="/drupal/sites/all/modules/jquery_update/compat-1.0.js"></script>
@@ -113,13 +113,16 @@ setcookie("locale", "en", strtotime("+1 year"), "/");
       <p>The Update Scanner source code can be accessed in either of the following ways:</p>
 
       <ul>
-      <li>View the source using the Mercurial <a href="http://hg.mozdev.org/updatescanner/">web interface</a></li>
-      <li>Get a local copy of the source with the following command:
+      <li>View the source using the CVS <a href="http://www.mozdev.org/source/browse/updatescanner/">web interface</a></li>
+      <li>Check out the source using anonymous CVS with the following commands (password is guest):
 <pre>
-hg clone https://hg.mozdev.org/updatescanner/
+cvs -d :pserver:guest@mozdev.org:/cvs login
+cvs -z3 -d :pserver:guest@mozdev.org:/cvs co updatescanner/src updatescanner/www
 </pre>
       </li>
       </ul>
+
+      <p>CVS clients and help documentation can be found at the <a href="http://ximbiot.com/cvs/wiki/">Ximbiot CVS Wiki</a>.</p>
     </div>
         <div id="us_footer">
           <a href="http://www.mozdev.org"><img border="0" src="http://www.mozdev.org/sharedimages/mozdev_tiny.png" align="top" alt="mozdev.org"/></a>
