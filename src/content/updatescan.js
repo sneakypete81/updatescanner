@@ -44,10 +44,10 @@ var USc_annotationObserver = {
   onItemAnnotationSet : function(aItemId, aName) {
     switch (aName) {
       case USc_places.ANNO_ROOT:
-        bookmarksTree.place = "place:queryType=1&folder=" + aItemId;
+        USc_updatescan.tree.place = "place:queryType=1&folder=" + aItemId;
         break;
       case USc_places.ANNO_STATUS:
-        bookmarksTree.getResultView().invalidateAll();
+        USc_updatescan.tree.getResultView().invalidateAll();
         break;
     }
   },
@@ -165,7 +165,6 @@ scanButtonClick : function()
 {
     var me = USc_updatescan;    
     var id;
-    var filebase;
     var numitems;
     var str=document.getElementById("updatescanStrings")
     var ignoreNumbers;
@@ -226,10 +225,10 @@ scanSelectedPage : function()
 **/
 },
 
-_scanChangedCallback : function(id, url, new_content, status, statusText, headerText)
+_scanChangedCallback : function(id, new_content, status, statusText, headerText)
 {
     var me = USc_updatescan;
-    if (USc_processScanChange(id, url, new_content, status, statusText, headerText)) {
+    if (USc_processScanChange(id, new_content, status, statusText, headerText)) {
         me.numChanges++;
     }
 },
@@ -237,7 +236,7 @@ _scanChangedCallback : function(id, url, new_content, status, statusText, header
 _scanEncodingCallback : function(id, encoding)
 // Called when encoding is detected for a page marked for auto-detect encoding
 {
-    USc_places.modifyAnno(id, "encoding", encoding);
+    USc_places.modifyAnno(id, USc_places.ANNO_ENCODING, encoding);
 },
 
 _scanFinishedCallback : function()
@@ -325,7 +324,7 @@ openNewDialogNoRefresh : function(title, url)
         USc_rdf.modifyItem(id, "ignoreNumbers", args.ignoreNumbers);
 
         filebase = USc_file.escapeFilename(id);
-        USc_file.USwriteFile(filebase+".new", "**NEW**");
+//        USc_file.USwriteFile(filebase+".new", "**NEW**");
 
         USc_rdf.modifyItem(id, "lastscan", "");  // lastscan not defined
         USc_rdf.modifyItem(id, "changed", "0");  // not changed 
@@ -370,7 +369,7 @@ openEditDialog : function()
 
         if (oldurl != args.url) {   // URL changed - reset all values
             filebase = USc_file.escapeFilename(id);
-            USc_file.USwriteFile(filebase+".new", "**NEW**");
+//            USc_file.USwriteFile(filebase+".new", "**NEW**");
 
             USc_rdf.modifyItem(id, "lastscan", "");  // lastscan not defined
             USc_rdf.modifyItem(id, "changed", "0");  // not changed

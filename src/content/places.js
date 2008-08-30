@@ -39,10 +39,15 @@ var USc_places = {
 
   ANNO_ROOT : "updatescan/root", // int, a Places itemId
   ANNO_STATUS : "updatescan/status", // string
-  ANNO_SIG : "updatscan/signature", // string
-  ANNO_LASTVISIT : "updatescan/lastvisit", // Epoch seconds
-  ANNO_FEEDTITLE : "updatescan/feedtitle", // string
-    
+  ANNO_ENCODING : "updatescan/encoding", // string
+  ANNO_THRESHOLD: "updatescan/threshold", // int
+  ANNO_IGNORE_NUMBERS : "updatescan/ignore_numbers", // boolean
+  ANNO_LAST_SCAN : "updatescan/last_scan", // string
+  ANNO_OLD_LAST_SCAN : "updatescan/old_last_scan", // string
+  ANNO_STATUS_TEXT : "updatescan/status_text", // string
+  ANNO_HEADER_TEXT : "updatescan/header_text", // string
+  ANNO_SIGNATURE : "updatescan/signature", // string
+
   ORGANIZER_QUERY_ANNO : "PlacesOrganizer/OrganizerQuery",
 
   NC_NS: "http://home.netscape.com/NC-rdf#",
@@ -135,7 +140,57 @@ var USc_places = {
     } else {
       return defaultValue;
     }
+  },
+
+  getSignature : function(id)
+  {
+    var sig = this.queryAnno(id, this.ANNO_SIGNATURE, "");
+    if (sig == "")
+    {
+      sig = USc_file.escapeFilename(this.createSignature(id));
+      alert(sig);
+      this.modifyAnno(id, this.ANNO_SIGNATURE, sig)
+    }
+    
+    return sig;
+  },
+
+  createSignature : function(id)
+  {
+    var now = new Date();
+    
+    // build string to be hashed (URL+date/time)
+    var str = this.getURL(id) + now.getTime();
+
+    var converter =
+      Components.classes["@mozilla.org/intl/scriptableunicodeconverter"].
+        createInstance(Components.interfaces.nsIScriptableUnicodeConverter);
+
+    // we use UTF-8 here, you can choose other encodings.
+    converter.charset = "UTF-8";
+    // result is an out parameter,
+    // result.value will contain the array length
+    var result = {};
+    // data is an array of bytes
+    var data = converter.convertToByteArray(str, result);
+    var ch = Components.classes["@mozilla.org/security/hash;1"]
+                       .createInstance(Components.interfaces.nsICryptoHash);
+    ch.init(ch.MD5);
+    ch.update(data, data.length);
+    var hash = ch.finish(false);
+
+    // convert the binary hash data to a hex string.
+    var hexHash = [this.toHexString(hash.charCodeAt(i)) for (i in hash)].join("");
+    
+    return hexHash;
+  },
+
+  // return the two-digit hexadecimal code for a byte
+  toHexString : function(charCode)
+  {
+    return ("0" + charCode.toString(16)).slice(-2);
   }
+  
   
 }
 }

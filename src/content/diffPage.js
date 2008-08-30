@@ -63,7 +63,7 @@ load : function()
         oldContent = this._stripScript(oldContent);
         newContent = this._stripScript(newContent);
 
-    	if (newContent=="**NEW**") {
+    	if (newContent=="") {
 	    view="notChecked";
         }
 

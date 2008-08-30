@@ -136,15 +136,14 @@ function USc_scanner()
 
         if (itemType == bmsvc.TYPE_BOOKMARK)
         {
-            var url = USc_places.getURL(itemId);
-            var filebase = USc_file.escapeFilename(url);
+            var filebase = USc_places.getSignature(itemId);
             me.addURL(itemId,
                       USc_places.getTitle(itemId), 
-                      url, 
+                      USc_places.getURL(itemId), 
                       USc_file.USreadFile(filebase+".new"),
-                      USc_places.queryAnno(itemId, "threshold", USc_defaults.DEF_THRESHOLD),
-                      USc_places.queryAnno(itemId, "ignoreNumbers", USc_defaults.DEF_IGNORE_NUMBERS),
-                      USc_places.queryAnno(itemId, "encoding", USc_defaults.DEF_ENCODING));
+                      USc_places.queryAnno(itemId, USc_places.ANNO_THRESHOLD, USc_defaults.DEF_THRESHOLD),
+                      USc_places.queryAnno(itemId, USc_places.ANNO_IGNORE_NUMBERS, USc_defaults.DEF_IGNORE_NUMBERS),
+                      USc_places.queryAnno(itemId, USc_places.ANNO_ENCODING, USc_defaults.DEF_ENCODING));
 
         } else if (itemType == bmsvc.TYPE_FOLDER) {
             aResultNode.QueryInterface(Components.interfaces.nsINavHistoryContainerResultNode);
@@ -258,7 +257,7 @@ function USc_scanner()
                     } else if (me._checkSame(newContent, oldContent, page.threshold)) {
                           status = kUSc_STATUS_MINOR_CHANGE;
                     } else {
-                        if (page.content == "**NEW**") {
+                        if (page.content == "") {
                             status = kUSc_STATUS_NEW;
                         } else {
                             status = kUSc_STATUS_CHANGE;
@@ -270,7 +269,7 @@ function USc_scanner()
             } catch (e) {
                 status = kUSc_STATUS_ERROR;
             }
-            changedCallback(page.id, page.url, httpreqResponseText, status, 
+            changedCallback(page.id, httpreqResponseText, status, 
                             httpreqStatusText, httpreqHeaderText);
             me._getNextPage();
         }
@@ -416,7 +415,7 @@ function USc_scanner()
 
 // This doesn't behave very nicely inside the class, since it is called
 // inside callbacks.    
-function USc_processScanChange(id, url, newContent, status, statusText, headerText)
+function USc_processScanChange(id, newContent, status, statusText, headerText)
 // Updates the specified item based on the new content.
 // * Updates Bookmark annotations
 // * Writes content to file
@@ -432,58 +431,69 @@ function USc_processScanChange(id, url, newContent, status, statusText, headerTe
 
     var logHeaders = prefs.getBoolPref("logHeaders");
 
-    filebase=USc_file.escapeFilename(url)
+    filebase=USc_places.getSignature(id);
     if (status == kUSc_STATUS_CHANGE) {
         retVal = true;
-        if (USc_places.queryAnno(id, "changed", false) == false) {
+        if (USc_places.queryAnno(id, USc_places.ANNO_STATUS, USc_places.STATUS_UNKNOWN)
+                != USc_places.STATUS_UPDATE)
+        {
             // If this is a new change, save the previous state for diffing
             USc_file.USrmFile(filebase+".old");
             USc_file.USmvFile(filebase+".new", filebase+".old");
-            oldLastscan = USc_places.queryAnno(id, "lastscan", "");
-            USc_places.modifyAnno(id, "old_lastscan", oldLastscan);
+            oldLastscan = USc_places.queryAnno(id, USc_places.ANNO_LAST_SCAN, "");
+            USc_places.modifyAnno(id, USc_places.ANNO_OLD_LAST_SCAN, oldLastscan);
         }
 
         USc_file.USwriteFile(filebase+".new", newContent);
 
-        USc_places.modifyAnno(id, "changed", true);
-        USc_places.modifyAnno(id, "lastscan", now.toString());
-        USc_places.modifyAnno(id, "error", false);
-        USc_places.modifyAnno(id, "statusText", statusText);
+        USc_places.modifyAnno(id, USc_places.ANNO_STATUS, USc_places.STATUS_UPDATE);
+        USc_places.modifyAnno(id, USc_places.ANNO_LAST_SCAN, now.toString());
+        USc_places.modifyAnno(id, USc_places.ANNO_STATUS_TEXT, statusText);
         if (logHeaders)
-            USc_places.modifyAnno(id, "headerText", headerText);        
+            USc_places.modifyAnno(id, USc_places.ANNO_HEADER_TEXT, headerText);        
 
     } else if (status == kUSc_STATUS_MINOR_CHANGE) {
         // Minor change: don't notify, but save new page
         USc_file.USwriteFile(filebase+".new", newContent);
 
-        USc_places.modifyAnno(id, "error", false);
-        USc_places.modifyAnno(id, "lastscan", now.toString());
-        USc_places.modifyAnno(id, "statusText", statusText);
+        // Update status to "no change" if necessary
+        if (USc_places.queryAnno(id, USc_places.ANNO_STATUS, USc_places.STATUS_UNKNOWN)
+                != USc_places.STATUS_UPDATE)
+        {
+            USc_places.modifyAnno(id, USc_places.ANNO_STATUS, USc_places.STATUS_NO_UPDATE);
+        }    
+        USc_places.modifyAnno(id, USc_places.ANNO_LAST_SCAN, now.toString());
+        USc_places.modifyAnno(id, USc_places.ANNO_STATUS_TEXT, statusText);
         if (logHeaders)
-            USc_places.modifyAnno(id, "headerText", headerText);        
+            USc_places.modifyAnno(id, USc_places.ANNO_HEADER_TEXT, headerText);        
 
     } else if (status == kUSc_STATUS_NO_CHANGE) {
-        USc_places.modifyAnno(id, "error", false);
-        USc_places.modifyAnno(id, "lastscan", now.toString());
-        USc_places.modifyAnno(id, "statusText", statusText);
+        // Update status to "no change" if necessary
+        if (USc_places.queryAnno(id, USc_places.ANNO_STATUS, USc_places.STATUS_UNKNOWN)
+                != USc_places.STATUS_UPDATE)
+        {
+            USc_places.modifyAnno(id, USc_places.ANNO_STATUS, USc_places.STATUS_NO_UPDATE);
+        }    
+        USc_places.modifyAnno(id, USc_places.ANNO_LAST_SCAN, now.toString());
+        USc_places.modifyAnno(id, USc_places.ANNO_STATUS_TEXT, statusText);
         if (logHeaders)
-            USc_places.modifyAnno(id, "headerText", headerText);
+            USc_places.modifyAnno(id, USc_places.ANNO_HEADER_TEXT, headerText);        
             
     } else if (status == kUSc_STATUS_NEW) {
         USc_file.USwriteFile(filebase+".old", newContent);
         USc_file.USwriteFile(filebase+".new", newContent);
-        USc_places.modifyAnno(id, "lastscan", now.toString());
-        USc_places.modifyAnno(id, "old_lastscan", now.toString());
-        USc_places.modifyAnno(id, "error", false);
-        USc_places.modifyAnno(id, "statusText", statusText);
+        USc_places.modifyAnno(id, USc_places.ANNO_LAST_SCAN, now.toString());
+        USc_places.modifyAnno(id, USc_places.ANNO_OLD_LAST_SCAN, now.toString());
+        USc_places.modifyAnno(id, USc_places.ANNO_STATUS, USc_places.STATUS_NO_UPDATE);
+        USc_places.modifyAnno(id, USc_places.ANNO_STATUS_TEXT, statusText);
         if (logHeaders)
-            USc_places.modifyAnno(id, "headerText", headerText);
+            USc_places.modifyAnno(id, USc_places.ANNO_HEADER_TEXT, headerText);
             
     } else {
-        USc_places.modifyAnno(id, "error", true);
-        USc_places.modifyAnno(id, "statusText", statusText);
+        USc_places.modifyAnno(id, USc_places.ANNO_STATUS, USc_places.STATUS_ERROR);
+        USc_places.modifyAnno(id, USc_places.ANNO_STATUS_TEXT, statusText);
         if (logHeaders)
-            USc_places.modifyAnno(id, "headerText", headerText);        
+            USc_places.modifyAnno(id, USc_places.ANNO_HEADER_TEXT, headerText);        
     }
     return retVal;
 }

@@ -15,6 +15,8 @@ Show deletions too
 
 Add "Current Page" link to error page
 
+Change filenames to signature-based (currently a mismash of url & id)
+
 -- Unreleased --
 Middle-click now focusses new tab too
 
