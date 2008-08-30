@@ -16,6 +16,9 @@
  * All Rights Reserved.
  * 
  * Contributor(s):
+ * Portions from Sage project:
+ * Peter Andrews <petea@jhu.edu>
+ * Erik Arvidsson <erik@eae.net>
  * 
  * Alternatively, the contents of this file may be used under the terms of
  * either the GNU General Public License Version 2 or later (the "GPL"), or
@@ -103,6 +106,54 @@ function USc_scanner()
             timeoutError = true;
             httpreq.abort(); // Triggers this.next with status undefined
         }
+    }
+
+    this.addItems = function(id)
+    {
+        var hist = Cc["@mozilla.org/browser/nav-history-service;1"]
+                   .getService(Ci.nsINavHistoryService);
+
+        var query = hist.getNewQuery();
+        var options = hist.getNewQueryOptions();
+        query.setFolders([id], 1);
+        var result = hist.executeQuery(query, options);
+
+        // select feeds to be checked, exclude separators and updated feeds
+        me.queueItemRecursive(result.root);
+
+        return itemlist.length;
+    }
+
+    this.queueItemRecursive = function(aResultNode)
+    {
+        var bmsvc = Cc["@mozilla.org/browser/nav-bookmarks-service;1"]
+                    .getService(Ci.nsINavBookmarksService);
+        var anno = Cc["@mozilla.org/browser/annotation-service;1"]
+                   .getService(Ci.nsIAnnotationService);
+        
+        var itemId = aResultNode.itemId;
+        var itemType = bmsvc.getItemType(itemId);
+
+        if (itemType == bmsvc.TYPE_BOOKMARK)
+        {
+            var url = USc_places.getURL(itemId);
+            var filebase = USc_file.escapeFilename(url);
+            me.addURL(itemId,
+                      USc_places.getTitle(itemId), 
+                      url, 
+                      USc_file.USreadFile(filebase+".new"),
+                      USc_places.queryAnno(itemId, "threshold", USc_defaults.DEF_THRESHOLD),
+                      USc_places.queryAnno(itemId, "ignoreNumbers", USc_defaults.DEF_IGNORE_NUMBERS),
+                      USc_places.queryAnno(itemId, "encoding", USc_defaults.DEF_ENCODING));
+
+        } else if (itemType == bmsvc.TYPE_FOLDER) {
+            aResultNode.QueryInterface(Components.interfaces.nsINavHistoryContainerResultNode);
+            aResultNode.containerOpen = true;
+            for (var i = 0; i < aResultNode.childCount; i ++) {
+                me.queueItemRecursive(aResultNode.getChild(i));
+            }
+            aResultNode.containerOpen = false;
+        }    
     }
 
     this.addURL = function(id, title, url, content, threshold, 
@@ -219,7 +270,7 @@ function USc_scanner()
             } catch (e) {
                 status = kUSc_STATUS_ERROR;
             }
-            changedCallback(page.id, httpreqResponseText, status, 
+            changedCallback(page.id, page.url, httpreqResponseText, status, 
                             httpreqStatusText, httpreqHeaderText);
             me._getNextPage();
         }
@@ -365,9 +416,9 @@ function USc_scanner()
 
 // This doesn't behave very nicely inside the class, since it is called
 // inside callbacks.    
-function USc_processScanChange(id, newContent, status, statusText, headerText)
+function USc_processScanChange(id, url, newContent, status, statusText, headerText)
 // Updates the specified item based on the new content.
-// * Updates RDF tree
+// * Updates Bookmark annotations
 // * Writes content to file
 {
     var now = new Date();
@@ -381,51 +432,59 @@ function USc_processScanChange(id, newContent, status, statusText, headerText)
 
     var logHeaders = prefs.getBoolPref("logHeaders");
 
-    filebase=USc_file.escapeFilename(id)
+    filebase=USc_file.escapeFilename(url)
     if (status == kUSc_STATUS_CHANGE) {
         retVal = true;
-        if (USc_rdf.queryItem(id, "changed") == "0") {
+        if (USc_places.queryAnno(id, "changed", false) == false) {
             // If this is a new change, save the previous state for diffing
             USc_file.USrmFile(filebase+".old");
             USc_file.USmvFile(filebase+".new", filebase+".old");
-            oldLastscan = USc_rdf.queryItem(id, "lastscan", "");
-            USc_rdf.modifyItem(id, "old_lastscan", oldLastscan);
+            oldLastscan = USc_places.queryAnno(id, "lastscan", "");
+            USc_places.modifyAnno(id, "old_lastscan", oldLastscan);
         }
 
         USc_file.USwriteFile(filebase+".new", newContent);
 
-        USc_rdf.modifyItem(id, "changed", "1");
-        USc_rdf.modifyItem(id, "lastscan", now.toString());
-        USc_rdf.modifyItem(id, "error", "0");
-        USc_rdf.modifyItem(id, "statusText", statusText);
-        if (logHeaders) USc_rdf.modifyItem(id, "headerText", headerText);        
+        USc_places.modifyAnno(id, "changed", true);
+        USc_places.modifyAnno(id, "lastscan", now.toString());
+        USc_places.modifyAnno(id, "error", false);
+        USc_places.modifyAnno(id, "statusText", statusText);
+        if (logHeaders)
+            USc_places.modifyAnno(id, "headerText", headerText);        
+
     } else if (status == kUSc_STATUS_MINOR_CHANGE) {
         // Minor change: don't notify, but save new page
         USc_file.USwriteFile(filebase+".new", newContent);
 
-        USc_rdf.modifyItem(id, "error", "0");
-        USc_rdf.modifyItem(id, "lastscan", now.toString());
-        USc_rdf.modifyItem(id, "statusText", statusText);
-        if (logHeaders) USc_rdf.modifyItem(id, "headerText", headerText);        
+        USc_places.modifyAnno(id, "error", false);
+        USc_places.modifyAnno(id, "lastscan", now.toString());
+        USc_places.modifyAnno(id, "statusText", statusText);
+        if (logHeaders)
+            USc_places.modifyAnno(id, "headerText", headerText);        
+
     } else if (status == kUSc_STATUS_NO_CHANGE) {
-        USc_rdf.modifyItem(id, "error", "0");
-        USc_rdf.modifyItem(id, "lastscan", now.toString());
-        USc_rdf.modifyItem(id, "statusText", statusText);
-        if (logHeaders) USc_rdf.modifyItem(id, "headerText", headerText);        
+        USc_places.modifyAnno(id, "error", false);
+        USc_places.modifyAnno(id, "lastscan", now.toString());
+        USc_places.modifyAnno(id, "statusText", statusText);
+        if (logHeaders)
+            USc_places.modifyAnno(id, "headerText", headerText);
+            
     } else if (status == kUSc_STATUS_NEW) {
         USc_file.USwriteFile(filebase+".old", newContent);
         USc_file.USwriteFile(filebase+".new", newContent);
-        USc_rdf.modifyItem(id, "lastscan", now.toString());
-        USc_rdf.modifyItem(id, "old_lastscan", now.toString());
-        USc_rdf.modifyItem(id, "error", "0");
-        USc_rdf.modifyItem(id, "statusText", statusText);
-        if (logHeaders) USc_rdf.modifyItem(id, "headerText", headerText);        
+        USc_places.modifyAnno(id, "lastscan", now.toString());
+        USc_places.modifyAnno(id, "old_lastscan", now.toString());
+        USc_places.modifyAnno(id, "error", false);
+        USc_places.modifyAnno(id, "statusText", statusText);
+        if (logHeaders)
+            USc_places.modifyAnno(id, "headerText", headerText);
+            
     } else {
-        USc_rdf.modifyItem(id, "error", "1");
-        USc_rdf.modifyItem(id, "statusText", statusText);
-        if (logHeaders) USc_rdf.modifyItem(id, "headerText", headerText);        
+        USc_places.modifyAnno(id, "error", true);
+        USc_places.modifyAnno(id, "statusText", statusText);
+        if (logHeaders)
+            USc_places.modifyAnno(id, "headerText", headerText);        
     }
-    USc_rdf.save();    
     return retVal;
 }
 

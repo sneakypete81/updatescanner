@@ -1445,4 +1445,28 @@
 <preference-set idref="91dc608a-b19f-456c-8c02-467eaf467777">
   <string relative="path" id="import_dirname">src/www/testing</string>
 </preference-set>
+<preference-set idref="c27f5df1-2061-48a3-ad21-760c526343c7">
+<preference-set id="Invocations">
+<preference-set id="default">
+  <string id="cookieparams"></string>
+  <string id="cwd"></string>
+  <string id="documentRoot"></string>
+  <string id="executable-params"></string>
+  <string relative="path" id="filename">src/content/scan.js</string>
+  <string id="getparams"></string>
+  <string id="language">JavaScript</string>
+  <string id="mpostparams"></string>
+  <string id="params"></string>
+  <string id="postparams"></string>
+  <string id="posttype">application/x-www-form-urlencoded</string>
+  <string id="request-method">GET</string>
+  <boolean id="show-dialog">1</boolean>
+  <boolean id="sim-cgi">0</boolean>
+  <boolean id="use-console">0</boolean>
+  <string id="userCGIEnvironment"></string>
+  <string id="userEnvironment"></string>
+</preference-set>
+</preference-set>
+  <string id="lastInvocation">default</string>
+</preference-set>
 </project>

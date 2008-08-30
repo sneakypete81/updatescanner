@@ -48,9 +48,6 @@ if (typeof(USc_overlay_exists) != 'boolean') {
 var USc_overlay_exists = true;
 var USc_overlay = {    
 
-initRDFdone : false,
-
-
 load : function() 
 {
     var me = USc_overlay;
@@ -77,13 +74,6 @@ _showMenu : function()
 addToUpdateScan : function(aBrowser)
 {
     var me = USc_overlay;
-    var rdffile;
-
-    if (!me.initRDFdone) {
-        rdffile = USc_rdf.getPath();
-        USc_rdf.init(USc_rdf.getURI(rdffile));
-        me.initRDFdone = true;
-    }
 
     var browsers = aBrowser.browsers;
     if (browsers && browsers.length > 1) {
