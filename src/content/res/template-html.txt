@@ -1,8 +1,0 @@
-<div id="rss-header">
-  <h1 id="rss-title"><a id="rss-link" href="**LINK**">**TITLE**</a></h1>
-  <p id="rss-desc">**DESCRIPTION**</p>
-</div>
-
-<div class="items">
-  **ITEMS**
-</div>
