@@ -495,6 +495,8 @@
 </file>
 <file id="a22df161-3e38-4f0f-bccc-88866eca0251" idref="5f44fd66-77ee-4919-b720-965e37410fe7" name="progress.js" url="src/content/progress.js">
 </file>
+<file id="acc8d916-a515-45ba-8e0a-37b77243edab" idref="5f44fd66-77ee-4919-b720-965e37410fe7" name="placesBrowser.xul" url="src/content/placesBrowser.xul">
+</file>
 <file id="ae6b0bac-133e-400a-8e30-3f23292c84bd" idref="5f44fd66-77ee-4919-b720-965e37410fe7" name="opentopwin.js" url="src/content/opentopwin.js">
 </file>
 <file id="c27f5df1-2061-48a3-ad21-760c526343c7" idref="5f44fd66-77ee-4919-b720-965e37410fe7" name="scan.js" url="src/content/scan.js">
@@ -1441,6 +1443,9 @@
   <string id="language">Python - unittest</string>
 </preference-set>
 </preference-set>
+</preference-set>
+<preference-set idref="5f44fd66-77ee-4919-b720-965e37410fe7">
+  <string relative="path" id="import_dirname">src/content</string>
 </preference-set>
 <preference-set idref="91dc608a-b19f-456c-8c02-467eaf467777">
   <string relative="path" id="import_dirname">src/www/testing</string>

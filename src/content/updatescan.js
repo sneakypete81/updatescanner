@@ -61,7 +61,9 @@ var USc_annotationObserver = {
 var USc_defaults = {
   DEF_THRESHOLD : 100,
   DEF_IGNORE_NUMBERS : false,
-  DEF_ENCODING : "auto"
+  DEF_ENCODING : "auto",
+  DEF_LAST_SCAN : "5 November 1978",
+  DEF_OLD_LAST_SCAN : "5 November 1978",
 }
 
 
@@ -90,21 +92,6 @@ load : function()
     
     PlacesUtils.annotations.addObserver(USc_annotationObserver);
     
-/*
-    // Connect to the RDF file
-    rdffile = USc_rdf.getPath();
-    USc_rdf.init(USc_rdf.getURI(rdffile));
-
-    // link to the listbox
-    tree = document.getElementById("UpdateTree");
-    tree.datasources=USc_rdf.getURI(rdffile);
- 
-    // Check for refresh requests
-    me.refresh = new USc_refresher();
-    me.refresh.register("refreshTreeRequest", me._refreshTree);
-    me.refresh.request();
-*/
-
     // Check for toolbar button changes
     me._branch = Components.classes["@mozilla.org/preferences-service;1"]
     me._branch = me._branch.getService(Components.interfaces.nsIPrefService);
@@ -120,7 +107,6 @@ unload : function()
     
     PlacesUtils.annotations.removeObserver(USc_annotationObserver);
     
-//    me.refresh.unregister();
     if (me._branch) {
 	me._branch.removeObserver("", this);
     }
@@ -403,28 +389,23 @@ _diffItem : function(id)
 {
     var me = USc_updatescan;
     var now = new Date();
-/**    USc_rdf.modifyItem(id, "changed", "0");
-    USc_rdf.save();
-
-    me._refreshTree();
-    me.refresh.request();
+    if (USc_places.queryAnno(id, USc_places.ANNO_STATUS, "") == USc_places.STATUS_UPDATE)
+    {
+      USc_places.modifyAnno(id, USc_places.ANNO_STATUS, USc_places.STATUS_NO_UPDATE);      
+    }
     
-    var old_lastScan = USc_rdf.queryItem(id, "old_lastscan", "")
-    if (old_lastScan == "") old_lastScan = "5 November 1978";
+    var old_lastScan = USc_places.queryAnno(id,
+                                            USc_places.ANNO_OLD_LAST_SCAN,
+                                            USc_defaults.DEF_OLD_LAST_SCAN);
     old_lastScan = new Date(old_lastScan);
-**/
-   var oldDate = "Whenever";
-   var newDate = "Otherwise";
-/** var oldDate = me._dateDiffString(old_lastScan, now);
 
-    var lastScan =USc_rdf.queryItem(id, "lastscan", "");
-    if (lastScan == "") lastScan = "5 November 1978";
+    var oldDate = me._dateDiffString(old_lastScan, now);
+
+    var lastScan = USc_places.queryAnno(id, USc_places.ANNO_LAST_SCAN, USc_defaults.DEF_LAST_SCAN);
     lastScan = new Date(lastScan);
     
     var newDate = me._dateDiffString(lastScan, now);
 
-    var filebase = USc_file.escapeFilename(id);
-**/
     return "chrome://updatescan/content/diffPage.xul?id="+escape(id)+
 	   "&title="+escape(USc_places.getTitle(id))+
 	   "&url="+escape(USc_places.getURL(id))+

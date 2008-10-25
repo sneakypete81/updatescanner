@@ -1,8 +1,4 @@
-<!-- Note to translators:
 
-     This file contains strings for the Updatescan sidebar.
-     Select "Tools->Update Scanner" to view the sidebar.
--->
 <!ENTITY headerOld1 "The page below is the old version of the webpage, scanned ">
 <!ENTITY headerOld2 ".">
 

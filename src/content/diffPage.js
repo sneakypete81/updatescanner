@@ -57,7 +57,7 @@ load : function()
 
         var content;
 
-        var filebase=USc_file.escapeFilename(id);
+        var filebase = USc_places.getSignature(id);
         var oldContent  = USc_file.USreadFile(filebase+".old");
         var newContent  = USc_file.USreadFile(filebase+".new");
         oldContent = this._stripScript(oldContent);

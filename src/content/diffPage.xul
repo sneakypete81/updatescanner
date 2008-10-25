@@ -55,6 +55,7 @@
   <script src="io.js"/>
   <script src="mydump.js"/>
   <script src="string.js"/>
+  <script src="places.js"/>
 
   <hbox class="blue-box">
   <spacer width="10"/>

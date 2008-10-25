@@ -60,7 +60,8 @@ var USc_places = {
   STATUS_CHECKING: "checking",
 
   getRootFolderId : function() {
-    var annotationService = Cc["@mozilla.org/browser/annotation-service;1"].getService(Ci.nsIAnnotationService);
+    var annotationService = Components.classes["@mozilla.org/browser/annotation-service;1"].
+                            getService(Components.interfaces.nsIAnnotationService);
     var results = annotationService.getItemsWithAnnotation(this.ANNO_ROOT, {});
     var rootFolderId;
     if (results.length == 1) {
@@ -80,7 +81,8 @@ var USc_places = {
   // left pane queries this way. Our UI doesn't allow users to select such
   // queries so no problem.
   setRootFolderId : function(folderId) {
-    var annotationService = Cc["@mozilla.org/browser/annotation-service;1"].getService(Ci.nsIAnnotationService);
+    var annotationService = Components.classes["@mozilla.org/browser/annotation-service;1"].
+                            getService(Components.interfaces.nsIAnnotationService);
     var results = annotationService.getItemsWithAnnotation(this.ANNO_ROOT, {});
     if (results.length == 1) {
       if (results[0] != folderId) {
@@ -102,9 +104,9 @@ var USc_places = {
   },
 
   addBookmark : function(title, url) {
-    var bookmarksService = Cc["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Ci.nsINavBookmarksService);
-    var annotationService = Cc["@mozilla.org/browser/annotation-service;1"].getService(Ci.nsIAnnotationService);
-    var ioService = Cc["@mozilla.org/network/io-service;1"].getService(Ci.nsIIOService);
+    var bookmarksService = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Components.interfaces.nsINavBookmarksService);
+    var annotationService = Components.classes["@mozilla.org/browser/annotation-service;1"].getService(Components.interfaces.nsIAnnotationService);
+    var ioService = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService);
     var bookmarkURI = ioService.newURI(url, null, null);
     var folderId = this.getRootFolderId();
     var id = bookmarksService.insertBookmark(folderId, bookmarkURI, bookmarksService.DEFAULT_INDEX, title);
@@ -112,7 +114,7 @@ var USc_places = {
   },
 
   deleteBookmark : function(id) {
-    var bookmarksService = Cc["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Ci.nsINavBookmarksService);
+    var bookmarksService = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Components.interfaces.nsINavBookmarksService);
     bookmarksService.removeItem(id);
   },
 
@@ -128,13 +130,13 @@ var USc_places = {
 
   modifyAnno : function(id, anno, value)
   {
-    var annotationService = Cc["@mozilla.org/browser/annotation-service;1"].getService(Ci.nsIAnnotationService);
+    var annotationService = Components.classes["@mozilla.org/browser/annotation-service;1"].getService(Components.interfaces.nsIAnnotationService);
     annotationService.setItemAnnotation(id, anno, value, 0, annotationService.EXPIRE_NEVER);
   },
 
   queryAnno : function(id, anno, defaultValue)
   {
-    var annotationService = Cc["@mozilla.org/browser/annotation-service;1"].getService(Ci.nsIAnnotationService);
+    var annotationService = Components.classes["@mozilla.org/browser/annotation-service;1"].getService(Components.interfaces.nsIAnnotationService);
     if (annotationService.itemHasAnnotation(id, anno)) {
       return annotationService.getItemAnnotation(id, anno);
     } else {
@@ -148,7 +150,6 @@ var USc_places = {
     if (sig == "")
     {
       sig = USc_file.escapeFilename(this.createSignature(id));
-      alert(sig);
       this.modifyAnno(id, this.ANNO_SIGNATURE, sig)
     }
     
