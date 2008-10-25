@@ -461,6 +461,8 @@
 </file>
 <file id="07bb18ad-ca77-4f50-aad2-52081732a598" idref="5f44fd66-77ee-4919-b720-965e37410fe7" name="defaultNotification.wav" url="src/content/defaultNotification.wav">
 </file>
+<file id="0948dc82-cdb6-4807-8a21-62148fffb03a" idref="5f44fd66-77ee-4919-b720-965e37410fe7" name="placesBrowser.js" url="src/content/placesBrowser.js">
+</file>
 <file id="144547f2-8272-45e0-b5e4-9cdd4db10f92" idref="5f44fd66-77ee-4919-b720-965e37410fe7" name="updatescanoverlay.js" url="src/content/updatescanoverlay.js">
 </file>
 <file id="29e4fe00-57e3-46f0-801a-a2f6964abd2a" idref="5f44fd66-77ee-4919-b720-965e37410fe7" name="file.js" url="src/content/file.js">
