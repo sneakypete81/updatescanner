@@ -28,13 +28,13 @@
 #bookmarks-view treechildren::-moz-tree-image(leaf, usc_state_updated) {
   list-style-image: url("chrome://updatescan/skin/updatescan_sm.png");
 }
-#bookmarks-view treechildren::-moz-tree-image(leaf, usc_state_error) {
-    color: darkgrey;
-}
 #bookmarks-view treechildren::-moz-tree-image(leaf, usc_state_checking) {
   list-style-image: url("chrome://global/skin/icons/loading_16.png");
 }
+
 #bookmarks-view treechildren::-moz-tree-cell-text(usc_state_updated) {
   font-weight: bold;
 }
-
+#bookmarks-view treechildren::-moz-tree-cell-text(usc_state_error) {
+  color: darkgrey;
+}

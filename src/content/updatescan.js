@@ -125,7 +125,7 @@ _treeClick : function(aEvent) {
     if (aEvent.button == 2) {
       return;
     }
-    
+
     var tbo = me.tree.treeBoxObject;
     var row = { }, col = { }, obj = { };
     tbo.getCellAt(aEvent.clientX, aEvent.clientY, row, col, obj);
@@ -133,16 +133,13 @@ _treeClick : function(aEvent) {
     if (row.value == -1 || obj.value == "twisty") {
       return;
     }
-
-    var aNode = me.tree.selectedNode;
-    var itemId = aNode.itemId;
-
+    
     switch (aEvent.button) {
         case 0:
-            me._diffItemThisWindow(itemId);
+            me.diffSelectedItemThisWindow();
             break;
         case 1:
-            me._diffItemNewTab(itemId);
+            me.diffSelectedItemNewTab();
             break;
     }
 },
@@ -176,6 +173,7 @@ scanButtonClick : function()
 
 scanSelectedPage : function()
 {
+///TODO
 /**    var me = USc_updatescan;    
     var id;
     var filebase;
@@ -184,7 +182,7 @@ scanSelectedPage : function()
     var ignoreNumbers;
     var encoding;
 
-    var id = me._getSelectedItemID();
+    var id = me.tree.selectedNode.itemId;
     if (id == "") return;
 
     me._showStopButton();
@@ -325,7 +323,7 @@ openEditDialog : function()
 {
   /**
     var me = USc_updatescan;
-    var id = me._getSelectedItemID();
+    var id = me.tree.selectedNode.itemId;
     if (id == "") return;
 
     var args = {
@@ -416,8 +414,8 @@ _diffItem : function(id)
 diffSelectedItemThisWindow : function()
 {
     var me = USc_updatescan;
-    var item = me._getSelectedItemID();
-    if (item == "") return;
+    var item = me.tree.selectedNode.itemId;
+    if (item == undefined) return;
     me._diffItemThisWindow(item);
 },
 
@@ -432,8 +430,8 @@ _diffItemThisWindow : function(id)
 diffSelectedItemNewTab : function()
 {
     var me = USc_updatescan;
-    var item = me._getSelectedItemID();
-    if (item == "") return;
+    var item = me.tree.selectedNode.itemId;
+    if (item == undefined) return;
     me._diffItemNewTab(item);    
 },
 
@@ -637,7 +635,7 @@ deleteSelectedItem : function()
   /**
     var me = USc_updatescan;
     var str=document.getElementById("updatescanStrings")
-    var id=me._getSelectedItemID();
+    var id=me.tree.selectedNode.itemId;
     var fileBase=USc_file.escapeFilename(id)
 
     if (id == "") return;
@@ -653,21 +651,6 @@ deleteSelectedItem : function()
         me.refresh.request();
 //    }
 **/
-},
-
-_getSelectedItemID : function()
-{
-  /**
-    var tree = document.getElementById("UpdateTree");
-    var id;
-    try {
-        id = tree.contentView.getItemAtIndex(tree.currentIndex).id;
-    } catch (e) {
-        id = "";
-    }
-
-    return id;
-    **/
 },
 
 _showStopButton : function()
