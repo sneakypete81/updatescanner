@@ -65,7 +65,7 @@
     <spacer flex="1"/>
   </vbox>
   <spacer width="20"/>
-  <vbox>
+  <vbox flex="1">
     <vbox id="sectionOld" hidden="true">
       <label class="plain" style="font-weight:bold;" id="titleOld"/>
       <hbox>

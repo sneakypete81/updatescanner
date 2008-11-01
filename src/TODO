@@ -20,6 +20,7 @@ Change filenames to signature-based (currently a mismash of url & id)
 
 -- Unreleased --
 Middle-click now focusses new tab too
+Fixed display bug in diffpage header
 
 -- 2.3 --
 Ignore number changes doesn't appear when sliders are disabled.
