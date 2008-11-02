@@ -791,11 +791,12 @@ _extendPlacesTreeView : function() {
          return false;
        }
     }
-    PlacesTreeView.prototype.getImageSrc =
+/* Uncomment the following to use generic page icons instead of favicons
+     PlacesTreeView.prototype.getImageSrc =
     function ext_getImageSrc(aRow, aColumn) {
       return "";
     }  
-}
+*/}
 
 
 }

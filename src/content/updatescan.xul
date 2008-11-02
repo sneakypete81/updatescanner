@@ -32,20 +32,15 @@
  * the terms of any one of the MPL, the GPL or the LGPL.  
  * ***** END LICENSE BLOCK ***** -->
 
-<!--START-->
-
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 <?xml-stylesheet href="chrome://browser/content/places/places.css"?>
 <?xml-stylesheet href="chrome://browser/skin/places/places.css"?>
 <?xul-overlay href="chrome://global/content/editMenuOverlay.xul"?>
 <?xul-overlay href="chrome://browser/content/places/placesOverlay.xul"?>
 <?xul-overlay href="chrome://updatescan/content/contextOverlay.xul"?>
-
 <?xml-stylesheet href="chrome://browser/skin/browser.css" type="text/css"?>
 <?xml-stylesheet href="chrome://updatescan/skin/updatescan.css" 
 		 type="text/css"?>
-
-<!--END-->
 
 <!DOCTYPE window SYSTEM "chrome://updatescan/locale/updatescan.dtd">
 
