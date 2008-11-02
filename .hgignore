@@ -1,8 +1,8 @@
-syntax: glob
-www
+syntax: regexp
+^www
 syntax: glob
 src/updatescan.xpi
 src/install.rdf
-*.pyc
 src/chrome/updatescan.jar
 src/chrome.manifest
+*.pyc
