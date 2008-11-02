@@ -6,20 +6,20 @@
               oncommand="USc_updatescan.diffSelectedItemThisWindow();"/>
     <command id="placesCmd_open:tab"
              oncommand="USc_updatescan.diffSelectedItemNewTab();"/>
+    <command id="placesCmd_new:bookmark"
+             oncommand="USc_updatescan.openNewDialogFromContext();"/>
+    <command id="placesCmd_show:info" 
+             oncommand="USc_updatescan.openEditDialog();"/>
   </commandset>
 
 <!--    
 
-    <command id="placesCmd_new:bookmark"
-             oncommand="goDoCommand('placesCmd_new:bookmark');"/>
     <command id="placesCmd_new:livemark"
              oncommand="goDoCommand('placesCmd_new:livemark');"/>
     <command id="placesCmd_new:folder"
              oncommand="goDoCommand('placesCmd_new:folder');"/>
     <command id="placesCmd_new:separator"
              oncommand="goDoCommand('placesCmd_new:separator');"/>
-    <command id="placesCmd_show:info" 
-             oncommand="goDoCommand('placesCmd_show:info');"/>
     <command id="placesCmd_rename"
              oncommand="goDoCommand('placesCmd_show:info');"
              observes="placesCmd_show:info"/>

@@ -1,3 +1,9 @@
+Bugs:
+* Copy/pasted bookmarks appear as blank diffpages
+* Sometimes right-clicking does funny things
+
+Delete button!
+
 diffpage.dtd remove leading spaces and resubmit to babelzilla!
 Diffpage arrow hyperlink to mozdev.updatescanner.org
 Notification click doesn't work for mac

@@ -60,7 +60,8 @@ var USc_annotationObserver = {
 
 var USc_defaults = {
   DEF_THRESHOLD : 100,
-  DEF_IGNORE_NUMBERS : false,
+  DEF_SCAN_RATE_MINS : 1440, // Scan once per day by default
+  DEF_IGNORE_NUMBERS : true,
   DEF_ENCODING : "auto",
   DEF_LAST_SCAN : "5 November 1978",
   DEF_OLD_LAST_SCAN : "5 November 1978",
@@ -264,10 +265,9 @@ stopButtonClick : function()
     me._setStatus(str.getString("statusCancel"));
 },
 
-openNewDialog : function()
+openNewDialogGetURL : function()
+// Opens a "New Item" dialog with the current page's URL/Title
 {
-/**
-    var me = USc_updatescan;
     var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
                    .getInterface(Components.interfaces.nsIWebNavigation)
                    .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
@@ -276,53 +276,59 @@ openNewDialog : function()
                    .getInterface(Components.interfaces.nsIDOMWindow) 
 
     USc_overlay.addToUpdateScan(mainWindow.document.getElementById('content'))
-    me._refreshTree();
-    me.refresh.request();
-    **/
 },
 
-openNewDialogNoRefresh : function(title, url)
+openNewDialogFromContext : function()
+// Opens a "New Item" dialog, and saves the new bookmark in the correct position
 {
-  /**
-    var id;
-    var filebase;
+  var me = USc_updatescan;
+  var id = me.tree.selectedNode.itemId;
+  if (USc_places.isFolder(id)) {
+    me.openNewDialog('','',id);
+  } else {
+    me.openNewDialog('','',
+                     USc_places.getParentFolder(id),
+                     USc_places.getIndex(id));
+  }
+},
+
+openNewDialog : function(title, url, parentId, index)
+{
+    if (typeof parentId == 'undefined' )
+      parentId = USc_places.getRootFolderId();
+    if (typeof index == 'iundefined') 
+      index = -1; // Insert at the bottom by default
+
     var args = {
         title:          title, 
         url:            url, 
-        threshold:      "100",      // threshold = 100 by default
-        scanRateMins:   "60",       // scan once an hour by default
-        encoding:       "auto",     // Auto encoding by default
-        ignoreNumbers:  "true",     // Ignore number changes by default
+        threshold:      USc_defaults.DEF_THRESHOLD,
+        scanRateMins:   USc_defaults.DEF_SCAN_RATE_MINS,
+        encoding:       USc_defaults.DEF_ENCODING,
+        ignoreNumbers:  USc_defaults.DEF_IGNORE_NUMBERS,
         advanced:       true
     };
 
     window.openDialog('chrome://updatescan/content/dlgnewedit.xul', 'dlgNew', 
                       'chrome,dialog,modal,centrescreen', args);
     if (args.ok) {
-        id = USc_rdf.addItem();
-        USc_rdf.modifyItem(id, "title", args.title);
-        USc_rdf.modifyItem(id, "url", args.url);
-        USc_rdf.modifyItem(id, "threshold", args.threshold);
-        USc_rdf.modifyItem(id, "scanratemins", args.scanRateMins);
-        USc_rdf.modifyItem(id, "encoding", args.encoding);
-        USc_rdf.modifyItem(id, "ignoreNumbers", args.ignoreNumbers);
+        var id = USc_places.addBookmark(args.title, args.url, parentId, index);
+        USc_places.modifyAnno(id, USc_places.ANNO_THRESHOLD, args.threshold);
+        USc_places.modifyAnno(id, USc_places.ANNO_SCAN_RATE_MINS, args.scanRateMins);
+        USc_places.modifyAnno(id, USc_places.ANNO_ENCODING, args.encoding);
+        USc_places.modifyAnno(id, USc_places.ANNO_IGNORE_NUMBERS, args.ignoreNumbers);
 
-        filebase = USc_file.escapeFilename(id);
-//        USc_file.USwriteFile(filebase+".new", "**NEW**");
+        var filebase=USc_places.getSignature(id);
+        USc_file.USwriteFile(filebase+".new", "**NEW**");
 
-        USc_rdf.modifyItem(id, "lastscan", "");  // lastscan not defined
-        USc_rdf.modifyItem(id, "changed", "0");  // not changed 
-        USc_rdf.modifyItem(id, "error", "0");    // no error
-        USc_rdf.save();
-
+        USc_places.modifyAnno(id, USc_places.ANNO_LAST_SCAN, "");
+        USc_places.modifyAnno(id, USc_places.ANNO_STATUS, USc_places.STATUS_NO_UPDATE);
     }
-    **/
 },
 
 openEditDialog : function()
 {
-  /**
-    var me = USc_updatescan;
+/**    var me = USc_updatescan;
     var id = me.tree.selectedNode.itemId;
     if (id == "") return;
 

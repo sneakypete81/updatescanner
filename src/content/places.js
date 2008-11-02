@@ -45,6 +45,7 @@ var USc_places = {
   ANNO_LAST_SCAN : "updatescan/last_scan", // string
   ANNO_OLD_LAST_SCAN : "updatescan/old_last_scan", // string
   ANNO_STATUS_TEXT : "updatescan/status_text", // string
+  ANNO_SCAN_RATE_MINS : "updatescan/scan_rate_mins", //string
   ANNO_HEADER_TEXT : "updatescan/header_text", // string
   ANNO_SIGNATURE : "updatescan/signature", // string
 
@@ -103,13 +104,18 @@ var USc_places = {
     }
   },
 
-  addBookmark : function(title, url) {
+  addBookmark : function(title, url, parentFolder, index) {
     var bookmarksService = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Components.interfaces.nsINavBookmarksService);
+    if (typeof parentFolder == 'undefined') {
+      parentFolder = this.getRootFolderId();
+    }
+    if (typeof index == 'undefined') {
+      index = bookmarksService.DEFAULT_INDEX;
+    }
     var annotationService = Components.classes["@mozilla.org/browser/annotation-service;1"].getService(Components.interfaces.nsIAnnotationService);
     var ioService = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService);
     var bookmarkURI = ioService.newURI(url, null, null);
-    var folderId = this.getRootFolderId();
-    var id = bookmarksService.insertBookmark(folderId, bookmarkURI, bookmarksService.DEFAULT_INDEX, title);
+    var id = bookmarksService.insertBookmark(parentFolder, bookmarkURI, index, title);
     return id;
   },
 
@@ -156,6 +162,29 @@ var USc_places = {
     return sig;
   },
 
+  getIndex : function(id)
+  {
+    var bmsvc = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"]
+                          .getService(Components.interfaces.nsINavBookmarksService);
+    return bmsvc.getItemIndex(id);    
+  },
+  
+  getParentFolder : function(id)
+  {
+    var bmsvc = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"]
+                          .getService(Components.interfaces.nsINavBookmarksService);
+    
+    return bmsvc.getFolderIdForItem(id);
+  },
+  
+  isFolder : function(id)
+  {
+    var bmsvc = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"]
+                          .getService(Components.interfaces.nsINavBookmarksService);
+    
+    return bmsvc.getItemType(id) == bmsvc.TYPE_FOLDER;    
+  },
+  
   createSignature : function(id)
   {
     var now = new Date();

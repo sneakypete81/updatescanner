@@ -107,7 +107,7 @@ _addToUpdateScanForTabBrowser : function(aTabBrowser)
             currentTabInfo = tabsInfo[i];
         }
     }
-    USc_updatescan.openNewDialogNoRefresh(currentTabInfo.name, currentTabInfo.url)
+    USc_updatescan.openNewDialog(currentTabInfo.name, currentTabInfo.url)
 },
 
 _addToUpdateScanForBrowser : function(aDocShell)
@@ -125,7 +125,7 @@ _addToUpdateScanForBrowser : function(aDocShell)
     } catch (e) {
         title = url;
     }
-    USc_updatescan.openNewDialogNoRefresh(title, url);
+    USc_updatescan.openNewDialog(title, url);
 }
 
 }
