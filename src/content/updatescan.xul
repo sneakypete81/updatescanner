@@ -96,6 +96,7 @@
         hidecolumnpicker="true"
         context="placesContext"
         flex="1"
+        seltype="single"
         onkeypress="SidebarUtils.handleTreeKeyPress(event);"
         onmousemove="SidebarUtils.handleTreeMouseMove(event);"
         onmouseout="SidebarUtils.clearURLFromStatusBar();">

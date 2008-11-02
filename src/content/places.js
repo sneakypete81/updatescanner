@@ -129,9 +129,23 @@ var USc_places = {
     return PlacesUtils.bookmarks.getBookmarkURI(id).spec;
   },
   
+  setURL : function(id, url)
+  {
+    var ioService = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService);
+    var bookmarksService = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Components.interfaces.nsINavBookmarksService);
+    uri = ioService.newURI(url, null, null);
+    bookmarksService.changeBookmarkURI(id, uri);
+  },
+
   getTitle : function(id)
   {
     return PlacesUtils.bookmarks.getItemTitle(id);
+  },
+
+  setTitle : function(id, title)
+  {
+    var bmsvc = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Components.interfaces.nsINavBookmarksService);
+    bmsvc.setItemTitle(id, title);
   },
 
   modifyAnno : function(id, anno, value)

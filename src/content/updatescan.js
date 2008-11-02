@@ -328,19 +328,21 @@ openNewDialog : function(title, url, parentId, index)
 
 openEditDialog : function()
 {
-/**    var me = USc_updatescan;
+    var me = USc_updatescan;
     var id = me.tree.selectedNode.itemId;
     if (id == "") return;
 
     var args = {
-        title:          USc_rdf.queryItem(id, "title", "No Title"),
-        url:            USc_rdf.queryItem(id, "url", ""),
-        threshold:      USc_rdf.queryItem(id, "threshold", "100"),
-        scanRateMins:   USc_rdf.queryItem(id, "scanratemins", "0"),
-        encoding:       USc_rdf.queryItem(id, "encoding", "auto"),
-        ignoreNumbers:  USc_rdf.queryItem(id, "ignoreNumbers", "false"),
-        // Although ignoreNumbers is true by default, behaviour of pages
-        // upgraded from previous version shouldn't be modified
+        title:          USc_places.getTitle(id),
+        url:            USc_places.getURL(id),
+        threshold:      USc_places.queryAnno(id, USc_places.ANNO_THRESHOLD,
+                                             USc_defaults.DEF_THRESHOLD),
+        scanRateMins:   USc_places.queryAnno(id, USc_places.ANNO_SCAN_RATE_MINS,
+                                             USc_defaults.DEF_SCAN_RATE_MINS),
+        encoding:       USc_places.queryAnno(id, USc_places.ANNO_ENCODING,
+                                             USc_defaults.DEF_ENCODING),
+        ignoreNumbers:  USc_places.queryAnno(id, USc_places.ANNO_IGNORE_NUMBERS,
+                                             USc_defaults.DEF_IGNORE_NUMBERS),
         advanced:       true
     }
 
@@ -350,26 +352,22 @@ openEditDialog : function()
                       'chrome,dialog,modal,centrescreen', args);
                       
     if (args.ok) {
-        USc_rdf.modifyItem(id, "title", args.title);
-        USc_rdf.modifyItem(id, "url", args.url);
-        USc_rdf.modifyItem(id, "threshold", args.threshold);
-        USc_rdf.modifyItem(id, "scanratemins", args.scanRateMins);
-        USc_rdf.modifyItem(id, "encoding", args.encoding);
-        USc_rdf.modifyItem(id, "ignoreNumbers", args.ignoreNumbers);
+        USc_places.setTitle(id, args.title);
+        USc_places.setURL(id, args.url);
+        
+        USc_places.modifyAnno(id, USc_places.ANNO_THRESHOLD, args.threshold);
+        USc_places.modifyAnno(id, USc_places.ANNO_SCAN_RATE_MINS, args.scanRateMins);
+        USc_places.modifyAnno(id, USc_places.ANNO_ENCODING, args.encoding);
+        USc_places.modifyAnno(id, USc_places.ANNO_IGNORE_NUMBERS, args.ignoreNumbers);
 
         if (oldurl != args.url) {   // URL changed - reset all values
-            filebase = USc_file.escapeFilename(id);
-//            USc_file.USwriteFile(filebase+".new", "**NEW**");
+          var filebase=USc_places.getSignature(id);
+          USc_file.USwriteFile(filebase+".new", "**NEW**");
 
-            USc_rdf.modifyItem(id, "lastscan", "");  // lastscan not defined
-            USc_rdf.modifyItem(id, "changed", "0");  // not changed
-            USc_rdf.modifyItem(id, "error", "0");    // no error
+          USc_places.modifyAnno(id, USc_places.ANNO_LAST_SCAN, "");
+          USc_places.modifyAnno(id, USc_places.ANNO_STATUS, USc_places.STATUS_NO_UPDATE);
         }
-        USc_rdf.save();
     }
-    me._refreshTree();
-    me.refresh.request();
-    **/
 },
 
 openPreferences : function()
@@ -377,16 +375,6 @@ openPreferences : function()
     window.openDialog('chrome://updatescan/content/preferences.xul',
                       'dlgUpdatescannerPreferences',
                       'chrome,toolbar,dialog=no,resizable,centerscreen');
-},
-
-openSelectedItem : function()
-{ // Not currently used - clicking now opens a diff instead
-    var me = USc_updatescan;
-    USc_rdf.modifyItem(id, "changed", "0");
-    USc_rdf.save();
-    USc_topWin.open(USc_rdf.queryItem(id, "url"));
-    me._refreshTree();
-    me.refresh.request();
 },
 
 _diffItem : function(id)
