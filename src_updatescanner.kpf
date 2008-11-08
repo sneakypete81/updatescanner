@@ -107,6 +107,8 @@
 </file>
 <file id="fe096784-d949-46db-bee3-4804c98e7ee9" idref="03ad9233-c134-4b8e-89e9-2fe60ccae922" name="diffPage.css" url="src/skin/classic/diffPage.css">
 </file>
+<file id="ca8ffcf9-26d8-4212-b7e5-ae6b7c514a25" idref="03bce2df-a159-4e09-92d8-0a0c56478b76" name="amowebsite.properties" url="src/www/testing_changed/locale/ko-KR/amowebsite.properties">
+</file>
 <file id="31496a5e-8c62-44c8-839f-08ed35885896" idref="044b4621-c549-40cc-a075-301bbd6ee723" name="dlgnewedit.dtd" url="src/locale/ru-RU/dlgnewedit.dtd">
 </file>
 <file id="4cc76f2c-304e-4e19-a2e2-271bbaea5e54" idref="044b4621-c549-40cc-a075-301bbd6ee723" name="amowebsite.properties" url="src/locale/ru-RU/amowebsite.properties">
@@ -157,13 +159,57 @@
 </file>
 <file id="f261e9e7-cee4-4400-bc30-58d05be1be48" idref="09c32439-f0ae-4ca7-b5f1-7f74f7310e96" name="not_found.properties" url="src/www/testing/locale/sk-SK/not_found.properties">
 </file>
+<file id="06af5eaf-bfce-4f89-b53b-8dba7a6861b8" idref="09e54378-2932-4492-9f19-dd67df293b33" name="_help_nav.properties" url="src/www/testing/locale/de-DE/_help_nav.properties">
+</file>
+<file id="0a62f6ef-9621-440e-99f6-2631ee20ee8e" idref="09e54378-2932-4492-9f19-dd67df293b33" name="index.properties" url="src/www/testing/locale/de-DE/index.properties">
+</file>
+<file id="2925a4cc-10c7-4ebf-b755-245b6454cb39" idref="09e54378-2932-4492-9f19-dd67df293b33" name="amowebsite.properties.orig" url="src/www/testing/locale/de-DE/amowebsite.properties.orig">
+</file>
+<file id="3192850e-f0f9-4e62-a9cd-b389861d4cc6" idref="09e54378-2932-4492-9f19-dd67df293b33" name="bug_reports.properties" url="src/www/testing/locale/de-DE/bug_reports.properties">
+</file>
+<file id="516a7ef3-fd6a-4d9c-a337-793704e95f3b" idref="09e54378-2932-4492-9f19-dd67df293b33" name="_footer.properties" url="src/www/testing/locale/de-DE/_footer.properties">
+</file>
+<file id="5d4f8f8b-70a5-4007-8ee3-ff577f9146b1" idref="09e54378-2932-4492-9f19-dd67df293b33" name="help.properties" url="src/www/testing/locale/de-DE/help.properties">
+</file>
+<file id="60db6d27-4035-42bc-9cbc-f21cba9dae6b" idref="09e54378-2932-4492-9f19-dd67df293b33" name="help-preferences.properties" url="src/www/testing/locale/de-DE/help-preferences.properties">
+</file>
+<file id="67805c2e-4aa1-4c12-9026-08a6cf4a9674" idref="09e54378-2932-4492-9f19-dd67df293b33" name="contact.properties" url="src/www/testing/locale/de-DE/contact.properties">
+</file>
+<file id="6cd55ef7-4234-4366-97c3-b973f86db903" idref="09e54378-2932-4492-9f19-dd67df293b33" name="help-properties.properties" url="src/www/testing/locale/de-DE/help-properties.properties">
+</file>
+<file id="74af6d63-a4ed-42b1-94c6-1c6551c3efe1" idref="09e54378-2932-4492-9f19-dd67df293b33" name="not_found.properties.orig" url="src/www/testing/locale/de-DE/not_found.properties.orig">
+</file>
+<file id="7ad45f44-dc84-4f63-b5dc-d54a308ed036" idref="09e54378-2932-4492-9f19-dd67df293b33" name="not_found.properties" url="src/www/testing/locale/de-DE/not_found.properties">
+</file>
+<file id="94e24b06-dea2-4bf7-a568-a94b6156687e" idref="09e54378-2932-4492-9f19-dd67df293b33" name="bug_reports.properties.orig" url="src/www/testing/locale/de-DE/bug_reports.properties.orig">
+</file>
+<file id="a9be12b1-5dbe-4595-815a-686eaf228213" idref="09e54378-2932-4492-9f19-dd67df293b33" name="help-faq.properties.orig" url="src/www/testing/locale/de-DE/help-faq.properties.orig">
+</file>
+<file id="b49d0afd-9f30-4e56-89ae-7db17a4d04a7" idref="09e54378-2932-4492-9f19-dd67df293b33" name="source.properties" url="src/www/testing/locale/de-DE/source.properties">
+</file>
+<file id="c821002a-d480-45a9-b006-64247ebe3ccd" idref="09e54378-2932-4492-9f19-dd67df293b33" name="help-faq.properties" url="src/www/testing/locale/de-DE/help-faq.properties">
+</file>
+<file id="dd5a45a7-5117-4698-b6b6-09f4d33e8286" idref="09e54378-2932-4492-9f19-dd67df293b33" name="index.properties.orig" url="src/www/testing/locale/de-DE/index.properties.orig">
+</file>
+<file id="e19b36cf-8a0a-4acb-9e8c-39779dfda685" idref="09e54378-2932-4492-9f19-dd67df293b33" name="help-preferences.properties.orig" url="src/www/testing/locale/de-DE/help-preferences.properties.orig">
+</file>
 <file id="ed6eece8-f3d3-4829-931e-dfffa6f48778" idref="09e54378-2932-4492-9f19-dd67df293b33" name="amowebsite.properties" url="src/www/testing/locale/de-DE/amowebsite.properties">
+</file>
+<file id="f0c0b248-8ecc-4570-80af-b597b3860268" idref="09e54378-2932-4492-9f19-dd67df293b33" name="help-properties.properties.orig" url="src/www/testing/locale/de-DE/help-properties.properties.orig">
+</file>
+<file id="f8bdecd7-ca67-4e8c-8b73-9aa12fe10191" idref="09e54378-2932-4492-9f19-dd67df293b33" name="_header.properties" url="src/www/testing/locale/de-DE/_header.properties">
+</file>
+<file id="fb15b6b2-c338-4058-8822-ecd5aaee5a0b" idref="09e54378-2932-4492-9f19-dd67df293b33" name="help-sidebar.properties" url="src/www/testing/locale/de-DE/help-sidebar.properties">
+</file>
+<file id="fe17d1a4-16a6-43db-83b6-3d6824afbcab" idref="09e54378-2932-4492-9f19-dd67df293b33" name="contents.rdf" url="src/www/testing/locale/de-DE/contents.rdf">
 </file>
 <file id="31c620fa-3958-4ec4-b5ce-605297e172df" idref="0be34170-8b2c-4497-b958-145e42b7a36c" name="help-properties.properties" url="src/www/locale/cs-CZ/help-properties.properties">
 </file>
 <file id="3bd62f71-4a90-46b2-96bb-d207dc73e482" idref="0be34170-8b2c-4497-b958-145e42b7a36c" name="source.properties" url="src/www/locale/cs-CZ/source.properties">
 </file>
 <file id="3f3bdbbc-ffa8-4a4f-8bc4-23999a797694" idref="0be34170-8b2c-4497-b958-145e42b7a36c" name="contents.rdf" url="src/www/locale/cs-CZ/contents.rdf">
+</file>
+<file id="4254bc3a-92af-4dab-b517-16b1e5ff3bf1" idref="0be34170-8b2c-4497-b958-145e42b7a36c" name="help-preferences.properties" url="src/www/locale/cs-CZ/help-preferences.properties">
 </file>
 <file id="56eddf16-b255-4fd3-8c66-89391b794b6d" idref="0be34170-8b2c-4497-b958-145e42b7a36c" name="help-faq.properties" url="src/www/locale/cs-CZ/help-faq.properties">
 </file>
@@ -172,6 +218,8 @@
 <file id="84191f90-aa3c-4bfd-9352-9ac91e3a2a10" idref="0be34170-8b2c-4497-b958-145e42b7a36c" name="_header.properties" url="src/www/locale/cs-CZ/_header.properties">
 </file>
 <file id="92551a3b-3902-4010-b9ff-280a60638ba8" idref="0be34170-8b2c-4497-b958-145e42b7a36c" name="help-sidebar.properties" url="src/www/locale/cs-CZ/help-sidebar.properties">
+</file>
+<file id="9b0721fc-9eef-49dd-9ca2-50a9468d8b0f" idref="0be34170-8b2c-4497-b958-145e42b7a36c" name="amowebsite.properties" url="src/www/locale/cs-CZ/amowebsite.properties">
 </file>
 <file id="9b0ab0de-e07d-443a-a5ef-90449ba6ea9a" idref="0be34170-8b2c-4497-b958-145e42b7a36c" name="help.properties" url="src/www/locale/cs-CZ/help.properties">
 </file>
@@ -204,6 +252,32 @@
 <file id="f178f9d3-9380-4576-9cfe-0df35f30c8d2" idref="1831ade4-1786-49a8-a2a7-7c00c4c9ad34" name="amowebsite.properties" url="src/locale/da-DK/amowebsite.properties">
 </file>
 <file id="f1e19524-2645-416d-b898-900776ec518d" idref="1831ade4-1786-49a8-a2a7-7c00c4c9ad34" name="updatescan.dtd" url="src/locale/da-DK/updatescan.dtd">
+</file>
+<file id="0e033277-23cd-45d0-8136-8fb1aca99583" idref="1dccf16b-d181-4fc9-bdae-c10b0d1acc27" name="publish" url="src/www/testing_changed/publish">
+</file>
+<file id="232fe4ab-98dc-4591-9f7b-aab1596b4a3d" idref="1dccf16b-d181-4fc9-bdae-c10b0d1acc27" name="xpi.build" url="src/www/testing_changed/xpi.build">
+</file>
+<file id="3f53f350-956a-4ab1-83ce-f1b29613c903" idref="1dccf16b-d181-4fc9-bdae-c10b0d1acc27" name="config.py" url="src/www/testing_changed/config.py">
+</file>
+<file id="51272e7d-cd20-4be2-b69a-c57d7989eda9" idref="1dccf16b-d181-4fc9-bdae-c10b0d1acc27" name="build_img.py" url="src/www/testing_changed/build_img.py">
+</file>
+<file id="5ba99a5b-0370-4cbf-ae9e-dc71b3327a74" idref="1dccf16b-d181-4fc9-bdae-c10b0d1acc27" name="install.rdf.build" url="src/www/testing_changed/install.rdf.build">
+</file>
+<folder id="78c4e1ce-990b-4a44-9997-010227cda451" idref="1dccf16b-d181-4fc9-bdae-c10b0d1acc27" name="content" url="src/www/testing_changed/content">
+</folder>
+<file id="84a13d7f-3eb4-4c69-8d79-c82c5a8721fa" idref="1dccf16b-d181-4fc9-bdae-c10b0d1acc27" name="chrome.manifest" url="src/www/testing_changed/chrome.manifest">
+</file>
+<file id="8945518b-082a-471d-9627-6920c6ce8759" idref="1dccf16b-d181-4fc9-bdae-c10b0d1acc27" name="build" url="src/www/testing_changed/build">
+</file>
+<file id="c830504e-4fd1-479c-9b3d-a47f3bdad755" idref="1dccf16b-d181-4fc9-bdae-c10b0d1acc27" name=".cvsignore" url="src/www/testing_changed/.cvsignore">
+</file>
+<file id="d9a5dced-c2c4-4e7e-9e56-a933528defd8" idref="1dccf16b-d181-4fc9-bdae-c10b0d1acc27" name="chrome.manifest.build" url="src/www/testing_changed/chrome.manifest.build">
+</file>
+<file id="e63377a6-1d06-4243-8857-c276b5f8cfd9" idref="1dccf16b-d181-4fc9-bdae-c10b0d1acc27" name="install.rdf" url="src/www/testing_changed/install.rdf">
+</file>
+<folder id="f589dabe-69ae-4fca-be03-35e38cb06bf1" idref="1dccf16b-d181-4fc9-bdae-c10b0d1acc27" name="locale" url="src/www/testing_changed/locale">
+</folder>
+<file id="f6ac36f3-14b7-4afa-8bd6-d2e2907d9273" idref="1dccf16b-d181-4fc9-bdae-c10b0d1acc27" name="build_www.py" url="src/www/testing_changed/build_www.py">
 </file>
 <file id="0c806512-f11f-419c-a6ae-4b96b9fcbec3" idref="21574451-2e61-42d2-a57b-40170c4e530a" name="bug_reports.properties" url="src/www/testing/locale/pt-BR/bug_reports.properties">
 </file>
@@ -257,6 +331,8 @@
 </file>
 <file id="13728c88-be8a-4724-8fd9-adc48da88180" idref="24562847-1672-4103-87b9-f8c339269638" name="help-properties.tmpl" url="src/www/content/help-properties.tmpl">
 </file>
+<file id="149f10ef-a70c-4464-a36a-43165f5976da" idref="24562847-1672-4103-87b9-f8c339269638" name="help-preferences.tmpl" url="src/www/content/help-preferences.tmpl">
+</file>
 <file id="15793e2e-f435-4993-9152-a548eee2b820" idref="24562847-1672-4103-87b9-f8c339269638" name="help-sidebar.tmpl" url="src/www/content/help-sidebar.tmpl">
 </file>
 <file id="1c1bc4d2-3221-4735-8766-6ead6fc67a23" idref="24562847-1672-4103-87b9-f8c339269638" name="help.tmpl" url="src/www/content/help.tmpl">
@@ -266,6 +342,8 @@
 <file id="41c0c086-968b-4b40-b2bc-47c8a7f943af" idref="24562847-1672-4103-87b9-f8c339269638" name="index.tmpl" url="src/www/content/index.tmpl">
 </file>
 <file id="42b867ca-a2b3-4cc2-888d-e1e8046f620e" idref="24562847-1672-4103-87b9-f8c339269638" name="contact.tmpl" url="src/www/content/contact.tmpl">
+</file>
+<file id="4e24240f-156a-43ef-8f73-0888b9ad2b4e" idref="24562847-1672-4103-87b9-f8c339269638" name="source.tmpl.orig" url="src/www/content/source.tmpl.orig">
 </file>
 <file id="8a034b7f-395c-4e83-9bab-a8693c823441" idref="24562847-1672-4103-87b9-f8c339269638" name="_header.tmpl" url="src/www/content/_header.tmpl">
 </file>
@@ -319,6 +397,8 @@
 </file>
 <file id="fd9bec4e-c49b-4a2e-bc17-2b3b857f48dc" idref="2d527c45-7a8c-4ae9-b032-a97a6f940f48" name="config.py" url="src/config.py">
 </file>
+<file id="8aa0cb40-6741-45ce-b5da-9a18615419ae" idref="2d654e2e-fa99-4d3c-a3da-af4d51ef5802" name="amowebsite.properties" url="src/www/testing_changed/locale/da-DK/amowebsite.properties">
+</file>
 <file id="03c49a3b-ba76-4f92-a34a-a32447875d0b" idref="30553ea4-d156-409f-b74c-cb8a22d64597" name="index.properties" url="src/www/testing/locale/cs-CZ/index.properties">
 </file>
 <file id="179c6a41-3e80-46b9-b216-0b3a2196b3f7" idref="30553ea4-d156-409f-b74c-cb8a22d64597" name="help-sidebar.properties" url="src/www/testing/locale/cs-CZ/help-sidebar.properties">
@@ -349,6 +429,8 @@
 </file>
 <file id="eb36cf78-c451-4e5a-85bd-1d600528fcf9" idref="30553ea4-d156-409f-b74c-cb8a22d64597" name="bug_reports.properties" url="src/www/testing/locale/cs-CZ/bug_reports.properties">
 </file>
+<file id="765cee4c-da4e-4bf0-875f-70d45bfd456c" idref="361ce49c-482a-4479-85a5-a26f0e3554d0" name="amowebsite.properties" url="src/www/testing_changed/locale/pl-PL/amowebsite.properties">
+</file>
 <file id="32a38952-7984-4c06-aa8c-849a81a8d59f" idref="36906a76-d08b-4348-bc97-8e4338b21fca" name="help-sidebar.properties" url="src/www/locale/nl-NL/help-sidebar.properties">
 </file>
 <file id="379dd5ce-af96-4fb5-8a4c-ccde7fedaa03" idref="36906a76-d08b-4348-bc97-8e4338b21fca" name="help-faq.properties" url="src/www/locale/nl-NL/help-faq.properties">
@@ -358,6 +440,8 @@
 <file id="5e84efd1-bcc3-484f-81d7-b99326881901" idref="36906a76-d08b-4348-bc97-8e4338b21fca" name="bug_reports.properties" url="src/www/locale/nl-NL/bug_reports.properties">
 </file>
 <file id="677260e8-9707-467e-8048-57fb4e353d4d" idref="36906a76-d08b-4348-bc97-8e4338b21fca" name="contents.rdf" url="src/www/locale/nl-NL/contents.rdf">
+</file>
+<file id="74876f77-ed22-4014-af9a-624067e58eb6" idref="36906a76-d08b-4348-bc97-8e4338b21fca" name="amowebsite.properties" url="src/www/locale/nl-NL/amowebsite.properties">
 </file>
 <file id="8e31e8ab-703c-4a06-8ec8-c45cb2da8ac0" idref="36906a76-d08b-4348-bc97-8e4338b21fca" name="_help_nav.properties" url="src/www/locale/nl-NL/_help_nav.properties">
 </file>
@@ -370,6 +454,8 @@
 <file id="d33c6d46-7931-4fd2-8b4c-19275fb61353" idref="36906a76-d08b-4348-bc97-8e4338b21fca" name="help.properties" url="src/www/locale/nl-NL/help.properties">
 </file>
 <file id="de267d11-b091-442b-be37-17019ca6751d" idref="36906a76-d08b-4348-bc97-8e4338b21fca" name="not_found.properties" url="src/www/locale/nl-NL/not_found.properties">
+</file>
+<file id="de6a1103-1654-4f2b-b717-711979b75692" idref="36906a76-d08b-4348-bc97-8e4338b21fca" name="help-preferences.properties" url="src/www/locale/nl-NL/help-preferences.properties">
 </file>
 <file id="f864d598-9e77-465f-88e7-2da6cf313286" idref="36906a76-d08b-4348-bc97-8e4338b21fca" name="contact.properties" url="src/www/locale/nl-NL/contact.properties">
 </file>
@@ -403,7 +489,39 @@
 </file>
 <file id="f296d3f8-1106-4931-b255-b7dcb5cbab4a" idref="3ac3e2bb-53a7-4208-a327-78903cedd1b8" name="_header.tmpl" url="src/www/testing/content/_header.tmpl">
 </file>
+<file id="f8c47949-ee27-4d07-991b-4ec86829a67f" idref="3ac3e2bb-53a7-4208-a327-78903cedd1b8" name="_header.tmpl.orig" url="src/www/testing/content/_header.tmpl.orig">
+</file>
 <file id="fc3523d9-d044-435d-85c3-c49a18e3db35" idref="3ac3e2bb-53a7-4208-a327-78903cedd1b8" name="_footer.tmpl" url="src/www/testing/content/_footer.tmpl">
+</file>
+<file id="063393fc-8b18-4fe2-bce4-345f40276915" idref="3ece6781-7ab3-4296-9413-67f8d6e9cfb6" name="help-sidebar.properties" url="src/www/testing/locale/fi-FI/help-sidebar.properties">
+</file>
+<file id="0ec5ebc9-8874-4407-bf1c-50645c301057" idref="3ece6781-7ab3-4296-9413-67f8d6e9cfb6" name="help-faq.properties" url="src/www/testing/locale/fi-FI/help-faq.properties">
+</file>
+<file id="26dc1674-d61c-4466-857c-dadb426c3ac2" idref="3ece6781-7ab3-4296-9413-67f8d6e9cfb6" name="help-preferences.properties" url="src/www/testing/locale/fi-FI/help-preferences.properties">
+</file>
+<file id="280df07d-b3c3-49e8-bd15-d80d4a875e09" idref="3ece6781-7ab3-4296-9413-67f8d6e9cfb6" name="not_found.properties" url="src/www/testing/locale/fi-FI/not_found.properties">
+</file>
+<file id="30b0bf06-c132-4797-bf22-c4aa210403b8" idref="3ece6781-7ab3-4296-9413-67f8d6e9cfb6" name="index.properties" url="src/www/testing/locale/fi-FI/index.properties">
+</file>
+<file id="3cc5420f-9cbb-451b-baf1-d14120f0fb5b" idref="3ece6781-7ab3-4296-9413-67f8d6e9cfb6" name="help.properties" url="src/www/testing/locale/fi-FI/help.properties">
+</file>
+<file id="71de69eb-262b-42f6-862d-2d79ecca811e" idref="3ece6781-7ab3-4296-9413-67f8d6e9cfb6" name="bug_reports.properties" url="src/www/testing/locale/fi-FI/bug_reports.properties">
+</file>
+<file id="79167549-5114-4342-9a7a-9f5b28b60f7d" idref="3ece6781-7ab3-4296-9413-67f8d6e9cfb6" name="amowebsite.properties" url="src/www/testing/locale/fi-FI/amowebsite.properties">
+</file>
+<file id="96da5891-ed56-4871-886a-b28240a03d9a" idref="3ece6781-7ab3-4296-9413-67f8d6e9cfb6" name="_header.properties" url="src/www/testing/locale/fi-FI/_header.properties">
+</file>
+<file id="9d9dbb6d-d481-49d9-a8a9-4950299b4fd4" idref="3ece6781-7ab3-4296-9413-67f8d6e9cfb6" name="_footer.properties" url="src/www/testing/locale/fi-FI/_footer.properties">
+</file>
+<file id="afcb57be-87fd-4453-9e4e-bc87501cbd58" idref="3ece6781-7ab3-4296-9413-67f8d6e9cfb6" name="contents.rdf" url="src/www/testing/locale/fi-FI/contents.rdf">
+</file>
+<file id="b798bad3-1682-40e8-ab39-0fde335df22b" idref="3ece6781-7ab3-4296-9413-67f8d6e9cfb6" name="help-properties.properties" url="src/www/testing/locale/fi-FI/help-properties.properties">
+</file>
+<file id="c709afcd-6c77-4131-b3b5-b9c6dc4f7a7b" idref="3ece6781-7ab3-4296-9413-67f8d6e9cfb6" name="source.properties" url="src/www/testing/locale/fi-FI/source.properties">
+</file>
+<file id="d1b6693e-17f8-4a31-85af-a1be3bab9a71" idref="3ece6781-7ab3-4296-9413-67f8d6e9cfb6" name="_help_nav.properties" url="src/www/testing/locale/fi-FI/_help_nav.properties">
+</file>
+<file id="d7ae9baa-6034-448f-bca0-1e350562d97b" idref="3ece6781-7ab3-4296-9413-67f8d6e9cfb6" name="contact.properties" url="src/www/testing/locale/fi-FI/contact.properties">
 </file>
 <file id="203cb943-fd78-4b24-8bd6-050e42478440" idref="426ca73c-f95f-4718-9306-f5ff4dd34e82" name="contents.rdf" url="src/locale/cs-CZ/contents.rdf">
 </file>
@@ -425,7 +543,129 @@
 </file>
 <file id="fea33980-10be-4ef6-8465-96f662319359" idref="426ca73c-f95f-4718-9306-f5ff4dd34e82" name="diffPage.properties" url="src/locale/cs-CZ/diffPage.properties">
 </file>
+<file id="050428f9-061c-4efc-929b-ab32c698b0c1" idref="454feb96-41e4-47f9-8f53-eee96d6d51c3" name="amowebsite.properties" url="src/www/testing_changed/locale/zh-CN/amowebsite.properties">
+</file>
+<file id="1f04b514-6e3d-4707-a061-fbf7a66d3465" idref="454feb96-41e4-47f9-8f53-eee96d6d51c3" name="contents.rdf" url="src/www/testing_changed/locale/zh-CN/contents.rdf">
+</file>
+<file id="26c91576-03cd-4ce5-b1fa-81cd37b33602" idref="454feb96-41e4-47f9-8f53-eee96d6d51c3" name="help-preferences.properties" url="src/www/testing_changed/locale/zh-CN/help-preferences.properties">
+</file>
+<file id="5e3844c1-8583-464d-b387-30c65ef835a8" idref="454feb96-41e4-47f9-8f53-eee96d6d51c3" name="contact.properties" url="src/www/testing_changed/locale/zh-CN/contact.properties">
+</file>
+<file id="6a6a0ccf-d4d6-4181-9930-7ccec5e73c38" idref="454feb96-41e4-47f9-8f53-eee96d6d51c3" name="_header.properties" url="src/www/testing_changed/locale/zh-CN/_header.properties">
+</file>
+<file id="7194fbb3-57a2-4f60-a45b-1168b6da3f10" idref="454feb96-41e4-47f9-8f53-eee96d6d51c3" name="_footer.properties" url="src/www/testing_changed/locale/zh-CN/_footer.properties">
+</file>
+<file id="9590ab40-a6f4-42a2-aec1-7caac5707567" idref="454feb96-41e4-47f9-8f53-eee96d6d51c3" name="_help_nav.properties" url="src/www/testing_changed/locale/zh-CN/_help_nav.properties">
+</file>
+<file id="a470b52f-6f2d-40fa-a568-7ea27c8d1547" idref="454feb96-41e4-47f9-8f53-eee96d6d51c3" name="not_found.properties" url="src/www/testing_changed/locale/zh-CN/not_found.properties">
+</file>
+<file id="ab280a57-c9c7-4939-b1d8-5fa64d23474f" idref="454feb96-41e4-47f9-8f53-eee96d6d51c3" name="index.properties" url="src/www/testing_changed/locale/zh-CN/index.properties">
+</file>
+<file id="abfe17b7-8642-41eb-9bb2-782313c12867" idref="454feb96-41e4-47f9-8f53-eee96d6d51c3" name="source.properties" url="src/www/testing_changed/locale/zh-CN/source.properties">
+</file>
+<file id="ad065c24-ffc8-4828-a60a-5978a74acd60" idref="454feb96-41e4-47f9-8f53-eee96d6d51c3" name="help-properties.properties" url="src/www/testing_changed/locale/zh-CN/help-properties.properties">
+</file>
+<file id="bbd2af0a-3922-4c84-8411-e6321c1e312a" idref="454feb96-41e4-47f9-8f53-eee96d6d51c3" name="help-faq.properties" url="src/www/testing_changed/locale/zh-CN/help-faq.properties">
+</file>
+<file id="c09e1603-b4c1-4bc6-8dff-74b05b6de78d" idref="454feb96-41e4-47f9-8f53-eee96d6d51c3" name="bug_reports.properties" url="src/www/testing_changed/locale/zh-CN/bug_reports.properties">
+</file>
+<file id="cc1b740c-d3a6-440d-9d34-5cc2d6ff4bb5" idref="454feb96-41e4-47f9-8f53-eee96d6d51c3" name="help-sidebar.properties" url="src/www/testing_changed/locale/zh-CN/help-sidebar.properties">
+</file>
+<file id="e29ff794-6773-4581-bea2-5b7d16d02957" idref="454feb96-41e4-47f9-8f53-eee96d6d51c3" name="help.properties" url="src/www/testing_changed/locale/zh-CN/help.properties">
+</file>
+<file id="1502114f-e001-4f03-9b30-993aa9a6ed89" idref="4a08a954-f58b-4be6-8c1e-29c74dc0d872" name="help-properties.properties" url="src/www/testing_changed/locale/fr-FR/help-properties.properties">
+</file>
+<file id="16434483-db82-47fe-847e-f53e9ab4e58e" idref="4a08a954-f58b-4be6-8c1e-29c74dc0d872" name="source.properties" url="src/www/testing_changed/locale/fr-FR/source.properties">
+</file>
+<file id="1ac1e8b4-6123-4ac7-9582-de9280d96737" idref="4a08a954-f58b-4be6-8c1e-29c74dc0d872" name="contact.properties" url="src/www/testing_changed/locale/fr-FR/contact.properties">
+</file>
+<file id="2521a26d-441c-4b05-b7be-d1c75bb220bb" idref="4a08a954-f58b-4be6-8c1e-29c74dc0d872" name="help-faq.properties" url="src/www/testing_changed/locale/fr-FR/help-faq.properties">
+</file>
+<file id="34877b6e-29c2-4f51-a636-96dcb6a0bcd1" idref="4a08a954-f58b-4be6-8c1e-29c74dc0d872" name="contents.rdf" url="src/www/testing_changed/locale/fr-FR/contents.rdf">
+</file>
+<file id="71bea787-eb99-40fb-bb83-320a8fda1c8d" idref="4a08a954-f58b-4be6-8c1e-29c74dc0d872" name="not_found.properties" url="src/www/testing_changed/locale/fr-FR/not_found.properties">
+</file>
+<file id="803cd6be-15c3-44bb-9594-738f1da7234e" idref="4a08a954-f58b-4be6-8c1e-29c74dc0d872" name="amowebsite.properties" url="src/www/testing_changed/locale/fr-FR/amowebsite.properties">
+</file>
+<file id="94d517f8-be24-4540-a397-ce5a0387ed68" idref="4a08a954-f58b-4be6-8c1e-29c74dc0d872" name="help.properties" url="src/www/testing_changed/locale/fr-FR/help.properties">
+</file>
+<file id="a5f015ee-b3c6-4cd6-929d-e30d92ad2516" idref="4a08a954-f58b-4be6-8c1e-29c74dc0d872" name="_help_nav.properties" url="src/www/testing_changed/locale/fr-FR/_help_nav.properties">
+</file>
+<file id="ae128443-9f9e-4189-8d8b-776b72251100" idref="4a08a954-f58b-4be6-8c1e-29c74dc0d872" name="_footer.properties" url="src/www/testing_changed/locale/fr-FR/_footer.properties">
+</file>
+<file id="b524a564-23a9-4daf-9ded-e67140218f21" idref="4a08a954-f58b-4be6-8c1e-29c74dc0d872" name="_header.properties" url="src/www/testing_changed/locale/fr-FR/_header.properties">
+</file>
+<file id="c8d5da8f-4254-47e0-b894-a50d86260a3b" idref="4a08a954-f58b-4be6-8c1e-29c74dc0d872" name="help-preferences.properties" url="src/www/testing_changed/locale/fr-FR/help-preferences.properties">
+</file>
+<file id="db7131aa-607d-45ce-9066-b6066ff1efec" idref="4a08a954-f58b-4be6-8c1e-29c74dc0d872" name="bug_reports.properties" url="src/www/testing_changed/locale/fr-FR/bug_reports.properties">
+</file>
+<file id="f893d36b-efb7-469e-856f-622f28512a47" idref="4a08a954-f58b-4be6-8c1e-29c74dc0d872" name="help-sidebar.properties" url="src/www/testing_changed/locale/fr-FR/help-sidebar.properties">
+</file>
+<file id="fbce2bde-c29e-4afc-8b1e-4131926d1dff" idref="4a08a954-f58b-4be6-8c1e-29c74dc0d872" name="index.properties" url="src/www/testing_changed/locale/fr-FR/index.properties">
+</file>
+<file id="23bcdb9f-0cca-4e9f-bf79-8185e7c2fb12" idref="4d43419c-59a0-46ac-8f5e-7e45d0f1386f" name="contents.rdf" url="src/www/testing_changed/locale/es-ES/contents.rdf">
+</file>
+<file id="440397bb-c79b-4025-ac5d-1648afafb6b4" idref="4d43419c-59a0-46ac-8f5e-7e45d0f1386f" name="_help_nav.properties" url="src/www/testing_changed/locale/es-ES/_help_nav.properties">
+</file>
+<file id="4c60f8b4-7c01-4ea2-846b-14ef8fa266d9" idref="4d43419c-59a0-46ac-8f5e-7e45d0f1386f" name="_header.properties" url="src/www/testing_changed/locale/es-ES/_header.properties">
+</file>
+<file id="52103115-2ffb-4bb7-8e43-a1ea37d06b50" idref="4d43419c-59a0-46ac-8f5e-7e45d0f1386f" name="_footer.properties" url="src/www/testing_changed/locale/es-ES/_footer.properties">
+</file>
+<file id="5c3bf4b3-ae11-4050-9356-b5a5f3e3384c" idref="4d43419c-59a0-46ac-8f5e-7e45d0f1386f" name="help-properties.properties" url="src/www/testing_changed/locale/es-ES/help-properties.properties">
+</file>
+<file id="6a047507-622d-454e-a352-5ceffc89525b" idref="4d43419c-59a0-46ac-8f5e-7e45d0f1386f" name="source.properties" url="src/www/testing_changed/locale/es-ES/source.properties">
+</file>
+<file id="6a2373b0-d720-45da-88c3-f8ee7356e935" idref="4d43419c-59a0-46ac-8f5e-7e45d0f1386f" name="contact.properties" url="src/www/testing_changed/locale/es-ES/contact.properties">
+</file>
+<file id="6bf86536-ba47-4df8-9a5b-b524c85d02a8" idref="4d43419c-59a0-46ac-8f5e-7e45d0f1386f" name="amowebsite.properties" url="src/www/testing_changed/locale/es-ES/amowebsite.properties">
+</file>
+<file id="866d9fae-b89e-4f36-b54e-de2cff1f3e1d" idref="4d43419c-59a0-46ac-8f5e-7e45d0f1386f" name="help-faq.properties" url="src/www/testing_changed/locale/es-ES/help-faq.properties">
+</file>
+<file id="a64d95f9-74d8-4fa9-9a49-36a1fd8d1a9c" idref="4d43419c-59a0-46ac-8f5e-7e45d0f1386f" name="help-sidebar.properties" url="src/www/testing_changed/locale/es-ES/help-sidebar.properties">
+</file>
+<file id="aed57360-abbf-40a3-a996-d28afc9dd8a2" idref="4d43419c-59a0-46ac-8f5e-7e45d0f1386f" name="help-preferences.properties" url="src/www/testing_changed/locale/es-ES/help-preferences.properties">
+</file>
+<file id="d5baf7db-d6ce-4e35-8a1d-044314937e75" idref="4d43419c-59a0-46ac-8f5e-7e45d0f1386f" name="index.properties" url="src/www/testing_changed/locale/es-ES/index.properties">
+</file>
+<file id="efe59e5d-398a-474a-aa92-5cf00d8f7c5f" idref="4d43419c-59a0-46ac-8f5e-7e45d0f1386f" name="not_found.properties" url="src/www/testing_changed/locale/es-ES/not_found.properties">
+</file>
+<file id="f6cd7496-6823-4c42-883f-c4a73f5a093f" idref="4d43419c-59a0-46ac-8f5e-7e45d0f1386f" name="help.properties" url="src/www/testing_changed/locale/es-ES/help.properties">
+</file>
+<file id="ffb7a810-fac2-4513-8b08-36125a781fdb" idref="4d43419c-59a0-46ac-8f5e-7e45d0f1386f" name="bug_reports.properties" url="src/www/testing_changed/locale/es-ES/bug_reports.properties">
+</file>
+<file id="16b6b2d0-3f9b-45eb-9db0-295655138cf6" idref="4d4d854c-6b4f-43db-b9c5-10018bd3f9a9" name="_help_nav.properties" url="src/www/testing_changed/locale/en-US/_help_nav.properties">
+</file>
+<file id="2571e2ed-42c6-460d-80d8-080fd6ef9862" idref="4d4d854c-6b4f-43db-b9c5-10018bd3f9a9" name="amowebsite.properties" url="src/www/testing_changed/locale/en-US/amowebsite.properties">
+</file>
+<file id="2a010c38-67a0-47f2-a4ed-b74815263daf" idref="4d4d854c-6b4f-43db-b9c5-10018bd3f9a9" name="not_found.properties" url="src/www/testing_changed/locale/en-US/not_found.properties">
+</file>
+<file id="48a7cd6d-52be-4bb5-87ea-85d5bdd2bfaa" idref="4d4d854c-6b4f-43db-b9c5-10018bd3f9a9" name="index.properties" url="src/www/testing_changed/locale/en-US/index.properties">
+</file>
+<file id="4d5ac197-3e32-4ad9-8c89-89bf3aea86ee" idref="4d4d854c-6b4f-43db-b9c5-10018bd3f9a9" name="source.properties" url="src/www/testing_changed/locale/en-US/source.properties">
+</file>
+<file id="4e052a52-353c-4233-b05d-98625c427c92" idref="4d4d854c-6b4f-43db-b9c5-10018bd3f9a9" name="_footer.properties" url="src/www/testing_changed/locale/en-US/_footer.properties">
+</file>
+<file id="5c9cfaae-0a8c-40f6-8f4c-ce0ad60456c5" idref="4d4d854c-6b4f-43db-b9c5-10018bd3f9a9" name="help-properties.properties" url="src/www/testing_changed/locale/en-US/help-properties.properties">
+</file>
+<file id="67886053-1c25-487d-ad75-146df55dca4d" idref="4d4d854c-6b4f-43db-b9c5-10018bd3f9a9" name="help.properties" url="src/www/testing_changed/locale/en-US/help.properties">
+</file>
+<file id="699dd33d-aa0f-4220-b3c5-722d4509fbbb" idref="4d4d854c-6b4f-43db-b9c5-10018bd3f9a9" name="contact.properties" url="src/www/testing_changed/locale/en-US/contact.properties">
+</file>
+<file id="6ad6a1fe-1c51-42ec-8b23-efcdadb5a534" idref="4d4d854c-6b4f-43db-b9c5-10018bd3f9a9" name="help-faq.properties" url="src/www/testing_changed/locale/en-US/help-faq.properties">
+</file>
+<file id="82560222-98dc-4d25-b743-6489474fc66a" idref="4d4d854c-6b4f-43db-b9c5-10018bd3f9a9" name="contents.rdf" url="src/www/testing_changed/locale/en-US/contents.rdf">
+</file>
+<file id="841e5797-f2ff-4422-a48d-38aed0cdfdf8" idref="4d4d854c-6b4f-43db-b9c5-10018bd3f9a9" name="help-sidebar.properties" url="src/www/testing_changed/locale/en-US/help-sidebar.properties">
+</file>
+<file id="abc0458d-7c57-439e-ad7a-784bcf464a4b" idref="4d4d854c-6b4f-43db-b9c5-10018bd3f9a9" name="help-preferences.properties" url="src/www/testing_changed/locale/en-US/help-preferences.properties">
+</file>
+<file id="ae5b960b-816c-46e0-9f3e-784c0b05e43c" idref="4d4d854c-6b4f-43db-b9c5-10018bd3f9a9" name="_header.properties" url="src/www/testing_changed/locale/en-US/_header.properties">
+</file>
+<file id="c39033ce-0ad2-4f87-8fdb-f9509bdb195d" idref="4d4d854c-6b4f-43db-b9c5-10018bd3f9a9" name="bug_reports.properties" url="src/www/testing_changed/locale/en-US/bug_reports.properties">
+</file>
 <file id="66a288dc-4fc7-43c5-b14e-67f85fe7c030" idref="571cf027-206d-4f3d-9cb9-d43c714a881c" name="amowebsite.properties" url="src/www/testing/locale/ko-KR/amowebsite.properties">
+</file>
+<file id="04a3c0a1-c4fa-4b01-8fa2-dccc5b79b940" idref="5d12f6ba-aa92-402b-828c-99f8d9d2c137" name="contact.properties.orig" url="src/www/testing/locale/it-IT/contact.properties.orig">
 </file>
 <file id="4092929e-b77e-4236-90b9-20944e4161e9" idref="5d12f6ba-aa92-402b-828c-99f8d9d2c137" name="amowebsite.properties" url="src/www/testing/locale/it-IT/amowebsite.properties">
 </file>
@@ -447,6 +687,8 @@
 </file>
 <file id="b6351168-41d5-47f0-8100-12930538403a" idref="5d12f6ba-aa92-402b-828c-99f8d9d2c137" name="help-preferences.properties" url="src/www/testing/locale/it-IT/help-preferences.properties">
 </file>
+<file id="b6ab58e2-79da-4a92-a84d-21f00f5bdd4a" idref="5d12f6ba-aa92-402b-828c-99f8d9d2c137" name="_header.properties.orig" url="src/www/testing/locale/it-IT/_header.properties.orig">
+</file>
 <file id="bacf5b51-8078-421b-a3b3-be83512ff286" idref="5d12f6ba-aa92-402b-828c-99f8d9d2c137" name="not_found.properties" url="src/www/testing/locale/it-IT/not_found.properties">
 </file>
 <file id="c4b6519e-3d9b-4d9c-97a7-7b3ed26c02e9" idref="5d12f6ba-aa92-402b-828c-99f8d9d2c137" name="_help_nav.properties" url="src/www/testing/locale/it-IT/_help_nav.properties">
@@ -456,6 +698,10 @@
 <file id="e61bf46c-328b-4098-9e4e-62fe4ae1250a" idref="5d12f6ba-aa92-402b-828c-99f8d9d2c137" name="help-faq.properties" url="src/www/testing/locale/it-IT/help-faq.properties">
 </file>
 <file id="ebe0f14f-e551-4362-b497-b6716a879f30" idref="5d12f6ba-aa92-402b-828c-99f8d9d2c137" name="index.properties" url="src/www/testing/locale/it-IT/index.properties">
+</file>
+<file id="f14c24c5-88b3-4c00-a957-7ff43ed57810" idref="5d12f6ba-aa92-402b-828c-99f8d9d2c137" name="bug_reports.properties.orig" url="src/www/testing/locale/it-IT/bug_reports.properties.orig">
+</file>
+<file id="fdd353b2-5d39-4a44-8cb3-7e629f162a9f" idref="5d12f6ba-aa92-402b-828c-99f8d9d2c137" name="help.properties.orig" url="src/www/testing/locale/it-IT/help.properties.orig">
 </file>
 <file id="00898f7e-e454-47f0-9b7e-5a9ee5ecf15e" idref="5f44fd66-77ee-4919-b720-965e37410fe7" name="places.js" url="src/content/places.js">
 </file>
@@ -501,6 +747,8 @@
 </file>
 <file id="ae6b0bac-133e-400a-8e30-3f23292c84bd" idref="5f44fd66-77ee-4919-b720-965e37410fe7" name="opentopwin.js" url="src/content/opentopwin.js">
 </file>
+<file id="c062a89e-5603-427b-b74a-4dcf766344a4" idref="5f44fd66-77ee-4919-b720-965e37410fe7" name="contextOverlay.xul" url="src/content/contextOverlay.xul">
+</file>
 <file id="c27f5df1-2061-48a3-ad21-760c526343c7" idref="5f44fd66-77ee-4919-b720-965e37410fe7" name="scan.js" url="src/content/scan.js">
 </file>
 <file id="c4903d30-604a-489f-bb80-fcba969d68b6" idref="5f44fd66-77ee-4919-b720-965e37410fe7" name="diffPage.js" url="src/content/diffPage.js">
@@ -525,6 +773,8 @@
 </file>
 <file id="4a965eca-3410-42ea-a1f4-c8fea8a2ecee" idref="608d8e87-a04a-4075-adbd-572e2652e4ed" name="not_found.properties" url="src/www/locale/it-IT/not_found.properties">
 </file>
+<file id="6ba1a880-a916-4c6e-8840-fb6443794306" idref="608d8e87-a04a-4075-adbd-572e2652e4ed" name="amowebsite.properties" url="src/www/locale/it-IT/amowebsite.properties">
+</file>
 <file id="73ab7e9f-8301-4439-ab89-d10c67ca81e1" idref="608d8e87-a04a-4075-adbd-572e2652e4ed" name="source.properties" url="src/www/locale/it-IT/source.properties">
 </file>
 <file id="78ddf0ec-6373-4c9e-8867-5032d2618447" idref="608d8e87-a04a-4075-adbd-572e2652e4ed" name="_help_nav.properties" url="src/www/locale/it-IT/_help_nav.properties">
@@ -541,10 +791,44 @@
 </file>
 <file id="bec3b56f-6252-47bf-870d-f28b25a39491" idref="608d8e87-a04a-4075-adbd-572e2652e4ed" name="bug_reports.properties" url="src/www/locale/it-IT/bug_reports.properties">
 </file>
+<file id="c4aecd71-e521-4f71-a8e0-7937041d4ab5" idref="608d8e87-a04a-4075-adbd-572e2652e4ed" name="help-preferences.properties" url="src/www/locale/it-IT/help-preferences.properties">
+</file>
 <file id="e9f9d20b-975c-428a-9911-50658c053d92" idref="608d8e87-a04a-4075-adbd-572e2652e4ed" name="_footer.properties" url="src/www/locale/it-IT/_footer.properties">
 </file>
 <file id="f60467a4-d4a0-4809-9bf3-f3b20acf8cab" idref="608d8e87-a04a-4075-adbd-572e2652e4ed" name="contents.rdf" url="src/www/locale/it-IT/contents.rdf">
 </file>
+<file id="086c47a3-50b2-4ef6-a5db-45fc24023316" idref="63b03f7f-77fb-4b79-b33e-848ece0fbb78" name="index.properties" url="src/www/testing_changed/locale/cs-CZ/index.properties">
+</file>
+<file id="0b2bf1d3-304d-4bbf-a7d8-3827a8dd8f04" idref="63b03f7f-77fb-4b79-b33e-848ece0fbb78" name="help-preferences.properties" url="src/www/testing_changed/locale/cs-CZ/help-preferences.properties">
+</file>
+<file id="1637648a-dffe-418e-8018-3951c3471d2c" idref="63b03f7f-77fb-4b79-b33e-848ece0fbb78" name="amowebsite.properties" url="src/www/testing_changed/locale/cs-CZ/amowebsite.properties">
+</file>
+<file id="1c15b16f-df6c-4b54-adb2-98d15f3419ba" idref="63b03f7f-77fb-4b79-b33e-848ece0fbb78" name="contact.properties" url="src/www/testing_changed/locale/cs-CZ/contact.properties">
+</file>
+<file id="39ac63c6-ab46-4705-bb9d-905f45e98386" idref="63b03f7f-77fb-4b79-b33e-848ece0fbb78" name="help-faq.properties" url="src/www/testing_changed/locale/cs-CZ/help-faq.properties">
+</file>
+<file id="4e3986b5-54ac-4742-bb43-c83966e5a506" idref="63b03f7f-77fb-4b79-b33e-848ece0fbb78" name="bug_reports.properties" url="src/www/testing_changed/locale/cs-CZ/bug_reports.properties">
+</file>
+<file id="695e9207-f850-48cb-ba5e-bfaea927c1cb" idref="63b03f7f-77fb-4b79-b33e-848ece0fbb78" name="_footer.properties" url="src/www/testing_changed/locale/cs-CZ/_footer.properties">
+</file>
+<file id="7b22fe5e-bbcf-420f-9b1d-0aca5308e3b8" idref="63b03f7f-77fb-4b79-b33e-848ece0fbb78" name="help-properties.properties" url="src/www/testing_changed/locale/cs-CZ/help-properties.properties">
+</file>
+<file id="85bbe3ef-f7e4-4e0b-9d0e-06475e5879ae" idref="63b03f7f-77fb-4b79-b33e-848ece0fbb78" name="source.properties" url="src/www/testing_changed/locale/cs-CZ/source.properties">
+</file>
+<file id="b0497ae2-1fb9-4334-b8ad-b3c30f79cedd" idref="63b03f7f-77fb-4b79-b33e-848ece0fbb78" name="_header.properties" url="src/www/testing_changed/locale/cs-CZ/_header.properties">
+</file>
+<file id="b1f4ff21-0606-4f33-a630-4150ce10d087" idref="63b03f7f-77fb-4b79-b33e-848ece0fbb78" name="help-sidebar.properties" url="src/www/testing_changed/locale/cs-CZ/help-sidebar.properties">
+</file>
+<file id="c75c54e2-9f49-421f-8bd9-7381a38f9b43" idref="63b03f7f-77fb-4b79-b33e-848ece0fbb78" name="not_found.properties" url="src/www/testing_changed/locale/cs-CZ/not_found.properties">
+</file>
+<file id="cfaac7b8-2ee5-4cd6-b30c-a3d8817e0036" idref="63b03f7f-77fb-4b79-b33e-848ece0fbb78" name="contents.rdf" url="src/www/testing_changed/locale/cs-CZ/contents.rdf">
+</file>
+<file id="ef3b60e8-c50f-4e38-8f1c-50e220511507" idref="63b03f7f-77fb-4b79-b33e-848ece0fbb78" name="help.properties" url="src/www/testing_changed/locale/cs-CZ/help.properties">
+</file>
+<file id="f1045678-17f3-448e-99ad-493d9ea7db9d" idref="63b03f7f-77fb-4b79-b33e-848ece0fbb78" name="_help_nav.properties" url="src/www/testing_changed/locale/cs-CZ/_help_nav.properties">
+</file>
+<folder id="1dccf16b-d181-4fc9-bdae-c10b0d1acc27" idref="689309ef-1bd4-4072-ad15-b47f3568839b" name="testing_changed" url="src/www/testing_changed">
+</folder>
 <folder id="24562847-1672-4103-87b9-f8c339269638" idref="689309ef-1bd4-4072-ad15-b47f3568839b" name="content" url="src/www/content">
 </folder>
 <file id="5debc0a1-5e37-47e5-b0c2-4dfe5be0c4ce" idref="689309ef-1bd4-4072-ad15-b47f3568839b" name="build_www.py" url="src/www/build_www.py">
@@ -562,6 +846,10 @@
 <file id="20205200-7e56-4551-b9c5-dbf9cc06f708" idref="696d8736-8a96-42e8-ba37-8b18d5a41d2e" name="not_found.properties" url="src/www/locale/sk-SK/not_found.properties">
 </file>
 <file id="313dfdd0-24d7-49a5-b921-59162b637d22" idref="696d8736-8a96-42e8-ba37-8b18d5a41d2e" name="_header.properties" url="src/www/locale/sk-SK/_header.properties">
+</file>
+<file id="4564cb69-b0ee-4ea6-a2aa-9dec32243a98" idref="696d8736-8a96-42e8-ba37-8b18d5a41d2e" name="help-preferences.properties" url="src/www/locale/sk-SK/help-preferences.properties">
+</file>
+<file id="54a7b153-87aa-4241-87ed-3589f23c0952" idref="696d8736-8a96-42e8-ba37-8b18d5a41d2e" name="amowebsite.properties" url="src/www/locale/sk-SK/amowebsite.properties">
 </file>
 <file id="71844673-31e8-4a42-a5b7-c6b88ca22d54" idref="696d8736-8a96-42e8-ba37-8b18d5a41d2e" name="help.properties" url="src/www/locale/sk-SK/help.properties">
 </file>
@@ -582,6 +870,66 @@
 <file id="fbe566b3-bb60-4053-b158-b01e1cbad17e" idref="696d8736-8a96-42e8-ba37-8b18d5a41d2e" name="_help_nav.properties" url="src/www/locale/sk-SK/_help_nav.properties">
 </file>
 <file id="ff13a669-b1e8-49c5-99ac-b078b7af6a52" idref="696d8736-8a96-42e8-ba37-8b18d5a41d2e" name="index.properties" url="src/www/locale/sk-SK/index.properties">
+</file>
+<file id="0da08db9-d702-445a-8299-4ff0d3201845" idref="6a2a1e64-f48a-44bf-9e6a-1443ffdc4d0e" name="help-preferences.properties" url="src/www/testing_changed/locale/sk-SK/help-preferences.properties">
+</file>
+<file id="1d4c8379-19de-410e-809c-ba0ec0765ee7" idref="6a2a1e64-f48a-44bf-9e6a-1443ffdc4d0e" name="_help_nav.properties" url="src/www/testing_changed/locale/sk-SK/_help_nav.properties">
+</file>
+<file id="2052fb16-4d2a-42fd-94c8-d2b211fcf87e" idref="6a2a1e64-f48a-44bf-9e6a-1443ffdc4d0e" name="help.properties" url="src/www/testing_changed/locale/sk-SK/help.properties">
+</file>
+<file id="261cc99f-cb9d-47b1-9ff1-d1ab806030d7" idref="6a2a1e64-f48a-44bf-9e6a-1443ffdc4d0e" name="help-sidebar.properties" url="src/www/testing_changed/locale/sk-SK/help-sidebar.properties">
+</file>
+<file id="28bba89f-4bf7-4d9e-919d-1b90f0c9feaf" idref="6a2a1e64-f48a-44bf-9e6a-1443ffdc4d0e" name="index.properties" url="src/www/testing_changed/locale/sk-SK/index.properties">
+</file>
+<file id="394403df-aafa-4704-b7ed-94c4d6b4b9c4" idref="6a2a1e64-f48a-44bf-9e6a-1443ffdc4d0e" name="amowebsite.properties" url="src/www/testing_changed/locale/sk-SK/amowebsite.properties">
+</file>
+<file id="4731e668-df7d-4d57-9040-d7c8006ac683" idref="6a2a1e64-f48a-44bf-9e6a-1443ffdc4d0e" name="source.properties" url="src/www/testing_changed/locale/sk-SK/source.properties">
+</file>
+<file id="4cd835ab-ba4c-425f-880e-3092201273d6" idref="6a2a1e64-f48a-44bf-9e6a-1443ffdc4d0e" name="_footer.properties" url="src/www/testing_changed/locale/sk-SK/_footer.properties">
+</file>
+<file id="7770e29c-e4eb-4589-b89a-3af250707f2c" idref="6a2a1e64-f48a-44bf-9e6a-1443ffdc4d0e" name="contact.properties" url="src/www/testing_changed/locale/sk-SK/contact.properties">
+</file>
+<file id="8c229f00-b8ae-4852-8f5a-c36426fea825" idref="6a2a1e64-f48a-44bf-9e6a-1443ffdc4d0e" name="help-properties.properties" url="src/www/testing_changed/locale/sk-SK/help-properties.properties">
+</file>
+<file id="8f94ef1b-ba72-40d7-96b9-ece62c8e4ac7" idref="6a2a1e64-f48a-44bf-9e6a-1443ffdc4d0e" name="not_found.properties" url="src/www/testing_changed/locale/sk-SK/not_found.properties">
+</file>
+<file id="b5229dd4-fdb8-47fd-81d8-849aa34dc2d3" idref="6a2a1e64-f48a-44bf-9e6a-1443ffdc4d0e" name="bug_reports.properties" url="src/www/testing_changed/locale/sk-SK/bug_reports.properties">
+</file>
+<file id="cb3c6644-4b47-4723-82a3-9844d977dd43" idref="6a2a1e64-f48a-44bf-9e6a-1443ffdc4d0e" name="_header.properties" url="src/www/testing_changed/locale/sk-SK/_header.properties">
+</file>
+<file id="ec2d476d-f052-4ea3-9ff6-0c66868de2f3" idref="6a2a1e64-f48a-44bf-9e6a-1443ffdc4d0e" name="contents.rdf" url="src/www/testing_changed/locale/sk-SK/contents.rdf">
+</file>
+<file id="f4612022-0fd4-41e0-8fc6-1e41eae17566" idref="6a2a1e64-f48a-44bf-9e6a-1443ffdc4d0e" name="help-faq.properties" url="src/www/testing_changed/locale/sk-SK/help-faq.properties">
+</file>
+<file id="0458d6b1-56ff-41c5-81ff-dbfb565b46c2" idref="6c80327b-7c33-42bc-9a27-890fcab1c18c" name="_footer.properties" url="src/www/testing_changed/locale/nl-NL/_footer.properties">
+</file>
+<file id="071b705b-9f32-4ac6-ab20-329d060e9b1c" idref="6c80327b-7c33-42bc-9a27-890fcab1c18c" name="_header.properties" url="src/www/testing_changed/locale/nl-NL/_header.properties">
+</file>
+<file id="0f3c2499-6c12-46d3-b8e9-c48929fcca39" idref="6c80327b-7c33-42bc-9a27-890fcab1c18c" name="contents.rdf" url="src/www/testing_changed/locale/nl-NL/contents.rdf">
+</file>
+<file id="14b8e527-9cc3-4f44-a067-afce5cd9368e" idref="6c80327b-7c33-42bc-9a27-890fcab1c18c" name="help.properties" url="src/www/testing_changed/locale/nl-NL/help.properties">
+</file>
+<file id="39338e20-2652-4583-aec3-4bfbcce52e6e" idref="6c80327b-7c33-42bc-9a27-890fcab1c18c" name="not_found.properties" url="src/www/testing_changed/locale/nl-NL/not_found.properties">
+</file>
+<file id="5e1277cb-077a-4a40-9548-169a494b8ae6" idref="6c80327b-7c33-42bc-9a27-890fcab1c18c" name="help-sidebar.properties" url="src/www/testing_changed/locale/nl-NL/help-sidebar.properties">
+</file>
+<file id="60840fb7-f6fb-4e7d-87eb-d082a66a83df" idref="6c80327b-7c33-42bc-9a27-890fcab1c18c" name="help-properties.properties" url="src/www/testing_changed/locale/nl-NL/help-properties.properties">
+</file>
+<file id="61717de2-b67e-4823-90a8-c89c82b05329" idref="6c80327b-7c33-42bc-9a27-890fcab1c18c" name="_help_nav.properties" url="src/www/testing_changed/locale/nl-NL/_help_nav.properties">
+</file>
+<file id="640e6ec4-c52e-448b-a2e7-461f0df7610d" idref="6c80327b-7c33-42bc-9a27-890fcab1c18c" name="amowebsite.properties" url="src/www/testing_changed/locale/nl-NL/amowebsite.properties">
+</file>
+<file id="8467e44e-efbe-4da2-8792-9308eb6dbeff" idref="6c80327b-7c33-42bc-9a27-890fcab1c18c" name="index.properties" url="src/www/testing_changed/locale/nl-NL/index.properties">
+</file>
+<file id="9d5fcafe-f7f7-4134-be46-6f8c623097df" idref="6c80327b-7c33-42bc-9a27-890fcab1c18c" name="help-preferences.properties" url="src/www/testing_changed/locale/nl-NL/help-preferences.properties">
+</file>
+<file id="c26711f2-0720-4448-acc5-389fabe59071" idref="6c80327b-7c33-42bc-9a27-890fcab1c18c" name="help-faq.properties" url="src/www/testing_changed/locale/nl-NL/help-faq.properties">
+</file>
+<file id="cae3a6a9-5ad9-4050-8d1a-ea5e666b8809" idref="6c80327b-7c33-42bc-9a27-890fcab1c18c" name="contact.properties" url="src/www/testing_changed/locale/nl-NL/contact.properties">
+</file>
+<file id="d1cb2d11-7065-4371-bb9c-912db9ac8f7e" idref="6c80327b-7c33-42bc-9a27-890fcab1c18c" name="bug_reports.properties" url="src/www/testing_changed/locale/nl-NL/bug_reports.properties">
+</file>
+<file id="ecf9e2c2-6273-45a8-9345-38e8afbf5d74" idref="6c80327b-7c33-42bc-9a27-890fcab1c18c" name="source.properties" url="src/www/testing_changed/locale/nl-NL/source.properties">
 </file>
 <file id="06d11738-62a8-4613-a974-af60a90e7e29" idref="6e256afa-0bbb-4bd4-bdfa-f7fbfa622f4a" name="not_found.properties" url="src/www/testing/locale/nl-NL/not_found.properties">
 </file>
@@ -627,9 +975,13 @@
 </file>
 <file id="70a4743f-70de-46a5-8e88-d7f052d81c88" idref="73195c81-5742-43dd-b398-dc3c5f6d39c2" name="contact.properties" url="src/www/locale/hu-HU/contact.properties">
 </file>
+<file id="90515898-409c-4979-bbca-10e887968058" idref="73195c81-5742-43dd-b398-dc3c5f6d39c2" name="help-preferences.properties" url="src/www/locale/hu-HU/help-preferences.properties">
+</file>
 <file id="9195531c-c14c-44f8-b0c2-19641a24b24a" idref="73195c81-5742-43dd-b398-dc3c5f6d39c2" name="contents.rdf" url="src/www/locale/hu-HU/contents.rdf">
 </file>
 <file id="96c749e0-3231-420a-b460-2f040a9f8cbd" idref="73195c81-5742-43dd-b398-dc3c5f6d39c2" name="_header.properties" url="src/www/locale/hu-HU/_header.properties">
+</file>
+<file id="a3cfd0b1-2f78-4832-96f7-f93fdfcb70d6" idref="73195c81-5742-43dd-b398-dc3c5f6d39c2" name="amowebsite.properties" url="src/www/locale/hu-HU/amowebsite.properties">
 </file>
 <file id="a42cc9e4-663e-457f-bc74-6d5ab2670566" idref="73195c81-5742-43dd-b398-dc3c5f6d39c2" name="_footer.properties" url="src/www/locale/hu-HU/_footer.properties">
 </file>
@@ -679,6 +1031,34 @@
 </folder>
 <folder id="f10def63-12ac-4ffb-b55e-f16a3e055061" idref="768b03ba-6884-491a-b900-fde0497d15d7" name="zh-CN" url="src/locale/zh-CN">
 </folder>
+<file id="04ada2fe-7a50-4b60-8e8f-68cd7ffa2bb9" idref="78c4e1ce-990b-4a44-9997-010227cda451" name="_footer.tmpl" url="src/www/testing_changed/content/_footer.tmpl">
+</file>
+<file id="19d6a452-e617-4903-81dd-5b9f50a19174" idref="78c4e1ce-990b-4a44-9997-010227cda451" name="help-preferences.tmpl" url="src/www/testing_changed/content/help-preferences.tmpl">
+</file>
+<file id="1d19cdd6-30fe-40a8-a9c7-44a8f3279e6f" idref="78c4e1ce-990b-4a44-9997-010227cda451" name="index.tmpl" url="src/www/testing_changed/content/index.tmpl">
+</file>
+<file id="50c82755-dd6c-46f1-8ed6-296dc7d66858" idref="78c4e1ce-990b-4a44-9997-010227cda451" name="help.tmpl" url="src/www/testing_changed/content/help.tmpl">
+</file>
+<file id="6e622ba8-0643-478a-8836-8aab71eb8395" idref="78c4e1ce-990b-4a44-9997-010227cda451" name="help-faq.tmpl" url="src/www/testing_changed/content/help-faq.tmpl">
+</file>
+<file id="6e942563-9d9d-4e8e-8903-a87d0a1e721c" idref="78c4e1ce-990b-4a44-9997-010227cda451" name="contact.tmpl" url="src/www/testing_changed/content/contact.tmpl">
+</file>
+<file id="7d82d7cc-d99d-46be-932c-23d10c06a73d" idref="78c4e1ce-990b-4a44-9997-010227cda451" name="_header.tmpl" url="src/www/testing_changed/content/_header.tmpl">
+</file>
+<file id="a2da3172-6845-4b8e-ab75-4a1b7fa107de" idref="78c4e1ce-990b-4a44-9997-010227cda451" name="help-properties.tmpl" url="src/www/testing_changed/content/help-properties.tmpl">
+</file>
+<file id="b06eb137-9413-4348-98c3-867177ed30d9" idref="78c4e1ce-990b-4a44-9997-010227cda451" name="source.tmpl" url="src/www/testing_changed/content/source.tmpl">
+</file>
+<file id="c933d91f-b7f5-458c-82c7-d99c903a607f" idref="78c4e1ce-990b-4a44-9997-010227cda451" name="not_found.tmpl" url="src/www/testing_changed/content/not_found.tmpl">
+</file>
+<file id="d869d9e5-29dd-4ebb-98a3-e07c0401fbc7" idref="78c4e1ce-990b-4a44-9997-010227cda451" name="_help_nav.tmpl" url="src/www/testing_changed/content/_help_nav.tmpl">
+</file>
+<file id="eabbe1e1-64da-42a0-a99c-80d48dbbe1a4" idref="78c4e1ce-990b-4a44-9997-010227cda451" name="bug_reports.tmpl" url="src/www/testing_changed/content/bug_reports.tmpl">
+</file>
+<file id="f1e04ee9-e1d2-4280-a577-6a8b661dfd00" idref="78c4e1ce-990b-4a44-9997-010227cda451" name="help-sidebar.tmpl" url="src/www/testing_changed/content/help-sidebar.tmpl">
+</file>
+<file id="a240e02b-ba1f-4d38-80f9-25f67cbad29a" idref="7fdea446-be3d-412f-a983-a14259ed0b80" name="amowebsite.properties" url="src/www/testing_changed/locale/zh-TW/amowebsite.properties">
+</file>
 <folder id="0be34170-8b2c-4497-b958-145e42b7a36c" idref="80af5554-ec4e-4b5c-a157-86b63947b096" name="cs-CZ" url="src/www/locale/cs-CZ">
 </folder>
 <folder id="36906a76-d08b-4348-bc97-8e4338b21fca" idref="80af5554-ec4e-4b5c-a157-86b63947b096" name="nl-NL" url="src/www/locale/nl-NL">
@@ -691,13 +1071,23 @@
 </folder>
 <folder id="8d411f8f-5f9c-4016-a3eb-2ae2e4221650" idref="80af5554-ec4e-4b5c-a157-86b63947b096" name="fr-FR" url="src/www/locale/fr-FR">
 </folder>
+<folder id="a9f3f289-b0ce-4c7a-b25a-2e683d687be9" idref="80af5554-ec4e-4b5c-a157-86b63947b096" name="ko-KR" url="src/www/locale/ko-KR">
+</folder>
 <folder id="ad088e51-71e0-414e-9cc6-8e356a38a074" idref="80af5554-ec4e-4b5c-a157-86b63947b096" name="ru-RU" url="src/www/locale/ru-RU">
 </folder>
 <folder id="ae96eb23-b01c-4401-ab6b-0e9346abf339" idref="80af5554-ec4e-4b5c-a157-86b63947b096" name="zh-CN" url="src/www/locale/zh-CN">
 </folder>
 <folder id="b2cc9286-86f8-4577-a11e-a7c50b0de5b9" idref="80af5554-ec4e-4b5c-a157-86b63947b096" name="en-US" url="src/www/locale/en-US">
 </folder>
+<folder id="b6e9aa3a-7710-4bd0-b493-99ca6f24c7c4" idref="80af5554-ec4e-4b5c-a157-86b63947b096" name="de-DE" url="src/www/locale/de-DE">
+</folder>
 <folder id="bcf235b4-a8c6-4421-b302-274f8255de8c" idref="80af5554-ec4e-4b5c-a157-86b63947b096" name="es-ES" url="src/www/locale/es-ES">
+</folder>
+<folder id="c6a32a1e-6f5a-4f92-a998-36552089d7cf" idref="80af5554-ec4e-4b5c-a157-86b63947b096" name="pl-PL" url="src/www/locale/pl-PL">
+</folder>
+<folder id="d702793d-4758-42f6-9f19-dd7b9d694881" idref="80af5554-ec4e-4b5c-a157-86b63947b096" name="da-DK" url="src/www/locale/da-DK">
+</folder>
+<folder id="dab050c2-4ae2-4f59-a0b9-1350f3bfc6f6" idref="80af5554-ec4e-4b5c-a157-86b63947b096" name="zh-TW" url="src/www/locale/zh-TW">
 </folder>
 <folder id="e010a3e8-52c9-4935-a0c5-074478a68f94" idref="80af5554-ec4e-4b5c-a157-86b63947b096" name="tr-TR" url="src/www/locale/tr-TR">
 </folder>
@@ -779,6 +1169,8 @@
 </file>
 <file id="89d2351d-3eaa-4beb-821b-9c0d4bc7e314" idref="8d411f8f-5f9c-4016-a3eb-2ae2e4221650" name="help.properties" url="src/www/locale/fr-FR/help.properties">
 </file>
+<file id="9239c000-8559-4946-b03b-5341a3b8f5a0" idref="8d411f8f-5f9c-4016-a3eb-2ae2e4221650" name="help-preferences.properties" url="src/www/locale/fr-FR/help-preferences.properties">
+</file>
 <file id="a46096b4-0e4e-4062-9558-d03a1c67935a" idref="8d411f8f-5f9c-4016-a3eb-2ae2e4221650" name="help-properties.properties" url="src/www/locale/fr-FR/help-properties.properties">
 </file>
 <file id="a7e33d53-48f6-4800-8ab1-0d5d6a918cfe" idref="8d411f8f-5f9c-4016-a3eb-2ae2e4221650" name="bug_reports.properties" url="src/www/locale/fr-FR/bug_reports.properties">
@@ -794,6 +1186,38 @@
 <file id="cd9a65cd-da2d-471a-b946-ac09ea005b90" idref="8d411f8f-5f9c-4016-a3eb-2ae2e4221650" name="_header.properties" url="src/www/locale/fr-FR/_header.properties">
 </file>
 <file id="d00fdc60-f3fd-46fe-bbc2-1ca529ce2e1b" idref="8d411f8f-5f9c-4016-a3eb-2ae2e4221650" name="help-sidebar.properties" url="src/www/locale/fr-FR/help-sidebar.properties">
+</file>
+<file id="d1e42438-e1ab-433b-8711-5f705a35a175" idref="8d411f8f-5f9c-4016-a3eb-2ae2e4221650" name="amowebsite.properties" url="src/www/locale/fr-FR/amowebsite.properties">
+</file>
+<file id="0b683ebc-7a60-4e37-8d7f-71543b40cae1" idref="8fa8948b-54a2-4cc1-8282-51dfc20bb11d" name="contact.properties" url="src/www/testing_changed/locale/ru-RU/contact.properties">
+</file>
+<file id="377afd00-d3d4-41ce-8f70-552b394f538c" idref="8fa8948b-54a2-4cc1-8282-51dfc20bb11d" name="amowebsite.properties" url="src/www/testing_changed/locale/ru-RU/amowebsite.properties">
+</file>
+<file id="3a80be61-ce4c-42c3-ac30-e04faaa1f9fd" idref="8fa8948b-54a2-4cc1-8282-51dfc20bb11d" name="bug_reports.properties" url="src/www/testing_changed/locale/ru-RU/bug_reports.properties">
+</file>
+<file id="3b7711a9-65d7-438a-a0c8-a0f5bcd89031" idref="8fa8948b-54a2-4cc1-8282-51dfc20bb11d" name="help-preferences.properties" url="src/www/testing_changed/locale/ru-RU/help-preferences.properties">
+</file>
+<file id="46a993b9-17c4-402e-9ae5-d43b99678671" idref="8fa8948b-54a2-4cc1-8282-51dfc20bb11d" name="source.properties" url="src/www/testing_changed/locale/ru-RU/source.properties">
+</file>
+<file id="65fb205f-07ea-406c-82e9-831b2e8bfd29" idref="8fa8948b-54a2-4cc1-8282-51dfc20bb11d" name="help-properties.properties" url="src/www/testing_changed/locale/ru-RU/help-properties.properties">
+</file>
+<file id="71d4a85b-b4d6-4388-b4e0-83cf8210a5fe" idref="8fa8948b-54a2-4cc1-8282-51dfc20bb11d" name="_header.properties" url="src/www/testing_changed/locale/ru-RU/_header.properties">
+</file>
+<file id="8df88d1a-f8ab-438e-9b86-6d3b762f14bc" idref="8fa8948b-54a2-4cc1-8282-51dfc20bb11d" name="help-sidebar.properties" url="src/www/testing_changed/locale/ru-RU/help-sidebar.properties">
+</file>
+<file id="900f26af-0cbc-4a49-913e-caea162a48bf" idref="8fa8948b-54a2-4cc1-8282-51dfc20bb11d" name="help.properties" url="src/www/testing_changed/locale/ru-RU/help.properties">
+</file>
+<file id="c6c3f8fa-5750-464f-b244-d395041b4266" idref="8fa8948b-54a2-4cc1-8282-51dfc20bb11d" name="index.properties" url="src/www/testing_changed/locale/ru-RU/index.properties">
+</file>
+<file id="dd8a977a-79b8-486f-b002-7b7fbd3c49f1" idref="8fa8948b-54a2-4cc1-8282-51dfc20bb11d" name="_help_nav.properties" url="src/www/testing_changed/locale/ru-RU/_help_nav.properties">
+</file>
+<file id="eeae37fa-39cf-4b85-ba11-3af0769e0699" idref="8fa8948b-54a2-4cc1-8282-51dfc20bb11d" name="_footer.properties" url="src/www/testing_changed/locale/ru-RU/_footer.properties">
+</file>
+<file id="f3a93194-1ae3-4f1f-be81-012ba7a5bc96" idref="8fa8948b-54a2-4cc1-8282-51dfc20bb11d" name="help-faq.properties" url="src/www/testing_changed/locale/ru-RU/help-faq.properties">
+</file>
+<file id="f793f37c-327e-4fec-81b3-c1a177f08628" idref="8fa8948b-54a2-4cc1-8282-51dfc20bb11d" name="contents.rdf" url="src/www/testing_changed/locale/ru-RU/contents.rdf">
+</file>
+<file id="fe7bdd03-0613-412c-9253-a36e42e79b30" idref="8fa8948b-54a2-4cc1-8282-51dfc20bb11d" name="not_found.properties" url="src/www/testing_changed/locale/ru-RU/not_found.properties">
 </file>
 <folder id="3a95003c-3080-4bbe-9ff4-5129b42c682f" idref="900038ca-cc6d-41b7-947a-ac377047302e" name="preferences" url="src/defaults/preferences">
 </folder>
@@ -819,12 +1243,18 @@
 </file>
 <file id="ea0cf335-22a0-48b6-b3e5-b9d1c1d03ddf" idref="91dc608a-b19f-456c-8c02-467eaf467777" name="chrome.manifest" url="src/www/testing/chrome.manifest">
 </file>
+<file id="f321510f-4464-4ecd-ab47-b741e90bd6fd" idref="91dc608a-b19f-456c-8c02-467eaf467777" name="build_img.py.orig" url="src/www/testing/build_img.py.orig">
+</file>
 <folder id="f50d5119-36fd-43b0-b7e0-d963771cbfc2" idref="91dc608a-b19f-456c-8c02-467eaf467777" name="chrome" url="src/www/testing/chrome">
 </folder>
+<file id="f5819580-dd03-44d2-8370-01b878926c11" idref="91dc608a-b19f-456c-8c02-467eaf467777" name="config.py.orig" url="src/www/testing/config.py.orig">
+</file>
 <file id="f6cda421-4ac3-42c9-95d7-4c01db7d1c8a" idref="91dc608a-b19f-456c-8c02-467eaf467777" name="chrome.manifest.build" url="src/www/testing/chrome.manifest.build">
 </file>
 <folder id="f7421a9e-95cf-4ff2-aea7-5ca51f48262e" idref="91dc608a-b19f-456c-8c02-467eaf467777" name="locale" url="src/www/testing/locale">
 </folder>
+<file id="f8a3efb6-f75c-4bf0-b683-8e8f3f1439d9" idref="91dc608a-b19f-456c-8c02-467eaf467777" name="build_www.py.orig" url="src/www/testing/build_www.py.orig">
+</file>
 <file id="fcf42eb6-ea21-4780-9e80-b109d36eeb5b" idref="91dc608a-b19f-456c-8c02-467eaf467777" name="config.py" url="src/www/testing/config.py">
 </file>
 <file id="25f2db7d-ec0c-4870-9f2c-dd17e7b5c8e8" idref="930054e9-e9ec-4c2a-bfeb-ec24380c2e3e" name="contact.properties" url="src/www/testing/locale/tr-TR/contact.properties">
@@ -947,6 +1377,36 @@
 </file>
 <file id="e5229838-b95e-4279-a6cc-c9688d3113f3" idref="9dc23f8c-9f55-4ec3-8eab-43968c46550b" name="updatescan.dtd" url="src/locale/pt-BR/updatescan.dtd">
 </file>
+<file id="137c7a17-eec2-4435-914e-4a91ba4c47b9" idref="9f711985-ea91-4dff-80b4-2a9a22332d58" name="contact.properties" url="src/www/testing_changed/locale/it-IT/contact.properties">
+</file>
+<file id="1ad6db14-fb83-4ab7-856e-f4e48b936f7e" idref="9f711985-ea91-4dff-80b4-2a9a22332d58" name="index.properties" url="src/www/testing_changed/locale/it-IT/index.properties">
+</file>
+<file id="3c838b0b-c920-4d58-b7d7-34b08ec30e78" idref="9f711985-ea91-4dff-80b4-2a9a22332d58" name="help-faq.properties" url="src/www/testing_changed/locale/it-IT/help-faq.properties">
+</file>
+<file id="4928f07a-18e2-4660-bab6-a17c2941a802" idref="9f711985-ea91-4dff-80b4-2a9a22332d58" name="_header.properties" url="src/www/testing_changed/locale/it-IT/_header.properties">
+</file>
+<file id="67826e90-eecf-4037-94a7-8a5883536cce" idref="9f711985-ea91-4dff-80b4-2a9a22332d58" name="bug_reports.properties" url="src/www/testing_changed/locale/it-IT/bug_reports.properties">
+</file>
+<file id="710f5d98-0865-45c3-9e31-e1b78bc26ad1" idref="9f711985-ea91-4dff-80b4-2a9a22332d58" name="source.properties" url="src/www/testing_changed/locale/it-IT/source.properties">
+</file>
+<file id="99242b5e-924e-4eb5-95b7-e85b71834243" idref="9f711985-ea91-4dff-80b4-2a9a22332d58" name="help-preferences.properties" url="src/www/testing_changed/locale/it-IT/help-preferences.properties">
+</file>
+<file id="9fdd0263-466e-4399-a81a-5d620e632b24" idref="9f711985-ea91-4dff-80b4-2a9a22332d58" name="not_found.properties" url="src/www/testing_changed/locale/it-IT/not_found.properties">
+</file>
+<file id="a3a30d6e-d131-494b-9ccf-13dd59d34d74" idref="9f711985-ea91-4dff-80b4-2a9a22332d58" name="_help_nav.properties" url="src/www/testing_changed/locale/it-IT/_help_nav.properties">
+</file>
+<file id="a80f21a7-139a-413c-93e0-5e8fa1c009b8" idref="9f711985-ea91-4dff-80b4-2a9a22332d58" name="_footer.properties" url="src/www/testing_changed/locale/it-IT/_footer.properties">
+</file>
+<file id="b6a35828-ab4e-431d-a005-599a9af4e9a4" idref="9f711985-ea91-4dff-80b4-2a9a22332d58" name="help-sidebar.properties" url="src/www/testing_changed/locale/it-IT/help-sidebar.properties">
+</file>
+<file id="c2d3dd53-8d4c-495a-8e70-1074c7a527f4" idref="9f711985-ea91-4dff-80b4-2a9a22332d58" name="help.properties" url="src/www/testing_changed/locale/it-IT/help.properties">
+</file>
+<file id="c720dad1-f0e0-4c17-961c-847d96f4cd70" idref="9f711985-ea91-4dff-80b4-2a9a22332d58" name="amowebsite.properties" url="src/www/testing_changed/locale/it-IT/amowebsite.properties">
+</file>
+<file id="cfe8b72f-66ae-40dd-b7e4-a53e8697c24e" idref="9f711985-ea91-4dff-80b4-2a9a22332d58" name="help-properties.properties" url="src/www/testing_changed/locale/it-IT/help-properties.properties">
+</file>
+<file id="d1740f1c-c3c6-49cc-ac52-a34520115587" idref="9f711985-ea91-4dff-80b4-2a9a22332d58" name="contents.rdf" url="src/www/testing_changed/locale/it-IT/contents.rdf">
+</file>
 <file id="0f95652f-f34c-4ec6-9181-9c65e8b0fac0" idref="a1b33499-5df4-4352-a094-d4e8ffe5c890" name="dlgnewedit.dtd" url="src/locale/ko-KR/dlgnewedit.dtd">
 </file>
 <file id="162eeed2-255e-42a1-8061-3af482cc941a" idref="a1b33499-5df4-4352-a094-d4e8ffe5c890" name="updatescan.properties" url="src/locale/ko-KR/updatescan.properties">
@@ -966,6 +1426,66 @@
 <file id="ed42fb68-6a3d-4b44-87bf-0d98943bffd5" idref="a1b33499-5df4-4352-a094-d4e8ffe5c890" name="amowebsite.properties" url="src/locale/ko-KR/amowebsite.properties">
 </file>
 <file id="fc4c4dfd-4236-44c2-8e41-1954bb44da56" idref="a1b33499-5df4-4352-a094-d4e8ffe5c890" name="contents.rdf" url="src/locale/ko-KR/contents.rdf">
+</file>
+<file id="00ddafcd-74dd-4f96-ab6a-6311d6dbde1b" idref="a22a760f-e169-47bc-aef5-71f7c092a80a" name="amowebsite.properties" url="src/www/testing_changed/locale/hu-HU/amowebsite.properties">
+</file>
+<file id="1d58140b-28f9-44a4-bd0a-cc5c9bee673e" idref="a22a760f-e169-47bc-aef5-71f7c092a80a" name="_footer.properties" url="src/www/testing_changed/locale/hu-HU/_footer.properties">
+</file>
+<file id="2569639a-e08e-4abd-89cf-6b0fef041c45" idref="a22a760f-e169-47bc-aef5-71f7c092a80a" name="not_found.properties" url="src/www/testing_changed/locale/hu-HU/not_found.properties">
+</file>
+<file id="2aae4e8e-f161-4167-a083-60093eed11e4" idref="a22a760f-e169-47bc-aef5-71f7c092a80a" name="help-preferences.properties" url="src/www/testing_changed/locale/hu-HU/help-preferences.properties">
+</file>
+<file id="485e3c7b-9b2d-439d-b3d6-fe6985a0164d" idref="a22a760f-e169-47bc-aef5-71f7c092a80a" name="_help_nav.properties" url="src/www/testing_changed/locale/hu-HU/_help_nav.properties">
+</file>
+<file id="5269c09d-1c52-4835-a6ca-763b88cd766a" idref="a22a760f-e169-47bc-aef5-71f7c092a80a" name="index.properties" url="src/www/testing_changed/locale/hu-HU/index.properties">
+</file>
+<file id="6514d21d-781b-462d-9135-7b5a358007d0" idref="a22a760f-e169-47bc-aef5-71f7c092a80a" name="help.properties" url="src/www/testing_changed/locale/hu-HU/help.properties">
+</file>
+<file id="731033ac-b17d-41f5-9b14-8c207d2de1f3" idref="a22a760f-e169-47bc-aef5-71f7c092a80a" name="help-faq.properties" url="src/www/testing_changed/locale/hu-HU/help-faq.properties">
+</file>
+<file id="7b1d1b75-cd4f-4867-900a-b02ffe61947a" idref="a22a760f-e169-47bc-aef5-71f7c092a80a" name="contents.rdf" url="src/www/testing_changed/locale/hu-HU/contents.rdf">
+</file>
+<file id="89bcf439-8568-466a-a1f6-ce8658d49459" idref="a22a760f-e169-47bc-aef5-71f7c092a80a" name="source.properties" url="src/www/testing_changed/locale/hu-HU/source.properties">
+</file>
+<file id="a361e5b7-bc8b-4d1b-b74d-954d0defcdf1" idref="a22a760f-e169-47bc-aef5-71f7c092a80a" name="bug_reports.properties" url="src/www/testing_changed/locale/hu-HU/bug_reports.properties">
+</file>
+<file id="a67e5e98-c002-425b-8b3c-737bb0ce1cf6" idref="a22a760f-e169-47bc-aef5-71f7c092a80a" name="_header.properties" url="src/www/testing_changed/locale/hu-HU/_header.properties">
+</file>
+<file id="c51be4c2-c270-4918-85d0-648fa3365c67" idref="a22a760f-e169-47bc-aef5-71f7c092a80a" name="help-sidebar.properties" url="src/www/testing_changed/locale/hu-HU/help-sidebar.properties">
+</file>
+<file id="c54fe568-2fd4-4495-9283-12c7126a7da2" idref="a22a760f-e169-47bc-aef5-71f7c092a80a" name="contact.properties" url="src/www/testing_changed/locale/hu-HU/contact.properties">
+</file>
+<file id="ccf8d476-c03b-400e-b3dd-c5994f9cc94c" idref="a22a760f-e169-47bc-aef5-71f7c092a80a" name="help-properties.properties" url="src/www/testing_changed/locale/hu-HU/help-properties.properties">
+</file>
+<file id="23cff855-7a20-4e42-9219-7e2e550132cd" idref="a71c2b34-9e4c-4cf7-b633-695c5b77381a" name="_footer.properties" url="src/www/testing_changed/locale/de-DE/_footer.properties">
+</file>
+<file id="3b7997da-166d-4216-8288-cecc1438c04a" idref="a71c2b34-9e4c-4cf7-b633-695c5b77381a" name="source.properties" url="src/www/testing_changed/locale/de-DE/source.properties">
+</file>
+<file id="58e9667a-039c-4db0-af19-c90a31039a78" idref="a71c2b34-9e4c-4cf7-b633-695c5b77381a" name="help.properties" url="src/www/testing_changed/locale/de-DE/help.properties">
+</file>
+<file id="7a2306fb-ef98-497f-86c0-d8cd9b950c9e" idref="a71c2b34-9e4c-4cf7-b633-695c5b77381a" name="help-faq.properties" url="src/www/testing_changed/locale/de-DE/help-faq.properties">
+</file>
+<file id="96d0eda8-2f9c-4818-9927-d7d75775fdb3" idref="a71c2b34-9e4c-4cf7-b633-695c5b77381a" name="help-preferences.properties" url="src/www/testing_changed/locale/de-DE/help-preferences.properties">
+</file>
+<file id="97ccc25b-03d4-41c5-aa21-fd1c1fd622e7" idref="a71c2b34-9e4c-4cf7-b633-695c5b77381a" name="contents.rdf" url="src/www/testing_changed/locale/de-DE/contents.rdf">
+</file>
+<file id="a4740108-6098-46ad-93d8-caa9336ca272" idref="a71c2b34-9e4c-4cf7-b633-695c5b77381a" name="not_found.properties" url="src/www/testing_changed/locale/de-DE/not_found.properties">
+</file>
+<file id="aab866ea-01f9-40f1-b72d-b54ac3773046" idref="a71c2b34-9e4c-4cf7-b633-695c5b77381a" name="_header.properties" url="src/www/testing_changed/locale/de-DE/_header.properties">
+</file>
+<file id="abd265df-8369-49d0-b58f-d341c5328e02" idref="a71c2b34-9e4c-4cf7-b633-695c5b77381a" name="index.properties" url="src/www/testing_changed/locale/de-DE/index.properties">
+</file>
+<file id="ae47c5fa-e8de-4bf0-abeb-f6bedb9333b4" idref="a71c2b34-9e4c-4cf7-b633-695c5b77381a" name="_help_nav.properties" url="src/www/testing_changed/locale/de-DE/_help_nav.properties">
+</file>
+<file id="d5682931-7b59-4262-8422-5513c1503a3d" idref="a71c2b34-9e4c-4cf7-b633-695c5b77381a" name="amowebsite.properties" url="src/www/testing_changed/locale/de-DE/amowebsite.properties">
+</file>
+<file id="eaab9175-a4c7-4ac6-9087-011f224358da" idref="a71c2b34-9e4c-4cf7-b633-695c5b77381a" name="contact.properties" url="src/www/testing_changed/locale/de-DE/contact.properties">
+</file>
+<file id="eb40dc90-a7d0-429f-a1d9-6696c8bfc2c5" idref="a71c2b34-9e4c-4cf7-b633-695c5b77381a" name="help-sidebar.properties" url="src/www/testing_changed/locale/de-DE/help-sidebar.properties">
+</file>
+<file id="f2eef8d6-a279-4012-b338-7bb314cfb5d3" idref="a71c2b34-9e4c-4cf7-b633-695c5b77381a" name="bug_reports.properties" url="src/www/testing_changed/locale/de-DE/bug_reports.properties">
+</file>
+<file id="ff0196c5-ce62-4a49-95dd-ee1a263aa6a0" idref="a71c2b34-9e4c-4cf7-b633-695c5b77381a" name="help-properties.properties" url="src/www/testing_changed/locale/de-DE/help-properties.properties">
 </file>
 <file id="049fc990-d0d8-4917-bd1f-2d629fbfe1fe" idref="a84380b2-df77-464c-8f5a-da2550f4df10" name="amowebsite.properties" url="src/locale/zh-TW/amowebsite.properties">
 </file>
@@ -987,11 +1507,45 @@
 </file>
 <file id="cdf583fd-5eaf-46d7-834c-b08a04371d8d" idref="a84380b2-df77-464c-8f5a-da2550f4df10" name="diffPage.properties" url="src/locale/zh-TW/diffPage.properties">
 </file>
+<file id="e5b22be5-bb65-4a5a-8c4a-75e6e110fab5" idref="a9f3f289-b0ce-4c7a-b25a-2e683d687be9" name="amowebsite.properties" url="src/www/locale/ko-KR/amowebsite.properties">
+</file>
+<file id="0d613e8b-60f3-408b-8919-cba96dda43bf" idref="aa13ce1b-7119-4606-9894-52594fbce014" name="help-faq.properties" url="src/www/testing_changed/locale/fi-FI/help-faq.properties">
+</file>
+<file id="29ba93d5-5dfc-4a63-b9d3-c5b877b8ff36" idref="aa13ce1b-7119-4606-9894-52594fbce014" name="source.properties" url="src/www/testing_changed/locale/fi-FI/source.properties">
+</file>
+<file id="319cf669-03d4-4c33-a836-af9cda040246" idref="aa13ce1b-7119-4606-9894-52594fbce014" name="help-properties.properties" url="src/www/testing_changed/locale/fi-FI/help-properties.properties">
+</file>
+<file id="43e04270-9efb-4477-bba4-eec879aa3b51" idref="aa13ce1b-7119-4606-9894-52594fbce014" name="help-sidebar.properties" url="src/www/testing_changed/locale/fi-FI/help-sidebar.properties">
+</file>
+<file id="5c2357be-e375-469f-9b14-63f8a4dda62a" idref="aa13ce1b-7119-4606-9894-52594fbce014" name="bug_reports.properties" url="src/www/testing_changed/locale/fi-FI/bug_reports.properties">
+</file>
+<file id="627b830f-ca35-4987-97ae-69177798c22b" idref="aa13ce1b-7119-4606-9894-52594fbce014" name="contact.properties" url="src/www/testing_changed/locale/fi-FI/contact.properties">
+</file>
+<file id="78794cb2-e55a-4bf8-b347-b155d93d2186" idref="aa13ce1b-7119-4606-9894-52594fbce014" name="index.properties" url="src/www/testing_changed/locale/fi-FI/index.properties">
+</file>
+<file id="860b6dd9-3e1b-4c8e-8860-e7e234855505" idref="aa13ce1b-7119-4606-9894-52594fbce014" name="contents.rdf" url="src/www/testing_changed/locale/fi-FI/contents.rdf">
+</file>
+<file id="8b4d3ce1-ec0f-44e5-94c3-f838ffde27eb" idref="aa13ce1b-7119-4606-9894-52594fbce014" name="_header.properties" url="src/www/testing_changed/locale/fi-FI/_header.properties">
+</file>
+<file id="8b6dc056-9a8a-41fe-be4e-bca1d33bf0d7" idref="aa13ce1b-7119-4606-9894-52594fbce014" name="not_found.properties" url="src/www/testing_changed/locale/fi-FI/not_found.properties">
+</file>
+<file id="a58b57d1-18c6-4b56-9548-68c38b1d58fa" idref="aa13ce1b-7119-4606-9894-52594fbce014" name="amowebsite.properties" url="src/www/testing_changed/locale/fi-FI/amowebsite.properties">
+</file>
+<file id="a774b384-a2eb-4be2-ab74-cf3b065c773d" idref="aa13ce1b-7119-4606-9894-52594fbce014" name="_footer.properties" url="src/www/testing_changed/locale/fi-FI/_footer.properties">
+</file>
+<file id="e06ab201-751b-4076-b8e6-563fa414ae76" idref="aa13ce1b-7119-4606-9894-52594fbce014" name="_help_nav.properties" url="src/www/testing_changed/locale/fi-FI/_help_nav.properties">
+</file>
+<file id="ea007eea-1bec-4495-9c61-e33b8edbe40e" idref="aa13ce1b-7119-4606-9894-52594fbce014" name="help.properties" url="src/www/testing_changed/locale/fi-FI/help.properties">
+</file>
+<file id="f9b4f01e-a518-48cd-bfa9-30fe12e44e3a" idref="aa13ce1b-7119-4606-9894-52594fbce014" name="help-preferences.properties" url="src/www/testing_changed/locale/fi-FI/help-preferences.properties">
+</file>
 <file id="06840577-2d49-4854-9ab0-492f8f1a3abc" idref="ad088e51-71e0-414e-9cc6-8e356a38a074" name="_footer.properties" url="src/www/locale/ru-RU/_footer.properties">
 </file>
 <file id="07c73092-be20-4bc2-89e6-18e2b769ed52" idref="ad088e51-71e0-414e-9cc6-8e356a38a074" name="_header.properties" url="src/www/locale/ru-RU/_header.properties">
 </file>
 <file id="1f1ddc04-78ec-4682-9961-482e99da9b81" idref="ad088e51-71e0-414e-9cc6-8e356a38a074" name="contents.rdf" url="src/www/locale/ru-RU/contents.rdf">
+</file>
+<file id="437d4739-d2f2-448f-80a7-749d65ff55dc" idref="ad088e51-71e0-414e-9cc6-8e356a38a074" name="help-preferences.properties" url="src/www/locale/ru-RU/help-preferences.properties">
 </file>
 <file id="497ecba2-b49a-4659-8265-c74830b39610" idref="ad088e51-71e0-414e-9cc6-8e356a38a074" name="_help_nav.properties" url="src/www/locale/ru-RU/_help_nav.properties">
 </file>
@@ -1004,6 +1558,8 @@
 <file id="c30b18b1-f61e-40d5-8216-d01addb55017" idref="ad088e51-71e0-414e-9cc6-8e356a38a074" name="not_found.properties" url="src/www/locale/ru-RU/not_found.properties">
 </file>
 <file id="ceedc680-5f35-4b9a-914a-4bfd7871c296" idref="ad088e51-71e0-414e-9cc6-8e356a38a074" name="help.properties" url="src/www/locale/ru-RU/help.properties">
+</file>
+<file id="d0569bf6-c8e2-4d6e-a021-0d834d567cbf" idref="ad088e51-71e0-414e-9cc6-8e356a38a074" name="amowebsite.properties" url="src/www/locale/ru-RU/amowebsite.properties">
 </file>
 <file id="d24cddb7-157e-4a5a-a410-140f37465e8a" idref="ad088e51-71e0-414e-9cc6-8e356a38a074" name="bug_reports.properties" url="src/www/locale/ru-RU/bug_reports.properties">
 </file>
@@ -1019,7 +1575,11 @@
 </file>
 <file id="40194f75-9ec8-4938-91fd-fb122dd61c17" idref="ae96eb23-b01c-4401-ab6b-0e9346abf339" name="contents.rdf" url="src/www/locale/zh-CN/contents.rdf">
 </file>
+<file id="6121e18b-7e17-4965-b4fb-aa3e5a8499f9" idref="ae96eb23-b01c-4401-ab6b-0e9346abf339" name="help-preferences.properties" url="src/www/locale/zh-CN/help-preferences.properties">
+</file>
 <file id="7a7389d0-f2e9-4446-876a-63a942b2f6d6" idref="ae96eb23-b01c-4401-ab6b-0e9346abf339" name="source.properties" url="src/www/locale/zh-CN/source.properties">
+</file>
+<file id="7ca3ddce-c0c8-4970-9cf9-6c1b9339dae9" idref="ae96eb23-b01c-4401-ab6b-0e9346abf339" name="amowebsite.properties" url="src/www/locale/zh-CN/amowebsite.properties">
 </file>
 <file id="89055467-18ce-4847-911e-e26b2ac4c055" idref="ae96eb23-b01c-4401-ab6b-0e9346abf339" name="help.properties" url="src/www/locale/zh-CN/help.properties">
 </file>
@@ -1061,6 +1621,8 @@
 </file>
 <file id="1ec3ea2a-17b7-4eeb-9a7e-d6321e79cc31" idref="b2cc9286-86f8-4577-a11e-a7c50b0de5b9" name="help-sidebar.properties" url="src/www/locale/en-US/help-sidebar.properties">
 </file>
+<file id="1f479427-90bc-4a33-93d2-017d37d24118" idref="b2cc9286-86f8-4577-a11e-a7c50b0de5b9" name="amowebsite.properties" url="src/www/locale/en-US/amowebsite.properties">
+</file>
 <file id="29017149-5fc4-4f27-a255-aaefa7d8142a" idref="b2cc9286-86f8-4577-a11e-a7c50b0de5b9" name="help-faq.properties" url="src/www/locale/en-US/help-faq.properties">
 </file>
 <file id="374f02fa-e337-4a64-bbe1-c2d1971d6af9" idref="b2cc9286-86f8-4577-a11e-a7c50b0de5b9" name="_help_nav.properties" url="src/www/locale/en-US/_help_nav.properties">
@@ -1074,6 +1636,8 @@
 <file id="49b69b79-9063-4a50-b764-aa50c739c36e" idref="b2cc9286-86f8-4577-a11e-a7c50b0de5b9" name="help.properties" url="src/www/locale/en-US/help.properties">
 </file>
 <file id="4d735e6d-baa3-48be-a31f-250a0876c29a" idref="b2cc9286-86f8-4577-a11e-a7c50b0de5b9" name="_footer.properties" url="src/www/locale/en-US/_footer.properties">
+</file>
+<file id="5e3dfcc3-8966-4638-a0f6-a6913068066f" idref="b2cc9286-86f8-4577-a11e-a7c50b0de5b9" name="help-preferences.properties" url="src/www/locale/en-US/help-preferences.properties">
 </file>
 <file id="7519028a-9030-429d-9749-a86a8162d1be" idref="b2cc9286-86f8-4577-a11e-a7c50b0de5b9" name="source.properties" url="src/www/locale/en-US/source.properties">
 </file>
@@ -1115,6 +1679,36 @@
 </file>
 <file id="f0be0b10-c2b6-49be-b234-10a4608f8dda" idref="b5e3b6f8-d9ab-4d00-968c-a7237604281f" name="help-sidebar.properties" url="src/www/testing/locale/es-ES/help-sidebar.properties">
 </file>
+<file id="27d2853d-2ad7-4bb6-87c0-f2fe1c8678db" idref="b6e9aa3a-7710-4bd0-b493-99ca6f24c7c4" name="amowebsite.properties" url="src/www/locale/de-DE/amowebsite.properties">
+</file>
+<file id="3b8c4b0c-a797-41f2-9485-b59d93990748" idref="b6e9aa3a-7710-4bd0-b493-99ca6f24c7c4" name="_header.properties" url="src/www/locale/de-DE/_header.properties">
+</file>
+<file id="57718e80-25f3-412b-ac7c-73b350545717" idref="b6e9aa3a-7710-4bd0-b493-99ca6f24c7c4" name="source.properties" url="src/www/locale/de-DE/source.properties">
+</file>
+<file id="5932f9d7-4b0b-4d02-a48d-e5fa1afe491f" idref="b6e9aa3a-7710-4bd0-b493-99ca6f24c7c4" name="bug_reports.properties" url="src/www/locale/de-DE/bug_reports.properties">
+</file>
+<file id="609ac07e-c58c-4b08-9c07-8c5ff7f6662f" idref="b6e9aa3a-7710-4bd0-b493-99ca6f24c7c4" name="help.properties" url="src/www/locale/de-DE/help.properties">
+</file>
+<file id="70a52d19-a7dd-4912-9201-3838884826ee" idref="b6e9aa3a-7710-4bd0-b493-99ca6f24c7c4" name="help-preferences.properties" url="src/www/locale/de-DE/help-preferences.properties">
+</file>
+<file id="757732e6-f8ea-4a79-9157-02605564307d" idref="b6e9aa3a-7710-4bd0-b493-99ca6f24c7c4" name="_footer.properties" url="src/www/locale/de-DE/_footer.properties">
+</file>
+<file id="76280533-01b7-468f-993b-80447d436186" idref="b6e9aa3a-7710-4bd0-b493-99ca6f24c7c4" name="index.properties" url="src/www/locale/de-DE/index.properties">
+</file>
+<file id="9ff93d02-93e4-4d83-acf5-ae4d259a3116" idref="b6e9aa3a-7710-4bd0-b493-99ca6f24c7c4" name="_help_nav.properties" url="src/www/locale/de-DE/_help_nav.properties">
+</file>
+<file id="a2505439-cb75-4d5e-934b-2da3a3ad03e7" idref="b6e9aa3a-7710-4bd0-b493-99ca6f24c7c4" name="help-properties.properties" url="src/www/locale/de-DE/help-properties.properties">
+</file>
+<file id="b1582a6a-8948-44fc-81f9-6031ecc8cd7a" idref="b6e9aa3a-7710-4bd0-b493-99ca6f24c7c4" name="not_found.properties" url="src/www/locale/de-DE/not_found.properties">
+</file>
+<file id="dacf8694-3abc-4ae7-9318-6b7edc56d838" idref="b6e9aa3a-7710-4bd0-b493-99ca6f24c7c4" name="help-faq.properties" url="src/www/locale/de-DE/help-faq.properties">
+</file>
+<file id="dcce5d39-5401-4b89-8497-6aa1272ff72c" idref="b6e9aa3a-7710-4bd0-b493-99ca6f24c7c4" name="help-sidebar.properties" url="src/www/locale/de-DE/help-sidebar.properties">
+</file>
+<file id="e6b5ab89-6c48-4483-ae02-9a9d50118501" idref="b6e9aa3a-7710-4bd0-b493-99ca6f24c7c4" name="contents.rdf" url="src/www/locale/de-DE/contents.rdf">
+</file>
+<file id="f1f46b68-7cf7-4e78-a76a-c8187edd7792" idref="b6e9aa3a-7710-4bd0-b493-99ca6f24c7c4" name="contact.properties" url="src/www/locale/de-DE/contact.properties">
+</file>
 <file id="3968fa5e-9a7b-42ac-b256-bde93797aa16" idref="bcf235b4-a8c6-4421-b302-274f8255de8c" name="source.properties" url="src/www/locale/es-ES/source.properties">
 </file>
 <file id="3f3bf972-722f-4d82-acb8-800ef96f37e2" idref="bcf235b4-a8c6-4421-b302-274f8255de8c" name="_header.properties" url="src/www/locale/es-ES/_header.properties">
@@ -1131,6 +1725,10 @@
 </file>
 <file id="9928f23c-0dc7-40d0-878e-2161799260f9" idref="bcf235b4-a8c6-4421-b302-274f8255de8c" name="help-faq.properties" url="src/www/locale/es-ES/help-faq.properties">
 </file>
+<file id="9e14f666-d346-4d20-8ff6-5a5545bb7085" idref="bcf235b4-a8c6-4421-b302-274f8255de8c" name="amowebsite.properties" url="src/www/locale/es-ES/amowebsite.properties">
+</file>
+<file id="ac1215d2-85b1-4323-b8f2-c2a1a20cdb68" idref="bcf235b4-a8c6-4421-b302-274f8255de8c" name="help-preferences.properties" url="src/www/locale/es-ES/help-preferences.properties">
+</file>
 <file id="b67149fd-8984-4793-88ce-aaf844a6ea0c" idref="bcf235b4-a8c6-4421-b302-274f8255de8c" name="help-properties.properties" url="src/www/locale/es-ES/help-properties.properties">
 </file>
 <file id="c7841308-d990-4785-9c29-f175edf4dda8" idref="bcf235b4-a8c6-4421-b302-274f8255de8c" name="bug_reports.properties" url="src/www/locale/es-ES/bug_reports.properties">
@@ -1142,6 +1740,8 @@
 <file id="f59f3f43-6207-426f-b8c8-f63b1ef9d75c" idref="bcf235b4-a8c6-4421-b302-274f8255de8c" name="contact.properties" url="src/www/locale/es-ES/contact.properties">
 </file>
 <file id="17f95f50-e2fc-44fc-84ec-5c620ade1980" idref="bd7fe55f-6862-4d25-9551-15ae64bf0d44" name="help-properties.properties" url="src/www/testing/locale/fr-FR/help-properties.properties">
+</file>
+<file id="1972f3fe-4c57-486b-8459-8063b8e60678" idref="bd7fe55f-6862-4d25-9551-15ae64bf0d44" name="index.properties.orig" url="src/www/testing/locale/fr-FR/index.properties.orig">
 </file>
 <file id="30c810a6-6507-4a2b-8e5f-2a57f87a3199" idref="bd7fe55f-6862-4d25-9551-15ae64bf0d44" name="contact.properties" url="src/www/testing/locale/fr-FR/contact.properties">
 </file>
@@ -1167,9 +1767,15 @@
 </file>
 <file id="a5ce4554-e0b3-40fd-b41b-7d8e90a95376" idref="bd7fe55f-6862-4d25-9551-15ae64bf0d44" name="source.properties" url="src/www/testing/locale/fr-FR/source.properties">
 </file>
+<file id="b205372d-6aa2-4778-b434-241fcdf032e0" idref="bd7fe55f-6862-4d25-9551-15ae64bf0d44" name="bug_reports.properties.orig" url="src/www/testing/locale/fr-FR/bug_reports.properties.orig">
+</file>
 <file id="b3c51a93-d102-4d9c-a8f3-e13684e11d48" idref="bd7fe55f-6862-4d25-9551-15ae64bf0d44" name="help-preferences.properties" url="src/www/testing/locale/fr-FR/help-preferences.properties">
 </file>
 <file id="da60741e-937c-4c05-ba25-25432a866fde" idref="bd7fe55f-6862-4d25-9551-15ae64bf0d44" name="_help_nav.properties" url="src/www/testing/locale/fr-FR/_help_nav.properties">
+</file>
+<file id="e2351c0c-fcef-4c5a-b09e-8fba0d3b1789" idref="bd7fe55f-6862-4d25-9551-15ae64bf0d44" name="help.properties.orig" url="src/www/testing/locale/fr-FR/help.properties.orig">
+</file>
+<file id="faa5a3b3-3827-4392-852b-4b1a2e4c5760" idref="bd7fe55f-6862-4d25-9551-15ae64bf0d44" name="contact.properties.orig" url="src/www/testing/locale/fr-FR/contact.properties.orig">
 </file>
 <file id="0a844b6a-d640-4388-83f6-a7f5909b31f0" idref="c0baa68a-ed5c-41fa-9d4d-583d6606583b" name="contents.rdf" url="src/locale/ja-JP/contents.rdf">
 </file>
@@ -1247,11 +1853,49 @@
 </file>
 <file id="7d5a6fb2-c581-43a4-9bae-12eb77ccfbae" idref="c6111de2-9b14-48c7-9682-1e8812e025e9" name="help-sidebar.properties" url="src/www/testing/locale/en-US/help-sidebar.properties">
 </file>
+<file id="a986c7be-83ff-4043-bef0-98fa5eb94a1f" idref="c6111de2-9b14-48c7-9682-1e8812e025e9" name="source.properties.orig" url="src/www/testing/locale/en-US/source.properties.orig">
+</file>
 <file id="b1e61f5b-23e4-4c4e-ae16-7dccbff9dcfa" idref="c6111de2-9b14-48c7-9682-1e8812e025e9" name="contents.rdf" url="src/www/testing/locale/en-US/contents.rdf">
 </file>
 <file id="c254d573-52c7-48ce-8d40-f8eb92b666ec" idref="c6111de2-9b14-48c7-9682-1e8812e025e9" name="not_found.properties" url="src/www/testing/locale/en-US/not_found.properties">
 </file>
+<file id="c6f4f843-ac3c-449a-a19e-928110b2927b" idref="c6a32a1e-6f5a-4f92-a998-36552089d7cf" name="amowebsite.properties" url="src/www/locale/pl-PL/amowebsite.properties">
+</file>
+<file id="10f186df-1d17-496f-a0b1-3c4ec031a22b" idref="d0301e67-d308-41ac-a824-565ec57aca6c" name="help-faq.properties" url="src/www/testing_changed/locale/tr-TR/help-faq.properties">
+</file>
+<file id="30392879-0e23-429c-bfb5-a0827eea1aed" idref="d0301e67-d308-41ac-a824-565ec57aca6c" name="help-properties.properties" url="src/www/testing_changed/locale/tr-TR/help-properties.properties">
+</file>
+<file id="30dc8ac6-8917-472c-ae63-b5d6b775b069" idref="d0301e67-d308-41ac-a824-565ec57aca6c" name="not_found.properties" url="src/www/testing_changed/locale/tr-TR/not_found.properties">
+</file>
+<file id="42d14f54-02a8-45d2-9cb0-1a85bcc74b2d" idref="d0301e67-d308-41ac-a824-565ec57aca6c" name="contents.rdf" url="src/www/testing_changed/locale/tr-TR/contents.rdf">
+</file>
+<file id="5d4f053a-44fe-4893-9e58-80beaaab323f" idref="d0301e67-d308-41ac-a824-565ec57aca6c" name="help.properties" url="src/www/testing_changed/locale/tr-TR/help.properties">
+</file>
+<file id="626b1e39-d737-48e7-9950-058d487dc02f" idref="d0301e67-d308-41ac-a824-565ec57aca6c" name="amowebsite.properties" url="src/www/testing_changed/locale/tr-TR/amowebsite.properties">
+</file>
+<file id="6740051a-aea5-4717-a1e6-45e948329780" idref="d0301e67-d308-41ac-a824-565ec57aca6c" name="_help_nav.properties" url="src/www/testing_changed/locale/tr-TR/_help_nav.properties">
+</file>
+<file id="7d038baa-8d00-4f9a-b7d7-12b2e0b56351" idref="d0301e67-d308-41ac-a824-565ec57aca6c" name="source.properties" url="src/www/testing_changed/locale/tr-TR/source.properties">
+</file>
+<file id="8237a8d0-2b9b-4292-87b8-f190d2a0b8da" idref="d0301e67-d308-41ac-a824-565ec57aca6c" name="bug_reports.properties" url="src/www/testing_changed/locale/tr-TR/bug_reports.properties">
+</file>
+<file id="91c7773b-51c8-43e2-82a5-ade88897d83a" idref="d0301e67-d308-41ac-a824-565ec57aca6c" name="_footer.properties" url="src/www/testing_changed/locale/tr-TR/_footer.properties">
+</file>
+<file id="a02c2dde-93b8-483b-894e-c70c51f5e1fc" idref="d0301e67-d308-41ac-a824-565ec57aca6c" name="help-preferences.properties" url="src/www/testing_changed/locale/tr-TR/help-preferences.properties">
+</file>
+<file id="a3816ce7-f049-4b5c-b379-1f495b3b812f" idref="d0301e67-d308-41ac-a824-565ec57aca6c" name="contact.properties" url="src/www/testing_changed/locale/tr-TR/contact.properties">
+</file>
+<file id="c325e8fe-a00e-40cb-a9e0-8ce869bc8853" idref="d0301e67-d308-41ac-a824-565ec57aca6c" name="_header.properties" url="src/www/testing_changed/locale/tr-TR/_header.properties">
+</file>
+<file id="e548e5f3-81b0-4a9d-ba86-5e273d314047" idref="d0301e67-d308-41ac-a824-565ec57aca6c" name="index.properties" url="src/www/testing_changed/locale/tr-TR/index.properties">
+</file>
+<file id="f76e4ab1-5412-4b1d-af4d-adedacb3d69b" idref="d0301e67-d308-41ac-a824-565ec57aca6c" name="help-sidebar.properties" url="src/www/testing_changed/locale/tr-TR/help-sidebar.properties">
+</file>
 <file id="c9dc03d2-3360-41e0-aca0-9a31c7896c4f" idref="d17ef789-46e8-451b-bd1b-69a811d6f67a" name=".cvsignore" url="src/releases/.cvsignore">
+</file>
+<file id="17b85acb-bc0d-4904-a85a-3278727f86a8" idref="d702793d-4758-42f6-9f19-dd7b9d694881" name="amowebsite.properties" url="src/www/locale/da-DK/amowebsite.properties">
+</file>
+<file id="3df209d4-3eda-42bf-83d8-629a970cb731" idref="dab050c2-4ae2-4f59-a0b9-1350f3bfc6f6" name="amowebsite.properties" url="src/www/locale/zh-TW/amowebsite.properties">
 </file>
 <file id="23a58ed9-8847-40fa-938b-7f4200302626" idref="de3e8590-32b4-4e27-a85c-d65e54e54de4" name="diffPage.dtd" url="src/locale/es-ES/diffPage.dtd">
 </file>
@@ -1277,6 +1921,8 @@
 </file>
 <file id="1934d6f6-a968-4026-aa19-29dfa87de2a7" idref="e010a3e8-52c9-4935-a0c5-074478a68f94" name="index.properties" url="src/www/locale/tr-TR/index.properties">
 </file>
+<file id="1f7481a0-d1ef-41e8-ad1a-6b30eaffb970" idref="e010a3e8-52c9-4935-a0c5-074478a68f94" name="amowebsite.properties" url="src/www/locale/tr-TR/amowebsite.properties">
+</file>
 <file id="266dcc99-da35-4bbf-a33d-61bd264c8bfb" idref="e010a3e8-52c9-4935-a0c5-074478a68f94" name="_help_nav.properties" url="src/www/locale/tr-TR/_help_nav.properties">
 </file>
 <file id="2a4bb498-4890-4223-aa8e-153981b35dfb" idref="e010a3e8-52c9-4935-a0c5-074478a68f94" name="help.properties" url="src/www/locale/tr-TR/help.properties">
@@ -1284,6 +1930,8 @@
 <file id="422abeff-8466-4108-9820-8bfe458eb505" idref="e010a3e8-52c9-4935-a0c5-074478a68f94" name="contact.properties" url="src/www/locale/tr-TR/contact.properties">
 </file>
 <file id="445da368-e04d-4147-9370-d4b565d8de8d" idref="e010a3e8-52c9-4935-a0c5-074478a68f94" name="contents.rdf" url="src/www/locale/tr-TR/contents.rdf">
+</file>
+<file id="8a5d2072-2e81-478f-bf5b-72caa4ec5e79" idref="e010a3e8-52c9-4935-a0c5-074478a68f94" name="help-preferences.properties" url="src/www/locale/tr-TR/help-preferences.properties">
 </file>
 <file id="9e012915-1754-4bc0-b13b-b96bb77df668" idref="e010a3e8-52c9-4935-a0c5-074478a68f94" name="not_found.properties" url="src/www/locale/tr-TR/not_found.properties">
 </file>
@@ -1363,11 +2011,19 @@
 </file>
 <file id="1acb3025-0c94-4d94-96a7-c978bf9c433c" idref="f49fe81a-54cd-4bb8-b1ee-831defc550b3" name="index.properties" url="src/www/testing/locale/zh-CN/index.properties">
 </file>
+<file id="27d030bd-a3e0-4327-ba0a-b98e0ee156c2" idref="f49fe81a-54cd-4bb8-b1ee-831defc550b3" name="contact.properties.orig" url="src/www/testing/locale/zh-CN/contact.properties.orig">
+</file>
 <file id="34c9a022-51d7-4ee8-8654-501ed54a4032" idref="f49fe81a-54cd-4bb8-b1ee-831defc550b3" name="help-preferences.properties" url="src/www/testing/locale/zh-CN/help-preferences.properties">
+</file>
+<file id="529f3f66-55e2-47c3-a64f-9447f6acf098" idref="f49fe81a-54cd-4bb8-b1ee-831defc550b3" name="help-preferences.properties.orig" url="src/www/testing/locale/zh-CN/help-preferences.properties.orig">
 </file>
 <file id="5526ad9b-3ef1-42fa-b7f1-a68bb4390d86" idref="f49fe81a-54cd-4bb8-b1ee-831defc550b3" name="source.properties" url="src/www/testing/locale/zh-CN/source.properties">
 </file>
+<file id="5c46ca46-8fec-44ea-b109-126dab80d7e0" idref="f49fe81a-54cd-4bb8-b1ee-831defc550b3" name="help.properties.orig" url="src/www/testing/locale/zh-CN/help.properties.orig">
+</file>
 <file id="71cb1c72-d85c-4982-ada5-0837a8774123" idref="f49fe81a-54cd-4bb8-b1ee-831defc550b3" name="help.properties" url="src/www/testing/locale/zh-CN/help.properties">
+</file>
+<file id="77967e8f-a158-425b-98e5-6c2025d652d5" idref="f49fe81a-54cd-4bb8-b1ee-831defc550b3" name="amowebsite.properties.orig" url="src/www/testing/locale/zh-CN/amowebsite.properties.orig">
 </file>
 <file id="850846ea-b368-4031-94a1-73ee4a904962" idref="f49fe81a-54cd-4bb8-b1ee-831defc550b3" name="help-faq.properties" url="src/www/testing/locale/zh-CN/help-faq.properties">
 </file>
@@ -1381,16 +2037,56 @@
 </file>
 <file id="b0353254-7983-4cb7-a6c4-279631367e81" idref="f49fe81a-54cd-4bb8-b1ee-831defc550b3" name="contents.rdf" url="src/www/testing/locale/zh-CN/contents.rdf">
 </file>
+<file id="b59a1e8c-e954-484d-bee7-00b39ac10972" idref="f49fe81a-54cd-4bb8-b1ee-831defc550b3" name="bug_reports.properties.orig" url="src/www/testing/locale/zh-CN/bug_reports.properties.orig">
+</file>
 <file id="b6c0e1fc-ebe7-4e72-95f9-1f716ae58e0f" idref="f49fe81a-54cd-4bb8-b1ee-831defc550b3" name="amowebsite.properties" url="src/www/testing/locale/zh-CN/amowebsite.properties">
+</file>
+<file id="cba0177c-2711-44e9-a8a4-ca9ad5cab5f7" idref="f49fe81a-54cd-4bb8-b1ee-831defc550b3" name="help-faq.properties.orig" url="src/www/testing/locale/zh-CN/help-faq.properties.orig">
 </file>
 <file id="e4b75aca-0ecc-4956-a45e-48ce8b968716" idref="f49fe81a-54cd-4bb8-b1ee-831defc550b3" name="not_found.properties" url="src/www/testing/locale/zh-CN/not_found.properties">
 </file>
 <file id="ea802461-7c9c-4e5b-9e19-b4e03a51b0af" idref="f49fe81a-54cd-4bb8-b1ee-831defc550b3" name="_help_nav.properties" url="src/www/testing/locale/zh-CN/_help_nav.properties">
 </file>
+<file id="f14924a2-1e4a-4e3c-b28c-197bfb5c8be7" idref="f49fe81a-54cd-4bb8-b1ee-831defc550b3" name="index.properties.orig" url="src/www/testing/locale/zh-CN/index.properties.orig">
+</file>
 <file id="f8f136b6-09ea-4666-a19e-85774c3b283b" idref="f49fe81a-54cd-4bb8-b1ee-831defc550b3" name="help-properties.properties" url="src/www/testing/locale/zh-CN/help-properties.properties">
 </file>
 <file id="2c62aea0-6bee-4647-864f-9246df803d8e" idref="f50d5119-36fd-43b0-b7e0-d963771cbfc2" name="updatescan_www.jar" url="src/www/testing/chrome/updatescan_www.jar">
 </file>
+<folder id="03bce2df-a159-4e09-92d8-0a0c56478b76" idref="f589dabe-69ae-4fca-be03-35e38cb06bf1" name="ko-KR" url="src/www/testing_changed/locale/ko-KR">
+</folder>
+<folder id="2d654e2e-fa99-4d3c-a3da-af4d51ef5802" idref="f589dabe-69ae-4fca-be03-35e38cb06bf1" name="da-DK" url="src/www/testing_changed/locale/da-DK">
+</folder>
+<folder id="361ce49c-482a-4479-85a5-a26f0e3554d0" idref="f589dabe-69ae-4fca-be03-35e38cb06bf1" name="pl-PL" url="src/www/testing_changed/locale/pl-PL">
+</folder>
+<folder id="454feb96-41e4-47f9-8f53-eee96d6d51c3" idref="f589dabe-69ae-4fca-be03-35e38cb06bf1" name="zh-CN" url="src/www/testing_changed/locale/zh-CN">
+</folder>
+<folder id="4a08a954-f58b-4be6-8c1e-29c74dc0d872" idref="f589dabe-69ae-4fca-be03-35e38cb06bf1" name="fr-FR" url="src/www/testing_changed/locale/fr-FR">
+</folder>
+<folder id="4d43419c-59a0-46ac-8f5e-7e45d0f1386f" idref="f589dabe-69ae-4fca-be03-35e38cb06bf1" name="es-ES" url="src/www/testing_changed/locale/es-ES">
+</folder>
+<folder id="4d4d854c-6b4f-43db-b9c5-10018bd3f9a9" idref="f589dabe-69ae-4fca-be03-35e38cb06bf1" name="en-US" url="src/www/testing_changed/locale/en-US">
+</folder>
+<folder id="63b03f7f-77fb-4b79-b33e-848ece0fbb78" idref="f589dabe-69ae-4fca-be03-35e38cb06bf1" name="cs-CZ" url="src/www/testing_changed/locale/cs-CZ">
+</folder>
+<folder id="6a2a1e64-f48a-44bf-9e6a-1443ffdc4d0e" idref="f589dabe-69ae-4fca-be03-35e38cb06bf1" name="sk-SK" url="src/www/testing_changed/locale/sk-SK">
+</folder>
+<folder id="6c80327b-7c33-42bc-9a27-890fcab1c18c" idref="f589dabe-69ae-4fca-be03-35e38cb06bf1" name="nl-NL" url="src/www/testing_changed/locale/nl-NL">
+</folder>
+<folder id="7fdea446-be3d-412f-a983-a14259ed0b80" idref="f589dabe-69ae-4fca-be03-35e38cb06bf1" name="zh-TW" url="src/www/testing_changed/locale/zh-TW">
+</folder>
+<folder id="8fa8948b-54a2-4cc1-8282-51dfc20bb11d" idref="f589dabe-69ae-4fca-be03-35e38cb06bf1" name="ru-RU" url="src/www/testing_changed/locale/ru-RU">
+</folder>
+<folder id="9f711985-ea91-4dff-80b4-2a9a22332d58" idref="f589dabe-69ae-4fca-be03-35e38cb06bf1" name="it-IT" url="src/www/testing_changed/locale/it-IT">
+</folder>
+<folder id="a22a760f-e169-47bc-aef5-71f7c092a80a" idref="f589dabe-69ae-4fca-be03-35e38cb06bf1" name="hu-HU" url="src/www/testing_changed/locale/hu-HU">
+</folder>
+<folder id="a71c2b34-9e4c-4cf7-b633-695c5b77381a" idref="f589dabe-69ae-4fca-be03-35e38cb06bf1" name="de-DE" url="src/www/testing_changed/locale/de-DE">
+</folder>
+<folder id="aa13ce1b-7119-4606-9894-52594fbce014" idref="f589dabe-69ae-4fca-be03-35e38cb06bf1" name="fi-FI" url="src/www/testing_changed/locale/fi-FI">
+</folder>
+<folder id="d0301e67-d308-41ac-a824-565ec57aca6c" idref="f589dabe-69ae-4fca-be03-35e38cb06bf1" name="tr-TR" url="src/www/testing_changed/locale/tr-TR">
+</folder>
 <folder id="09c32439-f0ae-4ca7-b5f1-7f74f7310e96" idref="f7421a9e-95cf-4ff2-aea7-5ca51f48262e" name="sk-SK" url="src/www/testing/locale/sk-SK">
 </folder>
 <folder id="09e54378-2932-4492-9f19-dd67df293b33" idref="f7421a9e-95cf-4ff2-aea7-5ca51f48262e" name="de-DE" url="src/www/testing/locale/de-DE">
@@ -1398,6 +2094,8 @@
 <folder id="21574451-2e61-42d2-a57b-40170c4e530a" idref="f7421a9e-95cf-4ff2-aea7-5ca51f48262e" name="pt-BR" url="src/www/testing/locale/pt-BR">
 </folder>
 <folder id="30553ea4-d156-409f-b74c-cb8a22d64597" idref="f7421a9e-95cf-4ff2-aea7-5ca51f48262e" name="cs-CZ" url="src/www/testing/locale/cs-CZ">
+</folder>
+<folder id="3ece6781-7ab3-4296-9413-67f8d6e9cfb6" idref="f7421a9e-95cf-4ff2-aea7-5ca51f48262e" name="fi-FI" url="src/www/testing/locale/fi-FI">
 </folder>
 <folder id="571cf027-206d-4f3d-9cb9-d43c714a881c" idref="f7421a9e-95cf-4ff2-aea7-5ca51f48262e" name="ko-KR" url="src/www/testing/locale/ko-KR">
 </folder>

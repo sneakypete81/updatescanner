@@ -55,14 +55,17 @@ load : function()
         "&url=" + escape(url) +
         "&view=";
 
-        var content;
+        var content=""
+        var newContent=""
+        var oldContent=""
 
-        var filebase = USc_places.getSignature(id);
-        var oldContent  = USc_file.USreadFile(filebase+".old");
-        var newContent  = USc_file.USreadFile(filebase+".new");
-        oldContent = this._stripScript(oldContent);
-        newContent = this._stripScript(newContent);
-
+        var filebase = USc_places.queryAnno(id, USc_places.ANNO_SIGNATURE, "");
+        if (filebase != "") {
+            oldContent  = USc_file.USreadFile(filebase+".old");
+            newContent  = USc_file.USreadFile(filebase+".new");
+            oldContent = this._stripScript(oldContent);
+            newContent = this._stripScript(newContent);
+        }
     	if (newContent=="") {
 	    view="notChecked";
         }
