@@ -1,6 +1,7 @@
 Bugs:
-* Copy/pasted bookmarks appear as blank diffpages
 * Sometimes right-clicking does funny things
+* Moving a changed item around doesn't update folder status annotations
+
 
 Delete button!
 

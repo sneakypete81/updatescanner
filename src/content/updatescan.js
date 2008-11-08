@@ -48,6 +48,8 @@ var USc_annotationObserver = {
         break;
       case USc_places.ANNO_STATUS:
         USc_updatescan.tree.getResultView().invalidateAll();
+        // Start an upwards cascade of annotation updates (as far as necessary)
+        USc_places.updateParentStatus(aItemId);
         break;
     }
   },
@@ -383,6 +385,10 @@ openPreferences : function()
 _diffItem : function(id)
 {
     var me = USc_updatescan;
+
+    if (USc_places.isFolder(id))
+      return;
+    
     var now = new Date();
     if (USc_places.queryAnno(id, USc_places.ANNO_STATUS, "") == USc_places.STATUS_UPDATE)
     {
@@ -760,12 +766,10 @@ _extendPlacesTreeView : function() {
             } catch (e) { }
           }
         } else if (nodeType == Ci.nsINavHistoryResultNode.RESULT_TYPE_FOLDER) {
-          if (PlacesUtils.nodeIsLivemarkContainer(node)) {
-            try {
-              var state = PlacesUtils.annotations.getItemAnnotation(itemId, USc_places.ANNO_STATUS);
-              properties.push(this._getAtomFor("usc_state_" + state));
-            } catch (e) { }
-          }
+          try {
+            var state = PlacesUtils.annotations.getItemAnnotation(itemId, USc_places.ANNO_STATUS);
+            properties.push(this._getAtomFor("usc_state_" + state));
+          } catch (e) { }
         }
         for (var i = 0; i < properties.length; i++) {
           aProperties.AppendElement(properties[i]);

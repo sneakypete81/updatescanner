@@ -38,54 +38,63 @@
 
 if (typeof(USc_statusbar_exists) != 'boolean') {
 var USc_statusbar_exists = true;
-var USc_statusbar = {    
 
-refresh : null,
+var USc_statusbarBookmarkObserver = {
+  onBeginUpdateBatch: function() {},
+  onEndUpdateBatch: function() {},
+  onItemAdded: function(aItemId, aFolder, aIndex) {},
+  onItemVisited: function(aBookmarkId, aVisitID, time) {},
+ 
+  onItemChanged: function(aBookmarkId, aProperty, aIsAnnotationProperty, aValue) {
+    // Update statusbar if status annotation is modified
+    if (aIsAnnotationProperty && aProperty == USc_places.ANNO_STATUS)
+        USc_statusbar.refresh();
+    
+  },
+
+  onItemRemoved: function(aItemId, aFolder, aIndex) {
+    // Update statusbar if a bookmark gets deleted
+    USc_statusbar.refresh();
+  },
+ 
+  onItemMoved: function(aItemId, aOldParent, aOldIndex, aNewParent, aNewIndex) {
+    // Update statusbar if a bookmark gets moved
+    USc_statusbar.refresh();
+  },
+
+  QueryInterface: function(iid) {
+    if (iid.equals(Ci.nsINavBookmarkObserver) || iid.equals(Ci.nsISupports)) {
+      return this;
+    }
+    throw Cr.NS_ERROR_NO_INTERFACE;
+  }
+};
+
+var USc_statusbar = {    
 
 load : function()
 {
     var me = USc_statusbar;
-    var rdffile;
-    var backupfile;
-    var corruptfile;
+    var bmsvc = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"]
+                          .getService(Components.interfaces.nsINavBookmarksService);
 
-    rdffile = USc_rdf.getPath();
-
-    backupfile = rdffile.parent;
-    backupfile.append("updatescan_backup.rdf");
-    corruptfile = rdffile.parent;
-    corruptfile.append("updatescan_corrupt.rdf");
-  
-    if (!USc_rdf.check(rdffile.path)) {
-        // RDF is corrupt - restore from last backup
-        USc_file.rmFile(corruptfile.path);
-        USc_file.cpFile(rdffile.path, corruptfile.path);
-        USc_file.rmFile(rdffile.path);
-        USc_file.cpFile(backupfile.path, rdffile.path);
-    }
-
-    USc_rdf.init(USc_rdf.getURI(rdffile));
-
-    // Backup the rdf file in case of corruption
-    USc_file.rmFile(backupfile.path);
-    USc_file.cpFile(rdffile.path, backupfile.path);
-
-    // Check for refresh requests
-    me.refresh = new USc_refresher();
-    me.refresh.register("refreshTreeRequest", me.refreshStatusbar);
+    // Update statusbar when bookmarks change
+    bmsvc.addObserver(USc_statusbarBookmarkObserver, false);
 
     // Start autoscanner
-    USc_autoscan.start(me.autoscanFinished);
+//    USc_autoscan.start(me.autoscanFinished);
 
     // Update the status bar icon
-    me.refreshStatusbar();
+    me.refresh();
 },
 
 unload : function()
 {
     var me = USc_statusbar;
+    var bmsvc = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"]
+                          .getService(Components.interfaces.nsINavBookmarksService);
     try { 
-        me.refresh.unregister(); 
+        bmsvc.removeObserver(USc_statusbarBookmarkObserver);
     } catch(e) {}
 },
 
@@ -108,7 +117,7 @@ autoscanFinished : function(numChanges)
 
     var message;
 
-    me.refresh.request();
+//    me.refresh.request();
     if (numChanges && prefBranch.getBoolPref("notifications.enable")) {
         if (numChanges == 1) {
             message = alertOneChange;
@@ -123,24 +132,15 @@ autoscanFinished : function(numChanges)
     }
 },
 
-// Called when a refresh is requested by the autoscanner or the sidebar
-refreshStatusbar : function()
+refresh : function()
 {
     var statusbar = document.getElementById("UpdateScanStatusbar");
-    var pages;
-    var page;
-    var changed = false;
 
-    pages = USc_rdf.getRoot().getChildren();
-    while (pages.hasMoreElements()) {
-        page = pages.getNext().getValue();
-        if (USc_rdf.queryItem(page, "changed", "0") == "1") {
-            changed=true;
-            break;
-        }
-    }
-
-    if (changed) {
+    // Check the status annotation on the root folder
+    var changed = USc_places.queryAnno(USc_places.getRootFolderId(),
+                                       USc_places.ANNO_STATUS,
+                                       USc_places.STATUS_UNKNOWN);
+    if (changed == USc_places.STATUS_UPDATE) {
         statusbar.setAttribute("status", "1");
     } else {
        statusbar.setAttribute("status", "0");
@@ -151,4 +151,3 @@ refreshStatusbar : function()
 
 window.addEventListener("load", USc_statusbar.load, false);
 window.addEventListener("unload", USc_statusbar.unload, false);
-

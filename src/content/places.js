@@ -150,6 +150,10 @@ var USc_places = {
 
   modifyAnno : function(id, anno, value)
   {
+    // Don't update if it's already set to desired value
+    if (this.queryAnno(id, anno, undefined) == value)
+      return;
+    
     var annotationService = Components.classes["@mozilla.org/browser/annotation-service;1"].getService(Components.interfaces.nsIAnnotationService);
     annotationService.setItemAnnotation(id, anno, value, 0, annotationService.EXPIRE_NEVER);
   },
@@ -229,6 +233,45 @@ var USc_places = {
     return hexHash;
   },
 
+  // Update the status annotation of the item's parent
+  updateParentStatus : function (id)
+  {
+    // Don't do anything if we're at the root folder
+    if (id == this.getRootFolderId())
+      return   
+    folderId = this.getParentFolder(id);
+
+    var historyService = Components.classes["@mozilla.org/browser/nav-history-service;1"]
+                                   .getService(Components.interfaces.nsINavHistoryService);
+    var options = historyService.getNewQueryOptions();
+    var query = historyService.getNewQuery();
+
+    var bookmarksService = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"]
+                                     .getService(Components.interfaces.nsINavBookmarksService);
+
+    query.setFolders([folderId], 1);
+    var result = historyService.executeQuery(query, options);
+    var rootNode = result.root;
+
+    // iterate over the immediate children of this folder and dump to console
+    rootNode.containerOpen = true;
+    var childrenUpdated = false;
+    
+    for (var i = 0; i < rootNode.childCount; i ++) {
+      var node = rootNode.getChild(i);
+      var status = this.queryAnno(node.itemId, this.ANNO_STATUS, this.STATUS_UNKNOWN);
+      if (status == this.STATUS_UPDATE) {
+        childrenUpdated = true;
+        break;
+      }
+    }
+    rootNode.containerOpen = false;    
+    if (childrenUpdated) 
+      this.modifyAnno(folderId, this.ANNO_STATUS, this.STATUS_UPDATE);
+    else
+      this.modifyAnno(folderId, this.ANNO_STATUS, this.STATUS_NO_UPDATE);
+  },
+  
   // return the two-digit hexadecimal code for a byte
   toHexString : function(charCode)
   {
