@@ -44,6 +44,7 @@ var USc_places = {
   ANNO_IGNORE_NUMBERS : "updatescan/ignore_numbers", // boolean
   ANNO_LAST_SCAN : "updatescan/last_scan", // string
   ANNO_OLD_LAST_SCAN : "updatescan/old_last_scan", // string
+  ANNO_LAST_AUTOSCAN : "updatescan/last_autoscan", // string
   ANNO_STATUS_TEXT : "updatescan/status_text", // string
   ANNO_SCAN_RATE_MINS : "updatescan/scan_rate_mins", //string
   ANNO_HEADER_TEXT : "updatescan/header_text", // string
@@ -133,7 +134,7 @@ var USc_places = {
   {
     var ioService = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService);
     var bookmarksService = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Components.interfaces.nsINavBookmarksService);
-    uri = ioService.newURI(url, null, null);
+    var uri = ioService.newURI(url, null, null);
     bookmarksService.changeBookmarkURI(id, uri);
   },
 

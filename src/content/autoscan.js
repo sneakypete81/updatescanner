@@ -65,60 +65,21 @@ stop : function()
 _check : function()
 {
     var me = USc_autoscan;
-    var id;
-    var pages;
-    var lastAutoScan;
-    var scanRate;
-    var now;
-    var doScan = false;
-    var filebase;
-    var ignoreNumbers;
-
-    pages = USc_rdf.getRoot().getChildren();
 
     me.scan = new USc_scanner();
-    now = new Date();
+    var numItems = me.scan.addItems(USc_places.getRootFolderId(), true);
+    
+//    var now = new Date();
+//    myDump(now.toString()+":"+numItems+" items to scan\n");
+    
+    if (numItems == 0)
+        me.callback(0);
 
-    while (pages.hasMoreElements()) {
-        id = pages.getNext().getValue();
-        scanRate = USc_rdf.queryItem(id, "scanratemins", "0");
-        if (scanRate != "0") {
-            lastAutoScan = USc_rdf.queryItem(id, "lastautoscan", "");
-            if (lastAutoScan == "") {
-                lastAutoScan = "5/11/1978";
-            }
-            lastAutoScan = new Date(lastAutoScan);
-            if (now - lastAutoScan > scanRate*1000*60) {
-                USc_rdf.modifyItem(id, "lastautoscan", now.toString());
-                USc_rdf.save();
-                doScan = true;
-                filebase=USc_file.escapeFilename(id)
-//                NOTE: ignoreNumber is now stored as boolean
-                if (USc_rdf.queryItem(id, "ignoreNumbers", "false") == "true") {
-                    ignoreNumbers = true;
-                } else {
-                    ignoreNumbers = false;
-                }
-
-                me.scan.addURL(id, USc_rdf.queryItem(id, "title", "No Title"), 
-                            USc_rdf.queryItem(id, "url", ""), 
-                            USc_file.USreadFile(filebase+".new"),
-                            USc_rdf.queryItem(id, "threshold", 100),                                
-                            ignoreNumbers,
-                            USc_rdf.queryItem(id, "encoding", "auto"));
-            }
-        }
-    }
-
-    if (doScan) {
-        me.numChanges = 0;
-        me.scan.start(me._scanChanged, 
-               me._scanFinished, 
-               me._scanProgress,
-               me._encodingChanged);
-    } else {
-        me.callback(0); // No changes
-    }
+    me.numChanges = 0;
+    me.scan.start(me._scanChanged, 
+                  me._scanFinished, 
+                  me._scanProgress,
+                  me._encodingChanged);
 },
 
 _scanChanged : function(id, new_content, status, statusText, headerText)
@@ -132,7 +93,7 @@ _scanChanged : function(id, new_content, status, statusText, headerText)
 _encodingChanged : function(id, encoding)
 // Called when encoding is detected for a page marked for auto-detect encoding
 {
-    USc_rdf.modifyItem(id, "encoding", encoding);
+    USc_places.modifyAnno(id, USc_places.ANNO_ENCODING, encoding);
 },
 
 

@@ -66,12 +66,12 @@ function treeClick(aEvent)
       if (storageType.value == annotationService.TYPE_BINARY) {
         var data = {}, length = {}, mimeType = {};
         annotationService.geItemAnnotationBinary(id, name, data, length, mimeType);
-        val = data.value;
+        var val = data.value;
       } else {
-        val = annotationService.getItemAnnotation(id, name);
+        var val = annotationService.getItemAnnotation(id, name);
       }
       
-      type = typeof val
+      var type = typeof val
       string += name+"("+type+")="+val+"\n\n";
     }
     

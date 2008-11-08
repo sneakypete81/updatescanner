@@ -108,7 +108,7 @@ function USc_scanner()
         }
     }
 
-    this.addItems = function(id)
+    this.addItems = function(id, autoScan)
     {
         var hist = Cc["@mozilla.org/browser/nav-history-service;1"]
                    .getService(Ci.nsINavHistoryService);
@@ -119,12 +119,12 @@ function USc_scanner()
         var result = hist.executeQuery(query, options);
 
         // select feeds to be checked, exclude separators and updated feeds
-        me.queueItemRecursive(result.root);
+        me.queueItemRecursive(result.root, autoScan);
 
         return itemlist.length;
     }
 
-    this.queueItemRecursive = function(aResultNode)
+    this.queueItemRecursive = function(aResultNode, autoScan)
     {
         var bmsvc = Cc["@mozilla.org/browser/nav-bookmarks-service;1"]
                     .getService(Ci.nsINavBookmarksService);
@@ -136,6 +136,25 @@ function USc_scanner()
 
         if (itemType == bmsvc.TYPE_BOOKMARK)
         {
+            // If we're autoscanning, only queue the item if it needs scanning
+            if (autoScan) {
+                var scanRate = USc_places.queryAnno(itemId,
+                                                    USc_places.ANNO_SCAN_RATE_MINS,
+                                                    USc_defaults.DEF_SCAN_RATE_MINS);
+                if (scanRate == 0)
+                    return;
+
+                var lastAutoScan = USc_places.queryAnno(itemId,
+                                                        USc_places.ANNO_LAST_AUTOSCAN,
+                                                        USc_defaults.DEF_LAST_AUTOSCAN);
+                var now = new Date();
+                lastAutoScan = new Date(lastAutoScan);
+                if (now - lastAutoScan < scanRate*1000*60)
+                    return;
+                USc_places.modifyAnno(itemId, USc_places.ANNO_LAST_AUTOSCAN,
+                                      now.toString());
+            }
+
             var filebase = USc_places.getSignature(itemId);
             me.addURL(itemId,
                       USc_places.getTitle(itemId), 
@@ -149,7 +168,7 @@ function USc_scanner()
             aResultNode.QueryInterface(Components.interfaces.nsINavHistoryContainerResultNode);
             aResultNode.containerOpen = true;
             for (var i = 0; i < aResultNode.childCount; i ++) {
-                me.queueItemRecursive(aResultNode.getChild(i));
+                me.queueItemRecursive(aResultNode.getChild(i), autoScan);
             }
             aResultNode.containerOpen = false;
         }    

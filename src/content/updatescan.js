@@ -43,7 +43,8 @@ var USc_defaults = {
   DEF_IGNORE_NUMBERS : true,
   DEF_ENCODING : "auto",
   DEF_LAST_SCAN : "5 November 1978",
-  DEF_OLD_LAST_SCAN : "5 November 1978"
+  DEF_OLD_LAST_SCAN : "5 November 1978",
+  DEF_LAST_AUTOSCAN : "5 November 1978"
 };
 
 var USc_updatescan = {    
@@ -138,7 +139,7 @@ scanButtonClick : function()
     me.scan = new USc_scanner();
     me.numChanges = 0;
 
-    if (me.scan.addItems(USc_places.getRootFolderId()) > 0)
+    if (me.scan.addItems(USc_places.getRootFolderId(), false) > 0)
     {
       me.scan.start(me._scanChangedCallback,
                     me._scanFinishedCallback,

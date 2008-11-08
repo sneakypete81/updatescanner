@@ -100,7 +100,7 @@ load : function()
     bmsvc.addObserver(USc_statusbarBookmarkObserver, false);
 
     // Start autoscanner
-//    USc_autoscan.start(me.autoscanFinished);
+    USc_autoscan.start(me.autoscanFinished);
 
     // Update the status bar icon
     me.refresh();
@@ -138,7 +138,6 @@ autoscanFinished : function(numChanges)
 
     var message;
 
-//    me.refresh.request();
     if (numChanges && prefBranch.getBoolPref("notifications.enable")) {
         if (numChanges == 1) {
             message = alertOneChange;
