@@ -193,6 +193,7 @@ scanSelectedPage : function()
     filebase=USc_file.escapeFilename(id);
     encoding = USc_rdf.queryItem(id, "encoding", "UTF-8");
     if (USc_rdf.queryItem(id, "ignoreNumbers", "false") == "true") {
+    NOTE: ignorenumber is now always stored as a boolean
 	ignoreNumbers = true;
     } else {
 	ignoreNumbers = false;
@@ -319,7 +320,7 @@ openNewDialog : function(title, url, parentId, index)
         USc_places.modifyAnno(id, USc_places.ANNO_IGNORE_NUMBERS, args.ignoreNumbers);
 
         var filebase=USc_places.getSignature(id);
-        USc_file.USwriteFile(filebase+".new", "**NEW**");
+        USc_file.USwriteFile(filebase+".new", "");
 
         USc_places.modifyAnno(id, USc_places.ANNO_LAST_SCAN, "");
         USc_places.modifyAnno(id, USc_places.ANNO_STATUS, USc_places.STATUS_NO_UPDATE);
@@ -361,8 +362,10 @@ openEditDialog : function()
         USc_places.modifyAnno(id, USc_places.ANNO_IGNORE_NUMBERS, args.ignoreNumbers);
 
         if (oldurl != args.url) {   // URL changed - reset all values
+          // Create a new signature
+          USc_places.modifyAnno(id, USc_places.ANNO_SIGNATURE, "")
           var filebase=USc_places.getSignature(id);
-          USc_file.USwriteFile(filebase+".new", "**NEW**");
+          USc_file.USwriteFile(filebase+".new", "");
 
           USc_places.modifyAnno(id, USc_places.ANNO_LAST_SCAN, "");
           USc_places.modifyAnno(id, USc_places.ANNO_STATUS, USc_places.STATUS_NO_UPDATE);
@@ -785,12 +788,32 @@ _extendPlacesTreeView : function() {
          return false;
        }
     }
-/* Uncomment the following to use generic page icons instead of favicons
-     PlacesTreeView.prototype.getImageSrc =
+
+    // Override the getImageSrc function, to insert the updatescanner icon
+    // if the page is updated
+    PlacesTreeView.prototype.getImageSrcBase = PlacesTreeView.prototype.getImageSrc;
+    PlacesTreeView.prototype.getImageSrc =
     function ext_getImageSrc(aRow, aColumn) {
-      return "";
+      this._ensureValidRow(aRow);
+
+      // only the title column has an image
+      if (this._getColumnType(aColumn) != this.COLUMN_TYPE_TITLE)
+        return "";
+
+      var node = this._visibleElements[aRow].node;
+      var status= USc_places.queryAnno(node.itemId, USc_places.ANNO_STATUS,
+                                       USc_places.STATUS_UNKNOWN)
+
+      if (status == USc_places.STATUS_UPDATE) {
+          myDump("update\n")
+          return ""; // Let updatscan.css choose the icon
+      }
+      
+          myDump("noupdate\n")
+      // Use favicon if possible
+      return this.getImageSrcBase(aRow, aColumn);
     }  
-*/}
+}
 
 
 }

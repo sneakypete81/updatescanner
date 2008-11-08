@@ -80,7 +80,7 @@ check : function()
 upgrade_3_0 : function()
 {
     var me = USc_upgrade;
-
+    // NOTE: IgnoreNumbers has changed from a string to a boolean!!
     me.createRootBookmarks();
     
     return true;
@@ -104,7 +104,7 @@ createRootBookmarks : function ()
 
     anno.setItemAnnotation(bookmarkId, USc_places.ANNO_STATUS, USc_places.STATUS_UPDATE, 0, anno.EXPIRE_NEVER);
         var filebase = USc_file.escapeFilename(updatescanURL);
-//        USc_file.USwriteFile(filebase+".new", "**NEW**");
+//        USc_file.USwriteFile(filebase+".new", "");
 /*
     USc_rdf.modifyItem(id, "lastscan", "");  // lastscan not defined
     USc_rdf.modifyItem(id, "changed", "0");  // not changed 
