@@ -343,7 +343,6 @@ function USc_scanner()
     this._checkSame = function(content1, content2, maxthreshold)
     {
         var threshold;
-        
         if (maxthreshold == 0) return (content1 == content2);
     
         // Slowly increase the threshold until it reaches the maximum
@@ -430,7 +429,6 @@ function USc_processScanChange(id, newContent, status, statusText, headerText)
                 getBranch("extensions.updatescan.");
 
     var logHeaders = prefs.getBoolPref("logHeaders");
-
     filebase=USc_places.getSignature(id);
     if (status == kUSc_STATUS_CHANGE) {
         retVal = true;

@@ -93,6 +93,7 @@ _check : function()
                 USc_rdf.save();
                 doScan = true;
                 filebase=USc_file.escapeFilename(id)
+//                NOTE: ignoreNumber is now stored as boolean
                 if (USc_rdf.queryItem(id, "ignoreNumbers", "false") == "true") {
                     ignoreNumbers = true;
                 } else {

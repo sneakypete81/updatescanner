@@ -91,13 +91,8 @@ function initDialog()
 	}
     }
 
-    if (args.ignoreNumbers == "true") {
-        document.getElementById("ignoreNumbers").checked = true;
-        document.getElementById("ignoreNumbers2").checked = true;
-    } else {
-        document.getElementById("ignoreNumbers").checked = false;
-        document.getElementById("ignoreNumbers2").checked = false;
-    }
+    document.getElementById("ignoreNumbers").checked = args.ignoreNumbers;
+    document.getElementById("ignoreNumbers2").checked = args.ignoreNumbers;
 
     loadAvailableCharSets();
     charEncodingChanged()
@@ -157,9 +152,9 @@ function Ok()
 	args.threshold = sliderThresholdDecode(sliderThresholdGetPos());
 	args.scanRateMins = sliderAutoscanDecode(sliderAutoscanGetPos());
         if (document.getElementById("ignoreNumbers").checked) {
-	    ignoreNumbers = true;
+	    args.ignoreNumbers = true;
 	} else {
-	    ignoreNumbers = false;
+	    args.ignoreNumbers = false;
 	}
     } else {
 	args.threshold = document.getElementById("textThreshold").value;
@@ -178,9 +173,9 @@ function Ok()
 	    }
 	}
         if (document.getElementById("ignoreNumbers2").checked) {
-	    ignoreNumbers = true;
+	    args.ignoreNumbers = true;
 	} else {
-	    ignoreNumbers = false;
+	    args.ignoreNumbers = false;
 	}
     }
 
@@ -189,11 +184,6 @@ function Ok()
         if (!confirm(fiveMinuteAlert)) {
             return false;
         }
-    }
-    if (ignoreNumbers) {
-        args.ignoreNumbers = "true";
-    } else {
-        args.ignoreNumbers = "false";
     }
     if (document.getElementById("autoCharEncoding").selectedIndex == 0) {
         args.encoding = "auto";
