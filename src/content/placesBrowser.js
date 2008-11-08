@@ -71,7 +71,8 @@ function treeClick(aEvent)
         val = annotationService.getItemAnnotation(id, name);
       }
       
-      string += name+"="+val+"\n\n";
+      type = typeof val
+      string += name+"("+type+")="+val+"\n\n";
     }
     
     text.value = string;
