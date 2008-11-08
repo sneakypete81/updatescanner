@@ -44,22 +44,17 @@ var USc_statusbarBookmarkObserver = {
   onEndUpdateBatch: function() {},
   onItemAdded: function(aItemId, aFolder, aIndex) {},
   onItemVisited: function(aBookmarkId, aVisitID, time) {},
- 
-  onItemChanged: function(aBookmarkId, aProperty, aIsAnnotationProperty, aValue) {
-    // Update statusbar if status annotation is modified
-    if (aIsAnnotationProperty && aProperty == USc_places.ANNO_STATUS)
-        USc_statusbar.refresh();
-    
-  },
+  onItemChanged: function(aBookmarkId, aProperty, aIsAnnotationProperty, aValue) {},
 
   onItemRemoved: function(aItemId, aFolder, aIndex) {
-    // Update statusbar if a bookmark gets deleted
-    USc_statusbar.refresh();
+    // Update parent annotations if a bookmark gets deleted
+    USc_places.updateFolderStatus(aFolder);
   },
  
   onItemMoved: function(aItemId, aOldParent, aOldIndex, aNewParent, aNewIndex) {
-    // Update statusbar if a bookmark gets moved
-    USc_statusbar.refresh();
+    // Update parent annotations if a bookmark gets moved
+    USc_places.updateFolderStatus(aOldParent);
+    USc_places.updateFolderStatus(aNewParent);
   },
 
   QueryInterface: function(iid) {
@@ -70,6 +65,25 @@ var USc_statusbarBookmarkObserver = {
   }
 };
 
+var USc_statusbarAnnotationObserver = {
+  onPageAnnotationSet : function(aURI, aName) { },
+  onPageAnnotationRemoved : function(aURI, aName) { },
+  onItemAnnotationRemoved : function(aItemId, aName) { },
+  
+  onItemAnnotationSet : function(aItemId, aName) {
+    if (aName == USc_places.ANNO_STATUS)
+    {
+      // Stop the cascade if we've reached the root
+      if (aItemId == USc_places.getRootFolderId()) {
+        USc_statusbar.refresh();
+        return;
+      }
+      // Start an upwards cascade of annotation updates (as far as necessary)
+      USc_places.updateFolderStatus(USc_places.getParentFolder(aItemId));
+    }
+  }  
+};
+
 var USc_statusbar = {    
 
 load : function()
@@ -78,7 +92,11 @@ load : function()
     var bmsvc = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"]
                           .getService(Components.interfaces.nsINavBookmarksService);
 
-    // Update statusbar when bookmarks change
+
+    // Update parent folder annotations when an annotation is updated
+    PlacesUtils.annotations.addObserver(USc_statusbarAnnotationObserver);
+
+    // Update parent folder annotations when bookmarks are moved/deleted
     bmsvc.addObserver(USc_statusbarBookmarkObserver, false);
 
     // Start autoscanner
@@ -93,6 +111,9 @@ unload : function()
     var me = USc_statusbar;
     var bmsvc = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"]
                           .getService(Components.interfaces.nsINavBookmarksService);
+    try { 
+      PlacesUtils.annotations.removeObserver(USc_statusbarAnnotationObserver);
+    } catch(e) {}
     try { 
         bmsvc.removeObserver(USc_statusbarBookmarkObserver);
     } catch(e) {}

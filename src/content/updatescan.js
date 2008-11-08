@@ -37,38 +37,14 @@
 if (typeof(USc_updatescan_exists) != 'boolean') {
 var USc_updatescan_exists = true;
 
-var USc_annotationObserver = {
-  
-  onPageAnnotationSet : function(aURI, aName) { },
-  
-  onItemAnnotationSet : function(aItemId, aName) {
-    switch (aName) {
-      case USc_places.ANNO_ROOT:
-        USc_updatescan.tree.place = "place:queryType=1&folder=" + aItemId;
-        break;
-      case USc_places.ANNO_STATUS:
-        USc_updatescan.tree.getResultView().invalidateAll();
-        // Start an upwards cascade of annotation updates (as far as necessary)
-        USc_places.updateParentStatus(aItemId);
-        break;
-    }
-  },
-  
-  onPageAnnotationRemoved : function(aURI, aName) { },
-  
-  onItemAnnotationRemoved : function(aItemId, aName) { }
-  
-}
-
 var USc_defaults = {
   DEF_THRESHOLD : 100,
   DEF_SCAN_RATE_MINS : 1440, // Scan once per day by default
   DEF_IGNORE_NUMBERS : true,
   DEF_ENCODING : "auto",
   DEF_LAST_SCAN : "5 November 1978",
-  DEF_OLD_LAST_SCAN : "5 November 1978",
-}
-
+  DEF_OLD_LAST_SCAN : "5 November 1978"
+};
 
 var USc_updatescan = {    
 
@@ -93,7 +69,7 @@ load : function()
     var rootFolderId = USc_places.getRootFolderId();
     me.tree.place = "place:queryType=1&folder=" + rootFolderId;
     
-    PlacesUtils.annotations.addObserver(USc_annotationObserver);
+    PlacesUtils.annotations.addObserver(USc_sidebarAnnotationObserver);
     
     // Check for toolbar button changes
     me._branch = Components.classes["@mozilla.org/preferences-service;1"]
@@ -107,12 +83,13 @@ load : function()
 unload : function()
 {
     var me = USc_updatescan;
-    
-    PlacesUtils.annotations.removeObserver(USc_annotationObserver);
-    
-    if (me._branch) {
-	me._branch.removeObserver("", this);
-    }
+  
+    try { 
+      PlacesUtils.annotations.removeObserver(USc_sidebarAnnotationObserver);
+    } catch(e) {}
+    try {
+      me._branch.removeObserver("", this);
+    } catch(e) {}
 },
 
 observe: function(aSubject, aTopic, aData) // Observe toolbar button preference changes
@@ -426,8 +403,10 @@ _diffItemThisWindow : function(id)
 {
     var me = USc_updatescan;
     var diffURL = me._diffItem(id)
-    USc_topWin.open(diffURL);
-    me.tree.focus();
+    if (diffURL) {
+      USc_topWin.open(diffURL);
+      me.tree.focus();
+    }
 },
 
 diffSelectedItemNewTab : function()
@@ -451,8 +430,10 @@ _diffItemNewTab : function(id)
     .getInterface(Components.interfaces.nsIDOMWindow);
 
     var diffURL = me._diffItem(id);
-    mainWindow.getBrowser().selectedTab = mainWindow.getBrowser().addTab(diffURL);
-    me.tree.focus();
+    if (diffURL) {
+      mainWindow.getBrowser().selectedTab = mainWindow.getBrowser().addTab(diffURL);
+      me.tree.focus();
+    }
 },
 
 _dateDiffString : function(oldDate, newDate)
@@ -816,7 +797,28 @@ _extendPlacesTreeView : function() {
       return this.getImageSrcBase(aRow, aColumn);
     }  
 }
+};
+
+var USc_sidebarAnnotationObserver = {
+  
+  onPageAnnotationSet : function(aURI, aName) { },
+  
+  onItemAnnotationSet : function(aItemId, aName) {
+    switch (aName) {
+      case USc_places.ANNO_ROOT:
+        USc_updatescan.tree.place = "place:queryType=1&folder=" + aItemId;
+        break;
+      case USc_places.ANNO_STATUS:
+        USc_updatescan.tree.getResultView().invalidateAll();
+        break;
+    }
+  },
+  
+  onPageAnnotationRemoved : function(aURI, aName) { },
+  
+  onItemAnnotationRemoved : function(aItemId, aName) { }
+  
+};
 
 
-}
 }

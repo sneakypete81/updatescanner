@@ -234,13 +234,8 @@ var USc_places = {
   },
 
   // Update the status annotation of the item's parent
-  updateParentStatus : function (id)
+  updateFolderStatus : function (folderId)
   {
-    // Don't do anything if we're at the root folder
-    if (id == this.getRootFolderId())
-      return   
-    folderId = this.getParentFolder(id);
-
     var historyService = Components.classes["@mozilla.org/browser/nav-history-service;1"]
                                    .getService(Components.interfaces.nsINavHistoryService);
     var options = historyService.getNewQueryOptions();
