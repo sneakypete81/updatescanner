@@ -266,11 +266,7 @@ _WDiffText : function(text, newStart, newEnd, oldStart, oldEnd, recursionLevel)
 {
     var me = USc_diffWiki;
 
-    symbol = new Object();
-    symbol.newCtr = [];
-    symbol.oldCtr = [];
-    symbol.toNew = [];
-    symbol.toOld = [];
+    var symbol = new Object();
 
 // set defaults
     newStart = newStart || 0;
@@ -481,8 +477,8 @@ _WDiffToHtml : function(text, block)
     var outText = text.message;
 
     var blockNumber = 0;
-    i = 0;
-    j = 0;
+    var i = 0;
+    var j = 0;
     do {
         var movedIndex = [];
         var movedBlock = [];
@@ -586,7 +582,7 @@ _WDiffToHtml : function(text, block)
     }
 
 // collect consecutive identical text
-        identCount = 0;
+    var identCount = 0;
     while ( (i < text.newWords.length) && (j < text.oldWords.length) ) {
         if ( (text.newToOld[i] == null) || (text.oldToNew[j] == null) ) {
             break;
@@ -656,14 +652,14 @@ _WDiffToHtml : function(text, block)
     if (insText != '') {
 
 //        myDump("before:"+insText);
-        tagSplits = insText.split("<");
+        var tagSplits = insText.split("<");
         // Rebuild insText, stopping highlighting before tags, and restarting afterwards.
         insText = "";
         if (me._trim(tagSplits[0]) != "")
         insText += me.wDiffHtmlInsertStart+tagSplits[0]+me.wDiffHtmlInsertEnd;
-        for (splitIndex=1; splitIndex<tagSplits.length; splitIndex++) {
-        tagSplit = tagSplits[splitIndex];
-        pos = tagSplit.lastIndexOf(">");
+        for (var splitIndex=1; splitIndex<tagSplits.length; splitIndex++) {
+        var tagSplit = tagSplits[splitIndex];
+        var pos = tagSplit.lastIndexOf(">");
         if (pos < 0)
             pos = tagSplit.length;
         insText += "<"+tagSplit.substring(0, pos+1);
@@ -1133,11 +1129,12 @@ _WDiffShortenOutput : function(diffText)
 
 _escapeScriptSpaces : function(content)
 {
-    result = ""
-        lastmatch = 0;
-    re=/<style([\r\n]|.)*?>([\r\n]|.)*?<\/style>/gi;
+    var result = ""
+    var lastmatch = 0;
+    var re=/<style([\r\n]|.)*?>([\r\n]|.)*?<\/style>/gi;
+    var match;
     while ((match = re.exec(content)) != null) {
-        escmatch = match[0].replace(/\s/g,"___UPDATESCAN___SPACE___");
+        var escmatch = match[0].replace(/\s/g,"___UPDATESCAN___SPACE___");
         result += content.substring(lastmatch, match.index) + escmatch;
                 lastmatch = re.lastIndex;
     }
@@ -1147,13 +1144,14 @@ _escapeScriptSpaces : function(content)
 
 _escapeTagSpaces : function(content)
 {
-        result = "";
-        lastmatch = 0;
-    re=/<[^<]+>/g;
+    var result = "";
+    var lastmatch = 0;
+    var re=/<[^<]+>/g;
+    var match;
     while ((match = re.exec(content)) != null) {
-                escmatch = match[0].replace(/\s/g,"___UPDATESCAN___SPACE___");
+        var escmatch = match[0].replace(/\s/g,"___UPDATESCAN___SPACE___");
         result += content.substring(lastmatch, match.index) + escmatch;
-                lastmatch = re.lastIndex;
+        lastmatch = re.lastIndex;
     }
     result += content.substring(lastmatch);
     return result;
@@ -1163,7 +1161,7 @@ _unescapeSpaces : function(content)
 // Replace escaped spaces (ie in tags or scripts) with normal spaces.
 // Remove tabs.
 {
-    result = content.replace(/___UPDATESCAN___SPACE___/g," ");
+    var result = content.replace(/___UPDATESCAN___SPACE___/g," ");
     return    result.replace(/\t/g,"");
 }
 }
