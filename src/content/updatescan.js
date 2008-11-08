@@ -805,11 +805,9 @@ _extendPlacesTreeView : function() {
                                        USc_places.STATUS_UNKNOWN)
 
       if (status == USc_places.STATUS_UPDATE) {
-          myDump("update\n")
           return ""; // Let updatscan.css choose the icon
       }
       
-          myDump("noupdate\n")
       // Use favicon if possible
       return this.getImageSrcBase(aRow, aColumn);
     }  

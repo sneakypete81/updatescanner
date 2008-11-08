@@ -37,12 +37,7 @@
  
 // This code is copied from the "AddToBookmarks" context menu item.
 
-
-
 // See the end of the file for load/unload observers!
-
-
-
 
 if (typeof(USc_overlay_exists) != 'boolean') {
 var USc_overlay_exists = true;
@@ -60,11 +55,12 @@ load : function()
     }
 },
 
-// Don't show context menu item when text is selected.
+// Don't show context menu item when text is selected,
+// or if URL is in chrome:// space.
 _showMenu : function() 
 {
-    if(gContextMenu.isTextSelected) {
-        // selected text = don't show menu item
+    myDump(window.content.document.URL)
+    if(gContextMenu.isTextSelected || !window.content.document.URL) {
         document.getElementById("AddToUpdateScan").hidden = true;
     } else {
         document.getElementById("AddToUpdateScan").hidden = false;
@@ -73,58 +69,8 @@ _showMenu : function()
 
 addToUpdateScan : function(aBrowser)
 {
-    var me = USc_overlay;
-
-    var browsers = aBrowser.browsers;
-    if (browsers && browsers.length > 1) {
-        me._addToUpdateScanForTabBrowser(aBrowser);
-    } else {
-        me._addToUpdateScanForBrowser(aBrowser.webNavigation);
-    }
-},
-
-_addToUpdateScanForTabBrowser : function(aTabBrowser)
-{
-    var tabsInfo = [];
-    var currentTabInfo = { name: "", url: "", charset: null };
-
-    var activeBrowser = aTabBrowser.selectedBrowser;
-    var browsers = aTabBrowser.browsers;
-    for (var i = 0; i < browsers.length; ++i) {
-        var webNav = browsers[i].webNavigation;
-        var url = webNav.currentURI.spec;
-        var name = "";
-        var charSet;
-        try {
-            var doc = webNav.document;
-            name = doc.title || url;
-            charSet = doc.characterSet;
-        } catch (e) {
-            name = url;
-        }
-        tabsInfo[i] = { name: name, url: url, charset: charSet };
-        if (browsers[i] == activeBrowser) {
-            currentTabInfo = tabsInfo[i];
-        }
-    }
-    USc_updatescan.openNewDialog(currentTabInfo.name, currentTabInfo.url)
-},
-
-_addToUpdateScanForBrowser : function(aDocShell)
-{
-    // Bug 52536: We obtain the URL and title from the nsIWebNavigation
-    // associated with a <browser/> rather than from a DOMWindow.
-    // This is because when a full page plugin is loaded, there is
-    // no DOMWindow (?) but information about the loaded document
-    // may still be obtained from the webNavigation. 
-    var url = aDocShell.currentURI.spec;
-    var title, charSet = null;
-    try {
-        title = aDocShell.document.title || url;
-        charSet = aDocShell.document.characterSet;
-    } catch (e) {
-        title = url;
-    }
+    var url = window.content.document.URL;
+    var title = window.content.document.title || url;
     USc_updatescan.openNewDialog(title, url);
 }
 
