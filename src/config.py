@@ -1,10 +1,7 @@
 #!/usr/bin/env python
 # coding=UTF-8
 
-major_version = 3
-minor_version = 0
-revision_version = 0
-build_version = 0
+version = "3.0alpha2" # Don't forget to update upgrade.js too!
 in_development = True
 publish_babelzilla = False # True = include incomplete locales for babelzilla
 only_english = False # True = only include english for beta releases
@@ -35,21 +32,8 @@ authorURL = "http://updatescanner.mozdev.org"
 uid = 'c07d1a49-9894-49ff-a594-38960ede8fb9'
 optionsChrome = 'chrome://updatescan/content/preferences.xul'
 
-if build_version:
-    version = "%d.%d.%d.%d%s" % (
-        major_version,
-        minor_version,
-        revision_version,
-        build_version,
-        in_development and "+" or ""
-    )
-else:
-    version = "%d.%d.%d%s" % (
-        major_version,
-        minor_version,
-        revision_version,
-        in_development and "+" or ""
-    )
+if in_development:
+    version = version + "+"
 
 homepageURL = "http://updatescanner.mozdev.org"
 

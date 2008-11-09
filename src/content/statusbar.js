@@ -92,12 +92,14 @@ load : function()
     var bmsvc = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"]
                           .getService(Components.interfaces.nsINavBookmarksService);
 
-
     // Update parent folder annotations when an annotation is updated
     PlacesUtils.annotations.addObserver(USc_statusbarAnnotationObserver);
 
     // Update parent folder annotations when bookmarks are moved/deleted
     bmsvc.addObserver(USc_statusbarBookmarkObserver, false);
+
+    // See if we need to upgrade something
+    USc_upgrade.check();
 
     // Start autoscanner
     USc_autoscan.start(me.autoscanFinished);

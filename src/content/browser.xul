@@ -57,6 +57,7 @@
   <script src="statusbar.js"/>
   <script src="string.js"/>
   <script src="places.js"/>
+  <script src="upgrade.js"/>
 
     <popup id="contentAreaContextMenu">
       <menuitem id="AddToUpdateScan"

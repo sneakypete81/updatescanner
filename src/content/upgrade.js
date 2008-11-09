@@ -16,6 +16,8 @@
  * All Rights Reserved.
  * 
  * Contributor(s):
+ *
+ * Locale checking from Martijn Kooij's Quick Locale Switcher
  * 
  * Alternatively, the contents of this file may be used under the terms of
  * either the GNU General Public License Version 2 or later (the "GPL"), or
@@ -35,83 +37,175 @@ var USc_upgrade_exists = true;
 var USc_upgrade = {    
 
 
-kVERSION_MAJOR : 3,
-kVERSION_MINOR : 0,
+VERSION : "3.0alpha2",
 
 check : function()
 {
-    var me = USc_upgrade;
-    var nodes;
-    var node;
-    var id;
-    var filebase;
-    var versionMajor;
-    var versionMinor;
+    if (this.isNewInstall()) {
+        this.createRootBookmark();
+        this.createUSBookmark();
+        this.updateVersion()
+        return;
+    }
+
+    if (this.isVersionBefore("2.0.14")) {
+        alert("You are upgrading from a very old version of UpdateScanner.\n"+
+              "Please upgrade to version 2.2.3 first. You can get this from \n"+
+              "https://addons.mozilla.org/en-US/firefox/addons/versions/3362");
+        this.createRootBookmark();
+        return;
+    }
+
+    if (this.isVersionBefore("2.*")) {
+        this.upgrade_3_0();
+        this.updateVersion()
+        return
+    }
+
+    if (this.isVersionBefore(this.VERSION)) {
+        this.updateVersion()        
+    }
+},
+
+isNewInstall : function()
+{
+    return this.getVersion() == ""
+},
+
+isVersionBefore : function(version)
+{
+    var comparator = Cc["@mozilla.org/xpcom/version-comparator;1"].
+        getService(Ci.nsIVersionComparator);
+    var lastVersion = this.getVersion();  
+
+    return (comparator.compare(lastVersion, version) < 0);
+},
+
+getVersion : function()
+{
     var prefs = Components.classes["@mozilla.org/preferences-service;1"].
                  getService(Components.interfaces.nsIPrefService).
                  getBranch("extensions.updatescan.");
-    var locale = Components.classes["@mozilla.org/preferences-service;1"].
-                 getService(Components.interfaces.nsIPrefService).
-                 getBranch("general.useragent.").
-                 getCharPref("locale");
-    var filebase;
-    
+
+    if (prefs.prefHasUserValue("version")) 
+        return prefs.getCharPref("version");
+        
+    // Also check old version preferences
     try {
-        versionMajor = prefs.getIntPref("versionMajor");
-        versionMinor = prefs.getIntPref("versionMinor");
+        var versionMajor = prefs.getIntPref("versionMajor");
+        var versionMinor = prefs.getIntPref("versionMinor");
+        var versionRevision = prefs.getIntPref("versionRevision");
     } catch (e) {
         // New installation
-        versionMajor = 0;
-        versionMinor = 0;
+        return "";
     }
+    return versionMajor + "." + versionMinor + "." + versionRevision;
+},
 
-// We should really just silently refuse to upgrade from really old installations,
-// just in case
+updateVersion : function(version)
+{
+    var prefs = Components.classes["@mozilla.org/preferences-service;1"].
+                 getService(Components.interfaces.nsIPrefService).
+                 getBranch("extensions.updatescan.");
 
-    if (      versionMajor < 3 || 
-              versionMajor == 3 && versionMinor < 0) {
-        if (me.upgrade_3_0()) {
-//            prefs.setIntPref("versionMajor", me.kVERSION_MAJOR);
-//            prefs.setIntPref("versionMinor", me.kVERSION_MINOR);
-        }
+    prefs.setCharPref("version", this.VERSION)
+
+    if (prefs.prefHasUserValue("versionMajor")) {
+        prefs.setIntPref("versionMajor", 0);
+        prefs.setIntPref("versionMinor", 0);
+        prefs.setIntPref("versionRevision", 0);        
     }
 },
 
 upgrade_3_0 : function()
 {
     var me = USc_upgrade;
-    // NOTE: IgnoreNumbers has changed from a string to a boolean!!
-    me.createRootBookmarks();
-    
+    this.createRootBookmark();
+
+    // Connect to the RDF file
+    var rdffile = USc_rdf.getPath();
+    USc_rdf.init(USc_rdf.getURI(rdffile));
+
+    var nodes = USc_rdf.getRoot().getChildren();
+    while (nodes.hasMoreElements()) {
+        var node = nodes.getNext();
+        var idRDF = node.getValue();
+
+        // Create new bookmark and copy annotations over
+
+        var url = USc_rdf.queryItem(idRDF, "url", "about:blank");
+        var title = USc_rdf.queryItem(idRDF, "title", url);
+
+        var idBM = USc_places.addBookmark(title, url);
+
+        USc_places.modifyAnno(idBM, USc_places.ANNO_ENCODING,
+                              USc_rdf.queryItem(idRDF, "encoding",
+                                                USc_defaults.DEF_ENCODING));
+        USc_places.modifyAnno(idBM, USc_places.ANNO_LAST_AUTOSCAN,
+                              USc_rdf.queryItem(idRDF, "lastautoscan",
+                                                USc_defaults.DEF_LAST_AUTOSCAN));
+        USc_places.modifyAnno(idBM, USc_places.ANNO_LAST_SCAN,
+                              USc_rdf.queryItem(idRDF, "lastscan",
+                                                USc_defaults.DEF_LAST_SCAN));
+        USc_places.modifyAnno(idBM, USc_places.ANNO_OLD_LAST_SCAN,
+                              USc_rdf.queryItem(idRDF, "old_lastscan",
+                                                USc_defaults.DEF_OLD_LAST_SCAN));
+        USc_places.modifyAnno(idBM, USc_places.ANNO_SCAN_RATE_MINS,
+                              USc_rdf.queryItem(idRDF, "scanratemins",
+                                                USc_defaults.DEF_SCAN_RATE_MINS));
+        USc_places.modifyAnno(idBM, USc_places.ANNO_THRESHOLD,
+                              USc_rdf.queryItem(idRDF, "threshold",
+                                                USc_defaults.DEF_THRESHOLD));
+
+        // ignoreNumbers has changed from a string to a boolean
+        var ignoreNumbers = USc_rdf.queryItem(idRDF, "ignoreNumbers", USc_defaults.DEF_IGNORE_NUMBERS)
+        ignoreNumbers = (ignoreNumbers == "true" || ignoreNumbers == true)
+        USc_places.modifyAnno(idBM, USc_places.ANNO_IGNORE_NUMBERS, ignoreNumbers);
+        
+        if (USc_rdf.queryItem(idRDF, "error", "0") != 0)
+            USc_places.modifyAnno(idBM, USc_places.ANNO_STATUS, USc_places.STATUS_ERROR);
+        else if (USc_rdf.queryItem(idRDF, "changed") != 0)
+            USc_places.modifyAnno(idBM, USc_places.ANNO_STATUS, USc_places.STATUS_UPDATE);
+        else
+            USc_places.modifyAnno(idBM, USc_places.ANNO_STATUS, USc_places.STATUS_NO_UPDATE);
+
+        // Rename files to match new signature scheme
+        var oldFilebase = USc_file.oldEscapeFilename(idRDF);
+        var newFilebase = USc_places.getSignature(idBM);
+        USc_file.USmvFile(oldFilebase+".old", newFilebase+".old");
+        USc_file.USmvFile(oldFilebase+".new", newFilebase+".new");
+    }
     return true;
 },
 
-createRootBookmarks : function ()
+createRootBookmark : function ()
 {
     var anno = Components.classes["@mozilla.org/browser/annotation-service;1"].getService(Ci.nsIAnnotationService);
-    
-    var locale = Components.classes["@mozilla.org/preferences-service;1"].
-                 getService(Components.interfaces.nsIPrefService).
-                 getBranch("general.useragent.").
-                 getCharPref("locale");
-    var updatescanURL="http://updatescanner.mozdev.org/redirect.php?page=index.html&source=scan&locale="+locale;
     var bookmarksService = Cc["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Ci.nsINavBookmarksService);
 
     if (USc_places.getRootFolderId() == null) {
         var folderId = bookmarksService.createFolder(bookmarksService.bookmarksMenuFolder, "Update Scanner's Pages", bookmarksService.DEFAULT_INDEX);
         USc_places.setRootFolderId(folderId);
-        var bookmarkId = USc_places.addBookmark("Update Scanner Website", updatescanURL);
-
-    anno.setItemAnnotation(bookmarkId, USc_places.ANNO_STATUS, USc_places.STATUS_UPDATE, 0, anno.EXPIRE_NEVER);
-        var filebase = USc_file.escapeFilename(updatescanURL);
-//        USc_file.USwriteFile(filebase+".new", "");
-/*
-    USc_rdf.modifyItem(id, "lastscan", "");  // lastscan not defined
-    USc_rdf.modifyItem(id, "changed", "0");  // not changed 
-    USc_rdf.modifyItem(id, "error", "0");    // no error
-    USc_rdf.save();
-*/    
     }
+},
+
+createUSBookmark : function ()
+{
+    var updatescanURL="http://updatescanner.mozdev.org/redirect.php?page=index.html&source=scan&locale="+this.getLocale();
+    var bookmarkId = USc_places.addBookmark("Update Scanner Website", updatescanURL);
+//    var filebase = USc_file.escapeFilename(updatescanURL);
+//    USc_file.USwriteFile(filebase+".new", "");
+    
+},
+
+getLocale : function()
+{
+    var oPref = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("general.useragent.");
+    try {
+        return oPref.getComplexValue("locale", Components.interfaces.nsIPrefLocalizedString).data;
+    }
+    catch (e) {}
+    return oPref.getCharPref("locale");
 }
 
 

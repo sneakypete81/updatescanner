@@ -60,8 +60,6 @@ load : function()
     var me = USc_updatescan;
     var r;
 
-    USc_upgrade.check(); // See if we need to upgrade something
-
     me._extendPlacesTreeView();
     
     me.tree = document.getElementById("bookmarks-view");
