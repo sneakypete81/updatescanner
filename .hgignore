@@ -6,3 +6,5 @@ src/install.rdf
 src/chrome/updatescan.jar
 src/chrome.manifest
 *.pyc
+syntax: glob
+src/releases/*.xpi
