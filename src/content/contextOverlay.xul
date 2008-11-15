@@ -1,8 +1,12 @@
+<!DOCTYPE overlay SYSTEM "chrome://updatescan/locale/updatescan.dtd">
+
 <overlay id="USc_ContextOverlay"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
   <commandset id="placesCommands">
     <command id="placesCmd_open"
+              oncommand="USc_updatescan.diffSelectedItemThisWindow();"/>
+    <command id="placesCmd_open_all_in_tabs"
               oncommand="USc_updatescan.diffSelectedItemThisWindow();"/>
     <command id="placesCmd_open:tab"
              oncommand="USc_updatescan.diffSelectedItemNewTab();"/>
@@ -36,6 +40,11 @@
     
   <popup id="placesContext">
     <menuitem id="placesContext_open:newwindow" removeelement="true"/>
+    <menuitem id="placesContext_openContainer:tabs"
+              oncommand="USc_updatescan.diffSelectedItemNewTab();"
+              label="&opentabmenu.label;"
+              selection="folder|host|query"/>
+  
   </popup>
 
 

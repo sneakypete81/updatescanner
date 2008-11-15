@@ -414,13 +414,20 @@ _diffItemThisWindow : function(id)
     }
 },
 
+showAllChangesInNewTabs : function()
+{
+  USc_places.callFunctionWithUpdatedItems(USc_places.getRootFolderId(),
+                                          USc_updatescan._diffItemNewTab);
+},
+
 diffSelectedItemNewTab : function()
 {
     var me = USc_updatescan;
-    var item = me._getSelectedItem();
-    if (item == undefined)
+    var id = me._getSelectedItem();
+    if (id == undefined)
       return;
-    me._diffItemNewTab(item);    
+
+    USc_places.callFunctionWithUpdatedItems(id, USc_updatescan._diffItemNewTab);
 },
 
 _diffItemNewTab : function(id)
@@ -497,12 +504,6 @@ _markAsVisited : function(id)
     {
       USc_places.modifyAnno(id, USc_places.ANNO_STATUS, USc_places.STATUS_NO_UPDATE);      
     }
-},
-
-showAllChangesInNewTabs : function()
-{
-  USc_places.callFunctionWithUpdatedItems(USc_places.getRootFolderId(),
-                                          USc_updatescan._diffItemNewTab);
 },
 
 openHelp : function()
