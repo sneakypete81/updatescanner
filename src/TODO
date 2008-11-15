@@ -1,18 +1,18 @@
 Bugs:
 * Sometimes right-clicking does funny things
-
-Diffpage arrow hyperlink to mozdev.updatescanner.org
-Notification click doesn't work for mac
-Add help button to preferences
+* Notification click doesn't work for mac
 
 Super Notification
  - show names of changed pages
  - one click to show diffpage
 
+Scan Regions
+ - Work out how to structure the UI for this
+
+Add help button to preferences
 Click link to scroll diffpage to change
 Show deletions too
 Configurable highlight colour
-
 
 
 -- Unreleased --

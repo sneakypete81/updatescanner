@@ -271,8 +271,8 @@ var USc_places = {
   callFunctionWithUpdatedItems : function(rootId, callback)
   // Look for updated items below rootId, and pass each id to the callback
   {
-    var hist = Cc["@mozilla.org/browser/nav-history-service;1"]
-               .getService(Ci.nsINavHistoryService);
+    var hist = Components.classes["@mozilla.org/browser/nav-history-service;1"]
+               .getService(Components.interfaces.nsINavHistoryService);
 
     var query = hist.getNewQuery();
     var options = hist.getNewQueryOptions();
@@ -292,8 +292,8 @@ var USc_places = {
     if (status != USc_places.STATUS_UPDATE)
       return
   
-    var bmsvc = Cc["@mozilla.org/browser/nav-bookmarks-service;1"]
-                .getService(Ci.nsINavBookmarksService);
+    var bmsvc = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"]
+                .getService(Components.interfaces.nsINavBookmarksService);
         
     var itemType = bmsvc.getItemType(itemId);
     if (itemType == bmsvc.TYPE_BOOKMARK)

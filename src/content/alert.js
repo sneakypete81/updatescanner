@@ -45,12 +45,8 @@ gFinalHeight : 50,
 gSlideIncrement : 4,
 gSlideTime : 20,
 
-gOpenTime : 3000,   // total time the alert should stay up once we are done animating.
+gOpenTimeAfterLinkClick : 3000, // Close 3 second after clicking on the link
 gPermanent : false, // should the window stay open permanently (until manually closed)
-
-gAlertListener : null,
-gAlertTextClickable : false,
-gAlertCookie : "",
 
 g_MAX_HEIGHT : 134,
 
@@ -121,9 +117,47 @@ onAlertClick : function()
     var win = wm.getMostRecentWindow("navigator:browser");
 
     if (win.toggleSidebar) {
-       win.toggleSidebar('viewUpdateScanSidebar');
+       win.toggleSidebar('viewUpdateScanSidebar', true);
     }
     win.focus()
+},
+
+onLinkClick : function(aEvent)
+{
+    var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
+                       .getService(Components.interfaces.nsIWindowMediator);
+    var win = wm.getMostRecentWindow("navigator:browser");
+
+    USc_places.callFunctionWithUpdatedItems(USc_places.getRootFolderId(),
+                                          this._diffItemNewTabBackground);
+    
+    USc_updatescan.showAllChangesInNewTabs();
+    win.focus();
+
+    // Close the alert soon
+    setTimeout(USc_alert._closeAlert, USc_alert.gOpenTimeAfterLinkClick);
+    // Don't open the sidebar 
+    aEvent.stopPropagation();
+},
+
+_diffItemNewTabBackground : function(id)
+{
+    var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
+                       .getService(Components.interfaces.nsIWindowMediator);
+    var window = wm.getMostRecentWindow("navigator:browser");
+
+    var mainWindow = window.QueryInterface(
+    Components.interfaces.nsIInterfaceRequestor)
+    .getInterface(Components.interfaces.nsIWebNavigation)
+    .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
+    .rootTreeItem
+    .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+    .getInterface(Components.interfaces.nsIDOMWindow);
+
+    var diffURL = USc_updatescan._diffItem(id);
+    if (diffURL) {
+      mainWindow.getBrowser().addTab(diffURL);
+    }
 },
 
 onAlertClose: function()
@@ -163,8 +197,6 @@ _closeAlert : function()
   }
   else
   {
-    if (me.gAlertListener)
-      me.gAlertListener.observe(null, "alertfinished", me.gAlertCookie); 
     window.close(); 
   }
 }

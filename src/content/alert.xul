@@ -39,6 +39,7 @@
  * ***** END LICENSE BLOCK ***** -->
 
 <?xml-stylesheet href="chrome://updatescan/skin/alert.css" type="text/css"?>
+<?xul-overlay href="chrome://browser/content/places/placesOverlay.xul"?>
 
 <window id="alertNotification"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
@@ -48,9 +49,15 @@
         xhtml2:role="wairole:alert"
         align="start"
         onload="USc_alert.onAlertLoad()">
-  
-<script type="application/x-javascript" 
-	src="chrome://updatescan/content/alert.js" />
+ 
+<script src="chrome://updatescan/content/alert.js" />
+<script src="chrome://updatescan/content/updatescan.js" />
+<script src="chrome://updatescan/content/places.js" />
+<script src="chrome://updatescan/content/string.js" />
+<script src="chrome://updatescan/content/mydump.js" />
+
+<stringbundle id="updatescanStrings" 
+	      src="chrome://updatescan/locale/updatescan.properties"/>
 
 <vbox id="alertBox" class="alertBox">
 <hbox>
@@ -62,7 +69,10 @@
   <vbox onclick="USc_alert.onAlertClick();">
     <spacer height="4px"/>
     <label value="Update Scanner" style="font-weight:bold"/>
-    <vbox><label id="message" value="" /></vbox>
+    <vbox>
+      <label class="text-link" onclick="USc_alert.onLinkClick(event);"
+	     id="message" value="" />
+    </vbox>
   </vbox>
   
   <vbox>
