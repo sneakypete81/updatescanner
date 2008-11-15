@@ -75,7 +75,7 @@ load : function()
 	    document.getElementById("sectionDiff").hidden=false;
 	    document.getElementById("titleDiff").value=title;
 	    document.getElementById("dateDiff").value=newDate;
-	    content = USc_diffWiki.WDiffString(oldContent, newContent);
+            this._launchThread(url, oldContent, newContent);
 	    break;
 	case "new":
 	    document.getElementById("sectionNew").hidden=false;
@@ -93,15 +93,11 @@ load : function()
 	    document.getElementById("sectionNotChecked").hidden=false;
 	    document.getElementById("sectionView").hidden=true;
 	    document.getElementById("titleNotChecked").value=title;
-	    content = "";
 	}
+
         this._writeViewFrame(view, url);
-	var doc = document.getElementById("diffFrame").contentDocument;
-	doc.open();
-	doc.write("<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>\n");
-	doc.write("<base href='"+url+"' target='_parent'>\n");	    
-	doc.write(content);
-	doc.close();
+        this._writeContentFrame(url, content);
+        
     }
 },
 
@@ -144,6 +140,16 @@ _writeViewFrame : function (view, url)
     viewDoc.close();
 },
 
+_writeContentFrame : function (url, content)
+{
+    var doc = document.getElementById("diffFrame").contentDocument;
+    doc.open();
+    doc.write("<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>\n");
+    doc.write("<base href='"+url+"' target='_parent'>\n");	    
+    doc.write(content);
+    doc.close();
+},
+
 // Taken with permission from http://www.netlobo.com/url_query_string_javascript.html
 _getUrlParameter : function (name, def)
 {
@@ -161,6 +167,73 @@ _stripScript : function(content)
 {
     content = content.replace(/<script([\r\n]|.)*?>([\r\n]|.)*?<\/script>/gi,"");
     return    content;
+},
+
+_launchThread : function(url, oldContent, newContent)
+// Run the diff script from another thread, so as not to slow things down too much
+// See https://developer.mozilla.org/en/The_Thread_Manager for more details
+{
+
+    var workingThread = function(threadID, url, oldContent, newContent) {
+      this.threadID = threadID;
+      this.url = url;
+      this.oldContent = oldContent;
+      this.newContent = newContent;
+      this.result = "";
+    }    
+    workingThread.prototype = {
+      run: function() {
+        try {
+          // This is where the working thread does its processing work.
+          this.result = USc_diffWiki.WDiffString(this.oldContent, this.newContent);
+          
+          // When it's done, call back to the main thread to let it know
+          // we're finished.
+         
+          main.dispatch(new mainThread(this.threadID, this.url, this.result),
+            background.DISPATCH_NORMAL);
+        } catch(err) {
+          Components.utils.reportError(err);
+        }
+      },      
+      QueryInterface: function(iid) {
+        if (iid.equals(Components.interfaces.nsIRunnable) ||
+            iid.equals(Components.interfaces.nsISupports)) {
+                return this;
+        }
+        throw Components.results.NS_ERROR_NO_INTERFACE;
+      }
+    };
+    
+    var mainThread = function(threadID, url, result) {
+      this.threadID = threadID;
+      this.url = url;
+      this.result = result;
+    };
+    mainThread.prototype = {
+      run: function() {
+        try {
+          // This is where we react to the completion of the working thread.
+          USc_diffPage._writeContentFrame(this.url, this.result);
+//          myDump('Thread ' + this.threadID + ' finished ('+this.url+')\n');
+        } catch(err) {
+          Components.utils.reportError(err);
+        }
+      },
+      QueryInterface: function(iid) {
+        if (iid.equals(Components.interfaces.nsIRunnable) ||
+            iid.equals(Components.interfaces.nsISupports)) {
+                return this;
+        }
+        throw Components.results.NS_ERROR_NO_INTERFACE;
+      }
+    };
+
+    var background = Components.classes["@mozilla.org/thread-manager;1"].getService().newThread(0);
+    var main = Components.classes["@mozilla.org/thread-manager;1"].getService().mainThread;
+    background.dispatch(new workingThread(1, url, oldContent, newContent),
+                        background.DISPATCH_NORMAL);
+    
 }
 
 }
