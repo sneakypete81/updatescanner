@@ -64,7 +64,6 @@ load : function()
     
     me.tree = document.getElementById("bookmarks-view");
     me.tree.onclick=me._treeClick;
-    me.tree.onkeypress=me._treeKeypress;
    
     var rootFolderId = USc_places.getRootFolderId();
     me.tree.place = "place:queryType=1&folder=" + rootFolderId;
@@ -122,13 +121,6 @@ _treeClick : function(aEvent) {
             me.diffSelectedItemNewTab();
             break;
     }
-},
-
-_treeKeypress : function(event)
-{
-  var me = USc_updatescan;    
-  if (event.keyCode == event.DOM_VK_DELETE)
-    me.deleteSelectedItem()
 },
 
 scanButtonClick : function()
