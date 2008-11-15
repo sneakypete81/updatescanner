@@ -535,15 +535,32 @@ _markAsVisited : function(id)
     }
 },
 
-openHelp : function()
+openHelp : function(aEvent)
 {
     var str=document.getElementById("updatescanStrings")
     var locale = Components.classes["@mozilla.org/preferences-service;1"].
                  getService(Components.interfaces.nsIPrefService).
                  getBranch("general.useragent.").
                  getCharPref("locale");
+
+    var mainWindow = window.QueryInterface(
+                  Components.interfaces.nsIInterfaceRequestor)
+                  .getInterface(Components.interfaces.nsIWebNavigation)
+                  .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
+                  .rootTreeItem
+                  .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+                  .getInterface(Components.interfaces.nsIDOMWindow);
+
     var helpURL="http://updatescanner.mozdev.org/redirect.php?page=help.html&locale="+locale;
-    USc_topWin.open(helpURL);
+    
+    switch (aEvent.button) {
+      case 0:
+        USc_topWin.open(helpURL);
+        break;
+      case 1:
+        mainWindow.getBrowser().selectedTab = mainWindow.getBrowser().addTab(helpURL);
+        break;
+    }
 },
 
 _getSelectedItem : function()
