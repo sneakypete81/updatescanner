@@ -130,10 +130,19 @@ function USc_scanner()
                     .getService(Ci.nsINavBookmarksService);
         var anno = Cc["@mozilla.org/browser/annotation-service;1"]
                    .getService(Ci.nsIAnnotationService);
+        var livemarkService = Cc["@mozilla.org/browser/livemark-service;2"]
+                              .getService(Ci.nsILivemarkService);
         
         var itemId = aResultNode.itemId;
         var itemType = bmsvc.getItemType(itemId);
 
+        // Can't handle livemarks yet - mark as error
+        if (livemarkService.isLivemark(itemId))
+        {
+            USc_places.modifyAnno(itemId, USc_places.ANNO_STATUS, USc_places.STATUS_ERROR);
+            return;
+        }
+        
         if (itemType == bmsvc.TYPE_BOOKMARK)
         {
             // If we're autoscanning, only queue the item if it needs scanning

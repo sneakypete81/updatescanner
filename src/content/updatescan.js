@@ -310,6 +310,14 @@ openEditDialog : function()
     if (id == undefined)
       return;
 
+    // Launch the folder properties dialog
+    if (USc_places.isFolder(id))
+    {
+         PlacesUIUtils.showItemProperties(id, "folder");
+         return;
+    }
+
+
     var args = {
         title:          USc_places.getTitle(id),
         url:            USc_places.getURL(id),
@@ -409,7 +417,17 @@ _diffItemThisWindow : function(id)
 showAllChangesInNewTabs : function()
 {
   USc_places.callFunctionWithUpdatedItems(USc_places.getRootFolderId(),
-                                          USc_updatescan._diffItemNewTab);
+                                          USc_updatescan._diffItemNewTabBackground);
+},
+
+diffSelectedFolderNewTab : function()
+{
+    var me = USc_updatescan;
+    var id = me._getSelectedItem();
+    if (id == undefined)
+      return;
+
+    USc_places.callFunctionWithUpdatedItems(id, USc_updatescan._diffItemNewTab);  
 },
 
 diffSelectedItemNewTab : function()
@@ -419,7 +437,7 @@ diffSelectedItemNewTab : function()
     if (id == undefined)
       return;
 
-    USc_places.callFunctionWithUpdatedItems(id, USc_updatescan._diffItemNewTab);
+    me._diffItemNewTab(id);
 },
 
 _diffItemNewTab : function(id)
@@ -437,6 +455,25 @@ _diffItemNewTab : function(id)
     var diffURL = me._diffItem(id);
     if (diffURL) {
       mainWindow.getBrowser().selectedTab = mainWindow.getBrowser().addTab(diffURL);
+      me.tree.focus();
+    }
+},
+
+_diffItemNewTabBackground : function(id)
+{
+    var me = USc_updatescan;
+
+    var mainWindow = window.QueryInterface(
+    Components.interfaces.nsIInterfaceRequestor)
+    .getInterface(Components.interfaces.nsIWebNavigation)
+    .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
+    .rootTreeItem
+    .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+    .getInterface(Components.interfaces.nsIDOMWindow);
+
+    var diffURL = me._diffItem(id);
+    if (diffURL) {
+      mainWindow.getBrowser().addTab(diffURL);
       me.tree.focus();
     }
 },

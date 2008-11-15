@@ -113,11 +113,6 @@
     <label id="StatusText" crop="end" value=""/>
   </vbox>
     
-  <keyset>
-    <key id="deleteKey" keycode="VK_DELETE" oncommand="USc_updatescan.deleteSelectedItem();"/>
-    <key id="enterKey" keycode="VK_RETURN" oncommand="USc_updatescan.diffSelectedItemThisWindow();"/>
-  </keyset>
-
   <broadcasterset>
     <broadcaster id="scanbutton" label="&scanbutton.label;" 
 		 oncommand="USc_updatescan.scanButtonClick()" 

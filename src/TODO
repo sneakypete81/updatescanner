@@ -1,9 +1,5 @@
 Bugs:
 * Sometimes right-clicking does funny things
-* Moving a changed item around doesn't update folder status annotations
-
-
-Delete button!
 
 diffpage.dtd remove leading spaces and resubmit to babelzilla!
 Diffpage arrow hyperlink to mozdev.updatescanner.org
@@ -11,7 +7,6 @@ Notification click doesn't work for mac
 Add help button to preferences
 
 Middle-click on toolbar icons opens in new tab
-"open all in tabs" command opens in foreground, not background
 
 Super Notification
  - show names of changed pages
@@ -23,11 +18,12 @@ Configurable highlight colour
 
 Add "Current Page" link to error page
 
-Change filenames to signature-based (currently a mismash of url & id)
 
 -- Unreleased --
 Middle-click now focusses new tab too
 Fixed display bug in diffpage header
+"open all in tabs" command now opens in background
+Changed filenames to signature-based (currently a mismash of url & id)
 
 -- 2.3 --
 Ignore number changes doesn't appear when sliders are disabled.

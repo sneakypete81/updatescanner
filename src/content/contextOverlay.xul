@@ -41,7 +41,7 @@
   <popup id="placesContext">
     <menuitem id="placesContext_open:newwindow" removeelement="true"/>
     <menuitem id="placesContext_openContainer:tabs"
-              oncommand="USc_updatescan.diffSelectedItemNewTab();"
+              oncommand="USc_updatescan.diffSelectedFolderNewTab();"
               label="&opentabmenu.label;"
               selection="folder|host|query"/>
   
