@@ -373,10 +373,8 @@ _diffItem : function(id)
       return undefined;
     
     var now = new Date();
-    if (USc_places.queryAnno(id, USc_places.ANNO_STATUS, "") == USc_places.STATUS_UPDATE)
-    {
-      USc_places.modifyAnno(id, USc_places.ANNO_STATUS, USc_places.STATUS_NO_UPDATE);      
-    }
+
+    me._markAsVisited(id);
     
     var old_lastScan = USc_places.queryAnno(id,
                                             USc_places.ANNO_OLD_LAST_SCAN,
@@ -489,64 +487,22 @@ _dateDiffString : function(oldDate, newDate)
 
 markAllAsVisited : function()
 {
-/**    var me = USc_updatescan;
-    var tree = document.getElementById("UpdateTree");
-    var ids = new Array();
-    var str=document.getElementById("updatescanStrings")
-
-    var numitems = me._getNumItems();
-    if (numitems > 0) {
-
-        for (var i=0; i<numitems; i++) {
-            var id = tree.contentView.getItemAtIndex(i).id;
-            ids.push(id);
-
-//            if (USc_rdf.queryItem(id, "changed") != "0") {
-//                USc_rdf.modifyItem(id, "changed", "0");
-//                me._refreshTree();
-//            }
-        }
-
-        var params = {label:str.getString("markLabel"), 
-                      callback:me._markAsVisited, 
-                      items:ids, 
-                      data:null, 
-                      cancelPrompt:str.getString("markCancel"), 
-                      retVal:null, 
-                      retData:null};       
-        window.openDialog('chrome://updatescan/content/progress.xul', 
-                          'dlgProgress', 
-                          'chrome,dialog,modal,centrescreen', params);
-        USc_rdf.save();
-        me._refreshTree();
-        me.refresh.request();
-    }
-    **/
+  USc_places.callFunctionWithUpdatedItems(USc_places.getRootFolderId(),
+                                          USc_updatescan._markAsVisited);
 },
 
-_markAsVisited : function(item, data)
+_markAsVisited : function(id)
 {
-  /**
-    if (USc_rdf.queryItem(item, "changed") != "0") {
-        USc_rdf.modifyItem(item, "changed", "0");
+    if (USc_places.queryAnno(id, USc_places.ANNO_STATUS, "") == USc_places.STATUS_UPDATE)
+    {
+      USc_places.modifyAnno(id, USc_places.ANNO_STATUS, USc_places.STATUS_NO_UPDATE);      
     }
-    **/
 },
 
 showAllChangesInNewTabs : function()
 {
-    var me = USc_updatescan;
-    var tree = document.getElementById("UpdateTree");
-
-    var numItems = me._getNumItems();
-    if (numItems > 0) {
-        for (var i=0; i<numItems; i++) {
-            var id = tree.contentView.getItemAtIndex(i).id;
-            if (USc_rdf.queryItem(id, "changed") != "0") {
-                me._diffItemNewTab(id);
-            }
-        }
-    }
+  USc_places.callFunctionWithUpdatedItems(USc_places.getRootFolderId(),
+                                          USc_updatescan._diffItemNewTab);
 },
 
 openHelp : function()
@@ -597,22 +553,6 @@ _showScanButton : function()
     var scanbutton = document.getElementById("scanbutton");
     scanbutton.setAttribute("label", scanbutton.getAttribute("scanbuttonlabel"));
     scanbutton.setAttribute("oncommand", scanbutton.getAttribute("scanbuttoncommand"));
-},
-
-_refreshTree : function()
-{
-  /**
-    try {
-        var tree=document.getElementById("UpdateTree");
-        var savedRow = tree.currentIndex;
-        var scrollRow = tree.boxObject.getFirstVisibleRow();
-        tree.builder.rebuild();    
-        tree.view.selection.select(savedRow);
-        tree.boxObject.scrollToRow(scrollRow);
-    } catch (e) {
-        ;
-    }
-    **/
 },
 
 _setStatus : function (status)

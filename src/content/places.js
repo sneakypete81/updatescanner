@@ -267,7 +267,49 @@ var USc_places = {
     else
       this.modifyAnno(folderId, this.ANNO_STATUS, this.STATUS_NO_UPDATE);
   },
+
+  callFunctionWithUpdatedItems : function(rootId, callback)
+  // Look for updated items below rootId, and pass each id to the callback
+  {
+    var hist = Cc["@mozilla.org/browser/nav-history-service;1"]
+               .getService(Ci.nsINavHistoryService);
+
+    var query = hist.getNewQuery();
+    var options = hist.getNewQueryOptions();
+    query.setFolders([rootId], 1);
+    var result = hist.executeQuery(query, options);
+
+    USc_places._callFunctionRecursive(result.root, callback);
+  },
+
+  _callFunctionRecursive : function(aResultNode, callback)
+  // If the node is not updated, don't do anything.
+  // If the node is a bookmark, call the callback with its ID.
+  // If the node is a folder, recurse.
+  {
+    var itemId = aResultNode.itemId;
+    var status = USc_places.queryAnno(itemId, USc_places.ANNO_STATUS, USc_places.STATUS_NO_UPDATE);
+    if (status != USc_places.STATUS_UPDATE)
+      return
   
+    var bmsvc = Cc["@mozilla.org/browser/nav-bookmarks-service;1"]
+                .getService(Ci.nsINavBookmarksService);
+        
+    var itemType = bmsvc.getItemType(itemId);
+    if (itemType == bmsvc.TYPE_BOOKMARK)
+    {
+      callback(itemId);
+
+    } else if (itemType == bmsvc.TYPE_FOLDER) {
+      aResultNode.QueryInterface(Components.interfaces.nsINavHistoryContainerResultNode);
+      aResultNode.containerOpen = true;
+      for (var i = 0; i < aResultNode.childCount; i ++) {
+        USc_places._callFunctionRecursive(aResultNode.getChild(i), callback);
+        }
+        aResultNode.containerOpen = false;
+    }    
+  },
+
   // return the two-digit hexadecimal code for a byte
   toHexString : function(charCode)
   {
