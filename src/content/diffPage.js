@@ -58,6 +58,7 @@ load : function()
         var content=""
         var newContent=""
         var oldContent=""
+        var enableDiffLinks = true;
 
         var filebase = USc_places.queryAnno(id, USc_places.ANNO_SIGNATURE, "");
         if (filebase != "") {
@@ -68,6 +69,13 @@ load : function()
         }
     	if (newContent=="") {
 	    view="notChecked";
+            enableDiffLinks = false;
+        }
+        if (USc_places.queryAnno(id, USc_places.ANNO_STATUS, "")
+            == USc_places.STATUS_ERROR)
+        {
+            view="error";
+            enableDiffLinks = false;
         }
 
 	switch (view) {
@@ -89,13 +97,16 @@ load : function()
 	    document.getElementById("dateOld").value=oldDate;
 	    content = oldContent;
 	    break;
+        case "error":
+	    document.getElementById("sectionError").hidden=false;
+	    document.getElementById("titleError").value=title;
+            break;
 	default:
 	    document.getElementById("sectionNotChecked").hidden=false;
-	    document.getElementById("sectionView").hidden=true;
 	    document.getElementById("titleNotChecked").value=title;
 	}
 
-        this._writeViewFrame(view, url);
+        this._writeViewFrame(view, url, enableDiffLinks);
         this._writeContentFrame(url, content);
         
     }
@@ -106,7 +117,7 @@ click : function(view)
     location.href = this.baseUrl+view;
 },
 
-_writeViewFrame : function (view, url)
+_writeViewFrame : function (view, url, enableDiffLinks)
 {
     var str=document.getElementById("diffPageStrings")
     
@@ -123,18 +134,29 @@ _writeViewFrame : function (view, url)
     viewDoc.write("<link rel='stylesheet' href='chrome://updatescan/skin/diffPage.css' type='text/css'/>");
     viewDoc.write("</head><body>");
     viewDoc.write("<b>View:</b>&nbsp;\n");
+
     if (view == "old") 
         viewDoc.write("<b>"+oldPage+"</b>&nbsp;\n");
-    else
+    else if (enableDiffLinks)
         viewDoc.write("<a href='"+this.baseUrl+"old' target='_top'>"+oldPage+"</a>&nbsp;\n");
+    else
+        viewDoc.write("<span style='color:#808080'>"+oldPage+"</span>&nbsp;\n");
+
     if (view == "new") 
         viewDoc.write("<b>"+newPage+"</b>&nbsp;\n");
-    else
+    else if (enableDiffLinks)
         viewDoc.write("<a href='"+this.baseUrl+"new' target='_top'>"+newPage+"</a>&nbsp;\n");
+    else
+        viewDoc.write("<span style='color:#808080'>"+newPage+"</span>&nbsp;\n");
+
     if (view == "diff") 
         viewDoc.write("<b>"+changes+"</b>&nbsp;\n");
-    else
+    else if (enableDiffLinks)
         viewDoc.write("<a href='"+this.baseUrl+"diff' target='_top'>"+changes+"</a>\n&nbsp;");
+    else
+        viewDoc.write("<span style='color:#808080'>"+changes+"</span>\n&nbsp;");
+    
+
     viewDoc.write("<a href='"+url+"' target='_top'>"+currentPage+"</a>\n");
     viewDoc.write("</body></html>");
     viewDoc.close();

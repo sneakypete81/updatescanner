@@ -10,8 +10,12 @@
 <!ENTITY headerDiff3 "highlighted">
 <!ENTITY headerDiff4 ".">
 
-<!ENTITY headerNotChecked1 "The selected page has not yet been checked.">
-<!ENTITY headerNotChecked2 " Please click the ">
+<!ENTITY headerNotChecked1 "This page has not yet been checked.">
+<!ENTITY headerNotChecked2 "Please click the ">
 <!ENTITY headerNotChecked3 "'Scan'">
-<!ENTITY headerNotChecked4 " button on the left, and try again.">
+<!ENTITY headerNotChecked4 "button on the left, and try again.">
 
+<!ENTITY headerError1 "This page returned an error last time it was scanned.">
+<!ENTITY headerError2 "Please click the ">
+<!ENTITY headerError3 "'Current Page'">
+<!ENTITY headerError4 "link to check that the page is valid.">

@@ -99,7 +99,16 @@
       <hbox>	
 	<label class="plain" value="&headerNotChecked2;"/>
 	<label class="plain" style="font-weight:bold;" value="&headerNotChecked3;"/>
-	<label class="plain" value="&headerNotChecked4;"/>
+	<label class="plain" value=" &headerNotChecked4;"/>
+      </hbox>
+    </vbox>
+    <vbox id="sectionError" hidden="true">
+      <label class="plain" style="font-weight:bold;" id="titleError"/>
+      <label class="plain" value="&headerError1;"/>
+      <hbox>
+        <label class="plain" value="&headerError2;"/> 
+	<label class="plain" style="font-weight:bold;" value="&headerError3;"/>
+	<label class="plain" value=" &headerError4;"/>
       </hbox>
     </vbox>
 
