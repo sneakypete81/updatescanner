@@ -90,6 +90,7 @@
       <toolbarspring />
       <button observes="scanbutton" />
     </hbox>
+
       <tree id="bookmarks-view"
         class="sidebar-placesTree"
         type="places"
@@ -97,7 +98,6 @@
         context="placesContext"
         flex="1"
         seltype="single"
-        onkeypress="SidebarUtils.handleTreeKeyPress(event);"
         onmousemove="SidebarUtils.handleTreeMouseMove(event);"
         onmouseout="SidebarUtils.clearURLFromStatusBar();">
         <treecols>
@@ -105,79 +105,7 @@
         </treecols>
         <treechildren id="bookmarks-view-children" class="sidebar-placesTreechildren" view="bookmarks-view" flex="1"/>
       </tree>
-<!--
-    <tree id="UpdateTree" flex="1" datasources="rdf://null" 
-	  hidecolumnpicker="true" seltype="single"
-	  ref="http://www.updatescan.com/rdf/updatescan/all">
-      <treecols>
-        <treecol hideheader="true" flex="1" id="title"/>
-        <treecol id="url" hidden="true"/>
-        <treecol id="scanrate" hidden="true"/>
-	<treecol id="threshold" hidden="true" />
-        <treecol id="lastscan" hidden="true"/>
-        <treecol id="changed" hidden="true"/>
-	<treecol id="error" hidden="true"/>
-      </treecols>
-           
-      <template>
-	<rule UPDATESCAN:changed="1">
-          <treechildren context="contextmenu">
-            <treeitem uri="rdf:*"><treerow>
-              <treecell properties="changed"
-                src="chrome://updatescan/skin/updatescan_sm.png" 
-                label=" rdf:http://www.updatescan.com/rdf/updatescan#title"/>
-              <treecell 
-		label="rdf:http://www.updatescan.com/rdf/updatescan#url"/>
-              <treecell 
-		label="rdf:http://www.updatescan.com/rdf/updatescan#threshold"/>
-              <treecell 
-		label="rdf:http://www.updatescan.com/rdf/updatescan#lastscan"/>
-              <treecell 
-		label="rdf:http://www.updatescan.com/rdf/updatescan#changed"/>
-              <treecell 
-		label="rdf:http://www.updatescan.com/rdf/updatescan#error"/>
-            </treerow></treeitem>
-          </treechildren>
-        </rule>
-	<rule UPDATESCAN:error="1">
-          <treechildren context="contextmenu">
-            <treeitem uri="rdf:*"><treerow>
-              <treecell properties="error" 
-                label="rdf:http://www.updatescan.com/rdf/updatescan#title"/>
-              <treecell 
-		label="rdf:http://www.updatescan.com/rdf/updatescan#url"/>
-              <treecell 
-		label="rdf:http://www.updatescan.com/rdf/updatescan#threshold"/>
-              <treecell 
-		label="rdf:http://www.updatescan.com/rdf/updatescan#lastscan"/>
-              <treecell 
-		label="rdf:http://www.updatescan.com/rdf/updatescan#changed"/>
-              <treecell 
-		label="rdf:http://www.updatescan.com/rdf/updatescan#error"/>
-            </treerow></treeitem>
-          </treechildren>
-        </rule>
-        <rule>
-          <treechildren context="contextmenu">
-            <treeitem uri="rdf:*"><treerow>
-              <treecell 
-		label="rdf:http://www.updatescan.com/rdf/updatescan#title"/>
-              <treecell 
-		label="rdf:http://www.updatescan.com/rdf/updatescan#url"/>
-              <treecell 
-		label="rdf:http://www.updatescan.com/rdf/updatescan#threshold"/>
-              <treecell 
-		label="rdf:http://www.updatescan.com/rdf/updatescan#lastscan"/>
-              <treecell 
-		label="rdf:http://www.updatescan.com/rdf/updatescan#changed"/>
-              <treecell 
-		label="rdf:http://www.updatescan.com/rdf/updatescan#error"/>
-            </treerow></treeitem>
-          </treechildren>
-        </rule>
-      </template>
-    </tree>
--->  
+
     <hbox>
       <progressmeter id="Progress" mode="normal" value="0" 
 		     collapsed="true" flex="1"/>

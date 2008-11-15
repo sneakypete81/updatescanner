@@ -64,6 +64,7 @@ load : function()
     
     me.tree = document.getElementById("bookmarks-view");
     me.tree.onclick=me._treeClick;
+    me.tree.onkeypress=me._treeKeypress;
    
     var rootFolderId = USc_places.getRootFolderId();
     me.tree.place = "place:queryType=1&folder=" + rootFolderId;
@@ -121,6 +122,12 @@ _treeClick : function(aEvent) {
             me.diffSelectedItemNewTab();
             break;
     }
+},
+
+_treeKeypress : function(event)
+{
+  if (event.keyCode == event.DOM_VK_DELETE)
+    this.deleteSelectedItem()
 },
 
 scanButtonClick : function()
@@ -363,7 +370,7 @@ _diffItem : function(id)
     var me = USc_updatescan;
 
     if (USc_places.isFolder(id))
-      return;
+      return undefined;
     
     var now = new Date();
     if (USc_places.queryAnno(id, USc_places.ANNO_STATUS, "") == USc_places.STATUS_UPDATE)
@@ -540,68 +547,6 @@ showAllChangesInNewTabs : function()
     }
 },
 
-sortByName : function()
-{
-  /**
-    var me = USc_updatescan;
-    var i;
-    var id;
-    var item;
-    var tree = document.getElementById("UpdateTree");
-    var numitems = me._getNumItems();
-    var data = new Array();
-    var indexes = new Array();
-    var params;
-    var str=document.getElementById("updatescanStrings");
-
-    // Get a list of ids & titles
-    if (numitems > 0)
-    {
-        for (var i=0; i<numitems; i++)
-        {
-            id = tree.contentView.getItemAtIndex(i).id;
-            item = {id:id, title:USc_rdf.queryItem(id, "title").toLowerCase()}
-            data.push(item);
-            indexes.push(i);
-        }
-        // Open the progress dialog and perform the sort
-        params = {label:str.getString("sortLabel"), callback:me._sortItem, 
-                  items:indexes, data:data, 
-                  cancelPrompt:str.getString("sortCancel"), 
-                  retVal:null, retData:null};       
-        window.openDialog('chrome://updatescan/content/progress.xul', 
-                          'dlgProgress', 
-                          'chrome,dialog,modal,centrescreen', params);
-
-        USc_rdf.save();
-        me._refreshTree();
-        me.refresh.request();
-    }
-    **/
-},
-
-_sortItem : function(index, data)
-// Passed the current index and the remaining items to sort.
-// Finds the smallest item, moves it into position, removes it from the 
-// data array.
-{
-    var i;
-    var smallestIndex = 0;
-    var smallestTitle = data[0].title;
-    var count = data.length;
-    for (i=1; i<count; i++) {
-        if (data[i].title < smallestTitle) {
-            smallestIndex = i;
-            smallestTitle = data[i].title;
-        }
-    }
-    if (smallestIndex != 0) {
-        USc_rdf.moveItem(data[smallestIndex].id, index); // Move into position
-    }
-    data.splice(smallestIndex, 1);              // Remove from data array
-    return null;    
-},
-
 openHelp : function()
 {
     var str=document.getElementById("updatescanStrings")
@@ -615,25 +560,17 @@ openHelp : function()
 
 deleteSelectedItem : function()
 {
-  /**
     var me = USc_updatescan;
-    var str=document.getElementById("updatescanStrings")
     var id=me.tree.selectedNode.itemId;
-    var fileBase=USc_file.escapeFilename(id)
+    var filebase=USc_places.getSignature(id);
 
     if (id == "") return;
-    var title = USc_rdf.queryItem(id, "title", "untitled");
 
+//    var title = USc_rdf.queryItem(id, "title", "untitled");
 //    if (confirm(str.getString("confirmDelete") + " " + title + "?")) {
-        USc_file.USrmFile(fileBase+".old");
-        USc_file.USrmFile(fileBase+".new");
-        USc_file.USrmFile(fileBase+".dif");
-        USc_rdf.deleteItem(id);
-        USc_rdf.save();
-        me._refreshTree();
-        me.refresh.request();
-//    }
-**/
+    USc_places.deleteBookmark(id);
+    USc_file.USrmFile(fileBase+".old");
+    USc_file.USrmFile(fileBase+".new");
 },
 
 _showStopButton : function()
