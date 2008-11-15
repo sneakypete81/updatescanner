@@ -2,10 +2,6 @@ Bugs:
 * Sometimes right-clicking does funny things
 * Notification click doesn't work for mac
 
-Super Notification
- - show names of changed pages
- - one click to show diffpage
-
 Scan Regions
  - Work out how to structure the UI for this
 
@@ -25,6 +21,9 @@ Middle-click on toolbar icons opens in new tab
 diffpage.dtd remove leading spaces
 Added error display to diffpage
 Add "Current Page" link to error diffpage
+
+Super Notification - one click to show diffpage
+
 
 -- 2.3 --
 Ignore number changes doesn't appear when sliders are disabled.

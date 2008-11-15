@@ -171,12 +171,8 @@ var USc_places = {
 
   getSignature : function(id)
   {
-    var sig = this.queryAnno(id, this.ANNO_SIGNATURE, "");
-    if (sig == "")
-    {
-      sig = USc_file.escapeFilename(this.createSignature(id));
-      this.modifyAnno(id, this.ANNO_SIGNATURE, sig)
-    }
+    var sig = this.createSignature(id);
+    this.modifyAnno(id, this.ANNO_SIGNATURE, sig)
     
     return sig;
   },
@@ -206,10 +202,8 @@ var USc_places = {
   
   createSignature : function(id)
   {
-    var now = new Date();
-    
-    // build string to be hashed (URL+date/time)
-    var str = this.getURL(id) + now.getTime();
+    // build string to be hashed (URL+id)
+    var str = this.getURL(id) + id;
 
     var converter =
       Components.classes["@mozilla.org/intl/scriptableunicodeconverter"].
