@@ -25,7 +25,6 @@
 #bookmarks-view treechildren::-moz-tree-image(leaf),
 #bookmarks-view treechildren::-moz-tree-image(leaf, usc_state_no-updated) {
 }
-#bookmarks-view treechildren::-moz-tree-image(title, container, usc_state_updated),
 #bookmarks-view treechildren::-moz-tree-image(leaf, usc_state_updated) {
   list-style-image: url("chrome://updatescan/skin/updatescan_sm.png");
 }
