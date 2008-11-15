@@ -491,8 +491,13 @@ _WDiffToHtml : function(text, block)
         var identEnd = '';
 
 // detect block boundary
-        if ( (text.newToOld[i] != j) || (blockNumber == 0 ) ) {
-            if ( ( (text.newToOld[i] != null) || (i >= text.newWords.length) ) && ( (text.oldToNew[j] != null) || (j >= text.oldWords.length) ) ) {
+        if (i < text.newToOld.length)
+            var newToOldi = text.newToOld[i];
+        else
+            var newToOldi = null;
+            
+        if ( (newToOldi != j) || (blockNumber == 0 ) ) {
+            if ( ( (newToOldi != null) || (i >= text.newWords.length) ) && ( (text.oldToNew[j] != null) || (j >= text.oldWords.length) ) ) {
 
 // block moved right
                 var moved = block.newRight[blockNumber];

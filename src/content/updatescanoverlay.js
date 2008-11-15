@@ -59,21 +59,12 @@ load : function()
 // or if URL is in chrome:// space.
 _showMenu : function() 
 {
-    myDump(window.content.document.URL)
     if(gContextMenu.isTextSelected || !window.content.document.URL) {
         document.getElementById("AddToUpdateScan").hidden = true;
     } else {
         document.getElementById("AddToUpdateScan").hidden = false;
     }
-},
-
-addToUpdateScan : function(aBrowser)
-{
-    var url = window.content.document.URL;
-    var title = window.content.document.title || url;
-    USc_updatescan.openNewDialog(title, url);
 }
-
 }
 }
 

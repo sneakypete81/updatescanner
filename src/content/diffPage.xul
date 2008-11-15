@@ -103,7 +103,10 @@
       </hbox>
     </vbox>
 
-  <iframe id="sectionView" src="chrome://" type="content-primary" flex="1"
+  <!-- src="chrome://" now throws a warning, so display a blank page instead.
+       Needs to be in the chrome namespace or we get security problems -->
+  <iframe id="sectionView" src="chrome://updatescan/content/blank"
+          type="content-primary" flex="1"
           height="40"/>
 <!--
     <hbox id="sectionView">
@@ -123,6 +126,9 @@
   </hbox>
 
   <separator class="groove-thin"/>
-  <iframe class="content" id="diffFrame" src="chrome://" type="content-primary" flex="1" />
+  <!-- src="chrome://" now throws a warning, so display a blank page instead.
+       Needs to be in the chrome namespace or we get security problems -->
+  <iframe class="content" id="diffFrame" src="chrome://updatescan/content/blank"
+          type="content-primary" flex="1" />
 </window>
 

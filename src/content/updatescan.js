@@ -126,8 +126,9 @@ _treeClick : function(aEvent) {
 
 _treeKeypress : function(event)
 {
+  var me = USc_updatescan;    
   if (event.keyCode == event.DOM_VK_DELETE)
-    this.deleteSelectedItem()
+    me.deleteSelectedItem()
 },
 
 scanButtonClick : function()
@@ -168,8 +169,9 @@ scanSelectedPage : function()
     var ignoreNumbers;
     var encoding;
 
-    var id = me.tree.selectedNode.itemId;
-    if (id == "") return;
+    var id = me._getSelectedItem();
+    if (id == undefined)
+      return;
 
     me._showStopButton();
     
@@ -251,9 +253,27 @@ stopButtonClick : function()
     me._setStatus(str.getString("statusCancel"));
 },
 
-openNewDialogGetURL : function()
-// Opens a "New Item" dialog with the current page's URL/Title
+openNewDialogCurrentPos : function()
+// Opens a "New Item" dialog, and saves the new bookmark in the correct position
 {
+  var me = USc_updatescan;
+  var id = me._getSelectedItem();
+  if (id == undefined)
+    me.openNewDialog();
+  else if (USc_places.isFolder(id)) 
+    me.openNewDialog(id);
+  else
+    me.openNewDialog(USc_places.getParentFolder(id),
+                     USc_places.getIndex(id));
+},
+
+openNewDialog : function(parentId, index)
+{
+    if (typeof parentId == 'undefined' )
+      parentId = USc_places.getRootFolderId();
+    if (typeof index == 'iundefined') 
+      index = -1; // Insert at the bottom by default
+
     var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
                    .getInterface(Components.interfaces.nsIWebNavigation)
                    .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
@@ -261,29 +281,8 @@ openNewDialogGetURL : function()
                    .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
                    .getInterface(Components.interfaces.nsIDOMWindow) 
 
-    USc_overlay.addToUpdateScan(mainWindow.document.getElementById('content'))
-},
-
-openNewDialogFromContext : function()
-// Opens a "New Item" dialog, and saves the new bookmark in the correct position
-{
-  var me = USc_updatescan;
-  var id = me.tree.selectedNode.itemId;
-  if (USc_places.isFolder(id)) {
-    me.openNewDialog('','',id);
-  } else {
-    me.openNewDialog('','',
-                     USc_places.getParentFolder(id),
-                     USc_places.getIndex(id));
-  }
-},
-
-openNewDialog : function(title, url, parentId, index)
-{
-    if (typeof parentId == 'undefined' )
-      parentId = USc_places.getRootFolderId();
-    if (typeof index == 'iundefined') 
-      index = -1; // Insert at the bottom by default
+    var url = mainWindow.content.document.URL;
+    var title = mainWindow.content.document.title || url;
 
     var args = {
         title:          title, 
@@ -315,8 +314,9 @@ openNewDialog : function(title, url, parentId, index)
 openEditDialog : function()
 {
     var me = USc_updatescan;
-    var id = me.tree.selectedNode.itemId;
-    if (id == "") return;
+    var id = me._getSelectedItem();
+    if (id == undefined)
+      return;
 
     var args = {
         title:          USc_places.getTitle(id),
@@ -400,8 +400,9 @@ _diffItem : function(id)
 diffSelectedItemThisWindow : function()
 {
     var me = USc_updatescan;
-    var item = me.tree.selectedNode.itemId;
-    if (item == undefined) return;
+    var item = me._getSelectedItem()
+    if (item == undefined)
+      return;
     me._diffItemThisWindow(item);
 },
 
@@ -418,8 +419,9 @@ _diffItemThisWindow : function(id)
 diffSelectedItemNewTab : function()
 {
     var me = USc_updatescan;
-    var item = me.tree.selectedNode.itemId;
-    if (item == undefined) return;
+    var item = me._getSelectedItem();
+    if (item == undefined)
+      return;
     me._diffItemNewTab(item);    
 },
 
@@ -558,19 +560,29 @@ openHelp : function()
     USc_topWin.open(helpURL);
 },
 
+_getSelectedItem : function()
+{
+    var me = USc_updatescan;
+    if (me.tree.selectedNode)
+      return me.tree.selectedNode.itemId
+    else
+      return undefined
+},
+
 deleteSelectedItem : function()
 {
     var me = USc_updatescan;
-    var id=me.tree.selectedNode.itemId;
-    var filebase=USc_places.getSignature(id);
+    var id = me._getSelectedItem();
+    if (id == undefined)
+      return;
 
-    if (id == "") return;
+    var filebase=USc_places.getSignature(id);
 
 //    var title = USc_rdf.queryItem(id, "title", "untitled");
 //    if (confirm(str.getString("confirmDelete") + " " + title + "?")) {
     USc_places.deleteBookmark(id);
-    USc_file.USrmFile(fileBase+".old");
-    USc_file.USrmFile(fileBase+".new");
+    USc_file.USrmFile(filebase+".old");
+    USc_file.USrmFile(filebase+".new");
 },
 
 _showStopButton : function()
