@@ -1,6 +1,7 @@
 Bugs:
 * Sometimes right-clicking does funny things
 * Notification click doesn't work for mac
+* Signatures seem to be getting suffixes added
 
 Scan Regions
  - Work out how to structure the UI for this
@@ -10,6 +11,8 @@ Click link to scroll diffpage to change
 Show deletions too
 Configurable highlight colour
 
+Check for wifi proxy
+Weekly scan
 
 -- Unreleased --
 Middle-click now focusses new tab too

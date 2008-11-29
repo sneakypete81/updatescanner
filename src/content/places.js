@@ -223,8 +223,10 @@ var USc_places = {
     var hash = ch.finish(false);
 
     // convert the binary hash data to a hex string.
-    var hexHash = [this.toHexString(hash.charCodeAt(i)) for (i in hash)].join("");
-    
+    var hexHash = ""
+    for (var i=0; i<hash.length; i++) {
+      hexHash += this.toHexString(hash.charCodeAt(i))
+    }
     return hexHash;
   },
 
