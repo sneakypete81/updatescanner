@@ -303,10 +303,15 @@ openNewDialog : function(parentId, index)
     }
 },
 
-openEditDialog : function()
+openEditDialogForSelected : function()
 {
     var me = USc_updatescan;
     var id = me._getSelectedItem();
+    me.openEditDialog(id);
+},
+
+openEditDialog : function(id)
+{
     if (id == undefined)
       return;
 
@@ -316,7 +321,6 @@ openEditDialog : function()
          PlacesUIUtils.showItemProperties(id, "folder");
          return;
     }
-
 
     var args = {
         title:          USc_places.getTitle(id),

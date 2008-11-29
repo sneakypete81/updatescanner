@@ -13,7 +13,7 @@
     <command id="placesCmd_new:bookmark"
              oncommand="USc_updatescan.openNewDialogCurrentPos();"/>
     <command id="placesCmd_show:info" 
-             oncommand="USc_updatescan.openEditDialog();"/>
+             oncommand="USc_updatescan.openEditDialogForSelected();"/>
   </commandset>
 
 <!--    
@@ -44,7 +44,9 @@
               oncommand="USc_updatescan.diffSelectedFolderNewTab();"
               label="&opentabmenu.label;"
               selection="folder|host|query"/>
-  
+    <menuitem label="&markvisitedmenu.label;"
+              oncommand="USc_updatescan.markAllAsVisited();"
+              insertafter="placesContext_sortSeparator"/>
   </popup>
 
 

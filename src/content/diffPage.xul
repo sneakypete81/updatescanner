@@ -33,6 +33,7 @@
  * ***** END LICENSE BLOCK ***** -->
 
 <?xml-stylesheet href="chrome://updatescan/skin/diffPage.css" type="text/css"?>
+<?xul-overlay href="chrome://browser/content/places/placesOverlay.xul"?>
 
 <!DOCTYPE window SYSTEM "chrome://updatescan/locale/diffPage.dtd">
 
@@ -56,6 +57,7 @@
   <script src="mydump.js"/>
   <script src="string.js"/>
   <script src="places.js"/>
+  <script src="updatescan.js"/>
 
   <hbox class="blue-box">
   <spacer width="10"/>
@@ -66,8 +68,13 @@
   </vbox>
   <spacer width="20"/>
   <vbox flex="1">
+      <hbox>
+        <label class="plain" style="font-weight:bold;" id="title"/>
+        <spacer flex="1"/>
+        <label class="text-link" value="&editProperties;"
+               onclick="USc_diffPage.editProperties()"/>
+      </hbox>
     <vbox id="sectionOld" hidden="true">
-      <label class="plain" style="font-weight:bold;" id="titleOld"/>
       <hbox>
 	<label class="plain" value="&headerOld1;"/>
 	<label class="plain" id="dateOld" />
@@ -75,7 +82,6 @@
       </hbox>
     </vbox>
     <vbox id="sectionNew" hidden="true">
-      <label class="plain" style="font-weight:bold;" id="titleNew"/>
       <hbox>
 	<label class="plain" value="&headerNew1;"/>
 	<label class="plain" id="dateNew" />
@@ -83,7 +89,6 @@
       </hbox>
     </vbox>
     <vbox id="sectionDiff" hidden="true">
-      <label class="plain" style="font-weight:bold;" id="titleDiff"/>
       <hbox>
 	<label class="plain" value="&headerDiff1;"/>
 	<label class="plain" id="dateDiff" />	
@@ -94,7 +99,6 @@
       </hbox>
     </vbox>
     <vbox id="sectionNotChecked" hidden="true">
-      <label class="plain" style="font-weight:bold;" id="titleNotChecked"/>
       <label class="plain" value="&headerNotChecked1;"/>
       <hbox>	
 	<label class="plain" value="&headerNotChecked2;"/>
@@ -103,7 +107,6 @@
       </hbox>
     </vbox>
     <vbox id="sectionError" hidden="true">
-      <label class="plain" style="font-weight:bold;" id="titleError"/>
       <label class="plain" value="&headerError1;"/>
       <hbox>
         <label class="plain" value="&headerError2;"/> 
@@ -131,7 +134,6 @@
 -->    
 
   </vbox>
-  <spacer flex="1"/>
   </hbox>
 
   <separator class="groove-thin"/>

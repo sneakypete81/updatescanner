@@ -40,6 +40,7 @@ load : function()
         this.loaded = true;
     
         var id = this._getUrlParameter("id", "");
+        this.id = id
         var title = this._getUrlParameter("title", "");
         var newDate = this._getUrlParameter("newDate", "");
         var oldDate = this._getUrlParameter("oldDate", "");
@@ -47,6 +48,7 @@ load : function()
         var view = this._getUrlParameter("view", "diff");
 
         document.title = title;
+        document.getElementById("title").value=title;
 
         this.baseUrl = "chrome://updatescan/content/diffPage.xul?id="+escape(id) +
         "&title=" + escape(title) +
@@ -81,29 +83,24 @@ load : function()
 	switch (view) {
 	case "diff" :
 	    document.getElementById("sectionDiff").hidden=false;
-	    document.getElementById("titleDiff").value=title;
 	    document.getElementById("dateDiff").value=newDate;
             this._launchThread(url, oldContent, newContent);
 	    break;
 	case "new":
 	    document.getElementById("sectionNew").hidden=false;
-	    document.getElementById("titleNew").value=title;
 	    document.getElementById("dateNew").value=newDate;
 	    content = newContent;
 	    break;
 	case "old":
 	    document.getElementById("sectionOld").hidden=false;
-	    document.getElementById("titleOld").value=title;
 	    document.getElementById("dateOld").value=oldDate;
 	    content = oldContent;
 	    break;
         case "error":
 	    document.getElementById("sectionError").hidden=false;
-	    document.getElementById("titleError").value=title;
             break;
 	default:
 	    document.getElementById("sectionNotChecked").hidden=false;
-	    document.getElementById("titleNotChecked").value=title;
 	}
 
         this._writeViewFrame(view, url, enableDiffLinks);
@@ -115,6 +112,11 @@ load : function()
 click : function(view) 
 {
     location.href = this.baseUrl+view;
+},
+
+editProperties : function()
+{
+    USc_updatescan.openEditDialog(this.id);
 },
 
 _writeViewFrame : function (view, url, enableDiffLinks)

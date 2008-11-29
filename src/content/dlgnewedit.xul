@@ -76,6 +76,7 @@
     <hbox align="center">
         <label value="&often.label;"/>
         <scale id="sliderAutoscan"
+               pageincrement="1"
                flex="100%"
                onchange="sliderAutoscanChange();"/>        
         <label value="&never.label;" />
@@ -114,7 +115,8 @@
     <hbox align="center">
         <label value="&low.label;" />       
         <scale id="sliderThreshold"
-               flex="100%" 
+               flex="100%"
+               pageincrement="1"
                onchange="sliderThresholdChange();"/>
         <label value="&high.label;" />
     </hbox>
