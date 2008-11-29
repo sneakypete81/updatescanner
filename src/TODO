@@ -2,16 +2,12 @@ Bugs:
 * Sometimes right-clicking does funny things
 * Notification click doesn't work for mac
 
-Add "Mark All As read" to context menu
-
 Scan Regions
  - Work out how to structure the UI for this
 
-Add help button to preferences
 Click link to scroll diffpage to change
 Show deletions too
 Configurable highlight colour
-
 Check for wifi proxy
 
 -- Unreleased --
@@ -30,6 +26,9 @@ Bug fixed: Signatures seem to be getting suffixes added
 
 Weekly scan
 Using proper sliders - should work on mac now
+Add "Mark All As read" to context menu
+Added properties link to diffpage
+Add help button to preferences
 
 -- 2.3 --
 Ignore number changes doesn't appear when sliders are disabled.

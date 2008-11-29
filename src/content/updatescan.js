@@ -539,7 +539,7 @@ _markAsVisited : function(id)
     }
 },
 
-openHelp : function(aEvent)
+openHelp : function()
 {
     var str=document.getElementById("updatescanStrings")
     var locale = Components.classes["@mozilla.org/preferences-service;1"].
@@ -557,14 +557,7 @@ openHelp : function(aEvent)
 
     var helpURL="http://updatescanner.mozdev.org/redirect.php?page=help.html&locale="+locale;
     
-    switch (aEvent.button) {
-      case 0:
-        USc_topWin.open(helpURL);
-        break;
-      case 1:
-        mainWindow.getBrowser().selectedTab = mainWindow.getBrowser().addTab(helpURL);
-        break;
-    }
+    mainWindow.getBrowser().selectedTab = mainWindow.getBrowser().addTab(helpURL);
 },
 
 _getSelectedItem : function()

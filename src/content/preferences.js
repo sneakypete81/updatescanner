@@ -146,6 +146,22 @@ var USc_pref = {
     }
     catch (e) {}
     return 'unknown';
+  },
+  
+  openHelp : function()
+  {
+    var prefs = Components.classes["@mozilla.org/preferences-service;1"]
+                          .getService(Components.interfaces.nsIPrefBranch2);
+    var locale = prefs.getCharPref("general.useragent.locale")
+
+    var url="http://updatescanner.mozdev.org/redirect.php?page=help-preferences.html&locale="+locale;
+
+    // non-instant apply prefwindows are usually modal, so we can't open in the topmost window, 
+    // since its probably behind the window.
+    var instantApply = prefs.getBoolPref("browser.preferences.instantApply");
+    var where = instantApply ? "tab" : "window";
+
+    openUILinkIn(url, where);
   }
 
 }    

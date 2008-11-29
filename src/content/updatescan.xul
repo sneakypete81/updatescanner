@@ -86,7 +86,7 @@
       <toolbarbutton id="checked-button" oncommand="USc_updatescan.markAllAsVisited()" tooltiptext="&markallasvisitedbutton.tooltip;"/>
       <toolbarbutton id="delete-button" oncommand="USc_updatescan.deleteSelectedItem()" tooltiptext="&deletebutton.tooltip;"/>
       <toolbarbutton id="settings-button" oncommand="USc_updatescan.openPreferences()" tooltiptext="&preferencesbutton.tooltip;"/>
-      <toolbarbutton id="help-button" onclick="USc_updatescan.openHelp(event)" tooltiptext="&helpbutton.tooltip;"/>
+      <toolbarbutton id="help-button" onclick="USc_updatescan.openHelp();" tooltiptext="&helpbutton.tooltip;"/>
       <toolbarspring />
       <button observes="scanbutton" />
     </hbox>

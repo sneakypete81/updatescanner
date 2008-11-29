@@ -39,12 +39,18 @@
 
 <!DOCTYPE dialog SYSTEM "chrome://updatescan/locale/preferences.dtd">
 
-<prefwindow id="updatescanneP-prefs"
+<prefwindow id="updatescanner-prefs"
      title="&preferences.title;"
      xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-     onload="USc_pref.onPrefLoad()">
- 
+     onload="USc_pref.onPrefLoad();"
+     buttons="accept,cancel,help"
+     ondialoghelp="USc_pref.openHelp();">
+
+<script type="application/javascript" src="chrome://browser/content/utilityOverlay.js"/>
+<script type="application/x-javascript" src="chrome://updatescan/content/preferences.js"/>
+
 <prefpane id="notifications" label="&notifications.title;"
+          helpTopic="prefs-notifications"
           image="chrome://updatescan/skin/dialog-information.png">
   <preferences>
     <preference id="notifications.enable" 
@@ -112,6 +118,7 @@
   </groupbox>
 </prefpane>
 <prefpane id="scanning" label="&scanning.title;"
+          helpTopic="prefs-scanning"
           image="chrome://updatescan/skin/updatescan_big.png">
   <preferences>
     <preference id="scan.useSliders" 
@@ -157,6 +164,7 @@
 </groupbox>
 </prefpane> 
 <prefpane id="toolbar" label="&toolbar.title;"
+          helpTopic="prefs-toolbar"
           image="chrome://updatescan/skin/preferences-system.png">
   <preferences>
     <preference id="toolbar.new" 
@@ -206,6 +214,4 @@
 </hbox>
 </groupbox>
 </prefpane> 
-<script type="application/x-javascript" src="chrome://updatescan/content/preferences.js"/>
 </prefwindow>
-
