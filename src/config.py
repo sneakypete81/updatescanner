@@ -45,7 +45,7 @@ iconPath = "skin/updatescan_big.png"
 
 firefoxUID = 'ec8030f7-c20a-464f-9b0e-13a3a9e97384'
 firefoxMinVersion = '3.0'
-firefoxMaxVersion = '3.0.*'
+firefoxMaxVersion = '3.1.*'
 
 overlays = (
     # overlay this on that

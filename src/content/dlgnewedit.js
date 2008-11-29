@@ -31,9 +31,7 @@
  * ***** END LICENSE BLOCK ***** */
 
 var ksliderThresholdValues = 5;
-var ksliderThresholdMax = 100;
-var ksliderAutoscanValues = 6;
-var ksliderAutoscanMax = 100;
+var ksliderAutoscanValues = 7;
 
 function initDialog()
 {
@@ -55,13 +53,11 @@ function initDialog()
 
     if (useSliders) {
 
-	document.getElementById("sliderThreshold")
-                .setAttribute("maxpos", ksliderThresholdMax);
+	document.getElementById("sliderThreshold").max = ksliderThresholdValues;
 	sliderThresholdSetPos(sliderThresholdEncode(args.threshold));
 	sliderThresholdChange();
 
-	document.getElementById("sliderAutoscan")
-                .setAttribute("maxpos", ksliderAutoscanMax);
+	document.getElementById("sliderAutoscan").max = ksliderAutoscanValues;
 	sliderAutoscanSetPos(sliderAutoscanEncode(args.scanRateMins));
 	sliderAutoscanChange();
 
@@ -230,23 +226,21 @@ function manualScanChanged()
 function sliderThresholdGetPos()
 {
     var slider=document.getElementById("sliderThreshold");
-    return Math.round(slider.getAttribute("curpos") /
-              ksliderThresholdMax*ksliderThresholdValues);
+    return slider.value;
 }
 
 function sliderThresholdSetPos(value)
 {
     var slider=document.getElementById("sliderThreshold");
-    slider.setAttribute("curpos",value*ksliderThresholdMax /
-            ksliderThresholdValues);
+    slider.value = value;
 }
 
 function sliderThresholdChange() 
 {
     var strings=document.getElementById("strings");
-    var slider=document.getElementById("sliderThreshold");
     var label1=document.getElementById("label1");
     var label2=document.getElementById("label2");
+    
     var pos = sliderThresholdGetPos();
     if (pos == 0) {
         label1.value=strings.getString("thresholdLabel0a");
@@ -302,22 +296,20 @@ function sliderThresholdDecode(slider)
 function sliderAutoscanGetPos()
 {
     var slider=document.getElementById("sliderAutoscan");
-    return Math.round(slider.getAttribute("curpos") /
-              ksliderAutoscanMax*ksliderAutoscanValues);
+    return slider.value;
 }
 
 function sliderAutoscanSetPos(value)
 {
     var slider=document.getElementById("sliderAutoscan");
-    slider.setAttribute("curpos",value*ksliderAutoscanMax /
-            ksliderAutoscanValues);
+    slider.value = value;
 }
 
 function sliderAutoscanChange() 
 {
     var strings=document.getElementById("strings");
-    var slider=document.getElementById("sliderAutoscan");
     var label3=document.getElementById("label3");
+
     var pos = sliderAutoscanGetPos();
     if (pos == 0) {
         label3.value=strings.getString("autoscanLabel0a");
@@ -332,6 +324,8 @@ function sliderAutoscanChange()
     } else if (pos == 5) {
         label3.value=strings.getString("autoscanLabel5a");
     } else if (pos == 6) {
+        label3.value=strings.getString("autoscanLabelWeekly");
+    } else if (pos == 7) {
         label3.value=strings.getString("autoscanLabel6a");
     }
 }
@@ -339,7 +333,7 @@ function sliderAutoscanChange()
 function sliderAutoscanEncode(scanratemins)
 {
     if (scanratemins == 0)      // Manual
-        return 6;
+        return 7;
     if (scanratemins < 10)
         return 0;
     if (scanratemins < 20)
@@ -350,8 +344,10 @@ function sliderAutoscanEncode(scanratemins)
         return 3;
     if (scanratemins < 60 * 12)
         return 4;
-    else
+    if (scanratemins < 60 * 24 * 4)
         return 5;
+    else
+        return 6;
 }
 
 function sliderAutoscanDecode(slider)
@@ -368,6 +364,8 @@ function sliderAutoscanDecode(slider)
         return 60 * 6;   // 6 Hours
     if (slider == 5)
         return 60 * 24;  // Daily
+    if (slider == 6)
+        return 60 * 24 * 7;  // Weekly
     else
         return 0;        // Manual
 }

@@ -1,7 +1,8 @@
 Bugs:
 * Sometimes right-clicking does funny things
 * Notification click doesn't work for mac
-* Signatures seem to be getting suffixes added
+
+Add "Mark All As read" to context menu
 
 Scan Regions
  - Work out how to structure the UI for this
@@ -12,7 +13,6 @@ Show deletions too
 Configurable highlight colour
 
 Check for wifi proxy
-Weekly scan
 
 -- Unreleased --
 Middle-click now focusses new tab too
@@ -26,7 +26,10 @@ Added error display to diffpage
 Add "Current Page" link to error diffpage
 
 Super Notification - one click to show diffpage
+Bug fixed: Signatures seem to be getting suffixes added
 
+Weekly scan
+Using proper sliders - should work on mac now
 
 -- 2.3 --
 Ignore number changes doesn't appear when sliders are disabled.
