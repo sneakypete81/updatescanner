@@ -4,7 +4,7 @@
 version = "3.0beta1" # Don't forget to update upgrade.js too!
 in_development = False
 publish_babelzilla = False # True = include incomplete locales for babelzilla
-only_english = False # True = only include english for beta releases
+only_english = True # True = only include english for beta releases
 
 
 app = 'updatescan'
