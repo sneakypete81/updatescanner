@@ -150,44 +150,24 @@ scanButtonClick : function()
     
 },
 
-scanSelectedPage : function()
+scanSelected : function()
 {
-///TODO
-/**    var me = USc_updatescan;    
-    var id;
-    var filebase;
-    var numitems;
-    var str=document.getElementById("updatescanStrings")
-    var ignoreNumbers;
-    var encoding;
-
-    var id = me._getSelectedItem();
-    if (id == undefined)
-      return;
+    var me = USc_updatescan;    
 
     me._showStopButton();
-    
-    me.scan = new USc_scanner();
-        
-    filebase=USc_file.escapeFilename(id);
-    encoding = USc_rdf.queryItem(id, "encoding", "UTF-8");
-    if (USc_rdf.queryItem(id, "ignoreNumbers", "false") == "true") {
-    NOTE: ignorenumber is now always stored as a boolean
-	ignoreNumbers = true;
-    } else {
-	ignoreNumbers = false;
-    }
-    me.scan.addURL(id, USc_rdf.queryItem(id, "title", "No Title"), 
-		   USc_rdf.queryItem(id, "url", ""), 
-		   USc_file.USreadFile(filebase+".new"),
-		   USc_rdf.queryItem(id, "threshold", 100),
-		   ignoreNumbers,
-		   USc_rdf.queryItem(id, "encoding", "auto"));
 
-    me.numChanges=0;
-    me.scan.start(me._scanChangedCallback, me._scanFinishedCallback, me._showProgress,
-		  me._scanEncodingCallback);
-**/
+    me.scan = new USc_scanner();
+    me.numChanges = 0;
+
+    if (me.scan.addItems(me._getSelectedItem(), false) > 0)
+    {
+      me.scan.start(me._scanChangedCallback,
+                    me._scanFinishedCallback,
+                    me._showProgress,
+                    me._scanEncodingCallback);
+    } else {
+      me._scanFinishedCallback();
+    }
 },
 
 _scanChangedCallback : function(id, new_content, status, statusText, headerText)
@@ -619,18 +599,6 @@ _showProgress : function(title, value, max)
 _hideProgress : function()
 {   
     document.getElementById("Progress").collapsed=true;
-},
-
-_getNumItems : function()
-{
-  /**
-    var tree = document.getElementById("UpdateTree");
-    try {
-        return tree.contentView.rowCount;
-    } catch(e) {
-        return 0;
-    }
-    **/
 },
 
 _updateToolbar : function()

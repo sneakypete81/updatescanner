@@ -44,6 +44,17 @@
               oncommand="USc_updatescan.diffSelectedFolderNewTab();"
               label="&opentabmenu.label;"
               selection="folder|host|query"/>
+    <menuitem label="&scanThisPage.label;"
+              oncommand="USc_updatescan.scanSelected();"
+              insertbefore="placesContext_openSeparator"
+              selection="link"/>
+    <menuitem label="&scanThisFolder.label;"
+              oncommand="USc_updatescan.scanSelected();"
+              insertbefore="placesContext_openSeparator"
+              selection="folder|host|query"/>
+    <menuitem id="placesContext_cut" removeelement="true"/>
+    <menuitem id="placesContext_copy" removeelement="true"/>
+    <menuitem id="placesContext_paste" removeelement="true"/>
     <menuitem label="&markvisitedmenu.label;"
               oncommand="USc_updatescan.markAllAsVisited();"
               insertafter="placesContext_sortSeparator"/>

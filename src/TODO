@@ -30,6 +30,8 @@ Add "Mark All As read" to context menu
 Added properties link to diffpage
 Add help button to preferences
 
+Scan selected page/folder
+
 -- 2.3 --
 Ignore number changes doesn't appear when sliders are disabled.
 Middleclick on link in diffpage causes strange behaviour. Changed back to HTML
