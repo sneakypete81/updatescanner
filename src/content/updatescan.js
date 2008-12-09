@@ -65,7 +65,11 @@ load : function()
     me.tree = document.getElementById("bookmarks-view");
     me.tree.onclick=me._treeClick;
    
-    var rootFolderId = USc_places.getRootFolderId();
+    try {
+      var rootFolderId = USc_places.getRootFolderId();
+    } catch (e) {
+      var rootFolderId = USc_places.createRootFolder();
+    }
     me.tree.place = "place:queryType=1&folder=" + rootFolderId;
     
     PlacesUtils.annotations.addObserver(USc_sidebarAnnotationObserver);

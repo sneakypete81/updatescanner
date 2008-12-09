@@ -180,12 +180,10 @@ upgrade_3_0 : function()
 
 createRootBookmark : function ()
 {
-    var anno = Components.classes["@mozilla.org/browser/annotation-service;1"].getService(Ci.nsIAnnotationService);
-    var bookmarksService = Cc["@mozilla.org/browser/nav-bookmarks-service;1"].getService(Ci.nsINavBookmarksService);
-
-    if (USc_places.getRootFolderId() == null) {
-        var folderId = bookmarksService.createFolder(bookmarksService.bookmarksMenuFolder, "Update Scanner's Pages", bookmarksService.DEFAULT_INDEX);
-        USc_places.setRootFolderId(folderId);
+    try {
+        USc_places.getRootFolderId();
+    } catch (e) {
+        USc_places.createRootFolder();
     }
 },
 
@@ -193,9 +191,6 @@ createUSBookmark : function ()
 {
     var updatescanURL="http://updatescanner.mozdev.org/redirect.php?page=index.html&source=scan&locale="+this.getLocale();
     var bookmarkId = USc_places.addBookmark("Update Scanner Website", updatescanURL);
-//    var filebase = USc_file.escapeFilename(updatescanURL);
-//    USc_file.USwriteFile(filebase+".new", "");
-    
 },
 
 getLocale : function()

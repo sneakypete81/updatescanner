@@ -69,12 +69,24 @@ var USc_places = {
     if (results.length == 1) {
       rootFolderId = results[0];
     } else if (results.length == 0) {
-      myDump("Root folder not found")
-      rootFolderId = null;
+      throw "Root folder not found";
     } else if (results.length > 1) {
-      throw "Multiple root folders found";
+      myDump("Updatescan warning: Multiple root folders found");
+      rootFolderId = results[0];
+      annotationService.removeItemAnnotation(results[1], this.ANNO_ROOT);
     }
     return rootFolderId;
+  },
+
+  createRootFolder : function() {
+    var bookmarksService = Cc["@mozilla.org/browser/nav-bookmarks-service;1"].
+                            getService(Ci.nsINavBookmarksService);
+    var folderId = bookmarksService.
+                    createFolder(bookmarksService.bookmarksMenuFolder,
+                                 "Update Scanner's Pages",
+                                 bookmarksService.DEFAULT_INDEX);
+    USc_places.setRootFolderId(folderId);
+    return folderId;
   },
   
   // Set the updatescan/root annotation to the corresponding folder, as well as
@@ -86,7 +98,10 @@ var USc_places = {
     var annotationService = Components.classes["@mozilla.org/browser/annotation-service;1"].
                             getService(Components.interfaces.nsIAnnotationService);
     var results = annotationService.getItemsWithAnnotation(this.ANNO_ROOT, {});
-    if (results.length == 1) {
+    if (results.length == 0) {
+      annotationService.setItemAnnotation(folderId, this.ANNO_ROOT, "Update Scanner Root Folder", 0, annotationService.EXPIRE_NEVER);
+      annotationService.setItemAnnotation(folderId, this.ORGANIZER_QUERY_ANNO, "UpdatescanRoot", 0, annotationService.EXPIRE_NEVER);
+    } else {
       if (results[0] != folderId) {
         annotationService.removeItemAnnotation(results[0], this.ANNO_ROOT);
         annotationService.setItemAnnotation(folderId, this.ANNO_ROOT, "Update Scanner Root Folder", 0, annotationService.EXPIRE_NEVER);
@@ -97,11 +112,6 @@ var USc_places = {
         }
         annotationService.setItemAnnotation(folderId, this.ORGANIZER_QUERY_ANNO, "UpdatescanRoot", 0, annotationService.EXPIRE_NEVER);
       }
-    } else if (results.length == 0) {
-      annotationService.setItemAnnotation(folderId, this.ANNO_ROOT, "Update Scanner Root Folder", 0, annotationService.EXPIRE_NEVER);
-      annotationService.setItemAnnotation(folderId, this.ORGANIZER_QUERY_ANNO, "UpdatescanRoot", 0, annotationService.EXPIRE_NEVER);
-    } else if (results.length > 1) {
-      throw "Multiple root folders found";
     }
   },
 

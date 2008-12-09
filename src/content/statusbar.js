@@ -98,6 +98,13 @@ load : function()
     // Update parent folder annotations when bookmarks are moved/deleted
     bmsvc.addObserver(USc_statusbarBookmarkObserver, false);
 
+    // Make sure we have a root folder
+    try {
+        USc_places.getRootFolderId();
+    } catch (e) {
+        USc_places.createRootFolder();
+    }
+
     // See if we need to upgrade something
     USc_upgrade.check();
 

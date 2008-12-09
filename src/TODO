@@ -2,6 +2,8 @@ Bugs:
 * Sometimes right-clicking does funny things
 * Notification click doesn't work for mac
 
+Tooltip with date last scanned.
+
 Scan Regions
  - Work out how to structure the UI for this
 
@@ -11,6 +13,9 @@ Configurable highlight colour
 Check for wifi proxy
 
 -- Unreleased --
+Handles root folder deletion and multiple copies
+
+-- 3.0 Beta 1 --
 Middle-click now focusses new tab too
 Fixed display bug in diffpage header
 "open all in tabs" command now opens in background
