@@ -81,9 +81,14 @@ var USc_places = {
   createRootFolder : function() {
     var bookmarksService = Cc["@mozilla.org/browser/nav-bookmarks-service;1"].
                             getService(Ci.nsINavBookmarksService);
+    var gBundle = Components.classes["@mozilla.org/intl/stringbundle;1"].getService(Components.interfaces.nsIStringBundleService);
+    var strings = gBundle.createBundle("chrome://updatescan/locale/updatescan.properties");
+    var folderName = strings.GetStringFromName("rootFolderName");
+    
+
     var folderId = bookmarksService.
                     createFolder(bookmarksService.bookmarksMenuFolder,
-                                 "Update Scanner's Pages",
+                                 folderName,
                                  bookmarksService.DEFAULT_INDEX);
     USc_places.setRootFolderId(folderId);
     return folderId;

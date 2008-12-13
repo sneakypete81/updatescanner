@@ -41,6 +41,9 @@ VERSION : "3.0beta1",
 
 check : function()
 {
+    var gBundle = Components.classes["@mozilla.org/intl/stringbundle;1"].getService(Components.interfaces.nsIStringBundleService);
+    var strings = gBundle.createBundle("chrome://updatescan/locale/updatescan.properties");
+    
     if (this.isNewInstall()) {
         this.createRootBookmark();
         this.createUSBookmark();
@@ -49,9 +52,9 @@ check : function()
     }
 
     if (this.isVersionBefore("2.0.14")) {
-        alert("You are upgrading from a very old version of UpdateScanner.\n"+
-              "Please upgrade to version 2.2.3 first. You can get this from \n"+
-              "https://addons.mozilla.org/en-US/firefox/addons/versions/3362");
+        alert(strings.GetStringFromName("upgradeBefore2_2_3_a") + "\n" +
+              strings.GetStringFromName("upgradeBefore2_2_3_b") + "\n" +
+              strings.GetStringFromName("upgradeBefore2_2_3_c"));
         this.createRootBookmark();
         return;
     }

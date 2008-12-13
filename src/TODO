@@ -4,6 +4,8 @@ Bugs:
 
 Tooltip with date last scanned.
 
+Check ETAG hash without scanning page
+
 Scan Regions
  - Work out how to structure the UI for this
 
