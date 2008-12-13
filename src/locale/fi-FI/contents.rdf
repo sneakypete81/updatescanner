@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<RDF:RDF
+    xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:chrome="http://www.mozilla.org/rdf/chrome#"
+>
+    <RDF:Seq about="urn:mozilla:locale:root">
+        <RDF:li resource="urn:mozilla:locale:en-US"/>
+    </RDF:Seq>
+    <RDF:Description
+        about="urn:mozilla:locale:en-US"
+        chrome:displayName="Suomeksi"
+        chrome:author="Olli"
+        chrome:name="fi-FI"
+        chrome:previewURL="http://www.mozilla.org/locales/fi-FI.gif"
+    >
+        <chrome:packages>
+            <RDF:Seq about="urn:mozilla:locale:fi-FI:packages">
+                <RDF:li resource="urn:mozilla:locale:fi-FI:updatescan"/>
+            </RDF:Seq>
+        </chrome:packages>
+    </RDF:Description>
+</RDF:RDF>

@@ -1,3 +1,3 @@
-<!ENTITY UpdateScan.tooltip "Analyser les pages Web pour suivre leurs mises à jour">
-<!ENTITY AddToUpdateScan.label "Analyser les pages pour suivre leurs mises à jour…">
+<!ENTITY UpdateScan.tooltip "Vérifier les mises à jour des pages Web">
+<!ENTITY AddToUpdateScan.label "Vérifier les mises à jour de la page…">
 <!ENTITY AddToUpdateScan.accesskey "U">

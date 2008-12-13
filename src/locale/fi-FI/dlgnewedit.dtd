@@ -1,0 +1,20 @@
+<!ENTITY url.label "URL:">
+<!ENTITY title.label "Otsikko:">
+<!ENTITY threshold.label "Muutoksen alaraja">
+<!ENTITY autoscan.label "Automaattinen skannaus">
+<!ENTITY low.label "Matala">
+<!ENTITY high.label "Korkea">
+<!ENTITY often.label "Usein">
+<!ENTITY never.label "Ei koskaan">
+<!ENTITY manualScan.label "Manuaalinen skannaus">
+<!ENTITY scanEvery.label "Skannaa joka">
+<!ENTITY minutes.label "minuutti">
+<!ENTITY hours.label "tunti">
+<!ENTITY days.label "päivä">
+<!ENTITY ignoreChanges.label "Hylkää muutokset jotka ovat vähemmän kuin noin">
+<!ENTITY characters.label "merkkiä">
+<!ENTITY ignoreNumbers.label "Hylkää muutokset numeroihin">
+<!ENTITY advanced.label "Kehittynyt...">
+<!ENTITY charEncoding.label "Merkistökoodaus">
+<!ENTITY autoDetect.label "Automaattinen tunnistus">
+<!ENTITY use.label "Käytä">

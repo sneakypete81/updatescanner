@@ -1,12 +1,17 @@
-<!ENTITY headerOld1 "">
+<!ENTITY headerOld1 "Siden nedenunder er den gamle version af hjemmesiden, skannet ">
 <!ENTITY headerOld2 ".">
-<!ENTITY headerNew1 "">
+<!ENTITY headerNew1 "Siden nedenunder er den nye version af hjemmesiden, skannet ">
 <!ENTITY headerNew2 ".">
-<!ENTITY headerDiff1 "">
-<!ENTITY headerDiff2 "">
-<!ENTITY headerDiff3 "">
+<!ENTITY headerDiff1 "Siden nedenunder blev senest skannet ">
+<!ENTITY headerDiff2 ". Ændringerne er ">
+<!ENTITY headerDiff3 "fremhævet">
 <!ENTITY headerDiff4 ".">
-<!ENTITY headerNotChecked1 "">
-<!ENTITY headerNotChecked2 "">
-<!ENTITY headerNotChecked3 "">
-<!ENTITY headerNotChecked4 "">
+<!ENTITY headerNotChecked1 "De valgte sider er endnu ikke blevet checket.">
+<!ENTITY headerNotChecked2 "Tryk venligst på">
+<!ENTITY headerNotChecked3 "&apos;Skan&apos;">
+<!ENTITY headerNotChecked4 "knappen til venstre og prøv igen.">
+<!ENTITY view "Visning">
+<!ENTITY oldPage "Gammel side">
+<!ENTITY newPage "Ny side">
+<!ENTITY changes "Ændringer">
+<!ENTITY currentPage "Nuværende side">

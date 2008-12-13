@@ -1,0 +1,17 @@
+<!ENTITY headerOld1 "Alla oleva sivu on vanha versio nettisivusta, skannattu">
+<!ENTITY headerOld2 ".">
+<!ENTITY headerNew1 "Alla oleva sivu on uusi versio nettisivusta, skannattu">
+<!ENTITY headerNew2 ".">
+<!ENTITY headerDiff1 "Alla oleva sivu on skannattu viimeksi">
+<!ENTITY headerDiff2 ". Muutokset on">
+<!ENTITY headerDiff3 "korostettu">
+<!ENTITY headerDiff4 ".">
+<!ENTITY headerNotChecked1 "Valittua sivua ei ole vielä tarkistettu.">
+<!ENTITY headerNotChecked2 "Klikkaa">
+<!ENTITY headerNotChecked3 "&apos;Skannaa&apos;">
+<!ENTITY headerNotChecked4 "-painiketta vasemmalta, ja yritä uudelleen.">
+<!ENTITY view "Näytä">
+<!ENTITY oldPage "Vanha sivu">
+<!ENTITY newPage "Uusi sivu">
+<!ENTITY changes "Muutokset">
+<!ENTITY currentPage "Nykyinen sivu">

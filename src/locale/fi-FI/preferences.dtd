@@ -1,0 +1,26 @@
+<!ENTITY preferences.title "Update Scannerin asetukset">
+<!ENTITY notifications.title "Ilmoitukset">
+<!ENTITY scanning.title "Skannaaminen">
+<!ENTITY toolbar.title "Työkalurivi">
+<!ENTITY notifications.enable.label "Näytä ilmoitusikkuna kun Internet-sivu muuttuu">
+<!ENTITY notifications.timed.label1 "Näytä">
+<!ENTITY notifications.timed.label2 "sekuntia">
+<!ENTITY notifications.permanent.label "Näytä niin kauan kun suljetaan manuaalisesti">
+<!ENTITY notifications.playSound.label "Toista ääni kun Internet-sivu muuttuu">
+<!ENTITY notifications.defaultSound.label "Oletusääni">
+<!ENTITY notifications.browse.label "Selaa...">
+<!ENTITY scan.pageProperties.label "Sivun ominaisuudet">
+<!ENTITY scan.selectUsing.label "Valitse skannausarvo ja alaraja käyttäen">
+<!ENTITY scan.sliders.label "Liukusäätimet">
+<!ENTITY scan.numbers.label "Numerot">
+<!ENTITY scan.warnScanShort.label "Ilmoita, kun skannausaika on liian lyhyt">
+<!ENTITY scan.advanced.label "Kehittyneet">
+<!ENTITY scan.timeoutIfLonger.label "Aikaraja jos skannaukseen menee enemmän kuin">
+<!ENTITY scan.seconds.label "sekuntia">
+<!ENTITY toolbar.toolbarIcons.label "Työkalurivin kuvakkeet">
+<!ENTITY toolbar.new.label "Uusi kohde">
+<!ENTITY toolbar.showNewTab.label "Näytä kaikki muuttuneet sivut uusilla välilehdillä">
+<!ENTITY toolbar.markVisited.label "Merkitse kaikki vierailluiksi">
+<!ENTITY toolbar.delete.label "Poista">
+<!ENTITY toolbar.preferences.label "Asetukset">
+<!ENTITY toolbar.help.label "Ohje">

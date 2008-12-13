@@ -1,16 +1,16 @@
-<!ENTITY scanbutton.label "Scan">
+<!ENTITY scanbutton.label "Skan">
 <!ENTITY stopbutton.label "Fortryd">
-<!ENTITY newbutton.tooltip "Ny">
+<!ENTITY newbutton.tooltip "Ny side">
 <!ENTITY showallchangesinnewtabsbutton.tooltip "Vis alle ændrede sider i nye faneblade">
-<!ENTITY markallasvisitedbutton.tooltip "">
+<!ENTITY markallasvisitedbutton.tooltip "Marker alle sider som besøgte">
 <!ENTITY deletebutton.tooltip "Slet">
-<!ENTITY preferencesbutton.tooltip "">
-<!ENTITY helpbutton.tooltip "Hjælp til Opdaterings scanner">
-<!ENTITY openmenu.label "Vis Ændringer">
+<!ENTITY preferencesbutton.tooltip "Update Scanner indstillinger">
+<!ENTITY helpbutton.tooltip "Hjælp til Update Scanner">
+<!ENTITY openmenu.label "Vis ændringer">
 <!ENTITY opentabmenu.label "Vis ændringer i nyt faneblad">
 <!ENTITY showallchangesinnewtabsmenu.label "Vis alle ændrede sider i nye faneblade">
-<!ENTITY markvisitedmenu.label "Marker som besøgt">
+<!ENTITY markvisitedmenu.label "Marker alle sider som besøgte">
 <!ENTITY sortbynamemenu.label "Sorter efter navn">
 <!ENTITY deletemenu.label "Slet">
 <!ENTITY editmenu.label "Egenskaber">
-<!ENTITY scanThisPage.label "">
+<!ENTITY scanThisPage.label "Skan denne side">

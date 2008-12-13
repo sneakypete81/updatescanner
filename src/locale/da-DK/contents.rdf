@@ -9,7 +9,7 @@
     <RDF:Description
         about="urn:mozilla:locale:da-DK"
         chrome:displayName="Dansk"
-        chrome:author="123tp"
+        chrome:author="123tp, Joergen"
         chrome:name="da-DK"
         chrome:previewURL="http://www.mozilla.org/locales/da-DK.gif"
     >

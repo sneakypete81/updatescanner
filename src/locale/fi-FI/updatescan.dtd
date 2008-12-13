@@ -1,0 +1,16 @@
+<!ENTITY scanbutton.label "Skannaa">
+<!ENTITY stopbutton.label "Peruuta">
+<!ENTITY newbutton.tooltip "Uusi kohde">
+<!ENTITY showallchangesinnewtabsbutton.tooltip "Näytä kaikki muuttuneet sivut uusilla välilehdillä">
+<!ENTITY markallasvisitedbutton.tooltip "Merkitse kaikki vierailluiksi">
+<!ENTITY deletebutton.tooltip "Poista">
+<!ENTITY preferencesbutton.tooltip "Update Scannerin asetukset">
+<!ENTITY helpbutton.tooltip "Update Scannerin ohje">
+<!ENTITY openmenu.label "Näytä muutokset">
+<!ENTITY opentabmenu.label "Näytä muutokset uudella välilehdellä">
+<!ENTITY showallchangesinnewtabsmenu.label "Näytä kaikki muutetut sivut uusilla välilehdillä">
+<!ENTITY markvisitedmenu.label "Merkitse kaikki vierailluiksi">
+<!ENTITY sortbynamemenu.label "Järjestä nimen mukaan">
+<!ENTITY deletemenu.label "Poista">
+<!ENTITY editmenu.label "Ominaisuudet">
+<!ENTITY scanThisPage.label "Skannaa tämä sivu">

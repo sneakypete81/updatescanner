@@ -1,20 +1,20 @@
 <!ENTITY url.label "URL:">
 <!ENTITY title.label "Titel:">
-<!ENTITY threshold.label "Ændringer">
-<!ENTITY autoscan.label "Autoscan">
+<!ENTITY threshold.label "Ændr grænse">
+<!ENTITY autoscan.label "Autoskan">
 <!ENTITY low.label "Lav">
 <!ENTITY high.label "Høj">
 <!ENTITY often.label "Ofte">
 <!ENTITY never.label "Aldrig">
-<!ENTITY manualScan.label "">
-<!ENTITY scanEvery.label "">
-<!ENTITY minutes.label "">
-<!ENTITY hours.label "">
-<!ENTITY days.label "">
-<!ENTITY ignoreChanges.label "">
-<!ENTITY characters.label "">
-<!ENTITY ignoreNumbers.label "Ignorer ændringer til nummer">
+<!ENTITY manualScan.label "Manuel skan">
+<!ENTITY scanEvery.label "Skan hvert">
+<!ENTITY minutes.label "minut">
+<!ENTITY hours.label "time">
+<!ENTITY days.label "dag">
+<!ENTITY ignoreChanges.label "Ignorer ændringer mindre end">
+<!ENTITY characters.label "tegn">
+<!ENTITY ignoreNumbers.label "Ignorer ændringer i tal">
 <!ENTITY advanced.label "Avanceret...">
-<!ENTITY charEncoding.label "Ændringer fundet">
-<!ENTITY autoDetect.label "Automatisk Søgning">
-<!ENTITY use.label "Brug">
+<!ENTITY charEncoding.label "Tegnkodning">
+<!ENTITY autoDetect.label "Auto-detekter">
+<!ENTITY use.label "Anvend">
