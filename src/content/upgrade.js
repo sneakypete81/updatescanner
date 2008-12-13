@@ -43,6 +43,10 @@ check : function()
 {
     var gBundle = Components.classes["@mozilla.org/intl/stringbundle;1"].getService(Components.interfaces.nsIStringBundleService);
     var strings = gBundle.createBundle("chrome://updatescan/locale/updatescan.properties");
+
+    if (!USc_file.updatescanDirExists()) {
+        USc_file.createUpdatescanDir();
+    }
     
     if (this.isNewInstall()) {
         this.createRootBookmark();
