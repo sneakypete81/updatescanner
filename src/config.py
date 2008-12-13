@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # coding=UTF-8
 
-version = "3.0beta1.1" # Don't forget to update upgrade.js too!
-in_development = False
-publish_babelzilla = True # True = include incomplete locales for babelzilla
-only_english = False # True = only include english for beta releases
+version = "3.0beta1.2" # Don't forget to update upgrade.js too!
+in_development = True
+publish_babelzilla = False # True = include incomplete locales for babelzilla
+only_english = True # True = only include english for beta releases
 
 
 app = 'updatescan'
@@ -24,10 +24,11 @@ translators = ['SlovakSoft (Slovenčina)',
                'Leszek(teo)Życzkowski (Polski)',
                'PetrTwo (Čeština)',
                'Raryel Costa Souza (português brasileiro)',
-#               '123tp (Dansk)',
+               '123tp, Jørgen (Dansk)',
                'Kenan Balamir (Türkçe)',
                'Wang King (简化字 - Simplified Chinese)',
-               'Peter Pin-Guang Chen (簡化字 - Traditional Chinese)']
+               'Peter Pin-Guang Chen (簡化字 - Traditional Chinese)',
+               'Olli (Suomeksi)']
 authorURL = "http://updatescanner.mozdev.org"
 uid = 'c07d1a49-9894-49ff-a594-38960ede8fb9'
 optionsChrome = 'chrome://updatescan/content/preferences.xul'

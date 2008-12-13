@@ -126,6 +126,7 @@ _writeViewFrame : function (view, url, enableDiffLinks)
     var viewFrame = document.getElementById("sectionView");
     var viewDoc = viewFrame.contentDocument;
 
+    var viewStr=str.getString("view");
     var oldPage=str.getString("oldPage");
     var newPage=str.getString("newPage");
     var changes=str.getString("changes");
@@ -135,7 +136,7 @@ _writeViewFrame : function (view, url, enableDiffLinks)
     viewDoc.write("<html><head>");
     viewDoc.write("<link rel='stylesheet' href='chrome://updatescan/skin/diffPage.css' type='text/css'/>");
     viewDoc.write("</head><body>");
-    viewDoc.write("<b>View:</b>&nbsp;\n");
+    viewDoc.write("<b>"+viewStr+":</b>&nbsp;\n");
 
     if (view == "old") 
         viewDoc.write("<b>"+oldPage+"</b>&nbsp;\n");

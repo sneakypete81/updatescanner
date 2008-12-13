@@ -76,23 +76,23 @@
       </hbox>
     <vbox id="sectionOld" hidden="true">
       <hbox>
-	<label class="plain" value="&headerOld1;"/>
+	<label class="plain" value="&headerOld1; "/>
 	<label class="plain" id="dateOld" />
 	<label class="plain" value="&headerOld2;"/>
       </hbox>
     </vbox>
     <vbox id="sectionNew" hidden="true">
       <hbox>
-	<label class="plain" value="&headerNew1;"/>
+	<label class="plain" value="&headerNew1; "/>
 	<label class="plain" id="dateNew" />
 	<label class="plain" value="&headerNew2;"/>
       </hbox>
     </vbox>
     <vbox id="sectionDiff" hidden="true">
       <hbox>
-	<label class="plain" value="&headerDiff1;"/>
+	<label class="plain" value="&headerDiff1; "/>
 	<label class="plain" id="dateDiff" />	
-	<label class="plain" value="&headerDiff2;"/>
+	<label class="plain" value="&headerDiff2; "/>
 	<label class="plain" style="font-weight:bold;background-color:yellow;" 
                              value="&headerDiff3;"/>
 	<label class="plain" value="&headerDiff4;"/>
@@ -101,7 +101,7 @@
     <vbox id="sectionNotChecked" hidden="true">
       <label class="plain" value="&headerNotChecked1;"/>
       <hbox>	
-	<label class="plain" value="&headerNotChecked2;"/>
+	<label class="plain" value="&headerNotChecked2; "/>
 	<label class="plain" style="font-weight:bold;" value="&headerNotChecked3;"/>
 	<label class="plain" value=" &headerNotChecked4;"/>
       </hbox>
@@ -109,7 +109,7 @@
     <vbox id="sectionError" hidden="true">
       <label class="plain" value="&headerError1;"/>
       <hbox>
-        <label class="plain" value="&headerError2;"/> 
+        <label class="plain" value="&headerError2; "/> 
 	<label class="plain" style="font-weight:bold;" value="&headerError3;"/>
 	<label class="plain" value=" &headerError4;"/>
       </hbox>
