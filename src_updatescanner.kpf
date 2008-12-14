@@ -377,6 +377,8 @@
 </folder>
 <file id="9321ba47-d14b-4f53-b6d4-eedc6c0eae52" idref="2d527c45-7a8c-4ae9-b032-a97a6f940f48" name="install.rdf" url="src/install.rdf">
 </file>
+<file id="9771d8d0-2694-44ae-85d3-d0b94e0ea75f" idref="2d527c45-7a8c-4ae9-b032-a97a6f940f48" name="unused_entities.sh" url="src/locale/unused_entities.sh">
+</file>
 <folder id="99b7c97a-afc4-42f6-9bc5-08a79937bfac" idref="2d527c45-7a8c-4ae9-b032-a97a6f940f48" name="chrome" url="src/chrome">
 </folder>
 <file id="9b68fd3c-0984-4372-9d41-e30e85649c0a" idref="2d527c45-7a8c-4ae9-b032-a97a6f940f48" name="xpi.build" url="src/xpi.build">

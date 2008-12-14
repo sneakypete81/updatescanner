@@ -11,22 +11,28 @@ imagePreviews=['browser_context_menu.png',
                'properties_dialog.png',
                'webpage_changes.png'
                ]
-maxSizes={'browser_context_menu.png'      :'800x600>',
-          'browser_context_menu_prv.png'  :'400x600>',
-          'button_delete.png'             :'120x40>',
-          'button_new.png'                :'120x40>',
-          'button_newtabs.png'            :'120x40>',
-          'button_scan.png'               :'120x40>',
-          'notification_popup.png'        :'200x200>',
-          'properties_dialog.png'         :'800x600>',
-          'properties_dialog_prv.png'     :'400x600>',
-          'sidebar_context.png'           :'800x600>',
-          'statusbar.png'                 :'400x600>',
-          'webpage_changes.png'           :'800x600>',
-          'webpage_changes_prv.png'       :'400x600>',
-          'pref_notifications.png'        :'800x600>',
-          'pref_scanning.png'             :'800x600>',
-          'pref_toolbar.png'              :'800x600>'
+
+img_button = '120x40>'
+img_preview = '400x600>'
+img_large = '900x900>'
+
+maxSizes={'browser_context_menu.png'      : img_large,
+          'browser_context_menu_prv.png'  : img_preview,
+          'button_delete.png'             : img_button,
+          'button_new.png'                : img_button,
+          'button_newtabs.png'            : img_button,
+          'button_scan.png'               : img_button,
+          'notification_popup.png'        : img_preview,
+          'properties_dialog.png'         : img_large,
+          'properties_dialog_prv.png'     : img_preview,
+          'sidebar_context.png'           : img_large,
+          'statusbar.png'                 : img_preview,
+          'webpage_changes.png'           : img_large,
+          'webpage_changes_prv.png'       : img_preview,
+          'pref_notifications.png'        : img_large,
+          'pref_scanning.png'             : img_large,
+          'pref_toolbar.png'              : img_large,
+          'donate.png'                    : img_preview,
             }
 
 try: 

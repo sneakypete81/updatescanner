@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding=UTF-8
 
-version = "3.0beta1.2" # Don't forget to update upgrade.js too!
+version = "3.0beta1.3" # Don't forget to update upgrade.js too!
 in_development = True
 publish_babelzilla = False # True = include incomplete locales for babelzilla
 only_english = True # True = only include english for beta releases
@@ -69,6 +69,10 @@ locales = {
         'locale_version': '1.0',
         'display_name': name,
     },                      
+    'da-DK': {
+        'locale_version': '1.0',
+        'display_name': name,
+    },           
     'de-DE': {
         'locale_version': '1.0',
         'display_name': name,
@@ -81,6 +85,10 @@ locales = {
         'locale_version': '1.0',
         'display_name': name,
     },
+    'fi-FI': {
+        'locale_version': '1.0',
+        'display_name': name,
+    },           
     'fr-FR': {
         'locale_version': '1.0',
         'display_name': name,
@@ -132,10 +140,6 @@ locales = {
 }
 
 incomplete_locales = {
-    'da-DK': {
-        'locale_version': '1.0',
-        'display_name': name,
-    },           
     'ja-JP': {
         'locale_version': '1.0',
         'display_name': name,
