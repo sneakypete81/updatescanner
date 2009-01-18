@@ -167,6 +167,17 @@ _writeViewFrame : function (view, url, enableDiffLinks)
 
 _writeContentFrame : function (url, content)
 {
+// This works, but leaves the iframe in quirks mode.
+// Use WebBrowserStream interface instead??
+//    re = /<head>/i;
+//    header_insert = "<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>\n" +
+//                    "<base href='"+url+"' target='_parent'>\n" 
+//    // Insert header into <head> element if possible, otherwise just tack on the start
+//    if (re.test(content))
+//        content = content.replace(re, "<head>"+header_insert)
+//    else
+//        content = header_insert + content
+        
     var doc = document.getElementById("diffFrame").contentDocument;
     doc.open();
     doc.write("<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>\n");

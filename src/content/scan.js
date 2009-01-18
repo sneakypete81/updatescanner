@@ -158,6 +158,11 @@ function USc_scanner()
                                                         USc_defaults.DEF_LAST_AUTOSCAN);
                 var now = new Date();
                 lastAutoScan = new Date(lastAutoScan);
+
+                 //do not allow last scan to be in the future
+                 if (now - lastAutoScan < 0)
+                    lastAutoScan = new Date(USc_defaults.DEF_LAST_AUTOSCAN);
+
                 if (now - lastAutoScan < scanRate*1000*60)
                     return;
                 USc_places.modifyAnno(itemId, USc_places.ANNO_LAST_AUTOSCAN,
