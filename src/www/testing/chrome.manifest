@@ -14,5 +14,6 @@ locale updatescan_www fr-FR jar:chrome/updatescan_www.jar!/locale/fr-FR/
 locale updatescan_www tr-TR jar:chrome/updatescan_www.jar!/locale/tr-TR/
 locale updatescan_www pl-PL jar:chrome/updatescan_www.jar!/locale/pl-PL/
 locale updatescan_www pt-BR jar:chrome/updatescan_www.jar!/locale/pt-BR/
+locale updatescan_www fi-FI jar:chrome/updatescan_www.jar!/locale/fi-FI/
 locale updatescan_www es-ES jar:chrome/updatescan_www.jar!/locale/es-ES/
 locale updatescan_www ru-RU jar:chrome/updatescan_www.jar!/locale/ru-RU/

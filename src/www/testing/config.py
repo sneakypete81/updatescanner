@@ -11,7 +11,7 @@ uid = '093dbef3-87da-4d49-9836-b717b8196cb1'
 
 major_version = 0
 minor_version = 0
-revision_version = 3
+revision_version = 4
 build_version = False
 in_development = False
 
@@ -64,6 +64,10 @@ locales = {
         'display_name': name,
     },
     'es-ES': {
+        'locale_version': '1.0',
+        'display_name': name,
+    },
+    'fi-FI': {
         'locale_version': '1.0',
         'display_name': name,
     },

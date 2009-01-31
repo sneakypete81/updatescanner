@@ -4,7 +4,7 @@ import os
 import shutil
 
 testing = True
-english_only = True
+english_only = False
 
 if testing:
     outputPath = '../../../www/testing'
