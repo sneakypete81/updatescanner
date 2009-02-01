@@ -6,6 +6,24 @@ import shutil
 testing = True
 english_only = False
 
+valid_locales = ["zh-CN",
+           "cs-CZ",
+           "nl-NL",
+           "en-US",
+           "fi-FI",
+           "fr-FR",
+           "de-DE",
+           "hu-HU",
+           "it-IT",
+           "pt-BR",
+           "ru-RU",
+           "sk-SK",
+           "es-ES",
+           "tr-TR",
+           ]
+if english_only:
+    valid_locales = ["en-US"]
+
 if testing:
     outputPath = '../../../www/testing'
 else:
@@ -19,7 +37,7 @@ def parseLocales(localePath):
         if locale == "CVS" or not os.path.isdir(os.path.join(localePath,locale)): 
             continue
 
-        if english_only and locale != "en-US":
+        if locale not in valid_locales:
             continue
 
 
