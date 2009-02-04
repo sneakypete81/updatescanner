@@ -8,6 +8,7 @@ english_only = False
 
 valid_locales = ["zh-CN",
            "cs-CZ",
+           "da-DK",
            "nl-NL",
            "en-US",
            "fi-FI",
@@ -15,6 +16,7 @@ valid_locales = ["zh-CN",
            "de-DE",
            "hu-HU",
            "it-IT",
+#           "ko-KR",
            "pt-BR",
            "ru-RU",
            "sk-SK",
@@ -39,8 +41,7 @@ def parseLocales(localePath):
 
         if locale not in valid_locales:
             continue
-
-
+ 
         locales[locale] = {}
         valid_locale = False
         for propFile in os.listdir(os.path.join(localePath,locale)):
