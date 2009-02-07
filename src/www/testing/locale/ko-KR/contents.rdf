@@ -3,12 +3,12 @@
     xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:chrome="http://www.mozilla.org/rdf/chrome#">
     <RDF:Seq about="urn:mozilla:locale:root">
-        <RDF:li resource="urn:mozilla:locale:en-US"/>
+        <RDF:li resource="urn:mozilla:locale:ko-KR"/>
     </RDF:Seq>
     <RDF:Description
-        about="urn:mozilla:locale:en-US"
-        chrome:displayName="English (US)"
-        chrome:author="Pete Burgers"
-        chrome:name="en-US"
+        about="urn:mozilla:locale:ko-KR"
+        chrome:displayName="Korean (KR)"
+        chrome:author="용오름(Wtspout)"
+        chrome:name="ko-KR"
     </RDF:Description>
 </RDF:RDF>
