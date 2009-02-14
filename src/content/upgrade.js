@@ -37,7 +37,7 @@ var USc_upgrade_exists = true;
 var USc_upgrade = {    
 
 
-VERSION : "3.0beta1",
+VERSION : "3.0",
 
 check : function()
 {
@@ -148,13 +148,10 @@ upgrade_3_0 : function()
               cancelPrompt:strings.GetStringFromName("upgradeCancel"), 
               retVal:null, 
               retData:null};       
-    alert("Upgrading")
     window.openDialog('chrome://updatescan/content/progress.xul', 
                       'dlgProgress', 
                       'chrome,dialog,modal,centrescreen', params);
-    alert("Upgraded")
     if (!params.retVal) {
-    alert("Failed")
         return false; // Upgrade was cancelled
     }
     return true;
