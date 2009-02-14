@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # coding=UTF-8
 
-version = "3.0beta1.4" # Don't forget to update upgrade.js too!
-in_development = True
+version = "3.0beta2" # Don't forget to update upgrade.js too!
+in_development = False
 publish_babelzilla = False # True = include incomplete locales for babelzilla
-only_english = True # True = only include english for beta releases
+only_english = False # True = only include english for beta releases
 
 
 app = 'updatescan'
@@ -19,6 +19,7 @@ translators = ['SlovakSoft (Slovenčina)',
                'Proyecto Nave (Español)',
                'Jeong Seungwon (한국어)',
                'Team erweiterungen.de (Deutsch)',
+               'Archaeopterix (Deutsch)'
                'JZsolt (Magyar)',
                'Edvard Borovskij (Русский)',
                'Leszek(teo)Życzkowski (Polski)',

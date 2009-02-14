@@ -2,6 +2,8 @@ Bugs:
 * Sometimes right-clicking does funny things
 * Notification click doesn't work for mac
 
+Make diffpage work properly - currently in quirksmode
+
 Tooltip with date last scanned.
 
 Check ETAG hash without scanning page
@@ -14,8 +16,9 @@ Show deletions too
 Configurable highlight colour
 Check for wifi proxy
 
--- Unreleased --
+-- 3.0 Beta 2 --
 Handles root folder deletion and multiple copies
+Don't use threading when displaying diffs
 
 -- 3.0 Beta 1 --
 Middle-click now focusses new tab too
