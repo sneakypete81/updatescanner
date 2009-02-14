@@ -84,8 +84,9 @@ load : function()
 	case "diff" :
 	    document.getElementById("sectionDiff").hidden=false;
 	    document.getElementById("dateDiff").value=newDate;
-            this._launchThread(url, oldContent, newContent);
-	    break;
+//            this._launchThread(url, oldContent, newContent);
+	    content = USc_diffWiki.WDiffString(oldContent, newContent);
+            break;
 	case "new":
 	    document.getElementById("sectionNew").hidden=false;
 	    document.getElementById("dateNew").value=newDate;
@@ -205,6 +206,7 @@ _stripScript : function(content)
     return    content;
 },
 
+// Seems to sometimes lock up under Linux - not sure why yet...
 _launchThread : function(url, oldContent, newContent)
 // Run the diff script from another thread, so as not to slow things down too much
 // See https://developer.mozilla.org/en/The_Thread_Manager for more details
