@@ -8,7 +8,7 @@
 <!ENTITY notifications.permanent.label "Weergeven totdat handmatig gesloten">
 <!ENTITY notifications.playSound.label "Geluid afspelen wanneer een webpagina wijzigt">
 <!ENTITY notifications.defaultSound.label "Standaardgeluid">
-<!ENTITY notifications.browse.label "Bladeren...">
+<!ENTITY notifications.browse.label "Bladeren…">
 <!ENTITY scan.pageProperties.label "Pagina-eigenschappen">
 <!ENTITY scan.selectUsing.label "Scanfrequentie en drempel selecteren met behulp van">
 <!ENTITY scan.sliders.label "schuifbalken">

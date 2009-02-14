@@ -1,16 +1,16 @@
 <!ENTITY scanbutton.label "Scannen">
 <!ENTITY stopbutton.label "Stoppen">
 <!ENTITY newbutton.tooltip "Nieuwe pagina">
-<!ENTITY showallchangesinnewtabsbutton.tooltip "Alle gewijzigde pagina&apos;s in nieuwe tabbladen weergeven">
+<!ENTITY showallchangesinnewtabsbutton.tooltip "Alle gewijzigde pagina’s in nieuwe tabbladen weergeven">
 <!ENTITY markallasvisitedbutton.tooltip "Alles als bezocht markeren">
 <!ENTITY deletebutton.tooltip "Verwijderen">
 <!ENTITY preferencesbutton.tooltip "Update Scanner voorkeuren">
 <!ENTITY helpbutton.tooltip "Update Scanner Help">
 <!ENTITY openmenu.label "Wijzigingen weergeven">
 <!ENTITY opentabmenu.label "Wijzigingen weergeven in nieuw tabblad">
-<!ENTITY showallchangesinnewtabsmenu.label "Alle gewijzigde pagina&apos;s in nieuwe tabbladen weergeven">
+<!ENTITY showallchangesinnewtabsmenu.label "Alle gewijzigde pagina’s in nieuwe tabbladen weergeven">
 <!ENTITY markvisitedmenu.label "Alles als bezocht markeren">
-<!ENTITY sortbynamemenu.label "Sorteren op naam">
 <!ENTITY deletemenu.label "Verwijderen">
 <!ENTITY editmenu.label "Eigenschappen">
 <!ENTITY scanThisPage.label "Deze pagina scannen">
+<!ENTITY scanThisFolder.label "Deze map scannen">

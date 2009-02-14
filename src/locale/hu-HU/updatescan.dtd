@@ -10,7 +10,7 @@
 <!ENTITY opentabmenu.label "Változások mutatása új fülön">
 <!ENTITY showallchangesinnewtabsmenu.label "Minden megváltozott oldal mutatása új fülön">
 <!ENTITY markvisitedmenu.label "Mind megjelölése megnézettként">
-<!ENTITY sortbynamemenu.label "Név szerinti rendezés">
 <!ENTITY deletemenu.label "Törlés a listáról">
 <!ENTITY editmenu.label "Tulajdonságok">
 <!ENTITY scanThisPage.label "Ennek az oldalnak az ellenőrzése most">
+<!ENTITY scanThisFolder.label "Ellenőrizd ezt a könyvtárat">

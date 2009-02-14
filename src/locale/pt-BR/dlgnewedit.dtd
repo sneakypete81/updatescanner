@@ -4,7 +4,7 @@
 <!ENTITY autoscan.label "Verificação automática">
 <!ENTITY low.label "Baixo">
 <!ENTITY high.label "Alta">
-<!ENTITY often.label "Freqüente">
+<!ENTITY often.label "Frequente">
 <!ENTITY never.label "Nunca">
 <!ENTITY manualScan.label "Verificação Manual">
 <!ENTITY scanEvery.label "Verificar a cada">

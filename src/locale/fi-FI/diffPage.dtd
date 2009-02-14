@@ -1,3 +1,4 @@
+<!ENTITY editProperties "Muokkaa ominaisuuksia">
 <!ENTITY headerOld1 "Alla oleva sivu on vanha versio nettisivusta, skannattu">
 <!ENTITY headerOld2 ".">
 <!ENTITY headerNew1 "Alla oleva sivu on uusi versio nettisivusta, skannattu">
@@ -10,8 +11,7 @@
 <!ENTITY headerNotChecked2 "Klikkaa">
 <!ENTITY headerNotChecked3 "&apos;Skannaa&apos;">
 <!ENTITY headerNotChecked4 "-painiketta vasemmalta, ja yritä uudelleen.">
-<!ENTITY view "Näytä">
-<!ENTITY oldPage "Vanha sivu">
-<!ENTITY newPage "Uusi sivu">
-<!ENTITY changes "Muutokset">
-<!ENTITY currentPage "Nykyinen sivu">
+<!ENTITY headerError1 "Sivu palautti virheen viime skannauskerralla.">
+<!ENTITY headerError2 "Klikkaa">
+<!ENTITY headerError3 "&apos;Nykyinen sivu&apos;">
+<!ENTITY headerError4 "-linkkiä tarkistaaksesi että sivu on kelvollinen.">

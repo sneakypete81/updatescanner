@@ -1,3 +1,4 @@
+<!ENTITY editProperties "Éditer les propriétés">
 <!ENTITY headerOld1 "La page ci-dessous est l&apos;ancienne version de la page Web, analysée">
 <!ENTITY headerOld2 ".">
 <!ENTITY headerNew1 "La page ci-dessous est la nouvelle version de la page Web, analysée">
@@ -10,3 +11,7 @@
 <!ENTITY headerNotChecked2 "Merci de cliquer sur le bouton">
 <!ENTITY headerNotChecked3 "« Analyser »">
 <!ENTITY headerNotChecked4 "sur la gauche, puis de réessayer.">
+<!ENTITY headerError1 "Cette page a retourné une erreur la dernière fois qu&apos;elle a été scannée.">
+<!ENTITY headerError2 "Merci de cliquer sur le lien">
+<!ENTITY headerError3 "« Page en cours »">
+<!ENTITY headerError4 "pour vérifier si elle est valide.">

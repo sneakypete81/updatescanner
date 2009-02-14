@@ -10,7 +10,7 @@
 <!ENTITY opentabmenu.label "Vis ændringer i nyt faneblad">
 <!ENTITY showallchangesinnewtabsmenu.label "Vis alle ændrede sider i nye faneblade">
 <!ENTITY markvisitedmenu.label "Marker alle sider som besøgte">
-<!ENTITY sortbynamemenu.label "Sorter efter navn">
 <!ENTITY deletemenu.label "Slet">
 <!ENTITY editmenu.label "Egenskaber">
 <!ENTITY scanThisPage.label "Skan denne side">
+<!ENTITY scanThisFolder.label "Skan denne mappe">

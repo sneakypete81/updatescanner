@@ -1,4 +1,5 @@
-<!ENTITY headerOld1 "A página abaixo é uma versão mais velha do site, verificada">
+<!ENTITY editProperties "Editar Propriedades">
+<!ENTITY headerOld1 "A página abaixo é uma versão mais antiga do site, verificada">
 <!ENTITY headerOld2 ".">
 <!ENTITY headerNew1 "A página abaixo é uma nova versão do site, verificado">
 <!ENTITY headerNew2 ".">
@@ -6,7 +7,11 @@
 <!ENTITY headerDiff2 ". As alterações estão">
 <!ENTITY headerDiff3 "sublinhadas">
 <!ENTITY headerDiff4 ".">
-<!ENTITY headerNotChecked1 "A página abaixo não pôde ser verificada.">
+<!ENTITY headerNotChecked1 "A página abaixo não pode ser verificada.">
 <!ENTITY headerNotChecked2 "Por favor clique em">
 <!ENTITY headerNotChecked3 "&apos;Verificar&apos;">
-<!ENTITY headerNotChecked4 "o botão á esquerda, e tente novamente">
+<!ENTITY headerNotChecked4 "o botão à esquerda, e tente novamente">
+<!ENTITY headerError1 "Essa página respondeu com erro na última vez que foi verificada">
+<!ENTITY headerError2 "Por favor clique em">
+<!ENTITY headerError3 "&apos;Página Atual&quot;">
+<!ENTITY headerError4 "para verificar se a página é válida.">

@@ -14,7 +14,7 @@
 <!ENTITY ignoreChanges.label "Wijzigen van minder dan ongeveer">
 <!ENTITY characters.label "karakters negeren">
 <!ENTITY ignoreNumbers.label "Wijzigingen aan getallen negeren">
-<!ENTITY advanced.label "Geavanceerd...">
+<!ENTITY advanced.label "Geavanceerd…">
 <!ENTITY charEncoding.label "Tekenset">
 <!ENTITY autoDetect.label "Automatisch detecteren">
 <!ENTITY use.label "Te gebruiken tekenset:">

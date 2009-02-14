@@ -9,7 +9,7 @@
     <RDF:Description
         about="urn:mozilla:locale:ko-KR"
         chrome:displayName="Korean (Korea)"
-        chrome:author="Jeong Seungwon"
+        chrome:author="Pete Burgers"
         chrome:name="ko-KR"
         chrome:previewURL="http://www.mozilla.org/locales/ko-KR.gif"
     >

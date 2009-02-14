@@ -17,7 +17,7 @@
 <!ENTITY scan.advanced.label "Avanceret">
 <!ENTITY scan.timeoutIfLonger.label "Timeout hvis skanning tager længere end">
 <!ENTITY scan.seconds.label "sekunder">
-<!ENTITY toolbar.toolbarIcons.label "Værktøjslinje-ikon">
+<!ENTITY toolbar.toolbarIcons.label "Værktøjslinjeikon">
 <!ENTITY toolbar.new.label "Ny side">
 <!ENTITY toolbar.showNewTab.label "Vis alle ændrede sider i nye faneblade">
 <!ENTITY toolbar.markVisited.label "Marker alle som besøgte">

@@ -10,7 +10,7 @@
 <!ENTITY notifications.defaultSound.label "Som padrão">
 <!ENTITY notifications.browse.label "Navegar...">
 <!ENTITY scan.pageProperties.label "Propriedades da Página">
-<!ENTITY scan.selectUsing.label "Selecionar freqüência de verificação e percentual de uso">
+<!ENTITY scan.selectUsing.label "Selecionar frequência de verificação e percentual de uso">
 <!ENTITY scan.sliders.label "Sliders">
 <!ENTITY scan.numbers.label "Números">
 <!ENTITY scan.warnScanShort.label "Alertar quando o intervalo de verificação é muito curto">

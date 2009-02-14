@@ -1,12 +1,17 @@
-<!ENTITY headerOld1 "Dole uvedená stránka je stará verzia webstránky, kontrolované ">
+<!ENTITY editProperties "Úprava vlastností">
+<!ENTITY headerOld1 "Dole uvedená stránka je stará verzia webstránky, kontrolované">
 <!ENTITY headerOld2 ".">
-<!ENTITY headerNew1 "Dole uvedená stránka je nová verzia webstránky, kontrolované ">
+<!ENTITY headerNew1 "Dole uvedená stránka je nová verzia webstránky, kontrolované">
 <!ENTITY headerNew2 ".">
-<!ENTITY headerDiff1 "Dole uvedená stránka bola naposledy kontrolovaná ">
-<!ENTITY headerDiff2 ". Zmeny sú ">
+<!ENTITY headerDiff1 "Dole uvedená stránka bola naposledy kontrolovaná">
+<!ENTITY headerDiff2 ". Zmeny sú">
 <!ENTITY headerDiff3 "zvýraznené">
 <!ENTITY headerDiff4 ".">
 <!ENTITY headerNotChecked1 "Vybraná stránka zatiaľ nebola kontrolovaná.">
-<!ENTITY headerNotChecked2 " Kliknite naľavo na tlačidlo ">
+<!ENTITY headerNotChecked2 "Kliknite naľavo na tlačidlo">
 <!ENTITY headerNotChecked3 "&apos;Kontrola&apos;">
-<!ENTITY headerNotChecked4 " a skúste znova.">
+<!ENTITY headerNotChecked4 "a skúste znova.">
+<!ENTITY headerError1 "Táto stránka vrátila pri poslednej kontrole chybu.">
+<!ENTITY headerError2 "Prosím, kliknite na odkaz">
+<!ENTITY headerError3 "&apos;Aktuálna stránka&apos;">
+<!ENTITY headerError4 ", ak chcete skontrolovať jej platnosť.">

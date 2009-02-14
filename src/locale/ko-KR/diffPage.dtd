@@ -1,3 +1,4 @@
+<!ENTITY editProperties "속성 편집">
 <!ENTITY headerOld1 "아래의 페이지는">
 <!ENTITY headerOld2 "에 검사된 예전 페이지입니다.">
 <!ENTITY headerNew1 "아래의 페이지는">
@@ -10,3 +11,7 @@
 <!ENTITY headerNotChecked2 "왼쪽의">
 <!ENTITY headerNotChecked3 "&apos;검사&apos;">
 <!ENTITY headerNotChecked4 "버튼을 클릭하여, 다시 시도하시기 바랍니다.">
+<!ENTITY headerError1 "이 페이지는 최근에 검사할 때 에러가 발생했습니다.">
+<!ENTITY headerError2 "&apos;현재 페이지&apos;">
+<!ENTITY headerError3 "링크를">
+<!ENTITY headerError4 "클릭하여 페이지가 적합한지 확인하세요.">
