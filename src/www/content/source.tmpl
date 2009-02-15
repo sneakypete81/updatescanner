@@ -6,19 +6,14 @@
       <p>$codeAccessed</p>
 
       <ul>
-#set $cvsWebInterface = $cvsWebInterface.replace('{linkStart}','<a href="http://www.mozdev.org/source/browse/updatescanner/">')
-#set $cvsWebInterface = $cvsWebInterface.replace('{linkEnd}','</a>')
-      <li>$cvsWebInterface</li>
-      <li>$checkOut
+#set $hgWebInterface = $hgWebInterface.replace('{linkStart}','<a href="http://hg.mozdev.org/updatescanner/">')
+#set $hgWebInterface = $hgWebInterface.replace('{linkEnd}','</a>')
+      <li>$hgWebInterface</li>
+      <li>$hgCheckOut
 <pre>
-cvs -d :pserver:guest@mozdev.org:/cvs login
-cvs -z3 -d :pserver:guest@mozdev.org:/cvs co updatescanner/src updatescanner/www
+hg clone https://hg.mozdev.org/updatescanner/
 </pre>
       </li>
       </ul>
-
-#set $cvsHelp = $cvsHelp.replace('{linkStart}','<a href="http://ximbiot.com/cvs/wiki/">')
-#set $cvsHelp = $cvsHelp.replace('{linkEnd}','</a>')
-      <p>$cvsHelp</p>
     </div>
 #include "content/_footer.tmpl"
