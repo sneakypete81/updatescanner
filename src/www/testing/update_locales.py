@@ -56,15 +56,22 @@ def run():
         (complete, incomplete) = check_complete(locales, verbose=options.verbose)
         if get_yn("Update complete locales?"):
             update_locales(replace_path, complete)
-        if get_yn("Update incomplete locales?"):
-            update_locales(replace_path, incomplete)
+        if options.skip:
+            if get_yn("Update incomplete locales, skipping missing strings?"):
+                update_locales(skip_path, incomplete)
+        else:
+            if get_yn("Update incomplete locales, using english if necessary?"):
+                update_locales(replace_path, incomplete)
     finally:
         pass
         shutil.rmtree(temp_path)
 
 def parse_args():
     parser = optparse.OptionParser()
-    parser.add_option("-v", "--verbose", action="store_true", dest="verbose")
+    parser.add_option("-v", "--verbose", 
+                      action="store_true", dest="verbose")
+    parser.add_option("-s", "--skip_incomplete", 
+                      action="store_true", dest="skip")
     return parser.parse_args()
 
 def download_locales(temp_path):
@@ -126,7 +133,10 @@ def parse_properties_file(file):
         line = line.split("#")[0].strip()
         if len(line) > 0:
             key, value = line.split("=", 1)
-            result[key.strip()] = unicode(value.strip(), "utf-8")
+            key = key.strip()
+            value = value.strip()
+            if value != "":
+                result[key.strip()] = unicode(value.strip(), "utf-8")
     return result
 
 def parse_dtd_file(file):
@@ -170,7 +180,7 @@ def check_complete(locales, verbose=False):
 
     return (complete_locales, incomplete_locales)
 
-def is_locale_complete(locale, locale_en):
+def is_locale_complete(locale, locale_en, verbose):
     ret = True
     for filename in locale_en.files.keys():
         if filename not in locale.files.keys():
