@@ -1,3 +1,4 @@
+<!ENTITY editProperties "Editar propiedades">
 <!ENTITY headerOld1 "La siguiente página es la versión antigua de la página, comprobada">
 <!ENTITY headerOld2 ".">
 <!ENTITY headerNew1 "La siguiente página es la versión nueva de la página, comprobada">
@@ -10,3 +11,7 @@
 <!ENTITY headerNotChecked2 "Por favor, pulse el botón">
 <!ENTITY headerNotChecked3 "&apos;Comprobar&apos;">
 <!ENTITY headerNotChecked4 "de la izquierda, e inténtelo de nuevo.">
+<!ENTITY headerError1 "Esta página devolvió un error la última vez que se comprobó">
+<!ENTITY headerError2 "Pulse el enlace">
+<!ENTITY headerError3 "&apos;Página actual&apos;">
+<!ENTITY headerError4 "para comprobar si esta página es correcta.">

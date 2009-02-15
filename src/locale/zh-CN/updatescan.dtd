@@ -10,7 +10,7 @@
 <!ENTITY opentabmenu.label "在新标签页显示更新">
 <!ENTITY showallchangesinnewtabsmenu.label "在新标签页显示所有更新的页面">
 <!ENTITY markvisitedmenu.label "标记所有为已访问">
-<!ENTITY sortbynamemenu.label "按名称排列">
 <!ENTITY deletemenu.label "删除">
 <!ENTITY editmenu.label "属性">
 <!ENTITY scanThisPage.label "扫描此页面">
+<!ENTITY scanThisFolder.label "Scan This Folder">

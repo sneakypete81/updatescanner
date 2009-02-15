@@ -1,16 +1,16 @@
-<!ENTITY scanbutton.label "">
-<!ENTITY stopbutton.label "">
-<!ENTITY newbutton.tooltip "">
-<!ENTITY showallchangesinnewtabsbutton.tooltip "">
-<!ENTITY markallasvisitedbutton.tooltip "">
-<!ENTITY deletebutton.tooltip "">
-<!ENTITY preferencesbutton.tooltip "">
-<!ENTITY helpbutton.tooltip "">
-<!ENTITY openmenu.label "">
-<!ENTITY opentabmenu.label "">
-<!ENTITY showallchangesinnewtabsmenu.label "">
-<!ENTITY markvisitedmenu.label "">
-<!ENTITY sortbynamemenu.label "">
-<!ENTITY deletemenu.label "">
-<!ENTITY editmenu.label "">
-<!ENTITY scanThisPage.label "">
+<!ENTITY scanbutton.label "Scan">
+<!ENTITY stopbutton.label "Cancel">
+<!ENTITY newbutton.tooltip "New Entry">
+<!ENTITY showallchangesinnewtabsbutton.tooltip "Show All Changed Pages in New Tabs">
+<!ENTITY markallasvisitedbutton.tooltip "Mark All as Visited">
+<!ENTITY deletebutton.tooltip "Delete">
+<!ENTITY preferencesbutton.tooltip "Update Scanner Preferences">
+<!ENTITY helpbutton.tooltip "Update Scanner Help">
+<!ENTITY openmenu.label "Show Changes">
+<!ENTITY opentabmenu.label "Show Changes in New Tab">
+<!ENTITY showallchangesinnewtabsmenu.label "Show All Changed Pages in New Tabs">
+<!ENTITY markvisitedmenu.label "Mark All as Visited">
+<!ENTITY deletemenu.label "Delete">
+<!ENTITY editmenu.label "Properties">
+<!ENTITY scanThisPage.label "Scan This Page">
+<!ENTITY scanThisFolder.label "Scan This Folder">

@@ -1,3 +1,4 @@
+<!ENTITY editProperties "编辑属性">
 <!ENTITY headerOld1 "下面是老版本的页面, 扫描时间">
 <!ENTITY headerOld2 ".">
 <!ENTITY headerNew1 "下面是新版本的页面, 扫描时间">
@@ -10,3 +11,7 @@
 <!ENTITY headerNotChecked2 "请点击左侧的">
 <!ENTITY headerNotChecked3 "[扫描]">
 <!ENTITY headerNotChecked4 "按钮后重试.">
+<!ENTITY headerError1 "此页面上次扫描时返回错误.">
+<!ENTITY headerError2 "请点击">
+<!ENTITY headerError3 "[当前页面]">
+<!ENTITY headerError4 "检查页面是否可用.">

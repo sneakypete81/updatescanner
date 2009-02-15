@@ -10,7 +10,7 @@
 <!ENTITY opentabmenu.label "在新頁面顯示更動">
 <!ENTITY showallchangesinnewtabsmenu.label "在新分頁標籤顯示所有有更動的頁面">
 <!ENTITY markvisitedmenu.label "將所有頁面標示為已閱讀">
-<!ENTITY sortbynamemenu.label "以名稱排序">
 <!ENTITY deletemenu.label "刪除">
 <!ENTITY editmenu.label "內容">
 <!ENTITY scanThisPage.label "掃描此頁">
+<!ENTITY scanThisFolder.label "掃描這個資料夾">

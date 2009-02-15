@@ -1,26 +1,26 @@
-<!ENTITY preferences.title "">
-<!ENTITY notifications.title "">
-<!ENTITY scanning.title "">
-<!ENTITY toolbar.title "">
-<!ENTITY notifications.enable.label "">
-<!ENTITY notifications.timed.label1 "">
-<!ENTITY notifications.timed.label2 "">
-<!ENTITY notifications.permanent.label "">
-<!ENTITY notifications.playSound.label "">
-<!ENTITY notifications.defaultSound.label "">
-<!ENTITY notifications.browse.label "">
-<!ENTITY scan.pageProperties.label "">
-<!ENTITY scan.selectUsing.label "">
-<!ENTITY scan.sliders.label "">
-<!ENTITY scan.numbers.label "">
-<!ENTITY scan.warnScanShort.label "">
-<!ENTITY scan.advanced.label "">
-<!ENTITY scan.timeoutIfLonger.label "">
-<!ENTITY scan.seconds.label "">
-<!ENTITY toolbar.toolbarIcons.label "">
-<!ENTITY toolbar.new.label "">
-<!ENTITY toolbar.showNewTab.label "">
-<!ENTITY toolbar.markVisited.label "">
-<!ENTITY toolbar.delete.label "">
-<!ENTITY toolbar.preferences.label "">
-<!ENTITY toolbar.help.label "">
+<!ENTITY preferences.title "Update Scanner Preferences">
+<!ENTITY notifications.title "Notifications">
+<!ENTITY scanning.title "Scanning">
+<!ENTITY toolbar.title "Toolbar">
+<!ENTITY notifications.enable.label "Show notification popup when a webpage changes">
+<!ENTITY notifications.timed.label1 "Show for">
+<!ENTITY notifications.timed.label2 "seconds">
+<!ENTITY notifications.permanent.label "Show until manually closed">
+<!ENTITY notifications.playSound.label "Play a sound when a webpage changes">
+<!ENTITY notifications.defaultSound.label "Default Sound">
+<!ENTITY notifications.browse.label "Browse...">
+<!ENTITY scan.pageProperties.label "Page Properties">
+<!ENTITY scan.selectUsing.label "Select scan rate and threshold using">
+<!ENTITY scan.sliders.label "Sliders">
+<!ENTITY scan.numbers.label "Numbers">
+<!ENTITY scan.warnScanShort.label "Warn when scan time is too short">
+<!ENTITY scan.advanced.label "Advanced">
+<!ENTITY scan.timeoutIfLonger.label "Timeout if scan takes longer than">
+<!ENTITY scan.seconds.label "seconds">
+<!ENTITY toolbar.toolbarIcons.label "Toolbar Icons">
+<!ENTITY toolbar.new.label "New Entry">
+<!ENTITY toolbar.showNewTab.label "Show All Changed Pages in New Tabs">
+<!ENTITY toolbar.markVisited.label "Mark All as Visited">
+<!ENTITY toolbar.delete.label "Delete">
+<!ENTITY toolbar.preferences.label "Preferences">
+<!ENTITY toolbar.help.label "Help">

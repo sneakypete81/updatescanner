@@ -1,3 +1,4 @@
+<!ENTITY editProperties "Özellikleri Düzenle">
 <!ENTITY headerOld1 "Web sayfasının eski sürümü aşağıda, tarandı">
 <!ENTITY headerOld2 ".">
 <!ENTITY headerNew1 "Web sayfasının yeni sürümü aşağıda, tarandı">
@@ -10,3 +11,7 @@
 <!ENTITY headerNotChecked2 "Lütfen soldaki">
 <!ENTITY headerNotChecked3 "&apos;Tara&apos;">
 <!ENTITY headerNotChecked4 "düğmesine basarak, tekrar deneyin.">
+<!ENTITY headerError1 "Bu sayfa son tarama işleminde bir hata oluşturdu.">
+<!ENTITY headerError2 "Lütfen sayfanın geçerliğini kontrol etmek için">
+<!ENTITY headerError3 "&apos;Geçerli Sayfa&apos;">
+<!ENTITY headerError4 "bağlantısına tıklayın.">

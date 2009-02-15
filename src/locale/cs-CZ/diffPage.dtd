@@ -1,3 +1,4 @@
+<!ENTITY editProperties "Upravit vlastnosti">
 <!ENTITY headerOld1 "Stránka níže je starou verzí webové stránky, prohledané">
 <!ENTITY headerOld2 ".">
 <!ENTITY headerNew1 "Stránka níže je novou verzí webové stránky, prohledané">
@@ -10,3 +11,7 @@
 <!ENTITY headerNotChecked2 "Prosím klepněte na tlačítko">
 <!ENTITY headerNotChecked3 "&apos;Prohledat&apos;">
 <!ENTITY headerNotChecked4 "na levé straně a zkuste to znova.">
+<!ENTITY headerError1 "Při posledním vyhledávání oznámila stránka chybu.">
+<!ENTITY headerError2 "Prosím klepněte na odkaz">
+<!ENTITY headerError3 "&apos;Aktuální stránka&apos;">
+<!ENTITY headerError4 "pro kontrolu platnosti stránky.">

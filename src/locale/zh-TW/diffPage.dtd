@@ -1,3 +1,4 @@
+<!ENTITY editProperties "編輯內容">
 <!ENTITY headerOld1 "下列是在">
 <!ENTITY headerOld2 "被掃描出的舊版頁面。">
 <!ENTITY headerNew1 "下列是在">
@@ -10,3 +11,7 @@
 <!ENTITY headerNotChecked2 "請按下左邊的">
 <!ENTITY headerNotChecked3 "&apos;檢查&apos;">
 <!ENTITY headerNotChecked4 "按鈕並再試一次。">
+<!ENTITY headerError1 "上一次掃描的時候，這個頁面回報了錯誤訊息。">
+<!ENTITY headerError2 "請按下">
+<!ENTITY headerError3 "&apos;目前頁面&apos;">
+<!ENTITY headerError4 "的連結來確認這個網頁有效。">

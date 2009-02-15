@@ -10,7 +10,7 @@
 <!ENTITY opentabmenu.label "Değişiklikleri Yeni Sekmede Göster">
 <!ENTITY showallchangesinnewtabsmenu.label "Değişen Yüm Sayfaları Yeni Sekmede Göster">
 <!ENTITY markvisitedmenu.label "Tüm Ziyaret Edilenleri İşaretle">
-<!ENTITY sortbynamemenu.label "İsime Göre Sırala">
 <!ENTITY deletemenu.label "Sil">
 <!ENTITY editmenu.label "Özellikler">
 <!ENTITY scanThisPage.label "Bu Sayfayı Tara">
+<!ENTITY scanThisFolder.label "Bu Dizini Tara">

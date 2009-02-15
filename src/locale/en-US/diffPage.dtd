@@ -1,22 +1,17 @@
 <!ENTITY editProperties "Edit Properties">
-
 <!ENTITY headerOld1 "The page below is the old version of the webpage, scanned">
 <!ENTITY headerOld2 ".">
-
 <!ENTITY headerNew1 "The page below is the new version of the webpage, scanned">
 <!ENTITY headerNew2 ".">
-
 <!ENTITY headerDiff1 "The page below was last scanned">
 <!ENTITY headerDiff2 ". The changes are">
 <!ENTITY headerDiff3 "highlighted">
 <!ENTITY headerDiff4 ".">
-
 <!ENTITY headerNotChecked1 "This page has not yet been checked.">
 <!ENTITY headerNotChecked2 "Please click the">
-<!ENTITY headerNotChecked3 "'Scan'">
+<!ENTITY headerNotChecked3 "&apos;Scan&apos;">
 <!ENTITY headerNotChecked4 "button on the left, and try again.">
-
 <!ENTITY headerError1 "This page returned an error last time it was scanned.">
 <!ENTITY headerError2 "Please click the">
-<!ENTITY headerError3 "'Current Page'">
+<!ENTITY headerError3 "&apos;Current Page&apos;">
 <!ENTITY headerError4 "link to check that the page is valid.">

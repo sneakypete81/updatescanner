@@ -10,7 +10,7 @@
 <!ENTITY opentabmenu.label "Mostra le modifiche in una nuova scheda">
 <!ENTITY showallchangesinnewtabsmenu.label "Mostra tutte le pagine aggiornate in nuove schede">
 <!ENTITY markvisitedmenu.label "Segna tutte le pagine come lette">
-<!ENTITY sortbynamemenu.label "Ordina le pagine per nome">
 <!ENTITY deletemenu.label "Elimina">
 <!ENTITY editmenu.label "Proprietà controllo pagina">
 <!ENTITY scanThisPage.label "Controlla questa pagina">
+<!ENTITY scanThisFolder.label "Scan This Folder">

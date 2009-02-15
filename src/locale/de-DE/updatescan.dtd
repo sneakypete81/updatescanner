@@ -5,12 +5,12 @@
 <!ENTITY markallasvisitedbutton.tooltip "Alle als gelesen markieren">
 <!ENTITY deletebutton.tooltip "Löschen">
 <!ENTITY preferencesbutton.tooltip "Einstellungen">
-<!ENTITY helpbutton.tooltip "Englischsprachige Anleitung zu Update Scanner">
+<!ENTITY helpbutton.tooltip "Anleitung zu Update Scanner">
 <!ENTITY openmenu.label "Änderungen anzeigen">
 <!ENTITY opentabmenu.label "Änderungen in neuem Tab anzeigen">
 <!ENTITY showallchangesinnewtabsmenu.label "Alle geänderten Seiten in Tabs öffnen">
 <!ENTITY markvisitedmenu.label "Alle als gelesen markieren">
-<!ENTITY sortbynamemenu.label "Nach Namen sortieren">
 <!ENTITY deletemenu.label "Löschen">
 <!ENTITY editmenu.label "Eigenschaften">
 <!ENTITY scanThisPage.label "Seite überprüfen">
+<!ENTITY scanThisFolder.label "Ordner überprüfen">

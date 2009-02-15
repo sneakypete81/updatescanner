@@ -2,15 +2,15 @@
 <!ENTITY stopbutton.label "キャンセル">
 <!ENTITY newbutton.tooltip "新規作成">
 <!ENTITY showallchangesinnewtabsbutton.tooltip "変更があったすべてのページを新しいタブに表示します">
-<!ENTITY markallasvisitedbutton.tooltip "">
+<!ENTITY markallasvisitedbutton.tooltip "Mark All as Visited">
 <!ENTITY deletebutton.tooltip "削除">
-<!ENTITY preferencesbutton.tooltip "">
-<!ENTITY helpbutton.tooltip "">
+<!ENTITY preferencesbutton.tooltip "Update Scanner Preferences">
+<!ENTITY helpbutton.tooltip "Update Scanner Help">
 <!ENTITY openmenu.label "変更を表示">
 <!ENTITY opentabmenu.label "新しいタブに変更を表示">
 <!ENTITY showallchangesinnewtabsmenu.label "新しいタブに変更のあるすべてのページを表示">
 <!ENTITY markvisitedmenu.label "すべて訪問済みにする">
-<!ENTITY sortbynamemenu.label "タイトルで並び替え">
 <!ENTITY deletemenu.label "削除">
 <!ENTITY editmenu.label "プロパティ">
-<!ENTITY scanThisPage.label "">
+<!ENTITY scanThisPage.label "Scan This Page">
+<!ENTITY scanThisFolder.label "Scan This Folder">

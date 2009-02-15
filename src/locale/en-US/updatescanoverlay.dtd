@@ -1,7 +1,3 @@
-<!-- Note to translators:
-
-     This file contains strings for the main browser window.
--->
 <!ENTITY UpdateScan.tooltip "Scan web pages for updates">
 <!ENTITY AddToUpdateScan.label "Scan Page For Updates...">
 <!ENTITY AddToUpdateScan.accesskey "U">

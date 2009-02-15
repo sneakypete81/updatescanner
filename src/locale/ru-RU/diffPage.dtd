@@ -1,3 +1,4 @@
+<!ENTITY editProperties "Edit Properties">
 <!ENTITY headerOld1 "Страница ниже является старой версией этой веб-страницы, сканировано">
 <!ENTITY headerOld2 ".">
 <!ENTITY headerNew1 "Страница ниже является новой версией этой веб-страницы, сканировано">
@@ -10,3 +11,7 @@
 <!ENTITY headerNotChecked2 "Пожалуйста нажмите сюда">
 <!ENTITY headerNotChecked3 "&apos;Сканировать&apos;">
 <!ENTITY headerNotChecked4 "кнопку слева, и попробуйте снова.">
+<!ENTITY headerError1 "This page returned an error last time it was scanned.">
+<!ENTITY headerError2 "Please click the">
+<!ENTITY headerError3 "&apos;Current Page&apos;">
+<!ENTITY headerError4 "link to check that the page is valid.">

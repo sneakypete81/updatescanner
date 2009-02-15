@@ -10,7 +10,7 @@
 <!ENTITY opentabmenu.label "Ver los cambios en una pestaña nueva">
 <!ENTITY showallchangesinnewtabsmenu.label "Ver todas las páginas cambiadas en pestañas nuevas">
 <!ENTITY markvisitedmenu.label "Marcar todas como visitadas">
-<!ENTITY sortbynamemenu.label "Ordenar por nombre">
 <!ENTITY deletemenu.label "Borrar">
 <!ENTITY editmenu.label "Propiedades">
 <!ENTITY scanThisPage.label "Comprobar esta página">
+<!ENTITY scanThisFolder.label "Comprobar esta carpeta">
