@@ -85,13 +85,48 @@ var USc_places = {
     var strings = gBundle.createBundle("chrome://updatescan/locale/updatescan.properties");
     var folderName = strings.GetStringFromName("rootFolderName");
     
-
-    var folderId = bookmarksService.
-                    createFolder(bookmarksService.bookmarksMenuFolder,
-                                 folderName,
-                                 bookmarksService.DEFAULT_INDEX);
+    // First see if there's an existing folder with that name
+    var folderId = this.findFolderId(folderName);
+    if (folderId == null) {
+      // If not, create it
+      var folderId = bookmarksService.
+                      createFolder(bookmarksService.bookmarksMenuFolder,
+                                   folderName,
+                                   bookmarksService.DEFAULT_INDEX);
+    }
     USc_places.setRootFolderId(folderId);
     return folderId;
+  },
+
+  findFolderId : function(name) {
+    var historyService = Components.classes["@mozilla.org/browser/nav-history-service;1"]
+                                   .getService(Components.interfaces.nsINavHistoryService);
+    var options = historyService.getNewQueryOptions();
+    var query = historyService.getNewQuery();
+
+    var bookmarksService = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"]
+                                     .getService(Components.interfaces.nsINavBookmarksService);
+    var bookmarksMenuFolder = bookmarksService.bookmarksMenuFolder;
+
+    query.setFolders([bookmarksMenuFolder], 1);
+
+    var result = historyService.executeQuery(query, options);
+    var rootNode = result.root;
+    rootNode.containerOpen = true;
+
+    // iterate over the immediate children of this folder and dump to console
+    for (var i = 0; i < rootNode.childCount; i ++) {
+      var node = rootNode.getChild(i);
+      myDump("Child: " + node.title + "\n");
+      if (node.title == name) {
+        rootNode.containerOpen = false;
+        return node.itemId;
+      }
+    }
+
+    // close a container after using it!
+    rootNode.containerOpen = false;
+    return null;
   },
   
   // Set the updatescan/root annotation to the corresponding folder, as well as
