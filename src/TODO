@@ -16,6 +16,16 @@ Show deletions too
 Configurable highlight colour
 Check for wifi proxy
 
+-- 3.0.2 --
+Gracefully handle errors in upgrade progress dialog
+
+-- 3.0.1 --
+If root folder annotation is not found, look for existing folder
+with matching name before creating a new one
+
+-- 3.0 --
+No changes
+
 -- 3.0 Beta 2 --
 Handles root folder deletion and multiple copies
 Don't use threading when displaying diffs

@@ -74,7 +74,11 @@ function timeout()
         // Cancel prompt is open - spin until it closes
         timeoutID = setTimeout(timeout, 1000);
     } else {
-        retVal = callback(items[count], data);
+        try {
+            retVal = callback(items[count], data);
+        } catch (e) { // Silently fail
+            retVal = null
+        }
         if (retVal != null) {
             retData.push(retVal);
         }
