@@ -411,7 +411,7 @@ function USc_scanner()
     
     this._stripNumbers = function(content)
     {
-        return content.replace(/[0-9]*/g,"")
+        return content.replace(/[0-9\,\.]*/g,"")
     }
     
     this._getEncoding = function(header, content)
