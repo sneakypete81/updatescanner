@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding=UTF-8
 
-version = "3.0.2" # Don't forget to update upgrade.js too!
+version = "3.0.3" # Don't forget to update upgrade.js too!
 in_development = False
 publish_babelzilla = False # True = include incomplete locales for babelzilla
 only_english = False # True = only include english for beta releases
@@ -47,7 +47,7 @@ iconPath = "skin/updatescan_big.png"
 
 firefoxUID = 'ec8030f7-c20a-464f-9b0e-13a3a9e97384'
 firefoxMinVersion = '3.0'
-firefoxMaxVersion = '3.1b3'
+firefoxMaxVersion = '3.5.*'
 
 overlays = (
     # overlay this on that

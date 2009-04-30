@@ -2,6 +2,10 @@ Bugs:
 * Sometimes right-clicking does funny things
 * Notification click doesn't work for mac
 
+CTRL-Click should open in new tab
+
+Don't change sidebar icon, just make bold
+
 Make diffpage work properly - currently in quirksmode
 
 Tooltip with date last scanned.
