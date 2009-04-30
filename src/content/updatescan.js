@@ -678,28 +678,6 @@ _extendPlacesTreeView : function() {
        }
     }
 
-    // Override the getImageSrc function, to insert the updatescanner icon
-    // if the page is updated
-    PlacesTreeView.prototype.getImageSrcBase = PlacesTreeView.prototype.getImageSrc;
-    PlacesTreeView.prototype.getImageSrc =
-    function ext_getImageSrc(aRow, aColumn) {
-      this._ensureValidRow(aRow);
-
-      // only the title column has an image
-      if (this._getColumnType(aColumn) != this.COLUMN_TYPE_TITLE)
-        return "";
-
-      var node = this._visibleElements[aRow].node;
-      var status= USc_places.queryAnno(node.itemId, USc_places.ANNO_STATUS,
-                                       USc_places.STATUS_UNKNOWN)
-
-      if (status == USc_places.STATUS_UPDATE) {
-          return ""; // Let updatscan.css choose the icon
-      }
-      
-      // Use favicon if possible
-      return this.getImageSrcBase(aRow, aColumn);
-    }  
 }
 };
 
