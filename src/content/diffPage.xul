@@ -120,26 +120,10 @@
   <iframe id="sectionView" src="chrome://updatescan/content/blank"
           type="content-primary" flex="1"
           height="40"/>
-<!--
-    <hbox id="sectionView">
-      <label class="header" value="&view;:"/>
-      <label class="text-link" value="&oldPage;" id="linkOld" 
-             onclick="USc_diffPage.click('old');"/>
-      <label class="text-link" value="&newPage;" id="linkNew"
-             onclick="USc_diffPage.click('new');"/>
-      <label class="text-link" value="&changes;" id="linkDiff"
-             onclick="USc_diffPage.click('diff');"/>
-      <label class="text-link" value="&currentPage;" id="linkCurrent"/>
-    </hbox>
--->    
-
   </vbox>
   </hbox>
 
   <separator class="groove-thin"/>
-  <!-- src="chrome://" now throws a warning, so display a blank page instead.
-       Needs to be in the chrome namespace or we get security problems -->
-  <iframe class="content" id="diffFrame" src="chrome://updatescan/content/blank"
-          type="content-primary" flex="1" />
+  <iframe class="content" id="diffFrame" type="content" flex="1" />
 </window>
 

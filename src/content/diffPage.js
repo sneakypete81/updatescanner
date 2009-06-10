@@ -66,8 +66,6 @@ load : function()
         if (filebase != "") {
             oldContent  = USc_file.USreadFile(filebase+".old");
             newContent  = USc_file.USreadFile(filebase+".new");
-            oldContent = this._stripScript(oldContent);
-            newContent = this._stripScript(newContent);
         }
     	if (newContent=="") {
 	    view="notChecked";
@@ -168,23 +166,28 @@ _writeViewFrame : function (view, url, enableDiffLinks)
 
 _writeContentFrame : function (url, content)
 {
-// This works, but leaves the iframe in quirks mode.
-// Use WebBrowserStream interface instead??
-//    re = /<head>/i;
-//    header_insert = "<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>\n" +
-//                    "<base href='"+url+"' target='_parent'>\n" 
-//    // Insert header into <head> element if possible, otherwise just tack on the start
-//    if (re.test(content))
-//        content = content.replace(re, "<head>"+header_insert)
-//    else
-//        content = header_insert + content
-        
-    var doc = document.getElementById("diffFrame").contentDocument;
-    doc.open();
-    doc.write("<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>\n");
-    doc.write("<base href='"+url+"' target='_parent'>\n");	    
-    doc.write(content);
-    doc.close();
+    // Charset is always UTF-8, since we read it from file
+    // Set baseURI manually
+    var re = /<\s*head[^>]*>/i;
+    var header = ("<meta http-equiv='Content-Type' content='text/html;"+
+                  "charset=UTF-8'>\n" +
+                  "<base href='"+url+"' target='_parent'>\n");
+    // Insert header into <head> element if one exists,
+    // otherwise just tack on the start
+    if (re.test(content))
+        content = content.replace(re, "<head>"+header);
+    else
+        content = header + content;
+
+    var frame = document.getElementById("diffFrame");
+
+    frame.docShell.allowAuth = false;  
+    frame.docShell.allowMetaRedirects = false;   
+    frame.docShell.allowJavascript = true;  
+    frame.docShell.allowPlugins = true;  
+
+    frame.setAttribute("src", "data:text/html," + 
+                       encodeURIComponent(content));  
 },
 
 // Taken with permission from http://www.netlobo.com/url_query_string_javascript.html
@@ -200,13 +203,6 @@ _getUrlParameter : function (name, def)
       return unescape(results[1]);
 },
 
-_stripScript : function(content)
-{
-    content = content.replace(/<script([\r\n]|.)*?>([\r\n]|.)*?<\/script>/gi,"");
-    return    content;
-},
-
-// Seems to sometimes lock up under Linux - not sure why yet...
 _launchThread : function(url, oldContent, newContent)
 // Run the diff script from another thread, so as not to slow things down too much
 // See https://developer.mozilla.org/en/The_Thread_Manager for more details
