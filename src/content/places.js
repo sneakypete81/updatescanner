@@ -75,6 +75,7 @@ var USc_places = {
       rootFolderId = results[0];
       annotationService.removeItemAnnotation(results[1], this.ANNO_ROOT);
     }
+
     return rootFolderId;
   },
 
@@ -114,10 +115,9 @@ var USc_places = {
     var rootNode = result.root;
     rootNode.containerOpen = true;
 
-    // iterate over the immediate children of this folder and dump to console
+    // iterate over the immediate children of this folder
     for (var i = 0; i < rootNode.childCount; i ++) {
       var node = rootNode.getChild(i);
-      myDump("Child: " + node.title + "\n");
       if (node.title == name) {
         rootNode.containerOpen = false;
         return node.itemId;
@@ -140,7 +140,6 @@ var USc_places = {
     var results = annotationService.getItemsWithAnnotation(this.ANNO_ROOT, {});
     if (results.length == 0) {
       annotationService.setItemAnnotation(folderId, this.ANNO_ROOT, "Update Scanner Root Folder", 0, annotationService.EXPIRE_NEVER);
-      annotationService.setItemAnnotation(folderId, this.ORGANIZER_QUERY_ANNO, "UpdatescanRoot", 0, annotationService.EXPIRE_NEVER);
     } else {
       if (results[0] != folderId) {
         annotationService.removeItemAnnotation(results[0], this.ANNO_ROOT);
@@ -216,6 +215,14 @@ var USc_places = {
       return annotationService.getItemAnnotation(id, anno);
     } else {
       return defaultValue;
+    }
+  },
+
+  removeAnno : function(id, anno)
+  {
+    var annotationService = Components.classes["@mozilla.org/browser/annotation-service;1"].getService(Components.interfaces.nsIAnnotationService);
+    if (annotationService.itemHasAnnotation(id, anno)) {
+        annotationService.removeItemAnnotation(id, anno);
     }
   },
 

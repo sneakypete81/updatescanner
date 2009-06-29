@@ -37,7 +37,7 @@ var USc_upgrade_exists = true;
 var USc_upgrade = {    
 
 
-VERSION : "3.0.4",
+VERSION : "3.0.5beta1",
 
 check : function()
 {
@@ -67,6 +67,12 @@ check : function()
         if (this.upgrade_3_0())
             this.updateVersion()
         return
+    }
+
+    if (this.isVersionBefore("3.0.4.99")) {
+        this.upgrade_3_0_5();
+        this.updateVersion();
+        return;
     }
 
     if (this.isVersionBefore(this.VERSION)) {
@@ -205,6 +211,28 @@ upgrade_item_3_0 : function(itemNumber, nodes)
     var newFilebase = USc_places.getSignature(idBM);
     USc_file.USmvFile(oldFilebase+".old", newFilebase+".old");
     USc_file.USmvFile(oldFilebase+".new", newFilebase+".new");
+},
+
+upgrade_3_0_5 : function()
+// For 3.0.5, make sure the root folder doesn't have the organiser query annotation
+// (this was originally copied from the Sage source, but seems to be redundant,
+//  and causes problems with FF3.5)
+{
+    var gBundle = Components.classes["@mozilla.org/intl/stringbundle;1"].getService(Components.interfaces.nsIStringBundleService);
+    var strings = gBundle.createBundle("chrome://updatescan/locale/updatescan.properties");
+    var folder_name = strings.GetStringFromName("rootFolderName");
+    var folder_id = USc_places.getRootFolderId()
+
+    try {
+        USc_places.removeAnno(folder_id, USc_places.ORGANIZER_QUERY_ANNO);
+    } catch (e) {
+    }
+
+    try {
+        myDump(USc_places.getTitle());
+    } catch (e) {
+        USc_places.setTitle(folder_id, folder_name);
+    }
 },
 
 createRootBookmark : function ()
