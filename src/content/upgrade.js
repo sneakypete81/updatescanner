@@ -37,7 +37,7 @@ var USc_upgrade_exists = true;
 var USc_upgrade = {    
 
 
-VERSION : "3.0.5beta1",
+VERSION : "3.0.5",
 
 check : function()
 {
@@ -69,7 +69,7 @@ check : function()
         return
     }
 
-    if (this.isVersionBefore("3.0.4.99")) {
+    if (this.isVersionBefore("3.0.5")) {
         this.upgrade_3_0_5();
         this.updateVersion();
         return;

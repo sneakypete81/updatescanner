@@ -2,7 +2,6 @@ Bugs:
 * Sometimes right-clicking does funny things
 * Notification click doesn't work for mac
 * Opening bookmarks sidebar stuffs up our context menu
-* Root Folder renamed to (no title)
 
 Add Delete link to the header
 
@@ -24,6 +23,9 @@ Show deletions too
 Option to view current page only, not diffs
 Configurable highlight colour
 Check for wifi proxy
+
+-- 3.0.5 --
+Fixed: Root Folder renamed to (no title) in FF3.5
 
 -- 3.0.4 --
 Make diffpage work properly - currently in quirksmode
