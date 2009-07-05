@@ -14,6 +14,7 @@ pref("extensions.updatescan.scan.useSliders", true);
 pref("extensions.updatescan.scan.warnScanShort", true);
 pref("extensions.updatescan.scan.displayAdvanced", true);
 pref("extensions.updatescan.scanTimeout", 30);
+pref("extensions.updatescan.newTabDelay", 3);
 
 // Toolbar button display preferences
 pref("extensions.updatescan.toolbar.new", true);

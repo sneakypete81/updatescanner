@@ -38,14 +38,41 @@ load : function()
 {
     if (!this.loaded) {
         this.loaded = true;
-    
-        var id = this._getUrlParameter("id", "");
+        var delay = this._getUrlParameter("delay", "0");
+        this.timer = (Components.classes["@mozilla.org/timer;1"]
+                      .createInstance(Components.interfaces.nsITimer));
+        this.timer.initWithCallback(USc_diffPage_timer,
+                                    delay * 1000,
+                                    Components.interfaces.nsITimer.TYPE_ONE_SHOT);
+
+    }
+},
+
+// Taken with permission from http://www.netlobo.com/url_query_string_javascript.html
+_getUrlParameter : function (name, def)
+{
+  name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+  var regexS = "[\\?&]"+name+"=([^&#]*)";
+  var regex = new RegExp( regexS );
+  var results = regex.exec( window.location.href );
+  if( results == null )
+    return def;
+  else
+      return unescape(results[1]);
+}
+}
+
+var USc_diffPage_timer = {
+
+notify : function(timer) 
+{
+        var id = USc_diffPage._getUrlParameter("id", "");
         this.id = id
-        var title = this._getUrlParameter("title", "");
-        var newDate = this._getUrlParameter("newDate", "");
-        var oldDate = this._getUrlParameter("oldDate", "");
-        var url = this._getUrlParameter("url", "");
-        var view = this._getUrlParameter("view", "diff");
+        var title = USc_diffPage._getUrlParameter("title", "");
+        var newDate = USc_diffPage._getUrlParameter("newDate", "");
+        var oldDate = USc_diffPage._getUrlParameter("oldDate", "");
+        var url = USc_diffPage._getUrlParameter("url", "");
+        var view = USc_diffPage._getUrlParameter("view", "diff");
 
         document.title = title;
         document.getElementById("title").value=title;
@@ -67,8 +94,8 @@ load : function()
             oldContent  = USc_file.USreadFile(filebase+".old");
             newContent  = USc_file.USreadFile(filebase+".new");
         }
-    	if (newContent=="") {
-	    view="notChecked";
+        if (newContent=="") {
+            view="notChecked";
             enableDiffLinks = false;
         }
         if (USc_places.queryAnno(id, USc_places.ANNO_STATUS, "")
@@ -78,34 +105,32 @@ load : function()
             enableDiffLinks = false;
         }
 
-	switch (view) {
-	case "diff" :
-	    document.getElementById("sectionDiff").hidden=false;
-	    document.getElementById("dateDiff").value=newDate;
-//            this._launchThread(url, oldContent, newContent);
-	    content = USc_diffWiki.WDiffString(oldContent, newContent);
-            break;
-	case "new":
-	    document.getElementById("sectionNew").hidden=false;
-	    document.getElementById("dateNew").value=newDate;
-	    content = newContent;
-	    break;
-	case "old":
-	    document.getElementById("sectionOld").hidden=false;
-	    document.getElementById("dateOld").value=oldDate;
-	    content = oldContent;
-	    break;
-        case "error":
-	    document.getElementById("sectionError").hidden=false;
-            break;
-	default:
-	    document.getElementById("sectionNotChecked").hidden=false;
-	}
-
+        switch (view) {
+      	case "diff" :
+      	    document.getElementById("sectionDiff").hidden=false;
+      	    document.getElementById("dateDiff").value=newDate;
+      	    content = USc_diffWiki.WDiffString(oldContent, newContent);
+                  break;
+      	case "new":
+      	    document.getElementById("sectionNew").hidden=false;
+      	    document.getElementById("dateNew").value=newDate;
+      	    content = newContent;
+      	    break;
+      	case "old":
+      	    document.getElementById("sectionOld").hidden=false;
+      	    document.getElementById("dateOld").value=oldDate;
+      	    content = oldContent;
+      	    break;
+              case "error":
+      	    document.getElementById("sectionError").hidden=false;
+                  break;
+      	default:
+      	    document.getElementById("sectionNotChecked").hidden=false;
+        }
+      
         this._writeViewFrame(view, url, enableDiffLinks);
         this._writeContentFrame(url, content);
         
-    }
 },
 
 click : function(view) 
@@ -188,87 +213,6 @@ _writeContentFrame : function (url, content)
 
     frame.setAttribute("src", "data:text/html," + 
                        encodeURIComponent(content));  
-},
-
-// Taken with permission from http://www.netlobo.com/url_query_string_javascript.html
-_getUrlParameter : function (name, def)
-{
-  name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
-  var regexS = "[\\?&]"+name+"=([^&#]*)";
-  var regex = new RegExp( regexS );
-  var results = regex.exec( window.location.href );
-  if( results == null )
-    return def;
-  else
-      return unescape(results[1]);
-},
-
-_launchThread : function(url, oldContent, newContent)
-// Run the diff script from another thread, so as not to slow things down too much
-// See https://developer.mozilla.org/en/The_Thread_Manager for more details
-{
-
-    var workingThread = function(threadID, url, oldContent, newContent) {
-      this.threadID = threadID;
-      this.url = url;
-      this.oldContent = oldContent;
-      this.newContent = newContent;
-      this.result = "";
-    }    
-    workingThread.prototype = {
-      run: function() {
-        try {
-          // This is where the working thread does its processing work.
-          this.result = USc_diffWiki.WDiffString(this.oldContent, this.newContent);
-          
-          // When it's done, call back to the main thread to let it know
-          // we're finished.
-         
-          main.dispatch(new mainThread(this.threadID, this.url, this.result),
-            background.DISPATCH_NORMAL);
-        } catch(err) {
-          Components.utils.reportError(err);
-        }
-      },      
-      QueryInterface: function(iid) {
-        if (iid.equals(Components.interfaces.nsIRunnable) ||
-            iid.equals(Components.interfaces.nsISupports)) {
-                return this;
-        }
-        throw Components.results.NS_ERROR_NO_INTERFACE;
-      }
-    };
-    
-    var mainThread = function(threadID, url, result) {
-      this.threadID = threadID;
-      this.url = url;
-      this.result = result;
-    };
-    mainThread.prototype = {
-      run: function() {
-        try {
-          // This is where we react to the completion of the working thread.
-          USc_diffPage._writeContentFrame(this.url, this.result);
-//          myDump('Thread ' + this.threadID + ' finished ('+this.url+')\n');
-        } catch(err) {
-          Components.utils.reportError(err);
-        }
-      },
-      QueryInterface: function(iid) {
-        if (iid.equals(Components.interfaces.nsIRunnable) ||
-            iid.equals(Components.interfaces.nsISupports)) {
-                return this;
-        }
-        throw Components.results.NS_ERROR_NO_INTERFACE;
-      }
-    };
-
-    var background = Components.classes["@mozilla.org/thread-manager;1"].getService().newThread(0);
-    var main = Components.classes["@mozilla.org/thread-manager;1"].getService().mainThread;
-    background.dispatch(new workingThread(1, url, oldContent, newContent),
-                        background.DISPATCH_NORMAL);
-    
 }
-
 }
 }

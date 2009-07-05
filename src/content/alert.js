@@ -140,7 +140,7 @@ onLinkClick : function(aEvent)
     aEvent.stopPropagation();
 },
 
-_diffItemNewTabBackground : function(id)
+_diffItemNewTabBackground : function(id, delay)
 {
     var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
                        .getService(Components.interfaces.nsIWindowMediator);
@@ -154,7 +154,7 @@ _diffItemNewTabBackground : function(id)
     .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
     .getInterface(Components.interfaces.nsIDOMWindow);
 
-    var diffURL = USc_updatescan._diffItem(id);
+    var diffURL = USc_updatescan._diffItem(id, delay);
     if (diffURL) {
       mainWindow.getBrowser().addTab(diffURL);
     }

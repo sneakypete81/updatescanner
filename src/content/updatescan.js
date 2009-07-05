@@ -353,7 +353,7 @@ openPreferences : function()
                       'chrome,toolbar,dialog=no,resizable,centerscreen');
 },
 
-_diffItem : function(id)
+_diffItem : function(id, delay)
 {
     var me = USc_updatescan;
 
@@ -376,11 +376,12 @@ _diffItem : function(id)
     
     var newDate = me._dateDiffString(lastScan, now);
 
-    return "chrome://updatescan/content/diffPage.xul?id="+escape(id)+
-	   "&title="+escape(USc_places.getTitle(id))+
-	   "&url="+escape(USc_places.getURL(id))+
-           "&oldDate="+escape(oldDate)+
-           "&newDate="+escape(newDate);
+    return ("chrome://updatescan/content/diffPage.xul?id="+escape(id)+
+            "&title="+escape(USc_places.getTitle(id))+
+            "&url="+escape(USc_places.getURL(id))+
+            "&oldDate="+escape(oldDate)+
+            "&newDate="+escape(newDate)+
+            "&delay="+escape(delay));
 },
 
 diffSelectedItemThisWindow : function()
@@ -395,7 +396,7 @@ diffSelectedItemThisWindow : function()
 _diffItemThisWindow : function(id)
 {
     var me = USc_updatescan;
-    var diffURL = me._diffItem(id)
+    var diffURL = me._diffItem(id, 0)
     if (diffURL) {
       USc_topWin.open(diffURL);
       me.tree.focus();
@@ -425,10 +426,10 @@ diffSelectedItemNewTab : function()
     if (id == undefined)
       return;
 
-    me._diffItemNewTab(id);
+    me._diffItemNewTab(id, 0);
 },
 
-_diffItemNewTab : function(id)
+_diffItemNewTab : function(id, delay)
 {
     var me = USc_updatescan;
 
@@ -440,14 +441,14 @@ _diffItemNewTab : function(id)
     .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
     .getInterface(Components.interfaces.nsIDOMWindow);
 
-    var diffURL = me._diffItem(id);
+    var diffURL = me._diffItem(id, delay);
     if (diffURL) {
       mainWindow.getBrowser().selectedTab = mainWindow.getBrowser().addTab(diffURL);
       me.tree.focus();
     }
 },
 
-_diffItemNewTabBackground : function(id)
+_diffItemNewTabBackground : function(id, delay)
 {
     var me = USc_updatescan;
 
@@ -459,7 +460,7 @@ _diffItemNewTabBackground : function(id)
     .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
     .getInterface(Components.interfaces.nsIDOMWindow);
 
-    var diffURL = me._diffItem(id);
+    var diffURL = me._diffItem(id, delay);
     if (diffURL) {
       mainWindow.getBrowser().addTab(diffURL);
       me.tree.focus();
@@ -515,7 +516,7 @@ markAllAsVisited : function()
                                           USc_updatescan._markAsVisited);
 },
 
-_markAsVisited : function(id)
+    _markAsVisited : function(id, delay)
 {
     if (USc_places.queryAnno(id, USc_places.ANNO_STATUS, "") == USc_places.STATUS_UPDATE)
     {

@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # coding=UTF-8
 
-version = "3.0.5" # Don't forget to update upgrade.js too!
-in_development = False
+version = "3.0.6beta1" # Don't forget to update upgrade.js too!
+in_development = True
 publish_babelzilla = False # True = include incomplete locales for babelzilla
 only_english = False # True = only include english for beta releases
 

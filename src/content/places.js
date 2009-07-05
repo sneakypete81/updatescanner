@@ -322,8 +322,13 @@ var USc_places = {
   },
 
   callFunctionWithUpdatedItems : function(rootId, callback)
-  // Look for updated items below rootId, and pass each id to the callback
+  // Look for updated items below rootId, and pass each id and delay 
+  // to the callback
   {
+    var prefs = Components.classes["@mozilla.org/preferences-service;1"]
+                          .getService(Components.interfaces.nsIPrefService);
+    prefs = prefs.getBranch("extensions.updatescan.scan.");
+
     var hist = Components.classes["@mozilla.org/browser/nav-history-service;1"]
                .getService(Components.interfaces.nsINavHistoryService);
 
@@ -332,12 +337,19 @@ var USc_places = {
     query.setFolders([rootId], 1);
     var result = hist.executeQuery(query, options);
 
+    this._current_delay = 0;
+    this._delay_increment = 0;
+    if(prefs.prefHasUserValue("newTabDelay")) {
+        this._delay_increment = prefs.getIntPref("newTabDelay");
+    }
+
     USc_places._callFunctionRecursive(result.root, callback);
   },
 
   _callFunctionRecursive : function(aResultNode, callback)
   // If the node is not updated, don't do anything.
-  // If the node is a bookmark, call the callback with its ID.
+  // If the node is a bookmark, call the callback with its ID and delay, and
+  //      increment current_delay by delay_increment
   // If the node is a folder, recurse.
   {
     var itemId = aResultNode.itemId;
@@ -351,7 +363,8 @@ var USc_places = {
     var itemType = bmsvc.getItemType(itemId);
     if (itemType == bmsvc.TYPE_BOOKMARK)
     {
-      callback(itemId);
+        callback(itemId, this._current_delay);
+        this._current_delay += this._delay_increment;
 
     } else if (itemType == bmsvc.TYPE_FOLDER) {
       aResultNode.QueryInterface(Components.interfaces.nsINavHistoryContainerResultNode);
