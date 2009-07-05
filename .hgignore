@@ -8,6 +8,7 @@ src/chrome/updatescan.jar
 src/chrome.manifest
 *.pyc
 syntax: glob
+src/TODO~
 src/post_data.py
 src/www/testing/post_data.py
 *.py~
