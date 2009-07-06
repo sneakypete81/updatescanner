@@ -11,8 +11,9 @@ syntax: glob
 src/TODO~
 src/post_data.py
 src/www/testing/post_data.py
-*.py~
 src/www/testing/updatescan_www.xpi
 src/www/testing/releases/*.xpi
 src/www/testing/chrome/*.jar
 src/releases/*.xpi
+glob:CVS/
+glob:*~
