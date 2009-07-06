@@ -327,7 +327,7 @@ var USc_places = {
   {
     var prefs = Components.classes["@mozilla.org/preferences-service;1"]
                           .getService(Components.interfaces.nsIPrefService);
-    prefs = prefs.getBranch("extensions.updatescan.scan.");
+    prefs = prefs.getBranch("extensions.updatescan.");
 
     var hist = Components.classes["@mozilla.org/browser/nav-history-service;1"]
                .getService(Components.interfaces.nsINavHistoryService);
@@ -338,10 +338,7 @@ var USc_places = {
     var result = hist.executeQuery(query, options);
 
     this._current_delay = 0;
-    this._delay_increment = 0;
-    if(prefs.prefHasUserValue("newTabDelay")) {
-        this._delay_increment = prefs.getIntPref("newTabDelay");
-    }
+    this._delay_increment = prefs.getIntPref("newTabDelay");
 
     USc_places._callFunctionRecursive(result.root, callback);
   },
