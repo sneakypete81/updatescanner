@@ -1,0 +1,11 @@
+Here is the latest beta release of the Update Scanner firefox extension. 
+
+http://downloads.mozdev.org/updatescanner/updatescan-3.0.4.xpi 
+
+Please post any comments or bug reports to the [http://updatescanner.mozdev.org/drupal/forum/2 Beta Comments Forum]. 
+
+@@---This beta is currently available in English only.@@ 
+
+++ What's new ++
+
+Pages are displayed with Javascript and Plugins fully enabled, and the correct "Quirks Mode" setting is now honoured, which should cause more pages to be displayed correctly 
