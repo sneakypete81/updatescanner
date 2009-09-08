@@ -8,12 +8,17 @@ toolbar[iconsize="small"] #tools-updatescan-button {
   list-style-image: url("chrome://updatescan/skin/updatescan_sm.png");
 }
 
-statusbarpanel#UpdateScanStatusbar[status="0"]
+statusbarpanel#UpdateScanStatusbar[status="NO_CHANGE"]
 {
     list-style-image: url("chrome://updatescan/skin/updatescan_grey_sm.png");
 }
 
-statusbarpanel#UpdateScanStatusbar[status="1"]
+statusbarpanel#UpdateScanStatusbar[status="CHANGE"]
 {
     list-style-image: url("chrome://updatescan/skin/updatescan_sm.png");
+}
+
+statusbarpanel#UpdateScanStatusbar[status="DISABLED"]
+{
+    list-style-image: url("chrome://updatescan/skin/updatescan_dis_sm.png");
 }

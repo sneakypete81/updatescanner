@@ -169,10 +169,13 @@ refresh : function()
     var changed = USc_places.queryAnno(USc_places.getRootFolderId(),
                                        USc_places.ANNO_STATUS,
                                        USc_places.STATUS_UNKNOWN);
-    if (changed == USc_places.STATUS_UPDATE) {
-        statusbar.setAttribute("status", "1");
+    var enabled = true;
+    if (!enabled) {
+        statusbar.setAttribute("status", "DISABLED");
+    } else if (changed == USc_places.STATUS_UPDATE) {
+        statusbar.setAttribute("status", "CHANGE");
     } else {
-       statusbar.setAttribute("status", "0");
+       statusbar.setAttribute("status", "NO_CHANGE");
     }
 }
 }
