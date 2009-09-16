@@ -53,6 +53,7 @@ load : function()
     } catch (e) {
         ;
     }
+
 },
 
 // Don't show context menu item when text is selected,
@@ -64,6 +65,11 @@ _showMenu : function()
     } else {
         document.getElementById("AddToUpdateScan").hidden = false;
     }
+},
+
+_showStatusMenu : function()
+{
+
 }
 }
 }

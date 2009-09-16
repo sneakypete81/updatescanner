@@ -545,6 +545,11 @@ openHelp : function()
     mainWindow.getBrowser().selectedTab = mainWindow.getBrowser().addTab(helpURL);
 },
 
+toggleEnable : function()
+{
+  alert("Toggle");
+},
+
 _getSelectedItem : function()
 {
     var me = USc_updatescan;
