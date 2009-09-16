@@ -110,22 +110,27 @@
                       class="statusbarpanel-iconic"
 			             tooltiptext="&UpdateScan.tooltip;"
 			             oncommand="toggleSidebar('viewUpdateScanSidebar');"
-                      context="statusmenu"
+                      context="UpdateScanStatusMenu"
                       status="0"/>
     </statusbar>
 
     <popupset>
-      <menupopup id="statusmenu">
+      <menupopup id="UpdateScanStatusMenu">
         <menuitem label="Update Scanner" default="true"
                   oncommand="toggleSidebar('viewUpdateScanSidebar');"/>
-        <menuitem label="&AddToUpdateScan.label;"
+        <menuitem id="StatusMenuAddToUpdateScan"
+                  label="&AddToUpdateScan.label;"
                   accesskey="&AddToUpdateScan.accesskey;"
                   oncommand="USc_updatescan.openNewDialog();"/>
  
         <menuseparator/>
-        <menuitem label="&DisableScanner.label"
-                  oncommand="USc_updatescan.toggleEnable();"/>
-        <menuitem label="&Preferences.label"
+        <menuitem id="StatusMenuDisableScanner"
+                  label="&DisableScanner.label;"
+                  oncommand="USc_updatescan.disableScanner();"/>
+        <menuitem id="StatusMenuEnableScanner"
+                  label="&EnableScanner.label;"
+                  oncommand="USc_updatescan.enableScanner();"/>
+        <menuitem label="&Preferences.label;"
                   oncommand="USc_updatescan.openPreferences();"/>
       </menupopup>
     </popupset>

@@ -46,14 +46,13 @@ var USc_overlay = {
 load : function() 
 {
     var me = USc_overlay;
-    // Eventlistener for the contextmenu
-    try {
-        var menu = document.getElementById("contentAreaContextMenu");
-        menu.addEventListener("popupshowing", me._showMenu, false);
-    } catch (e) {
-        ;
-    }
+    // Eventlistener for the main context menu
+    var menu = document.getElementById("contentAreaContextMenu");
+    menu.addEventListener("popupshowing", me._showMenu, false);
 
+    // Eventlistener for the statusbar context menu
+    var statusmenu = document.getElementById("UpdateScanStatusMenu");
+    statusmenu.addEventListener("popupshowing", me._showStatusMenu, false);
 },
 
 // Don't show context menu item when text is selected,
@@ -69,9 +68,27 @@ _showMenu : function()
 
 _showStatusMenu : function()
 {
+    // Don't show context menu "Scan Page For Updates" item if URL is in chrome:// space.
+    if(!window.content.document.URL) {
+        document.getElementById("StatusMenuAddToUpdateScan").hidden = true;
+    } else {
+        document.getElementById("StatusMenuAddToUpdateScan").hidden = false;
+    }
 
+    // Show/hide the enable/disable options as appropriate
+    var prefBranch = (Components.classes["@mozilla.org/preferences-service;1"].
+                      getService(Components.interfaces.nsIPrefService).
+                      getBranch("extensions.updatescan."));
+
+    if (prefBranch.getBoolPref("scan.enable")) {
+        document.getElementById("StatusMenuDisableScanner").hidden = false;
+        document.getElementById("StatusMenuEnableScanner").hidden = true;
+    } else {
+        document.getElementById("StatusMenuDisableScanner").hidden = true;        
+        document.getElementById("StatusMenuEnableScanner").hidden = false;
+    }
 }
-}
+};
 }
 
 window.addEventListener("load", USc_overlay.load, false);

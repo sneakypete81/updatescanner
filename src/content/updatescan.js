@@ -545,9 +545,22 @@ openHelp : function()
     mainWindow.getBrowser().selectedTab = mainWindow.getBrowser().addTab(helpURL);
 },
 
-toggleEnable : function()
+enableScanner : function()
 {
-  alert("Toggle");
+    var prefBranch = (Components.classes["@mozilla.org/preferences-service;1"].
+                      getService(Components.interfaces.nsIPrefService).
+                      getBranch("extensions.updatescan."));
+
+    prefBranch.setBoolPref("scan.enable", true)
+},
+
+disableScanner : function()
+{
+    var prefBranch = (Components.classes["@mozilla.org/preferences-service;1"].
+                      getService(Components.interfaces.nsIPrefService).
+                      getBranch("extensions.updatescan."));
+
+    prefBranch.setBoolPref("scan.enable", false)
 },
 
 _getSelectedItem : function()
