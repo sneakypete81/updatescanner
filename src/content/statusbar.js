@@ -84,7 +84,18 @@ var USc_statusbarAnnotationObserver = {
   }  
 };
 
-var USc_statusbar = {    
+var USc_statusbarEnablePrefObserver = {
+    // Refresh the status bar if the scan.enable preference changes
+    observe: function(subject, topic, data)
+    {
+        if (topic == "nsPref:changed" && data == "scan.enable") {
+            USc_statusbar.refresh();
+        }
+    }
+};
+
+var USc_statusbar = {   
+    prefs: null,
 
 load : function()
 {
@@ -97,6 +108,15 @@ load : function()
 
     // Update parent folder annotations when bookmarks are moved/deleted
     bmsvc.addObserver(USc_statusbarBookmarkObserver, false);
+
+    me.prefs = Components.classes["@mozilla.org/preferences-service;1"]
+                           .getService(Components.interfaces.nsIPrefService)
+                           .getBranch("extensions.updatescan.");
+    me.prefs.QueryInterface(Components.interfaces.nsIPrefBranch2);
+
+    // Update statusbar icon when scanner is disabled/enabled
+    me.prefs.addObserver("scan.enable", USc_statusbarEnablePrefObserver, false);
+
 
     // Make sure we have a root folder
     try {
@@ -123,8 +143,13 @@ unload : function()
     try { 
       PlacesUtils.annotations.removeObserver(USc_statusbarAnnotationObserver);
     } catch(e) {}
+
     try { 
         bmsvc.removeObserver(USc_statusbarBookmarkObserver);
+    } catch(e) {}
+ 
+    try { 
+        this.prefs.removeObserver("scan.enable", USc_statusbarBookmarkObserver);
     } catch(e) {}
 },
 
@@ -163,19 +188,27 @@ autoscanFinished : function(numChanges)
 
 refresh : function()
 {
+    var me = USc_statusbar;
     var statusbar = document.getElementById("UpdateScanStatusbar");
 
     // Check the status annotation on the root folder
     var changed = USc_places.queryAnno(USc_places.getRootFolderId(),
                                        USc_places.ANNO_STATUS,
                                        USc_places.STATUS_UNKNOWN);
-    var enabled = true;
-    if (!enabled) {
-        statusbar.setAttribute("status", "DISABLED");
-    } else if (changed == USc_places.STATUS_UPDATE) {
-        statusbar.setAttribute("status", "CHANGE");
+    var enabled = me.prefs.getBoolPref("scan.enable");
+          
+    if (changed == USc_places.STATUS_UPDATE) {
+        if (enabled) {
+            statusbar.setAttribute("status", "CHANGE");
+        } else {
+            statusbar.setAttribute("status", "CHANGE_DISABLED");
+        }
     } else {
-       statusbar.setAttribute("status", "NO_CHANGE");
+        if (enabled) {
+            statusbar.setAttribute("status", "NO_CHANGE");
+        } else {
+            statusbar.setAttribute("status", "NO_CHANGE_DISABLED");
+        }
     }
 }
 }

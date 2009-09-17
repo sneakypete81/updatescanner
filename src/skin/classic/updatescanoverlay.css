@@ -18,7 +18,12 @@ statusbarpanel#UpdateScanStatusbar[status="CHANGE"]
     list-style-image: url("chrome://updatescan/skin/updatescan_sm.png");
 }
 
-statusbarpanel#UpdateScanStatusbar[status="DISABLED"]
+statusbarpanel#UpdateScanStatusbar[status="NO_CHANGE_DISABLED"]
+{
+    list-style-image: url("chrome://updatescan/skin/updatescan_grey_dis_sm.png");
+}
+
+statusbarpanel#UpdateScanStatusbar[status="CHANGE_DISABLED"]
 {
     list-style-image: url("chrome://updatescan/skin/updatescan_dis_sm.png");
 }
