@@ -66,20 +66,28 @@ _check : function()
 {
     var me = USc_autoscan;
 
-    me.scan = new USc_scanner();
-    var numItems = me.scan.addItems(USc_places.getRootFolderId(), true);
+    var prefBranch = (Components.classes["@mozilla.org/preferences-service;1"].
+                      getService(Components.interfaces.nsIPrefService).
+                      getBranch("extensions.updatescan."));
+
+    // Only scan if we're enabled
+    if (prefBranch.getBoolPref("scan.enable")) {
+
+        me.scan = new USc_scanner();
+        var numItems = me.scan.addItems(USc_places.getRootFolderId(), true);
     
 //    var now = new Date();
 //    myDump(now.toString()+":"+numItems+" items to scan\n");
     
-    if (numItems == 0)
-        me.callback(0);
-
-    me.numChanges = 0;
-    me.scan.start(me._scanChanged, 
-                  me._scanFinished, 
-                  me._scanProgress,
-                  me._encodingChanged);
+        if (numItems == 0) {
+            me.callback(0);            
+        }
+        me.numChanges = 0;
+        me.scan.start(me._scanChanged, 
+                      me._scanFinished, 
+                      me._scanProgress,
+                      me._encodingChanged);
+    }
 },
 
 _scanChanged : function(id, new_content, status, statusText, headerText)
