@@ -59,7 +59,14 @@ _getUrlParameter : function (name, def)
     return def;
   else
       return unescape(results[1]);
+},
+
+editProperties : function()
+{
+    var id = USc_diffPage._getUrlParameter("id", "");
+    USc_updatescan.openEditDialog(id);
 }
+
 }
 
 var USc_diffPage_timer = {
@@ -67,7 +74,6 @@ var USc_diffPage_timer = {
 notify : function(timer) 
 {
         var id = USc_diffPage._getUrlParameter("id", "");
-        this.id = id
         var title = USc_diffPage._getUrlParameter("title", "");
         var newDate = USc_diffPage._getUrlParameter("newDate", "");
         var oldDate = USc_diffPage._getUrlParameter("oldDate", "");
@@ -136,11 +142,6 @@ notify : function(timer)
 click : function(view) 
 {
     location.href = this.baseUrl+view;
-},
-
-editProperties : function()
-{
-    USc_updatescan.openEditDialog(this.id);
 },
 
 _writeViewFrame : function (view, url, enableDiffLinks)
