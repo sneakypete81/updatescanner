@@ -67,76 +67,75 @@ editProperties : function()
     USc_updatescan.openEditDialog(id);
 }
 
-}
+};
 
 var USc_diffPage_timer = {
 
 notify : function(timer) 
 {
-        var id = USc_diffPage._getUrlParameter("id", "");
-        var title = USc_diffPage._getUrlParameter("title", "");
-        var newDate = USc_diffPage._getUrlParameter("newDate", "");
-        var oldDate = USc_diffPage._getUrlParameter("oldDate", "");
-        var url = USc_diffPage._getUrlParameter("url", "");
-        var view = USc_diffPage._getUrlParameter("view", "diff");
+    var id = USc_diffPage._getUrlParameter("id", "");
+    var title = USc_diffPage._getUrlParameter("title", "");
+    var newDate = USc_diffPage._getUrlParameter("newDate", "");
+    var oldDate = USc_diffPage._getUrlParameter("oldDate", "");
+    var url = USc_diffPage._getUrlParameter("url", "");
+    var view = USc_diffPage._getUrlParameter("view", "diff");
 
-        document.title = title;
-        document.getElementById("title").value=title;
+    document.title = title;
+    document.getElementById("title").value=title;
 
-        this.baseUrl = "chrome://updatescan/content/diffPage.xul?id="+escape(id) +
-        "&title=" + escape(title) +
-        "&newDate=" + escape(newDate) +
-        "&oldDate=" + escape(oldDate) +
-        "&url=" + escape(url) +
-        "&view=";
+    this.baseUrl = ("chrome://updatescan/content/diffPage.xul?id="+escape(id) +
+                    "&title=" + escape(title) +
+                    "&newDate=" + escape(newDate) +
+                    "&oldDate=" + escape(oldDate) +
+                    "&url=" + escape(url) +
+                    "&view=");
 
-        var content=""
-        var newContent=""
-        var oldContent=""
-        var enableDiffLinks = true;
+    var content="";
+    var newContent="";
+    var oldContent="";
+    var enableDiffLinks = true;
 
-        var filebase = USc_places.queryAnno(id, USc_places.ANNO_SIGNATURE, "");
-        if (filebase != "") {
-            oldContent  = USc_file.USreadFile(filebase+".old");
-            newContent  = USc_file.USreadFile(filebase+".new");
-        }
-        if (newContent=="") {
-            view="notChecked";
-            enableDiffLinks = false;
-        }
-        if (USc_places.queryAnno(id, USc_places.ANNO_STATUS, "")
-            == USc_places.STATUS_ERROR)
-        {
-            view="error";
-            enableDiffLinks = false;
-        }
+    var filebase = USc_places.queryAnno(id, USc_places.ANNO_SIGNATURE, "");
+    if (filebase != "") {
+        oldContent  = USc_file.USreadFile(filebase+".old");
+        newContent  = USc_file.USreadFile(filebase+".new");
+    }
+    if (newContent=="") {
+        view="notChecked";
+        enableDiffLinks = false;
+    }
+    if (USc_places.queryAnno(id, USc_places.ANNO_STATUS, "")
+        == USc_places.STATUS_ERROR)
+    {
+        view="error";
+        enableDiffLinks = false;
+    }
 
-        switch (view) {
-      	case "diff" :
-      	    document.getElementById("sectionDiff").hidden=false;
-      	    document.getElementById("dateDiff").value=newDate;
-      	    content = USc_diffWiki.WDiffString(oldContent, newContent);
-                  break;
-      	case "new":
-      	    document.getElementById("sectionNew").hidden=false;
-      	    document.getElementById("dateNew").value=newDate;
-      	    content = newContent;
-      	    break;
-      	case "old":
-      	    document.getElementById("sectionOld").hidden=false;
-      	    document.getElementById("dateOld").value=oldDate;
-      	    content = oldContent;
-      	    break;
-              case "error":
-      	    document.getElementById("sectionError").hidden=false;
-                  break;
-      	default:
-      	    document.getElementById("sectionNotChecked").hidden=false;
-        }
+    switch (view) {
+    case "diff" :
+        document.getElementById("sectionDiff").hidden=false;
+        document.getElementById("dateDiff").value=newDate;
+        content = USc_diffWiki.WDiffString(oldContent, newContent);
+        break;
+    case "new":
+        document.getElementById("sectionNew").hidden=false;
+        document.getElementById("dateNew").value=newDate;
+        content = newContent;
+        break;
+    case "old":
+        document.getElementById("sectionOld").hidden=false;
+        document.getElementById("dateOld").value=oldDate;
+        content = oldContent;
+        break;
+    case "error":
+        document.getElementById("sectionError").hidden=false;
+        break;
+    default:
+        document.getElementById("sectionNotChecked").hidden=false;
+    }
       
-        this._writeViewFrame(view, url, enableDiffLinks);
-        this._writeContentFrame(url, content);
-        
+    this._writeViewFrame(view, url, enableDiffLinks);
+    this._writeContentFrame(url, content);
 },
 
 click : function(view) 
@@ -146,7 +145,7 @@ click : function(view)
 
 _writeViewFrame : function (view, url, enableDiffLinks)
 {
-    var str=document.getElementById("diffPageStrings")
+    var str=document.getElementById("diffPageStrings");
     
     var viewFrame = document.getElementById("sectionView");
     var viewDoc = viewFrame.contentDocument;
@@ -215,5 +214,5 @@ _writeContentFrame : function (url, content)
     frame.setAttribute("src", "data:text/html," + 
                        encodeURIComponent(content));  
 }
-}
+};
 }
