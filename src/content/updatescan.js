@@ -360,7 +360,7 @@ openEditDialog : function(id)
 
         if (oldurl != args.url) {   // URL changed - reset all values
           // Create a new signature
-          USc_places.modifyAnno(id, USc_places.ANNO_SIGNATURE, "")
+          USc_places.modifyAnno(id, USc_places.ANNO_SIGNATURE, "");
           var filebase=USc_places.getSignature(id);
           USc_file.USwriteFile(filebase+".new", "");
 
@@ -400,18 +400,26 @@ _diffItem : function(id, delay)
     
     var newDate = me._dateDiffString(lastScan, now);
 
-    return ("chrome://updatescan/content/diffPage.xul?id="+escape(id)+
-            "&title="+escape(USc_places.getTitle(id))+
-            "&url="+escape(USc_places.getURL(id))+
-            "&oldDate="+escape(oldDate)+
-            "&newDate="+escape(newDate)+
-            "&delay="+escape(delay));
+    if (USc_places.queryAnno(id, USc_places.ANNO_HIGHLIGHT_CHANGES,
+                             USc_defaults.DEF_HIGHLIGHT_CHANGES)) {
+        var url = ("chrome://updatescan/content/diffPage.xul?id="+escape(id)+
+                   "&title="+escape(USc_places.getTitle(id))+
+                   "&url="+escape(USc_places.getURL(id))+
+                   "&oldDate="+escape(oldDate)+
+                   "&newDate="+escape(newDate)+
+                   "&delay="+escape(delay));
+    } else {
+        // Don't highlight - just show the page
+        var url = USc_places.getURL(id);
+    }
+
+    return url;
 },
 
 diffSelectedItemThisWindow : function()
 {
     var me = USc_updatescan;
-    var item = me._getSelectedItem()
+    var item = me._getSelectedItem();
     if (item == undefined)
       return;
     me._diffItemThisWindow(item);
@@ -420,7 +428,7 @@ diffSelectedItemThisWindow : function()
 _diffItemThisWindow : function(id)
 {
     var me = USc_updatescan;
-    var diffURL = me._diffItem(id, 0)
+    var diffURL = me._diffItem(id, 0);
     if (diffURL) {
       USc_topWin.open(diffURL);
       me.tree.focus();
@@ -495,7 +503,7 @@ _dateDiffString : function(oldDate, newDate)
 {
     var ret; 
     var time;
-    var str=document.getElementById("updatescanStrings")
+    var str=document.getElementById("updatescanStrings");
 
     var diff = newDate.getTime() - oldDate.getTime();
     diff = diff / 1000; // convert to seconds
@@ -540,7 +548,7 @@ markAllAsVisited : function()
                                           USc_updatescan._markAsVisited);
 },
 
-    _markAsVisited : function(id, delay)
+_markAsVisited : function(id, delay)
 {
     if (USc_places.queryAnno(id, USc_places.ANNO_STATUS, "") == USc_places.STATUS_UPDATE)
     {
@@ -550,7 +558,7 @@ markAllAsVisited : function()
 
 openHelp : function()
 {
-    var str=document.getElementById("updatescanStrings")
+    var str=document.getElementById("updatescanStrings");
     var locale = Components.classes["@mozilla.org/preferences-service;1"].
                  getService(Components.interfaces.nsIPrefService).
                  getBranch("general.useragent.").
@@ -575,7 +583,7 @@ enableScanner : function()
                       getService(Components.interfaces.nsIPrefService).
                       getBranch("extensions.updatescan."));
 
-    prefBranch.setBoolPref("scan.enable", true)
+    prefBranch.setBoolPref("scan.enable", true);
 },
 
 disableScanner : function()
@@ -584,16 +592,16 @@ disableScanner : function()
                       getService(Components.interfaces.nsIPrefService).
                       getBranch("extensions.updatescan."));
 
-    prefBranch.setBoolPref("scan.enable", false)
+    prefBranch.setBoolPref("scan.enable", false);
 },
 
 _getSelectedItem : function()
 {
     var me = USc_updatescan;
     if (me.tree.selectedNode)
-      return me.tree.selectedNode.itemId
+        return me.tree.selectedNode.itemId;
     else
-      return undefined
+        return undefined;
 },
 
 deleteSelectedItem : function()
@@ -634,7 +642,7 @@ _setStatus : function (status)
 _showProgress : function(title, value, max)
 {
     var me = USc_updatescan;
-    var str=document.getElementById("updatescanStrings")
+    var str=document.getElementById("updatescanStrings");
     var param = {title:title};
     me._setStatus(str.getString("statusScanning").USc_supplant(param));
 
@@ -704,7 +712,7 @@ _extendPlacesTreeView : function() {
           this._visibleElements[aRow].properties.push(properties[i]);
         }
       }
-    }
+    };
     PlacesTreeView.prototype.isContainerBase = PlacesTreeView.prototype.isContainer;
     PlacesTreeView.prototype.isContainer =
     function ext_isContainer(aRow) {
@@ -719,7 +727,7 @@ _extendPlacesTreeView : function() {
        } else {
          return false;
        }
-    }
+    };
 
 }
 };

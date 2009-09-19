@@ -22,7 +22,7 @@ translators = ['SlovakSoft (Slovenčina)',
                'Archaeopterix (Deutsch)'
                'JZsolt (Magyar)',
                'Edvard Borovskij (Русский)',
-               'Leszek(teo)Życzkowski (Polski)',
+               'Leszek(teo) Życzkowski (Polski)',
                'PetrTwo (Čeština)',
                'Raryel Costa Souza (português brasileiro)',
                '123tp, Jørgen (Dansk)',
