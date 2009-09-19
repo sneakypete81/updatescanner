@@ -113,6 +113,12 @@ function initDialog()
         advLabel.hidden = true;
     }
 
+    document.getElementById("highlightChanges").checked = args.highlightChanges;
+    document.getElementById("highlightColour").color = args.highlightColour;
+    document.getElementById("showDeletions").checked = args.showDeletions;
+    document.getElementById("enableFlash").checked = args.enableFlash;
+    
+
     highlightChangesChanged();
 
 }
@@ -146,38 +152,38 @@ function Ok()
     args.title = txtTitle.value;
     args.url = txtURL.value;
     if (prefBranch.getBoolPref("scan.useSliders")) {
-	args.threshold = sliderThresholdDecode(sliderThresholdGetPos());
-	args.scanRateMins = sliderAutoscanDecode(sliderAutoscanGetPos());
+	     args.threshold = sliderThresholdDecode(sliderThresholdGetPos());
+	     args.scanRateMins = sliderAutoscanDecode(sliderAutoscanGetPos());
         if (document.getElementById("ignoreNumbers").checked) {
-	    args.ignoreNumbers = true;
-	} else {
-	    args.ignoreNumbers = false;
-	}
+	         args.ignoreNumbers = true;
+	     } else {
+	         args.ignoreNumbers = false;
+	     }
     } else {
-	args.threshold = document.getElementById("textThreshold").value;
+	     args.threshold = document.getElementById("textThreshold").value;
 
-	if (document.getElementById("manualScan").selectedIndex == 0) {
-	    args.scanRateMins = 0; // Manual scan
-	} else {
-	    args.scanRateMins = document.getElementById("textAutoscan").value;
-	    if (document.getElementById("menuAutoscanUnit").value == "Hours") {
-		args.scanRateMins = args.scanRateMins * 60;
-	    } else if (document.getElementById("menuAutoscanUnit").value == "Days") {
-		args.scanRateMins = args.scanRateMins * 60 * 24;
-	    }
-	    if (args.scanRateMins < 5) {
-		args.scanRateMins = 5;
-	    }
-	}
+	     if (document.getElementById("manualScan").selectedIndex == 0) {
+	         args.scanRateMins = 0; // Manual scan
+	     } else {
+	         args.scanRateMins = document.getElementById("textAutoscan").value;
+	         if (document.getElementById("menuAutoscanUnit").value == "Hours") {
+		          args.scanRateMins = args.scanRateMins * 60;
+	         } else if (document.getElementById("menuAutoscanUnit").value == "Days") {
+		          args.scanRateMins = args.scanRateMins * 60 * 24;
+	         }
+	         if (args.scanRateMins < 5) {
+		          args.scanRateMins = 5;
+	         }
+	     }
         if (document.getElementById("ignoreNumbers2").checked) {
-	    args.ignoreNumbers = true;
-	} else {
-	    args.ignoreNumbers = false;
-	}
+	         args.ignoreNumbers = true;
+	     } else {
+	         args.ignoreNumbers = false;
+	     }
     }
 
     if (args.scanRateMins > 0 && args.scanRateMins < 15 &&
-	prefBranch.getBoolPref("scan.warnScanShort")) {
+	     prefBranch.getBoolPref("scan.warnScanShort")) {
         if (!confirm(fiveMinuteAlert)) {
             return false;
         }
@@ -187,6 +193,11 @@ function Ok()
     } else {
         args.encoding = document.getElementById("encodingMenu").selectedItem.id;
     }
+
+    args.highlightChanges = document.getElementById("highlightChanges").checked;
+    args.highlightColour = document.getElementById("highlightColour").color;
+    args.showDeletions = document.getElementById("showDeletions").checked;
+    args.enableFlash = document.getElementById("enableFlash").checked;
 
     args.ok = true;
 

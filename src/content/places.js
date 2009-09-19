@@ -49,6 +49,10 @@ var USc_places = {
   ANNO_SCAN_RATE_MINS : "updatescan/scan_rate_mins", //string
   ANNO_HEADER_TEXT : "updatescan/header_text", // string
   ANNO_SIGNATURE : "updatescan/signature", // string
+  ANNO_HIGHLIGHT_CHANGES : "updatescan/highlight_changes", // boolean
+  ANNO_HIGHLIGHT_COLOUR : "updatescan/highlight_colour", // string
+  ANNO_SHOW_DELETIONS : "updatescan/show_deletions", // boolean
+  ANNO_ENABLE_FLASH : "updatescan/enable_flash", // boolean
 
   ORGANIZER_QUERY_ANNO : "PlacesOrganizer/OrganizerQuery",
 

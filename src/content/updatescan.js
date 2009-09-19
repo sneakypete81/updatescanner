@@ -38,13 +38,17 @@ if (typeof(USc_updatescan_exists) != 'boolean') {
 var USc_updatescan_exists = true;
 
 var USc_defaults = {
-  DEF_THRESHOLD : 100,
-  DEF_SCAN_RATE_MINS : 1440, // Scan once per day by default
-  DEF_IGNORE_NUMBERS : true,
-  DEF_ENCODING : "auto",
-  DEF_LAST_SCAN : "5 November 1978",
-  DEF_OLD_LAST_SCAN : "5 November 1978",
-  DEF_LAST_AUTOSCAN : "5 November 1978"
+    DEF_THRESHOLD : 100,
+    DEF_SCAN_RATE_MINS : 1440, // Scan once per day by default
+    DEF_IGNORE_NUMBERS : true,
+    DEF_ENCODING : "auto",
+    DEF_LAST_SCAN : "5 November 1978",
+    DEF_OLD_LAST_SCAN : "5 November 1978",
+    DEF_LAST_AUTOSCAN : "5 November 1978",
+    DEF_HIGHLIGHT_CHANGES : true,
+    DEF_HIGHLIGHT_COLOUR : "#ffff66",
+    DEF_SHOW_DELETIONS : false,
+    DEF_ENABLE_FLASH : true
 };
 
 var USc_updatescan = {    
@@ -75,7 +79,7 @@ load : function()
     PlacesUtils.annotations.addObserver(USc_sidebarAnnotationObserver);
     
     // Check for toolbar button changes
-    me._branch = Components.classes["@mozilla.org/preferences-service;1"]
+    me._branch = Components.classes["@mozilla.org/preferences-service;1"];
     me._branch = me._branch.getService(Components.interfaces.nsIPrefService);
     me._branch = me._branch.getBranch("extensions.updatescan.toolbar.");
     me._branch.QueryInterface(Components.interfaces.nsIPrefBranch2);
@@ -132,7 +136,7 @@ scanButtonClick : function()
     var me = USc_updatescan;    
     var id;
     var numitems;
-    var str=document.getElementById("updatescanStrings")
+    var str=document.getElementById("updatescanStrings");
     var ignoreNumbers;
     var encoding;
 
@@ -255,19 +259,23 @@ openNewDialog : function(parentId, index)
                    .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
                    .rootTreeItem
                    .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
-                   .getInterface(Components.interfaces.nsIDOMWindow) 
+                   .getInterface(Components.interfaces.nsIDOMWindow);
 
     var url = mainWindow.content.document.URL;
     var title = mainWindow.content.document.title || url;
 
     var args = {
-        title:          title, 
-        url:            url, 
-        threshold:      USc_defaults.DEF_THRESHOLD,
-        scanRateMins:   USc_defaults.DEF_SCAN_RATE_MINS,
-        encoding:       USc_defaults.DEF_ENCODING,
-        ignoreNumbers:  USc_defaults.DEF_IGNORE_NUMBERS,
-        advanced:       false
+        title:            title, 
+        url:              url, 
+        threshold:        USc_defaults.DEF_THRESHOLD,
+        scanRateMins:     USc_defaults.DEF_SCAN_RATE_MINS,
+        encoding:         USc_defaults.DEF_ENCODING,
+        ignoreNumbers:    USc_defaults.DEF_IGNORE_NUMBERS,
+        highlightChanges: USc_defaults.DEF_HIGHLIGHT_CHANGES,
+        highlightColour:  USc_defaults.DEF_HIGHLIGHT_COLOUR,
+        showDeletions:    USc_defaults.DEF_SHOW_DELETIONS,
+        enableFlash:      USc_defaults.DEF_ENABLE_FLASH,
+        advanced:         false
     };
 
     window.openDialog('chrome://updatescan/content/dlgnewedit.xul', 'dlgNew', 
@@ -278,6 +286,10 @@ openNewDialog : function(parentId, index)
         USc_places.modifyAnno(id, USc_places.ANNO_SCAN_RATE_MINS, args.scanRateMins);
         USc_places.modifyAnno(id, USc_places.ANNO_ENCODING, args.encoding);
         USc_places.modifyAnno(id, USc_places.ANNO_IGNORE_NUMBERS, args.ignoreNumbers);
+        USc_places.modifyAnno(id, USc_places.ANNO_HIGHLIGHT_CHANGES, args.highlightChanges);
+        USc_places.modifyAnno(id, USc_places.ANNO_HIGHLIGHT_COLOUR, args.highlightColour);
+        USc_places.modifyAnno(id, USc_places.ANNO_SHOW_DELETIONS, args.showDeletions);
+        USc_places.modifyAnno(id, USc_places.ANNO_ENABLE_FLASH, args.enableFlash);
 
         var filebase=USc_places.getSignature(id);
         USc_file.USwriteFile(filebase+".new", "");
@@ -307,18 +319,26 @@ openEditDialog : function(id)
     }
 
     var args = {
-        title:          USc_places.getTitle(id),
-        url:            USc_places.getURL(id),
-        threshold:      USc_places.queryAnno(id, USc_places.ANNO_THRESHOLD,
-                                             USc_defaults.DEF_THRESHOLD),
-        scanRateMins:   USc_places.queryAnno(id, USc_places.ANNO_SCAN_RATE_MINS,
-                                             USc_defaults.DEF_SCAN_RATE_MINS),
-        encoding:       USc_places.queryAnno(id, USc_places.ANNO_ENCODING,
-                                             USc_defaults.DEF_ENCODING),
-        ignoreNumbers:  USc_places.queryAnno(id, USc_places.ANNO_IGNORE_NUMBERS,
-                                             USc_defaults.DEF_IGNORE_NUMBERS),
-        advanced:       false
-    }
+        title:            USc_places.getTitle(id),
+        url:              USc_places.getURL(id),
+        threshold:        USc_places.queryAnno(id, USc_places.ANNO_THRESHOLD,
+                                               USc_defaults.DEF_THRESHOLD),
+        scanRateMins:     USc_places.queryAnno(id, USc_places.ANNO_SCAN_RATE_MINS,
+                                               USc_defaults.DEF_SCAN_RATE_MINS),
+        encoding:         USc_places.queryAnno(id, USc_places.ANNO_ENCODING,
+                                               USc_defaults.DEF_ENCODING),
+        ignoreNumbers:    USc_places.queryAnno(id, USc_places.ANNO_IGNORE_NUMBERS,
+                                               USc_defaults.DEF_IGNORE_NUMBERS),
+        advanced:         false,
+        highlightChanges: USc_places.queryAnno(id, USc_places.ANNO_HIGHLIGHT_CHANGES,
+                                               USc_defaults.DEF_HIGHLIGHT_CHANGES),
+        highlightColour:  USc_places.queryAnno(id, USc_places.ANNO_HIGHLIGHT_COLOUR,
+                                               USc_defaults.DEF_HIGHLIGHT_COLOUR),
+        showDeletions:    USc_places.queryAnno(id, USc_places.ANNO_SHOW_DELETIONS,
+                                               USc_defaults.DEF_SHOW_DELETIONS),
+        enableFlash:      USc_places.queryAnno(id, USc_places.ANNO_ENABLE_FLASH,
+                                               USc_defaults.DEF_ENABLE_FLASH)
+    };
 
     var oldurl = args.url;
 
@@ -333,6 +353,10 @@ openEditDialog : function(id)
         USc_places.modifyAnno(id, USc_places.ANNO_SCAN_RATE_MINS, args.scanRateMins);
         USc_places.modifyAnno(id, USc_places.ANNO_ENCODING, args.encoding);
         USc_places.modifyAnno(id, USc_places.ANNO_IGNORE_NUMBERS, args.ignoreNumbers);
+        USc_places.modifyAnno(id, USc_places.ANNO_HIGHLIGHT_CHANGES, args.highlightChanges);
+        USc_places.modifyAnno(id, USc_places.ANNO_HIGHLIGHT_COLOUR, args.highlightColour);
+        USc_places.modifyAnno(id, USc_places.ANNO_SHOW_DELETIONS, args.showDeletions);
+        USc_places.modifyAnno(id, USc_places.ANNO_ENABLE_FLASH, args.enableFlash);
 
         if (oldurl != args.url) {   // URL changed - reset all values
           // Create a new signature
