@@ -18,3 +18,7 @@
 <!ENTITY charEncoding.label "Character Encoding">
 <!ENTITY autoDetect.label "Auto-detect">
 <!ENTITY use.label "Use">
+<!ENTITY changeHighlighting.label "Change Highlighting">
+<!ENTITY highlightChanges.label "Highlight changes">
+<!ENTITY showDeletions.label "Show deleted text">
+<!ENTITY enableFlash.label "Enable Flash and Plugins">

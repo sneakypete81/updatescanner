@@ -91,7 +91,7 @@ function initDialog()
     document.getElementById("ignoreNumbers2").checked = args.ignoreNumbers;
 
     loadAvailableCharSets();
-    charEncodingChanged()
+    charEncodingChanged();
     
     if (args.encoding == "auto") {
         document.getElementById("autoCharEncoding")
@@ -99,7 +99,7 @@ function initDialog()
     } else {
         try {
             document.getElementById("encodingMenu").selectedItem = 
-                           document.getElementById(args.encoding.toLowerCase())
+                           document.getElementById(args.encoding.toLowerCase());
         } catch (e) {} 
         document.getElementById("autoCharEncoding")
                 .selectedIndex = 1;
@@ -113,6 +113,7 @@ function initDialog()
         advLabel.hidden = true;
     }
 
+    highlightChangesChanged();
 
 }
 
@@ -219,8 +220,8 @@ function advancedClick()
 function manualScanChanged()
 {
     var manualScan = (document.getElementById("manualScan").selectedIndex == 0);
-    document.getElementById("textAutoscan").disabled = manualScan
-    document.getElementById("menuAutoscanUnit").disabled = manualScan
+    document.getElementById("textAutoscan").disabled = manualScan;
+    document.getElementById("menuAutoscanUnit").disabled = manualScan;
 }
 
 function sliderThresholdGetPos()
@@ -244,7 +245,7 @@ function sliderThresholdChange()
     var pos = sliderThresholdGetPos();
     if (pos == 0) {
         label1.value=strings.getString("thresholdLabel0a");
-        label2.value=""
+        label2.value="";
     } else if (pos == 1) {
         label1.value=strings.getString("thresholdLabel1a");
         label2.value=strings.getString("thresholdLabel1b");
@@ -368,6 +369,17 @@ function sliderAutoscanDecode(slider)
         return 60 * 24 * 7;  // Weekly
     else
         return 0;        // Manual
+}
+
+function highlightChangesChanged()
+{
+    var enabled = document.getElementById("highlightChanges");
+    var highlightColour = document.getElementById("highlightColour");
+    var showDeletions = document.getElementById("showDeletions");
+    var enableFlash = document.getElementById("enableFlash");
+    highlightColour.disabled = !enabled.checked;
+    showDeletions.disabled = !enabled.checked;
+    enableFlash.disabled = !enabled.checked;
 }
 
 function charEncodingChanged()

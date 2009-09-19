@@ -267,7 +267,7 @@ openNewDialog : function(parentId, index)
         scanRateMins:   USc_defaults.DEF_SCAN_RATE_MINS,
         encoding:       USc_defaults.DEF_ENCODING,
         ignoreNumbers:  USc_defaults.DEF_IGNORE_NUMBERS,
-        advanced:       true
+        advanced:       false
     };
 
     window.openDialog('chrome://updatescan/content/dlgnewedit.xul', 'dlgNew', 
@@ -317,7 +317,7 @@ openEditDialog : function(id)
                                              USc_defaults.DEF_ENCODING),
         ignoreNumbers:  USc_places.queryAnno(id, USc_places.ANNO_IGNORE_NUMBERS,
                                              USc_defaults.DEF_IGNORE_NUMBERS),
-        advanced:       true
+        advanced:       false
     }
 
     var oldurl = args.url;
