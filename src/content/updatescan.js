@@ -47,6 +47,7 @@ var USc_defaults = {
     DEF_LAST_AUTOSCAN : "5 November 1978",
     DEF_HIGHLIGHT_CHANGES : true,
     DEF_HIGHLIGHT_COLOUR : "#ffff66",
+    DEF_ENABLE_SCRIPT : true,
     DEF_ENABLE_FLASH : true
 };
 
@@ -272,6 +273,7 @@ openNewDialog : function(parentId, index)
         ignoreNumbers:    USc_defaults.DEF_IGNORE_NUMBERS,
         highlightChanges: USc_defaults.DEF_HIGHLIGHT_CHANGES,
         highlightColour:  USc_defaults.DEF_HIGHLIGHT_COLOUR,
+        enableScript:     USc_defaults.DEF_ENABLE_SCRIPT,
         enableFlash:      USc_defaults.DEF_ENABLE_FLASH,
         advanced:         false
     };
@@ -286,6 +288,7 @@ openNewDialog : function(parentId, index)
         USc_places.modifyAnno(id, USc_places.ANNO_IGNORE_NUMBERS, args.ignoreNumbers);
         USc_places.modifyAnno(id, USc_places.ANNO_HIGHLIGHT_CHANGES, args.highlightChanges);
         USc_places.modifyAnno(id, USc_places.ANNO_HIGHLIGHT_COLOUR, args.highlightColour);
+        USc_places.modifyAnno(id, USc_places.ANNO_ENABLE_SCRIPT, args.enableScipt);
         USc_places.modifyAnno(id, USc_places.ANNO_ENABLE_FLASH, args.enableFlash);
 
         var filebase=USc_places.getSignature(id);
@@ -331,6 +334,8 @@ openEditDialog : function(id)
                                                USc_defaults.DEF_HIGHLIGHT_CHANGES),
         highlightColour:  USc_places.queryAnno(id, USc_places.ANNO_HIGHLIGHT_COLOUR,
                                                USc_defaults.DEF_HIGHLIGHT_COLOUR),
+        enableScript:     USc_places.queryAnno(id, USc_places.ANNO_ENABLE_SCRIPT,
+                                               USc_defaults.DEF_ENABLE_SCRIPT),
         enableFlash:      USc_places.queryAnno(id, USc_places.ANNO_ENABLE_FLASH,
                                                USc_defaults.DEF_ENABLE_FLASH)
     };
@@ -350,6 +355,7 @@ openEditDialog : function(id)
         USc_places.modifyAnno(id, USc_places.ANNO_IGNORE_NUMBERS, args.ignoreNumbers);
         USc_places.modifyAnno(id, USc_places.ANNO_HIGHLIGHT_CHANGES, args.highlightChanges);
         USc_places.modifyAnno(id, USc_places.ANNO_HIGHLIGHT_COLOUR, args.highlightColour);
+        USc_places.modifyAnno(id, USc_places.ANNO_ENABLE_SCRIPT, args.enableScript);
         USc_places.modifyAnno(id, USc_places.ANNO_ENABLE_FLASH, args.enableFlash);
 
         if (oldurl != args.url) {   // URL changed - reset all values

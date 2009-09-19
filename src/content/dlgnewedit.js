@@ -115,6 +115,7 @@ function initDialog()
 
     document.getElementById("highlightChanges").checked = args.highlightChanges;
     document.getElementById("highlightColour").color = args.highlightColour;
+    document.getElementById("enableScript").checked = args.enableScript;
     document.getElementById("enableFlash").checked = args.enableFlash;
     
 
@@ -195,6 +196,7 @@ function Ok()
 
     args.highlightChanges = document.getElementById("highlightChanges").checked;
     args.highlightColour = document.getElementById("highlightColour").color;
+    args.enableScript = document.getElementById("enableScript").checked;
     args.enableFlash = document.getElementById("enableFlash").checked;
 
     args.ok = true;
@@ -384,8 +386,10 @@ function highlightChangesChanged()
 {
     var enabled = document.getElementById("highlightChanges");
     var highlightColour = document.getElementById("highlightColour");
+    var enableScript = document.getElementById("enableScript");
     var enableFlash = document.getElementById("enableFlash");
     highlightColour.disabled = !enabled.checked;
+    enableScript.disabled = !enabled.checked;
     enableFlash.disabled = !enabled.checked;
 }
 

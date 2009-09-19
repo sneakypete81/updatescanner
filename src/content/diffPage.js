@@ -140,7 +140,13 @@ notify : function(timer)
     }
       
     this._writeViewFrame(view, url, enableDiffLinks);
-    this._writeContentFrame(url, content);
+    
+    var enableScript = USc_places.queryAnno(id, USc_places.ANNO_ENABLE_SCRIPT,
+                                               USc_defaults.DEF_ENABLE_SCRIPT);
+    var enableFlash = USc_places.queryAnno(id, USc_places.ANNO_ENABLE_FLASH,
+                                               USc_defaults.DEF_ENABLE_FLASH);
+
+    this._writeContentFrame(url, content, enableScript, enableFlash);
 },
 
 click : function(view) 
@@ -194,7 +200,7 @@ _writeViewFrame : function (view, url, enableDiffLinks)
     viewDoc.close();
 },
 
-_writeContentFrame : function (url, content)
+_writeContentFrame : function (url, content, enableScript, enableFlash)
 {
     // Charset is always UTF-8, since we read it from file
     // Set baseURI manually
@@ -213,8 +219,8 @@ _writeContentFrame : function (url, content)
 
     frame.docShell.allowAuth = false;  
     frame.docShell.allowMetaRedirects = false;   
-    frame.docShell.allowJavascript = true;  
-    frame.docShell.allowPlugins = true;  
+    frame.docShell.allowJavascript = enableScript;  
+    frame.docShell.allowPlugins = enableFlash;  
 
     frame.setAttribute("src", "data:text/html," + 
                        encodeURIComponent(content));  
