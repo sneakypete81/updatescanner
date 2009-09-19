@@ -161,7 +161,6 @@
   <hbox>
     <spacer width="15" />
     <vbox>
-      <checkbox id="showDeletions" label="&showDeletions.label;" />
       <checkbox id="enableFlash" label="&enableFlash.label;" />
     </vbox>
   </hbox>

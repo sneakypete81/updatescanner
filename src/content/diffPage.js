@@ -113,9 +113,14 @@ notify : function(timer)
 
     switch (view) {
     case "diff" :
+        var highlightColour = USc_places.queryAnno(id, USc_places.ANNO_HIGHLIGHT_COLOUR,
+                                                   USc_defaults.DEF_HIGHLIGHT_COLOUR);
+        // Set heading label highlight background
+        document.getElementById("highlightedLabel").
+            setAttribute('style', 'font-weight:bold;background: ' + highlightColour);
         document.getElementById("sectionDiff").hidden=false;
         document.getElementById("dateDiff").value=newDate;
-        content = USc_diffWiki.WDiffString(oldContent, newContent);
+        content = USc_diffWiki.WDiffString(oldContent, newContent, highlightColour);
         break;
     case "new":
         document.getElementById("sectionNew").hidden=false;

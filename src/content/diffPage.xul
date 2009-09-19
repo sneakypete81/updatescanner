@@ -93,8 +93,8 @@
 	<label class="plain" value="&headerDiff1; "/>
 	<label class="plain" id="dateDiff" />	
 	<label class="plain" value="&headerDiff2; "/>
-	<label class="plain" style="font-weight:bold;background-color:yellow;" 
-                             value="&headerDiff3;"/>
+	<label id="highlightedLabel" class="plain" 
+          value="&headerDiff3;"/>
 	<label class="plain" value="&headerDiff4;"/>
       </hbox>
     </vbox>

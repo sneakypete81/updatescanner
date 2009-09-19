@@ -79,9 +79,6 @@ var USc_diffWiki = {
 
 
 // css for change indicators
-wDiffStyleDelete : 'font-weight: bold; text-decoration: none; color: #000000; background-color: #ffff66;',
-wDiffStyleInsert : 'color: #000000; background-color: #ffff66;',
-wDiffStyleMoved  : 'font-weight: bold; vertical-align: text-bottom; font-size: xx-small; padding: 0; border: solid 1px;',
 wDiffStyleBlock  : [
     'background-color: #66ffff;',
     'background-color: #ff66ff;',
@@ -101,10 +98,10 @@ wDiffHtmlMovedLeft   : '<input type="button" value="&lt;" style="font-weight: bo
 wDiffHtmlBlockStart  : '<span style="{block}">',
 wDiffHtmlBlockEnd    : '</span>',
 
-wDiffHtmlDeleteStart : '<span style="font-weight: bold; text-decoration: none; color: #000000; background-color: #ffff66;">',
+wDiffHtmlDeleteStart : '<span style="text-decoration: line-through; background-color: #ffff66;">',
 wDiffHtmlDeleteEnd   : '</span>',
 
-wDiffHtmlInsertStart : '<span style="color: #000000; background-color: #ffff66;">',
+wDiffHtmlInsertStart : '<span style="background-color: #ffff66;">',
 wDiffHtmlInsertEnd   : '</span>',
 
 // minimal number of real words for a moved block (0 for always displaying block move indicators)
@@ -159,7 +156,7 @@ _trim : function(text)
 return text.replace(/^\s*|\s*$/g, "");
 },
 
-WDiffString : function(oldText, newText)
+WDiffString : function(oldText, newText, highlightColour)
 {
     var me = USc_diffWiki;
     var text = {};
@@ -170,6 +167,10 @@ WDiffString : function(oldText, newText)
     text.message = '';
     var block = {};
     var outText = '';
+
+    // Set highlight colour
+    me.wDiffHtmlInsertStart = ('<span style="background-color: ' + 
+                               highlightColour + ';">');
 
 // trap trivial changes: no change
     if (oldText == newText) {
@@ -567,9 +568,7 @@ _WDiffToHtml : function(text, block)
             for (var n = movedStart; n < movedStart + movedLength; n ++) {
                 str += text.newWords[n];
             }
-//            str = str.replace(/\n/g, '&para;<br>');
-            blockText += me.wDiffHtmlDeleteStart + " " + me.wDiffHtmlDeleteEnd;
-//            blockText += wDiffHtmlDeleteStart + WDiffEscape(str) + wDiffHtmlDeleteEnd;
+//            blockText += me.wDiffHtmlDeleteStart + str + me.wDiffHtmlDeleteEnd;
         }
 
 // add a placeholder / move direction indicator
@@ -649,7 +648,7 @@ _WDiffToHtml : function(text, block)
     }
     outText += preText;
     if (delText != '') {
-//        delText = wDiffHtmlDeleteStart + WDiffEscape(delText) + wDiffHtmlDeleteEnd;
+//        delText = me.wDiffHtmlDeleteStart + delText + me.wDiffHtmlDeleteEnd;
 //        delText = delText.replace(/\n/g, '&para;<br>');
 //        delText = wDiffHtmlDeleteStart + " " + wDiffHtmlDeleteEnd;
 //        outText += delText;
