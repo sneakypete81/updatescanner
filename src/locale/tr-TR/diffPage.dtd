@@ -9,9 +9,9 @@
 <!ENTITY headerDiff4 ".">
 <!ENTITY headerNotChecked1 "Seçili sayfa henüz kontrol edilmedi.">
 <!ENTITY headerNotChecked2 "Lütfen soldaki">
-<!ENTITY headerNotChecked3 "&apos;Tara&apos;">
+<!ENTITY headerNotChecked3 "'Tara'">
 <!ENTITY headerNotChecked4 "düğmesine basarak, tekrar deneyin.">
 <!ENTITY headerError1 "Bu sayfa son tarama işleminde bir hata oluşturdu.">
 <!ENTITY headerError2 "Lütfen sayfanın geçerliğini kontrol etmek için">
-<!ENTITY headerError3 "&apos;Geçerli Sayfa&apos;">
+<!ENTITY headerError3 "'Geçerli Sayfa'">
 <!ENTITY headerError4 "bağlantısına tıklayın.">

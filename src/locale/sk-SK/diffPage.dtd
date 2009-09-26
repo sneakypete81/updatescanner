@@ -9,9 +9,9 @@
 <!ENTITY headerDiff4 ".">
 <!ENTITY headerNotChecked1 "Vybraná stránka zatiaľ nebola kontrolovaná.">
 <!ENTITY headerNotChecked2 "Kliknite naľavo na tlačidlo">
-<!ENTITY headerNotChecked3 "&apos;Kontrola&apos;">
+<!ENTITY headerNotChecked3 "'Kontrola'">
 <!ENTITY headerNotChecked4 "a skúste znova.">
 <!ENTITY headerError1 "Táto stránka vrátila pri poslednej kontrole chybu.">
 <!ENTITY headerError2 "Prosím, kliknite na odkaz">
-<!ENTITY headerError3 "&apos;Aktuálna stránka&apos;">
+<!ENTITY headerError3 "'Aktuálna stránka'">
 <!ENTITY headerError4 ", ak chcete skontrolovať jej platnosť.">

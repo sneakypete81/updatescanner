@@ -19,7 +19,7 @@
 <!ENTITY scan.seconds.label "seconden">
 <!ENTITY toolbar.toolbarIcons.label "Werkbalkpictogrammen">
 <!ENTITY toolbar.new.label "Nieuwe ingave">
-<!ENTITY toolbar.showNewTab.label "Alle gewijzigde pagina&apos;s in nieuwe tabbladen weergeven">
+<!ENTITY toolbar.showNewTab.label "Alle gewijzigde pagina's in nieuwe tabbladen weergeven">
 <!ENTITY toolbar.markVisited.label "Alles als bezocht markeren">
 <!ENTITY toolbar.delete.label "Verwijderen">
 <!ENTITY toolbar.preferences.label "Voorkeuren">

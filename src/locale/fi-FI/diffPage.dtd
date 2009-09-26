@@ -9,9 +9,9 @@
 <!ENTITY headerDiff4 ".">
 <!ENTITY headerNotChecked1 "Valittua sivua ei ole vielä tarkistettu.">
 <!ENTITY headerNotChecked2 "Klikkaa">
-<!ENTITY headerNotChecked3 "&apos;Skannaa&apos;">
+<!ENTITY headerNotChecked3 "'Skannaa'">
 <!ENTITY headerNotChecked4 "-painiketta vasemmalta, ja yritä uudelleen.">
 <!ENTITY headerError1 "Sivu palautti virheen viime skannauskerralla.">
 <!ENTITY headerError2 "Klikkaa">
-<!ENTITY headerError3 "&apos;Nykyinen sivu&apos;">
+<!ENTITY headerError3 "'Nykyinen sivu'">
 <!ENTITY headerError4 "-linkkiä tarkistaaksesi että sivu on kelvollinen.">

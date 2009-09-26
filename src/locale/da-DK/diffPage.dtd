@@ -9,9 +9,9 @@
 <!ENTITY headerDiff4 ".">
 <!ENTITY headerNotChecked1 "De valgte sider er endnu ikke blevet checket.">
 <!ENTITY headerNotChecked2 "Tryk venligst på">
-<!ENTITY headerNotChecked3 "&apos;Skan&apos;">
+<!ENTITY headerNotChecked3 "'Skan'">
 <!ENTITY headerNotChecked4 "knappen til venstre og prøv igen.">
 <!ENTITY headerError1 "Denne side returnerede en fejl sidst den blev skannet.">
-<!ENTITY headerError2 "Klik venligst på">
-<!ENTITY headerError3 "&apos;Nuværende side&apos;">
-<!ENTITY headerError4 "link til at tjekke at den side er gyldig.">
+<!ENTITY headerError2 "Klik venligst på linket">
+<!ENTITY headerError3 "'Nuværende side'">
+<!ENTITY headerError4 "for at tjekke, at siden er gyldig.">

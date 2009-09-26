@@ -1,5 +1,5 @@
 <!ENTITY editProperties "Éditer les propriétés">
-<!ENTITY headerOld1 "La page ci-dessous est l&apos;ancienne version de la page Web, analysée">
+<!ENTITY headerOld1 "La page ci-dessous est l'ancienne version de la page Web, analysée">
 <!ENTITY headerOld2 ".">
 <!ENTITY headerNew1 "La page ci-dessous est la nouvelle version de la page Web, analysée">
 <!ENTITY headerNew2 ".">
@@ -7,11 +7,11 @@
 <!ENTITY headerDiff2 ". Les différences sont">
 <!ENTITY headerDiff3 "en surbrillance">
 <!ENTITY headerDiff4 ".">
-<!ENTITY headerNotChecked1 "La page choisie n&apos;a pas encore été vérifiée.">
+<!ENTITY headerNotChecked1 "La page choisie n'a pas encore été vérifiée.">
 <!ENTITY headerNotChecked2 "Merci de cliquer sur le bouton">
 <!ENTITY headerNotChecked3 "« Analyser »">
 <!ENTITY headerNotChecked4 "sur la gauche, puis de réessayer.">
-<!ENTITY headerError1 "Cette page a retourné une erreur la dernière fois qu&apos;elle a été scannée.">
+<!ENTITY headerError1 "Cette page a retourné une erreur la dernière fois qu'elle a été scannée.">
 <!ENTITY headerError2 "Merci de cliquer sur le lien">
 <!ENTITY headerError3 "« Page en cours »">
 <!ENTITY headerError4 "pour vérifier si elle est valide.">

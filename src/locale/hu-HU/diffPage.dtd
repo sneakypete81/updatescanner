@@ -9,9 +9,9 @@
 <!ENTITY headerDiff4 ".">
 <!ENTITY headerNotChecked1 "A kiválasztott oldal eddig még nem volt ellenőrizve.">
 <!ENTITY headerNotChecked2 "Kattints az">
-<!ENTITY headerNotChecked3 "&apos;Ellenőrzés&apos;">
+<!ENTITY headerNotChecked3 "'Ellenőrzés'">
 <!ENTITY headerNotChecked4 "gombra a bal oldalon és próbáld újra.">
 <!ENTITY headerError1 "Ennek az oldalnak a legutóbbi ellenőrzése hibát jelzett.">
 <!ENTITY headerError2 "Kattints a">
-<!ENTITY headerError3 "&apos;A pillanatnyi állapot&apos;">
+<!ENTITY headerError3 "'A pillanatnyi állapot'">
 <!ENTITY headerError4 "linkre, hogy ellenőrizd az oldal érvényességét.">
