@@ -9,8 +9,7 @@ src/chrome.manifest
 *.pyc
 syntax: glob
 src/TODO~
-src/post_data.py
-src/www/testing/post_data.py
+post_data.py
 src/www/testing/updatescan_www.xpi
 src/www/testing/releases/*.xpi
 src/www/testing/chrome/*.jar

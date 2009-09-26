@@ -21,8 +21,6 @@ WGET_LOGIN = ["wget",
               "--keep-session-cookies",
               "http://www.babelzilla.org/index.php?option=com_ipblogin&task=login",
               ]
-
-
 # Command to download locales with missing strings skipped
 WGET_DOWNLOAD_SKIP = ["wget",
                       "--quiet",
@@ -71,9 +69,13 @@ def run():
 def parse_args():
     parser = optparse.OptionParser()
     parser.add_option("-v", "--verbose", 
-                      action="store_true", dest="verbose")
+                      action="store_true", 
+                      dest="verbose")
     parser.add_option("-s", "--skip_incomplete", 
-                      action="store_true", dest="skip")
+                      action="store_true", 
+                      dest="skip",
+                      help=("Use this option to skip untranslated strings." +
+                            "(handy when uploading updated extension to babelzilla)"))
     return parser.parse_args()
 
 def download_locales(temp_path):
