@@ -19,8 +19,10 @@ WGET_LOGIN = ["wget",
               "--post-data", POST_DATA,
               "--save-cookies", "cookies.txt",
               "--keep-session-cookies",
-              "http://www.babelzilla.org/component/option,com_ipblogin/task,login",
+              "http://www.babelzilla.org/index.php?option=com_ipblogin&task=login",
               ]
+
+
 # Command to download locales with missing strings skipped
 WGET_DOWNLOAD_SKIP = ["wget",
                       "--quiet",
