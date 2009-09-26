@@ -29,7 +29,9 @@ translators = ['SlovakSoft (Slovenčina)',
                'Kenan Balamir (Türkçe)',
                'Wang King (简化字 - Simplified Chinese)',
                'Peter Pin-Guang Chen (簡化字 - Traditional Chinese)',
-               'Olli (Suomeksi)']
+               'Olli (Suomeksi)',
+#               'stoyan (български език)',
+               ]
 authorURL = "http://updatescanner.mozdev.org"
 uid = 'c07d1a49-9894-49ff-a594-38960ede8fb9'
 optionsChrome = 'chrome://updatescan/content/preferences.xul'
@@ -141,6 +143,10 @@ locales = {
 }
 
 incomplete_locales = {
+    'bg-BG': {
+        'locale_version': '1.0',
+        'display_name': name,
+    },
     'ja-JP': {
         'locale_version': '1.0',
         'display_name': name,
