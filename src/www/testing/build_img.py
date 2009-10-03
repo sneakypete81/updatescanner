@@ -8,7 +8,7 @@ import os
 import shutil
 
 imagePreviews=['browser_context_menu.png',
-               'properties_dialog.png',
+               'properties_dialog_advanced.png',
                'webpage_changes.png'
                ]
 
@@ -23,10 +23,12 @@ maxSizes={'browser_context_menu.png'      : img_large,
           'button_newtabs.png'            : img_button,
           'button_scan.png'               : img_button,
           'notification_popup.png'        : img_preview,
-          'properties_dialog.png'         : img_large,
-          'properties_dialog_prv.png'     : img_preview,
+          'properties_dialog.png'         : img_preview,
+          'properties_dialog_advanced.png': img_large,
+          'properties_dialog_advanced_prv.png': img_preview,
           'sidebar_context.png'           : img_large,
           'statusbar.png'                 : img_preview,
+          'statusbar_menu.png'            : img_preview,
           'webpage_changes.png'           : img_large,
           'webpage_changes_prv.png'       : img_preview,
           'pref_notifications.png'        : img_large,
