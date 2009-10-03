@@ -4,7 +4,7 @@ import os
 import shutil
 
 testing = True
-english_only = False
+english_only = True
 
 valid_locales = ["zh-CN",
            "cs-CZ",
