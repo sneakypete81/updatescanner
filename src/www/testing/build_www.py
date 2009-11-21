@@ -4,25 +4,28 @@ import os
 import shutil
 
 testing = True
-english_only = True
+english_only = False
 
-valid_locales = ["zh-CN",
-           "cs-CZ",
-           "da-DK",
-           "nl-NL",
-           "en-US",
-           "fi-FI",
-           "fr-FR",
-           "de-DE",
-           "hu-HU",
-           "it-IT",
-           "ko-KR",
-           "pt-BR",
-           "ru-RU",
-           "sk-SK",
-           "es-ES",
-           "tr-TR",
-           ]
+valid_locales = [
+#    "cs-CZ",
+#    "da-DK",
+#    "de-DE",
+    "en-US",
+#    "es-ES",
+#    "fi-FI",
+#    "fr-FR",
+#    "hu-HU",
+#    "it-IT",
+#    "ko-KR",
+#    "nl-NL",
+#    "pl-PL",
+#    "pt-BR",
+#    "ru-RU",
+#    "sk-SK",
+#    "tr-TR",
+#    "zh-CN",
+#    "zh-TW",
+    ]
 if english_only:
     valid_locales = ["en-US"]
 
