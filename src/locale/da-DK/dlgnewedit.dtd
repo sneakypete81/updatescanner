@@ -18,3 +18,7 @@
 <!ENTITY charEncoding.label "Tegnkodning">
 <!ENTITY autoDetect.label "Auto-detektér">
 <!ENTITY use.label "Anvend">
+<!ENTITY changeHighlighting.label "Skift fremhævning">
+<!ENTITY highlightChanges.label "Fremhæv ændringer">
+<!ENTITY enableScript.label "Aktiver Javascript">
+<!ENTITY enableFlash.label "Aktiver Flash og plugins">

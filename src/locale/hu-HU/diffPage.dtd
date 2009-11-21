@@ -5,7 +5,7 @@
 <!ENTITY headerNew2 ".">
 <!ENTITY headerDiff1 "Az utolsó ellenőrzéskori állapot. Ellenőrizve:">
 <!ENTITY headerDiff2 ". A változások">
-<!ENTITY headerDiff3 "világító sárgával kiemelve">
+<!ENTITY headerDiff3 "kiemelve">
 <!ENTITY headerDiff4 ".">
 <!ENTITY headerNotChecked1 "A kiválasztott oldal eddig még nem volt ellenőrizve.">
 <!ENTITY headerNotChecked2 "Kattints az">

@@ -1,3 +1,6 @@
 <!ENTITY UpdateScan.tooltip "Webpagina’s op updates scannen">
 <!ENTITY AddToUpdateScan.label "Pagina op updates scannen…">
 <!ENTITY AddToUpdateScan.accesskey "U">
+<!ENTITY EnableScanner.label "Scanner inschakelen">
+<!ENTITY DisableScanner.label "Scanner uitschakelen">
+<!ENTITY Preferences.label "Voorkeuren…">

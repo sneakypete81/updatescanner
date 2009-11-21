@@ -12,6 +12,6 @@
 <!ENTITY headerNotChecked3 "‘Scannen’">
 <!ENTITY headerNotChecked4 "aan de linkerzijde en probeer het opnieuw.">
 <!ENTITY headerError1 "Deze pagina heeft bij de laatste scan een foutmelding gegeven.">
-<!ENTITY headerError2 "Klik a.u.b. op de">
+<!ENTITY headerError2 "Klik a.u.b. op de koppeling">
 <!ENTITY headerError3 "‘Huidige pagina’">
-<!ENTITY headerError4 "-koppeling om te controleren of de pagina geldig is.">
+<!ENTITY headerError4 "om te controleren of de pagina geldig is.">

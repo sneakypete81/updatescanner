@@ -7,7 +7,7 @@
 <!ENTITY often.label "Souvent">
 <!ENTITY never.label "Jamais">
 <!ENTITY manualScan.label "Analyse manuelle">
-<!ENTITY scanEvery.label "Fréquence d&apos;analyse :">
+<!ENTITY scanEvery.label "Fréquence d'analyse :">
 <!ENTITY minutes.label "minutes">
 <!ENTITY hours.label "heures">
 <!ENTITY days.label "jours">
@@ -18,3 +18,7 @@
 <!ENTITY charEncoding.label "Encodage des caractères">
 <!ENTITY autoDetect.label "Détection automatique">
 <!ENTITY use.label "Utiliser">
+<!ENTITY changeHighlighting.label "Changer de surlignage">
+<!ENTITY highlightChanges.label "Surligner les modifications">
+<!ENTITY enableScript.label "Activer JavaScript">
+<!ENTITY enableFlash.label "Activer Flash et les plugins">

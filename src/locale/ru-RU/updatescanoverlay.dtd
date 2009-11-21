@@ -1,3 +1,6 @@
 <!ENTITY UpdateScan.tooltip "Сканировать web-страницы на наличие обновлений">
 <!ENTITY AddToUpdateScan.label "Сканировать web-страницу на наличие обновлений...">
 <!ENTITY AddToUpdateScan.accesskey "к">
+<!ENTITY EnableScanner.label "Включить сканирование">
+<!ENTITY DisableScanner.label "Отключить сканирование">
+<!ENTITY Preferences.label "Настройки...">

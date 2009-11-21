@@ -18,3 +18,7 @@
 <!ENTITY charEncoding.label "Tekenset">
 <!ENTITY autoDetect.label "Automatisch detecteren">
 <!ENTITY use.label "Te gebruiken tekenset:">
+<!ENTITY changeHighlighting.label "Accentuering wijzigingen">
+<!ENTITY highlightChanges.label "Wijzigingen accentueren">
+<!ENTITY enableScript.label "Javascript inschakelen">
+<!ENTITY enableFlash.label "Flash en plug-ins inschakelen">

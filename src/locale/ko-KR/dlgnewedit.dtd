@@ -18,3 +18,7 @@
 <!ENTITY charEncoding.label "문자 인코딩">
 <!ENTITY autoDetect.label "자동 선택">
 <!ENTITY use.label "다음을 사용 :">
+<!ENTITY changeHighlighting.label "변경된 내용 강조">
+<!ENTITY highlightChanges.label "변경된 내용 강조하기">
+<!ENTITY enableScript.label "Javascript 사용">
+<!ENTITY enableFlash.label "Flash와 플러그인 사용">

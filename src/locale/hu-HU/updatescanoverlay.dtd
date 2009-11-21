@@ -1,3 +1,6 @@
 <!ENTITY UpdateScan.tooltip "Weboldalak frissítésének figyelése">
 <!ENTITY AddToUpdateScan.label "A weboldal frissítésének figyelése...">
 <!ENTITY AddToUpdateScan.accesskey "U">
+<!ENTITY EnableScanner.label "Ellenőrzés engedélyezése">
+<!ENTITY DisableScanner.label "Ellenőrzés tiltása">
+<!ENTITY Preferences.label "Beállítások">

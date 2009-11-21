@@ -1,0 +1,17 @@
+<!ENTITY url.label "URL:">
+<!ENTITY title.label "Заглавие">
+<!ENTITY threshold.label "Промяна на чувствителността">
+<!ENTITY autoscan.label "Автоматично сканиране">
+<!ENTITY low.label "Нисък">
+<!ENTITY high.label "Висок">
+<!ENTITY often.label "Често">
+<!ENTITY never.label "Никога">
+<!ENTITY manualScan.label "Ръчно">
+<!ENTITY scanEvery.label "Сканиране всеки(всяка)">
+<!ENTITY minutes.label "минута(и)">
+<!ENTITY hours.label "час(а)">
+<!ENTITY days.label "ден">
+<!ENTITY ignoreChanges.label "Игнориране на промени по-малки то около">
+<!ENTITY characters.label "знака">
+<!ENTITY ignoreNumbers.label "Игнориране на промяна в цифри">
+<!ENTITY advanced.label "Разширени">

@@ -1,2 +1,17 @@
+<!ENTITY editProperties "Настройки">
+<!ENTITY headerOld1 "Страницата по-долу е старата версия на сканирания сайт">
+<!ENTITY headerOld2 ".">
+<!ENTITY headerNew1 "Страницата по-долу е новата версия на сканирания сайт">
+<!ENTITY headerNew2 ".">
+<!ENTITY headerDiff1 "Тази страница за последно е била сканирана">
 <!ENTITY headerDiff2 ". The changes are">
+<!ENTITY headerDiff3 "избран">
+<!ENTITY headerDiff4 ".">
+<!ENTITY headerNotChecked1 "Тази страница не е била сканирана.">
+<!ENTITY headerNotChecked2 "Моля изберете">
+<!ENTITY headerNotChecked3 "'Сканиране'">
+<!ENTITY headerNotChecked4 "бутон в ляво и опирайте отново">
+<!ENTITY headerError1 "Тази страница върна грешка при последното сканиране.">
+<!ENTITY headerError2 "Моля изберете">
 <!ENTITY headerError3 "'Текуща страница'">
+<!ENTITY headerError4 "връзката към страницата е правилна.">

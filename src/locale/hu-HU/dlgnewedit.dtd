@@ -2,8 +2,8 @@
 <!ENTITY title.label "Név:">
 <!ENTITY threshold.label "A változások számának küszöbértéke">
 <!ENTITY autoscan.label "Automatikus ellenőrzés gyakorisága">
-<!ENTITY low.label "Kevés">
-<!ENTITY high.label "Sok">
+<!ENTITY low.label "Alacsony">
+<!ENTITY high.label "Magas">
 <!ENTITY often.label "Gyakori">
 <!ENTITY never.label "Ritka">
 <!ENTITY manualScan.label "Kézi ellenőrzés">
@@ -13,8 +13,12 @@
 <!ENTITY days.label "naponta">
 <!ENTITY ignoreChanges.label "A változás figyelmen kívül hagyása, ha az kevesebb">
 <!ENTITY characters.label "karakternél">
-<!ENTITY ignoreNumbers.label "Kihagyható változások száma:">
+<!ENTITY ignoreNumbers.label "Kihagyható változások száma">
 <!ENTITY advanced.label "Haladó...">
 <!ENTITY charEncoding.label "Karakterkódolás">
 <!ENTITY autoDetect.label "Automatikus felismerés">
 <!ENTITY use.label "Alkalmazza ezt:">
+<!ENTITY changeHighlighting.label "Kiemelés módosítása">
+<!ENTITY highlightChanges.label "Változások kiemelése">
+<!ENTITY enableScript.label "JavaScript engedélyezése">
+<!ENTITY enableFlash.label "Flash és kiterjesztések engedélyezése">

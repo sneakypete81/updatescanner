@@ -1,3 +1,4 @@
+<!ENTITY editProperties "Изменить Настройки">
 <!ENTITY headerOld1 "Страница ниже является старой версией этой веб-страницы, сканировано">
 <!ENTITY headerOld2 ".">
 <!ENTITY headerNew1 "Страница ниже является новой версией этой веб-страницы, сканировано">
@@ -8,5 +9,9 @@
 <!ENTITY headerDiff4 ".">
 <!ENTITY headerNotChecked1 "Выбранная страница ещё не была проверена.">
 <!ENTITY headerNotChecked2 "Пожалуйста нажмите сюда">
-<!ENTITY headerNotChecked3 "&apos;Сканировать&apos;">
+<!ENTITY headerNotChecked3 "'Сканировать'">
 <!ENTITY headerNotChecked4 "кнопку слева, и попробуйте снова.">
+<!ENTITY headerError1 "Во время прошлого сканирования этой страница произошла ошибка.">
+<!ENTITY headerError2 "Пожалуйста кликните по ссылке на">
+<!ENTITY headerError3 "'Нынешнюю страницу'">
+<!ENTITY headerError4 "чтобы убедиться, что страница существует.">

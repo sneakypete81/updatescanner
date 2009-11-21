@@ -1,3 +1,6 @@
 <!ENTITY UpdateScan.tooltip "Vyhledat změny na webových stránkách">
 <!ENTITY AddToUpdateScan.label "Vyhledávat změny na webové stránce...">
 <!ENTITY AddToUpdateScan.accesskey "w">
+<!ENTITY EnableScanner.label "Zapnout Update Scanner">
+<!ENTITY DisableScanner.label "Vypnout Update Scanner">
+<!ENTITY Preferences.label "Předvolby...">

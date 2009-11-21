@@ -18,3 +18,7 @@
 <!ENTITY charEncoding.label "Codificación de caracteres">
 <!ENTITY autoDetect.label "Detectar automáticamente">
 <!ENTITY use.label "Usar">
+<!ENTITY changeHighlighting.label "Resaltado de cambios">
+<!ENTITY highlightChanges.label "Resaltar cambios">
+<!ENTITY enableScript.label "Habilitar Javascript">
+<!ENTITY enableFlash.label "Habilitar Flash y plugins">

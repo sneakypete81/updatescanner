@@ -1,3 +1,6 @@
 <!ENTITY UpdateScan.tooltip "Kontrola aktualizácií webových stránok">
 <!ENTITY AddToUpdateScan.label "Kontrola aktualizácie stránky...">
 <!ENTITY AddToUpdateScan.accesskey "U">
+<!ENTITY EnableScanner.label "Povoliť skener">
+<!ENTITY DisableScanner.label "Zakázať skener">
+<!ENTITY Preferences.label "Nastavenia...">

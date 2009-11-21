@@ -11,10 +11,14 @@
 <!ENTITY minutes.label "Minuten">
 <!ENTITY hours.label "Stunden">
 <!ENTITY days.label "Tage">
-<!ENTITY ignoreChanges.label "Änderungen von weniger als ">
+<!ENTITY ignoreChanges.label "Änderungen von weniger als">
 <!ENTITY characters.label "Zeichen ignorieren">
 <!ENTITY ignoreNumbers.label "Änderungen von Zahlenwerten ignorieren">
 <!ENTITY advanced.label "Erweitert...">
 <!ENTITY charEncoding.label "Zeichenkodierung">
 <!ENTITY autoDetect.label "Automatisch bestimmen">
 <!ENTITY use.label "Benutzerdefiniert">
+<!ENTITY changeHighlighting.label "Hervorhebungen">
+<!ENTITY highlightChanges.label "Änderungen hervorheben">
+<!ENTITY enableScript.label "JavaScript aktivieren">
+<!ENTITY enableFlash.label "Flash und Plug-ins aktivieren">
