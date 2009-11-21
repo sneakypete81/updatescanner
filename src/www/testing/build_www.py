@@ -22,7 +22,7 @@ valid_locales = [
 #    "pt-BR",
 #    "ru-RU",
 #    "sk-SK",
-#    "tr-TR",
+    "tr-TR",
 #    "zh-CN",
 #    "zh-TW",
     ]
@@ -78,6 +78,10 @@ def extractLanguages(locales):
     languages = []
     for locale in locales.values():
         localePath = locale['_header']['_localePath']
+        if testing:
+            localePath = "testing/"+localePath
+        print "TEST TESTING LANGUAGE REDIRECT!!"
+        print localePath
         language = locale['_header']['_language']
 #        language = language.decode("utf-8").encode("ascii", "xmlcharrefreplace")
         languages.append({'path'       : localePath,
