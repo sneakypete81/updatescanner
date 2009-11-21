@@ -80,8 +80,6 @@ def extractLanguages(locales):
         localePath = locale['_header']['_localePath']
         if testing:
             localePath = "testing/"+localePath
-        print "TEST TESTING LANGUAGE REDIRECT!!"
-        print localePath
         language = locale['_header']['_language']
 #        language = language.decode("utf-8").encode("ascii", "xmlcharrefreplace")
         languages.append({'path'       : localePath,
