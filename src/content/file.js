@@ -107,7 +107,7 @@ USmvFile : function(sourcefile, destfile)
 
     try {
         sourcefile = me._prependUpdatescanPath(sourcefile);
-        destpath = me._prependUpdatescanPath("");
+        var destpath = me._prependUpdatescanPath("");
     
         // next, assign URLs to the file components
         aFile.initWithPath(sourcefile);

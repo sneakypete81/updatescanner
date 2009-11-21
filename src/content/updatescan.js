@@ -197,6 +197,7 @@ _scanFinishedCallback : function()
     var me = USc_updatescan;
     var str=document.getElementById("updatescanStrings");
     var param;
+    var message;
     var prefService = Components.classes["@mozilla.org/preferences-service;1"].getService();
     prefService = prefService.QueryInterface(Components.interfaces.nsIPrefService);
     var prefBranch = prefService.getBranch("extensions.updatescan.");
@@ -430,8 +431,8 @@ _diffItemThisWindow : function(id)
     var me = USc_updatescan;
     var diffURL = me._diffItem(id, 0);
     if (diffURL) {
-      USc_topWin.open(diffURL);
-      me.tree.focus();
+        USc_topWin.open(diffURL);
+        if (me.tree) me.tree.focus();    
     }
 },
 
@@ -476,7 +477,7 @@ _diffItemNewTab : function(id, delay)
     var diffURL = me._diffItem(id, delay);
     if (diffURL) {
       mainWindow.getBrowser().selectedTab = mainWindow.getBrowser().addTab(diffURL);
-      me.tree.focus();
+      if (me.tree) me.tree.focus();
     }
 },
 
@@ -495,7 +496,7 @@ _diffItemNewTabBackground : function(id, delay)
     var diffURL = me._diffItem(id, delay);
     if (diffURL) {
       mainWindow.getBrowser().addTab(diffURL);
-      me.tree.focus();
+      if (me.tree) me.tree.focus();
     }
 },
 
@@ -678,7 +679,7 @@ _extendPlacesTreeView : function() {
       
       var propertiesBase = Cc["@mozilla.org/supports-array;1"].createInstance(Ci.nsISupportsArray);
       this.getCellPropertiesBase(aRow, aColumn, propertiesBase);
-      var proptery;
+      var property;
       for (var i = 0; i < propertiesBase.Count(); i++) {
         property = propertiesBase.GetElementAt(i);
         if (property != this._getAtomFor("livemark")) {

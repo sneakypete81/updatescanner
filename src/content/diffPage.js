@@ -73,6 +73,10 @@ var USc_diffPage_timer = {
 
 notify : function(timer) 
 {
+    // Abort if the tab has been closed before we got here
+    if (typeof(USc_diffPage_exists) != 'boolean')
+        return;
+
     var id = USc_diffPage._getUrlParameter("id", "");
     var title = USc_diffPage._getUrlParameter("title", "");
     var newDate = USc_diffPage._getUrlParameter("newDate", "");

@@ -49,9 +49,7 @@
 	onunload="USc_updatescan.unload();"
 	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
 	xmlns:UPDATESCAN="http://www.updatescan.com/rdf/updatescan#">
-<!--	onload="USc_updatescan.load(); sidebarController.init();"
-	onunload="USc_updatescan.unload(); sidebarController.uninit();"
--->
+
   <stringbundle id="updatescanStrings" 
 		src="chrome://updatescan/locale/updatescan.properties"/>
 

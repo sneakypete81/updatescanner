@@ -128,10 +128,10 @@ onLinkClick : function(aEvent)
                        .getService(Components.interfaces.nsIWindowMediator);
     var win = wm.getMostRecentWindow("navigator:browser");
 
+    // Can't just call Usc_Updatescan.Showallchangesinnewtabs, since
+    // window value is incorrect in this scope.
     USc_places.callFunctionWithUpdatedItems(USc_places.getRootFolderId(),
-                                          this._diffItemNewTabBackground);
-    
-    USc_updatescan.showAllChangesInNewTabs();
+                                          this._diffItemNewTabBackground);   
     win.focus();
 
     // Close the alert soon

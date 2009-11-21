@@ -223,6 +223,7 @@ function USc_scanner()
         var filename;
         var response;
         var page;
+        var oldContent;
         var newContent;
         var status = kUSc_STATUS_ERROR;
         var httpreqStatus;
