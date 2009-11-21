@@ -3,16 +3,13 @@ Bugs:
 * Notification click doesn't work for mac
 * Opening bookmarks sidebar stuffs up our context menu
 
-Add Delete link to the header
+Firefox 3.6 support
 
+Double-click statusbar shows all changes
 CTRL-Click should open in new tab
-
-Don't change sidebar icon, just make bold (make this configurable!)
-
 Tooltip with date last scanned.
 
 Check ETAG hash without scanning page
-
 Trigger notification on keyword match
 
 Scan Regions
@@ -20,9 +17,20 @@ Scan Regions
 
 Click link to scroll diffpage to change
 Show deletions too
-Option to view current page only, not diffs
-Configurable highlight colour
 Check for wifi proxy
+Add Delete link to the header
+Don't change sidebar icon, just make bold (make this configurable!)
+
+-- 3.0.6 (beta)--
+
+**** Show all changes from statusbar menu not working.****
+**** Need to update documentation and get new locale strings for this" ***
+
+Configurable highlight colour
+Option to view current page only, not diffs
+Enable/Disable javascript/plugins
+Enable/Disable scanning (right-click on the statusbar icon)
+Status bar context menu
 
 -- 3.0.5 --
 Fixed: Root Folder renamed to (no title) in FF3.5

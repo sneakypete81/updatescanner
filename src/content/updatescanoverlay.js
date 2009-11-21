@@ -48,11 +48,15 @@ load : function()
     var me = USc_overlay;
     // Eventlistener for the main context menu
     var menu = document.getElementById("contentAreaContextMenu");
-    menu.addEventListener("popupshowing", me._showMenu, false);
+    if (menu) {
+        menu.addEventListener("popupshowing", me._showMenu, false);
+    }
 
     // Eventlistener for the statusbar context menu
     var statusmenu = document.getElementById("UpdateScanStatusMenu");
-    statusmenu.addEventListener("popupshowing", me._showStatusMenu, false);
+    if (statusmenu) {
+        statusmenu.addEventListener("popupshowing", me._showStatusMenu, false);
+    }
 },
 
 // Don't show context menu item when text is selected,
@@ -68,6 +72,16 @@ _showMenu : function()
 
 _showStatusMenu : function()
 {
+    // Don't show context menu "Show All Changes" if there are no changes to show.
+    var changed = USc_places.queryAnno(USc_places.getRootFolderId(),
+                                       USc_places.ANNO_STATUS,
+                                       USc_places.STATUS_UNKNOWN);
+    if (changed == USc_places.STATUS_UPDATE) {
+        document.getElementById("StatusMenuShowAllChanges").hidden = false;
+    } else {
+        document.getElementById("StatusMenuShowAllChanges").hidden = true;
+    }
+
     // Don't show context menu "Scan Page For Updates" item if URL is in chrome:// space.
     if(!window.content.document.URL) {
         document.getElementById("StatusMenuAddToUpdateScan").hidden = true;
@@ -87,7 +101,33 @@ _showStatusMenu : function()
         document.getElementById("StatusMenuDisableScanner").hidden = true;        
         document.getElementById("StatusMenuEnableScanner").hidden = false;
     }
-}
+},
+
+onShowAll : function(aEvent)
+{
+    USc_updatescan.showAllChangesInNewTabs();
+},
+
+_diffItemNewTabBackground : function(id, delay)
+{
+    var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
+                       .getService(Components.interfaces.nsIWindowMediator);
+    var window = wm.getMostRecentWindow("navigator:browser");
+
+    var mainWindow = window.QueryInterface(
+    Components.interfaces.nsIInterfaceRequestor)
+    .getInterface(Components.interfaces.nsIWebNavigation)
+    .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
+    .rootTreeItem
+    .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+    .getInterface(Components.interfaces.nsIDOMWindow);
+
+    var diffURL = USc_updatescan._diffItem(id, delay);
+    if (diffURL) {
+      mainWindow.getBrowser().addTab(diffURL);
+    }
+},
+
 };
 }
 
