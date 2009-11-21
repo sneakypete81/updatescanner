@@ -8,7 +8,7 @@ english_only = False
 
 valid_locales = [
 #    "cs-CZ",
-#    "da-DK",
+    "da-DK",
 #    "de-DE",
     "en-US",
 #    "es-ES",
