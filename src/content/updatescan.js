@@ -693,6 +693,10 @@ _extendPlacesTreeView : function() {
       if (!properties) {
         properties = [];
         var node = this._visibleElements[aRow].node;
+        // Firefox3.6+: no longer uses .node in _visibleElements
+        if (!node) {
+            var node = this._visibleElements[aRow];
+        }
         var nodeType = node.type;
         var itemId = node.itemId;
         if (nodeType == Ci.nsINavHistoryResultNode.RESULT_TYPE_URI) {
@@ -714,22 +718,6 @@ _extendPlacesTreeView : function() {
         }
       }
     };
-    PlacesTreeView.prototype.isContainerBase = PlacesTreeView.prototype.isContainer;
-    PlacesTreeView.prototype.isContainer =
-    function ext_isContainer(aRow) {
-      var baseValue = this.isContainerBase(aRow);
-       if (baseValue) {
-         var node = this._visibleElements[aRow].node;
-         if (PlacesUtils.annotations.itemHasAnnotation(node.itemId, LMANNO_FEEDURI)) {
-           return false;
-         } else {
-           return true;
-         }
-       } else {
-         return false;
-       }
-    };
-
 }
 };
 

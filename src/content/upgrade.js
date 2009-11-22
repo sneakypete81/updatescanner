@@ -37,7 +37,7 @@ var USc_upgrade_exists = true;
 var USc_upgrade = {    
 
 
-VERSION : "3.0.5",
+VERSION : "3.0.6",
 
 check : function()
 {
