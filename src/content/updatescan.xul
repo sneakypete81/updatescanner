@@ -35,7 +35,7 @@
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 <?xml-stylesheet href="chrome://browser/content/places/places.css"?>
 <?xml-stylesheet href="chrome://browser/skin/places/places.css"?>
-<?xul-overlay href="chrome://global/content/editMenuOverlay.xul"?>
+<!-- <?xul-overlay href="chrome://global/content/editMenuOverlay.xul"?> -->
 <?xul-overlay href="chrome://browser/content/places/placesOverlay.xul"?>
 <?xul-overlay href="chrome://updatescan/content/contextOverlay.xul"?>
 <?xml-stylesheet href="chrome://browser/skin/browser.css" type="text/css"?>
@@ -89,20 +89,17 @@
       <button observes="scanbutton" />
     </hbox>
 
-      <tree id="bookmarks-view"
-        class="sidebar-placesTree"
-        type="places"
-        hidecolumnpicker="true"
-        context="placesContext"
-        flex="1"
-        seltype="single"
-        onmousemove="SidebarUtils.handleTreeMouseMove(event);"
-        onmouseout="SidebarUtils.clearURLFromStatusBar();">
-        <treecols>
+    <tree id="updatescan-bookmarks-view"
+          class="sidebar-placesTree"
+          flex="1" 
+          hidecolumnpicker="true"
+          seltype="single"
+          type="places">
+      <treecols>
           <treecol id="title" flex="1" primary="true" hideheader="true"/>
-        </treecols>
-        <treechildren id="bookmarks-view-children" class="sidebar-placesTreechildren" view="bookmarks-view" flex="1"/>
-      </tree>
+      </treecols>
+      <treechildren class="sidebar-placesTreechildren"/>
+    </tree> 
 
     <hbox>
       <progressmeter id="Progress" mode="normal" value="0" 

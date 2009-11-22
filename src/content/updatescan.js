@@ -66,7 +66,7 @@ load : function()
 
     me._extendPlacesTreeView();
     
-    me.tree = document.getElementById("bookmarks-view");
+    me.tree = document.getElementById("updatescan-bookmarks-view");
     me.tree.onclick=me._treeClick;
    
     try {
@@ -699,7 +699,7 @@ _extendPlacesTreeView : function() {
         }
         var nodeType = node.type;
         var itemId = node.itemId;
-        if (nodeType == Ci.nsINavHistoryResultNode.RESULT_TYPE_URI) {
+        if (nodeType == Ci.nsINavHistoryResultNode.RESULT_TYPE_URI) { 
           if (!PlacesUtils.nodeIsLivemarkContainer(node.parent)) {
             try {
               var state = PlacesUtils.annotations.getItemAnnotation(itemId, USc_places.ANNO_STATUS);
