@@ -9,6 +9,9 @@ Double-click statusbar shows all changes
 CTRL-Click should open in new tab
 Tooltip with date last scanned.
 
+Scan password-protected page 
+(see http://updatescanner.mozdev.org/drupal/content/scan-protectedprivate-pages)
+
 Check ETAG hash without scanning page
 Trigger notification on keyword match
 
