@@ -20,10 +20,10 @@ valid_locales = [
     "nl-NL",
     "pl-PL",
 #    "pt-BR",
-#    "ru-RU",
+    "ru-RU",
 #    "sk-SK",
     "tr-TR",
-#    "zh-CN",
+    "zh-CN",
 #    "zh-TW",
     ]
 if english_only:
