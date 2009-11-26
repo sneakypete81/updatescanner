@@ -16,7 +16,7 @@ valid_locales = [
 #    "fr-FR",
     "hu-HU",
 #    "it-IT",
-#    "ko-KR",
+    "ko-KR",
     "nl-NL",
     "pl-PL",
 #    "pt-BR",
