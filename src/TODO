@@ -4,6 +4,9 @@ Bugs:
 * Opening bookmarks sidebar stuffs up our context menu
 
 Firefox 3.6 support
+* Need to update sidebar context menu screenshot to match new text (and html text)
+
+For the statusbar, I think I should change the tooltip to "Update Scanner: Scan web pages for updates", and the first item in the menu to "Open Update Scanner sidebar".
 
 Double-click statusbar shows all changes
 CTRL-Click should open in new tab
