@@ -85,6 +85,13 @@ load : function()
     me._branch.QueryInterface(Components.interfaces.nsIPrefBranch2);
     me._branch.addObserver("", this, false);
     me._updateToolbar();
+
+    // Eventlistener for the main context menu
+    var menu = document.getElementById("updatescanSidebarContext");
+    if (menu) {
+        menu.addEventListener("popupshowing", me._showMenu, false);
+    }
+
 },
 
 unload : function()
@@ -97,6 +104,30 @@ unload : function()
     try {
       me._branch.removeObserver("", this);
     } catch(e) {}
+},
+
+// Show/hide menu items depending on whether folder or bookmark is selected
+_showMenu : function() 
+{
+    var me = USc_updatescan;
+    var id = me._getSelectedItem();
+    if (id == undefined)
+      return;
+    if (USc_places.isFolder(id)) {
+        document.getElementById("open").hidden = true;
+        document.getElementById("openItemTab").hidden = true;
+        document.getElementById("openFolderTab").hidden = false;
+        document.getElementById("scanPage").hidden = true;
+        document.getElementById("scanFolder").hidden = false;
+        document.getElementById("placesContext_sortBy:name").hidden = false;
+    } else {
+        document.getElementById("open").hidden = false;
+        document.getElementById("openItemTab").hidden = false;
+        document.getElementById("openFolderTab").hidden = true;
+        document.getElementById("scanPage").hidden = false;
+        document.getElementById("scanFolder").hidden = true;
+        document.getElementById("placesContext_sortBy:name").hidden = true;
+    }
 },
 
 observe: function(aSubject, aTopic, aData) // Observe toolbar button preference changes
