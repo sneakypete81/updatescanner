@@ -151,10 +151,17 @@ _treeClick : function(aEvent) {
     if (row.value == -1 || obj.value == "twisty") {
       return;
     }
+
+    var modifKey = aEvent.metaKey || aEvent.ctrlKey || aEvent.shiftKey;
+
     
     switch (aEvent.button) {
         case 0:
-            me.diffSelectedItemThisWindow();
+            if (modifKey) {
+                me.diffSelectedItemNewTab();
+            } else {
+                me.diffSelectedItemThisWindow();
+            }
             break;
         case 1:
             me.diffSelectedItemNewTab();
