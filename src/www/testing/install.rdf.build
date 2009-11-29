@@ -18,6 +18,9 @@ translator_list = "".join("<em:translator>%s</em:translator>\n" % translator
                           for translator in translators
 )
 
+contributor_list = "".join("<em:contributor>%s</em:contributor>\n" % contributor 
+                          for contributor in contributors
+)
 
 if allowUpdate:
     updateURLprint = "<em:updateURL>"+updateURL+"</em:updateURL>"
@@ -50,6 +53,8 @@ print >> file('install.rdf', 'w'), """\
 <em:description>%(description)s</em:description>
 <em:creator>%(author)s</em:creator>
 <em:homepageURL>%(homepageURL)s</em:homepageURL>
+<em:optionsURL>%(optionsChrome)s</em:optionsURL>
+%(contributor_list)s
 %(translator_list)s
 %(updateURLprint)s
 

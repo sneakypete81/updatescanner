@@ -2,30 +2,13 @@
 from Cheetah.Template import Template
 import os
 import shutil
+import config
 
 testing = True
 english_only = False
 
-valid_locales = [
-#    "cs-CZ",
-    "da-DK",
-#    "de-DE",
-    "en-US",
-    "es-ES",
-    "fi-FI",
-#    "fr-FR",
-    "hu-HU",
-#    "it-IT",
-    "ko-KR",
-    "nl-NL",
-    "pl-PL",
-#    "pt-BR",
-    "ru-RU",
-#    "sk-SK",
-    "tr-TR",
-    "zh-CN",
-#    "zh-TW",
-    ]
+valid_locales = config.locales.keys()
+
 if english_only:
     valid_locales = ["en-US"]
 
