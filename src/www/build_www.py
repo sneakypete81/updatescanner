@@ -2,26 +2,13 @@
 from Cheetah.Template import Template
 import os
 import shutil
+import config
 
 testing = False
 english_only = False
 
-valid_locales = ["cs-CZ",
-                 "da-DK",
-                 "de-DE",
-                 "en-US",
-                 "es-ES",
-                 "fi-FI",
-                 "fr-FR",
-                 "hu-HU",
-                 "it-IT",
-                 "ko-KR",
-                 "nl-NL",
-                 "ru-RU",
-                 "sk-SK",
-                 "tr-TR",
-                 "zh-CN",
-                 ]
+valid_locales = config.locales.keys()
+
 if english_only:
     valid_locales = ["en-US"]
 
@@ -74,6 +61,8 @@ def extractLanguages(locales):
     languages = []
     for locale in locales.values():
         localePath = locale['_header']['_localePath']
+        if testing:
+            localePath = "testing/"+localePath
         language = locale['_header']['_language']
 #        language = language.decode("utf-8").encode("ascii", "xmlcharrefreplace")
         languages.append({'path'       : localePath,

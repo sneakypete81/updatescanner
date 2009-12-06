@@ -62,6 +62,7 @@ setcookie("locale", "$_localePath", strtotime("+1 year"), "/");
 #set $_help_sidebar_aclass = ""
 #set $_help_properties_aclass = ""
 #set $_help_preferences_aclass = ""
+#set $_help_statusbar_aclass = ""
 #set $_help_faq_aclass = ""
 #set $_source_aclass = ""
 #set $_bugs_aclass = ""
@@ -79,6 +80,8 @@ setcookie("locale", "$_localePath", strtotime("+1 year"), "/");
   #set $_help_properties_aclass = "active"
 #else if $_thisPage == "help-preferences"
   #set $_help_preferences_aclass = "active"
+#else if $_thisPage == "help-statusbar"
+  #set $_help_statusbar_aclass = "active"
 #else if $_thisPage == "help-faq"
   #set $_help_faq_aclass = "active"
 #else if $_thisPage == "bugs"
@@ -87,7 +90,7 @@ setcookie("locale", "$_localePath", strtotime("+1 year"), "/");
   #set $_contact_aclass = "active"
 #end if
 
-#set $_linkPrefix = $getVar('_linkPrefix', '/'+$_localePath)
+#set $_linkPrefix = $getVar('_linkPrefix', '.')
 
       <div id="sidebar-left" class="sidebar">
         <div id="block-user-1" class="clear-block block block-user">
@@ -111,6 +114,8 @@ setcookie("locale", "$_localePath", strtotime("+1 year"), "/");
                   $_pageProperties</a></li>
                 <li class="leaf"><a class="$_help_preferences_aclass" href="$_linkPrefix/help-preferences.html">
                   $_preferences</a></li>
+                <li class="leaf"><a class="$_help_statusbar_aclass" href="$_linkPrefix/help-statusbar.html">
+                  $_statusbar</a></li>
                 <li class="leaf"><a class="$_help_faq_aclass" href="$_linkPrefix/help-faq.html">
                   $_faq</a></li>
               </ul>

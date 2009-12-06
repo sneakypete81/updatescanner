@@ -25,10 +25,20 @@
 
       <h4>$toolbarIconQ</h4>
       <p>$toolbarIconA</p>
+
+      <h4>$ignoreNumbersQ</h4>
+#set $ignoreNumbersA3 = $ignoreNumbersA3.replace('{linkStart}','<a href="http://winmerge.org/">')
+#set $ignoreNumbersA3 = $ignoreNumbersA3.replace('{linkEnd}','</a>')
+      <p>$ignoreNumbersA
+      <ul>
+      <li>$ignoreNumbersA1
+      <li>$ignoreNumbersA2
+      <li>$ignoreNumbersA3
+      </p>
  
       <div class="prevnext">
         <table>
-        <td class="prev"><a href="./help-preferences.html">&laquo; $_prev $_preferences</a></td>
+        <td class="prev"><a href="./help-statusbar.html">&laquo; $_prev $_statusbar</a></td>
         </table>
       </div>
     </div>

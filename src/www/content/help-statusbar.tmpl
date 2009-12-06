@@ -1,0 +1,36 @@
+#set global $_stylesheet = "prosimii-screen-sidebar.css"
+#set global $_title = "Update Scanner %s" %($_statusbar)
+#set global $_thisPage = "help-statusbar"
+#set global $_helpPage = "true"
+#include "content/_header.tmpl"
+
+    <div id="content">
+      <h1>$statusbarIcon</h1>
+      <p>$statusbarIconDesc1</p>
+      <p>$statusbarIconDesc2</p>
+      <p>$statusbarIconDesc3</p>
+      <img class="preview" src="$_img.statusbar_menu"/><br/>
+
+      <h4>$updateScanner</h4>
+      <p>$updateScannerDesc</p>
+
+      <h4>$showAllChanges</h4>
+      <p>$showAllChangesDesc</p>
+
+      <h4>$scanPage</h4>
+      <p>$scanPageDesc</p>
+
+      <h4>$disableEnable</h4>
+      <p>$disableEnableDesc</p>
+ 
+      <h4>$preferences</h4>
+      <p>$preferencesDesc</p>
+ 
+      <div class="prevnext">
+        <table>
+        <td class="prev"><a href="./help-preferences.html">&laquo; $_prev $_preferences</a></td>
+        <td class="next"><a href="./help-faq.html">$_next $_faq &raquo;</a></td>
+        </table>
+      </div>
+    </div>
+#include "content/_footer.tmpl"
