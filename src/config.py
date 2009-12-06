@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # coding=UTF-8
 
-version = "3.0.6beta3" # Don't forget to update upgrade.js too!
+version = "3.0.6" # Don't forget to update upgrade.js too!
 in_development = False
 publish_babelzilla = False # True = include incomplete locales for babelzilla
-only_english = True # True = only include english for beta releases
+only_english = False # True = only include english for beta releases
 
 
 app = 'updatescan'
@@ -12,24 +12,29 @@ name = 'Update Scanner'
 description = 'Monitors webpages for updates'
 author = 'Pete Burgers'
 contributors = ['Karol Misiura (Tango Desktop Project Icons)']
-translators = ['SlovakSoft (Slovenčina)',
-               'Almotasim (Italiano)',
-               'myahoo (Français)',
-               'Mark Heijl (Nederlands)',
-               'Proyecto Nave (Español)',
-               'Jeong Seungwon (한국어)',
+translators = ['PetrTwo (Čeština)',
+               'Jørgen (Dansk)',
+               '123tp (Dansk)',
+               'Archaeopteryx (Deutsch)'
                'Team erweiterungen.de (Deutsch)',
-               'Archaeopterix (Deutsch)'
-               'JZsolt (Magyar)',
-               'Edvard Borovskij (Русский)',
-               'Leszek(teo) Życzkowski (Polski)',
-               'PetrTwo (Čeština)',
-               'Raryel Costa Souza (português brasileiro)',
-               '123tp, Jørgen (Dansk)',
-               'Kenan Balamir (Türkçe)',
-               'Wang King (简化字 - Simplified Chinese)',
-               'Peter Pin-Guang Chen (簡化字 - Traditional Chinese)',
+               'Proyecto Nave (Español)',
+               'Chuzo (Español)',
                'Olli (Suomeksi)',
+               'myahoo (Français)',
+               'JZsolt (Magyar)',
+               'Almotasim (Italiano)',
+               'Jeong Seungwon (한국어)',
+               'Funalien (lietuvių kalba)',
+               'Lauriote (lietuvių kalba)',
+               'Mark Heijl (Nederlands)',
+               'Leszek(teo) Życzkowski (Polski)',
+               'Raryel Costa Souza (português brasileiro)',
+               'Edgard Magalhaes (português brasileiro)',
+               'Funalien (Русский)',
+               'Slovak Team (Slovenčina)',
+               'Kenan Balamir (Türkçe)',
+               'Wang King (简化字 - zh-CN)',
+               'Peter Pin-Guang Chen (簡化字 - zh-TW)',
 #               'stoyan (български език)',
                ]
 authorURL = "http://updatescanner.mozdev.org"
@@ -105,6 +110,10 @@ locales = {
         'display_name': name,
     },
     'ko-KR': {
+        'locale_version': '1.0',
+        'display_name': name,
+    },
+    'lt-LT': {
         'locale_version': '1.0',
         'display_name': name,
     },

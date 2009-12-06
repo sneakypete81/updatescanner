@@ -6,6 +6,7 @@ import subprocess
 import shutil
 import tempfile
 from post_data import POST_DATA
+import config
 
 US_EXTENSION_ID = 4552
 WEB_EXTENSION_ID = 4726
@@ -62,8 +63,9 @@ def run():
         else:
             if get_yn("Update incomplete locales, using english if necessary?"):
                 update_locales(replace_path, incomplete)
+        check_config(complete, incomplete)
+
     finally:
-        pass
         shutil.rmtree(temp_path)
 
 def parse_args():
@@ -215,6 +217,22 @@ def update_locales(temp_path, locales):
             shutil.rmtree(dest)
         shutil.copytree(source, dest)
         
+
+def check_config(complete, incomplete):
+    for name in sorted(complete):
+        if name not in config.locales.keys():
+            print "WARNING: %s is missing from config.locales[]" % name
+    for name in sorted(incomplete):
+        if name not in config.incomplete_locales.keys():
+            print "WARNING: %s is missing from config.incomplete_locales[]" % name
+
+    for name in sorted(config.locales.keys()):    
+        if name not in complete:
+            print "WARNING: %s should not be in config.locales[]" % name
+
+    for name in sorted(config.incomplete_locales.keys()):    
+        if name not in incomplete:
+            print "WARNING: %s should not be in config.incomplete_locales[]" % name
 
 ############################
 
