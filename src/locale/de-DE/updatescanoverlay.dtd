@@ -1,6 +1,7 @@
 <!ENTITY UpdateScan.tooltip "Webseiten auf Aktualisierungen überprüfen">
 <!ENTITY AddToUpdateScan.label "Seite auf Aktualisierung überprüfen...">
 <!ENTITY AddToUpdateScan.accesskey "A">
+<!ENTITY ShowAllChanges.label "Alle Änderungen anzeigen">
 <!ENTITY EnableScanner.label "Überprüfung aktivieren">
 <!ENTITY DisableScanner.label "Überprüfung deaktivieren">
 <!ENTITY Preferences.label "Update Scanner-Einstellungen...">

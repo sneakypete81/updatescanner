@@ -1,6 +1,7 @@
 <!ENTITY UpdateScan.tooltip "Skanuje witryny w poszukiwaniu zmian">
 <!ENTITY AddToUpdateScan.label "Skanuj stronę">
 <!ENTITY AddToUpdateScan.accesskey "S">
+<!ENTITY ShowAllChanges.label "Wyświetl wszystkie zmiany">
 <!ENTITY EnableScanner.label "Włącz skaner">
 <!ENTITY DisableScanner.label "Wyłącz skaner">
 <!ENTITY Preferences.label "Ustawienia…">

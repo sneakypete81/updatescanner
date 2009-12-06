@@ -1,0 +1,24 @@
+<!ENTITY url.label "URL:">
+<!ENTITY title.label "Antraštė:">
+<!ENTITY threshold.label "Keisti dažnumą">
+<!ENTITY autoscan.label "Auto-tikrinimas">
+<!ENTITY low.label "Žemas">
+<!ENTITY high.label "Aukštas">
+<!ENTITY often.label "Dažnai">
+<!ENTITY never.label "Niekada">
+<!ENTITY manualScan.label "Skanuoti savarankiškai">
+<!ENTITY scanEvery.label "Skanuoti kas">
+<!ENTITY minutes.label "minutes">
+<!ENTITY hours.label "valanda(-s)">
+<!ENTITY days.label "diena">
+<!ENTITY ignoreChanges.label "Iguoruoti pakeitimus, kurie yra mažesni, nei">
+<!ENTITY characters.label "simbolių">
+<!ENTITY ignoreNumbers.label "Ignoruoti skaičių pakeitimus">
+<!ENTITY advanced.label "Papildomai...">
+<!ENTITY charEncoding.label "Kodiruotės išdėstymas">
+<!ENTITY autoDetect.label "Auto-nustatymas">
+<!ENTITY use.label "Nauduoti">
+<!ENTITY changeHighlighting.label "Keisti pašviesinimą">
+<!ENTITY highlightChanges.label "pašviesinti pakeitimus">
+<!ENTITY enableScript.label "Įjungti Javascript">
+<!ENTITY enableFlash.label "Įjungti Flash ir papildymus">

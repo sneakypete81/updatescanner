@@ -1,0 +1,17 @@
+<!ENTITY editProperties "Redaguoti nustatymus">
+<!ENTITY headerOld1 "Puslapis žemiau - sena puslapio versija, tikrinta">
+<!ENTITY headerOld2 ".">
+<!ENTITY headerNew1 "Puslapis žemiau - nauja puslapio versija, tikrinta">
+<!ENTITY headerNew2 ".">
+<!ENTITY headerDiff1 "Puslapis žemiau paskutinį kartą buvo tikrinamas">
+<!ENTITY headerDiff2 ". Pakeitimai yra">
+<!ENTITY headerDiff3 "pašvesinti">
+<!ENTITY headerDiff4 ".">
+<!ENTITY headerNotChecked1 "Šis puslapis dar nebuvo patikrintas.">
+<!ENTITY headerNotChecked2 "Prašome paspausti">
+<!ENTITY headerNotChecked3 "'Tikrinti'">
+<!ENTITY headerNotChecked4 "migtuką kaireje, ir pabandyti dar kartą.">
+<!ENTITY headerError1 "Praeitą kartą tikrinimo laiku puslapis grąžino klaidą.">
+<!ENTITY headerError2 "Prašome paspausti">
+<!ENTITY headerError3 "'Dabartintis puslapis'">
+<!ENTITY headerError4 "nuoroda, kad patikrinti, ar puslapis egzistoja.">

@@ -18,3 +18,7 @@
 <!ENTITY charEncoding.label "Karakter Çözümlemesi">
 <!ENTITY autoDetect.label "Otomatik-algıla">
 <!ENTITY use.label "Seçeyim">
+<!ENTITY changeHighlighting.label "Değişiklikleri Parlat">
+<!ENTITY highlightChanges.label "Değişiklikleri Parlat">
+<!ENTITY enableScript.label "JavaScript Etkinleştirilsin">
+<!ENTITY enableFlash.label "Flash ve Eklentileri Etkinleştir">

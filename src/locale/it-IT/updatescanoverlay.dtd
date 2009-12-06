@@ -1,3 +1,7 @@
 <!ENTITY UpdateScan.tooltip "Controlla le pagine selezionate in cerca di aggiornamenti">
 <!ENTITY AddToUpdateScan.label "Ricerca nuove modifiche...">
 <!ENTITY AddToUpdateScan.accesskey "U">
+<!ENTITY ShowAllChanges.label "Show All Changes">
+<!ENTITY EnableScanner.label "Enable Scanner">
+<!ENTITY DisableScanner.label "Disable Scanner">
+<!ENTITY Preferences.label "Preferences...">

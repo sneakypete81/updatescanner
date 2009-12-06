@@ -1,0 +1,26 @@
+<!ENTITY preferences.title "Update Scanner nustatymai">
+<!ENTITY notifications.title "Pranešimai">
+<!ENTITY scanning.title "Tikrinimas">
+<!ENTITY toolbar.title "Įrankių juosta">
+<!ENTITY notifications.enable.label "Rodyti pranešimų popup langus, kai puslapis atnaujintas">
+<!ENTITY notifications.timed.label1 "Rodyti">
+<!ENTITY notifications.timed.label2 "sekundes(-ių)">
+<!ENTITY notifications.permanent.label "Rodyti iki savarankiško uždarymo">
+<!ENTITY notifications.playSound.label "Informuoti garso signalu, kai puslapis atnaujintas">
+<!ENTITY notifications.defaultSound.label "Numatytasis garsas">
+<!ENTITY notifications.browse.label "Pasirinkti...">
+<!ENTITY scan.pageProperties.label "Puslapio nustatymai">
+<!ENTITY scan.selectUsing.label "Pasirinkti tikrinimo dažnumą naudojant">
+<!ENTITY scan.sliders.label "Šliaužiklius">
+<!ENTITY scan.numbers.label "Skaičius">
+<!ENTITY scan.warnScanShort.label "Pranešti, kai tikrinimo laikas per trumpas">
+<!ENTITY scan.advanced.label "Išplėstiniai nustatymai">
+<!ENTITY scan.timeoutIfLonger.label "Nutraukti tikrinima, kai jis trunka ilgiau, nei">
+<!ENTITY scan.seconds.label "sekundžių">
+<!ENTITY toolbar.toolbarIcons.label "Įrankių juostos ženklai">
+<!ENTITY toolbar.new.label "Naujas užrašas">
+<!ENTITY toolbar.showNewTab.label "Parodyti visus pakeistus puslapius naujose kortelėse">
+<!ENTITY toolbar.markVisited.label "Pažymėti viską kaip perskaitytą">
+<!ENTITY toolbar.delete.label "Pašalinti">
+<!ENTITY toolbar.preferences.label "Nustatymai">
+<!ENTITY toolbar.help.label "Pagalba">

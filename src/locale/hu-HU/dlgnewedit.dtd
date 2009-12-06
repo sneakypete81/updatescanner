@@ -13,7 +13,7 @@
 <!ENTITY days.label "naponta">
 <!ENTITY ignoreChanges.label "A változás figyelmen kívül hagyása, ha az kevesebb">
 <!ENTITY characters.label "karakternél">
-<!ENTITY ignoreNumbers.label "Kihagyható változások száma">
+<!ENTITY ignoreNumbers.label "Figyelmen kívül hagyja a számok változásait">
 <!ENTITY advanced.label "Haladó...">
 <!ENTITY charEncoding.label "Karakterkódolás">
 <!ENTITY autoDetect.label "Automatikus felismerés">

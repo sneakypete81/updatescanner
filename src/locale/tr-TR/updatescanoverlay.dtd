@@ -1,3 +1,7 @@
 <!ENTITY UpdateScan.tooltip "Güncellemeler için web sayfalarını tara">
 <!ENTITY AddToUpdateScan.label "Güncellemeler için sayfayı tara...">
 <!ENTITY AddToUpdateScan.accesskey "U">
+<!ENTITY ShowAllChanges.label "Tüm Değişiklikleri Göster">
+<!ENTITY EnableScanner.label "Tarayıcıyı Etkinleştir">
+<!ENTITY DisableScanner.label "Tarayıcıyı Devredışı Bırak">
+<!ENTITY Preferences.label "Özellikler...">

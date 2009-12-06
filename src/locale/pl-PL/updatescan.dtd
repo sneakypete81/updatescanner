@@ -4,8 +4,8 @@
 <!ENTITY showallchangesinnewtabsbutton.tooltip "Wyświetl wszystkie zmienione strony w nowych kartach">
 <!ENTITY markallasvisitedbutton.tooltip "Oznacz jako sprawdzone">
 <!ENTITY deletebutton.tooltip "Usuń">
-<!ENTITY preferencesbutton.tooltip "Update Scanner - ustawienia">
-<!ENTITY helpbutton.tooltip "Update Scanner - pomoc">
+<!ENTITY preferencesbutton.tooltip "Update Scanner – ustawienia">
+<!ENTITY helpbutton.tooltip "Update Scanner – pomoc">
 <!ENTITY openmenu.label "Wyświetl zmiany">
 <!ENTITY opentabmenu.label "Wyświetl zmiany w nowych kartach">
 <!ENTITY showallchangesinnewtabsmenu.label "Wyświetl wszystkie zmienione strony w kartach">

@@ -17,8 +17,8 @@
 <!ENTITY advanced.label "Расширено...">
 <!ENTITY charEncoding.label "Кодировка">
 <!ENTITY autoDetect.label "Авто-обнаружение">
-<!ENTITY use.label "Использовать">
+<!ENTITY use.label "Выбрать">
 <!ENTITY changeHighlighting.label "Изменить подсветку">
-<!ENTITY highlightChanges.label "Подсветить изменения">
+<!ENTITY highlightChanges.label "Подсвечивать изменения">
 <!ENTITY enableScript.label "Включить Javascript">
 <!ENTITY enableFlash.label "Включить дополнения и Flash">

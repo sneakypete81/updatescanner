@@ -4,11 +4,11 @@
 <!ENTITY toolbar.title "Pasek narzędziowy">
 <!ENTITY notifications.enable.label "Wyświetlaj powiadomienia, gdy są zmiany w witrynie">
 <!ENTITY notifications.timed.label1 "Wyświetlaj przez">
-<!ENTITY notifications.timed.label2 "sekund">
-<!ENTITY notifications.permanent.label "Wyświetlaj aż do czasu zamknięcia ręcznego">
+<!ENTITY notifications.timed.label2 "s">
+<!ENTITY notifications.permanent.label "Wyświetlaj aż do czasu ręcznego zamknięcia">
 <!ENTITY notifications.playSound.label "Odtwarzaj dźwięk, gdy są zmiany w witrynie">
 <!ENTITY notifications.defaultSound.label "Domyślny dźwięk">
-<!ENTITY notifications.browse.label "Przeglądaj...">
+<!ENTITY notifications.browse.label "Przeglądaj…">
 <!ENTITY scan.pageProperties.label "Właściwości strony">
 <!ENTITY scan.selectUsing.label "Określaj częstotliwość skanowania i próg czułości za pomocą">
 <!ENTITY scan.sliders.label "suwaków">

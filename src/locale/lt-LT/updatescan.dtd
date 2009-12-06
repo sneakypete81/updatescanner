@@ -1,0 +1,16 @@
+<!ENTITY scanbutton.label "Tikrinti">
+<!ENTITY stopbutton.label "Atšaukti">
+<!ENTITY newbutton.tooltip "Naujas užrašas">
+<!ENTITY showallchangesinnewtabsbutton.tooltip "Parodyti visus pakeistus puslapius naujose kortelėse">
+<!ENTITY markallasvisitedbutton.tooltip "Pasižymėti viską kaip perskaytą">
+<!ENTITY deletebutton.tooltip "Pašalinti">
+<!ENTITY preferencesbutton.tooltip "Update Scanner nustatymai">
+<!ENTITY helpbutton.tooltip "Update Scanner pagalba">
+<!ENTITY openmenu.label "Parodyti pakeitimus">
+<!ENTITY opentabmenu.label "Parodyti pakeitimus naujose kortelėse">
+<!ENTITY showallchangesinnewtabsmenu.label "Parodyti visus pakeistus puslapius naujose kortelėse">
+<!ENTITY markvisitedmenu.label "Pažymėti viską kaip aplankytą">
+<!ENTITY deletemenu.label "Pašalinti">
+<!ENTITY editmenu.label "Nustatymai">
+<!ENTITY scanThisPage.label "Tikrinti šį puslapį">
+<!ENTITY scanThisFolder.label "Tikrinti šį katalogą">

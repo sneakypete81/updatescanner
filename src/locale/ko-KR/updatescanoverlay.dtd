@@ -1,6 +1,7 @@
 <!ENTITY UpdateScan.tooltip "웹 페이지 업데이트 검사">
 <!ENTITY AddToUpdateScan.label "웹 페이지 업데이트 검사...">
 <!ENTITY AddToUpdateScan.accesskey "U">
+<!ENTITY ShowAllChanges.label "모든 변경 내용 표시">
 <!ENTITY EnableScanner.label "Scanner 사용">
 <!ENTITY DisableScanner.label "Scanner 사용 안함">
 <!ENTITY Preferences.label "환경 설정...">

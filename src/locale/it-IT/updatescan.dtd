@@ -13,3 +13,4 @@
 <!ENTITY deletemenu.label "Elimina">
 <!ENTITY editmenu.label "Proprietà controllo pagina">
 <!ENTITY scanThisPage.label "Controlla questa pagina">
+<!ENTITY scanThisFolder.label "Scan This Folder">

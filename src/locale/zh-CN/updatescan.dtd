@@ -13,3 +13,4 @@
 <!ENTITY deletemenu.label "删除">
 <!ENTITY editmenu.label "属性">
 <!ENTITY scanThisPage.label "扫描此页面">
+<!ENTITY scanThisFolder.label "扫描此文件夹">

@@ -7,15 +7,15 @@
         <RDF:li resource="urn:mozilla:locale:ru-RU"/>
     </RDF:Seq>
     <RDF:Description
-        about="urn:mozilla:locale:ru-RU"
-        chrome:displayName="Russian (RU)"
+        about="urn:mozilla:locale:lt-LT"
+        chrome:displayName="Lithuanian (LT)"
         chrome:author="Edvard Borovskij"
-        chrome:name="ru-RU"
+        chrome:name="lt-LT"
         chrome:previewURL="http://www.mozilla.org/locales/en-US.gif"
     >
         <chrome:packages>
-            <RDF:Seq about="urn:mozilla:locale:ru-RU:packages">
-                <RDF:li resource="urn:mozilla:locale:ru-RU:updatescan"/>
+            <RDF:Seq about="urn:mozilla:locale:lt-LT:packages">
+                <RDF:li resource="urn:mozilla:locale:lt-LT:updatescan"/>
             </RDF:Seq>
         </chrome:packages>
     </RDF:Description>
