@@ -32,9 +32,14 @@
  * the terms of any one of the MPL, the GPL or the LGPL.  
  * ***** END LICENSE BLOCK ***** -->
 
-<?xml-stylesheet href="chrome://global/skin/global.css"?>
+<?xml-stylesheet href="chrome://global/skin/"?>
+<!-- Removed in an attempt to fix MacOS incorrect sizing, reported by 
+     I believe prefwindow is now identical to code in:
+     https://developer.mozilla.org/en/Adding_preferences_to_an_extension
+     
 <?xml-stylesheet href="chrome://mozapps/content/preferences/preferences.css"?>
 <?xml-stylesheet href="chrome://browser/skin/preferences/preferences.css"?>
+-->
 <?xml-stylesheet href="chrome://updatescan/skin/preferences.css" type="text/css"?>
 
 <!DOCTYPE dialog SYSTEM "chrome://updatescan/locale/preferences.dtd">

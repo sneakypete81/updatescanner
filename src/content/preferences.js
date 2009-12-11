@@ -114,8 +114,6 @@ var USc_pref = {
     var soundFile = document.getElementById("notificationsSoundFile")
 
     soundFile.file = prefSoundFile.value;
-    soundFile.label = prefSoundFile.value.path;
-    
   },
   
   soundBrowseClick: function()
