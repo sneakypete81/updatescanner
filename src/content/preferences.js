@@ -114,6 +114,11 @@ var USc_pref = {
     var soundFile = document.getElementById("notificationsSoundFile")
 
     soundFile.file = prefSoundFile.value;
+    // The following is necessary for WinXP, or the label isn't updated properly.
+    // Test for null, to prevent MacOS errors.
+    if (soundFile.file) {
+      soundFile.label = soundFile.file.path;
+    }
   },
   
   soundBrowseClick: function()
