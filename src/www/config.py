@@ -79,9 +79,8 @@ locales = {
         'locale_version': '1.0',
         'display_name': name,
     },
-}
 
-incomplete_locales = {
+
     'de-DE': {
         'locale_version': '1.0',
         'display_name': name,
@@ -106,6 +105,10 @@ incomplete_locales = {
         'locale_version': '1.0',
         'display_name': name,
     },
+
+}
+
+incomplete_locales = {
     'zh-TW': {
         'locale_version': '1.0',
         'display_name': name,
