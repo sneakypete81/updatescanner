@@ -23,3 +23,10 @@
 #settings-button {
   list-style-image: url("chrome://updatescan/skin/preferences-system_sm.png");
 }
+
+/* From chrome://browser/skin/preferences/preferences.css:
+   bottom-most box containing a groupbox in a prefpane. 
+   Prevents the bottom of the groupbox from being cutoff */
+.bottomBox {
+  padding-bottom: 4px;
+}

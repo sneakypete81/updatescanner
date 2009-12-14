@@ -33,13 +33,9 @@
  * ***** END LICENSE BLOCK ***** -->
 
 <?xml-stylesheet href="chrome://global/skin/"?>
-<!-- Removed in an attempt to fix MacOS incorrect sizing, reported by 
-     I believe prefwindow is now identical to code in:
-     https://developer.mozilla.org/en/Adding_preferences_to_an_extension
-     
+<!-- Contains filefield xml bindings -->
 <?xml-stylesheet href="chrome://mozapps/content/preferences/preferences.css"?>
-<?xml-stylesheet href="chrome://browser/skin/preferences/preferences.css"?>
--->
+
 <?xml-stylesheet href="chrome://updatescan/skin/preferences.css" type="text/css"?>
 
 <!DOCTYPE dialog SYSTEM "chrome://updatescan/locale/preferences.dtd">
@@ -99,6 +95,7 @@
          value="permanent" />
   </radiogroup>
   </groupbox>
+  <hbox class="bottomBox"> <!-- Ensures the bottom doesn't get cut off -->
   <groupbox>
   <checkbox label="&notifications.playSound.label;"
             preference="notifications.playSound"
@@ -121,6 +118,7 @@
   </hbox>
   </radiogroup>
   </groupbox>
+  </hbox>
 </prefpane>
 <prefpane id="scanning" label="&scanning.title;"
           helpTopic="prefs-scanning"
@@ -158,6 +156,7 @@
           preference="scan.displayAdvanced"/>
 -->
 </groupbox>
+<hbox class="bottomBox"> <!-- Ensures the bottom doesn't get cut off -->
 <groupbox>
 <caption label="&scan.advanced.label;"/>
 <hbox align="center">
@@ -167,6 +166,7 @@
 <label value="&scan.seconds.label;"/>
 </hbox>
 </groupbox>
+</hbox>
 </prefpane> 
 <prefpane id="toolbar" label="&toolbar.title;"
           helpTopic="prefs-toolbar"
@@ -191,6 +191,7 @@
                 name="extensions.updatescan.toolbar.help" 
                 type="bool"/>
   </preferences>
+<hbox class="bottomBox"> <!-- Ensures the bottom doesn't get cut off -->
 <groupbox>
 <caption label="&toolbar.toolbarIcons.label;"/>
 <hbox align="center">
@@ -218,5 +219,6 @@
 <label value="&toolbar.help.label;"/>
 </hbox>
 </groupbox>
+</hbox>
 </prefpane> 
 </prefwindow>
