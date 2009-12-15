@@ -40,6 +40,8 @@ var USc_pref = {
     if (this.checkOS() == 'macintosh') {
       this.disableRadioPermanent();
     }
+    // Mac bug: dialog auto sizing doesn't work for some reason.
+    window.sizeToContent();
   },
   
   disableRadioPermanent: function ()
