@@ -122,7 +122,7 @@
 </prefpane>
 <prefpane id="scanning" label="&scanning.title;"
           helpTopic="prefs-scanning"
-          image="chrome://updatescan/skin/updatescan_big.png">
+          image="chrome://updatescan/skin/updatescan_med.png">
   <preferences>
     <preference id="scan.useSliders" 
                 name="extensions.updatescan.scan.useSliders" 
