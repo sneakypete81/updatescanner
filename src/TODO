@@ -1,6 +1,6 @@
+** Add a "New Bookmark" item to right-click menu
+
 Bugs:
-* Sometimes right-clicking does funny things (I think this was a firefox-linux 
-      bug - seems ok now)
 * Notification click doesn't work for mac
 
 For the statusbar, I think I should change the tooltip to 
@@ -20,7 +20,7 @@ Show deletions too
 Check for wifi proxy
 Add Delete link to the header
 
--- 3.0.7 (alpha)--
+-- 3.1.0 (alpha)--
 
 Firefox 3.6 support
 Fixed sidebar bold highlighting for FF3.6
