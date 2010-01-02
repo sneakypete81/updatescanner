@@ -150,11 +150,9 @@
               oncommand="USc_updatescan.scanSelected();"/>
     <menuseparator/>
     <menuitem id="placesContext_new:bookmark"
-              command="USc_updatescan.openNewDialogCurrentPos();"
+              oncommand="USc_updatescan.openNewDialogCurrentPos();"
               label="&cmd.new_bookmark.label;"
-              accesskey="&cmd.new_bookmark.accesskey;"
-              selection="any"
-              hideifnoinsetionpoint="true"/>
+              accesskey="&cmd.new_bookmark.accesskey;"/>
     <menuitem id="placesContext_new:folder"
               command="placesCmd_new:folder"
               label="&cmd.new_folder.label;"
