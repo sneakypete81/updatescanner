@@ -644,6 +644,7 @@ _getSelectedItem : function()
 },
 
 deleteSelectedItem : function()
+// TODO: currently doesn't delete .old and .new files when entire folders are deleted.
 {
     var me = USc_updatescan;
     var id = me._getSelectedItem();
