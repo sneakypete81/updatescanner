@@ -1,12 +1,12 @@
+** Add a "New Bookmark" item to right-click menu
+
 Bugs:
-* Sometimes right-clicking does funny things
 * Notification click doesn't work for mac
-* Opening bookmarks sidebar stuffs up our context menu
 
-Firefox 3.6 support
+For the statusbar, I think I should change the tooltip to 
+"Update Scanner: Scan web pages for updates", and the first item in the menu 
+to "Open Update Scanner sidebar".
 
-Double-click statusbar shows all changes
-CTRL-Click should open in new tab
 Tooltip with date last scanned.
 
 Scan password-protected page 
@@ -22,18 +22,25 @@ Click link to scroll diffpage to change
 Show deletions too
 Check for wifi proxy
 Add Delete link to the header
-Don't change sidebar icon, just make bold (make this configurable!)
+
+Email notifications.
+
+-- 3.1.0 (alpha)--
+
+Firefox 3.6 support
+Fixed sidebar bold highlighting for FF3.6
+Fixed conflict with bookmarks sidebar context menu
+CTRL/ALT/SHIFT/OPT-click an item in the sidebar to open in a new tab
+
 
 -- 3.0.6 (beta)--
-
-**** Show all changes from statusbar menu not working.****
-**** Need to update documentation and get new locale strings for this" ***
 
 Configurable highlight colour
 Option to view current page only, not diffs
 Enable/Disable javascript/plugins
 Enable/Disable scanning (right-click on the statusbar icon)
 Status bar context menu
+Double-click statusbar shows all changes
 
 -- 3.0.5 --
 Fixed: Root Folder renamed to (no title) in FF3.5

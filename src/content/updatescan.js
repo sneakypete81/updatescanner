@@ -66,7 +66,7 @@ load : function()
 
     me._extendPlacesTreeView();
     
-    me.tree = document.getElementById("bookmarks-view");
+    me.tree = document.getElementById("updatescan-bookmarks-view");
     me.tree.onclick=me._treeClick;
    
     try {
@@ -85,6 +85,13 @@ load : function()
     me._branch.QueryInterface(Components.interfaces.nsIPrefBranch2);
     me._branch.addObserver("", this, false);
     me._updateToolbar();
+
+    // Eventlistener for the main context menu
+    var menu = document.getElementById("updatescanSidebarContext");
+    if (menu) {
+        menu.addEventListener("popupshowing", me._showMenu, false);
+    }
+
 },
 
 unload : function()
@@ -97,6 +104,30 @@ unload : function()
     try {
       me._branch.removeObserver("", this);
     } catch(e) {}
+},
+
+// Show/hide menu items depending on whether folder or bookmark is selected
+_showMenu : function() 
+{
+    var me = USc_updatescan;
+    var id = me._getSelectedItem();
+    if (id == undefined)
+      return;
+    if (USc_places.isFolder(id)) {
+        document.getElementById("open").hidden = true;
+        document.getElementById("openItemTab").hidden = true;
+        document.getElementById("openFolderTab").hidden = false;
+        document.getElementById("scanPage").hidden = true;
+        document.getElementById("scanFolder").hidden = false;
+        document.getElementById("placesContext_sortBy:name").hidden = false;
+    } else {
+        document.getElementById("open").hidden = false;
+        document.getElementById("openItemTab").hidden = false;
+        document.getElementById("openFolderTab").hidden = true;
+        document.getElementById("scanPage").hidden = false;
+        document.getElementById("scanFolder").hidden = true;
+        document.getElementById("placesContext_sortBy:name").hidden = true;
+    }
 },
 
 observe: function(aSubject, aTopic, aData) // Observe toolbar button preference changes
@@ -120,10 +151,17 @@ _treeClick : function(aEvent) {
     if (row.value == -1 || obj.value == "twisty") {
       return;
     }
+
+    var modifKey = aEvent.metaKey || aEvent.ctrlKey || aEvent.shiftKey;
+
     
     switch (aEvent.button) {
         case 0:
-            me.diffSelectedItemThisWindow();
+            if (modifKey) {
+                me.diffSelectedItemNewTab();
+            } else {
+                me.diffSelectedItemThisWindow();
+            }
             break;
         case 1:
             me.diffSelectedItemNewTab();
@@ -606,19 +644,22 @@ _getSelectedItem : function()
 },
 
 deleteSelectedItem : function()
+// TODO: currently doesn't delete .old and .new files when entire folders are deleted.
 {
     var me = USc_updatescan;
     var id = me._getSelectedItem();
     if (id == undefined)
       return;
 
-    var filebase=USc_places.getSignature(id);
+    try {
+        var filebase=USc_places.getSignature(id);
 
 //    var title = USc_rdf.queryItem(id, "title", "untitled");
 //    if (confirm(str.getString("confirmDelete") + " " + title + "?")) {
+        USc_file.USrmFile(filebase+".old");
+        USc_file.USrmFile(filebase+".new");
+    } catch (ex) { }
     USc_places.deleteBookmark(id);
-    USc_file.USrmFile(filebase+".old");
-    USc_file.USrmFile(filebase+".new");
 },
 
 _showStopButton : function()
@@ -693,9 +734,13 @@ _extendPlacesTreeView : function() {
       if (!properties) {
         properties = [];
         var node = this._visibleElements[aRow].node;
+        // Firefox3.6+: no longer uses .node in _visibleElements
+        if (!node) {
+            var node = this._visibleElements[aRow];
+        }
         var nodeType = node.type;
         var itemId = node.itemId;
-        if (nodeType == Ci.nsINavHistoryResultNode.RESULT_TYPE_URI) {
+        if (nodeType == Ci.nsINavHistoryResultNode.RESULT_TYPE_URI) { 
           if (!PlacesUtils.nodeIsLivemarkContainer(node.parent)) {
             try {
               var state = PlacesUtils.annotations.getItemAnnotation(itemId, USc_places.ANNO_STATUS);
@@ -714,22 +759,6 @@ _extendPlacesTreeView : function() {
         }
       }
     };
-    PlacesTreeView.prototype.isContainerBase = PlacesTreeView.prototype.isContainer;
-    PlacesTreeView.prototype.isContainer =
-    function ext_isContainer(aRow) {
-      var baseValue = this.isContainerBase(aRow);
-       if (baseValue) {
-         var node = this._visibleElements[aRow].node;
-         if (PlacesUtils.annotations.itemHasAnnotation(node.itemId, LMANNO_FEEDURI)) {
-           return false;
-         } else {
-           return true;
-         }
-       } else {
-         return false;
-       }
-    };
-
 }
 };
 

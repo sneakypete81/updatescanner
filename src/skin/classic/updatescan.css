@@ -22,9 +22,9 @@
   list-style-image: url("chrome://updatescan/skin/updatescan.png");
 }
 
-#bookmarks-view treechildren::-moz-tree-cell-text(usc_state_updated) {
+#updatescan-bookmarks-view treechildren::-moz-tree-cell-text(usc_state_updated) {
   font-weight: bold;
 }
-#bookmarks-view treechildren::-moz-tree-cell-text(usc_state_error) {
+#updatescan-bookmarks-view treechildren::-moz-tree-cell-text(usc_state_error) {
   color: darkgrey;
 }
