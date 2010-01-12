@@ -10,6 +10,7 @@ pref("extensions.updatescan.notifications.defaultSound", true);
 pref("extensions.updatescan.notifications.soundFile", "");
 
 // Scan preferences
+pref("extensions.updatescan.scan.newtab_leftclick", false);
 pref("extensions.updatescan.scan.useSliders", true);
 pref("extensions.updatescan.scan.warnScanShort", true);
 pref("extensions.updatescan.scan.displayAdvanced", true);

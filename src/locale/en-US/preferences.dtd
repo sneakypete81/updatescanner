@@ -9,6 +9,8 @@
 <!ENTITY notifications.playSound.label "Play a sound when a webpage changes">
 <!ENTITY notifications.defaultSound.label "Default Sound">
 <!ENTITY notifications.browse.label "Browse...">
+<!ENTITY scan.sidebar.label "Sidebar">
+<!ENTITY scan.newtab_leftclick.label "Left-click shows changes in a new tab">
 <!ENTITY scan.pageProperties.label "Page Properties">
 <!ENTITY scan.selectUsing.label "Select scan rate and threshold using">
 <!ENTITY scan.sliders.label "Sliders">

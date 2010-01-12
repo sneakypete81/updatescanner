@@ -1,7 +1,18 @@
-** Add a "New Bookmark" item to right-click menu
-
+=========
 Bugs:
-* Notification click doesn't work for mac
+=========
+
+Notification click doesn't work for mac
+
+Bex's error, line 758 of updatescan.js: http://updatescanner.mozdev.org/drupal/content/310beta1-released-testing
+
+Properties dialog opens in topleft corner of screen under Windows (Linux ok)
+
+=========
+Features:
+=========
+
+Option to open in new tab with left-click
 
 For the statusbar, I think I should change the tooltip to 
 "Update Scanner: Scan web pages for updates", and the first item in the menu 
@@ -13,19 +24,23 @@ Scan password-protected page
 (see http://updatescanner.mozdev.org/drupal/content/scan-protectedprivate-pages)
 
 Check ETAG hash without scanning page
+
 Trigger notification on keyword match
 
 Scan Regions
  - Work out how to structure the UI for this
 
 Click link to scroll diffpage to change
+
 Show deletions too
+
 Check for wifi proxy
+
 Add Delete link to the header
 
 Email notifications.
 
--- 3.1.0 (alpha)--
+-- 3.1.0 (beta) --
 
 Firefox 3.6 support
 Fixed sidebar bold highlighting for FF3.6
@@ -33,7 +48,7 @@ Fixed conflict with bookmarks sidebar context menu
 CTRL/ALT/SHIFT/OPT-click an item in the sidebar to open in a new tab
 
 
--- 3.0.6 (beta)--
+-- 3.0.8 --
 
 Configurable highlight colour
 Option to view current page only, not diffs
@@ -41,6 +56,7 @@ Enable/Disable javascript/plugins
 Enable/Disable scanning (right-click on the statusbar icon)
 Status bar context menu
 Double-click statusbar shows all changes
+Fixed MacOS preference dialog display problem
 
 -- 3.0.5 --
 Fixed: Root Folder renamed to (no title) in FF3.5
@@ -119,7 +135,6 @@ Don't diff during a scan
 No temp files - use xul and iframe instead
 Configurable toolbar
 
-Done:
 -- 2.0.15 --
 Added screenshots for ES, IT & SK
 Added Danish, Turkish and simplified chinese

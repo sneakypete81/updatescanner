@@ -124,6 +124,9 @@
           helpTopic="prefs-scanning"
           image="chrome://updatescan/skin/updatescan_med.png">
   <preferences>
+    <preference id="scan.newtab_leftclick" 
+                name="extensions.updatescan.scan.newtab_leftclick" 
+                type="bool"/>
     <preference id="scan.useSliders" 
                 name="extensions.updatescan.scan.useSliders" 
                 type="bool"/>
@@ -137,6 +140,13 @@
                 name="extensions.updatescan.scanTimeout"
                 type="int"/>
   </preferences>
+
+<groupbox>
+<caption label="&scan.sidebar.label;"/>
+  <checkbox label="&scan.newtab_leftclick.label;" 
+            preference="scan.newtab_leftclick"/>
+</groupbox>
+
 <groupbox>
 <caption label="&scan.pageProperties.label;"/>
 <hbox align="center">
@@ -156,6 +166,7 @@
           preference="scan.displayAdvanced"/>
 -->
 </groupbox>
+
 <hbox class="bottomBox"> <!-- Ensures the bottom doesn't get cut off -->
 <groupbox>
 <caption label="&scan.advanced.label;"/>
@@ -221,4 +232,5 @@
 </groupbox>
 </hbox>
 </prefpane> 
+
 </prefwindow>

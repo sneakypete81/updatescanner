@@ -140,6 +140,10 @@ observe: function(aSubject, aTopic, aData) // Observe toolbar button preference 
 
 _treeClick : function(aEvent) {
     var me = USc_updatescan;
+    var prefBranch = (Components.classes["@mozilla.org/preferences-service;1"].
+                      getService(Components.interfaces.nsIPrefService).
+                      getBranch("extensions.updatescan."));
+
     if (aEvent.button == 2) {
       return;
     }
@@ -153,11 +157,11 @@ _treeClick : function(aEvent) {
     }
 
     var modifKey = aEvent.metaKey || aEvent.ctrlKey || aEvent.shiftKey;
-
+    var newtab_leftclick = prefBranch.getBoolPref("scan.newtab_leftclick");
     
     switch (aEvent.button) {
         case 0:
-            if (modifKey) {
+            if (modifKey || newtab_leftclick) {
                 me.diffSelectedItemNewTab();
             } else {
                 me.diffSelectedItemThisWindow();
