@@ -1,4 +1,5 @@
 <!ENTITY editProperties "Edit Properties">
+<!ENTITY delete "Delete">
 <!ENTITY headerOld1 "The page below is the old version of the webpage, scanned">
 <!ENTITY headerOld2 ".">
 <!ENTITY headerNew1 "The page below is the new version of the webpage, scanned">

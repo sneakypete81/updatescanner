@@ -68,12 +68,7 @@
   </vbox>
   <spacer width="20"/>
   <vbox flex="1">
-      <hbox>
-        <label class="plain" style="font-weight:bold;" id="title"/>
-        <spacer flex="1"/>
-        <label class="text-link" value="&editProperties;"
-               onclick="USc_diffPage.editProperties()"/>
-      </hbox>
+    <label class="plain" style="font-weight:bold;" id="title"/>
     <vbox id="sectionOld" hidden="true">
       <hbox>
 	<label class="plain" value="&headerOld1; "/>
@@ -121,6 +116,15 @@
           type="content-primary" flex="1"
           height="40"/>
   </vbox>
+
+  <spacer flex="1"/>
+  <vbox>
+    <label class="text-link" value="&editProperties;"
+           onclick="USc_diffPage.editProperties()"/>
+    <label class="text-link" value="&delete;"
+           onclick="USc_diffPage.delete()"/>
+  </vbox>
+
   </hbox>
 
   <separator class="groove-thin"/>

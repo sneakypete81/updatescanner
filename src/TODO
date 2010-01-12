@@ -4,15 +4,11 @@ Bugs:
 
 Notification click doesn't work for mac
 
-Bex's error, line 758 of updatescan.js: http://updatescanner.mozdev.org/drupal/content/310beta1-released-testing
-
 Properties dialog opens in topleft corner of screen under Windows (Linux ok)
 
 =========
 Features:
 =========
-
-Option to open in new tab with left-click
 
 For the statusbar, I think I should change the tooltip to 
 "Update Scanner: Scan web pages for updates", and the first item in the menu 
@@ -36,8 +32,6 @@ Show deletions too
 
 Check for wifi proxy
 
-Add Delete link to the header
-
 Email notifications.
 
 -- 3.1.0 (beta) --
@@ -46,6 +40,12 @@ Firefox 3.6 support
 Fixed sidebar bold highlighting for FF3.6
 Fixed conflict with bookmarks sidebar context menu
 CTRL/ALT/SHIFT/OPT-click an item in the sidebar to open in a new tab
+
+Option to open in new tab with left-click
+Fixed _extendPlacesTreeView bug, where _visibleElements[aRow].properties doesn't exist - thanks Bex
+Add Delete link to the header
+
+
 
 
 -- 3.0.8 --

@@ -65,7 +65,18 @@ editProperties : function()
 {
     var id = USc_diffPage._getUrlParameter("id", "");
     USc_updatescan.openEditDialog(id);
-}
+},
+
+delete : function()
+{
+    var str = document.getElementById("diffPageStrings");
+    var id = USc_diffPage._getUrlParameter("id", "");
+    
+    if (confirm(str.getString("confirmDelete"))) {
+        USc_places.deleteBookmark(id);
+        window.location = "about:blank";
+    }
+},
 
 };
 
