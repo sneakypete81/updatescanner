@@ -761,9 +761,9 @@ _extendPlacesTreeView : function() {
 
         for (var i = 0; i < properties.length; i++) {
           aProperties.AppendElement(properties[i]);
-/* This causes an error in FF3.6, and I'm not sure why we needed it anyway:
-          this._visibleElements[aRow].properties.push(properties[i]);
-*/
+          try {
+              this._visibleElements[aRow].properties.push(properties[i]);
+          } catch (e) { }              
         }
 
       }
