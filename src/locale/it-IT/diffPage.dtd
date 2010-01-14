@@ -1,4 +1,3 @@
-<!ENTITY editProperties "Edit Properties">
 <!ENTITY headerOld1 "Quella visualizzata di seguito è la versione precedente della pagina, controllata ">
 <!ENTITY headerOld2 ".">
 <!ENTITY headerNew1 "Quella visualizzata di seguito è la nuova versione della pagina, controllata ">
@@ -11,7 +10,3 @@
 <!ENTITY headerNotChecked2 " Fare clic sul pulsante ">
 <!ENTITY headerNotChecked3 "&apos;Controlla&apos;">
 <!ENTITY headerNotChecked4 " (a sinistra) e riprova.">
-<!ENTITY headerError1 "This page returned an error last time it was scanned.">
-<!ENTITY headerError2 "Please click the">
-<!ENTITY headerError3 "'Current Page'">
-<!ENTITY headerError4 "link to check that the page is valid.">
