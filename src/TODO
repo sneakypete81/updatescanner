@@ -1,3 +1,9 @@
+====================
+BEFORE NEXT RELEASE:
+====================
+Submit string to Babelzilla
+Update test website & submit to Babelzilla
+
 =========
 Bugs:
 =========
@@ -9,10 +15,6 @@ Properties dialog opens in topleft corner of screen under Windows (Linux ok)
 =========
 Features:
 =========
-
-For the statusbar, I think I should change the tooltip to 
-"Update Scanner: Scan web pages for updates", and the first item in the menu 
-to "Open Update Scanner sidebar".
 
 Tooltip with date last scanned.
 

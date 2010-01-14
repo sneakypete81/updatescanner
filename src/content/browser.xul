@@ -119,7 +119,7 @@
 
     <popupset>
       <menupopup id="UpdateScanStatusMenu">
-        <menuitem label="Update Scanner" default="true"
+        <menuitem label="&ToggleSidebar.label;" default="true"
                   oncommand="toggleSidebar('viewUpdateScanSidebar');"/>
         <menuitem id="StatusMenuShowAllChanges"
                   label="&ShowAllChanges.label;"
