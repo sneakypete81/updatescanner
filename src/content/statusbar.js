@@ -40,6 +40,7 @@ if (typeof(USc_statusbar_exists) != 'boolean') {
 var USc_statusbar_exists = true;
 
 var USc_statusbarBookmarkObserver = {
+  onBeforeItemRemoved: function() {},
   onBeginUpdateBatch: function() {},
   onEndUpdateBatch: function() {},
   onItemAdded: function(aItemId, aFolder, aIndex) {},
