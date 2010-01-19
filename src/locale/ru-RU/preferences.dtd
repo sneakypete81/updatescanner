@@ -9,6 +9,8 @@
 <!ENTITY notifications.playSound.label "Проигрывать звук при обновлении страницы">
 <!ENTITY notifications.defaultSound.label "Звук по умолчанию">
 <!ENTITY notifications.browse.label "Выбрать...">
+<!ENTITY scan.sidebar.label "Sidebar">
+<!ENTITY scan.newtab_leftclick.label "Left-click shows changes in a new tab">
 <!ENTITY scan.pageProperties.label "Настройки страницы">
 <!ENTITY scan.selectUsing.label "Выбирать частоту сканирования с помощью">
 <!ENTITY scan.sliders.label "Ползунков">

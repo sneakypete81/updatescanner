@@ -1,3 +1,8 @@
 <!ENTITY UpdateScan.tooltip "ウェブページに更新がないか確認します">
 <!ENTITY AddToUpdateScan.label "ページの更新をスキャン...">
 <!ENTITY AddToUpdateScan.accesskey "U">
+<!ENTITY ToggleSidebar.label "Toggle Update Scanner Sidebar">
+<!ENTITY ShowAllChanges.label "Show All Changes">
+<!ENTITY EnableScanner.label "Enable Scanner">
+<!ENTITY DisableScanner.label "Disable Scanner">
+<!ENTITY Preferences.label "Preferences...">

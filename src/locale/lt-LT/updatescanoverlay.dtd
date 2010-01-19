@@ -1,6 +1,7 @@
 <!ENTITY UpdateScan.tooltip "Tikrinti puslapį atnaujinimams">
 <!ENTITY AddToUpdateScan.label "Tikrinti puslapį atnaujinimams">
 <!ENTITY AddToUpdateScan.accesskey "p">
+<!ENTITY ToggleSidebar.label "Toggle Update Scanner Sidebar">
 <!ENTITY ShowAllChanges.label "Parodyti visus pakeitimus">
 <!ENTITY EnableScanner.label "Įjungti tikrinimą">
 <!ENTITY DisableScanner.label "Išjungti tikrinimą">

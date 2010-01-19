@@ -1,4 +1,5 @@
 <!ENTITY editProperties "编辑属性">
+<!ENTITY delete "Delete">
 <!ENTITY headerOld1 "下面是老版本的页面, 扫描时间">
 <!ENTITY headerOld2 ".">
 <!ENTITY headerNew1 "下面是新版本的页面, 扫描时间">

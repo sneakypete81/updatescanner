@@ -6,3 +6,19 @@
 <!ENTITY high.label "高い">
 <!ENTITY often.label "頻繁">
 <!ENTITY never.label "なし">
+<!ENTITY manualScan.label "Manual Scan">
+<!ENTITY scanEvery.label "Scan every">
+<!ENTITY minutes.label "minutes">
+<!ENTITY hours.label "hours">
+<!ENTITY days.label "days">
+<!ENTITY ignoreChanges.label "Ignore changes less than about">
+<!ENTITY characters.label "characters">
+<!ENTITY ignoreNumbers.label "Ignore changes to numbers">
+<!ENTITY advanced.label "Advanced...">
+<!ENTITY charEncoding.label "Character Encoding">
+<!ENTITY autoDetect.label "Auto-detect">
+<!ENTITY use.label "Use">
+<!ENTITY changeHighlighting.label "Change Highlighting">
+<!ENTITY highlightChanges.label "Highlight changes">
+<!ENTITY enableScript.label "Enable Javascript">
+<!ENTITY enableFlash.label "Enable Flash and Plugins">

@@ -7,7 +7,14 @@
 <!ENTITY preferencesbutton.tooltip "选项">
 <!ENTITY helpbutton.tooltip "帮助">
 <!ENTITY openmenu.label "显示更新">
+<!ENTITY openmenu.accesskey "C">
 <!ENTITY opentabmenu.label "在新标签页显示更新">
+<!ENTITY opentabmenu.accesskey "T">
+<!ENTITY opentabsmenu.label "Show Changes in New Tabs">
+<!ENTITY opentabsmenu.accesskey "T">
 <!ENTITY markvisitedmenu.label "标记所有为已访问">
+<!ENTITY markvisitedmenu.accesskey "V">
 <!ENTITY scanThisPage.label "扫描此页面">
+<!ENTITY scanThisPage.accesskey "N">
 <!ENTITY scanThisFolder.label "扫描此文件夹">
+<!ENTITY scanThisFolder.accesskey "N">

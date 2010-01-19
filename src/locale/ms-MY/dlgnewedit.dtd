@@ -1,1 +1,24 @@
+<!ENTITY url.label "URL:">
 <!ENTITY title.label "Tajuk:">
+<!ENTITY threshold.label "Change Threshold">
+<!ENTITY autoscan.label "Autoscan">
+<!ENTITY low.label "Low">
+<!ENTITY high.label "High">
+<!ENTITY often.label "Often">
+<!ENTITY never.label "Never">
+<!ENTITY manualScan.label "Manual Scan">
+<!ENTITY scanEvery.label "Scan every">
+<!ENTITY minutes.label "minutes">
+<!ENTITY hours.label "hours">
+<!ENTITY days.label "days">
+<!ENTITY ignoreChanges.label "Ignore changes less than about">
+<!ENTITY characters.label "characters">
+<!ENTITY ignoreNumbers.label "Ignore changes to numbers">
+<!ENTITY advanced.label "Advanced...">
+<!ENTITY charEncoding.label "Character Encoding">
+<!ENTITY autoDetect.label "Auto-detect">
+<!ENTITY use.label "Use">
+<!ENTITY changeHighlighting.label "Change Highlighting">
+<!ENTITY highlightChanges.label "Highlight changes">
+<!ENTITY enableScript.label "Enable Javascript">
+<!ENTITY enableFlash.label "Enable Flash and Plugins">

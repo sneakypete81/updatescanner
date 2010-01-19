@@ -1,9 +1,9 @@
 ====================
 BEFORE NEXT RELEASE:
 ====================
-Submit string to Babelzilla
-Update test website & submit to Babelzilla
-(add to bugs page: "Revert to default theme" and "what updatescanner version?")
+- New release with extra babelzilla strings.
+- Update test website & submit to Babelzilla
+  (add to bugs page: "Revert to default theme" and "what updatescanner version?")
 
 =========
 Bugs:
@@ -37,7 +37,7 @@ Check for wifi proxy
 
 Email notifications.
 
--- 3.1.0 (beta) --
+-- 3.1.0 --
 
 Firefox 3.6 support
 Fixed sidebar bold highlighting for FF3.6

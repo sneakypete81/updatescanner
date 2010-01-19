@@ -7,7 +7,14 @@
 <!ENTITY preferencesbutton.tooltip "Update Scanner Özellikleri">
 <!ENTITY helpbutton.tooltip "Update Scanner Yardım">
 <!ENTITY openmenu.label "Değişiklikleri Göster">
+<!ENTITY openmenu.accesskey "C">
 <!ENTITY opentabmenu.label "Değişiklikleri Yeni Sekmede Göster">
+<!ENTITY opentabmenu.accesskey "T">
+<!ENTITY opentabsmenu.label "Show Changes in New Tabs">
+<!ENTITY opentabsmenu.accesskey "T">
 <!ENTITY markvisitedmenu.label "Tüm Ziyaret Edilenleri İşaretle">
+<!ENTITY markvisitedmenu.accesskey "V">
 <!ENTITY scanThisPage.label "Bu Sayfayı Tara">
+<!ENTITY scanThisPage.accesskey "N">
 <!ENTITY scanThisFolder.label "Bu Dizini Tara">
+<!ENTITY scanThisFolder.accesskey "N">

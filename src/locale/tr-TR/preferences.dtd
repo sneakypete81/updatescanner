@@ -9,6 +9,8 @@
 <!ENTITY notifications.playSound.label "Bir web sayfasında değişiklik olursa, ses çal">
 <!ENTITY notifications.defaultSound.label "Varsayılan Ses">
 <!ENTITY notifications.browse.label "Gözat...">
+<!ENTITY scan.sidebar.label "Sidebar">
+<!ENTITY scan.newtab_leftclick.label "Left-click shows changes in a new tab">
 <!ENTITY scan.pageProperties.label "Sayfa Özellikleri">
 <!ENTITY scan.selectUsing.label "Arama oranını seçin">
 <!ENTITY scan.sliders.label "Geçişler">

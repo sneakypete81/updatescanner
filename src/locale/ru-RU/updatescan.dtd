@@ -7,7 +7,14 @@
 <!ENTITY preferencesbutton.tooltip "Преднастройки Update Scanner">
 <!ENTITY helpbutton.tooltip "Справка Update Scanner">
 <!ENTITY openmenu.label "Показать изменения">
+<!ENTITY openmenu.accesskey "C">
 <!ENTITY opentabmenu.label "Показать изменение в новой вкладке">
+<!ENTITY opentabmenu.accesskey "T">
+<!ENTITY opentabsmenu.label "Show Changes in New Tabs">
+<!ENTITY opentabsmenu.accesskey "T">
 <!ENTITY markvisitedmenu.label "Пометить всё как просмотренное">
+<!ENTITY markvisitedmenu.accesskey "V">
 <!ENTITY scanThisPage.label "Сканировать эту страницу">
+<!ENTITY scanThisPage.accesskey "N">
 <!ENTITY scanThisFolder.label "Сканировать этот каталог">
+<!ENTITY scanThisFolder.accesskey "N">

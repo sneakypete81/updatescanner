@@ -9,6 +9,8 @@
 <!ENTITY notifications.playSound.label "Informuoti garso signalu, kai puslapis atnaujintas">
 <!ENTITY notifications.defaultSound.label "Numatytasis garsas">
 <!ENTITY notifications.browse.label "Pasirinkti...">
+<!ENTITY scan.sidebar.label "Sidebar">
+<!ENTITY scan.newtab_leftclick.label "Left-click shows changes in a new tab">
 <!ENTITY scan.pageProperties.label "Puslapio nustatymai">
 <!ENTITY scan.selectUsing.label "Pasirinkti tikrinimo dažnumą naudojant">
 <!ENTITY scan.sliders.label "Šliaužiklius">

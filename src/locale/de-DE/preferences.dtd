@@ -9,6 +9,8 @@
 <!ENTITY notifications.playSound.label "Bei Veränderung einer Seite Klang abspielen">
 <!ENTITY notifications.defaultSound.label "Systemklang">
 <!ENTITY notifications.browse.label "Durchsuchen...">
+<!ENTITY scan.sidebar.label "Sidebar">
+<!ENTITY scan.newtab_leftclick.label "Left-click shows changes in a new tab">
 <!ENTITY scan.pageProperties.label "Seiteneigenschaften">
 <!ENTITY scan.selectUsing.label "Überprüfungsintervall und Mindeständerung festlegen mittels">
 <!ENTITY scan.sliders.label "Schieberegler">
