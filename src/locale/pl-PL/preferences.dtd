@@ -9,6 +9,8 @@
 <!ENTITY notifications.playSound.label "Odtwarzaj dźwięk, gdy są zmiany w witrynie">
 <!ENTITY notifications.defaultSound.label "Domyślny dźwięk">
 <!ENTITY notifications.browse.label "Przeglądaj…">
+<!ENTITY scan.sidebar.label "Panel boczny">
+<!ENTITY scan.newtab_leftclick.label "Kliknięcie l.p.m. powoduje wyświetlenie zmian w nowej karcie">
 <!ENTITY scan.pageProperties.label "Właściwości strony">
 <!ENTITY scan.selectUsing.label "Określaj częstotliwość skanowania i próg czułości za pomocą">
 <!ENTITY scan.sliders.label "suwaków">

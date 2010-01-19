@@ -1,11 +1,12 @@
 <!ENTITY editProperties "Editar Propriedades">
+<!ENTITY delete "Apagar">
 <!ENTITY headerOld1 "A página abaixo é uma versão mais antiga do site, verificada">
 <!ENTITY headerOld2 ".">
-<!ENTITY headerNew1 "A página abaixo é uma nova versão do site, verificado">
+<!ENTITY headerNew1 "A página abaixo é uma versão atualizada do site, verificada">
 <!ENTITY headerNew2 ".">
 <!ENTITY headerDiff1 "A página abaixo foi a última verificada">
 <!ENTITY headerDiff2 ". As alterações estão">
-<!ENTITY headerDiff3 "sublinhadas">
+<!ENTITY headerDiff3 "destacadas">
 <!ENTITY headerDiff4 ".">
 <!ENTITY headerNotChecked1 "A página abaixo não pode ser verificada.">
 <!ENTITY headerNotChecked2 "Por favor clique em">

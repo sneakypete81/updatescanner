@@ -7,10 +7,14 @@
 <!ENTITY preferencesbutton.tooltip "Update Scanner - Předvolby">
 <!ENTITY helpbutton.tooltip "Update Scanner - Nápověda">
 <!ENTITY openmenu.label "Zobrazit změny">
+<!ENTITY openmenu.accesskey "Z">
 <!ENTITY opentabmenu.label "Zobrazit změny v nových panelech">
-<!ENTITY showallchangesinnewtabsmenu.label "Zobrazit všechny změněné stránky v nových panelech">
+<!ENTITY opentabmenu.accesskey "p">
+<!ENTITY opentabsmenu.label "Zobrazit změny v nových panelech">
+<!ENTITY opentabsmenu.accesskey "t">
 <!ENTITY markvisitedmenu.label "Označit vše za prohlédnuté">
-<!ENTITY deletemenu.label "Odstranit">
-<!ENTITY editmenu.label "Vlastnosti">
+<!ENTITY markvisitedmenu.accesskey "v">
 <!ENTITY scanThisPage.label "Prohledat tuto stránku">
+<!ENTITY scanThisPage.accesskey "n">
 <!ENTITY scanThisFolder.label "Prohledat tuto složku">
+<!ENTITY scanThisFolder.accesskey "s">

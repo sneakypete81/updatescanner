@@ -2,15 +2,17 @@
 <!ENTITY notifications.title "Notificações">
 <!ENTITY scanning.title "Verificando">
 <!ENTITY toolbar.title "Barra de Ferramentas">
-<!ENTITY notifications.enable.label "Mostrar popup de notificação quando detectar atualizações">
+<!ENTITY notifications.enable.label "Mostrar mensagem de notificação quando houver atualizações na página">
 <!ENTITY notifications.timed.label1 "Mostrar por">
 <!ENTITY notifications.timed.label2 "segundos">
 <!ENTITY notifications.permanent.label "Mostrar até ser fechado manualmente">
-<!ENTITY notifications.playSound.label "Tocar um som quando uma página dor atualizada">
+<!ENTITY notifications.playSound.label "Tocar um som quando uma página for atualizada">
 <!ENTITY notifications.defaultSound.label "Som padrão">
 <!ENTITY notifications.browse.label "Navegar...">
+<!ENTITY scan.sidebar.label "Barra lateral">
+<!ENTITY scan.newtab_leftclick.label "O botão esquerdo mostra as mudanças em uma nova aba">
 <!ENTITY scan.pageProperties.label "Propriedades da Página">
-<!ENTITY scan.selectUsing.label "Selecionar frequência de verificação e percentual de uso">
+<!ENTITY scan.selectUsing.label "Selecionar freqüência de verificação e percentual de uso">
 <!ENTITY scan.sliders.label "Sliders">
 <!ENTITY scan.numbers.label "Números">
 <!ENTITY scan.warnScanShort.label "Alertar quando o intervalo de verificação é muito curto">

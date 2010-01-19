@@ -1,6 +1,7 @@
 <!ENTITY UpdateScan.tooltip "檢查頁面更動">
 <!ENTITY AddToUpdateScan.label "檢查頁面更動...">
 <!ENTITY AddToUpdateScan.accesskey "U">
+<!ENTITY ToggleSidebar.label "切換 Update Scanner 側邊欄">
 <!ENTITY ShowAllChanges.label "顯示全部更動">
 <!ENTITY EnableScanner.label "啟用檢查">
 <!ENTITY DisableScanner.label "停用檢查">

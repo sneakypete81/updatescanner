@@ -1,6 +1,7 @@
 <!ENTITY UpdateScan.tooltip "Kontrola aktualizácií webových stránok">
 <!ENTITY AddToUpdateScan.label "Kontrola aktualizácie stránky...">
 <!ENTITY AddToUpdateScan.accesskey "U">
+<!ENTITY ToggleSidebar.label "Prepnúť bočný panel rozšírenia Update Scanner">
 <!ENTITY ShowAllChanges.label "Zobraziť všetky zmeny">
 <!ENTITY EnableScanner.label "Povoliť skener">
 <!ENTITY DisableScanner.label "Zakázať skener">

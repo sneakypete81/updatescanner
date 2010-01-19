@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # coding=UTF-8
 
-version = "3.1.0beta3" # Don't forget to update upgrade.js too!
+version = "3.1.0" # Don't forget to update upgrade.js too!
 in_development = False
 publish_babelzilla = False # True = include incomplete locales for babelzilla
-only_english = True # True = only include english for beta releases
+only_english = False # True = only include english for beta releases
 
 
 app = 'updatescan'
@@ -117,7 +117,7 @@ locales = {
         'locale_version': '1.0',
         'display_name': name,
     },
-    'nl-NL': {
+    'nl': {
         'locale_version': '1.0',
         'display_name': name,
     },

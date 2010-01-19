@@ -9,7 +9,8 @@
     <RDF:Description
         about="urn:mozilla:locale:pt-BR"
         chrome:displayName="Brazil (BR)"
-	chrome:author="Raryel Costa Souza"
+	chrome:author="Pete Burgers"
+	chrome:translator="Raryel Costa Souza e Edgard Dias Magalhães"
         chrome:name="pt-BR"
         chrome:previewURL="http://www.mozilla.org/locales/pt-BR.gif"
     >

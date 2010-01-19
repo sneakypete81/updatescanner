@@ -9,6 +9,8 @@
 <!ENTITY notifications.playSound.label "Prehrať zvuk pri zmenách webstránky">
 <!ENTITY notifications.defaultSound.label "Predvolený zvuk">
 <!ENTITY notifications.browse.label "Prehľadávať...">
+<!ENTITY scan.sidebar.label "Bočný panel">
+<!ENTITY scan.newtab_leftclick.label "Kliknutie ľavým tlačidlom zobrazí zmeny na novej karte">
 <!ENTITY scan.pageProperties.label "Vlastnosti stránky">
 <!ENTITY scan.selectUsing.label "Vybrať frekvenciu kontroly a limity pomocou">
 <!ENTITY scan.sliders.label "posúvačov">

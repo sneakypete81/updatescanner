@@ -6,7 +6,6 @@
 <!ENTITY deletebutton.tooltip "Delete">
 <!ENTITY preferencesbutton.tooltip "Update Scanner Preferences">
 <!ENTITY helpbutton.tooltip "Update Scanner Help">
-
 <!ENTITY openmenu.label "Show Changes">
 <!ENTITY openmenu.accesskey "C">
 <!ENTITY opentabmenu.label "Show Changes in a New Tab">

@@ -7,10 +7,14 @@
 <!ENTITY preferencesbutton.tooltip "Predvoľby rozšírenia Update Scanner">
 <!ENTITY helpbutton.tooltip "Update Scanner – Pomocník">
 <!ENTITY openmenu.label "Zobraziť zmeny">
+<!ENTITY openmenu.accesskey "Z">
 <!ENTITY opentabmenu.label "Zobraziť zmeny na novej karte">
-<!ENTITY showallchangesinnewtabsmenu.label "Zobraziť všetky zmenené stránky na nových kartách">
+<!ENTITY opentabmenu.accesskey "k">
+<!ENTITY opentabsmenu.label "Zobraziť zmeny na nových kartách">
+<!ENTITY opentabsmenu.accesskey "m">
 <!ENTITY markvisitedmenu.label "Označiť všetky ako navštívené">
-<!ENTITY deletemenu.label "Odstrániť">
-<!ENTITY editmenu.label "Vlastnosti">
+<!ENTITY markvisitedmenu.accesskey "v">
 <!ENTITY scanThisPage.label "Kontrola tejto stránky">
+<!ENTITY scanThisPage.accesskey "K">
 <!ENTITY scanThisFolder.label "Kontrola tohto priečinka">
+<!ENTITY scanThisFolder.accesskey "h">

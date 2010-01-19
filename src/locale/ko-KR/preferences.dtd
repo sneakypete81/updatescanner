@@ -9,6 +9,8 @@
 <!ENTITY notifications.playSound.label "웹 페이지가 바뀌면 소리로 알려줌">
 <!ENTITY notifications.defaultSound.label "기본 소리">
 <!ENTITY notifications.browse.label "찾아보기...">
+<!ENTITY scan.sidebar.label "사이드 바">
+<!ENTITY scan.newtab_leftclick.label "왼쪽 마우스 버튼을 클릭하면 변경 내용을 새 탭에 표시함">
 <!ENTITY scan.pageProperties.label "페이지 속성">
 <!ENTITY scan.selectUsing.label "다음을 사용하여 검사율과 변경 허용치를 선택함 :">
 <!ENTITY scan.sliders.label "슬라이더">

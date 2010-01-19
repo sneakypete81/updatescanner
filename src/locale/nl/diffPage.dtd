@@ -1,4 +1,5 @@
 <!ENTITY editProperties "Eigenschappen bewerken">
+<!ENTITY delete "Verwijderen">
 <!ENTITY headerOld1 "Onderstaande pagina is een oude versie van de webpagina, gescand">
 <!ENTITY headerOld2 ".">
 <!ENTITY headerNew1 "Onderstaande pagina is een nieuwe versie van de webpagina, gescand">
@@ -8,7 +9,7 @@
 <!ENTITY headerDiff3 "geaccentueerd">
 <!ENTITY headerDiff4 ".">
 <!ENTITY headerNotChecked1 "De geselecteerde pagina is nog niet gecontroleerd.">
-<!ENTITY headerNotChecked2 "Klik a.u.b. de op knop">
+<!ENTITY headerNotChecked2 "Klik a.u.b. op de knop">
 <!ENTITY headerNotChecked3 "‘Scannen’">
 <!ENTITY headerNotChecked4 "aan de linkerzijde en probeer het opnieuw.">
 <!ENTITY headerError1 "Deze pagina heeft bij de laatste scan een foutmelding gegeven.">

@@ -9,6 +9,8 @@
 <!ENTITY notifications.playSound.label "Toista ääni kun Internet-sivu muuttuu">
 <!ENTITY notifications.defaultSound.label "Oletusääni">
 <!ENTITY notifications.browse.label "Selaa...">
+<!ENTITY scan.sidebar.label "Sivupalkki">
+<!ENTITY scan.newtab_leftclick.label "Klikkaa hiiren vasemmalla näppäimellä nähdäksesi muutokset uudessa välilehdessä">
 <!ENTITY scan.pageProperties.label "Sivun ominaisuudet">
 <!ENTITY scan.selectUsing.label "Valitse skannausarvo ja alaraja käyttäen">
 <!ENTITY scan.sliders.label "Liukusäätimet">

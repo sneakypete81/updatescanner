@@ -7,10 +7,14 @@
 <!ENTITY preferencesbutton.tooltip "Update Scanner – ustawienia">
 <!ENTITY helpbutton.tooltip "Update Scanner – pomoc">
 <!ENTITY openmenu.label "Wyświetl zmiany">
+<!ENTITY openmenu.accesskey "W">
 <!ENTITY opentabmenu.label "Wyświetl zmiany w nowych kartach">
-<!ENTITY showallchangesinnewtabsmenu.label "Wyświetl wszystkie zmienione strony w kartach">
+<!ENTITY opentabmenu.accesskey "K">
+<!ENTITY opentabsmenu.label "Wyświetl zmiany w nowych kartach">
+<!ENTITY opentabsmenu.accesskey "K">
 <!ENTITY markvisitedmenu.label "Oznacz jako sprawdzone">
-<!ENTITY deletemenu.label "Usuń">
-<!ENTITY editmenu.label "Ustawienia skanowania">
+<!ENTITY markvisitedmenu.accesskey "R">
 <!ENTITY scanThisPage.label "Skanuj tę stronę">
+<!ENTITY scanThisPage.accesskey "T">
 <!ENTITY scanThisFolder.label "Skanuj ten folder">
+<!ENTITY scanThisFolder.accesskey "F">

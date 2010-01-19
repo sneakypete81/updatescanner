@@ -1,6 +1,7 @@
 <!ENTITY UpdateScan.tooltip "Webpagina’s op updates scannen">
 <!ENTITY AddToUpdateScan.label "Pagina op updates scannen…">
 <!ENTITY AddToUpdateScan.accesskey "U">
+<!ENTITY ToggleSidebar.label "Update Scanner-zijbalk wisselen">
 <!ENTITY ShowAllChanges.label "Alle wijzigingen weergeven">
 <!ENTITY EnableScanner.label "Scanner inschakelen">
 <!ENTITY DisableScanner.label "Scanner uitschakelen">

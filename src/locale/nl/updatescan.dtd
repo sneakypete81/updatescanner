@@ -7,10 +7,14 @@
 <!ENTITY preferencesbutton.tooltip "Update Scanner voorkeuren">
 <!ENTITY helpbutton.tooltip "Update Scanner Help">
 <!ENTITY openmenu.label "Wijzigingen weergeven">
+<!ENTITY openmenu.accesskey "w">
 <!ENTITY opentabmenu.label "Wijzigingen weergeven in nieuw tabblad">
-<!ENTITY showallchangesinnewtabsmenu.label "Alle gewijzigde pagina’s in nieuwe tabbladen weergeven">
+<!ENTITY opentabmenu.accesskey "T">
+<!ENTITY opentabsmenu.label "Wijzigingen in nieuwe tabbladen weergeven">
+<!ENTITY opentabsmenu.accesskey "b">
 <!ENTITY markvisitedmenu.label "Alles als bezocht markeren">
-<!ENTITY deletemenu.label "Verwijderen">
-<!ENTITY editmenu.label "Eigenschappen">
+<!ENTITY markvisitedmenu.accesskey "z">
 <!ENTITY scanThisPage.label "Deze pagina scannen">
+<!ENTITY scanThisPage.accesskey "c">
 <!ENTITY scanThisFolder.label "Deze map scannen">
+<!ENTITY scanThisFolder.accesskey "a">

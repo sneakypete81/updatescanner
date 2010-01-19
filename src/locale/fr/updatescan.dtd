@@ -8,9 +8,6 @@
 <!ENTITY helpbutton.tooltip "Aide d'Update Scanner">
 <!ENTITY openmenu.label "Voir les changements">
 <!ENTITY opentabmenu.label "Voir les changements dans un nouvel onglet">
-<!ENTITY showallchangesinnewtabsmenu.label "Voir dans de nouveaux onglets toutes les pages ayant changé">
 <!ENTITY markvisitedmenu.label "Tout noter comme étant visité">
-<!ENTITY deletemenu.label "Supprimer">
-<!ENTITY editmenu.label "Propriétés">
 <!ENTITY scanThisPage.label "Analyser cette page">
 <!ENTITY scanThisFolder.label "Analyser ce dossier">

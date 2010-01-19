@@ -9,6 +9,8 @@
 <!ENTITY notifications.playSound.label "Reproducir un sonido cuando alguna página cambie">
 <!ENTITY notifications.defaultSound.label "Sonido por defecto">
 <!ENTITY notifications.browse.label "Seleccionar...">
+<!ENTITY scan.sidebar.label "Panel lateral">
+<!ENTITY scan.newtab_leftclick.label "Clic izquierdo muestra los cambios en una pestaña nueva">
 <!ENTITY scan.pageProperties.label "Propiedades de la página">
 <!ENTITY scan.selectUsing.label "Seleccionar el promedio de comprobación y el umbral a usar">
 <!ENTITY scan.sliders.label "Sliders">

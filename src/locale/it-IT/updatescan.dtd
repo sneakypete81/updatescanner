@@ -8,8 +8,5 @@
 <!ENTITY helpbutton.tooltip "Guida in linea">
 <!ENTITY openmenu.label "Mostra le modifiche">
 <!ENTITY opentabmenu.label "Mostra le modifiche in una nuova scheda">
-<!ENTITY showallchangesinnewtabsmenu.label "Mostra tutte le pagine aggiornate in nuove schede">
 <!ENTITY markvisitedmenu.label "Segna tutte le pagine come lette">
-<!ENTITY deletemenu.label "Elimina">
-<!ENTITY editmenu.label "Proprietà controllo pagina">
 <!ENTITY scanThisPage.label "Controlla questa pagina">

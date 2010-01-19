@@ -9,6 +9,8 @@
 <!ENTITY notifications.playSound.label "當頁面有更動時播放聲音">
 <!ENTITY notifications.defaultSound.label "預設音效">
 <!ENTITY notifications.browse.label "瀏覽...">
+<!ENTITY scan.sidebar.label "側邊欄">
+<!ENTITY scan.newtab_leftclick.label "用左鍵單點一下把頁面更動顯示在新的分頁">
 <!ENTITY scan.pageProperties.label "頁面設定">
 <!ENTITY scan.selectUsing.label "使用什麼來調整掃描頻率及門檻？">
 <!ENTITY scan.sliders.label "滑桿">

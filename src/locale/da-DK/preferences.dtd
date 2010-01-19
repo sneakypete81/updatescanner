@@ -8,7 +8,9 @@
 <!ENTITY notifications.permanent.label "Vis indtil den lukkes manuelt">
 <!ENTITY notifications.playSound.label "Afspil en lyd når en side ændres">
 <!ENTITY notifications.defaultSound.label "Standardlyd">
-<!ENTITY notifications.browse.label "Gennemse...">
+<!ENTITY notifications.browse.label "Gennemse…">
+<!ENTITY scan.sidebar.label "Sidebjælke">
+<!ENTITY scan.newtab_leftclick.label "Venstreklik viser ændringer i et nyt faneblad">
 <!ENTITY scan.pageProperties.label "Sideegenskaber">
 <!ENTITY scan.selectUsing.label "Vælg skanningsrate og grænse med">
 <!ENTITY scan.sliders.label "Skyder">

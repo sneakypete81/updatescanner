@@ -9,6 +9,8 @@
 <!ENTITY notifications.playSound.label "Játsszon le egy hangot, amikor a weboldal megváltozik">
 <!ENTITY notifications.defaultSound.label "Alapértelmezett hang">
 <!ENTITY notifications.browse.label "Tallóz...">
+<!ENTITY scan.sidebar.label "Oldalsáv">
+<!ENTITY scan.newtab_leftclick.label "Balgombos kattintásra új fülön mutatja a változásokat">
 <!ENTITY scan.pageProperties.label "A weboldal tulajdonságai">
 <!ENTITY scan.selectUsing.label "Az ellenőrzési gyakoriság és a változások küszöbértékének megadása">
 <!ENTITY scan.sliders.label "csúszkával">

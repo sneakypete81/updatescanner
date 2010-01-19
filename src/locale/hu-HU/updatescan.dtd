@@ -7,10 +7,14 @@
 <!ENTITY preferencesbutton.tooltip "Beállítások">
 <!ENTITY helpbutton.tooltip "Súgó">
 <!ENTITY openmenu.label "Változások mutatása">
+<!ENTITY openmenu.accesskey "m">
 <!ENTITY opentabmenu.label "Változások mutatása új fülön">
-<!ENTITY showallchangesinnewtabsmenu.label "Minden megváltozott oldal mutatása új fülön">
+<!ENTITY opentabmenu.accesskey "f">
+<!ENTITY opentabsmenu.label "Változások mutatása új füleken">
+<!ENTITY opentabsmenu.accesskey "f">
 <!ENTITY markvisitedmenu.label "Mind megjelölése megnézettként">
-<!ENTITY deletemenu.label "Törlés a listáról">
-<!ENTITY editmenu.label "Tulajdonságok">
+<!ENTITY markvisitedmenu.accesskey "j">
 <!ENTITY scanThisPage.label "Ennek az oldalnak az ellenőrzése most">
+<!ENTITY scanThisPage.accesskey "m">
 <!ENTITY scanThisFolder.label "Ellenőrizd ezt a könyvtárat">
+<!ENTITY scanThisFolder.accesskey "k">

@@ -1,7 +1,8 @@
-<!ENTITY UpdateScan.tooltip "Verifica alterações em sites">
+<!ENTITY UpdateScan.tooltip "Verifica alterações em páginas">
 <!ENTITY AddToUpdateScan.label "Verificar Alterações na Página...">
-<!ENTITY AddToUpdateScan.accesskey "U">
+<!ENTITY AddToUpdateScan.accesskey "V">
+<!ENTITY ToggleSidebar.label "Acionar/Desligar a Barra Lateral do Update Scanner">
 <!ENTITY ShowAllChanges.label "Mostrar TODAS as mudanças">
-<!ENTITY EnableScanner.label "Ativar scanner">
-<!ENTITY DisableScanner.label "Desativar scanner">
+<!ENTITY EnableScanner.label "Ativar Verificador">
+<!ENTITY DisableScanner.label "Desativar Verificador">
 <!ENTITY Preferences.label "Preferências...">

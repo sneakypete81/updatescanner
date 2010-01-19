@@ -7,10 +7,14 @@
 <!ENTITY preferencesbutton.tooltip "Update Scannerin asetukset">
 <!ENTITY helpbutton.tooltip "Update Scannerin ohje">
 <!ENTITY openmenu.label "Näytä muutokset">
+<!ENTITY openmenu.accesskey "C">
 <!ENTITY opentabmenu.label "Näytä muutokset uudella välilehdellä">
-<!ENTITY showallchangesinnewtabsmenu.label "Näytä kaikki muutetut sivut uusilla välilehdillä">
+<!ENTITY opentabmenu.accesskey "T">
+<!ENTITY opentabsmenu.label "Avaa muutokset uusilla välilehdillä">
+<!ENTITY opentabsmenu.accesskey "T">
 <!ENTITY markvisitedmenu.label "Merkitse kaikki vierailluiksi">
-<!ENTITY deletemenu.label "Poista">
-<!ENTITY editmenu.label "Ominaisuudet">
+<!ENTITY markvisitedmenu.accesskey "V">
 <!ENTITY scanThisPage.label "Skannaa tämä sivu">
+<!ENTITY scanThisPage.accesskey "N">
 <!ENTITY scanThisFolder.label "Skannaa tämä kansio">
+<!ENTITY scanThisFolder.accesskey "N">

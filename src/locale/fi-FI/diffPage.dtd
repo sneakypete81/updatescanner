@@ -1,4 +1,5 @@
 <!ENTITY editProperties "Muokkaa ominaisuuksia">
+<!ENTITY delete "Poista">
 <!ENTITY headerOld1 "Alla oleva sivu on vanha versio nettisivusta, skannattu">
 <!ENTITY headerOld2 ".">
 <!ENTITY headerNew1 "Alla oleva sivu on uusi versio nettisivusta, skannattu">

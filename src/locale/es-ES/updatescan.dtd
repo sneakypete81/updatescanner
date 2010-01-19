@@ -7,10 +7,14 @@
 <!ENTITY preferencesbutton.tooltip "Update Scanner - Opciones">
 <!ENTITY helpbutton.tooltip "Update Scanner - Ayuda">
 <!ENTITY openmenu.label "Ver cambios">
+<!ENTITY openmenu.accesskey "C">
 <!ENTITY opentabmenu.label "Ver los cambios en una pestaña nueva">
-<!ENTITY showallchangesinnewtabsmenu.label "Ver todas las páginas cambiadas en pestañas nuevas">
+<!ENTITY opentabmenu.accesskey "T">
+<!ENTITY opentabsmenu.label "Mostrar los cambios en pestañas nuevas">
+<!ENTITY opentabsmenu.accesskey "T">
 <!ENTITY markvisitedmenu.label "Marcar todas como visitadas">
-<!ENTITY deletemenu.label "Borrar">
-<!ENTITY editmenu.label "Propiedades">
+<!ENTITY markvisitedmenu.accesskey "V">
 <!ENTITY scanThisPage.label "Comprobar esta página">
+<!ENTITY scanThisPage.accesskey "N">
 <!ENTITY scanThisFolder.label "Comprobar esta carpeta">
+<!ENTITY scanThisFolder.accesskey "N">

@@ -9,6 +9,8 @@
 <!ENTITY notifications.playSound.label "Přehrát zvuk po změně stránky">
 <!ENTITY notifications.defaultSound.label "Výchozí zvuk">
 <!ENTITY notifications.browse.label "Procházet...">
+<!ENTITY scan.sidebar.label "Postranní panel">
+<!ENTITY scan.newtab_leftclick.label "Klepnutí levým tlačítkem myši zobrazí změny v novém panelu">
 <!ENTITY scan.pageProperties.label "Vlastnosti stránky">
 <!ENTITY scan.selectUsing.label "Zvolit frekvenci a citlivost prohledávání prostřednictvím">
 <!ENTITY scan.sliders.label "posuvníků">

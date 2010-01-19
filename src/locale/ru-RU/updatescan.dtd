@@ -8,9 +8,6 @@
 <!ENTITY helpbutton.tooltip "Справка Update Scanner">
 <!ENTITY openmenu.label "Показать изменения">
 <!ENTITY opentabmenu.label "Показать изменение в новой вкладке">
-<!ENTITY showallchangesinnewtabsmenu.label "Показать все изменённые страницы в новых вкладках">
 <!ENTITY markvisitedmenu.label "Пометить всё как просмотренное">
-<!ENTITY deletemenu.label "Удалить">
-<!ENTITY editmenu.label "Параметры">
 <!ENTITY scanThisPage.label "Сканировать эту страницу">
 <!ENTITY scanThisFolder.label "Сканировать этот каталог">

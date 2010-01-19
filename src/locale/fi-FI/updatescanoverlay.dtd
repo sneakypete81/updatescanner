@@ -1,6 +1,7 @@
 <!ENTITY UpdateScan.tooltip "Skannaa Internet-sivuja päivityksiltä">
 <!ENTITY AddToUpdateScan.label "Skannaa sivua päivityksiltä...">
 <!ENTITY AddToUpdateScan.accesskey "U">
+<!ENTITY ToggleSidebar.label "Näytä/piilota Update Scannerin sivupalkki">
 <!ENTITY ShowAllChanges.label "Näytä kaikki muutokset">
 <!ENTITY EnableScanner.label "Ota skanneri käyttöön">
 <!ENTITY DisableScanner.label "Poista skanneri käytöstä">

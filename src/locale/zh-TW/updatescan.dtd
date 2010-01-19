@@ -7,10 +7,14 @@
 <!ENTITY preferencesbutton.tooltip "Update Scanner 選項">
 <!ENTITY helpbutton.tooltip "Update Scanner 輔助說明">
 <!ENTITY openmenu.label "顯示更動">
+<!ENTITY openmenu.accesskey "C">
 <!ENTITY opentabmenu.label "在新頁面顯示更動">
-<!ENTITY showallchangesinnewtabsmenu.label "在新分頁標籤顯示所有有更動的頁面">
+<!ENTITY opentabmenu.accesskey "Y">
+<!ENTITY opentabsmenu.label "在新分頁顯示頁面更動">
+<!ENTITY opentabsmenu.accesskey "T">
 <!ENTITY markvisitedmenu.label "將所有頁面標示為已閱讀">
-<!ENTITY deletemenu.label "刪除">
-<!ENTITY editmenu.label "內容">
+<!ENTITY markvisitedmenu.accesskey "V">
 <!ENTITY scanThisPage.label "掃描此頁">
+<!ENTITY scanThisPage.accesskey "N">
 <!ENTITY scanThisFolder.label "掃描這個資料夾">
+<!ENTITY scanThisFolder.accesskey "N">

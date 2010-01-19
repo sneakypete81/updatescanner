@@ -1,7 +1,8 @@
 <!ENTITY UpdateScan.tooltip "Skan hjemmesider for opdateringer">
-<!ENTITY AddToUpdateScan.label "Skan side for opdatering...">
+<!ENTITY AddToUpdateScan.label "Skan side for opdatering…">
 <!ENTITY AddToUpdateScan.accesskey "o">
+<!ENTITY ToggleSidebar.label "Vis/Skjul Update Scanner sidebjælke">
 <!ENTITY ShowAllChanges.label "Vis alle ændringer">
 <!ENTITY EnableScanner.label "Aktiver skanner">
 <!ENTITY DisableScanner.label "Deaktiver skanner">
-<!ENTITY Preferences.label "Indstillinger...">
+<!ENTITY Preferences.label "Indstillinger…">
