@@ -24,18 +24,18 @@ translators = ['PetrTwo (Čeština)',
                'JZsolt (Magyar)',
                'Almotasim (Italiano)',
                'Jeong Seungwon (한국어)',
-               'Funalien (lietuvių kalba)',
+               'Edvard (Funalien) Borovskij (lietuvių kalba)',
                'Lauriote (lietuvių kalba)',
                'Mark Heijl (Nederlands)',
-               'Leszek(teo) Życzkowski (Polski)',
+               'Leszek (teo) Życzkowski (Polski)',
                'Raryel Costa Souza (português brasileiro)',
-               'Edgard Magalhaes (português brasileiro)',
-               'Funalien (Русский)',
+               'Edgard Dias Magalhães (português brasileiro)',
+               'Edvard (Funalien) Borovskij (Русский)',
                'Slovak Team (Slovenčina)',
                'Kenan Balamir (Türkçe)',
                'Wang King (简化字 - zh-CN)',
                'Peter Pin-Guang Chen (簡化字 - zh-TW)',
-#               'stoyan (български език)',
+#               'stoyan (български език)',BULGARIAN, not complete yet
                ]
 authorURL = "http://updatescanner.mozdev.org"
 uid = 'c07d1a49-9894-49ff-a594-38960ede8fb9'
