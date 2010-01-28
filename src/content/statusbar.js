@@ -178,7 +178,7 @@ autoscanFinished : function(numChanges)
             message = alertOneChange;
         } else {
             param = {numChanges:numChanges};
-            message = alertManyChanges.USc_supplant(param);
+            message = USc_supplant(alertManyChanges, param);
         }
         window.openDialog("chrome://updatescan/content/alert.xul",
                   "alert:alert",

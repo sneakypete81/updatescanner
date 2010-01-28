@@ -252,8 +252,8 @@ _scanFinishedCallback : function()
             message = str.getString("alertOneChange");
         } else {
             param = {numChanges:me.numChanges};
-            me._setStatus(str.getString("statusManyChanges").USc_supplant(param));
-            message = str.getString("alertManyChanges").USc_supplant(param);
+            me._setStatus(USc_supplant(str.getString("statusManyChanges"), param));
+            message = USc_supplant(str.getString("alertManyChanges"), param);
         }
         window.openDialog("chrome://updatescan/content/alert.xul",
                   "alert:alert",
@@ -561,9 +561,9 @@ _dateDiffString : function(oldDate, newDate)
         time += mins;
 
         if (oldDate.getDate() != newDate.getDate()) {
-            return str.getString("yesterdayAt").USc_supplant({time:time});
+            return USc_supplant(str.getString("yesterdayAt"), {time:time});
         } else {
-            return str.getString("todayAt").USc_supplant({time:time});
+            return USc_supplant(str.getString("todayAt"), {time:time});
         }
     }
 
@@ -573,7 +573,7 @@ _dateDiffString : function(oldDate, newDate)
         if (diff == 1) {
             return str.getString("dayAgo");
         } else {
-            return str.getString("daysAgo").USc_supplant({numDays:diff});
+            return USc_supplant(str.getString("daysAgo"), {numDays:diff});
         }
     }
     diff = diff / 7;
@@ -581,7 +581,7 @@ _dateDiffString : function(oldDate, newDate)
     if (diff == 1) {
         return str.getString("weekAgo");
     } else {
-        return str.getString("weeksAgo").USc_supplant({numWeeks:diff});
+        return USc_supplant(str.getString("weeksAgo"), {numWeeks:diff});
     }
 },
 
@@ -690,7 +690,7 @@ _showProgress : function(title, value, max)
     var me = USc_updatescan;
     var str=document.getElementById("updatescanStrings");
     var param = {title:title};
-    me._setStatus(str.getString("statusScanning").USc_supplant(param));
+    me._setStatus(USc_supplant(str.getString("statusScanning"), param));
 
     var progress = document.getElementById("Progress");
     progress.collapsed = false;

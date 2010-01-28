@@ -5,10 +5,10 @@
 
 // example:
 // param = {domain: 'valvion.com', media: 'http://media.valvion.com/'};
-// url = "{media}logo.gif".supplant(param);
+// url = supplant("{media}logo.gif", param);
 
-String.prototype.USc_supplant = function (o) {
-    return this.replace(/{([^{}]*)}/g,
+USc_supplant = function (str, o) {
+    return str.replace(/{([^{}]*)}/g,
         function (a, b) {
             var r = o[b];
             return typeof r === 'string' || typeof r === 'number' ? r : a;
