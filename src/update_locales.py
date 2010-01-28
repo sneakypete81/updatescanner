@@ -15,7 +15,7 @@ EXTENSION_ID = US_EXTENSION_ID
 
 LOG_FILE = "log.txt"
 WGET_LOGIN = ["wget", 
-              "--output-document=/dev/null",
+              "--output-document=login.html",
               "--append-output=%s" % LOG_FILE,
               "--post-data", POST_DATA,
               "--save-cookies", "cookies.txt",
@@ -81,6 +81,7 @@ def parse_args():
     return parser.parse_args()
 
 def download_locales(temp_path):
+    print "Temp path: %s" % temp_path
     log_file = os.path.join(temp_path, LOG_FILE)
     os.mkdir(os.path.join(temp_path, SKIP_DIR))
     os.mkdir(os.path.join(temp_path, REPLACE_DIR))

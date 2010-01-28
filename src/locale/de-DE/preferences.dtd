@@ -1,6 +1,6 @@
 <!ENTITY preferences.title "Update Scanner - Einstellungen">
 <!ENTITY notifications.title "Benachrichtigungen">
-<!ENTITY scanning.title "Überprüfen">
+<!ENTITY scanning.title "Überprüfung">
 <!ENTITY toolbar.title "Symbolleiste">
 <!ENTITY notifications.enable.label "Benachrichtigungsfenster bei Änderung einer Seite anzeigen">
 <!ENTITY notifications.timed.label1 "für">
@@ -10,7 +10,7 @@
 <!ENTITY notifications.defaultSound.label "Systemklang">
 <!ENTITY notifications.browse.label "Durchsuchen...">
 <!ENTITY scan.sidebar.label "Sidebar">
-<!ENTITY scan.newtab_leftclick.label "Left-click shows changes in a new tab">
+<!ENTITY scan.newtab_leftclick.label "Linksklick öffnet Änderungen in neuem Tab">
 <!ENTITY scan.pageProperties.label "Seiteneigenschaften">
 <!ENTITY scan.selectUsing.label "Überprüfungsintervall und Mindeständerung festlegen mittels">
 <!ENTITY scan.sliders.label "Schieberegler">

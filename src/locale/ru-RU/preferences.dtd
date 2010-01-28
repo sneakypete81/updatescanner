@@ -1,4 +1,4 @@
-<!ENTITY preferences.title "Преднастройки Update Scanner">
+<!ENTITY preferences.title "Настройки Update Scanner">
 <!ENTITY notifications.title "Уведомление">
 <!ENTITY scanning.title "Сканирование">
 <!ENTITY toolbar.title "Панель инструментов">
@@ -9,8 +9,8 @@
 <!ENTITY notifications.playSound.label "Проигрывать звук при обновлении страницы">
 <!ENTITY notifications.defaultSound.label "Звук по умолчанию">
 <!ENTITY notifications.browse.label "Выбрать...">
-<!ENTITY scan.sidebar.label "Sidebar">
-<!ENTITY scan.newtab_leftclick.label "Left-click shows changes in a new tab">
+<!ENTITY scan.sidebar.label "Боковая панель">
+<!ENTITY scan.newtab_leftclick.label "Левый щелчок мыши показывает изменения в новой вкладке">
 <!ENTITY scan.pageProperties.label "Настройки страницы">
 <!ENTITY scan.selectUsing.label "Выбирать частоту сканирования с помощью">
 <!ENTITY scan.sliders.label "Ползунков">
