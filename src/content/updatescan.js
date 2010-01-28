@@ -781,6 +781,9 @@ var USc_sidebarAnnotationObserver = {
         USc_updatescan.tree.place = "place:queryType=1&folder=" + aItemId;
         break;
       case USc_places.ANNO_STATUS:
+        // Firefox 3.5 requires the following:
+        USc_updatescan.tree.getResultView().invalidateAll();
+        // Firefox 3.6 requires the following:
         USc_updatescan.tree.boxObject.invalidate();
         break;
     }
