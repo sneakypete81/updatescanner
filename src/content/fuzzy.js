@@ -41,8 +41,6 @@ compare : function(content1, content2, threshold)
     var index;
     var i;
     
-    String.prototype.diffIndex = me._diffIndex; // register new string method
-
     shortest = Math.min(content1.length, content2.length);
     if (shortest+threshold < Math.max(content1.length, content2.length)) {
        return false; // Lengths are too different - can't be a match
@@ -52,7 +50,7 @@ compare : function(content1, content2, threshold)
     // then see if the remaining text matches up.
 
     while (content1 != content2) {
-        index = content1.diffIndex(content2);
+        index = me._diffIndex(content1, content2);
         
         shortest = Math.min(content1.length, content2.length);
         if (index+threshold*2 >= shortest) {
@@ -66,11 +64,11 @@ compare : function(content1, content2, threshold)
         // See if there's a match within the threshold
         for (i=0; ; i++) {
             // Does the match last for 10 characters?
-            if (content1.diffIndex(content2.slice(i)) > 10) {
+            if (me._diffIndex(content1, content2.slice(i)) > 10) {
                 content2 = content2.slice(i);
                 break;
             }
-            if (content2.diffIndex(content1.slice(i)) > 10) {
+            if (me._diffIndex(content2, content1.slice(i)) > 10) {
                 content1 = content1.slice(i);
                 break;
             }
@@ -84,16 +82,15 @@ compare : function(content1, content2, threshold)
     return true;
 },
 
-// new method for String the returns the first index where the two strings
-// don't match
-_diffIndex : function(string2)
+// Returns the first index where the two strings don't match
+_diffIndex : function(string1, string2)
 {
     var i, minlen;
 
-    minlen = Math.min(this.length, string2.length);
+    minlen = Math.min(string1.length, string2.length);
     
     for (i=0; i<minlen; i++) {
-       if (this[i] != string2[i]) {
+       if (string1[i] != string2[i]) {
            return i;
        }
     }
