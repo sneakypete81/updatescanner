@@ -781,7 +781,7 @@ var USc_sidebarAnnotationObserver = {
         USc_updatescan.tree.place = "place:queryType=1&folder=" + aItemId;
         break;
       case USc_places.ANNO_STATUS:
-        USc_updatescan.tree.getResultView().invalidateAll();
+        USc_updatescan.tree.boxObject.invalidate();
         break;
     }
   },
