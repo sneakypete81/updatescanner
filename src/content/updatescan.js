@@ -726,9 +726,13 @@ _extendPlacesTreeView : function() {
     function ext_getCellProperties(aRow, aColumn, aProperties) {
         this.getCellPropertiesBase(aRow, aColumn, aProperties);
 
-        this._ensureValidRow(aRow);
-
-        var node = this._visibleElements[aRow];
+        try {
+            // Firefox 4 method:
+            var node = this._rows[aRow];
+        } catch (e) {
+            // Firefox 3.6 method:
+            var node = this._visibleElements[aRow];
+        }
         var properties = node._cellProperties;
     
         var newProperties = new Array();
