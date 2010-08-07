@@ -13,6 +13,8 @@ Notification click doesn't work for mac
 
 Properties dialog opens in topleft corner of screen under Windows (Linux ok)
 
+Preferences: disabling notification doesn't disable sound settings
+
 =========
 Features:
 =========
