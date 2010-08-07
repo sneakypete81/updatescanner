@@ -19,6 +19,9 @@
  * Portions from Sage project:
  * Peter Andrews <petea@jhu.edu>
  * Erik Arvidsson <erik@eae.net>
+
+ * Portions from Boox project:
+ * Nicolas Martin http://joliclic.free.fr
  * 
  * Alternatively, the contents of this file may be used under the terms of
  * either the GNU General Public License Version 2 or later (the "GPL"), or
@@ -716,58 +719,62 @@ _updateToolbar : function()
     document.getElementById("help-button").hidden = !prefBranch.getBoolPref("help");
 },
 
-// From the Sage Extension:
+// Adapted from the Sage & Boox Extensions:
 _extendPlacesTreeView : function() {
     PlacesTreeView.prototype.getCellPropertiesBase = PlacesTreeView.prototype.getCellProperties;
     PlacesTreeView.prototype.getCellProperties =
     function ext_getCellProperties(aRow, aColumn, aProperties) {
-      var properties = this._visibleElements[aRow].properties;
-      
-      var propertiesBase = Cc["@mozilla.org/supports-array;1"].createInstance(Ci.nsISupportsArray);
-      this.getCellPropertiesBase(aRow, aColumn, propertiesBase);
-      var property;
-      for (var i = 0; i < propertiesBase.Count(); i++) {
-        property = propertiesBase.GetElementAt(i);
-        if (property != this._getAtomFor("livemark")) {
-          aProperties.AppendElement(propertiesBase.GetElementAt(i));
+        this.getCellPropertiesBase(aRow, aColumn, aProperties);
+
+        this._ensureValidRow(aRow);
+
+        var node = this._visibleElements[aRow];
+        var properties = node._cellProperties;
+    
+        var newProperties = new Array();
+    
+        var isLivemark = (properties.indexOf(this._getAtomFor("livemark")) != -1);
+        if (isLivemark) {
+            return;
         }
-      }
-          
-      if (aColumn.id != "title")
-        return;
-      
-      if (!properties) {
-        properties = [];
-        var node = this._visibleElements[aRow].node;
-        // Firefox3.6+: no longer uses .node in _visibleElements
-        if (!node) {
-            var node = this._visibleElements[aRow];
-        }
-        var nodeType = node.type;
-        var itemId = node.itemId;
-        if (nodeType == Ci.nsINavHistoryResultNode.RESULT_TYPE_URI) { 
-          if (!PlacesUtils.nodeIsLivemarkContainer(node.parent)) {
+        if (node.type == Ci.nsINavHistoryResultNode.RESULT_TYPE_FOLDER ||
+            (node.type == Ci.nsINavHistoryResultNode.RESULT_TYPE_URI &&
+             !PlacesUtils.nodeIsLivemarkContainer(node.parent))) {
             try {
-              var state = PlacesUtils.annotations.getItemAnnotation(itemId, USc_places.ANNO_STATUS);
-              properties.push(this._getAtomFor("usc_state_" + state));
-            } catch (e) { }
-          }
-        } else if (nodeType == Ci.nsINavHistoryResultNode.RESULT_TYPE_FOLDER) {
-          try {
-            var state = PlacesUtils.annotations.getItemAnnotation(itemId, USc_places.ANNO_STATUS);
-            properties.push(this._getAtomFor("usc_state_" + state));
-          } catch (e) { }
+                var state = "usc_state_" + PlacesUtils.annotations.getItemAnnotation(node.itemId, USc_places.ANNO_STATUS);
+            } catch (e) {
+                return;
+            }
+        } else {
+            return;
         }
-
-        for (var i = 0; i < properties.length; i++) {
-          aProperties.AppendElement(properties[i]);
-          try {
-              this._visibleElements[aRow].properties.push(properties[i]);
-          } catch (e) { }              
+        var index = aProperties.GetIndexOf(this._getAtomFor("usc_state_updated"));
+        if (state == "usc_state_updated") {
+            if (index == -1) {
+                newProperties.push(this._getAtomFor("usc_state_updated"))
+            }
+        } else {
+            if (index != -1) {
+                aProperties.DeleteElementAt(index);
+            }
         }
-
-      }
-    };
+            
+        var index = aProperties.GetIndexOf(this._getAtomFor("usc_state_error"));
+        if (state == "usc_state_error") {
+            if (index == -1) {
+                newProperties.push(this._getAtomFor("usc_state_error"))
+            }
+        } else {
+            if (index != -1) {
+                aProperties.DeleteElementAt(index);
+            }
+        }
+    
+        for (var i = 0, l = newProperties.length; i < l; i++) {
+            aProperties.AppendElement(newProperties[i]);
+            properties.push(newProperties[i]);
+        }
+    }
 }
 };
 
@@ -781,10 +788,8 @@ var USc_sidebarAnnotationObserver = {
         USc_updatescan.tree.place = "place:queryType=1&folder=" + aItemId;
         break;
       case USc_places.ANNO_STATUS:
-        // Firefox 3.5 requires the following:
-        USc_updatescan.tree.getResultView().invalidateAll();
-        // Firefox 3.6 requires the following:
-        USc_updatescan.tree.boxObject.invalidate();
+        var bx = USc_updatescan.tree.boxObject.QueryInterface(Components.interfaces.nsITreeBoxObject); 
+        setTimeout(function(a){a.invalidate();}, 0 ,bx);
         break;
     }
   },
