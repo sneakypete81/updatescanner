@@ -127,7 +127,7 @@
   <!-- Some of this is taken from:
        http://mxr.mozilla.org/mozilla1.9.2/source/browser/components/places/content/placesOverlay.xul
   -->
-  <popup id="updatescanSidebarContext">
+  <menupopup id="updatescanSidebarContext">
     <menuitem id="open"
               label="&openmenu.label;"
               accesskey="&openmenu.accesskey;"
@@ -189,7 +189,7 @@
               selection="bookmark|folder|query"
               forcehideselection="livemarkChild"/>
 
-  </popup>
+  </menupopup>
     
 </window>
 
