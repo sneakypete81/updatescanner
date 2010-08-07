@@ -6,15 +6,15 @@
 <!ENTITY deletebutton.tooltip "Supprimer">
 <!ENTITY preferencesbutton.tooltip "Préférences d'Update Scanner">
 <!ENTITY helpbutton.tooltip "Aide d'Update Scanner">
-<!ENTITY openmenu.label "Voir les changements">
-<!ENTITY openmenu.accesskey "C">
+<!ENTITY openmenu.label "Afficher les changements">
+<!ENTITY openmenu.accesskey "c">
 <!ENTITY opentabmenu.label "Voir les changements dans un nouvel onglet">
-<!ENTITY opentabmenu.accesskey "T">
-<!ENTITY opentabsmenu.label "Show Changes in New Tabs">
-<!ENTITY opentabsmenu.accesskey "T">
+<!ENTITY opentabmenu.accesskey "t">
+<!ENTITY opentabsmenu.label "Voir les changements dans un nouvel onglet">
+<!ENTITY opentabsmenu.accesskey "t">
 <!ENTITY markvisitedmenu.label "Tout noter comme étant visité">
-<!ENTITY markvisitedmenu.accesskey "V">
+<!ENTITY markvisitedmenu.accesskey "v">
 <!ENTITY scanThisPage.label "Analyser cette page">
-<!ENTITY scanThisPage.accesskey "N">
+<!ENTITY scanThisPage.accesskey "n">
 <!ENTITY scanThisFolder.label "Analyser ce dossier">
-<!ENTITY scanThisFolder.accesskey "N">
+<!ENTITY scanThisFolder.accesskey "n">

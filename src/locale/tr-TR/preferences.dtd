@@ -5,12 +5,12 @@
 <!ENTITY notifications.enable.label "Bir web sayfasında değişiklik olursa, hatırlatma penceresini göster">
 <!ENTITY notifications.timed.label1 "Görüntüle">
 <!ENTITY notifications.timed.label2 "saniye">
-<!ENTITY notifications.permanent.label "El ile kapatıldığında göster">
+<!ENTITY notifications.permanent.label "Ben kapatana kadar göster">
 <!ENTITY notifications.playSound.label "Bir web sayfasında değişiklik olursa, ses çal">
 <!ENTITY notifications.defaultSound.label "Varsayılan Ses">
 <!ENTITY notifications.browse.label "Gözat...">
-<!ENTITY scan.sidebar.label "Sidebar">
-<!ENTITY scan.newtab_leftclick.label "Left-click shows changes in a new tab">
+<!ENTITY scan.sidebar.label "Kenar Çubuğu">
+<!ENTITY scan.newtab_leftclick.label "Sol tuşla tıklamak, değişiklikleri yeni sekmede gösterir.">
 <!ENTITY scan.pageProperties.label "Sayfa Özellikleri">
 <!ENTITY scan.selectUsing.label "Arama oranını seçin">
 <!ENTITY scan.sliders.label "Geçişler">
@@ -22,7 +22,7 @@
 <!ENTITY toolbar.toolbarIcons.label "Araç Çubuğu Simgeleri">
 <!ENTITY toolbar.new.label "Yeni Girdi">
 <!ENTITY toolbar.showNewTab.label "Tüm Sayfa Değişikliklerini Yeni Sekmede Göster">
-<!ENTITY toolbar.markVisited.label "Tüm Ziyaret Edilenleri İşaretle">
+<!ENTITY toolbar.markVisited.label "Tümünü Ziyaret Edildi Olarak İşaretle">
 <!ENTITY toolbar.delete.label "Sil">
 <!ENTITY toolbar.preferences.label "Özellikler">
 <!ENTITY toolbar.help.label "Yardım">

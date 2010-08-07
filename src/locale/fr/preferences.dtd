@@ -1,25 +1,25 @@
-<!ENTITY preferences.title "Préférences d&apos;Update Scanner">
+<!ENTITY preferences.title "Préférences d'Update Scanner">
 <!ENTITY notifications.title "Avertissements">
 <!ENTITY scanning.title "Analyse">
-<!ENTITY toolbar.title "Barre d&apos;outils">
-<!ENTITY notifications.enable.label "Afficher un popup d&apos;avertissement lors du changement d&apos;une page Web">
+<!ENTITY toolbar.title "Barre d'outils">
+<!ENTITY notifications.enable.label "Afficher un popup d'avertissement lors du changement d'une page Web">
 <!ENTITY notifications.timed.label1 "Afficher durant">
 <!ENTITY notifications.timed.label2 "secondes">
-<!ENTITY notifications.permanent.label "Afficher jusqu&apos;à une fermeture manuelle">
+<!ENTITY notifications.permanent.label "Afficher jusqu'à une fermeture manuelle">
 <!ENTITY notifications.playSound.label "Jouer un son quand la page Web a changé">
 <!ENTITY notifications.defaultSound.label "Son par défaut">
 <!ENTITY notifications.browse.label "Parcourir…">
-<!ENTITY scan.sidebar.label "Sidebar">
-<!ENTITY scan.newtab_leftclick.label "Left-click shows changes in a new tab">
+<!ENTITY scan.sidebar.label "Panneau latéral">
+<!ENTITY scan.newtab_leftclick.label "Un clic gauche affiche les changements dans un nouvel onglet">
 <!ENTITY scan.pageProperties.label "Propriétés de la page">
-<!ENTITY scan.selectUsing.label "Sélectionner le taux et le seuil d&apos;analyse en utilisant">
+<!ENTITY scan.selectUsing.label "Sélectionner le taux et le seuil d'analyse en utilisant">
 <!ENTITY scan.sliders.label "Barres de défilement">
 <!ENTITY scan.numbers.label "Nombres">
-<!ENTITY scan.warnScanShort.label "Prévenir quand la durée d&apos;analyse est trop courte">
+<!ENTITY scan.warnScanShort.label "Prévenir quand la durée d'analyse est trop courte">
 <!ENTITY scan.advanced.label "Avancé">
-<!ENTITY scan.timeoutIfLonger.label "Abandonner si l&apos;analyse dure plus de">
+<!ENTITY scan.timeoutIfLonger.label "Abandonner si l'analyse dure plus de">
 <!ENTITY scan.seconds.label "secondes">
-<!ENTITY toolbar.toolbarIcons.label "Icônes de la barre d&apos;outils">
+<!ENTITY toolbar.toolbarIcons.label "Icônes de la barre d'outils">
 <!ENTITY toolbar.new.label "Nouvelle entrée">
 <!ENTITY toolbar.showNewTab.label "Voir toutes les pages modifiées dans de nouveaux onglets">
 <!ENTITY toolbar.markVisited.label "Tout marquer comme étant visité">

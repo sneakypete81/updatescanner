@@ -10,7 +10,7 @@
 <!ENTITY openmenu.accesskey "C">
 <!ENTITY opentabmenu.label "在新标签页显示更新">
 <!ENTITY opentabmenu.accesskey "T">
-<!ENTITY opentabsmenu.label "Show Changes in New Tabs">
+<!ENTITY opentabsmenu.label "在新标签页显示更新">
 <!ENTITY opentabsmenu.accesskey "T">
 <!ENTITY markvisitedmenu.label "标记所有为已访问">
 <!ENTITY markvisitedmenu.accesskey "V">

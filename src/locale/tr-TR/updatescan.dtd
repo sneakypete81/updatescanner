@@ -10,7 +10,7 @@
 <!ENTITY openmenu.accesskey "C">
 <!ENTITY opentabmenu.label "Değişiklikleri Yeni Sekmede Göster">
 <!ENTITY opentabmenu.accesskey "T">
-<!ENTITY opentabsmenu.label "Show Changes in New Tabs">
+<!ENTITY opentabsmenu.label "Değişiklikleri Yeni Sekmede Göster">
 <!ENTITY opentabsmenu.accesskey "T">
 <!ENTITY markvisitedmenu.label "Tüm Ziyaret Edilenleri İşaretle">
 <!ENTITY markvisitedmenu.accesskey "V">

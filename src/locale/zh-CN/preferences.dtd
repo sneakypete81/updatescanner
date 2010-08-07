@@ -9,8 +9,8 @@
 <!ENTITY notifications.playSound.label "发现页面更新时显示播放声音">
 <!ENTITY notifications.defaultSound.label "默认声音">
 <!ENTITY notifications.browse.label "浏览...">
-<!ENTITY scan.sidebar.label "Sidebar">
-<!ENTITY scan.newtab_leftclick.label "Left-click shows changes in a new tab">
+<!ENTITY scan.sidebar.label "侧边栏">
+<!ENTITY scan.newtab_leftclick.label "左键单击在新标签页显示更新">
 <!ENTITY scan.pageProperties.label "页面属性">
 <!ENTITY scan.selectUsing.label "设置扫描频率和范围使用">
 <!ENTITY scan.sliders.label "滑动条">

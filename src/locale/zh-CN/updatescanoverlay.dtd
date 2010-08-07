@@ -1,7 +1,7 @@
 <!ENTITY UpdateScan.tooltip "扫描页面更新">
 <!ENTITY AddToUpdateScan.label "扫描页面更新...">
 <!ENTITY AddToUpdateScan.accesskey "U">
-<!ENTITY ToggleSidebar.label "Toggle Update Scanner Sidebar">
+<!ENTITY ToggleSidebar.label "开关更新扫描器侧边栏">
 <!ENTITY ShowAllChanges.label "显示所有更新">
 <!ENTITY EnableScanner.label "启用扫描器">
 <!ENTITY DisableScanner.label "禁用扫描器">
