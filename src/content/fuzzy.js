@@ -41,7 +41,7 @@ compare : function(content1, content2, threshold)
     var index;
     var i;
     
-    shortest = Math.min(content1.length, content2.length);
+    var shortest = Math.min(content1.length, content2.length);
     if (shortest+threshold < Math.max(content1.length, content2.length)) {
        return false; // Lengths are too different - can't be a match
     }
