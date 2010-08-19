@@ -15,10 +15,10 @@
 <!ENTITY characters.label "знака">
 <!ENTITY ignoreNumbers.label "Игнориране на промяна в цифри">
 <!ENTITY advanced.label "Разширени">
-<!ENTITY charEncoding.label "Character Encoding">
-<!ENTITY autoDetect.label "Auto-detect">
-<!ENTITY use.label "Use">
-<!ENTITY changeHighlighting.label "Change Highlighting">
-<!ENTITY highlightChanges.label "Highlight changes">
-<!ENTITY enableScript.label "Enable Javascript">
-<!ENTITY enableFlash.label "Enable Flash and Plugins">
+<!ENTITY charEncoding.label "Кодова таблица">
+<!ENTITY autoDetect.label "Автоматично разпознаване">
+<!ENTITY use.label "Използване на">
+<!ENTITY changeHighlighting.label "Промяна на подчертаването">
+<!ENTITY highlightChanges.label "Подчертаване на промените">
+<!ENTITY enableScript.label "Включване на Javascript">
+<!ENTITY enableFlash.label "Включване на Flash и Приставки">

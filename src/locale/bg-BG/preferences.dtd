@@ -1,28 +1,28 @@
 <!ENTITY preferences.title "Update Scanner Preferences">
-<!ENTITY notifications.title "Notifications">
-<!ENTITY scanning.title "Scanning">
+<!ENTITY notifications.title "Известия">
+<!ENTITY scanning.title "Сканиране">
 <!ENTITY toolbar.title "Toolbar">
 <!ENTITY notifications.enable.label "Show notification popup when a webpage changes">
-<!ENTITY notifications.timed.label1 "Show for">
-<!ENTITY notifications.timed.label2 "seconds">
-<!ENTITY notifications.permanent.label "Show until manually closed">
+<!ENTITY notifications.timed.label1 "Показване за">
+<!ENTITY notifications.timed.label2 "секунди">
+<!ENTITY notifications.permanent.label "Показване докато не бъде затворено">
 <!ENTITY notifications.playSound.label "Play a sound when a webpage changes">
 <!ENTITY notifications.defaultSound.label "Default Sound">
 <!ENTITY notifications.browse.label "Browse...">
-<!ENTITY scan.sidebar.label "Sidebar">
+<!ENTITY scan.sidebar.label "Странична лента">
 <!ENTITY scan.newtab_leftclick.label "Left-click shows changes in a new tab">
 <!ENTITY scan.pageProperties.label "Page Properties">
 <!ENTITY scan.selectUsing.label "Select scan rate and threshold using">
-<!ENTITY scan.sliders.label "Sliders">
-<!ENTITY scan.numbers.label "Numbers">
+<!ENTITY scan.sliders.label "Плъзгачи">
+<!ENTITY scan.numbers.label "Цифри">
 <!ENTITY scan.warnScanShort.label "Warn when scan time is too short">
-<!ENTITY scan.advanced.label "Advanced">
+<!ENTITY scan.advanced.label "Разширено">
 <!ENTITY scan.timeoutIfLonger.label "Timeout if scan takes longer than">
-<!ENTITY scan.seconds.label "seconds">
+<!ENTITY scan.seconds.label "секунди">
 <!ENTITY toolbar.toolbarIcons.label "Toolbar Icons">
 <!ENTITY toolbar.new.label "New Entry">
 <!ENTITY toolbar.showNewTab.label "Show All Changed Pages in New Tabs">
-<!ENTITY toolbar.markVisited.label "Mark All as Visited">
-<!ENTITY toolbar.delete.label "Delete">
-<!ENTITY toolbar.preferences.label "Preferences">
-<!ENTITY toolbar.help.label "Help">
+<!ENTITY toolbar.markVisited.label "Маркиране всички като посетени">
+<!ENTITY toolbar.delete.label "Изтриване">
+<!ENTITY toolbar.preferences.label "Предпочитания">
+<!ENTITY toolbar.help.label "Помощ">
