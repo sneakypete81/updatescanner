@@ -59,7 +59,7 @@ locales = {
         'locale_version': '1.0',
         'display_name': name,
     },
-    'nl-NL': {
+    'nl': {
         'locale_version': '1.0',
         'display_name': name,
     },
@@ -81,11 +81,11 @@ locales = {
     },
 
 
-    'de-DE': {
+    'de': {
         'locale_version': '1.0',
         'display_name': name,
     },
-    'fr-FR': {
+    'fr': {
         'locale_version': '1.0',
         'display_name': name,
     },
