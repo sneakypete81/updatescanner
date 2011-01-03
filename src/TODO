@@ -9,6 +9,8 @@ BEFORE NEXT RELEASE:
 Bugs:
 =========
 
+Fix help page location - mozdev redirect no longer works
+
 Notification click doesn't work for mac
 
 Properties dialog opens in topleft corner of screen under Windows (Linux ok)
@@ -18,6 +20,10 @@ Preferences: disabling notification doesn't disable sound settings
 =========
 Features:
 =========
+
+Update icon sizes for FF4
+
+Remove addonbar icon and use standard relocatable toolbar icon instead
 
 Tooltip with date last scanned.
 
@@ -39,22 +45,25 @@ Check for wifi proxy
 
 Email notifications.
 
--- 3.1.0 --
+-- 3.1.4 --
 
-Firefox 3.6 support
-Fixed sidebar bold highlighting for FF3.6
-Fixed conflict with bookmarks sidebar context menu
-CTRL/ALT/SHIFT/OPT-click an item in the sidebar to open in a new tab
+-- 3.1.3 --
+* Update for Firefox 4
+* Updated French, Turkish, Simplified Chinese, Bulgarian locales
+* Fixed - sidebar style update issue
 
-Option to open in new tab with left-click
-Fixed _extendPlacesTreeView bug, where _visibleElements[aRow].properties doesn't exist - thanks Bex
-Add Delete link to the header
-
-
-
+-- 3.1.2 --
+* Firefox 3.6 support
+* Ctrl+Click, Alt+Click, Shift+Click in sidebar shows changes in new tab
+* New config option: Left-click in sidebar can be set to show changes in new tabs
+* Delete link added to page header
+* Fixed - Conflict with bookmarks sidebar context menu (bug 21934)
+* Fixed - _extendPlacesTreeView bug. Thanks Bex
+* Fixed - nsINavBookmarkObserver::onBeforeItemRemoved bug. Thanks again Bex
+* Fixed - Ensure tree refreshes properly
+* Fixed - Improved compatibility (removed string prototypes)
 
 -- 3.0.8 --
-
 Configurable highlight colour
 Option to view current page only, not diffs
 Enable/Disable javascript/plugins

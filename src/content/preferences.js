@@ -157,9 +157,7 @@ var USc_pref = {
   {
     var prefs = Components.classes["@mozilla.org/preferences-service;1"]
                           .getService(Components.interfaces.nsIPrefBranch2);
-    var locale = prefs.getCharPref("general.useragent.locale")
-
-    var url="http://updatescanner.mozdev.org/redirect.php?page=help-preferences.html&locale="+locale;
+    var url="http://updatescanner.mozdev.org";
 
     // non-instant apply prefwindows are usually modal, so we can't open in the topmost window, 
     // since its probably behind the window.

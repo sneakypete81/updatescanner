@@ -604,12 +604,6 @@ _markAsVisited : function(id, delay)
 
 openHelp : function()
 {
-    var str=document.getElementById("updatescanStrings");
-    var locale = Components.classes["@mozilla.org/preferences-service;1"].
-                 getService(Components.interfaces.nsIPrefService).
-                 getBranch("general.useragent.").
-                 getCharPref("locale");
-
     var mainWindow = window.QueryInterface(
                   Components.interfaces.nsIInterfaceRequestor)
                   .getInterface(Components.interfaces.nsIWebNavigation)
@@ -618,7 +612,7 @@ openHelp : function()
                   .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
                   .getInterface(Components.interfaces.nsIDOMWindow);
 
-    var helpURL="http://updatescanner.mozdev.org/redirect.php?page=help.html&locale="+locale;
+    var helpURL="http://updatescanner.mozdev.org";
     
     mainWindow.getBrowser().selectedTab = mainWindow.getBrowser().addTab(helpURL);
 },
