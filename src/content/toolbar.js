@@ -36,10 +36,10 @@
 
 
 
-if (typeof(USc_statusbar_exists) != 'boolean') {
-var USc_statusbar_exists = true;
+if (typeof(USc_toolbar_exists) != 'boolean') {
+var USc_toolbar_exists = true;
 
-var USc_statusbarBookmarkObserver = {
+var USc_toolbarBookmarkObserver = {
   onBeforeItemRemoved: function() {},
   onBeginUpdateBatch: function() {},
   onEndUpdateBatch: function() {},
@@ -66,7 +66,7 @@ var USc_statusbarBookmarkObserver = {
   }
 };
 
-var USc_statusbarAnnotationObserver = {
+var USc_toolbarAnnotationObserver = {
   onPageAnnotationSet : function(aURI, aName) { },
   onPageAnnotationRemoved : function(aURI, aName) { },
   onItemAnnotationRemoved : function(aItemId, aName) { },
@@ -76,7 +76,7 @@ var USc_statusbarAnnotationObserver = {
     {
       // Stop the cascade if we've reached the root
       if (aItemId == USc_places.getRootFolderId()) {
-        USc_statusbar.refresh();
+        USc_toolbar.refresh();
         return;
       }
       // Start an upwards cascade of annotation updates (as far as necessary)
@@ -85,38 +85,38 @@ var USc_statusbarAnnotationObserver = {
   }  
 };
 
-var USc_statusbarEnablePrefObserver = {
-    // Refresh the status bar if the scan.enable preference changes
+var USc_toolbarEnablePrefObserver = {
+    // Refresh the toolbar if the scan.enable preference changes
     observe: function(subject, topic, data)
     {
         if (topic == "nsPref:changed" && data == "scan.enable") {
-            USc_statusbar.refresh();
+            USc_toolbar.refresh();
         }
     }
 };
 
-var USc_statusbar = {   
+var USc_toolbar = {   
     prefs: null,
 
 load : function()
 {
-    var me = USc_statusbar;
+    var me = USc_toolbar;
     var bmsvc = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"]
                           .getService(Components.interfaces.nsINavBookmarksService);
 
     // Update parent folder annotations when an annotation is updated
-    PlacesUtils.annotations.addObserver(USc_statusbarAnnotationObserver);
+    PlacesUtils.annotations.addObserver(USc_toolbarAnnotationObserver);
 
     // Update parent folder annotations when bookmarks are moved/deleted
-    bmsvc.addObserver(USc_statusbarBookmarkObserver, false);
+    bmsvc.addObserver(USc_toolbarBookmarkObserver, false);
 
     me.prefs = Components.classes["@mozilla.org/preferences-service;1"]
                            .getService(Components.interfaces.nsIPrefService)
                            .getBranch("extensions.updatescan.");
     me.prefs.QueryInterface(Components.interfaces.nsIPrefBranch2);
 
-    // Update statusbar icon when scanner is disabled/enabled
-    me.prefs.addObserver("scan.enable", USc_statusbarEnablePrefObserver, false);
+    // Update toolbar icon when scanner is disabled/enabled
+    me.prefs.addObserver("scan.enable", USc_toolbarEnablePrefObserver, false);
 
 
     // Make sure we have a root folder
@@ -132,25 +132,25 @@ load : function()
     // Start autoscanner
     USc_autoscan.start(me.autoscanFinished);
 
-    // Update the status bar icon
+    // Update the toolbar icon
     me.refresh();
 },
 
 unload : function()
 {
-    var me = USc_statusbar;
+    var me = USc_toolbar;
     var bmsvc = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"]
                           .getService(Components.interfaces.nsINavBookmarksService);
     try { 
-      PlacesUtils.annotations.removeObserver(USc_statusbarAnnotationObserver);
+      PlacesUtils.annotations.removeObserver(USc_toolbarAnnotationObserver);
     } catch(e) {}
 
     try { 
-        bmsvc.removeObserver(USc_statusbarBookmarkObserver);
+        bmsvc.removeObserver(USc_toolbarBookmarkObserver);
     } catch(e) {}
  
     try { 
-        this.prefs.removeObserver("scan.enable", USc_statusbarBookmarkObserver);
+        this.prefs.removeObserver("scan.enable", USc_toolbarBookmarkObserver);
     } catch(e) {}
 },
 
@@ -158,7 +158,7 @@ autoscanFinished : function(numChanges)
 {
 //    var alertsService = Components.classes["@mozilla.org/alerts-service;1"]
 //                        .getService(Components.interfaces.nsIAlertsService); 
-    var me = USc_statusbar;
+    var me = USc_toolbar;
 
     var gBundle = Components.classes["@mozilla.org/intl/stringbundle;1"].getService(Components.interfaces.nsIStringBundleService);
     var strings = gBundle.createBundle("chrome://updatescan/locale/updatescan.properties");
@@ -189,8 +189,8 @@ autoscanFinished : function(numChanges)
 
 refresh : function()
 {
-    var me = USc_statusbar;
-    var statusbar = document.getElementById("UpdateScanStatusbar");
+    var me = USc_toolbar;
+    var toolbar = document.getElementById("tools-updatescan-button");
 
     // Check the status annotation on the root folder
     var changed = USc_places.queryAnno(USc_places.getRootFolderId(),
@@ -200,20 +200,20 @@ refresh : function()
           
     if (changed == USc_places.STATUS_UPDATE) {
         if (enabled) {
-            statusbar.setAttribute("status", "CHANGE");
+            toolbar.setAttribute("status", "CHANGE");
         } else {
-            statusbar.setAttribute("status", "CHANGE_DISABLED");
+            toolbar.setAttribute("status", "CHANGE_DISABLED");
         }
     } else {
         if (enabled) {
-            statusbar.setAttribute("status", "NO_CHANGE");
+            toolbar.setAttribute("status", "NO_CHANGE");
         } else {
-            statusbar.setAttribute("status", "NO_CHANGE_DISABLED");
+            toolbar.setAttribute("status", "NO_CHANGE_DISABLED");
         }
     }
 }
 }
 }
 
-window.addEventListener("load", USc_statusbar.load, false);
-window.addEventListener("unload", USc_statusbar.unload, false);
+window.addEventListener("load", USc_toolbar.load, false);
+window.addEventListener("unload", USc_toolbar.unload, false);

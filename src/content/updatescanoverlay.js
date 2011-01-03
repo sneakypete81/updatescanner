@@ -52,10 +52,10 @@ load : function()
         menu.addEventListener("popupshowing", me._showMenu, false);
     }
 
-    // Eventlistener for the statusbar context menu
-    var statusmenu = document.getElementById("UpdateScanStatusMenu");
-    if (statusmenu) {
-        statusmenu.addEventListener("popupshowing", me._showStatusMenu, false);
+    // Eventlistener for the toolbar context menu
+    var toolbarmenu = document.getElementById("UpdateScanToolbarMenu");
+    if (toolbarmenu) {
+        toolbarmenu.addEventListener("popupshowing", me._showToolbarMenu, false);
     }
 },
 
@@ -70,23 +70,23 @@ _showMenu : function()
     }
 },
 
-_showStatusMenu : function()
+_showToolbarMenu : function()
 {
     // Don't show context menu "Show All Changes" if there are no changes to show.
     var changed = USc_places.queryAnno(USc_places.getRootFolderId(),
                                        USc_places.ANNO_STATUS,
                                        USc_places.STATUS_UNKNOWN);
     if (changed == USc_places.STATUS_UPDATE) {
-        document.getElementById("StatusMenuShowAllChanges").hidden = false;
+        document.getElementById("ToolbarMenuShowAllChanges").hidden = false;
     } else {
-        document.getElementById("StatusMenuShowAllChanges").hidden = true;
+        document.getElementById("ToolbarMenuShowAllChanges").hidden = true;
     }
 
     // Don't show context menu "Scan Page For Updates" item if URL is in chrome:// space.
     if(!window.content.document.URL) {
-        document.getElementById("StatusMenuAddToUpdateScan").hidden = true;
+        document.getElementById("ToolbarMenuAddToUpdateScan").hidden = true;
     } else {
-        document.getElementById("StatusMenuAddToUpdateScan").hidden = false;
+        document.getElementById("ToolbarMenuAddToUpdateScan").hidden = false;
     }
 
     // Show/hide the enable/disable options as appropriate
@@ -95,11 +95,11 @@ _showStatusMenu : function()
                       getBranch("extensions.updatescan."));
 
     if (prefBranch.getBoolPref("scan.enable")) {
-        document.getElementById("StatusMenuDisableScanner").hidden = false;
-        document.getElementById("StatusMenuEnableScanner").hidden = true;
+        document.getElementById("ToolbarMenuDisableScanner").hidden = false;
+        document.getElementById("ToolbarMenuEnableScanner").hidden = true;
     } else {
-        document.getElementById("StatusMenuDisableScanner").hidden = true;        
-        document.getElementById("StatusMenuEnableScanner").hidden = false;
+        document.getElementById("ToolbarMenuDisableScanner").hidden = true;        
+        document.getElementById("ToolbarMenuEnableScanner").hidden = false;
     }
 },
 

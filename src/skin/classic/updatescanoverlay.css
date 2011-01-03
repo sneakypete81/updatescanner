@@ -1,29 +1,29 @@
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 
-#tools-updatescan-button {
-  list-style-image: url("chrome://updatescan/skin/updatescan.png");
-}
+/* #tools-updatescan-button { */
+  /* list-style-image: url("chrome://updatescan/skin/updatescan.png"); */
+/* } */
 
-toolbar[iconsize="small"] #tools-updatescan-button {
-  list-style-image: url("chrome://updatescan/skin/updatescan_sm.png");
-}
+/* toolbar[iconsize="small"] #tools-updatescan-button { */
+  /* list-style-image: url("chrome://updatescan/skin/updatescan_sm.png"); */
+/* } */
 
-statusbarpanel#UpdateScanStatusbar[status="NO_CHANGE"]
+#tools-updatescan-button[status="NO_CHANGE"]
 {
     list-style-image: url("chrome://updatescan/skin/updatescan_grey_sm.png");
 }
 
-statusbarpanel#UpdateScanStatusbar[status="CHANGE"]
+#tools-updatescan-button[status="CHANGE"]
 {
     list-style-image: url("chrome://updatescan/skin/updatescan_sm.png");
 }
 
-statusbarpanel#UpdateScanStatusbar[status="NO_CHANGE_DISABLED"]
+#tools-updatescan-button[status="NO_CHANGE_DISABLED"]
 {
     list-style-image: url("chrome://updatescan/skin/updatescan_grey_dis_sm.png");
 }
 
-statusbarpanel#UpdateScanStatusbar[status="CHANGE_DISABLED"]
+#tools-updatescan-button[status="CHANGE_DISABLED"]
 {
     list-style-image: url("chrome://updatescan/skin/updatescan_dis_sm.png");
 }

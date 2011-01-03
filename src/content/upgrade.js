@@ -246,7 +246,7 @@ createRootBookmark : function ()
 
 createUSBookmark : function ()
 {
-    var updatescanURL="http://updatescanner.mozdev.org/redirect.php?page=index.html&source=scan&locale="+this.getLocale();
+    var updatescanURL="http://updatescanner.mozdev.org";
     var bookmarkId = USc_places.addBookmark("Update Scanner Website", updatescanURL);
 },
 

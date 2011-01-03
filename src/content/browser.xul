@@ -56,7 +56,7 @@
   <script src="refresher.js"/>
   <script src="opentopwin.js"/>
   <script src="updatescanoverlay.js"/>
-  <script src="statusbar.js"/>
+  <script src="toolbar.js"/>
   <script src="string.js"/>
   <script src="places.js"/>
   <script src="upgrade.js"/>
@@ -75,6 +75,8 @@
                        label="Update Scanner"
                        tooltiptext="&UpdateScan.tooltip;"
                        observes="viewUpdateScanSidebar"
+                       ondblclick="USc_overlay.onShowAll();"
+                       context="UpdateScanToolbarMenu"
                        class="toolbarbutton-1" />
     </toolbarpalette>
 
@@ -107,33 +109,23 @@
                      oncommand="toggleSidebar('viewUpdateScanSidebar');"/>
     </broadcasterset>
 
-    <statusbar id="status-bar">
-      <statusbarpanel id="UpdateScanStatusbar" 
-                      class="statusbarpanel-iconic"
-			             tooltiptext="&UpdateScan.tooltip;"
-			             oncommand="toggleSidebar('viewUpdateScanSidebar');"
-                      ondblclick="USc_overlay.onShowAll();"
-                      context="UpdateScanStatusMenu"
-                      status="0"/>
-    </statusbar>
-
     <popupset>
-      <menupopup id="UpdateScanStatusMenu">
+      <menupopup id="UpdateScanToolbarMenu">
         <menuitem label="&ToggleSidebar.label;" default="true"
                   oncommand="toggleSidebar('viewUpdateScanSidebar');"/>
-        <menuitem id="StatusMenuShowAllChanges"
+        <menuitem id="ToolbarMenuShowAllChanges"
                   label="&ShowAllChanges.label;"
                   oncommand="USc_overlay.onShowAll();"/>
-        <menuitem id="StatusMenuAddToUpdateScan"
+        <menuitem id="ToolbarMenuAddToUpdateScan"
                   label="&AddToUpdateScan.label;"
                   accesskey="&AddToUpdateScan.accesskey;"
                   oncommand="USc_updatescan.openNewDialog();"/>
  
         <menuseparator/>
-        <menuitem id="StatusMenuDisableScanner"
+        <menuitem id="ToolbarMenuDisableScanner"
                   label="&DisableScanner.label;"
                   oncommand="USc_updatescan.disableScanner();"/>
-        <menuitem id="StatusMenuEnableScanner"
+        <menuitem id="ToolbarMenuEnableScanner"
                   label="&EnableScanner.label;"
                   oncommand="USc_updatescan.enableScanner();"/>
         <menuitem label="&Preferences.label;"
