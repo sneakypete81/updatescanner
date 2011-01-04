@@ -3,7 +3,7 @@
 
 /* Use dedicated 24x24 and 18x18 icons */
 
-#tools-updatescan-button[status="NO_CHANGE"]
+#tools-updatescan-button
 {
     list-style-image: url("chrome://updatescan/skin/updatescan-grey-24x24.png");
 }
@@ -23,7 +23,7 @@
     list-style-image: url("chrome://updatescan/skin/updatescan-dis-24x24.png");
 }
 
-toolbar[iconsize="small"] #tools-updatescan-button[status="NO_CHANGE"]
+toolbar[iconsize="small"] #tools-updatescan-button
 {
     list-style-image: url("chrome://updatescan/skin/updatescan-grey-18x18.png");
 }

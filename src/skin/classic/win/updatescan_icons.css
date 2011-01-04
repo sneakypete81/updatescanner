@@ -7,7 +7,7 @@
   height: auto !important;
 }
 
-#tools-updatescan-button[status="NO_CHANGE"]
+#tools-updatescan-button
 {
     list-style-image: url("chrome://updatescan/skin/updatescan-grey-18x18.png");
 }
