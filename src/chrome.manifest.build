@@ -25,15 +25,21 @@ def manifest():
         v.update(details)
         v['name'] = name
         if in_development:
-            yield (
-                """skin %(app)s %(name)s/%(skin_version)s """ +
-                """skin/%(name)s/""" 
-            ) % v
+            v['path'] = "skin/%(name)s" % v
         else:
-            yield (
-                """skin %(app)s %(name)s/%(skin_version)s """ +
-                """jar:chrome/%(app)s.jar!/skin/%(name)s/""" 
-            ) % v
+            v['path'] = "jar:chrome/%(app)s.jar!/skin/%(name)s"  % v
+            
+        skin_def = "skin %(app)s %(name)s/%(skin_version)s %(path)s/" % v
+
+        # Additional OS-specific skin definitions
+        #skin updatescan-os classic/1.0 skin/classic/linux/
+        #skin updatescan-os classic/1.0 skin/classic/win/ os=WINNT
+        #skin updatescan-os classic/1.0 skin/classic/mac/ os=Darwin
+        for extra in v['extras']:
+            v.update(extra)
+            skin_def += "\nskin %(app)s-os %(name)s/%(skin_version)s %(path)s/%(os_path)s/ %(os_code)s" % v
+
+        yield (skin_def)
 
     # locales
     for name, details in locales.items():

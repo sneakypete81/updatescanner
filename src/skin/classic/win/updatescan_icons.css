@@ -1,0 +1,29 @@
+/* Windows-specific Toolbar Icons (and Mac) */
+
+/* Use 18x18 icons everywhere, and create small icons by trimming the padding */
+#tools-updatescan-button > .toolbarbutton-icon {
+  margin: 0px !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+#tools-updatescan-button[status="NO_CHANGE"]
+{
+    list-style-image: url("chrome://updatescan/skin/updatescan-grey-18x18.png");
+}
+
+#tools-updatescan-button[status="CHANGE"]
+{
+    list-style-image: url("chrome://updatescan/skin/updatescan-18x18.png");
+}
+
+#tools-updatescan-button[status="NO_CHANGE_DISABLED"]
+{
+    list-style-image: url("chrome://updatescan/skin/updatescan-grey-dis-18x18.png");
+}
+
+#tools-updatescan-button[status="CHANGE_DISABLED"]
+{
+    list-style-image: url("chrome://updatescan/skin/updatescan-dis-18x18.png");
+}
+

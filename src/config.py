@@ -52,7 +52,7 @@ updateFile = "%(app)s-%(version)s.xpi" % vars()
 updateLink = "%(homepageURL)s/%(updateFile)s" % vars()
 
 firefoxUID = 'ec8030f7-c20a-464f-9b0e-13a3a9e97384'
-firefoxMinVersion = '4.0'
+firefoxMinVersion = '4.0b8'
 firefoxMaxVersion = '4.0.*'
 
 overlays = (
@@ -68,6 +68,10 @@ skins = {
     'classic': {
         'skin_version': '1.0',
         'display_name': name,
+        'extras': [{'os_code': '', 'os_path': 'linux'},
+                   {'os_code': 'os=WINNT', 'os_path': 'win'},
+                   {'os_code': 'os=Darwin', 'os_path': 'win'}, # Mac can use Windows icons
+                   ],
     },
 }
 
