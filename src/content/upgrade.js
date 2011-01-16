@@ -51,6 +51,7 @@ check : function()
     if (this.isNewInstall()) {
         this.createRootBookmark();
         this.createUSBookmark();
+        USc_toolbar.installAddonbarIcon();
         this.updateVersion()
         return;
     }
@@ -72,7 +73,10 @@ check : function()
     if (this.isVersionBefore("3.0.5")) {
         this.upgrade_3_0_5();
         this.updateVersion();
-        return;
+    }
+
+    if (this.isVersionBefore("3.1.4")) {
+        USc_toolbar.installAddonbarIcon();
     }
 
     if (this.isVersionBefore(this.VERSION)) {

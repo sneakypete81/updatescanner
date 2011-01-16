@@ -16,7 +16,8 @@
  * All Rights Reserved.
  * 
  * Contributor(s):
- * 
+ * Wladimir Palant (adblockplus code to handle toolbar buttons)
+ *
  * Alternatively, the contents of this file may be used under the terms of
  * either the GNU General Public License Version 2 or later (the "GPL"), or
  * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
@@ -160,6 +161,25 @@ unload : function()
     } catch(e) {}
 },
 
+installAddonbarIcon : function()
+// Inserts the toolbar icon into the addonbar
+// Adapted from adblockplus.org AppIntegration.jsm
+{
+    var toolbar = document.getElementById("addon-bar");
+    if (!toolbar || typeof toolbar.insertItem != "function")
+        return;
+
+    toolbar.insertItem("tools-updatescan-button", null, null, false); 
+    toolbar.setAttribute("currentset", toolbar.currentSet);
+    document.persist(toolbar.id, "currentset");
+
+    // Ensure the addon bar is shown
+    toolbar.setAttribute("collapsed", "false");
+    document.persist(toolbar.id, "collapsed");
+
+    USc_toolbar.refresh();
+},
+
 autoscanFinished : function(numChanges)
 {
 //    var alertsService = Components.classes["@mozilla.org/alerts-service;1"]
@@ -197,6 +217,8 @@ refresh : function()
 {
     var me = USc_toolbar;
     var toolbar = document.getElementById("tools-updatescan-button");
+    if (!toolbar)
+        return;
 
     // Check the status annotation on the root folder
     var changed = USc_places.queryAnno(USc_places.getRootFolderId(),
