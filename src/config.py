@@ -147,6 +147,10 @@ locales = {
         'locale_version': '1.0',
         'display_name': name,
     },
+    'sv-SE': {
+        'locale_version': '1.0',
+        'display_name': name,
+    },    
     'tr-TR': {
         'locale_version': '1.0',
         'display_name': name,
