@@ -169,7 +169,7 @@ installAddonbarIcon : function()
     if (!toolbar || typeof toolbar.insertItem != "function")
         return;
 
-    toolbar.insertItem("tools-updatescan-button", null, null, false); 
+    toolbar.insertItem("tools-updatescan-button", document.getElementById("addonbar-closebutton"), null, false); 
     toolbar.setAttribute("currentset", toolbar.currentSet);
     document.persist(toolbar.id, "currentset");
 
