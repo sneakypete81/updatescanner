@@ -9,8 +9,6 @@ BEFORE NEXT RELEASE:
 Bugs:
 =========
 
-Fix updatescanner webpage location in upgrade.js
-
 Notification click doesn't work for mac
 
 Properties dialog opens in topleft corner of screen under Windows (Linux ok)
@@ -20,10 +18,6 @@ Preferences: disabling notification doesn't disable sound settings
 =========
 Features:
 =========
-
-Update icon sizes for FF4
-
-Remove addonbar icon and use standard relocatable toolbar icon instead
 
 Tooltip with date last scanned.
 
@@ -46,8 +40,9 @@ Check for wifi proxy
 Email notifications.
 
 -- 3.1.4 --
+* Toolbar icon can now be moved (View->Toolbars->Customise, then drag to new location)
+* Update icon sizes for Firefox 4
 * Fixed help page location - mozdev redirect no longer works
-
 
 -- 3.1.3 --
 * Update for Firefox 4
