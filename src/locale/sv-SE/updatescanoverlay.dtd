@@ -1,0 +1,8 @@
+<!ENTITY UpdateScan.tooltip "Sök igenom webbsidor efter uppdateringar">
+<!ENTITY AddToUpdateScan.label "Sök igenom sidan efter uppdateringar...">
+<!ENTITY AddToUpdateScan.accesskey "u">
+<!ENTITY ToggleSidebar.label "Växla Update Scanners sidopanel">
+<!ENTITY ShowAllChanges.label "Visa alla ändringar">
+<!ENTITY EnableScanner.label "Aktivera Update Scanner">
+<!ENTITY DisableScanner.label "Inaktivera Update Scanner">
+<!ENTITY Preferences.label "Inställningar...">

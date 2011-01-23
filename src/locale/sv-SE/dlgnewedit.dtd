@@ -1,0 +1,24 @@
+<!ENTITY url.label "URL:">
+<!ENTITY title.label "Rubrik:">
+<!ENTITY threshold.label "Ändra tröskelvärde">
+<!ENTITY autoscan.label "Automatisk genomsökning">
+<!ENTITY low.label "Lågt">
+<!ENTITY high.label "Högt">
+<!ENTITY often.label "Ofta">
+<!ENTITY never.label "Aldrig">
+<!ENTITY manualScan.label "Manuell genomsökning">
+<!ENTITY scanEvery.label "Sök igenom var">
+<!ENTITY minutes.label "minut">
+<!ENTITY hours.label "timme">
+<!ENTITY days.label "dag">
+<!ENTITY ignoreChanges.label "Ignorera ändringar på färre än ca.">
+<!ENTITY characters.label "tecken">
+<!ENTITY ignoreNumbers.label "Ignorera ändringar av nummer">
+<!ENTITY advanced.label "Avancerat...">
+<!ENTITY charEncoding.label "Teckenkodning">
+<!ENTITY autoDetect.label "Identifiera automatiskt">
+<!ENTITY use.label "Använd">
+<!ENTITY changeHighlighting.label "Ändra markering">
+<!ENTITY highlightChanges.label "Markera ändringar">
+<!ENTITY enableScript.label "Aktivera JavaScript">
+<!ENTITY enableFlash.label "Aktivera Flash och insticksmoduler">

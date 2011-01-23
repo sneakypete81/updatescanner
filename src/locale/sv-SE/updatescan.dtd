@@ -1,0 +1,20 @@
+<!ENTITY scanbutton.label "Sök igenom">
+<!ENTITY stopbutton.label "Avbryt">
+<!ENTITY newbutton.tooltip "Ny post">
+<!ENTITY showallchangesinnewtabsbutton.tooltip "Visa alla ändrade sidor i nya flikar">
+<!ENTITY markallasvisitedbutton.tooltip "Märk alla som besökta">
+<!ENTITY deletebutton.tooltip "Ta bort">
+<!ENTITY preferencesbutton.tooltip "Inställningar för Update Scanner">
+<!ENTITY helpbutton.tooltip "Hjälp för Update Scanner">
+<!ENTITY openmenu.label "Visa ändringar">
+<!ENTITY openmenu.accesskey "ä">
+<!ENTITY opentabmenu.label "Visa ändringar i en ny flik">
+<!ENTITY opentabmenu.accesskey "f">
+<!ENTITY opentabsmenu.label "Visa ändringar i nya flikar">
+<!ENTITY opentabsmenu.accesskey "f">
+<!ENTITY markvisitedmenu.label "Märk alla som besökta">
+<!ENTITY markvisitedmenu.accesskey "b">
+<!ENTITY scanThisPage.label "Sök igenom den här sidan">
+<!ENTITY scanThisPage.accesskey "k">
+<!ENTITY scanThisFolder.label "Sök igenom den här mappen">
+<!ENTITY scanThisFolder.accesskey "k">

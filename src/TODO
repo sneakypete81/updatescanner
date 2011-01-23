@@ -1,6 +1,8 @@
 ====================
 BEFORE NEXT RELEASE:
 ====================
+- Added Swedish locale (thanks Lakrits!)
+
 - New release with extra babelzilla strings.
 - Update test website & submit to Babelzilla
   (add to bugs page: "Revert to default theme" and "what updatescanner version?")

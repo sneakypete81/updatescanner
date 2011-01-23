@@ -1,0 +1,28 @@
+<!ENTITY preferences.title "Inställningar för Update Scanner">
+<!ENTITY notifications.title "Meddelanden">
+<!ENTITY scanning.title "Genomsökning">
+<!ENTITY toolbar.title "Verktygsfält">
+<!ENTITY notifications.enable.label "Visa popup-meddelande när en webbsida ändras">
+<!ENTITY notifications.timed.label1 "Visa under">
+<!ENTITY notifications.timed.label2 "sekunder">
+<!ENTITY notifications.permanent.label "Visa tills det stängs manuellt">
+<!ENTITY notifications.playSound.label "Spela upp ett ljud när en webbsida ändras">
+<!ENTITY notifications.defaultSound.label "Standardljud">
+<!ENTITY notifications.browse.label "Bläddra...">
+<!ENTITY scan.sidebar.label "Sidopanel">
+<!ENTITY scan.newtab_leftclick.label "Vänsterklick visar ändringar i en ny flik">
+<!ENTITY scan.pageProperties.label "Sidegenskaper">
+<!ENTITY scan.selectUsing.label "Välj genomsökningshastighet och tröskelvärde med">
+<!ENTITY scan.sliders.label "Skjutreglage">
+<!ENTITY scan.numbers.label "Nummer">
+<!ENTITY scan.warnScanShort.label "Varna när genomsökningstiden är för kort">
+<!ENTITY scan.advanced.label "Avancerat">
+<!ENTITY scan.timeoutIfLonger.label "Avbryt om genomsökningen tar längre än">
+<!ENTITY scan.seconds.label "sekunder">
+<!ENTITY toolbar.toolbarIcons.label "Verktygsfältsikoner">
+<!ENTITY toolbar.new.label "Ny post">
+<!ENTITY toolbar.showNewTab.label "Visa alla ändrade sidor i nya flikar">
+<!ENTITY toolbar.markVisited.label "Märk alla som besökta">
+<!ENTITY toolbar.delete.label "Ta bort">
+<!ENTITY toolbar.preferences.label "Inställningar">
+<!ENTITY toolbar.help.label "Hjälp">
