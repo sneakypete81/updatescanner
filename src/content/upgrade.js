@@ -254,16 +254,5 @@ createUSBookmark : function ()
     var bookmarkId = USc_places.addBookmark("Update Scanner Website", updatescanURL);
 },
 
-getLocale : function()
-{
-    var oPref = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("general.useragent.");
-    try {
-        return oPref.getComplexValue("locale", Components.interfaces.nsIPrefLocalizedString).data;
-    }
-    catch (e) {}
-    return oPref.getCharPref("locale");
-}
-
-
 }
 }
