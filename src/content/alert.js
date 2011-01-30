@@ -82,7 +82,7 @@ onAlertLoad : function()
   // be sure to offset the alert by 10 pixels from the far right edge of the screen
   window.moveTo( (screen.availLeft + screen.availWidth - window.outerWidth) - 10, screen.availTop + screen.availHeight - window.outerHeight);
 
-  setTimeout(me._animateAlert, me.gSlideTime);
+  setTimeout(function() {USc_alert._animateAlert();}, me.gSlideTime);
 
 },
 
@@ -135,7 +135,7 @@ onLinkClick : function(aEvent)
     win.focus();
 
     // Close the alert soon
-    setTimeout(USc_alert._closeAlert, USc_alert.gOpenTimeAfterLinkClick);
+    setTimeout(function(){USc_alert._closeAlert();}, USc_alert.gOpenTimeAfterLinkClick);
     // Don't open the sidebar 
     aEvent.stopPropagation();
 },
@@ -175,13 +175,13 @@ _animateAlert : function()
   if (window.outerHeight < me.gFinalHeight) {
     window.screenY -= me.gSlideIncrement;
     window.outerHeight += me.gSlideIncrement;
-    setTimeout(me._animateAlert, me.gSlideTime);
+    setTimeout(function(){USc_alert._animateAlert();}, me.gSlideTime);
   } else {
       if (prefBranch.getBoolPref("playSound")) {
 	  me._playSound();
       }
     if (!me.gPermanent) {
-      setTimeout(me._closeAlert, me.gOpenTime);
+      setTimeout(function(){USc_alert._closeAlert();}, me.gOpenTime);
     }
   }
 },
@@ -193,7 +193,7 @@ _closeAlert : function()
   {
     window.screenY += me.gSlideIncrement;
     window.outerHeight -= me.gSlideIncrement;
-    setTimeout(me._closeAlert, me.gSlideTime);
+    setTimeout(function(){USc_alert._closeAlert();}, me.gSlideTime);
   }
   else
   {
