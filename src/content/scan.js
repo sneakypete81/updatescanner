@@ -88,7 +88,7 @@ function USc_scanner()
         me._stopTimeout();
         scanTimerRunning = true;
         timeoutError = false;
-        scanTimerID = setTimeout(me._timeout, scanTimeout*1000);
+        scanTimerID = setTimeout(function(){me._timeout();}, scanTimeout*1000);
     }
 
     this._stopTimeout = function()

@@ -144,9 +144,9 @@ _diffItemNewTabBackground : function(id, delay)
 {
     var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
                        .getService(Components.interfaces.nsIWindowMediator);
-    var window = wm.getMostRecentWindow("navigator:browser");
+    var recentwindow = wm.getMostRecentWindow("navigator:browser");
 
-    var mainWindow = window.QueryInterface(
+    var mainWindow = recentwindow.QueryInterface(
     Components.interfaces.nsIInterfaceRequestor)
     .getInterface(Components.interfaces.nsIWebNavigation)
     .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
