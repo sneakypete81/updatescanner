@@ -1,27 +1,27 @@
-<!ENTITY preferences.title "Update Scanner Preferences">
+<!ENTITY preferences.title "Update Scanner Предпочитания">
 <!ENTITY notifications.title "Известия">
 <!ENTITY scanning.title "Сканиране">
-<!ENTITY toolbar.title "Toolbar">
-<!ENTITY notifications.enable.label "Show notification popup when a webpage changes">
+<!ENTITY toolbar.title "Лента с инструменти">
+<!ENTITY notifications.enable.label "Показване на уведомление, когато дадена уеб страница се промени">
 <!ENTITY notifications.timed.label1 "Показване за">
 <!ENTITY notifications.timed.label2 "секунди">
 <!ENTITY notifications.permanent.label "Показване докато не бъде затворено">
-<!ENTITY notifications.playSound.label "Play a sound when a webpage changes">
-<!ENTITY notifications.defaultSound.label "Default Sound">
-<!ENTITY notifications.browse.label "Browse...">
+<!ENTITY notifications.playSound.label "Издаване на звук при промяна на страница">
+<!ENTITY notifications.defaultSound.label "Звук по подразбиране">
+<!ENTITY notifications.browse.label "Преглед…">
 <!ENTITY scan.sidebar.label "Странична лента">
-<!ENTITY scan.newtab_leftclick.label "Left-click shows changes in a new tab">
-<!ENTITY scan.pageProperties.label "Page Properties">
-<!ENTITY scan.selectUsing.label "Select scan rate and threshold using">
+<!ENTITY scan.newtab_leftclick.label "Натискане с мишката показва промените в подпрозорец">
+<!ENTITY scan.pageProperties.label "Страница">
+<!ENTITY scan.selectUsing.label "Изберете сканиране и праг на чувствителност">
 <!ENTITY scan.sliders.label "Плъзгачи">
 <!ENTITY scan.numbers.label "Цифри">
-<!ENTITY scan.warnScanShort.label "Warn when scan time is too short">
+<!ENTITY scan.warnScanShort.label "Предупреждение при кратък интервал за сканиране">
 <!ENTITY scan.advanced.label "Разширено">
-<!ENTITY scan.timeoutIfLonger.label "Timeout if scan takes longer than">
+<!ENTITY scan.timeoutIfLonger.label "Изтичане на времето при сканиране повече от">
 <!ENTITY scan.seconds.label "секунди">
-<!ENTITY toolbar.toolbarIcons.label "Toolbar Icons">
-<!ENTITY toolbar.new.label "New Entry">
-<!ENTITY toolbar.showNewTab.label "Show All Changed Pages in New Tabs">
+<!ENTITY toolbar.toolbarIcons.label "Икони в лентата с инструменти">
+<!ENTITY toolbar.new.label "Добавяне">
+<!ENTITY toolbar.showNewTab.label "Показване на всички променени страници в подпрозорци">
 <!ENTITY toolbar.markVisited.label "Маркиране всички като посетени">
 <!ENTITY toolbar.delete.label "Изтриване">
 <!ENTITY toolbar.preferences.label "Предпочитания">

@@ -2,15 +2,15 @@
 <!ENTITY notifications.title "Pranešimai">
 <!ENTITY scanning.title "Tikrinimas">
 <!ENTITY toolbar.title "Įrankių juosta">
-<!ENTITY notifications.enable.label "Rodyti pranešimų popup langus, kai puslapis atnaujintas">
+<!ENTITY notifications.enable.label "Rodyti pranešimų iškylančiuosius langus, kai puslapis atnaujintas">
 <!ENTITY notifications.timed.label1 "Rodyti">
 <!ENTITY notifications.timed.label2 "sekundes(-ių)">
 <!ENTITY notifications.permanent.label "Rodyti iki savarankiško uždarymo">
 <!ENTITY notifications.playSound.label "Informuoti garso signalu, kai puslapis atnaujintas">
 <!ENTITY notifications.defaultSound.label "Numatytasis garsas">
 <!ENTITY notifications.browse.label "Pasirinkti...">
-<!ENTITY scan.sidebar.label "Sidebar">
-<!ENTITY scan.newtab_leftclick.label "Left-click shows changes in a new tab">
+<!ENTITY scan.sidebar.label "Šoninė juosta">
+<!ENTITY scan.newtab_leftclick.label "Kairiojo mygtuko paspaudimas parodo pakeitimus naujoje kortelėje">
 <!ENTITY scan.pageProperties.label "Puslapio nustatymai">
 <!ENTITY scan.selectUsing.label "Pasirinkti tikrinimo dažnumą naudojant">
 <!ENTITY scan.sliders.label "Šliaužiklius">

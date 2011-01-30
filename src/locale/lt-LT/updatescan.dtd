@@ -7,14 +7,14 @@
 <!ENTITY preferencesbutton.tooltip "Update Scanner nustatymai">
 <!ENTITY helpbutton.tooltip "Update Scanner pagalba">
 <!ENTITY openmenu.label "Parodyti pakeitimus">
-<!ENTITY openmenu.accesskey "C">
-<!ENTITY opentabmenu.label "Parodyti pakeitimus naujose kortelėse">
-<!ENTITY opentabmenu.accesskey "T">
-<!ENTITY opentabsmenu.label "Show Changes in New Tabs">
-<!ENTITY opentabsmenu.accesskey "T">
+<!ENTITY openmenu.accesskey "P">
+<!ENTITY opentabmenu.label "Parodyti pakeitimus naujoje kortelėje">
+<!ENTITY opentabmenu.accesskey "k">
+<!ENTITY opentabsmenu.label "Parodyti pakeitimus naujose kortelėse">
+<!ENTITY opentabsmenu.accesskey "s">
 <!ENTITY markvisitedmenu.label "Pažymėti viską kaip aplankytą">
-<!ENTITY markvisitedmenu.accesskey "V">
+<!ENTITY markvisitedmenu.accesskey "v">
 <!ENTITY scanThisPage.label "Tikrinti šį puslapį">
-<!ENTITY scanThisPage.accesskey "N">
+<!ENTITY scanThisPage.accesskey "T">
 <!ENTITY scanThisFolder.label "Tikrinti šį katalogą">
-<!ENTITY scanThisFolder.accesskey "N">
+<!ENTITY scanThisFolder.accesskey "i">

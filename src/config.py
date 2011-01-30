@@ -3,7 +3,7 @@
 
 import sys
 
-version = "3.1.4beta1" # Don't forget to update upgrade.js too!
+version = "3.1.4rc1" # Don't forget to update upgrade.js too!
 publish_babelzilla = False # True = include incomplete locales for babelzilla
 only_english = False # True = only include english for beta releases
 
@@ -13,7 +13,8 @@ name = 'Update Scanner'
 description = 'Monitors webpages for updates'
 author = 'Pete Burgers'
 contributors = ['Karol Misiura (Tango Desktop Project Icons)']
-translators = ['PetrTwo (Čeština)',
+translators = ['stoyan (български език)',
+               'PetrTwo (Čeština)',
                'Jørgen (Dansk)',
                '123tp (Dansk)',
                'Archaeopteryx (Deutsch)'
@@ -33,11 +34,10 @@ translators = ['PetrTwo (Čeština)',
                'Edgard Dias Magalhães (português brasileiro)',
                'Edvard (Funalien) Borovskij (Русский)',
                'Slovak Team (Slovenčina)',
-               'Lakrits (Svenska)',
+               'Mikael Hiort af Ornäs (Svenska)',
                'Kenan Balamir (Türkçe)',
                'Wang King (简化字 - zh-CN)',
                'Peter Pin-Guang Chen (簡化字 - zh-TW)',
-#               'stoyan (български език)',BULGARIAN, not complete yet
                ]
 authorURL = "http://updatescanner.mozdev.org"
 uid = 'c07d1a49-9894-49ff-a594-38960ede8fb9'
@@ -83,6 +83,10 @@ skins = {
 }
 
 locales = {
+    'bg-BG': {
+        'locale_version': '1.0',
+        'display_name': name,
+    },
     'cs': {
         'locale_version': '1.0',
         'display_name': name,
@@ -166,10 +170,6 @@ locales = {
 }
 
 incomplete_locales = {
-    'bg-BG': {
-        'locale_version': '1.0',
-        'display_name': name,
-    },
     'ja-JP': {
         'locale_version': '1.0',
         'display_name': name,

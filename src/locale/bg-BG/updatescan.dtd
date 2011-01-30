@@ -1,20 +1,20 @@
 <!ENTITY scanbutton.label "Сканиране">
 <!ENTITY stopbutton.label "Отказ">
-<!ENTITY newbutton.tooltip "New Entry">
-<!ENTITY showallchangesinnewtabsbutton.tooltip "Show All Changed Pages in New Tabs">
-<!ENTITY markallasvisitedbutton.tooltip "Mark All as Visited">
+<!ENTITY newbutton.tooltip "Добавяне">
+<!ENTITY showallchangesinnewtabsbutton.tooltip "Показване на всички променени страници в подпрозорци">
+<!ENTITY markallasvisitedbutton.tooltip "Маркиране на всички като посетени">
 <!ENTITY deletebutton.tooltip "Изтриване">
-<!ENTITY preferencesbutton.tooltip "Update Scanner Preferences">
-<!ENTITY helpbutton.tooltip "Update Scanner Help">
+<!ENTITY preferencesbutton.tooltip "Update Scanner Предпочитания">
+<!ENTITY helpbutton.tooltip "Update Scanner Помощ">
 <!ENTITY openmenu.label "Показване на промените">
 <!ENTITY openmenu.accesskey "П">
-<!ENTITY opentabmenu.label "Показване на промените в нов подпрозорец">
+<!ENTITY opentabmenu.label "Показване на промените в подпрозорец">
 <!ENTITY opentabmenu.accesskey "н">
-<!ENTITY opentabsmenu.label "Show Changes in New Tabs">
-<!ENTITY opentabsmenu.accesskey "T">
+<!ENTITY opentabsmenu.label "Показване на промените в подпрозорец">
+<!ENTITY opentabsmenu.accesskey "п">
 <!ENTITY markvisitedmenu.label "Маркиране на всички като посетени">
-<!ENTITY markvisitedmenu.accesskey "V">
-<!ENTITY scanThisPage.label "Scan This Page">
-<!ENTITY scanThisPage.accesskey "N">
+<!ENTITY markvisitedmenu.accesskey "в">
+<!ENTITY scanThisPage.label "Сканиране на тази страница">
+<!ENTITY scanThisPage.accesskey "т">
 <!ENTITY scanThisFolder.label "Сканиране на тази папка">
 <!ENTITY scanThisFolder.accesskey "С">
