@@ -48,7 +48,7 @@ start : function(callbackarg)
     if (me.checkTimerRunning) {
         me.stop();
     }
-    me.checkTimerID = setInterval(me._check, 60*1000);
+    me.checkTimerID = setInterval(function(){me._check();}, 60*1000);
     me.checkTimerRunning = true;
 },
 

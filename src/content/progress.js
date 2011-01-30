@@ -63,7 +63,7 @@ function initDialog()
     count = 0;
     cancelling = false;
     retData = new Array();
-    timeoutID = setTimeout(timeout, 10) 
+    timeoutID = setTimeout(function(){timeout();}, 10) 
     window.arguments[0].retVal = false;
 }
 
@@ -72,7 +72,7 @@ function timeout()
     var retVal;
     if (cancelling) {
         // Cancel prompt is open - spin until it closes
-        timeoutID = setTimeout(timeout, 1000);
+        timeoutID = setTimeout(function(){timeout();}, 1000);
     } else {
         try {
             retVal = callback(items[count], data);
@@ -89,7 +89,7 @@ function timeout()
             window.arguments[0].retVal = true;
             document.getElementById("dlgProgress").acceptDialog();
         } else {
-            timeoutID = setTimeout(timeout, 10);
+            timeoutID = setTimeout(function(){timeout();}, 10);
         }
     }
 }
