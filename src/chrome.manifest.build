@@ -7,11 +7,7 @@ v = vars()
 def manifest():
 
     # content archive for the chrome URL
-    if in_development:
-        yield """content %(app)s content/""" % v
-    else:
-        yield """content %(app)s jar:chrome/%(app)s.jar!/content/""" % v
-
+    yield """content %(app)s chrome/content/""" % v
 
     # XUL overlay this on that
     for this, that in overlays:
@@ -24,10 +20,7 @@ def manifest():
     for name, details in skins.items():
         v.update(details)
         v['name'] = name
-        if in_development:
-            v['path'] = "skin/%(name)s" % v
-        else:
-            v['path'] = "jar:chrome/%(app)s.jar!/skin/%(name)s"  % v
+        v['path'] = "chrome/skin/%(name)s"  % v
             
         skin_def = "skin %(app)s %(name)s/%(skin_version)s %(path)s/" % v
 
@@ -45,15 +38,9 @@ def manifest():
     for name, details in locales.items():
         v.update(details)
         v['name'] = name
-        if in_development:
-            yield (
-                """locale %(app)s %(name)s """ + 
-                """locale/%(name)s/"""
-            ) % v
-        else:
-            yield (
-                """locale %(app)s %(name)s """ + 
-                """jar:chrome/%(app)s.jar!/locale/%(name)s/"""
+        yield (
+            """locale %(app)s %(name)s """ + 
+            """chrome/locale/%(name)s/"""
             ) % v
 
 print >> file('chrome.manifest', 'w'), "\n".join(manifest())

@@ -57,19 +57,8 @@ print >> file('install.rdf', 'w'), """\
 %(contributor_list)s
 %(translator_list)s
 %(updateURLprint)s
-
-<!-- Front End Integration Hooks (used by Extension Manager)-->
-<!--<em:optionsURL>chrome://%(app)s/content/options.xul</em:optionsURL>-->
 <!--<em:aboutURL>chrome://%(app)s/content/about.xul</em:aboutURL>-->
 
-<!-- Packages, Skins and Locales that this extension registers -->
-<em:file>
-	<Description about="urn:mozilla:extension:file:%(app)s.jar">
-		%(package_list)s
-		%(locale_list)s
-		%(skin_list)s
-	</Description>
-</em:file>
 </Description>
 
 </RDF>""" % vars()

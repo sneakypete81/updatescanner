@@ -1,16 +1,13 @@
 #!/usr/bin/env bash
 
-mkdir -p chrome
-JAR="chrome/$APP.jar"
-[ -f $JAR ] && rm $JAR
-echo $JAR
-find content locale skin \
-    | grep -v '/.svn' \
-    | grep -v '/.#' \
-    | grep -v '/CVS' \
-    | grep -v '.cvsignore' \
-    | grep -v '.build$' \
-    | xargs zip -q $JAR
+[ -e chrome ] && rm -rf chrome
+mkdir chrome
+cp -r content chrome
+cp -r locale chrome
+cp -r skin chrome
+
+find chrome -type f | grep '/.#' | xargs rm -f
+find chrome -type f | grep '.*~$' | xargs rm -f
 
 XPI="$APP.xpi"
 [ -f $XPI ] && rm $XPI
@@ -18,6 +15,7 @@ echo $XPI
 find install.rdf chrome.manifest chrome defaults \
     | grep -v /.svn \
     | grep -v '/.#' \
+    | grep -v '.*~$' \
     | grep -v '/CVS' \
     | grep -v '.cvsignore' \
     | grep -v '.build$' \

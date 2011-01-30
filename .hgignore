@@ -16,3 +16,4 @@ src/www/testing/chrome/*.jar
 src/releases/*.xpi
 glob:CVS/
 glob:*~
+relre:^src/chrome/
