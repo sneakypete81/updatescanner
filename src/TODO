@@ -1,10 +1,8 @@
 ====================
-BEFORE NEXT RELEASE:
+Website:
 ====================
-- Added Swedish locale (thanks Lakrits!)
 
-- New release with extra babelzilla strings.
-- Update test website & submit to Babelzilla
+* Update test website & submit to Babelzilla
   (add to bugs page: "Revert to default theme" and "what updatescanner version?")
 
 =========
@@ -43,8 +41,11 @@ Email notifications.
 
 -- 3.1.4 --
 * Toolbar icon can now be moved (View->Toolbars->Customise, then drag to new location)
-* Update icon sizes for Firefox 4
-* Fixed help page location - mozdev redirect no longer works
+* Updated icon sizes for Firefox 4
+* Fixed help page location - Mozdev redirect no longer works
+* Added Swedish & Bulgarian translation (thanks Lakrits & Stoyan!)
+* Moved from JAR to flat addon structure
+* Corrected addon validation warnings
 
 -- 3.1.3 --
 * Update for Firefox 4
