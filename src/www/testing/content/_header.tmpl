@@ -145,7 +145,7 @@ setcookie("locale", "$_localePath", strtotime("+1 year"), "/");
       <div class="left-corner">
       <div class="breadcrumb">
             <form dir="ltr" method="get" action="/redirect.php">
-              <input type="hidden" name="page" value="$_filename">
+              <input type="hidden" name="show" value="$_filename">
               <select id="language" name="locale" dir="ltr" onchange="this.form.submit()">
 ## Put the current language first!
                 <option value="$_localePath">$_language</option>
