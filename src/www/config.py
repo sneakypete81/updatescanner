@@ -35,11 +35,11 @@ overlays = ()
 stylesheets = ()
 skins = {}
 locales = {
-    'cs-CZ': {
+    'cs': {
         'locale_version': '1.0',
         'display_name': name,
     },
-    'da-DK': {
+    'da': {
         'locale_version': '1.0',
         'display_name': name,
     },
@@ -63,7 +63,7 @@ locales = {
         'locale_version': '1.0',
         'display_name': name,
     },
-    'pl-PL': {
+    'pl': {
         'locale_version': '1.0',
         'display_name': name,
     },
@@ -81,6 +81,7 @@ locales = {
     },
 
 
+# Translations only partially complete, but uploaded to website anyway:
     'de': {
         'locale_version': '1.0',
         'display_name': name,
