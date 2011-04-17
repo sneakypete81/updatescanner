@@ -39,7 +39,7 @@ locales = {
         'locale_version': '1.0',
         'display_name': name,
     },
-    'da-DK': {
+    'da': {
         'locale_version': '1.0',
         'display_name': name,
     },
@@ -55,15 +55,35 @@ locales = {
         'locale_version': '1.0',
         'display_name': name,
     },
+    'fr': {
+        'locale_version': '1.0',
+        'display_name': name,
+    },
     'hu-HU': {
         'locale_version': '1.0',
         'display_name': name,
     },
-    'nl-NL': {
+    'ja-JP': {
         'locale_version': '1.0',
         'display_name': name,
     },
-    'pl-PL': {
+    'ko-KR': {
+        'locale_version': '1.0',
+        'display_name': name,
+    },
+    'nl': {
+        'locale_version': '1.0',
+        'display_name': name,
+    },
+    'pl': {
+        'locale_version': '1.0',
+        'display_name': name,
+    },
+    'pt-BR': {
+        'locale_version': '1.0',
+        'display_name': name,
+    },
+    'sk-SK': {
         'locale_version': '1.0',
         'display_name': name,
     },
@@ -79,14 +99,10 @@ locales = {
         'locale_version': '1.0',
         'display_name': name,
     },
-}
 
-incomplete_locales = {
-    'de-DE': {
-        'locale_version': '1.0',
-        'display_name': name,
-    },
-    'fr-FR': {
+
+# Translations only partially complete, but uploaded to website anyway:
+    'de': {
         'locale_version': '1.0',
         'display_name': name,
     },
@@ -94,15 +110,12 @@ incomplete_locales = {
         'locale_version': '1.0',
         'display_name': name,
     },
-    'ko-KR': {
-        'locale_version': '1.0',
-        'display_name': name,
-    },
-    'pt-BR': {
-        'locale_version': '1.0',
-        'display_name': name,
-    },
-    'sk-SK': {
+
+}
+
+incomplete_locales = {
+    # Hasn't been properly converted in Babelzilla from cs-CZ to cs. Ignore cs for now.
+    'cs': {
         'locale_version': '1.0',
         'display_name': name,
     },
