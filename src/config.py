@@ -25,6 +25,7 @@ translators = ['stoyan (български език)',
                'myahoo (Français)',
                'JZsolt (Magyar)',
                'Almotasim (Italiano)',
+               '藤本理弘 (日本語)',
                'Jeong Seungwon (한국어)',
                'Edvard (Funalien) Borovskij (lietuvių kalba)',
                'Lauriote (lietuvių kalba)',
@@ -123,6 +124,10 @@ locales = {
         'locale_version': '1.0',
         'display_name': name,
     },
+    'ja-JP': {
+        'locale_version': '1.0',
+        'display_name': name,
+    },
     'ko-KR': {
         'locale_version': '1.0',
         'display_name': name,
@@ -170,10 +175,6 @@ locales = {
 }
 
 incomplete_locales = {
-    'ja-JP': {
-        'locale_version': '1.0',
-        'display_name': name,
-    },
     'ms-MY': {
         'locale_version': '1.0',
         'display_name': name,

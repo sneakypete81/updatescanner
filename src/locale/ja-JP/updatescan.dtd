@@ -1,20 +1,20 @@
-<!ENTITY scanbutton.label "スキャン">
-<!ENTITY stopbutton.label "キャンセル">
-<!ENTITY newbutton.tooltip "新規作成">
-<!ENTITY showallchangesinnewtabsbutton.tooltip "変更があったすべてのページを新しいタブに表示します">
-<!ENTITY markallasvisitedbutton.tooltip "Mark All as Visited">
+<!ENTITY scanbutton.label "確認">
+<!ENTITY stopbutton.label "中止">
+<!ENTITY newbutton.tooltip "監視するページを追加">
+<!ENTITY showallchangesinnewtabsbutton.tooltip "更新されたすべてのページを新しいタブで表示">
+<!ENTITY markallasvisitedbutton.tooltip "すべて既読にする">
 <!ENTITY deletebutton.tooltip "削除">
-<!ENTITY preferencesbutton.tooltip "Update Scanner Preferences">
-<!ENTITY helpbutton.tooltip "Update Scanner Help">
-<!ENTITY openmenu.label "変更を表示">
+<!ENTITY preferencesbutton.tooltip "機能設定">
+<!ENTITY helpbutton.tooltip "ヘルプ">
+<!ENTITY openmenu.label "変更点を表示">
 <!ENTITY openmenu.accesskey "C">
-<!ENTITY opentabmenu.label "新しいタブに変更を表示">
+<!ENTITY opentabmenu.label "変更点を新しいタブで表示">
 <!ENTITY opentabmenu.accesskey "T">
-<!ENTITY opentabsmenu.label "Show Changes in New Tabs">
+<!ENTITY opentabsmenu.label "更新されたすべてのページを新しいタブで表示">
 <!ENTITY opentabsmenu.accesskey "T">
-<!ENTITY markvisitedmenu.label "すべて訪問済みにする">
+<!ENTITY markvisitedmenu.label "すべて既読にする">
 <!ENTITY markvisitedmenu.accesskey "V">
-<!ENTITY scanThisPage.label "Scan This Page">
+<!ENTITY scanThisPage.label "このページを確認">
 <!ENTITY scanThisPage.accesskey "N">
-<!ENTITY scanThisFolder.label "Scan This Folder">
+<!ENTITY scanThisFolder.label "このフォルダー内のページを確認">
 <!ENTITY scanThisFolder.accesskey "N">

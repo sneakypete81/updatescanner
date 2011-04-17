@@ -1,28 +1,28 @@
-<!ENTITY preferences.title "Update Scanner Preferences">
-<!ENTITY notifications.title "Notifications">
-<!ENTITY scanning.title "Scanning">
-<!ENTITY toolbar.title "Toolbar">
-<!ENTITY notifications.enable.label "Show notification popup when a webpage changes">
-<!ENTITY notifications.timed.label1 "Show for">
-<!ENTITY notifications.timed.label2 "seconds">
-<!ENTITY notifications.permanent.label "Show until manually closed">
-<!ENTITY notifications.playSound.label "Play a sound when a webpage changes">
-<!ENTITY notifications.defaultSound.label "Default Sound">
-<!ENTITY notifications.browse.label "Browse...">
-<!ENTITY scan.sidebar.label "Sidebar">
-<!ENTITY scan.newtab_leftclick.label "Left-click shows changes in a new tab">
-<!ENTITY scan.pageProperties.label "Page Properties">
-<!ENTITY scan.selectUsing.label "Select scan rate and threshold using">
-<!ENTITY scan.sliders.label "Sliders">
-<!ENTITY scan.numbers.label "Numbers">
-<!ENTITY scan.warnScanShort.label "Warn when scan time is too short">
-<!ENTITY scan.advanced.label "Advanced">
-<!ENTITY scan.timeoutIfLonger.label "Timeout if scan takes longer than">
-<!ENTITY scan.seconds.label "seconds">
-<!ENTITY toolbar.toolbarIcons.label "Toolbar Icons">
-<!ENTITY toolbar.new.label "New Entry">
-<!ENTITY toolbar.showNewTab.label "Show All Changed Pages in New Tabs">
-<!ENTITY toolbar.markVisited.label "Mark All as Visited">
-<!ENTITY toolbar.delete.label "Delete">
-<!ENTITY toolbar.preferences.label "Preferences">
-<!ENTITY toolbar.help.label "Help">
+<!ENTITY preferences.title "Update Scanner 機能設定">
+<!ENTITY notifications.title "通知">
+<!ENTITY scanning.title "確認">
+<!ENTITY toolbar.title "ツールバー">
+<!ENTITY notifications.enable.label "更新を検出したらポップアップで通知する">
+<!ENTITY notifications.timed.label1 "ポップアップを">
+<!ENTITY notifications.timed.label2 "秒間表示する">
+<!ENTITY notifications.permanent.label "ポップアップを閉じられるまで表示する">
+<!ENTITY notifications.playSound.label "更新を検出したら音を鳴らす">
+<!ENTITY notifications.defaultSound.label "デフォルト">
+<!ENTITY notifications.browse.label "参照...">
+<!ENTITY scan.sidebar.label "サイドバー">
+<!ENTITY scan.newtab_leftclick.label "左クリックで変更点を新しいタブに表示">
+<!ENTITY scan.pageProperties.label "ページ確認方法の設定">
+<!ENTITY scan.selectUsing.label "確認間隔を設定する方法">
+<!ENTITY scan.sliders.label "スライダー">
+<!ENTITY scan.numbers.label "数値入力">
+<!ENTITY scan.warnScanShort.label "確認間隔が短すぎるときは警告する">
+<!ENTITY scan.advanced.label "詳細設定">
+<!ENTITY scan.timeoutIfLonger.label "確認に">
+<!ENTITY scan.seconds.label "秒以上かかったらタイムアウトする">
+<!ENTITY toolbar.toolbarIcons.label "ツールバーのアイコン">
+<!ENTITY toolbar.new.label "監視するページを追加">
+<!ENTITY toolbar.showNewTab.label "更新されたすべてのページを新しいタブで表示">
+<!ENTITY toolbar.markVisited.label "すべて確認済みにする">
+<!ENTITY toolbar.delete.label "削除">
+<!ENTITY toolbar.preferences.label "機能設定">
+<!ENTITY toolbar.help.label "ヘルプ">

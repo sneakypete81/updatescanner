@@ -1,18 +1,18 @@
-<!ENTITY editProperties "Edit Properties">
-<!ENTITY delete "Delete">
-<!ENTITY headerOld1 "The page below is the old version of the webpage, scanned">
-<!ENTITY headerOld2 ".">
-<!ENTITY headerNew1 "The page below is the new version of the webpage, scanned">
-<!ENTITY headerNew2 ".">
-<!ENTITY headerDiff1 "The page below was last scanned">
-<!ENTITY headerDiff2 ". The changes are">
-<!ENTITY headerDiff3 "highlighted">
-<!ENTITY headerDiff4 ".">
-<!ENTITY headerNotChecked1 "This page has not yet been checked.">
-<!ENTITY headerNotChecked2 "Please click the">
-<!ENTITY headerNotChecked3 "'Scan'">
-<!ENTITY headerNotChecked4 "button on the left, and try again.">
-<!ENTITY headerError1 "This page returned an error last time it was scanned.">
-<!ENTITY headerError2 "Please click the">
-<!ENTITY headerError3 "'Current Page'">
-<!ENTITY headerError4 "link to check that the page is valid.">
+<!ENTITY editProperties "プロパティ...">
+<!ENTITY delete "削除">
+<!ENTITY headerOld1 "更新前のページ（">
+<!ENTITY headerOld2 "時点）を表示しています。">
+<!ENTITY headerNew1 "更新後のページ（">
+<!ENTITY headerNew2 "時点）を表示しています。">
+<!ENTITY headerDiff1 "更新後のページ（">
+<!ENTITY headerDiff2 "時点）を表示しています。変更点は">
+<!ENTITY headerDiff3 "強調表示">
+<!ENTITY headerDiff4 "されています。">
+<!ENTITY headerNotChecked1 "このページはまだ確認されていません。">
+<!ENTITY headerNotChecked2 "左の">
+<!ENTITY headerNotChecked3 "[確認]">
+<!ENTITY headerNotChecked4 "ボタンを押してから、再度試してください。">
+<!ENTITY headerError1 "このページを確認した時にエラーを検出しました。">
+<!ENTITY headerError2 "「">
+<!ENTITY headerError3 "ページを直接表示">
+<!ENTITY headerError4 "」をクリックして、ページが有効か確認してください。">

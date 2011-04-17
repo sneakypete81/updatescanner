@@ -4,18 +4,18 @@
     xmlns:chrome="http://www.mozilla.org/rdf/chrome#"
 >
     <RDF:Seq about="urn:mozilla:locale:root">
-        <RDF:li resource="urn:mozilla:locale:en-US"/>
+        <RDF:li resource="urn:mozilla:locale:ja-JP"/>
     </RDF:Seq>
     <RDF:Description
-        about="urn:mozilla:locale:en-US"
-        chrome:displayName="English (US)"
-        chrome:author="Pete Burgers"
-        chrome:name="en-US"
-        chrome:previewURL="http://www.mozilla.org/locales/en-US.gif"
+        about="urn:mozilla:locale:ja-JP"
+        chrome:displayName="日本語 (日本)"
+        chrome:author="藤本理弘"
+        chrome:name="ja-JP"
+        chrome:previewURL="http://www.mozilla.org/locales/ja-JP.gif"
     >
         <chrome:packages>
-            <RDF:Seq about="urn:mozilla:locale:en-US:packages">
-                <RDF:li resource="urn:mozilla:locale:en-US:updatescan"/>
+            <RDF:Seq about="urn:mozilla:locale:ja-JP:packages">
+                <RDF:li resource="urn:mozilla:locale:ja-JP:updatescan"/>
             </RDF:Seq>
         </chrome:packages>
     </RDF:Description>
