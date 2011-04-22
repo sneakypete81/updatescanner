@@ -7,11 +7,11 @@
 <!ENTITY often.label "頻繁">
 <!ENTITY never.label "なし">
 <!ENTITY manualScan.label "自動確認しない">
-<!ENTITY scanEvery.label "自動確認間隔：">
-<!ENTITY minutes.label "分間">
+<!ENTITY scanEvery.label "自動確認周期：">
+<!ENTITY minutes.label "分">
 <!ENTITY hours.label "時間">
-<!ENTITY days.label "日間">
-<!ENTITY ignoreChanges.label "Ignore changes less than about">
+<!ENTITY days.label "日">
+<!ENTITY ignoreChanges.label "">
 <!ENTITY characters.label "文字未満の変更は無視する">
 <!ENTITY ignoreNumbers.label "数字のみの変更は無視する">
 <!ENTITY advanced.label "拡張設定...">

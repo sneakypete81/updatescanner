@@ -12,10 +12,10 @@
 <!ENTITY scan.sidebar.label "サイドバー">
 <!ENTITY scan.newtab_leftclick.label "左クリックで変更点を新しいタブに表示">
 <!ENTITY scan.pageProperties.label "ページ確認方法の設定">
-<!ENTITY scan.selectUsing.label "確認間隔を設定する方法">
+<!ENTITY scan.selectUsing.label "確認周期を設定する方法">
 <!ENTITY scan.sliders.label "スライダー">
 <!ENTITY scan.numbers.label "数値入力">
-<!ENTITY scan.warnScanShort.label "確認間隔が短すぎるときは警告する">
+<!ENTITY scan.warnScanShort.label "確認周期が短すぎるときは警告する">
 <!ENTITY scan.advanced.label "詳細設定">
 <!ENTITY scan.timeoutIfLonger.label "確認に">
 <!ENTITY scan.seconds.label "秒以上かかったらタイムアウトする">

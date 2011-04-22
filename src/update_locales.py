@@ -46,6 +46,10 @@ SKIP_DIR = "skip"
 REPLACE_DIR = "replace"
 LOCALE_DIR = "locale"
 
+# This is used to distinguish between untranslated strings and
+# strings that are deliberately blank.
+VALID_BLANK_STRINGS = {"ja-JP": {"dlgnewedit.dtd": ["ignoreChanges.label"]}}
+
 def run():
     (options, args) = parse_args()
     temp_path = tempfile.mkdtemp()
@@ -130,6 +134,18 @@ def parse_locales(temp_path):
             else:
                 raise Exception, ("Unrecognised locale file extension: %s" % 
                                   os.path.join(temp_path, dir, file))
+
+            # Some translations may have strings that are intentionally blank.
+            # These will be missing from the parsed file, so need manually adding.
+            if (locale.name in VALID_BLANK_STRINGS.keys() and
+                  file in VALID_BLANK_STRINGS[locale.name].keys()):
+                for string in VALID_BLANK_STRINGS[locale.name][file]:
+                    if string in locale_file.keys():
+                        raise Exception("String %s in file %s of locale %s is expected to be blank." %
+                                        (string, file, locale.name))
+                    else:
+                        locale_file[string] = ""
+
             locale.files[file] = locale_file
         locales[dir] = locale
     return locales
@@ -220,6 +236,7 @@ def update_locales(temp_path, locales):
         
 
 def check_config(complete, incomplete):
+    print
     for name in sorted(complete):
         if name not in config.locales.keys():
             print "WARNING: %s is missing from config.locales[]" % name
@@ -235,6 +252,14 @@ def check_config(complete, incomplete):
         if name not in incomplete:
             print "WARNING: %s should not be in config.incomplete_locales[]" % name
 
+    print
+    print "The following strings are supposed to be empty."
+    print "You will need to manually edit the files and replace them with empty strings."
+    for locale in VALID_BLANK_STRINGS.keys():
+        for filename in VALID_BLANK_STRINGS[locale].keys():
+            for string in VALID_BLANK_STRINGS[locale][filename]:
+                print "   %s in %s/%s" % (string, locale, filename)
+    print
 ############################
 
 class Locale():
