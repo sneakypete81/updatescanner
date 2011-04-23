@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding=UTF-8
 
-version = "0.0.5"
+version = "0.0.6"
 in_development = False
 publish_babelzilla = False # True = include incomplete locales for babelzilla
 only_english = False # True = only include english for beta releases
@@ -55,7 +55,19 @@ locales = {
         'locale_version': '1.0',
         'display_name': name,
     },
+    'fr': {
+        'locale_version': '1.0',
+        'display_name': name,
+    },
     'hu-HU': {
+        'locale_version': '1.0',
+        'display_name': name,
+    },
+    'ja-JP': {
+        'locale_version': '1.0',
+        'display_name': name,
+    },
+    'ko-KR': {
         'locale_version': '1.0',
         'display_name': name,
     },
@@ -64,6 +76,14 @@ locales = {
         'display_name': name,
     },
     'pl': {
+        'locale_version': '1.0',
+        'display_name': name,
+    },
+    'pt-BR': {
+        'locale_version': '1.0',
+        'display_name': name,
+    },
+    'sk-SK': {
         'locale_version': '1.0',
         'display_name': name,
     },
@@ -86,23 +106,7 @@ locales = {
         'locale_version': '1.0',
         'display_name': name,
     },
-    'fr': {
-        'locale_version': '1.0',
-        'display_name': name,
-    },
     'it-IT': {
-        'locale_version': '1.0',
-        'display_name': name,
-    },
-    'ko-KR': {
-        'locale_version': '1.0',
-        'display_name': name,
-    },
-    'pt-BR': {
-        'locale_version': '1.0',
-        'display_name': name,
-    },
-    'sk-SK': {
         'locale_version': '1.0',
         'display_name': name,
     },
