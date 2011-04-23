@@ -48,7 +48,9 @@ LOCALE_DIR = "locale"
 
 # This is used to distinguish between untranslated strings and
 # strings that are deliberately blank.
-VALID_BLANK_STRINGS = {"ja-JP": {"dlgnewedit.dtd": ["ignoreChanges.label"]}}
+VALID_BLANK_STRINGS = {"ja-JP": 
+                        {"dlgnewedit.dtd": 
+                          {"ignoreChanges.label": "Ignore changes less than about"}}}
 
 def run():
     (options, args) = parse_args()
@@ -57,6 +59,7 @@ def run():
     replace_path = os.path.join(temp_path, REPLACE_DIR)
     try:
         download_locales(temp_path)
+        fix_blank_strings(replace_path)
         locales = parse_locales(skip_path)
         (complete, incomplete) = check_complete(locales, verbose=options.verbose)
         if get_yn("Update complete locales?"):
@@ -116,6 +119,20 @@ def download_locales(temp_path):
                            "-xf", "locales_replace.tar.gz"],
                           cwd=temp_path)
 
+
+def fix_blank_strings(temp_path):
+    """ Fix up strings that have deliberately been left blank by the translator
+    Babelzilla incorrectly substitutes the English translation, so this needs removing
+    """
+    for locale in VALID_BLANK_STRINGS.keys():
+        for filename in VALID_BLANK_STRINGS[locale].keys():
+            for string in VALID_BLANK_STRINGS[locale][filename].values():
+                print temp_path, locale, filename
+                print ['sed', '-i', 's/%s//' % string, 
+                       '%s' % os.path.join(temp_path, locale, filename)]
+                subprocess.check_call(['sed', '-i', 's/Ignore changes less than about//', 
+                                       '%s' % os.path.join(temp_path, locale, filename)])
+
 def parse_locales(temp_path):
     print "Parsing locales..."
     locales = {}
@@ -139,7 +156,7 @@ def parse_locales(temp_path):
             # These will be missing from the parsed file, so need manually adding.
             if (locale.name in VALID_BLANK_STRINGS.keys() and
                   file in VALID_BLANK_STRINGS[locale.name].keys()):
-                for string in VALID_BLANK_STRINGS[locale.name][file]:
+                for string in VALID_BLANK_STRINGS[locale.name][file].keys():
                     if string in locale_file.keys():
                         raise Exception("String %s in file %s of locale %s is expected to be blank." %
                                         (string, file, locale.name))
@@ -252,14 +269,6 @@ def check_config(complete, incomplete):
         if name not in incomplete:
             print "WARNING: %s should not be in config.incomplete_locales[]" % name
 
-    print
-    print "The following strings are supposed to be empty."
-    print "You will need to manually edit the files and replace them with empty strings."
-    for locale in VALID_BLANK_STRINGS.keys():
-        for filename in VALID_BLANK_STRINGS[locale].keys():
-            for string in VALID_BLANK_STRINGS[locale][filename]:
-                print "   %s in %s/%s" % (string, locale, filename)
-    print
 ############################
 
 class Locale():
