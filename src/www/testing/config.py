@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding=UTF-8
 
-version = "0.0.5"
+version = "0.0.6"
 in_development = False
 publish_babelzilla = False # True = include incomplete locales for babelzilla
 only_english = False # True = only include english for beta releases
@@ -35,7 +35,7 @@ overlays = ()
 stylesheets = ()
 skins = {}
 locales = {
-    'cs-CZ': {
+    'cs': {
         'locale_version': '1.0',
         'display_name': name,
     },
@@ -114,11 +114,6 @@ locales = {
 }
 
 incomplete_locales = {
-    # Hasn't been properly converted in Babelzilla from cs-CZ to cs. Ignore cs for now.
-    'cs': {
-        'locale_version': '1.0',
-        'display_name': name,
-    },
     'zh-TW': {
         'locale_version': '1.0',
         'display_name': name,
