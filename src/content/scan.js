@@ -422,12 +422,17 @@ function USc_scanner()
     // content="text/html; charset=xxxxx">
     {
         var result;
-        result = /content-type[^\n]*charset[^\S\n]*=[^\S\n]*([^\s;]*)/i(header)
-        if (result != null) return result[1];
+        var re = /content-type[^\n]*charset[^\S\n]*=[^\S\n]*([^\s;]*)/i;
+        result = re.exec(header);
+        if (result != null) {
+            return result[1];
+        }
         
-        result = /<meta[^>]+charset\s*=\s*([^>"';]+)/i(content)
-        if (result != null) return result[1];
-        
+        re = /<meta[^>]+charset\s*=\s*([^>"';]+)/i;
+        result = re.exec(content);
+        if (result != null) {
+            return result[1];
+        }
         return ""
     }
     
