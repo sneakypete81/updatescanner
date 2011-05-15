@@ -143,7 +143,7 @@ function Ok()
     if (!httpexists.test(txtURL.value.toLowerCase())) {
         txtURL.value="http://" + txtURL.value;
     }
-    if (txtTitle.value == "" || !restexists(txtURL.value))
+    if (txtTitle.value == "" || !restexists.test(txtURL.value))
     {
         alert(noDataAlert);
         return false;
@@ -200,7 +200,6 @@ function Ok()
     args.enableFlash = document.getElementById("enableFlash").checked;
 
     args.ok = true;
-
     return true;
 }
 
