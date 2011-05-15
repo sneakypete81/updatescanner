@@ -36,6 +36,7 @@ print >> file('install.rdf', 'w'), """\
 <Description about="urn:mozilla:install-manifest">
 <em:id>{%(uid)s}</em:id>
 <em:version>%(version)s</em:version>
+<em:type>2</em:type>
 
 <!-- Target Application this extension can install into,
     with minimum and maximum supported versions:
