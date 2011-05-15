@@ -114,12 +114,10 @@
   </vbox>
     
   <broadcasterset>
-    <broadcaster id="scanbutton" label="&scanbutton.label;" 
-		 oncommand="USc_updatescan.scanButtonClick()" 
-		 scanbuttonlabel="&scanbutton.label;" 
-		 scanbuttoncommand="USc_updatescan.scanButtonClick()"
-                 stopbuttonlabel="&stopbutton.label;" 
-		 stopbuttoncommand="USc_updatescan.stopButtonClick()"/>
+    <broadcaster id="scanbutton"
+                 oncommand="USc_updatescan.scanButtonClick()" 
+                 scanbuttonlabel="&scanbutton.label;" 
+                 stopbuttonlabel="&stopbutton.label;" />
   </broadcasterset>
 
   <commandset id="placesCommands"/>

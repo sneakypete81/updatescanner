@@ -95,6 +95,7 @@ load : function()
         menu.addEventListener("popupshowing", me._showMenu, false);
     }
 
+    this._showScanButton();
 },
 
 unload : function()
@@ -179,11 +180,23 @@ _treeClick : function(aEvent) {
 scanButtonClick : function()
 {
     var me = USc_updatescan;    
+    var scanbutton = document.getElementById("scanbutton");
     var id;
     var numitems;
     var str=document.getElementById("updatescanStrings");
     var ignoreNumbers;
     var encoding;
+
+    // Is the scan button showing "Cancel"?
+    if (scanbutton.getAttribute("label") == scanbutton.getAttribute("stopbuttonlabel")) {
+        if (me.scan != null) {
+            me.scan.cancel();
+        }
+        me._hideProgress();
+        me._showScanButton();
+        me._setStatus(str.getString("statusCancel"));
+        return;
+    }
 
     me._showStopButton();
 
@@ -265,18 +278,6 @@ _scanFinishedCallback : function()
     }
     me._hideProgress();
     me._showScanButton();
-},
-
-stopButtonClick : function()
-{
-    var me = USc_updatescan;
-    var str=document.getElementById("updatescanStrings");
-    if (me.scan != null) {
-        me.scan.cancel();
-    }
-    me._hideProgress();
-    me._showScanButton();
-    me._setStatus(str.getString("statusCancel"));
 },
 
 openNewDialogCurrentPos : function()
@@ -667,14 +668,12 @@ _showStopButton : function()
 {
     var scanbutton = document.getElementById("scanbutton");
     scanbutton.setAttribute("label", scanbutton.getAttribute("stopbuttonlabel"));
-    scanbutton.setAttribute("oncommand", scanbutton.getAttribute("stopbuttoncommand"));
 },
 
 _showScanButton : function()
 {
     var scanbutton = document.getElementById("scanbutton");
-    scanbutton.setAttribute("label", scanbutton.getAttribute("scanbuttonlabel"));
-    scanbutton.setAttribute("oncommand", scanbutton.getAttribute("scanbuttoncommand"));
+    scanbutton.setAttribute("label", scanbutton.getAttribute("scanbuttonlabel")); 
 },
 
 _setStatus : function (status)
