@@ -655,7 +655,7 @@ _WDiffToHtml : function(text, block)
     }
     if (insText != '') {
 
-//        myDump("before:"+insText);
+//        USc_updatescan.myDump("before:"+insText);
         var tagSplits = insText.split("<");
         // Rebuild insText, stopping highlighting before tags, and restarting afterwards.
         insText = "";
@@ -673,7 +673,7 @@ _WDiffToHtml : function(text, block)
             insText += me.wDiffHtmlInsertEnd;
         }
         }
-//        myDump("after:"+insText);
+//        USc_updatescan.myDump("after:"+insText);
         //insText = wDiffHtmlInsertStart + WDiffEscape(insText) + wDiffHtmlInsertEnd;
         //insText = insText.replace(/\n/g, '&para;<br>');
         outText += insText;

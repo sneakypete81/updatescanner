@@ -42,7 +42,6 @@
         ondialogcancel="return cancel();">
 
 <script src="progress.js"/>
-<script src="mydump.js"/>
 
 <spacer class="margintopbottom"/>
 <vbox>

@@ -37,7 +37,7 @@ var USc_upgrade_exists = true;
 var USc_upgrade = {    
 
 
-VERSION : "3.1.6",
+VERSION : "3.1.7",
 
 check : function()
 {
@@ -233,7 +233,7 @@ upgrade_3_0_5 : function()
     }
 
     try {
-        myDump(USc_places.getTitle());
+        USc_updatescan.myDump(USc_places.getTitle());
     } catch (e) {
         USc_places.setTitle(folder_id, folder_name);
     }

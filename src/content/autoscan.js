@@ -77,7 +77,7 @@ _check : function()
         var numItems = me.scan.addItems(USc_places.getRootFolderId(), true);
     
 //    var now = new Date();
-//    myDump(now.toString()+":"+numItems+" items to scan\n");
+//    USc_updatescan.myDump(now.toString()+":"+numItems+" items to scan\n");
     
         if (numItems == 0) {
             me.callback(0);            

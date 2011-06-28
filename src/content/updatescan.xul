@@ -63,7 +63,6 @@
 
   <script src="rdf/rdfds.js"/>
   <script src="rdf/rdf.js"/>
-  <script src="mydump.js"/>
   <script src="updatescan.js"/>
   <script src="scan.js"/>
   <script src="fuzzy.js"/>

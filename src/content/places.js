@@ -75,7 +75,7 @@ var USc_places = {
     } else if (results.length == 0) {
       throw "Root folder not found";
     } else if (results.length > 1) {
-      myDump("Updatescan warning: Multiple root folders found");
+      USc_updatescan.myDump("Updatescan warning: Multiple root folders found");
       rootFolderId = results[0];
       annotationService.removeItemAnnotation(results[1], this.ANNO_ROOT);
     }

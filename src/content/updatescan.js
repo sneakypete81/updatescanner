@@ -772,7 +772,15 @@ _extendPlacesTreeView : function() {
             properties.push(newProperties[i]);
         }
     }
+},
+
+myDump : function(aMessage) {
+    dump(aMessage);
+    var consoleService = Components.classes["@mozilla.org/consoleservice;1"]
+                         .getService(Components.interfaces.nsIConsoleService);
+    consoleService.logStringMessage("UpdateScan: " + aMessage);
 }
+
 };
 
 var USc_sidebarAnnotationObserver = {
@@ -796,6 +804,4 @@ var USc_sidebarAnnotationObserver = {
   onItemAnnotationRemoved : function(aItemId, aName) { }
   
 };
-
-
 }

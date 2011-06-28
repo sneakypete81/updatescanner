@@ -54,7 +54,6 @@
 <script src="chrome://updatescan/content/updatescan.js" />
 <script src="chrome://updatescan/content/places.js" />
 <script src="chrome://updatescan/content/string.js" />
-<script src="chrome://updatescan/content/mydump.js" />
 
 <stringbundle id="updatescanStrings" 
 	      src="chrome://updatescan/locale/updatescan.properties"/>

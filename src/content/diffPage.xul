@@ -54,7 +54,6 @@
   <script src="diffwiki.js"/>
   <script src="file.js"/>
   <script src="io.js"/>
-  <script src="mydump.js"/>
   <script src="string.js"/>
   <script src="places.js"/>
   <script src="updatescan.js"/>
