@@ -215,10 +215,14 @@ var USc_places = {
   queryAnno : function(id, anno, defaultValue)
   {
     var annotationService = Components.classes["@mozilla.org/browser/annotation-service;1"].getService(Components.interfaces.nsIAnnotationService);
-    if (annotationService.itemHasAnnotation(id, anno)) {
-      return annotationService.getItemAnnotation(id, anno);
-    } else {
-      return defaultValue;
+    try {
+        if (annotationService.itemHasAnnotation(id, anno)) {
+            return annotationService.getItemAnnotation(id, anno);
+        } else {
+            return defaultValue;
+        }
+    } catch (e) { // The annotation didn't exist
+        return defaultValue;
     }
   },
 
