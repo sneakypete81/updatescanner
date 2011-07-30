@@ -110,21 +110,28 @@ function USc_scanner()
 
     this.addItems = function(id, autoScan)
     {
-        var hist = Cc["@mozilla.org/browser/nav-history-service;1"]
-                   .getService(Ci.nsINavHistoryService);
+        if (USc_places.isFolder(id)) {
 
-        var query = hist.getNewQuery();
-        var options = hist.getNewQueryOptions();
-        query.setFolders([id], 1);
-        var result = hist.executeQuery(query, options);
+            var hist = Cc["@mozilla.org/browser/nav-history-service;1"]
+                         .getService(Ci.nsINavHistoryService);
 
-        // select feeds to be checked, exclude separators and updated feeds
-        me.queueItemRecursive(result.root, autoScan);
+            var query = hist.getNewQuery();
+            var options = hist.getNewQueryOptions();
+            query.setFolders([id], 1);
+            var result = hist.executeQuery(query, options);
+
+            // select feeds to be checked, exclude separators and updated feeds
+            me.queueItemRecursive(result.root, autoScan);
+        } else {
+            me.queueItemRecursive(id, autoScan);
+        }
 
         return itemlist.length;
     }
 
     this.queueItemRecursive = function(aResultNode, autoScan)
+    // aResultNode can be either an item from a places query,
+    // or a single bookmark id.
     {
         var bmsvc = Cc["@mozilla.org/browser/nav-bookmarks-service;1"]
                     .getService(Ci.nsINavBookmarksService);
@@ -133,7 +140,13 @@ function USc_scanner()
         var livemarkService = Cc["@mozilla.org/browser/livemark-service;2"]
                               .getService(Ci.nsILivemarkService);
         
-        var itemId = aResultNode.itemId;
+        var itemId;
+        if (typeof(aResultNode) == "number") {
+            itemId = aResultNode;
+        } else {
+            itemId = aResultNode.itemId;
+        }
+
         var itemType = bmsvc.getItemType(itemId);
 
         // Can't handle livemarks yet - mark as error
