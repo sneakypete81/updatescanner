@@ -30,20 +30,22 @@
  * the terms of any one of the MPL, the GPL or the LGPL.  
  * ***** END LICENSE BLOCK ***** */
 
-var tree;
-var text;
-function init()
+if (typeof(USc_places_browser_exists) != 'boolean') {
+var USc_places_browser_exists = true;
+
+var USc_places_browser = {    
+
+init : function()
 {
-    tree = document.getElementById("bookmarks-view");
-    tree.onclick=treeClick;
+    var tree = document.getElementById("bookmarks-view");
+    tree.onclick=this.treeClick;
     var rootFolderId = USc_places.getRootFolderId();
     tree.place = "place:queryType=1&folder=" + rootFolderId;
-    
-    text = document.getElementById("text-box");
-}
+},
 
-function treeClick(aEvent)
+treeClick : function(aEvent)
 {
+    var tree = document.getElementById("bookmarks-view");
     var tbo = tree.treeBoxObject;
     var row = { }, col = { }, obj = { };
     tbo.getCellAt(aEvent.clientX, aEvent.clientY, row, col, obj);
@@ -75,6 +77,8 @@ function treeClick(aEvent)
       string += name+"("+type+")="+val+"\n\n";
     }
     
-    text.value = string;
+    document.getElementById("text-box").value = string;
 }
 
+};
+}

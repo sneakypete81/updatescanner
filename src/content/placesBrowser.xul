@@ -48,7 +48,7 @@ as well as the default commands and context menu -->
 
 <window xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         title="Places Browser"
-	onload="init();">
+	onload="USc_places_browser.init();">
 <script src="placesBrowser.js"/>
 <script src="places.js"/>
 <script type="application/x-javascript" src="chrome://browser/content/bookmarks/sidebarUtils.js"/>
