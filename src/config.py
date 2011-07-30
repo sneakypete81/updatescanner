@@ -60,7 +60,7 @@ updateFile = "%(app)s-%(version)s.xpi" % vars()
 updateLink = "%(homepageURL)s/%(updateFile)s" % vars()
 
 firefoxUID = 'ec8030f7-c20a-464f-9b0e-13a3a9e97384'
-firefoxMinVersion = '5.*'
+firefoxMinVersion = '5.0'
 firefoxMaxVersion = '6.*'
 
 overlays = (
