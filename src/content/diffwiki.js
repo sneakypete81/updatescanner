@@ -266,6 +266,8 @@ WDiffString : function(oldText, newText, highlightColour)
 _WDiffText : function(text, newStart, newEnd, oldStart, oldEnd, recursionLevel) 
 {
     var me = USc_diffWiki;
+    var i;
+    var j;
 
     var symbol = new Object();
 
@@ -750,8 +752,8 @@ _WDiffDetectBlocks : function(text, block) {
 
 // get old text block order
     if (me.wDiffShowBlockMoves) {
-        j = 0;
-        i = 0;
+        var j = 0;
+        var i = 0;
         do {
 
 // detect block boundaries on old text
@@ -805,6 +807,8 @@ _WDiffDetectBlocks : function(text, block) {
 
 // get the block order in the new text
         var lastMin;
+        var curr;
+        var currMin;
         var currMinIndex;
         lastMin = null;
 
