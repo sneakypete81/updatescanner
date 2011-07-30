@@ -656,7 +656,6 @@ deleteSelectedItem : function()
     try {
         var filebase=USc_places.getSignature(id);
 
-//    var title = USc_rdf.queryItem(id, "title", "untitled");
 //    if (confirm(str.getString("confirmDelete") + " " + title + "?")) {
         USc_file.USrmFile(filebase+".old");
         USc_file.USrmFile(filebase+".new");

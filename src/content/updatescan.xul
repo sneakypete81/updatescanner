@@ -61,8 +61,6 @@
   <stringbundle id="updatescanStrings" 
 		src="chrome://updatescan/locale/updatescan.properties"/>
 
-  <script src="rdf/rdfds.js"/>
-  <script src="rdf/rdf.js"/>
   <script src="updatescan.js"/>
   <script src="scan.js"/>
   <script src="fuzzy.js"/>

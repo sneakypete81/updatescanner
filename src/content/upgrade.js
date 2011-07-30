@@ -56,20 +56,6 @@ check : function()
         return;
     }
 
-    if (this.isVersionBefore("2.0.14")) {
-        alert(strings.GetStringFromName("upgradeBefore2_2_3_a") + "\n" +
-              strings.GetStringFromName("upgradeBefore2_2_3_b") + "\n" +
-              strings.GetStringFromName("upgradeBefore2_2_3_c"));
-        this.createRootBookmark();
-        return;
-    }
-
-    if (this.isVersionBefore("2.*")) {
-        if (this.upgrade_3_0())
-            this.updateVersion()
-        return
-    }
-
     if (this.isVersionBefore("3.0.5")) {
         this.upgrade_3_0_5();
         this.updateVersion();
@@ -132,89 +118,6 @@ updateVersion : function(version)
         prefs.setIntPref("versionMinor", 0);
         prefs.setIntPref("versionRevision", 0);        
     }
-},
-
-upgrade_3_0 : function()
-{
-    var gBundle = Components.classes["@mozilla.org/intl/stringbundle;1"].getService(Components.interfaces.nsIStringBundleService);
-    var strings = gBundle.createBundle("chrome://updatescan/locale/updatescan.properties");
-    var me = USc_upgrade;
-    this.createRootBookmark();
-
-    // Connect to the RDF file
-    var rdffile = USc_rdf.getPath();
-    USc_rdf.init(USc_rdf.getURI(rdffile));
-
-    var nodes = USc_rdf.getRoot().getChildren();
-    var nodeCount = USc_rdf.getRoot().getChildCount();
-    // Pass in an empty array, just so progress.js has something to count
-    var nodeCountArr = new Array(nodeCount)
-
-    params = {label:strings.GetStringFromName("upgradeLabel")+"...",
-              label2:strings.GetStringFromName("timeWarning"),
-              callback:me.upgrade_item_3_0, 
-              items:nodeCountArr, 
-              data:nodes, 
-              cancelPrompt:strings.GetStringFromName("upgradeCancel"), 
-              retVal:null, 
-              retData:null};       
-    window.openDialog('chrome://updatescan/content/progress.xul', 
-                      'dlgProgress', 
-                      'chrome,dialog,modal,centrescreen', params);
-    if (!params.retVal) {
-        return false; // Upgrade was cancelled
-    }
-    return true;
-},
-
-upgrade_item_3_0 : function(itemNumber, nodes)
-{
-    var node = nodes.getNext();
-    var idRDF = node.getValue();
-
-    // Create new bookmark and copy annotations over
-
-    var url = USc_rdf.queryItem(idRDF, "url", "about:blank");
-    var title = USc_rdf.queryItem(idRDF, "title", url);
-
-    var idBM = USc_places.addBookmark(title, url);
-
-    USc_places.modifyAnno(idBM, USc_places.ANNO_ENCODING,
-                          USc_rdf.queryItem(idRDF, "encoding",
-                                            USc_defaults.DEF_ENCODING));
-    USc_places.modifyAnno(idBM, USc_places.ANNO_LAST_AUTOSCAN,
-                          USc_rdf.queryItem(idRDF, "lastautoscan",
-                                            USc_defaults.DEF_LAST_AUTOSCAN));
-    USc_places.modifyAnno(idBM, USc_places.ANNO_LAST_SCAN,
-                          USc_rdf.queryItem(idRDF, "lastscan",
-                                            USc_defaults.DEF_LAST_SCAN));
-    USc_places.modifyAnno(idBM, USc_places.ANNO_OLD_LAST_SCAN,
-                          USc_rdf.queryItem(idRDF, "old_lastscan",
-                                            USc_defaults.DEF_OLD_LAST_SCAN));
-    USc_places.modifyAnno(idBM, USc_places.ANNO_SCAN_RATE_MINS,
-                          USc_rdf.queryItem(idRDF, "scanratemins",
-                                            USc_defaults.DEF_SCAN_RATE_MINS));
-    USc_places.modifyAnno(idBM, USc_places.ANNO_THRESHOLD,
-                          USc_rdf.queryItem(idRDF, "threshold",
-                                            USc_defaults.DEF_THRESHOLD));
-
-    // ignoreNumbers has changed from a string to a boolean
-    var ignoreNumbers = USc_rdf.queryItem(idRDF, "ignoreNumbers", USc_defaults.DEF_IGNORE_NUMBERS)
-    ignoreNumbers = (ignoreNumbers == "true" || ignoreNumbers == true)
-    USc_places.modifyAnno(idBM, USc_places.ANNO_IGNORE_NUMBERS, ignoreNumbers);
-    
-    if (USc_rdf.queryItem(idRDF, "error", "0") != 0)
-        USc_places.modifyAnno(idBM, USc_places.ANNO_STATUS, USc_places.STATUS_ERROR);
-    else if (USc_rdf.queryItem(idRDF, "changed") != 0)
-        USc_places.modifyAnno(idBM, USc_places.ANNO_STATUS, USc_places.STATUS_UPDATE);
-    else
-        USc_places.modifyAnno(idBM, USc_places.ANNO_STATUS, USc_places.STATUS_NO_UPDATE);
-
-    // Rename files to match new signature scheme
-    var oldFilebase = USc_file.oldEscapeFilename(idRDF);
-    var newFilebase = USc_places.getSignature(idBM);
-    USc_file.USmvFile(oldFilebase+".old", newFilebase+".old");
-    USc_file.USmvFile(oldFilebase+".new", newFilebase+".new");
 },
 
 upgrade_3_0_5 : function()

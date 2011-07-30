@@ -48,8 +48,6 @@
   <stringbundle id="diffPageStrings" 
 		src="chrome://updatescan/locale/diffPage.properties"/>
 
-  <script src="rdf/rdfds.js"/>
-  <script src="rdf/rdf.js"/>
   <script src="diffPage.js"/>
   <script src="diffwiki.js"/>
   <script src="file.js"/>
