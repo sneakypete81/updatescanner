@@ -129,9 +129,9 @@ function Ok()
     var scanrate;
     var txtURL=document.getElementById("txtURL");
     var txtTitle=document.getElementById("txtTitle");
-    var noDataAlert=document.getElementById("strings").getString(
+    var noDataAlert=document.getElementById("USc_strings").getString(
                                             "noDataAlert");
-    var fiveMinuteAlert=document.getElementById("strings").getString(
+    var fiveMinuteAlert=document.getElementById("USc_strings").getString(
                         "shortScanAlert");
     var httpexists = /^[A-Za-z]+:\/\//;
     var restexists = /^[A-Za-z]+:\/\/\W*\w/;
@@ -211,7 +211,7 @@ function Cancel()
 
 function Help()
 {
-    var addPageTip=document.getElementById("strings").getString("addPageTip");
+    var addPageTip=document.getElementById("USc_strings").getString("addPageTip");
     alert(addPageTip);
     return true;
 }
@@ -248,7 +248,7 @@ function sliderThresholdSetPos(value)
 
 function sliderThresholdChange() 
 {
-    var strings=document.getElementById("strings");
+    var strings=document.getElementById("USc_strings");
     var label1=document.getElementById("label1");
     var label2=document.getElementById("label2");
     
@@ -318,7 +318,7 @@ function sliderAutoscanSetPos(value)
 
 function sliderAutoscanChange() 
 {
-    var strings=document.getElementById("strings");
+    var strings=document.getElementById("USc_strings");
     var label3=document.getElementById("label3");
 
     var pos = sliderAutoscanGetPos();

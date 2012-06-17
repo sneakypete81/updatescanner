@@ -43,7 +43,7 @@
         ondialogaccept="return Ok();"
         ondialogcancel="return Cancel();">
 
-<stringbundle id="strings" src="chrome://updatescan/locale/dlgnewedit.properties"/>
+<stringbundle id="USc_strings" src="chrome://updatescan/locale/dlgnewedit.properties"/>
 
 <script src="dlgnewedit.js"/>
 
