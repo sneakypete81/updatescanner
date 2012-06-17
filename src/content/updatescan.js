@@ -85,7 +85,7 @@ load : function()
     me._branch = Components.classes["@mozilla.org/preferences-service;1"];
     me._branch = me._branch.getService(Components.interfaces.nsIPrefService);
     me._branch = me._branch.getBranch("extensions.updatescan.toolbar.");
-    me._branch.QueryInterface(Components.interfaces.nsIPrefBranch2);
+    me._branch.QueryInterface(Components.interfaces.nsIPrefBranch);
     me._branch.addObserver("", this, false);
     me._updateToolbar();
 

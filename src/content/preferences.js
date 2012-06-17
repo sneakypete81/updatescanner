@@ -156,7 +156,7 @@ var USc_pref = {
   openHelp : function()
   {
     var prefs = Components.classes["@mozilla.org/preferences-service;1"]
-                          .getService(Components.interfaces.nsIPrefBranch2);
+                          .getService(Components.interfaces.nsIPrefBranch);
     var url="http://updatescanner.mozdev.org";
 
     // non-instant apply prefwindows are usually modal, so we can't open in the topmost window, 

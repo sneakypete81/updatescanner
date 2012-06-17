@@ -114,7 +114,7 @@ load : function()
     me.prefs = Components.classes["@mozilla.org/preferences-service;1"]
                            .getService(Components.interfaces.nsIPrefService)
                            .getBranch("extensions.updatescan.");
-    me.prefs.QueryInterface(Components.interfaces.nsIPrefBranch2);
+    me.prefs.QueryInterface(Components.interfaces.nsIPrefBranch);
 
     // Update toolbar icon when scanner is disabled/enabled
     me.prefs.addObserver("scan.enable", USc_toolbarEnablePrefObserver, false);

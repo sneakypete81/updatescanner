@@ -45,7 +45,7 @@ function USc_refresher()
     callback = callbackarg;
     prefName = prefNamearg;
     _branch = prefService.getBranch("extensions.updatescan.");
-    _branch.QueryInterface(Components.interfaces.nsIPrefBranch2);
+    _branch.QueryInterface(Components.interfaces.nsIPrefBranch);
     _branch.addObserver("", this, false);
 
     try { // See if the preference exists
