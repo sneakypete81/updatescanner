@@ -405,8 +405,7 @@ function USc_scanner()
     
     this._stripScript = function(content)
     {
-        content = content.replace(/<script([\r\n]|.)*?>([\r\n]|.)*?<\/script>/gi,"");
-        return    content
+        return content.replace(/<script([\r\n]|.)*?>([\r\n]|.)*?<\/script>/gi,"");
     }
     
     this._stripWhitespace = function(content)
