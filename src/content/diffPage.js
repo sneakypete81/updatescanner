@@ -105,7 +105,7 @@ notify : function(timer)
                     "&url=" + escape(url) +
                     "&view=");
 
-    var content="";
+    var thisContent="";
     var newContent="";
     var oldContent="";
     var enableDiffLinks = true;
@@ -135,17 +135,17 @@ notify : function(timer)
             setAttribute('style', 'font-weight:bold;background: ' + highlightColour);
         document.getElementById("sectionDiff").hidden=false;
         document.getElementById("dateDiff").value=newDate;
-        content = USc_diffWiki.WDiffString(oldContent, newContent, highlightColour);
+        thisContent = USc_diffWiki.WDiffString(oldContent, newContent, highlightColour);
         break;
     case "new":
         document.getElementById("sectionNew").hidden=false;
         document.getElementById("dateNew").value=newDate;
-        content = newContent;
+        thisContent = newContent;
         break;
     case "old":
         document.getElementById("sectionOld").hidden=false;
         document.getElementById("dateOld").value=oldDate;
-        content = oldContent;
+        thisContent = oldContent;
         break;
     case "error":
         document.getElementById("sectionError").hidden=false;
@@ -161,7 +161,7 @@ notify : function(timer)
     var enableFlash = USc_places.queryAnno(id, USc_places.ANNO_ENABLE_FLASH,
                                                USc_defaults.DEF_ENABLE_FLASH);
 
-    this._writeContentFrame(url, content, enableScript, enableFlash);
+    this._writeContentFrame(url, thisContent, enableScript, enableFlash);
 },
 
 click : function(view) 
@@ -215,7 +215,7 @@ _writeViewFrame : function (view, url, enableDiffLinks)
     viewDoc.close();
 },
 
-_writeContentFrame : function (url, content, enableScript, enableFlash)
+_writeContentFrame : function (url, thisContent, enableScript, enableFlash)
 {
     // Charset is always UTF-8, since we read it from file
     // Set baseURI manually
@@ -225,10 +225,10 @@ _writeContentFrame : function (url, content, enableScript, enableFlash)
                   "<base href='"+url+"' target='_parent'>\n");
     // Insert header into <head> element if one exists,
     // otherwise just tack on the start
-    if (re.test(content))
-        content = content.replace(re, "<head>"+header);
+    if (re.test(thisContent))
+        thisContent = thisContent.replace(re, "<head>"+header);
     else
-        content = header + content;
+        thisContent = header + thisContent;
 
     var frame = document.getElementById("diffFrame");
 
@@ -238,7 +238,7 @@ _writeContentFrame : function (url, content, enableScript, enableFlash)
     frame.docShell.allowPlugins = enableFlash;  
 
     frame.setAttribute("src", "data:text/html," + 
-                       encodeURIComponent(content));  
+                       encodeURIComponent(thisContent));  
 }
 };
 }
