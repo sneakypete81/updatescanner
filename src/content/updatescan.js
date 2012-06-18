@@ -728,14 +728,8 @@ _extendPlacesTreeView : function() {
 	}
         var newProperties = new Array();
     
-	// TODO: remove?
-        var isLivemark = (properties.indexOf(this._getAtomFor("livemark")) != -1);
-        if (isLivemark) {
-            return;
-        }
         if (node.type == Ci.nsINavHistoryResultNode.RESULT_TYPE_FOLDER ||
-            (node.type == Ci.nsINavHistoryResultNode.RESULT_TYPE_URI &&
-             !PlacesUtils.nodeIsLivemarkContainer(node.parent))) {
+            (node.type == Ci.nsINavHistoryResultNode.RESULT_TYPE_URI)) {
             try {
                 var state = "usc_state_" + PlacesUtils.annotations.getItemAnnotation(node.itemId, USc_places.ANNO_STATUS);
             } catch (e) {
