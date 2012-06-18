@@ -718,17 +718,17 @@ _extendPlacesTreeView : function() {
     function ext_getCellProperties(aRow, aColumn, aProperties) {
         this.getCellPropertiesBase(aRow, aColumn, aProperties);
 
-        try {
-            // Firefox 4 method:
-            var node = this._rows[aRow];
-        } catch (e) {
-            // Firefox 3.6 method:
-            var node = this._visibleElements[aRow];
-        }
-        var properties = node._cellProperties;
-    
+        var node = this._rows[aRow];
+	if (this._cellProperties) {
+	    // FF15 and later
+            var properties = this._cellProperties.get(node)
+	} else {
+	    // FF14 and earlier
+	    var properties = node._cellProperties;
+	}
         var newProperties = new Array();
     
+	// TODO: remove?
         var isLivemark = (properties.indexOf(this._getAtomFor("livemark")) != -1);
         if (isLivemark) {
             return;
