@@ -153,7 +153,7 @@ createRootBookmark : function ()
 
 createUSBookmark : function ()
 {
-    var updatescanURL="http://updatescanner.mozdev.org";
+    var updatescanURL="http://updatescanner.sourceforge.net";
     var bookmarkId = USc_places.addBookmark("Update Scanner Website", updatescanURL);
 },
 

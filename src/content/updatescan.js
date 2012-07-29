@@ -613,7 +613,7 @@ openHelp : function()
                   .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
                   .getInterface(Components.interfaces.nsIDOMWindow);
 
-    var helpURL="http://updatescanner.mozdev.org";
+    var helpURL="http://updatescanner.sourceforge.net";
     
     mainWindow.getBrowser().selectedTab = mainWindow.getBrowser().addTab(helpURL);
 },
