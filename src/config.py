@@ -40,7 +40,7 @@ translators = ['stoyan (български език)',
                'Wang King (简化字 - zh-CN)',
                'Peter Pin-Guang Chen (簡化字 - zh-TW)',
                ]
-authorURL = "http://updatescanner.mozdev.org"
+authorURL = "http://updatescanner.sourceforge.net"
 uid = 'c07d1a49-9894-49ff-a594-38960ede8fb9'
 optionsChrome = 'chrome://updatescan/content/preferences.xul'
 
@@ -52,7 +52,7 @@ else:
 if in_development:
     version = version + "+"
 
-homepageURL = "http://updatescanner.mozdev.org"
+homepageURL = "http://updatescanner.sourceforge.net"
 
 allowUpdate = False
 updateURL = "%(homepageURL)s/update.rdf" % vars()
