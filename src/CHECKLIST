@@ -6,14 +6,15 @@ Mark all as visited
 Manual scan
 Alert with sound
 Click alert
-Scan single page
+Right-click scan single page
 Close alert
 View old/new/changes/current
 Edit Properties link
+Trash URL and check link gets greyed out
+Delete link
 Right-click properties
 Right-click show changes
 Right-click new tab
-Right-click scan
 Right-click new bookmark
 Right-click new folder
 Right-click new seperator
@@ -27,6 +28,6 @@ Right-click button Toggle sidebar
 Right-click button Scan for updates
 Right-click button Preferences
 Auto scan
+Double-click button
 Grey/Blue/Disabled Toolbar button
 No auto scan when disabled
-Delete link in diffpage
