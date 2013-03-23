@@ -3,7 +3,7 @@
 
 import sys
 
-version = "3.1.11" # Don't forget to update upgrade.js too!
+version = "3.1.12" # Don't forget to update upgrade.js too!
 publish_babelzilla = False # True = include incomplete locales for babelzilla
 only_english = False # True = only include english for beta releases
 
@@ -60,7 +60,7 @@ updateFile = "%(app)s-%(version)s.xpi" % vars()
 updateLink = "%(homepageURL)s/%(updateFile)s" % vars()
 
 firefoxUID = 'ec8030f7-c20a-464f-9b0e-13a3a9e97384'
-firefoxMinVersion = '22.0a1'
+firefoxMinVersion = '13.0'
 firefoxMaxVersion = '22.0'
 
 overlays = (

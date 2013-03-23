@@ -714,28 +714,91 @@ _updateToolbar : function()
 // Adapted from the Sage & Boox Extensions:
 _extendPlacesTreeView : function() {
     PlacesTreeView.prototype.getCellPropertiesBase = PlacesTreeView.prototype.getCellProperties;
-    PlacesTreeView.prototype.getCellProperties =
-    function ext_getCellProperties(aRow, aColumn) {
-        var properties = this.getCellPropertiesBase(aRow, aColumn);
-        var node = this._rows[aRow];
-  
-        if (node.type == Ci.nsINavHistoryResultNode.RESULT_TYPE_FOLDER ||
-            (node.type == Ci.nsINavHistoryResultNode.RESULT_TYPE_URI)) {
-            try {
-                var state = "usc_state_" + PlacesUtils.annotations.getItemAnnotation(node.itemId, USc_places.ANNO_STATUS);
-            } catch (e) {
-                return properties;
-            }
 
+    // Assuming we're running Firefox
+    var appInfo = Components.classes["@mozilla.org/xre/app-info;1"]
+                            .getService(Components.interfaces.nsIXULAppInfo);
+    var versionChecker = Components.classes["@mozilla.org/xpcom/version-comparator;1"]
+                                   .getService(Components.interfaces.nsIVersionComparator);
+    if(versionChecker.compare(appInfo.version, "22.0a1") >= 0) {
+	// Firefox 22 or later
+        PlacesTreeView.prototype.getCellProperties =
+        function ext_getCellProperties(aRow, aColumn) {
+            var properties = this.getCellPropertiesBase(aRow, aColumn);
+            var node = this._rows[aRow];
+  
+            if (node.type == Ci.nsINavHistoryResultNode.RESULT_TYPE_FOLDER ||
+                (node.type == Ci.nsINavHistoryResultNode.RESULT_TYPE_URI)) {
+                try {
+                    var state = "usc_state_" + PlacesUtils.annotations.getItemAnnotation(node.itemId, USc_places.ANNO_STATUS);
+                } catch (e) {
+                    return properties;
+                }
+
+                if (state == "usc_state_updated") {
+                    properties += " usc_state_updated";
+                }
+                if (state == "usc_state_error") {
+                    properties += " usc_state_error";
+                }
+            }
+            return properties;
+        };
+    } else {
+        // Before Firefox 22
+        PlacesTreeView.prototype.getCellProperties =
+        function ext_getCellProperties(aRow, aColumn, aProperties) {
+            this.getCellPropertiesBase(aRow, aColumn, aProperties);
+    
+            var node = this._rows[aRow];
+            if (this._cellProperties) {
+                // FF15 and later
+                var properties = this._cellProperties.get(node)
+            } else {
+    	        // FF14 and earlier
+    	        var properties = node._cellProperties;
+            }
+            var newProperties = new Array();
+        
+            if (node.type == Ci.nsINavHistoryResultNode.RESULT_TYPE_FOLDER ||
+                (node.type == Ci.nsINavHistoryResultNode.RESULT_TYPE_URI)) {
+                try {
+                    var state = "usc_state_" + PlacesUtils.annotations.getItemAnnotation(node.itemId, USc_places.ANNO_STATUS);
+                } catch (e) {
+                    return;
+                }
+            } else {
+                return;
+            }
+            var index = aProperties.GetIndexOf(this._getAtomFor("usc_state_updated"));
             if (state == "usc_state_updated") {
-		properties += " usc_state_updated";
+                if (index == -1) {
+                    newProperties.push(this._getAtomFor("usc_state_updated"))
+                }
+            } else {
+                if (index != -1) {
+                    aProperties.DeleteElementAt(index);
+                }
             }
-	    if (state == "usc_state_error") {
-		properties += " usc_state_error";
+                
+            var index = aProperties.GetIndexOf(this._getAtomFor("usc_state_error"));
+            if (state == "usc_state_error") {
+                if (index == -1) {
+                    newProperties.push(this._getAtomFor("usc_state_error"))
+                }
+            } else {
+                if (index != -1) {
+                    aProperties.DeleteElementAt(index);
+                }
             }
-	}
-	return properties;
+        
+            for (var i = 0, l = newProperties.length; i < l; i++) {
+                aProperties.AppendElement(newProperties[i]);
+                properties.push(newProperties[i]);
+            }
+        };
     }
+
 },
 
 myDump : function(aMessage) {
