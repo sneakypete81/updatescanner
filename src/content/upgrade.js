@@ -37,7 +37,7 @@ var USc_upgrade_exists = true;
 var USc_upgrade = {    
 
 
-VERSION : "3.1.12",
+VERSION : "3.1.13",
 
 check : function()
 {
@@ -153,8 +153,10 @@ createRootBookmark : function ()
 
 createUSBookmark : function ()
 {
-    var updatescanURL="http://sourceforge.net/p/updatescanner";
+    var updatescanURL="https://sourceforge.net/p/updatescanner/wiki/Home/";
     var bookmarkId = USc_places.addBookmark("Update Scanner Website", updatescanURL);
+    // Set default scan to manual only, to prevent excessive Sourceforge traffic
+    USc_places.modifyAnno(bookmarkId, USc_places.ANNO_SCAN_RATE_MINS, 0);
 },
 
 }
