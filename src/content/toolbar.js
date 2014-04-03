@@ -119,13 +119,6 @@ load : function()
     // Update toolbar icon when scanner is disabled/enabled
     me.prefs.addObserver("scan.enable", USc_toolbarEnablePrefObserver, false);
 
-    // Update toolbar button when Customize Toolbar dialog is closed
-    window._USc_OriginalToolboxCustomizeDone = BrowserToolboxCustomizeDone;
-    BrowserToolboxCustomizeDone = function BrowserToolboxCustomizeDone(aToolboxChanged) {
-        window._USc_OriginalToolboxCustomizeDone(aToolboxChanged);
-        USc_toolbar.refresh();
-    }
-
     // Make sure we have a root folder
     try {
         USc_places.getRootFolderId();
