@@ -1,3 +1,5 @@
 name: Update Scanner
-markdown: redcarpet
+markdown: kramdown
 pygments: true
+kramdown:
+  input: GFM

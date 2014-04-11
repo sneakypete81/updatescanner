@@ -17,7 +17,7 @@
         <header class="inner">
           <a id="forkme_banner" href="https://addons.mozilla.org/firefox/addon/update-scanner/">Install</a>
 
-          <h1 id="project_title">{{ site.name }}</h1>
+          <h1 id="project_title"><a href="index.html">{{ site.name }}</a></h1>
           <h2 id="project_tagline">Firefox addon to monitor web pages for updates</h2>
 
         </header>
@@ -26,8 +26,18 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
+
       {{ content }}
+
+      <hr>
+
+      {% if page.previous %}
+      <p class="previous"><a href="{{ page.previous_url }}">&lt;&lt; Previous: {{ page.previous }}</a></p>
+      {% endif %}
+      {% if page.next %}
+      <p class="next"><a href="{{ page.next_url }}">Next: {{ page.next }} &gt;&gt;</a></p>
       </section>
+      {% endif %}
     </div>
 
     <!-- FOOTER  -->

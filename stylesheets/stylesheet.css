@@ -67,6 +67,14 @@ h1 {
   font-weight: 700;
 }
 
+h1 a {
+  color:#ffffff;
+}
+
+h1 a:hover, a:focus {
+  text-decoration: none;
+}
+
 h2 {
   padding-bottom: 10px;
   font-size: 32px;
@@ -74,7 +82,13 @@ h2 {
 }
 
 h3 {
-  font-size: 24px;
+  font-size: 22px;
+}
+
+h3 img {
+  padding: 0px;
+  margin: 0px;
+  margin-left: 10px;
 }
 
 h4 {
@@ -91,6 +105,14 @@ h6 {
 
 p {
   margin: 10px 0 15px 0;
+}
+
+p.previous {
+  float: left;
+}
+
+p.next {
+  float: right;
 }
 
 footer p {
@@ -358,7 +380,8 @@ Full-Width Styles
 }
 
 #main_content {
-  padding-top: 40px;
+  padding-top: 20px;
+  padding-bottom: 40px;
 }
 
 #footer_wrap {
