@@ -1,13 +1,10 @@
 #!/usr/bin/env bash
 
-[ -e chrome ] && rm -rf chrome
 mkdir chrome
-cp -r content chrome
-cp -r locale chrome
-cp -r skin chrome
-
-find chrome -type f | grep '/.#' | xargs rm -f
-find chrome -type f | grep '.*~$' | xargs rm -f
+cp -r ../content chrome
+cp -r ../locale chrome
+cp -r ../skin chrome
+cp -r ../defaults .
 
 XPI="$APP.xpi"
 [ -f $XPI ] && rm $XPI

@@ -2,12 +2,9 @@
 
 export APP=updatescan
 
-# First do a release build and package it up
-./install.rdf.build
-./chrome.manifest.build
-rm -f $APP.xpi
-./xpi.build
+mkdir -p _build
+cd _build
 
-# Now do a dev build and leave unpackaged
-./install.rdf.build dev
-./chrome.manifest.build dev
+../scripts/install.rdf.build
+../scripts/chrome.manifest.build
+../scripts/xpi.build
