@@ -1,14 +1,20 @@
+export PATH := node_modules/.bin:$(PATH)
 
 all: build publish
 
 build: clean
-	@scripts/build
+	scripts/build
 
 publish:
-	@scripts/publish
+	scripts/publish
 
 clean:
 	@\rm -rf _build
 
+.PHONY: test
 test:
-	@echo "TODO: set up test environment"
+	mocha
+
+test-spec:
+	mocha -R spec
+

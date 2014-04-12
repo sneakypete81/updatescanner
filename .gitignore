@@ -1,3 +1,4 @@
 *.pyc
-_releases
-_build
+_releases/
+_build/
+node_modules/

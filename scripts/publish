@@ -15,4 +15,4 @@ except OSError:
     pass
 
 shutil.copy("_build/%(app)s.xpi" % v, "_releases/%(updateFile)s" % v)
-print "_releases/%(updateFile)s" % v
+print " => _releases/%(updateFile)s" % v

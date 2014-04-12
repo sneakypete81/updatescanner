@@ -8,7 +8,7 @@ cp -r ../defaults .
 
 XPI="$APP.xpi"
 [ -f $XPI ] && rm $XPI
-echo _build/$XPI
+echo " => _build/$XPI"
 find install.rdf chrome.manifest chrome defaults \
     | grep -v /.svn \
     | grep -v '/.#' \
