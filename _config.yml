@@ -1,5 +1,5 @@
 name: Update Scanner
-baseurl: /upatescanner
+baseurl: /updatescanner
 
 markdown: kramdown
 kramdown:
