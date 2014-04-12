@@ -11,7 +11,7 @@ next_url: toolbar_icon.html
 Notification Preferences
 ------------------------
 
-![Notification Preferences](images/pref_notifications.png)
+![Notification Preferences]({{ site.baseurl }}/images/pref_notifications.png)
 
 ### Notification Popup
 
@@ -24,7 +24,7 @@ Configure the sound that is played when a webpage change is detected.
 Scanning Preferences
 --------------------
 
-![Scanning Preferences](images/pref_scanning.png)
+![Scanning Preferences]({{ site.baseurl }}/images/pref_scanning.png)
 
 ### Selection Method
 
@@ -37,7 +37,7 @@ Set how long the scanner will wait for a page to load before giving up. Increase
 Toolbar Preferences
 -------------------
 
-![Toolbar Preferences](images/pref_toolbar.png)
+![Toolbar Preferences]({{ site.baseurl }}/images/pref_toolbar.png)
 
 ### Toolbar Icons
 

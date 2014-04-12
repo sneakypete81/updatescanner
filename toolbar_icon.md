@@ -15,7 +15,7 @@ Double-click the icon to show all changed pages in a new browser tab.
 
 Right-click the icon to open the statusbar menu:
 
-![Toolbar Menu](images/statusbar_menu.png)
+![Toolbar Menu]({{ site.baseurl }}/images/statusbar_menu.png)
 
 ### Update Scanner
 

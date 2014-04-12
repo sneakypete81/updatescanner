@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="description" content="Update Scanner : Firefox addon to monitor web pages for updates. Useful for websites that don&#39;t provide Atom or RSS feeds.">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ site.baseurl }}/stylesheets/stylesheet.css">
+    <link rel="icon" type="image/x-icon" href="{{ site.baseurl }}/favicon.ico">
 
     <title>{{  page.title }}</title>
   </head>
@@ -18,7 +18,7 @@
         <header class="inner">
           <a id="forkme_banner" href="https://addons.mozilla.org/firefox/addon/update-scanner/">Install</a>
 
-          <h1 id="project_title"><a href="index.html">{{ site.name }}</a></h1>
+          <h1 id="project_title"><a href="{{ site.baseurl }}/index.html">{{ site.name }}</a></h1>
           <h2 id="project_tagline">Firefox addon to monitor web pages for updates</h2>
 
         </header>
@@ -33,10 +33,10 @@
       <hr>
 
       {% if page.previous %}
-      <p class="previous"><a href="{{ page.previous_url }}">&lt;&lt; Previous: {{ page.previous }}</a></p>
+      <p class="previous"><a href="{{ site.baseurl }}/{{ page.previous_url }}">&lt;&lt; Previous: {{ page.previous }}</a></p>
       {% endif %}
       {% if page.next %}
-      <p class="next"><a href="{{ page.next_url }}">Next: {{ page.next }} &gt;&gt;</a></p>
+      <p class="next"><a href="{{ site.baseurl }}/{{ page.next_url }}">Next: {{ page.next }} &gt;&gt;</a></p>
       </section>
       {% endif %}
     </div>

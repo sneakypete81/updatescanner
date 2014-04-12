@@ -11,13 +11,13 @@ next_url: page_properties.html
 Sidebar
 -------
 
-![Sidebar Context](images/sidebar_context.png)
+![Sidebar Context]({{ site.baseurl }}/images/sidebar_context.png)
 
-### Scan ![](images/button_scan.png)
+### Scan ![]({{ site.baseurl }}/images/button_scan.png)
 
 Perform a manual update scan of all pages in the sidebar.
 
-### New Bookmark ![](images/button_new.png)
+### New Bookmark ![]({{ site.baseurl }}/images/button_new.png)
 
 Add a new page to the sidebar.
 
@@ -33,11 +33,11 @@ View the latest scan of the selected page in a new tab. Middle-clicking on an it
 
 Perform a manual scan on the selected page.
 
-### Delete ![](images/button_delete.png)
+### Delete ![]({{ site.baseurl }}/images/button_delete.png)
 
 Delete the selected page from the sidebar.
 
-### Show All Changed Pages In New Tabs ![](images/button_newtabs.png)
+### Show All Changed Pages In New Tabs ![]({{ site.baseurl }}/images/button_newtabs.png)
 
 All pages marked as changed are opened in separate tabs, and the changes highlighted. This is useful if there are a lot of changed pages to review.
 

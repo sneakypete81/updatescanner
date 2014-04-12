@@ -11,7 +11,7 @@ next_url: preferences.html
 Page Properties
 ---------------
 
-![Advanced Properties Dialog](images/properties_dialog_advanced_prv.png)
+![Advanced Properties Dialog]({{ site.baseurl }}/images/properties_dialog_advanced_prv.png)
 
 ### Title
 

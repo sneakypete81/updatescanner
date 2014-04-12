@@ -1,5 +1,6 @@
 name: Update Scanner
+baseurl: /upatescanner
+
 markdown: kramdown
-pygments: true
 kramdown:
   input: GFM
