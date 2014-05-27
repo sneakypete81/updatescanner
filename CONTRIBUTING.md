@@ -15,11 +15,6 @@ To build .xpi files, you'll need:
  * Make
  * Python 2.7
 
-To run the unit tests:
- * NPM
- * Mocha
- * Unit.js
-
 ### Build
 
 From your working copy, type the following to build a fresh .xpi:
@@ -27,21 +22,3 @@ From your working copy, type the following to build a fresh .xpi:
 make
 ```
 This should create ```updatescan-<version>.xpi``` in the ```_releases``` directory.
-
-### Unit Tests
-
-First make sure the test dependencies are installed:
-
-```
-npm install mocha unit.js
-```
-
-Then run the tests:
-```
-make test
-```
-
-or
-```
-make test-spec
-```
