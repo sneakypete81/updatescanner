@@ -75,7 +75,7 @@
   </vbox>
   
   <vbox>
-  <toolbarbutton align="top" class="tabs-closebutton" 
+  <toolbarbutton align="top" id="close-button"
                  onclick="USc_alert.onAlertClose();"/>
   <spacer flex="1" onclick="USc_alert.onAlertClick();"/>
   </vbox>
