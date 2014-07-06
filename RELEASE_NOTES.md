@@ -1,6 +1,10 @@
 Update Scanner Release Notes
 ============================
 
+3.1.15:
+-------
+* Fixed: Updated help links to website on Github (#3)
+
 3.1.14:
 -------
 * Fixed: FF29 notification popup has no close button (#5)
