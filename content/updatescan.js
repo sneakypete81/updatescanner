@@ -613,7 +613,7 @@ openHelp : function()
                   .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
                   .getInterface(Components.interfaces.nsIDOMWindow);
 
-    var helpURL="http://updatescanner.sourceforge.net";
+    var helpURL="http://sneakypete81.github.io/updatescanner/";
     
     mainWindow.getBrowser().selectedTab = mainWindow.getBrowser().addTab(helpURL);
 },
