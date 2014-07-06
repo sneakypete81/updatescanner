@@ -157,7 +157,7 @@ var USc_pref = {
   {
     var prefs = Components.classes["@mozilla.org/preferences-service;1"]
                           .getService(Components.interfaces.nsIPrefBranch);
-    var url="http://updatescanner.sourceforge.net";
+    var url="http://sneakypete81.github.io/updatescanner/";
 
     // non-instant apply prefwindows are usually modal, so we can't open in the topmost window, 
     // since its probably behind the window.
