@@ -1,6 +1,10 @@
 Update Scanner Release Notes
 ============================
 
+3.1.16:
+-------
+* Fixed: Removed Mac-specific disabling of permanent notification option (#12, #14)
+
 3.1.15:
 -------
 * Fixed: Updated help links to website on Github (#3)
