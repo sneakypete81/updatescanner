@@ -141,12 +141,7 @@
         <radio label="&autoDetect.label;" selected="true"/>
         <hbox align="center">
             <radio label="&use.label;"/>
-            <menulist id="encodingMenu" disabled="True">
-                <menupopup id="encodingPopup">
-                    <menuitem id="UTF-8" label="Unicode (UTF-8)"/>
-                    <menuseparator/>
-                </menupopup>
-            </menulist>
+            <textbox id="encodingText" size="50" disabled="True"/>
         </hbox>
     </radiogroup>
 </groupbox>    

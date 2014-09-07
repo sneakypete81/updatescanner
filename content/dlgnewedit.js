@@ -90,20 +90,15 @@ function initDialog()
     document.getElementById("ignoreNumbers").checked = args.ignoreNumbers;
     document.getElementById("ignoreNumbers2").checked = args.ignoreNumbers;
 
-    loadAvailableCharSets();
-    charEncodingChanged();
-    
     if (args.encoding == "auto") {
         document.getElementById("autoCharEncoding")
                 .selectedIndex = 0;
     } else {
-        try {
-            document.getElementById("encodingMenu").selectedItem = 
-                           document.getElementById(args.encoding.toLowerCase());
-        } catch (e) {} 
         document.getElementById("autoCharEncoding")
                 .selectedIndex = 1;
+        document.getElementById("encodingText").value = args.encoding;
     }
+    charEncodingChanged();
 
     var advSection = document.getElementById("advSection");
     var advLabel = document.getElementById("advLabel");
@@ -191,7 +186,7 @@ function Ok()
     if (document.getElementById("autoCharEncoding").selectedIndex == 0) {
         args.encoding = "auto";
     } else {
-        args.encoding = document.getElementById("encodingMenu").selectedItem.id;
+        args.encoding = document.getElementById("encodingText").value;
     }
 
     args.highlightChanges = document.getElementById("highlightChanges").checked;
@@ -395,64 +390,11 @@ function highlightChangesChanged()
 function charEncodingChanged()
 {
     var auto=document.getElementById("autoCharEncoding");
-    var encodingMenu = document.getElementById("encodingMenu");
+    var encodingText = document.getElementById("encodingText");
     if  (auto.selectedIndex == 1) {
-        encodingMenu.disabled = false;
+        encodingText.disabled = false;
     } else {
-        encodingMenu.disabled = true;
+        encodingText.disabled = true;
     }
 }
-
-function readRDFString(aDS,aRes,aProp) 
-{
-  var n = aDS.GetTarget(aRes, aProp, true);
-  if (n)
-    return n.QueryInterface(Components.interfaces.nsIRDFLiteral).Value;
-  else 
-    return "";
-}
-
-function loadAvailableCharSets()
-// From Firefox source:
-{
-    var availCharsetDict     = [];
-    var encodingPopup = document.getElementById('encodingPopup');
-    var rdf=Components.classes["@mozilla.org/rdf/rdf-service;1"].getService(Components.interfaces.nsIRDFService); 
-    var kNC_Root = rdf.GetResource("NC:DecodersRoot");
-    var kNC_name = rdf.GetResource("http://home.netscape.com/NC-rdf#Name");
-    var rdfDataSource = rdf.GetDataSource("rdf:charset-menu"); 
-    var rdfContainer = Components.classes["@mozilla.org/rdf/container;1"].getService(Components.interfaces.nsIRDFContainer);
-
-    // Need the following to populate the RDF source?
-    var observerService = Components.classes["@mozilla.org/observer-service;1"].getService(Components.interfaces.nsIObserverService);
-    observerService.notifyObservers(null, "charsetmenu-selected", "other");
-
-    rdfContainer.Init(rdfDataSource, kNC_Root);
-    var availableCharsets = rdfContainer.GetElements();
-    var charset;
-
-    for (var i = 0; i < rdfContainer.GetCount(); i++) {
-      charset = availableCharsets.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-      availCharsetDict[i] = new Array(2);
-      availCharsetDict[i][0] = readRDFString(rdfDataSource, charset, kNC_name);
-      availCharsetDict[i][1] = charset.Value;
-      AddMenuItem(document,
-                  encodingPopup,
-                  availCharsetDict[i][1],
-                  availCharsetDict[i][0]);
-    }
-}
-
-function AddMenuItem(doc, menu, ID, UIstring)
-{
-    try {
-        // Create a treerow for the new item
-        var item = doc.createElement('menuitem');
-
-        // Copy over the attributes
-        item.setAttribute('label', UIstring);
-        item.setAttribute('id', ID.toLowerCase());
-
-        menu.appendChild(item);
-    } catch(e) {}
 }
