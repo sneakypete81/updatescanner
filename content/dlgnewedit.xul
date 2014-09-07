@@ -157,13 +157,6 @@
   <checkbox id="highlightChanges" label="&highlightChanges.label;" oncommand="highlightChangesChanged();" />
     <colorpicker type="button" id="highlightColour" />
   </hbox>
-  <hbox>
-    <spacer width="15" />
-    <vbox>
-      <checkbox id="enableScript" label="&enableScript.label;" />
-      <checkbox id="enableFlash" label="&enableFlash.label;" />
-    </vbox>
-  </hbox>
 </groupbox>
 </vbox>
    
