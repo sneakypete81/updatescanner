@@ -36,25 +36,10 @@ var USc_pref = {
   
   onPrefLoad: function ()
   {
-    // Mac bug: popup window can't be closed - don't allow permanent notifications!
-    if (this.checkOS() == 'macintosh') {
-      this.disableRadioPermanent();
-    }
     // Mac bug: dialog auto sizing doesn't work for some reason.
     window.sizeToContent();
   },
   
-  disableRadioPermanent: function ()
-  {
-    var radioPermanent = document.getElementById("notificationsDisplayRadioPermanent");
-    var prefService = Components.classes["@mozilla.org/preferences-service;1"].getService();
-    prefService = prefService.QueryInterface(Components.interfaces.nsIPrefService);
-    var prefBranch = prefService.getBranch("extensions.updatescan.notifications.");
-
-    radioPermanent.disabled = true;
-    prefBranch.setBoolPref("permanent", false);
-  },
-
   readNotificationsEnable: function ()
   {
     var prefEnable = document.getElementById("notifications.enable");
@@ -65,11 +50,6 @@ var USc_pref = {
     displayRadio.disabled = !prefEnable.value;
     displayTimeEntry.disabled = !prefEnable.value;
     displayTimeEntryLabel.disabled = !prefEnable.value;
-
-    // Mac bug: popup window can't be closed - don't allow permanent notifications!
-    if (this.checkOS() == 'macintosh') {
-      this.disableRadioPermanent();
-    }
 
     // don't override the preference's value in UI
     return undefined;
