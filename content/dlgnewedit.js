@@ -397,4 +397,3 @@ function charEncodingChanged()
         encodingText.disabled = true;
     }
 }
-}
