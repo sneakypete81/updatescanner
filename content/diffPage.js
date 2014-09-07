@@ -230,15 +230,31 @@ _writeContentFrame : function (url, thisContent, enableScript, enableFlash)
     else
         thisContent = header + thisContent;
 
-    var frame = document.getElementById("diffFrame");
+    const XUL = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul";
+    var frame = document.createElementNS(XUL, "iframe");
+    frame.setAttribute("flex", 1);
+    frame.setAttribute("type", "content");
 
-    frame.docShell.allowAuth = false;  
-    frame.docShell.allowMetaRedirects = false;   
-    frame.docShell.allowJavascript = enableScript;  
-    frame.docShell.allowPlugins = enableFlash;  
+    var win = document.getElementById("diffPage");
+    win.appendChild(frame);
 
-    frame.setAttribute("src", "data:text/html," + 
-                       encodeURIComponent(thisContent));  
+    messageHandler = "<script type='text/javascript'>" +
+                     "   document.addEventListener('US_event'," +
+                     "      function(e) {" +
+                     "         document.write(e.target.getAttribute('content')); },false);" +
+                     "</script>";
+
+    frame.contentDocument.open();
+    frame.contentDocument.write(messageHandler);
+    frame.contentDocument.close();
+
+    var element = frame.contentDocument.createElement("US_data");
+    element.setAttribute("content", thisContent);
+    frame.contentDocument.documentElement.appendChild(element);
+
+    var event = frame.contentDocument.createEvent("HTMLEvents");
+    event.initEvent("US_event", true, false);
+    element.dispatchEvent(event);
 }
 };
 }
