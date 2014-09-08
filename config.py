@@ -3,7 +3,7 @@
 
 import sys
 
-version = "3.1.16beta1" # Don't forget to update upgrade.js too!
+version = "3.1.17" # Don't forget to update upgrade.js too!
 publish_babelzilla = False # True = include incomplete locales for babelzilla
 only_english = False # True = only include english for beta releases
 
