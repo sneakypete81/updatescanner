@@ -141,7 +141,14 @@
         <radio label="&autoDetect.label;" selected="true"/>
         <hbox align="center">
             <radio label="&use.label;"/>
-            <textbox id="encodingText" size="50" disabled="True"/>
+            <menulist id="encodingMenu" disabled="True" ref="NC:DecodersRoot" datasources="rdf:charset-menu">
+                <menupopup id="encodingPopup" />
+                <template>
+                    <menupopup>
+                        <menuitem label="rdf:http://home.netscape.com/NC-rdf#Name" charset="..." uri="..." />
+                    </menupopup>
+                </template>
+            </menulist>
         </hbox>
     </radiogroup>
 </groupbox>    

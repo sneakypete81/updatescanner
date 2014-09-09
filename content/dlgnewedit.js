@@ -90,13 +90,15 @@ function initDialog()
     document.getElementById("ignoreNumbers").checked = args.ignoreNumbers;
     document.getElementById("ignoreNumbers2").checked = args.ignoreNumbers;
 
+    loadAvailableCharSets();
+
     if (args.encoding == "auto") {
         document.getElementById("autoCharEncoding")
                 .selectedIndex = 0;
     } else {
         document.getElementById("autoCharEncoding")
                 .selectedIndex = 1;
-        document.getElementById("encodingText").value = args.encoding;
+        document.getElementById("encodingMenu").value = args.encoding.toLowerCase();
     }
     charEncodingChanged();
 
@@ -186,7 +188,7 @@ function Ok()
     if (document.getElementById("autoCharEncoding").selectedIndex == 0) {
         args.encoding = "auto";
     } else {
-        args.encoding = document.getElementById("encodingText").value;
+        args.encoding = document.getElementById("encodingMenu").value;
     }
 
     args.highlightChanges = document.getElementById("highlightChanges").checked;
@@ -390,10 +392,34 @@ function highlightChangesChanged()
 function charEncodingChanged()
 {
     var auto=document.getElementById("autoCharEncoding");
-    var encodingText = document.getElementById("encodingText");
+    var encodingMenu = document.getElementById("encodingMenu");
     if  (auto.selectedIndex == 1) {
-        encodingText.disabled = false;
+        encodingMenu.disabled = false;
     } else {
-        encodingText.disabled = true;
+        encodingMenu.disabled = true;
     }
+}
+
+function loadAvailableCharSets()
+{
+    var encodingPopup = document.getElementById("encodingPopup");
+    Components.classes["@mozilla.org/observer-service;1"]
+        .getService(Components.interfaces.nsIObserverService)
+        .notifyObservers(null, "charsetmenu-selected", "other");
+    if (!encodingPopup.hasChildNodes()) try { // Firefox 32+
+        var CharsetMenu = Components.utils.import("resource://gre/modules/CharsetMenu.jsm", {}).CharsetMenu;
+        var df = document.createDocumentFragment();
+        CharsetMenu.build(df, true, false); // Works only with empty nodes!
+        encodingPopup.appendChild(df);
+    }
+    catch(e) {
+        Components.utils.reportError(e);
+    }
+    Array.forEach(
+        encodingPopup.getElementsByTagName("menuitem"),
+        function(mi) {
+            mi.setAttribute("value", mi.getAttribute("charset").toLowerCase());
+            mi.removeAttribute("type"); // Remove type="radio"
+        }
+    );
 }
