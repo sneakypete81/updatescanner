@@ -56,7 +56,10 @@ homepageURL = "http://updatescanner.sourceforge.net"
 
 allowUpdate = False
 updateURL = "%(homepageURL)s/update.rdf" % vars()
-updateFile = "%(app)s-%(version)s.xpi" % vars()
+if in_development:
+  updateFile = "%(app)s-dev.xpi" % vars()
+else:
+  updateFile = "%(app)s-%(version)s.xpi" % vars()
 updateLink = "%(homepageURL)s/%(updateFile)s" % vars()
 
 firefoxUID = 'ec8030f7-c20a-464f-9b0e-13a3a9e97384'

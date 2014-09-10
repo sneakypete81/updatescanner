@@ -5,6 +5,6 @@ export APP=updatescan
 mkdir -p _build
 cd _build
 
-../scripts/install.rdf.build
-../scripts/chrome.manifest.build
-../scripts/xpi.build
+../scripts/install.rdf.build $*
+../scripts/chrome.manifest.build $*
+../scripts/xpi.build $*
