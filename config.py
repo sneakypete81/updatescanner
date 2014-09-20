@@ -40,7 +40,7 @@ translators = ['stoyan (български език)',
                'Wang King (简化字 - zh-CN)',
                'Peter Pin-Guang Chen (簡化字 - zh-TW)',
                ]
-authorURL = "http://updatescanner.sourceforge.net"
+authorURL = "http://sneakypete81.github.io/updatescanner/"
 uid = 'c07d1a49-9894-49ff-a594-38960ede8fb9'
 optionsChrome = 'chrome://updatescan/content/preferences.xul'
 
@@ -52,7 +52,7 @@ else:
 if in_development:
     version = version + "+"
 
-homepageURL = "http://updatescanner.sourceforge.net"
+homepageURL = "http://sneakypete81.github.io/updatescanner/"
 
 allowUpdate = False
 updateURL = "%(homepageURL)s/update.rdf" % vars()
