@@ -3,7 +3,7 @@
 
 import sys
 
-version = "3.1.17" # Don't forget to update upgrade.js too!
+version = "3.2.0" # Don't forget to update upgrade.js too!
 publish_babelzilla = False # True = include incomplete locales for babelzilla
 only_english = False # True = only include english for beta releases
 
@@ -40,7 +40,7 @@ translators = ['stoyan (български език)',
                'Wang King (简化字 - zh-CN)',
                'Peter Pin-Guang Chen (簡化字 - zh-TW)',
                ]
-authorURL = "http://updatescanner.sourceforge.net"
+authorURL = "http://sneakypete81.github.io/updatescanner/"
 uid = 'c07d1a49-9894-49ff-a594-38960ede8fb9'
 optionsChrome = 'chrome://updatescan/content/preferences.xul'
 
@@ -52,7 +52,7 @@ else:
 if in_development:
     version = version + "+"
 
-homepageURL = "http://updatescanner.sourceforge.net"
+homepageURL = "http://sneakypete81.github.io/updatescanner/"
 
 allowUpdate = False
 updateURL = "%(homepageURL)s/update.rdf" % vars()
@@ -60,8 +60,8 @@ updateFile = "%(app)s-%(version)s.xpi" % vars()
 updateLink = "%(homepageURL)s/%(updateFile)s" % vars()
 
 firefoxUID = 'ec8030f7-c20a-464f-9b0e-13a3a9e97384'
-firefoxMinVersion = '29.0'
-firefoxMaxVersion = '29.0'
+firefoxMinVersion = '32.0'
+firefoxMaxVersion = '32.0'
 
 overlays = (
     # overlay this on that
