@@ -70,12 +70,12 @@ onAlertLoad : function()
 
   sizeToContent();
 
-  me.gFinalHeight = window.outerHeight;  //134  5 lines - 152 6 lines
+  me.gFinalHeight = window.outerHeight;
   if ( me.gFinalHeight > me.g_MAX_HEIGHT ) {
       me.gFinalHeight = me.g_MAX_HEIGHT;
   }
 
-  window.outerHeight = 1;
+  window.resizeTo(window.outerWidth, 1);
 
   // be sure to offset the alert by 10 pixels from the far right edge of the screen
   window.moveTo( (screen.availLeft + screen.availWidth - window.outerWidth) - 10, screen.availTop + screen.availHeight - window.outerHeight);
@@ -173,7 +173,7 @@ _animateAlert : function()
   var me = this;
   if (window.outerHeight < me.gFinalHeight) {
     window.screenY -= me.gSlideIncrement;
-    window.outerHeight += me.gSlideIncrement;
+    window.resizeBy(0, me.gSlideIncrement);
     setTimeout(function(){me._animateAlert();}, me.gSlideTime);
   } else {
       if (prefBranch.getBoolPref("playSound")) {
@@ -191,7 +191,7 @@ _closeAlert : function()
   if (window.outerHeight > 1)
   {
     window.screenY += me.gSlideIncrement;
-    window.outerHeight -= me.gSlideIncrement;
+    window.resizeBy(0, -me.gSlideIncrement);
     setTimeout(function(){me._closeAlert();}, me.gSlideTime);
   }
   else
