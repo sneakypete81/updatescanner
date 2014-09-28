@@ -72,7 +72,7 @@ delete : function()
 
     if (confirm(str.getString("confirmDelete"))) {
         UpdateScanner.Places.deleteBookmark(id);
-        window.location = "about:blank";
+        window.location.href = "about:blank";
     }
 },
 

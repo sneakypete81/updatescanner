@@ -463,7 +463,13 @@ _diffItemThisWindow : function(id)
     var me = UpdateScanner.Updatescan;
     var diffURL = me.diffItem(id, 0);
     if (diffURL) {
-        UpdateScanner.TopWin.open(diffURL);
+        var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+                               .getInterface(Components.interfaces.nsIWebNavigation)
+                               .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
+                               .rootTreeItem
+                               .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+                               .getInterface(Components.interfaces.nsIDOMWindow);
+        mainWindow.getBrowser().selectedBrowser.contentWindow.location.href = diffURL;
         if (me.tree) me.tree.focus();
     }
 },
@@ -498,13 +504,12 @@ _diffItemNewTab : function(id, delay)
 {
     var me = UpdateScanner.Updatescan;
 
-    var mainWindow = window.QueryInterface(
-    Components.interfaces.nsIInterfaceRequestor)
-    .getInterface(Components.interfaces.nsIWebNavigation)
-    .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
-    .rootTreeItem
-    .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
-    .getInterface(Components.interfaces.nsIDOMWindow);
+    var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+                           .getInterface(Components.interfaces.nsIWebNavigation)
+                           .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
+                           .rootTreeItem
+                           .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+                           .getInterface(Components.interfaces.nsIDOMWindow);
 
     var diffURL = me.diffItem(id, delay);
     if (diffURL) {
