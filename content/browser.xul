@@ -52,7 +52,6 @@
   <script src="chrome://updatescan/content/file.js"/>
   <script src="chrome://updatescan/content/autoscan.js"/>
   <script src="chrome://updatescan/content/refresher.js"/>
-  <script src="chrome://updatescan/content/opentopwin.js"/>
   <script src="chrome://updatescan/content/updatescanoverlay.js"/>
   <script src="chrome://updatescan/content/toolbar.js"/>
   <script src="chrome://updatescan/content/string.js"/>
