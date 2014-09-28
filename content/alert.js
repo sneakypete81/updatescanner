@@ -37,9 +37,7 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-if (typeof(USc_alert_exists) != 'boolean') {
-var USc_alert_exists = true;
-var USc_alert = {    
+UpdateScanner.Alert = {
 
 gFinalHeight : 50,
 gSlideIncrement : 4,
@@ -50,18 +48,18 @@ gPermanent : false, // should the window stay open permanently (until manually c
 
 g_MAX_HEIGHT : 134,
 
-prefillAlertInfo : function() 
+prefillAlertInfo : function()
 {
     var label = document.getElementById("message");
     label.value=window.arguments[0];
-              
+
 },
 
 onAlertLoad : function()
 {
-  var me = USc_alert;
+  var me = this;
   // read out our initial settings from prefs.
-  try 
+  try
   {
     var prefService = Components.classes["@mozilla.org/preferences-service;1"].getService();
     prefService = prefService.QueryInterface(Components.interfaces.nsIPrefService);
@@ -82,7 +80,7 @@ onAlertLoad : function()
   // be sure to offset the alert by 10 pixels from the far right edge of the screen
   window.moveTo( (screen.availLeft + screen.availWidth - window.outerWidth) - 10, screen.availTop + screen.availHeight - window.outerHeight);
 
-  setTimeout(function() {USc_alert._animateAlert();}, me.gSlideTime);
+  setTimeout(function() {me._animateAlert();}, me.gSlideTime);
 
 },
 
@@ -103,7 +101,7 @@ _playSound : function()
       } else {
           var file = prefBranch.getComplexValue("soundFile", Components.interfaces.nsILocalFile);
           url = ioService.newFileURI(file);
-      }          
+      }
       player.init();
       player.play(url);
   } catch(ex) { }
@@ -124,19 +122,20 @@ onAlertClick : function()
 
 onLinkClick : function(aEvent)
 {
+    var me = this;
     var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
                        .getService(Components.interfaces.nsIWindowMediator);
     var win = wm.getMostRecentWindow("navigator:browser");
 
-    // Can't just call Usc_Updatescan.Showallchangesinnewtabs, since
+    // Can't just call UpdateScanner.Updatescan.Showallchangesinnewtabs, since
     // window value is incorrect in this scope.
-    USc_places.callFunctionWithUpdatedItems(USc_places.getRootFolderId(),
-                                          this._diffItemNewTabBackground);   
+    UpdateScanner.Places.callFunctionWithUpdatedItems(UpdateScanner.Places.getRootFolderId(),
+                                                      this._diffItemNewTabBackground);
     win.focus();
 
     // Close the alert soon
-    setTimeout(function(){USc_alert._closeAlert();}, USc_alert.gOpenTimeAfterLinkClick);
-    // Don't open the sidebar 
+    setTimeout(function(){me._closeAlert();}, me.gOpenTimeAfterLinkClick);
+    // Don't open the sidebar
     aEvent.stopPropagation();
 },
 
@@ -154,7 +153,7 @@ _diffItemNewTabBackground : function(id, delay)
     .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
     .getInterface(Components.interfaces.nsIDOMWindow);
 
-    var diffURL = USc_updatescan._diffItem(id, delay);
+    var diffURL = UpdateScanner.Updatescan.diffItem(id, delay);
     if (diffURL) {
       mainWindow.getBrowser().addTab(diffURL);
     }
@@ -162,7 +161,7 @@ _diffItemNewTabBackground : function(id, delay)
 
 onAlertClose: function()
 {
-    var me = USc_alert;
+    var me = this;
     me._closeAlert();
 },
 
@@ -171,34 +170,33 @@ _animateAlert : function()
   var prefService = Components.classes["@mozilla.org/preferences-service;1"].getService();
   prefService = prefService.QueryInterface(Components.interfaces.nsIPrefService);
   var prefBranch = prefService.getBranch("extensions.updatescan.notifications.");
-  var me = USc_alert;
+  var me = this;
   if (window.outerHeight < me.gFinalHeight) {
     window.screenY -= me.gSlideIncrement;
     window.outerHeight += me.gSlideIncrement;
-    setTimeout(function(){USc_alert._animateAlert();}, me.gSlideTime);
+    setTimeout(function(){me._animateAlert();}, me.gSlideTime);
   } else {
       if (prefBranch.getBoolPref("playSound")) {
-	  me._playSound();
+        me._playSound();
       }
     if (!me.gPermanent) {
-      setTimeout(function(){USc_alert._closeAlert();}, me.gOpenTime);
+      setTimeout(function(){me._closeAlert();}, me.gOpenTime);
     }
   }
 },
 
 _closeAlert : function()
 {
-  var me = USc_alert;
+  var me = this;
   if (window.outerHeight > 1)
   {
     window.screenY += me.gSlideIncrement;
     window.outerHeight -= me.gSlideIncrement;
-    setTimeout(function(){USc_alert._closeAlert();}, me.gSlideTime);
+    setTimeout(function(){me._closeAlert();}, me.gSlideTime);
   }
   else
   {
-    window.close(); 
+    window.close();
   }
 }
-}
-}
+};

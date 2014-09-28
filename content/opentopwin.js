@@ -35,13 +35,11 @@
  * the terms of any one of the MPL, the GPL or the LGPL.
  *
  * ***** END LICENSE BLOCK ***** */
- 
+
  /* These functions are from the Thunderbird source (utilityOverlay.js) */
 
-if (typeof(USc_topWin_exists) != 'boolean') {
-var USc_topWin_exists = true;
-var USc_topWin = {    
- 
+UpdateScanner.TopWin = {
+
 get : function()
 {
     var windowManager = Components.classes['@mozilla.org/appshell/window-mediator;1'].getService();
@@ -69,7 +67,7 @@ open : function(url)
         url = "about:blank";
     }
 
-    var topWindowOfType = USc_topWin.get();
+    var topWindowOfType = UpdateScanner.TopWin.get();
     if ( topWindowOfType )
     {
         topWindowOfType.focus();
@@ -77,6 +75,5 @@ open : function(url)
         return topWindowOfType;
     }
     return window.openDialog( getBrowserURL(), "_blank", "chrome,all,dialog=no", url );
-}
-}
-}
+},
+};

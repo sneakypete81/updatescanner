@@ -5,20 +5,20 @@
  * Version 1.1 (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License at
  * http://www.mozilla.org/MPL/
- * 
+ *
  * Software distributed under the License is distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
  * License for the specific language governing rights and limitations
  * under the License.
- * 
+ *
  * The Original Code is Update Scanner.
- * 
+ *
  * The Initial Developer of the Original Code is Pete Burgers.
  * Portions created by Pete Burgers are Copyright (C) 2006-2007
  * All Rights Reserved.
- * 
+ *
  * Contributor(s):
- * 
+ *
  * Alternatively, the contents of this file may be used under the terms of
  * either the GNU General Public License Version 2 or later (the "GPL"), or
  * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
@@ -29,7 +29,7 @@
  * decision by deleting the provisions above and replace them with the notice
  * and other provisions required by the GPL or the LGPL. If you do not delete
  * the provisions above, a recipient may use your version of this file under
- * the terms of any one of the MPL, the GPL or the LGPL.  
+ * the terms of any one of the MPL, the GPL or the LGPL.
  * ***** END LICENSE BLOCK ***** -->
 
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
@@ -38,8 +38,8 @@
 <?xul-overlay href="chrome://browser/content/places/placesOverlay.xul"?>
 <?xul-overlay href="chrome://global/content/editMenuOverlay.xul"?>
 <?xml-stylesheet href="chrome://browser/skin/browser.css" type="text/css"?>
-<?xml-stylesheet href="chrome://updatescan/skin/updatescan.css" 
-		 type="text/css"?>
+<?xml-stylesheet href="chrome://updatescan/skin/updatescan.css"
+                 type="text/css"?>
 
 
 <!DOCTYPE overlay [
@@ -53,46 +53,47 @@
 
 
 <window id="UpdateScan-window"
-	onload="USc_updatescan.load();"
-	onunload="USc_updatescan.unload();"
-	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-	xmlns:UPDATESCAN="http://www.updatescan.com/rdf/updatescan#">
+        onload="UpdateScanner.Updatescan.load();"
+        onunload="UpdateScanner.Updatescan.unload();"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:UPDATESCAN="http://www.updatescan.com/rdf/updatescan#">
 
-  <stringbundle id="updatescanStrings" 
-		src="chrome://updatescan/locale/updatescan.properties"/>
+  <stringbundle id="updatescanStrings"
+                src="chrome://updatescan/locale/updatescan.properties"/>
 
-  <script src="updatescan.js"/>
-  <script src="scan.js"/>
-  <script src="fuzzy.js"/>
-  <script src="diffwiki.js"/>
-  <script src="io.js"/>
-  <script src="file.js"/>
-  <script src="autoscan.js"/>
-  <script src="refresher.js"/>
-  <script src="opentopwin.js"/>
-  <script src="updatescanoverlay.js"/>
-  <script src="upgrade.js"/>
-  <script src="string.js"/>
-  <script src="places.js"/>
+  <script src="chrome://updatescan/content/namespace.js" />
+  <script src="chrome://updatescan/content/updatescan.js"/>
+  <script src="chrome://updatescan/content/scan.js"/>
+  <script src="chrome://updatescan/content/fuzzy.js"/>
+  <script src="chrome://updatescan/content/diffwiki.js"/>
+  <script src="chrome://updatescan/content/io.js"/>
+  <script src="chrome://updatescan/content/file.js"/>
+  <script src="chrome://updatescan/content/autoscan.js"/>
+  <script src="chrome://updatescan/content/refresher.js"/>
+  <script src="chrome://updatescan/content/opentopwin.js"/>
+  <script src="chrome://updatescan/content/updatescanoverlay.js"/>
+  <script src="chrome://updatescan/content/upgrade.js"/>
+  <script src="chrome://updatescan/content/string.js"/>
+  <script src="chrome://updatescan/content/places.js"/>
 
   <script type="application/x-javascript" src="chrome://browser/content/bookmarks/sidebarUtils.js"/>
   <script type="application/x-javascript" src="chrome://global/content/contentAreaUtils.js"/>
 
   <vbox flex="1">
     <hbox pack="left">
-      <toolbarbutton id="new-button" oncommand="USc_updatescan.openNewDialogCurrentPos()" tooltiptext="&newbutton.tooltip;"/>
-      <toolbarbutton id="newtab-button" oncommand="USc_updatescan.showAllChangesInNewTabs()" tooltiptext="&showallchangesinnewtabsbutton.tooltip;"/>
-      <toolbarbutton id="checked-button" oncommand="USc_updatescan.markAllAsVisited()" tooltiptext="&markallasvisitedbutton.tooltip;"/>
-      <toolbarbutton id="delete-button" oncommand="USc_updatescan.deleteSelectedItem()" tooltiptext="&deletebutton.tooltip;"/>
-      <toolbarbutton id="settings-button" oncommand="USc_updatescan.openPreferences()" tooltiptext="&preferencesbutton.tooltip;"/>
-      <toolbarbutton id="help-button" onclick="USc_updatescan.openHelp();" tooltiptext="&helpbutton.tooltip;"/>
+      <toolbarbutton id="new-button" oncommand="UpdateScanner.Updatescan.openNewDialogCurrentPos()" tooltiptext="&newbutton.tooltip;"/>
+      <toolbarbutton id="newtab-button" oncommand="UpdateScanner.Updatescan.showAllChangesInNewTabs()" tooltiptext="&showallchangesinnewtabsbutton.tooltip;"/>
+      <toolbarbutton id="checked-button" oncommand="UpdateScanner.Updatescan.markAllAsVisited()" tooltiptext="&markallasvisitedbutton.tooltip;"/>
+      <toolbarbutton id="delete-button" oncommand="UpdateScanner.Updatescan.deleteSelectedItem()" tooltiptext="&deletebutton.tooltip;"/>
+      <toolbarbutton id="settings-button" oncommand="UpdateScanner.Updatescan.openPreferences()" tooltiptext="&preferencesbutton.tooltip;"/>
+      <toolbarbutton id="help-button" onclick="UpdateScanner.Updatescan.openHelp();" tooltiptext="&helpbutton.tooltip;"/>
       <toolbarspring />
       <button observes="scanbutton" />
     </hbox>
 
     <tree id="updatescan-bookmarks-view"
           class="sidebar-placesTree"
-          flex="1" 
+          flex="1"
           hidecolumnpicker="true"
           seltype="single"
           context="updatescanSidebarContext"
@@ -101,19 +102,19 @@
           <treecol id="title" flex="1" primary="true" hideheader="true"/>
       </treecols>
       <treechildren class="sidebar-placesTreechildren"/>
-    </tree> 
+    </tree>
 
     <hbox>
-      <progressmeter id="Progress" mode="normal" value="0" 
-		     collapsed="true" flex="1"/>
+      <progressmeter id="Progress" mode="normal" value="0"
+                     collapsed="true" flex="1"/>
     </hbox>
     <label id="StatusText" crop="end" value=""/>
   </vbox>
-    
+
   <broadcasterset>
     <broadcaster id="scanbutton"
-                 oncommand="USc_updatescan.scanButtonClick()" 
-                 scanbuttonlabel="&scanbutton.label;" 
+                 oncommand="UpdateScanner.Updatescan.scanButtonClick()"
+                 scanbuttonlabel="&scanbutton.label;"
                  stopbuttonlabel="&stopbutton.label;" />
   </broadcasterset>
 
@@ -126,26 +127,26 @@
     <menuitem id="open"
               label="&openmenu.label;"
               accesskey="&openmenu.accesskey;"
-              oncommand="USc_updatescan.diffSelectedItemThisWindow();"/>
+              oncommand="UpdateScanner.Updatescan.diffSelectedItemThisWindow();"/>
     <menuitem id="openItemTab"
               label="&opentabmenu.label;"
               accesskey="&opentabmenu.accesskey;"
-              oncommand="USc_updatescan.diffSelectedItemNewTab();"/>
+              oncommand="UpdateScanner.Updatescan.diffSelectedItemNewTab();"/>
     <menuitem id="openFolderTab"
               label="&opentabsmenu.label;"
               accesskey="&opentabsmenu.accesskey;"
-              oncommand="USc_updatescan.diffSelectedFolderNewTab();"/>
+              oncommand="UpdateScanner.Updatescan.diffSelectedFolderNewTab();"/>
     <menuitem id="scanPage"
               label="&scanThisPage.label;"
               accesskey="&scanThisPage.accesskey;"
-              oncommand="USc_updatescan.scanSelected();"/>
+              oncommand="UpdateScanner.Updatescan.scanSelected();"/>
     <menuitem id="scanFolder"
               label="&scanThisFolder.label;"
               accesskey="&scanThisFolder.accesskey;"
-              oncommand="USc_updatescan.scanSelected();"/>
+              oncommand="UpdateScanner.Updatescan.scanSelected();"/>
     <menuseparator/>
     <menuitem id="placesContext_new:bookmark"
-              oncommand="USc_updatescan.openNewDialogCurrentPos();"
+              oncommand="UpdateScanner.Updatescan.openNewDialogCurrentPos();"
               label="&cmd.new_bookmark.label;"
               accesskey="&cmd.new_bookmark.accesskey;"/>
     <menuitem id="placesContext_new:folder"
@@ -165,7 +166,7 @@
     <menuitem id="deleteItem"
               label="&deleteCmd.label;"
               accesskey="&deleteCmd.accesskey;"
-              oncommand="USc_updatescan.deleteSelectedItem();"/>
+              oncommand="UpdateScanner.Updatescan.deleteSelectedItem();"/>
     <menuseparator/>
     <menuitem id="placesContext_sortBy:name"
               command="placesCmd_sortBy:name"
@@ -176,15 +177,15 @@
     <menuitem id="markVisited"
               label="&markvisitedmenu.label;"
               accesskey="&markvisitedmenu.accesskey;"
-              oncommand="USc_updatescan.markAllAsVisited();"/>
+              oncommand="UpdateScanner.Updatescan.markAllAsVisited();"/>
     <menuitem id="placesContext_show:info"
-              label="&cmd.properties.label;" 
-              oncommand="USc_updatescan.openEditDialogForSelected();"
+              label="&cmd.properties.label;"
+              oncommand="UpdateScanner.Updatescan.openEditDialogForSelected();"
               accesskey="&cmd.properties.accesskey;"
               selection="bookmark|folder|query"
               forcehideselection="livemarkChild"/>
 
   </menupopup>
-    
+
 </window>
 
