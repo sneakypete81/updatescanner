@@ -139,10 +139,11 @@ UpdateScanner.Pref = {
 
     // non-instant apply prefwindows are usually modal, so we can't open in the topmost window,
     // since its probably behind the window.
-    var instantApply = prefs.getBoolPref("browser.preferences.instantApply");
-    var where = instantApply ? "tab" : "window";
-
-    openUILinkIn(url, where);
+    if (prefs.getBoolPref("browser.preferences.instantApply")) {
+      openUILinkIn(url, "tab");
+    } else {
+      openUILinkIn(url, "window");
+    }
   },
 
 };
