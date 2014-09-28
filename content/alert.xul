@@ -82,6 +82,9 @@
   </vbox>
 </hbox>
 </vbox>
+
+<audio xmlns="http://www.w3.org/1999/xhtml" id="alertSound"/>
+
 <!-- This method is called inline because we want to make sure we establish the width
      and height of the alert before we fire the onload handler. -->
 <script type="application/x-javascript">UpdateScanner.Alert.prefillAlertInfo();</script>

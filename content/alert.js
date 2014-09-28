@@ -92,19 +92,17 @@ _playSound : function()
   var ioService = Components.classes["@mozilla.org/network/io-service;1"]
                             .getService(Components.interfaces.nsIIOService)
   var url;
-  var player = Components.classes["@mozilla.org/sound;1"]
-                         .createInstance(Components.interfaces.nsISound);
 
-  try {
-      if (prefBranch.getBoolPref("defaultSound")) {
-          url = ioService.newURI("chrome://updatescan/content/defaultNotification.wav",null,null);
-      } else {
-          var file = prefBranch.getComplexValue("soundFile", Components.interfaces.nsILocalFile);
-          url = ioService.newFileURI(file);
-      }
-      player.init();
-      player.play(url);
-  } catch(ex) { }
+  if (prefBranch.getBoolPref("defaultSound")) {
+      url = "chrome://updatescan/content/defaultNotification.wav";
+  } else {
+      var file = prefBranch.getComplexValue("soundFile", Components.interfaces.nsILocalFile);
+      url = ioService.newFileURI(file).resolve("");
+  }
+
+  var audio = document.getElementById("alertSound");
+  audio.src = url
+  audio.play();
 },
 
 
