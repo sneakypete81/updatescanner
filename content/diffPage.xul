@@ -41,20 +41,21 @@
 	title="Update Scanner Results"
 	xmlns:html="http://www.w3.org/1999/xhtml"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-        onload="USc_diffPage.load();">
+        onload="UpdateScanner.DiffPage.load();">
 
   <stringbundle id="updatescanStrings" 
 		src="chrome://updatescan/locale/updatescan.properties"/>
   <stringbundle id="diffPageStrings" 
 		src="chrome://updatescan/locale/diffPage.properties"/>
 
-  <script src="diffPage.js"/>
-  <script src="diffwiki.js"/>
-  <script src="file.js"/>
-  <script src="io.js"/>
-  <script src="string.js"/>
-  <script src="places.js"/>
-  <script src="updatescan.js"/>
+  <script src="chrome://updatescan/content/namespace.js" />
+  <script src="chrome://updatescan/content/diffPage.js"/>
+  <script src="chrome://updatescan/content/diffwiki.js"/>
+  <script src="chrome://updatescan/content/file.js"/>
+  <script src="chrome://updatescan/content/io.js"/>
+  <script src="chrome://updatescan/content/string.js"/>
+  <script src="chrome://updatescan/content/places.js"/>
+  <script src="chrome://updatescan/content/updatescan.js"/>
 
   <hbox class="blue-box">
   <spacer width="10"/>
@@ -117,9 +118,9 @@
   <spacer flex="1"/>
   <vbox>
     <label class="text-link" value="&editProperties;"
-           onclick="USc_diffPage.editProperties()"/>
+           onclick="UpdateScanner.DiffPage.editProperties()"/>
     <label class="text-link" value="&delete;"
-           onclick="USc_diffPage.delete()"/>
+           onclick="UpdateScanner.DiffPage.delete()"/>
   </vbox>
 
   </hbox>

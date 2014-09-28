@@ -7,9 +7,7 @@
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 
-if (typeof(USc_io_exists) != 'boolean') {
-var USc_io_exists = true;
-var USc_io = {    
+UpdateScanner.Io = {
 
 
     /////////////////////////////////////////////////
@@ -198,9 +196,8 @@ var USc_io = {
                 // foobar!
             }
             return data;
-        }
-
-    }
+        },
+};
 
 
     /////////////////////////////////////////////////
@@ -209,10 +206,10 @@ var USc_io = {
     /////////////////////////////////////////////////
 
     // Example use:
-    // var dir = DirIO.open('/test');
+    // var dir = UpdateScanner.DirIo.open('/test');
     // if (dir.exists()) {
-    //     alert(DirIO.path(dir));
-    //     var arr = DirIO.read(dir, true), i;
+    //     alert(UpdateScanner.DirIo.path(dir));
+    //     var arr = UpdateScanner.DirIo.read(dir, true), i;
     //     if (arr) {
     //         for (i = 0; i < arr.length; ++i) {
     //             alert(arr[i].path);
@@ -220,7 +217,7 @@ var USc_io = {
     //     }
     // }
     // else {
-    //     var rv = DirIO.create(dir);
+    //     var rv = UpdateScanner.DirIo.create(dir);
     //     alert('Directory create: ' + rv);
     // }
 
@@ -240,8 +237,7 @@ var USc_io = {
     //     'CurProcD'            = installation (usually)
     //     'Home'                = OS root (e.g., /root)
     //     'TmpD'                = OS tmp (e.g., /tmp)
-
-    var DirIO = {
+UpdateScanner.DirIo = {
 
         sep        : '/',
 
@@ -264,7 +260,7 @@ var USc_io = {
         },
 
         open   : function(path) {
-            return USc_io.open(path);
+            return UpdateScanner.Io.open(path);
         },
 
         create : function(dir) {
@@ -299,7 +295,7 @@ var USc_io = {
             try {
                 while (dirEntry.hasMoreElements()) {
                     list.push(dirEntry.getNext()
-                                    .QueryInterface(USc_io.localfileIID));
+                                    .QueryInterface(UpdateScanner.Io.localfileIID));
                 }
                 if (recursive) {
                     var list2 = new Array();
@@ -334,7 +330,7 @@ var USc_io = {
         },
 
         path   : function (dir) {
-            return USc_io.path(dir);
+            return UpdateScanner.Io.path(dir);
         },
 
         split  : function(str, join) {
@@ -355,12 +351,9 @@ var USc_io = {
                                         this.sep : '');
             }
             return str;
-        }
-    
-    }
+        },
+};
 
-    if (navigator.platform.toLowerCase().indexOf('win') > -1) {
-        DirIO.sep = '\\';
-    }
-
+if (navigator.platform.toLowerCase().indexOf('win') > -1) {
+    UpdateScanner.DirIo.sep = '\\';
 }

@@ -43,10 +43,11 @@
 <prefwindow id="updatescanner-prefs"
      title="&preferences.title;"
      xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-     onload="USc_pref.onPrefLoad();"
+     onload="UpdateScanner.Pref.onPrefLoad();"
      buttons="accept,cancel,help"
-     ondialoghelp="USc_pref.openHelp();">
+     ondialoghelp="UpdateScanner.Pref.openHelp();">
 
+<script src="chrome://updatescan/content/namespace.js" />
 <script type="application/javascript" src="chrome://browser/content/utilityOverlay.js"/>
 <script type="application/x-javascript" src="chrome://updatescan/content/preferences.js"/>
 
@@ -76,12 +77,12 @@
  <groupbox>
   <checkbox label="&notifications.enable.label;" 
             preference="notifications.enable"
-            onsyncfrompreference="return USc_pref.readNotificationsEnable();"/>
+            onsyncfrompreference="return UpdateScanner.Pref.readNotificationsEnable();"/>
   <radiogroup id="notificationsDisplayRadio" 
               class="indent"
               preference="notifications.permanent" 
-              onsyncfrompreference="return USc_pref.readNotificationsPermanent();"
-              onsynctopreference="return USc_pref.writeNotificationsPermanent();">
+              onsyncfrompreference="return UpdateScanner.Pref.readNotificationsPermanent();"
+              onsynctopreference="return UpdateScanner.Pref.writeNotificationsPermanent();">
    <hbox align="center">
     <radio label="&notifications.timed.label1;" value="timed"/>
     <textbox id="notificationsDisplayTimeEntry"
@@ -99,22 +100,22 @@
   <groupbox>
   <checkbox label="&notifications.playSound.label;"
             preference="notifications.playSound"
-            onsyncfrompreference="return USc_pref.readNotificationsPlaySound()"/>
+            onsyncfrompreference="return UpdateScanner.Pref.readNotificationsPlaySound()"/>
   <radiogroup id="notificationsSoundRadio" 
               class="indent"
               preference="notifications.defaultSound" 
-              onsyncfrompreference="return USc_pref.readNotificationsDefaultSound();"
-              onsynctopreference="return USc_pref.writeNotificationsDefaultSound();">
+              onsyncfrompreference="return UpdateScanner.Pref.readNotificationsDefaultSound();"
+              onsynctopreference="return UpdateScanner.Pref.writeNotificationsDefaultSound();">
   <radio label="&notifications.defaultSound.label;" value="default"/>
   <hbox>
     <radio value="file" />
     <filefield id="notificationsSoundFile" flex="1"
                preference="notifications.soundFile"
                preference-editable="true"
-               onsyncfrompreference="return USc_pref.readNotificationsSoundFile();"/>
+               onsyncfrompreference="return UpdateScanner.Pref.readNotificationsSoundFile();"/>
     <button label="&notifications.browse.label;"
             id="notificationsSoundBrowse"
-            oncommand="USc_pref.soundBrowseClick();"/>
+            oncommand="UpdateScanner.Pref.soundBrowseClick();"/>
   </hbox>
   </radiogroup>
   </groupbox>

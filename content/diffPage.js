@@ -29,10 +29,8 @@
  * the provisions above, a recipient may use your version of this file under
  * the terms of any one of the MPL, the GPL or the LGPL.  
  * ***** END LICENSE BLOCK ***** */
- 
-if (typeof(USc_diffPage_exists) != 'boolean') {
-var USc_diffPage_exists = true;
-var USc_diffPage = {    
+
+UpdateScanner.DiffPage = {
 
 load : function()
 {
@@ -41,7 +39,7 @@ load : function()
         var delay = this._getUrlParameter("delay", "0");
         this.timer = (Components.classes["@mozilla.org/timer;1"]
                       .createInstance(Components.interfaces.nsITimer));
-        this.timer.initWithCallback(USc_diffPage_timer,
+        this.timer.initWithCallback(UpdateScanner.DiffPageTimer,
                                     delay * 1000,
                                     Components.interfaces.nsITimer.TYPE_ONE_SHOT);
 
@@ -63,37 +61,33 @@ _getUrlParameter : function (name, def)
 
 editProperties : function()
 {
-    var id = USc_diffPage._getUrlParameter("id", "");
-    USc_updatescan.openEditDialog(id);
+    var id = UpdateScanner.DiffPage._getUrlParameter("id", "");
+    UpdateScanner.Updatescan.openEditDialog(id);
 },
 
 delete : function()
 {
     var str = document.getElementById("diffPageStrings");
-    var id = USc_diffPage._getUrlParameter("id", "");
+    var id = UpdateScanner.DiffPage._getUrlParameter("id", "");
     
     if (confirm(str.getString("confirmDelete"))) {
-        USc_places.deleteBookmark(id);
+        UpdateScanner.Places.deleteBookmark(id);
         window.location = "about:blank";
     }
 },
 
 };
 
-var USc_diffPage_timer = {
+UpdateScanner.DiffPageTimer = {
 
 notify : function(timer) 
 {
-    // Abort if the tab has been closed before we got here
-    if (typeof(USc_diffPage_exists) != 'boolean')
-        return;
-
-    var id = USc_diffPage._getUrlParameter("id", "");
-    var title = USc_diffPage._getUrlParameter("title", "");
-    var newDate = USc_diffPage._getUrlParameter("newDate", "");
-    var oldDate = USc_diffPage._getUrlParameter("oldDate", "");
-    var url = USc_diffPage._getUrlParameter("url", "");
-    var view = USc_diffPage._getUrlParameter("view", "diff");
+    var id = UpdateScanner.DiffPage._getUrlParameter("id", "");
+    var title = UpdateScanner.DiffPage._getUrlParameter("title", "");
+    var newDate = UpdateScanner.DiffPage._getUrlParameter("newDate", "");
+    var oldDate = UpdateScanner.DiffPage._getUrlParameter("oldDate", "");
+    var url = UpdateScanner.DiffPage._getUrlParameter("url", "");
+    var view = UpdateScanner.DiffPage._getUrlParameter("view", "diff");
 
     document.title = title;
     document.getElementById("title").value=title;
@@ -110,17 +104,17 @@ notify : function(timer)
     var oldContent="";
     var enableDiffLinks = true;
 
-    var filebase = USc_places.queryAnno(id, USc_places.ANNO_SIGNATURE, "");
+    var filebase = UpdateScanner.Places.queryAnno(id, UpdateScanner.Places.ANNO_SIGNATURE, "");
     if (filebase != "") {
-        oldContent  = USc_file.USreadFile(filebase+".old");
-        newContent  = USc_file.USreadFile(filebase+".new");
+        oldContent  = UpdateScanner.File.USreadFile(filebase+".old");
+        newContent  = UpdateScanner.File.USreadFile(filebase+".new");
     }
     if (newContent=="") {
         view="notChecked";
         enableDiffLinks = false;
     }
-    if (USc_places.queryAnno(id, USc_places.ANNO_STATUS, "")
-        == USc_places.STATUS_ERROR)
+    if (UpdateScanner.Places.queryAnno(id, UpdateScanner.Places.ANNO_STATUS, "")
+        == UpdateScanner.Places.STATUS_ERROR)
     {
         view="error";
         enableDiffLinks = false;
@@ -128,14 +122,14 @@ notify : function(timer)
 
     switch (view) {
     case "diff" :
-        var highlightColour = USc_places.queryAnno(id, USc_places.ANNO_HIGHLIGHT_COLOUR,
-                                                   USc_defaults.DEF_HIGHLIGHT_COLOUR);
+        var highlightColour = UpdateScanner.Places.queryAnno(id, UpdateScanner.Places.ANNO_HIGHLIGHT_COLOUR,
+                                                             UpdateScanner.Defaults.DEF_HIGHLIGHT_COLOUR);
         // Set heading label highlight background
         document.getElementById("highlightedLabel").
             setAttribute('style', 'font-weight:bold;background: ' + highlightColour);
         document.getElementById("sectionDiff").hidden=false;
         document.getElementById("dateDiff").value=newDate;
-        thisContent = USc_diffWiki.WDiffString(oldContent, newContent, highlightColour);
+        thisContent = UpdateScanner.DiffWiki.WDiffString(oldContent, newContent, highlightColour);
         break;
     case "new":
         document.getElementById("sectionNew").hidden=false;
@@ -250,6 +244,5 @@ _writeContentFrame : function (url, thisContent)
     var event = frame.contentDocument.createEvent("HTMLEvents");
     event.initEvent("US_event", true, false);
     element.dispatchEvent(event);
-}
+},
 };
-}

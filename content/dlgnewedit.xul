@@ -39,13 +39,14 @@
 <dialog id="dlgNewEdit" 
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         buttons="accept,cancel"
-        onload="initDialog();"
-        ondialogaccept="return Ok();"
-        ondialogcancel="return Cancel();">
+        onload="UpdateScanner.DlgNewEdit.initDialog();"
+        ondialogaccept="return UpdateScanner.DlgNewEdit.Ok();"
+        ondialogcancel="return UpdateScanner.DlgNewEdit.Cancel();">
 
 <stringbundle id="USc_strings" src="chrome://updatescan/locale/dlgnewedit.properties"/>
 
-<script src="dlgnewedit.js"/>
+<script src="chrome://updatescan/content/namespace.js" />
+<script src="chrome://updatescan/content/dlgnewedit.js"/>
 
 <spacer class="margintopbottom"/>
 <grid>
@@ -77,7 +78,7 @@
         <scale id="sliderAutoscan"
                pageincrement="1"
                flex="100%"
-               onchange="sliderAutoscanChange();"/>        
+               onchange="UpdateScanner.DlgNewEdit.sliderAutoscanChange();"/>
         <label value="&never.label;" />
     </hbox>
     <vbox align="center">
@@ -87,7 +88,7 @@
 
 <groupbox id="groupboxAutoscanNumbers">
   <caption label="&autoscan.label;" />
-  <radiogroup id="manualScan" onselect="manualScanChanged()">
+  <radiogroup id="manualScan" onselect="UpdateScanner.DlgNewEdit.manualScanChanged()">
     <radio label="&manualScan.label;"/>
     <hbox align="center">
       <radio label="&scanEvery.label;"/>
@@ -112,7 +113,7 @@
         <scale id="sliderThreshold"
                flex="100%"
                pageincrement="1"
-               onchange="sliderThresholdChange();"/>
+               onchange="UpdateScanner.DlgNewEdit.sliderThresholdChange();"/>
         <label value="&high.label;" />
     </hbox>
     <vbox align="center">
@@ -132,12 +133,12 @@
 </groupbox>
 
 <label id="advLabel" value="&advanced.label;" 
-       onclick="advancedClick();" class="text-link" />
+       onclick="UpdateScanner.DlgNewEdit.advancedClick();" class="text-link" />
 
 <vbox id="advSection" hidden="true">
 <groupbox>
     <caption label="&charEncoding.label;" />
-    <radiogroup id="autoCharEncoding" onselect="charEncodingChanged();">
+    <radiogroup id="autoCharEncoding" onselect="UpdateScanner.DlgNewEdit.charEncodingChanged();">
         <radio label="&autoDetect.label;" selected="true"/>
         <hbox align="center">
             <radio label="&use.label;"/>
@@ -149,7 +150,7 @@
 <groupbox>
   <caption label="&changeHighlighting.label;" />
   <hbox align="centre">
-  <checkbox id="highlightChanges" label="&highlightChanges.label;" oncommand="highlightChangesChanged();" />
+  <checkbox id="highlightChanges" label="&highlightChanges.label;" oncommand="UpdateScanner.DlgNewEdit.highlightChangesChanged();" />
     <colorpicker type="button" id="highlightColour" />
   </hbox>
 </groupbox>

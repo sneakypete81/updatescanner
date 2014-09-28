@@ -32,9 +32,7 @@
  * the terms of any one of the MPL, the GPL or the LGPL.  
  * ***** END LICENSE BLOCK ***** */
 
-if (typeof(USc_upgrade_exists) != 'boolean') {
-var USc_upgrade_exists = true;
-var USc_upgrade = {    
+UpdateScanner.Upgrade = {
 
 
 VERSION : "3.2.0",
@@ -44,14 +42,14 @@ check : function()
     var gBundle = Components.classes["@mozilla.org/intl/stringbundle;1"].getService(Components.interfaces.nsIStringBundleService);
     var strings = gBundle.createBundle("chrome://updatescan/locale/updatescan.properties");
 
-    if (!USc_file.updatescanDirExists()) {
-        USc_file.createUpdatescanDir();
+    if (!UpdateScanner.File.updatescanDirExists()) {
+        UpdateScanner.File.createUpdatescanDir();
     }
     
     if (this.isNewInstall()) {
         this.createRootBookmark();
         this.createUSBookmark();
-        USc_toolbar.installAddonbarIcon();
+        UpdateScanner.Toolbar.installAddonbarIcon();
         this.updateVersion()
         return;
     }
@@ -62,7 +60,7 @@ check : function()
     }
 
     if (this.isVersionBefore("3.1.4")) {
-        USc_toolbar.installAddonbarIcon();
+        UpdateScanner.Toolbar.installAddonbarIcon();
     }
 
     if (this.isVersionBefore(this.VERSION)) {
@@ -128,36 +126,34 @@ upgrade_3_0_5 : function()
     var gBundle = Components.classes["@mozilla.org/intl/stringbundle;1"].getService(Components.interfaces.nsIStringBundleService);
     var strings = gBundle.createBundle("chrome://updatescan/locale/updatescan.properties");
     var folder_name = strings.GetStringFromName("rootFolderName");
-    var folder_id = USc_places.getRootFolderId()
+    var folder_id = UpdateScanner.Places.getRootFolderId()
 
     try {
-        USc_places.removeAnno(folder_id, USc_places.ORGANIZER_QUERY_ANNO);
+        UpdateScanner.Places.removeAnno(folder_id, UpdateScanner.Places.ORGANIZER_QUERY_ANNO);
     } catch (e) {
     }
 
     try {
-        USc_updatescan.myDump(USc_places.getTitle());
+        UpdateScanner.Updatescan.myDump(UpdateScanner.Places.getTitle());
     } catch (e) {
-        USc_places.setTitle(folder_id, folder_name);
+        UpdateScanner.Places.setTitle(folder_id, folder_name);
     }
 },
 
 createRootBookmark : function ()
 {
     try {
-        USc_places.getRootFolderId();
+        UpdateScanner.Places.getRootFolderId();
     } catch (e) {
-        USc_places.createRootFolder();
+        UpdateScanner.Places.createRootFolder();
     }
 },
 
 createUSBookmark : function ()
 {
     var updatescanURL="https://addons.mozilla.org/firefox/addon/update-scanner/";
-    var bookmarkId = USc_places.addBookmark("Update Scanner Website", updatescanURL);
+    var bookmarkId = UpdateScanner.Places.addBookmark("Update Scanner Website", updatescanURL);
     // Set default scan to manual only, to prevent excessive traffic
-    USc_places.modifyAnno(bookmarkId, USc_places.ANNO_SCAN_RATE_MINS, 0);
+    UpdateScanner.Places.modifyAnno(bookmarkId, UpdateScanner.Places.ANNO_SCAN_RATE_MINS, 0);
 },
-
-}
-}
+};

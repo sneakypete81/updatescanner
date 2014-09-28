@@ -43,27 +43,28 @@
 		src="chrome://updatescan/locale/updatescan.properties"/>
 </stringbundleset>
 
-  <script src="updatescan.js"/>
-  <script src="scan.js"/>
-  <script src="fuzzy.js"/>
-  <script src="diffwiki.js"/>
-  <script src="io.js"/>
-  <script src="file.js"/>
-  <script src="autoscan.js"/>
-  <script src="refresher.js"/>
-  <script src="opentopwin.js"/>
-  <script src="updatescanoverlay.js"/>
-  <script src="toolbar.js"/>
-  <script src="string.js"/>
-  <script src="places.js"/>
-  <script src="upgrade.js"/>
+  <script src="chrome://updatescan/content/namespace.js" />
+  <script src="chrome://updatescan/content/updatescan.js"/>
+  <script src="chrome://updatescan/content/scan.js"/>
+  <script src="chrome://updatescan/content/fuzzy.js"/>
+  <script src="chrome://updatescan/content/diffwiki.js"/>
+  <script src="chrome://updatescan/content/io.js"/>
+  <script src="chrome://updatescan/content/file.js"/>
+  <script src="chrome://updatescan/content/autoscan.js"/>
+  <script src="chrome://updatescan/content/refresher.js"/>
+  <script src="chrome://updatescan/content/opentopwin.js"/>
+  <script src="chrome://updatescan/content/updatescanoverlay.js"/>
+  <script src="chrome://updatescan/content/toolbar.js"/>
+  <script src="chrome://updatescan/content/string.js"/>
+  <script src="chrome://updatescan/content/places.js"/>
+  <script src="chrome://updatescan/content/upgrade.js"/>
 
     <popup id="contentAreaContextMenu">
       <menuitem id="AddToUpdateScan"
 		insertbefore="#context-sep-paste"                
                 label="&AddToUpdateScan.label;"
                 accesskey="&AddToUpdateScan.accesskey;"
-                oncommand="USc_updatescan.openNewDialog();"/>
+                oncommand="UpdateScanner.Updatescan.openNewDialog();"/>
 
     </popup>
 
@@ -72,7 +73,7 @@
                        label="Update Scanner"
                        tooltiptext="&UpdateScan.tooltip;"
                        observes="viewUpdateScanSidebar"
-                       ondblclick="USc_overlay.onShowAll();"
+                       ondblclick="UpdateScanner.Overlay.onShowAll();"
                        context="UpdateScanToolbarMenu"
                        class="toolbarbutton-1" />
     </toolbarpalette>
@@ -112,21 +113,21 @@
                   oncommand="toggleSidebar('viewUpdateScanSidebar');"/>
         <menuitem id="ToolbarMenuShowAllChanges"
                   label="&ShowAllChanges.label;"
-                  oncommand="USc_overlay.onShowAll();"/>
+                  oncommand="UpdateScanner.Overlay.onShowAll();"/>
         <menuitem id="ToolbarMenuAddToUpdateScan"
                   label="&AddToUpdateScan.label;"
                   accesskey="&AddToUpdateScan.accesskey;"
-                  oncommand="USc_updatescan.openNewDialog();"/>
+                  oncommand="UpdateScanner.Updatescan.openNewDialog();"/>
  
         <menuseparator/>
         <menuitem id="ToolbarMenuDisableScanner"
                   label="&DisableScanner.label;"
-                  oncommand="USc_updatescan.disableScanner();"/>
+                  oncommand="UpdateScanner.Updatescan.disableScanner();"/>
         <menuitem id="ToolbarMenuEnableScanner"
                   label="&EnableScanner.label;"
-                  oncommand="USc_updatescan.enableScanner();"/>
+                  oncommand="UpdateScanner.Updatescan.enableScanner();"/>
         <menuitem label="&Preferences.label;"
-                  oncommand="USc_updatescan.openPreferences();"/>
+                  oncommand="UpdateScanner.Updatescan.openPreferences();"/>
       </menupopup>
     </popupset>
 

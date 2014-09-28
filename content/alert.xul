@@ -48,8 +48,9 @@
         xmlns:wairole="http://www.w3.org/2005/01/wai-rdf/GUIRoleTaxonomy#"
         xhtml2:role="wairole:alert"
         align="start"
-        onload="USc_alert.onAlertLoad()">
- 
+        onload="UpdateScanner.Alert.onAlertLoad()">
+
+<script src="chrome://updatescan/content/namespace.js" />
 <script src="chrome://updatescan/content/alert.js" />
 <script src="chrome://updatescan/content/updatescan.js" />
 <script src="chrome://updatescan/content/places.js" />
@@ -60,28 +61,28 @@
 
 <vbox id="alertBox" class="alertBox">
 <hbox>
-  <vbox onclick="USc_alert.onAlertClick();">
+  <vbox onclick="UpdateScanner.Alert.onAlertClick();">
     <spacer height="4px"/>
     <image src='chrome://updatescan/skin/updatescan_big.png'/>
   </vbox>
 
-  <vbox onclick="USc_alert.onAlertClick();">
+  <vbox onclick="UpdateScanner.Alert.onAlertClick();">
     <spacer height="4px"/>
     <label value="Update Scanner" style="font-weight:bold"/>
     <vbox>
-      <label class="text-link" onclick="USc_alert.onLinkClick(event);"
+      <label class="text-link" onclick="UpdateScanner.Alert.onLinkClick(event);"
 	     id="message" value="" />
     </vbox>
   </vbox>
   
   <vbox>
   <toolbarbutton align="top" id="close-button"
-                 onclick="USc_alert.onAlertClose();"/>
-  <spacer flex="1" onclick="USc_alert.onAlertClick();"/>
+                 onclick="UpdateScanner.Alert.onAlertClose();"/>
+  <spacer flex="1" onclick="UpdateScanner.Alert.onAlertClick();"/>
   </vbox>
 </hbox>
 </vbox>
 <!-- This method is called inline because we want to make sure we establish the width
      and height of the alert before we fire the onload handler. -->
-<script type="application/x-javascript">USc_alert.prefillAlertInfo();</script>
+<script type="application/x-javascript">UpdateScanner.Alert.prefillAlertInfo();</script>
 </window>

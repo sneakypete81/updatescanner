@@ -30,10 +30,8 @@
  * the terms of any one of the MPL, the GPL or the LGPL.  
  * ***** END LICENSE BLOCK ***** */
 
-if (typeof(USc_pref_exists) != 'boolean') {
-var USc_pref_exists = true;
-var USc_pref = {
-  
+UpdateScanner.Pref = {
+
   onPrefLoad: function ()
   {
     // Mac bug: dialog auto sizing doesn't work for some reason.
@@ -145,7 +143,6 @@ var USc_pref = {
     var where = instantApply ? "tab" : "window";
 
     openUILinkIn(url, where);
-  }
+  },
 
-}    
-}
+};

@@ -39,13 +39,11 @@
 
 // See the end of the file for load/unload observers!
 
-if (typeof(USc_overlay_exists) != 'boolean') {
-var USc_overlay_exists = true;
-var USc_overlay = {    
+UpdateScanner.Overlay = {
 
 load : function() 
 {
-    var me = USc_overlay;
+    var me = UpdateScanner.Overlay;
     // Eventlistener for the main context menu
     var menu = document.getElementById("contentAreaContextMenu");
     if (menu) {
@@ -73,10 +71,10 @@ _showMenu : function()
 _showToolbarMenu : function()
 {
     // Don't show context menu "Show All Changes" if there are no changes to show.
-    var changed = USc_places.queryAnno(USc_places.getRootFolderId(),
-                                       USc_places.ANNO_STATUS,
-                                       USc_places.STATUS_UNKNOWN);
-    if (changed == USc_places.STATUS_UPDATE) {
+    var changed = UpdateScanner.Places.queryAnno(UpdateScanner.Places.getRootFolderId(),
+                                                 UpdateScanner.Places.ANNO_STATUS,
+                                                 UpdateScanner.Places.STATUS_UNKNOWN);
+    if (changed == UpdateScanner.Places.STATUS_UPDATE) {
         document.getElementById("ToolbarMenuShowAllChanges").hidden = false;
     } else {
         document.getElementById("ToolbarMenuShowAllChanges").hidden = true;
@@ -105,7 +103,7 @@ _showToolbarMenu : function()
 
 onShowAll : function(aEvent)
 {
-    USc_updatescan.showAllChangesInNewTabs();
+    UpdateScanner.Updatescan.showAllChangesInNewTabs();
 },
 
 _diffItemNewTabBackground : function(id, delay)
@@ -122,13 +120,11 @@ _diffItemNewTabBackground : function(id, delay)
     .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
     .getInterface(Components.interfaces.nsIDOMWindow);
 
-    var diffURL = USc_updatescan._diffItem(id, delay);
+    var diffURL = UpdateScanner.Updatescan.diffItem(id, delay);
     if (diffURL) {
       mainWindow.getBrowser().addTab(diffURL);
     }
 },
-
 };
-}
 
-window.addEventListener("load", USc_overlay.load, false);
+window.addEventListener("load", UpdateScanner.Overlay.load, false);

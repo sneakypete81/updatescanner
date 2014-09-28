@@ -7,7 +7,7 @@
 // param = {domain: 'valvion.com', media: 'http://media.valvion.com/'};
 // url = supplant("{media}logo.gif", param);
 
-var USc_supplant = function (str, o) {
+UpdateScanner.supplant = function (str, o) {
     return str.replace(/{([^{}]*)}/g,
         function (a, b) {
             var r = o[b];

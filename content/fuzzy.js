@@ -30,14 +30,12 @@
  * the terms of any one of the MPL, the GPL or the LGPL.  
  * ***** END LICENSE BLOCK ***** */
 
-if (typeof(USc_fuzzy_exists) != 'boolean') {
-var USc_fuzzy_exists = true;
-var USc_fuzzy = {    
+UpdateScanner.Fuzzy = {
 
 // Returns true if the content is the same (or within a certain number of characters)
 compare : function(content1, content2, threshold)
 {
-    var me = USc_fuzzy;
+    var me = UpdateScanner.Fuzzy;
     var index;
     var i;
     
@@ -96,6 +94,5 @@ _diffIndex : function(string1, string2)
     }
 
     return minlen;
-}
-}
-}
+},
+};

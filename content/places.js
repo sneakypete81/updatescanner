@@ -33,9 +33,7 @@
  * the terms of any one of the MPL, the GPL or the LGPL.  
  * ***** END LICENSE BLOCK ***** */
 
-if (typeof(USc_places_exists) != 'boolean') {
-var USc_places_exists = true;
-var USc_places = {    
+UpdateScanner.Places = {
 
   ANNO_ROOT : "updatescan/root", // int, a Places itemId
   ANNO_STATUS : "updatescan/status", // string
@@ -75,7 +73,7 @@ var USc_places = {
     } else if (results.length == 0) {
       throw "Root folder not found";
     } else if (results.length > 1) {
-      USc_updatescan.myDump("Updatescan warning: Multiple root folders found");
+      UpdateScanner.Updatescan.myDump("Updatescan warning: Multiple root folders found");
       rootFolderId = results[0];
       annotationService.removeItemAnnotation(results[1], this.ANNO_ROOT);
     }
@@ -99,7 +97,7 @@ var USc_places = {
                                    folderName,
                                    bookmarksService.DEFAULT_INDEX);
     }
-    USc_places.setRootFolderId(folderId);
+    UpdateScanner.Places.setRootFolderId(folderId);
     return folderId;
   },
 
@@ -205,9 +203,9 @@ var USc_places = {
   modifyAnno : function(id, anno, value)
   {
     // Don't update if it's already set to desired value
-    if (this.queryAnno(id, anno, undefined) == value)
+    if (this.queryAnno(id, anno, undefined) == value) {
       return;
-    
+    }
     var annotationService = Components.classes["@mozilla.org/browser/annotation-service;1"].getService(Components.interfaces.nsIAnnotationService);
     annotationService.setItemAnnotation(id, anno, value, 0, annotationService.EXPIRE_NEVER);
   },
@@ -323,10 +321,11 @@ var USc_places = {
       }
     }
     rootNode.containerOpen = false;    
-    if (childrenUpdated) 
+    if (childrenUpdated) {
       this.modifyAnno(folderId, this.ANNO_STATUS, this.STATUS_UPDATE);
-    else
+    } else {
       this.modifyAnno(folderId, this.ANNO_STATUS, this.STATUS_NO_UPDATE);
+    }
   },
 
   callFunctionWithUpdatedItems : function(rootId, callback)
@@ -348,7 +347,7 @@ var USc_places = {
     this._current_delay = 0;
     this._delay_increment = prefs.getIntPref("newTabDelay");
 
-    USc_places._callFunctionRecursive(result.root, callback);
+    UpdateScanner.Places._callFunctionRecursive(result.root, callback);
   },
 
   _callFunctionRecursive : function(aResultNode, callback)
@@ -358,10 +357,10 @@ var USc_places = {
   // If the node is a folder, recurse.
   {
     var itemId = aResultNode.itemId;
-    var status = USc_places.queryAnno(itemId, USc_places.ANNO_STATUS, USc_places.STATUS_NO_UPDATE);
-    if (status != USc_places.STATUS_UPDATE)
-      return
-  
+    var status = UpdateScanner.Places.queryAnno(itemId, UpdateScanner.Places.ANNO_STATUS, UpdateScanner.Places.STATUS_NO_UPDATE);
+    if (status != UpdateScanner.Places.STATUS_UPDATE) {
+      return;
+    }
     var bmsvc = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"]
                 .getService(Components.interfaces.nsINavBookmarksService);
         
@@ -375,7 +374,7 @@ var USc_places = {
       aResultNode.QueryInterface(Components.interfaces.nsINavHistoryContainerResultNode);
       aResultNode.containerOpen = true;
       for (var i = 0; i < aResultNode.childCount; i ++) {
-        USc_places._callFunctionRecursive(aResultNode.getChild(i), callback);
+        UpdateScanner.Places._callFunctionRecursive(aResultNode.getChild(i), callback);
         }
         aResultNode.containerOpen = false;
     }    
@@ -385,8 +384,5 @@ var USc_places = {
   toHexString : function(charCode)
   {
     return ("0" + charCode.toString(16)).slice(-2);
-  }
-  
-  
-}
-}
+  },
+};

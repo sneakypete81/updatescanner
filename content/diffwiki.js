@@ -73,9 +73,7 @@ block: an object that holds block move information
 
 */
 
-if (typeof(USc_diffWiki_exists) != 'boolean') {
-var USc_diffWiki_exists = true;
-var USc_diffWiki = {    
+UpdateScanner.DiffWiki = {
 
 
 // css for change indicators
@@ -158,7 +156,7 @@ return text.replace(/^\s*|\s*$/g, "");
 
 WDiffString : function(oldText, newText, highlightColour)
 {
-    var me = USc_diffWiki;
+    var me = UpdateScanner.DiffWiki;
     var text = {};
     text.newWords = [];
     text.oldWords = [];
@@ -215,7 +213,7 @@ WDiffString : function(oldText, newText, highlightColour)
 // UpdateScanner: Now ensures that tags are not split up into multiple words
  _WDiffSplitText: function(oldText, newText, text) 
  {
-    var me = USc_diffWiki;
+    var me = UpdateScanner.DiffWiki;
     // Remove dos carriage returns
     oldText = oldText.replace(/\r\n/g,"\n");
     newText = newText.replace(/\r\n/g,"\n");
@@ -265,7 +263,7 @@ WDiffString : function(oldText, newText, highlightColour)
 
 _WDiffText : function(text, newStart, newEnd, oldStart, oldEnd, recursionLevel) 
 {
-    var me = USc_diffWiki;
+    var me = UpdateScanner.DiffWiki;
     var i;
     var j;
 
@@ -476,7 +474,7 @@ _WDiffText : function(text, newStart, newEnd, oldStart, oldEnd, recursionLevel)
 
 _WDiffToHtml : function(text, block) 
 {
-    var me = USc_diffWiki;
+    var me = UpdateScanner.DiffWiki;
     var outText = text.message;
 
     var blockNumber = 0;
@@ -657,7 +655,7 @@ _WDiffToHtml : function(text, block)
     }
     if (insText != '') {
 
-//        USc_updatescan.myDump("before:"+insText);
+//        UpdateScanner.Updatescan.myDump("before:"+insText);
         var tagSplits = insText.split("<");
         // Rebuild insText, stopping highlighting before tags, and restarting afterwards.
         insText = "";
@@ -675,7 +673,7 @@ _WDiffToHtml : function(text, block)
             insText += me.wDiffHtmlInsertEnd;
         }
         }
-//        USc_updatescan.myDump("after:"+insText);
+//        UpdateScanner.Updatescan.myDump("after:"+insText);
         //insText = wDiffHtmlInsertStart + WDiffEscape(insText) + wDiffHtmlInsertEnd;
         //insText = insText.replace(/\n/g, '&para;<br>');
         outText += insText;
@@ -707,7 +705,7 @@ _WDiffEscape : function(text) {
 
 _WDiffHtmlCustomize : function(text, block) 
 {
-    var me = USc_diffWiki;
+    var me = UpdateScanner.DiffWiki;
 
     text = text.replace(/\{number\}/, block);
     text = text.replace(/\{block\}/, me.wDiffStyleBlock[block]);
@@ -730,7 +728,7 @@ _WDiffHtmlFormat : function(text) {
 // input: text object, block object
 
 _WDiffDetectBlocks : function(text, block) {
-    var me = USc_diffWiki;
+    var me = UpdateScanner.DiffWiki;
 
     block.oldStart  = [];
     block.oldToNew  = [];
@@ -901,7 +899,7 @@ _WDiffDetectBlocks : function(text, block) {
 
 _WDiffShortenOutput : function(diffText) 
 {
-    var me = USc_diffWiki;
+    var me = UpdateScanner.DiffWiki;
 
 // html <br/> to newlines
     diffText = diffText.replace(/<br[^>]*>/g, '\n');
@@ -1172,5 +1170,4 @@ _unescapeSpaces : function(content)
     var result = content.replace(/___UPDATESCAN___SPACE___/g," ");
     return    result.replace(/\t/g,"");
 }
-}
-}
+};

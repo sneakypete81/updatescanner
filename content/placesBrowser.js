@@ -30,16 +30,13 @@
  * the terms of any one of the MPL, the GPL or the LGPL.  
  * ***** END LICENSE BLOCK ***** */
 
-if (typeof(USc_places_browser_exists) != 'boolean') {
-var USc_places_browser_exists = true;
-
-var USc_places_browser = {    
+UpdateScanner.PlacesBrowser = {
 
 init : function()
 {
     var tree = document.getElementById("bookmarks-view");
     tree.onclick=this.treeClick;
-    var rootFolderId = USc_places.getRootFolderId();
+    var rootFolderId = UpdateScanner.Places.getRootFolderId();
     tree.place = "place:queryType=1&folder=" + rootFolderId;
 },
 
@@ -78,7 +75,6 @@ treeClick : function(aEvent)
     }
     
     document.getElementById("text-box").value = string;
-}
+},
 
 };
-}

@@ -36,11 +36,7 @@
  * the terms of any one of the MPL, the GPL or the LGPL.  
  * ***** END LICENSE BLOCK ***** */
 
- 
-if (typeof(USc_updatescan_exists) != 'boolean') {
-var USc_updatescan_exists = true;
-
-var USc_defaults = {
+UpdateScanner.Defaults = {
     DEF_THRESHOLD : 100,
     DEF_SCAN_RATE_MINS : 1440, // Scan once per day by default
     DEF_IGNORE_NUMBERS : true,
@@ -54,7 +50,7 @@ var USc_defaults = {
     DEF_ENABLE_FLASH : true
 };
 
-var USc_updatescan = {    
+UpdateScanner.Updatescan = {
 
 numChanges : 0,
 refresh : null,
@@ -64,7 +60,7 @@ tree : null,
 
 load : function()
 {
-    var me = USc_updatescan;
+    var me = UpdateScanner.Updatescan;
     var r;
 
     me._extendPlacesTreeView();
@@ -73,13 +69,13 @@ load : function()
     me.tree.onclick=me._treeClick;
    
     try {
-      var rootFolderId = USc_places.getRootFolderId();
+      var rootFolderId = UpdateScanner.Places.getRootFolderId();
     } catch (e) {
-      var rootFolderId = USc_places.createRootFolder();
+      var rootFolderId = UpdateScanner.Places.createRootFolder();
     }
     me.tree.place = "place:queryType=1&folder=" + rootFolderId;
     
-    PlacesUtils.annotations.addObserver(USc_sidebarAnnotationObserver);
+    PlacesUtils.annotations.addObserver(UpdateScanner.SidebarAnnotationObserver);
     
     // Check for toolbar button changes
     me._branch = Components.classes["@mozilla.org/preferences-service;1"];
@@ -100,10 +96,10 @@ load : function()
 
 unload : function()
 {
-    var me = USc_updatescan;
+    var me = UpdateScanner.Updatescan;
   
     try { 
-      PlacesUtils.annotations.removeObserver(USc_sidebarAnnotationObserver);
+      PlacesUtils.annotations.removeObserver(UpdateScanner.SidebarAnnotationObserver);
     } catch(e) {}
     try {
       me._branch.removeObserver("", this);
@@ -113,11 +109,11 @@ unload : function()
 // Show/hide menu items depending on whether folder or bookmark is selected
 _showMenu : function() 
 {
-    var me = USc_updatescan;
+    var me = UpdateScanner.Updatescan;
     var id = me._getSelectedItem();
     if (id == undefined)
       return;
-    if (USc_places.isFolder(id)) {
+    if (UpdateScanner.Places.isFolder(id)) {
         document.getElementById("open").hidden = true;
         document.getElementById("openItemTab").hidden = true;
         document.getElementById("openFolderTab").hidden = false;
@@ -136,14 +132,14 @@ _showMenu : function()
 
 observe: function(aSubject, aTopic, aData) // Observe toolbar button preference changes
 {
-    var me = USc_updatescan;
+    var me = UpdateScanner.Updatescan;
     if (aTopic == "nsPref:changed") {
 	me._updateToolbar();
     }
 },
 
 _treeClick : function(aEvent) {
-    var me = USc_updatescan;
+    var me = UpdateScanner.Updatescan;
     var prefBranch = (Components.classes["@mozilla.org/preferences-service;1"].
                       getService(Components.interfaces.nsIPrefService).
                       getBranch("extensions.updatescan."));
@@ -179,7 +175,7 @@ _treeClick : function(aEvent) {
 
 scanButtonClick : function()
 {
-    var me = USc_updatescan;    
+    var me = UpdateScanner.Updatescan;    
     var scanbutton = document.getElementById("scanbutton");
     var id;
     var numitems;
@@ -200,10 +196,10 @@ scanButtonClick : function()
 
     me._showStopButton();
 
-    me.scan = new USc_scanner();
+    me.scan = new UpdateScanner.Scan.scanner();
     me.numChanges = 0;
 
-    if (me.scan.addItems(USc_places.getRootFolderId(), false) > 0)
+    if (me.scan.addItems(UpdateScanner.Places.getRootFolderId(), false) > 0)
     {
       me.scan.start(me._scanChangedCallback,
                     me._scanFinishedCallback,
@@ -218,11 +214,11 @@ scanButtonClick : function()
 
 scanSelected : function()
 {
-    var me = USc_updatescan;    
+    var me = UpdateScanner.Updatescan;    
 
     me._showStopButton();
 
-    me.scan = new USc_scanner();
+    me.scan = new UpdateScanner.Scan.scanner();
     me.numChanges = 0;
 
     if (me.scan.addItems(me._getSelectedItem(), false) > 0)
@@ -238,8 +234,8 @@ scanSelected : function()
 
 _scanChangedCallback : function(id, new_content, status, statusText, headerText)
 {
-    var me = USc_updatescan;
-    if (USc_processScanChange(id, new_content, status, statusText, headerText)) {
+    var me = UpdateScanner.Updatescan;
+    if (UpdateScanner.Scan.processScanChange(id, new_content, status, statusText, headerText)) {
         me.numChanges++;
     }
 },
@@ -247,12 +243,12 @@ _scanChangedCallback : function(id, new_content, status, statusText, headerText)
 _scanEncodingCallback : function(id, encoding)
 // Called when encoding is detected for a page marked for auto-detect encoding
 {
-    USc_places.modifyAnno(id, USc_places.ANNO_ENCODING, encoding);
+    UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_ENCODING, encoding);
 },
 
 _scanFinishedCallback : function()
 {
-    var me = USc_updatescan;
+    var me = UpdateScanner.Updatescan;
     var str=document.getElementById("updatescanStrings");
     var param;
     var message;
@@ -268,8 +264,8 @@ _scanFinishedCallback : function()
             message = str.getString("alertOneChange");
         } else {
             param = {numChanges:me.numChanges};
-            me._setStatus(USc_supplant(str.getString("statusManyChanges"), param));
-            message = USc_supplant(str.getString("alertManyChanges"), param);
+            me._setStatus(UpdateScanner.supplant(str.getString("statusManyChanges"), param));
+            message = UpdateScanner.supplant(str.getString("alertManyChanges"), param);
         }
         window.openDialog("chrome://updatescan/content/alert.xul",
                   "alert:alert",
@@ -283,21 +279,21 @@ _scanFinishedCallback : function()
 openNewDialogCurrentPos : function()
 // Opens a "New Item" dialog, and saves the new bookmark in the correct position
 {
-  var me = USc_updatescan;
+  var me = UpdateScanner.Updatescan;
   var id = me._getSelectedItem();
   if (id == undefined)
     me.openNewDialog();
-  else if (USc_places.isFolder(id)) 
+  else if (UpdateScanner.Places.isFolder(id)) 
     me.openNewDialog(id);
   else
-    me.openNewDialog(USc_places.getParentFolder(id),
-                     USc_places.getIndex(id));
+    me.openNewDialog(UpdateScanner.Places.getParentFolder(id),
+                     UpdateScanner.Places.getIndex(id));
 },
 
 openNewDialog : function(parentId, index)
 {
     if (typeof parentId == 'undefined' )
-      parentId = USc_places.getRootFolderId();
+      parentId = UpdateScanner.Places.getRootFolderId();
     if (typeof index == 'iundefined') 
       index = -1; // Insert at the bottom by default
 
@@ -314,37 +310,37 @@ openNewDialog : function(parentId, index)
     var args = {
         title:            title, 
         url:              url, 
-        threshold:        USc_defaults.DEF_THRESHOLD,
-        scanRateMins:     USc_defaults.DEF_SCAN_RATE_MINS,
-        encoding:         USc_defaults.DEF_ENCODING,
-        ignoreNumbers:    USc_defaults.DEF_IGNORE_NUMBERS,
-        highlightChanges: USc_defaults.DEF_HIGHLIGHT_CHANGES,
-        highlightColour:  USc_defaults.DEF_HIGHLIGHT_COLOUR,
+        threshold:        UpdateScanner.Defaults.DEF_THRESHOLD,
+        scanRateMins:     UpdateScanner.Defaults.DEF_SCAN_RATE_MINS,
+        encoding:         UpdateScanner.Defaults.DEF_ENCODING,
+        ignoreNumbers:    UpdateScanner.Defaults.DEF_IGNORE_NUMBERS,
+        highlightChanges: UpdateScanner.Defaults.DEF_HIGHLIGHT_CHANGES,
+        highlightColour:  UpdateScanner.Defaults.DEF_HIGHLIGHT_COLOUR,
         advanced:         false
     };
 
     window.openDialog('chrome://updatescan/content/dlgnewedit.xul', 'dlgNew', 
                       'chrome,dialog,modal,centrescreen', args);
     if (args.ok) {
-        var id = USc_places.addBookmark(args.title, args.url, parentId, index);
-        USc_places.modifyAnno(id, USc_places.ANNO_THRESHOLD, args.threshold);
-        USc_places.modifyAnno(id, USc_places.ANNO_SCAN_RATE_MINS, args.scanRateMins);
-        USc_places.modifyAnno(id, USc_places.ANNO_ENCODING, args.encoding);
-        USc_places.modifyAnno(id, USc_places.ANNO_IGNORE_NUMBERS, args.ignoreNumbers);
-        USc_places.modifyAnno(id, USc_places.ANNO_HIGHLIGHT_CHANGES, args.highlightChanges);
-        USc_places.modifyAnno(id, USc_places.ANNO_HIGHLIGHT_COLOUR, args.highlightColour);
+        var id = UpdateScanner.Places.addBookmark(args.title, args.url, parentId, index);
+        UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_THRESHOLD, args.threshold);
+        UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_SCAN_RATE_MINS, args.scanRateMins);
+        UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_ENCODING, args.encoding);
+        UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_IGNORE_NUMBERS, args.ignoreNumbers);
+        UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_HIGHLIGHT_CHANGES, args.highlightChanges);
+        UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_HIGHLIGHT_COLOUR, args.highlightColour);
 
-        var filebase=USc_places.getSignature(id);
-        USc_file.USwriteFile(filebase+".new", "");
+        var filebase=UpdateScanner.Places.getSignature(id);
+        UpdateScanner.File.USwriteFile(filebase+".new", "");
 
-        USc_places.modifyAnno(id, USc_places.ANNO_LAST_SCAN, "");
-        USc_places.modifyAnno(id, USc_places.ANNO_STATUS, USc_places.STATUS_NO_UPDATE);
+        UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_LAST_SCAN, "");
+        UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_STATUS, UpdateScanner.Places.STATUS_NO_UPDATE);
     }
 },
 
 openEditDialogForSelected : function()
 {
-    var me = USc_updatescan;
+    var me = UpdateScanner.Updatescan;
     var id = me._getSelectedItem();
     me.openEditDialog(id);
 },
@@ -355,28 +351,28 @@ openEditDialog : function(id)
       return;
 
     // Launch the folder properties dialog
-    if (USc_places.isFolder(id))
+    if (UpdateScanner.Places.isFolder(id))
     {
          PlacesUIUtils.showItemProperties(id, "folder");
          return;
     }
 
     var args = {
-        title:            USc_places.getTitle(id),
-        url:              USc_places.getURL(id),
-        threshold:        USc_places.queryAnno(id, USc_places.ANNO_THRESHOLD,
-                                               USc_defaults.DEF_THRESHOLD),
-        scanRateMins:     USc_places.queryAnno(id, USc_places.ANNO_SCAN_RATE_MINS,
-                                               USc_defaults.DEF_SCAN_RATE_MINS),
-        encoding:         USc_places.queryAnno(id, USc_places.ANNO_ENCODING,
-                                               USc_defaults.DEF_ENCODING),
-        ignoreNumbers:    USc_places.queryAnno(id, USc_places.ANNO_IGNORE_NUMBERS,
-                                               USc_defaults.DEF_IGNORE_NUMBERS),
+        title:            UpdateScanner.Places.getTitle(id),
+        url:              UpdateScanner.Places.getURL(id),
+        threshold:        UpdateScanner.Places.queryAnno(id, UpdateScanner.Places.ANNO_THRESHOLD,
+                                                         UpdateScanner.Defaults.DEF_THRESHOLD),
+        scanRateMins:     UpdateScanner.Places.queryAnno(id, UpdateScanner.Places.ANNO_SCAN_RATE_MINS,
+                                                         UpdateScanner.Defaults.DEF_SCAN_RATE_MINS),
+        encoding:         UpdateScanner.Places.queryAnno(id, UpdateScanner.Places.ANNO_ENCODING,
+                                                         UpdateScanner.Defaults.DEF_ENCODING),
+        ignoreNumbers:    UpdateScanner.Places.queryAnno(id, UpdateScanner.Places.ANNO_IGNORE_NUMBERS,
+                                                         UpdateScanner.Defaults.DEF_IGNORE_NUMBERS),
         advanced:         false,
-        highlightChanges: USc_places.queryAnno(id, USc_places.ANNO_HIGHLIGHT_CHANGES,
-                                               USc_defaults.DEF_HIGHLIGHT_CHANGES),
-        highlightColour:  USc_places.queryAnno(id, USc_places.ANNO_HIGHLIGHT_COLOUR,
-                                               USc_defaults.DEF_HIGHLIGHT_COLOUR),
+        highlightChanges: UpdateScanner.Places.queryAnno(id, UpdateScanner.Places.ANNO_HIGHLIGHT_CHANGES,
+                                                         UpdateScanner.Defaults.DEF_HIGHLIGHT_CHANGES),
+        highlightColour:  UpdateScanner.Places.queryAnno(id, UpdateScanner.Places.ANNO_HIGHLIGHT_COLOUR,
+                                                         UpdateScanner.Defaults.DEF_HIGHLIGHT_COLOUR),
     };
 
     var oldurl = args.url;
@@ -385,24 +381,24 @@ openEditDialog : function(id)
                       'chrome,dialog,modal,centrescreen', args);
                       
     if (args.ok) {
-        USc_places.setTitle(id, args.title);
-        USc_places.setURL(id, args.url);
+        UpdateScanner.Places.setTitle(id, args.title);
+        UpdateScanner.Places.setURL(id, args.url);
         
-        USc_places.modifyAnno(id, USc_places.ANNO_THRESHOLD, args.threshold);
-        USc_places.modifyAnno(id, USc_places.ANNO_SCAN_RATE_MINS, args.scanRateMins);
-        USc_places.modifyAnno(id, USc_places.ANNO_ENCODING, args.encoding);
-        USc_places.modifyAnno(id, USc_places.ANNO_IGNORE_NUMBERS, args.ignoreNumbers);
-        USc_places.modifyAnno(id, USc_places.ANNO_HIGHLIGHT_CHANGES, args.highlightChanges);
-        USc_places.modifyAnno(id, USc_places.ANNO_HIGHLIGHT_COLOUR, args.highlightColour);
+        UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_THRESHOLD, args.threshold);
+        UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_SCAN_RATE_MINS, args.scanRateMins);
+        UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_ENCODING, args.encoding);
+        UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_IGNORE_NUMBERS, args.ignoreNumbers);
+        UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_HIGHLIGHT_CHANGES, args.highlightChanges);
+        UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_HIGHLIGHT_COLOUR, args.highlightColour);
 
         if (oldurl != args.url) {   // URL changed - reset all values
           // Create a new signature
-          USc_places.modifyAnno(id, USc_places.ANNO_SIGNATURE, "");
-          var filebase=USc_places.getSignature(id);
-          USc_file.USwriteFile(filebase+".new", "");
+          UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_SIGNATURE, "");
+          var filebase=UpdateScanner.Places.getSignature(id);
+          UpdateScanner.File.USwriteFile(filebase+".new", "");
 
-          USc_places.modifyAnno(id, USc_places.ANNO_LAST_SCAN, "");
-          USc_places.modifyAnno(id, USc_places.ANNO_STATUS, USc_places.STATUS_NO_UPDATE);
+          UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_LAST_SCAN, "");
+          UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_STATUS, UpdateScanner.Places.STATUS_NO_UPDATE);
         }
     }
 },
@@ -414,40 +410,40 @@ openPreferences : function()
                       'chrome,toolbar,dialog=no,resizable,centerscreen');
 },
 
-_diffItem : function(id, delay)
+diffItem : function(id, delay)
 {
-    var me = USc_updatescan;
+    var me = UpdateScanner.Updatescan;
 
-    if (USc_places.isFolder(id))
+    if (UpdateScanner.Places.isFolder(id))
       return undefined;
     
     var now = new Date();
 
     me._markAsVisited(id);
     
-    var old_lastScan = USc_places.queryAnno(id,
-                                            USc_places.ANNO_OLD_LAST_SCAN,
-                                            USc_defaults.DEF_OLD_LAST_SCAN);
+    var old_lastScan = UpdateScanner.Places.queryAnno(id,
+                                            UpdateScanner.Places.ANNO_OLD_LAST_SCAN,
+                                            UpdateScanner.Defaults.DEF_OLD_LAST_SCAN);
     old_lastScan = new Date(old_lastScan);
 
     var oldDate = me._dateDiffString(old_lastScan, now);
 
-    var lastScan = USc_places.queryAnno(id, USc_places.ANNO_LAST_SCAN, USc_defaults.DEF_LAST_SCAN);
+    var lastScan = UpdateScanner.Places.queryAnno(id, UpdateScanner.Places.ANNO_LAST_SCAN, UpdateScanner.Defaults.DEF_LAST_SCAN);
     lastScan = new Date(lastScan);
     
     var newDate = me._dateDiffString(lastScan, now);
 
-    if (USc_places.queryAnno(id, USc_places.ANNO_HIGHLIGHT_CHANGES,
-                             USc_defaults.DEF_HIGHLIGHT_CHANGES)) {
+    if (UpdateScanner.Places.queryAnno(id, UpdateScanner.Places.ANNO_HIGHLIGHT_CHANGES,
+                                       UpdateScanner.Defaults.DEF_HIGHLIGHT_CHANGES)) {
         var url = ("chrome://updatescan/content/diffPage.xul?id="+escape(id)+
-                   "&title="+escape(USc_places.getTitle(id))+
-                   "&url="+escape(USc_places.getURL(id))+
+                   "&title="+escape(UpdateScanner.Places.getTitle(id))+
+                   "&url="+escape(UpdateScanner.Places.getURL(id))+
                    "&oldDate="+escape(oldDate)+
                    "&newDate="+escape(newDate)+
                    "&delay="+escape(delay));
     } else {
         // Don't highlight - just show the page
-        var url = USc_places.getURL(id);
+        var url = UpdateScanner.Places.getURL(id);
     }
 
     return url;
@@ -455,7 +451,7 @@ _diffItem : function(id, delay)
 
 diffSelectedItemThisWindow : function()
 {
-    var me = USc_updatescan;
+    var me = UpdateScanner.Updatescan;
     var item = me._getSelectedItem();
     if (item == undefined)
       return;
@@ -464,33 +460,33 @@ diffSelectedItemThisWindow : function()
 
 _diffItemThisWindow : function(id)
 {
-    var me = USc_updatescan;
-    var diffURL = me._diffItem(id, 0);
+    var me = UpdateScanner.Updatescan;
+    var diffURL = me.diffItem(id, 0);
     if (diffURL) {
-        USc_topWin.open(diffURL);
+        UpdateScanner.TopWin.open(diffURL);
         if (me.tree) me.tree.focus();    
     }
 },
 
 showAllChangesInNewTabs : function()
 {
-  USc_places.callFunctionWithUpdatedItems(USc_places.getRootFolderId(),
-                                          USc_updatescan._diffItemNewTabBackground);
+  UpdateScanner.Places.callFunctionWithUpdatedItems(UpdateScanner.Places.getRootFolderId(),
+                                                    UpdateScanner.Updatescan._diffItemNewTabBackground);
 },
 
 diffSelectedFolderNewTab : function()
 {
-    var me = USc_updatescan;
+    var me = UpdateScanner.Updatescan;
     var id = me._getSelectedItem();
     if (id == undefined)
       return;
 
-    USc_places.callFunctionWithUpdatedItems(id, USc_updatescan._diffItemNewTab);  
+    UpdateScanner.Places.callFunctionWithUpdatedItems(id, UpdateScanner.Updatescan._diffItemNewTab);  
 },
 
 diffSelectedItemNewTab : function()
 {
-    var me = USc_updatescan;
+    var me = UpdateScanner.Updatescan;
     var id = me._getSelectedItem();
     if (id == undefined)
       return;
@@ -500,7 +496,7 @@ diffSelectedItemNewTab : function()
 
 _diffItemNewTab : function(id, delay)
 {
-    var me = USc_updatescan;
+    var me = UpdateScanner.Updatescan;
 
     var mainWindow = window.QueryInterface(
     Components.interfaces.nsIInterfaceRequestor)
@@ -510,7 +506,7 @@ _diffItemNewTab : function(id, delay)
     .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
     .getInterface(Components.interfaces.nsIDOMWindow);
 
-    var diffURL = me._diffItem(id, delay);
+    var diffURL = me.diffItem(id, delay);
     if (diffURL) {
       mainWindow.getBrowser().selectedTab = mainWindow.getBrowser().addTab(diffURL);
       if (me.tree) me.tree.focus();
@@ -519,7 +515,7 @@ _diffItemNewTab : function(id, delay)
 
 _diffItemNewTabBackground : function(id, delay)
 {
-    var me = USc_updatescan;
+    var me = UpdateScanner.Updatescan;
 
     var mainWindow = window.QueryInterface(
     Components.interfaces.nsIInterfaceRequestor)
@@ -529,7 +525,7 @@ _diffItemNewTabBackground : function(id, delay)
     .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
     .getInterface(Components.interfaces.nsIDOMWindow);
 
-    var diffURL = me._diffItem(id, delay);
+    var diffURL = me.diffItem(id, delay);
     if (diffURL) {
       mainWindow.getBrowser().addTab(diffURL);
       if (me.tree) me.tree.focus();
@@ -555,9 +551,9 @@ _dateDiffString : function(oldDate, newDate)
         time += mins;
 
         if (oldDate.getDate() != newDate.getDate()) {
-            return USc_supplant(str.getString("yesterdayAt"), {time:time});
+            return UpdateScanner.supplant(str.getString("yesterdayAt"), {time:time});
         } else {
-            return USc_supplant(str.getString("todayAt"), {time:time});
+            return UpdateScanner.supplant(str.getString("todayAt"), {time:time});
         }
     }
 
@@ -567,7 +563,7 @@ _dateDiffString : function(oldDate, newDate)
         if (diff == 1) {
             return str.getString("dayAgo");
         } else {
-            return USc_supplant(str.getString("daysAgo"), {numDays:diff});
+            return UpdateScanner.supplant(str.getString("daysAgo"), {numDays:diff});
         }
     }
     diff = diff / 7;
@@ -575,21 +571,21 @@ _dateDiffString : function(oldDate, newDate)
     if (diff == 1) {
         return str.getString("weekAgo");
     } else {
-        return USc_supplant(str.getString("weeksAgo"), {numWeeks:diff});
+        return UpdateScanner.supplant(str.getString("weeksAgo"), {numWeeks:diff});
     }
 },
 
 markAllAsVisited : function()
 {
-  USc_places.callFunctionWithUpdatedItems(USc_places.getRootFolderId(),
-                                          USc_updatescan._markAsVisited);
+  UpdateScanner.Places.callFunctionWithUpdatedItems(UpdateScanner.Places.getRootFolderId(),
+                                                    UpdateScanner.Updatescan._markAsVisited);
 },
 
 _markAsVisited : function(id, delay)
 {
-    if (USc_places.queryAnno(id, USc_places.ANNO_STATUS, "") == USc_places.STATUS_UPDATE)
+    if (UpdateScanner.Places.queryAnno(id, UpdateScanner.Places.ANNO_STATUS, "") == UpdateScanner.Places.STATUS_UPDATE)
     {
-      USc_places.modifyAnno(id, USc_places.ANNO_STATUS, USc_places.STATUS_NO_UPDATE);      
+      UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_STATUS, UpdateScanner.Places.STATUS_NO_UPDATE);      
     }
 },
 
@@ -628,7 +624,7 @@ disableScanner : function()
 
 _getSelectedItem : function()
 {
-    var me = USc_updatescan;
+    var me = UpdateScanner.Updatescan;
     if (me.tree.selectedNode)
         return me.tree.selectedNode.itemId;
     else
@@ -638,19 +634,19 @@ _getSelectedItem : function()
 deleteSelectedItem : function()
 // TODO: currently doesn't delete .old and .new files when entire folders are deleted.
 {
-    var me = USc_updatescan;
+    var me = UpdateScanner.Updatescan;
     var id = me._getSelectedItem();
     if (id == undefined)
       return;
 
     try {
-        var filebase=USc_places.getSignature(id);
+        var filebase=UpdateScanner.Places.getSignature(id);
 
 //    if (confirm(str.getString("confirmDelete") + " " + title + "?")) {
-        USc_file.USrmFile(filebase+".old");
-        USc_file.USrmFile(filebase+".new");
+        UpdateScanner.File.USrmFile(filebase+".old");
+        UpdateScanner.File.USrmFile(filebase+".new");
     } catch (ex) { }
-    USc_places.deleteBookmark(id);
+    UpdateScanner.Places.deleteBookmark(id);
 },
 
 _showStopButton : function()
@@ -672,10 +668,10 @@ _setStatus : function (status)
 
 _showProgress : function(title, value, max)
 {
-    var me = USc_updatescan;
+    var me = UpdateScanner.Updatescan;
     var str=document.getElementById("updatescanStrings");
     var param = {title:title};
-    me._setStatus(USc_supplant(str.getString("statusScanning"), param));
+    me._setStatus(UpdateScanner.supplant(str.getString("statusScanning"), param));
 
     var progress = document.getElementById("Progress");
     progress.collapsed = false;
@@ -720,7 +716,7 @@ _extendPlacesTreeView : function() {
             if (node.type == Ci.nsINavHistoryResultNode.RESULT_TYPE_FOLDER ||
                 (node.type == Ci.nsINavHistoryResultNode.RESULT_TYPE_URI)) {
                 try {
-                    var state = "usc_state_" + PlacesUtils.annotations.getItemAnnotation(node.itemId, USc_places.ANNO_STATUS);
+                    var state = "usc_state_" + PlacesUtils.annotations.getItemAnnotation(node.itemId, UpdateScanner.Places.ANNO_STATUS);
                 } catch (e) {
                     return properties;
                 }
@@ -753,7 +749,7 @@ _extendPlacesTreeView : function() {
             if (node.type == Ci.nsINavHistoryResultNode.RESULT_TYPE_FOLDER ||
                 (node.type == Ci.nsINavHistoryResultNode.RESULT_TYPE_URI)) {
                 try {
-                    var state = "usc_state_" + PlacesUtils.annotations.getItemAnnotation(node.itemId, USc_places.ANNO_STATUS);
+                    var state = "usc_state_" + PlacesUtils.annotations.getItemAnnotation(node.itemId, UpdateScanner.Places.ANNO_STATUS);
                 } catch (e) {
                     return;
                 }
@@ -796,21 +792,20 @@ myDump : function(aMessage) {
     var consoleService = Components.classes["@mozilla.org/consoleservice;1"]
                          .getService(Components.interfaces.nsIConsoleService);
     consoleService.logStringMessage("UpdateScan: " + aMessage);
-}
-
+},
 };
 
-var USc_sidebarAnnotationObserver = {
+UpdateScanner.SidebarAnnotationObserver = {
   
   onPageAnnotationSet : function(aURI, aName) { },
   
   onItemAnnotationSet : function(aItemId, aName) {
     switch (aName) {
-      case USc_places.ANNO_ROOT:
-        USc_updatescan.tree.place = "place:queryType=1&folder=" + aItemId;
+      case UpdateScanner.Places.ANNO_ROOT:
+        UpdateScanner.Updatescan.tree.place = "place:queryType=1&folder=" + aItemId;
         break;
-      case USc_places.ANNO_STATUS:
-        var bx = USc_updatescan.tree.boxObject.QueryInterface(Components.interfaces.nsITreeBoxObject); 
+      case UpdateScanner.Places.ANNO_STATUS:
+        var bx = UpdateScanner.Updatescan.tree.boxObject.QueryInterface(Components.interfaces.nsITreeBoxObject); 
         setTimeout(function(a){a.invalidate();}, 0 ,bx);
         break;
     }
@@ -821,4 +816,3 @@ var USc_sidebarAnnotationObserver = {
   onItemAnnotationRemoved : function(aItemId, aName) { }
   
 };
-}
