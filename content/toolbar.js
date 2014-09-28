@@ -3,18 +3,18 @@
  * Version 1.1 (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License at
  * http://www.mozilla.org/MPL/
- * 
+ *
  * Software distributed under the License is distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
  * License for the specific language governing rights and limitations
  * under the License.
- * 
+ *
  * The Original Code is Update Scanner.
- * 
+ *
  * The Initial Developer of the Original Code is Pete Burgers.
  * Portions created by Pete Burgers are Copyright (C) 2006-2007
  * All Rights Reserved.
- * 
+ *
  * Contributor(s):
  * Wladimir Palant (adblockplus code to handle toolbar buttons)
  *
@@ -28,7 +28,7 @@
  * decision by deleting the provisions above and replace them with the notice
  * and other provisions required by the GPL or the LGPL. If you do not delete
  * the provisions above, a recipient may use your version of this file under
- * the terms of any one of the MPL, the GPL or the LGPL.  
+ * the terms of any one of the MPL, the GPL or the LGPL.
  * ***** END LICENSE BLOCK ***** */
 
 
@@ -49,7 +49,7 @@ UpdateScanner.BookmarkObserver = {
     // Update parent annotations if a bookmark gets deleted
     UpdateScanner.Places.updateFolderStatus(aFolder);
   },
- 
+
   onItemMoved: function(aItemId, aOldParent, aOldIndex, aNewParent, aNewIndex) {
     // Update parent annotations if a bookmark gets moved
     UpdateScanner.Places.updateFolderStatus(aOldParent);
@@ -68,7 +68,7 @@ UpdateScanner.AnnotationObserver = {
   onPageAnnotationSet : function(aURI, aName) { },
   onPageAnnotationRemoved : function(aURI, aName) { },
   onItemAnnotationRemoved : function(aItemId, aName) { },
-  
+
   onItemAnnotationSet : function(aItemId, aName) {
     if (aName == UpdateScanner.Places.ANNO_STATUS)
     {
@@ -80,7 +80,7 @@ UpdateScanner.AnnotationObserver = {
       // Start an upwards cascade of annotation updates (as far as necessary)
       UpdateScanner.Places.updateFolderStatus(UpdateScanner.Places.getParentFolder(aItemId));
     }
-  }  
+  }
 };
 
 UpdateScanner.EnablePrefObserver = {
@@ -138,15 +138,15 @@ unload : function()
     var me = UpdateScanner.Toolbar;
     var bmsvc = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"]
                           .getService(Components.interfaces.nsINavBookmarksService);
-    try { 
+    try {
       PlacesUtils.annotations.removeObserver(UpdateScanner.AnnotationObserver);
     } catch(e) {}
 
-    try { 
+    try {
         bmsvc.removeObserver(UpdateScanner.BookmarkObserver);
     } catch(e) {}
- 
-    try { 
+
+    try {
         this.prefs.removeObserver("scan.enable", UpdateScanner.BookmarkObserver);
     } catch(e) {}
 },
@@ -159,7 +159,7 @@ installAddonbarIcon : function()
     if (!toolbar || typeof toolbar.insertItem != "function")
         return;
 
-    toolbar.insertItem("tools-updatescan-button", document.getElementById("addonbar-closebutton"), null, false); 
+    toolbar.insertItem("tools-updatescan-button", document.getElementById("addonbar-closebutton"), null, false);
     toolbar.setAttribute("currentset", toolbar.currentSet);
     document.persist(toolbar.id, "currentset");
 
@@ -173,7 +173,7 @@ installAddonbarIcon : function()
 autoscanFinished : function(numChanges)
 {
 //    var alertsService = Components.classes["@mozilla.org/alerts-service;1"]
-//                        .getService(Components.interfaces.nsIAlertsService); 
+//                        .getService(Components.interfaces.nsIAlertsService);
     var me = UpdateScanner.Toolbar;
 
     var gBundle = Components.classes["@mozilla.org/intl/stringbundle;1"].getService(Components.interfaces.nsIStringBundleService);
@@ -215,7 +215,7 @@ refresh : function()
                                                  UpdateScanner.Places.ANNO_STATUS,
                                                  UpdateScanner.Places.STATUS_UNKNOWN);
     var enabled = me.prefs.getBoolPref("scan.enable");
-          
+
     if (changed == UpdateScanner.Places.STATUS_UPDATE) {
         if (enabled) {
             toolbar.setAttribute("status", "CHANGE");

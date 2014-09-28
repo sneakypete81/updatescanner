@@ -35,7 +35,7 @@
  * the terms of any one of the MPL, the GPL or the LGPL.
  *
  * ***** END LICENSE BLOCK ***** */
- 
+
  /* These functions are from the Thunderbird source (utilityOverlay.js) */
 
 UpdateScanner.TopWin = {

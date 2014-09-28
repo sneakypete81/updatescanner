@@ -3,20 +3,20 @@
  * Version 1.1 (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License at
  * http://www.mozilla.org/MPL/
- * 
+ *
  * Software distributed under the License is distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
  * License for the specific language governing rights and limitations
  * under the License.
- * 
+ *
  * The Original Code is Update Scanner.
- * 
+ *
  * The Initial Developer of the Original Code is Pete Burgers.
  * Portions created by Pete Burgers are Copyright (C) 2006-2007
  * All Rights Reserved.
- * 
+ *
  * Contributor(s):
- * 
+ *
  * Alternatively, the contents of this file may be used under the terms of
  * either the GNU General Public License Version 2 or later (the "GPL"), or
  * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
@@ -27,7 +27,7 @@
  * decision by deleting the provisions above and replace them with the notice
  * and other provisions required by the GPL or the LGPL. If you do not delete
  * the provisions above, a recipient may use your version of this file under
- * the terms of any one of the MPL, the GPL or the LGPL.  
+ * the terms of any one of the MPL, the GPL or the LGPL.
  * ***** END LICENSE BLOCK ***** */
 
 UpdateScanner.DlgNewEdit = {
@@ -41,7 +41,7 @@ initDialog : function()
     var prefService = Components.classes["@mozilla.org/preferences-service;1"].getService();
     prefService = prefService.QueryInterface(Components.interfaces.nsIPrefService);
     var prefBranch = prefService.getBranch("extensions.updatescan.");
-    
+
     document.title = "Update Scanner";
     document.getElementById("txtTitle").value = args.title;
     document.getElementById("txtURL").value = args.url;
@@ -54,39 +54,36 @@ initDialog : function()
 
 
     if (useSliders) {
+        document.getElementById("sliderThreshold").max = this.ksliderThresholdValues;
+        this.sliderThresholdSetPos(this.sliderThresholdEncode(args.threshold));
+        this.sliderThresholdChange();
 
-	document.getElementById("sliderThreshold").max = this.ksliderThresholdValues;
-	this.sliderThresholdSetPos(this.sliderThresholdEncode(args.threshold));
-	this.sliderThresholdChange();
-
-	document.getElementById("sliderAutoscan").max = this.ksliderAutoscanValues;
-	this.sliderAutoscanSetPos(this.sliderAutoscanEncode(args.scanRateMins));
-	this.sliderAutoscanChange();
-
+        document.getElementById("sliderAutoscan").max = this.ksliderAutoscanValues;
+        this.sliderAutoscanSetPos(this.sliderAutoscanEncode(args.scanRateMins));
+        this.sliderAutoscanChange();
     } else {
+        document.getElementById("textThreshold").value = args.threshold;
 
-	document.getElementById("textThreshold").value = args.threshold;
+        if (args.scanRateMins == 0) { // Manual scan selected
+            document.getElementById("manualScan").selectedIndex = 0;
+            args.scanRateMins = 60; // Default to 1 hour
+        } else {
+            document.getElementById("manualScan").selectedIndex = 1;
+            if (args.scanRateMins < 5) {
+                args.scanRateMins = 5;
+            }
+        }
 
-	if (args.scanRateMins == 0) { // Manual scan selected
-	    document.getElementById("manualScan").selectedIndex = 0;
-	    args.scanRateMins = 60; // Default to 1 hour
-	} else {
-	    document.getElementById("manualScan").selectedIndex = 1;
-	    if (args.scanRateMins < 5) {
-		args.scanRateMins = 5;
-	    }
-	}	
-
-	if (args.scanRateMins % (60*24) == 0) {
-	    document.getElementById("textAutoscan").value = args.scanRateMins/(60*24);
-	    document.getElementById("menuAutoscanUnit").value = "Days";
-	} else if (args.scanRateMins % 60 == 0) {
-	    document.getElementById("textAutoscan").value = args.scanRateMins/60;
-	    document.getElementById("menuAutoscanUnit").value = "Hours";
-	} else {
-	    document.getElementById("textAutoscan").value = args.scanRateMins;
-	    document.getElementById("menuAutoscanUnit").value = "Minutes";
-	}
+        if (args.scanRateMins % (60*24) == 0) {
+            document.getElementById("textAutoscan").value = args.scanRateMins/(60*24);
+            document.getElementById("menuAutoscanUnit").value = "Days";
+        } else if (args.scanRateMins % 60 == 0) {
+            document.getElementById("textAutoscan").value = args.scanRateMins/60;
+            document.getElementById("menuAutoscanUnit").value = "Hours";
+        } else {
+            document.getElementById("textAutoscan").value = args.scanRateMins;
+            document.getElementById("menuAutoscanUnit").value = "Minutes";
+        }
     }
 
     document.getElementById("ignoreNumbers").checked = args.ignoreNumbers;
@@ -105,7 +102,7 @@ initDialog : function()
 
     var advSection = document.getElementById("advSection");
     var advLabel = document.getElementById("advLabel");
-    
+
     if (args.advanced) {
         advSection.hidden = false;
         advLabel.hidden = true;
@@ -142,42 +139,42 @@ Ok : function()
         alert(noDataAlert);
         return false;
     }
-    
+
     args.title = txtTitle.value;
     args.url = txtURL.value;
     if (prefBranch.getBoolPref("scan.useSliders")) {
-	     args.threshold = this.sliderThresholdDecode(this.sliderThresholdGetPos());
-	     args.scanRateMins = this.sliderAutoscanDecode(this.sliderAutoscanGetPos());
+             args.threshold = this.sliderThresholdDecode(this.sliderThresholdGetPos());
+             args.scanRateMins = this.sliderAutoscanDecode(this.sliderAutoscanGetPos());
         if (document.getElementById("ignoreNumbers").checked) {
-	         args.ignoreNumbers = true;
-	     } else {
-	         args.ignoreNumbers = false;
-	     }
+            args.ignoreNumbers = true;
+        } else {
+            args.ignoreNumbers = false;
+        }
     } else {
-	     args.threshold = document.getElementById("textThreshold").value;
+        args.threshold = document.getElementById("textThreshold").value;
 
-	     if (document.getElementById("manualScan").selectedIndex == 0) {
-	         args.scanRateMins = 0; // Manual scan
-	     } else {
-	         args.scanRateMins = document.getElementById("textAutoscan").value;
-	         if (document.getElementById("menuAutoscanUnit").value == "Hours") {
-		          args.scanRateMins = args.scanRateMins * 60;
-	         } else if (document.getElementById("menuAutoscanUnit").value == "Days") {
-		          args.scanRateMins = args.scanRateMins * 60 * 24;
-	         }
-	         if (args.scanRateMins < 5) {
-		          args.scanRateMins = 5;
-	         }
-	     }
+        if (document.getElementById("manualScan").selectedIndex == 0) {
+            args.scanRateMins = 0; // Manual scan
+        } else {
+            args.scanRateMins = document.getElementById("textAutoscan").value;
+            if (document.getElementById("menuAutoscanUnit").value == "Hours") {
+                args.scanRateMins = args.scanRateMins * 60;
+            } else if (document.getElementById("menuAutoscanUnit").value == "Days") {
+                args.scanRateMins = args.scanRateMins * 60 * 24;
+            }
+            if (args.scanRateMins < 5) {
+                args.scanRateMins = 5;
+            }
+        }
         if (document.getElementById("ignoreNumbers2").checked) {
-	         args.ignoreNumbers = true;
-	     } else {
-	         args.ignoreNumbers = false;
-	     }
+            args.ignoreNumbers = true;
+        } else {
+            args.ignoreNumbers = false;
+        }
     }
 
     if (args.scanRateMins > 0 && args.scanRateMins < 15 &&
-	     prefBranch.getBoolPref("scan.warnScanShort")) {
+        prefBranch.getBoolPref("scan.warnScanShort")) {
         if (!confirm(fiveMinuteAlert)) {
             return false;
         }
@@ -205,10 +202,10 @@ advancedClick : function()
 {
     var advLabel = document.getElementById("advLabel");
     var advSection = document.getElementById("advSection");
-    
+
     advLabel.hidden = true;
     advSection.hidden = false;
-    
+
     window.sizeToContent();
 },
 
@@ -236,7 +233,7 @@ sliderThresholdChange : function()
     var strings=document.getElementById("USc_strings");
     var label1=document.getElementById("label1");
     var label2=document.getElementById("label2");
-    
+
     var pos = this.sliderThresholdGetPos();
     if (pos == 0) {
         label1.value=strings.getString("thresholdLabel0a");

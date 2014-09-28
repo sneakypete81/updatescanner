@@ -34,14 +34,14 @@
  * the terms of any one of the MPL, the GPL or the LGPL.
  *
  * ***** END LICENSE BLOCK ***** */
- 
+
 // This code is copied from the "AddToBookmarks" context menu item.
 
 // See the end of the file for load/unload observers!
 
 UpdateScanner.Overlay = {
 
-load : function() 
+load : function()
 {
     var me = UpdateScanner.Overlay;
     // Eventlistener for the main context menu
@@ -59,7 +59,7 @@ load : function()
 
 // Don't show context menu item when text is selected,
 // or if URL is in chrome:// space.
-_showMenu : function() 
+_showMenu : function()
 {
     if(gContextMenu.isTextSelected || !window.content.document.URL) {
         document.getElementById("AddToUpdateScan").hidden = true;
@@ -96,7 +96,7 @@ _showToolbarMenu : function()
         document.getElementById("ToolbarMenuDisableScanner").hidden = false;
         document.getElementById("ToolbarMenuEnableScanner").hidden = true;
     } else {
-        document.getElementById("ToolbarMenuDisableScanner").hidden = true;        
+        document.getElementById("ToolbarMenuDisableScanner").hidden = true;
         document.getElementById("ToolbarMenuEnableScanner").hidden = false;
     }
 },

@@ -3,23 +3,23 @@
  * Version 1.1 (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License at
  * http://www.mozilla.org/MPL/
- * 
+ *
  * Software distributed under the License is distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
  * License for the specific language governing rights and limitations
  * under the License.
- * 
+ *
  * The Original Code is Update Scanner.
- * 
+ *
  * The Initial Developer of the Original Code is Pete Burgers.
  * Portions created by Pete Burgers are Copyright (C) 2006-2007
  * All Rights Reserved.
- * 
+ *
  * Contributor(s):
  * Portions from Sage project:
  * Peter Andrews <petea@jhu.edu>
  * Erik Arvidsson <erik@eae.net>
- * 
+ *
  * Alternatively, the contents of this file may be used under the terms of
  * either the GNU General Public License Version 2 or later (the "GPL"), or
  * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
@@ -30,7 +30,7 @@
  * decision by deleting the provisions above and replace them with the notice
  * and other provisions required by the GPL or the LGPL. If you do not delete
  * the provisions above, a recipient may use your version of this file under
- * the terms of any one of the MPL, the GPL or the LGPL.  
+ * the terms of any one of the MPL, the GPL or the LGPL.
  * ***** END LICENSE BLOCK ***** */
 
 UpdateScanner.Places = {
@@ -87,7 +87,7 @@ UpdateScanner.Places = {
     var gBundle = Components.classes["@mozilla.org/intl/stringbundle;1"].getService(Components.interfaces.nsIStringBundleService);
     var strings = gBundle.createBundle("chrome://updatescan/locale/updatescan.properties");
     var folderName = strings.GetStringFromName("rootFolderName");
-    
+
     // First see if there's an existing folder with that name
     var folderId = this.findFolderId(folderName);
     if (folderId == null) {
@@ -130,7 +130,7 @@ UpdateScanner.Places = {
     rootNode.containerOpen = false;
     return null;
   },
-  
+
   // Set the updatescan/root annotation to the corresponding folder, as well as
   // PlacesOrganizer/OrganizerQuery. Note that there is no risk to stomp
   // a folder already annotated for Firefox, because Firefox only annotates
@@ -180,7 +180,7 @@ UpdateScanner.Places = {
   {
     return PlacesUtils.bookmarks.getBookmarkURI(id).spec;
   },
-  
+
   setURL : function(id, url)
   {
     var ioService = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService);
@@ -236,7 +236,7 @@ UpdateScanner.Places = {
   {
     var sig = this.createSignature(id);
     this.modifyAnno(id, this.ANNO_SIGNATURE, sig)
-    
+
     return sig;
   },
 
@@ -244,25 +244,25 @@ UpdateScanner.Places = {
   {
     var bmsvc = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"]
                           .getService(Components.interfaces.nsINavBookmarksService);
-    return bmsvc.getItemIndex(id);    
+    return bmsvc.getItemIndex(id);
   },
-  
+
   getParentFolder : function(id)
   {
     var bmsvc = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"]
                           .getService(Components.interfaces.nsINavBookmarksService);
-    
+
     return bmsvc.getFolderIdForItem(id);
   },
-  
+
   isFolder : function(id)
   {
     var bmsvc = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"]
                           .getService(Components.interfaces.nsINavBookmarksService);
-    
-    return bmsvc.getItemType(id) == bmsvc.TYPE_FOLDER;    
+
+    return bmsvc.getItemType(id) == bmsvc.TYPE_FOLDER;
   },
-  
+
   createSignature : function(id)
   {
     // build string to be hashed (URL+id)
@@ -311,7 +311,7 @@ UpdateScanner.Places = {
     // iterate over the immediate children of this folder and dump to console
     rootNode.containerOpen = true;
     var childrenUpdated = false;
-    
+
     for (var i = 0; i < rootNode.childCount; i ++) {
       var node = rootNode.getChild(i);
       var status = this.queryAnno(node.itemId, this.ANNO_STATUS, this.STATUS_UNKNOWN);
@@ -320,7 +320,7 @@ UpdateScanner.Places = {
         break;
       }
     }
-    rootNode.containerOpen = false;    
+    rootNode.containerOpen = false;
     if (childrenUpdated) {
       this.modifyAnno(folderId, this.ANNO_STATUS, this.STATUS_UPDATE);
     } else {
@@ -329,7 +329,7 @@ UpdateScanner.Places = {
   },
 
   callFunctionWithUpdatedItems : function(rootId, callback)
-  // Look for updated items below rootId, and pass each id and delay 
+  // Look for updated items below rootId, and pass each id and delay
   // to the callback
   {
     var prefs = Components.classes["@mozilla.org/preferences-service;1"]
@@ -363,7 +363,7 @@ UpdateScanner.Places = {
     }
     var bmsvc = Components.classes["@mozilla.org/browser/nav-bookmarks-service;1"]
                 .getService(Components.interfaces.nsINavBookmarksService);
-        
+
     var itemType = bmsvc.getItemType(itemId);
     if (itemType == bmsvc.TYPE_BOOKMARK)
     {
@@ -377,7 +377,7 @@ UpdateScanner.Places = {
         UpdateScanner.Places._callFunctionRecursive(aResultNode.getChild(i), callback);
         }
         aResultNode.containerOpen = false;
-    }    
+    }
   },
 
   // return the two-digit hexadecimal code for a byte

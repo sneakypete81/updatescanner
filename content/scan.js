@@ -3,23 +3,23 @@
  * Version 1.1 (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License at
  * http://www.mozilla.org/MPL/
- * 
+ *
  * Software distributed under the License is distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
  * License for the specific language governing rights and limitations
  * under the License.
- * 
+ *
  * The Original Code is Update Scanner.
- * 
+ *
  * The Initial Developer of the Original Code is Pete Burgers.
  * Portions created by Pete Burgers are Copyright (C) 2006-2007
  * All Rights Reserved.
- * 
+ *
  * Contributor(s):
  * Portions from Sage project:
  * Peter Andrews <petea@jhu.edu>
  * Erik Arvidsson <erik@eae.net>
- * 
+ *
  * Alternatively, the contents of this file may be used under the terms of
  * either the GNU General Public License Version 2 or later (the "GPL"), or
  * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
@@ -30,7 +30,7 @@
  * decision by deleting the provisions above and replace them with the notice
  * and other provisions required by the GPL or the LGPL. If you do not delete
  * the provisions above, a recipient may use your version of this file under
- * the terms of any one of the MPL, the GPL or the LGPL.  
+ * the terms of any one of the MPL, the GPL or the LGPL.
  * ***** END LICENSE BLOCK ***** */
 
 UpdateScanner.Scan = {
@@ -60,7 +60,7 @@ scanner : function()
     var currentitem;
     var scanTimerID = null;
     var scanTimerRunning = false;
- 
+
     this.clear = function()
     {
         itemlist.length = 0;
@@ -83,12 +83,12 @@ scanner : function()
                     getBranch("extensions.updatescan.");
 
         var scanTimeout;
-        try { 
+        try {
             scanTimeout = prefs.getIntPref("scanTimeout");
-	    } catch (e) {
+        } catch (e) {
             scanTimeout = 10;
         }
-	    if (scanTimeout < 10) scanTimeout = 10;
+        if (scanTimeout < 10) scanTimeout = 10;
         me._stopTimeout();
         scanTimerRunning = true;
         timeoutError = false;
@@ -106,7 +106,7 @@ scanner : function()
 
     this._timeout = function()
     {
-        if (httpreq) { // Abort the request - this triggers an error 
+        if (httpreq) { // Abort the request - this triggers an error
             timeoutError = true;
             httpreq.abort(); // Triggers this.next with status undefined
         }
@@ -141,7 +141,7 @@ scanner : function()
                     .getService(Ci.nsINavBookmarksService);
         var anno = Cc["@mozilla.org/browser/annotation-service;1"]
                    .getService(Ci.nsIAnnotationService);
-        
+
         var itemId;
         if (typeof(aResultNode) == "number") {
             itemId = aResultNode;
@@ -150,7 +150,7 @@ scanner : function()
         }
 
         var itemType = bmsvc.getItemType(itemId);
-        
+
         if (itemType == bmsvc.TYPE_BOOKMARK)
         {
             // If we're autoscanning, only queue the item if it needs scanning
@@ -193,17 +193,17 @@ scanner : function()
                 me.queueItemRecursive(aResultNode.getChild(i), autoScan);
             }
             aResultNode.containerOpen = false;
-        }    
+        }
     }
 
-    this.addURL = function(id, title, url, content, threshold, 
+    this.addURL = function(id, title, url, content, threshold,
                            ignoreNumbers, encoding)
     {
-        var page = new me._uscanItem(id, title, url, content, threshold, 
+        var page = new me._uscanItem(id, title, url, content, threshold,
                                  ignoreNumbers, encoding);
         itemlist.push(page);
     }
-    
+
     this.start = function(changedCallbackarg, finishedCallbackarg,
               progressCallbackarg, encodingCallbackarg)
     {
@@ -211,17 +211,17 @@ scanner : function()
         finishedCallback = finishedCallbackarg;
         progressCallback = progressCallbackarg;
         encodingCallback = encodingCallbackarg;
-        
+
         if (itemlist.length == 0)
         {
             finishedCallback("");
             return;
         }
-       
+
         numitems = itemlist.length + 1;
         currentitem = 0;
         progressCallback(me._nextTitleText(), currentitem, numitems);
-        
+
         scanning = true;
         me._getNextPage();
     }
@@ -265,21 +265,21 @@ scanner : function()
             httpreq = null;
             me._stopTimeout();
             page = itemlist.shift();      // extract the next item
-    
+
             try {
                 if (httpreqStatus == 200 || httpreqStatus == 0) {
                     // 200 = OK, 0 = FTP/FILE finished
 
                     if (page.encoding == "auto") {
                         // Scan the response for encoding
-                        page.encoding = me._getEncoding(httpreqHeaderText, 
+                        page.encoding = me._getEncoding(httpreqHeaderText,
                                                     httpreqResponseText);
                         // If encoding is not defined anywhere, use whatever
                         // the XMLHttpRequest method decided to do.
-                   
+
                         if (page.encoding != "") {
                             encodingCallback(page.id, page.encoding);
-                            // Download again with the correct encoding                            
+                            // Download again with the correct encoding
                             itemlist.unshift(page);
                             me._getNextPage();
                             return;
@@ -311,7 +311,7 @@ scanner : function()
             } catch (e) {
                 status = usc.STATUS_ERROR;
             }
-            changedCallback(page.id, httpreqResponseText, status, 
+            changedCallback(page.id, httpreqResponseText, status,
                             httpreqStatusText, httpreqHeaderText);
             me._getNextPage();
         }
@@ -323,7 +323,7 @@ scanner : function()
         if (itemlist.length > 0) {
             while (!me._attemptGet(itemlist[0].url, itemlist[0].encoding)) {
                 page = itemlist.shift();      // extract the next item
-                changedCallback(page.id, "", usc.STATUS_ERROR, 
+                changedCallback(page.id, "", usc.STATUS_ERROR,
                     Components.classes["@mozilla.org/intl/stringbundle;1"]
                    .getService(Components.interfaces.nsIStringBundleService)
                    .createBundle("chrome://updatescan/locale/updatescan.properties")
@@ -350,13 +350,13 @@ scanner : function()
             return;
         }
     }
-    
+
     this._attemptGet = function(url, encoding)
     {
         try {
             httpreq = new XMLHttpRequest();
             httpreq.open("GET", url, true);
-            if (encoding != "auto") { 
+            if (encoding != "auto") {
                 // Force parser to use a specific encoding
                 httpreq.overrideMimeType('text/html; charset='+encoding);
             }
@@ -365,11 +365,11 @@ scanner : function()
             return true;
         } catch (e) {
             return false;
-        }        
+        }
     }
 
-    this._uscanItem = function(id, title, url, content, threshold, 
-                   ignoreNumbers, encoding) 
+    this._uscanItem = function(id, title, url, content, threshold,
+                   ignoreNumbers, encoding)
     {
         this.id = id;
         this.title = title;
@@ -378,7 +378,7 @@ scanner : function()
         this.threshold = threshold;
         this.ignoreNumbers = ignoreNumbers;
         this.encoding = encoding;
-    } 
+    }
 
     // Returns true if the content is the same
     // (or within a certain number of characters)
@@ -386,7 +386,7 @@ scanner : function()
     {
         var threshold;
         if (maxthreshold == 0) return (content1 == content2);
-    
+
         // Slowly increase the threshold until it reaches the maximum
         threshold=0;
         while (threshold < maxthreshold) {
@@ -401,31 +401,31 @@ scanner : function()
         }
         return false;
     }
-    
+
     this._stripTags = function(content)
     {
         return content.replace(/(<([^<]+)>)/g,"");
     }
-    
+
     this._stripScript = function(content)
     {
         return content.replace(/<script([\r\n]|.)*?>([\r\n]|.)*?<\/script>/gi,"");
     }
-    
+
     this._stripWhitespace = function(content)
     {
         return content.replace(/\s+/g,"");
     }
-    
+
     this._stripNumbers = function(content)
     {
         return content.replace(/[0-9\,\.]*/g,"")
     }
-    
+
     this._getEncoding = function(header, content)
     // Searches through the header for Content-Type: text/html; charset=xxxxx
     //
-    // If not found, scans content for <META http-equiv="Content-Type" 
+    // If not found, scans content for <META http-equiv="Content-Type"
     // content="text/html; charset=xxxxx">
     {
         var result;
@@ -434,7 +434,7 @@ scanner : function()
         if (result != null) {
             return result[1];
         }
-        
+
         re = /<meta[^>]+charset\s*=\s*([^>"';]+)/i;
         result = re.exec(content);
         if (result != null) {
@@ -442,7 +442,7 @@ scanner : function()
         }
         return ""
     }
-    
+
     this._nextTitleText = function()
     {
         var item;
@@ -459,7 +459,7 @@ scanner : function()
 },
 
 // This doesn't behave very nicely inside the class, since it is called
-// inside callbacks.    
+// inside callbacks.
 processScanChange : function(id, newContent, status, statusText, headerText)
 // Updates the specified item based on the new content.
 // * Updates Bookmark annotations
@@ -495,7 +495,7 @@ processScanChange : function(id, newContent, status, statusText, headerText)
         UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_LAST_SCAN, now.toString());
         UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_STATUS_TEXT, statusText);
         if (logHeaders)
-            UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_HEADER_TEXT, headerText);        
+            UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_HEADER_TEXT, headerText);
 
     } else if (status == usc.STATUS_MINOR_CHANGE) {
         // Minor change: don't notify, but save new page
@@ -506,11 +506,11 @@ processScanChange : function(id, newContent, status, statusText, headerText)
             != UpdateScanner.Places.STATUS_UPDATE)
         {
             UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_STATUS, UpdateScanner.Places.STATUS_NO_UPDATE);
-        }    
+        }
         UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_LAST_SCAN, now.toString());
         UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_STATUS_TEXT, statusText);
         if (logHeaders)
-            UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_HEADER_TEXT, headerText);        
+            UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_HEADER_TEXT, headerText);
 
     } else if (status == usc.STATUS_NO_CHANGE) {
         // Update status to "no change" if necessary
@@ -518,12 +518,12 @@ processScanChange : function(id, newContent, status, statusText, headerText)
                 != UpdateScanner.Places.STATUS_UPDATE)
         {
             UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_STATUS, UpdateScanner.Places.STATUS_NO_UPDATE);
-        }    
+        }
         UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_LAST_SCAN, now.toString());
         UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_STATUS_TEXT, statusText);
         if (logHeaders)
-            UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_HEADER_TEXT, headerText);        
-            
+            UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_HEADER_TEXT, headerText);
+
     } else if (status == usc.STATUS_NEW) {
         UpdateScanner.File.USwriteFile(filebase+".old", newContent);
         UpdateScanner.File.USwriteFile(filebase+".new", newContent);
@@ -533,12 +533,12 @@ processScanChange : function(id, newContent, status, statusText, headerText)
         UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_STATUS_TEXT, statusText);
         if (logHeaders)
             UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_HEADER_TEXT, headerText);
-            
+
     } else {
         UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_STATUS, UpdateScanner.Places.STATUS_ERROR);
         UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_STATUS_TEXT, statusText);
         if (logHeaders)
-            UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_HEADER_TEXT, headerText);        
+            UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_HEADER_TEXT, headerText);
     }
     return retVal;
 },

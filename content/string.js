@@ -1,6 +1,6 @@
 // From http://javascript.crockford.com/remedial.html
 // There is no license, but the website states:
-//   "You can put these functions in your code library 
+//   "You can put these functions in your code library
 //    and copy them individually into your projects as you need them."
 
 // example:

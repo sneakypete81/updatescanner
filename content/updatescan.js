@@ -3,18 +3,18 @@
  * Version 1.1 (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License at
  * http://www.mozilla.org/MPL/
- * 
+ *
  * Software distributed under the License is distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
  * License for the specific language governing rights and limitations
  * under the License.
- * 
+ *
  * The Original Code is Update Scanner.
- * 
+ *
  * The Initial Developer of the Original Code is Pete Burgers.
  * Portions created by Pete Burgers are Copyright (C) 2006-2007
  * All Rights Reserved.
- * 
+ *
  * Contributor(s):
  * Portions from Sage project:
  * Peter Andrews <petea@jhu.edu>
@@ -22,7 +22,7 @@
 
  * Portions from Boox project:
  * Nicolas Martin http://joliclic.free.fr
- * 
+ *
  * Alternatively, the contents of this file may be used under the terms of
  * either the GNU General Public License Version 2 or later (the "GPL"), or
  * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
@@ -33,7 +33,7 @@
  * decision by deleting the provisions above and replace them with the notice
  * and other provisions required by the GPL or the LGPL. If you do not delete
  * the provisions above, a recipient may use your version of this file under
- * the terms of any one of the MPL, the GPL or the LGPL.  
+ * the terms of any one of the MPL, the GPL or the LGPL.
  * ***** END LICENSE BLOCK ***** */
 
 UpdateScanner.Defaults = {
@@ -64,19 +64,19 @@ load : function()
     var r;
 
     me._extendPlacesTreeView();
-    
+
     me.tree = document.getElementById("updatescan-bookmarks-view");
     me.tree.onclick=me._treeClick;
-   
+
     try {
       var rootFolderId = UpdateScanner.Places.getRootFolderId();
     } catch (e) {
       var rootFolderId = UpdateScanner.Places.createRootFolder();
     }
     me.tree.place = "place:queryType=1&folder=" + rootFolderId;
-    
+
     PlacesUtils.annotations.addObserver(UpdateScanner.SidebarAnnotationObserver);
-    
+
     // Check for toolbar button changes
     me._branch = Components.classes["@mozilla.org/preferences-service;1"];
     me._branch = me._branch.getService(Components.interfaces.nsIPrefService);
@@ -97,8 +97,8 @@ load : function()
 unload : function()
 {
     var me = UpdateScanner.Updatescan;
-  
-    try { 
+
+    try {
       PlacesUtils.annotations.removeObserver(UpdateScanner.SidebarAnnotationObserver);
     } catch(e) {}
     try {
@@ -107,7 +107,7 @@ unload : function()
 },
 
 // Show/hide menu items depending on whether folder or bookmark is selected
-_showMenu : function() 
+_showMenu : function()
 {
     var me = UpdateScanner.Updatescan;
     var id = me._getSelectedItem();
@@ -134,7 +134,7 @@ observe: function(aSubject, aTopic, aData) // Observe toolbar button preference 
 {
     var me = UpdateScanner.Updatescan;
     if (aTopic == "nsPref:changed") {
-	me._updateToolbar();
+    me._updateToolbar();
     }
 },
 
@@ -158,7 +158,7 @@ _treeClick : function(aEvent) {
 
     var modifKey = aEvent.metaKey || aEvent.ctrlKey || aEvent.shiftKey;
     var newtab_leftclick = prefBranch.getBoolPref("scan.newtab_leftclick");
-    
+
     switch (aEvent.button) {
         case 0:
             if (modifKey || newtab_leftclick) {
@@ -175,7 +175,7 @@ _treeClick : function(aEvent) {
 
 scanButtonClick : function()
 {
-    var me = UpdateScanner.Updatescan;    
+    var me = UpdateScanner.Updatescan;
     var scanbutton = document.getElementById("scanbutton");
     var id;
     var numitems;
@@ -209,12 +209,12 @@ scanButtonClick : function()
         me.numChanges = 0;
         me._scanFinishedCallback(str.getString("treeEmptyAlert"));
     }
-    
+
 },
 
 scanSelected : function()
 {
-    var me = UpdateScanner.Updatescan;    
+    var me = UpdateScanner.Updatescan;
 
     me._showStopButton();
 
@@ -283,7 +283,7 @@ openNewDialogCurrentPos : function()
   var id = me._getSelectedItem();
   if (id == undefined)
     me.openNewDialog();
-  else if (UpdateScanner.Places.isFolder(id)) 
+  else if (UpdateScanner.Places.isFolder(id))
     me.openNewDialog(id);
   else
     me.openNewDialog(UpdateScanner.Places.getParentFolder(id),
@@ -294,7 +294,7 @@ openNewDialog : function(parentId, index)
 {
     if (typeof parentId == 'undefined' )
       parentId = UpdateScanner.Places.getRootFolderId();
-    if (typeof index == 'iundefined') 
+    if (typeof index == 'iundefined')
       index = -1; // Insert at the bottom by default
 
     var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
@@ -308,8 +308,8 @@ openNewDialog : function(parentId, index)
     var title = mainWindow.content.document.title || url;
 
     var args = {
-        title:            title, 
-        url:              url, 
+        title:            title,
+        url:              url,
         threshold:        UpdateScanner.Defaults.DEF_THRESHOLD,
         scanRateMins:     UpdateScanner.Defaults.DEF_SCAN_RATE_MINS,
         encoding:         UpdateScanner.Defaults.DEF_ENCODING,
@@ -319,7 +319,7 @@ openNewDialog : function(parentId, index)
         advanced:         false
     };
 
-    window.openDialog('chrome://updatescan/content/dlgnewedit.xul', 'dlgNew', 
+    window.openDialog('chrome://updatescan/content/dlgnewedit.xul', 'dlgNew',
                       'chrome,dialog,modal,centrescreen', args);
     if (args.ok) {
         var id = UpdateScanner.Places.addBookmark(args.title, args.url, parentId, index);
@@ -377,13 +377,13 @@ openEditDialog : function(id)
 
     var oldurl = args.url;
 
-    window.openDialog('chrome://updatescan/content/dlgnewedit.xul', 'dlgEdit', 
+    window.openDialog('chrome://updatescan/content/dlgnewedit.xul', 'dlgEdit',
                       'chrome,dialog,modal,centrescreen', args);
-                      
+
     if (args.ok) {
         UpdateScanner.Places.setTitle(id, args.title);
         UpdateScanner.Places.setURL(id, args.url);
-        
+
         UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_THRESHOLD, args.threshold);
         UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_SCAN_RATE_MINS, args.scanRateMins);
         UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_ENCODING, args.encoding);
@@ -416,11 +416,11 @@ diffItem : function(id, delay)
 
     if (UpdateScanner.Places.isFolder(id))
       return undefined;
-    
+
     var now = new Date();
 
     me._markAsVisited(id);
-    
+
     var old_lastScan = UpdateScanner.Places.queryAnno(id,
                                             UpdateScanner.Places.ANNO_OLD_LAST_SCAN,
                                             UpdateScanner.Defaults.DEF_OLD_LAST_SCAN);
@@ -430,7 +430,7 @@ diffItem : function(id, delay)
 
     var lastScan = UpdateScanner.Places.queryAnno(id, UpdateScanner.Places.ANNO_LAST_SCAN, UpdateScanner.Defaults.DEF_LAST_SCAN);
     lastScan = new Date(lastScan);
-    
+
     var newDate = me._dateDiffString(lastScan, now);
 
     if (UpdateScanner.Places.queryAnno(id, UpdateScanner.Places.ANNO_HIGHLIGHT_CHANGES,
@@ -464,7 +464,7 @@ _diffItemThisWindow : function(id)
     var diffURL = me.diffItem(id, 0);
     if (diffURL) {
         UpdateScanner.TopWin.open(diffURL);
-        if (me.tree) me.tree.focus();    
+        if (me.tree) me.tree.focus();
     }
 },
 
@@ -481,7 +481,7 @@ diffSelectedFolderNewTab : function()
     if (id == undefined)
       return;
 
-    UpdateScanner.Places.callFunctionWithUpdatedItems(id, UpdateScanner.Updatescan._diffItemNewTab);  
+    UpdateScanner.Places.callFunctionWithUpdatedItems(id, UpdateScanner.Updatescan._diffItemNewTab);
 },
 
 diffSelectedItemNewTab : function()
@@ -534,7 +534,7 @@ _diffItemNewTabBackground : function(id, delay)
 
 _dateDiffString : function(oldDate, newDate)
 {
-    var ret; 
+    var ret;
     var time;
     var str=document.getElementById("updatescanStrings");
 
@@ -585,7 +585,7 @@ _markAsVisited : function(id, delay)
 {
     if (UpdateScanner.Places.queryAnno(id, UpdateScanner.Places.ANNO_STATUS, "") == UpdateScanner.Places.STATUS_UPDATE)
     {
-      UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_STATUS, UpdateScanner.Places.STATUS_NO_UPDATE);      
+      UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_STATUS, UpdateScanner.Places.STATUS_NO_UPDATE);
     }
 },
 
@@ -600,7 +600,7 @@ openHelp : function()
                   .getInterface(Components.interfaces.nsIDOMWindow);
 
     var helpURL="http://sneakypete81.github.io/updatescanner/";
-    
+
     mainWindow.getBrowser().selectedTab = mainWindow.getBrowser().addTab(helpURL);
 },
 
@@ -658,7 +658,7 @@ _showStopButton : function()
 _showScanButton : function()
 {
     var scanbutton = document.getElementById("scanbutton");
-    scanbutton.setAttribute("label", scanbutton.getAttribute("scanbuttonlabel")); 
+    scanbutton.setAttribute("label", scanbutton.getAttribute("scanbuttonlabel"));
 },
 
 _setStatus : function (status)
@@ -679,7 +679,7 @@ _showProgress : function(title, value, max)
 },
 
 _hideProgress : function()
-{   
+{
     document.getElementById("Progress").collapsed=true;
 },
 
@@ -707,12 +707,12 @@ _extendPlacesTreeView : function() {
     var versionChecker = Components.classes["@mozilla.org/xpcom/version-comparator;1"]
                                    .getService(Components.interfaces.nsIVersionComparator);
     if(versionChecker.compare(appInfo.version, "22.0a1") >= 0) {
-	// Firefox 22 or later
+    // Firefox 22 or later
         PlacesTreeView.prototype.getCellProperties =
         function ext_getCellProperties(aRow, aColumn) {
             var properties = this.getCellPropertiesBase(aRow, aColumn);
             var node = this._rows[aRow];
-  
+
             if (node.type == Ci.nsINavHistoryResultNode.RESULT_TYPE_FOLDER ||
                 (node.type == Ci.nsINavHistoryResultNode.RESULT_TYPE_URI)) {
                 try {
@@ -735,17 +735,17 @@ _extendPlacesTreeView : function() {
         PlacesTreeView.prototype.getCellProperties =
         function ext_getCellProperties(aRow, aColumn, aProperties) {
             this.getCellPropertiesBase(aRow, aColumn, aProperties);
-    
+
             var node = this._rows[aRow];
             if (this._cellProperties) {
                 // FF15 and later
                 var properties = this._cellProperties.get(node)
             } else {
-    	        // FF14 and earlier
-    	        var properties = node._cellProperties;
+                // FF14 and earlier
+                var properties = node._cellProperties;
             }
             var newProperties = new Array();
-        
+
             if (node.type == Ci.nsINavHistoryResultNode.RESULT_TYPE_FOLDER ||
                 (node.type == Ci.nsINavHistoryResultNode.RESULT_TYPE_URI)) {
                 try {
@@ -766,7 +766,7 @@ _extendPlacesTreeView : function() {
                     aProperties.DeleteElementAt(index);
                 }
             }
-                
+
             var index = aProperties.GetIndexOf(this._getAtomFor("usc_state_error"));
             if (state == "usc_state_error") {
                 if (index == -1) {
@@ -777,7 +777,7 @@ _extendPlacesTreeView : function() {
                     aProperties.DeleteElementAt(index);
                 }
             }
-        
+
             for (var i = 0, l = newProperties.length; i < l; i++) {
                 aProperties.AppendElement(newProperties[i]);
                 properties.push(newProperties[i]);
@@ -796,23 +796,23 @@ myDump : function(aMessage) {
 };
 
 UpdateScanner.SidebarAnnotationObserver = {
-  
+
   onPageAnnotationSet : function(aURI, aName) { },
-  
+
   onItemAnnotationSet : function(aItemId, aName) {
     switch (aName) {
       case UpdateScanner.Places.ANNO_ROOT:
         UpdateScanner.Updatescan.tree.place = "place:queryType=1&folder=" + aItemId;
         break;
       case UpdateScanner.Places.ANNO_STATUS:
-        var bx = UpdateScanner.Updatescan.tree.boxObject.QueryInterface(Components.interfaces.nsITreeBoxObject); 
+        var bx = UpdateScanner.Updatescan.tree.boxObject.QueryInterface(Components.interfaces.nsITreeBoxObject);
         setTimeout(function(a){a.invalidate();}, 0 ,bx);
         break;
     }
   },
-  
+
   onPageAnnotationRemoved : function(aURI, aName) { },
-  
+
   onItemAnnotationRemoved : function(aItemId, aName) { }
-  
+
 };

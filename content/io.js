@@ -11,7 +11,7 @@ UpdateScanner.Io = {
 
 
     /////////////////////////////////////////////////
-    // Basic file IO object based on Mozilla source 
+    // Basic file IO object based on Mozilla source
     // code post at forums.mozillazine.org
     /////////////////////////////////////////////////
 
@@ -65,7 +65,7 @@ UpdateScanner.Io = {
         openTemp : function(suggestedName) {
             try {
                         var file = Components.classes[this.dirserviceCID]
-                                           .getService(this.propertiesIID).get("TmpD", 
+                                           .getService(this.propertiesIID).get("TmpD",
                                                        this.fileIID);
                       file.append(suggestedName);
                     file.createUnique(this.fileIID.NORMAL_FILE_TYPE, 0664);
@@ -92,7 +92,7 @@ UpdateScanner.Io = {
                     data = this.toUnicode(charset, data);
                 }
                 return data;
-            } 
+            }
             catch(e) {
                 return false;
             }
@@ -177,7 +177,7 @@ UpdateScanner.Io = {
                                     .createInstance(this.suniconvIID);
                 uniConv.charset = charset;
                 data = uniConv.ConvertToUnicode(data);
-            } 
+            }
             catch(e) {
                 // foobar!
             }
@@ -201,7 +201,7 @@ UpdateScanner.Io = {
 
 
     /////////////////////////////////////////////////
-    // Basic Directory IO object based on JSLib 
+    // Basic Directory IO object based on JSLib
     // source code found at jslib.mozdev.org
     /////////////////////////////////////////////////
 
@@ -242,9 +242,9 @@ UpdateScanner.DirIo = {
         sep        : '/',
 
         dirservCID : '@mozilla.org/file/directory_service;1',
-    
+
         propsIID   : Components.interfaces.nsIProperties,
-    
+
         fileIID    : Components.interfaces.nsIFile,
 
         get    : function(type) {
@@ -337,7 +337,7 @@ UpdateScanner.DirIo = {
             var arr = str.split(/\/|\\/), i;
             str = new String();
             for (i = 0; i < arr.length; ++i) {
-                str += arr[i] + ((i != arr.length - 1) ? 
+                str += arr[i] + ((i != arr.length - 1) ?
                                         join : '');
             }
             return str;
@@ -347,7 +347,7 @@ UpdateScanner.DirIo = {
             var arr = str.split(split), i;
             str = new String();
             for (i = 0; i < arr.length; ++i) {
-                str += arr[i] + ((i != arr.length - 1) ? 
+                str += arr[i] + ((i != arr.length - 1) ?
                                         this.sep : '');
             }
             return str;

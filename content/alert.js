@@ -48,18 +48,18 @@ gPermanent : false, // should the window stay open permanently (until manually c
 
 g_MAX_HEIGHT : 134,
 
-prefillAlertInfo : function() 
+prefillAlertInfo : function()
 {
     var label = document.getElementById("message");
     label.value=window.arguments[0];
-              
+
 },
 
 onAlertLoad : function()
 {
   var me = this;
   // read out our initial settings from prefs.
-  try 
+  try
   {
     var prefService = Components.classes["@mozilla.org/preferences-service;1"].getService();
     prefService = prefService.QueryInterface(Components.interfaces.nsIPrefService);
@@ -101,7 +101,7 @@ _playSound : function()
       } else {
           var file = prefBranch.getComplexValue("soundFile", Components.interfaces.nsILocalFile);
           url = ioService.newFileURI(file);
-      }          
+      }
       player.init();
       player.play(url);
   } catch(ex) { }
@@ -135,7 +135,7 @@ onLinkClick : function(aEvent)
 
     // Close the alert soon
     setTimeout(function(){me._closeAlert();}, me.gOpenTimeAfterLinkClick);
-    // Don't open the sidebar 
+    // Don't open the sidebar
     aEvent.stopPropagation();
 },
 
@@ -196,7 +196,7 @@ _closeAlert : function()
   }
   else
   {
-    window.close(); 
+    window.close();
   }
 }
 };

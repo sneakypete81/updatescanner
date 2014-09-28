@@ -3,20 +3,20 @@
  * Version 1.1 (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License at
  * http://www.mozilla.org/MPL/
- * 
+ *
  * Software distributed under the License is distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
  * License for the specific language governing rights and limitations
  * under the License.
- * 
+ *
  * The Original Code is Update Scanner.
- * 
+ *
  * The Initial Developer of the Original Code is Pete Burgers.
  * Portions created by Pete Burgers are Copyright (C) 2006-2007
  * All Rights Reserved.
- * 
+ *
  * Contributor(s):
- * 
+ *
  * Alternatively, the contents of this file may be used under the terms of
  * either the GNU General Public License Version 2 or later (the "GPL"), or
  * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
@@ -27,7 +27,7 @@
  * decision by deleting the provisions above and replace them with the notice
  * and other provisions required by the GPL or the LGPL. If you do not delete
  * the provisions above, a recipient may use your version of this file under
- * the terms of any one of the MPL, the GPL or the LGPL.  
+ * the terms of any one of the MPL, the GPL or the LGPL.
  * ***** END LICENSE BLOCK ***** */
 
 UpdateScanner.DiffPage = {
@@ -69,7 +69,7 @@ delete : function()
 {
     var str = document.getElementById("diffPageStrings");
     var id = UpdateScanner.DiffPage._getUrlParameter("id", "");
-    
+
     if (confirm(str.getString("confirmDelete"))) {
         UpdateScanner.Places.deleteBookmark(id);
         window.location = "about:blank";
@@ -80,7 +80,7 @@ delete : function()
 
 UpdateScanner.DiffPageTimer = {
 
-notify : function(timer) 
+notify : function(timer)
 {
     var id = UpdateScanner.DiffPage._getUrlParameter("id", "");
     var title = UpdateScanner.DiffPage._getUrlParameter("title", "");
@@ -147,13 +147,13 @@ notify : function(timer)
     default:
         document.getElementById("sectionNotChecked").hidden=false;
     }
-      
+
     this._writeViewFrame(view, url, enableDiffLinks);
-    
+
     this._writeContentFrame(url, thisContent);
 },
 
-click : function(view) 
+click : function(view)
 {
     location.href = this.baseUrl+view;
 },
@@ -161,7 +161,7 @@ click : function(view)
 _writeViewFrame : function (view, url, enableDiffLinks)
 {
     var str=document.getElementById("diffPageStrings");
-    
+
     var viewFrame = document.getElementById("sectionView");
     var viewDoc = viewFrame.contentDocument;
 
@@ -177,27 +177,27 @@ _writeViewFrame : function (view, url, enableDiffLinks)
     viewDoc.write("</head><body>");
     viewDoc.write("<b>"+viewStr+":</b>&nbsp;\n");
 
-    if (view == "old") 
+    if (view == "old")
         viewDoc.write("<b>"+oldPage+"</b>&nbsp;\n");
     else if (enableDiffLinks)
         viewDoc.write("<a href='"+this.baseUrl+"old' target='_top'>"+oldPage+"</a>&nbsp;\n");
     else
         viewDoc.write("<span style='color:#808080'>"+oldPage+"</span>&nbsp;\n");
 
-    if (view == "new") 
+    if (view == "new")
         viewDoc.write("<b>"+newPage+"</b>&nbsp;\n");
     else if (enableDiffLinks)
         viewDoc.write("<a href='"+this.baseUrl+"new' target='_top'>"+newPage+"</a>&nbsp;\n");
     else
         viewDoc.write("<span style='color:#808080'>"+newPage+"</span>&nbsp;\n");
 
-    if (view == "diff") 
+    if (view == "diff")
         viewDoc.write("<b>"+changes+"</b>&nbsp;\n");
     else if (enableDiffLinks)
         viewDoc.write("<a href='"+this.baseUrl+"diff' target='_top'>"+changes+"</a>\n&nbsp;");
     else
         viewDoc.write("<span style='color:#808080'>"+changes+"</span>\n&nbsp;");
-    
+
 
     viewDoc.write("<a href='"+url+"' target='_top'>"+currentPage+"</a>\n");
     viewDoc.write("</body></html>");
