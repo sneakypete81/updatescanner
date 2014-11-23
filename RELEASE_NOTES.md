@@ -1,6 +1,11 @@
 Update Scanner Release Notes
 ============================
 
+3.2.1: (23 November 2014)
+------
+* Feature: Build script improvements for dev builds
+* Fixed: Addon Compatibility Check improvements (#25)
+
 3.2.0: (20 September 2014)
 ------
 * Fixed: Improved page view performance (#18)
