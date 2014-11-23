@@ -5,20 +5,20 @@
  * Version 1.1 (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License at
  * http://www.mozilla.org/MPL/
- * 
+ *
  * Software distributed under the License is distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
  * License for the specific language governing rights and limitations
  * under the License.
- * 
+ *
  * The Original Code is Update Scanner.
- * 
+ *
  * The Initial Developer of the Original Code is Pete Burgers.
  * Portions created by Pete Burgers are Copyright (C) 2006-2007
  * All Rights Reserved.
- * 
+ *
  * Contributor(s):
- * 
+ *
  * Alternatively, the contents of this file may be used under the terms of
  * either the GNU General Public License Version 2 or later (the "GPL"), or
  * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
@@ -29,23 +29,24 @@
  * decision by deleting the provisions above and replace them with the notice
  * and other provisions required by the GPL or the LGPL. If you do not delete
  * the provisions above, a recipient may use your version of this file under
- * the terms of any one of the MPL, the GPL or the LGPL.  
+ * the terms of any one of the MPL, the GPL or the LGPL.
  * ***** END LICENSE BLOCK ***** -->
 
 <?xml-stylesheet href="chrome://updatescan/skin/dlgnewedit.css" type="text/css"?>
 
 <!DOCTYPE window SYSTEM "chrome://updatescan/locale/dlgnewedit.dtd">
 
-<dialog id="dlgNewEdit" 
+<dialog id="dlgNewEdit"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         buttons="accept,cancel"
-        onload="initDialog();"
-        ondialogaccept="return Ok();"
-        ondialogcancel="return Cancel();">
+        onload="UpdateScanner.DlgNewEdit.initDialog();"
+        ondialogaccept="return UpdateScanner.DlgNewEdit.Ok();"
+        ondialogcancel="return UpdateScanner.DlgNewEdit.Cancel();">
 
 <stringbundle id="USc_strings" src="chrome://updatescan/locale/dlgnewedit.properties"/>
 
-<script src="dlgnewedit.js"/>
+<script src="chrome://updatescan/content/namespace.js" />
+<script src="chrome://updatescan/content/dlgnewedit.js"/>
 
 <spacer class="margintopbottom"/>
 <grid>
@@ -66,7 +67,7 @@
                 <label value="&url.label;" control="txtURL"/>
             </box>
             <textbox id="txtURL" size="50"/>
-        </row> 
+        </row>
     </rows>
 </grid>
 
@@ -77,7 +78,7 @@
         <scale id="sliderAutoscan"
                pageincrement="1"
                flex="100%"
-               onchange="sliderAutoscanChange();"/>        
+               onchange="UpdateScanner.DlgNewEdit.sliderAutoscanChange();"/>
         <label value="&never.label;" />
     </hbox>
     <vbox align="center">
@@ -87,17 +88,17 @@
 
 <groupbox id="groupboxAutoscanNumbers">
   <caption label="&autoscan.label;" />
-  <radiogroup id="manualScan" onselect="manualScanChanged()">
+  <radiogroup id="manualScan" onselect="UpdateScanner.DlgNewEdit.manualScanChanged()">
     <radio label="&manualScan.label;"/>
     <hbox align="center">
       <radio label="&scanEvery.label;"/>
       <textbox id="textAutoscan" size="3" maxlength="3"/>
       <menulist id="menuAutoscanUnit">
-	<menupopup>
-	  <menuitem label="&minutes.label;" value="Minutes"/>
-	  <menuitem label="&hours.label;" value="Hours"/>
-	  <menuitem label="&days.label;" value="Days"/>
-	</menupopup>
+      <menupopup>
+        <menuitem label="&minutes.label;" value="Minutes"/>
+        <menuitem label="&hours.label;" value="Hours"/>
+        <menuitem label="&days.label;" value="Days"/>
+      </menupopup>
       </menulist>
     </hbox>
   </radiogroup>
@@ -108,11 +109,11 @@
     <checkbox id="ignoreNumbers" label="&ignoreNumbers.label;"/>
     <separator />
     <hbox align="center">
-        <label value="&low.label;" />       
+        <label value="&low.label;" />
         <scale id="sliderThreshold"
                flex="100%"
                pageincrement="1"
-               onchange="sliderThresholdChange();"/>
+               onchange="UpdateScanner.DlgNewEdit.sliderThresholdChange();"/>
         <label value="&high.label;" />
     </hbox>
     <vbox align="center">
@@ -131,29 +132,29 @@
   <checkbox id="ignoreNumbers2" label="&ignoreNumbers.label;"/>
 </groupbox>
 
-<label id="advLabel" value="&advanced.label;" 
-       onclick="advancedClick();" class="text-link" />
+<label id="advLabel" value="&advanced.label;"
+       onclick="UpdateScanner.DlgNewEdit.advancedClick();" class="text-link" />
 
 <vbox id="advSection" hidden="true">
 <groupbox>
     <caption label="&charEncoding.label;" />
-    <radiogroup id="autoCharEncoding" onselect="charEncodingChanged();">
+    <radiogroup id="autoCharEncoding" onselect="UpdateScanner.DlgNewEdit.charEncodingChanged();">
         <radio label="&autoDetect.label;" selected="true"/>
         <hbox align="center">
             <radio label="&use.label;"/>
             <textbox id="encodingText" size="50" disabled="True"/>
         </hbox>
     </radiogroup>
-</groupbox>    
+</groupbox>
 
 <groupbox>
   <caption label="&changeHighlighting.label;" />
   <hbox align="centre">
-  <checkbox id="highlightChanges" label="&highlightChanges.label;" oncommand="highlightChangesChanged();" />
+  <checkbox id="highlightChanges" label="&highlightChanges.label;" oncommand="UpdateScanner.DlgNewEdit.highlightChangesChanged();" />
     <colorpicker type="button" id="highlightColour" />
   </hbox>
 </groupbox>
 </vbox>
-   
+
 <spacer class="margintopbottom" />
 </dialog>

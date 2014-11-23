@@ -5,20 +5,20 @@
  * Version 1.1 (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License at
  * http://www.mozilla.org/MPL/
- * 
+ *
  * Software distributed under the License is distributed on an "AS IS"
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
  * License for the specific language governing rights and limitations
  * under the License.
- * 
+ *
  * The Original Code is Update Scanner.
- * 
+ *
  * The Initial Developer of the Original Code is Pete Burgers.
  * Portions created by Pete Burgers are Copyright (C) 2006-2008
  * All Rights Reserved.
- * 
+ *
  * Contributor(s):
- * 
+ *
  * Alternatively, the contents of this file may be used under the terms of
  * either the GNU General Public License Version 2 or later (the "GPL"), or
  * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
@@ -29,7 +29,7 @@
  * decision by deleting the provisions above and replace them with the notice
  * and other provisions required by the GPL or the LGPL. If you do not delete
  * the provisions above, a recipient may use your version of this file under
- * the terms of any one of the MPL, the GPL or the LGPL.  
+ * the terms of any one of the MPL, the GPL or the LGPL.
  * ***** END LICENSE BLOCK ***** -->
 
 <?xml-stylesheet href="chrome://updatescan/skin/diffPage.css" type="text/css"?>
@@ -37,28 +37,29 @@
 
 <!DOCTYPE window SYSTEM "chrome://updatescan/locale/diffPage.dtd">
 
-<window id="diffPage" 
-	title="Update Scanner Results"
-	xmlns:html="http://www.w3.org/1999/xhtml"
+<window id="diffPage"
+        title="Update Scanner Results"
+        xmlns:html="http://www.w3.org/1999/xhtml"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-        onload="USc_diffPage.load();">
+        onload="UpdateScanner.DiffPage.load();">
 
-  <stringbundle id="updatescanStrings" 
-		src="chrome://updatescan/locale/updatescan.properties"/>
-  <stringbundle id="diffPageStrings" 
-		src="chrome://updatescan/locale/diffPage.properties"/>
+  <stringbundle id="updatescanStrings"
+                src="chrome://updatescan/locale/updatescan.properties"/>
+  <stringbundle id="diffPageStrings"
+                src="chrome://updatescan/locale/diffPage.properties"/>
 
-  <script src="diffPage.js"/>
-  <script src="diffwiki.js"/>
-  <script src="file.js"/>
-  <script src="io.js"/>
-  <script src="string.js"/>
-  <script src="places.js"/>
-  <script src="updatescan.js"/>
+  <script src="chrome://updatescan/content/namespace.js" />
+  <script src="chrome://updatescan/content/diffPage.js"/>
+  <script src="chrome://updatescan/content/diffwiki.js"/>
+  <script src="chrome://updatescan/content/file.js"/>
+  <script src="chrome://updatescan/content/io.js"/>
+  <script src="chrome://updatescan/content/string.js"/>
+  <script src="chrome://updatescan/content/places.js"/>
+  <script src="chrome://updatescan/content/updatescan.js"/>
 
   <hbox class="blue-box">
   <spacer width="10"/>
-  <vbox> 
+  <vbox>
     <spacer flex="1"/>
     <image src="chrome://updatescan/skin/updatescan_big.png"/>
     <spacer flex="1"/>
@@ -68,42 +69,42 @@
     <label class="plain" style="font-weight:bold;" id="title"/>
     <vbox id="sectionOld" hidden="true">
       <hbox>
-	<label class="plain" value="&headerOld1; "/>
-	<label class="plain" id="dateOld" />
-	<label class="plain" value="&headerOld2;"/>
+        <label class="plain" value="&headerOld1; "/>
+        <label class="plain" id="dateOld" />
+        <label class="plain" value="&headerOld2;"/>
       </hbox>
     </vbox>
     <vbox id="sectionNew" hidden="true">
       <hbox>
-	<label class="plain" value="&headerNew1; "/>
-	<label class="plain" id="dateNew" />
-	<label class="plain" value="&headerNew2;"/>
+        <label class="plain" value="&headerNew1; "/>
+        <label class="plain" id="dateNew" />
+        <label class="plain" value="&headerNew2;"/>
       </hbox>
     </vbox>
     <vbox id="sectionDiff" hidden="true">
       <hbox>
-	<label class="plain" value="&headerDiff1; "/>
-	<label class="plain" id="dateDiff" />	
-	<label class="plain" value="&headerDiff2; "/>
-	<label id="highlightedLabel" class="plain" 
-          value="&headerDiff3;"/>
-	<label class="plain" value="&headerDiff4;"/>
+        <label class="plain" value="&headerDiff1; "/>
+        <label class="plain" id="dateDiff" />
+        <label class="plain" value="&headerDiff2; "/>
+        <label id="highlightedLabel" class="plain"
+               value="&headerDiff3;"/>
+        <label class="plain" value="&headerDiff4;"/>
       </hbox>
     </vbox>
     <vbox id="sectionNotChecked" hidden="true">
       <label class="plain" value="&headerNotChecked1;"/>
-      <hbox>	
-	<label class="plain" value="&headerNotChecked2; "/>
-	<label class="plain" style="font-weight:bold;" value="&headerNotChecked3;"/>
-	<label class="plain" value=" &headerNotChecked4;"/>
+      <hbox>
+        <label class="plain" value="&headerNotChecked2; "/>
+        <label class="plain" style="font-weight:bold;" value="&headerNotChecked3;"/>
+        <label class="plain" value=" &headerNotChecked4;"/>
       </hbox>
     </vbox>
     <vbox id="sectionError" hidden="true">
       <label class="plain" value="&headerError1;"/>
       <hbox>
-        <label class="plain" value="&headerError2; "/> 
-	<label class="plain" style="font-weight:bold;" value="&headerError3;"/>
-	<label class="plain" value=" &headerError4;"/>
+        <label class="plain" value="&headerError2; "/>
+        <label class="plain" style="font-weight:bold;" value="&headerError3;"/>
+        <label class="plain" value=" &headerError4;"/>
       </hbox>
     </vbox>
 
@@ -117,9 +118,9 @@
   <spacer flex="1"/>
   <vbox>
     <label class="text-link" value="&editProperties;"
-           onclick="USc_diffPage.editProperties()"/>
+           onclick="UpdateScanner.DiffPage.editProperties()"/>
     <label class="text-link" value="&delete;"
-           onclick="USc_diffPage.delete()"/>
+           onclick="UpdateScanner.DiffPage.delete()"/>
   </vbox>
 
   </hbox>

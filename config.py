@@ -3,7 +3,7 @@
 
 import sys
 
-version = "3.2.0" # Don't forget to update upgrade.js too!
+version = "3.2.1" # Don't forget to update upgrade.js too!
 publish_babelzilla = False # True = include incomplete locales for babelzilla
 only_english = False # True = only include english for beta releases
 
@@ -56,7 +56,10 @@ homepageURL = "http://sneakypete81.github.io/updatescanner/"
 
 allowUpdate = False
 updateURL = "%(homepageURL)s/update.rdf" % vars()
-updateFile = "%(app)s-%(version)s.xpi" % vars()
+if in_development:
+  updateFile = "%(app)s-dev.xpi" % vars()
+else:
+  updateFile = "%(app)s-%(version)s.xpi" % vars()
 updateLink = "%(homepageURL)s/%(updateFile)s" % vars()
 
 firefoxUID = 'ec8030f7-c20a-464f-9b0e-13a3a9e97384'

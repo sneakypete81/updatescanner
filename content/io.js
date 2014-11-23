@@ -7,13 +7,11 @@
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 
-if (typeof(USc_io_exists) != 'boolean') {
-var USc_io_exists = true;
-var USc_io = {    
+UpdateScanner.Io = {
 
 
     /////////////////////////////////////////////////
-    // Basic file IO object based on Mozilla source 
+    // Basic file IO object based on Mozilla source
     // code post at forums.mozillazine.org
     /////////////////////////////////////////////////
 
@@ -67,7 +65,7 @@ var USc_io = {
         openTemp : function(suggestedName) {
             try {
                         var file = Components.classes[this.dirserviceCID]
-                                           .getService(this.propertiesIID).get("TmpD", 
+                                           .getService(this.propertiesIID).get("TmpD",
                                                        this.fileIID);
                       file.append(suggestedName);
                     file.createUnique(this.fileIID.NORMAL_FILE_TYPE, 0664);
@@ -94,7 +92,7 @@ var USc_io = {
                     data = this.toUnicode(charset, data);
                 }
                 return data;
-            } 
+            }
             catch(e) {
                 return false;
             }
@@ -179,7 +177,7 @@ var USc_io = {
                                     .createInstance(this.suniconvIID);
                 uniConv.charset = charset;
                 data = uniConv.ConvertToUnicode(data);
-            } 
+            }
             catch(e) {
                 // foobar!
             }
@@ -198,21 +196,20 @@ var USc_io = {
                 // foobar!
             }
             return data;
-        }
-
-    }
+        },
+};
 
 
     /////////////////////////////////////////////////
-    // Basic Directory IO object based on JSLib 
+    // Basic Directory IO object based on JSLib
     // source code found at jslib.mozdev.org
     /////////////////////////////////////////////////
 
     // Example use:
-    // var dir = DirIO.open('/test');
+    // var dir = UpdateScanner.DirIo.open('/test');
     // if (dir.exists()) {
-    //     alert(DirIO.path(dir));
-    //     var arr = DirIO.read(dir, true), i;
+    //     alert(UpdateScanner.DirIo.path(dir));
+    //     var arr = UpdateScanner.DirIo.read(dir, true), i;
     //     if (arr) {
     //         for (i = 0; i < arr.length; ++i) {
     //             alert(arr[i].path);
@@ -220,7 +217,7 @@ var USc_io = {
     //     }
     // }
     // else {
-    //     var rv = DirIO.create(dir);
+    //     var rv = UpdateScanner.DirIo.create(dir);
     //     alert('Directory create: ' + rv);
     // }
 
@@ -240,15 +237,14 @@ var USc_io = {
     //     'CurProcD'            = installation (usually)
     //     'Home'                = OS root (e.g., /root)
     //     'TmpD'                = OS tmp (e.g., /tmp)
-
-    var DirIO = {
+UpdateScanner.DirIo = {
 
         sep        : '/',
 
         dirservCID : '@mozilla.org/file/directory_service;1',
-    
+
         propsIID   : Components.interfaces.nsIProperties,
-    
+
         fileIID    : Components.interfaces.nsIFile,
 
         get    : function(type) {
@@ -264,7 +260,7 @@ var USc_io = {
         },
 
         open   : function(path) {
-            return USc_io.open(path);
+            return UpdateScanner.Io.open(path);
         },
 
         create : function(dir) {
@@ -299,7 +295,7 @@ var USc_io = {
             try {
                 while (dirEntry.hasMoreElements()) {
                     list.push(dirEntry.getNext()
-                                    .QueryInterface(USc_io.localfileIID));
+                                    .QueryInterface(UpdateScanner.Io.localfileIID));
                 }
                 if (recursive) {
                     var list2 = new Array();
@@ -334,14 +330,14 @@ var USc_io = {
         },
 
         path   : function (dir) {
-            return USc_io.path(dir);
+            return UpdateScanner.Io.path(dir);
         },
 
         split  : function(str, join) {
             var arr = str.split(/\/|\\/), i;
             str = new String();
             for (i = 0; i < arr.length; ++i) {
-                str += arr[i] + ((i != arr.length - 1) ? 
+                str += arr[i] + ((i != arr.length - 1) ?
                                         join : '');
             }
             return str;
@@ -351,16 +347,13 @@ var USc_io = {
             var arr = str.split(split), i;
             str = new String();
             for (i = 0; i < arr.length; ++i) {
-                str += arr[i] + ((i != arr.length - 1) ? 
+                str += arr[i] + ((i != arr.length - 1) ?
                                         this.sep : '');
             }
             return str;
-        }
-    
-    }
+        },
+};
 
-    if (navigator.platform.toLowerCase().indexOf('win') > -1) {
-        DirIO.sep = '\\';
-    }
-
+if (navigator.platform.toLowerCase().indexOf('win') > -1) {
+    UpdateScanner.DirIo.sep = '\\';
 }
