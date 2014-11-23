@@ -92,7 +92,7 @@ notify : function(timer)
     document.title = title;
     document.getElementById("title").value=title;
 
-    this.baseUrl = ("chrome://updatescan/content/diffPage.xul?id="+escape(id) +
+    this.baseUrl = ("about:updatescan?id="+escape(id) +
                     "&title=" + escape(title) +
                     "&newDate=" + escape(newDate) +
                     "&oldDate=" + escape(oldDate) +

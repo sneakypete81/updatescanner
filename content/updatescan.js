@@ -435,7 +435,7 @@ diffItem : function(id, delay)
 
     if (UpdateScanner.Places.queryAnno(id, UpdateScanner.Places.ANNO_HIGHLIGHT_CHANGES,
                                        UpdateScanner.Defaults.DEF_HIGHLIGHT_CHANGES)) {
-        var url = ("chrome://updatescan/content/diffPage.xul?id="+escape(id)+
+        var url = ("about:updatescan?id="+escape(id)+
                    "&title="+escape(UpdateScanner.Places.getTitle(id))+
                    "&url="+escape(UpdateScanner.Places.getURL(id))+
                    "&oldDate="+escape(oldDate)+
