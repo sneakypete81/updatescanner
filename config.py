@@ -63,8 +63,8 @@ else:
 updateLink = "%(homepageURL)s/%(updateFile)s" % vars()
 
 firefoxUID = 'ec8030f7-c20a-464f-9b0e-13a3a9e97384'
-firefoxMinVersion = '32.0'
-firefoxMaxVersion = '32.0'
+firefoxMinVersion = '40.0'
+firefoxMaxVersion = '40.0'
 
 overlays = (
     # overlay this on that
