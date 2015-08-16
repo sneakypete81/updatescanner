@@ -1,8 +1,8 @@
-<!ENTITY UpdateScan.tooltip "Сканиране на страници за промени">
-<!ENTITY AddToUpdateScan.label "Сканиране за промени…">
-<!ENTITY AddToUpdateScan.accesskey "с">
+<!ENTITY UpdateScan.tooltip "Проверяване на страници за промени">
+<!ENTITY AddToUpdateScan.label "Проверяване за промени…">
+<!ENTITY AddToUpdateScan.accesskey "п">
 <!ENTITY ToggleSidebar.label "Превключване на страничната лента">
 <!ENTITY ShowAllChanges.label "Показване на всички промени">
-<!ENTITY EnableScanner.label "Включване на скенера">
-<!ENTITY DisableScanner.label "Изключване на скенера">
-<!ENTITY Preferences.label "Предпочитания">
+<!ENTITY EnableScanner.label "Проверяване включено">
+<!ENTITY DisableScanner.label "Проверяване изключено">
+<!ENTITY Preferences.label "Настройки">

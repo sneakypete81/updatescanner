@@ -1,8 +1,8 @@
-<!ENTITY preferences.title "Update Scanner Предпочитания">
+<!ENTITY preferences.title "Настройки на Update Scanner">
 <!ENTITY notifications.title "Известия">
-<!ENTITY scanning.title "Сканиране">
+<!ENTITY scanning.title "Проверяване">
 <!ENTITY toolbar.title "Лента с инструменти">
-<!ENTITY notifications.enable.label "Показване на уведомление, когато дадена уеб страница се промени">
+<!ENTITY notifications.enable.label "Показване на известие при промяна в страница">
 <!ENTITY notifications.timed.label1 "Показване за">
 <!ENTITY notifications.timed.label2 "секунди">
 <!ENTITY notifications.permanent.label "Показване докато не бъде затворено">
@@ -12,17 +12,17 @@
 <!ENTITY scan.sidebar.label "Странична лента">
 <!ENTITY scan.newtab_leftclick.label "Натискане с мишката показва промените в подпрозорец">
 <!ENTITY scan.pageProperties.label "Страница">
-<!ENTITY scan.selectUsing.label "Изберете сканиране и праг на чувствителност">
+<!ENTITY scan.selectUsing.label "Честота на проверка и чувствителност">
 <!ENTITY scan.sliders.label "Плъзгачи">
 <!ENTITY scan.numbers.label "Цифри">
-<!ENTITY scan.warnScanShort.label "Предупреждение при кратък интервал за сканиране">
-<!ENTITY scan.advanced.label "Разширено">
-<!ENTITY scan.timeoutIfLonger.label "Изтичане на времето при сканиране повече от">
+<!ENTITY scan.warnScanShort.label "Предупреждение при кратък интервал">
+<!ENTITY scan.advanced.label "Разширени">
+<!ENTITY scan.timeoutIfLonger.label "Времето за проверка изтича при повече от">
 <!ENTITY scan.seconds.label "секунди">
 <!ENTITY toolbar.toolbarIcons.label "Икони в лентата с инструменти">
 <!ENTITY toolbar.new.label "Добавяне">
-<!ENTITY toolbar.showNewTab.label "Показване на всички променени страници в подпрозорци">
-<!ENTITY toolbar.markVisited.label "Маркиране всички като посетени">
+<!ENTITY toolbar.showNewTab.label "Всички променени страници в подпрозорци">
+<!ENTITY toolbar.markVisited.label "Отбелязване на всички като посетени">
 <!ENTITY toolbar.delete.label "Изтриване">
-<!ENTITY toolbar.preferences.label "Предпочитания">
+<!ENTITY toolbar.preferences.label "Настройки">
 <!ENTITY toolbar.help.label "Помощ">
