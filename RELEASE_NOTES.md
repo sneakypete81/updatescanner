@@ -1,6 +1,17 @@
 Update Scanner Release Notes
 ============================
 
+3.2.3: (16 August 2015)
+------
+* Locale: Updated Russion translation - thanks Vyacheslav Chudievich (#55)
+* Locale: Updated Bulgarian translation - thanks stoyan
+* License: Upgraded to MPL 2.2
+
+3.2.2: (NOT RELEASED)
+------
+(This version introduced 'about:updatescan' URIs for Electolysis support,
+ which was abandoned when Electrolysis started accepting 'chrome: URIs)
+
 3.2.1: (23 November 2014)
 ------
 * Feature: Build script improvements for dev builds
