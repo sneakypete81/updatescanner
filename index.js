@@ -1,12 +1,10 @@
 var buttons = require('sdk/ui/button/toggle');
-var tabs = require("sdk/tabs");
+var panels = require("sdk/panel");
 
 var sidebar = require("sdk/ui/sidebar").Sidebar({
   id: 'updatescanner-sidebar',
   title: 'Update Scanner',
   url: "./html/sidebar.html",
-  onShow: handleSidebarShow,
-  onHide: handleSidebarHide
 });
 
 var button = buttons.ToggleButton({
@@ -21,26 +19,28 @@ var button = buttons.ToggleButton({
   onChange: handleButtonChange
 });
 
-// var buttonClicking = false;
+var panel = panels.Panel({
+  contentURL: "./html/panel.html",
+  onHide: handlePanelHide
+});
+panel.port.on("sidebar_show", handleSidebarShowRequest);
+
 
 function handleButtonChange(state) {
-  // buttonClicking = true;
+  // Show the panel when the button is clicked
   if (state.checked) {
-    console.log("showing");
-    sidebar.show();
-  } else {
-    console.log("hiding");
-    sidebar.hide();
+    panel.show({position: button});
   }
-  // buttonClicking = false;
 }
 
-function handleSidebarShow() {
-  button.state("window", {checked: true});
+function handlePanelHide() {
+  // Uncheck the button when the panel disappears
+  button.state('window', {checked: false});
 }
 
-function handleSidebarHide() {
-  button.state("window", {checked: false});
+function handleSidebarShowRequest() {
+  sidebar.show();
+  panel.hide();
 }
 
 // a dummy function, to show how tests work.
