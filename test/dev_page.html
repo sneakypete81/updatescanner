@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+  <title>Update Scanner Development Environment</title>
+  <style>
+    body {
+      background-color: #ddf;
+      color: #333;
+      font: 14px/20px "HelveticaNeue-Light", "HelveticaNeue", Helvetica, Arial, sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <h1>Update Scanner Development Environment</h1>
+  <h2>Setup</h2>
+  <ul>
+    <li>Download the latest source code from [TBD]</li>
+    <li>Create a new Firefox profile called "updatescanner_dev"</li>
+    <li>Install the <a href="https://addons.mozilla.org/en-US/firefox/addon/autoinstaller/" target="_blank">Extension Auto-Installer</a> addon</li>
+    <li>Close Firefox</li>
+  </ul>
+  <h2>Usage</h2>
+  <ul>
+    <li>Type the following to launch the Firefox dev profile:
+      <pre>    make dev</pre>
+    </li>
+    <li>Type the following in different terminal to automatically post XPI updates to the Firefox dev profile:
+      <pre>    make watchpost</pre>
+    </li>
+  </ul>
+
+</body>
+</html>
