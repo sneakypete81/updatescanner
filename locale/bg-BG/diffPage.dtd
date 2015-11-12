@@ -1,18 +1,18 @@
 <!ENTITY editProperties "Настройки">
 <!ENTITY delete "Изтриване">
-<!ENTITY headerOld1 "Страницата по-долу е старата версия на сканирания сайт">
+<!ENTITY headerOld1 "Страницата по-долу е старата версия">
 <!ENTITY headerOld2 ".">
-<!ENTITY headerNew1 "Страницата по-долу е новата версия на сканирания сайт">
+<!ENTITY headerNew1 "Страницата по-долу е новата версия">
 <!ENTITY headerNew2 ".">
-<!ENTITY headerDiff1 "Тази страница за последно е била сканирана">
+<!ENTITY headerDiff1 "Страницата последно е била проверена">
 <!ENTITY headerDiff2 ". Промените са">
-<!ENTITY headerDiff3 "избран">
+<!ENTITY headerDiff3 "откроени">
 <!ENTITY headerDiff4 ".">
-<!ENTITY headerNotChecked1 "Тази страница не е била сканирана.">
-<!ENTITY headerNotChecked2 "Моля изберете">
-<!ENTITY headerNotChecked3 "'Сканиране'">
+<!ENTITY headerNotChecked1 "Тази страница не е била проверявана.">
+<!ENTITY headerNotChecked2 "Моля, изберете">
+<!ENTITY headerNotChecked3 "„Проверяване“">
 <!ENTITY headerNotChecked4 "бутон вляво и опирайте отново">
-<!ENTITY headerError1 "Тази страница върна грешка при последното сканиране.">
+<!ENTITY headerError1 "Тази страница върна грешка при последната проверка.">
 <!ENTITY headerError2 "Моля изберете">
-<!ENTITY headerError3 "'Текуща страница'">
+<!ENTITY headerError3 "„Текуща страница“">
 <!ENTITY headerError4 "връзка, за да проверите, че страницата е валидна.">

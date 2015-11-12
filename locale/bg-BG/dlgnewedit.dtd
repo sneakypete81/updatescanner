@@ -1,24 +1,24 @@
-<!ENTITY url.label "URL:">
-<!ENTITY title.label "Заглавие">
-<!ENTITY threshold.label "Промяна на чувствителността">
-<!ENTITY autoscan.label "Автоматично сканиране">
+<!ENTITY url.label "Адрес:">
+<!ENTITY title.label "Заглавие:">
+<!ENTITY threshold.label "Чувствителност към промени">
+<!ENTITY autoscan.label "Проверяване">
 <!ENTITY low.label "Нисък">
 <!ENTITY high.label "Висок">
 <!ENTITY often.label "Често">
 <!ENTITY never.label "Никога">
 <!ENTITY manualScan.label "Ръчно">
-<!ENTITY scanEvery.label "Сканиране всеки(всяка)">
+<!ENTITY scanEvery.label "Автоматично на всеки">
 <!ENTITY minutes.label "минута(и)">
 <!ENTITY hours.label "час(а)">
-<!ENTITY days.label "ден">
-<!ENTITY ignoreChanges.label "Игнориране на промени по-малки то около">
+<!ENTITY days.label "дена(и)">
+<!ENTITY ignoreChanges.label "Незачитане на промени по-малки то около">
 <!ENTITY characters.label "знака">
-<!ENTITY ignoreNumbers.label "Игнориране на промяна в цифри">
+<!ENTITY ignoreNumbers.label "Незачитане на промени в цифри">
 <!ENTITY advanced.label "Разширени">
 <!ENTITY charEncoding.label "Кодова таблица">
 <!ENTITY autoDetect.label "Автоматично разпознаване">
 <!ENTITY use.label "Използване на">
-<!ENTITY changeHighlighting.label "Промяна на подчертаването">
-<!ENTITY highlightChanges.label "Подчертаване на промените">
-<!ENTITY enableScript.label "Включване на Javascript">
-<!ENTITY enableFlash.label "Включване на Flash и Приставки">
+<!ENTITY changeHighlighting.label "Открояване на промените">
+<!ENTITY highlightChanges.label "Цвят на фона">
+<!ENTITY enableScript.label "Javascript влкючен">
+<!ENTITY enableFlash.label "Flash и приставки включени">
