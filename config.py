@@ -3,7 +3,7 @@
 
 import sys
 
-version = "3.2.3" # Don't forget to update upgrade.js too!
+version = "3.2.4beta1" # Don't forget to update upgrade.js too!
 publish_babelzilla = False # True = include incomplete locales for babelzilla
 only_english = False # True = only include english for beta releases
 
@@ -94,15 +94,15 @@ locales = {
     'cs': {
         'locale_version': '1.0',
         'display_name': name,
-    },                      
+    },
     'da': {
         'locale_version': '1.0',
         'display_name': name,
-    },           
+    },
     'de': {
         'locale_version': '1.0',
         'display_name': name,
-    },           
+    },
     'en-US': {
         'locale_version': '1.0',
         'display_name': name,
@@ -114,7 +114,7 @@ locales = {
     'fi-FI': {
         'locale_version': '1.0',
         'display_name': name,
-    },           
+    },
     'fr': {
         'locale_version': '1.0',
         'display_name': name,
@@ -150,7 +150,7 @@ locales = {
     'pt-BR': {
         'locale_version': '1.0',
         'display_name': name,
-    },    
+    },
     'ru-RU': {
         'locale_version': '1.0',
         'display_name': name,
@@ -162,7 +162,7 @@ locales = {
     'sv-SE': {
         'locale_version': '1.0',
         'display_name': name,
-    },    
+    },
     'tr-TR': {
         'locale_version': '1.0',
         'display_name': name,

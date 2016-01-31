@@ -1,6 +1,10 @@
 Update Scanner Release Notes
 ============================
 
+3.2.4:
+------
+* Don't change alert window size, just slide it up/down (#66)
+
 3.2.3: (16 August 2015)
 ------
 * Locale: Updated Russion translation - thanks Vyacheslav Chudievich (#55)
@@ -39,7 +43,7 @@ Update Scanner Release Notes
 
 3.1.13: (9 April 2014)
 -------
-* Fixed: FF29 issue with installation and autoscanning. 
+* Fixed: FF29 issue with installation and autoscanning.
 
 3.1.12: (23 March 2013)
 -------
@@ -54,7 +58,7 @@ Update Scanner Release Notes
 3.1.8: (30 July 2011)
 ------
 * Fixed: FF6 support
-* Fixed: Single page scan now working again. 
+* Fixed: Single page scan now working again.
 
 3.1.7: (28 June 2011)
 ------
@@ -76,13 +80,13 @@ Update Scanner Release Notes
 * Fixed: Updated icon sizes for Firefox 4
 * Fixed: Help page location - Mozdev redirect no longer works
 * Fixed: Moved from JAR to flat addon structure
-* Fixed: Addon validation warnings 
+* Fixed: Addon validation warnings
 * Locale: Swedish & Bulgarian translation (thanks Lakrits & Stoyan!)
 
 3.1.3: (19 August 2010)
 ------
 * Fixed: FF4 support
-* Fixed: Sidebar style update issue 
+* Fixed: Sidebar style update issue
 * Locale: Updated French, Turkish, Simplified Chinese, Bulgarian locales
 
 3.1.2: (28 January 2010)
@@ -95,7 +99,7 @@ Update Scanner Release Notes
 * Fixed: _extendPlacesTreeView bug. Thanks Bex
 * Fixed: nsINavBookmarkObserver::onBeforeItemRemoved bug. Thanks again Bex
 * Fixed: Ensure tree refreshes properly
-* Fixed: Improved compatibility (removed string prototypes) 
+* Fixed: Improved compatibility (removed string prototypes)
 
 3.0.8: (15 December 2009)
 ------
@@ -103,7 +107,7 @@ Update Scanner Release Notes
 * Feature: Enable/Disable scanning (right-click on the statusbar icon)
 * Feature: Enable/Disable javascript/plugins
 * Feature: Configurable highlight colour
-* Feature: Double-click statusbar icon shows all changes 
+* Feature: Double-click statusbar icon shows all changes
 
 3.0.5: (5 July 2009)
 ------
