@@ -42,11 +42,3 @@ If this doesn't work, you can also select the encoding type manually.
 
 If selected, webpage changes will be highlighted. Click the colour button to set the highlight colour.
 If not selected, the Update Scanner header will not be displayed, and changes will not be highlighted.
-
-### Enable Javascript
-
-Deselect this to disable Javascript when displaying highlighted pages. This can be useful if a page has a script that causes it to "pop out" to the main frame and remove the Update Scanner header.
-
-### Enable Flash and Plugins
-
-Deselect this to disable flash and plugins when displaying highlighted pages.
