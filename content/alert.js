@@ -37,8 +37,10 @@ onAlertLoad : function()
 
   sizeToContent();
 
-  // be sure to offset the alert by 10 pixels from the far right edge of the screen
-  window.moveTo( (screen.availLeft + screen.availWidth - window.outerWidth) - 10, screen.availTop + screen.availHeight);
+  // Be sure to offset the alert by 10 pixels from the far right edge of the screen
+  // Start just onscreen or Win10 refuses to display the popup
+  window.moveTo(screen.availLeft + screen.availWidth - window.outerWidth - 10,
+                screen.availTop + screen.availHeight - 10);
   me.finalScreenY = screen.availTop + screen.availHeight - window.outerHeight;
 
   setTimeout(function() {me._animateAlert();}, me.slideTime);
