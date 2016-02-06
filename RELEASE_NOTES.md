@@ -3,7 +3,8 @@ Update Scanner Release Notes
 
 3.2.4:
 ------
-* Don't change alert window size, just slide it up/down (#66)
+* Fixed: Don't change alert window size, just slide it up/down (#66)
+* Fixed: Alert working again on Win10 (#66)
 
 3.2.3: (16 August 2015)
 ------
