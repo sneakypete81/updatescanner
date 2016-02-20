@@ -3,7 +3,7 @@
 
 import sys
 
-version = "3.2.4beta2" # Don't forget to update upgrade.js too!
+version = "3.2.4" # Don't forget to update upgrade.js too!
 firefoxMinVersion = '45.0'
 firefoxMaxVersion = '45.0'
 publish_babelzilla = False # True = include incomplete locales for babelzilla
