@@ -3,7 +3,9 @@
 
 import sys
 
-version = "3.2.3" # Don't forget to update upgrade.js too!
+version = "3.2.4" # Don't forget to update upgrade.js too!
+firefoxMinVersion = '45.0'
+firefoxMaxVersion = '45.0'
 publish_babelzilla = False # True = include incomplete locales for babelzilla
 only_english = False # True = only include english for beta releases
 
@@ -42,7 +44,7 @@ translators = ['stoyan (български език)',
                ]
 authorURL = "http://sneakypete81.github.io/updatescanner/"
 uid = 'c07d1a49-9894-49ff-a594-38960ede8fb9'
-optionsChrome = 'chrome://updatescan/content/preferences.xul'
+firefoxUID = 'ec8030f7-c20a-464f-9b0e-13a3a9e97384'
 
 if len(sys.argv) > 1 and sys.argv[1] == "dev":
     in_development = True
@@ -52,6 +54,7 @@ else:
 if in_development:
     version = version + "+"
 
+optionsChrome = 'chrome://updatescan/content/preferences.xul'
 homepageURL = "http://sneakypete81.github.io/updatescanner/"
 
 allowUpdate = False
@@ -61,10 +64,6 @@ if in_development:
 else:
   updateFile = "%(app)s-%(version)s.xpi" % vars()
 updateLink = "%(homepageURL)s/%(updateFile)s" % vars()
-
-firefoxUID = 'ec8030f7-c20a-464f-9b0e-13a3a9e97384'
-firefoxMinVersion = '40.0'
-firefoxMaxVersion = '40.0'
 
 overlays = (
     # overlay this on that
@@ -94,15 +93,15 @@ locales = {
     'cs': {
         'locale_version': '1.0',
         'display_name': name,
-    },                      
+    },
     'da': {
         'locale_version': '1.0',
         'display_name': name,
-    },           
+    },
     'de': {
         'locale_version': '1.0',
         'display_name': name,
-    },           
+    },
     'en-US': {
         'locale_version': '1.0',
         'display_name': name,
@@ -114,7 +113,7 @@ locales = {
     'fi-FI': {
         'locale_version': '1.0',
         'display_name': name,
-    },           
+    },
     'fr': {
         'locale_version': '1.0',
         'display_name': name,
@@ -150,7 +149,7 @@ locales = {
     'pt-BR': {
         'locale_version': '1.0',
         'display_name': name,
-    },    
+    },
     'ru-RU': {
         'locale_version': '1.0',
         'display_name': name,
@@ -162,7 +161,7 @@ locales = {
     'sv-SE': {
         'locale_version': '1.0',
         'display_name': name,
-    },    
+    },
     'tr-TR': {
         'locale_version': '1.0',
         'display_name': name,
