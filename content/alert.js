@@ -10,14 +10,10 @@
 
 UpdateScanner.Alert = {
 
-gFinalHeight : 50,
-gSlideIncrement : 4,
-gSlideTime : 20,
+slideIncrement : 4,
+slideTime : 20,
 
-gOpenTimeAfterLinkClick : 3000, // Close 3 second after clicking on the link
-gPermanent : false, // should the window stay open permanently (until manually closed)
-
-g_MAX_HEIGHT : 134,
+openTimeAfterLinkClick : 3000, // Close 3 second after clicking on the link
 
 prefillAlertInfo : function()
 {
@@ -35,23 +31,19 @@ onAlertLoad : function()
     var prefService = Components.classes["@mozilla.org/preferences-service;1"].getService();
     prefService = prefService.QueryInterface(Components.interfaces.nsIPrefService);
     var prefBranch = prefService.getBranch("extensions.updatescan.notifications.");
-    me.gOpenTime = prefBranch.getIntPref("displayTime")*1000;
+    me.openTime = prefBranch.getIntPref("displayTime")*1000;
     me.gPermanent = prefBranch.getBoolPref("permanent");
   } catch (ex) { }
 
   sizeToContent();
 
-  me.gFinalHeight = window.outerHeight;
-  if ( me.gFinalHeight > me.g_MAX_HEIGHT ) {
-      me.gFinalHeight = me.g_MAX_HEIGHT;
-  }
+  // Be sure to offset the alert by 10 pixels from the far right edge of the screen
+  // Start just onscreen or Win10 refuses to display the popup
+  window.moveTo(screen.availLeft + screen.availWidth - window.outerWidth - 10,
+                screen.availTop + screen.availHeight - 10);
+  me.finalScreenY = screen.availTop + screen.availHeight - window.outerHeight;
 
-  window.resizeTo(window.outerWidth, 1);
-
-  // be sure to offset the alert by 10 pixels from the far right edge of the screen
-  window.moveTo( (screen.availLeft + screen.availWidth - window.outerWidth) - 10, screen.availTop + screen.availHeight - window.outerHeight);
-
-  setTimeout(function() {me._animateAlert();}, me.gSlideTime);
+  setTimeout(function() {me._animateAlert();}, me.slideTime);
 
 },
 
@@ -103,7 +95,7 @@ onLinkClick : function(aEvent)
     win.focus();
 
     // Close the alert soon
-    setTimeout(function(){me._closeAlert();}, me.gOpenTimeAfterLinkClick);
+    setTimeout(function(){me._closeAlert();}, me.openTimeAfterLinkClick);
     // Don't open the sidebar
     aEvent.stopPropagation();
 },
@@ -140,16 +132,15 @@ _animateAlert : function()
   prefService = prefService.QueryInterface(Components.interfaces.nsIPrefService);
   var prefBranch = prefService.getBranch("extensions.updatescan.notifications.");
   var me = this;
-  if (window.outerHeight < me.gFinalHeight) {
-    window.screenY -= me.gSlideIncrement;
-    window.resizeBy(0, me.gSlideIncrement);
-    setTimeout(function(){me._animateAlert();}, me.gSlideTime);
+  if (window.screenY > me.finalScreenY) {
+    window.screenY -= me.slideIncrement;
+    setTimeout(function(){me._animateAlert();}, me.slideTime);
   } else {
       if (prefBranch.getBoolPref("playSound")) {
         me._playSound();
       }
     if (!me.gPermanent) {
-      setTimeout(function(){me._closeAlert();}, me.gOpenTime);
+      setTimeout(function(){me._closeAlert();}, me.openTime);
     }
   }
 },
@@ -157,14 +148,11 @@ _animateAlert : function()
 _closeAlert : function()
 {
   var me = this;
-  if (window.outerHeight > 1)
+  if (window.screenY < (screen.availTop + screen.availHeight))
   {
-    window.screenY += me.gSlideIncrement;
-    window.resizeBy(0, -me.gSlideIncrement);
-    setTimeout(function(){me._closeAlert();}, me.gSlideTime);
-  }
-  else
-  {
+    window.screenY += me.slideIncrement;
+    setTimeout(function(){me._closeAlert();}, me.slideTime);
+  } else {
     window.close();
   }
 }
