@@ -101,8 +101,8 @@ notify : function(timer)
         var startMarker = "";
         var endMarker = "";
         if (markChanges) {
-          startMarker = "&lt;&lt;&lt;";
-          endMarker = "&gt;&gt;&gt;";
+          startMarker = "&lt;&lt;";
+          endMarker = "&gt;&gt;";
         }
 
         // Set heading label highlight background
