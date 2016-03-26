@@ -82,6 +82,7 @@ initDialog : function()
 
     document.getElementById("highlightChanges").checked = args.highlightChanges;
     document.getElementById("highlightColour").color = args.highlightColour;
+    document.getElementById("markChanges").checked = args.markChanges;
 
     this.highlightChangesChanged();
 },
@@ -159,6 +160,7 @@ Ok : function()
 
     args.highlightChanges = document.getElementById("highlightChanges").checked;
     args.highlightColour = document.getElementById("highlightColour").color;
+    args.markChanges = document.getElementById("markChanges").checked;
 
     args.ok = true;
     return true;

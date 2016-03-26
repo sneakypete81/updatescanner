@@ -25,6 +25,7 @@ UpdateScanner.Places = {
   ANNO_SIGNATURE : "updatescan/signature", // string
   ANNO_HIGHLIGHT_CHANGES : "updatescan/highlight_changes", // boolean
   ANNO_HIGHLIGHT_COLOUR : "updatescan/highlight_colour", // string
+  ANNO_MARK_CHANGES : "updatescan/mark_changes", // boolean
   ANNO_ENABLE_SCRIPT : "updatescan/enable_script", // boolean
   ANNO_ENABLE_FLASH : "updatescan/enable_flash", // boolean
 
