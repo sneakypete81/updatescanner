@@ -22,6 +22,7 @@ UpdateScanner.Defaults = {
     DEF_LAST_AUTOSCAN : "5 November 1978",
     DEF_HIGHLIGHT_CHANGES : true,
     DEF_HIGHLIGHT_COLOUR : "#ffff66",
+    DEF_MARK_CHANGES : false,
     DEF_ENABLE_SCRIPT : true,
     DEF_ENABLE_FLASH : true
 };
@@ -292,6 +293,7 @@ openNewDialog : function(parentId, index)
         ignoreNumbers:    UpdateScanner.Defaults.DEF_IGNORE_NUMBERS,
         highlightChanges: UpdateScanner.Defaults.DEF_HIGHLIGHT_CHANGES,
         highlightColour:  UpdateScanner.Defaults.DEF_HIGHLIGHT_COLOUR,
+        markChanges:      UpdateScanner.Defaults.DEF_MARK_CHANGES,
         advanced:         false
     };
 
@@ -305,6 +307,7 @@ openNewDialog : function(parentId, index)
         UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_IGNORE_NUMBERS, args.ignoreNumbers);
         UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_HIGHLIGHT_CHANGES, args.highlightChanges);
         UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_HIGHLIGHT_COLOUR, args.highlightColour);
+        UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_MARK_CHANGES, args.markChanges);
 
         var filebase=UpdateScanner.Places.getSignature(id);
         UpdateScanner.File.USwriteFile(filebase+".new", "");
@@ -349,6 +352,8 @@ openEditDialog : function(id)
                                                          UpdateScanner.Defaults.DEF_HIGHLIGHT_CHANGES),
         highlightColour:  UpdateScanner.Places.queryAnno(id, UpdateScanner.Places.ANNO_HIGHLIGHT_COLOUR,
                                                          UpdateScanner.Defaults.DEF_HIGHLIGHT_COLOUR),
+        markChanges:      UpdateScanner.Places.queryAnno(id, UpdateScanner.Places.ANNO_MARK_CHANGES,
+                                                         UpdateScanner.Defaults.DEF_MARK_CHANGES),
     };
 
     var oldurl = args.url;
@@ -366,6 +371,7 @@ openEditDialog : function(id)
         UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_IGNORE_NUMBERS, args.ignoreNumbers);
         UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_HIGHLIGHT_CHANGES, args.highlightChanges);
         UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_HIGHLIGHT_COLOUR, args.highlightColour);
+        UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_MARK_CHANGES, args.markChanges);
 
         if (oldurl != args.url) {   // URL changed - reset all values
           // Create a new signature

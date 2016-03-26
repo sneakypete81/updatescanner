@@ -122,9 +122,10 @@
 <groupbox>
   <caption label="&changeHighlighting.label;" />
   <hbox align="centre">
-  <checkbox id="highlightChanges" label="&highlightChanges.label;" oncommand="UpdateScanner.DlgNewEdit.highlightChangesChanged();" />
+    <checkbox id="highlightChanges" label="&highlightChanges.label;" oncommand="UpdateScanner.DlgNewEdit.highlightChangesChanged();" />
     <colorpicker type="button" id="highlightColour" />
   </hbox>
+  <checkbox id="markChanges" label="&markChanges.label;" />
 </groupbox>
 </vbox>
 
