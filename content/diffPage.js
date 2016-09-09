@@ -95,13 +95,23 @@ notify : function(timer)
     switch (view) {
     case "diff" :
         var highlightColour = UpdateScanner.Places.queryAnno(id, UpdateScanner.Places.ANNO_HIGHLIGHT_COLOUR,
-                                                             UpdateScanner.Defaults.DEF_HIGHLIGHT_COLOUR);
+                                                                 UpdateScanner.Defaults.DEF_HIGHLIGHT_COLOUR);
+        var markChanges = UpdateScanner.Places.queryAnno(id, UpdateScanner.Places.ANNO_MARK_CHANGES,
+                                                             UpdateScanner.Defaults.DEF_MARK_CHANGES);
+        var startMarker = "";
+        var endMarker = "";
+        if (markChanges) {
+          startMarker = "&lt;&lt;";
+          endMarker = "&gt;&gt;";
+        }
+
         // Set heading label highlight background
         document.getElementById("highlightedLabel").
             setAttribute('style', 'font-weight:bold;background: ' + highlightColour);
         document.getElementById("sectionDiff").hidden=false;
         document.getElementById("dateDiff").value=newDate;
-        thisContent = UpdateScanner.DiffWiki.WDiffString(oldContent, newContent, highlightColour);
+        thisContent = UpdateScanner.DiffWiki.WDiffString(oldContent, newContent, highlightColour,
+                                                         startMarker, endMarker);
         break;
     case "new":
         document.getElementById("sectionNew").hidden=false;

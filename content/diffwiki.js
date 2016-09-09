@@ -154,7 +154,7 @@ _trim : function(text)
 return text.replace(/^\s*|\s*$/g, "");
 },
 
-WDiffString : function(oldText, newText, highlightColour)
+WDiffString : function(oldText, newText, highlightColour, startMarker, endMarker)
 {
     var me = UpdateScanner.DiffWiki;
     var text = {};
@@ -167,8 +167,10 @@ WDiffString : function(oldText, newText, highlightColour)
     var outText = '';
 
     // Set highlight colour
-    me.wDiffHtmlInsertStart = ('<span style="background-color: ' + 
-                               highlightColour + ';">');
+    me.wDiffHtmlInsertStart = ('<span style="background-color: ' +
+                               highlightColour + ';">' + startMarker);
+    me.wDiffHtmlInsertEnd = endMarker + '</span>';
+
 
 // trap trivial changes: no change
     if (oldText == newText) {

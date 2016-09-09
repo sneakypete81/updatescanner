@@ -7,7 +7,7 @@
 UpdateScanner.Upgrade = {
 
 
-VERSION : "3.2.4",
+VERSION : "3.3.0",
 
 check : function()
 {
