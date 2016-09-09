@@ -452,7 +452,12 @@ processScanChange : function(id, newContent, status, statusText, headerText)
                 getBranch("extensions.updatescan.");
 
     var logHeaders = prefs.getBoolPref("logHeaders");
-    filebase=UpdateScanner.Places.getSignature(id);
+
+    if (UpdateScanner.Places.isIdValid(id) == false) {
+      return false;
+    }
+
+    filebase = UpdateScanner.Places.getSignature(id);
     if (status == usc.STATUS_CHANGE) {
         retVal = true;
         if (UpdateScanner.Places.queryAnno(id, UpdateScanner.Places.ANNO_STATUS, UpdateScanner.Places.STATUS_UNKNOWN)
