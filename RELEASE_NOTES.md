@@ -1,7 +1,11 @@
 Update Scanner Release Notes
 ============================
 
-3.2.4:
+3.3.0:
+------
+* Feature: Optionally add << >> markers around highlighted changes (#51)
+
+3.2.4: (20 February 2016)
 ------
 * Fixed: Don't change alert window size, just slide it up/down (#66)
 * Fixed: Alert working again on Win10 (#66)
