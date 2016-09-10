@@ -110,7 +110,7 @@ locales = {
         'locale_version': '1.0',
         'display_name': name,
     },
-    'fi-FI': {
+    'fi': {
         'locale_version': '1.0',
         'display_name': name,
     },
@@ -122,7 +122,7 @@ locales = {
         'locale_version': '1.0',
         'display_name': name,
     },
-    'it-IT': {
+    'it': {
         'locale_version': '1.0',
         'display_name': name,
     },
@@ -162,7 +162,7 @@ locales = {
         'locale_version': '1.0',
         'display_name': name,
     },
-    'tr-TR': {
+    'tr': {
         'locale_version': '1.0',
         'display_name': name,
     },

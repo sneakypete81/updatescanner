@@ -11,7 +11,6 @@
 <!ENTITY minutes.label "分">
 <!ENTITY hours.label "時間">
 <!ENTITY days.label "日">
-<!ENTITY ignoreChanges.label "">
 <!ENTITY characters.label "文字未満の変更は無視する">
 <!ENTITY ignoreNumbers.label "数字のみの変更は無視する">
 <!ENTITY advanced.label "拡張設定...">
