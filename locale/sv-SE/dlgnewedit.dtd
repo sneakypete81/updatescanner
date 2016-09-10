@@ -20,5 +20,6 @@
 <!ENTITY use.label "Använd">
 <!ENTITY changeHighlighting.label "Ändra markering">
 <!ENTITY highlightChanges.label "Markera ändringar">
+<!ENTITY markChanges.label "Mark changes with &lt;&lt;  &gt;&gt;">
 <!ENTITY enableScript.label "Aktivera JavaScript">
 <!ENTITY enableFlash.label "Aktivera Flash och insticksmoduler">

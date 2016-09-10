@@ -20,5 +20,6 @@
 <!ENTITY use.label "使用">
 <!ENTITY changeHighlighting.label "更改高亮颜色">
 <!ENTITY highlightChanges.label "高亮颜色">
+<!ENTITY markChanges.label "Mark changes with &lt;&lt;  &gt;&gt;">
 <!ENTITY enableScript.label "启用Javascript">
 <!ENTITY enableFlash.label "启用Flash和插件">

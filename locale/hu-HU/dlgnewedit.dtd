@@ -20,5 +20,6 @@
 <!ENTITY use.label "Alkalmazza ezt:">
 <!ENTITY changeHighlighting.label "Kiemelés módosítása">
 <!ENTITY highlightChanges.label "Változások kiemelése">
+<!ENTITY markChanges.label "Mark changes with &lt;&lt;  &gt;&gt;">
 <!ENTITY enableScript.label "JavaScript engedélyezése">
 <!ENTITY enableFlash.label "Flash és kiterjesztések engedélyezése">
