@@ -1,6 +1,6 @@
-<!ENTITY url.label "URL:">
+<!ENTITY url.label "Adresse:">
 <!ENTITY title.label "Titel:">
-<!ENTITY threshold.label "Ændr grænse">
+<!ENTITY threshold.label "Skift grænse">
 <!ENTITY autoscan.label "Autoskan">
 <!ENTITY low.label "Lav">
 <!ENTITY high.label "Høj">
@@ -13,12 +13,13 @@
 <!ENTITY days.label "dag">
 <!ENTITY ignoreChanges.label "Ignorer ændringer mindre end">
 <!ENTITY characters.label "tegn">
-<!ENTITY ignoreNumbers.label "Ignorer ændringer af tal">
+<!ENTITY ignoreNumbers.label "Ignorér ændringer af tal">
 <!ENTITY advanced.label "Avanceret…">
 <!ENTITY charEncoding.label "Tegnkodning">
 <!ENTITY autoDetect.label "Auto-detektér">
 <!ENTITY use.label "Anvend">
 <!ENTITY changeHighlighting.label "Skift fremhævning">
 <!ENTITY highlightChanges.label "Fremhæv ændringer">
-<!ENTITY enableScript.label "Aktiver Javascript">
-<!ENTITY enableFlash.label "Aktiver Flash og plugins">
+<!ENTITY markChanges.label "Markér ændringer med &lt;&lt; &gt;&gt;">
+<!ENTITY enableScript.label "Aktivér Javascript">
+<!ENTITY enableFlash.label "Aktivér Flash og plugins">

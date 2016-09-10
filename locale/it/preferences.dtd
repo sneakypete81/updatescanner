@@ -9,6 +9,8 @@
 <!ENTITY notifications.playSound.label "Riproduci un suono quando una pagina viene modificata">
 <!ENTITY notifications.defaultSound.label "Suono predefinito">
 <!ENTITY notifications.browse.label "Sfoglia...">
+<!ENTITY scan.sidebar.label "Sidebar">
+<!ENTITY scan.newtab_leftclick.label "Left-click shows changes in a new tab">
 <!ENTITY scan.pageProperties.label "Proprietà controllo pagina">
 <!ENTITY scan.selectUsing.label "Per impostare la frequenza dei controlli e il valore di soglia per le notifiche utilizza">
 <!ENTITY scan.sliders.label "indicatori scorrevoli">

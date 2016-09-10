@@ -20,5 +20,6 @@
 <!ENTITY use.label "Použít">
 <!ENTITY changeHighlighting.label "Změnit zvýrazňování">
 <!ENTITY highlightChanges.label "Zvýraznit změny">
+<!ENTITY markChanges.label "Mark changes with &lt;&lt;  &gt;&gt;">
 <!ENTITY enableScript.label "Zapnout Javascript">
 <!ENTITY enableFlash.label "Zapnout Flash a pluginy">

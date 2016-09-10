@@ -20,5 +20,6 @@
 <!ENTITY use.label "Utiliser">
 <!ENTITY changeHighlighting.label "Changer de surlignage">
 <!ENTITY highlightChanges.label "Surligner les modifications">
+<!ENTITY markChanges.label "Mark changes with &lt;&lt;  &gt;&gt;">
 <!ENTITY enableScript.label "Activer JavaScript">
 <!ENTITY enableFlash.label "Activer Flash et les plugins">

@@ -4,7 +4,7 @@
 <!ENTITY showallchangesinnewtabsbutton.tooltip "Vis alle ændrede sider i nye faneblade">
 <!ENTITY markallasvisitedbutton.tooltip "Marker alle sider som besøgte">
 <!ENTITY deletebutton.tooltip "Slet">
-<!ENTITY preferencesbutton.tooltip "Update Scanner indstillinger">
+<!ENTITY preferencesbutton.tooltip "Update Scanner - Indstillinger">
 <!ENTITY helpbutton.tooltip "Hjælp til Update Scanner">
 <!ENTITY openmenu.label "Vis ændringer">
 <!ENTITY openmenu.accesskey "V">

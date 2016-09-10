@@ -20,5 +20,6 @@
 <!ENTITY use.label "Nauduoti">
 <!ENTITY changeHighlighting.label "Keisti pašviesinimą">
 <!ENTITY highlightChanges.label "pašviesinti pakeitimus">
+<!ENTITY markChanges.label "Mark changes with &lt;&lt;  &gt;&gt;">
 <!ENTITY enableScript.label "Įjungti Javascript">
 <!ENTITY enableFlash.label "Įjungti Flash ir papildymus">

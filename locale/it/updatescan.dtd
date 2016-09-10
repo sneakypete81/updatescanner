@@ -7,6 +7,14 @@
 <!ENTITY preferencesbutton.tooltip "Opzioni">
 <!ENTITY helpbutton.tooltip "Guida in linea">
 <!ENTITY openmenu.label "Mostra le modifiche">
+<!ENTITY openmenu.accesskey "C">
 <!ENTITY opentabmenu.label "Mostra le modifiche in una nuova scheda">
+<!ENTITY opentabmenu.accesskey "T">
+<!ENTITY opentabsmenu.label "Show Changes in New Tabs">
+<!ENTITY opentabsmenu.accesskey "T">
 <!ENTITY markvisitedmenu.label "Segna tutte le pagine come lette">
+<!ENTITY markvisitedmenu.accesskey "V">
 <!ENTITY scanThisPage.label "Controlla questa pagina">
+<!ENTITY scanThisPage.accesskey "N">
+<!ENTITY scanThisFolder.label "Scan This Folder">
+<!ENTITY scanThisFolder.accesskey "N">

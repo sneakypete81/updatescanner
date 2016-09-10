@@ -20,5 +20,6 @@
 <!ENTITY use.label "Seçeyim">
 <!ENTITY changeHighlighting.label "Değişiklikleri Parlat">
 <!ENTITY highlightChanges.label "Değişiklikleri Parlat">
+<!ENTITY markChanges.label "Mark changes with &lt;&lt;  &gt;&gt;">
 <!ENTITY enableScript.label "JavaScript Etkinleştirilsin">
 <!ENTITY enableFlash.label "Flash ve Eklentileri Etkinleştir">

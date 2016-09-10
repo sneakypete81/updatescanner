@@ -15,4 +15,4 @@
 <!ENTITY headerError1 "Denne side returnerede en fejl sidst den blev skannet.">
 <!ENTITY headerError2 "Klik venligst på linket">
 <!ENTITY headerError3 "'Nuværende side'">
-<!ENTITY headerError4 "for at tjekke, at siden er gyldig.">
+<!ENTITY headerError4 "for at tjekke, om siden er gyldig.">

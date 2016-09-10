@@ -1,15 +1,15 @@
-<!ENTITY preferences.title "Update Scanner indstillinger">
+<!ENTITY preferences.title "Update Scanner - Indstillinger">
 <!ENTITY notifications.title "Påmindelser">
 <!ENTITY scanning.title "Skanner">
 <!ENTITY toolbar.title "Værktøjslinje">
-<!ENTITY notifications.enable.label "Vis popop-påmindelse når en side ændres">
+<!ENTITY notifications.enable.label "Vis pop op-påmindelse når en side ændres">
 <!ENTITY notifications.timed.label1 "Vis i">
 <!ENTITY notifications.timed.label2 "sekunder">
 <!ENTITY notifications.permanent.label "Vis indtil den lukkes manuelt">
 <!ENTITY notifications.playSound.label "Afspil en lyd når en side ændres">
 <!ENTITY notifications.defaultSound.label "Standardlyd">
 <!ENTITY notifications.browse.label "Gennemse…">
-<!ENTITY scan.sidebar.label "Sidebjælke">
+<!ENTITY scan.sidebar.label "Sidepanel">
 <!ENTITY scan.newtab_leftclick.label "Venstreklik viser ændringer i et nyt faneblad">
 <!ENTITY scan.pageProperties.label "Sideegenskaber">
 <!ENTITY scan.selectUsing.label "Vælg skanningsrate og grænse med">
@@ -22,7 +22,7 @@
 <!ENTITY toolbar.toolbarIcons.label "Værktøjslinjeikon">
 <!ENTITY toolbar.new.label "Ny side">
 <!ENTITY toolbar.showNewTab.label "Vis alle ændrede sider i nye faneblade">
-<!ENTITY toolbar.markVisited.label "Marker alle som besøgte">
+<!ENTITY toolbar.markVisited.label "Markér alle som besøgte">
 <!ENTITY toolbar.delete.label "Slet">
 <!ENTITY toolbar.preferences.label "Indstillinger">
 <!ENTITY toolbar.help.label "Hjælp">

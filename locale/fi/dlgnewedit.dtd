@@ -20,5 +20,6 @@
 <!ENTITY use.label "Käytä">
 <!ENTITY changeHighlighting.label "Vaihda väritystä">
 <!ENTITY highlightChanges.label "Väritysmuutokset">
+<!ENTITY markChanges.label "Mark changes with &lt;&lt;  &gt;&gt;">
 <!ENTITY enableScript.label "Ota JavaScript käyttöön">
 <!ENTITY enableFlash.label "Ota Flash ja lisäosat käyttöön">

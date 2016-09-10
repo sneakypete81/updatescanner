@@ -11,6 +11,7 @@
 <!ENTITY minutes.label "分">
 <!ENTITY hours.label "時間">
 <!ENTITY days.label "日">
+<!ENTITY ignoreChanges.label "Ignore changes less than about">
 <!ENTITY characters.label "文字未満の変更は無視する">
 <!ENTITY ignoreNumbers.label "数字のみの変更は無視する">
 <!ENTITY advanced.label "拡張設定...">
@@ -19,5 +20,6 @@
 <!ENTITY use.label "文字コードを指定：">
 <!ENTITY changeHighlighting.label "変更点の表示">
 <!ENTITY highlightChanges.label "変更点を強調表示">
+<!ENTITY markChanges.label "Mark changes with &lt;&lt;  &gt;&gt;">
 <!ENTITY enableScript.label "Javascriptを有効にする">
 <!ENTITY enableFlash.label "Flashやプラグインを有効にする">
