@@ -9,10 +9,10 @@
 <!ENTITY headerDiff3 "откроени">
 <!ENTITY headerDiff4 ".">
 <!ENTITY headerNotChecked1 "Тази страница не е била проверявана.">
-<!ENTITY headerNotChecked2 "Моля, изберете">
+<!ENTITY headerNotChecked2 "Моля, натиснете бутонът">
 <!ENTITY headerNotChecked3 "„Проверяване“">
-<!ENTITY headerNotChecked4 "бутон вляво и опирайте отново">
-<!ENTITY headerError1 "Тази страница върна грешка при последната проверка.">
-<!ENTITY headerError2 "Моля изберете">
+<!ENTITY headerNotChecked4 "вляво и опитайте отново.">
+<!ENTITY headerError1 "Тази страница е върнала грешка при последната проверка.">
+<!ENTITY headerError2 "Моля посетете препратката">
 <!ENTITY headerError3 "„Текуща страница“">
-<!ENTITY headerError4 "връзка, за да проверите, че страницата е валидна.">
+<!ENTITY headerError4 ", за да се уверите, че страницата е валидна.">

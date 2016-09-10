@@ -14,11 +14,12 @@
 <!ENTITY ignoreChanges.label "Ignoruj zmiany mniejsze niż">
 <!ENTITY characters.label "znaków">
 <!ENTITY ignoreNumbers.label "Ignoruj zmiany numerów">
-<!ENTITY advanced.label "Zaawansowane">
+<!ENTITY advanced.label "Zaawansowane…">
 <!ENTITY charEncoding.label "Kodowanie znaków">
 <!ENTITY autoDetect.label "Wybierz automatycznie">
 <!ENTITY use.label "Użyj">
 <!ENTITY changeHighlighting.label "Zmień wyróżnianie">
 <!ENTITY highlightChanges.label "Zmiany wyróżniania">
+<!ENTITY markChanges.label "Oznacz zmiany za pomocą &lt;&lt;&gt;&gt;">
 <!ENTITY enableScript.label "Włącz JavaScript">
 <!ENTITY enableFlash.label "Włącz Flash i wtyczki">

@@ -20,5 +20,6 @@
 <!ENTITY use.label "Use">
 <!ENTITY changeHighlighting.label "Change Highlighting">
 <!ENTITY highlightChanges.label "Highlight changes">
+<!ENTITY markChanges.label "Mark changes with &lt;&lt;  &gt;&gt;">
 <!ENTITY enableScript.label "Enable Javascript">
 <!ENTITY enableFlash.label "Enable Flash and Plugins">

@@ -20,5 +20,6 @@
 <!ENTITY use.label "Выбрать">
 <!ENTITY changeHighlighting.label "Изменить подсветку">
 <!ENTITY highlightChanges.label "Подсвечивать изменения">
+<!ENTITY markChanges.label "Mark changes with &lt;&lt;  &gt;&gt;">
 <!ENTITY enableScript.label "Включить Javascript">
 <!ENTITY enableFlash.label "Включить дополнения и Flash">

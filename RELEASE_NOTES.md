@@ -1,7 +1,11 @@
 Update Scanner Release Notes
 ============================
 
-3.3.0:
+3.3.1: (10 September 2016)
+------
+* Fixed: Included missing translations
+
+3.3.0: (9 September 2016)
 ------
 * Feature: Optionally add << >> markers around highlighted changes (#51)
 

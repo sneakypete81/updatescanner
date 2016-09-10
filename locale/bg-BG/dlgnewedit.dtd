@@ -20,5 +20,6 @@
 <!ENTITY use.label "Използване на">
 <!ENTITY changeHighlighting.label "Открояване на промените">
 <!ENTITY highlightChanges.label "Цвят на фона">
+<!ENTITY markChanges.label "Ограждане на промените в &lt;&lt;&gt;&gt;">
 <!ENTITY enableScript.label "Javascript влкючен">
 <!ENTITY enableFlash.label "Flash и приставки включени">

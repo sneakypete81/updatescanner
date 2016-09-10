@@ -3,7 +3,7 @@
 
 import sys
 
-version = "3.3.0" # Don't forget to update upgrade.js too!
+version = "3.3.1" # Don't forget to update upgrade.js too!
 firefoxMinVersion = '48.0'
 firefoxMaxVersion = '48.0'
 publish_babelzilla = False # True = include incomplete locales for babelzilla
@@ -110,7 +110,7 @@ locales = {
         'locale_version': '1.0',
         'display_name': name,
     },
-    'fi-FI': {
+    'fi': {
         'locale_version': '1.0',
         'display_name': name,
     },
@@ -122,7 +122,7 @@ locales = {
         'locale_version': '1.0',
         'display_name': name,
     },
-    'it-IT': {
+    'it': {
         'locale_version': '1.0',
         'display_name': name,
     },
@@ -162,7 +162,7 @@ locales = {
         'locale_version': '1.0',
         'display_name': name,
     },
-    'tr-TR': {
+    'tr': {
         'locale_version': '1.0',
         'display_name': name,
     },
