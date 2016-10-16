@@ -1,9 +1,11 @@
 Update Scanner Release Notes
 ============================
 
+* Fixed: Don't lock up if bookmark deleted while scanning (#72)
+
 3.3.1: (10 September 2016)
 ------
-* Fixed: Included missing translations
+* Fixed: Included missing translations (#74)
 
 3.3.0: (9 September 2016)
 ------
