@@ -340,8 +340,8 @@ sliderAutoscanDecode : function(slider)
 highlightChangesChanged : function()
 {
     var enabled = document.getElementById("highlightChanges");
-    var highlightColour = document.getElementById("highlightColour");
-    highlightColour.disabled = !enabled.checked;
+    document.getElementById("highlightColour").disabled = !enabled.checked;
+    document.getElementById("markChanges").disabled = !enabled.checked;
 },
 
 charEncodingChanged : function()
