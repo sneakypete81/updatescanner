@@ -1,22 +1,18 @@
-SHELL := /bin/bash
-
-# Default: build the XPI
-all: build
+# Default: lint and build the XPI
+all: lint build
 build:
-	jpm xpi
+	web-ext build --artifacts-dir=.build
 
-# Run unit tests
-test: .FORCE
-.FORCE:
-	jpm test
+run:
+	web-ext run --firefox-binary=firefox-dev --firefox-profile dev-edition-default
 
-# Launch Firefox dev profile
-dev:
-	firefox --no-remote -P updatescanner_dev test/dev_page.html
+lint:
+	web-ext lint
 
-# Automatically post XPI updates to the Firefox dev profile
-watchpost:
-	jpm watchpost --post-url http://localhost:8888/
+# # Run unit tests
+# test: .FORCE
+# .FORCE:
+# 	jpm test
 
 # clean:
-#     @\rm -rf _build
+	rm -rf .build
