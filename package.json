@@ -1,6 +1,9 @@
 {
   "name": "updatescanner",
   "license": "GPL-3.0",
+  "dependencies" : {
+    "jstree": "^3.3.3"
+  },
   "devDependencies": {
     "web-ext": "^1.6.0",
     "eslint": "^3.10.2",
