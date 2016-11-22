@@ -1,3 +1,5 @@
+/* eslint-env node */
+
 module.exports = function(grunt) {
   // Gruntfile
 
@@ -25,18 +27,31 @@ module.exports = function(grunt) {
     },
 
     eslint: {
-      'files': ['lib/', 'test/'],
+      'files': ['lib/', 'test/', '*.js'],
     },
+
+    jasmine: {
+      src: 'lib/**/*.js',
+      options: {
+        specs: 'spec/**/*_spec.js',
+        vendor: [
+          'node_modules/jquery/dist/jquery.js',
+          'node_modules/jasmine-jquery/lib/jasmine-jquery.js',
+        ],
+      },
+    },
+
   });
 
   // Load plugins
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-eslint');
+  grunt.loadNpmTasks('grunt-contrib-jasmine');
 
   // Register tasks
   grunt.registerTask('build', ['shell:webextBuild']);
   grunt.registerTask('run', ['shell:webextRun']);
   grunt.registerTask('lint', ['eslint',
                               'shell:webextLint']);
-  grunt.registerTask('test', ['lint']); // TODO: Add unit test target
+  grunt.registerTask('test', ['jasmine']);
 };
