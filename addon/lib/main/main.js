@@ -1,7 +1,8 @@
+/* global Sidebar */
 /* exported Main */
 
 class Main {
-  constructor(Sidebar) {
+  constructor() {
     this.sidebar = new Sidebar('#tree');
   }
 

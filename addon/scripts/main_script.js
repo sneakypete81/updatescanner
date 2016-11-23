@@ -1,3 +1,3 @@
-/* global Main, Sidebar */
-const main = new Main(Sidebar);
+/* global Main */
+const main = new Main();
 document.addEventListener('DOMContentLoaded', () => main.load());

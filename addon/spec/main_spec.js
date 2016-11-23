@@ -1,12 +1,12 @@
 /* eslint-env jasmine,jquery */
 /* global loadFixtures */
-/* global Main, Sidebar */
+/* global Main */
 
 jasmine.getFixtures().fixturesPath = '/spec/fixtures';
 
 describe('Main', function() {
   beforeEach(function() {
-    this.main = new Main(Sidebar);
+    this.main = new Main();
     loadFixtures('main.html');
   });
 
