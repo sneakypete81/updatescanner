@@ -11,3 +11,4 @@ Clone the source and install all dependencies:
     git clone <<insert_repo_here>>
     cd updatescanner
     npm install
+    npm install grunt-cli --global

@@ -8,7 +8,6 @@
     "eslint": "^3.10.2",
     "eslint-config-google": "^0.7.0",
     "grunt": "^1.0.1",
-    "grunt-contrib-jasmine": "^1.0.3",
     "grunt-eslint": "^19.0.0",
     "grunt-shell": "^2.1.0",
     "jasmine": "^2.5.2",

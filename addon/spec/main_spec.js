@@ -1,11 +1,12 @@
 /* eslint-env jasmine,jquery */
 /* global loadFixtures */
-/* global clearIframe */
+/* global Main, Sidebar */
 
-jasmine.getFixtures().fixturesPath = 'spec/fixtures';
+jasmine.getFixtures().fixturesPath = '/spec/fixtures';
 
 describe('Main', function() {
   beforeEach(function() {
+    this.main = new Main(Sidebar);
     loadFixtures('main.html');
   });
 
@@ -14,14 +15,14 @@ describe('Main', function() {
       const mainContainer = $('#main');
       mainContainer.append('<iframe id="frame"></iframe>');
       expect(mainContainer).not.toBeEmpty();
-      clearIframe();
+      this.main.clearIframe();
       expect(mainContainer).toBeEmpty();
     });
 
     it('does nothing if an iframe doesn\'t exist', function() {
       const mainContainer = $('#main');
       expect(mainContainer).toBeEmpty();
-      clearIframe();
+      this.main.clearIframe();
       expect(mainContainer).toBeEmpty();
     });
   });

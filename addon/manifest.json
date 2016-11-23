@@ -8,8 +8,8 @@
   "homepage_url": "https://sneakypete81.github.io/updatescanner/",
 
   "icons": {
-    "48": "lib/images/updatescanner_48.png",
-    "96": "lib/images/updatescanner_96.png"
+    "48": "images/updatescanner_48.png",
+    "96": "images/updatescanner_96.png"
   },
 
   "permissions": [
@@ -17,15 +17,15 @@
   ],
 
   "background": {
-    "scripts": ["lib/background_scripts/toolbar_button.js"]
+    "scripts": ["scripts/toolbar_button_script.js"]
   },
 
   "browser_action": {
     "default_title": "Update Scanner",
     "default_icon": {
-          "18": "lib/images/updatescanner_18.png",
-          "48": "lib/images/updatescanner_48.png",
-          "64": "lib/images/updatescanner_64.png"
+          "18": "images/updatescanner_18.png",
+          "48": "images/updatescanner_48.png",
+          "64": "images/updatescanner_64.png"
         }
   }
 

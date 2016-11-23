@@ -6,11 +6,11 @@ class Sidebar {
     this.sidebarDivSelector = sidebarDivSelector;
   }
 
-  init() {
+  load() {
     $(this.sidebarDivSelector).jstree();
   }
 
-  handleSelection(handler) {
+  registerSelectHandler(handler) {
     $(this.sidebarDivSelector).on('changed.jstree', handler);
   }
 }
