@@ -57,7 +57,10 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-eslint');
   grunt.config('eslint', {
-    files: ['addon/lib/', 'addon/spec/', '*.js'],
+    options: {
+      ignorePattern: ['node_modules/', 'addon/dependencies/'],
+    },
+    target: ['.'],
   });
 
   grunt.loadNpmTasks('grunt-karma');
