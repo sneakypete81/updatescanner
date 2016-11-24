@@ -1,3 +1,6 @@
 /* global Main */
-const main = new Main();
-document.addEventListener('DOMContentLoaded', () => main.load());
+
+(function() {
+  const main = new Main();
+  document.addEventListener('DOMContentLoaded', () => main.load());
+})();
