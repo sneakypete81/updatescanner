@@ -8,10 +8,16 @@
     "eslint": "^3.10.2",
     "eslint-config-google": "^0.7.0",
     "grunt": "^1.0.1",
+    "grunt-env": "^0.4.4",
     "grunt-eslint": "^19.0.0",
+    "grunt-karma": "^2.0.0",
     "grunt-shell": "^2.1.0",
     "jasmine": "^2.5.2",
     "jasmine-jquery": "^2.1.1",
+    "karma": "^1.3.0",
+    "karma-firefox-launcher": "^1.0.0",
+    "karma-jasmine": "^1.0.2",
+    "karma-jasmine-html-reporter": "^0.2.2",
     "web-ext": "^1.6.0"
   },
   "scripts": {

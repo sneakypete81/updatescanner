@@ -2,7 +2,7 @@
 /* global loadFixtures */
 /* global Main */
 
-jasmine.getFixtures().fixturesPath = '/spec/fixtures';
+jasmine.getFixtures().fixturesPath = '/base/test/unit/fixtures';
 
 describe('Main', function() {
   beforeEach(function() {
