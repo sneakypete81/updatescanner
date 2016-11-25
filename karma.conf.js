@@ -17,16 +17,22 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      // Dependencies
       'addon/dependencies/jquery/jquery.min.js',
       'node_modules/jasmine-jquery/lib/jasmine-jquery.js',
+      'node_modules/jasmine-fixture/dist/jasmine-fixture.min.js',
+
+      // Source
       'addon/lib/**/*.js',
+
+      // Test specs
       'test/unit/**/*_spec.js',
 
-      // Serve fixtures, but don't include them in the runner
-      {
-        pattern: 'test/unit/fixtures/**',
-        watched: true, served: true, included: false,
-      },
+      // // Serve fixtures, but don't include them in the runner
+      // {
+      //   pattern: 'test/unit/fixtures/**',
+      //   watched: true, served: true, included: false,
+      // },
     ],
 
     // list of files to exclude

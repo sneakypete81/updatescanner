@@ -1,28 +1,31 @@
 /* eslint-env jasmine,jquery */
-/* global loadFixtures */
+/* global affix */
 /* global Main */
 
-jasmine.getFixtures().fixturesPath = '/base/test/unit/fixtures';
+// jasmine.getFixtures().fixturesPath = '/base/test/unit/fixtures';
 
 describe('Main', function() {
   beforeEach(function() {
     this.main = new Main();
-    loadFixtures('main.html');
   });
 
   describe('clearIframe', function() {
     it('removes the iframe if one exists', function() {
-      const mainContainer = $('#main');
-      mainContainer.append('<iframe id="frame"></iframe>');
+      const mainContainer = affix('#main');
+      mainContainer.affix('iframe#frame');
       expect(mainContainer).not.toBeEmpty();
+
       this.main.clearIframe();
+
       expect(mainContainer).toBeEmpty();
     });
 
     it('does nothing if an iframe doesn\'t exist', function() {
-      const mainContainer = $('#main');
+      const mainContainer = affix('#main');
       expect(mainContainer).toBeEmpty();
+
       this.main.clearIframe();
+
       expect(mainContainer).toBeEmpty();
     });
   });
