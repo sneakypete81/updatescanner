@@ -21,7 +21,8 @@ module.exports = function(config) {
       'addon/dependencies/jquery/jquery.min.js',
       'node_modules/jasmine-jquery/lib/jasmine-jquery.js',
       'node_modules/jasmine-fixture/dist/jasmine-fixture.min.js',
-
+      'node_modules/sinon/pkg/sinon.js',
+      'node_modules/sinon-chrome/bundle/sinon-chrome-webextensions.min.js',
       // Source
       'addon/lib/**/*.js',
 

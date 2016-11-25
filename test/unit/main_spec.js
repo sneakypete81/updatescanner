@@ -1,14 +1,59 @@
-/* eslint-env jasmine,jquery */
+/* eslint-env jasmine, jquery */
 /* global affix */
 /* global Main */
 
 // jasmine.getFixtures().fixturesPath = '/base/test/unit/fixtures';
 
+// sinon-chrome doesn't implement browser.storage promises correctly yet,
+// so override the stub with a custom spy
+chrome.storage = {local: {get: null}};
+
+function spyOnStorageGet(result) {
+  spyOn(browser.storage.local, 'get').and.returnValue(
+    Promise.resolve(result));
+}
+
 describe('Main', function() {
   beforeEach(function() {
+    /* global browser:true */
+    // sinon-chrome-webextensions currently exports 'chrome' for some reason
+    browser = chrome;
+    browser.flush();
+
     this.main = new Main();
     // Add <div id="main"> to the DOM
     affix('#main');
+  });
+
+  afterEach(function() {
+    /* eslint no-delete-var: 'off' */
+    delete browser;
+  });
+
+  describe('loadHtml', function() {
+    it('returns the page\'s html from storage', function(done) {
+      const id = '42';
+      const html = 'hello';
+      spyOnStorageGet({['html:' + id]: html});
+
+      this.main.loadHtml(id)
+        .then(function(result) {
+          expect(result).toBe('hello');
+          done();
+        })
+        .catch((error) => done.fail(error));
+    });
+
+    it('fails when the page id doesn\'t exist in storage', function(done) {
+      const id = '42';
+      spyOnStorageGet({});
+
+      this.main.loadHtml(id)
+        .then(function(result) {
+          done.fail('loadHtml unexpectedly returned a successful promise.');
+        })
+        .catch((error) => done());
+    });
   });
 
   describe('loadIframe', function() {
