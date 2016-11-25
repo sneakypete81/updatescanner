@@ -43,6 +43,21 @@ describe('Main', function() {
 
       this.main.onSidebarChanged(null, {selected: ['id:' + id]});
     });
+
+    it('logs to the console if the page\'s html isn\'t found', function(done) {
+      const id = '42';
+      const error = 'dummy error';
+      spyOn(this.main, 'loadIframe');
+      spyOn(this.main, 'loadHtml').and.callFake((id) => Promise.reject(error));
+
+      spyOn(console, 'log').and.callFake((msg) => {
+        expect(msg).toBe(error);
+        expect(this.main.loadIframe).not.toHaveBeenCalled();
+        done();
+      });
+
+      this.main.onSidebarChanged(null, {selected: ['id:' + id]});
+    });
   });
 
   describe('loadHtml', function() {
