@@ -30,6 +30,21 @@ describe('Main', function() {
     delete browser;
   });
 
+  describe('onSidebarChanged', function() {
+    it('calls loadIframe with the page\'s html from storage', function(done) {
+      const id = '42';
+      const html = 'hello';
+      spyOnStorageGet({['html:' + id]: html});
+
+      spyOn(this.main, 'loadIframe').and.callFake((result) => {
+        expect(result).toBe(html);
+        done();
+      });
+
+      this.main.onSidebarChanged(null, {selected: ['id:' + id]});
+    });
+  });
+
   describe('loadHtml', function() {
     it('returns the page\'s html from storage', function(done) {
       const id = '42';
