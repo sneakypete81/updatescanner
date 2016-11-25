@@ -7,7 +7,8 @@
 describe('Main', function() {
   beforeEach(function() {
     this.main = new Main();
-    this.mainContainer = affix('#main');
+    // Add <div id="main"> to the DOM
+    affix('#main');
   });
 
   describe('loadIframe', function() {
@@ -16,7 +17,7 @@ describe('Main', function() {
 
       this.main.loadIframe(html);
 
-      expect($('#frame').attr('srcdoc')).toBe(html);
+      expect('#frame').toHaveAttr('srcdoc', html);
     });
 
     it('loads html into an iframe if one exists already', function() {
@@ -26,13 +27,13 @@ describe('Main', function() {
       this.main.loadIframe(html1);
       this.main.loadIframe(html2);
 
-      expect($('#frame').attr('srcdoc')).toBe(html2);
+      expect('#frame').toHaveAttr('srcdoc', html2);
     });
   });
 
   describe('clearIframe', function() {
     it('removes the iframe if one exists already', function() {
-      this.mainContainer.affix('iframe#frame');
+      $('#main').affix('iframe#frame');
       expect('#main').not.toBeEmpty();
 
       this.main.clearIframe();
