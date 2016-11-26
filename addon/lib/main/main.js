@@ -1,4 +1,4 @@
-/* global Sidebar */
+/* global Sidebar, pageStore, Page */
 /* exported Main */
 
 class Main {
@@ -27,14 +27,7 @@ class Main {
   }
 
   loadHtml(id) {
-    const key = 'html:' + id;
-    return browser.storage.local.get(key).then(function(result) {
-      if (key in result) {
-        return result[key];
-      } else {
-        throw Error('Could not retrieve key "' + key + '" from Storage');
-      }
-    });
+    return pageStore.getHtml(id, Page.pageTypes.CHANGES);
   }
 
   loadIframe(html) {

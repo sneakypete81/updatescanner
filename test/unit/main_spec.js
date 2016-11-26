@@ -4,10 +4,6 @@
 
 // jasmine.getFixtures().fixturesPath = '/base/test/unit/fixtures';
 
-// sinon-chrome doesn't implement browser.storage promises correctly yet,
-// so override the stub with a custom spy
-chrome.storage = {local: {get: null}};
-
 function spyOnStorageGet(result) {
   spyOn(browser.storage.local, 'get').and.returnValue(
     Promise.resolve(result));
@@ -15,8 +11,8 @@ function spyOnStorageGet(result) {
 
 describe('Main', function() {
   beforeEach(function() {
-    /* global browser:true */
     // sinon-chrome-webextensions currently exports 'chrome' for some reason
+    /* global browser:true */
     browser = chrome;
     browser.flush();
 
@@ -34,7 +30,7 @@ describe('Main', function() {
     it('calls loadIframe with the page\'s html from storage', function(done) {
       const id = '42';
       const html = 'hello';
-      spyOnStorageGet({['html:' + id]: html});
+      spyOnStorageGet({['html:changes:' + id]: html});
 
       spyOn(this.main, 'loadIframe').and.callFake((result) => {
         expect(result).toBe(html);
@@ -57,32 +53,6 @@ describe('Main', function() {
       });
 
       this.main.onSidebarChanged(null, {selected: ['id:' + id]});
-    });
-  });
-
-  describe('loadHtml', function() {
-    it('returns the page\'s html from storage', function(done) {
-      const id = '42';
-      const html = 'hello';
-      spyOnStorageGet({['html:' + id]: html});
-
-      this.main.loadHtml(id)
-        .then(function(result) {
-          expect(result).toBe('hello');
-          done();
-        })
-        .catch((error) => done.fail(error));
-    });
-
-    it('fails when the page id doesn\'t exist in storage', function(done) {
-      const id = '42';
-      spyOnStorageGet({});
-
-      this.main.loadHtml(id)
-        .then(function(result) {
-          done.fail('loadHtml unexpectedly returned a successful promise.');
-        })
-        .catch((error) => done());
     });
   });
 
