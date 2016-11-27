@@ -20,6 +20,8 @@
     "karma-firefox-launcher": "^1.0.0",
     "karma-jasmine": "^1.0.2",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "karma-notification-reporter": "^0.1.1",
+    "karma-spec-reporter": "0.0.26",
     "web-ext": "^1.6.0"
   },
   "scripts": {

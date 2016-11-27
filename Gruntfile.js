@@ -72,7 +72,7 @@ module.exports = function(grunt) {
     debug: {
       singleRun: false,
       autoWatch: true,
-      reporters: ['dots', 'kjhtml'],
+      reporters: ['spec', 'kjhtml', 'notification'],
     },
   });
 };
