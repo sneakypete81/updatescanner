@@ -1,5 +1,7 @@
 /* global PageTree, Page */
 
+// @TODO: convert to class with static methods?
+
 (function(exports) {
   const pageTreeKey = 'pagetree';
   const pageKey = (pageId) => 'page:' + pageId;
@@ -25,12 +27,20 @@
   };
 
   exports.loadPageTree = function() {
+    let pageTree;
+
+    // Return a promise that first loads the PageTree data
     return loadData(pageTreeKey).then(function(data) {
       if (data === undefined) {
         data = {};
       }
-      return new PageTree(data);
-    }).catch((error) => console.log.bind(console));
+      pageTree = new PageTree(data);
+
+      // Then load the child Pages of the PageTree
+      return pageTree.loadChildren(exports.loadPage);
+    })
+
+    .catch((error) => console.log.bind(console));
   };
 
   exports.savePage = function(page) {

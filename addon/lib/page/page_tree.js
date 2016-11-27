@@ -1,7 +1,5 @@
 /* exported PageTree */
+/* global PageFolder */
 
-class PageTree {
-  constructor(data) {
-    this.data = data;
-  }
+class PageTree extends PageFolder {
 }
