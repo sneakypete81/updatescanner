@@ -27,7 +27,12 @@ class Main {
   }
 
   loadHtml(id) {
-    return pageStore.getHtml(id, Page.pageTypes.CHANGES);
+    return pageStore.loadHtml(id, Page.pageTypes.CHANGES).then(function(html) {
+      if (html === undefined) {
+        throw Error('Could not load "' + id + '" changes HTML from storage');
+      }
+      return html;
+    });
   }
 
   loadIframe(html) {

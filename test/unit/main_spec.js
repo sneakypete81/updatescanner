@@ -33,7 +33,7 @@ describe('Main', function() {
       spyOnStorageGet({['html:changes:' + id]: html});
 
       spyOn(this.main, 'loadIframe').and.callFake((result) => {
-        expect(result).toBe(html);
+        expect(result).toEqual(html);
         done();
       });
 
@@ -42,12 +42,11 @@ describe('Main', function() {
 
     it('logs to the console if the page\'s html isn\'t found', function(done) {
       const id = '42';
-      const error = 'dummy error';
       spyOn(this.main, 'loadIframe');
-      spyOn(this.main, 'loadHtml').and.callFake((id) => Promise.reject(error));
+      spyOnStorageGet({});
 
       spyOn(console, 'log').and.callFake((msg) => {
-        expect(msg).toBe(error);
+        expect(msg).toMatch('Error:');
         expect(this.main.loadIframe).not.toHaveBeenCalled();
         done();
       });
