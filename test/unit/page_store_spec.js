@@ -120,19 +120,19 @@ describe('page_store', function() {
           .catch((error) => done.fail(error));
       });
     });
-  });
 
-  it('returns undefined when the page id doesn\'t exist in storage',
-     function(done) {
-    const id = '42';
-    spyOnStorageGet({});
+    it('returns undefined when the page id doesn\'t exist in storage',
+       function(done) {
+      const id = '42';
+      spyOnStorageGet({});
 
-    pageStore.loadHtml(id, Page.pageTypes.OLD)
-      .then(function(result) {
-        expect(result).toBeUndefined();
-        done();
-      })
-      .catch((error) => done.fail(error));
+      pageStore.loadHtml(id, Page.pageTypes.OLD)
+        .then(function(result) {
+          expect(result).toBeUndefined();
+          done();
+        })
+        .catch((error) => done.fail(error));
+    });
   });
 
   describe('saveHtml', function() {
