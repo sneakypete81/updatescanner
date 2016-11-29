@@ -1,4 +1,3 @@
-/* eslint-env jasmine */
 /* global using */
 /* global pageStore, PageTree, Page */
 

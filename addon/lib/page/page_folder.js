@@ -1,12 +1,53 @@
 /* exported PageFolder */
 
+/**
+ * Class representing a folder of Pages.
+ */
 class PageFolder {
+  /**
+   * PageFolder constructor.
+   */
   constructor() {
     this.id = undefined;
     this.name = undefined;
+    /**
+     * Array of Page instances in the folder. Subfolders are represented as
+     * nested PageFolder instances.
+     * @member {Array.(Page|PageFolder)}
+     */
     this.children = [];
   }
 
+  /**
+   * Object representation of a PageFolder, used for serialisation to
+   * storage.
+   * @typedef SerialisedPageFolder
+   * @type {object}
+   * @property {string} id - ID of the PageFolder.
+   * @property {string} name - Name of the PageFolder.
+   * @property {Array.(string|PageFolderData)} children - Array of Page IDs in
+   * the folder. Subfolders are represented as nested SerialisedPageFolder
+   * objects.
+   */
+
+  /**
+   * Callback for loading Page objects from storage.
+   * @callback PageFolder~pageLoadCallback
+   * @param {string} id - Page ID to load.
+   * @returns {Page} Page object with the specified ID.
+   */
+
+  /**
+   * Update this.children (the Page/PageFolder instance tree) based on the
+   * serialised data from storage.
+   *
+   * @param {SerialisedPageFolder} data - Serialised data from storage.
+   * @param {PageFolder~pageLoadCallback} loadPage - Callback to load a Page
+   * object from storage.
+   *
+   * @returns {Promise} A Promise that will be fulfilled with this PageFolder
+   * object (to aid chaining) once all sub-Pages have been loaded.
+   */
   deserialise(data, loadPage) {
     this.id = data.id;
     this.name = data.name;

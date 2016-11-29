@@ -1,4 +1,4 @@
-/* eslint-env jasmine, jquery */
+/* eslint-env jquery */
 /* global affix */
 /* global Main */
 

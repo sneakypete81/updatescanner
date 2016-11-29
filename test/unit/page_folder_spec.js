@@ -1,4 +1,3 @@
-/* eslint-env jasmine */
 /* global PageFolder */
 
 describe('page_folder', function() {
