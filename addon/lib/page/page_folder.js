@@ -1,27 +1,30 @@
 /* exported PageFolder */
 
 class PageFolder {
-  constructor(data) {
-    this.data = data;
-    this.id = data.id;
-    this.name = data.name;
+  constructor() {
+    this.id = undefined;
+    this.name = undefined;
     this.children = [];
   }
 
-  loadChildren(loadPage) {
-    if (this.data.children === undefined || this.data.children.length == 0) {
+  deserialise(data, loadPage) {
+    this.id = data.id;
+    this.name = data.name;
+    this.children = [];
+
+    if (data.children === undefined || data.children.length == 0) {
       return Promise.resolve(this);
     }
+
     // Make an array of promises, each returning a child
     let promises = [];
-    for (let i=0; i<this.data.children.length; i++) {
-      if (this.data.children[i] instanceof Object) {
+    for (let i=0; i<data.children.length; i++) {
+      if (data.children[i] instanceof Object) {
         // A nested PageFolder - load its children
-        promises.push(new PageFolder(this.data.children[i])
-                      .loadChildren(loadPage));
+        promises.push(new PageFolder().deserialise(data.children[i], loadPage));
       } else {
         // A Page - load its contents
-        promises.push(loadPage(this.data.children[i]));
+        promises.push(loadPage(data.children[i]));
       }
     }
 

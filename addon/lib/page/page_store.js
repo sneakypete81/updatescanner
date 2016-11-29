@@ -27,19 +27,14 @@
   };
 
   exports.loadPageTree = function() {
-    let pageTree;
-
     // Return a promise that first loads the PageTree data
     return loadData(pageTreeKey).then(function(data) {
       if (data === undefined) {
         data = {};
       }
-      pageTree = new PageTree(data);
-
       // Then load the child Pages of the PageTree
-      return pageTree.loadChildren(exports.loadPage);
+      return new PageTree().deserialise(data, exports.loadPage);
     })
-
     .catch((error) => console.log.bind(console));
   };
 

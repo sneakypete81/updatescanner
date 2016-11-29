@@ -27,9 +27,9 @@ describe('page_store', function() {
 
       pageStore.loadPageTree().then((result) => {
           expect(result).toEqual(jasmine.any(PageTree));
-          expect(result.data).toEqual(pageTreeData);
           expect(result.id).toEqual(0);
           expect(result.name).toEqual('root');
+          expect(result.children).toEqual([]);
           done();
         })
         .catch((error) => done.fail(error));
@@ -48,7 +48,6 @@ describe('page_store', function() {
       promise.then((result) => {
           // Check the PageTree root
           expect(result).toEqual(jasmine.any(PageTree));
-          expect(result.data).toEqual(pageTreeData);
           expect(result.id).toEqual(0);
           expect(result.name).toEqual('root');
           // Check the child pages
@@ -78,7 +77,6 @@ describe('page_store', function() {
       promise.then((result) => {
           // Check the PageTree root
           expect(result).toEqual(jasmine.any(PageTree));
-          expect(result.data).toEqual(pageTreeData);
           expect(result.id).toEqual(0);
           expect(result.name).toEqual('root');
           // Check the child pages
