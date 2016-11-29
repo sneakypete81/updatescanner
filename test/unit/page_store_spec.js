@@ -99,7 +99,9 @@ describe('PageStore', function() {
 
       PageStore.loadPageTree()
         .then(function(result) {
-          expect(result).toEqual(new PageTree({}));
+          expect(result.id).toBeUndefined();
+          expect(result.name).toBeUndefined();
+          expect(result.children).toEqual([]);
           done();
         })
         .catch((error) => done.fail(error));

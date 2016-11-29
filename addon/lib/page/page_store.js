@@ -62,7 +62,7 @@ class PageStore {
         data = {};
       }
       // Then load the child Pages of the PageTree
-      return new PageTree().deserialise(data, PageStore.loadPage)
+      return PageTree.fromObject(data, PageStore.loadPage)
         .catch((error) => console.log.bind(console));
     });
   }
