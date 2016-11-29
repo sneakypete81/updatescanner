@@ -75,12 +75,12 @@ describe('Main', function() {
     });
   });
 
-  describe('clearIframe', function() {
+  describe('removeIframe', function() {
     it('removes the iframe if one exists already', function() {
       $('#main').affix('iframe#frame');
       expect('#main').not.toBeEmpty();
 
-      this.main.clearIframe();
+      this.main.removeIframe();
 
       expect('#main').toBeEmpty();
     });
@@ -88,7 +88,7 @@ describe('Main', function() {
     it('does nothing if an iframe doesn\'t exist already', function() {
       expect('#main').toBeEmpty();
 
-      this.main.clearIframe();
+      this.main.removeIframe();
 
       expect('#main').toBeEmpty();
     });

@@ -6,8 +6,8 @@ class Main {
     this.sidebar = new Sidebar('#tree');
   }
 
-  load() {
-    this.sidebar.load();
+  init() {
+    this.sidebar.init();
     this.sidebar.registerSelectHandler((evt, data) =>
                                        this.onSidebarChanged(evt, data));
 
@@ -36,7 +36,7 @@ class Main {
   }
 
   loadIframe(html) {
-    this.clearIframe();
+    this.removeIframe();
     const iframe = document.createElement('iframe');
     iframe.id = 'frame';
     iframe.sandbox = '';
@@ -44,7 +44,7 @@ class Main {
     document.querySelector('#main').appendChild(iframe);
   }
 
-  clearIframe() {
+  removeIframe() {
     const iframe = document.querySelector('#frame');
     if (iframe) {
       iframe.parentNode.removeChild(iframe);

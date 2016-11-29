@@ -6,7 +6,7 @@ class Sidebar {
     this.sidebarDivSelector = sidebarDivSelector;
   }
 
-  load() {
+  init() {
     $(this.sidebarDivSelector).jstree();
   }
 
