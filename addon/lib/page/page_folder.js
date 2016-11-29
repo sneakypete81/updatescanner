@@ -49,6 +49,7 @@ class PageFolder {
    * object (to aid chaining) once all sub-Pages have been loaded.
    */
   deserialise(data, loadPage) {
+    // @TODO: Convert to static fromObject?
     this.id = data.id;
     this.name = data.name;
     this.children = [];

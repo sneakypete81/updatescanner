@@ -1,12 +1,12 @@
 /* global using */
-/* global pageStore, PageTree, Page */
+/* global PageStore, PageTree, Page */
 
 function spyOnStorageGet(result) {
   spyOn(browser.storage.local, 'get').and.returnValue(
     Promise.resolve(result));
 }
 
-describe('page_store', function() {
+describe('PageStore', function() {
   beforeEach(function() {
     // sinon-chrome-webextensions currently exports 'chrome' for some reason
     /* global browser:true */
@@ -24,7 +24,7 @@ describe('page_store', function() {
       const pageTreeData = {id: 0, name: 'root', children: []};
       spyOnStorageGet({pagetree: pageTreeData});
 
-      pageStore.loadPageTree().then((result) => {
+      PageStore.loadPageTree().then((result) => {
           expect(result).toEqual(jasmine.any(PageTree));
           expect(result.id).toEqual(0);
           expect(result.name).toEqual('root');
@@ -43,7 +43,7 @@ describe('page_store', function() {
         Promise.resolve({'page:2': {name: 'Page2'}})
       );
 
-      const promise = pageStore.loadPageTree();
+      const promise = PageStore.loadPageTree();
       promise.then((result) => {
           // Check the PageTree root
           expect(result).toEqual(jasmine.any(PageTree));
@@ -72,7 +72,7 @@ describe('page_store', function() {
         Promise.resolve({'page:5': {name: 'Page5'}})
       );
 
-      const promise = pageStore.loadPageTree();
+      const promise = PageStore.loadPageTree();
       promise.then((result) => {
           // Check the PageTree root
           expect(result).toEqual(jasmine.any(PageTree));
@@ -97,7 +97,7 @@ describe('page_store', function() {
     function(done) {
       spyOnStorageGet({});
 
-      pageStore.loadPageTree()
+      PageStore.loadPageTree()
         .then(function(result) {
           expect(result).toEqual(new PageTree({}));
           done();
@@ -112,7 +112,7 @@ describe('page_store', function() {
       spyOn(browser.storage.local, 'set').and.returnValue(
         Promise.resolve());
 
-      pageStore.savePageTree(pageTree)
+      PageStore.savePageTree(pageTree)
         .then(function() {
           expect(browser.storage.local.set).toHaveBeenCalledWith(
             {pagetree: pageTree.data});
@@ -128,7 +128,7 @@ describe('page_store', function() {
       const pageData = {an: 'object'};
       spyOnStorageGet({['page:' + id]: pageData});
 
-      pageStore.loadPage(id)
+      PageStore.loadPage(id)
         .then(function(result) {
           expect(result).toEqual(jasmine.any(Page));
           expect(result.id).toEqual(id);
@@ -142,7 +142,7 @@ describe('page_store', function() {
       const id = 13;
       spyOnStorageGet({});
 
-      pageStore.loadPage(id)
+      PageStore.loadPage(id)
         .then(function(result) {
           expect(result).toEqual(new Page(id, {}));
           done();
@@ -158,7 +158,7 @@ describe('page_store', function() {
       spyOn(browser.storage.local, 'set').and.returnValue(
         Promise.resolve());
 
-      pageStore.savePage(page)
+      PageStore.savePage(page)
         .then(function() {
           expect(browser.storage.local.set).toHaveBeenCalledWith(
             {['page:' + id]: page.data});
@@ -176,7 +176,7 @@ describe('page_store', function() {
         const html = 'some HTML';
         spyOnStorageGet({['html:' + pageType + ':' + id]: html});
 
-        pageStore.loadHtml(id, pageType)
+        PageStore.loadHtml(id, pageType)
           .then(function(result) {
             expect(result).toEqual(html);
             done();
@@ -190,7 +190,7 @@ describe('page_store', function() {
       const id = '42';
       spyOnStorageGet({});
 
-      pageStore.loadHtml(id, Page.pageTypes.OLD)
+      PageStore.loadHtml(id, Page.pageTypes.OLD)
         .then(function(result) {
           expect(result).toBeUndefined();
           done();
@@ -206,7 +206,7 @@ describe('page_store', function() {
       spyOn(browser.storage.local, 'set').and.returnValue(
         Promise.resolve());
 
-      pageStore.saveHtml(id, Page.pageTypes.OLD, html)
+      PageStore.saveHtml(id, Page.pageTypes.OLD, html)
         .then(function() {
           expect(browser.storage.local.set).toHaveBeenCalledWith(
             {['html:' + Page.pageTypes.OLD + ':' + id]: html});

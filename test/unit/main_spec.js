@@ -26,40 +26,40 @@ describe('Main', function() {
     delete browser;
   });
 
-  describe('onSidebarChanged', function() {
+  describe('_onSidebarChanged', function() {
     it('calls loadIframe with the page\'s html from storage', function(done) {
       const id = '42';
       const html = 'hello';
       spyOnStorageGet({['html:changes:' + id]: html});
 
-      spyOn(this.main, 'loadIframe').and.callFake((result) => {
+      spyOn(this.main, '_loadIframe').and.callFake((result) => {
         expect(result).toEqual(html);
         done();
       });
 
-      this.main.onSidebarChanged(null, {selected: ['id:' + id]});
+      this.main._onSidebarChanged(null, {selected: ['id:' + id]});
     });
 
     it('logs to the console if the page\'s html isn\'t found', function(done) {
       const id = '42';
-      spyOn(this.main, 'loadIframe');
+      spyOn(this.main, '_loadIframe');
       spyOnStorageGet({});
 
       spyOn(console, 'log').and.callFake((msg) => {
         expect(msg).toMatch('Error:');
-        expect(this.main.loadIframe).not.toHaveBeenCalled();
+        expect(this.main._loadIframe).not.toHaveBeenCalled();
         done();
       });
 
-      this.main.onSidebarChanged(null, {selected: ['id:' + id]});
+      this.main._onSidebarChanged(null, {selected: ['id:' + id]});
     });
   });
 
-  describe('loadIframe', function() {
+  describe('_loadIframe', function() {
     it('loads html into an iframe', function() {
       const html = 'This is some <b>HTML</b>.';
 
-      this.main.loadIframe(html);
+      this.main._loadIframe(html);
 
       expect('#frame').toHaveAttr('srcdoc', html);
     });
@@ -68,19 +68,19 @@ describe('Main', function() {
       const html1 = 'This is some <b>HTML</b>.';
       const html2 = 'This is some more <b>HTML</b>.';
 
-      this.main.loadIframe(html1);
-      this.main.loadIframe(html2);
+      this.main._loadIframe(html1);
+      this.main._loadIframe(html2);
 
       expect('#frame').toHaveAttr('srcdoc', html2);
     });
   });
 
-  describe('removeIframe', function() {
+  describe('_removeIframe', function() {
     it('removes the iframe if one exists already', function() {
       $('#main').affix('iframe#frame');
       expect('#main').not.toBeEmpty();
 
-      this.main.removeIframe();
+      this.main._removeIframe();
 
       expect('#main').toBeEmpty();
     });
@@ -88,7 +88,7 @@ describe('Main', function() {
     it('does nothing if an iframe doesn\'t exist already', function() {
       expect('#main').toBeEmpty();
 
-      this.main.removeIframe();
+      this.main._removeIframe();
 
       expect('#main').toBeEmpty();
     });

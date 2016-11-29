@@ -1,6 +1,6 @@
 /* global PageFolder */
 
-describe('page_folder', function() {
+describe('PageFolder', function() {
   beforeEach(function() {
     // sinon-chrome-webextensions currently exports 'chrome' for some reason
     /* global browser:true */
