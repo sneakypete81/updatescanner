@@ -6,8 +6,6 @@
  */
 class Sidebar {
   /**
-   * Sidebar constructor.
-   *
    * @param {string} sidebarDivSelector - Selector for the div that will contain
    * the Sidebar.
    */

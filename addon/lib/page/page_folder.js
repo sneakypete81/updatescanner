@@ -5,12 +5,6 @@
  */
 class PageFolder {
   /**
-   *
-   */
-
-  /**
-   * PageFolder constructor.
-   *
    * @param {string} id - ID of the PageFolder.
    * @param {string} name - Name of the PageFolder.
    * @param {Array} children - Array of Page instances in the folder.

@@ -16,8 +16,6 @@ class Page {
   }
 
   /**
-   * Page constructor.
-   *
    * @param {string} id - ID of the page.
    * @param {Object} data - Data associated with the page.
    */
