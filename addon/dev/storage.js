@@ -1,5 +1,3 @@
-/* global PageTree */
-
 const dataText = document.querySelector('#data');
 const reloadBtn = document.querySelector('#reload');
 const preloadBtn = document.querySelector('#preload');
@@ -25,14 +23,7 @@ function reload() {
 }
 
 function preload() {
-  const pageTree = new PageTree(
-    {id: 0, name: 'root', children:
-     [1, 2, {id: 3, name: 'subfolder', children:
-             [4, 5]}]});
-
-  pageTree.loadChildren((id) => Promise.resolve('Page with id ' + id))
-    .then(() => browser.storage.local.set({pagetree: pageTree}))
-    .then(reload);
+  alert('@TODO!');
 }
 
 function clear() {
