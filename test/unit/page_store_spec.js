@@ -1,11 +1,6 @@
 /* global using */
 /* global PageStore, PageTree, Page */
 
-function spyOnStorageGet(result) {
-  spyOn(browser.storage.local, 'get').and.returnValue(
-    Promise.resolve(result));
-}
-
 describe('PageStore', function() {
   beforeEach(function() {
     // sinon-chrome-webextensions currently exports 'chrome' for some reason
@@ -22,7 +17,9 @@ describe('PageStore', function() {
   describe('loadPageTree', function() {
     it('retrieves an empty PageTree from storage', function(done) {
       const pageTreeData = {id: 0, name: 'root', children: []};
-      spyOnStorageGet({pagetree: pageTreeData});
+      // Expect a storage request for the pagetree
+      browser.storage.local.get.withArgs('pagetree').returns(
+        Promise.resolve({pagetree: pageTreeData}));
 
       PageStore.loadPageTree().then((result) => {
           expect(result).toEqual(jasmine.any(PageTree));
@@ -36,12 +33,13 @@ describe('PageStore', function() {
 
     it('retrieves a PageTree containing pages from storage', function(done) {
       const pageTreeData = {id: 0, name: 'root', children: [1, 2]};
-      // Expect to get a storage requrest for each element in turn
-      spyOn(browser.storage.local, 'get').and.returnValues(
-        Promise.resolve({pagetree: pageTreeData}),
-        Promise.resolve({'page:1': {name: 'Page1'}}),
-        Promise.resolve({'page:2': {name: 'Page2'}})
-      );
+      // Expect a storage requrest for the pagetree and each element in turn
+      browser.storage.local.get.withArgs('pagetree').returns(
+        Promise.resolve({pagetree: pageTreeData}));
+      browser.storage.local.get.withArgs('page:1').returns(
+        Promise.resolve({'page:1': {name: 'Page1'}}));
+      browser.storage.local.get.withArgs('page:2').returns(
+        Promise.resolve({'page:2': {name: 'Page2'}}));
 
       const promise = PageStore.loadPageTree();
       promise.then((result) => {
@@ -63,14 +61,17 @@ describe('PageStore', function() {
                             [1, 2,
                               {id: 3, name: 'Subfolder', children:
                                [4, 5]}]};
-      // Expect to get
-      spyOn(browser.storage.local, 'get').and.returnValues(
-        Promise.resolve({pagetree: pageTreeData}),
-        Promise.resolve({'page:1': {name: 'Page1'}}),
-        Promise.resolve({'page:2': {name: 'Page2'}}),
-        Promise.resolve({'page:4': {name: 'Page4'}}),
-        Promise.resolve({'page:5': {name: 'Page5'}})
-      );
+      // Expect a storage requrest for the pagetree and each element in turn
+      browser.storage.local.get.withArgs('pagetree').returns(
+        Promise.resolve({pagetree: pageTreeData}));
+      browser.storage.local.get.withArgs('page:1').returns(
+        Promise.resolve({'page:1': {name: 'Page1'}}));
+      browser.storage.local.get.withArgs('page:2').returns(
+        Promise.resolve({'page:2': {name: 'Page2'}}));
+      browser.storage.local.get.withArgs('page:4').returns(
+        Promise.resolve({'page:4': {name: 'Page4'}}));
+      browser.storage.local.get.withArgs('page:5').returns(
+        Promise.resolve({'page:5': {name: 'Page5'}}));
 
       const promise = PageStore.loadPageTree();
       promise.then((result) => {
@@ -95,7 +96,8 @@ describe('PageStore', function() {
 
     it('returns an empty PageTree if it doesn\'t exist in storage',
     function(done) {
-      spyOnStorageGet({});
+      browser.storage.local.get.withArgs('pagetree').returns(
+        Promise.resolve({}));
 
       PageStore.loadPageTree()
         .then(function(result) {
@@ -111,13 +113,12 @@ describe('PageStore', function() {
   describe('savePageTree', function() {
     it('saves a PageTree to storage', function(done) {
       const pageTree = new PageTree([1, 2, [3, 4]]);
-      spyOn(browser.storage.local, 'set').and.returnValue(
-        Promise.resolve());
+      browser.storage.local.set.returns(Promise.resolve());
 
       PageStore.savePageTree(pageTree)
         .then(function() {
-          expect(browser.storage.local.set).toHaveBeenCalledWith(
-            {pagetree: pageTree.data});
+          expect(browser.storage.local.set.getCall(0).args[0])
+            .toEqual({pagetree: pageTree.data});
           done();
         })
         .catch((error) => done.fail(error));
@@ -128,9 +129,10 @@ describe('PageStore', function() {
     it('retrieves a Page from storage', function(done) {
       const id = 12;
       const pageData = {an: 'object'};
-      spyOnStorageGet({['page:' + id]: pageData});
+      browser.storage.local.get.withArgs('page:' + id).returns(
+        Promise.resolve({['page:' + id]: pageData}));
 
-      PageStore.loadPage(id)
+      PageStore.loadPage(12)
         .then(function(result) {
           expect(result).toEqual(jasmine.any(Page));
           expect(result.id).toEqual(id);
@@ -142,7 +144,7 @@ describe('PageStore', function() {
 
     it('returns an empty Page if it doesn\'t exist in storage', function(done) {
       const id = 13;
-      spyOnStorageGet({});
+      browser.storage.local.get.returns(Promise.resolve({}));
 
       PageStore.loadPage(id)
         .then(function(result) {
@@ -157,13 +159,12 @@ describe('PageStore', function() {
     it('saves a Page to storage', function(done) {
       const id = 52;
       const page = new Page(id, [1, 2, [3, 4]]);
-      spyOn(browser.storage.local, 'set').and.returnValue(
-        Promise.resolve());
+      browser.storage.local.set.returns(Promise.resolve());
 
       PageStore.savePage(page)
         .then(function() {
-          expect(browser.storage.local.set).toHaveBeenCalledWith(
-            {['page:' + id]: page.data});
+          expect(browser.storage.local.set.getCall(0).args[0])
+            .toEqual({['page:' + id]: page.data});
           done();
         })
         .catch((error) => done.fail(error));
@@ -176,7 +177,8 @@ describe('PageStore', function() {
       it('retrieves "' + pageType + '" HTML from storage', function(done) {
         const id = 66;
         const html = 'some HTML';
-        spyOnStorageGet({['html:' + pageType + ':' + id]: html});
+      browser.storage.local.get.withArgs('html:' + pageType + ':' + id).returns(
+        Promise.resolve({['html:' + pageType + ':' + id]: html}));
 
         PageStore.loadHtml(id, pageType)
           .then(function(result) {
@@ -190,7 +192,7 @@ describe('PageStore', function() {
     it('returns undefined when the page id doesn\'t exist in storage',
        function(done) {
       const id = '42';
-      spyOnStorageGet({});
+      browser.storage.local.get.returns(Promise.resolve({}));
 
       PageStore.loadHtml(id, Page.pageTypes.OLD)
         .then(function(result) {
@@ -205,13 +207,12 @@ describe('PageStore', function() {
     it('saves HTML to storage', function(done) {
       const id = '24';
       const html = 'some HTML..';
-      spyOn(browser.storage.local, 'set').and.returnValue(
-        Promise.resolve());
+      browser.storage.local.set.returns(Promise.resolve());
 
       PageStore.saveHtml(id, Page.pageTypes.OLD, html)
         .then(function() {
-          expect(browser.storage.local.set).toHaveBeenCalledWith(
-            {['html:' + Page.pageTypes.OLD + ':' + id]: html});
+          expect(browser.storage.local.set.getCall(0).args[0])
+            .toEqual({['html:' + Page.pageTypes.OLD + ':' + id]: html});
           done();
         })
         .catch((error) => done.fail(error));

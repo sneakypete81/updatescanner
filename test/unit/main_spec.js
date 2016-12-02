@@ -4,11 +4,6 @@
 
 // jasmine.getFixtures().fixturesPath = '/base/test/unit/fixtures';
 
-function spyOnStorageGet(result) {
-  spyOn(browser.storage.local, 'get').and.returnValue(
-    Promise.resolve(result));
-}
-
 describe('Main', function() {
   beforeEach(function() {
     // sinon-chrome-webextensions currently exports 'chrome' for some reason
@@ -30,7 +25,8 @@ describe('Main', function() {
     it('calls loadIframe with the page\'s html from storage', function(done) {
       const id = '42';
       const html = 'hello';
-      spyOnStorageGet({['html:changes:' + id]: html});
+      browser.storage.local.get.withArgs('html:changes:' + id).returns(
+        Promise.resolve({['html:changes:' + id]: html}));
 
       spyOn(this.main, '_loadIframe').and.callFake((result) => {
         expect(result).toEqual(html);
@@ -43,7 +39,7 @@ describe('Main', function() {
     it('logs to the console if the page\'s html isn\'t found', function(done) {
       const id = '42';
       spyOn(this.main, '_loadIframe');
-      spyOnStorageGet({});
+      browser.storage.local.get.returns(Promise.resolve({}));
 
       spyOn(console, 'log').and.callFake((msg) => {
         expect(msg).toMatch('Error:');
