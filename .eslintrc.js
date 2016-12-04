@@ -13,6 +13,8 @@ module.exports = {
     'no-cond-assign': ['error', 'except-parens'],
     // We're allowed to log to console
     'no-console': 'off',
+    // Downgrade JSDoc requirement to a warning
+    'require-jsdoc': 'warn',
     // Use @returns if the function returns
     'valid-jsdoc': ['error', {
       'requireReturn': false,

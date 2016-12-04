@@ -59,6 +59,7 @@ module.exports = function(grunt) {
   grunt.config('eslint', {
     options: {
       ignorePattern: ['node_modules/', 'addon/dependencies/'],
+      maxWarnings: 0,
     },
     target: ['.'],
   });
