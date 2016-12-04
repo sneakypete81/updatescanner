@@ -6,7 +6,7 @@
  */
 class Main {
   /**
-   * Main constructor.
+   * @property {Sidebar} sidebar - Object representing the sidebar element.
    */
   constructor() {
     this.sidebar = new Sidebar('#tree');
@@ -18,27 +18,21 @@ class Main {
   init() {
     this.sidebar.init();
     this.sidebar.registerSelectHandler((evt, data) =>
-                                       this._onSidebarChanged(evt, data));
-
-    const html = '<h1>Hello</h1><script src="hello.js"></script>' +
-                 '<p style="margin-top:200em">Some more text</p>';
-    this._loadIframe(html);
+                                       this._onSelection(evt, data));
   }
 
   /**
-   * Called by the sidebar whenever the selection changes.
+   * Called by the sidebar whenever a single item in the sidebar is selected..
    *
-   * @param {Event} evt - Event that caused the selection change.
-   * @param {string} data - Data associated with the new selection.
+   * @param {string} id - ID of the selected item.
+   * @param {Page|PageFolder} item - Selected Page or PageFolder object..
    */
-  _onSidebarChanged(evt, data) {
-    const selectedString = data.selected[0];
-    if (selectedString.startsWith('id:')) {
-      const id = selectedString.slice(3);
+  _onSelect(id, item) {
+    if (item.type == Page.TYPE) {
       this._loadHtml(id)
         .then((html) => this._loadIframe(html))
         .catch(console.log.bind(console));
-    }
+      }
   }
 
   /**

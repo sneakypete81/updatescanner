@@ -5,6 +5,13 @@
  */
 class Page {
   /**
+   * @returns {string} String denoting the Page object type.
+   */
+  static get TYPE() {
+    return 'Page';
+  }
+
+  /**
    * @returns {Object} Enumeration of HTML page types.
    */
   static get pageTypes() {
@@ -21,6 +28,7 @@ class Page {
    */
   constructor(id, data) {
     this.id = id;
-    this.data = data;
+    this.type = Page.TYPE;
+    this.name = data.name;
   }
 }

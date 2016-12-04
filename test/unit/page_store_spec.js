@@ -128,7 +128,7 @@ describe('PageStore', function() {
   describe('loadPage', function() {
     it('retrieves a Page from storage', function(done) {
       const id = 12;
-      const pageData = {an: 'object'};
+      const pageData = {name: 'This Page'};
       browser.storage.local.get.withArgs('page:' + id).returns(
         Promise.resolve({['page:' + id]: pageData}));
 
@@ -136,7 +136,7 @@ describe('PageStore', function() {
         .then(function(result) {
           expect(result).toEqual(jasmine.any(Page));
           expect(result.id).toEqual(id);
-          expect(result.data).toEqual(pageData);
+          expect(result.name).toEqual(pageData.name);
           done();
         })
         .catch((error) => done.fail(error));

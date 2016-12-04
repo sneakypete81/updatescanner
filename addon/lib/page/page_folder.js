@@ -5,6 +5,13 @@
  */
 class PageFolder {
   /**
+   * @returns {string} String denoting the PageFolder object type.
+   */
+  static get TYPE() {
+    return 'PageFolder';
+  }
+
+  /**
    * @param {string} id - ID of the PageFolder.
    * @param {string} name - Name of the PageFolder.
    * @param {Array} children - Array of Page instances in the folder.
@@ -12,6 +19,7 @@ class PageFolder {
    */
   constructor(id, name, children) {
     this.id = id;
+    this.type = PageFolder.TYPE;
     this.name = name;
     this.children = children;
   }

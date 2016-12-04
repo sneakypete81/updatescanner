@@ -1,6 +1,6 @@
 /* eslint-env jquery */
 /* global affix */
-/* global Main */
+/* global Main, Page */
 
 // jasmine.getFixtures().fixturesPath = '/base/test/unit/fixtures';
 
@@ -21,7 +21,7 @@ describe('Main', function() {
     delete browser;
   });
 
-  describe('_onSidebarChanged', function() {
+  describe('_onSelect', function() {
     it('calls loadIframe with the page\'s html from storage', function(done) {
       const id = '42';
       const html = 'hello';
@@ -33,7 +33,7 @@ describe('Main', function() {
         done();
       });
 
-      this.main._onSidebarChanged(null, {selected: ['id:' + id]});
+      this.main._onSelect(id, new Page(id, {}));
     });
 
     it('logs to the console if the page\'s html isn\'t found', function(done) {
@@ -47,7 +47,7 @@ describe('Main', function() {
         done();
       });
 
-      this.main._onSidebarChanged(null, {selected: ['id:' + id]});
+      this.main._onSelect(id, new Page(id, {}));
     });
   });
 
