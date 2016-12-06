@@ -1,72 +1,71 @@
 /* global PageFolder */
 
-describe('PageFolder', function() {
-  beforeEach(function() {
-    // sinon-chrome-webextensions currently exports 'chrome' for some reason
-    /* global browser:true */
-    browser = chrome;
-    browser.flush();
+fdescribe('PageFolder', function() {
+  describe('load', function() {
+    it('loads a PageFolder from storage', function(done) {
+      const id = '42';
+      const data = {title: 'Folder Title',
+                    children: ['1', '2', '3'],
+                    };
+      spyOn(Storage, 'load').and.returnValues(Promise.resolve(data));
+
+      PageFolder.load(id).then((pageFolder) => {
+        expect(Storage.load).toHaveBeenCalledWith(PageFolder._KEY(id));
+        expect(pageFolder.title).toEqual(data.title);
+        expect(pageFolder.children).toEqual(data.children);
+        done();
+      })
+      .catch((error) => done.fail(error));
+    });
+
+    it('returns the default PageFolder if there is no object in storage',
+       function(done) {
+      spyOn(Storage, 'load').and.returnValues(Promise.resolve(undefined));
+
+      PageFolder.load('42').then((pageFolder) => {
+        expect(pageFolder.title).toEqual('New Folder');
+        expect(pageFolder.children).toEqual([]);
+        done();
+      })
+      .catch((error) => done.fail(error));
+    });
+
+    it('returns the default PageFolder if the storage load fails',
+       function(done) {
+      spyOn(Storage, 'load').and.returnValues(Promise.reject('ERROR_MESSAGE'));
+      spyOn(console, 'log');
+
+      PageFolder.load('42').then((pageFolder) => {
+        expect(pageFolder.title).toEqual('New Folder');
+        expect(console.log.calls.argsFor(0)).toMatch('ERROR_MESSAGE');
+        done();
+      })
+      .catch((error) => done.fail(error));
+    });
   });
 
-  afterEach(function() {
-    /* eslint no-delete-var: 'off' */
-    delete browser;
-  });
+  describe('save', function() {
+    it('saves a PageFolder to storage', function(done) {
+      spyOn(Storage, 'save').and.returnValues(Promise.resolve());
+      const id = 33;
+      const data = {title: 'A PageFolder',
+                    children: ['23', '34'],
+                  };
+      const pageFolder = new PageFolder(id, data);
 
-  describe('fromObject', function() {
-    it('does nothing if the children list is undefined', function(done) {
-      const data = {};
-
-      PageFolder.fromObject(data).then((result) => {
-        expect(result.children).toEqual([]);
+      pageFolder.save().then(() => {
+        expect(Storage.save).toHaveBeenCalledWith(PageFolder._KEY(id), data);
         done();
       })
       .catch((error) => done.fail(error));
     });
 
-    it('does nothing if there are no children', function(done) {
-      const data = {children: []};
+    it('silently logs an error if the save fails', function(done) {
+      spyOn(Storage, 'save').and.returnValues(Promise.reject('AN_ERROR'));
+      spyOn(console, 'log');
 
-      PageFolder.fromObject(data).then((result) => {
-        expect(result.children).toEqual([]);
-        done();
-      })
-      .catch((error) => done.fail(error));
-    });
-
-    it('loads child pages with no hierarchy', function(done) {
-      const data = {id: 0, name: 'root', children: [1, 2]};
-
-      const loadPageSpy = jasmine.createSpy('loadPage').and.returnValues(
-        Promise.resolve('Page1'),
-        Promise.resolve('Page2'));
-
-      PageFolder.fromObject(data, loadPageSpy).then((result) => {
-        expect(result.id).toEqual(0);
-        expect(result.name).toEqual('root');
-        expect(result.children).toEqual(['Page1', 'Page2']);
-        done();
-      })
-      .catch((error) => done.fail(error));
-    });
-
-    it('loads child pages with subfolder hierarchy', function(done) {
-      const data = {id: 0, name: 'root', children: [1, 2,
-                    {id: 3, name: 'Subfolder', children: [4, 5]}]};
-
-      const loadPageSpy = jasmine.createSpy('loadPage').and.returnValues(
-        Promise.resolve('Page1'),
-        Promise.resolve('Page2'),
-        Promise.resolve('Page4'),
-        Promise.resolve('Page5'));
-
-      PageFolder.fromObject(data, loadPageSpy).then((result) => {
-        const subFolder = result.children[2];
-        expect(subFolder).toEqual(jasmine.any(PageFolder));
-        expect(subFolder.id).toEqual(3);
-        expect(subFolder.name).toEqual('Subfolder');
-        expect(subFolder.children[0]).toEqual('Page4');
-        expect(subFolder.children[1]).toEqual('Page5');
+      new PageFolder('37').save().then(() => {
+        expect(console.log.calls.argsFor(0)).toMatch('AN_ERROR');
         done();
       })
       .catch((error) => done.fail(error));
