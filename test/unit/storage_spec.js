@@ -1,6 +1,6 @@
 /* global Storage */
 
-fdescribe('Storage', function() {
+describe('Storage', function() {
   beforeEach(function() {
     // sinon-chrome-webextensions currently exports 'chrome' for some reason
     /* global browser:true */
