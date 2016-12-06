@@ -7,7 +7,7 @@ describe('StorageInfo', function() {
                     pageCount: 23,
                     folderCount: 5,
                     };
-      spyOn(Storage, 'load').and.returnValue(Promise.resolve(data));
+      spyOn(Storage, 'load').and.returnValues(Promise.resolve(data));
 
       StorageInfo.load().then((storageInfo) => {
         expect(Storage.load).toHaveBeenCalledWith(StorageInfo._KEY);
@@ -21,7 +21,7 @@ describe('StorageInfo', function() {
 
     it('returns default StorageInfo if there is no object in storage',
        function(done) {
-      spyOn(Storage, 'load').and.returnValue(Promise.resolve(undefined));
+      spyOn(Storage, 'load').and.returnValues(Promise.resolve(undefined));
 
       StorageInfo.load().then((storageInfo) => {
         expect(storageInfo.version).toEqual(StorageInfo._VERSION);
@@ -34,7 +34,7 @@ describe('StorageInfo', function() {
 
     it('returns default StorageInfo if there is an empty object in storage',
        function(done) {
-      spyOn(Storage, 'load').and.returnValue(Promise.resolve({}));
+      spyOn(Storage, 'load').and.returnValues(Promise.resolve({}));
 
       StorageInfo.load().then((storageInfo) => {
         expect(storageInfo.version).toEqual(StorageInfo._VERSION);
@@ -46,7 +46,7 @@ describe('StorageInfo', function() {
     });
 
     it('returns default StorageInfo if the storage load fails', function(done) {
-      spyOn(Storage, 'load').and.returnValue(Promise.reject('ERROR_MESSAGE'));
+      spyOn(Storage, 'load').and.returnValues(Promise.reject('ERROR_MESSAGE'));
       spyOn(console, 'log');
 
       StorageInfo.load().then((storageInfo) => {
@@ -62,7 +62,7 @@ describe('StorageInfo', function() {
 
   describe('save', function() {
     it('saves a StorageInfo to storage', function(done) {
-      spyOn(Storage, 'save').and.returnValue(Promise.resolve());
+      spyOn(Storage, 'save').and.returnValues(Promise.resolve());
       const data = {version: 42,
                     pageCount: 63,
                     folderCount: 8,
@@ -77,7 +77,7 @@ describe('StorageInfo', function() {
     });
 
     it('silently logs an error if the save fails', function(done) {
-      spyOn(Storage, 'save').and.returnValue(Promise.reject('AN_ERROR'));
+      spyOn(Storage, 'save').and.returnValues(Promise.reject('AN_ERROR'));
       spyOn(console, 'log');
 
       new StorageInfo().save().then(() => {
