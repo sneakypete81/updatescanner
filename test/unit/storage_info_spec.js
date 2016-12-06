@@ -2,19 +2,18 @@
 
 describe('StorageInfo', function() {
   describe('load', function() {
-    it('loads StorageInfo from storage',
-       function(done) {
-      spyOn(Storage, 'load').and.returnValue(Promise.resolve({
-        version: 99,
-        pageCount: 23,
-        folderCount: 5,
-      }));
+    it('loads StorageInfo from storage', function(done) {
+      const data = {version: 99,
+                    pageCount: 23,
+                    folderCount: 5,
+                    };
+      spyOn(Storage, 'load').and.returnValue(Promise.resolve(data));
 
       StorageInfo.load().then((storageInfo) => {
         expect(Storage.load).toHaveBeenCalledWith(StorageInfo._KEY);
-        expect(storageInfo.version).toEqual(99);
-        expect(storageInfo.pageCount).toEqual(23);
-        expect(storageInfo.folderCount).toEqual(5);
+        expect(storageInfo.version).toEqual(data.version);
+        expect(storageInfo.pageCount).toEqual(data.pageCount);
+        expect(storageInfo.folderCount).toEqual(data.folderCount);
         done();
       })
       .catch((error) => done.fail(error));
@@ -62,8 +61,7 @@ describe('StorageInfo', function() {
   });
 
   describe('save', function() {
-    it('saves a StorageInfo to storage',
-       function(done) {
+    it('saves a StorageInfo to storage', function(done) {
       spyOn(Storage, 'save').and.returnValue(Promise.resolve());
       const data = {version: 42,
                     pageCount: 63,
@@ -78,8 +76,7 @@ describe('StorageInfo', function() {
       .catch((error) => done.fail(error));
     });
 
-    it('silently logs an error if the save fails',
-       function(done) {
+    it('silently logs an error if the save fails', function(done) {
       spyOn(Storage, 'save').and.returnValue(Promise.reject('AN_ERROR'));
       spyOn(console, 'log');
 
