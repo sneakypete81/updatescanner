@@ -41,8 +41,7 @@ describe('Page', function() {
   });
 
   describe('save', function() {
-    it('saves a Page to storage',
-       function(done) {
+    it('saves a Page to storage', function(done) {
       spyOn(Storage, 'save').and.returnValues(Promise.resolve());
       const id = 33;
       const data = {title: 'A Page',
@@ -56,8 +55,7 @@ describe('Page', function() {
       .catch((error) => done.fail(error));
     });
 
-    it('silently logs an error if the save fails',
-       function(done) {
+    it('silently logs an error if the save fails', function(done) {
       spyOn(Storage, 'save').and.returnValues(Promise.reject('AN_ERROR'));
       spyOn(console, 'log');
 
