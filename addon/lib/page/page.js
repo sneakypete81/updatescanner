@@ -5,30 +5,57 @@
  */
 class Page {
   /**
-   * @returns {string} String denoting the Page object type.
+   * @param {string} id - ID of the Page.
+   * @returns {string} Storage key for the Page object.
    */
-  static get TYPE() {
-    return 'Page';
-  }
-
-  /**
-   * @returns {Object} Enumeration of HTML page types.
-   */
-  static get pageTypes() {
-    return {
-      OLD: 'old',
-      NEW: 'new',
-      CHANGES: 'changes',
-    };
+  static _KEY(id) {
+    return 'page:' + id;
   }
 
   /**
    * @param {string} id - ID of the page.
-   * @param {Object} data - Data associated with the page.
+   * @param {Object} data - Serialised Page object from storage.
    */
-  constructor(id, data) {
+  constructor(id, data={}) {
     this.id = id;
-    this.type = Page.TYPE;
-    this.name = data.name;
+    this.title = data.title || 'New Page';
+  }
+
+  /**
+   * Convert the Page instance to an object suitable for storage.
+   *
+   * @returns {Object} Object suitable for storage.
+   */
+  _toObject() {
+    return {title: this.title,
+            };
+  }
+
+  /**
+   * Load the Page from storage. If it doesn't exist or an error occurs,
+   * an empty default Page is returned.
+   *
+   * @param {string} id - ID of the Page.
+   *
+   * @returns {Promise} A Promise that fulfils with a Page object.
+   */
+  static load(id) {
+    return Storage.load(Page._KEY(id)).then((data) => {
+      return new Page(id, data);
+    }).catch((error) => {
+      console.log('ERROR:Page.load:' + error);
+      return new Page(id);
+    });
+  }
+
+  /**
+   * Save the Page to storage.
+   *
+   * @returns {Promise} An empty Promise that fulfils when the operation is
+   * finished. Errors are logged and ignored.
+   */
+  save() {
+    return Storage.save(Page._KEY(this.id), this._toObject())
+      .catch((error) => console.log('ERROR:Page.save:' + error));
   }
 }
