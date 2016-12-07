@@ -4,16 +4,16 @@ describe('StorageInfo', function() {
   describe('load', function() {
     it('loads StorageInfo from storage', function(done) {
       const data = {version: 99,
-                    pageCount: 23,
-                    folderCount: 5,
+                    pageIds: ['1', '2', '3'],
+                    pageFolderIds: ['0', '4'],
                     };
       spyOn(Storage, 'load').and.returnValues(Promise.resolve(data));
 
       StorageInfo.load().then((storageInfo) => {
         expect(Storage.load).toHaveBeenCalledWith(StorageInfo._KEY);
         expect(storageInfo.version).toEqual(data.version);
-        expect(storageInfo.pageCount).toEqual(data.pageCount);
-        expect(storageInfo.folderCount).toEqual(data.folderCount);
+        expect(storageInfo.pageIds).toEqual(data.pageIds);
+        expect(storageInfo.pageFolderIds).toEqual(data.pageFolderIds);
         done();
       })
       .catch((error) => done.fail(error));
@@ -25,8 +25,8 @@ describe('StorageInfo', function() {
 
       StorageInfo.load().then((storageInfo) => {
         expect(storageInfo.version).toEqual(StorageInfo._VERSION);
-        expect(storageInfo.pageCount).toEqual(0);
-        expect(storageInfo.folderCount).toEqual(0);
+        expect(storageInfo.pageIds).toEqual([]);
+        expect(storageInfo.pageFolderIds).toEqual([]);
         done();
       })
       .catch((error) => done.fail(error));
@@ -38,8 +38,8 @@ describe('StorageInfo', function() {
 
       StorageInfo.load().then((storageInfo) => {
         expect(storageInfo.version).toEqual(StorageInfo._VERSION);
-        expect(storageInfo.pageCount).toEqual(0);
-        expect(storageInfo.folderCount).toEqual(0);
+        expect(storageInfo.pageIds).toEqual([]);
+        expect(storageInfo.pageFolderIds).toEqual([]);
         done();
       })
       .catch((error) => done.fail(error));
@@ -51,8 +51,8 @@ describe('StorageInfo', function() {
 
       StorageInfo.load().then((storageInfo) => {
         expect(storageInfo.version).toEqual(StorageInfo._VERSION);
-        expect(storageInfo.pageCount).toEqual(0);
-        expect(storageInfo.folderCount).toEqual(0);
+        expect(storageInfo.pageIds).toEqual([]);
+        expect(storageInfo.pageFolderIds).toEqual([]);
         expect(console.log.calls.argsFor(0)).toMatch('ERROR_MESSAGE');
         done();
       })
@@ -64,8 +64,8 @@ describe('StorageInfo', function() {
     it('saves a StorageInfo to storage', function(done) {
       spyOn(Storage, 'save').and.returnValues(Promise.resolve());
       const data = {version: 42,
-                    pageCount: 63,
-                    folderCount: 8,
+                    pageIds: ['6', '5', '4'],
+                    pageFolderIds: ['0', '1'],
                   };
       const storageInfo = new StorageInfo(data);
 

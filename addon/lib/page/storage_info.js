@@ -24,8 +24,8 @@ class StorageInfo {
    */
   constructor(data={}) {
     this.version = data.version || StorageInfo._VERSION;
-    this.pageCount = data.pageCount || 0;
-    this.folderCount = data.folderCount || 0;
+    this.pageIds = data.pageIds || [];
+    this.pageFolderIds = data.pageFolderIds || [];
   }
 
   /**
@@ -35,8 +35,8 @@ class StorageInfo {
    */
   _toObject() {
     return {version: this.version,
-            pageCount: this.pageCount,
-            folderCount: this.folderCount,
+            pageIds: this.pageIds,
+            pageFolderIds: this.pageFolderIds,
             };
   }
 

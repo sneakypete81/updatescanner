@@ -1,6 +1,6 @@
 /* global PageFolder */
 
-fdescribe('PageFolder', function() {
+describe('PageFolder', function() {
   describe('load', function() {
     it('loads a PageFolder from storage', function(done) {
       const id = '42';
