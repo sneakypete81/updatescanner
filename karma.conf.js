@@ -19,6 +19,7 @@ module.exports = function(config) {
     files: [
       // Dependencies
       'addon/dependencies/jquery/jquery.min.js',
+      'addon/dependencies/jstree/jstree.js',
       'node_modules/jasmine-jquery/lib/jasmine-jquery.js',
       'node_modules/jasmine-fixture/dist/jasmine-fixture.min.js',
       'node_modules/jasmine-data-provider/src/index.js',
