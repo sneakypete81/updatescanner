@@ -26,13 +26,16 @@ function reload() {
 
 function preload() {
   browser.storage.local.set({
-    'pagetree': {id: 0, name: 'root', children:
-                  [1, 2, {id: 3, name: 'Subfolder', children:
-                    [4, 5]}]},
-    'page:1': {name: 'Update Scanner Website'},
-    'page:2': {name: 'Another Page'},
-    'page:4': {name: 'A Website Inside a Subfolder'},
-    'page:5': {name: 'The Final Site'},
+    'storage_info': {version: 1,
+                     pageIds: ['1', '2', '4', '5'],
+                     pageFolderIds: ['0', '3'],
+                    },
+    'page_folder:0': {title: 'root', children: ['1', '2', '3', '5']},
+    'page_folder:3': {title: 'Subfolder', children: ['4']},
+    'page:1': {title: 'Update Scanner Website'},
+    'page:2': {title: 'Another Page'},
+    'page:4': {title: 'A Website Inside a Subfolder'},
+    'page:5': {title: 'The Final Site'},
     'html:changes:1': '<h1>Update Scanner Website</h1>',
     'html:changes:2': '<h1>Another Page</h1>',
     'html:changes:4': '<h1>A Website Inside a Subfolder</h1>',
