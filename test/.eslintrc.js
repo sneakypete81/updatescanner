@@ -3,6 +3,12 @@ module.exports = {
 
   env: {
     'jasmine': true,
+    'jquery': true,
+  },
+
+  globals: {
+    // From jasmine-fixture
+    'affix': false,
   },
 
   rules: {
