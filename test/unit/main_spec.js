@@ -1,5 +1,3 @@
-/* eslint-env jquery */
-/* global affix */
 /* global Main, Page */
 
 // jasmine.getFixtures().fixturesPath = '/base/test/unit/fixtures';
@@ -33,7 +31,7 @@ describe('Main', function() {
         done();
       });
 
-      this.main._onSelect(id, new Page(id, {}));
+      this.main._onSelect(new Page(id, {}));
     });
 
     it('logs to the console if the page\'s html isn\'t found', function(done) {
@@ -47,7 +45,7 @@ describe('Main', function() {
         done();
       });
 
-      this.main._onSelect(id, new Page(id, {}));
+      this.main._onSelect(new Page(id, {}));
     });
   });
 

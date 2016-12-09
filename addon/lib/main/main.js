@@ -10,26 +10,29 @@ class Main {
    */
   constructor() {
     this.sidebar = new Sidebar('#tree');
+    this.pageStore = undefined;
   }
 
   /**
    * Initialises the main page's sidebar and content iframe.
    */
   init() {
-    this.sidebar.init();
-    this.sidebar.registerSelectHandler((evt, data) =>
-                                       this._onSelection(evt, data));
+    PageStore.load().then((pageStore) => {
+      this.pageStore = pageStore;
+      this.sidebar.init(pageStore.pageMap, PageStore.ROOT_ID);
+      this.sidebar.registerSelectHandler((evt, data) =>
+                                         this._onSelect(evt, data));
+    });
   }
 
   /**
    * Called by the sidebar whenever a single item in the sidebar is selected..
    *
-   * @param {string} id - ID of the selected item.
    * @param {Page|PageFolder} item - Selected Page or PageFolder object..
    */
-  _onSelect(id, item) {
-    if (item.type == Page.TYPE) {
-      this._loadHtml(id)
+  _onSelect(item) {
+    if (item instanceof Page) {
+      this._loadHtml(item.id)
         .then((html) => this._loadIframe(html))
         .catch(console.log.bind(console));
       }
@@ -42,12 +45,13 @@ class Main {
    * @returns {Promise} A Promise to be fulfilled with the requested HTML.
    */
   _loadHtml(id) {
-    return PageStore.loadHtml(id, Page.pageTypes.CHANGES).then(function(html) {
-      if (html === undefined) {
-        throw Error('Could not load "' + id + '" changes HTML from storage');
-      }
-      return html;
-    });
+    return PageStore.loadHtml(id, PageStore.htmlTypes.CHANGES)
+      .then(function(html) {
+        if (html === undefined) {
+          throw Error('Could not load "' + id + '" changes HTML from storage');
+        }
+        return html;
+      });
   }
 
   /**

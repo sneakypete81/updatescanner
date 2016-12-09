@@ -7,10 +7,18 @@
 class PageStore {
 
   /**
+   * @returns {string} The ID of the root folder.
+   */
+  static get ROOT_ID() {
+    return '0';
+  }
+
+  /**
    * @returns {Map} A Page Map consisting of just the root folder.
    */
   static get ROOT_PAGE_MAP() {
-    return new Map([['0', new PageFolder('0', {title: 'root', children: []})]]);
+    return new Map([[PageStore.ROOT_ID,
+      new PageFolder(PageStore.ROOT_ID, {title: 'root', children: []})]]);
   }
 
   /**
@@ -43,20 +51,21 @@ class PageStore {
    * fully populated pageMap.
    */
   static load() {
+    let storageInfo;
+
     // Return a promise to first load the list of Page & PageFolder IDs
     return StorageInfo.load()
       .then((storageInfo) => {
         // Then load all Pages and PageFolders into a Map
         return PageStore._generatePageMap(storageInfo.pageIds,
-                                        storageInfo.pageFolderIds)
-          .then((pageMap) => {
-            return new PageStore(pageMap, storageInfo);
-          });
-    }).catch((error) => {
-      // Not much we can do with an error. Set to an empty pageMap.
-      console.log.bind(console);
-      return new PageStore(PageStore.ROOT_PAGE_MAP, {});
-    });
+                                        storageInfo.pageFolderIds);
+      }).then((pageMap) => {
+        return new PageStore(pageMap, storageInfo);
+      }).catch((error) => {
+        // Not much we can do with an error. Set to an empty pageMap.
+        console.log.bind(console);
+        return new PageStore(PageStore.ROOT_PAGE_MAP, {});
+      });
   }
 
   /**
@@ -93,26 +102,6 @@ class PageStore {
         return PageStore.ROOT_PAGE_MAP;
       }
     });
-
-    // if (promises.length == 0) {
-    //   return Promise.resolve(new Map());
-    // }
-    //
-    // // Resolve the promises in sequence, constructing the map of PageFolders
-    // // and Pages
-    // let pageMap = new Map();
-    // let promiseSequence = promises[0];
-    // for (let i=1; i<promises.length; i++) {
-    //   promiseSequence = promiseSequence.then((item) => {
-    //     pageMap.set(item.id, item);
-    //     return promises[i];
-    //   });
-    // }
-    // // For the last promise, return the pageMap
-    // return promiseSequence.then((item) => {
-    //   pageMap.set(item.id, item);
-    //   return pageMap;
-    // });
   }
 
   /**

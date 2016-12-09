@@ -16,7 +16,7 @@ class StorageInfo {
    * @returns {string} Storage key for the StorageInfo object.
    */
   static get _KEY() {
-    return 'page_info';
+    return 'storage_info';
   }
 
   /**
