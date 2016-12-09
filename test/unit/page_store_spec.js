@@ -1,7 +1,7 @@
 /* global using */
 /* global PageStore, PageFolder, Page, Storage, StorageInfo*/
 
-fdescribe('PageStore', function() {
+describe('PageStore', function() {
   const spyOnStorageLoadWithArgReturn = (returnMap) => {
     spyOn(Storage, 'load').and.callFake(function(arg) {
       if (!(arg in returnMap)) {
@@ -10,73 +10,6 @@ fdescribe('PageStore', function() {
       return returnMap[arg];
     });
   };
-
-  describe('_generatePageMap', function() {
-    it('returns an empty map if there are no Pages or PageFolders',
-       function(done) {
-      PageStore._generatePageMap([], []).then((pageMap) => {
-        expect(pageMap.get('0')).toEqual(
-          new PageFolder('0', {title: 'root'}));
-        expect(pageMap.size).toEqual(1);
-        done();
-      })
-      .catch((error) => done.fail(error));
-    });
-
-    it('generates a map with a single page',
-       function(done) {
-      spyOnStorageLoadWithArgReturn({
-        [Page._KEY('1')]: Promise.resolve({title: 'Page 1'}),
-      });
-
-      PageStore._generatePageMap(['1'], []).then((pageMap) => {
-        expect(pageMap.get('1')).toEqual(new Page('1', {title: 'Page 1'}));
-        expect(pageMap.size).toEqual(1);
-        done();
-      })
-      .catch((error) => done.fail(error));
-    });
-
-    it('generates a map with a single folder',
-       function(done) {
-      spyOnStorageLoadWithArgReturn({
-        [PageFolder._KEY('1')]: Promise.resolve(
-                                {title: 'Folder1', children: ['2']}),
-      });
-
-      PageStore._generatePageMap([], ['1']).then((pageMap) => {
-        expect(pageMap.get('1')).toEqual(new PageFolder('1',
-          {title: 'Folder1', children: ['2']}));
-        expect(pageMap.size).toEqual(1);
-        done();
-      })
-      .catch((error) => done.fail(error));
-    });
-
-    it('generates a map with pages and folders',
-       function(done) {
-      spyOnStorageLoadWithArgReturn({
-        [PageFolder._KEY('1')]: Promise.resolve(
-                                {title: 'Folder1', children: ['2', '3']}),
-        [Page._KEY('2')]: Promise.resolve({title: 'Page2'}),
-        [PageFolder._KEY('3')]: Promise.resolve(
-                                {title: 'Folder3', children: ['4']}),
-        [Page._KEY('4')]: Promise.resolve({title: 'Page4'}),
-      });
-
-      PageStore._generatePageMap(['2', '4'], ['1', '3']).then((pageMap) => {
-        expect(pageMap.get('1')).toEqual(new PageFolder('1',
-          {title: 'Folder1', children: ['2', '3']}));
-        expect(pageMap.get('2')).toEqual(new Page('2', {title: 'Page2'}));
-        expect(pageMap.get('3')).toEqual(new PageFolder('3',
-          {title: 'Folder3', children: ['4']}));
-        expect(pageMap.get('4')).toEqual(new Page('4', {title: 'Page4'}));
-        expect(pageMap.size).toEqual(4);
-        done();
-      })
-      .catch((error) => done.fail(error));
-    });
-  });
 
   describe('load', function() {
     it('retrieves an empty pageMap from storage', function(done) {
@@ -138,6 +71,70 @@ fdescribe('PageStore', function() {
           done();
         })
         .catch((error) => done.fail(error));
+    });
+  });
+
+  describe('_generatePageMap', function() {
+    it('returns an empty map if there are no Pages or PageFolders',
+       function(done) {
+      PageStore._generatePageMap([], []).then((pageMap) => {
+        expect(pageMap.get('0')).toEqual(
+          new PageFolder('0', {title: 'root'}));
+        expect(pageMap.size).toEqual(1);
+        done();
+      })
+      .catch((error) => done.fail(error));
+    });
+
+    it('generates a map with a single page', function(done) {
+      spyOnStorageLoadWithArgReturn({
+        [Page._KEY('1')]: Promise.resolve({title: 'Page 1'}),
+      });
+
+      PageStore._generatePageMap(['1'], []).then((pageMap) => {
+        expect(pageMap.get('1')).toEqual(new Page('1', {title: 'Page 1'}));
+        expect(pageMap.size).toEqual(1);
+        done();
+      })
+      .catch((error) => done.fail(error));
+    });
+
+    it('generates a map with a single folder', function(done) {
+      spyOnStorageLoadWithArgReturn({
+        [PageFolder._KEY('1')]: Promise.resolve(
+                                {title: 'Folder1', children: ['2']}),
+      });
+
+      PageStore._generatePageMap([], ['1']).then((pageMap) => {
+        expect(pageMap.get('1')).toEqual(new PageFolder('1',
+          {title: 'Folder1', children: ['2']}));
+        expect(pageMap.size).toEqual(1);
+        done();
+      })
+      .catch((error) => done.fail(error));
+    });
+
+    it('generates a map with pages and folders', function(done) {
+      spyOnStorageLoadWithArgReturn({
+        [PageFolder._KEY('1')]: Promise.resolve(
+                                {title: 'Folder1', children: ['2', '3']}),
+        [Page._KEY('2')]: Promise.resolve({title: 'Page2'}),
+        [PageFolder._KEY('3')]: Promise.resolve(
+                                {title: 'Folder3', children: ['4']}),
+        [Page._KEY('4')]: Promise.resolve({title: 'Page4'}),
+      });
+
+      PageStore._generatePageMap(['2', '4'], ['1', '3']).then((pageMap) => {
+        expect(pageMap.get('1')).toEqual(new PageFolder('1',
+          {title: 'Folder1', children: ['2', '3']}));
+        expect(pageMap.get('2')).toEqual(new Page('2', {title: 'Page2'}));
+        expect(pageMap.get('3')).toEqual(new PageFolder('3',
+          {title: 'Folder3', children: ['4']}));
+        expect(pageMap.get('4')).toEqual(new Page('4', {title: 'Page4'}));
+        expect(pageMap.size).toEqual(4);
+        done();
+      })
+      .catch((error) => done.fail(error));
     });
   });
 
