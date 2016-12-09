@@ -27,8 +27,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-env');
   grunt.config('env', {
     firefoxBin: {
-      FIREFOX_BIN: 'firefox-dev',
-      WEB_EXT_FIREFOX: 'firefox-dev',
+      FIREFOX_BIN: 'firefox-developer',
+      WEB_EXT_FIREFOX: 'firefox-developer',
       WEB_EXT_FIREFOX_PROFILE: 'dev-edition-default',
     },
   });
