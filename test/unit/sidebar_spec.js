@@ -17,10 +17,14 @@ describe('Sidebar', function() {
       $('#tree').on('ready.jstree', (e, data) => {
         const jstree = $('#tree').jstree(true);
         expect(jstree.get_node('#').children).toEqual(['1', '2']);
+        expect(jstree.get_node('#').data).toEqual(map.get('0'));
         expect(jstree.get_node('1').text).toEqual('subfolder');
         expect(jstree.get_node('1').children).toEqual(['3']);
+        expect(jstree.get_node('1').data).toEqual(map.get('1'));
         expect(jstree.get_node('2').text).toEqual('Page2');
+        expect(jstree.get_node('2').data).toEqual(map.get('2'));
         expect(jstree.get_node('3').text).toEqual('Page3');
+        expect(jstree.get_node('3').data).toEqual(map.get('3'));
         done();
       });
     });
