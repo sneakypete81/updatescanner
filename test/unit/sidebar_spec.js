@@ -1,7 +1,7 @@
 /* global Sidebar, PageFolder, Page */
 
 describe('Sidebar', function() {
-  describe('init', function() {
+  describe('load', function() {
     it('populates a jstree in the DOM', function(done) {
       // Add <div id="tree"> to the DOM
       affix('#tree');
@@ -12,7 +12,7 @@ describe('Sidebar', function() {
         ['3', new Page('3', {title: 'Page3'})],
       ]);
 
-      new Sidebar('#tree').init(map, '0');
+      new Sidebar('#tree').load(map, '0');
 
       $('#tree').on('ready.jstree', (e, data) => {
         const jstree = $('#tree').jstree(true);

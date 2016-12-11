@@ -2,7 +2,7 @@
 /* exported PageStore */
 
 /**
- * Static functions to save and load data from storage.
+ * Class to manage saving and loading data from storage.
  */
 class PageStore {
 
@@ -136,7 +136,8 @@ class PageStore {
   }
 
   /**
-   * @param {string} pageType - Page.pageTypes string identifying the HTML type.
+   * @param {string} pageType - PageStore.htmlTypes string identifying
+   * the HTML type.
    * @param {string} id - ID of the page.
    * @returns {string} Storage key for an HTML object.
    */

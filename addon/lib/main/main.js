@@ -7,6 +7,8 @@
 class Main {
   /**
    * @property {Sidebar} sidebar - Object representing the sidebar element.
+   * @property {PageStore} pageStore - Object used for saving and loading data
+   * from storage.
    */
   constructor() {
     this.sidebar = new Sidebar('#tree');
@@ -19,16 +21,17 @@ class Main {
   init() {
     PageStore.load().then((pageStore) => {
       this.pageStore = pageStore;
-      this.sidebar.init(pageStore.pageMap, PageStore.ROOT_ID);
+      this.sidebar.load(pageStore.pageMap, PageStore.ROOT_ID);
       this.sidebar.registerSelectHandler((evt, data) =>
                                          this._onSelect(evt, data));
     });
   }
 
   /**
-   * Called by the sidebar whenever a single item in the sidebar is selected..
+   * Called whenever a single item in the sidebar is selected. If the selected
+   * item is a Page, load the page's HTML into the iframe.
    *
-   * @param {Page|PageFolder} item - Selected Page or PageFolder object..
+   * @param {Page|PageFolder} item - Selected Page or PageFolder object.
    */
   _onSelect(item) {
     if (item instanceof Page) {
@@ -39,7 +42,7 @@ class Main {
   }
 
   /**
-   * Loads the specified Page HTML from the Page Store.
+   * Loads the specified Page HTML from the PageStore.
    *
    * @param {string} id - ID of the Page to load.
    * @returns {Promise} A Promise to be fulfilled with the requested HTML.

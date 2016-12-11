@@ -14,30 +14,38 @@ class Sidebar {
     this.sidebarDivSelector = sidebarDivSelector;
   }
 
-  /*
-   * Initialises the Sidebar.
+  /**
+   * Load the sidebar with the specified tree of pages.
+   *
+   * @param {Map} pageMap - Map of Page and PageFolder objects, keyed by ID.
+   * @param {string} rootId - ID of the root PageFolder.
    */
-  init(pageMap, rootId) {
+  load(pageMap, rootId) {
     const root = pageMap.get(rootId);
 
     $(this.sidebarDivSelector).jstree(
       {core: {data: this._generateTree(pageMap, root).children}});
 
     $(this.sidebarDivSelector).on('ready.jstree', (e, data) => {
-      this._attachData(pageMap);
+      this._setTreeData(pageMap);
     });
   }
 
-  /*
-   * Generate a JSTree node from a pageMap object.
+  /**
+   * Generate a JSTree data object from a pageMap object.
    *
+   * @param {Map} pageMap - Map of Page and PageFolder objects, keyed by ID.
+   * @param {Page|PageFolder} root - Node to use as the root of the tree.
+   *
+   * @returns {Object} Object containing the JSTree data generated from the
+   * pageMap.
    */
-  _generateTree(pageMap, node) {
+  _generateTree(pageMap, root) {
     let result = {};
-    result.id = node.id;
-    result.text = node.title;
+    result.id = root.id;
+    result.text = root.title;
     result.children = [];
-    const children = node.children || [];
+    const children = root.children || [];
     for (let i=0; i<children.length; i++) {
       const child = pageMap.get(children[i]);
       if (child instanceof Page) {
@@ -52,7 +60,12 @@ class Sidebar {
     return result;
   }
 
-  _attachData(pageMap) {
+  /**
+   * Add a Page/PageFolder object to the data attribute of each JSTree node.
+   *
+   * @param {Map} pageMap - Map of Page and PageFolder objects, keyed by ID.
+   */
+  _setTreeData(pageMap) {
     for (let [id, data] of pageMap) {
       // JSTree uses id='#' for the root node.
       if (id == '0') {
