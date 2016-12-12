@@ -6,6 +6,7 @@
   },
   "devDependencies": {
     "eslint": "^3.12.0",
+    "eslint-config-google": "^0.7.0",
     "grunt": "^1.0.1",
     "grunt-env": "^0.4.4",
     "grunt-eslint": "^19.0.0",

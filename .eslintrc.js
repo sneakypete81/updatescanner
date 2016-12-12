@@ -1,6 +1,7 @@
 module.exports = {
   extends: [
     'eslint:recommended',
+    'google',
   ],
 
   plugins: [
@@ -8,8 +9,6 @@ module.exports = {
   ],
 
   rules: {
-    // Allow unused vars in argument lists, due to callback difficulties
-    'no-unused-vars': ['error', {args: 'none'}],
     // Don't allow assignment in conditionals
     'no-cond-assign': ['error', 'except-parens'],
     // We're allowed to log to console
