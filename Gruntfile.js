@@ -4,54 +4,54 @@ module.exports = function(grunt) {
   grunt.initConfig();
 
   grunt.registerTask('default', 'Lint and build the webextension.',
-                     ['lint', 'build']);
+                     ['lint', 'test', 'build']);
 
   grunt.registerTask('build', 'Build the webextension.',
                      ['shell:webextBuild']);
 
   grunt.registerTask('run', 'Run the webextension with Firefox.',
-                     ['env:firefoxBin', 'shell:webextRun']);
+                     ['env:webextRun', 'shell:webextRun']);
 
   grunt.registerTask('lint', 'Check for linter warnings.',
                      ['eslint', 'shell:webextLint']);
 
   grunt.registerTask('test', 'Run the unit tests.',
-                     ['env:firefoxBin', 'karma:unit']);
+                     ['env:karma', 'karma:unit']);
 
   grunt.registerTask('test:debug', 'Run the unit tests in debug mode.',
-                     ['env:firefoxBin', 'karma:debug']);
+                     ['env:karma', 'karma:debug']);
 
 
-  // Custom environment variables for Firefox location
-  // @TODO: allow file override for local customisation
+  // Custom environment variables for Firefox
+  // Uses options.add so that these can be overridden by the environment.
   grunt.loadNpmTasks('grunt-env');
   grunt.config('env', {
-    firefoxBin: {
+    karma: {options: {add:{
       FIREFOX_BIN: 'firefox-developer',
+    }}},
+    webextRun: {options: {add:{
       WEB_EXT_FIREFOX: 'firefox-developer',
       WEB_EXT_FIREFOX_PROFILE: 'dev-edition-default',
-    },
+    }}},
   });
 
   // Use grunt-shell to launch web-ext
-  const webExtCmd = function(envVarName, command, defaultArgs) {
+  const webExtCmd = function(command, args=[]) {
     const webExtBinary = ['node', './node_modules/web-ext/bin/web-ext',
                           '--source-dir=addon'];
-    const args = (envVarName in process.env) ? process.env[envVarName]
-                                             : defaultArgs;
     return webExtBinary.concat([command]).concat(args).join(' ');
   };
 
   grunt.loadNpmTasks('grunt-shell');
   grunt.config('shell', {
     webextBuild: {
-      command: webExtCmd('WEBEXT_BUILD', 'build', ['--artifacts-dir=dist']),
+      command: webExtCmd('build', ['--artifacts-dir=dist']),
     },
     webextRun: {
-      command: webExtCmd('WEBEXT_RUN', 'run'),
+      command: webExtCmd('run'),
     },
     webextLint: {
-      command: webExtCmd('WEBEXT_LINT', 'lint', []),
+      command: webExtCmd('lint'),
     },
   });
 
