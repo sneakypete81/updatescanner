@@ -1,6 +1,10 @@
 {
   "name": "updatescanner",
   "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/sneakypete81/updatescanner.git"
+  },
   "dependencies": {
     "jstree": "^3.3.3"
   },
