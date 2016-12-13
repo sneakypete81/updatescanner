@@ -26,10 +26,10 @@ module.exports = function(grunt) {
   // Uses options.add so that these can be overridden by the environment.
   grunt.loadNpmTasks('grunt-env');
   grunt.config('env', {
-    karma: {options: {add:{
+    karma: {options: {add: {
       FIREFOX_BIN: 'firefox-developer',
     }}},
-    webextRun: {options: {add:{
+    webextRun: {options: {add: {
       WEB_EXT_FIREFOX: 'firefox-developer',
       WEB_EXT_FIREFOX_PROFILE: 'dev-edition-default',
     }}},
