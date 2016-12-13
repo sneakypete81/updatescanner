@@ -13,15 +13,17 @@
   },
 
   "permissions": [
-    "storage"
+    "storage",
+    "alarms"
   ],
 
   "background": {
-    "scripts": ["scripts/toolbar_button_script.js"]
+    "page": "lib/background/background.html"
   },
 
   "browser_action": {
     "default_title": "Update Scanner",
+    "browser_style": true,
     "default_icon": {
           "18": "images/updatescanner_18.png",
           "48": "images/updatescanner_48.png",

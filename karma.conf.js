@@ -42,7 +42,10 @@ module.exports = function(config) {
 
     // list of files to exclude
     exclude: [
-      '/addon/lib/dev',
+      // Exclude HTML script files
+      'addon/lib/**/*_script.js',
+      // Exclude files used for debugging
+      'addon/lib/dev',
     ],
 
     // preprocess matching files before serving them to the browser
