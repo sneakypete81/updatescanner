@@ -71,10 +71,24 @@ class Autoscan {
   static _getScanList(pageStore) {
     let scanList = [];
     for (const page of pageStore.pageMap.values()) {
-      if (page instanceof Page && page.autoscanPending()) {
+      if (page instanceof Page && Autoscan._isAutoscanPending(page)) {
         scanList.push(page);
       }
     }
     return scanList;
+  }
+
+  /**
+   */
+  /**
+   * Determine whether it's time to autoscan a page.
+   *
+   * @param {Page} page - Page to check.
+   *
+   * @returns {boolean} True if it's time to autoscan the page.
+   */
+  static _isAutoscanPending(page) {
+    // @TODO: Implement!
+    return true;
   }
 }

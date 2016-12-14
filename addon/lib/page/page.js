@@ -58,14 +58,4 @@ class Page {
     return Storage.save(Page._KEY(this.id), this._toObject())
       .catch((error) => console.log('ERROR:Page.save:' + error));
   }
-
-  /**
-   * Determine whether it's time to autoscan this page.
-   *
-   * @returns {boolean} True if it's time to autoscan this page.
-   */
-  autoscanPending() {
-    // @TODO: Implement!
-    return true;
-  }
 }
