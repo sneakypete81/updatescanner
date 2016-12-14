@@ -11,6 +11,7 @@
   "devDependencies": {
     "eslint": "^3.12.0",
     "eslint-config-google": "^0.7.0",
+    "eslint-plugin-jsdoc": "^2.4.0",
     "grunt": "^1.0.1",
     "grunt-env": "^0.4.4",
     "grunt-eslint": "^19.0.0",
@@ -25,6 +26,7 @@
     "karma-jasmine": "^1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
     "karma-notification-reporter": "^0.1.1",
+    "sinon-chrome": "^2.1.2",
     "web-ext": "^1.6.0"
   },
   "scripts": {
