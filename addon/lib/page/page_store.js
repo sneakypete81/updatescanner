@@ -108,14 +108,15 @@ class PageStore {
    * Save a Page's HTML to storage.
    *
    * @param {string} id - ID of the page.
-   * @param {string} pageType - Page.pageTypes string identifying the HTML type.
+   * @param {string} htmlType - PageStore.htmlTypes string identifying the HTML
+   * type.
    * @param {string} html - HTML to save.
    *
    * @returns {Promise} An empty Promise that fulfils when the save succeeds.
    * Errors are logged and discarded.
    */
-  static saveHtml(id, pageType, html) {
-    return Storage.save(PageStore._HTML_KEY(id, pageType), html)
+  static saveHtml(id, htmlType, html) {
+    return Storage.save(PageStore._HTML_KEY(id, htmlType), html)
       .catch((error) => console.log('ERROR:PageStore.saveHtml:' + error));
   }
 
@@ -123,12 +124,13 @@ class PageStore {
    * Load a Page's HTML from storage.
    *
    * @param {string} id - ID of the page.
-   * @param {string} pageType - Page.pageTypes string identifying the HTML type.
+   * @param {string} htmlType - PageStore.htmlTypes string identifying the HTML
+   * type.
    *
    * @returns {Promise} A Promise that fulfils with the requested HTML.
    */
-  static loadHtml(id, pageType) {
-    return Storage.load(PageStore._HTML_KEY(id, pageType))
+  static loadHtml(id, htmlType) {
+    return Storage.load(PageStore._HTML_KEY(id, htmlType))
       .catch((error) => {
         console.log('ERROR:PageStore.loadHtml:' + error);
         return undefined;
@@ -136,12 +138,12 @@ class PageStore {
   }
 
   /**
-   * @param {string} pageType - PageStore.htmlTypes string identifying
+   * @param {string} htmlType - PageStore.htmlTypes string identifying
    * the HTML type.
    * @param {string} id - ID of the page.
    * @returns {string} Storage key for an HTML object.
    */
-  static _HTML_KEY(pageType, id) {
-    return 'html:' + id + ':' + pageType;
+  static _HTML_KEY(htmlType, id) {
+    return 'html:' + id + ':' + htmlType;
   }
 }
