@@ -23,8 +23,8 @@ describe('Main', function() {
     it('calls loadIframe with the page\'s html from storage', function(done) {
       const id = '42';
       const html = 'hello';
-      browser.storage.local.get.withArgs('html:changes:' + id).returns(
-        Promise.resolve({['html:changes:' + id]: html}));
+      browser.storage.local.get.withArgs('html:new:' + id).returns(
+        Promise.resolve({['html:new:' + id]: html}));
 
       spyOn(this.main, '_loadIframe').and.callFake((result) => {
         expect(result).toEqual(html);

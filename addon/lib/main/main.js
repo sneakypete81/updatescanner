@@ -48,7 +48,7 @@ class Main {
    * @returns {Promise} A Promise to be fulfilled with the requested HTML.
    */
   _loadHtml(id) {
-    return PageStore.loadHtml(id, PageStore.htmlTypes.CHANGES)
+    return PageStore.loadHtml(id, PageStore.htmlTypes.NEW)
       .then(function(html) {
         if (html === undefined) {
           throw Error('Could not load "' + id + '" changes HTML from storage');

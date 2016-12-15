@@ -57,7 +57,7 @@ class Scan {
       .then((response) => response.text())
       .then((html) => {
         console.log('HTML: ' + html.slice(0, 50));
-        PageStore.saveHtml(page.id, PageStore.htmlTypes.CHANGES, html);
+        PageStore.saveHtml(page.id, PageStore.htmlTypes.NEW, html);
       }).catch((error) => {
         console.log('Could not scan "' + page.title + '": ' + error);
       });
