@@ -1,5 +1,5 @@
 /* exported Autoscan */
-/* global PageStore, Page */
+/* global Scan, PageStore, Page */
 
 /**
  * Static functions to handle the automatic scanning of webpages.
@@ -53,10 +53,12 @@ class Autoscan {
   static _onAlarm(alarm) {
     if (alarm.name == Autoscan.ALARM_ID) {
       PageStore.load().then((pageStore) => {
-        const scanList = Autoscan._getScanList(pageStore);
+        const pageList = Autoscan._getScanList(pageStore);
 
-        console.log('Scanning ' + scanList.length + ' pages.');
-        // @TODO: Scan the pages
+        console.log('Scanning ' + pageList.length + ' pages.');
+        new Scan(pageList).start().then(() => {
+          console.log('Autoscan complete.');
+        });
       });
     }
   }
@@ -69,13 +71,13 @@ class Autoscan {
    * @returns {Array.<Page>} List of Page objects that need scanning.
    */
   static _getScanList(pageStore) {
-    let scanList = [];
+    let pageList = [];
     for (const page of pageStore.pageMap.values()) {
       if (page instanceof Page && Autoscan._isAutoscanPending(page)) {
-        scanList.push(page);
+        pageList.push(page);
       }
     }
-    return scanList;
+    return pageList;
   }
 
   /**
