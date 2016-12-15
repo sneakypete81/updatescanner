@@ -5,12 +5,15 @@ describe('Page', function() {
     it('loads a Page from storage', function(done) {
       const id = '42';
       const data = {title: 'Page Title',
+                    url: 'https://example.com/test',
                     };
       spyOn(Storage, 'load').and.returnValues(Promise.resolve(data));
 
       Page.load(id).then((page) => {
         expect(Storage.load).toHaveBeenCalledWith(Page._KEY(id));
+        expect(page.id).toEqual(id);
         expect(page.title).toEqual(data.title);
+        expect(page.url).toEqual(data.url);
         done();
       })
       .catch((error) => done.fail(error));
@@ -45,7 +48,8 @@ describe('Page', function() {
       spyOn(Storage, 'save').and.returnValues(Promise.resolve());
       const id = 33;
       const data = {title: 'A Page',
-                  };
+                    url: 'https://www.example.com/test',
+                    };
       const page = new Page(id, data);
 
       page.save().then(() => {

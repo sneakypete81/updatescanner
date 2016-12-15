@@ -15,10 +15,15 @@ class Page {
   /**
    * @param {string} id - ID of the page.
    * @param {Object} data - Serialised Page object from storage.
+   *
+   * @property {string} id - ID of the page.
+   * @property {string} title - Title of the page.
+   * @property {string} url - URL of the page.
    */
   constructor(id, data={}) {
     this.id = id;
     this.title = data.title || 'New Page';
+    this.url = data.url;
   }
 
   /**
@@ -28,6 +33,7 @@ class Page {
    */
   _toObject() {
     return {title: this.title,
+            url: this.url,
             };
   }
 
