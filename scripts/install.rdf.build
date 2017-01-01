@@ -16,11 +16,11 @@ skin_list = "\n\t\t".join(
     for skin in skins.keys()
 )
 
-translator_list = "".join("<em:translator>%s</em:translator>\n" % translator 
+translator_list = "".join("<em:translator>%s</em:translator>\n" % translator
                           for translator in translators
 )
 
-contributor_list = "".join("<em:contributor>%s</em:contributor>\n" % contributor 
+contributor_list = "".join("<em:contributor>%s</em:contributor>\n" % contributor
                           for contributor in contributors
 )
 
@@ -66,4 +66,3 @@ print >> file('install.rdf', 'w'), """\
 </Description>
 
 </RDF>""" % vars()
-

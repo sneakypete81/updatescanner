@@ -41,7 +41,7 @@ translators = ['stoyan (български език)',
                'Kenan Balamir (Türkçe)',
                'Wang King (简化字 - zh-CN)',
                'Peter Pin-Guang Chen (簡化字 - zh-TW)',
-               ]
+              ]
 authorURL = "http://sneakypete81.github.io/updatescanner/"
 uid = 'c07d1a49-9894-49ff-a594-38960ede8fb9'
 firefoxUID = 'ec8030f7-c20a-464f-9b0e-13a3a9e97384'
@@ -60,9 +60,9 @@ homepageURL = "http://sneakypete81.github.io/updatescanner/"
 allowUpdate = False
 updateURL = "%(homepageURL)s/update.rdf" % vars()
 if in_development:
-  updateFile = "%(app)s-dev.xpi" % vars()
+    updateFile = "%(app)s-dev.xpi" % vars()
 else:
-  updateFile = "%(app)s-%(version)s.xpi" % vars()
+    updateFile = "%(app)s-%(version)s.xpi" % vars()
 updateLink = "%(homepageURL)s/%(updateFile)s" % vars()
 
 overlays = (
@@ -81,7 +81,7 @@ skins = {
         'extras': [{'os_code': '', 'os_path': 'linux'},
                    {'os_code': 'os=WINNT', 'os_path': 'win'},
                    {'os_code': 'os=Darwin', 'os_path': 'win'}, # Mac can use Windows icons
-                   ],
+                  ],
     },
 }
 
@@ -191,5 +191,5 @@ if publish_babelzilla:
 if only_english:
     print "*** English-only version - only use for betas! ***"
     locales = {
-        'en-US': {'locale_version': '1.0','display_name': name}
+        'en-US': {'locale_version': '1.0', 'display_name': name}
         }
