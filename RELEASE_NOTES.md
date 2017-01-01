@@ -1,7 +1,11 @@
 Update Scanner Release Notes
 ============================
 
+3.3.2:
+------
 * Fixed: Don't lock up if bookmark deleted while scanning (#72)
+* Fixed: Disable "Mark changes with << >>" when "Highlight changes" is unchecked (#78)
+* Fixed: Marked addon as multiprocessCompatible
 
 3.3.1: (10 September 2016)
 ------
