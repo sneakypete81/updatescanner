@@ -53,6 +53,7 @@ print >> file('install.rdf', 'w'), """\
 
 <!-- Front End MetaData -->
 <em:name>%(name)s</em:name>
+<em:multiprocessCompatible>true</em:multiprocessCompatible>
 <em:description>%(description)s</em:description>
 <em:creator>%(author)s</em:creator>
 <em:homepageURL>%(homepageURL)s</em:homepageURL>
