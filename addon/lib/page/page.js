@@ -4,6 +4,18 @@
  * Class representing a webpage.
  */
 class Page {
+
+  /**
+   * @returns {string} Enumeration of Page change states. Any value other
+   * than NO_CHANGE or CHANGE indicates an error.
+   */
+  static get stateEnum() {
+    return {NO_CHANGE: 'no_change',
+            CHANGED: 'changed',
+            ERROR: 'error',
+          };
+  }
+
   /**
    * @param {string} id - ID of the Page.
    * @returns {string} Storage key for the Page object.
@@ -24,6 +36,7 @@ class Page {
     this.id = id;
     this.title = data.title || 'New Page';
     this.url = data.url;
+    this.state = data.state;
   }
 
   /**
@@ -34,6 +47,7 @@ class Page {
   _toObject() {
     return {title: this.title,
             url: this.url,
+            state: this.state,
             };
   }
 

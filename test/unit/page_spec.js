@@ -49,6 +49,7 @@ describe('Page', function() {
       const id = 33;
       const data = {title: 'A Page',
                     url: 'https://www.example.com/test',
+                    state: Page.stateEnum.NO_CHANGE,
                     };
       const page = new Page(id, data);
 
