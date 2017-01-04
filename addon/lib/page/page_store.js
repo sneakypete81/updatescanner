@@ -28,7 +28,6 @@ class PageStore {
     return {
       OLD: 'old',
       NEW: 'new',
-      CHANGES: 'changes',
     };
   }
 
