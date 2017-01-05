@@ -31,6 +31,13 @@ class Page {
    * @property {string} id - ID of the page.
    * @property {string} title - Title of the page.
    * @property {string} url - URL of the page.
+   * @property {stateEnum} state - Current scan state of the page.
+   * @property {integer} changeThreshold - Number of characters changed before
+   * signalling that a change has occurred.
+   * @property {boolean} error - Indicates whether the last scan failed due to
+   * an error.
+   * @property {string} errorMessage - If error is true, contains the error
+   * message from the last scan.
    */
   constructor(id, data={}) {
     this.id = id;
@@ -38,6 +45,8 @@ class Page {
     this.url = data.url;
     this.state = data.state;
     this.changeThreshold = data.changeThreshold;
+    this.error = data.error;
+    this.errorMessage = data.errorMessage;
   }
 
   /**
@@ -50,6 +59,8 @@ class Page {
             url: this.url,
             state: this.state,
             changeThreshold: this.changeThreshold,
+            error: this.error,
+            errorMessage: this.errorMessage,
             };
   }
 

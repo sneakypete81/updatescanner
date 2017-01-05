@@ -51,6 +51,8 @@ describe('Page', function() {
                     url: 'https://www.example.com/test',
                     state: Page.stateEnum.NO_CHANGE,
                     changeThreshold: 1234,
+                    error: true,
+                    errorMessage: 'This is an error',
                     };
       const page = new Page(id, data);
 
