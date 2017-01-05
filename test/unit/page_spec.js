@@ -50,6 +50,7 @@ describe('Page', function() {
       const data = {title: 'A Page',
                     url: 'https://www.example.com/test',
                     state: Page.stateEnum.NO_CHANGE,
+                    changeThreshold: 1234,
                     };
       const page = new Page(id, data);
 

@@ -37,6 +37,7 @@ class Page {
     this.title = data.title || 'New Page';
     this.url = data.url;
     this.state = data.state;
+    this.changeThreshold = data.changeThreshold;
   }
 
   /**
@@ -48,6 +49,7 @@ class Page {
     return {title: this.title,
             url: this.url,
             state: this.state,
+            changeThreshold: this.changeThreshold,
             };
   }
 
