@@ -74,6 +74,7 @@ module.exports = function(grunt) {
       singleRun: false,
       autoWatch: true,
       reporters: ['dots', 'kjhtml', 'notification'],
+      preprocessors: {}, // Don't run coverage
     },
   });
 };
