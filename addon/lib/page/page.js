@@ -38,15 +38,25 @@ class Page {
    * an error.
    * @property {string} errorMessage - If error is true, contains the error
    * message from the last scan.
+   * @property {integer} lastAutoscanTime - Time that this page was last
+   * autoscanned (ms since Unix epoch).
+   * @property {integer} oldScanTime - Time when the OLD HTML was last updated
+   * (ms since Unix epoch).
+   * @property {integer} newScanTime - Time when the NEW HTML was last updated
+   * (ms since Unix epoch).
    */
   constructor(id, data={}) {
     this.id = id;
     this.title = data.title || 'New Page';
     this.url = data.url;
-    this.state = data.state;
     this.changeThreshold = data.changeThreshold;
+    this.scanRateMinutes = data.scanRateMinutes;
+    this.state = data.state;
     this.error = data.error;
     this.errorMessage = data.errorMessage;
+    this.lastAutoscanTime = data.lastAutoscanTime;
+    this.oldScanTime = data.oldScanTime;
+    this.newScanTime = data.newScanTime;
   }
 
   /**
@@ -57,10 +67,14 @@ class Page {
   _toObject() {
     return {title: this.title,
             url: this.url,
-            state: this.state,
             changeThreshold: this.changeThreshold,
+            scanRateMinutes: this.scanRateMinutes,
+            state: this.state,
             error: this.error,
             errorMessage: this.errorMessage,
+            lastAutoscanTime: this.lastAutoscanTime,
+            oldScanTime: this.oldScanTime,
+            newScanTime: this.newScanTime,
             };
   }
 

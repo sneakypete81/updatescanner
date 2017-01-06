@@ -49,10 +49,14 @@ describe('Page', function() {
       const id = 33;
       const data = {title: 'A Page',
                     url: 'https://www.example.com/test',
-                    state: Page.stateEnum.NO_CHANGE,
                     changeThreshold: 1234,
+                    scanRateMinutes: 64,
+                    state: Page.stateEnum.NO_CHANGE,
                     error: true,
                     errorMessage: 'This is an error',
+                    lastAutoscanTime: 10209876,
+                    oldScanTime: 9381234,
+                    newScanTime: 40834321,
                     };
       const page = new Page(id, data);
 
