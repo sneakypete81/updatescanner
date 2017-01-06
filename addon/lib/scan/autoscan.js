@@ -90,7 +90,10 @@ class Autoscan {
    * @returns {boolean} True if it's time to autoscan the page.
    */
   static _isAutoscanPending(page) {
-    // @TODO: Implement!
-    return true;
+    if (page.lastAutoscanTime === undefined) {
+      return true;
+    }
+    const timeSinceLastAutoscan = Date.now() - page.lastAutoscanTime;
+    return (timeSinceLastAutoscan >= page.scanRateMinutes * 60 * 1000);
   }
 }
