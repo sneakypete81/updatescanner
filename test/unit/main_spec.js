@@ -4,10 +4,8 @@
 
 describe('Main', function() {
   beforeEach(function() {
-    // sinon-chrome-webextensions currently exports 'chrome' for some reason
-    /* global browser:true */
-    browser = chrome;
-    browser.flush();
+    this._browser = window.browser;
+    window.browser = {storage: {local: {get: {}}}};
 
     this.main = new Main();
     // Add <div id="main"> to the DOM
@@ -15,17 +13,15 @@ describe('Main', function() {
   });
 
   afterEach(function() {
-    /* eslint no-delete-var: 'off' */
-    delete browser;
+    window.browser = this._browser;
   });
 
   describe('_onSelect', function() {
     it('calls loadIframe with the page\'s html from storage', function(done) {
       const id = '42';
       const html = 'hello';
-      browser.storage.local.get.withArgs('html:new:' + id).returns(
-        Promise.resolve({['html:new:' + id]: html}));
-
+      spyOn(browser.storage.local, 'get').and.callFake(
+        (key) => Promise.resolve({[key]: html}));
       spyOn(this.main, '_loadIframe').and.callFake((result) => {
         expect(result).toEqual(html);
         done();
@@ -37,8 +33,7 @@ describe('Main', function() {
     it('logs to the console if the page\'s html isn\'t found', function(done) {
       const id = '42';
       spyOn(this.main, '_loadIframe');
-      browser.storage.local.get.returns(Promise.resolve({}));
-
+      spyOn(browser.storage.local, 'get').and.returnValue(Promise.resolve({}));
       spyOn(console, 'log').and.callFake((msg) => {
         expect(msg).toMatch('Error:');
         expect(this.main._loadIframe).not.toHaveBeenCalled();

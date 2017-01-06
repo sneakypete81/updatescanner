@@ -2,34 +2,30 @@
 
 describe('Storage', function() {
   beforeEach(function() {
-    // sinon-chrome-webextensions currently exports 'chrome' for some reason
-    /* global browser:true */
-    browser = chrome;
-    browser.flush();
+    this._browser = window.browser;
+    window.browser = {storage: {local: {get: {}, set: {}}}};
   });
 
   afterEach(function() {
-    /* eslint no-delete-var: 'off' */
-    delete browser;
+    window.browser = this._browser;
   });
 
   describe('save', function() {
     it('saves an item to storage', function(done) {
       const key = 'thisIsAKey';
       const data = {thisIs: 'someData'};
-      browser.storage.local.set.returns(Promise.resolve());
+      spyOn(browser.storage.local, 'set').and.returnValue(Promise.resolve());
 
       Storage.save(key, data).then(() => {
-        // Using the Sinon spy from chrome-sinon
-        expect(browser.storage.local.set.getCall(0).args)
-          .toEqual([{[key]: data}]);
+        expect(browser.storage.local.set).toHaveBeenCalledWith({[key]: data});
         done();
       })
       .catch((error) => done.fail(error));
     });
 
     it('rejects the promise if the save operation fails', function(done) {
-      browser.storage.local.set.returns(Promise.reject('ERROR_MESSAGE'));
+      spyOn(browser.storage.local, 'set').and.returnValue(
+        Promise.reject('ERROR_MESSAGE'));
 
       Storage.save('test', 'data').then((result) => {
         done.fail('Promise was not rejected.');
@@ -45,18 +41,19 @@ describe('Storage', function() {
     it('loads an item from storage', function(done) {
       const key = 'thisIsAKey';
       const data = {thisIs: 'someData'};
-      browser.storage.local.get.withArgs(key).returns(
+      spyOn(browser.storage.local, 'get').and.returnValue(
         Promise.resolve({[key]: data}));
 
       Storage.load(key).then((result) => {
         expect(result).toEqual(data);
+        expect(browser.storage.local.get).toHaveBeenCalledWith(key);
         done();
       })
       .catch((error) => done.fail(error));
     });
 
     it('returns undefined if the key doesn\'t exist', function(done) {
-      browser.storage.local.get.returns(Promise.resolve({}));
+      spyOn(browser.storage.local, 'get').and.returnValue(Promise.resolve({}));
 
       Storage.load('test').then((result) => {
         expect(result).toBeUndefined();
@@ -66,7 +63,8 @@ describe('Storage', function() {
     });
 
     it('rejects the promise if the load operation fails', function(done) {
-      browser.storage.local.get.returns(Promise.reject('ERROR_MESSAGE'));
+      spyOn(browser.storage.local, 'get').and.returnValue(
+        Promise.reject('ERROR_MESSAGE'));
 
       Storage.load('test').then((result) => {
         done.fail('Promise was not rejected.');
