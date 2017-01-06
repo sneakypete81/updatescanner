@@ -1,6 +1,6 @@
 /* global Autoscan, PageStore, Page */
 
-fdescribe('Autoscan', function() {
+describe('Autoscan', function() {
   describe('_onAlarm', function() {
     it('does nothing if the alarm name doesn\'t match', function() {
       spyOn(PageStore, 'load');
