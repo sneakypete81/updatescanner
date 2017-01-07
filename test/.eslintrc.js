@@ -13,5 +13,7 @@ module.exports = {
 
   rules: {
     'require-jsdoc': 'off',
+    // Complain if specs are left focussed
+    'no-restricted-globals': ['warn', 'fdescribe', 'fit'],
   },
 };
