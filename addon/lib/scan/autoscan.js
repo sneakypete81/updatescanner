@@ -49,39 +49,52 @@ class Autoscan {
    * scanning.
    *
    * @param {type} alarm - Alarm object that expired.
+   *
+   * @returns {Promise} A Promise that resolves when the autoscan is
+   * complete. This will be ignored by the caller, but is useful for testing..
    */
   static _onAlarm(alarm) {
     if (alarm.name == Autoscan.ALARM_ID) {
-      PageStore.load().then((pageStore) => {
-        const pageList = Autoscan._getScanList(pageStore);
-
-        console.log('Scanning ' + pageList.length + ' pages.');
-        new Scan(pageList).start().then(() => {
-          console.log('Autoscan complete.');
-        });
+      return Autoscan._loadPageList().then((pageList) => {
+        const scanList = Autoscan._getScanList(pageList);
+        if (scanList.length > 0) {
+          console.log('Pages to autoscan: ' + scanList.length);
+          Autoscan._startScan(scanList).then(() => {
+            console.log('Autoscan complete.');
+          });
+        }
       });
     }
   }
 
   /**
-   * Determine which pages need to be scanned.
+   * Load the list of pages from storage.
    *
-   * @param {PageStore} pageStore - PageStore object loaded from storage.
-   *
-   * @returns {Array.<Page>} List of Page objects that need scanning.
+   * @returns {Promise} A promise that returns the full list of Pages
+   * (and PageFolders).
    */
-  static _getScanList(pageStore) {
-    let pageList = [];
-    for (const page of pageStore.pageMap.values()) {
-      if (page instanceof Page && Autoscan._isAutoscanPending(page)) {
-        pageList.push(page);
-      }
-    }
-    return pageList;
+  static _loadPageList() {
+    return PageStore.load().then((pageStore) => pageStore.pageMap.values());
   }
 
   /**
+   * Determine which pages need to be scanned.
+   *
+   * @param {Array.<Page|PageFolder>} pageList - List of Pages/PageFolders
+   * loaded from storage.
+   *
+   * @returns {Array.<Page>} List of Page objects that need scanning.
    */
+  static _getScanList(pageList) {
+    let scanList = [];
+    for (const page of pageList) {
+      if (page instanceof Page && Autoscan._isAutoscanPending(page)) {
+        scanList.push(page);
+      }
+    }
+    return scanList;
+  }
+
   /**
    * Determine whether it's time to autoscan a page.
    *
@@ -95,5 +108,17 @@ class Autoscan {
     }
     const timeSinceLastAutoscan = Date.now() - page.lastAutoscanTime;
     return (timeSinceLastAutoscan >= page.scanRateMinutes * 60 * 1000);
+  }
+
+  /**
+   * Start scanning a list of pages.
+   *
+   * @param {Array.<Page>} scanList - List of pages to scan.
+   *
+   * @returns {Promise} An empty promise that fulfills once all pages have been
+   * scanned and updated.
+   */
+  static _startScan(scanList) {
+    return new Scan(scanList).start();
   }
 }
