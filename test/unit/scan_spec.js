@@ -21,7 +21,7 @@ describe('Scan', function() {
     it('detects minor changes', function() {
       const html1 = 'Here is some <b>HTML</b>';
       const html2 = 'Here is some different <b>HTML</b>';
-      spyOn(Fuzzy, 'isMajorChange').and.returnValue(false);
+      spyOn(Fuzzy, 'isMajorChange').and.returnValues(false);
 
       const result = Scan._getChangeType(html1, html2, 100);
 
@@ -31,7 +31,7 @@ describe('Scan', function() {
     it('detects major changes', function() {
       const html1 = 'Here is some <b>HTML</b>';
       const html2 = 'Here is some different <b>HTML</b>';
-      spyOn(Fuzzy, 'isMajorChange').and.returnValue(true);
+      spyOn(Fuzzy, 'isMajorChange').and.returnValues(true);
 
       const result = Scan._getChangeType(html1, html2, 100);
 
@@ -89,7 +89,7 @@ describe('Scan', function() {
       const html2 = 'Here is some different <b>HTML</b>';
       spyOn(page, 'save');
       spyOn(PageStore, 'saveHtml');
-      spyOn(Fuzzy, 'isMajorChange').and.returnValue(false);
+      spyOn(Fuzzy, 'isMajorChange').and.returnValues(false);
 
       Scan._updatePageState(page, html1, html2);
 
@@ -107,7 +107,7 @@ describe('Scan', function() {
       const html2 = 'Here is some different <b>HTML</b>';
       spyOn(page, 'save');
       spyOn(PageStore, 'saveHtml');
-      spyOn(Fuzzy, 'isMajorChange').and.returnValue(false);
+      spyOn(Fuzzy, 'isMajorChange').and.returnValues(false);
 
       Scan._updatePageState(page, html1, html2);
 
@@ -124,7 +124,7 @@ describe('Scan', function() {
       const html2 = 'Here is some different <b>HTML</b>';
       spyOn(page, 'save');
       spyOn(PageStore, 'saveHtml');
-      spyOn(Fuzzy, 'isMajorChange').and.returnValue(true);
+      spyOn(Fuzzy, 'isMajorChange').and.returnValues(true);
 
       Scan._updatePageState(page, html1, html2);
 
@@ -143,7 +143,7 @@ describe('Scan', function() {
       const html2 = 'Here is some different <b>HTML</b>';
       spyOn(page, 'save');
       spyOn(PageStore, 'saveHtml');
-      spyOn(Fuzzy, 'isMajorChange').and.returnValue(true);
+      spyOn(Fuzzy, 'isMajorChange').and.returnValues(true);
 
       Scan._updatePageState(page, html1, html2);
 
@@ -170,9 +170,9 @@ describe('Scan', function() {
       const page = new Page('1', {url: 'http://www.example.com/'});
       const html = 'Some <b>HTML</b>';
 
-      spyOn(window, 'fetch').and.returnValue(
+      spyOn(window, 'fetch').and.returnValues(
         Promise.resolve({ok: true, text: () => html}));
-      spyOn(PageStore, 'loadHtml').and.returnValue(Promise.resolve(html));
+      spyOn(PageStore, 'loadHtml').and.returnValues(Promise.resolve(html));
 
       Scan.scan([page]).then(() => {
         expect(window.fetch).toHaveBeenCalledWith(page.url);
@@ -214,7 +214,7 @@ describe('Scan', function() {
       const page = new Page('1', {title: 'example',
                                   url: 'http://www.example.com/'});
 
-      spyOn(window, 'fetch').and.returnValue(
+      spyOn(window, 'fetch').and.returnValues(
         Promise.resolve({ok: false, status: 404, statusText: 'no such page'}));
       spyOn(PageStore, 'loadHtml');
       spyOn(console, 'log').and.callFake((msg) => {
@@ -237,7 +237,7 @@ describe('Scan', function() {
       const page = new Page('1', {title: 'example',
                                   url: 'http://www.example.com/'});
 
-      spyOn(window, 'fetch').and.returnValue(
+      spyOn(window, 'fetch').and.returnValues(
         Promise.reject('Network error'));
       spyOn(PageStore, 'loadHtml');
       spyOn(console, 'log').and.callFake((msg) => {

@@ -13,7 +13,7 @@ describe('Autoscan', function() {
   describe('_onAlarm', function() {
     it('does nothing if the alarm name doesn\'t match', function() {
       spyOn(PageStore, 'load');
-      spyOn(Scan, 'scan').and.returnValue(Promise.resolve());
+      spyOn(Scan, 'scan').and.returnValues(Promise.resolve());
 
       Autoscan._onAlarm({name: 'illegal-alarm'});
 
@@ -26,8 +26,8 @@ describe('Autoscan', function() {
                                     scanRateMinutes: 15,
                                     lastAutoscanTime: Date.now()}),
                     ];
-      spyOn(Autoscan, '_loadPageList').and.returnValue(Promise.resolve(pages));
-      spyOn(Scan, 'scan').and.returnValue(Promise.resolve());
+      spyOn(Autoscan, '_loadPageList').and.returnValues(Promise.resolve(pages));
+      spyOn(Scan, 'scan').and.returnValues(Promise.resolve());
       jasmine.clock().tick(20 * 60 * 1000);
 
       Autoscan._onAlarm({name: Autoscan.ALARM_ID}).then(() => {
@@ -44,8 +44,8 @@ describe('Autoscan', function() {
                                   scanRateMinutes: 30,
                                   lastAutoscanTime: Date.now()}),
                     ];
-      spyOn(Autoscan, '_loadPageList').and.returnValue(Promise.resolve(pages));
-      spyOn(Scan, 'scan').and.returnValue(Promise.resolve());
+      spyOn(Autoscan, '_loadPageList').and.returnValues(Promise.resolve(pages));
+      spyOn(Scan, 'scan').and.returnValues(Promise.resolve());
 
       jasmine.clock().tick(60 * 60 * 1000);
 
@@ -63,9 +63,9 @@ describe('Autoscan', function() {
                                          scanRateMinutes: 30,
                                          lastAutoscanTime: Date.now()});
 
-      spyOn(Autoscan, '_loadPageList').and.returnValue(
+      spyOn(Autoscan, '_loadPageList').and.returnValues(
         Promise.resolve([pageToScan, pageNotToScan]));
-      spyOn(Scan, 'scan').and.returnValue(Promise.resolve());
+      spyOn(Scan, 'scan').and.returnValues(Promise.resolve());
       jasmine.clock().tick(20 * 60 * 1000);
 
       Autoscan._onAlarm({name: Autoscan.ALARM_ID}).then(() => {
@@ -75,9 +75,9 @@ describe('Autoscan', function() {
     });
 
     it('ignores a PageFolder', function(done) {
-      spyOn(Autoscan, '_loadPageList').and.returnValue(
+      spyOn(Autoscan, '_loadPageList').and.returnValues(
         Promise.resolve([new PageFolder(1)]));
-      spyOn(Scan, 'scan').and.returnValue(Promise.resolve());
+      spyOn(Scan, 'scan').and.returnValues(Promise.resolve());
 
       Autoscan._onAlarm({name: Autoscan.ALARM_ID}).then(() => {
         expect(Scan.scan).not.toHaveBeenCalled();

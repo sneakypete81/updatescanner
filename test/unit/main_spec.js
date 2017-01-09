@@ -33,7 +33,7 @@ describe('Main', function() {
     it('logs to the console if the page\'s html isn\'t found', function(done) {
       const id = '42';
       spyOn(this.main, '_loadIframe');
-      spyOn(browser.storage.local, 'get').and.returnValue(Promise.resolve({}));
+      spyOn(browser.storage.local, 'get').and.returnValues(Promise.resolve({}));
       spyOn(console, 'log').and.callFake((msg) => {
         expect(msg).toMatch('Error:');
         expect(this.main._loadIframe).not.toHaveBeenCalled();
