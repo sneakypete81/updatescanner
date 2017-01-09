@@ -6,7 +6,7 @@
 class Page {
 
   /**
-   * @returns {string} Enumeration of Page change states. Any value other
+   * @returns {Object} Enumeration of Page change states. Any value other
    * than NO_CHANGE or CHANGE indicates an error.
    */
   static get stateEnum() {
