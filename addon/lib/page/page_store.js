@@ -32,12 +32,10 @@ class PageStore {
   }
 
   /**
-   * @param {Map} [pageMap={}] - Map of Page and PageFolder objects,
-   * keyed by ID.
-   * @param {StorageInfo} [storageInfo={}] - StorageInfo object loaded from
-   * storage.
+   * @param {Map} pageMap - Map of Page and PageFolder objects, keyed by ID.
+   * @param {StorageInfo} storageInfo - StorageInfo object loaded from storage.
    */
-  constructor(pageMap={}, storageInfo={}) {
+  constructor(pageMap, storageInfo) {
     this.pageMap = pageMap;
     this.storageInfo = storageInfo;
   }
