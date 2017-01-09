@@ -28,7 +28,7 @@ class Storage {
    * If the operation fails, the promise will be rejected.
    */
   static load(key) {
-    return browser.storage.local.get(key).then(function(result) {
+    return browser.storage.local.get(key).then((result) => {
       if (key in result) {
         return result[key];
       } else {
