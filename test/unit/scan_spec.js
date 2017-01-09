@@ -154,12 +154,12 @@ describe('Scan', function() {
     });
   });
 
-  describe('start', function() {
+  describe('scan', function() {
     it('does nothing when given an empty page list', function(done) {
       spyOn(window, 'fetch');
       spyOn(PageStore, 'loadHtml');
 
-      new Scan([]).start().then(() => {
+      Scan.scan([]).then(() => {
         expect(window.fetch).not.toHaveBeenCalled();
         expect(PageStore.loadHtml).not.toHaveBeenCalled();
         done();
@@ -174,7 +174,7 @@ describe('Scan', function() {
         Promise.resolve({ok: true, text: () => html}));
       spyOn(PageStore, 'loadHtml').and.returnValue(Promise.resolve(html));
 
-      new Scan([page]).start().then(() => {
+      Scan.scan([page]).then(() => {
         expect(window.fetch).toHaveBeenCalledWith(page.url);
         expect(PageStore.loadHtml).toHaveBeenCalledWith(
           '1', PageStore.htmlTypes.NEW);
@@ -193,7 +193,7 @@ describe('Scan', function() {
         Promise.resolve({ok: true, text: () => html}));
       spyOn(PageStore, 'loadHtml').and.returnValue(Promise.resolve(html));
 
-      new Scan(pages).start().then(() => {
+      Scan.scan(pages).then(() => {
         expect(window.fetch).toHaveBeenCalledWith(pages[0].url);
         expect(window.fetch).toHaveBeenCalledWith(pages[1].url);
         expect(window.fetch).toHaveBeenCalledWith(pages[2].url);
@@ -223,7 +223,7 @@ describe('Scan', function() {
       });
       console.matched = false;
 
-      new Scan([page]).start().then(() => {
+      Scan.scan([page]).then(() => {
         expect(window.fetch).toHaveBeenCalledWith(page.url);
         expect(PageStore.loadHtml).not.toHaveBeenCalled();
         expect(page.error).toEqual(true);
@@ -246,7 +246,7 @@ describe('Scan', function() {
       });
       console.matched = false;
 
-      new Scan([page]).start().then(() => {
+      Scan.scan([page]).then(() => {
         expect(window.fetch).toHaveBeenCalledWith(page.url);
         expect(PageStore.loadHtml).not.toHaveBeenCalled();
         expect(page.error).toEqual(true);

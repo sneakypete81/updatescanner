@@ -59,7 +59,7 @@ class Autoscan {
         const scanList = Autoscan._getScanList(pageList);
         if (scanList.length > 0) {
           console.log('Pages to autoscan: ' + scanList.length);
-          Autoscan._startScan(scanList).then(() => {
+          Scan.scan(scanList).then(() => {
             console.log('Autoscan complete.');
           });
         }
@@ -108,17 +108,5 @@ class Autoscan {
     }
     const timeSinceLastAutoscan = Date.now() - page.lastAutoscanTime;
     return (timeSinceLastAutoscan >= page.scanRateMinutes * 60 * 1000);
-  }
-
-  /**
-   * Start scanning a list of pages.
-   *
-   * @param {Array.<Page>} scanList - List of pages to scan.
-   *
-   * @returns {Promise} An empty promise that fulfills once all pages have been
-   * scanned and updated.
-   */
-  static _startScan(scanList) {
-    return new Scan(scanList).start();
   }
 }

@@ -2,27 +2,22 @@
 /* global Fuzzy, PageStore, Page */
 
 /**
- * Class used to scan a list of webpages and test for updates.
+ * Static functions to scan a list of webpages and test for updates.
  */
 class Scan {
-  /**
-   * @param {Array.<Page>} pageList - Array of pages to scan.
-   */
-  constructor(pageList) {
-    this.pageList = pageList;
-  }
-
   /**
    * Start scanning the pages one at a time. HTML is checked for updates and
    * saved to the PageStore, and the Page objects updated and saved accordingly.
    *
+   * @param {Array.<Page>} pageList - Array of pages to scan.
+   *
    * @returns {Promise} An empty promise that fulfills once all pages have been
    * scanned and updated.
    */
-  start() {
+  static scan(pageList) {
     // Construct a chain of Promises to scan each Page sequentially.
     let promiseChain = Promise.resolve(null);
-    this.pageList.forEach((page) => {
+    pageList.forEach((page) => {
       // The 'then' clause needs a dummy parameter to keep the chain sequential.
       promiseChain = promiseChain.then((_) => {
         return Scan._scanPage(page);
