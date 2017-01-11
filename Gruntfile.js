@@ -58,7 +58,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-eslint');
   grunt.config('eslint', {
     options: {
-      ignorePattern: ['node_modules/', 'addon/dependencies/'],
+      ignorePattern: ['node_modules/', 'coverage/', 'addon/dependencies/'],
       maxWarnings: 0,
     },
     target: ['.'],
