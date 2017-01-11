@@ -9,7 +9,7 @@
     "jstree": "^3.3.3"
   },
   "devDependencies": {
-    "eslint": "^3.12.0",
+    "eslint": "^3.13.1",
     "eslint-config-google": "^0.7.0",
     "eslint-plugin-jsdoc": "^2.4.0",
     "grunt": "^1.0.1",
@@ -26,8 +26,8 @@
     "karma-firefox-launcher": "^1.0.0",
     "karma-jasmine": "^1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
-    "karma-notification-reporter": "^0.1.1",
-    "web-ext": "^1.6.0"
+    "karma-notification-reporter": "^0.1.2",
+    "web-ext": "^1.7.0"
   },
   "scripts": {
     "build": "grunt build",
