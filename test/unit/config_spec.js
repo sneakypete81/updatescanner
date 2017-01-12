@@ -4,10 +4,12 @@ describe('Config', function() {
   describe('load', function() {
     it('loads a config setting from storage', function(done) {
       spyOn(Storage, 'load').and.returnValues(Promise.resolve({debug: true}));
+      spyOn(Storage, 'addListener');
 
       const config = new Config();
       config.load().then(() => {
         expect(Storage.load).toHaveBeenCalledWith('config');
+        expect(Storage.addListener).toHaveBeenCalled();
         expect(config.get('debug')).toEqual(true);
         done();
       }).catch((error) => done.fail(error));
@@ -16,12 +18,29 @@ describe('Config', function() {
     it('loads a config setting from storage with chained construction',
         function(done) {
       spyOn(Storage, 'load').and.returnValues(Promise.resolve({debug: true}));
+      spyOn(Storage, 'addListener');
 
       new Config().load().then((config) => {
         expect(Storage.load).toHaveBeenCalledWith('config');
+        expect(Storage.addListener).toHaveBeenCalled();
         expect(config.get('debug')).toEqual(true);
         done();
       }).catch((error) => done.fail(error));
+    });
+
+    it('only adds a Storage listener the first time load is called',
+        function(done) {
+      spyOn(Storage, 'load').and.returnValue(Promise.resolve({debug: true}));
+      spyOn(Storage, 'addListener');
+
+      const config = new Config();
+      config.load().then(
+        config.load().then(() => {
+          expect(Storage.load).toHaveBeenCalledTimes(2);
+          expect(Storage.addListener).toHaveBeenCalledTimes(1);
+          expect(config.get('debug')).toEqual(true);
+          done();
+      })).catch((error) => done.fail(error));
     });
   });
 
@@ -68,6 +87,37 @@ describe('Config', function() {
     it('throws if the setting name is invalid', function() {
       expect(() => new Config().set('invalid-setting', 4))
         .toThrowError(InvalidConfigNameError);
+    });
+  });
+
+  describe('_storageChangeHandler', function() {
+    it('updates config data when Storage config data is updated', function() {
+      const config = new Config();
+      const changes = {config: {newValue: {debug: true}}};
+
+      config._storageChangeHandler(changes);
+
+      expect(config.get('debug')).toEqual(true);
+    });
+
+    it('does nothing if Storage config data is unchanged', function() {
+      const config = new Config();
+      config.set('debug', 42);
+      const changes = {anotherChange: {newValue: {debug: true}}};
+
+      config._storageChangeHandler(changes);
+
+      expect(config.get('debug')).toEqual(42);
+    });
+
+    it('clears config data if Storage config data is deleted', function() {
+      const config = new Config();
+      config.set('debug', 42);
+      const changes = {config: {}};
+
+      config._storageChangeHandler(changes);
+
+      expect(config.get('debug')).toEqual(false);
     });
   });
 });

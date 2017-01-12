@@ -20,6 +20,7 @@ class Config {
    */
   constructor() {
     this._data = {};
+    this._listening = false;
   }
 
   /**
@@ -31,6 +32,10 @@ class Config {
   load() {
     return Storage.load('config').then((storageData) => {
       this._data = storageData;
+      if (!this._listening) {
+        Storage.addListener(this._storageChangeHandler);
+        this._listening = true;
+      }
       return this;
     });
   }
@@ -80,6 +85,22 @@ class Config {
     }
 
     this._data[name] = value;
+  }
+
+  /**
+   * Updates the config data when the data in Storage changes.
+   * See https://developer.mozilla.org/en-US/Add-ons/WebExtensions/API/storage/onChanged.
+   *
+   * @param {Object} changes - Object describing the change.
+   */
+  _storageChangeHandler(changes) {
+    if (changes.hasOwnProperty('config')) {
+      if (changes.config.hasOwnProperty('newValue')) {
+        this._data = changes.config.newValue;
+      } else {
+        this._data = {};
+      }
+    }
   }
 }
 

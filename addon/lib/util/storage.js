@@ -36,4 +36,28 @@ class Storage {
       }
     });
   }
+
+  /**
+   * Adds a listener that fires whenever a Storage item is updated.
+   * See https://developer.mozilla.org/en-US/Add-ons/WebExtensions/API/storage/onChanged.
+   *
+   * @param {callback} listener - Called when a local Storage item is updated.
+   */
+  static addListener(listener) {
+    browser.storage.onChanged.addListener((changes, areaName) => {
+      if (areaName == 'local') {
+        listener(changes);
+      }
+    });
+  }
+
+  /**
+   * Stop listening to storage.onChanged events.
+   * See https://developer.mozilla.org/en-US/Add-ons/WebExtensions/API/storage/onChanged.
+   *
+   * @param {callback} listener - Listener to remove.
+   */
+  static removeListener(listener) {
+    browser.storage.onChanged.removeListener(listener);
+  }
 }
