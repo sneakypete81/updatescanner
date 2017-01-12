@@ -24,6 +24,21 @@ class Config {
   }
 
   /**
+   * Loads the configuration settings from storage and gets the specified
+   * config setting. If the setting doesn't exist in storage, a sensible
+   * default value is returned. Throws if the setting name is unrecognised.
+   *
+   * @param {string} name - Name of the config setting.
+   *
+   * @returns {Promise} A promise that fulfils with the requested config
+   * setting.
+   */
+  static loadSingleSetting(name) {
+    return Storage.load('config').then((storageData) => {
+      return Config._getWithDefault(storageData, name);
+    });
+  }
+  /**
    * Load the configuration settings from storage.
    *
    * @returns {Promise} A Promise that fulfils with this object (for chaining),
@@ -60,12 +75,27 @@ class Config {
    * @returns {Object} The requested config setting.
    */
   get(name) {
+    return Config._getWithDefault(this._data, name);
+  }
+
+
+  /**
+   * Used by Config.get and Config.loadSingleSetting to return a default value
+   * if the specified setting was not loaded from Storage. Throws if the
+   * setting name is unrecognised.
+   *
+   * @param {type} storageData - Config data from storage.
+   * @param {type} name - Name of the config setting.
+   *
+   * @returns {Object} The requested config setting.
+   */
+  static _getWithDefault(storageData, name) {
     if (!Config._DEFAULTS.hasOwnProperty(name)) {
       throw new InvalidConfigNameError(name);
     }
 
-    if (this._data.hasOwnProperty(name)) {
-      return this._data[name];
+    if (storageData.hasOwnProperty(name)) {
+      return storageData[name];
     } else {
       return Config._DEFAULTS[name];
     }

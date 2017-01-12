@@ -120,4 +120,38 @@ describe('Config', function() {
       expect(config.get('debug')).toEqual(false);
     });
   });
+
+  describe('loadSingleSetting', function() {
+    it('loads a config setting from storage', function(done) {
+      spyOn(Storage, 'load').and.returnValues(Promise.resolve({debug: true}));
+
+      Config.loadSingleSetting('debug').then((debug) => {
+        expect(Storage.load).toHaveBeenCalledWith('config');
+        expect(debug).toEqual(true);
+        done();
+      }).catch((error) => done.fail(error));
+    });
+
+    it('returns the default if the setting is not in storage', function(done) {
+      spyOn(Storage, 'load').and.returnValues(Promise.resolve({}));
+
+      Config.loadSingleSetting('debug').then((debug) => {
+        expect(Storage.load).toHaveBeenCalledWith('config');
+        // Default for the debug setting is false.
+        expect(debug).toEqual(false);
+        done();
+      }).catch((error) => done.fail(error));
+    });
+
+    it('throws if the setting name is invalid', function(done) {
+      spyOn(Storage, 'load').and.returnValues(Promise.resolve({}));
+
+      Config.loadSingleSetting('invalid-setting').then(() => {
+        done.fail('Expected loadSingleSetting to throw');
+      }).catch((error) => {
+        expect(error).toMatch('InvalidConfigNameError');
+        done();
+      });
+    });
+  });
 });
