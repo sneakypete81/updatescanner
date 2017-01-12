@@ -1,5 +1,5 @@
 /* exported Autoscan */
-/* global Scan, PageStore, Page */
+/* global Scan, PageStore, Page, Config*/
 
 /**
  * Static functions to handle the automatic scanning of webpages.
@@ -9,39 +9,55 @@ class Autoscan {
   /**
    * @returns {string} ID for the Autoscanner alarm.
    */
-  static get ALARM_ID() {
+  static get _ALARM_ID() {
     return 'updatescanner-autoscan';
   }
 
   /**
    * @returns {Object} Timing object for the Autoscanner alarms.
    */
-  static get ALARM_TIMING() {
-    // @TODO: Configure this with a dev flag preference
+  static get _ALARM_TIMING() {
+    return {delayInMinutes: 1, periodInMinutes: 5};
+  }
+
+  /**
+   * @returns {Object} Timing object for the Autoscanner alarms in debug mode.
+   */
+  static get _DEBUG_ALARM_TIMING() {
     return {delayInMinutes: 0.1, periodInMinutes: 0.5};
   }
 
   /**
    * Initialise the Autoscanner.
+   *
+   * @returns {Promise} Empty promise that resolves when initialisation is
+   * complete.
    */
   static init() {
-    Autoscan._stopAlarm();
-    Autoscan._startAlarm();
-    browser.alarms.onAlarm.addListener((alarm) => Autoscan._onAlarm(alarm));
+    return Config.loadSingleSetting('debug').then((debug) => {
+      Autoscan._stopAlarm();
+      Autoscan._startAlarm(debug);
+      browser.alarms.onAlarm.addListener(
+        (alarm) => Autoscan._onAlarm(alarm));
+    });
   }
 
   /**
    * Start the Autoscanner alarm.
+   *
+   * @param {boolean} debug - Whether to use shorter debug timings.
    */
-  static _startAlarm() {
-    browser.alarms.create(Autoscan.ALARM_ID, Autoscan.ALARM_TIMING);
+  static _startAlarm(debug) {
+    const timing = debug ? Autoscan._DEBUG_ALARM_TIMING
+                         : Autoscan._ALARM_TIMING;
+    browser.alarms.create(Autoscan._ALARM_ID, timing);
   }
 
   /**
    * Stop the Autoscanner alarm.
    */
   static _stopAlarm() {
-    browser.alarms.clear(Autoscan.ALARM_ID);
+    browser.alarms.clear(Autoscan._ALARM_ID);
   }
 
   /**
@@ -54,7 +70,7 @@ class Autoscan {
    * complete. This will be ignored by the caller, but is useful for testing..
    */
   static _onAlarm(alarm) {
-    if (alarm.name == Autoscan.ALARM_ID) {
+    if (alarm.name == Autoscan._ALARM_ID) {
       return Autoscan._loadPageList().then((pageList) => {
         const scanList = Autoscan._getScanList(pageList);
         if (scanList.length > 0) {

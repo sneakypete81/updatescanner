@@ -1,4 +1,4 @@
-/* global Autoscan, Scan, PageStore, Page, PageFolder */
+/* global Autoscan, Scan, PageStore, Page, PageFolder, Config*/
 
 describe('Autoscan', function() {
   beforeEach(function() {
@@ -8,6 +8,58 @@ describe('Autoscan', function() {
 
   afterEach(function() {
     jasmine.clock().uninstall();
+  });
+
+  describe('init', function() {
+    beforeEach(function() {
+      this._browser = window.browser;
+      window.browser = {alarms: {create: {}, clear: {},
+                                 onAlarm: {addListener: {}}}};
+      this.calls = [];
+      spyOn(browser.alarms, 'create').and.callFake(() => {
+        this.calls.push('create');
+      });
+      spyOn(browser.alarms, 'clear').and.callFake(() => {
+        this.calls.push('clear');
+      });
+      spyOn(browser.alarms.onAlarm, 'addListener');
+    });
+
+    afterEach(function() {
+      window.browser = this._browser;
+    });
+
+    it('clears existing alarms then configures a new alarm', function(done) {
+      spyOn(Config, 'loadSingleSetting').and.returnValues(
+        Promise.resolve(false));
+
+      Autoscan.init().then(() => {
+        expect(this.calls).toEqual(['clear', 'create']);
+        done();
+      }).catch((error) => done.fail(error));
+    });
+
+    it('uses normal delays when the debug flag is clear', function(done) {
+      spyOn(Config, 'loadSingleSetting').and.returnValues(
+        Promise.resolve(false));
+
+      Autoscan.init().then(() => {
+        expect(browser.alarms.create).toHaveBeenCalledWith(Autoscan._ALARM_ID,
+          {delayInMinutes: 1, periodInMinutes: 5});
+        done();
+      }).catch((error) => done.fail(error));
+    });
+
+    it('uses short delays when the debug flag is set', function(done) {
+      spyOn(Config, 'loadSingleSetting').and.returnValues(
+        Promise.resolve(true));
+
+      Autoscan.init().then(() => {
+        expect(browser.alarms.create).toHaveBeenCalledWith(Autoscan._ALARM_ID,
+          {delayInMinutes: 0.1, periodInMinutes: 0.5});
+        done();
+      }).catch((error) => done.fail(error));
+    });
   });
 
   describe('_onAlarm', function() {
@@ -32,7 +84,7 @@ describe('Autoscan', function() {
       spyOn(console, 'log');
       jasmine.clock().tick(20 * 60 * 1000);
 
-      Autoscan._onAlarm({name: Autoscan.ALARM_ID}).then(() => {
+      Autoscan._onAlarm({name: Autoscan._ALARM_ID}).then(() => {
         expect(Scan.scan).toHaveBeenCalledWith(pages);
         done();
       }).catch((error) => done.fail(error));
@@ -52,7 +104,7 @@ describe('Autoscan', function() {
 
       jasmine.clock().tick(60 * 60 * 1000);
 
-      Autoscan._onAlarm({name: Autoscan.ALARM_ID}).then(() => {
+      Autoscan._onAlarm({name: Autoscan._ALARM_ID}).then(() => {
         expect(Scan.scan).toHaveBeenCalledWith(pages);
         done();
       }).catch((error) => done.fail(error));
@@ -73,7 +125,7 @@ describe('Autoscan', function() {
 
       jasmine.clock().tick(20 * 60 * 1000);
 
-      Autoscan._onAlarm({name: Autoscan.ALARM_ID}).then(() => {
+      Autoscan._onAlarm({name: Autoscan._ALARM_ID}).then(() => {
         expect(Scan.scan).toHaveBeenCalledWith([pageToScan]);
         done();
       }).catch((error) => done.fail(error));
@@ -85,7 +137,7 @@ describe('Autoscan', function() {
       spyOn(Scan, 'scan').and.returnValues(Promise.resolve());
       spyOn(console, 'log');
 
-      Autoscan._onAlarm({name: Autoscan.ALARM_ID}).then(() => {
+      Autoscan._onAlarm({name: Autoscan._ALARM_ID}).then(() => {
         expect(Scan.scan).not.toHaveBeenCalled();
         done();
       }).catch((error) => done.fail(error));
