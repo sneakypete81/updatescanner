@@ -35,6 +35,9 @@ export class Config {
    */
   static loadSingleSetting(name) {
     return Storage.load('config').then((storageData) => {
+      if (storageData === undefined) {
+        storageData = {};
+      }
       return Config._getWithDefault(storageData, name);
     });
   }
@@ -46,7 +49,11 @@ export class Config {
    */
   load() {
     return Storage.load('config').then((storageData) => {
-      this._data = storageData;
+      if (storageData === undefined) {
+        this._data = {};
+      } else {
+        this._data = storageData;
+      }
       if (!this._listening) {
         Storage.addListener(this._storageChangeHandler);
         this._listening = true;

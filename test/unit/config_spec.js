@@ -134,7 +134,7 @@ describe('Config', function() {
     });
 
     it('returns the default if the setting is not in storage', function(done) {
-      spyOn(Storage, 'load').and.returnValues(Promise.resolve({}));
+      spyOn(Storage, 'load').and.returnValues(Promise.resolve(undefined));
 
       Config.loadSingleSetting('debug').then((debug) => {
         expect(Storage.load).toHaveBeenCalledWith('config');
