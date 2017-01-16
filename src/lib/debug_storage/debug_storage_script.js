@@ -1,4 +1,5 @@
-/* eslint-env jquery */
+// @TODO: Don't need JQuery
+import $ from 'jquery';
 
 const dataText = $('#data');
 const reloadBtn = document.querySelector('#reload');

@@ -1,9 +1,9 @@
-/* exported PageFolder */
+import {Storage} from 'util/storage';
 
 /**
  * Class representing a folder of Pages.
  */
-class PageFolder {
+export class PageFolder {
   /**
    * @param {string} id - ID of the PageFolder.
    * @returns {string} Storage key for the PageFolder object.

@@ -1,10 +1,12 @@
-/* global StorageInfo, Page, PageFolder */
-/* exported PageStore */
+import {Page} from './page';
+import {PageFolder} from './page_folder';
+import {StorageInfo} from './storage_info';
+import {Storage} from 'util/storage';
 
 /**
  * Class to manage saving and loading data from storage.
  */
-class PageStore {
+export class PageStore {
 
   /**
    * @returns {string} The ID of the root folder.

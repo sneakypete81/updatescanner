@@ -1,4 +1,5 @@
-/* global Page */
+import {Page} from 'page/page';
+import {Storage} from 'util/storage';
 
 describe('Page', function() {
   describe('load', function() {

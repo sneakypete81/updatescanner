@@ -1,9 +1,9 @@
-/* exported Config */
+import {Storage} from 'util/storage';
 
 /**
  * Class used to access configuration settings.
  */
-class Config {
+export class Config {
 
   /**
    * @returns {Object} Dictionary of default values for all valid config names.
@@ -139,7 +139,7 @@ class Config {
  *
  * @param {string} configName - Name of the config setting.
  */
-function InvalidConfigNameError(configName) {
+export function InvalidConfigNameError(configName) {
   this.name = 'InvalidConfigNameError';
   this.message = 'Invalid config setting: ' + configName;
   this.stack = (new Error()).stack;

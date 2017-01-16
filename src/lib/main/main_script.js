@@ -1,4 +1,4 @@
-/* global Main */
+import {Main} from './main';
 
 (function() {
   const main = new Main();

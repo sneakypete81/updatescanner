@@ -1,9 +1,9 @@
-/* exported Page */
+import {Storage} from 'util/storage';
 
 /**
  * Class representing a webpage.
  */
-class Page {
+export class Page {
 
   /**
    * @returns {Object} Enumeration of Page change states. Any value other

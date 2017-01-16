@@ -1,5 +1,10 @@
-/* global using */
-/* global PageStore, PageFolder, Page, Storage, StorageInfo*/
+import using from 'jasmine-data-provider';
+
+import {PageStore} from 'page/page_store';
+import {Page} from 'page/page';
+import {PageFolder} from 'page/page_folder';
+import {StorageInfo} from 'page/storage_info';
+import {Storage} from 'util/storage';
 
 describe('PageStore', function() {
   const spyOnStorageLoadWithArgReturn = (returnMap) => {

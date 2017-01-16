@@ -1,4 +1,7 @@
-/* global Scan, Fuzzy, Page, PageStore */
+import {Scan} from 'scan/scan';
+import {Fuzzy} from 'scan/fuzzy';
+import {PageStore} from 'page/page_store';
+import {Page} from 'page/page';
 
 describe('Scan', function() {
   describe('_getChangeType', function() {

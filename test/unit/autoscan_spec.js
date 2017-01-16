@@ -1,4 +1,9 @@
-/* global Autoscan, Scan, PageStore, Page, PageFolder, Config*/
+import {Autoscan} from 'scan/autoscan';
+import {Scan} from 'scan/scan';
+import {PageStore} from 'page/page_store';
+import {Page} from 'page/page';
+import {PageFolder} from 'page/page_folder';
+import {Config} from 'util/config';
 
 describe('Autoscan', function() {
   beforeEach(function() {

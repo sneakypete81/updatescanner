@@ -1,10 +1,11 @@
-/* exported Scan */
-/* global Fuzzy, PageStore, Page */
+import {Fuzzy} from './fuzzy';
+import {PageStore} from 'page/page_store';
+import {Page} from 'page/page';
 
 /**
  * Static functions to scan a list of webpages and test for updates.
  */
-class Scan {
+export class Scan {
   /**
    * Start scanning the pages one at a time. HTML is checked for updates and
    * saved to the PageStore, and the Page objects updated and saved accordingly.

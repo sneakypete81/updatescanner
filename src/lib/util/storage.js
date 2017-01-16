@@ -1,9 +1,7 @@
-/* exported Storage */
-
 /**
  * Static functions to save and load data from storage.
  */
-class Storage {
+export class Storage {
 
   /**
    * Save an object to storage.

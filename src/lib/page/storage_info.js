@@ -1,10 +1,9 @@
-/* exported StorageInfo */
-/* global Storage */
+import {Storage} from 'util/storage';
 
 /**
  * Class representing a information about the stored pages.
  */
-class StorageInfo {
+export class StorageInfo {
   /**
    * @returns {integer} Current version of the Page Storage structure.
    */

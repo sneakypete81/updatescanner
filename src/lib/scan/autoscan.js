@@ -1,10 +1,12 @@
-/* exported Autoscan */
-/* global Scan, PageStore, Page, Config*/
+import {Scan} from './scan';
+import {PageStore} from 'page/page_store';
+import {Page} from 'page/page';
+import {Config} from 'util/config';
 
 /**
  * Static functions to handle the automatic scanning of webpages.
  */
-class Autoscan {
+export class Autoscan {
 
   /**
    * @returns {string} ID for the Autoscanner alarm.

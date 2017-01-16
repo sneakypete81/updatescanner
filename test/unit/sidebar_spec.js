@@ -1,10 +1,24 @@
-/* global Sidebar, PageFolder, Page */
+// @TODO: Don't need JQuery
+import $ from 'jquery';
+
+import {Sidebar} from 'main/sidebar';
+import {Page} from 'page/page';
+import {PageFolder} from 'page/page_folder';
 
 describe('Sidebar', function() {
   describe('load', function() {
-    it('populates a jstree in the DOM', function(done) {
+    beforeEach(function() {
       // Add <div id="tree"> to the DOM
-      affix('#tree');
+      this.tree = document.createElement('div');
+      this.tree.id = 'tree';
+      document.body.appendChild(this.tree);
+    });
+
+    afterEach(function() {
+      this.tree.remove();
+    });
+
+    it('populates a jstree in the DOM', function(done) {
       const map = new Map([
         ['0', new PageFolder('0', {title: 'root', children: ['1', '2']})],
         ['1', new PageFolder('1', {title: 'subfolder', children: ['3']})],

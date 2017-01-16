@@ -1,4 +1,5 @@
-/* global Config, InvalidConfigNameError */
+import {Config, InvalidConfigNameError} from 'util/config';
+import {Storage} from 'util/storage';
 
 describe('Config', function() {
   describe('load', function() {

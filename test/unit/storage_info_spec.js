@@ -1,4 +1,5 @@
-/* global StorageInfo */
+import {StorageInfo} from 'page/storage_info';
+import {Storage} from 'util/storage';
 
 describe('StorageInfo', function() {
   describe('load', function() {

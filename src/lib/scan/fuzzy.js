@@ -1,9 +1,7 @@
-/* exported Fuzzy */
-
 /**
  * Class used to scan a list of webpages and test for updates.
  */
-class Fuzzy {
+export class Fuzzy {
   /**
    * Check if two HTML strings differ by more than a threshold.
    *

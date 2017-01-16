@@ -1,4 +1,5 @@
-/* global PageFolder */
+import {PageFolder} from 'page/page_folder';
+import {Storage} from 'util/storage';
 
 describe('PageFolder', function() {
   describe('load', function() {

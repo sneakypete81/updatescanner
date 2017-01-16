@@ -1,4 +1,4 @@
-/* global Storage */
+import {Storage} from 'util/storage';
 
 describe('Storage', function() {
   beforeEach(function() {

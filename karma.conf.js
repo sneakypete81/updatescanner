@@ -1,7 +1,9 @@
+/* eslint-env node */
+
 // Karma configuration
 // Generated on Thu Nov 24 2016 11:02:43 GMT+0000 (GMT)
 
-/* eslint-env node */
+const path = require('path');
 
 module.exports = function(config) {
   config.set({
@@ -17,19 +19,8 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      // Dependencies
-      'addon/dependencies/jquery/jquery.min.js',
-      'addon/dependencies/jstree/jstree.js',
-      'node_modules/jasmine-jquery/lib/jasmine-jquery.js',
-      'node_modules/jasmine-fixture/dist/jasmine-fixture.min.js',
-      'node_modules/jasmine-data-provider/src/index.js',
-
-      // Source
-      'addon/lib/**/*.js',
-
-      // Test specs
-      'test/unit/helpers/*.js',
-      'test/unit/**/*_spec.js',
+      // Single target that imports all _spec files
+      {pattern: 'test/unit/test_index.js', watched: false},
 
       // // Serve fixtures, but don't include them in the runner
       // {
@@ -38,19 +29,25 @@ module.exports = function(config) {
       // },
     ],
 
-    // list of files to exclude
-    exclude: [
-      // Exclude HTML script files
-      'addon/lib/**/*_script.js',
-      // Exclude files used for debugging
-      'addon/lib/dev',
-    ],
-
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      // Use webpack to handle ES6 imports in spec files
+      'test/unit/test_index.js': ['webpack', 'sourcemap'],
+
       // Generate coverage for all source files
-      'addon/lib/**/*.js': ['coverage'],
+      'src/lib/**/*.js': ['coverage'],
+    },
+
+    webpack: {
+      resolve: {
+        modules: [
+          path.resolve(__dirname, 'src/lib'),
+          'node_modules',
+        ],
+      },
+
+      devtool: 'source-map',
     },
 
     // test results reporter to use

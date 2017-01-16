@@ -1,85 +1,94 @@
-/* global Main, Page */
-
-// jasmine.getFixtures().fixturesPath = '/base/test/unit/fixtures';
+import {Main} from 'main/main';
+import {Page} from 'page/page';
+import {Storage} from 'util/storage';
 
 describe('Main', function() {
   beforeEach(function() {
-    this._browser = window.browser;
-    window.browser = {storage: {local: {get: {}}}};
-
-    this.main = new Main();
     // Add <div id="main"> to the DOM
-    affix('#main');
+    this.mainDiv = document.createElement('div');
+    this.mainDiv.id = 'main';
+    document.body.appendChild(this.mainDiv);
   });
 
   afterEach(function() {
-    window.browser = this._browser;
+    this.mainDiv.remove();
   });
 
   describe('_onSelect', function() {
     it('calls loadIframe with the page\'s html from storage', function(done) {
       const id = '42';
       const html = 'hello';
-      spyOn(browser.storage.local, 'get').and.callFake(
-        (key) => Promise.resolve({[key]: html}));
-      spyOn(this.main, '_loadIframe').and.callFake((result) => {
+      const main = new Main();
+
+      spyOn(Storage, 'load').and.returnValues(Promise.resolve(html));
+      spyOn(main, '_loadIframe').and.callFake((result) => {
         expect(result).toEqual(html);
         done();
       });
 
-      this.main._onSelect(new Page(id, {}));
+      main._onSelect(new Page(id, {}));
     });
 
     it('logs to the console if the page\'s html isn\'t found', function(done) {
       const id = '42';
-      spyOn(this.main, '_loadIframe');
-      spyOn(browser.storage.local, 'get').and.returnValues(Promise.resolve({}));
+      const main = new Main();
+
+      spyOn(main, '_loadIframe');
+      spyOn(Storage, 'load').and.returnValues(Promise.resolve(undefined));
       spyOn(console, 'log').and.callFake((msg) => {
         expect(msg).toMatch('Error:');
-        expect(this.main._loadIframe).not.toHaveBeenCalled();
+        expect(main._loadIframe).not.toHaveBeenCalled();
         done();
       });
 
-      this.main._onSelect(new Page(id, {}));
+      main._onSelect(new Page(id, {}));
     });
   });
 
   describe('_loadIframe', function() {
     it('loads html into an iframe', function() {
       const html = 'This is some <b>HTML</b>.';
+      const main = new Main();
 
-      this.main._loadIframe(html);
+      main._loadIframe(html);
 
-      expect('#frame').toHaveAttr('srcdoc', html);
+      const iframe = document.getElementById('frame');
+      expect(iframe.srcdoc).toEqual(html);
     });
 
     it('loads html into an iframe if one exists already', function() {
       const html1 = 'This is some <b>HTML</b>.';
       const html2 = 'This is some more <b>HTML</b>.';
+      const main = new Main();
 
-      this.main._loadIframe(html1);
-      this.main._loadIframe(html2);
+      main._loadIframe(html1);
+      main._loadIframe(html2);
 
-      expect('#frame').toHaveAttr('srcdoc', html2);
+      const iframe = document.getElementById('frame');
+      expect(iframe.srcdoc).toEqual(html2);
     });
   });
 
   describe('_removeIframe', function() {
     it('removes the iframe if one exists already', function() {
-      $('#main').affix('iframe#frame');
-      expect('#main').not.toBeEmpty();
+      const main = new Main();
+      const iframe = document.createElement('iframe');
+      iframe.id = 'frame';
+      this.mainDiv.appendChild(iframe);
+      expect(this.mainDiv.hasChildNodes()).toBe(true);
 
-      this.main._removeIframe();
+      main._removeIframe();
 
-      expect('#main').toBeEmpty();
+      expect(this.mainDiv.hasChildNodes()).toBe(false);
     });
 
     it('does nothing if an iframe doesn\'t exist already', function() {
-      expect('#main').toBeEmpty();
+      const main = new Main();
+      expect(this.mainDiv.hasChildNodes()).toBe(false);
 
-      this.main._removeIframe();
+      main._removeIframe();
 
-      expect('#main').toBeEmpty();
+      expect(this.mainDiv.hasChildNodes()).toBe(false);
     });
   });
 });

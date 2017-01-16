@@ -1,11 +1,14 @@
-/* exported Sidebar */
-/* global PageFolder, Page */
 /* eslint-env jquery */
+import $ from 'jquery';
+import 'jstree';
+
+import {Page} from 'page/page';
+import {PageFolder} from 'page/page_folder';
 
 /**
  * Class representing the Update Scanner Sidebar.
  */
-class Sidebar {
+export class Sidebar {
   /**
    * @param {string} sidebarDivSelector - Selector for the div that will contain
    * the Sidebar.

@@ -1,10 +1,11 @@
-/* global Sidebar, PageStore, Page */
-/* exported Main */
+import {Sidebar} from './sidebar';
+import {PageStore} from 'page/page_store';
+import {Page} from 'page/page';
 
 /**
  * Class representing the main Update Scanner content page.
  */
-class Main {
+export class Main {
   /**
    * @property {Sidebar} sidebar - Object representing the sidebar element.
    * @property {PageStore} pageStore - Object used for saving and loading data
