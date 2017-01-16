@@ -1,4 +1,3 @@
-/* eslint-env jquery */
 import $ from 'jquery';
 import 'jstree';
 
@@ -27,7 +26,8 @@ export class Sidebar {
     const root = pageMap.get(rootId);
 
     $(this.sidebarDivSelector).jstree(
-      {core: {data: this._generateTree(pageMap, root).children}});
+      {core: {themes: {dots: false},
+              data: this._generateTree(pageMap, root).children}});
 
     $(this.sidebarDivSelector).on('ready.jstree', (e, data) => {
       this._setTreeData(pageMap);
