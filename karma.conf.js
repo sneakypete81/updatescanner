@@ -34,9 +34,6 @@ module.exports = function(config) {
     preprocessors: {
       // Use webpack to handle ES6 imports in spec files
       'test/unit/test_index.js': ['webpack', 'sourcemap'],
-
-      // Generate coverage for all source files
-      'src/lib/**/*.js': ['coverage'],
     },
 
     webpack: {
@@ -45,6 +42,16 @@ module.exports = function(config) {
           path.resolve(__dirname, 'src/lib'),
           'node_modules',
         ],
+      },
+
+      module: {
+        rules: [{
+          test: /\.js$/,
+          include: path.resolve(__dirname, 'src/lib'),
+          loader: 'istanbul-instrumenter-loader',
+          enforce: 'pre',
+          query: {esModules: true},
+        }],
       },
 
       devtool: 'source-map',
