@@ -1,4 +1,4 @@
-// Custom environment variables for Firefox
+// Custom environment variables for Firefox to run the Developer Edition.
 // Uses options.add so that these can be overridden by the environment.
 
 module.exports = {
@@ -8,6 +8,5 @@ module.exports = {
 
   webextRun: {options: {add: {
     WEB_EXT_FIREFOX: 'firefox-developer',
-    WEB_EXT_FIREFOX_PROFILE: 'dev-edition-default',
   }}},
 };

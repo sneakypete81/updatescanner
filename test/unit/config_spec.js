@@ -1,3 +1,5 @@
+// @TODO: test missing config item as well as missing storage item
+
 import {Config, InvalidConfigNameError} from 'util/config';
 import {Storage} from 'util/storage';
 
