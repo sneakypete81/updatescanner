@@ -19,7 +19,7 @@
   ],
 
   "background": {
-    "page": "lib/background/background.html"
+    "page": "app/background/background.html"
   },
 
   "browser_action": {

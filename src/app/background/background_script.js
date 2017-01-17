@@ -3,7 +3,7 @@ import {Autoscan} from 'scan/autoscan';
 // Handle the toolbar button click event
 (function() {
   chrome.browserAction.onClicked.addListener(() => {
-    const url = chrome.extension.getURL('/lib/main/main.html');
+    const url = chrome.extension.getURL('/app/main/main.html');
     // chrome.tabs.update({url: url})
     chrome.tabs.create({url: url});
   });
