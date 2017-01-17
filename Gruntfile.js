@@ -27,7 +27,6 @@ module.exports = function(grunt) {
 
   grunt.config('clean', {
     output: [
-      'dist/',
       'build/',
       'coverage/',
     ],
@@ -76,14 +75,14 @@ module.exports = function(grunt) {
 
     options: {
       entry: {
-        main: './src/lib/main/main_script.js',
-        background: './src/lib/background/background_script.js',
-        debug_storage: './src/lib/debug_storage/debug_storage_script.js',
+        main: './src/app/main/main_script.js',
+        background: './src/app/background/background_script.js',
+        debug_storage: './src/app/debug_storage/debug_storage_script.js',
       },
 
       output: {
         path: 'build',
-        filename: 'lib/[name]/[name]_script.js',
+        filename: 'app/[name]/[name]_script.js',
       },
 
       resolve: {
@@ -101,16 +100,15 @@ module.exports = function(grunt) {
         }),
 
         // Copy across all non-javascript files
-        new CopyWebpackPlugin([{
-          context: 'src',
-          from: '**/*',
-        }],
+        new CopyWebpackPlugin([
+          {context: 'src', from: '**/*'},
+        ],
         {ignore: ['*.js']}),
       ],
 
       // This will expose source map files so that errors will point to your
       // original source files instead of the transpiled files.
-      devtool: 'inline-sourcemap',
+      devtool: 'source-map',
     },
   });
 
