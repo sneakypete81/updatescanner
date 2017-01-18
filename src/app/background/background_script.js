@@ -1,4 +1,4 @@
-import {Autoscan} from 'scan/autoscan';
+import * as autoscan from 'scan/autoscan';
 
 // Handle the toolbar button click event
 (function() {
@@ -11,5 +11,5 @@ import {Autoscan} from 'scan/autoscan';
 
 // Run the Autoscan process in the background
 (function() {
-  Autoscan.init();
+  autoscan.start();
 })();
