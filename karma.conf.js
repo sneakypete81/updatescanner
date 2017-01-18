@@ -54,7 +54,7 @@ module.exports = function(config) {
         }],
       },
 
-      devtool: 'source-map',
+      devtool: 'inline-source-map',
     },
 
     // test results reporter to use
