@@ -1,4 +1,4 @@
-import * as scan from './scan';
+import * as scan from 'scan/scan';
 import * as pageStore from 'page/page_store';
 import * as page from 'page/page';
 import * as config from 'util/config';
@@ -51,11 +51,10 @@ function stopAlarm() {
 function onAlarm(alarm) {
   if (alarm.name == ALARM_ID) {
     return loadPageList().then((pageList) => {
-      console.log(pageList);
       const scanList = getScanList(pageList);
       if (scanList.length > 0) {
         console.log('Pages to autoscan: ' + scanList.length);
-        scan.Scan.scan(scanList).then(() => {
+        scan.scan(scanList).then(() => {
           console.log('Autoscan complete.');
         });
       }

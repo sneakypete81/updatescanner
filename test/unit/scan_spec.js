@@ -1,24 +1,24 @@
-import {Scan} from 'scan/scan';
+import * as scan from 'scan/scan';
 import {Fuzzy} from 'scan/fuzzy';
 import {PageStore} from 'page/page_store';
 import {Page} from 'page/page';
 
-describe('Scan', function() {
-  describe('_getChangeType', function() {
+describe('scan', function() {
+  describe('getChangeType', function() {
     it('detects identical pages', function() {
       const html = 'Here is some <b>HTML</b>';
 
-      const result = Scan._getChangeType(html, html, 100);
+      const result = scan.__.getChangeType(html, html, 100);
 
-      expect(result).toEqual(Scan.changeEnum.NO_CHANGE);
+      expect(result).toEqual(scan.__.changeEnum.NO_CHANGE);
     });
 
     it('detects new content', function() {
       const html = 'Here is some <b>HTML</b>';
 
-      const result = Scan._getChangeType('', html, 100);
+      const result = scan.__.getChangeType('', html, 100);
 
-      expect(result).toEqual(Scan.changeEnum.NEW_CONTENT);
+      expect(result).toEqual(scan.__.changeEnum.NEW_CONTENT);
     });
 
     it('detects minor changes', function() {
@@ -26,9 +26,9 @@ describe('Scan', function() {
       const html2 = 'Here is some different <b>HTML</b>';
       spyOn(Fuzzy, 'isMajorChange').and.returnValues(false);
 
-      const result = Scan._getChangeType(html1, html2, 100);
+      const result = scan.__.getChangeType(html1, html2, 100);
 
-      expect(result).toEqual(Scan.changeEnum.MINOR_CHANGE);
+      expect(result).toEqual(scan.__.changeEnum.MINOR_CHANGE);
     });
 
     it('detects major changes', function() {
@@ -36,13 +36,13 @@ describe('Scan', function() {
       const html2 = 'Here is some different <b>HTML</b>';
       spyOn(Fuzzy, 'isMajorChange').and.returnValues(true);
 
-      const result = Scan._getChangeType(html1, html2, 100);
+      const result = scan.__.getChangeType(html1, html2, 100);
 
-      expect(result).toEqual(Scan.changeEnum.MAJOR_CHANGE);
+      expect(result).toEqual(scan.__.changeEnum.MAJOR_CHANGE);
     });
   });
 
-  describe('_updatePageState', function() {
+  describe('updatePageState', function() {
     it('does nothing if the page is unchanged', function() {
       const page = new Page('1', {changeThreshold: 100,
                                   state: Page.stateEnum.NO_CHANGE});
@@ -50,7 +50,7 @@ describe('Scan', function() {
       spyOn(page, 'save');
       spyOn(PageStore, 'saveHtml');
 
-      Scan._updatePageState(page, html, html);
+      scan.__.updatePageState(page, html, html);
 
       expect(page.state).toEqual(Page.stateEnum.NO_CHANGE);
       expect(PageStore.saveHtml).not.toHaveBeenCalled();
@@ -64,7 +64,7 @@ describe('Scan', function() {
       spyOn(page, 'save');
       spyOn(PageStore, 'saveHtml');
 
-      Scan._updatePageState(page, html, html);
+      scan.__.updatePageState(page, html, html);
 
       expect(page.state).toEqual(Page.stateEnum.CHANGED);
       expect(PageStore.saveHtml).not.toHaveBeenCalled();
@@ -77,7 +77,7 @@ describe('Scan', function() {
       spyOn(page, 'save');
       spyOn(PageStore, 'saveHtml');
 
-      Scan._updatePageState(page, '', html);
+      scan.__.updatePageState(page, '', html);
 
       expect(page.state).toEqual(Page.stateEnum.NO_CHANGE);
       expect(PageStore.saveHtml).toHaveBeenCalledWith(
@@ -94,7 +94,7 @@ describe('Scan', function() {
       spyOn(PageStore, 'saveHtml');
       spyOn(Fuzzy, 'isMajorChange').and.returnValues(false);
 
-      Scan._updatePageState(page, html1, html2);
+      scan.__.updatePageState(page, html1, html2);
 
       expect(page.state).toEqual(Page.stateEnum.NO_CHANGE);
       expect(PageStore.saveHtml).toHaveBeenCalledWith(
@@ -112,7 +112,7 @@ describe('Scan', function() {
       spyOn(PageStore, 'saveHtml');
       spyOn(Fuzzy, 'isMajorChange').and.returnValues(false);
 
-      Scan._updatePageState(page, html1, html2);
+      scan.__.updatePageState(page, html1, html2);
 
       expect(page.state).toEqual(Page.stateEnum.CHANGED);
       expect(PageStore.saveHtml).toHaveBeenCalledWith(
@@ -129,7 +129,7 @@ describe('Scan', function() {
       spyOn(PageStore, 'saveHtml');
       spyOn(Fuzzy, 'isMajorChange').and.returnValues(true);
 
-      Scan._updatePageState(page, html1, html2);
+      scan.__.updatePageState(page, html1, html2);
 
       expect(page.state).toEqual(Page.stateEnum.CHANGED);
       expect(PageStore.saveHtml).toHaveBeenCalledWith(
@@ -148,7 +148,7 @@ describe('Scan', function() {
       spyOn(PageStore, 'saveHtml');
       spyOn(Fuzzy, 'isMajorChange').and.returnValues(true);
 
-      Scan._updatePageState(page, html1, html2);
+      scan.__.updatePageState(page, html1, html2);
 
       expect(page.state).toEqual(Page.stateEnum.CHANGED);
       expect(PageStore.saveHtml).toHaveBeenCalledWith(
@@ -157,12 +157,12 @@ describe('Scan', function() {
     });
   });
 
-  describe('scan', function() {
+  describe('start', function() {
     it('does nothing when given an empty page list', function(done) {
       spyOn(window, 'fetch');
       spyOn(PageStore, 'loadHtml');
 
-      Scan.scan([]).then(() => {
+      scan.scan([]).then(() => {
         expect(window.fetch).not.toHaveBeenCalled();
         expect(PageStore.loadHtml).not.toHaveBeenCalled();
         done();
@@ -177,7 +177,7 @@ describe('Scan', function() {
         Promise.resolve({ok: true, text: () => html}));
       spyOn(PageStore, 'loadHtml').and.returnValues(Promise.resolve(html));
 
-      Scan.scan([page]).then(() => {
+      scan.scan([page]).then(() => {
         expect(window.fetch).toHaveBeenCalledWith(page.url);
         expect(PageStore.loadHtml).toHaveBeenCalledWith(
           '1', PageStore.htmlTypes.NEW);
@@ -196,7 +196,7 @@ describe('Scan', function() {
         Promise.resolve({ok: true, text: () => html}));
       spyOn(PageStore, 'loadHtml').and.returnValue(Promise.resolve(html));
 
-      Scan.scan(pages).then(() => {
+      scan.scan(pages).then(() => {
         expect(window.fetch).toHaveBeenCalledWith(pages[0].url);
         expect(window.fetch).toHaveBeenCalledWith(pages[1].url);
         expect(window.fetch).toHaveBeenCalledWith(pages[2].url);
@@ -226,7 +226,7 @@ describe('Scan', function() {
       });
       console.matched = false;
 
-      Scan.scan([page]).then(() => {
+      scan.scan([page]).then(() => {
         expect(window.fetch).toHaveBeenCalledWith(page.url);
         expect(PageStore.loadHtml).not.toHaveBeenCalled();
         expect(page.error).toEqual(true);
@@ -249,7 +249,7 @@ describe('Scan', function() {
       });
       console.matched = false;
 
-      Scan.scan([page]).then(() => {
+      scan.scan([page]).then(() => {
         expect(window.fetch).toHaveBeenCalledWith(page.url);
         expect(PageStore.loadHtml).not.toHaveBeenCalled();
         expect(page.error).toEqual(true);

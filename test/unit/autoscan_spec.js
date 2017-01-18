@@ -1,5 +1,5 @@
 import * as autoscan from 'scan/autoscan';
-import {Scan} from 'scan/scan';
+import * as scan from 'scan/scan';
 import {PageStore} from 'page/page_store';
 import {Page} from 'page/page';
 import {PageFolder} from 'page/page_folder';
@@ -78,13 +78,13 @@ describe('autoscan', function() {
 
     it('does nothing if the alarm name doesn\'t match', function() {
       spyOn(PageStore, 'load');
-      spyOn(Scan, 'scan').and.returnValues(Promise.resolve());
+      spyOn(scan, 'scan').and.returnValues(Promise.resolve());
       spyOn(console, 'log');
 
       autoscan.__.onAlarm({name: 'illegal-alarm'});
 
       expect(PageStore.load).not.toHaveBeenCalled();
-      expect(Scan.scan).not.toHaveBeenCalled();
+      expect(scan.scan).not.toHaveBeenCalled();
     });
 
     it('scans a pending page', function(done) {
@@ -94,12 +94,12 @@ describe('autoscan', function() {
                     ];
       spyOn(PageStore, 'load').and.returnValues(
         Promise.resolve({pageMap: generatePageMap(pages)}));
-      spyOn(Scan, 'scan').and.returnValues(Promise.resolve());
-      // spyOn(console, 'log');
+      spyOn(scan, 'scan').and.returnValues(Promise.resolve());
+      spyOn(console, 'log');
       jasmine.clock().tick(20 * 60 * 1000);
 
       autoscan.__.onAlarm({name: 'updatescanner-autoscan'}).then(() => {
-        expect(Scan.scan).toHaveBeenCalledWith(pages);
+        expect(scan.scan).toHaveBeenCalledWith(pages);
         done();
       }).catch((error) => done.fail(error));
     });
@@ -114,13 +114,13 @@ describe('autoscan', function() {
                     ];
       spyOn(PageStore, 'load').and.returnValues(
         Promise.resolve({pageMap: generatePageMap(pages)}));
-      spyOn(Scan, 'scan').and.returnValues(Promise.resolve());
+      spyOn(scan, 'scan').and.returnValues(Promise.resolve());
       spyOn(console, 'log');
 
       jasmine.clock().tick(60 * 60 * 1000);
 
       autoscan.__.onAlarm({name: 'updatescanner-autoscan'}).then(() => {
-        expect(Scan.scan).toHaveBeenCalledWith(pages);
+        expect(scan.scan).toHaveBeenCalledWith(pages);
         done();
       }).catch((error) => done.fail(error));
     });
@@ -135,13 +135,13 @@ describe('autoscan', function() {
 
       spyOn(PageStore, 'load').and.returnValues(Promise.resolve(
         {pageMap: generatePageMap([pageToScan, pageNotToScan])}));
-      spyOn(Scan, 'scan').and.returnValues(Promise.resolve());
+      spyOn(scan, 'scan').and.returnValues(Promise.resolve());
       spyOn(console, 'log');
 
       jasmine.clock().tick(20 * 60 * 1000);
 
       autoscan.__.onAlarm({name: 'updatescanner-autoscan'}).then(() => {
-        expect(Scan.scan).toHaveBeenCalledWith([pageToScan]);
+        expect(scan.scan).toHaveBeenCalledWith([pageToScan]);
         done();
       }).catch((error) => done.fail(error));
     });
@@ -149,11 +149,11 @@ describe('autoscan', function() {
     it('ignores a PageFolder', function(done) {
       spyOn(PageStore, 'load').and.returnValues(
         Promise.resolve({pageMap: generatePageMap([new PageFolder(1)])}));
-      spyOn(Scan, 'scan').and.returnValues(Promise.resolve());
+      spyOn(scan, 'scan').and.returnValues(Promise.resolve());
       spyOn(console, 'log');
 
       autoscan.__.onAlarm({name: 'updatescanner-autoscan'}).then(() => {
-        expect(Scan.scan).not.toHaveBeenCalled();
+        expect(scan.scan).not.toHaveBeenCalled();
         done();
       }).catch((error) => done.fail(error));
     });
