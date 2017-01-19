@@ -1,5 +1,5 @@
 import * as scan from 'scan/scan';
-import {Fuzzy} from 'scan/fuzzy';
+import * as fuzzy from 'scan/fuzzy';
 import {PageStore} from 'page/page_store';
 import {Page} from 'page/page';
 
@@ -24,7 +24,7 @@ describe('scan', function() {
     it('detects minor changes', function() {
       const html1 = 'Here is some <b>HTML</b>';
       const html2 = 'Here is some different <b>HTML</b>';
-      spyOn(Fuzzy, 'isMajorChange').and.returnValues(false);
+      spyOn(fuzzy, 'isMajorChange').and.returnValues(false);
 
       const result = scan.__.getChangeType(html1, html2, 100);
 
@@ -34,7 +34,7 @@ describe('scan', function() {
     it('detects major changes', function() {
       const html1 = 'Here is some <b>HTML</b>';
       const html2 = 'Here is some different <b>HTML</b>';
-      spyOn(Fuzzy, 'isMajorChange').and.returnValues(true);
+      spyOn(fuzzy, 'isMajorChange').and.returnValues(true);
 
       const result = scan.__.getChangeType(html1, html2, 100);
 
@@ -92,7 +92,7 @@ describe('scan', function() {
       const html2 = 'Here is some different <b>HTML</b>';
       spyOn(page, 'save');
       spyOn(PageStore, 'saveHtml');
-      spyOn(Fuzzy, 'isMajorChange').and.returnValues(false);
+      spyOn(fuzzy, 'isMajorChange').and.returnValues(false);
 
       scan.__.updatePageState(page, html1, html2);
 
@@ -110,7 +110,7 @@ describe('scan', function() {
       const html2 = 'Here is some different <b>HTML</b>';
       spyOn(page, 'save');
       spyOn(PageStore, 'saveHtml');
-      spyOn(Fuzzy, 'isMajorChange').and.returnValues(false);
+      spyOn(fuzzy, 'isMajorChange').and.returnValues(false);
 
       scan.__.updatePageState(page, html1, html2);
 
@@ -127,7 +127,7 @@ describe('scan', function() {
       const html2 = 'Here is some different <b>HTML</b>';
       spyOn(page, 'save');
       spyOn(PageStore, 'saveHtml');
-      spyOn(Fuzzy, 'isMajorChange').and.returnValues(true);
+      spyOn(fuzzy, 'isMajorChange').and.returnValues(true);
 
       scan.__.updatePageState(page, html1, html2);
 
@@ -146,7 +146,7 @@ describe('scan', function() {
       const html2 = 'Here is some different <b>HTML</b>';
       spyOn(page, 'save');
       spyOn(PageStore, 'saveHtml');
-      spyOn(Fuzzy, 'isMajorChange').and.returnValues(true);
+      spyOn(fuzzy, 'isMajorChange').and.returnValues(true);
 
       scan.__.updatePageState(page, html1, html2);
 

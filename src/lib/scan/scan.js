@@ -1,4 +1,4 @@
-import {Fuzzy} from 'scan/fuzzy';
+import * as fuzzy from 'scan/fuzzy';
 import {PageStore} from 'page/page_store';
 import {Page} from 'page/page';
 
@@ -130,22 +130,22 @@ function updatePageState(page, prevHtml, scannedHtml) {
  * Given two downloaded HTML strings, return a changeEnum value indicating how
  * similar they are.
  *
- * @param {string} html1 - First HTML string for comparison.
- * @param {string} html2 - Second HTML string for comparison.
+ * @param {string} str1 - First HTML string for comparison.
+ * @param {string} str2 - Second HTML string for comparison.
  * @param {integer} changeThreshold - Number of characters that must change to
  * indicate a major change.
  *
  * @returns {string} ChangeEnum string indicating how similar the
  * two HTML strings are.
  */
-function getChangeType(html1, html2, changeThreshold) {
-  if (html1 == '') {
+function getChangeType(str1, str2, changeThreshold) {
+  if (str1 == '') {
     // This is the first scan.
     return changeEnum.NEW_CONTENT;
-  } else if (html1 == html2) {
+  } else if (str1 == str2) {
     // HTML is unchanged.
     return changeEnum.NO_CHANGE;
-  } else if (Fuzzy.isMajorChange(html1, html2, changeThreshold)) {
+  } else if (fuzzy.isMajorChange(str1, str2, changeThreshold)) {
     // Change is larger than changeThreshold.
     return changeEnum.MAJOR_CHANGE;
   } else {
