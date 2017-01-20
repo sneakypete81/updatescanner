@@ -59,7 +59,7 @@ function matchSlice(str1, str2, sliceLength) {
     const index = firstDifference(str1, str2);
 
     const shortest = Math.min(str1.length, str2.length);
-    if (shortest <= index + (sliceLength * 2)) {
+    if (shortest < index + (sliceLength * 2)) {
       // Got to the end, it's a match
       return true;
     }

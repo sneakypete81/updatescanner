@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+            <title>Update Scanner :: Add-ons for Firefox</title>
+
+    <link rel="shortcut icon" type="image/x-icon"
+          href="https://addons.cdn.mozilla.net/static/img/favicon.ico">
+
+    
+        <link title="Firefox Add-ons"
+          rel="search" type="application/opensearchdescription+xml"
+          href="/en-GB/firefox/opensearch.xml" />
+
+          <link href="https://addons.cdn.mozilla.net/static/css/tabzilla/tabzilla.css" rel="stylesheet" />
+              <link rel="stylesheet" media="all" href="https://addons.cdn.mozilla.net/static/css/zamboni/impala-min.css?build=5cb8048" />
+      <link rel="stylesheet" media="all" href="https://addons.cdn.mozilla.net/static/css/restyle/css-min.css?build=b5db931" />
+      <!--[if lt IE 9]>
+        <script src="https://addons.cdn.mozilla.net/static/js/lib/iepp.min.js?b=dd0e71c-587e5d3e"></script>
+      <![endif]-->
+      <!--[if lte IE 9]>
+        <link rel="stylesheet" href="https://addons.cdn.mozilla.net/static/css/legacy/ie9.css?b=dd0e71c-587e5d3e">
+      <![endif]-->
+    
+        <meta property="og:title" content="Update Scanner">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://addons.cdn.mozilla.net/user-media/addon_icons/3/3362-64.png?modified=1473535216">
+  <meta property="og:url" content="https://addons.mozilla.org/en-GB/firefox/addon/update-scanner/">
+  <meta property="og:description" content="Monitors web pages for updates. Useful for websites that don&#39;t provide Atom or RSS feeds.">
+    <noscript><link rel="stylesheet" href="https://addons.cdn.mozilla.net/static/css/impala/nojs.css?b=dd0e71c-587e5d3e"></noscript>
+
+    
+          <meta name="csrf" content="mMc2PHiwAGNUMZuDjCmoRYG56465lhzf">
+    
+    <script src="https://addons.cdn.mozilla.net/static/js/preload-min.js?build=dd0e71c-587e5d3e"></script>
+  </head>
+  <body class="html-ltr firefox moz-header-slim gutter addon-details  is-impala restyle"
+        data-app="firefox"
+        data-appname="Firefox"
+        data-appid="1"
+        data-anonymous="false"
+        data-readonly="false"
+        data-media-url="https://addons.cdn.mozilla.net/user-media/"
+        data-static-url="https://addons.cdn.mozilla.net/static/"
+        data-raven-dsn="https://8c1c5936578948a9a0614cbbafccf049@sentry.prod.mozaws.net/78"
+        data-raven-urls="[&#39;addons.mozilla.org&#39;, &#39;addons.cdn.mozilla.net&#39;]"
+        data-fxa-config="{&#34;state&#34;: &#34;075642ed1736aa717d088cefd2c687138627d8d1948687220740ccb2a2a17fee&#34;, &#34;clientId&#34;: &#34;a4907de5fa9d78fc&#34;, &#34;oauthHost&#34;: &#34;https://oauth.accounts.firefox.com/v1&#34;, &#34;profileHost&#34;: &#34;https://profile.accounts.firefox.com/v1&#34;, &#34;redirectUrl&#34;: &#34;https://addons.mozilla.org/api/v3/accounts/authenticate/&#34;, &#34;scope&#34;: &#34;profile&#34;, &#34;email&#34;: &#34;updatescanner@gmail.com&#34;, &#34;contentHost&#34;: &#34;https://accounts.firefox.com&#34;}"
+        >
+
+    <div id="main-wrapper">
+      <div id="page" class="c">
+                  <div class="header-bg">
+            <div class="amo-header-wrapper">
+              <div id="tabzilla">
+    <a href="https://www.mozilla.org/">Mozilla</a>
+</div>              <div class="amo-header">
+                <nav id="aux-nav" role="navigation" class="menu-nav c">
+                  <ul>
+                                            <li class="account">
+    <a href="/en-GB/firefox/user/sneakypete81/" class="user" title="updatescanner@gmail.com">
+      sneakypete81</a>
+    <ul>
+                                    <li><a href="/en-GB/firefox/user/sneakypete81/">My Profile</a></li>
+                                        <li><a href="/en-GB/firefox/users/edit">Account Settings</a></li>
+                                        <li><a href="/en-GB/firefox/collections/sneakypete81/">My Collections</a></li>
+                                                <li class="nomenu logout">
+        <a href="/en-GB/firefox/users/logout">Log out</a>
+      </li>
+    </ul>
+  </li>
+
+      <li class="tools">
+      <a href="#">Tools</a>
+      <ul>
+                  <li><a href="/en-GB/developers/addons">Manage My Submissions</a></li>
+                  <li><a href="/en-GB/developers/addon/submit/agreement">Submit a New Add-on</a></li>
+                  <li><a href="/en-GB/developers/theme/submit">Submit a New Theme</a></li>
+                  <li><a href="/en-GB/developers/">Developer Hub</a></li>
+                  <li><a href="/en-GB/developers/addon/api/key/">Manage API Keys</a></li>
+              </ul>
+    </li>
+                                                                <li>
+                        <a href="#" id="other-apps" title="Find add-ons for other applications">Other Applications</a>
+                        <ul class="other-apps">
+                                                                                                                                          <li id="app-thunderbird" class="thunderbird">
+                                <a href="/en-GB/thunderbird">Thunderbird</a>
+                              </li>
+                                                                                                                <li id="app-android" class="android">
+                                <a href="/en-GB/android">Firefox for Android</a>
+                              </li>
+                                                                                                                                                                      <li id="app-seamonkey" class="seamonkey">
+                                <a href="/en-GB/seamonkey">SeaMonkey</a>
+                              </li>
+                                                                              </ul>
+                      </li>
+                                      </ul>
+                </nav>
+                <div class="header-search" role="search">
+                                                                                  <form id="search" action="/en-GB/firefox/search/" data-no-csrf>
+  <input id="search-q" type="text" name="q" autocomplete="off" title=""
+         class="text placeholder"
+         placeholder="search for add-ons"
+         value="">
+        <input id="id_appver" name="appver" type="hidden" />
+    <input id="id_platform" name="platform" type="hidden" />
+    <button class="search-button" type="submit" title="Search"
+         src="https://addons.cdn.mozilla.net/static/img/zamboni/global/btn-search.png?b=dd0e71c-587e5d3e"></button>
+      <div id="site-search-suggestions"
+         data-cat="all"
+         data-src="/en-GB/firefox/search/suggestions"></div>
+  </form>                                                      </div>
+                <div id="masthead">
+                                    <h1 class="site-title">
+  <a href="/en-GB/firefox/" title="Return to the Firefox Add-ons homepage">
+    <img alt="" src="https://addons.cdn.mozilla.net/static/img/icons/firefox.png?b=dd0e71c-587e5d3e">
+    Add-ons
+</a>
+</h1>                  
+
+<nav id="site-nav" class="menu-nav c">
+  <ul>
+      <li id="extensions">
+    <a href="/en-GB/firefox/extensions/">Extensions</a>
+    <ul class="two-col">
+              <li><em><a href="/en-GB/firefox/extensions/?sort=featured">Featured</a></em></li>
+              <li><em><a href="/en-GB/firefox/extensions/?sort=users">Most Popular</a></em></li>
+              <li><em><a href="/en-GB/firefox/extensions/?sort=rating">Top Rated</a></em></li>
+                  <li><a href="/en-GB/firefox/extensions/alerts-updates/">Alerts &amp; Updates</a></li>
+            <li><a href="/en-GB/firefox/extensions/appearance/">Appearance</a></li>
+            <li><a href="/en-GB/firefox/extensions/bookmarks/">Bookmarks</a></li>
+            <li><a href="/en-GB/firefox/extensions/download-management/">Download Management</a></li>
+            <li><a href="/en-GB/firefox/extensions/feeds-news-blogging/">Feeds, News &amp; Blogging</a></li>
+            <li><a href="/en-GB/firefox/extensions/games-entertainment/">Games &amp; Entertainment</a></li>
+            <li><a href="/en-GB/firefox/extensions/language-support/">Language Support</a></li>
+            <li><a href="/en-GB/firefox/extensions/photos-music-videos/">Photos, Music &amp; Videos</a></li>
+            <li><a href="/en-GB/firefox/extensions/privacy-security/">Privacy &amp; Security</a></li>
+            <li><a href="/en-GB/firefox/extensions/search-tools/">Search Tools</a></li>
+            <li><a href="/en-GB/firefox/extensions/shopping/">Shopping</a></li>
+            <li><a href="/en-GB/firefox/extensions/social-communication/">Social &amp; Communication</a></li>
+            <li><a href="/en-GB/firefox/extensions/tabs/">Tabs</a></li>
+            <li><a href="/en-GB/firefox/extensions/web-development/">Web Development</a></li>
+            <li><a href="/en-GB/firefox/extensions/other/">Other</a></li>
+          </ul>
+  </li>
+
+    
+        <li id="themes">
+      <a href="/en-GB/firefox/themes/">Themes</a>
+              <ul class="two-col">
+                      <li><em><a href="/en-GB/firefox/themes/?sort=popular">Most Popular</a></em></li>
+                      <li><em><a href="/en-GB/firefox/themes/?sort=rating">Top Rated</a></em></li>
+                      <li><em><a href="/en-GB/firefox/themes/?sort=created">Newest</a></em></li>
+                                <li><a href="/en-GB/firefox/themes/abstract">Abstract</a></li>
+                      <li><a href="/en-GB/firefox/themes/causes">Causes</a></li>
+                      <li><a href="/en-GB/firefox/themes/fashion">Fashion</a></li>
+                      <li><a href="/en-GB/firefox/themes/film-and-tv">Film and TV</a></li>
+                      <li><a href="/en-GB/firefox/themes/firefox">Firefox</a></li>
+                      <li><a href="/en-GB/firefox/themes/foxkeh">Foxkeh</a></li>
+                      <li><a href="/en-GB/firefox/themes/holiday">Holiday</a></li>
+                      <li><a href="/en-GB/firefox/themes/music">Music</a></li>
+                      <li><a href="/en-GB/firefox/themes/nature">Nature</a></li>
+                      <li><a href="/en-GB/firefox/themes/other">Other</a></li>
+                      <li><a href="/en-GB/firefox/themes/scenery">Scenery</a></li>
+                      <li><a href="/en-GB/firefox/themes/seasonal">Seasonal</a></li>
+                      <li><a href="/en-GB/firefox/themes/solid">Solid</a></li>
+                      <li><a href="/en-GB/firefox/themes/sports">Sports</a></li>
+                      <li><a href="/en-GB/firefox/themes/websites">Web Sites</a></li>
+                  </ul>
+        <div>
+          <a class="complete-themes" href="/en-GB/firefox/complete-themes/">
+            Want more customisation? Try <b>Complete Themes</b>          </a>
+        </div>
+          </li>
+
+        <li id="collections">
+            <a href="/en-GB/firefox/collections/">Collections</a>
+      <ul>
+                  <li><em><a href="/en-GB/firefox/collections/?sort=featured">Featured</a></em></li>
+                  <li><em><a href="/en-GB/firefox/collections/?sort=users">Most Followers</a></em></li>
+                  <li><em><a href="/en-GB/firefox/collections/?sort=created">Newest</a></em></li>
+                <hr>
+        <li><a href="/en-GB/firefox/collections/mine/">
+          Collections I've Made</a></li>
+        <li><a href="/en-GB/firefox/collections/following/">
+          Collections I'm Following</a></li>
+                <li><a href="/en-GB/firefox/collections/mine/favorites">
+          My Favourite Add-ons</a></li>
+      </ul>
+          </li>
+    <li id="more">
+      <a href="#">More&hellip;</a>
+      <ul>
+                  <li class="more-mobile"><a href="/en-GB/android">
+            Add-ons for Mobile</a></li>
+                <li class="more-lang"><a href="/en-GB/firefox/language-tools/">
+          Dictionaries & Language Packs</a></li>
+        <li><a href="/en-GB/firefox/search-tools/">Search Tools</a></li>
+        <li><a href="/en-GB/developers/">Developer Hub</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+                                  </div>
+                                                                                                      <div class="site-balloon" id="site-nonfx">
+                      <p>
+                        To try the thousands of add-ons available here, download <a href="http://mozilla.org/firefox/?src=amo">Mozilla Firefox</a>, a fast, free way to surf the Web!                      </p>
+                      <a href="#" class="close">Close</a>
+                    </div>
+                                    <div class="site-balloon" id="site-welcome">
+                                        <h3>Welcome to Firefox Add-ons.</h3>
+                    <p>
+                                              Choose from thousands of extra features and styles to make Firefox your own.                                          </p>
+                    <a href="#" class="close">Close</a>
+                  </div>
+                  <div class="site-balloon" id="mobile-banner">
+                    <h3>On the go?</h3>
+                    <p>
+                      Check out our <a class="mobile-link" href="#">Mobile Add-ons site</a>.                    </p>
+                    <a href="#" class="close">Close</a>
+                  </div>
+                                <div itemscope itemtype="http://schema.org/WebApplication">
+  <link itemprop="SoftwareApplicationCategory" href="http://schema.org/OtherApplication" />
+  <aside class="secondary addon-vitals">
+
+        <span itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+      <meta itemprop="price" content="$0" />
+      <meta itemprop="priceCurrency" content="USD" />
+      <link itemprop="availability" href="http://schema.org/InStock" />
+    </span>
+
+    <div itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating">
+      <meta content="4.1022" itemprop="ratingValue">
+        <span class="stars large stars-4" title="Rated 4 out of 5 stars">
+      Rated 4 out of 5 stars  </span>
+
+
+      <div>
+        <a id="reviews-link" href="/en-GB/firefox/addon/update-scanner/reviews/">
+          <span itemprop="ratingCount">225</span> user reviews        </a>
+      </div>
+    </div>
+
+                                                    <div id="daily-users">
+                  <a class="stats" title="View statistics"
+             href="/en-GB/firefox/addon/update-scanner/statistics/">24,607 users</a>
+                <meta itemprop="interactionCount" content="UserDownloads:1132624" />
+      </div>
+    
+    <div class="widgets">
+      <a class="favorite widget "
+  data-addonid="3362"
+  data-addurl="/en-GB/firefox/collections/sneakypete81/favorites/add"
+  data-removeurl="/en-GB/firefox/collections/sneakypete81/favorites/remove"
+  data-favedtext="Remove from favourites"
+  data-unfavedtext="Add to favourites"
+  title=""
+  href="#"
+  >
+  Add to favourites
+</a>
+      <a class="collection-add widget collection"
+  data-listurl="/en-GB/firefox/collections/ajax/list"
+  data-addurl="/en-GB/firefox/collections/ajax/add"
+  data-removeurl="/en-GB/firefox/collections/ajax/remove"
+  data-newurl="/en-GB/firefox/collections/ajax/new"
+  data-addonid="3362"
+  title=""
+  href="#"
+  >
+  Add to collection
+</a>    </div>
+          <p class="manage-button"><a href="/en-GB/developers/addon/update-scanner/edit" class="button developer prominent"><span>Manage</span></a></p>
+              </aside>
+
+  
+    <section class="primary addon-description-header">
+    <div id="addon" class="island c" role="main" data-id="3362">
+      <hgroup>
+                <img id="addon-icon" itemprop="image" src="https://addons.cdn.mozilla.net/user-media/addon_icons/3/3362-64.png?modified=1473535216" class="icon" alt="Icon of Update Scanner">
+        <h1 class="addon" lang="en-US" dir="ltr">
+          <span itemprop="name">Update Scanner</span>
+                      <span class="version-number" itemprop="version">3.3.1</span>
+                                &nbsp;<span class="requires-restart">Requires Restart</span>
+                  </h1>
+        <h4 class="author">by <a href="/en-GB/firefox/user/sneakypete81/" title="sneakypete81">sneakypete81</a></h4>
+      </hgroup>
+      <p id="addon-summary" itemprop="description"  lang="en-US" dir="ltr">Monitors web pages for updates. Useful for websites that don't provide Atom or RSS feeds.</p>
+              <div class="install-wrapper ">
+<div class="install-shell">
+<div class="install "
+       data-addon="3362"
+  data-icon="https://addons.cdn.mozilla.net/user-media/addon_icons/3/3362-32.png?modified=1473535216"
+  data-developers="/en-GB/firefox/addon/update-scanner/developers"
+  data-versions="/en-GB/firefox/addon/3362/versions/"
+  data-name="Update Scanner"
+   data-after="contrib"
+  data-min="48.0"
+  data-max="48.0"
+  data-is-compatible="true"
+  data-is-compatible-app="true"
+  data-compat-overrides="[]"
+>
+  <p class="install-button">
+                            <a class="button  download prominent "
+  data-hash="sha256:9eba4c80042a2a45c005b85aa3db74cd6f30a0b6a00662a4d83136b223495dbf"
+      href="/firefox/downloads/latest/update-scanner/addon-3362-latest.xpi?src=dp-btn-primary"
+  >
+      <b></b>
+    <span>
+      Download Now
+          </span>
+  </a>
+<input type='hidden' name='csrfmiddlewaretoken' value='mMc2PHiwAGNUMZuDjCmoRYG56465lhzf' />      </p>
+</div> 
+    
+  
+      <div class="d2c-reasons-popup popup">
+      <p>This add-on is not compatible with your version of Firefox because of the following:</p>
+      <ul></ul>
+    </div>
+  <p>
+    <a id="downloadAnyway" hidden="true">Download Anyway</a>
+</p>
+</div> </div>
+                </div>
+
+    
+
+          <div class="notice c author" id="contribution">
+
+            <img class="avatar" alt="sneakypete81"
+           src="https://addons.cdn.mozilla.net/static//img/zamboni/anon_user.png">
+      
+  <div class="aux">
+    <div class="button-wrapper">
+      <a class="button contribute prominent" id="contribute-button" href="#">
+        <b></b>Contribute
+      </a>
+    </div>
+    <p class="suggestion">
+          </p>
+      </div>
+  <h3>Enjoy this add-on?</h3>
+  <p class="">
+          The <a href="/en-GB/firefox/addon/update-scanner/developers">developer of this add-on</a> asks that you help support its continued development by making a small donation.      </p>
+
+  <div id="contribute-box" class="jqmWindow modal">
+  <form action="/en-GB/firefox/addon/update-scanner/contribute/" method="post">
+    <input type='hidden' name='csrfmiddlewaretoken' value='mMc2PHiwAGNUMZuDjCmoRYG56465lhzf' />
+    <input type="hidden" name="source" value="dp-btn-primary"/>
+    <h2>Make a Contribution</h2>
+    <p class="support">
+                        Help support the continued development of <strong>Update Scanner</strong> by making a small contribution through <a href="http://paypal.com">PayPal</a>.                  </p>
+
+    <h4>How much would you like to donate?</h4>
+    <div class="error" id="contrib-too-much"
+         data-max-amount="1000">
+        The maximum donation amount is US$1,000.00.
+    </div>
+    <div class="error" id="contrib-too-little">
+        The minimum donation amount is $0.01.
+    </div>
+    <div class="error" id="contrib-not-entered">
+        Donation amount must be a number.
+    </div>
+    <div class="error" id="paypal-error">
+    </div>
+    <ul>
+            <li>
+        <input type="radio" name="type" value="onetime"
+               id="contrib-onetime"
+               checked="checked"/>
+        <label>
+                    A one-time donation of $ <input type="text" name="onetime-amount" value=""/>
+        </label>
+      </li>
+    </ul>
+
+    <h4 class="comment">
+      <label for="contrib-comment">
+        Leave a comment or request with your donation .
+      </label>
+    </h4><span>(optional)</span>
+    <textarea name="comment" id="contrib-comment" maxlength="255"></textarea>
+    <span class="commentlen"></span>
+
+    <div id="contribute-actions">
+        <button id="contribute-confirm" type="submit" class="prominent">
+          Make Donation
+        </button>
+        <span class="js-hidden ajax-loading">Contacting PayPal</span>
+        <span class="cancel"><a href="#">No Thanks</a></span>
+    </div>
+    <div id="paypal-complete" class="js-hidden">
+        <strong>Donation made, thank you.</strong>
+    </div>
+
+  </form>
+</div>
+</div>
+      </section>
+</div>
+              </div>
+            </div>           </div>         
+                                              
+  
+      <section class="previews">
+      <div class="carousel">
+        <a href="#" class="control prev">&laquo;</a>
+        <a href="#" class="control next">&raquo;</a>
+        <ul id="preview" class="slider"><li class="panel">
+              <a class="screenshot thumbnail" rel="jquery-lightbox"
+                 href="https://addons.cdn.mozilla.net/user-media/previews/full/12/12565.png?modified=1454227352" title="Notification Popup">
+                                <img src="https://addons.cdn.mozilla.net/user-media/previews/thumbs/12/12565.png?modified=1454227352" alt="Add-on screenshot #1">
+              </a>
+            </li><li class="panel">
+              <a class="screenshot thumbnail" rel="jquery-lightbox"
+                 href="https://addons.cdn.mozilla.net/user-media/previews/full/16/16187.png?modified=1454227352" title="Update Scanner Sidebar">
+                                <img src="https://addons.cdn.mozilla.net/user-media/previews/thumbs/16/16187.png?modified=1454227352" alt="Add-on screenshot #2">
+              </a>
+            </li><li class="panel">
+              <a class="screenshot thumbnail" rel="jquery-lightbox"
+                 href="https://addons.cdn.mozilla.net/user-media/previews/full/170/170797.png?modified=1454227353" title="Dialog showing the various settings">
+                                <img src="https://addons.cdn.mozilla.net/user-media/previews/thumbs/170/170797.png?modified=1454227353" alt="Add-on screenshot #3">
+              </a>
+            </li><li class="panel">
+              <a class="screenshot thumbnail" rel="jquery-lightbox"
+                 href="https://addons.cdn.mozilla.net/user-media/previews/full/33/33285.png?modified=1454227352" title="Webpage changes are highlighted in yellow">
+                                <img src="https://addons.cdn.mozilla.net/user-media/previews/thumbs/33/33285.png?modified=1454227352" alt="Add-on screenshot #4">
+              </a>
+            </li></ul>
+      </div>
+    </section>
+    <div id="lightbox">
+      <section>
+        <div class="content">
+          <a class="close" href="#">Close</a>
+        </div>
+        <div class="controls">
+          <a href="#" class="control next">&raquo;</a>
+          <a href="#" class="control prev">&laquo;</a>
+          <div class="caption"><span></span></div>
+        </div>
+      </section>
+    </div>
+  
+<aside class="secondary metadata c">
+  <ul class="links">
+          <li><a class="home" href="https://outgoing.prod.mozaws.net/v1/6fd2eda134757eb70d0630b4176a5d2a6a4ec354cba84e06ede9534069734acd/http%3A//sneakypete81.github.io/updatescanner/">
+        Add-on home page</a></li>
+              <li><a class="support" href="https://outgoing.prod.mozaws.net/v1/ade48307b005ce1707cf8340e9bef081fd2de6ebc1454602b521976d35437979/https%3A//github.com/sneakypete81/updatescanner/issues">Support site</a></li>
+          </ul>
+      <ul>
+      <li>Version 3.3.1 <a class="scrollto" href="#detail-relnotes">Info</a></li>
+      <li>Last Updated: September 10, 2016</li>
+      <li class="source-license">
+                                      Released under <a href="http://www.mozilla.org/MPL/2.0/">Mozilla Public License, version 2.0</a>                        </li>
+    </ul>
+  </aside>
+
+<section class="primary island c">
+  <h2>About this Add-on</h2>
+  <div class="prose">
+      <div id="addon-description" class="prose"  lang="en-US" dir="ltr">Features:<br>* Select how often each site will be scanned<br>* Changes to pages are highlighted automatically<br>* Minor changes can be ignored<br>* Full international support</div>
+    </div>
+</section>
+
+<div id="more-webpage" class="primary c" data-more-url="/en-GB/firefox/addon/update-scanner/more"></div>
+
+<section class="primary island more-island">
+  
+      <section id="detail-relnotes" class="expando">
+      <h2>Version Information<a class="toggle" href="#detail-relnotes"><b></b></a></h2>
+      <div class="content listing">
+        <div class="items">
+          <div class="version item" id="version-3.3.1">
+  <div class="info">
+    <h3><a href="/en-GB/firefox/addon/update-scanner/versions/3.3.1"
+           title="Permanent link to this version">
+      Version 3.3.1</a>
+      <span class="meta">
+        <time datetime="2016-09-10T18:04:01Z">
+                    Released September 10, 2016
+        </time>
+                  <span class="filesize">
+            436.6 KiB
+          </span>
+              </span>
+              <span class="meta compat">
+                    Works with
+                      Firefox 48.0 and later        </span>
+          </h3>
+
+    <div class="desc prose" >
+      
+    </div>
+
+    <ul class="source">
+                  <li>
+                      Source code released under <a href="http://www.mozilla.org/MPL/2.0/">Mozilla Public License, version 2.0</a>                  </li>
+        <li>
+          <a class="license-faq" href="/en-GB/faq#license">
+            What's this?</a>
+        </li>
+              <li>
+        <a class="source-code"
+           href="/en-GB/firefox/files/browse/500141/">
+          View the source</a>
+      </li>
+        </ul>
+
+  </div>
+  <div class="action">
+    
+<div class="install-shell">
+<div class="install "
+       data-addon="3362"
+  data-icon="https://addons.cdn.mozilla.net/user-media/addon_icons/3/3362-32.png?modified=1473535216"
+  data-developers="/en-GB/firefox/addon/update-scanner/developers"
+  data-versions="/en-GB/firefox/addon/3362/versions/"
+  data-name="Update Scanner"
+   data-after="contrib"
+  data-min="48.0"
+  data-max="48.0"
+  data-is-compatible="true"
+  data-is-compatible-app="true"
+  data-compat-overrides="[]"
+>
+  <p class="install-button">
+                            <a class="button  download "
+  data-hash="sha256:9eba4c80042a2a45c005b85aa3db74cd6f30a0b6a00662a4d83136b223495dbf"
+      href="https://addons.mozilla.org/firefox/downloads/file/500141/update_scanner-3.3.1-fx.xpi?src=dp-btn-version"
+  >
+      <b></b>
+    <span>
+      Download Now
+          </span>
+  </a>
+<input type='hidden' name='csrfmiddlewaretoken' value='mMc2PHiwAGNUMZuDjCmoRYG56465lhzf' />      </p>
+</div> 
+
+      <div class="d2c-reasons-popup popup">
+      <p>This add-on is not compatible with your version of Firefox because of the following:</p>
+      <ul></ul>
+    </div>
+  <p>
+    <a id="downloadAnyway" hidden="true">Download Anyway</a>
+</p>
+</div> 
+  </div>
+</div>
+        </div>
+        <p class="more c">
+          <a class="more-info" href="/en-GB/firefox/addon/update-scanner/versions/">
+            See complete version history
+          </a>
+        </p>
+      </div>
+    </section>
+  
+      <section id="beta-channel" class="expando">
+      <h2>Development Channel<a class="toggle" href="#beta-channel"><b></b></a></h2>
+      <div class="content">
+        <p>
+          The Development Channel lets you test an experimental new version of this add-on before it's released to the general public. Once you install the development version, you will continue to get updates from this channel. To stop receiving development updates, reinstall the default version from the link above.        </p>
+        <div class="install-beta" id="install-beta">
+          <p>
+            <strong>Caution:</strong> Development versions of this add-on have not been reviewed by Mozilla.          </p>
+          <dl>
+            <dt class="beta-version">Version 3.3.2beta1:</dt>
+            <dd>
+<div class="install-shell">
+<div class="install unreviewed beta"
+       data-addon="3362"
+  data-icon="https://addons.cdn.mozilla.net/user-media/addon_icons/3/3362-32.png?modified=1473535216"
+  data-developers="/en-GB/firefox/addon/update-scanner/developers"
+  data-versions="/en-GB/firefox/addon/3362/versions/"
+  data-name="Update Scanner"
+   data-after="contrib"
+  data-min="50.0"
+  data-max="50.0"
+  data-is-compatible="true"
+  data-is-compatible-app="true"
+  data-compat-overrides="[]"
+>
+  <p class="install-button">
+                            <a class="button  download caution "
+  data-hash="sha256:37d3a69de788298f2dcbe92c6a1283bb973aec66776c93d724aca59dd589b48b"
+      href="/firefox/downloads/latest-beta/update-scanner/addon-3362-latest.xpi?src=dp-btn-devchannel"
+  >
+      <b></b>
+    <span>
+      Download Now
+          </span>
+  </a>
+<input type='hidden' name='csrfmiddlewaretoken' value='mMc2PHiwAGNUMZuDjCmoRYG56465lhzf' />      </p>
+</div> 
+
+      <div class="d2c-reasons-popup popup">
+      <p>This add-on is not compatible with your version of Firefox because of the following:</p>
+      <ul></ul>
+    </div>
+  <p>
+    <a id="downloadAnyway" hidden="true">Download Anyway</a>
+</p>
+</div> </dd>
+          </dl>
+        </div>
+        <p class="more c">
+          <a class="more-info" href="/en-GB/firefox/addon/update-scanner/versions/beta">
+            See complete development channel history
+          </a>
+        </p>
+      </div>
+    </section>
+  </section>
+
+
+</div>
+              </div>
+      <div id="tooltip">
+        <span></span>
+      </div>
+      <div id="popup-staging">
+        <div id="add-to-collection" class="popup">
+          <div class="collection-add-login">
+            <p>To create your own collections, you must have a Mozilla Add-ons account.</p>
+            <p class="register-button">
+              <a class="button" href="https://oauth.accounts.firefox.com/v1/authorization?action=signup&amp;scope=profile&amp;state=075642ed1736aa717d088cefd2c687138627d8d1948687220740ccb2a2a17fee%3AL2VuLUdCL2ZpcmVmb3gvYWRkb24vdXBkYXRlLXNjYW5uZXIv&amp;redirect_url=https%3A%2F%2Faddons.mozilla.org%2Fapi%2Fv3%2Faccounts%2Fauthenticate%2F&amp;client_id=a4907de5fa9d78fc">Create an Add-ons Account</a>
+            </p>
+            <p>
+              or <a href="https://oauth.accounts.firefox.com/v1/authorization?action=signin&amp;scope=profile&amp;state=075642ed1736aa717d088cefd2c687138627d8d1948687220740ccb2a2a17fee%3AL2VuLUdCL2ZpcmVmb3gvYWRkb24vdXBkYXRlLXNjYW5uZXIv&amp;redirect_url=https%3A%2F%2Faddons.mozilla.org%2Fapi%2Fv3%2Faccounts%2Fauthenticate%2F&amp;client_id=a4907de5fa9d78fc">log in to your current account</a>            </p>
+          </div>
+        </div>
+                    <div id="review-add-box" class="modal">
+</div>
+        <div id="abuse-modal" class="modal">
+      <a href="#" class="close">close</a>
+      <h2>Report Abuse</h2>
+      <form method="post" action="/en-GB/firefox/addon/update-scanner/abuse/">
+  <input type='hidden' name='csrfmiddlewaretoken' value='mMc2PHiwAGNUMZuDjCmoRYG56465lhzf' />
+  <fieldset class="abuse">
+        <ol >
+      <li>
+        <p>If you suspect this add-on violates <a href="https://developer.mozilla.org/en-US/Add-ons/AMO/Policy">our policies</a> or has security or privacy issues, please use the form below to describe your concerns. Please do not use this form for any other reason.</p>
+      </li>
+      <li>
+        <textarea cols="40" id="id_text" name="text" rows="10">
+</textarea>
+        
+      </li>
+            <li class="footer-submit">
+        <button type="submit">Send Report</button>
+              </li>
+    </ol>
+  </fieldset>
+</form>
+    </div>
+        </div>
+    </div>
+          <div id="footer" role="contentinfo">
+        <div class="section">
+                    <img class="footerlogo" src="https://addons.cdn.mozilla.net/static/img/zamboni/footer-logo-med.png?b=dd0e71c-587e5d3e" alt="Footer logo">
+                                <div class="links-footer">
+  <ul>
+    <li>get to know <b>add-ons</b></li>
+    <li><a href="/en-GB/about">About</a></li>
+    <li><a href="http://blog.mozilla.com/addons">Blog</a></li>
+    <li class="footer-devhub-link"><a href="/en-GB/developers/">Developer Hub</a></li>
+    <li><a href="/en-GB/faq">FAQ</a></li>
+    <li><a href="https://discourse.mozilla-community.org/c/add-ons">Forum</a></li>
+  </ul>
+</div>
+<div id="footer-content">
+                <form class="languages go" id="lang_form" method="get" action="" data-no-csrf>
+          <label for="language">Other languages</label>
+          <select id="language" name="lang" dir="ltr">
+            <option value="af" >
+                Afrikaans
+              </option><option value="ar" >
+                عربي
+              </option><option value="bg" >
+                Български
+              </option><option value="bn-bd" >
+                বাংলা (বাংলাদেশ)
+              </option><option value="ca" >
+                Català
+              </option><option value="cs" >
+                Čeština
+              </option><option value="da" >
+                Dansk
+              </option><option value="de" >
+                Deutsch
+              </option><option value="dsb" >
+                Dolnoserbšćina
+              </option><option value="el" >
+                Ελληνικά
+              </option><option value="en-gb" selected>
+                English (British)
+              </option><option value="en-us" >
+                English (US)
+              </option><option value="es" >
+                Español
+              </option><option value="eu" >
+                Euskara
+              </option><option value="fa" >
+                فارسی
+              </option><option value="fi" >
+                suomi
+              </option><option value="fr" >
+                Français
+              </option><option value="ga-ie" >
+                Gaeilge
+              </option><option value="he" >
+                עברית
+              </option><option value="hsb" >
+                Hornjoserbsce
+              </option><option value="hu" >
+                magyar
+              </option><option value="id" >
+                Bahasa Indonesia
+              </option><option value="it" >
+                Italiano
+              </option><option value="ja" >
+                日本語
+              </option><option value="ka" >
+                ქართული
+              </option><option value="kab" >
+                Taqbaylit
+              </option><option value="ko" >
+                한국어
+              </option><option value="mk" >
+                Македонски
+              </option><option value="mn" >
+                Монгол
+              </option><option value="nl" >
+                Nederlands
+              </option><option value="nn-no" >
+                Norsk nynorsk
+              </option><option value="pl" >
+                Polski
+              </option><option value="pt-br" >
+                Português (do Brasil)
+              </option><option value="pt-pt" >
+                Português (Europeu)
+              </option><option value="ro" >
+                Română
+              </option><option value="ru" >
+                Русский
+              </option><option value="sk" >
+                slovenčina
+              </option><option value="sl" >
+                Slovenščina
+              </option><option value="sq" >
+                Shqip
+              </option><option value="sv-se" >
+                Svenska
+              </option><option value="uk" >
+                Українська
+              </option><option value="vi" >
+                Tiếng Việt
+              </option><option value="zh-cn" >
+                中文 (简体)
+              </option><option value="zh-tw" >
+                正體中文 (繁體)
+              </option>          </select>
+                    <noscript><button type="submit">Go</button></noscript>
+        </form>
+            <div id="copyright">
+  <p id="footer-links">
+          <a href="https://www.mozilla.org/privacy/websites/">
+        Privacy Policy
+      </a> &nbsp;|&nbsp;
+      <a href="https://www.mozilla.org/about/legal/">
+        Legal Notices
+      </a> &nbsp;|&nbsp;
+      <a href="https://www.mozilla.org/about/legal/fraud-report/">
+        Report Trademark Abuse
+      </a>
+                        &nbsp;|&nbsp;<a class="mobile-link" href="#">View Mobile Site</a>
+                &nbsp;|&nbsp;<a href="https://status.mozilla.org/#addons.mozilla.org_service_history">Site Status </a>
+        &nbsp;|&nbsp;<a href="https://developer.mozilla.org/Add-ons/AMO/Policy/Contact">Report a bug</a>
+            </p>
+  <p>
+    Except where otherwise <a href="https://www.mozilla.org/about/legal/">noted</a>, content on this site is licensed under the <br /> <a href="https://creativecommons.org/licenses/by-sa/3.0/"> Creative Commons Attribution Share-Alike Licence v3.0 </a> or any later version.  </p>
+</div>    </div>
+                  </div>       </div>                   <script src="https://addons.cdn.mozilla.net/en-GB/firefox/jsi18n.js?b=dd0e71c-587e5d3e"></script>
+      <script src="https://addons.cdn.mozilla.net/static/js/impala-min.js?build=dd0e71c-587e5d3e"></script>
+      <script async defer src="https://addons.cdn.mozilla.net/en-GB/firefox/addons/buttons.js?b=dd0e71c-587e5d3e"></script>
+          <script async defer src="https://www.paypalobjects.com/js/external/dg.js"></script>
+      </body>
+</html>

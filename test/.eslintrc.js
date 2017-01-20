@@ -11,6 +11,11 @@ module.exports = {
     'jquery': true,
   },
 
+  globals: {
+    // jasmine-jquery globals
+    readFixtures: false,
+  },
+
   rules: {
     'require-jsdoc': 'off',
     // Complain if specs are left focussed

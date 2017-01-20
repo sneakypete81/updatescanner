@@ -22,11 +22,11 @@ module.exports = function(config) {
       // Single target that imports all _spec files
       {pattern: 'test/unit/test_index.js', watched: false},
 
-      // // Serve fixtures, but don't include them in the runner
-      // {
-      //   pattern: 'test/unit/fixtures/**',
-      //   watched: true, served: true, included: false,
-      // },
+      // Serve fixtures, but don't include them in the runner
+      {
+        pattern: 'test/unit/fixtures/**',
+        watched: true, served: true, included: false,
+      },
     ],
 
     // preprocess matching files before serving them to the browser
