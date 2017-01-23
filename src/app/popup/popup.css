@@ -1,0 +1,56 @@
+html body {
+  min-width: 20em;
+  overflow: hidden;
+}
+
+.panel-section-list {
+  padding: 0;
+  background-color: rgba(0, 0, 0, 0.15);
+  min-height: 10em;
+}
+
+.panel-list-empty {
+  display: none;
+  color: #999;
+  text-align: center;
+  padding: 24px 16px;
+}
+
+.panel-list-background {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.panel-list-item {
+}
+
+.icon-section-header {
+  background-image: url('/images/updatescanner_32.png');
+}
+
+.panel-section-footer {
+  height: auto;
+  min-height: 41px;
+}
+
+.footer-button-icon {
+  height: 32px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-image: url('/images/updatescanner_18.png');
+}
+
+#new > .footer-button-icon {
+  background-image: url('/images/new_32.png');
+}
+
+#sidebar > .footer-button-icon {
+  background-image: url('/images/sidebar_32.png');
+}
+
+#more > .footer-button-icon {
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICA8cGF0aCBkPSJNOCwxMkwzLDcsNCw2bDQsNCw0LTQsMSwxWiIgZmlsbD0iIzZBNkE2QSIgLz4KPC9zdmc+Cg==);
+}
+
+.footer-button-text {
+  text-align: center;
+}

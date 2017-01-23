@@ -25,12 +25,11 @@
   "browser_action": {
     "default_title": "Update Scanner",
     "browser_style": true,
+    "default_popup": "app/popup/popup.html",
     "default_icon": {
           "18": "images/updatescanner_18.png",
           "48": "images/updatescanner_48.png",
           "64": "images/updatescanner_64.png"
         }
   }
-
-
 }
