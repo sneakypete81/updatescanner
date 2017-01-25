@@ -24,7 +24,7 @@ export class Main {
       this.pageStore = pageStore;
       this.sidebar.load(pageStore.pageMap, PageStore.ROOT_ID);
       this.sidebar.registerSelectHandler((evt, data) =>
-                                         this._onSelect(evt, data));
+                                         this._handleSelect(evt, data));
     });
   }
 
@@ -34,7 +34,7 @@ export class Main {
    *
    * @param {Page|PageFolder} item - Selected Page or PageFolder object.
    */
-  _onSelect(item) {
+  _handleSelect(item) {
     if (item instanceof Page) {
       this._loadHtml(item.id)
         .then((html) => this._loadIframe(html))

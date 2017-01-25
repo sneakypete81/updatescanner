@@ -14,7 +14,7 @@ describe('Main', function() {
     this.mainDiv.remove();
   });
 
-  describe('_onSelect', function() {
+  describe('_handleSelect', function() {
     it('calls loadIframe with the page\'s html from storage', function(done) {
       const id = '42';
       const html = 'hello';
@@ -26,7 +26,7 @@ describe('Main', function() {
         done();
       });
 
-      main._onSelect(new Page(id, {}));
+      main._handleSelect(new Page(id, {}));
     });
 
     it('logs to the console if the page\'s html isn\'t found', function(done) {
@@ -41,7 +41,7 @@ describe('Main', function() {
         done();
       });
 
-      main._onSelect(new Page(id, {}));
+      main._handleSelect(new Page(id, {}));
     });
   });
 
