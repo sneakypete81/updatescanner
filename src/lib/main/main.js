@@ -25,21 +25,49 @@ export class Main {
       this.sidebar.load(pageStore.pageMap, PageStore.ROOT_ID);
       this.sidebar.registerSelectHandler((evt, data) =>
                                          this._handleSelect(evt, data));
+
+      this._handleUrlParams(window.location.search);
     });
   }
 
   /**
-   * Called whenever a single item in the sidebar is selected. If the selected
-   * item is a Page, load the page's HTML into the iframe.
+   * Parse and handle URL query parameters.
+   *
+   * @param {string} searchString - Query portion of the URL, starting with the
+   * '?' character.
+   */
+  _handleUrlParams(searchString) {
+    const params = new URLSearchParams(searchString);
+    switch (params.get(paramEnum.ACTION)) {
+      case actionEnum.NEW:
+        break;
+
+      case actionEnum.DIFF:
+        this._loadPageIntoIframe(params.get(paramEnum.ID));
+        break;
+    }
+  }
+
+  /**
+   * Called whenever a single item in the sidebar is selected.
    *
    * @param {Page|PageFolder} item - Selected Page or PageFolder object.
    */
   _handleSelect(item) {
     if (item instanceof Page) {
-      this._loadHtml(item.id)
-        .then((html) => this._loadIframe(html))
-        .catch(console.log.bind(console));
-      }
+      this._loadPageIntoIframe(item.id);
+    }
+  }
+
+  /**
+   * Load the HTML of the specified page, then insert it into the iframe.
+   *
+   * @param {type} pageId - ID of the page to load.
+   */
+  _loadPageIntoIframe(pageId) {
+    this._loadHtml(pageId)
+      .then((html) => this._loadIframe(html))
+      .catch(console.log.bind(console));
   }
 
   /**
@@ -81,5 +109,24 @@ export class Main {
       iframe.parentNode.removeChild(iframe);
     }
   }
-
 }
+
+/**
+ * Parameter names for the Main page URL parameters.
+ * @readonly
+ * @enum {string}
+ */
+export const paramEnum = {
+  ACTION: 'action',
+  ID: 'id',
+};
+
+/**
+ * Values for the Main page action URL parameter.
+ * @readonly
+ * @enum {string}
+ */
+export const actionEnum = {
+  NEW: 'new',
+  DIFF: 'diff',
+};

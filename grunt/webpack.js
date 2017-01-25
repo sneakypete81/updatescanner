@@ -10,8 +10,9 @@ module.exports = {
 
   options: {
     entry: {
-      main: './src/app/main/main_script.js',
       background: './src/app/background/background_script.js',
+      main: './src/app/main/main_script.js',
+      popup: './src/app/popup/popup_script.js',
       debug_storage: './src/app/debug_storage/debug_storage_script.js',
     },
 
