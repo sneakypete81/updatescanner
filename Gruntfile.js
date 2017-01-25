@@ -13,7 +13,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('run', 'Run the webextension with Firefox, watching ' +
                             'and rebuilding when files change.',
-                     ['clean', 'concurrent:run']);
+                     ['clean', 'webpack:build', 'concurrent:run']);
 
   grunt.registerTask('lint', 'Check for linter warnings.',
                      ['eslint', 'shell:webextLint']);
