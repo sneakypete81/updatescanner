@@ -3,8 +3,9 @@ import {PageStore} from 'page/page_store';
 import {Page} from 'page/page';
 
 /**
- * @returns {string} Enumeration indicating the similarity of two HTML
- * strings.
+ * Enumeration indicating the similarity of two HTML strings.
+ * @readonly
+ * @enum {string}
  */
 const changeEnum = {
   NEW_CONTENT: 'new_content',
