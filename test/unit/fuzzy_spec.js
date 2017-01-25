@@ -1,4 +1,5 @@
 import 'jasmine-jquery';
+
 import * as fuzzy from 'scan/fuzzy';
 
 describe('fuzzy', function() {
