@@ -1,4 +1,5 @@
-import {Sidebar} from './sidebar';
+import {paramEnum, actionEnum} from 'main/main_url';
+import {Sidebar} from 'main/sidebar';
 import {PageStore} from 'page/page_store';
 import {Page} from 'page/page';
 
@@ -110,23 +111,3 @@ export class Main {
     }
   }
 }
-
-/**
- * Parameter names for the Main page URL parameters.
- * @readonly
- * @enum {string}
- */
-export const paramEnum = {
-  ACTION: 'action',
-  ID: 'id',
-};
-
-/**
- * Values for the Main page action URL parameter.
- * @readonly
- * @enum {string}
- */
-export const actionEnum = {
-  NEW: 'new',
-  DIFF: 'diff',
-};

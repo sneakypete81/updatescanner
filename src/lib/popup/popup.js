@@ -1,4 +1,4 @@
-import {paramEnum, actionEnum} from 'main/main';
+import {openMain, paramEnum, actionEnum} from 'main/main_url';
 /**
  * Class representing the Update Scanner toolbar popup.
  */
@@ -28,9 +28,7 @@ export class Popup {
    * @param {Event} event - Click event.
    */
   static _handleClickNew(event) {
-    const mainUrl = new URL(browser.extension.getURL('/app/main/main.html'));
-    mainUrl.searchParams.set(paramEnum.ACTION, actionEnum.NEW);
-    browser.tabs.update({url: mainUrl.href});
+    openMain({[paramEnum.ACTION]: actionEnum.NEW});
     window.close();
   }
 
@@ -41,8 +39,7 @@ export class Popup {
    */
   static _handleClickSidebar(event) {
     // @TODO: Use sidebar API rather than just opening the main page.
-    const mainUrl = new URL(browser.extension.getURL('/app/main/main.html'));
-    browser.tabs.update({url: mainUrl.href});
+    openMain();
   }
 
   /**
@@ -53,10 +50,8 @@ export class Popup {
   static _handleClickListItem(event) {
     const pageId = event.currentTarget.dataset.id;
     if (pageId !== undefined) {
-      const mainUrl = new URL(browser.extension.getURL('/app/main/main.html'));
-      mainUrl.searchParams.set(paramEnum.ACTION, actionEnum.DIFF);
-      mainUrl.searchParams.set(paramEnum.ID, pageId);
-      browser.tabs.update({url: mainUrl.href});
+      openMain({[paramEnum.ACTION]: actionEnum.DIFF,
+        [paramEnum.ID]: pageId});
     }
   }
 }
