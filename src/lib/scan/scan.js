@@ -1,4 +1,4 @@
-import * as fuzzy from 'scan/fuzzy';
+import {isMajorChange} from 'scan/fuzzy';
 import {PageStore} from 'page/page_store';
 import {Page} from 'page/page';
 
@@ -146,7 +146,7 @@ function getChangeType(str1, str2, changeThreshold) {
   } else if (str1 == str2) {
     // HTML is unchanged.
     return changeEnum.NO_CHANGE;
-  } else if (fuzzy.isMajorChange(str1, str2, changeThreshold)) {
+  } else if (isMajorChange(str1, str2, changeThreshold)) {
     // Change is larger than changeThreshold.
     return changeEnum.MAJOR_CHANGE;
   } else {

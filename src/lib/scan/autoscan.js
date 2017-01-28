@@ -1,7 +1,6 @@
-import * as scan from 'scan/scan';
+import {scan} from 'scan/scan';
 import {PageStore} from 'page/page_store';
-import * as page from 'page/page';
-import * as config from 'util/config';
+import {Config} from 'util/config';
 
 const ALARM_ID = 'updatescanner-autoscan';
 const ALARM_TIMING = {delayInMinutes: 1, periodInMinutes: 5};
@@ -14,7 +13,7 @@ const DEBUG_ALARM_TIMING = {delayInMinutes: 0.1, periodInMinutes: 0.5};
  * complete.
  */
 export function start() {
-  return config.Config.loadSingleSetting('debug').then((debug) => {
+  return Config.loadSingleSetting('debug').then((debug) => {
     stopAlarm();
     startAlarm(debug);
     browser.alarms.onAlarm.addListener(
@@ -54,7 +53,7 @@ function onAlarm(alarm) {
       const scanList = getScanList(pageList);
       if (scanList.length > 0) {
         console.log('Pages to autoscan: ' + scanList.length);
-        scan.scan(scanList).then(() => {
+        scan(scanList).then(() => {
           console.log('Autoscan complete.');
         });
       }
