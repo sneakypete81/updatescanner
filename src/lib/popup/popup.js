@@ -18,10 +18,12 @@ export class Popup {
    * Initialises the popup data and event handlers.
    */
   init() {
+    document.querySelector('#showAll')
+      .addEventListener('click', () => this._handleClickShowAll());
     document.querySelector('#new')
-      .addEventListener('click', Popup._handleClickNew);
+      .addEventListener('click', () => this._handleClickNew());
     document.querySelector('#sidebar')
-      .addEventListener('click', Popup._handleClickSidebar);
+      .addEventListener('click', () => this._handleClickSidebar());
 
     PageStore.load().then((pageStore) => {
       this.pageStore = pageStore;
@@ -46,7 +48,7 @@ export class Popup {
    *
    * @param {Event} event - Click event.
    */
-  static _handleClickNew(event) {
+  _handleClickNew() {
     openMain({[paramEnum.ACTION]: actionEnum.NEW});
     window.close();
   }
@@ -56,9 +58,24 @@ export class Popup {
    *
    * @param {Event} event - Click event.
    */
-  static _handleClickSidebar(event) {
+  _handleClickSidebar() {
     // @TODO: Use sidebar API rather than just opening the main page.
     openMain();
+  }
+
+  /**
+   * Called when the "Show All Updates" button is clicked, to open all changes
+   * in new tabs.
+   */
+  _handleClickShowAll() {
+    console.log("ShowAll");
+    for (const page of this.pageStore.getPageList()) {
+      if (page.state == Page.stateEnum.CHANGED) {
+        console.log(page);
+        openMain({[paramEnum.ACTION]: actionEnum.DIFF, [paramEnum.ID]: page.id},
+          true);
+      }
+    }
   }
 
   /**
@@ -69,8 +86,7 @@ export class Popup {
   static _handleClickListItem(event) {
     const pageId = event.currentTarget.dataset.id;
     if (pageId !== undefined) {
-      openMain({[paramEnum.ACTION]: actionEnum.DIFF,
-        [paramEnum.ID]: pageId});
+      openMain({[paramEnum.ACTION]: actionEnum.DIFF, [paramEnum.ID]: pageId});
     }
   }
 }
