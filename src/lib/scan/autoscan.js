@@ -1,5 +1,5 @@
 import * as scan from 'scan/scan';
-import * as pageStore from 'page/page_store';
+import {PageStore} from 'page/page_store';
 import * as page from 'page/page';
 import * as config from 'util/config';
 
@@ -69,8 +69,8 @@ function onAlarm(alarm) {
  * (and PageFolders).
  */
 function loadPageList() {
-  return pageStore.PageStore.load().then(
-    (pageStore) => pageStore.pageMap.values());
+  return PageStore.load().then(
+    (pageStore) => pageStore.getPageList());
 }
 
 /**

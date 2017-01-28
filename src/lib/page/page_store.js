@@ -68,6 +68,14 @@ export class PageStore {
   }
 
   /**
+   * @returns {Array.<Page|PageFolder>} List of Page and PageFolder objects from
+   * the pageMap.
+   */
+  getPageList() {
+    return this.pageMap.values();
+  }
+
+  /**
    * Given Arrays of Page and Folder IDs, loads the corresponding objects from
    * storage and generates a Map keyed by ID.
    *

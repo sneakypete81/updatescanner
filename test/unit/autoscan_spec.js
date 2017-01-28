@@ -70,14 +70,12 @@ describe('autoscan', function() {
   });
 
   describe('onAlarm', function() {
-    function generatePageMap(pages) {
-      let pageMap = new Map();
-      pages.forEach((page) => pageMap.set(page.id, page));
-      return pageMap;
-    }
+    beforeEach(function() {
+      spyOn(PageStore, 'load').and.returnValue(
+        Promise.resolve(new PageStore()));
+    });
 
     it('does nothing if the alarm name doesn\'t match', function() {
-      spyOn(PageStore, 'load');
       spyOn(scan, 'scan').and.returnValues(Promise.resolve());
       spyOn(console, 'log');
 
@@ -92,8 +90,7 @@ describe('autoscan', function() {
                                     scanRateMinutes: 15,
                                     lastAutoscanTime: Date.now()}),
                     ];
-      spyOn(PageStore, 'load').and.returnValues(
-        Promise.resolve({pageMap: generatePageMap(pages)}));
+      spyOn(PageStore.prototype, 'getPageList').and.returnValues(pages);
       spyOn(scan, 'scan').and.returnValues(Promise.resolve());
       spyOn(console, 'log');
       jasmine.clock().tick(20 * 60 * 1000);
@@ -112,8 +109,7 @@ describe('autoscan', function() {
                                   scanRateMinutes: 30,
                                   lastAutoscanTime: Date.now()}),
                     ];
-      spyOn(PageStore, 'load').and.returnValues(
-        Promise.resolve({pageMap: generatePageMap(pages)}));
+      spyOn(PageStore.prototype, 'getPageList').and.returnValues(pages);
       spyOn(scan, 'scan').and.returnValues(Promise.resolve());
       spyOn(console, 'log');
 
@@ -132,9 +128,9 @@ describe('autoscan', function() {
       const pageNotToScan = new Page(2, {url: 'http://test.com',
                                          scanRateMinutes: 30,
                                          lastAutoscanTime: Date.now()});
+      const pages = [pageToScan, pageNotToScan];
 
-      spyOn(PageStore, 'load').and.returnValues(Promise.resolve(
-        {pageMap: generatePageMap([pageToScan, pageNotToScan])}));
+      spyOn(PageStore.prototype, 'getPageList').and.returnValues(pages);
       spyOn(scan, 'scan').and.returnValues(Promise.resolve());
       spyOn(console, 'log');
 
@@ -147,8 +143,9 @@ describe('autoscan', function() {
     });
 
     it('ignores a PageFolder', function(done) {
-      spyOn(PageStore, 'load').and.returnValues(
-        Promise.resolve({pageMap: generatePageMap([new PageFolder(1)])}));
+      const pages = [new PageFolder(1)];
+
+      spyOn(PageStore.prototype, 'getPageList').and.returnValues(pages);
       spyOn(scan, 'scan').and.returnValues(Promise.resolve());
       spyOn(console, 'log');
 
