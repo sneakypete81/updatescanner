@@ -33,9 +33,9 @@ export class Popup {
    * Add any pages with CHANGED state to the page list.
    */
   _refreshPageList() {
-    for (const item of this.pageStore.getPageList()) {
-      if (item.state == Page.stateEnum.CHANGED) {
-        document.querySelector('#list').appendChild(createListItem(item));
+    for (const page of this.pageStore.getPageList()) {
+      if (page.state == Page.stateEnum.CHANGED) {
+        document.querySelector('#list').appendChild(createListItem(page));
       }
     }
   }
