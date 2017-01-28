@@ -1,8 +1,19 @@
 import {openMain, paramEnum, actionEnum} from 'main/main_url';
+import {PageStore} from 'page/page_store';
+import {Page} from 'page/page';
+
 /**
  * Class representing the Update Scanner toolbar popup.
  */
 export class Popup {
+  /**
+   * @property {PageStore} pageStore - Object used for saving and loading data
+   * from storage.
+   */
+  constructor() {
+    this.pageStore = undefined;
+  }
+
   /**
    * Initialises the popup data and event handlers.
    */
@@ -12,13 +23,21 @@ export class Popup {
     document.querySelector('#sidebar')
       .addEventListener('click', Popup._handleClickSidebar);
 
-    // @TODO: register on list creation
-    document.querySelector('#id1')
-      .addEventListener('click', Popup._handleClickListItem);
-    document.querySelector('#id2')
-      .addEventListener('click', Popup._handleClickListItem);
-    document.querySelector('#id3')
-      .addEventListener('click', Popup._handleClickListItem);
+    PageStore.load().then((pageStore) => {
+      this.pageStore = pageStore;
+      this._refreshPageList();
+    });
+  }
+
+  /**
+   * Add any pages with CHANGED state to the page list.
+   */
+  _refreshPageList() {
+    for (const item of this.pageStore.getPageList()) {
+      if (item.state == Page.stateEnum.CHANGED) {
+        document.querySelector('#list').appendChild(createListItem(item));
+      }
+    }
   }
 
   /**
@@ -54,4 +73,32 @@ export class Popup {
         [paramEnum.ID]: pageId});
     }
   }
+}
+
+/**
+ * Create a new list item for a Page.
+ *
+ * @param {Page} page - Page object to use for the list item.
+ *
+ * @returns {Element} List item for the given Page.
+ */
+function createListItem(page) {
+  const item = document.createElement('div');
+  item.className = 'panel-list-item';
+  item.dataset.id = page.id;
+
+  const icon = document.createElement('div');
+  icon.className = 'icon';
+  const image = document.createElement('img');
+  image.src = '/images/updatescanner_18.png';
+  icon.appendChild(image);
+
+  const text = document.createElement('div');
+  text.className = 'text';
+  text.textContent = page.title;
+
+  item.appendChild(icon);
+  item.appendChild(text);
+  item.addEventListener('click', Popup._handleClickListItem);
+  return item;
 }

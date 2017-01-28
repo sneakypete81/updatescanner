@@ -16,11 +16,8 @@ html body {
   padding: 24px 16px;
 }
 
-.panel-list-background {
+.panel-list-content {
   background-color: rgba(255, 255, 255, 1);
-}
-
-.panel-list-item {
 }
 
 .icon-section-header {
@@ -36,7 +33,6 @@ html body {
   height: 32px;
   background-position: center center;
   background-repeat: no-repeat;
-  background-image: url('/images/updatescanner_18.png');
 }
 
 #new > .footer-button-icon {
