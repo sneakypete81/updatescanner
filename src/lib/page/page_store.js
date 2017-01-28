@@ -68,11 +68,11 @@ export class PageStore {
   }
 
   /**
-   * @returns {Array.<Page|PageFolder>} List of Page and PageFolder objects from
-   * the pageMap.
+   * @returns {Array.<Page|PageFolder>} Array of Page objects in the pageMap.
    */
   getPageList() {
-    return this.pageMap.values();
+    return Array.from(this.pageMap.values()).filter(
+      (item) => item instanceof Page);
   }
 
   /**
@@ -86,8 +86,8 @@ export class PageStore {
    * have been loaded.
    */
   static _generatePageMap(pageIds, pageFolderIds) {
-    let promises = [];
-    let pageMap = new Map();
+    const promises = [];
+    const pageMap = new Map();
 
     // Make an array of promises, each returning a PageFolder or Page
     for (let i=0; i<pageFolderIds.length; i++) {

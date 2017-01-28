@@ -2,7 +2,6 @@ import * as autoscan from 'scan/autoscan';
 import * as scan from 'scan/scan';
 import {PageStore} from 'page/page_store';
 import {Page} from 'page/page';
-import {PageFolder} from 'page/page_folder';
 import {Config} from 'util/config';
 
 describe('autoscan', function() {
@@ -138,19 +137,6 @@ describe('autoscan', function() {
 
       autoscan.__.onAlarm({name: 'updatescanner-autoscan'}).then(() => {
         expect(scan.scan).toHaveBeenCalledWith([pageToScan]);
-        done();
-      }).catch((error) => done.fail(error));
-    });
-
-    it('ignores a PageFolder', function(done) {
-      const pages = [new PageFolder(1)];
-
-      spyOn(PageStore.prototype, 'getPageList').and.returnValues(pages);
-      spyOn(scan, 'scan').and.returnValues(Promise.resolve());
-      spyOn(console, 'log');
-
-      autoscan.__.onAlarm({name: 'updatescanner-autoscan'}).then(() => {
-        expect(scan.scan).not.toHaveBeenCalled();
         done();
       }).catch((error) => done.fail(error));
     });

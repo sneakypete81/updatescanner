@@ -143,6 +143,29 @@ describe('PageStore', function() {
     });
   });
 
+  describe('getPageList', function() {
+    it('returns an empty array when there are no Pages in the map', function() {
+      const pageStore = new PageStore(new Map());
+      pageStore.pageMap.set('1', new PageFolder('1'));
+
+      const pageList = pageStore.getPageList();
+
+      expect(pageList).toEqual([]);
+    });
+
+    it('returns an array containing all Pages in the map', function() {
+      const pageStore = new PageStore(new Map());
+      pageStore.pageMap.set('1', new PageFolder('1'));
+      pageStore.pageMap.set('2', new Page('2'));
+      pageStore.pageMap.set('3', new PageFolder('3'));
+      pageStore.pageMap.set('4', new Page('4'));
+
+      const pageList = pageStore.getPageList();
+
+      expect(pageList).toEqual([new Page('2'), new Page('4')]);
+    });
+  });
+
   describe('loadHtml', function() {
     using([PageStore.htmlTypes.OLD,
            PageStore.htmlTypes.NEW,

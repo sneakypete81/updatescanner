@@ -84,7 +84,7 @@ function loadPageList() {
 function getScanList(pageList) {
   let scanList = [];
   for (const item of pageList) {
-    if (item instanceof page.Page && isAutoscanPending(item)) {
+    if (isAutoscanPending(item)) {
       scanList.push(item);
     }
   }
