@@ -1,6 +1,7 @@
 import {openMain, paramEnum, actionEnum} from 'main/main_url';
 import {PageStore} from 'page/page_store';
 import {Page} from 'page/page';
+import * as view from 'popup/popup_view';
 
 /**
  * Class representing the Update Scanner toolbar popup.
@@ -18,12 +19,10 @@ export class Popup {
    * Initialises the popup data and event handlers.
    */
   init() {
-    document.querySelector('#showAll')
-      .addEventListener('click', () => this._handleClickShowAll());
-    document.querySelector('#new')
-      .addEventListener('click', () => this._handleClickNew());
-    document.querySelector('#sidebar')
-      .addEventListener('click', () => this._handleClickSidebar());
+    view.bindShowAllClick(this._handleShowAllClick.bind(this));
+    view.bindNewClick(this._handleNewClick.bind(this));
+    view.bindSidebarClick(this._handleSidebarClick.bind(this));
+    view.bindPageClick(this._handlePageClick.bind(this));
 
     PageStore.load().then((pageStore) => {
       this.pageStore = pageStore;
@@ -37,7 +36,7 @@ export class Popup {
   _refreshPageList() {
     for (const page of this.pageStore.getPageList()) {
       if (page.state == Page.stateEnum.CHANGED) {
-        document.querySelector('#list').appendChild(createListItem(page));
+        view.addPage(page);
       }
     }
   }
@@ -45,20 +44,16 @@ export class Popup {
   /**
    * Called when the New button is clicked, to open the page to create a new
    * scan item.
-   *
-   * @param {Event} event - Click event.
    */
-  _handleClickNew() {
+  _handleNewClick() {
     openMain({[paramEnum.ACTION]: actionEnum.NEW});
     window.close();
   }
 
   /**
    * Called when the Sidebar button is clicked, to open the sidebar.
-   *
-   * @param {Event} event - Click event.
    */
-  _handleClickSidebar() {
+  _handleSidebarClick() {
     // @TODO: Use sidebar API rather than just opening the main page.
     openMain();
   }
@@ -67,8 +62,7 @@ export class Popup {
    * Called when the "Show All Updates" button is clicked, to open all changes
    * in new tabs.
    */
-  _handleClickShowAll() {
-    console.log("ShowAll");
+  _handleShowAllClick() {
     for (const page of this.pageStore.getPageList()) {
       if (page.state == Page.stateEnum.CHANGED) {
         console.log(page);
@@ -81,40 +75,11 @@ export class Popup {
   /**
    * Called when an item in the page list is clicked, to view that page.
    *
-   * @param {Event} event - Click event.
+   * @param {string} pageId - ID of the clicked page.
    */
-  static _handleClickListItem(event) {
-    const pageId = event.currentTarget.dataset.id;
+  _handlePageClick(pageId) {
     if (pageId !== undefined) {
       openMain({[paramEnum.ACTION]: actionEnum.DIFF, [paramEnum.ID]: pageId});
     }
   }
-}
-
-/**
- * Create a new list item for a Page.
- *
- * @param {Page} page - Page object to use for the list item.
- *
- * @returns {Element} List item for the given Page.
- */
-function createListItem(page) {
-  const item = document.createElement('div');
-  item.className = 'panel-list-item';
-  item.dataset.id = page.id;
-
-  const icon = document.createElement('div');
-  icon.className = 'icon';
-  const image = document.createElement('img');
-  image.src = '/images/updatescanner_18.png';
-  icon.appendChild(image);
-
-  const text = document.createElement('div');
-  text.className = 'text';
-  text.textContent = page.title;
-
-  item.appendChild(icon);
-  item.appendChild(text);
-  item.addEventListener('click', Popup._handleClickListItem);
-  return item;
 }
