@@ -11,7 +11,10 @@ module.exports = {
     command: webExtCmd('build', ['--artifacts-dir=dist']),
   },
   webextRun: {
-    command: webExtCmd('run', ['--pref=devtools.theme=light']),
+    command: webExtCmd('run', [
+      '--pref=devtools.theme=light',
+      '--pref=javascript.options.strict=false',
+    ]),
   },
   webextLint: {
     command: webExtCmd('lint'),
