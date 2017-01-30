@@ -1178,4 +1178,4 @@ _unescapeSpaces : function(content)
 }
 };
 
-export const diff = DiffWiki.WDiffString;
+export const highlightDiffs = DiffWiki.WDiffString;

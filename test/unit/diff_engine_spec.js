@@ -1,4 +1,4 @@
-import {diff} from 'diff/diff_engine';
+import {highlightDiffs} from 'diff/diff_engine';
 
 describe('diff_engine', function() {
   describe('diff', function() {
@@ -6,7 +6,7 @@ describe('diff_engine', function() {
       const html1 = '<html><body>This is some text.</body></html>';
       const html2 = '<html><body>This is some inserted text.</body></html>';
 
-      const result = diff(html1, html2, 'yellow', '', '');
+      const result = highlightDiffs(html1, html2, 'yellow', '', '');
 
       expect(result).toEqual(
         '<html><body>This is some ' +
@@ -18,7 +18,7 @@ describe('diff_engine', function() {
       const html1 = '<html><body>This is some text.</body></html>';
       const html2 = '<html><body>This is text some.</body></html>';
 
-      const result = diff(html1, html2, 'yellow', '', '');
+      const result = highlightDiffs(html1, html2, 'yellow', '', '');
 
       expect(result).toEqual(
         '<html><body>This is ' +
@@ -30,7 +30,7 @@ describe('diff_engine', function() {
       const html1 = '<html><body>This is some text.</body></html>';
       const html2 = '<html><body>This is text.</body></html>';
 
-      const result = diff(html1, html2, 'yellow', '', '');
+      const result = highlightDiffs(html1, html2, 'yellow', '', '');
 
       expect(result).toEqual(html2 + '\n');
     });
