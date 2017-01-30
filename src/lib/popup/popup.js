@@ -65,7 +65,6 @@ export class Popup {
   _handleShowAllClick() {
     for (const page of this.pageStore.getPageList()) {
       if (page.state == Page.stateEnum.CHANGED) {
-        console.log(page);
         openMain({[paramEnum.ACTION]: actionEnum.SHOW_DIFF,
           [paramEnum.ID]: page.id}, true);
       }
