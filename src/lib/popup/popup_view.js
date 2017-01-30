@@ -42,7 +42,6 @@ export function addPage(page) {
   qs('#list').appendChild(createListItem(page));
 }
 
-
 /**
  * Create a new list item for a Page.
  *
