@@ -10,5 +10,5 @@ import {highlightDiffs} from 'diff/diff_engine';
  * @returns {string} Highlighted HTML string.
  */
 export function diff(page, oldHtml, newHtml) {
-  return highlightDiffs(oldHtml, newHtml, 'yellow', '', '');
+  return highlightDiffs(oldHtml, newHtml, '#ffff66', '', '');
 }
