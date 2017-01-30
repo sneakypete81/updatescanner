@@ -1,6 +1,7 @@
 import {Main} from 'main/main';
 import {Page} from 'page/page';
 import {Storage} from 'util/storage';
+import * as diff from 'diff/diff';
 
 describe('Main', function() {
   beforeEach(function() {
@@ -15,18 +16,24 @@ describe('Main', function() {
   });
 
   describe('_handleSelect', function() {
-    it('calls loadIframe with the page\'s html from storage', function(done) {
+    it('calls loadIframe with a diff of the old and new HTML from storage',
+    function(done) {
       const id = '42';
+      const page = new Page(id, {});
       const html = 'hello';
       const main = new Main();
 
-      spyOn(Storage, 'load').and.returnValues(Promise.resolve(html));
+      spyOn(Storage, 'load').and.returnValue(Promise.resolve(html));
+      spyOn(diff, 'diff').and.returnValues('diffHtml');
       spyOn(main, '_loadIframe').and.callFake((result) => {
-        expect(result).toEqual(html);
+        expect(result).toEqual('diffHtml');
+        expect(Storage.load).toHaveBeenCalledWith('html:old:' + id);
+        expect(Storage.load).toHaveBeenCalledWith('html:new:' + id);
+        expect(diff.diff).toHaveBeenCalledWith(page, html, html);
         done();
       });
 
-      main._handleSelect(new Page(id, {}));
+      main._handleSelect(page);
     });
 
     it('logs to the console if the page\'s html isn\'t found', function(done) {

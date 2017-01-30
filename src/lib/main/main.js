@@ -2,6 +2,7 @@ import {paramEnum, actionEnum} from 'main/main_url';
 import {Sidebar} from 'main/sidebar';
 import {PageStore} from 'page/page_store';
 import {Page} from 'page/page';
+import {diff} from 'diff/diff';
 
 /**
  * Class representing the main Update Scanner content page.
@@ -56,29 +57,34 @@ export class Main {
    */
   _handleSelect(item) {
     if (item instanceof Page) {
-      this._loadPageIntoIframe(item.id);
+      this._loadPageIntoIframe(item);
     }
   }
 
   /**
    * Load the HTML of the specified page, then insert it into the iframe.
    *
-   * @param {type} pageId - ID of the page to load.
+   * @param {type} page - Page object to load.
    */
-  _loadPageIntoIframe(pageId) {
-    this._loadHtml(pageId)
-      .then((html) => this._loadIframe(html))
-      .catch(console.log.bind(console));
+  _loadPageIntoIframe(page) {
+    this._loadHtml(page.id, PageStore.htmlTypes.OLD).then((oldHtml) => {
+      this._loadHtml(page.id, PageStore.htmlTypes.NEW).then((newHtml) => {
+        const diffHtml = diff(page, oldHtml, newHtml);
+        this._loadIframe(diffHtml);
+      });
+    }).catch(console.log.bind(console));
   }
 
   /**
    * Loads the specified Page HTML from the PageStore.
    *
    * @param {string} id - ID of the Page to load.
+   * @param {string} htmlType - PageStore.htmlTypes string identifying the HTML
+   * type.
    * @returns {Promise} A Promise to be fulfilled with the requested HTML.
    */
-  _loadHtml(id) {
-    return PageStore.loadHtml(id, PageStore.htmlTypes.NEW)
+  _loadHtml(id, htmlType) {
+    return PageStore.loadHtml(id, htmlType)
       .then(function(html) {
         if (html === undefined) {
           throw Error('Could not load "' + id + '" changes HTML from storage');
