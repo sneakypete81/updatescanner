@@ -274,18 +274,13 @@ openNewDialog : function(parentId, index)
     if (typeof index == 'iundefined')
       index = -1; // Insert at the bottom by default
 
-    // @TODO: the following method of determining the current URL/title is not
-    // multi-process compatible.
+    var currentWindow = Components.classes["@mozilla.org/appshell/window-mediator;1"]
+      .getService(Components.interfaces.nsIWindowMediator)
+      .getMostRecentWindow("navigator:browser");
 
-    var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
-                   .getInterface(Components.interfaces.nsIWebNavigation)
-                   .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
-                   .rootTreeItem
-                   .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
-                   .getInterface(Components.interfaces.nsIDOMWindow);
-
-    var url = mainWindow.content.document.URL;
-    var title = mainWindow.content.document.title || url;
+    var currBrowser = currentWindow.getBrowser();
+    var url = currBrowser.currentURI.spec;
+    var title = currBrowser.contentTitle || url;
 
     var args = {
         title:            title,
