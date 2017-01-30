@@ -274,15 +274,13 @@ openNewDialog : function(parentId, index)
     if (typeof index == 'iundefined')
       index = -1; // Insert at the bottom by default
 
-    var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
-                   .getInterface(Components.interfaces.nsIWebNavigation)
-                   .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
-                   .rootTreeItem
-                   .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
-                   .getInterface(Components.interfaces.nsIDOMWindow);
+    var currentWindow = Components.classes["@mozilla.org/appshell/window-mediator;1"]
+      .getService(Components.interfaces.nsIWindowMediator)
+      .getMostRecentWindow("navigator:browser");
 
-    var url = mainWindow.content.document.URL;
-    var title = mainWindow.content.document.title || url;
+    var currBrowser = currentWindow.getBrowser();
+    var url = currBrowser.currentURI.spec;
+    var title = currBrowser.contentTitle || url;
 
     var args = {
         title:            title,
@@ -445,13 +443,7 @@ _diffItemThisWindow : function(id)
     var me = UpdateScanner.Updatescan;
     var diffURL = me.diffItem(id, 0);
     if (diffURL) {
-        var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
-                               .getInterface(Components.interfaces.nsIWebNavigation)
-                               .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
-                               .rootTreeItem
-                               .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
-                               .getInterface(Components.interfaces.nsIDOMWindow);
-        mainWindow.getBrowser().selectedBrowser.contentWindow.location.href = diffURL;
+        openUILinkIn(diffURL, "current");
         if (me.tree) me.tree.focus();
     }
 },
@@ -485,17 +477,9 @@ diffSelectedItemNewTab : function()
 _diffItemNewTab : function(id, delay)
 {
     var me = UpdateScanner.Updatescan;
-
-    var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
-                           .getInterface(Components.interfaces.nsIWebNavigation)
-                           .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
-                           .rootTreeItem
-                           .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
-                           .getInterface(Components.interfaces.nsIDOMWindow);
-
     var diffURL = me.diffItem(id, delay);
     if (diffURL) {
-      mainWindow.getBrowser().selectedTab = mainWindow.getBrowser().addTab(diffURL);
+      openUILinkIn(diffURL, "tab");
       if (me.tree) me.tree.focus();
     }
 },
@@ -503,18 +487,9 @@ _diffItemNewTab : function(id, delay)
 _diffItemNewTabBackground : function(id, delay)
 {
     var me = UpdateScanner.Updatescan;
-
-    var mainWindow = window.QueryInterface(
-    Components.interfaces.nsIInterfaceRequestor)
-    .getInterface(Components.interfaces.nsIWebNavigation)
-    .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
-    .rootTreeItem
-    .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
-    .getInterface(Components.interfaces.nsIDOMWindow);
-
     var diffURL = me.diffItem(id, delay);
     if (diffURL) {
-      mainWindow.getBrowser().addTab(diffURL);
+      openUILinkIn(diffURL, "tabshifted");
       if (me.tree) me.tree.focus();
     }
 },
@@ -578,17 +553,7 @@ _markAsVisited : function(id, delay)
 
 openHelp : function()
 {
-    var mainWindow = window.QueryInterface(
-                  Components.interfaces.nsIInterfaceRequestor)
-                  .getInterface(Components.interfaces.nsIWebNavigation)
-                  .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
-                  .rootTreeItem
-                  .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
-                  .getInterface(Components.interfaces.nsIDOMWindow);
-
-    var helpURL="http://sneakypete81.github.io/updatescanner/";
-
-    mainWindow.getBrowser().selectedTab = mainWindow.getBrowser().addTab(helpURL);
+    openUILinkIn("http://sneakypete81.github.io/updatescanner/", "tab");
 },
 
 enableScanner : function()
