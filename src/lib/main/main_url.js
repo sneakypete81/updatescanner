@@ -14,8 +14,8 @@ export const paramEnum = {
  * @enum {string}
  */
 export const actionEnum = {
-  NEW: 'new',
-  DIFF: 'diff',
+  NEW_PAGE: 'new_page',
+  SHOW_DIFF: 'show_diff',
 };
 
 

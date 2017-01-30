@@ -46,7 +46,7 @@ export class Popup {
    * scan item.
    */
   _handleNewClick() {
-    openMain({[paramEnum.ACTION]: actionEnum.NEW});
+    openMain({[paramEnum.ACTION]: actionEnum.NEW_PAGE});
     window.close();
   }
 
@@ -66,8 +66,8 @@ export class Popup {
     for (const page of this.pageStore.getPageList()) {
       if (page.state == Page.stateEnum.CHANGED) {
         console.log(page);
-        openMain({[paramEnum.ACTION]: actionEnum.DIFF, [paramEnum.ID]: page.id},
-          true);
+        openMain({[paramEnum.ACTION]: actionEnum.SHOW_DIFF,
+          [paramEnum.ID]: page.id}, true);
       }
     }
   }
@@ -79,7 +79,8 @@ export class Popup {
    */
   _handlePageClick(pageId) {
     if (pageId !== undefined) {
-      openMain({[paramEnum.ACTION]: actionEnum.DIFF, [paramEnum.ID]: pageId});
+      openMain({[paramEnum.ACTION]: actionEnum.SHOW_DIFF,
+        [paramEnum.ID]: pageId});
     }
   }
 }

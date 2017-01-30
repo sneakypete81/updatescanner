@@ -40,10 +40,10 @@ export class Main {
   _handleUrlParams(searchString) {
     const params = new URLSearchParams(searchString);
     switch (params.get(paramEnum.ACTION)) {
-      case actionEnum.NEW:
+      case actionEnum.NEW_PAGE:
         break;
 
-      case actionEnum.DIFF:
+      case actionEnum.SHOW_DIFF:
         this._loadPageIntoIframe(params.get(paramEnum.ID));
         break;
     }
