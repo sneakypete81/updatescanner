@@ -41,10 +41,14 @@ function preload() {
       url: 'https://addons.mozilla.org/thisisanerror'},
     'page:5': {title: 'Firefox Addons',
       url: 'https://addons.mozilla.org/'},
-    'html:changes:1': '<h1>Update Scanner Website</h1>',
-    'html:changes:2': '<h1>Another Page</h1>',
-    'html:changes:4': '<h1>A Website Inside a Subfolder</h1>',
-    'html:changes:5': '<h1>The Final Site</h1>',
+    'html:old:1': '<h1>Update Scanner Website</h1>',
+    'html:new:1': '<h1>Update Scanner Website With Changed Text</h1>',
+    'html:old:2': '<h1>Another Page</h1>',
+    'html:new:2': '<h1>Another Page with Changed Text</h1>',
+    'html:old:4': '<h1>A Website Inside a Subfolder</h1>',
+    'html:new:4': '<h1>A Website Inside a Subfolder with Changed Text</h1>',
+    'html:old:5': '<h1>The Final Site</h1>',
+    'html:new:5': '<h1>The Final Site with Changed Text</h1>',
     });
     reload();
 }
