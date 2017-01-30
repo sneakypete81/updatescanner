@@ -23,12 +23,11 @@ describe('PageStore', function() {
       });
 
       PageStore.load().then((pageStore) => {
-          expect(pageStore.pageMap.get('0')).toEqual(
-            new PageFolder('0', {title: 'root'}));
-          expect(pageStore.pageMap.size).toEqual(1);
-          done();
-        })
-        .catch((error) => done.fail(error));
+        expect(pageStore.pageMap.get('0')).toEqual(
+          new PageFolder('0', {title: 'root'}));
+        expect(pageStore.pageMap.size).toEqual(1);
+        done();
+      }).catch((error) => done.fail(error));
     });
 
     it('retrieves a pageMap containing pages from storage', function(done) {
@@ -40,14 +39,13 @@ describe('PageStore', function() {
       });
 
       PageStore.load().then((pageStore) => {
-          expect(pageStore.pageMap.get('1')).toEqual(
-            new Page('1', {title: 'Page 1'}));
-          expect(pageStore.pageMap.get('2')).toEqual(
-            new Page('2', {title: 'Page 2'}));
-          expect(pageStore.pageMap.size).toEqual(2);
-          done();
-        })
-        .catch((error) => done.fail(error));
+        expect(pageStore.pageMap.get('1')).toEqual(
+          new Page('1', {title: 'Page 1'}));
+        expect(pageStore.pageMap.get('2')).toEqual(
+          new Page('2', {title: 'Page 2'}));
+        expect(pageStore.pageMap.size).toEqual(2);
+        done();
+      }).catch((error) => done.fail(error));
     });
 
     it('retrieves a pageMap containing a subfolder from storage',
@@ -64,18 +62,29 @@ describe('PageStore', function() {
       });
 
       PageStore.load().then((pageStore) => {
-          expect(pageStore.pageMap.get('1')).toEqual(
-            new Page('1', {title: 'Page 1'}));
-          expect(pageStore.pageMap.get('2')).toEqual(
-            new Page('2', {title: 'Page 2'}));
-          expect(pageStore.pageMap.get('0')).toEqual(
-            new PageFolder('0', {title: 'root', children: ['1', '3']}));
-          expect(pageStore.pageMap.get('3')).toEqual(
-            new PageFolder('3', {title: 'subfolder', children: ['2']}));
-          expect(pageStore.pageMap.size).toEqual(4);
-          done();
-        })
-        .catch((error) => done.fail(error));
+        expect(pageStore.pageMap.get('1')).toEqual(
+          new Page('1', {title: 'Page 1'}));
+        expect(pageStore.pageMap.get('2')).toEqual(
+          new Page('2', {title: 'Page 2'}));
+        expect(pageStore.pageMap.get('0')).toEqual(
+          new PageFolder('0', {title: 'root', children: ['1', '3']}));
+        expect(pageStore.pageMap.get('3')).toEqual(
+          new PageFolder('3', {title: 'subfolder', children: ['2']}));
+        expect(pageStore.pageMap.size).toEqual(4);
+        done();
+      }).catch((error) => done.fail(error));
+    });
+
+    it('remembers the StorageInfo object after loading', function(done) {
+      const storageInfo = {pageIds: [], pageFolderIds: []};
+      spyOnStorageLoadWithArgReturn({
+        [StorageInfo._KEY]: Promise.resolve(storageInfo),
+      });
+
+      PageStore.load().then((pageStore) => {
+        expect(pageStore.storageInfo).toEqual(new StorageInfo(storageInfo));
+        done();
+      }).catch((error) => done.fail(error));
     });
   });
 

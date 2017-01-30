@@ -50,16 +50,15 @@ export class PageStore {
    * fully populated pageMap.
    */
   static load() {
-    let storageInfo;
-
     // Return a promise to first load the list of Page & PageFolder IDs
     return StorageInfo.load()
       .then((storageInfo) => {
         // Then load all Pages and PageFolders into a Map
         return PageStore._generatePageMap(storageInfo.pageIds,
-                                        storageInfo.pageFolderIds);
-      }).then((pageMap) => {
-        return new PageStore(pageMap, storageInfo);
+                                        storageInfo.pageFolderIds)
+          .then((pageMap) => {
+            return new PageStore(pageMap, storageInfo);
+          });
       }).catch((error) => {
         // Not much we can do with an error. Set to an empty pageMap.
         console.log.bind(console);
