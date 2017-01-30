@@ -67,6 +67,17 @@ export class PageStore {
   }
 
   /**
+   * Get a Page/PageFolder object.
+   *
+   * @param {string} pageId - ID of the Page to return.
+   *
+   * @returns {Page|PageFolder} Object with the specified ID.
+   */
+  getPage(pageId) {
+    return this.pageMap.get(pageId);
+  }
+
+  /**
    * @returns {Array.<Page|PageFolder>} Array of Page objects in the pageMap.
    */
   getPageList() {

@@ -45,8 +45,11 @@ export class Main {
         break;
 
       case actionEnum.SHOW_DIFF:
-        this._loadPageIntoIframe(params.get(paramEnum.ID));
+      {
+        const page = this.pageStore.getPage(params.get(paramEnum.ID));
+        this._loadPageIntoIframe(page);
         break;
+      }
     }
   }
 
