@@ -85,6 +85,8 @@ function getScanList(pageList) {
   for (const item of pageList) {
     if (isAutoscanPending(item)) {
       scanList.push(item);
+      item.lastAutoscanTime = Date.now();
+      item.save();
     }
   }
   return scanList;

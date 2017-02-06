@@ -90,6 +90,7 @@ describe('autoscan', function() {
                                     lastAutoscanTime: Date.now()}),
                     ];
       spyOn(PageStore.prototype, 'getPageList').and.returnValues(pages);
+      spyOn(Page.prototype, 'save');
       spyOn(scan, 'scan').and.returnValues(Promise.resolve());
       spyOn(console, 'log');
       jasmine.clock().tick(20 * 60 * 1000);
@@ -109,6 +110,7 @@ describe('autoscan', function() {
                                   lastAutoscanTime: Date.now()}),
                     ];
       spyOn(PageStore.prototype, 'getPageList').and.returnValues(pages);
+      spyOn(Page.prototype, 'save');
       spyOn(scan, 'scan').and.returnValues(Promise.resolve());
       spyOn(console, 'log');
 
@@ -130,6 +132,7 @@ describe('autoscan', function() {
       const pages = [pageToScan, pageNotToScan];
 
       spyOn(PageStore.prototype, 'getPageList').and.returnValues(pages);
+      spyOn(Page.prototype, 'save');
       spyOn(scan, 'scan').and.returnValues(Promise.resolve());
       spyOn(console, 'log');
 
@@ -137,6 +140,46 @@ describe('autoscan', function() {
 
       autoscan.__.onAlarm({name: 'updatescanner-autoscan'}).then(() => {
         expect(scan.scan).toHaveBeenCalledWith([pageToScan]);
+        done();
+      }).catch((error) => done.fail(error));
+    });
+
+    it('updates lastAutoscanTime when a page is scanned', function(done) {
+      const pages = [new Page(1, {url: 'http://example.com',
+                                    scanRateMinutes: 15,
+                                    lastAutoscanTime: Date.now()}),
+                    ];
+      spyOn(PageStore.prototype, 'getPageList').and.returnValues(pages);
+      spyOn(scan, 'scan').and.returnValues(Promise.resolve());
+      spyOn(console, 'log');
+      jasmine.clock().tick(20 * 60 * 1000);
+
+      let savedLastAutoscanTime = undefined;
+      spyOn(Page.prototype, 'save').and.callFake(() => {
+        savedLastAutoscanTime = pages[0].lastAutoscanTime;
+      });
+
+      autoscan.__.onAlarm({name: 'updatescanner-autoscan'}).then(() => {
+        expect(Page.prototype.save).toHaveBeenCalled();
+        expect(savedLastAutoscanTime).toEqual(Date.now());
+        done();
+      }).catch((error) => done.fail(error));
+    });
+
+    it('doesn\'t update lastAutoscanTime if a page is skipped', function(done) {
+      const pages = [new Page(1, {url: 'http://example.com',
+                                    scanRateMinutes: 30,
+                                    lastAutoscanTime: Date.now()}),
+                    ];
+      spyOn(PageStore.prototype, 'getPageList').and.returnValues(pages);
+      spyOn(scan, 'scan').and.returnValues(Promise.resolve());
+      spyOn(console, 'log');
+      jasmine.clock().tick(20 * 60 * 1000);
+
+      spyOn(Page.prototype, 'save');
+
+      autoscan.__.onAlarm({name: 'updatescanner-autoscan'}).then(() => {
+        expect(Page.prototype.save).not.toHaveBeenCalled();
         done();
       }).catch((error) => done.fail(error));
     });
