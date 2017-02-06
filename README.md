@@ -16,13 +16,15 @@ Clone the source and install all dependencies:
 # TODO
 
 * [X] Popup
-* [ ] Diffing
+* [X] Diffing
 * [ ] Header for main.html
 * [ ] Hook up Old/New/Diff
 * [ ] New/Edit Page
 * [ ] Notification on storage change
 * [X] MVCify popup.js
 * [ ] MVCify main.js
-* [ ] ES6 Modules everywhere - remove classes
+* [ ] ES6 Modules everywhere - remove classes as needed
+  * [ ] Default Exports where possible
+  * [ ] Filenames to match export names
 * [ ] Sidebar support (once implemented in FF)
 * [ ] E2E testing
