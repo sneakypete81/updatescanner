@@ -108,6 +108,7 @@ function updatePageState(page, prevHtml, scannedHtml) {
       if (page.state != Page.stateEnum.CHANGED) {
         // This is a newly detected change, so update the old HTML.
         PageStore.saveHtml(page.id, PageStore.htmlTypes.OLD, prevHtml);
+        page.oldScanTime = page.newScanTime;
       }
       PageStore.saveHtml(page.id, PageStore.htmlTypes.NEW, scannedHtml);
       page.state = Page.stateEnum.CHANGED;
@@ -120,6 +121,7 @@ function updatePageState(page, prevHtml, scannedHtml) {
       }
       break;
   }
+  page.newScanTime = Date.now();
   page.error = false;
   page.errorMessage = '';
 
