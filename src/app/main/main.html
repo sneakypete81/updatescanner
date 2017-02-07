@@ -10,16 +10,25 @@
 
 <body>
   <div id="content">
-
-    <div id="sidebar" border=1>
+    <div id="sidebar">
       <div id="tree"></div>
       <a href="/app/debug_storage/debug_storage.html">Storage API</a>
     </div>
 
-    <div id="main" border=1>
-      <!-- iframe is inserted here -->
-    </div>
+    <div id="main">
+      <div id="header">
+        <div id="icon"></div>
+        <div>
+          <h1>
+            <a id="title"></a></h1>
+          </h1>
+          <div id="subtitle"></div>
+        </div>
+      </div>
 
+      <div id="frameContainer"></div>
+
+    </div>
   </div>
 
   <!-- Output script from webpack -->

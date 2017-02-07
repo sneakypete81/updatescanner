@@ -1,3 +1,4 @@
+import * as view from 'main/main_view';
 import {paramEnum, actionEnum} from 'main/main_url';
 import {Sidebar} from 'main/sidebar';
 import {PageStore} from 'page/page_store';
@@ -47,7 +48,7 @@ export class Main {
       case actionEnum.SHOW_DIFF:
       {
         const page = this.pageStore.getPage(params.get(paramEnum.ID));
-        this._loadPageIntoIframe(page);
+        this._viewDiff(page);
         break;
       }
     }
@@ -60,20 +61,21 @@ export class Main {
    */
   _handleSelect(item) {
     if (item instanceof Page) {
-      this._loadPageIntoIframe(item);
+      this._viewDiff(item);
     }
   }
 
   /**
-   * Load the HTML of the specified page, then insert it into the iframe.
+   * View the page as a diff. Load the HTMLs of the specified page, perform a
+   * diff, then insert it into the iframe.
    *
-   * @param {type} page - Page object to load.
+   * @param {type} page - Page object to view.
    */
-  _loadPageIntoIframe(page) {
+  _viewDiff(page) {
     this._loadHtml(page.id, PageStore.htmlTypes.OLD).then((oldHtml) => {
       this._loadHtml(page.id, PageStore.htmlTypes.NEW).then((newHtml) => {
         const diffHtml = diff(page, oldHtml, newHtml);
-        this._loadIframe(diffHtml);
+        view.viewDiff(page, diffHtml);
       });
     }).catch(console.log.bind(console));
   }
@@ -94,29 +96,5 @@ export class Main {
         }
         return html;
       });
-  }
-
-  /**
-   * Creates a content iframe and inserts it into the main content area.
-   *
-   * @param {string} html - HTML to load.
-   */
-  _loadIframe(html) {
-    this._removeIframe();
-    const iframe = document.createElement('iframe');
-    iframe.id = 'frame';
-    iframe.sandbox = '';
-    iframe.srcdoc = html;
-    document.querySelector('#main').appendChild(iframe);
-  }
-
-  /**
-   * Remove the iframe from the DOM, if it exists.
-   */
-  _removeIframe() {
-    const iframe = document.querySelector('#frame');
-    if (iframe) {
-      iframe.parentNode.removeChild(iframe);
-    }
   }
 }
