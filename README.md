@@ -14,14 +14,13 @@ Clone the source and install all dependencies:
     npm install grunt-cli --global
 
 # TODO
-
-* [X] Popup
-* [X] Diffing
-* [X] Header for main.html
+* [x] Popup
+* [x] Diffing
+* [x] Header for main.html
 * [ ] Hook up Old/New/Diff
 * [ ] New/Edit Page
 * [ ] Notification on storage change
-* [X] MVCify popup.js
+* [x] MVCify popup.js
 * [ ] MVCify main.js
 * [ ] ES6 Modules everywhere - remove classes as needed
   * [ ] Default Exports where possible
