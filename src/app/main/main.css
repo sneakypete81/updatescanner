@@ -3,10 +3,6 @@ html, body {
   margin: 0;
 }
 
-h1 {
-  font-size: 20px;
-}
-
 #content {
   position: relative;
   width: 100%;
@@ -31,20 +27,51 @@ h1 {
 }
 
 #header {
-  padding-left: 1em;
+  padding: 1em;
+  border-bottom: #d3d3d3 solid 1px;
+  background-color: #fbfbfb;
+}
+
+#header > div {
   display: inline-block;
+  vertical-align: top;
+}
+
+h1 {
+  font-size: 20px;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 #icon {
   height: 48px;
   width: 48px;
+  margin-right: 10px;
   background-image: url('/images/updatescanner_48.png');
   background-position: center center;
   background-repeat: no-repeat;
 }
 
-#title {
-  vertical-align: top;
+#subtitle {
+  color: #595959;
+}
+
+#menuButton {
+  height: 24px;
+  width: 24px;
+  float: right;
+  background-image: url('/images/options.png');
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 
 #frameContainer {

@@ -17,7 +17,7 @@ Clone the source and install all dependencies:
 
 * [X] Popup
 * [X] Diffing
-* [ ] Header for main.html
+* [X] Header for main.html
 * [ ] Hook up Old/New/Diff
 * [ ] New/Edit Page
 * [ ] Notification on storage change
