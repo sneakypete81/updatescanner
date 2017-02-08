@@ -6,6 +6,7 @@ module.exports = {
 
   watch: {
     watch: true,
+    failOnError: false,
   },
 
   options: {
