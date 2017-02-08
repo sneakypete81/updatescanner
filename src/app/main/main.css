@@ -23,22 +23,39 @@ html, body {
   margin-left: 250px;
   border-left: solid 2px lightgrey;
   height: 100%;
+  /* Don't scroll main, just the internal frame */
+  /* @TODO: need to do something similar for x */
   overflow-y: hidden;
 }
 
 #header {
   padding: 1em;
-  border-bottom: #d3d3d3 solid 1px;
+  border-bottom: #d4d4d4 solid 1px;
   background-color: #fbfbfb;
+  /* prevent text reflow */
+  white-space: nowrap;
 }
 
+/* Horizontal placement of icon and title/subtitle */
 #header > div {
   display: inline-block;
   vertical-align: top;
 }
 
+#icon {
+  height: 48px;
+  width: 48px;
+  margin-top: 5px;
+  margin-right: 10px;
+  background-image: url('/images/updatescanner_48.png');
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
 h1 {
-  font-size: 20px;
+  /* Place menu button beside the title */
+  display: inline-block;
+  font-size: 22px;
   margin-top: 0;
   margin-bottom: 10px;
 }
@@ -52,26 +69,51 @@ a:hover {
   text-decoration: underline;
 }
 
-#icon {
-  height: 48px;
-  width: 48px;
-  margin-right: 10px;
-  background-image: url('/images/updatescanner_48.png');
-  background-position: center center;
-  background-repeat: no-repeat;
-}
-
-#subtitle {
-  color: #595959;
+.menu-container {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 5px;
 }
 
 #menuButton {
   height: 24px;
   width: 24px;
-  float: right;
   background-image: url('/images/options.png');
   background-position: center center;
   background-repeat: no-repeat;
+  border: none;
+}
+
+/* Menu content, hidden by default */
+.menu-content {
+  display: none;
+  position: absolute;
+  padding: inherit;
+  margin: inherit;
+  margin-top: 2px;
+  background-color: #fbfbfb;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.menu-content li {
+  padding: 5px 15px;
+  display: block;
+}
+
+.menu-content li:hover {
+  background-color: #e3e3e3;
+}
+
+/* Show the dropdown menu */
+.menu-show {
+  display:block;
+}
+
+#subtitle {
+  color: #595959;
 }
 
 #frameContainer {

@@ -1,5 +1,24 @@
-import {qs} from 'util/view_helpers';
+import {qs, $on} from 'util/view_helpers';
 import {timeSince} from 'util/date_format';
+
+/**
+ */
+export function bindMenu() {
+  const menu = qs('#menu');
+
+  // Toggle the menu when its button is clicked
+  $on(qs('#menuButton'), 'click', (event) => {
+    menu.classList.toggle('menu-show');
+    event.stopPropagation();
+  });
+
+  // Hide the menu when something else is clicked
+  $on(window, 'click', ({target}) => {
+    if (menu.classList.contains('menu-show')) {
+      menu.classList.remove('menu-show');
+    }
+  });
+}
 
 /**
  * Show the diff view of the specified page.
@@ -16,7 +35,6 @@ export function viewDiff(page, diffHtml) {
   }
   loadIframe(diffHtml);
 }
-
 
 /**
  * @param {string} title - Title of the page.

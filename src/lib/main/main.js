@@ -25,6 +25,8 @@ export class Main {
   init() {
     PageStore.load().then((pageStore) => {
       this.pageStore = pageStore;
+      view.bindMenu();
+
       this.sidebar.load(pageStore.pageMap, PageStore.ROOT_ID);
       this.sidebar.registerSelectHandler((evt, data) =>
                                          this._handleSelect(evt, data));
