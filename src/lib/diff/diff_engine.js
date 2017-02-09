@@ -176,21 +176,21 @@ WDiffString : function(oldText, newText, highlightColour, startMarker, endMarker
     me.wDiffHtmlInsertEnd = endMarker + '</span>';
 
 
-// trap trivial changes: no change
+// trap trivial changes:
+    if (newText === undefined) {
+        return '';
+    }
+
+    if (oldText === undefined) {
+        return newText;
+    }
+
     if (oldText == newText) {
         outText = newText;
         outText = me._WDiffEscape(outText);
         outText = me._WDiffHtmlFormat(outText);
         return(outText);
     }
-
-  if (newText === undefined) {
-    return '';
-  }
-
-  if (oldText === undefined) {
-    return newText;
-  }
 
 // remove everything up to the body start
     var bodyPos = newText.search(/<body/i);
