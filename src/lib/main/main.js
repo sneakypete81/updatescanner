@@ -13,26 +13,30 @@ export class Main {
    * @property {Sidebar} sidebar - Object representing the sidebar element.
    * @property {PageStore} pageStore - Object used for saving and loading data
    * from storage.
+   * @property {Page} currentPage - Currently selected page.
+   * @property {view.ViewTypes} viewType - Currently selected view type.
    */
   constructor() {
     this.sidebar = new Sidebar('#tree');
     this.pageStore = undefined;
+    this.currentPage = undefined;
+    this.viewType = view.ViewTypes.DIFF;
   }
 
   /**
    * Initialises the main page's sidebar and content iframe.
    */
-  init() {
-    PageStore.load().then((pageStore) => {
-      this.pageStore = pageStore;
-      view.bindMenu();
+  async init() {
+    this.pageStore = await PageStore.load();
 
-      this.sidebar.load(pageStore.pageMap, PageStore.ROOT_ID);
-      this.sidebar.registerSelectHandler((evt, data) =>
-                                         this._handleSelect(evt, data));
+    view.bindMenu();
+    view.bindViewDropdownChange(this._handleViewDropdownChange.bind(this));
 
-      this._handleUrlParams(window.location.search);
-    });
+    this.sidebar.load(this.pageStore.pageMap, PageStore.ROOT_ID);
+    this.sidebar.registerSelectHandler((evt, data) =>
+                                       this._handleSelect(evt, data));
+
+    this._handleUrlParams(window.location.search);
   }
 
   /**
@@ -49,8 +53,8 @@ export class Main {
 
       case actionEnum.SHOW_DIFF:
       {
-        const page = this.pageStore.getPage(params.get(paramEnum.ID));
-        this._viewDiff(page);
+        this.currentPage = this.pageStore.getPage(params.get(paramEnum.ID));
+        this._refreshView();
         break;
       }
     }
@@ -63,40 +67,81 @@ export class Main {
    */
   _handleSelect(item) {
     if (item instanceof Page) {
-      this._viewDiff(item);
+      this.currentPage = item;
+      this.viewType = view.ViewTypes.DIFF;
+      this._refreshView();
     }
   }
 
   /**
-   * View the page as a diff. Load the HTMLs of the specified page, perform a
-   * diff, then insert it into the iframe.
+   * Called whenever the view dropdown selection changes.
    *
-   * @param {type} page - Page object to view.
+   * @param {view.ViewTypes} viewType - New value of the dropdown.
    */
-  _viewDiff(page) {
-    this._loadHtml(page.id, PageStore.htmlTypes.OLD).then((oldHtml) => {
-      this._loadHtml(page.id, PageStore.htmlTypes.NEW).then((newHtml) => {
-        const diffHtml = diff(page, oldHtml, newHtml);
-        view.viewDiff(page, diffHtml);
-      });
-    }).catch(console.log.bind(console));
+  _handleViewDropdownChange(viewType) {
+    this.viewType = viewType;
+    this._refreshView();
   }
 
   /**
-   * Loads the specified Page HTML from the PageStore.
-   *
-   * @param {string} id - ID of the Page to load.
-   * @param {string} htmlType - PageStore.htmlTypes string identifying the HTML
-   * type.
-   * @returns {Promise} A Promise to be fulfilled with the requested HTML.
+   * Refreshes the view, reloading any necessary HTML from storage.
    */
-  _loadHtml(id, htmlType) {
-    return PageStore.loadHtml(id, htmlType)
-      .then(function(html) {
-        if (html === undefined) {
-          throw Error('Could not load "' + id + '" changes HTML from storage');
-        }
-        return html;
-      });
+  async _refreshView() {
+    switch (this.viewType) {
+      case view.ViewTypes.OLD:
+      {
+        const html = await loadHtml(this.currentPage,
+          PageStore.htmlTypes.OLD) || '';
+        view.viewOld(this.currentPage, html);
+        break;
+      }
+
+      case view.ViewTypes.NEW:
+      {
+        const html = await loadHtml(this.currentPage,
+          PageStore.htmlTypes.NEW) || '';
+        view.viewNew(this.currentPage, html);
+        break;
+      }
+
+      case view.ViewTypes.DIFF:
+      default:
+      {
+        const html = await loadDiff(this.currentPage);
+        view.viewDiff(this.currentPage, html);
+      }
+    }
   }
+}
+
+/**
+ * Load the HTMLs of the specified page, perform a diff and return the
+ * highlighted HTML.
+ *
+ * @param {Page} page - Page object to load.
+ *
+ * @returns {Promise} A promise that fulfils with the highlighted HTML string.
+ */
+async function loadDiff(page) {
+  const oldHtml = await loadHtml(page, PageStore.htmlTypes.OLD);
+  const newHtml = await loadHtml(page, PageStore.htmlTypes.NEW);
+  return diff(page, oldHtml, newHtml);
+}
+
+/**
+ * Loads the specified Page HTML from the PageStore.
+ *
+ * @param {Page} page - Page to load.
+ * @param {string} htmlType - PageStore.htmlTypes string identifying the HTML
+ * type.
+ * @returns {Promise} A Promise to be fulfilled with the requested HTML, or
+ * undefined if the HTML does not exist in storage.
+ */
+async function loadHtml(page, htmlType) {
+  const html = await PageStore.loadHtml(page.id, htmlType);
+
+  if (html === undefined) {
+    console.log(`Could not load '${page.title}' ${htmlType} HTML from storage`);
+  }
+  return html;
 }

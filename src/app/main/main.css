@@ -32,8 +32,6 @@ html, body {
   padding: 1em;
   border-bottom: #d4d4d4 solid 1px;
   background-color: #fbfbfb;
-  /* prevent text reflow */
-  white-space: nowrap;
 }
 
 /* Horizontal placement of icon and title/subtitle */
@@ -114,6 +112,11 @@ a:hover {
 
 #subtitle {
   color: #595959;
+}
+
+#view-dropdown {
+  float: right;
+  margin-top: 30px;
 }
 
 #frameContainer {

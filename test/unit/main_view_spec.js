@@ -12,12 +12,14 @@ describe('main_view', function() {
   beforeEach(function() {
     this.title = addElement('div', 'title');
     this.subtitle = addElement('div', 'subtitle');
+    this.viewDropdown = addElement('select', 'view-dropdown');
     this.frameContainer = addElement('div', 'frameContainer');
   });
 
   afterEach(function() {
     this.title.remove();
     this.subtitle.remove();
+    this.viewDropdown.remove();
     this.frameContainer.remove();
   });
 

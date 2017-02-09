@@ -1,6 +1,12 @@
 import {qs, $on} from 'util/view_helpers';
 import {timeSince} from 'util/date_format';
 
+export const ViewTypes = {
+  OLD: 'old',
+  NEW: 'new',
+  DIFF: 'diff',
+};
+
 /**
  */
 export function bindMenu() {
@@ -21,19 +27,63 @@ export function bindMenu() {
 }
 
 /**
+ * @param {Function} handler - Called when the View Dropdown choice changes.
+ */
+export function bindViewDropdownChange(handler) {
+  $on(qs('#view-dropdown'), 'change', ({target}) => {
+    if (target.value) {
+      handler(target.value);
+    }
+  });
+}
+
+/**
  * Show the diff view of the specified page.
  *
  * @param {Page} page - Page object to view.
- * @param {tring} diffHtml - HTML string with diff highlighting.
+ * @param {string} html - HTML string with diff highlighting.
  */
-export function viewDiff(page, diffHtml) {
+export function viewDiff(page, html) {
   setTitle(page.title, page.url);
   if (page.newScanTime !== undefined) {
     const scanTime = timeSince(new Date(page.newScanTime));
     setSubtitle(`This page was last scanned ${scanTime}. ` +
       'The changes are highlighted.');
   }
-  loadIframe(diffHtml);
+  setViewDropdown(ViewTypes.DIFF);
+  loadIframe(html);
+}
+
+/**
+ * Show the old view of the specified page.
+ *
+ * @param {Page} page - Page object to view.
+ * @param {string} html - Old HTML string.
+ */
+export function viewOld(page, html) {
+  setTitle(page.title, page.url);
+  if (page.oldScanTime !== undefined) {
+    const scanTime = timeSince(new Date(page.oldScanTime));
+    setSubtitle(`This is the old version of the page, scanned ${scanTime}.`);
+  }
+  setViewDropdown(ViewTypes.OLD);
+  loadIframe(html);
+}
+
+/**
+ * Show the new view of the specified page.
+ *
+ * @param {Page} page - Page object to view.
+ * @param {string} html - New HTML string.
+ */
+export function viewNew(page, html) {
+  setTitle(page.title, page.url);
+  if (page.newScanTime !== undefined) {
+    const scanTime = timeSince(new Date(page.newScanTime));
+    setSubtitle(`This is the new version of the page, scanned ${scanTime}.`);
+  }
+  setViewDropdown(ViewTypes.NEW);
+  loadIframe(html);
 }
 
 /**
@@ -53,6 +103,14 @@ function setTitle(title, url) {
 function setSubtitle(subtitle) {
   const subtitleElement = qs('#subtitle');
   subtitleElement.textContent = subtitle;
+}
+
+/**
+ * @param {ViewTypes} viewType - New value of the dropdown selection.
+ */
+function setViewDropdown(viewType) {
+  const viewDropdown = qs('#view-dropdown');
+  viewDropdown.value = viewType;
 }
 
 /**

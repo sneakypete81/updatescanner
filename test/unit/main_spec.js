@@ -45,7 +45,7 @@ describe('Main', function() {
       spyOn(mainView, 'viewDiff');
       spyOn(Storage, 'load').and.returnValues(Promise.resolve(undefined));
       spyOn(console, 'log').and.callFake((msg) => {
-        expect(msg).toMatch('Error:');
+        expect(msg).toMatch('Could not load .* from storage');
         expect(mainView.viewDiff).not.toHaveBeenCalled();
         done();
       });

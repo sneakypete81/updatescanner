@@ -17,7 +17,7 @@ Clone the source and install all dependencies:
 * [x] Popup
 * [x] Diffing
 * [x] Header for main.html
-* [ ] Hook up Old/New/Diff
+* [x] Hook up Old/New/Diff
 * [ ] New/Edit Page
 * [ ] Notification on storage change
 * [x] MVCify popup.js
