@@ -50,21 +50,17 @@ export class PageStore {
    * @returns {Promise} A Promise that returns a PageStore instance with a
    * fully populated pageMap.
    */
-  static load() {
-    // Return a promise to first load the list of Page & PageFolder IDs
-    return StorageInfo.load()
-      .then((storageInfo) => {
-        // Then load all Pages and PageFolders into a Map
-        return PageStore._generatePageMap(storageInfo.pageIds,
-                                        storageInfo.pageFolderIds)
-          .then((pageMap) => {
-            return new PageStore(pageMap, storageInfo);
-          });
-      }).catch((error) => {
-        // Not much we can do with an error. Set to an empty pageMap.
-        console.log.bind(console);
-        return new PageStore(PageStore.ROOT_PAGE_MAP, {});
-      });
+  static async load() {
+    const storageInfo = await StorageInfo.load();
+    try {
+      const pageMap = await PageStore._generatePageMap(storageInfo.pageIds,
+        storageInfo.pageFolderIds);
+      return new PageStore(pageMap, storageInfo);
+    } catch(error) {
+      // Not much we can do with an error. Set to an empty pageMap.
+      console.log.bind(console);
+      return new PageStore(PageStore.ROOT_PAGE_MAP, {});
+    }
   }
 
   /**
@@ -96,7 +92,7 @@ export class PageStore {
    * @returns {Promise} A Promise that resolves to the pageMap once all objects
    * have been loaded.
    */
-  static _generatePageMap(pageIds, pageFolderIds) {
+  static async _generatePageMap(pageIds, pageFolderIds) {
     const promises = [];
     const pageMap = new Map();
 
@@ -109,17 +105,15 @@ export class PageStore {
     }
 
     // Resolve all promises, adding the results to the pageMap
-    return Promise.all(promises).then((items) => {
-      for (const item of items) {
-        pageMap.set(item.id, item);
-      }
+    const items = await Promise.all(promises);
+    for (const item of items) {
+      pageMap.set(item.id, item);
+    }
 
-      if (pageMap.size > 0) {
-        return pageMap;
-      } else {
-        return PageStore.ROOT_PAGE_MAP;
-      }
-    });
+    if (pageMap.size == 0) {
+      return PageStore.ROOT_PAGE_MAP;
+    }
+    return pageMap;
   }
 
   /**

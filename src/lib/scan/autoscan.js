@@ -1,6 +1,7 @@
 import {scan} from 'scan/scan';
 import {PageStore} from 'page/page_store';
 import {Config} from 'util/config';
+import {log} from 'util/log';
 
 const ALARM_ID = 'updatescanner-autoscan';
 const ALARM_TIMING = {delayInMinutes: 1, periodInMinutes: 5};
@@ -12,13 +13,12 @@ const DEBUG_ALARM_TIMING = {delayInMinutes: 0.1, periodInMinutes: 0.5};
  * @returns {Promise} Empty promise that resolves when initialisation is
  * complete.
  */
-export function start() {
-  return Config.loadSingleSetting('debug').then((debug) => {
-    stopAlarm();
-    startAlarm(debug);
-    browser.alarms.onAlarm.addListener(
-      (alarm) => onAlarm(alarm));
-  });
+export async function start() {
+  const debug = await Config.loadSingleSetting('debug');
+  stopAlarm();
+  startAlarm(debug);
+  browser.alarms.onAlarm.addListener((alarm) => onAlarm(alarm));
+  return {};
 }
 
 /**
@@ -47,18 +47,17 @@ function stopAlarm() {
  * @returns {Promise} A Promise that resolves when the autoscan is
  * complete. This will be ignored by the caller, but is useful for testing..
  */
-function onAlarm(alarm) {
+async function onAlarm(alarm) {
   if (alarm.name == ALARM_ID) {
-    return loadPageList().then((pageList) => {
-      const scanList = getScanList(pageList);
-      if (scanList.length > 0) {
-        console.log('Pages to autoscan: ' + scanList.length);
-        scan(scanList).then(() => {
-          console.log('Autoscan complete.');
-        });
-      }
-    });
+    const pageList = await loadPageList();
+    const scanList = getScanList(pageList);
+    if (scanList.length > 0) {
+      log(`Pages to autoscan: ${scanList.length}`);
+      await scan(scanList);
+      log('Autoscan complete.');
+    }
   }
+  return {};
 }
 
 /**
@@ -67,9 +66,9 @@ function onAlarm(alarm) {
  * @returns {Promise} A promise that returns the full list of Pages
  * (and PageFolders).
  */
-function loadPageList() {
-  return PageStore.load().then(
-    (pageStore) => pageStore.getPageList());
+async function loadPageList() {
+  const pageStore = await PageStore.load();
+  return pageStore.getPageList();
 }
 
 /**

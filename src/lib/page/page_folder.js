@@ -1,4 +1,5 @@
 import {Storage} from 'util/storage';
+import {log} from 'util/log';
 
 /**
  * Class representing a folder of Pages.
@@ -41,13 +42,14 @@ export class PageFolder {
    *
    * @returns {Promise} A Promise that fulfils with a PageFolder object.
    */
-  static load(id) {
-    return Storage.load(PageFolder._KEY(id)).then((data) => {
+  static async load(id) {
+    try {
+      const data = await Storage.load(PageFolder._KEY(id));
       return new PageFolder(id, data);
-    }).catch((error) => {
-      console.log('ERROR:PageFolder.load:' + error);
+    } catch(error) {
+      log(`ERROR: PageFolder.load: ${error}`);
       return new PageFolder(id);
-    });
+    }
   }
 
   /**
@@ -56,8 +58,12 @@ export class PageFolder {
    * @returns {Promise} An empty Promise that fulfils when the operation is
    * finished. Errors are logged and ignored.
    */
-  save() {
-    return Storage.save(PageFolder._KEY(this.id), this._toObject())
-      .catch((error) => console.log('ERROR:PageFolder.save:' + error));
+  async save() {
+    try {
+      await Storage.save(PageFolder._KEY(this.id), this._toObject());
+    } catch(error) {
+      log(`ERROR: PageFolder.save: ${error}`);
+    }
+    return {};
   }
 }

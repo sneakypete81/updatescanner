@@ -33,13 +33,9 @@ export class Config {
    * @returns {Promise} A promise that fulfils with the requested config
    * setting.
    */
-  static loadSingleSetting(name) {
-    return Storage.load('config').then((storageData) => {
-      if (storageData === undefined) {
-        storageData = {};
-      }
-      return Config._getWithDefault(storageData, name);
-    });
+  static async loadSingleSetting(name) {
+    const storageData = await Storage.load('config') || {};
+    return Config._getWithDefault(storageData, name);
   }
   /**
    * Load the configuration settings from storage.
@@ -47,19 +43,14 @@ export class Config {
    * @returns {Promise} A Promise that fulfils with this object (for chaining),
    * or is rejected if the storage operation fails.
    */
-  load() {
-    return Storage.load('config').then((storageData) => {
-      if (storageData === undefined) {
-        this._data = {};
-      } else {
-        this._data = storageData;
-      }
-      if (!this._listening) {
-        Storage.addListener(this._storageChangeHandler);
-        this._listening = true;
-      }
-      return this;
-    });
+  async load() {
+    this._data = await Storage.load('config') || {};
+
+    if (!this._listening) {
+      Storage.addListener(this._storageChangeHandler);
+      this._listening = true;
+    }
+    return this;
   }
 
   /**

@@ -1,4 +1,5 @@
 import {Storage} from 'util/storage';
+import {log} from 'util/log';
 
 /**
  * Class representing a information about the stored pages.
@@ -45,13 +46,14 @@ export class StorageInfo {
    *
    * @returns {Promise} A Promise that fulfils with a StorageInfo object.
    */
-  static load() {
-    return Storage.load(StorageInfo._KEY).then((data) => {
+  static async load() {
+    try {
+      const data = await Storage.load(StorageInfo._KEY);
       return new StorageInfo(data);
-    }).catch((error) => {
-      console.log('ERROR:StorageInfo.load:' + error);
+    } catch (error) {
+      log(`ERROR:StorageInfo.load: ${error}`);
       return new StorageInfo();
-    });
+    }
   }
 
   /**
@@ -60,8 +62,12 @@ export class StorageInfo {
    * @returns {Promise} An empty Promise that fulfils when the operation is
    * finished. Errors are logged and ignored.
    */
-  save() {
-    return Storage.save(StorageInfo._KEY, this._toObject())
-      .catch((error) => console.log('ERROR:StorageInfo.save:' + error));
+  async save() {
+    try {
+      await Storage.save(StorageInfo._KEY, this._toObject());
+    } catch(error) {
+      log(`ERROR:StorageInfo.save: ${error}`);
+    }
+    return {};
   }
 }

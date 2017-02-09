@@ -1,6 +1,7 @@
 import {isMajorChange} from 'scan/fuzzy';
 import {PageStore} from 'page/page_store';
 import {Page} from 'page/page';
+import {log} from 'util/log';
 
 /**
  * Enumeration indicating the similarity of two HTML strings.
@@ -23,16 +24,11 @@ const changeEnum = {
  * @returns {Promise} An empty promise that fulfills once all pages have been
  * scanned and updated.
  */
-export function scan(pageList) {
-  // Construct a chain of Promises to scan each Page sequentially.
-  let promiseChain = Promise.resolve(null);
-  pageList.forEach((page) => {
-    // The 'then' clause needs a dummy parameter to keep the chain sequential.
-    promiseChain = promiseChain.then((_) => {
-      return scanPage(page);
-    });
-  });
-  return promiseChain;
+export async function scan(pageList) {
+  for (const page of pageList) {
+    await scanPage(page);
+  }
+  return {};
 }
 
 /**
@@ -45,26 +41,20 @@ export function scan(pageList) {
  * @returns {Promise} Promise that fulfils once the page has been scanned and
  * updated.
  */
-function scanPage(page) {
-  // Function to check the status of a fetch response.
-  const checkStatus = function(response) {
-    if (response.ok) {
-      return Promise.resolve(response);
-    } else {
-      return Promise.reject('[' + response.status + '] '
-                            + response.statusText);
+async function scanPage(page) {
+  try {
+    const response = await fetch(page.url);
+    if (!response.ok) {
+      throw Error(`[${response.status}] ${response.statusText}`);
     }
-  };
 
-  return fetch(page.url)
-    .then(checkStatus)
-    .then((response) => response.text())
-    .then((html) => processHtml(page, html))
-    .catch((error) => {
-      console.log('Could not scan "' + page.title + '": ' + error);
-      page.error = true;
-      page.errorMessage = error;
-    });
+    const html = await response.text();
+    return processHtml(page, html);
+  } catch(error) {
+    log(`Could not scan "${page.title}": ${error}`);
+    page.error = true;
+    page.errorMessage = error.toString();
+  }
 }
 
 /**
@@ -78,10 +68,9 @@ function scanPage(page) {
  * @param {Page} page - Page object to update.
  * @param {string} scannedHtml - HTML to process.
  */
-function processHtml(page, scannedHtml) {
-  PageStore.loadHtml(page.id, PageStore.htmlTypes.NEW).then((prevHtml) => {
-    updatePageState(page, prevHtml, scannedHtml);
-  });
+async function processHtml(page, scannedHtml) {
+  const prevHtml = await PageStore.loadHtml(page.id, PageStore.htmlTypes.NEW);
+  updatePageState(page, prevHtml, scannedHtml);
 }
 
 /**

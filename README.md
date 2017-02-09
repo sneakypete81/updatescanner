@@ -25,5 +25,6 @@ Clone the source and install all dependencies:
 * [ ] ES6 Modules everywhere - remove classes as needed
   * [ ] Default Exports where possible
   * [ ] Filenames to match export names
+  * [ ] async/await
 * [ ] Sidebar support (once implemented in FF)
 * [ ] E2E testing

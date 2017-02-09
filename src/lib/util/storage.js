@@ -25,14 +25,13 @@ export class Storage {
    * object. If the object doesn't exist, the promise returns undefined.
    * If the operation fails, the promise will be rejected.
    */
-  static load(key) {
-    return browser.storage.local.get(key).then((result) => {
-      if (key in result) {
-        return result[key];
-      } else {
-        return undefined;
-      }
-    });
+  static async load(key) {
+    const result = await browser.storage.local.get(key);
+    if (key in result) {
+      return result[key];
+    } else {
+      return undefined;
+    }
   }
 
   /**

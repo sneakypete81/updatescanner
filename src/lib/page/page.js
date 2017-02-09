@@ -1,4 +1,5 @@
 import {Storage} from 'util/storage';
+import {log} from 'util/log';
 
 /**
  * Class representing a webpage.
@@ -86,13 +87,14 @@ export class Page {
    *
    * @returns {Promise} A Promise that fulfils with a Page object.
    */
-  static load(id) {
-    return Storage.load(Page._KEY(id)).then((data) => {
+  static async load(id) {
+    try {
+      const data = await Storage.load(Page._KEY(id));
       return new Page(id, data);
-    }).catch((error) => {
-      console.log('ERROR:Page.load:' + error);
+    } catch(error) {
+      log(`ERROR: Page.load: ${error}`);
       return new Page(id);
-    });
+    }
   }
 
   /**
@@ -101,8 +103,12 @@ export class Page {
    * @returns {Promise} An empty Promise that fulfils when the operation is
    * finished. Errors are logged and ignored.
    */
-  save() {
-    return Storage.save(Page._KEY(this.id), this._toObject())
-      .catch((error) => console.log('ERROR:Page.save:' + error));
+  async save() {
+    try {
+      await Storage.save(Page._KEY(this.id), this._toObject());
+    } catch(error) {
+      log(`ERROR: Page.save: ${error}`);
+    }
+    return {};
   }
 }

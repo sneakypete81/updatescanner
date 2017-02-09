@@ -200,6 +200,7 @@ describe('scan', function() {
       spyOn(window, 'fetch').and.returnValues(
         Promise.resolve({ok: true, text: () => html}));
       spyOn(PageStore, 'loadHtml').and.returnValues(Promise.resolve(html));
+      spyOn(Page.prototype, 'save');
 
       scan.scan([page]).then(() => {
         expect(window.fetch).toHaveBeenCalledWith(page.url);
@@ -219,6 +220,7 @@ describe('scan', function() {
       spyOn(window, 'fetch').and.returnValue(
         Promise.resolve({ok: true, text: () => html}));
       spyOn(PageStore, 'loadHtml').and.returnValue(Promise.resolve(html));
+      spyOn(Page.prototype, 'save');
 
       scan.scan(pages).then(() => {
         expect(window.fetch).toHaveBeenCalledWith(pages[0].url);
@@ -254,7 +256,7 @@ describe('scan', function() {
         expect(window.fetch).toHaveBeenCalledWith(page.url);
         expect(PageStore.loadHtml).not.toHaveBeenCalled();
         expect(page.error).toEqual(true);
-        expect(page.errorMessage).toEqual('[404] no such page');
+        expect(page.errorMessage).toEqual('Error: [404] no such page');
         expect(console.matched).toEqual(true);
         done();
       }).catch((error) => done.fail(error));

@@ -18,16 +18,14 @@ export class Popup {
   /**
    * Initialises the popup data and event handlers.
    */
-  init() {
+  async init() {
     view.bindShowAllClick(this._handleShowAllClick.bind(this));
     view.bindNewClick(this._handleNewClick.bind(this));
     view.bindSidebarClick(this._handleSidebarClick.bind(this));
     view.bindPageClick(this._handlePageClick.bind(this));
 
-    PageStore.load().then((pageStore) => {
-      this.pageStore = pageStore;
-      this._refreshPageList();
-    });
+    this.pageStore = await PageStore.load();
+    this._refreshPageList();
   }
 
   /**

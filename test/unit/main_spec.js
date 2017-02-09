@@ -3,6 +3,7 @@ import {Page} from 'page/page';
 import {Storage} from 'util/storage';
 import * as diff from 'diff/diff';
 import * as mainView from 'main/main_view';
+import * as log from 'util/log';
 
 describe('Main', function() {
   beforeEach(function() {
@@ -39,18 +40,21 @@ describe('Main', function() {
     });
 
     it('logs to the console if the page\'s html isn\'t found', function(done) {
-      const id = '42';
+      const page = new Page(42, {});
       const main = new Main();
 
       spyOn(mainView, 'viewDiff');
-      spyOn(Storage, 'load').and.returnValues(Promise.resolve(undefined));
-      spyOn(console, 'log').and.callFake((msg) => {
+      spyOn(Storage, 'load').and.returnValue(Promise.resolve(undefined));
+
+      spyOn(log, 'log').and.callFake((msg) => {
         expect(msg).toMatch('Could not load .* from storage');
-        expect(mainView.viewDiff).not.toHaveBeenCalled();
-        done();
       });
 
-      main._handleSelect(new Page(id, {}));
+      main._handleSelect(page).then(() => {
+        expect(log.log).toHaveBeenCalled();
+        expect(mainView.viewDiff).toHaveBeenCalledWith(page, '');
+        done();
+      });
     });
   });
 });
