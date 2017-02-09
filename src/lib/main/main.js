@@ -4,6 +4,7 @@ import {Sidebar} from 'main/sidebar';
 import {PageStore} from 'page/page_store';
 import {Page} from 'page/page';
 import {diff} from 'diff/diff';
+import {log} from 'util/log';
 
 /**
  * Class representing the main Update Scanner content page.
@@ -143,7 +144,7 @@ async function loadHtml(page, htmlType) {
   const html = await PageStore.loadHtml(page.id, htmlType);
 
   if (html === undefined) {
-    console.log(`Could not load '${page.title}' ${htmlType} HTML from storage`);
+    log(`Could not load '${page.title}' ${htmlType} HTML from storage`);
   }
   return html;
 }

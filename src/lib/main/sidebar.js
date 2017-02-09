@@ -3,6 +3,7 @@ import 'jstree';
 
 import {Page} from 'page/page';
 import {PageFolder} from 'page/page_folder';
+import {log} from 'util/log';
 
 /**
  * Class representing the Update Scanner Sidebar.
@@ -57,7 +58,7 @@ export class Sidebar {
       } else if (child instanceof PageFolder) {
         result.children.push(this._generateTree(pageMap, child));
       } else {
-        console.log('Unknown node type: ' + child);
+        log('Unknown node type: ' + child);
       }
     }
     return result;

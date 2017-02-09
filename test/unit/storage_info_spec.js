@@ -1,5 +1,6 @@
 import {StorageInfo} from 'page/storage_info';
 import {Storage} from 'util/storage';
+import * as log from 'util/log';
 
 describe('StorageInfo', function() {
   describe('load', function() {
@@ -48,13 +49,13 @@ describe('StorageInfo', function() {
 
     it('returns default StorageInfo if the storage load fails', function(done) {
       spyOn(Storage, 'load').and.returnValues(Promise.reject('ERROR_MESSAGE'));
-      spyOn(console, 'log');
+      spyOn(log, 'log');
 
       StorageInfo.load().then((storageInfo) => {
         expect(storageInfo.version).toEqual(StorageInfo._VERSION);
         expect(storageInfo.pageIds).toEqual([]);
         expect(storageInfo.pageFolderIds).toEqual([]);
-        expect(console.log.calls.argsFor(0)).toMatch('ERROR_MESSAGE');
+        expect(log.log.calls.argsFor(0)).toMatch('ERROR_MESSAGE');
         done();
       })
       .catch((error) => done.fail(error));
@@ -79,10 +80,10 @@ describe('StorageInfo', function() {
 
     it('silently logs an error if the save fails', function(done) {
       spyOn(Storage, 'save').and.returnValues(Promise.reject('AN_ERROR'));
-      spyOn(console, 'log');
+      spyOn(log, 'log');
 
       new StorageInfo().save().then(() => {
-        expect(console.log.calls.argsFor(0)).toMatch('AN_ERROR');
+        expect(log.log.calls.argsFor(0)).toMatch('AN_ERROR');
         done();
       })
       .catch((error) => done.fail(error));

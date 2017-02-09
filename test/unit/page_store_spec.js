@@ -5,6 +5,7 @@ import {Page} from 'page/page';
 import {PageFolder} from 'page/page_folder';
 import {StorageInfo} from 'page/storage_info';
 import {Storage} from 'util/storage';
+import * as log from 'util/log';
 
 describe('PageStore', function() {
   const spyOnStorageLoadWithArgReturn = (returnMap) => {
@@ -210,11 +211,11 @@ describe('PageStore', function() {
     it('returns undefined when the load operation fails', function(done) {
       const id = '42';
       spyOn(Storage, 'load').and.returnValues(Promise.reject('ERROR_MSG'));
-      spyOn(console, 'log');
+      spyOn(log, 'log');
 
       PageStore.loadHtml(id, PageStore.htmlTypes.OLD).then((result) => {
         expect(result).toBeUndefined();
-        expect(console.log.calls.argsFor(0)).toMatch('ERROR_MSG');
+        expect(log.log.calls.argsFor(0)).toMatch('ERROR_MSG');
         done();
       })
       .catch((error) => done.fail(error));
@@ -237,10 +238,10 @@ describe('PageStore', function() {
 
     it('silently logs an error if the save fails', function(done) {
       spyOn(Storage, 'save').and.returnValues(Promise.reject('AN_ERROR'));
-      spyOn(console, 'log');
+      spyOn(log, 'log');
 
       PageStore.saveHtml('2', PageStore.htmlTypes.NEW, 'Some HTML').then(() => {
-        expect(console.log.calls.argsFor(0)).toMatch('AN_ERROR');
+        expect(log.log.calls.argsFor(0)).toMatch('AN_ERROR');
         done();
       })
       .catch((error) => done.fail(error));

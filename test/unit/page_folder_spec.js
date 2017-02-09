@@ -1,5 +1,6 @@
 import {PageFolder} from 'page/page_folder';
 import {Storage} from 'util/storage';
+import * as log from 'util/log';
 
 describe('PageFolder', function() {
   describe('load', function() {
@@ -34,11 +35,11 @@ describe('PageFolder', function() {
     it('returns the default PageFolder if the storage load fails',
        function(done) {
       spyOn(Storage, 'load').and.returnValues(Promise.reject('ERROR_MESSAGE'));
-      spyOn(console, 'log');
+      spyOn(log, 'log');
 
       PageFolder.load('42').then((pageFolder) => {
         expect(pageFolder.title).toEqual('New Folder');
-        expect(console.log.calls.argsFor(0)).toMatch('ERROR_MESSAGE');
+        expect(log.log.calls.argsFor(0)).toMatch('ERROR_MESSAGE');
         done();
       })
       .catch((error) => done.fail(error));
@@ -63,10 +64,10 @@ describe('PageFolder', function() {
 
     it('silently logs an error if the save fails', function(done) {
       spyOn(Storage, 'save').and.returnValues(Promise.reject('AN_ERROR'));
-      spyOn(console, 'log');
+      spyOn(log, 'log');
 
       new PageFolder('37').save().then(() => {
-        expect(console.log.calls.argsFor(0)).toMatch('AN_ERROR');
+        expect(log.log.calls.argsFor(0)).toMatch('AN_ERROR');
         done();
       })
       .catch((error) => done.fail(error));

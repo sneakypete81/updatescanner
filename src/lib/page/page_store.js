@@ -2,6 +2,7 @@ import {Page} from './page';
 import {PageFolder} from './page_folder';
 import {StorageInfo} from './storage_info';
 import {Storage} from 'util/storage';
+import {log} from 'util/log';
 
 /**
  * Class to manage saving and loading data from storage.
@@ -134,7 +135,7 @@ export class PageStore {
    */
   static saveHtml(id, htmlType, html) {
     return Storage.save(PageStore._HTML_KEY(id, htmlType), html)
-      .catch((error) => console.log('ERROR:PageStore.saveHtml:' + error));
+      .catch((error) => log('ERROR:PageStore.saveHtml:' + error));
   }
 
   /**
@@ -149,7 +150,7 @@ export class PageStore {
   static loadHtml(id, htmlType) {
     return Storage.load(PageStore._HTML_KEY(id, htmlType))
       .catch((error) => {
-        console.log('ERROR:PageStore.loadHtml:' + error);
+        log('ERROR:PageStore.loadHtml:' + error);
         return undefined;
       });
   }
