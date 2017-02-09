@@ -64,12 +64,14 @@ export class Main {
    * Called whenever a single item in the sidebar is selected.
    *
    * @param {Page|PageFolder} item - Selected Page or PageFolder object.
+   *
+   * @returns {Promise} An empty Promise once the view has been updated.
    */
   _handleSelect(item) {
     if (item instanceof Page) {
       this.currentPage = item;
       this.viewType = view.ViewTypes.DIFF;
-      this._refreshView();
+      return this._refreshView();
     }
   }
 
