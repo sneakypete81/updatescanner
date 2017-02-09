@@ -16,9 +16,7 @@ module.exports = function(grunt) {
                      ['clean', 'webpack:build', 'concurrent:run']);
 
   grunt.registerTask('lint', 'Check for linter warnings.',
-                     ['eslint']),
-// Web-ext lint doesn't support async/await
-//                      'shell:webextLint']);
+                     ['eslint', 'shell:webextLint']);
 
   grunt.registerTask('test', 'Run the unit tests.',
                      ['env:karma', 'karma:unit']);
