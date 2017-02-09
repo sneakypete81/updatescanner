@@ -34,5 +34,23 @@ describe('diff_engine', function() {
 
       expect(result).toEqual(html2 + '\n');
     });
+
+    it('returns the NEW HTML if OLD HTML is undefined', function() {
+      const html1 = undefined;
+      const html2 = '<html><body>This is some text.</body></html>';
+
+      const result = highlightDiffs(html1, html2, 'yellow', '', '');
+
+      expect(result).toEqual(html2);
+    });
+
+    it('returns an empty string if the NEW HTML is undefined', function() {
+      const html1 = '<html><body>This is some text.</body></html>';
+      const html2 = undefined;
+
+      const result = highlightDiffs(html1, html2, 'yellow', '', '');
+
+      expect(result).toEqual('');
+    });
   });
 });

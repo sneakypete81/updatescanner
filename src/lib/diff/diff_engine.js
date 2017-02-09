@@ -184,6 +184,14 @@ WDiffString : function(oldText, newText, highlightColour, startMarker, endMarker
         return(outText);
     }
 
+  if (newText === undefined) {
+    return '';
+  }
+
+  if (oldText === undefined) {
+    return newText;
+  }
+
 // remove everything up to the body start
     var bodyPos = newText.search(/<body/i);
     if (bodyPos < 0) bodyPos = 0;
