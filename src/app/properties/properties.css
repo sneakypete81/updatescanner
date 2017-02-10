@@ -1,0 +1,59 @@
+body {
+  font-size: large;
+}
+
+#content {
+  margin-left: 1em;
+  width: 32em;
+}
+
+.flex {
+  display: flex;
+}
+
+h1 {
+  font-weight: normal;
+}
+
+fieldset {
+  border: none;
+  margin-left: 1em;
+}
+
+legend {
+  margin-left: -0.5em;
+  font-weight: bold;
+}
+
+label {
+  display: block;
+  margin-bottom: 12px;
+  font: inherit;
+}
+
+label span {
+  display: inline-block;
+  width  : 2.5em;
+  text-align: right;
+  margin-right: 6px;
+}
+
+input {
+  flex-grow: 1;
+}
+
+.range-label-min {
+  display: inline-block;
+  width: 3em;
+  text-align: right;
+}
+
+.range-label-max {
+  width: 3em;
+}
+
+output {
+  display: block;
+  text-align: center;
+  font-size: smaller;
+}
