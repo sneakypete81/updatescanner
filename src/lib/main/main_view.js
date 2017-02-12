@@ -8,21 +8,76 @@ export const ViewTypes = {
 };
 
 /**
+ * Initialise the main view.
  */
-export function bindMenu() {
+export function init() {
+  initMenu();
+  initDialog();
+}
+
+/**
+ * Initialise the dropdown menu.
+ */
+function initMenu() {
   const menu = qs('#menu');
 
   // Toggle the menu when its button is clicked
   $on(qs('#menuButton'), 'click', (event) => {
-    menu.classList.toggle('menu-show');
+    menu.classList.toggle('show');
+    // Prevent the click from immediately closing the dropdown
     event.stopPropagation();
   });
 
   // Hide the menu when something else is clicked
   $on(window, 'click', ({target}) => {
-    if (menu.classList.contains('menu-show')) {
-      menu.classList.remove('menu-show');
+    if (menu.classList.contains('show')) {
+      menu.classList.remove('show');
     }
+  });
+}
+
+/**
+ * Initialise the dialog box.
+ */
+function initDialog() {
+  const dialog = qs('#dialog');
+  const dialogFrame = qs('#dialog-frame');
+
+  // Show the dialog once its content has loaded
+  $on(dialogFrame, 'load', () => {
+    dialog.classList.add('show');
+
+    // Adjust the dialog iframe size to match the dialog contents
+    dialogFrame.style.height =
+      dialogFrame.contentWindow.document.body.offsetHeight + 'px';
+
+    const borderWidth = 2;
+    qs('#dialog-content').style.width =
+      qs('#content', dialogFrame.contentWindow.document).offsetWidth +
+      borderWidth + 'px';
+
+    // Hide the dialog when its close button is clicked
+    $on(qs('#close', dialogFrame.contentWindow.document), 'click', (event) => {
+      dialog.classList.remove('show');
+      event.stopPropagation();
+    });
+  });
+
+  // Hide dialog when something else is clicked
+  $on(window, 'click', ({target}) => {
+    if (dialog.classList.contains('show')) {
+      dialog.classList.remove('show');
+    }
+  });
+}
+
+/**
+ * @param {Object} handlers - Object containing the following keys:
+ * settingsHandler - Called when the Page Settings menu item is clicked.
+ */
+export function bindMenu({settingsHandler}) {
+  $on(qs('#page-settings'), 'click', (event) => {
+    settingsHandler();
   });
 }
 
@@ -51,7 +106,7 @@ export function viewDiff(page, html) {
       'The changes are highlighted.');
   }
   setViewDropdown(ViewTypes.DIFF);
-  loadIframe(html);
+  loadSandboxedIframe(html);
 }
 
 /**
@@ -67,7 +122,7 @@ export function viewOld(page, html) {
     setSubtitle(`This is the old version of the page, scanned ${scanTime}.`);
   }
   setViewDropdown(ViewTypes.OLD);
-  loadIframe(html);
+  loadSandboxedIframe(html);
 }
 
 /**
@@ -83,7 +138,17 @@ export function viewNew(page, html) {
     setSubtitle(`This is the new version of the page, scanned ${scanTime}.`);
   }
   setViewDropdown(ViewTypes.NEW);
-  loadIframe(html);
+  loadSandboxedIframe(html);
+}
+
+/**
+ * Show the settings dialog for the specified page.
+ *
+ * @param {Page} page - Page object to view.
+ */
+export function openSettingsDialog(page) {
+  qs('#dialog-frame').src = browser.extension.getURL(
+    '/app/settings/settings.html');
 }
 
 /**
@@ -114,14 +179,16 @@ function setViewDropdown(viewType) {
 }
 
 /**
- * Creates a content iframe and inserts it into the main content area.
+ * Create a sandboxed iframe with the supplied unsafe HTML and insert it into
+ * the main content area.
  *
- * @param {string} html - HTML to load.
+ * @param {string} html - Unsafe HTML to load.
  */
-function loadIframe(html) {
+function loadSandboxedIframe(html) {
   removeIframe();
   const iframe = document.createElement('iframe');
   iframe.id = 'frame';
+  iframe.classList.add('frame');
   iframe.sandbox = '';
   iframe.srcdoc = html;
   qs('#frameContainer').appendChild(iframe);

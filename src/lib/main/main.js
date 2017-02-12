@@ -25,12 +25,15 @@ export class Main {
   }
 
   /**
-   * Initialises the main page's sidebar and content iframe.
+   * Initialise the main page's sidebar and content iframe.
    */
   async init() {
     this.pageStore = await PageStore.load();
 
-    view.bindMenu();
+    view.init();
+    view.bindMenu({
+      settingsHandler: this._handleMenuSettings.bind(this),
+    });
     view.bindViewDropdownChange(this._handleViewDropdownChange.bind(this));
 
     this.sidebar.load(this.pageStore.pageMap, PageStore.ROOT_ID);
@@ -77,6 +80,13 @@ export class Main {
   }
 
   /**
+   * Called whenever the 'Page Settings' item is chosen from the menu.
+   */
+  _handleMenuSettings() {
+    view.openSettingsDialog(this.currentPage);
+  }
+
+  /**
    * Called whenever the view dropdown selection changes.
    *
    * @param {view.ViewTypes} viewType - New value of the dropdown.
@@ -87,7 +97,7 @@ export class Main {
   }
 
   /**
-   * Refreshes the view, reloading any necessary HTML from storage.
+   * Refresh the view, reloading any necessary HTML from storage.
    */
   async _refreshView() {
     switch (this.viewType) {
@@ -132,7 +142,7 @@ async function loadDiff(page) {
 }
 
 /**
- * Loads the specified Page HTML from the PageStore.
+ * Load the specified Page HTML from the PageStore.
  *
  * @param {Page} page - Page to load.
  * @param {string} htmlType - PageStore.htmlTypes string identifying the HTML
