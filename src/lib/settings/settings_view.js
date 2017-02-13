@@ -15,6 +15,18 @@ export function init() {
 }
 
 /**
+ * @param {Function} handler - Called when a dialog input is modified.
+ */
+export function bindValueInput(handler) {
+  const form = qs('#form');
+  $on(form.title, 'input', ({target}) => handler('title', target.value));
+  $on(form.url, 'input', ({target}) => handler('url', target.value));
+  $on(form.autoscan, 'input', ({target}) =>
+    handler('scanRateMinutes', AutoscanSliderToMins[target.value]));
+  $on(form.threshold, 'input', ({target}) =>
+    handler('changeThreshold', ThresholdSliderToChars[target.value]));
+}
+/**
  * Update the Page Settings view.
  *
  * @param {Object} data - Object containing the data to update the view. All

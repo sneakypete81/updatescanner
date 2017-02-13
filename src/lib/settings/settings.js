@@ -18,10 +18,22 @@ export class Settings {
    */
   async init() {
     view.init();
+    view.bindValueInput(this._handleValueInput.bind(this));
 
     const params = new URLSearchParams(window.location.search);
     const pageId = params.get(paramEnum.ID);
     this.page = await Page.load(pageId);
     view.update(this.page);
+  }
+
+  /**
+   * Called when a dialog input is modified, to update the Page object.
+   *
+   * @param {string} key - Page attribute that was modified.
+   * @param {type} value - New value of the attribute.
+   */
+  _handleValueInput(key, value) {
+    this.page[key] = value;
+    this.page.save();
   }
 }
