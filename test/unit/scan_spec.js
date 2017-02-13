@@ -16,7 +16,7 @@ describe('scan', function() {
     it('detects new content', function() {
       const html = 'Here is some <b>HTML</b>';
 
-      const result = scan.__.getChangeType('', html, 100);
+      const result = scan.__.getChangeType(undefined, html, 100);
 
       expect(result).toEqual(scan.__.changeEnum.NEW_CONTENT);
     });
