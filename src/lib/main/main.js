@@ -49,12 +49,16 @@ export class Main {
    * @param {string} searchString - Query portion of the URL, starting with the
    * '?' character.
    */
-  _handleUrlParams(searchString) {
+  async _handleUrlParams(searchString) {
     const params = new URLSearchParams(searchString);
     switch (params.get(paramEnum.ACTION)) {
       case actionEnum.NEW_PAGE:
+      {
+        const page = await this.pageStore.createPage(PageStore.ROOT_ID);
+        this.currentPage = page;
+        view.openSettingsDialog(page);
         break;
-
+      }
       case actionEnum.SHOW_DIFF:
       {
         this.currentPage = this.pageStore.getPage(params.get(paramEnum.ID));

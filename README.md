@@ -18,10 +18,12 @@ Clone the source and install all dependencies:
 * [x] Diffing
 * [x] Header for main.html
 * [x] Hook up Old/New/Diff
-* [ ] New/Edit Page
+* [x] New/Edit Page
+* [ ] Handle main view when Old/New HTML don't exist
+* [ ] Consider modifying New Page URL in case of reloads. Make it a POST?
 * [ ] Notification on storage change
 * [x] MVCify popup.js
-* [ ] MVCify main.js
+* [x] MVCify main.js
 * [ ] ES6 Modules everywhere - remove classes as needed
   * [ ] Default Exports where possible
   * [ ] Filenames to match export names
