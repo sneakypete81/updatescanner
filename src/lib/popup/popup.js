@@ -67,6 +67,7 @@ export class Popup {
           [paramEnum.ID]: page.id}, true);
       }
     }
+    window.close();
   }
 
   /**
