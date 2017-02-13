@@ -30,6 +30,7 @@ function preload() {
     'storage_info': {version: 1,
                      pageIds: ['1', '2', '4', '5'],
                      pageFolderIds: ['0', '3'],
+                     nextId: '6',
                     },
     'page_folder:0': {title: 'root', children: ['1', '2', '3', '5']},
     'page_folder:3': {title: 'Subfolder', children: ['4']},

@@ -26,6 +26,7 @@ export class StorageInfo {
     this.version = data.version || StorageInfo._VERSION;
     this.pageIds = data.pageIds || [];
     this.pageFolderIds = data.pageFolderIds || [];
+    this.nextId = data.nextId || '1';
   }
 
   /**
@@ -37,6 +38,7 @@ export class StorageInfo {
     return {version: this.version,
             pageIds: this.pageIds,
             pageFolderIds: this.pageFolderIds,
+            nextId: this.nextId,
             };
   }
 
@@ -69,5 +71,18 @@ export class StorageInfo {
       log(`ERROR:StorageInfo.save: ${error}`);
     }
     return {};
+  }
+
+  /**
+   * Generate an ID for a new page, and add it to the pageIds array. Don't
+   * forget to call save() afterwards.
+   *
+   * @returns {string} - ID of the new page.
+   */
+  createPage() {
+    const pageId = this.nextId;
+    this.nextId = (parseInt(pageId) + 1).toString();
+    this.pageIds.push(pageId);
+    return pageId;
   }
 }

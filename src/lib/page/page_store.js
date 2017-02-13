@@ -83,6 +83,32 @@ export class PageStore {
   }
 
   /**
+   * Create a new Page object, updating the StorageInfo and PageMap.
+   *
+   * @param {string} parentId - ID of the parent PageFolder.
+   *
+   * @returns {Promise} A Promise that fulfils with the new Page object.
+   */
+  async createPage(parentId) {
+    // Update StorageInfo with the new Page, returning the new Page ID
+    const pageId = this.storageInfo.createPage();
+    await this.storageInfo.save();
+
+    // Update the parent PageFolder
+    const pageFolder = this.pageMap.get(parentId);
+    pageFolder.children.push(pageId);
+    await pageFolder.save();
+
+    // Create the Page
+    const page = new Page(pageId);
+
+    // Update the PageMap
+    this.pageMap.set(pageId, page);
+
+    return page;
+  }
+
+  /**
    * Given Arrays of Page and Folder IDs, loads the corresponding objects from
    * storage and generates a Map keyed by ID.
    *

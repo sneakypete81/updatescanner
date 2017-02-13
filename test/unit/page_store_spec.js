@@ -176,6 +176,49 @@ describe('PageStore', function() {
     });
   });
 
+  describe('createPage', function() {
+    it('creates a new page at the tree root', function(done) {
+      spyOn(Storage, 'save').and.returnValues(Promise.resolve());
+      const pageStore = new PageStore(
+        PageStore.ROOT_PAGE_MAP, new StorageInfo());
+
+      pageStore.createPage(PageStore.ROOT_ID).then((page) => {
+        expect(page.id).toEqual('1');
+        expect(pageStore.pageMap.get('1')).toEqual(page);
+
+        const rootFolder = pageStore.pageMap.get(PageStore.ROOT_ID);
+        expect(rootFolder.children).toContain('1');
+
+        expect(Storage.save).toHaveBeenCalledWith(
+          PageFolder._KEY('0'), rootFolder._toObject());
+        expect(Storage.save).toHaveBeenCalledWith(
+          StorageInfo._KEY, pageStore.storageInfo._toObject());
+        done();
+      });
+    });
+
+    it('creates a new page in a subfolder', function(done) {
+      spyOn(Storage, 'save').and.returnValues(Promise.resolve());
+      const subFolder = new PageFolder('1');
+      const pageStore = new PageStore(
+        PageStore.ROOT_PAGE_MAP, new StorageInfo({nextId: '2'}));
+      pageStore.pageMap.set('1', subFolder);
+
+      pageStore.createPage('1').then((page) => {
+        expect(page.id).toEqual('2');
+        expect(pageStore.pageMap.get('2')).toEqual(page);
+
+        expect(subFolder.children).toContain('2');
+
+        expect(Storage.save).toHaveBeenCalledWith(
+          PageFolder._KEY('1'), subFolder._toObject());
+        expect(Storage.save).toHaveBeenCalledWith(
+          StorageInfo._KEY, pageStore.storageInfo._toObject());
+        done();
+      });
+    });
+  });
+
   describe('loadHtml', function() {
     using([PageStore.htmlTypes.OLD,
            PageStore.htmlTypes.NEW,
