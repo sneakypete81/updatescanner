@@ -33,6 +33,8 @@ export class Page {
    * @property {string} title - Title of the page.
    * @property {string} url - URL of the page.
    * @property {stateEnum} state - Current scan state of the page.
+   * @property {integer} scanRateMinutes - Number of minutes between scans. Zero
+   * means manual scan only.
    * @property {integer} changeThreshold - Number of characters changed before
    * signalling that a change has occurred.
    * @property {boolean} error - Indicates whether the last scan failed due to
@@ -50,8 +52,8 @@ export class Page {
     this.id = id;
     this.title = data.title || 'New Page';
     this.url = data.url;
-    this.changeThreshold = data.changeThreshold;
-    this.scanRateMinutes = data.scanRateMinutes;
+    this.scanRateMinutes = data.scanRateMinutes || 24 * 60;
+    this.changeThreshold = data.changeThreshold || 100;
     this.state = data.state;
     this.error = data.error;
     this.errorMessage = data.errorMessage;
@@ -68,8 +70,8 @@ export class Page {
   _toObject() {
     return {title: this.title,
             url: this.url,
-            changeThreshold: this.changeThreshold,
             scanRateMinutes: this.scanRateMinutes,
+            changeThreshold: this.changeThreshold,
             state: this.state,
             error: this.error,
             errorMessage: this.errorMessage,

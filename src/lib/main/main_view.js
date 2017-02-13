@@ -1,3 +1,4 @@
+import {getSettingsUrl} from 'settings/settings_url';
 import {qs, $on} from 'util/view_helpers';
 import {timeSince} from 'util/date_format';
 
@@ -147,8 +148,7 @@ export function viewNew(page, html) {
  * @param {Page} page - Page object to view.
  */
 export function openSettingsDialog(page) {
-  qs('#dialog-frame').src = browser.extension.getURL(
-    '/app/settings/settings.html');
+  qs('#dialog-frame').src = getSettingsUrl(page.id);
 }
 
 /**
