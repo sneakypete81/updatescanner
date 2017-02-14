@@ -4,6 +4,7 @@ import {PageStore} from 'page/page_store';
 import {Page} from 'page/page';
 import {Config} from 'util/config';
 import {Storage} from 'util/storage';
+import * as log from 'util/log';
 
 describe('autoscan', function() {
   beforeEach(function() {
@@ -59,6 +60,7 @@ describe('autoscan', function() {
     });
 
     it('uses short delays when the debug flag is set', function(done) {
+      spyOn(log, 'log');
       spyOn(Config, 'loadSingleSetting').and.returnValues(
         Promise.resolve(true));
 
