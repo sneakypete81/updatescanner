@@ -3,11 +3,14 @@ import * as scan from 'scan/scan';
 import {PageStore} from 'page/page_store';
 import {Page} from 'page/page';
 import {Config} from 'util/config';
+import {Storage} from 'util/storage';
 
 describe('autoscan', function() {
   beforeEach(function() {
     jasmine.clock().install();
     jasmine.clock().mockDate(new Date(1978, 11, 5, 4, 30));
+
+    spyOn(Storage, 'addListener');
   });
 
   afterEach(function() {

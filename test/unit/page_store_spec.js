@@ -17,6 +17,12 @@ describe('PageStore', function() {
     });
   };
 
+  beforeEach(function() {
+    spyOn(Storage, 'addListener').and.callFake((listener) => {
+      this.storageListener = listener;
+    });
+  });
+
   describe('load', function() {
     it('retrieves an empty pageMap from storage', function(done) {
       spyOnStorageLoadWithArgReturn({
@@ -288,6 +294,94 @@ describe('PageStore', function() {
         done();
       })
       .catch((error) => done.fail(error));
+    });
+  });
+
+  describe('bindPageUpdate', function() {
+    it('calls the handler when a Page update event fires', function() {
+      const pageStore = new PageStore(new Map(), {});
+      this.pageIds = [];
+      this.changes = [];
+
+      pageStore.bindPageUpdate((pageId, change) => {
+        this.pageIds.push(pageId);
+        this.changes.push(change);
+      });
+
+      this.storageListener({[Page._KEY('23')]: 'Change!'});
+
+      expect(this.pageIds).toEqual(['23']);
+      expect(this.changes).toEqual(['Change!']);
+    });
+
+    it('calls the handler twice when a double Page update event fires',
+      function() {
+      const pageStore = new PageStore(new Map(), {});
+      this.pageIds = [];
+      this.changes = [];
+
+      pageStore.bindPageUpdate((pageId, change) => {
+        this.pageIds.push(pageId);
+        this.changes.push(change);
+      });
+
+      this.storageListener({
+        [Page._KEY('23')]: 'Change!',
+        [Page._KEY('34')]: 'Another change',
+      });
+
+      expect(this.pageIds).toEqual(['23', '34']);
+      expect(this.changes).toEqual(['Change!', 'Another change']);
+    });
+
+    it('doesn\'t call the handler when a non-Page update event fires',
+    function() {
+      const pageStore = new PageStore(new Map(), {});
+      const updateHandler = jasmine.createSpy('updateHandler');
+      pageStore.bindPageUpdate(updateHandler);
+
+      this.storageListener({['invalidKey:1']: 'Change!'});
+
+      expect(updateHandler).not.toHaveBeenCalled();
+    });
+
+    it('adds a page to the pageMap when a new Page event fires',
+      function() {
+      const page = new Page('1', {title: 'NewTitle'});
+
+      const pageStore = new PageStore(new Map(), {});
+
+      this.storageListener({
+        [Page._KEY('1')]: {newValue: page._toObject()},
+      });
+
+      expect(pageStore.getPageList()).toEqual([page]);
+    });
+
+    it('updates the pageMap when a Page update event fires', function() {
+      const originalPage = new Page('1');
+      const updatedPage = new Page('1', {title: 'Changed Title'});
+
+      const pageStore = new PageStore(new Map(), {});
+      pageStore.pageMap.set('1', originalPage);
+
+      this.storageListener({
+        [Page._KEY('1')]: {newValue: updatedPage._toObject()},
+      });
+
+      expect(pageStore.getPageList()).toEqual([updatedPage]);
+    });
+
+    it('doesn\'t update the pageMap when a non-Page event fires', function() {
+      const page = new Page('1', {title: 'NewTitle'});
+
+      const pageStore = new PageStore(new Map(), {});
+
+      this.storageListener({
+        ['invalidKey: 1']: {newValue: page._toObject()},
+      });
+
+      expect(pageStore.getPageList()).toEqual([]);
     });
   });
 });

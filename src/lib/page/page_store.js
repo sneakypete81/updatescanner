@@ -41,6 +41,9 @@ export class PageStore {
   constructor(pageMap, storageInfo) {
     this.pageMap = pageMap;
     this.storageInfo = storageInfo;
+    this._pageUpdateHandler = null;
+
+    this._addStorageListener();
   }
 
   /**
@@ -106,6 +109,44 @@ export class PageStore {
     this.pageMap.set(pageId, page);
 
     return page;
+  }
+
+  /**
+   * @param {Function} handler - Called when a Page in the PageStore is updated.
+   */
+  bindPageUpdate(handler) {
+    this._pageUpdateHandler = handler;
+  }
+
+  /**
+   * Listen to Storage changes, handling any Page updates.
+   */
+  _addStorageListener() {
+    Storage.addListener((changes) => {
+      // Iterate over changes, handling any Page updates
+      for (const key of Object.keys(changes)) {
+        const pageId = Page.idFromKey(key);
+        if (pageId !== null) {
+          this._handlePageUpdate(pageId, changes[key]);
+        }
+      }
+    });
+  }
+
+  /**
+   * Handle Page changes by updating the PageMap and calling _pageUpdateHandler.
+   *
+   * @param {string} pageId - ID of the page that changed.
+   * @param {storage.StorageChange} change - Object representing the change.
+   */
+  _handlePageUpdate(pageId, change) {
+    // Update the pageMap with the new Page
+    this.pageMap.set(pageId, new Page(pageId, change.newValue));
+
+    // Call the handler, if one is registered
+    if (this._pageUpdateHandler !== null) {
+      this._pageUpdateHandler(pageId, change);
+    }
   }
 
   /**
