@@ -29,9 +29,10 @@ export class Popup {
   }
 
   /**
-   * Add any pages with CHANGED state to the page list.
+   * Update the page list to show all pages in the 'changed'' state.
    */
   _refreshPageList() {
+    view.clearPageList();
     for (const page of this.pageStore.getPageList()) {
       if (page.state == Page.stateEnum.CHANGED) {
         view.addPage(page);

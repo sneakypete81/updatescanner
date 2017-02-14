@@ -43,6 +43,13 @@ export function addPage(page) {
 }
 
 /**
+ * Remove all items from the list of updated pages.
+ */
+export function clearPageList() {
+  qs('#list').innerHTML = '';
+}
+
+/**
  * Create a new list item for a Page.
  *
  * @param {Page} page - Page object to use for the list item.
