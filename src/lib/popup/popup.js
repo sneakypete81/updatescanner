@@ -19,12 +19,14 @@ export class Popup {
    * Initialises the popup data and event handlers.
    */
   async init() {
+    this.pageStore = await PageStore.load();
+    this.pageStore.bindPageUpdate(this._handlePageUpdate.bind(this));
+
     view.bindShowAllClick(this._handleShowAllClick.bind(this));
     view.bindNewClick(this._handleNewClick.bind(this));
     view.bindSidebarClick(this._handleSidebarClick.bind(this));
     view.bindPageClick(this._handlePageClick.bind(this));
 
-    this.pageStore = await PageStore.load();
     this._refreshPageList();
   }
 
@@ -80,6 +82,19 @@ export class Popup {
     if (pageId !== undefined) {
       openMain({[paramEnum.ACTION]: actionEnum.SHOW_DIFF,
         [paramEnum.ID]: pageId});
+    }
+  }
+
+  /**
+   * Called when a Page is updated in Storage. Refresh the page list if its
+   * state changed.
+   *
+   * @param {string} pageId - ID of the changed Page.
+   * @param {storage.StorageChange} change - Object representing the change.
+   */
+  _handlePageUpdate(pageId, change) {
+    if (change.oldValue.state != change.newValue.state) {
+      this._refreshPageList();
     }
   }
 }
