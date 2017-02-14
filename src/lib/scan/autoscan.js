@@ -15,6 +15,10 @@ const DEBUG_ALARM_TIMING = {delayInMinutes: 0.1, periodInMinutes: 0.5};
  */
 export async function start() {
   const debug = await Config.loadSingleSetting('debug');
+  if (debug) {
+    log('Debug enabled - using fast scan times.');
+  }
+
   stopAlarm();
   startAlarm(debug);
   browser.alarms.onAlarm.addListener((alarm) => onAlarm(alarm));
