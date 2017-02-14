@@ -344,7 +344,9 @@ describe('PageStore', function() {
 
       expect(updateHandler).not.toHaveBeenCalled();
     });
+  });
 
+  describe('_addStorageListener', function() {
     it('adds a page to the pageMap when a new Page event fires',
       function() {
       const page = new Page('1', {title: 'NewTitle'});
