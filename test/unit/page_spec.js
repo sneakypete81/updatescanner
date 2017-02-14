@@ -80,4 +80,18 @@ describe('Page', function() {
       .catch((error) => done.fail(error));
     });
   });
+
+  describe('idFromKey', function() {
+    it('extracts the id from a Page key', function() {
+      const key = Page._KEY('987');
+      const id = Page.idFromKey(key);
+      expect(id).toEqual('987');
+    });
+
+    it('returns null if the key is invalid', function() {
+      const key = 'invalid:987';
+      const id = Page.idFromKey(key);
+      expect(id).toBeNull;
+    });
+  });
 });

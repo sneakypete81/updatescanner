@@ -26,6 +26,20 @@ export class Page {
   }
 
   /**
+   * @param {string} key - Storage key for the Page object.
+   *
+   * @returns {string} Page ID, or null if the key is not for a Page object.
+   */
+  static idFromKey(key) {
+    const matches = key.match('^page\:(.*)$');
+    if (matches === null) {
+      return null;
+    } else {
+      return matches[1];
+    }
+  }
+
+  /**
    * @param {string} id - ID of the page.
    * @param {Object} data - Serialised Page object from storage.
    *
