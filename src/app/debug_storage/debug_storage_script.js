@@ -27,29 +27,37 @@ function reload() {
 
 function preload() {
   browser.storage.local.set({
-    'storage_info': {version: 1,
-                     pageIds: ['1', '2', '4', '5'],
-                     pageFolderIds: ['0', '3'],
-                     nextId: '6',
-                    },
+    'config': {
+      debug: true,
+    },
+    'storage_info': {
+      version: 1,
+      pageIds: ['1', '2', '4', '5'],
+      pageFolderIds: ['0', '3'],
+      nextId: '6',
+    },
     'page_folder:0': {title: 'root', children: ['1', '2', '3', '5']},
     'page_folder:3': {title: 'Subfolder', children: ['4']},
-    'page:1': {title: 'Update Scanner Website',
+    'page:1': {
+      title: 'Update Scanner Website',
       url: 'https://addons.mozilla.org/firefox/addon/update-scanner/',
       state: 'changed',
       oldScanTime: 1486026360682,
       newScanTime: 1486631108392,
     },
-    'page:2': {title: 'Another Page',
+    'page:2': {
+      title: 'Another Page',
       oldScanTime: 1486026360682,
       newScanTime: 1486631108392,
     },
-    'page:4': {title: 'An Invalid Website Inside a Subfolder',
+    'page:4': {
+      title: 'An Invalid Website Inside a Subfolder',
       url: 'https://addons.mozilla.org/thisisanerror',
       oldScanTime: 1486026360682,
       newScanTime: 1486631108392,
     },
-    'page:5': {title: 'Firefox Addons',
+    'page:5': {
+      title: 'Firefox Addons',
       url: 'https://addons.mozilla.org/',
       oldScanTime: 1486026360682,
       newScanTime: 1486631108392,
