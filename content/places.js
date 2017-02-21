@@ -153,6 +153,16 @@ UpdateScanner.Places = {
     bookmarksService.removeItem(id);
   },
 
+  isIdValid : function(id)
+  {
+    try {
+      this.getURL(id);
+    } catch (e) {
+        return false;
+    }
+    return true;
+  },
+
   getURL : function(id)
   {
     return PlacesUtils.bookmarks.getBookmarkURI(id).spec;

@@ -125,7 +125,10 @@
     <checkbox id="highlightChanges" label="&highlightChanges.label;" oncommand="UpdateScanner.DlgNewEdit.highlightChangesChanged();" />
     <colorpicker type="button" id="highlightColour" />
   </hbox>
-  <checkbox id="markChanges" label="&markChanges.label;" />
+  <hbox>
+    <separator orient="vertical"/>
+    <checkbox id="markChanges" label="&markChanges.label;" />
+  </hbox>
 </groupbox>
 </vbox>
 

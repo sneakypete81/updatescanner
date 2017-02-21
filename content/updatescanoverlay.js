@@ -31,11 +31,10 @@ load : function()
     }
 },
 
-// Don't show context menu item when text is selected,
-// or if URL is in chrome:// space.
+// Don't show context menu item when text is selected, or if URL isn't http*.
 _showMenu : function()
 {
-    if(gContextMenu.isTextSelected || !window.content.document.URL) {
+    if(gContextMenu.isTextSelected || !gBrowser.currentURI.spec.startsWith("http")) {
         document.getElementById("AddToUpdateScan").hidden = true;
     } else {
         document.getElementById("AddToUpdateScan").hidden = false;
@@ -54,8 +53,8 @@ _showToolbarMenu : function()
         document.getElementById("ToolbarMenuShowAllChanges").hidden = true;
     }
 
-    // Don't show context menu "Scan Page For Updates" item if URL is in chrome:// space.
-    if(!window.content.document.URL) {
+    // Don't show context menu "Scan Page For Updates" item if URL isn't http*.
+    if(!gBrowser.currentURI.spec.startsWith("http")) {
         document.getElementById("ToolbarMenuAddToUpdateScan").hidden = true;
     } else {
         document.getElementById("ToolbarMenuAddToUpdateScan").hidden = false;
@@ -78,26 +77,6 @@ _showToolbarMenu : function()
 onShowAll : function(aEvent)
 {
     UpdateScanner.Updatescan.showAllChangesInNewTabs();
-},
-
-_diffItemNewTabBackground : function(id, delay)
-{
-    var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"]
-                       .getService(Components.interfaces.nsIWindowMediator);
-    var recent_window = wm.getMostRecentWindow("navigator:browser");
-
-    var mainWindow = recent_window.QueryInterface(
-    Components.interfaces.nsIInterfaceRequestor)
-    .getInterface(Components.interfaces.nsIWebNavigation)
-    .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
-    .rootTreeItem
-    .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
-    .getInterface(Components.interfaces.nsIDOMWindow);
-
-    var diffURL = UpdateScanner.Updatescan.diffItem(id, delay);
-    if (diffURL) {
-      mainWindow.getBrowser().addTab(diffURL);
-    }
 },
 };
 
