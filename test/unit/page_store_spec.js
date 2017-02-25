@@ -1,6 +1,6 @@
 import using from 'jasmine-data-provider';
 
-import {PageStore} from 'page/page_store';
+import {PageStore, hasPageStateChanged} from 'page/page_store';
 import {Page} from 'page/page';
 import {PageFolder} from 'page/page_folder';
 import {StorageInfo} from 'page/storage_info';
@@ -385,5 +385,42 @@ describe('PageStore', function() {
 
       expect(pageStore.getPageList()).toEqual([]);
     });
+  });
+});
+
+describe('hasPageStateChanged', function() {
+  it('returns true if the page state changed', function() {
+    const change = {
+      oldValue: {state: 'NO_CHANGE'},
+      newValue: {state: 'CHANGE'},
+    };
+    expect(hasPageStateChanged(change)).toEqual(true);
+  });
+
+  it('returns false if the page state has not changed', function() {
+    const change = {
+      oldValue: {state: 'CHANGE'},
+      newValue: {state: 'CHANGE'},
+    };
+    expect(hasPageStateChanged(change)).toEqual(false);
+  });
+
+  it('returns true if the page was deleted', function() {
+    const change = {
+      oldValue: {state: 'NO_CHANGE'},
+    };
+    expect(hasPageStateChanged(change)).toEqual(true);
+  });
+
+  it('returns true if the page was added', function() {
+    const change = {
+      newValue: {state: 'CHANGE'},
+    };
+    expect(hasPageStateChanged(change)).toEqual(true);
+  });
+
+  it('returns true if the change is not specified', function() {
+    const change = {};
+    expect(hasPageStateChanged(change)).toEqual(true);
   });
 });

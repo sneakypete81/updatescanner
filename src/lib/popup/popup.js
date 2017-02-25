@@ -1,5 +1,5 @@
 import {openMain, paramEnum, actionEnum} from 'main/main_url';
-import {PageStore} from 'page/page_store';
+import {PageStore, hasPageStateChanged} from 'page/page_store';
 import {Page} from 'page/page';
 import * as view from 'popup/popup_view';
 
@@ -93,7 +93,7 @@ export class Popup {
    * @param {storage.StorageChange} change - Object representing the change.
    */
   _handlePageUpdate(pageId, change) {
-    if (change.oldValue.state != change.newValue.state) {
+    if (hasPageStateChanged(change)) {
       this._refreshPageList();
     }
   }

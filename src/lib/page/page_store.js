@@ -226,3 +226,15 @@ export class PageStore {
     return 'html:' + id + ':' + htmlType;
   }
 }
+
+
+/**
+ * @param {storage.StorageChange} change - Object representing the change.
+ *
+ * @returns {boolean} True if the change represents a change in page state or
+ * the page was added or deleted.
+ */
+export function hasPageStateChanged(change) {
+  return (change.oldValue === undefined || change.newValue === undefined ||
+    (change.oldValue.state != change.newValue.state));
+}
