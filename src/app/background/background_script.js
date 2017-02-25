@@ -1,6 +1,6 @@
-import * as autoscan from 'scan/autoscan';
+import {Background} from 'background/background';
 
-// Run the Autoscan process in the background
 (function() {
-  autoscan.start();
+  const background = new Background();
+  background.init();
 })();
