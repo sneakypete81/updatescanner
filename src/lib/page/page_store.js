@@ -103,7 +103,7 @@ export class PageStore {
     await pageFolder.save();
 
     // Create the Page
-    const page = new Page(pageId);
+    const page = new Page(pageId, {});
 
     // Update the PageMap
     this.pageMap.set(pageId, page);
@@ -140,8 +140,9 @@ export class PageStore {
    * @param {storage.StorageChange} change - Object representing the change.
    */
   _handlePageUpdate(pageId, change) {
+    const newValue = change.newValue || {};
     // Update the pageMap with the new Page
-    this.pageMap.set(pageId, new Page(pageId, change.newValue));
+    this.pageMap.set(pageId, new Page(pageId, newValue));
 
     // Call the handler, if one is registered
     if (this._pageUpdateHandler !== null) {

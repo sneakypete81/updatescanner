@@ -26,7 +26,7 @@ describe('main_view', function() {
   describe('viewDiff', function() {
     it('loads html into an iframe', function() {
       const html = 'This is some <b>HTML</b>.';
-      const page = new Page();
+      const page = new Page(0, {});
 
       viewDiff(page, html);
 
@@ -37,7 +37,7 @@ describe('main_view', function() {
     it('loads html into an iframe if one exists already', function() {
       const html1 = 'This is some <b>HTML</b>.';
       const html2 = 'This is some more <b>HTML</b>.';
-      const page = new Page();
+      const page = new Page(0, {});
 
       viewDiff(page, html1);
       viewDiff(page, html2);

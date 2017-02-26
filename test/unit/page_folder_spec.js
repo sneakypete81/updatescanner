@@ -66,7 +66,7 @@ describe('PageFolder', function() {
       spyOn(Storage, 'save').and.returnValues(Promise.reject('AN_ERROR'));
       spyOn(log, 'log');
 
-      new PageFolder('37').save().then(() => {
+      new PageFolder('37', {}).save().then(() => {
         expect(log.log.calls.argsFor(0)).toMatch('AN_ERROR');
         done();
       })

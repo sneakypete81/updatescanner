@@ -162,7 +162,7 @@ describe('PageStore', function() {
   describe('getPageList', function() {
     it('returns an empty array when there are no Pages in the map', function() {
       const pageStore = new PageStore(new Map());
-      pageStore.pageMap.set('1', new PageFolder('1'));
+      pageStore.pageMap.set('1', new PageFolder('1', {}));
 
       const pageList = pageStore.getPageList();
 
@@ -171,14 +171,14 @@ describe('PageStore', function() {
 
     it('returns an array containing all Pages in the map', function() {
       const pageStore = new PageStore(new Map());
-      pageStore.pageMap.set('1', new PageFolder('1'));
-      pageStore.pageMap.set('2', new Page('2'));
-      pageStore.pageMap.set('3', new PageFolder('3'));
-      pageStore.pageMap.set('4', new Page('4'));
+      pageStore.pageMap.set('1', new PageFolder('1', {}));
+      pageStore.pageMap.set('2', new Page('2', {}));
+      pageStore.pageMap.set('3', new PageFolder('3', {}));
+      pageStore.pageMap.set('4', new Page('4', {}));
 
       const pageList = pageStore.getPageList();
 
-      expect(pageList).toEqual([new Page('2'), new Page('4')]);
+      expect(pageList).toEqual([new Page('2', {}), new Page('4', {})]);
     });
   });
 
@@ -205,7 +205,7 @@ describe('PageStore', function() {
 
     it('creates a new page in a subfolder', function(done) {
       spyOn(Storage, 'save').and.returnValues(Promise.resolve());
-      const subFolder = new PageFolder('1');
+      const subFolder = new PageFolder('1', {});
       const pageStore = new PageStore(
         PageStore.ROOT_PAGE_MAP, new StorageInfo({nextId: '2'}));
       pageStore.pageMap.set('1', subFolder);
@@ -361,7 +361,7 @@ describe('PageStore', function() {
     });
 
     it('updates the pageMap when a Page update event fires', function() {
-      const originalPage = new Page('1');
+      const originalPage = new Page('1', {});
       const updatedPage = new Page('1', {title: 'Changed Title'});
 
       const pageStore = new PageStore(new Map(), {});

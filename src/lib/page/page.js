@@ -62,18 +62,29 @@ export class Page {
    * @property {integer} newScanTime - Time when the NEW HTML was last updated
    * (ms since Unix epoch).
    */
-  constructor(id, data={}) {
+  constructor(id, {
+    title = 'New Page',
+    url = null,
+    scanRateMinutes = 24 * 60,
+    changeThreshold = 100,
+    state = Page.stateEnum.NO_CHANGE,
+    error = null,
+    errorMessage = null,
+    lastAutoscanTime = null,
+    oldScanTime = null,
+    newScanTime = null,
+  }) {
     this.id = id;
-    this.title = data.title || 'New Page';
-    this.url = data.url || null;
-    this.scanRateMinutes = data.scanRateMinutes || 24 * 60;
-    this.changeThreshold = data.changeThreshold || 100;
-    this.state = data.state || Page.stateEnum.NO_CHANGE;
-    this.error = data.error || null;
-    this.errorMessage = data.errorMessage || null;
-    this.lastAutoscanTime = data.lastAutoscanTime || null;
-    this.oldScanTime = data.oldScanTime || null;
-    this.newScanTime = data.newScanTime || null;
+    this.title = title;
+    this.url = url;
+    this.scanRateMinutes = scanRateMinutes;
+    this.changeThreshold = changeThreshold;
+    this.state = state;
+    this.error = error;
+    this.errorMessage = errorMessage;
+    this.lastAutoscanTime = lastAutoscanTime;
+    this.oldScanTime = oldScanTime;
+    this.newScanTime = newScanTime;
   }
 
   /**
@@ -105,11 +116,11 @@ export class Page {
    */
   static async load(id) {
     try {
-      const data = await Storage.load(Page._KEY(id));
+      const data = await Storage.load(Page._KEY(id)) || {};
       return new Page(id, data);
     } catch(error) {
       log(`ERROR: Page.load: ${error}`);
-      return new Page(id);
+      return new Page(id, {});
     }
   }
 

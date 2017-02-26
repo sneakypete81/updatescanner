@@ -17,10 +17,10 @@ export class PageFolder {
    * @param {string} id - ID of the PageFolder.
    * @param {Object} data - Serialised PageFoler object from storage.
    */
-  constructor(id, data={}) {
+  constructor(id, {title='New Folder', children=[]}) {
     this.id = id;
-    this.title = data.title || 'New Folder';
-    this.children = data.children || [];
+    this.title = title;
+    this.children = children;
   }
 
   /**
@@ -44,11 +44,11 @@ export class PageFolder {
    */
   static async load(id) {
     try {
-      const data = await Storage.load(PageFolder._KEY(id));
+      const data = await Storage.load(PageFolder._KEY(id)) || {};
       return new PageFolder(id, data);
     } catch(error) {
       log(`ERROR: PageFolder.load: ${error}`);
-      return new PageFolder(id);
+      return new PageFolder(id, {});
     }
   }
 

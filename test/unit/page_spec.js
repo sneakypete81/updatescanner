@@ -73,7 +73,7 @@ describe('Page', function() {
       spyOn(Storage, 'save').and.returnValues(Promise.reject('AN_ERROR'));
       spyOn(log, 'log');
 
-      new Page('37').save().then(() => {
+      new Page('37', {}).save().then(() => {
         expect(log.log.calls.argsFor(0)).toMatch('AN_ERROR');
         done();
       })
