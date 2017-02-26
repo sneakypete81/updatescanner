@@ -206,14 +206,20 @@ export class PageStore {
    * @param {string} htmlType - PageStore.htmlTypes string identifying the HTML
    * type.
    *
-   * @returns {Promise} A Promise that fulfils with the requested HTML.
+   * @returns {Promise} A Promise that fulfils with the requested HTML, or null
+   * if it can't be loaded from storage.
    */
-  static loadHtml(id, htmlType) {
-    return Storage.load(PageStore._HTML_KEY(id, htmlType))
-      .catch((error) => {
-        log('ERROR:PageStore.loadHtml:' + error);
-        return undefined;
-      });
+  static async loadHtml(id, htmlType) {
+    try {
+      const html = await Storage.load(PageStore._HTML_KEY(id, htmlType));
+      if (html === undefined) {
+        return null;
+      }
+      return html;
+    } catch(error) {
+      log('ERROR:PageStore.loadHtml:' + error);
+      return null;
+    }
   }
 
   /**

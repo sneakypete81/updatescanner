@@ -12,7 +12,7 @@ export class Popup {
    * from storage.
    */
   constructor() {
-    this.pageStore = undefined;
+    this.pageStore = null;
   }
 
   /**

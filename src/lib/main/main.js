@@ -19,8 +19,8 @@ export class Main {
    */
   constructor() {
     this.sidebar = new Sidebar('#tree');
-    this.pageStore = undefined;
-    this.currentPage = undefined;
+    this.pageStore = null;
+    this.currentPage = null;
     this.viewType = view.ViewTypes.DIFF;
   }
 
@@ -152,12 +152,12 @@ async function loadDiff(page) {
  * @param {string} htmlType - PageStore.htmlTypes string identifying the HTML
  * type.
  * @returns {Promise} A Promise to be fulfilled with the requested HTML, or
- * undefined if the HTML does not exist in storage.
+ * null if the HTML does not exist in storage.
  */
 async function loadHtml(page, htmlType) {
   const html = await PageStore.loadHtml(page.id, htmlType);
 
-  if (html === undefined) {
+  if (html === null) {
     log(`Could not load '${page.title}' ${htmlType} HTML from storage`);
   }
   return html;

@@ -245,25 +245,25 @@ describe('PageStore', function() {
       });
     });
 
-    it('returns undefined when the page id doesn\'t exist in storage',
+    it('returns null when the page HTML doesn\'t exist in storage',
        function(done) {
       const id = '42';
       spyOn(Storage, 'load').and.returnValues(Promise.resolve(undefined));
 
       PageStore.loadHtml(id, PageStore.htmlTypes.OLD).then((result) => {
-        expect(result).toBeUndefined();
+        expect(result).toBeNull();
         done();
       })
       .catch((error) => done.fail(error));
     });
 
-    it('returns undefined when the load operation fails', function(done) {
+    it('returns null when the load operation fails', function(done) {
       const id = '42';
       spyOn(Storage, 'load').and.returnValues(Promise.reject('ERROR_MSG'));
       spyOn(log, 'log');
 
       PageStore.loadHtml(id, PageStore.htmlTypes.OLD).then((result) => {
-        expect(result).toBeUndefined();
+        expect(result).toBeNull();
         expect(log.log.calls.argsFor(0)).toMatch('ERROR_MSG');
         done();
       })

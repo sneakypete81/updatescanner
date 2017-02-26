@@ -11,8 +11,11 @@
  * changeThreshold charagers.
  */
 export function isMajorChange(str1, str2, changeThreshold) {
+  const safeStr1 = str1 || '';
+  const safeStr2 = str2 || '';
+
   if (changeThreshold == 0) {
-    return (str1 != str2);
+    return (safeStr1 != safeStr2);
   }
 
   // Start with sliceLength=0 and slowly increase it until it reaches the
@@ -27,7 +30,7 @@ export function isMajorChange(str1, str2, changeThreshold) {
     }
 
     // If there's match with this slice length, it's not a major change.
-    if (matchSlice(str1, str2, sliceLength)) {
+    if (matchSlice(safeStr1, safeStr2, sliceLength)) {
       return false;
     }
   }

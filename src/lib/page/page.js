@@ -65,15 +65,15 @@ export class Page {
   constructor(id, data={}) {
     this.id = id;
     this.title = data.title || 'New Page';
-    this.url = data.url;
+    this.url = data.url || null;
     this.scanRateMinutes = data.scanRateMinutes || 24 * 60;
     this.changeThreshold = data.changeThreshold || 100;
-    this.state = data.state;
-    this.error = data.error;
-    this.errorMessage = data.errorMessage;
-    this.lastAutoscanTime = data.lastAutoscanTime;
-    this.oldScanTime = data.oldScanTime;
-    this.newScanTime = data.newScanTime;
+    this.state = data.state || Page.stateEnum.NO_CHANGE;
+    this.error = data.error || null;
+    this.errorMessage = data.errorMessage || null;
+    this.lastAutoscanTime = data.lastAutoscanTime || null;
+    this.oldScanTime = data.oldScanTime || null;
+    this.newScanTime = data.newScanTime || null;
   }
 
   /**

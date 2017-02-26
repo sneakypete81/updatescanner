@@ -10,7 +10,7 @@ export class Settings {
    * @property {Page} page - Page object being edited.
    */
   constructor() {
-    this.page = undefined;
+    this.page = null;
   }
 
   /**

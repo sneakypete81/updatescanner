@@ -177,11 +177,11 @@ WDiffString : function(oldText, newText, highlightColour, startMarker, endMarker
 
 
 // trap trivial changes:
-    if (newText === undefined) {
+    if (!newText) {
         return '';
     }
 
-    if (oldText === undefined) {
+    if (!oldText) {
         return newText;
     }
 

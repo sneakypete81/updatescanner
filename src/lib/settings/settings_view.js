@@ -41,17 +41,17 @@ export function bindValueInput(handler) {
 export function update({title, url, scanRateMinutes, changeThreshold}) {
   const form = qs('#form');
 
-  if (title !== undefined) {
+  if (title !== null) {
     form.title.value = title;
   }
-  if (url !== undefined) {
+  if (url !== null) {
     form.url.value = url;
   }
-  if (scanRateMinutes !== undefined) {
+  if (scanRateMinutes !== null) {
     form.autoscan.value = autoscanMinsToSlider(scanRateMinutes);
     updateAutoscanDescription(form.autoscan.value);
   }
-  if (changeThreshold !== undefined) {
+  if (changeThreshold !== null) {
     form.threshold.value = thresholdCharsToSlider(changeThreshold);
     updateThresholdDescription(form.threshold.value);
   }

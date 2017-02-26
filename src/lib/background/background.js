@@ -17,7 +17,7 @@ export class Background {
    * from storage.
    */
   constructor() {
-    this.pageStore = undefined;
+    this.pageStore = null;
   }
 
   /**

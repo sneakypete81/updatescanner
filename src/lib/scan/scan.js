@@ -131,7 +131,7 @@ function updatePageState(page, prevHtml, scannedHtml) {
  * two HTML strings are.
  */
 function getChangeType(str1, str2, changeThreshold) {
-  if (str1 === undefined) {
+  if (str1 === null) {
     // This is the first scan.
     return changeEnum.NEW_CONTENT;
   } else if (str1 == str2) {

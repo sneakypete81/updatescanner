@@ -159,7 +159,7 @@ describe('autoscan', function() {
       spyOn(console, 'log');
       jasmine.clock().tick(20 * 60 * 1000);
 
-      let savedLastAutoscanTime = undefined;
+      let savedLastAutoscanTime = null;
       spyOn(Page.prototype, 'save').and.callFake(() => {
         savedLastAutoscanTime = pages[0].lastAutoscanTime;
       });

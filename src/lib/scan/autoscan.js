@@ -103,7 +103,7 @@ function getScanList(pageList) {
  * @returns {boolean} True if it's time to autoscan the page.
  */
 function isAutoscanPending(page) {
-  if (page.lastAutoscanTime === undefined) {
+  if (page.lastAutoscanTime === null) {
     return true;
   }
   const timeSinceLastAutoscan = Date.now() - page.lastAutoscanTime;
