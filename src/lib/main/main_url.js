@@ -6,6 +6,8 @@
 export const paramEnum = {
   ACTION: 'action',
   ID: 'id',
+  TITLE: 'title',
+  URL: 'url',
 };
 
 /**

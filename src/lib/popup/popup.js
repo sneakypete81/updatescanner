@@ -46,8 +46,13 @@ export class Popup {
    * Called when the New button is clicked, to open the page to create a new
    * scan item.
    */
-  _handleNewClick() {
-    openMain({[paramEnum.ACTION]: actionEnum.NEW_PAGE});
+  async _handleNewClick() {
+    const tabs = await browser.tabs.query({currentWindow: true, active: true});
+    openMain({
+      [paramEnum.ACTION]: actionEnum.NEW_PAGE,
+      [paramEnum.TITLE]: tabs[0].title,
+      [paramEnum.URL]: tabs[0].url,
+    });
     window.close();
   }
 

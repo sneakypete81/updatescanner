@@ -55,6 +55,10 @@ export class Main {
       case actionEnum.NEW_PAGE:
       {
         const page = await this.pageStore.createPage(PageStore.ROOT_ID);
+        page.title = params.get(paramEnum.TITLE);
+        page.url = params.get(paramEnum.URL);
+        page.save();
+
         this.currentPage = page;
         view.openSettingsDialog(page);
         break;

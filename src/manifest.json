@@ -22,7 +22,8 @@
   "permissions": [
     "<all_urls>",
     "storage",
-    "alarms"
+    "alarms",
+    "tabs"
   ],
 
   "background": {
