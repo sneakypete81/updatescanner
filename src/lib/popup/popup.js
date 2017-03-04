@@ -56,7 +56,7 @@ export class Popup {
    */
   _handleSidebarClick() {
     // @TODO: Use sidebar API rather than just opening the main page.
-    openMain();
+    openMain({});
   }
 
   /**
