@@ -26,13 +26,40 @@ export const actionEnum = {
  * @param {boolean} newTab - Open the page in a new tab.
  */
 export function openMain(params, newTab) {
-    const url = new URL(browser.extension.getURL('/app/main/main.html'));
-    for (const [param, value] of Object.entries(params)) {
-      url.searchParams.set(param, value);
-    }
-    if (newTab) {
-      browser.tabs.create({url: url.href});
-    } else {
-      browser.tabs.update({url: url.href});
-    }
+  const url = getMainUrl(params);
+  if (newTab) {
+    browser.tabs.create({url: url});
+  } else {
+    browser.tabs.update({url: url});
+  }
+}
+
+/**
+ * Returns the URL to open the Main page, passing the specified parameters.
+ *
+ * @param {Object} params - Object containing paramEnum key/values.
+ *
+ * @returns {string} URL of the Main page.
+ */
+function getMainUrl(params) {
+  const url = new URL(browser.extension.getURL('/app/main/main.html'));
+  for (const [param, value] of Object.entries(params)) {
+    url.searchParams.set(param, value);
+  }
+  return url.href;
+}
+
+/**
+ * Returns the URL to open the Main page showing a diff.
+ *
+ * @param {string} pageId - ID of the Page to diff.
+ *
+ * @returns {string} URL of the Main page.
+ */
+export function getMainDiffUrl(pageId) {
+  const params = {
+    [paramEnum.ACTION]: actionEnum.SHOW_DIFF,
+    [paramEnum.ID]: pageId,
+  };
+  return getMainUrl(params);
 }

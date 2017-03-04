@@ -1,4 +1,5 @@
 import {getSettingsUrl} from 'settings/settings_url';
+import {getMainDiffUrl} from 'main/main_url';
 import {qs, $on} from 'util/view_helpers';
 import {timeSince} from 'util/date_format';
 
@@ -58,16 +59,22 @@ function initDialog() {
       borderWidth + 'px';
 
     // Hide the dialog when its close button is clicked
+    // Update the URL to reload the main view, and prevent 'New Page' dialog
+    // from being stored in the history.
     $on(qs('#close', dialogFrame.contentWindow.document), 'click', (event) => {
       dialog.classList.remove('show');
+      window.location.replace(getMainDiffUrl(dialogFrame.data));
       event.stopPropagation();
     });
   });
 
   // Hide dialog when something else is clicked
+  // Update the URL to reload the main view, and prevent 'New Page' dialog
+  // from being stored in the history.
   $on(window, 'click', ({target}) => {
     if (dialog.classList.contains('show')) {
       dialog.classList.remove('show');
+      window.location.replace(getMainDiffUrl(dialogFrame.data));
     }
   });
 }
