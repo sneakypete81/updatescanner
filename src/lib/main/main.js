@@ -61,8 +61,7 @@ export class Main {
       }
       case actionEnum.SHOW_DIFF:
       {
-        this.currentPage = this.pageStore.getPage(params.get(paramEnum.ID));
-        this._refreshView();
+        this._showDiff(this.pageStore.getPage(params.get(paramEnum.ID)));
         break;
       }
     }
@@ -73,13 +72,11 @@ export class Main {
    *
    * @param {Page|PageFolder} item - Selected Page or PageFolder object.
    *
-   * @returns {Promise} An empty Promise once the view has been updated.
+   * @returns {Promise} A Promise that fulfils once the view has been updated.
    */
   _handleSelect(item) {
     if (item instanceof Page) {
-      this.currentPage = item;
-      this.viewType = view.ViewTypes.DIFF;
-      return this._refreshView();
+      return this._showDiff(item);
     }
   }
 
@@ -98,6 +95,23 @@ export class Main {
   _handleViewDropdownChange(viewType) {
     this.viewType = viewType;
     this._refreshView();
+  }
+
+  /**
+   * Show the diff view of the Page, and update the page state to NO_CHANGE.
+   *
+   * @param {Page} page - Page to view.
+   *
+   * @returns {Promise} A Promise that fulfils once the view has been updated.
+   */
+  _showDiff(page) {
+    if (page.state == Page.stateEnum.CHANGED) {
+      page.state = Page.stateEnum.NO_CHANGE;
+      page.save();
+    }
+    this.currentPage = page;
+    this.viewType = view.ViewTypes.DIFF;
+    return this._refreshView();
   }
 
   /**
