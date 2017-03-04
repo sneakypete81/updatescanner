@@ -165,10 +165,10 @@ export class PageStore {
     const pageMap = new Map();
 
     // Make an array of promises, each returning a PageFolder or Page
-    for (let i=0; i<pageFolderIds.length; i++) {
+    for (let i = 0; i < pageFolderIds.length; i++) {
       promises.push(PageFolder.load(pageFolderIds[i]));
     }
-    for (let i=0; i<pageIds.length; i++) {
+    for (let i = 0; i < pageIds.length; i++) {
       promises.push(Page.load(pageIds[i]));
     }
 

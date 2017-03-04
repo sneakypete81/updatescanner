@@ -27,10 +27,8 @@ export const actionEnum = {
  */
 export function openMain(params, newTab) {
     const url = new URL(browser.extension.getURL('/app/main/main.html'));
-    for (const param in params) {
-      if (params.hasOwnProperty(param)) {
-        url.searchParams.set(param, params[param]);
-      }
+    for (const [param, value] of Object.entries(params)) {
+      url.searchParams.set(param, value);
     }
     if (newTab) {
       browser.tabs.create({url: url.href});

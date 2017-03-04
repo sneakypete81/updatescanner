@@ -82,7 +82,7 @@ function autoscanMinsToSlider(minutes) {
   }
 
   // Walk through the options, returning the first one that matches
-  for (let i=0; i<AutoscanSliderToMins.length; i++) {
+  for (let i = 0; i < AutoscanSliderToMins.length; i++) {
     if (AutoscanSliderToMins[i] >= minutes) {
       return i;
     }
@@ -120,7 +120,7 @@ const ThresholdSliderDescriptions = [...ThresholdSliderMap.values()];
  */
 function thresholdCharsToSlider(changeThreshold) {
   // Walk through the options, returning the first one that matches
-  for (let i=0; i<ThresholdSliderToChars.length; i++) {
+  for (let i = 0; i < ThresholdSliderToChars.length; i++) {
     if (ThresholdSliderToChars[i] >= changeThreshold) {
       return i;
     }

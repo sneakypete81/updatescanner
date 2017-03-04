@@ -29,6 +29,6 @@ Clone the source and install all dependencies:
   * [ ] Default Exports where possible
   * [ ] Filenames to match export names
   * [ ] async/await
-* [ ] Use "for [key, value] of object.entries()" or "for key of object.keys()"
-* [ ] Sidebar support (once implemented in FF)
+* [x] Use "for [key, value] of object.entries()" or "for key of object.keys()"
+* [ ] Sidebar support (once DE uses FF54)
 * [ ] E2E testing

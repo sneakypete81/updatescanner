@@ -50,7 +50,7 @@ export class Sidebar {
     result.text = root.title;
     result.children = [];
     const children = root.children || [];
-    for (let i=0; i<children.length; i++) {
+    for (let i = 0; i < children.length; i++) {
       const child = pageMap.get(children[i]);
       if (child instanceof Page) {
         result.children.push({id: child.id,
