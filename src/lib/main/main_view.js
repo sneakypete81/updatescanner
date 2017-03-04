@@ -148,7 +148,10 @@ export function viewNew(page, html) {
  * @param {Page} page - Page object to view.
  */
 export function openSettingsDialog(page) {
-  qs('#dialog-frame').src = getSettingsUrl(page.id);
+  // Use contentWindow.location.replace() to avoid updating the history
+  const dialogFrame = qs('#dialog-frame');
+  dialogFrame.data = page.id;
+  dialogFrame.contentWindow.location.replace(getSettingsUrl(page.id));
 }
 
 /**
