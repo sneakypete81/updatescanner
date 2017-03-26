@@ -30,6 +30,10 @@ module.exports = {
       ],
     },
 
+    externals: {
+      jquery: 'jQuery',
+    },
+
     plugins: [
       // Since some NodeJS modules expect to be running in Node, it is helpful
       // to set this environment var to avoid reference errors.
@@ -42,6 +46,13 @@ module.exports = {
         {context: 'src', from: '**/*'},
       ],
       {ignore: ['*.js']}),
+
+      // Copy across external dependencies. This is better than bundling, since
+      // it's much faster and prevents web-ext lint issues.
+      new CopyWebpackPlugin([
+        {context: 'src', from: 'dependencies/**/*'},
+      ]),
+
     ],
 
     // This will expose source map files so that errors will point to your

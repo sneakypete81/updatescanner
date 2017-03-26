@@ -17,6 +17,9 @@ module.exports = {
     ]),
   },
   webextLint: {
-    command: webExtCmd('lint'),
+    command: webExtCmd('lint', [
+      // Ignore dependencies (JQuery, etc)
+      '--ignore-files="dependencies/**/*"',
+    ]),
   },
 };
