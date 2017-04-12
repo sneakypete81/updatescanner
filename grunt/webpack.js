@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const path = require('path');
 
 module.exports = {
   build: {},
@@ -19,7 +20,7 @@ module.exports = {
     },
 
     output: {
-      path: 'build',
+      path: path.resolve(__dirname + '/../build'),
       filename: 'app/[name]/[name]_script.js',
     },
 
