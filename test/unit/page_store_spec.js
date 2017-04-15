@@ -24,6 +24,21 @@ describe('PageStore', function() {
   });
 
   describe('load', function() {
+    it('creates an empty pageMap if it isn\'t found in storage',
+      function(done) {
+        spyOnStorageLoadWithArgReturn({
+          [StorageInfo._KEY]: Promise.resolve(undefined),
+        });
+
+        PageStore.load().then((pageStore) => {
+          expect(pageStore.pageMap.get('0')).toEqual(
+            new PageFolder('0', {title: 'root'}));
+          expect(pageStore.pageMap.size).toEqual(1);
+          done();
+        }).catch((error) => done.fail(error));
+      }
+    );
+
     it('retrieves an empty pageMap from storage', function(done) {
       spyOnStorageLoadWithArgReturn({
         [StorageInfo._KEY]: Promise.resolve({pageIds: [], pageFolderIds: []}),
@@ -39,18 +54,22 @@ describe('PageStore', function() {
 
     it('retrieves a pageMap containing pages from storage', function(done) {
       spyOnStorageLoadWithArgReturn({
-        [StorageInfo._KEY]: Promise.resolve({pageIds: ['1', '2'],
-                                             pageFolderIds: []}),
+        [StorageInfo._KEY]: Promise.resolve(
+          {pageIds: ['1', '2'], pageFolderIds: ['0']}),
+        [PageFolder._KEY('0')]: Promise.resolve(
+          {title: 'root', children: ['1', '2']}),
         [Page._KEY('1')]: Promise.resolve({title: 'Page 1'}),
         [Page._KEY('2')]: Promise.resolve({title: 'Page 2'}),
       });
 
       PageStore.load().then((pageStore) => {
+        expect(pageStore.pageMap.get('0')).toEqual(
+          new PageFolder('0', {title: 'root', children: ['1', '2']}));
         expect(pageStore.pageMap.get('1')).toEqual(
           new Page('1', {title: 'Page 1'}));
         expect(pageStore.pageMap.get('2')).toEqual(
           new Page('2', {title: 'Page 2'}));
-        expect(pageStore.pageMap.size).toEqual(2);
+        expect(pageStore.pageMap.size).toEqual(3);
         done();
       }).catch((error) => done.fail(error));
     });
@@ -58,8 +77,8 @@ describe('PageStore', function() {
     it('retrieves a pageMap containing a subfolder from storage',
        function(done) {
       spyOnStorageLoadWithArgReturn({
-        [StorageInfo._KEY]: Promise.resolve({pageIds: ['1', '2'],
-                                             pageFolderIds: ['0', '3']}),
+        [StorageInfo._KEY]: Promise.resolve(
+          {pageIds: ['1', '2'], pageFolderIds: ['0', '3']}),
         [Page._KEY('1')]: Promise.resolve({title: 'Page 1'}),
         [Page._KEY('2')]: Promise.resolve({title: 'Page 2'}),
         [PageFolder._KEY('0')]: Promise.resolve(
@@ -109,12 +128,16 @@ describe('PageStore', function() {
 
     it('generates a map with a single page', function(done) {
       spyOnStorageLoadWithArgReturn({
+        [PageFolder._KEY('0')]: Promise.resolve(
+          {title: 'root', children: ['1']}),
         [Page._KEY('1')]: Promise.resolve({title: 'Page 1'}),
       });
 
-      PageStore._generatePageMap(['1'], []).then((pageMap) => {
+      PageStore._generatePageMap(['1'], ['0']).then((pageMap) => {
+        expect(pageMap.get('0')).toEqual(
+          new PageFolder('0', {title: 'root', children: ['1']}));
         expect(pageMap.get('1')).toEqual(new Page('1', {title: 'Page 1'}));
-        expect(pageMap.size).toEqual(1);
+        expect(pageMap.size).toEqual(2);
         done();
       })
       .catch((error) => done.fail(error));
@@ -122,14 +145,18 @@ describe('PageStore', function() {
 
     it('generates a map with a single folder', function(done) {
       spyOnStorageLoadWithArgReturn({
+        [PageFolder._KEY('0')]: Promise.resolve(
+          {title: 'root', children: ['1']}),
         [PageFolder._KEY('1')]: Promise.resolve(
                                 {title: 'Folder1', children: ['2']}),
       });
 
-      PageStore._generatePageMap([], ['1']).then((pageMap) => {
+      PageStore._generatePageMap([], ['0', '1']).then((pageMap) => {
+        expect(pageMap.get('0')).toEqual(
+          new PageFolder('0', {title: 'root', children: ['1']}));
         expect(pageMap.get('1')).toEqual(new PageFolder('1',
           {title: 'Folder1', children: ['2']}));
-        expect(pageMap.size).toEqual(1);
+        expect(pageMap.size).toEqual(2);
         done();
       })
       .catch((error) => done.fail(error));
@@ -137,22 +164,27 @@ describe('PageStore', function() {
 
     it('generates a map with pages and folders', function(done) {
       spyOnStorageLoadWithArgReturn({
+        [PageFolder._KEY('0')]: Promise.resolve(
+          {title: 'root', children: ['1']}),
         [PageFolder._KEY('1')]: Promise.resolve(
-                                {title: 'Folder1', children: ['2', '3']}),
+          {title: 'Folder1', children: ['2', '3']}),
         [Page._KEY('2')]: Promise.resolve({title: 'Page2'}),
         [PageFolder._KEY('3')]: Promise.resolve(
-                                {title: 'Folder3', children: ['4']}),
+          {title: 'Folder3', children: ['4']}),
         [Page._KEY('4')]: Promise.resolve({title: 'Page4'}),
       });
 
-      PageStore._generatePageMap(['2', '4'], ['1', '3']).then((pageMap) => {
+      PageStore._generatePageMap(['2', '4'], ['0', '1', '3'])
+      .then((pageMap) => {
+        expect(pageMap.get('0')).toEqual(
+          new PageFolder('0', {title: 'root', children: ['1']}));
         expect(pageMap.get('1')).toEqual(new PageFolder('1',
           {title: 'Folder1', children: ['2', '3']}));
         expect(pageMap.get('2')).toEqual(new Page('2', {title: 'Page2'}));
         expect(pageMap.get('3')).toEqual(new PageFolder('3',
           {title: 'Folder3', children: ['4']}));
         expect(pageMap.get('4')).toEqual(new Page('4', {title: 'Page4'}));
-        expect(pageMap.size).toEqual(4);
+        expect(pageMap.size).toEqual(5);
         done();
       })
       .catch((error) => done.fail(error));
@@ -184,44 +216,49 @@ describe('PageStore', function() {
 
   describe('createPage', function() {
     it('creates a new page at the tree root', function(done) {
-      spyOn(Storage, 'save').and.returnValues(Promise.resolve());
-      const pageStore = new PageStore(
-        PageStore.ROOT_PAGE_MAP, new StorageInfo());
-
-      pageStore.createPage(PageStore.ROOT_ID).then((page) => {
-        expect(page.id).toEqual('1');
-        expect(pageStore.pageMap.get('1')).toEqual(page);
-
-        const rootFolder = pageStore.pageMap.get(PageStore.ROOT_ID);
-        expect(rootFolder.children).toContain('1');
-
-        expect(Storage.save).toHaveBeenCalledWith(
-          PageFolder._KEY('0'), rootFolder._toObject());
-        expect(Storage.save).toHaveBeenCalledWith(
-          StorageInfo._KEY, pageStore.storageInfo._toObject());
-        done();
+      spyOnStorageLoadWithArgReturn({
+        [StorageInfo._KEY]: Promise.resolve(undefined),
       });
+      spyOn(Storage, 'save').and.returnValues(Promise.resolve());
+      PageStore.load().then((pageStore) => {
+        pageStore.createPage(PageStore.ROOT_ID).then((page) => {
+          expect(page.id).toEqual('1');
+          expect(pageStore.pageMap.get('1')).toEqual(page);
+
+          const rootFolder = pageStore.pageMap.get(PageStore.ROOT_ID);
+          expect(rootFolder.children).toContain('1');
+
+          expect(Storage.save).toHaveBeenCalledWith(
+            PageFolder._KEY('0'), rootFolder._toObject());
+          expect(Storage.save).toHaveBeenCalledWith(
+            StorageInfo._KEY, pageStore.storageInfo._toObject());
+          done();
+        }).catch((error) => done.fail(error));
+      }).catch((error) => done.fail(error));
     });
 
     it('creates a new page in a subfolder', function(done) {
-      spyOn(Storage, 'save').and.returnValues(Promise.resolve());
-      const subFolder = new PageFolder('1', {});
-      const pageStore = new PageStore(
-        PageStore.ROOT_PAGE_MAP, new StorageInfo({nextId: '2'}));
-      pageStore.pageMap.set('1', subFolder);
-
-      pageStore.createPage('1').then((page) => {
-        expect(page.id).toEqual('2');
-        expect(pageStore.pageMap.get('2')).toEqual(page);
-
-        expect(subFolder.children).toContain('2');
-
-        expect(Storage.save).toHaveBeenCalledWith(
-          PageFolder._KEY('1'), subFolder._toObject());
-        expect(Storage.save).toHaveBeenCalledWith(
-          StorageInfo._KEY, pageStore.storageInfo._toObject());
-        done();
+      spyOnStorageLoadWithArgReturn({
+        [StorageInfo._KEY]: Promise.resolve({nextId: '2'}),
       });
+      spyOn(Storage, 'save').and.returnValues(Promise.resolve());
+      PageStore.load().then((pageStore) => {
+        const subFolder = new PageFolder('1', {});
+        pageStore.pageMap.set('1', subFolder);
+
+        pageStore.createPage('1').then((page) => {
+          expect(page.id).toEqual('2');
+          expect(pageStore.pageMap.get('2')).toEqual(page);
+
+          expect(subFolder.children).toContain('2');
+
+          expect(Storage.save).toHaveBeenCalledWith(
+            PageFolder._KEY('1'), subFolder._toObject());
+          expect(Storage.save).toHaveBeenCalledWith(
+            StorageInfo._KEY, pageStore.storageInfo._toObject());
+          done();
+        }).catch((error) => done.fail(error));
+      }).catch((error) => done.fail(error));
     });
   });
 
@@ -240,8 +277,7 @@ describe('PageStore', function() {
             PageStore._HTML_KEY(id, pageType));
           expect(result).toEqual(html);
           done();
-        })
-        .catch((error) => done.fail(error));
+        }).catch((error) => done.fail(error));
       });
     });
 
@@ -253,8 +289,7 @@ describe('PageStore', function() {
       PageStore.loadHtml(id, PageStore.htmlTypes.OLD).then((result) => {
         expect(result).toBeNull();
         done();
-      })
-      .catch((error) => done.fail(error));
+      }).catch((error) => done.fail(error));
     });
 
     it('returns null when the load operation fails', function(done) {
@@ -266,8 +301,7 @@ describe('PageStore', function() {
         expect(result).toBeNull();
         expect(log.log.calls.argsFor(0)).toMatch('ERROR_MSG');
         done();
-      })
-      .catch((error) => done.fail(error));
+      }).catch((error) => done.fail(error));
     });
   });
 
@@ -292,8 +326,7 @@ describe('PageStore', function() {
       PageStore.saveHtml('2', PageStore.htmlTypes.NEW, 'Some HTML').then(() => {
         expect(log.log.calls.argsFor(0)).toMatch('AN_ERROR');
         done();
-      })
-      .catch((error) => done.fail(error));
+      }).catch((error) => done.fail(error));
     });
   });
 

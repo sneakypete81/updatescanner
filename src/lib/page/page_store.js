@@ -17,14 +17,6 @@ export class PageStore {
   }
 
   /**
-   * @returns {Map} A Page Map consisting of just the root folder.
-   */
-  static get ROOT_PAGE_MAP() {
-    return new Map([[PageStore.ROOT_ID,
-      new PageFolder(PageStore.ROOT_ID, {title: 'root', children: []})]]);
-  }
-
-  /**
    * @returns {Object} Enumeration of HTML page types.
    */
   static get htmlTypes() {
@@ -62,7 +54,8 @@ export class PageStore {
     } catch(error) {
       // Not much we can do with an error. Set to an empty pageMap.
       console.log.bind(console);
-      return new PageStore(PageStore.ROOT_PAGE_MAP, {});
+      return new PageStore(
+        PageStore._generatePageMap([], []), new StorageInfo());
     }
   }
 
@@ -164,6 +157,11 @@ export class PageStore {
     const promises = [];
     const pageMap = new Map();
 
+    // Default root PageFolder
+    pageMap.set(PageStore.ROOT_ID, new PageFolder(
+      PageStore.ROOT_ID, {title: 'root', children: []},
+    ));
+
     // Make an array of promises, each returning a PageFolder or Page
     for (let i = 0; i < pageFolderIds.length; i++) {
       promises.push(PageFolder.load(pageFolderIds[i]));
@@ -178,9 +176,6 @@ export class PageStore {
       pageMap.set(item.id, item);
     }
 
-    if (pageMap.size == 0) {
-      return PageStore.ROOT_PAGE_MAP;
-    }
     return pageMap;
   }
 
