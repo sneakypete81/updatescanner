@@ -34,6 +34,7 @@ describe('PageStore', function() {
           expect(pageStore.pageMap.get('0')).toEqual(
             new PageFolder('0', {title: 'root'}));
           expect(pageStore.pageMap.size).toEqual(1);
+          expect(pageStore.storageInfo.pageFolderIds).toEqual(['0']);
           done();
         }).catch((error) => done.fail(error));
       }

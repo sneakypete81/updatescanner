@@ -47,9 +47,15 @@ export class PageStore {
    */
   static async load() {
     const storageInfo = await StorageInfo.load();
+
     try {
-      const pageMap = await PageStore._generatePageMap(storageInfo.pageIds,
-        storageInfo.pageFolderIds);
+      const pageMap = await PageStore._generatePageMap(
+        storageInfo.pageIds, storageInfo.pageFolderIds);
+
+      if (!storageInfo.pageFolderIds.includes(PageStore.ROOT_ID)) {
+        storageInfo.pageFolderIds.push(PageStore.ROOT_ID);
+      }
+
       return new PageStore(pageMap, storageInfo);
     } catch(error) {
       // Not much we can do with an error. Set to an empty pageMap.
