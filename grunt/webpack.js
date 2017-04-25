@@ -50,9 +50,11 @@ module.exports = {
 
       // Copy across external dependencies. This is better than bundling, since
       // it's much faster and prevents web-ext lint issues.
-      new CopyWebpackPlugin([
-        {context: 'src', from: 'dependencies/**/*'},
-      ]),
+      new CopyWebpackPlugin([{
+        context: 'node_modules',
+        from: 'jquery/dist/**/jquery.slim.min.js',
+        to: 'dependencies'
+      }]),
 
     ],
 
