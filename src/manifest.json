@@ -10,7 +10,7 @@
   "applications": {
     "gecko": {
       "id": "updatescanner4_test@sneakypete81.github.io",
-      "strict_min_version": "52.0"
+      "strict_min_version": "54.0a1"
     }
   },
 
@@ -35,9 +35,27 @@
     "browser_style": true,
     "default_popup": "app/popup/popup.html",
     "default_icon": {
-          "18": "images/updatescanner_18.png",
-          "48": "images/updatescanner_48.png",
-          "64": "images/updatescanner_64.png"
-        }
+      "18": "images/updatescanner_18.png",
+      "48": "images/updatescanner_48.png",
+      "64": "images/updatescanner_64.png"
+    }
+  },
+
+  "sidebar_action": {
+    "default_title" : "Update Scanner",
+    "default_panel": "app/sidebar/sidebar.html",
+    "default_icon": {
+      "18": "images/updatescanner_18.png",
+      "48": "images/updatescanner_48.png",
+      "64": "images/updatescanner_64.png"
+    }
+  },
+
+  "commands": {
+    "_execute_sidebar_action": {
+      "suggested_key": {
+        "default": "Alt+U"
+      }
+    }
   }
 }
