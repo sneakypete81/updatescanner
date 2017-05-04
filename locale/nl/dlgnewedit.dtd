@@ -15,6 +15,7 @@
 <!ENTITY characters.label "karakters negeren">
 <!ENTITY ignoreNumbers.label "Wijzigingen aan getallen negeren">
 <!ENTITY advanced.label "Geavanceerd…">
+<!ENTITY requestMethod.label "Aanvraag Methode">
 <!ENTITY charEncoding.label "Tekenset">
 <!ENTITY autoDetect.label "Automatisch detecteren">
 <!ENTITY use.label "Te gebruiken tekenset:">

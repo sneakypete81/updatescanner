@@ -15,6 +15,7 @@
 <!ENTITY characters.label "글자">
 <!ENTITY ignoreNumbers.label "숫자에 대한 변화를 무시">
 <!ENTITY advanced.label "고급...">
+<!ENTITY requestMethod.label "요청 방법">
 <!ENTITY charEncoding.label "문자 인코딩">
 <!ENTITY autoDetect.label "자동 선택">
 <!ENTITY use.label "다음을 사용 :">

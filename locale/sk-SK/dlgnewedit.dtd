@@ -15,6 +15,7 @@
 <!ENTITY characters.label "znakov">
 <!ENTITY ignoreNumbers.label "Ignorovať číselné zmeny">
 <!ENTITY advanced.label "Spresniť...">
+<!ENTITY requestMethod.label "Metóda požiadavky">
 <!ENTITY charEncoding.label "Kódovanie znakov">
 <!ENTITY autoDetect.label "Zistiť automaticky">
 <!ENTITY use.label "Použiť:">
