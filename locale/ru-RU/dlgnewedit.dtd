@@ -15,6 +15,7 @@
 <!ENTITY characters.label "символы">
 <!ENTITY ignoreNumbers.label "Игнорировать изменения цифр">
 <!ENTITY advanced.label "Расширено...">
+<!ENTITY requestMethod.label "Метод запроса">
 <!ENTITY charEncoding.label "Кодировка">
 <!ENTITY autoDetect.label "Авто-обнаружение">
 <!ENTITY use.label "Выбрать">

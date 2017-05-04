@@ -16,6 +16,8 @@ UpdateScanner.Defaults = {
     DEF_THRESHOLD : 100,
     DEF_SCAN_RATE_MINS : 1440, // Scan once per day by default
     DEF_IGNORE_NUMBERS : true,
+    DEF_REQUEST_METHOD : "get",
+    DEF_POST_PARAMS : "",
     DEF_ENCODING : "auto",
     DEF_LAST_SCAN : "5 November 1978",
     DEF_OLD_LAST_SCAN : "5 November 1978",
@@ -287,6 +289,8 @@ openNewDialog : function(parentId, index)
         url:              url,
         threshold:        UpdateScanner.Defaults.DEF_THRESHOLD,
         scanRateMins:     UpdateScanner.Defaults.DEF_SCAN_RATE_MINS,
+        requestMethod:    UpdateScanner.Defaults.DEF_REQUEST_METHOD,
+        postParams:       UpdateScanner.Defaults.DEF_POST_PARAMS,
         encoding:         UpdateScanner.Defaults.DEF_ENCODING,
         ignoreNumbers:    UpdateScanner.Defaults.DEF_IGNORE_NUMBERS,
         highlightChanges: UpdateScanner.Defaults.DEF_HIGHLIGHT_CHANGES,
@@ -301,6 +305,8 @@ openNewDialog : function(parentId, index)
         var id = UpdateScanner.Places.addBookmark(args.title, args.url, parentId, index);
         UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_THRESHOLD, args.threshold);
         UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_SCAN_RATE_MINS, args.scanRateMins);
+        UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_REQUEST_METHOD, args.requestMethod);
+        UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_POST_PARAMS, args.postParams);
         UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_ENCODING, args.encoding);
         UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_IGNORE_NUMBERS, args.ignoreNumbers);
         UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_HIGHLIGHT_CHANGES, args.highlightChanges);
@@ -341,6 +347,10 @@ openEditDialog : function(id)
                                                          UpdateScanner.Defaults.DEF_THRESHOLD),
         scanRateMins:     UpdateScanner.Places.queryAnno(id, UpdateScanner.Places.ANNO_SCAN_RATE_MINS,
                                                          UpdateScanner.Defaults.DEF_SCAN_RATE_MINS),
+        requestMethod:    UpdateScanner.Places.queryAnno(id, UpdateScanner.Places.ANNO_REQUEST_METHOD,
+                                                         UpdateScanner.Defaults.DEF_REQUEST_METHOD),
+        postParams:       UpdateScanner.Places.queryAnno(id, UpdateScanner.Places.ANNO_POST_PARAMS,
+                                                         UpdateScanner.Defaults.DEF_POST_PARAMS),
         encoding:         UpdateScanner.Places.queryAnno(id, UpdateScanner.Places.ANNO_ENCODING,
                                                          UpdateScanner.Defaults.DEF_ENCODING),
         ignoreNumbers:    UpdateScanner.Places.queryAnno(id, UpdateScanner.Places.ANNO_IGNORE_NUMBERS,
@@ -365,6 +375,8 @@ openEditDialog : function(id)
 
         UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_THRESHOLD, args.threshold);
         UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_SCAN_RATE_MINS, args.scanRateMins);
+        UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_REQUEST_METHOD, args.requestMethod);
+        UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_POST_PARAMS, args.postParams);
         UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_ENCODING, args.encoding);
         UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_IGNORE_NUMBERS, args.ignoreNumbers);
         UpdateScanner.Places.modifyAnno(id, UpdateScanner.Places.ANNO_HIGHLIGHT_CHANGES, args.highlightChanges);
