@@ -15,7 +15,6 @@
 <!ENTITY characters.label "karakternél">
 <!ENTITY ignoreNumbers.label "Figyelmen kívül hagyja a számok változásait">
 <!ENTITY advanced.label "Haladó...">
-<!ENTITY requestMethod.label "Kérés módja">
 <!ENTITY charEncoding.label "Karakterkódolás">
 <!ENTITY autoDetect.label "Automatikus felismerés">
 <!ENTITY use.label "Alkalmazza ezt:">

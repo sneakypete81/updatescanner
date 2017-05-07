@@ -15,7 +15,6 @@
 <!ENTITY characters.label "merkkiä">
 <!ENTITY ignoreNumbers.label "Hylkää muutokset numeroihin">
 <!ENTITY advanced.label "Kehittynyt...">
-<!ENTITY requestMethod.label "Pyyntö menetelmä">
 <!ENTITY charEncoding.label "Merkistökoodaus">
 <!ENTITY autoDetect.label "Automaattinen tunnistus">
 <!ENTITY use.label "Käytä">

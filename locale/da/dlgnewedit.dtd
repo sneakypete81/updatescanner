@@ -15,7 +15,6 @@
 <!ENTITY characters.label "tegn">
 <!ENTITY ignoreNumbers.label "Ignorér ændringer af tal">
 <!ENTITY advanced.label "Avanceret…">
-<!ENTITY requestMethod.label "Forespørgselsmetode">
 <!ENTITY charEncoding.label "Tegnkodning">
 <!ENTITY autoDetect.label "Auto-detektér">
 <!ENTITY use.label "Anvend">

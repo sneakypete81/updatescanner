@@ -15,7 +15,6 @@
 <!ENTITY characters.label "字符的更新">
 <!ENTITY ignoreNumbers.label "忽略数字更新">
 <!ENTITY advanced.label "高级...">
-<!ENTITY requestMethod.label "请求方式">
 <!ENTITY charEncoding.label "字符编码">
 <!ENTITY autoDetect.label "自动检测">
 <!ENTITY use.label "使用">
