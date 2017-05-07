@@ -14,34 +14,38 @@ app = 'updatescan'
 name = 'Update Scanner'
 description = 'Monitors webpages for updates'
 author = 'Pete Burgers'
-contributors = ['Karol Misiura (Tango Desktop Project Icons)']
-translators = ['stoyan (български език)',
-               'PetrTwo (Čeština)',
-               'Jørgen (Dansk)',
-               '123tp (Dansk)',
-               'Archaeopteryx (Deutsch)'
-               'Team erweiterungen.de (Deutsch)',
-               'Proyecto Nave (Español)',
-               'Chuzo (Español)',
-               'Olli (Suomeksi)',
-               'myahoo (Français)',
-               'JZsolt (Magyar)',
-               'Almotasim (Italiano)',
-               '藤本理弘 (日本語)',
-               'Jeong Seungwon (한국어)',
-               'Edvard (Funalien) Borovskij (lietuvių kalba)',
-               'Lauriote (lietuvių kalba)',
-               'Mark Heijl (Nederlands)',
-               'Leszek (teo) Życzkowski (Polski)',
-               'Raryel Costa Souza (português brasileiro)',
-               'Edgard Dias Magalhães (português brasileiro)',
-               'Edvard (Funalien) Borovskij (Русский)',
-               'Slovak Team (Slovenčina)',
-               'Mikael Hiort af Ornäs (Svenska)',
-               'Kenan Balamir (Türkçe)',
-               'Wang King (简化字 - zh-CN)',
-               'Peter Pin-Guang Chen (簡化字 - zh-TW)',
-              ]
+contributors = [
+    'Karol Misiura (Tango Desktop Project Icons)',
+    'Flavio Toribio',
+]
+translators = [
+    'stoyan (български език)',
+    'PetrTwo (Čeština)',
+    'Jørgen (Dansk)',
+    '123tp (Dansk)',
+    'Archaeopteryx (Deutsch)'
+    'Team erweiterungen.de (Deutsch)',
+    'Proyecto Nave (Español)',
+    'Chuzo (Español)',
+    'Olli (Suomeksi)',
+    'myahoo (Français)',
+    'JZsolt (Magyar)',
+    'Almotasim (Italiano)',
+    '藤本理弘 (日本語)',
+    'Jeong Seungwon (한국어)',
+    'Edvard (Funalien) Borovskij (lietuvių kalba)',
+    'Lauriote (lietuvių kalba)',
+    'Mark Heijl (Nederlands)',
+    'Leszek (teo) Życzkowski (Polski)',
+    'Raryel Costa Souza (português brasileiro)',
+    'Edgard Dias Magalhães (português brasileiro)',
+    'Edvard (Funalien) Borovskij (Русский)',
+    'Slovak Team (Slovenčina)',
+    'Mikael Hiort af Ornäs (Svenska)',
+    'Kenan Balamir (Türkçe)',
+    'Wang King (简化字 - zh-CN)',
+    'Peter Pin-Guang Chen (簡化字 - zh-TW)',
+]
 authorURL = "http://sneakypete81.github.io/updatescanner/"
 uid = 'c07d1a49-9894-49ff-a594-38960ede8fb9'
 firefoxUID = 'ec8030f7-c20a-464f-9b0e-13a3a9e97384'
