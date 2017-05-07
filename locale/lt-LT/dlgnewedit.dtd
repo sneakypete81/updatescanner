@@ -15,7 +15,6 @@
 <!ENTITY characters.label "simbolių">
 <!ENTITY ignoreNumbers.label "Ignoruoti skaičių pakeitimus">
 <!ENTITY advanced.label "Papildomai...">
-<!ENTITY requestMethod.label "Prašymas būdas">
 <!ENTITY charEncoding.label "Kodiruotės išdėstymas">
 <!ENTITY autoDetect.label "Auto-nustatymas">
 <!ENTITY use.label "Nauduoti">

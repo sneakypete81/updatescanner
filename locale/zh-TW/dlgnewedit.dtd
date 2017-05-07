@@ -15,7 +15,6 @@
 <!ENTITY characters.label "字元數的變動">
 <!ENTITY ignoreNumbers.label "忽略數字的更動">
 <!ENTITY advanced.label "進階…">
-<!ENTITY requestMethod.label "請求方式">
 <!ENTITY charEncoding.label "頁面字元編碼">
 <!ENTITY autoDetect.label "自動偵測">
 <!ENTITY use.label "使用">

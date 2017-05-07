@@ -15,7 +15,6 @@
 <!ENTITY characters.label "знака">
 <!ENTITY ignoreNumbers.label "Незачитане на промени в цифри">
 <!ENTITY advanced.label "Разширени">
-<!ENTITY requestMethod.label "Метод на заявката">
 <!ENTITY charEncoding.label "Кодова таблица">
 <!ENTITY autoDetect.label "Автоматично разпознаване">
 <!ENTITY use.label "Използване на">

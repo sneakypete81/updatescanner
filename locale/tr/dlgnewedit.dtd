@@ -15,7 +15,6 @@
 <!ENTITY characters.label "karakter">
 <!ENTITY ignoreNumbers.label "Belirttiğim karakter sayısı kadar güncelleme gerçekleşirse yoksay">
 <!ENTITY advanced.label "Gelişmiş..">
-<!ENTITY requestMethod.label "İstek Metodu">
 <!ENTITY charEncoding.label "Karakter Çözümlemesi">
 <!ENTITY autoDetect.label "Otomatik-algıla">
 <!ENTITY use.label "Seçeyim">

@@ -15,7 +15,6 @@
 <!ENTITY characters.label "文字未満の変更は無視する">
 <!ENTITY ignoreNumbers.label "数字のみの変更は無視する">
 <!ENTITY advanced.label "拡張設定...">
-<!ENTITY requestMethod.label "リクエストメソッド">
 <!ENTITY charEncoding.label "文字エンコーディング">
 <!ENTITY autoDetect.label "自動判別">
 <!ENTITY use.label "文字コードを指定：">
