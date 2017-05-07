@@ -114,7 +114,7 @@
         <radio label="GET" selected="true"/>
         <hbox align="center">
             <radio label="POST"/>
-            <textbox id="postParams" size="50" disabled="True"/>
+            <textbox id="postParams" size="50" disabled="True" placeholder="a=1&amp;b=foo+bar" />
         </hbox>
     </radiogroup>
 </groupbox>
