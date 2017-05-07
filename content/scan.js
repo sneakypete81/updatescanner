@@ -299,7 +299,7 @@ scanner : function()
     {
         var page;
         if (itemlist.length > 0) {
-            while (!me._attemptGet(itemlist[0].url, itemlist[0].requestMethod, itemlist[0].postParams, itemlist[0].encoding)) {
+            while (!me._attemptRequest(itemlist[0].url, itemlist[0].requestMethod, itemlist[0].postParams, itemlist[0].encoding)) {
                 page = itemlist.shift();      // extract the next item
                 changedCallback(page.id, "", usc.STATUS_ERROR,
                     Components.classes["@mozilla.org/intl/stringbundle;1"]
@@ -329,7 +329,7 @@ scanner : function()
         }
     }
 
-    this._attemptGet = function(url, requestMethod, postParams, encoding)
+    this._attemptRequest = function(url, requestMethod, postParams, encoding)
     {
         var data = null;
         if (requestMethod == "post" && (postParams != null || postParams != "")) {
@@ -337,10 +337,14 @@ scanner : function()
         }
         try {
             httpreq = new XMLHttpRequest();
-            httpreq.open(requestMethod.toUpperCase(), url, true);
+
             if (requestMethod == "post") {
+                httpreq.open("POST", url, true);
                 httpreq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+            } else {
+                httpreq.open("GET", url, true);
             }
+
             if (encoding != "auto") {
                 // Force parser to use a specific encoding
                 httpreq.overrideMimeType('text/html; charset='+encoding);
