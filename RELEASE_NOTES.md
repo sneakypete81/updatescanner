@@ -1,7 +1,11 @@
 Update Scanner Release Notes
 ============================
 
-3.3.2:
+3.3.3:
+------
+* Feature: POST support - thanks @flaviotoribio (#98)
+
+3.3.2: (21 February 2017)
 ------
 * Fixed: Don't lock up if bookmark deleted while scanning (#72)
 * Fixed: Disable "Mark changes with << >>" when "Highlight changes" is unchecked (#78)
