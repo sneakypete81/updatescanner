@@ -83,9 +83,9 @@ notify : function(timer)
         oldContent  = UpdateScanner.File.USreadFile(filebase+".old");
         newContent  = UpdateScanner.File.USreadFile(filebase+".new");
     }
-    requestMethod = UpdateScanner.Places.queryAnno(id, UpdateScanner.Places.ANNO_REQUEST_METHOD, "");
+    requestMethod = UpdateScanner.Places.queryAnno(id, UpdateScanner.Places.ANNO_REQUEST_METHOD, UpdateScanner.Defaults.DEF_REQUEST_METHOD);
     if (requestMethod == "post") {
-        postParams = UpdateScanner.Places.queryAnno(id, UpdateScanner.Places.ANNO_POST_PARAMS, "");
+        postParams = UpdateScanner.Places.queryAnno(id, UpdateScanner.Places.ANNO_POST_PARAMS, null);
     }
     if (newContent=="") {
         view="notChecked";
@@ -129,6 +129,9 @@ notify : function(timer)
         document.getElementById("dateOld").value=oldDate;
         thisContent = oldContent;
         break;
+    case "current":
+        this._redirectToCurrentPage(url, requestMethod, postParams);
+        break;
     case "error":
         document.getElementById("sectionError").hidden=false;
         break;
@@ -136,7 +139,7 @@ notify : function(timer)
         document.getElementById("sectionNotChecked").hidden=false;
     }
 
-    this._writeViewFrame(view, url, postParams, enableDiffLinks);
+    this._writeViewFrame(view, url, enableDiffLinks);
 
     this._writeContentFrame(url, thisContent);
 },
@@ -146,7 +149,7 @@ click : function(view)
     location.href = this.baseUrl+view;
 },
 
-_writeViewFrame : function (view, url, postParams, enableDiffLinks)
+_writeViewFrame : function (view, url, enableDiffLinks)
 {
     var str=document.getElementById("diffPageStrings");
 
@@ -163,16 +166,6 @@ _writeViewFrame : function (view, url, postParams, enableDiffLinks)
     viewDoc.write("<html><head>");
     viewDoc.write("<link rel='stylesheet' href='chrome://updatescan/skin/diffPage.css' type='text/css'/>");
     viewDoc.write("</head><body>");
-
-    if (postParams) {
-        viewDoc.write("<form target='_top' enctype='multipart/form-data' action='"+url+"' method='post' name='currentPageForm'>\n");
-        var params = this._getQueryParams(postParams);
-        for (key in params) {
-            var value = params[key];
-            viewDoc.write("<input type='hidden' name='"+this._escapeHtml(key)+"' value='"+this._escapeHtml(value)+"'>\n");
-        }
-        viewDoc.write("</form>\n");
-    }
 
     viewDoc.write("<b>"+viewStr+":</b>&nbsp;\n");
 
@@ -197,12 +190,11 @@ _writeViewFrame : function (view, url, postParams, enableDiffLinks)
     else
         viewDoc.write("<span style='color:#808080'>"+changes+"</span>\n&nbsp;");
 
+    if (view == "current")
+        viewDoc.write("<b>"+currentPage+"</b>\n");
+    else
+        viewDoc.write("<a href='"+this.baseUrl+"current' target='_top'>"+currentPage+"</a>\n");
 
-    if (postParams) {
-        viewDoc.write("<a href='javascript:void(0);' onclick='document.currentPageForm.submit();'>"+currentPage+"</a>\n");
-    } else {
-        viewDoc.write("<a href='"+url+"' target='_top'>"+currentPage+"</a>\n");
-    }
     viewDoc.write("</body></html>");
     viewDoc.close();
 },
@@ -249,29 +241,22 @@ _writeContentFrame : function (url, thisContent)
     element.dispatchEvent(event);
 },
 
-_getQueryParams : function (qs) {
-    qs = qs.split('+').join(' ');
+_redirectToCurrentPage : function (url, requestMethod, postParams)
+{
+    var tabBrowser = Cc["@mozilla.org/appshell/window-mediator;1"].getService(Ci.nsIWindowMediator).getMostRecentWindow("navigator:browser").gBrowser;
+    var currentBrowser = tabBrowser.getBrowserForDocument(document);
 
-    var params = {},
-        tokens,
-        re = /[?&]?([^=]+)=([^&]*)/g;
+    if (requestMethod == "post") {
+        var stringStream = Cc["@mozilla.org/io/string-input-stream;1"].createInstance(Ci.nsIStringInputStream);
+        var postData = Cc["@mozilla.org/network/mime-input-stream;1"].createInstance(Ci.nsIMIMEInputStream);
 
-    while (tokens = re.exec(qs)) {
-        params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
+        stringStream.data = postParams;
+
+        postData.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+        postData.addContentLength = true;
+        postData.setData(stringStream);
     }
 
-    return params;
-},
-
-_escapeHtml : function (text) {
-  var map = {
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#039;'
-  };
-
-  return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+    currentBrowser.loadURIWithFlags(url, Ci.nsIWebNavigation.LOAD_FLAGS_REPLACE_HISTORY, null, null, postData);
 }
 };
