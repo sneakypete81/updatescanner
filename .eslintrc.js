@@ -44,6 +44,12 @@ module.exports = {
     'jsdoc/require-returns-type': 'error',
   },
 
+  'globals': {
+    // React is included globally, not Webpacked
+    'React': false,
+    'ReactDOM': false,
+  },
+
   'env': {
     'es6': 'true',
     'webextensions': 'true',
