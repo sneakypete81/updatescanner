@@ -1,5 +1,21 @@
+<!doctype html>
 <html>
+<head>
+  <meta charset="UTF-8">
+  <title>Hello React</title>
+</head>
 <body>
-Hello Sidebar
+  Hello Sidebar
+
+  <div id="hello"></div>
+  <div id="world"></div>
+
+  <!-- Dependencies (only required if React isn't Webpacked) -->
+  <script src="/dependencies/react/dist/react.min.js"></script>
+  <script src="/dependencies/react-dom/dist/react-dom.min.js"></script>
+
+  <!-- Output script from webpack -->
+  <script src="sidebar_script.js"></script>
+
 </body>
 </html>

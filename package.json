@@ -7,13 +7,19 @@
   },
   "dependencies": {
     "jquery": "^3.1.1",
-    "jstree": "^3.3.3"
+    "jstree": "^3.3.3",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4"
   },
   "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-preset-react": "^6.24.1",
     "copy-webpack-plugin": "^4.0.1",
     "eslint": "^3.13.1",
     "eslint-config-google": "^0.7.0",
     "eslint-plugin-jsdoc": "^3.0.2",
+    "eslint-plugin-react": "^7.0.1",
     "grunt": "^1.0.1",
     "grunt-concurrent": "^2.3.1",
     "grunt-contrib-clean": "^1.0.0",

@@ -17,6 +17,7 @@ module.exports = {
       popup: './src/app/popup/popup_script.js',
       settings: './src/app/settings/settings_script.js',
       debug_storage: './src/app/debug_storage/debug_storage_script.js',
+      sidebar: './src/app/sidebar/sidebar_script.js',
     },
 
     output: {
@@ -31,8 +32,11 @@ module.exports = {
       ],
     },
 
+    // Exclude dependencies from webpack - they're copied separately below.
     externals: {
-      jquery: 'jQuery',
+      'jquery': 'jQuery',
+      // 'react': 'react',
+      // 'react-dom': 'reactDOM',
     },
 
     plugins: [
@@ -50,13 +54,40 @@ module.exports = {
 
       // Copy across external dependencies. This is better than bundling, since
       // it's much faster and prevents web-ext lint issues.
-      new CopyWebpackPlugin([{
-        context: 'node_modules',
-        from: 'jquery/dist/**/jquery.slim.min.js',
-        to: 'dependencies'
-      }]),
+      new CopyWebpackPlugin([
+        {
+          context: 'node_modules',
+          from: 'jquery/dist/**/jquery.slim.min.js',
+          to: 'dependencies',
+        },
+        // {
+        //   context: 'node_modules',
+        //   from: 'react/dist/**/react.min.js',
+        //   to: 'dependencies',
+        // },
+        // {
+        //   context: 'node_modules',
+        //   from: 'react-dom/dist/**/react.dom.min.js',
+        //   to: 'dependencies',
+        // },
+      ]),
 
     ],
+
+    module: {
+      rules: [
+        {
+          test: /\.jsx$/,
+          exclude: /node_modules/,
+          use: {
+            loader: 'babel-loader',
+            options: {
+              presets: ['react'],
+            },
+          },
+        },
+      ],
+    },
 
     // This will expose source map files so that errors will point to your
     // original source files instead of the transpiled files.

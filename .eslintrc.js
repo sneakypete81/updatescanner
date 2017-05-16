@@ -2,14 +2,19 @@ module.exports = {
   parserOptions: {
     'sourceType': 'module',
     'ecmaVersion': 2017,
+    'ecmaFeatures': {
+      'jsx': true,
+    },
   },
 
   extends: [
     'eslint:recommended',
+    'plugin:react/recommended',
     'google',
   ],
 
   plugins: [
+    'react',
     'jsdoc',
   ],
 
