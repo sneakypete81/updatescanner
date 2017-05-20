@@ -6,10 +6,12 @@
     "url": "git://github.com/sneakypete81/updatescanner.git"
   },
   "dependencies": {
+    "classnames": "^2.2.5",
     "jquery": "^3.1.1",
     "jstree": "^3.3.3",
     "react": "^15.5.4",
-    "react-dom": "^15.5.4"
+    "react-dom": "^15.5.4",
+    "react-ui-tree": "^2.6.0"
   },
   "devDependencies": {
     "babel-core": "^6.24.1",
