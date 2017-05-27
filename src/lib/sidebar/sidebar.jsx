@@ -10,13 +10,19 @@ import Tree from 'react-ui-tree';
 import cx from 'classnames';
 import {tree} from './tree_example';
 
-export const Sidebar = React.createClass({
-  getInitialState() {
-    return {
+export class Sidebar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
       active: null,
       tree: tree,
     };
-  },
+
+    this.renderNode = this.renderNode.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.updateTree = this.updateTree.bind(this);
+    this.onClickNode = this.onClickNode.bind(this);
+  }
 
   renderNode(node) {
     return (
@@ -26,13 +32,14 @@ export const Sidebar = React.createClass({
         {node.module}
       </span>
     );
-  },
+  }
 
   onClickNode(node) {
     this.setState({
       active: node,
     });
-  },
+    console.log(node);
+  }
 
   render() {
     return (
@@ -51,13 +58,13 @@ export const Sidebar = React.createClass({
          </div>
       </div>
     );
-  },
+  }
 
   handleChange(tree) {
     this.setState({
       tree: tree,
     });
-  },
+  }
 
   updateTree() {
     const tree = this.state.tree;
@@ -65,7 +72,7 @@ export const Sidebar = React.createClass({
     this.setState({
       tree: tree,
     });
-  },
-});
+  }
+}
 
 ReactDOM.render(<Sidebar/>, document.getElementById('sidebar'));
