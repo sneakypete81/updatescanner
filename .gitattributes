@@ -1,0 +1,2 @@
+# Just make everything LF-only, even on Windows. Prevents linter errors.
+* text eol=lf
