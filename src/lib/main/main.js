@@ -122,28 +122,30 @@ export class Main {
    * Refresh the view, reloading any necessary HTML from storage.
    */
   async _refreshView() {
+    const page = this.currentPage;
+
     switch (this.viewType) {
       case view.ViewTypes.OLD:
       {
-        const html = await loadHtml(this.currentPage,
-          PageStore.htmlTypes.OLD) || '';
-        view.viewOld(this.currentPage, html);
+        const html = _updateHeader(page,
+          await loadHtml(page, PageStore.htmlTypes.OLD) || '');
+        view.viewOld(page, html);
         break;
       }
 
       case view.ViewTypes.NEW:
       {
-        const html = await loadHtml(this.currentPage,
-          PageStore.htmlTypes.NEW) || '';
-        view.viewNew(this.currentPage, html);
+        const html = _updateHeader(page,
+          await loadHtml(page, PageStore.htmlTypes.NEW) || '');
+        view.viewNew(page, html);
         break;
       }
 
       case view.ViewTypes.DIFF:
       default:
       {
-        const html = await loadDiff(this.currentPage);
-        view.viewDiff(this.currentPage, html);
+        const html = _updateHeader(page, await loadDiff(page));
+        view.viewDiff(page, html);
       }
     }
   }
@@ -179,4 +181,18 @@ async function loadHtml(page, htmlType) {
     log(`Could not load '${page.title}' ${htmlType} HTML from storage`);
   }
   return html;
+}
+
+
+/**
+ * Update the HTML header with a <base href> for the page.
+ *
+ * @param {Page} page - Page to update.
+ * @param {string} html - HTML page content.
+ * type.
+ * @returns {string} Updated HTML page content.
+ */
+function _updateHeader(page, html) {
+  // @TODO: Only add if there's no existing <base href> tag
+  return `<base href="${page.url}">` + html;
 }

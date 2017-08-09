@@ -21,14 +21,14 @@ describe('Main', function() {
     it('Updates the view with a diff of the old and new HTML from storage',
     function(done) {
       const id = '42';
-      const page = new Page(id, {});
+      const page = new Page(id, {url: 'test.com/blah'});
       const html = 'hello';
       const main = new Main();
 
       spyOn(Storage, 'load').and.returnValue(Promise.resolve(html));
       spyOn(diff, 'diff').and.returnValues('diffHtml');
       spyOn(mainView, 'viewDiff').and.callFake((pageArg, htmlArg) => {
-        expect(htmlArg).toEqual('diffHtml');
+        expect(htmlArg).toEqual('<base href="test.com/blah">diffHtml');
         expect(pageArg).toEqual(page);
         expect(Storage.load).toHaveBeenCalledWith('html:old:' + id);
         expect(Storage.load).toHaveBeenCalledWith('html:new:' + id);
@@ -40,7 +40,7 @@ describe('Main', function() {
     });
 
     it('logs to the console if the page\'s html isn\'t found', function(done) {
-      const page = new Page(42, {});
+      const page = new Page(42, {url: 'test.com/blah'});
       const main = new Main();
 
       spyOn(mainView, 'viewDiff');
@@ -52,7 +52,8 @@ describe('Main', function() {
 
       main._handleSelect(page).then(() => {
         expect(log.log).toHaveBeenCalled();
-        expect(mainView.viewDiff).toHaveBeenCalledWith(page, '');
+        expect(mainView.viewDiff).toHaveBeenCalledWith(
+          page, '<base href="test.com/blah">');
         done();
       });
     });
