@@ -50,7 +50,7 @@ async function scanPage(page) {
 
     const html = await response.text();
     return processHtml(page, html);
-  } catch(error) {
+  } catch (error) {
     log(`Could not scan "${page.title}": ${error}`);
     page.error = true;
     page.errorMessage = error.toString();

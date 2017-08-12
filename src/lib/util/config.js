@@ -4,7 +4,6 @@ import {Storage} from 'util/storage';
  * Class used to access configuration settings.
  */
 export class Config {
-
   /**
    * @returns {Object} Dictionary of default values for all valid config names.
    * By convention, all config names are lowercase and hythenated.

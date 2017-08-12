@@ -46,7 +46,7 @@ export class PageFolder {
     try {
       const data = await Storage.load(PageFolder._KEY(id)) || {};
       return new PageFolder(id, data);
-    } catch(error) {
+    } catch (error) {
       log(`ERROR: PageFolder.load: ${error}`);
       return new PageFolder(id, {});
     }
@@ -61,7 +61,7 @@ export class PageFolder {
   async save() {
     try {
       await Storage.save(PageFolder._KEY(this.id), this._toObject());
-    } catch(error) {
+    } catch (error) {
       log(`ERROR: PageFolder.save: ${error}`);
     }
     return {};

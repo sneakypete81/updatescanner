@@ -8,7 +8,6 @@ import {log} from 'util/log';
  * Class to manage saving and loading data from storage.
  */
 export class PageStore {
-
   /**
    * @returns {string} The ID of the root folder.
    */
@@ -57,7 +56,7 @@ export class PageStore {
       }
 
       return new PageStore(pageMap, storageInfo);
-    } catch(error) {
+    } catch (error) {
       // Not much we can do with an error. Set to an empty pageMap.
       console.log.bind(console);
       return new PageStore(
@@ -218,7 +217,7 @@ export class PageStore {
         return null;
       }
       return html;
-    } catch(error) {
+    } catch (error) {
       log('ERROR:PageStore.loadHtml:' + error);
       return null;
     }

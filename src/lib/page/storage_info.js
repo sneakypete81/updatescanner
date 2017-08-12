@@ -67,7 +67,7 @@ export class StorageInfo {
   async save() {
     try {
       await Storage.save(StorageInfo._KEY, this._toObject());
-    } catch(error) {
+    } catch (error) {
       log(`ERROR:StorageInfo.save: ${error}`);
     }
     return {};

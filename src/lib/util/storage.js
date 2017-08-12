@@ -2,7 +2,6 @@
  * Static functions to save and load data from storage.
  */
 export class Storage {
-
   /**
    * Save an object to storage.
    *

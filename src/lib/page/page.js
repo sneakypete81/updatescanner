@@ -5,7 +5,6 @@ import {log} from 'util/log';
  * Class representing a webpage.
  */
 export class Page {
-
   /**
    * @returns {Object} Enumeration of Page change states. Any value other
    * than NO_CHANGE or CHANGE indicates an error.
@@ -31,7 +30,7 @@ export class Page {
    * @returns {string} Page ID, or null if the key is not for a Page object.
    */
   static idFromKey(key) {
-    const matches = key.match('^page\:(.*)$');
+    const matches = key.match('^page:(.*)$');
     if (matches === null) {
       return null;
     } else {
@@ -118,7 +117,7 @@ export class Page {
     try {
       const data = await Storage.load(Page._KEY(id)) || {};
       return new Page(id, data);
-    } catch(error) {
+    } catch (error) {
       log(`ERROR: Page.load: ${error}`);
       return new Page(id, {});
     }
@@ -133,7 +132,7 @@ export class Page {
   async save() {
     try {
       await Storage.save(Page._KEY(this.id), this._toObject());
-    } catch(error) {
+    } catch (error) {
       log(`ERROR: Page.save: ${error}`);
     }
     return {};
