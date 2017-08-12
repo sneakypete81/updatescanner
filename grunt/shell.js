@@ -1,5 +1,7 @@
 // Use grunt-shell to launch web-ext
 
+const settings = require('./settings');
+
 const webExtCmd = function(command, args=[]) {
   const webExtBinary = ['node', './node_modules/web-ext/bin/web-ext',
                         '--source-dir=build'];
@@ -16,6 +18,7 @@ module.exports = {
   },
   webextRun: {
     command: webExtCmd('run', [
+      '--firefox=' + settings.get('firefox', 'firefox'),
       '--pref=devtools.theme=light',
       '--pref=javascript.options.strict=false',
     ]),

@@ -19,14 +19,13 @@ module.exports = function(grunt) {
                      ['eslint', 'shell:webextLint']);
 
   grunt.registerTask('test', 'Run the unit tests.',
-                     ['env:karma', 'karma:unit']);
+                     ['karma:unit']);
 
   grunt.registerTask('test:watch', 'Run the unit tests, watching and ' +
                                    'rerunning when files change.',
-                     ['env:karma', 'karma:watch']);
+                     ['karma:watch']);
 
   grunt.config('clean', require('./grunt/clean'));
-  grunt.config('env', require('./grunt/env'));
   grunt.config('shell', require('./grunt/shell'));
   grunt.config('webpack', require('./grunt/webpack'));
   grunt.config('eslint', require('./grunt/eslint'));
@@ -35,7 +34,7 @@ module.exports = function(grunt) {
   grunt.config('concurrent', {
     // Run webpack in watch mode alongside webext run
     run: {
-      tasks: ['webpack:watch', ['env:webextRun', 'shell:webextRun']],
+      tasks: ['webpack:watch', 'shell:webextRun'],
       options: {logConcurrentOutput: true},
     },
   });
