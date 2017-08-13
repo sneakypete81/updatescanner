@@ -29,7 +29,7 @@
     "grunt-eslint": "^20.0.0",
     "grunt-karma": "^2.0.0",
     "grunt-shell": "^2.1.0",
-    "grunt-webpack": "^2.0.0-beta.6",
+    "grunt-webpack": "^3.0.2",
     "istanbul-instrumenter-loader": "^2.0.0",
     "jasmine": "^2.6.0",
     "jasmine-data-provider": "^2.2.0",
@@ -41,10 +41,10 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "karma-notification-reporter": "^0.1.2",
     "karma-sourcemap-loader": "^0.3.7",
-    "karma-webpack": "^2.0.1",
+    "karma-webpack": "^2.0.4",
     "load-grunt-tasks": "^3.5.2",
     "web-ext": "^1.9.1",
-    "webpack": "^2.5.1"
+    "webpack": "^3.5.4"
   },
   "scripts": {
     "build": "grunt build",
