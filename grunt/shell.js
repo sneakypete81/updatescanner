@@ -2,11 +2,20 @@
 
 const settings = require('./settings');
 
-const webExtCmd = function(command, args=[]) {
+
+/**
+ * Create a command list to run web-ext.
+ *
+ * @param {type} command - The web-ext command to use (build, run, etc).
+ * @param {Array.<string>} args - Additional arguments to pass to web-ext.
+ *
+ * @returns {Array.<string>} Full command array.
+ */
+function webExtCmd(command, args=[]) {
   const webExtBinary = ['node', './node_modules/web-ext/bin/web-ext',
                         '--source-dir=build'];
   return webExtBinary.concat([command]).concat(args).join(' ');
-};
+}
 
 module.exports = {
   webextBuild: {
@@ -29,4 +38,12 @@ module.exports = {
       '--ignore-files="dependencies/**/*"',
     ]),
   },
+  webextSign: {
+    command: webExtCmd('sign', [
+      '--artifacts-dir=dist',
+      '--api-key=' + settings.get('api_key'),
+      '--api-secret=' + settings.get('api_secret'),
+    ]),
+  },
+
 };
