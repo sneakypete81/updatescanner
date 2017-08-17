@@ -1,4 +1,0 @@
-/* Hack to enable react-ui-tree to see the React definitions */
-
-const react = React;
-const reactDOM = ReactDOM;

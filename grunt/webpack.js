@@ -34,8 +34,6 @@ module.exports = {
     // Exclude dependencies from webpack - they're copied separately below.
     externals: {
       'jquery': 'jQuery',
-      'react': 'react',
-      'react-dom': 'reactDOM',
     },
 
     plugins: [
@@ -59,34 +57,9 @@ module.exports = {
           from: 'jquery/dist/**/jquery.slim.min.js',
           to: 'dependencies',
         },
-        {
-          context: 'node_modules',
-          from: 'react/dist/**/react.min.js',
-          to: 'dependencies',
-        },
-        {
-          context: 'node_modules',
-          from: 'react-dom/dist/**/react-dom.min.js',
-          to: 'dependencies',
-        },
       ]),
 
     ],
-
-    module: {
-      rules: [
-        {
-          test: /\.jsx$/,
-          exclude: /node_modules/,
-          use: {
-            loader: 'babel-loader',
-            options: {
-              presets: ['react'],
-            },
-          },
-        },
-      ],
-    },
 
     // This will expose source map files so that errors will point to your
     // original source files instead of the transpiled files.

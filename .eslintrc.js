@@ -2,19 +2,14 @@ module.exports = {
   parserOptions: {
     'sourceType': 'module',
     'ecmaVersion': 2017,
-    'ecmaFeatures': {
-      'jsx': true,
-    },
   },
 
   extends: [
     'eslint:recommended',
-    'plugin:react/recommended',
     'google',
   ],
 
   plugins: [
-    'react',
     'jsdoc',
   ],
 
@@ -45,9 +40,6 @@ module.exports = {
   },
 
   'globals': {
-    // React is included globally, not Webpacked
-    'React': false,
-    'ReactDOM': false,
   },
 
   'env': {

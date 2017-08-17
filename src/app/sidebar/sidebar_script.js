@@ -1,2 +1,6 @@
-/* eslint-disable no-unused-vars */
-import {Sidebar} from 'sidebar/sidebar.jsx';
+// import {Sidebar} from 'sidebar/sidebar';
+//
+// (function() {
+//   const sidebar = new Sidebar();
+//   document.addEventListener('DOMContentLoaded', () => sidebar.init());
+// })();
