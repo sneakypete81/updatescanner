@@ -54,7 +54,7 @@ module.exports = {
       new CopyWebpackPlugin([
         {
           context: 'node_modules',
-          from: 'jquery/dist/**/jquery.slim.min.js',
+          from: 'jquery/dist/**/jquery.min.js',
           to: 'dependencies',
         },
       ]),
