@@ -17,7 +17,7 @@ describe('Main', function() {
     this.frameContainer.remove();
   });
 
-  describe('_handleSelect', function() {
+  describe('_showDiff', function() {
     it('Updates the view with a diff of the old and new HTML from storage',
     function(done) {
       const id = '42';
@@ -36,7 +36,7 @@ describe('Main', function() {
         done();
       });
 
-      main._handleSelect(page);
+      main._showDiff(page);
     });
 
     it('logs to the console if the page\'s html isn\'t found', function(done) {
@@ -50,7 +50,7 @@ describe('Main', function() {
         expect(msg).toMatch('Could not load .* from storage');
       });
 
-      main._handleSelect(page).then(() => {
+      main._showDiff(page).then(() => {
         expect(log.log).toHaveBeenCalled();
         expect(mainView.viewDiff).toHaveBeenCalledWith(
           page, '<base href="test.com/blah">');
