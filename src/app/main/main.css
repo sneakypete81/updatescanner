@@ -1,18 +1,23 @@
-html, body {
+html, body, #content {
   height: 100%;
-  margin: 0;
 }
 
-#main {
-  /* Don't scroll main, just the internal frame */
-  /* @TODO: need to do something similar for x */
+#content {
+  display: flex;
+  flex-direction: column;
   overflow-y: hidden;
 }
 
 #header {
+  flex: 0 0 auto;
   padding: 1em;
   border-bottom: #d4d4d4 solid 1px;
   background-color: #fbfbfb;
+}
+
+#main {
+  flex: 1 1 auto;
+  position: relative;/* need this to position inner content */
 }
 
 /* Horizontal placement of icon and title/subtitle */
