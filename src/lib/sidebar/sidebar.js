@@ -1,6 +1,7 @@
 import {Sidebar2} from 'sidebar/sidebar2';
 import {PageStore} from 'page/page_store';
 import {Page} from 'page/page';
+import {openMain, paramEnum, actionEnum} from 'main/main_url';
 
 /**
  * Class representing the main Update Scanner content page.
@@ -34,12 +35,11 @@ export class Sidebar {
    * Called whenever a single item in the sidebar is selected.
    *
    * @param {Page|PageFolder} item - Selected Page or PageFolder object.
-   *
-   * @returns {Promise} A Promise that fulfils once the view has been updated.
    */
   _handleSelect(item) {
     if (item instanceof Page) {
-      return this._showDiff(item);
+      openMain({[paramEnum.ACTION]: actionEnum.SHOW_DIFF,
+        [paramEnum.ID]: item.id});
     }
   }
 }
