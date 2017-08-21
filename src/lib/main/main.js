@@ -1,6 +1,5 @@
 import * as view from 'main/main_view';
 import {paramEnum, actionEnum} from 'main/main_url';
-import {Sidebar} from 'main/sidebar';
 import {PageStore} from 'page/page_store';
 import {Page} from 'page/page';
 import {diff} from 'diff/diff';
@@ -18,7 +17,6 @@ export class Main {
    * @property {view.ViewTypes} viewType - Currently selected view type.
    */
   constructor() {
-    this.sidebar = new Sidebar('#tree');
     this.pageStore = null;
     this.currentPage = null;
     this.viewType = view.ViewTypes.DIFF;
@@ -35,10 +33,6 @@ export class Main {
       settingsHandler: this._handleMenuSettings.bind(this),
     });
     view.bindViewDropdownChange(this._handleViewDropdownChange.bind(this));
-
-    this.sidebar.load(this.pageStore.pageMap, PageStore.ROOT_ID);
-    this.sidebar.registerSelectHandler((evt, data) =>
-                                       this._handleSelect(evt, data));
 
     this._handleUrlParams(window.location.search);
   }
@@ -68,19 +62,6 @@ export class Main {
         this._showDiff(this.pageStore.getPage(params.get(paramEnum.ID)));
         break;
       }
-    }
-  }
-
-  /**
-   * Called whenever a single item in the sidebar is selected.
-   *
-   * @param {Page|PageFolder} item - Selected Page or PageFolder object.
-   *
-   * @returns {Promise} A Promise that fulfils once the view has been updated.
-   */
-  _handleSelect(item) {
-    if (item instanceof Page) {
-      return this._showDiff(item);
     }
   }
 
@@ -182,7 +163,6 @@ async function loadHtml(page, htmlType) {
   }
   return html;
 }
-
 
 /**
  * Update the HTML header with a <base href> for the page.
