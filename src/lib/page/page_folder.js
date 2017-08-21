@@ -14,6 +14,30 @@ export class PageFolder {
   }
 
   /**
+   * @param {string} key - Storage key for the PageFolder object.
+   *
+   * @returns {string} PageFolder ID, or null if the key is not for a PageFolder
+   * object.
+   */
+  static idFromKey(key) {
+    const matches = key.match('^page_folder:(.*)$');
+    if (matches === null) {
+      return null;
+    } else {
+      return matches[1];
+    }
+  }
+
+  /**
+   * @param {string} key - Storage key.
+   *
+   * @returns {bool} True if the key is for a PageFolder object.
+   */
+  static isPageFolderKey(key) {
+    return PageFolder.idFromKey(key) !== null;
+  }
+
+  /**
    * @param {string} id - ID of the PageFolder.
    * @param {Object} data - Serialised PageFoler object from storage.
    */

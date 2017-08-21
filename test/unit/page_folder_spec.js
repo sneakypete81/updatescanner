@@ -73,4 +73,32 @@ describe('PageFolder', function() {
       .catch((error) => done.fail(error));
     });
   });
+
+  describe('idFromKey', function() {
+    it('extracts the id from a PageFolder key', function() {
+      const key = PageFolder._KEY('987');
+      const id = PageFolder.idFromKey(key);
+      expect(id).toEqual('987');
+    });
+
+    it('returns null if the key is invalid', function() {
+      const key = 'invalid:987';
+      const id = PageFolder.idFromKey(key);
+      expect(id).toBeNull;
+    });
+  });
+
+  describe('isPageFolderKey', function() {
+    it('returns true if key is for a PageFolder', function() {
+      const key = PageFolder._KEY('123');
+      const isPageFolderKey = PageFolder.isPageFolderKey(key);
+      expect(isPageFolderKey).toBeTruthy();
+    });
+
+    it('returns false if key is not for a PageFolder', function() {
+      const key = 'invalid:123';
+      const isPageFolderKey = PageFolder.isPageFolderKey(key);
+      expect(isPageFolderKey).toBeFalsy();
+    });
+  });
 });

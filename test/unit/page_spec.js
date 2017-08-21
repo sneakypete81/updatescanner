@@ -94,4 +94,18 @@ describe('Page', function() {
       expect(id).toBeNull;
     });
   });
+
+  describe('isPageKey', function() {
+    it('returns true if key is for a Page', function() {
+      const key = Page._KEY('123');
+      const isPageKey = Page.isPageKey(key);
+      expect(isPageKey).toBeTruthy();
+    });
+
+    it('returns false if key is not for a Page', function() {
+      const key = 'invalid:123';
+      const isPageKey = Page.isPageKey(key);
+      expect(isPageKey).toBeFalsy();
+    });
+  });
 });

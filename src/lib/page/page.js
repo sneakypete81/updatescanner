@@ -39,6 +39,15 @@ export class Page {
   }
 
   /**
+   * @param {string} key - Storage key.
+   *
+   * @returns {bool} True if the key is for a Page object.
+   */
+  static isPageKey(key) {
+    return Page.idFromKey(key) !== null;
+  }
+
+  /**
    * @param {string} id - ID of the page.
    * @param {Object} data - Serialised Page object from storage.
    *

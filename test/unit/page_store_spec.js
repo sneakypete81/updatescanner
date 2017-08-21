@@ -348,6 +348,22 @@ describe('PageStore', function() {
       expect(this.changes).toEqual(['Change!']);
     });
 
+    it('calls the handler when a PageFolder update event fires', function() {
+      const pageStore = new PageStore(new Map(), {});
+      this.pageIds = [];
+      this.changes = [];
+
+      pageStore.bindPageUpdate((pageId, change) => {
+        this.pageIds.push(pageId);
+        this.changes.push(change);
+      });
+
+      this.storageListener({[PageFolder._KEY('23')]: 'Change!'});
+
+      expect(this.pageIds).toEqual(['23']);
+      expect(this.changes).toEqual(['Change!']);
+    });
+
     it('calls the handler twice when a double Page update event fires',
       function() {
       const pageStore = new PageStore(new Map(), {});
@@ -418,6 +434,33 @@ describe('PageStore', function() {
       });
 
       expect(pageStore.getPageList()).toEqual([]);
+    });
+
+    it('adds a page folder to the pageMap when a new PageFolder event fires',
+      function() {
+      const pageFolder = new PageFolder('1', {title: 'NewTitle'});
+
+      const pageStore = new PageStore(new Map(), {});
+
+      this.storageListener({
+        [PageFolder._KEY('1')]: {newValue: pageFolder._toObject()},
+      });
+
+      expect(pageStore.pageMap).toEqual(new Map([['1', pageFolder]]));
+    });
+
+    it('updates the pageMap when a PageFolder update event fires', function() {
+      const originalPageFolder = new PageFolder('1', {});
+      const updatedPageFolder = new PageFolder('1', {title: 'Changed Title'});
+
+      const pageStore = new PageStore(new Map(), {});
+      pageStore.pageMap.set('1', originalPageFolder);
+
+      this.storageListener({
+        [PageFolder._KEY('1')]: {newValue: updatedPageFolder._toObject()},
+      });
+
+      expect(pageStore.pageMap).toEqual(new Map([['1', updatedPageFolder]]));
     });
   });
 });
