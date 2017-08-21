@@ -8,13 +8,14 @@ import {log} from 'util/log';
 /**
  * Class representing the Update Scanner Sidebar.
  */
-export class Sidebar2 {
+export class SidebarView {
   /**
    * @param {string} sidebarDivSelector - Selector for the div that will contain
    * the Sidebar.
    */
   constructor(sidebarDivSelector) {
     this.sidebarDivSelector = sidebarDivSelector;
+    $(this.sidebarDivSelector).jstree();
   }
 
   /**
@@ -25,14 +26,16 @@ export class Sidebar2 {
    */
   load(pageMap, rootId) {
     const root = pageMap.get(rootId);
+    $(this.sidebarDivSelector).jstree(true).settings.core.data =
+      this._generateTree(pageMap, root).children;
+  }
 
-    $(this.sidebarDivSelector).jstree(
-      {core: {themes: {dots: false},
-              data: this._generateTree(pageMap, root).children}});
-
-    $(this.sidebarDivSelector).on('ready.jstree', (e, data) => {
-      this._setTreeData(pageMap);
-    });
+  /**
+   * Refresh the tree view.
+   */
+  refresh() {
+    console.log($(this.sidebarDivSelector).jstree(true).settings.core.data);
+    $(this.sidebarDivSelector).jstree(true).refresh();
   }
 
   /**
@@ -65,21 +68,6 @@ export class Sidebar2 {
   }
 
   /**
-   * Add a Page/PageFolder object to the data attribute of each JSTree node.
-   *
-   * @param {Map} pageMap - Map of Page and PageFolder objects, keyed by ID.
-   */
-  _setTreeData(pageMap) {
-    for (let [id, data] of pageMap) {
-      // JSTree uses id='#' for the root node.
-      if (id == '0') {
-        id = '#';
-      }
-      $(this.sidebarDivSelector).jstree(true).get_node(id).data = data;
-    }
-  }
-
-  /**
    * Callback for handling Sidebar selection changes.
    * @callback Sidebar~selectHandler
    * @param {Page|PageFolder} item - Selected Page or PageFolder object..
@@ -96,7 +84,7 @@ export class Sidebar2 {
     $(this.sidebarDivSelector).on('changed.jstree', (evt, data) => {
       if (data.selected.length == 1) {
         const id = data.selected[0];
-        handler(data.instance.get_node(id).data);
+        handler(id);
       }
     });
   }

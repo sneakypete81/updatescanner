@@ -1,5 +1,5 @@
-import {Sidebar2} from 'sidebar/sidebar2';
-import {PageStore} from 'page/page_store';
+import {SidebarView} from 'sidebar/sidebar_view';
+import {PageStore, hasPageStateChanged} from 'page/page_store';
 import {Page} from 'page/page';
 import {openMain, paramEnum, actionEnum} from 'main/main_url';
 
@@ -15,7 +15,7 @@ export class Sidebar {
    * @property {view.ViewTypes} viewType - Currently selected view type.
    */
   constructor() {
-    this.sidebar = new Sidebar2('#tree');
+    this.sidebar = new SidebarView('#tree');
     this.pageStore = null;
     this.currentPage = null;
   }
@@ -25,21 +25,44 @@ export class Sidebar {
    */
   async init() {
     this.pageStore = await PageStore.load();
+    this.pageStore.bindPageUpdate(this._handlePageUpdate.bind(this));
 
-    this.sidebar.load(this.pageStore.pageMap, PageStore.ROOT_ID);
+    this._refreshSidebar();
     this.sidebar.registerSelectHandler((evt, data) =>
                                        this._handleSelect(evt, data));
   }
 
   /**
+   * Reload the sidebar view.
+   */
+  async _refreshSidebar() {
+    this.sidebar.load(this.pageStore.pageMap, PageStore.ROOT_ID);
+    this.sidebar.refresh(this.pageStore.pageMap);
+  }
+
+  /**
    * Called whenever a single item in the sidebar is selected.
    *
-   * @param {Page|PageFolder} item - Selected Page or PageFolder object.
+   * @param {string} pageId - Selected Page ID.
    */
-  _handleSelect(item) {
-    if (item instanceof Page) {
+  _handleSelect(pageId) {
+    const page = this.pageStore.getPage(pageId);
+    if (page instanceof Page) {
       openMain({[paramEnum.ACTION]: actionEnum.SHOW_DIFF,
-        [paramEnum.ID]: item.id});
+        [paramEnum.ID]: page.id});
+    }
+  }
+
+  /**
+   * Called when a Page is updated in Storage. Refresh the sidebar if its state
+   * changed.
+   *
+   * @param {string} pageId - ID of the changed Page.
+   * @param {storage.StorageChange} change - Object representing the change.
+   */
+  _handlePageUpdate(pageId, change) {
+    if (hasPageStateChanged(change)) {
+      this._refreshSidebar();
     }
   }
 }
