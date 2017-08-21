@@ -146,6 +146,10 @@ export class PageStore {
     if (change.newValue === undefined) {
       // Page has been deleted
       this.pageMap.delete(pageId);
+      // Don't allow Root to be deleted
+      if (pageId == PageStore.ROOT_ID) {
+        this.pageMap.set(pageId, new PageFolder(pageId, {title: 'root'}));
+      }
     } else {
       // Update the pageMap with the new Page/PageFolder
       if (isPage) {
