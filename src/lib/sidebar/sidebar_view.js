@@ -34,7 +34,6 @@ export class SidebarView {
    * Refresh the tree view.
    */
   refresh() {
-    console.log($(this.sidebarDivSelector).jstree(true).settings.core.data);
     $(this.sidebarDivSelector).jstree(true).refresh();
   }
 
