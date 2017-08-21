@@ -1,5 +1,5 @@
 import {SidebarView} from 'sidebar/sidebar_view';
-import {PageStore, hasPageStateChanged} from 'page/page_store';
+import {PageStore} from 'page/page_store';
 import {Page} from 'page/page';
 import {openMain, paramEnum, actionEnum} from 'main/main_url';
 
@@ -61,8 +61,6 @@ export class Sidebar {
    * @param {storage.StorageChange} change - Object representing the change.
    */
   _handlePageUpdate(pageId, change) {
-    if (hasPageStateChanged(change)) {
-      this._refreshSidebar();
-    }
+    this._refreshSidebar();
   }
 }
