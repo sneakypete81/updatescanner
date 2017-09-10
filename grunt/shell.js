@@ -41,8 +41,8 @@ module.exports = {
   webextSign: {
     command: webExtCmd('sign', [
       '--artifacts-dir=dist',
-      '--api-key=' + settings.get('api_key'),
-      '--api-secret=' + settings.get('api_secret'),
+      '--api-key=' + settings.get('api_key', ''),
+      '--api-secret=' + settings.get('api_secret', ''),
     ]),
   },
 
