@@ -17,6 +17,7 @@ module.exports = {
       settings: './src/app/settings/settings_script.js',
       debug_storage: './src/app/debug_storage/debug_storage_script.js',
       sidebar: './src/app/sidebar/sidebar_script.js',
+      upgrade: './src/app/upgrade/upgrade_script.js',
     },
 
     output: {

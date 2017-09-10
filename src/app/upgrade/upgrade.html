@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+  <title>Update Scanner Upgrade</title>
+  <link rel="stylesheet" href="chrome://browser/content/extension.css">
+  <link rel="stylesheet" href="upgrade.css">
+</head>
+
+<body>
+  <div id="intro">
+    <h1>Welcome to Update Scanner 4!</h1>
+    Update Scanner has been updated to a WebExtension. If you have used Update
+    Scanner before, you can import your previous scan list by following the
+    following instructions.
+  </div>
+
+  <div class="step">
+    <h2>Export your Bookmarks</h2>
+    <ul>
+      <li>Open the Bookmark Manager by clicking the bookmark icon and clicking "Show
+        All Bookmarks".</li>
+      <li>From the "Import and Backup" menu, choose "Backup".</li>
+      <li>Save your bookmark file somewhere handy.</li>
+    </ol>
+  </div>
+
+  <div class="step">
+    <h2>Import into Update Scanner 4</h2>
+    <form id="jsonFile" name="jsonFile" enctype="multipart/form-data" method="post">
+      <input type="file" id="fileInput">
+      <input type="button" id="loadButton" value="Import">
+    </form>
+  </div>
+
+  <!-- Output script from webpack -->
+  <script src="upgrade_script.js"></script>
+
+</body>
+</html>
