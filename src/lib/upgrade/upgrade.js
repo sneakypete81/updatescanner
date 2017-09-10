@@ -11,12 +11,8 @@ export class Upgrade {
   init() {
     $on(qs('#loadButton'), 'click', async (event) => {
       const file = qs('#fileInput').files[0];
-      if (file) {
-        const bookmarks = await loadBookmarks(file);
-        if (bookmarks) {
-          importPages(bookmarks);
-        }
-      }
+      const bookmarks = await loadBookmarks(file);
+      importPages(bookmarks);
     });
   }
 }
@@ -34,7 +30,7 @@ async function loadBookmarks(file) {
   } catch (e) {
     console.log(e);
   }
-  return;
+  return {};
 }
 
 /**
