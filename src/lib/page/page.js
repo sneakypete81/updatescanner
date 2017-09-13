@@ -54,11 +54,13 @@ export class Page {
    * @property {string} id - ID of the page.
    * @property {string} title - Title of the page.
    * @property {string} url - URL of the page.
-   * @property {stateEnum} state - Current scan state of the page.
    * @property {integer} scanRateMinutes - Number of minutes between scans. Zero
    * means manual scan only.
    * @property {integer} changeThreshold - Number of characters changed before
    * signalling that a change has occurred.
+   * @property {boolean} ignoreNumbers - Don't trigger if only a number has
+   * changed.
+   * @property {stateEnum} state - Current scan state of the page.
    * @property {boolean} error - Indicates whether the last scan failed due to
    * an error.
    * @property {string} errorMessage - If error is true, contains the error
@@ -75,6 +77,7 @@ export class Page {
     url = null,
     scanRateMinutes = 24 * 60,
     changeThreshold = 100,
+    ignoreNumbers = false,
     state = Page.stateEnum.NO_CHANGE,
     error = null,
     errorMessage = null,
@@ -87,6 +90,7 @@ export class Page {
     this.url = url;
     this.scanRateMinutes = scanRateMinutes;
     this.changeThreshold = changeThreshold;
+    this.ignoreNumbers = ignoreNumbers;
     this.state = state;
     this.error = error;
     this.errorMessage = errorMessage;
@@ -105,6 +109,7 @@ export class Page {
             url: this.url,
             scanRateMinutes: this.scanRateMinutes,
             changeThreshold: this.changeThreshold,
+            ignoreNumbers: this.ignoreNumbers,
             state: this.state,
             error: this.error,
             errorMessage: this.errorMessage,

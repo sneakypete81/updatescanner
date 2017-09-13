@@ -53,6 +53,7 @@ describe('Page', function() {
                     url: 'https://www.example.com/test',
                     changeThreshold: 1234,
                     scanRateMinutes: 64,
+                    ignoreNumbers: true,
                     state: Page.stateEnum.NO_CHANGE,
                     error: true,
                     errorMessage: 'This is an error',
