@@ -103,6 +103,10 @@ function getScanList(pageList) {
  * @returns {boolean} True if it's time to autoscan the page.
  */
 function isAutoscanPending(page) {
+  if (page.scanRateMinutes == 0) {
+    // Autoscanning is disabled for this page
+    return false;
+  }
   if (page.lastAutoscanTime === null) {
     return true;
   }

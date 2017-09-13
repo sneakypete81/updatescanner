@@ -209,6 +209,15 @@ describe('autoscan', function() {
       expect(autoscan.__.isAutoscanPending(page)).toBeFalsy();
     });
 
+    it('returns false if autoscan is disabled for the page', function() {
+      const page = new Page(1, {
+        lastAutoscanTime: Date.now(),
+        scanRateMinutes: 0});
+      jasmine.clock().tick(5 * 60 * 1000);
+
+      expect(autoscan.__.isAutoscanPending(page)).toBeFalsy();
+    });
+
     it('returns true if the page has not yet been scanned', function() {
       const page = new Page(1, {scanRateMinutes: 5});
 
