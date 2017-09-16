@@ -13,7 +13,7 @@ Clone the source and install all dependencies:
     npm install
     npm install grunt-cli --global
 
-Build the webextension:
+Build, lint and test the webextension:
 
     grunt
 
