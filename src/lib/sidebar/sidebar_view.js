@@ -87,4 +87,16 @@ export class SidebarView {
       }
     });
   }
+
+  /**
+   * Registers the provided handler function to be called whenever a tree
+   * refresh completes.
+   *
+   * @param {Object} handler - Callback to use whenever a refresh completes.
+   */
+  registerRefreshDoneHandler(handler) {
+    $(this.sidebarDivSelector).on('refresh.jstree', (evt, data) => {
+      handler();
+    });
+  }
 }

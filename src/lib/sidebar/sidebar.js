@@ -18,6 +18,7 @@ export class Sidebar {
     this.sidebar = new SidebarView('#tree');
     this.pageStore = null;
     this.currentPage = null;
+    this.isRefreshing = false;
   }
 
   /**
@@ -30,14 +31,23 @@ export class Sidebar {
     this._refreshSidebar();
     this.sidebar.registerSelectHandler((evt, data) =>
                                        this._handleSelect(evt, data));
+    this.sidebar.registerRefreshDoneHandler(() => this._handleRefreshDone());
   }
 
   /**
    * Reload the sidebar view.
    */
   async _refreshSidebar() {
+    this.isRefreshing = true;
     this.sidebar.load(this.pageStore.pageMap, PageStore.ROOT_ID);
     this.sidebar.refresh(this.pageStore.pageMap);
+  }
+
+  /**
+   * Called when a sidebar refresh is complete.
+   */
+  _handleRefreshDone() {
+    this.isRefreshing = false;
   }
 
   /**
@@ -46,10 +56,12 @@ export class Sidebar {
    * @param {string} pageId - Selected Page ID.
    */
   _handleSelect(pageId) {
-    const page = this.pageStore.getPage(pageId);
-    if (page instanceof Page) {
-      openMain({[paramEnum.ACTION]: actionEnum.SHOW_DIFF,
-        [paramEnum.ID]: page.id});
+    if (!this.isRefreshing) {
+      const page = this.pageStore.getPage(pageId);
+      if (page instanceof Page) {
+        openMain({[paramEnum.ACTION]: actionEnum.SHOW_DIFF,
+          [paramEnum.ID]: page.id});
+      }
     }
   }
 
