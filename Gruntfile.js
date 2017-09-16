@@ -5,7 +5,7 @@ module.exports = function(grunt) {
   require('load-grunt-tasks')(grunt);
   grunt.initConfig();
 
-  grunt.registerTask('default', 'Lint, build and test the webextension.',
+  grunt.registerTask('default', 'Build, Lint and test the webextension.',
                      ['build', 'lint', 'test']);
 
   grunt.registerTask('build', 'Build the webextension.',
