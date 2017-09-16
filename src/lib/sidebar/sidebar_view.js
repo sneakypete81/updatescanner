@@ -67,16 +67,10 @@ export class SidebarView {
   }
 
   /**
-   * Callback for handling Sidebar selection changes.
-   * @callback Sidebar~selectHandler
-   * @param {Page|PageFolder} item - Selected Page or PageFolder object..
-   */
-
-  /**
    * Registers the provided handler function to be called whenever a single
    * item in the sidebar is selected.
    *
-   * @param {Sidebar~selectHandler} handler - Callback to use whenever the
+   * @param {Object} handler - Callback to use whenever the
    * sidebar selection changes.
    */
   registerSelectHandler(handler) {

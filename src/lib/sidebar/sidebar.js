@@ -29,8 +29,8 @@ export class Sidebar {
     this.pageStore.bindPageUpdate(this._handlePageUpdate.bind(this));
 
     this._refreshSidebar();
-    this.sidebar.registerSelectHandler((evt, data) =>
-                                       this._handleSelect(evt, data));
+
+    this.sidebar.registerSelectHandler((pageId) => this._handleSelect(pageId));
     this.sidebar.registerRefreshDoneHandler(() => this._handleRefreshDone());
   }
 
@@ -40,7 +40,7 @@ export class Sidebar {
   async _refreshSidebar() {
     this.isRefreshing = true;
     this.sidebar.load(this.pageStore.pageMap, PageStore.ROOT_ID);
-    this.sidebar.refresh(this.pageStore.pageMap);
+    this.sidebar.refresh();
   }
 
   /**
