@@ -1,0 +1,16 @@
+language: node_js
+node_js: stable
+sudo: false
+cache:
+  directories:
+    - node_modules
+
+env:
+  - FIREFOX_VERSION=$HOME/firefox-latest/firefox
+
+before_script:
+  # Use xvfb to run Firefox
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+
+script: grunt
