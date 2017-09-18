@@ -62,8 +62,13 @@ export class SidebarView {
     for (let i = 0; i < children.length; i++) {
       const child = pageMap.get(children[i]);
       if (child instanceof Page) {
-        result.children.push({id: child.id,
-                              text: child.title});
+        result.children.push({
+          id: child.id,
+          text: child.title,
+          li_attr: {
+            class: this._getStateClass(child.state),
+          },
+        });
       } else if (child instanceof PageFolder) {
         result.children.push(this._generateTree(pageMap, child));
       } else {
@@ -71,6 +76,21 @@ export class SidebarView {
       }
     }
     return result;
+  }
+
+  /**
+   * @param {Page.stateEnum} state - State of the page.
+   *
+   * @returns {string} CSS class to use for the tree element.
+   */
+  _getStateClass(state) {
+    switch (state) {
+      case Page.stateEnum.CHANGED:
+        return 'changed';
+      case Page.stateEnum.ERROR:
+        return 'error';
+    }
+    return '';
   }
 
   /**
