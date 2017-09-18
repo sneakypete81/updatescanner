@@ -15,7 +15,14 @@ export class SidebarView {
    */
   constructor(sidebarDivSelector) {
     this.sidebarDivSelector = sidebarDivSelector;
-    $(this.sidebarDivSelector).jstree();
+    $(this.sidebarDivSelector).jstree({
+      core: {
+        themes: {
+          icons: false,
+          dots: false,
+        },
+      },
+    });
   }
 
   /**
