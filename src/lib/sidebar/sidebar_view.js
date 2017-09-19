@@ -14,6 +14,7 @@ export class SidebarView {
    * the Sidebar.
    */
   constructor(sidebarDivSelector) {
+    this.deleteHandler = null;
     this.sidebarDivSelector = sidebarDivSelector;
     $(this.sidebarDivSelector).jstree({
       core: {
@@ -22,7 +23,18 @@ export class SidebarView {
           dots: false,
         },
       },
+
+      contextmenu: {
+        select_node: false,
+        items: this._getSidebarItems(),
+      },
+
+      plugins: [
+        'contextmenu',
+      ],
     });
+
+    document.addEventListener('contextmenu', (evt) => evt.preventDefault());
   }
 
   /**
@@ -94,11 +106,25 @@ export class SidebarView {
   }
 
   /**
+   * @returns {Object} Object containing sidebar configuration items.
+   */
+  _getSidebarItems() {
+    return (node) => {
+      return {
+        delete: {
+          label: 'Delete',
+          action: () => this.deleteHandler(node),
+        },
+      };
+    };
+  }
+
+  /**
    * Registers the provided handler function to be called whenever a single
    * item in the sidebar is selected.
    *
-   * @param {Object} handler - Callback to use whenever the
-   * sidebar selection changes.
+   * @param {Object} handler - Callback to use whenever the sidebar selection
+   * changes.
    */
   registerSelectHandler(handler) {
     $(this.sidebarDivSelector).on('changed.jstree', (evt, data) => {
@@ -119,5 +145,17 @@ export class SidebarView {
     $(this.sidebarDivSelector).on('refresh.jstree', (evt, data) => {
       handler();
     });
+  }
+
+  /**
+   * Registers the provided handler function to be called whenever a tree
+   * node is to be deleted..
+   *
+   * @param {Object} handler - Callback to use whenever a node is to be deleted.
+   */
+  registerDeleteHandler(handler) {
+    this.deleteHandler = (node) => {
+      handler(node.id);
+    };
   }
 }

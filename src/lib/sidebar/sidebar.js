@@ -43,6 +43,7 @@ export class Sidebar {
     this._refreshSidebar();
 
     this.sidebar.registerSelectHandler((pageId) => this._handleSelect(pageId));
+    this.sidebar.registerDeleteHandler((pageId) => this._handleDelete(pageId));
     this.sidebar.registerRefreshDoneHandler(() => this._handleRefreshDone());
   }
 
@@ -77,6 +78,14 @@ export class Sidebar {
     }
   }
 
+  /**
+   * Called whenever the Delete context menu item is selected.
+   *
+   * @param {string} pageId - Page ID to delete.
+   */
+  _handleDelete(pageId) {
+    console.log('@TODO: Delete Page #' + pageId);
+  }
   /**
    * Called when a Page is updated in Storage. Refresh the sidebar if its state
    * changed.
