@@ -27,7 +27,7 @@ module.exports = {
   },
   webextRun: {
     command: webExtCmd('run', [
-      '--firefox=' + settings.get('firefox', 'firefox'),
+      '--firefox="' + settings.get('firefox', 'firefox') + '"',
       '--pref=devtools.theme=light',
       '--pref=javascript.options.strict=false',
     ]),
