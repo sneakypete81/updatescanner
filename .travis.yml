@@ -8,9 +8,16 @@ cache:
 env:
   - FIREFOX_VERSION=$HOME/firefox-latest/firefox
 
+
+before_install:
+- npm install -g greenkeeper-lockfile@1
+
 before_script:
+  - greenkeeper-lockfile-update
   # Use xvfb to run Firefox
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
 
 script: grunt
+
+after_script: greenkeeper-lockfile-upload
