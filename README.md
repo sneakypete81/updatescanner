@@ -1,4 +1,6 @@
 # Update Scanner
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/sneakypete81/updatescanner4.svg)](https://greenkeeper.io/)
 Monitors webpages for updates
 
 # Development
