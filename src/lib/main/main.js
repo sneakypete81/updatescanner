@@ -1,5 +1,6 @@
 import * as view from 'main/main_view';
-import {paramEnum, actionEnum} from 'main/main_url';
+import * as dialog from 'main/dialog_view';
+import {getMainDiffUrl, paramEnum, actionEnum} from 'main/main_url';
 import {PageStore} from 'page/page_store';
 import {Page} from 'page/page';
 import {diff} from 'diff/diff';
@@ -34,6 +35,8 @@ export class Main {
     });
     view.bindViewDropdownChange(this._handleViewDropdownChange.bind(this));
 
+    dialog.init();
+
     this._handleUrlParams(window.location.search);
   }
 
@@ -48,13 +51,17 @@ export class Main {
     switch (params.get(paramEnum.ACTION)) {
       case actionEnum.NEW_PAGE:
       {
-        const page = await this.pageStore.createPage(PageStore.ROOT_ID);
-        page.title = params.get(paramEnum.TITLE);
-        page.url = params.get(paramEnum.URL);
-        page.save();
+        this.currentPage = await this.pageStore.createPage(PageStore.ROOT_ID);
+        this.currentPage.title = params.get(paramEnum.TITLE);
+        this.currentPage.url = params.get(paramEnum.URL);
+        view.viewDiff(this.currentPage, '');
 
-        this.currentPage = page;
-        view.openSettingsDialog(page);
+        const newSettings = await dialog.open(this.currentPage);
+        if (newSettings !== null) {
+          this._updateCurrentPage(newSettings);
+        } else {
+          document.location.replace('about:blank');
+        }
         break;
       }
       case actionEnum.SHOW_DIFF:
@@ -68,8 +75,26 @@ export class Main {
   /**
    * Called whenever the 'Page Settings' item is chosen from the menu.
    */
-  _handleMenuSettings() {
-    view.openSettingsDialog(this.currentPage);
+  async _handleMenuSettings() {
+    const newSettings = await dialog.open(this.currentPage);
+    if (newSettings !== null) {
+      this._updateCurrentPage(newSettings);
+    }
+  }
+
+  /**
+   * Update the current Page with new settings from the Settings dialog.
+   *
+   * @param {Object} newSettings - Settings to apply to the current page.
+   */
+  _updateCurrentPage(newSettings) {
+    this.currentPage.title = newSettings.title;
+    this.currentPage.url = newSettings.url;
+    this.currentPage.scanRateMinutes = newSettings.scanRateMinutes;
+    this.currentPage.changeThreshold = newSettings.changeThreshold;
+    this.currentPage.save();
+
+    document.location.replace(getMainDiffUrl(this.currentPage.id));
   }
 
   /**

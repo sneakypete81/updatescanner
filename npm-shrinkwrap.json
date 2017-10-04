@@ -1997,6 +1997,11 @@
       "integrity": "sha1-gGZJMmzqp8qjMG112YXqJ0i6kTw=",
       "dev": true
     },
+    "dialog-polyfill": {
+      "version": "0.4.9",
+      "resolved": "https://registry.npmjs.org/dialog-polyfill/-/dialog-polyfill-0.4.9.tgz",
+      "integrity": "sha512-iM4ZXRLOA/qpbW6XznGOq7Iq58JoXhZGo+OMG8K3wFxvIatnMTnIancLGEKa6WYy6oTkndfb2UXQ6FGtoUBn1g=="
+    },
     "diffie-hellman": {
       "version": "5.0.2",
       "resolved": "https://registry.npmjs.org/diffie-hellman/-/diffie-hellman-5.0.2.tgz",

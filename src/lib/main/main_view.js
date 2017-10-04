@@ -1,5 +1,3 @@
-import {getSettingsUrl} from 'settings/settings_url';
-import {getMainDiffUrl} from 'main/main_url';
 import {qs, $on} from 'util/view_helpers';
 import {timeSince} from 'util/date_format';
 
@@ -14,7 +12,6 @@ export const ViewTypes = {
  */
 export function init() {
   initMenu();
-  initDialog();
 }
 
 /**
@@ -34,47 +31,6 @@ function initMenu() {
   $on(window, 'click', ({target}) => {
     if (menu.classList.contains('show')) {
       menu.classList.remove('show');
-    }
-  });
-}
-
-/**
- * Initialise the dialog box.
- */
-function initDialog() {
-  const dialog = qs('#dialog');
-  const dialogFrame = qs('#dialog-frame');
-
-  // Show the dialog once its content has loaded
-  $on(dialogFrame, 'load', () => {
-    dialog.classList.add('show');
-
-    // Adjust the dialog iframe size to match the dialog contents
-    dialogFrame.style.height =
-      dialogFrame.contentWindow.document.body.offsetHeight + 'px';
-
-    const borderWidth = 2;
-    qs('#dialog-content').style.width =
-      qs('#content', dialogFrame.contentWindow.document).offsetWidth +
-      borderWidth + 'px';
-
-    // Hide the dialog when its close button is clicked
-    // Update the URL to reload the main view, and prevent 'New Page' dialog
-    // from being stored in the history.
-    $on(qs('#close', dialogFrame.contentWindow.document), 'click', (event) => {
-      dialog.classList.remove('show');
-      window.location.replace(getMainDiffUrl(dialogFrame.data));
-      event.stopPropagation();
-    });
-  });
-
-  // Hide dialog when something else is clicked
-  // Update the URL to reload the main view, and prevent 'New Page' dialog
-  // from being stored in the history.
-  $on(window, 'click', ({target}) => {
-    if (dialog.classList.contains('show')) {
-      dialog.classList.remove('show');
-      window.location.replace(getMainDiffUrl(dialogFrame.data));
     }
   });
 }
@@ -147,18 +103,6 @@ export function viewNew(page, html) {
   }
   setViewDropdown(ViewTypes.NEW);
   loadSandboxedIframe(html);
-}
-
-/**
- * Show the settings dialog for the specified page.
- *
- * @param {Page} page - Page object to view.
- */
-export function openSettingsDialog(page) {
-  // Use contentWindow.location.replace() to avoid updating the history
-  const dialogFrame = qs('#dialog-frame');
-  dialogFrame.data = page.id;
-  dialogFrame.contentWindow.location.replace(getSettingsUrl(page.id));
 }
 
 /**

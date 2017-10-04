@@ -14,7 +14,6 @@ module.exports = {
       background: './src/app/background/background_script.js',
       main: './src/app/main/main_script.js',
       popup: './src/app/popup/popup_script.js',
-      settings: './src/app/settings/settings_script.js',
       debug_storage: './src/app/debug_storage/debug_storage_script.js',
       sidebar: './src/app/sidebar/sidebar_script.js',
       upgrade: './src/app/upgrade/upgrade_script.js',

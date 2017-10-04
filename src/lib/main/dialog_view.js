@@ -1,60 +1,72 @@
+import dialogPolyfill from 'dialog-polyfill';
 import {qs, $on} from 'util/view_helpers';
 
 /**
- * Initialise the Page Settings view.
+ * Initialise the dialog box.
  */
 export function init() {
-  const form = qs('#form');
-  form.autoscan.max = AutoscanSliderToMins.length - 1;
-  form.threshold.max = ThresholdSliderToChars.length - 1;
+  const dialog = qs('#settings-dialog');
+  dialogPolyfill.registerDialog(dialog);
 
-  $on(form.autoscan, 'input', ({target}) =>
+  const form = qs('#settings-form');
+  form.elements['autoscan'].max = AutoscanSliderToMins.length - 1;
+  form.elements['threshold'].max = ThresholdSliderToChars.length - 1;
+
+  $on(form.elements['autoscan'], 'input', ({target}) =>
     updateAutoscanDescription(target.value));
-  $on(form.threshold, 'input', ({target}) =>
+  $on(form.elements['threshold'], 'input', ({target}) =>
     updateThresholdDescription(target.value));
+
+  $on(form, 'reset', () => dialog.close());
 }
 
 /**
- * @param {Function} handler - Called when a dialog input is modified.
- */
-export function bindValueInput(handler) {
-  const form = qs('#form');
-  $on(form.title, 'input', ({target}) => handler('title', target.value));
-  $on(form.url, 'input', ({target}) => handler('url', target.value));
-  $on(form.autoscan, 'input', ({target}) =>
-    handler('scanRateMinutes', AutoscanSliderToMins[target.value]));
-  $on(form.threshold, 'input', ({target}) =>
-    handler('changeThreshold', ThresholdSliderToChars[target.value]));
-}
-/**
- * Update the Page Settings view.
+ * Show the settings dialog for the specified page.
  *
- * @param {Object} data - Object containing the data to update the view. All
- * attributes are optional, only those that exist will be used.
- * @param {string} data.title - Title of the page.
- * @param {string} data.url - URL of the page.
- * @param {integer} data.scanRateMinutes - Number of minutes between scans. Zero
- * means manual scan only.
- * @param {integer} data.changeThreshold - Number of characters changed before
- * signalling that a change has occurred.
+ * @param {Page} page - Page object to view.
+ *
+ * @returns {Promise} Promise that resolves with an object containing the
+ * updated page settings.
  */
-export function update({title, url, scanRateMinutes, changeThreshold}) {
-  const form = qs('#form');
+export function open(page) {
+  // Now dialog acts like a native <dialog>.
+  const dialog = qs('#settings-dialog');
+  const form = qs('#settings-form');
 
-  if (title !== null) {
-    form.title.value = title;
+  if (page.title !== null) {
+    form.elements['title'].value = page.title;
   }
-  if (url !== null) {
-    form.url.value = url;
+  if (page.url !== null) {
+    form.elements['url'].value = page.url;
   }
-  if (scanRateMinutes !== null) {
-    form.autoscan.value = autoscanMinsToSlider(scanRateMinutes);
-    updateAutoscanDescription(form.autoscan.value);
+  if (page.scanRateMinutes !== null) {
+    const sliderValue = autoscanMinsToSlider(page.scanRateMinutes);
+    form.elements['autoscan'].value = sliderValue;
+    updateAutoscanDescription(sliderValue);
   }
-  if (changeThreshold !== null) {
-    form.threshold.value = thresholdCharsToSlider(changeThreshold);
-    updateThresholdDescription(form.threshold.value);
+  if (page.changeThreshold !== null) {
+    const sliderValue = thresholdCharsToSlider(page.changeThreshold);
+    form.elements['threshold'].value = sliderValue;
+    updateThresholdDescription(sliderValue);
   }
+  dialog.showModal();
+
+  return new Promise((resolve, reject) => {
+    $on(dialog, 'close', () => {
+      if (dialog.returnValue == 'ok') {
+        resolve({
+          title: form.elements['title'].value,
+          url: form.elements['url'].value,
+          scanRateMinutes:
+            AutoscanSliderToMins[form.elements['autoscan'].value],
+          changeThreshold:
+            ThresholdSliderToChars[form.elements['threshold'].value],
+        });
+      } else {
+        resolve(null);
+      }
+    });
+  });
 }
 
 const AutoscanSliderMap = new Map([
@@ -98,7 +110,7 @@ function autoscanMinsToSlider(minutes) {
  * @param {integer} sliderValue - Autoscan slider value.
  */
 function updateAutoscanDescription(sliderValue) {
-  qs('#form').elements['autoscan-description'].value =
+  qs('#settings-form').elements['autoscan-description'].value =
     AutoscanSliderDescriptions[sliderValue];
 }
 
@@ -134,8 +146,8 @@ function thresholdCharsToSlider(changeThreshold) {
  * @param {integer} sliderValue - Threshold slider value.
  */
 function updateThresholdDescription(sliderValue) {
-  qs('#form').elements['threshold-description'].value =
+  qs('#settings-form').elements['threshold-description'].value =
     ThresholdSliderDescriptions[sliderValue][0];
-  qs('#form').elements['threshold-subdescription'].value =
+  qs('#settings-form').elements['threshold-subdescription'].value =
     ThresholdSliderDescriptions[sliderValue][1];
 }

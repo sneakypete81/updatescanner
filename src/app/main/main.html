@@ -39,14 +39,48 @@
     </div>
   </div>
 
-  <div id="dialog" class="modal-background">
-    <div id="dialog-content" class="modal-content">
-      <iframe id="dialog-frame" class="frame"></iframe>
-    </div>
-  </div>
+  <dialog id="settings-dialog">
+    <form id="settings-form", method="dialog">
+      <h1>Page Settings</h1>
+      <fieldset>
+        <label class="flex">
+          <span>Title:</span>
+          <input name="title" type="text"></input>
+        </label>
 
-  <!-- Dependencies -->
-  <script src="/dependencies/jquery/dist/jquery.min.js"></script>
+        <label class="flex">
+          <span>URL:</span>
+          <input name="url" type="text" placeholder="https://www.example.com"></input>
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Autoscan:</legend>
+        <div class="flex">
+          <span class="range-label-min">Often</span>
+          <input name="autoscan" type="range"></input>
+          <span class="range-label-max">Never</span>
+        </div>
+        <output name="autoscan-description" for="autoscan">...</output>
+      </fieldset>
+
+      <fieldset>
+        <legend>Change Threshold:</legend>
+        <div class="flex">
+          <span class="range-label-min">Low</span>
+          <input name="threshold" type="range"></input>
+          <span class="range-label-max">High</span>
+        </div>
+        <output name="threshold-description" for="autoscan">...</output>
+        <output name="threshold-subdescription" for="autoscan">(...)</output>
+      </fieldset>
+
+      <div id="dialog-buttons">
+        <button class="browser-style" id="cancel-button" type="reset">Cancel</button>
+        <button class="browser-style default" type="submit" value="ok">Ok</button>
+      </div>
+    </form>
+  </dialog>
 
   <!-- Output script from webpack -->
   <script src="main_script.js"></script>
