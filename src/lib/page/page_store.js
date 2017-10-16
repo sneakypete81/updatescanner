@@ -76,7 +76,7 @@ export class PageStore {
   }
 
   /**
-   * @returns {Array.<Page|PageFolder>} Array of Page objects in the pageMap.
+   * @returns {Array.<Page>} Array of Page objects in the pageMap.
    */
   getPageList() {
     return Array.from(this.pageMap.values()).filter(
@@ -169,8 +169,8 @@ export class PageStore {
    * Given Arrays of Page and Folder IDs, loads the corresponding objects from
    * storage and generates a Map keyed by ID.
    *
-   * @param {Array} pageIds - Array of page IDs.
-   * @param {Array} pageFolderIds - Array of page folder IDs.
+   * @param {Array.<Integer>} pageIds - Array of page IDs.
+   * @param {Array.<Integer>} pageFolderIds - Array of page folder IDs.
    *
    * @returns {Promise} A Promise that resolves to the pageMap once all objects
    * have been loaded.

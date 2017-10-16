@@ -75,7 +75,7 @@ export class StorageInfo {
 
   /**
    * Generate an ID for a new page, and add it to the pageIds array. Don't
-   * forget to call save() afterwards.
+   * forget to save() afterwards.
    *
    * @returns {string} - ID of the new page.
    */
