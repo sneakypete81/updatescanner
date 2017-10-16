@@ -60,8 +60,8 @@ export class Popup {
    * Called when the Sidebar button is clicked, to open the sidebar.
    */
   _handleSidebarClick() {
-    // @TODO: Use sidebar API rather than just opening the main page.
-    openMain({});
+    browser.sidebarAction.open();
+    window.close();
   }
 
   /**
