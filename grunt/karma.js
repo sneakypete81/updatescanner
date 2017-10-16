@@ -9,8 +9,8 @@ module.exports = {
     singleRun: false,
     autoWatch: true,
     // Windows is not supported by the notification reporter
-    reporters: ['dots', 'kjhtml'] +
-      (isWindows ? [''] : ['notification']),
+    reporters: ['dots', 'kjhtml'].concat(
+      isWindows ? [''] : ['notification']),
     preprocessors: {}, // Don't run coverage
   },
 };
