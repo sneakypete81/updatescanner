@@ -34,6 +34,7 @@ module.exports = {
     // Exclude dependencies from webpack - they're copied separately below.
     externals: {
       'jquery': 'jQuery',
+      'jstree': {root: 'jstree'},
     },
 
     plugins: [
@@ -55,6 +56,11 @@ module.exports = {
         {
           context: 'node_modules',
           from: 'jquery/dist/**/jquery.min.js',
+          to: 'dependencies',
+        },
+        {
+          context: 'node_modules',
+          from: 'jstree/dist/**/jstree.min.js',
           to: 'dependencies',
         },
       ]),
