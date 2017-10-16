@@ -1,3 +1,7 @@
 .changed > .jstree-anchor {
   font-weight:bold;
 }
+
+p {
+  white-space: pre-line;
+}
