@@ -215,12 +215,86 @@ describe('PageStore', function() {
     });
   });
 
+  describe('getPageFolderList', function() {
+    it('returns just the root when there are no other PageFolders in the map',
+      function() {
+        const pageStore = new PageStore(new Map());
+        const root = new PageFolder('1', {});
+        pageStore.pageMap.set(root.id, root);
+
+        const pageFolderList = pageStore.getPageFolderList();
+
+        expect(pageFolderList).toEqual([root]);
+      }
+    );
+
+    it('returns an array containing all PageFolders in the map', function() {
+      const pageStore = new PageStore(new Map());
+      pageStore.pageMap.set('1', new PageFolder('1', {}));
+      pageStore.pageMap.set('2', new Page('2', {}));
+      pageStore.pageMap.set('3', new PageFolder('3', {}));
+      pageStore.pageMap.set('4', new Page('4', {}));
+
+      const pageList = pageStore.getPageFolderList();
+
+      expect(pageList)
+        .toEqual([new PageFolder('1', {}), new PageFolder('3', {})]);
+    });
+  });
+
+  describe('findParent', function() {
+    it('returns the parent of a Page', function() {
+      const pageStore = new PageStore(new Map());
+      const root = new PageFolder('1', {children: ['2', '3']});
+      pageStore.pageMap.set('1', root);
+      pageStore.pageMap.set('2', new Page('2', {}));
+      pageStore.pageMap.set('3', new PageFolder('3', {children: ['4']}));
+      pageStore.pageMap.set('4', new Page('4', {}));
+
+      const parent = pageStore.findParent('2');
+
+      expect(parent).toEqual(root);
+    });
+
+    it('returns the parent of a PageFolder', function() {
+      const pageStore = new PageStore(new Map());
+      const root = new PageFolder('1', {children: ['2', '3']});
+      pageStore.pageMap.set('1', root);
+      pageStore.pageMap.set('2', new Page('2', {}));
+      pageStore.pageMap.set('3', new PageFolder('3', {children: ['4']}));
+      pageStore.pageMap.set('4', new Page('4', {}));
+
+      const parent = pageStore.findParent('3');
+
+      expect(parent).toEqual(root);
+    });
+
+    it('returns undefined if the item doesn\'t exist', function() {
+      const pageStore = new PageStore(new Map());
+      pageStore.pageMap.set('2', new Page('2', {}));
+
+      const parent = pageStore.findParent('3');
+
+      expect(parent).toBeUndefined();
+    });
+
+    it('returns undefined if the item doesn\'t have a parent', function() {
+      const pageStore = new PageStore(new Map());
+      pageStore.pageMap.set('2', new Page('2', {}));
+
+      const parent = pageStore.findParent('2');
+
+      expect(parent).toBeUndefined();
+    });
+  });
+
   describe('createPage', function() {
     it('creates a new page at the tree root', function(done) {
       spyOnStorageLoadWithArgReturn({
         [StorageInfo._KEY]: Promise.resolve(undefined),
       });
       spyOn(Storage, 'save').and.returnValues(Promise.resolve());
+
       PageStore.load().then((pageStore) => {
         pageStore.createPage(PageStore.ROOT_ID).then((page) => {
           expect(page.id).toEqual('1');
@@ -243,6 +317,7 @@ describe('PageStore', function() {
         [StorageInfo._KEY]: Promise.resolve({nextId: '2'}),
       });
       spyOn(Storage, 'save').and.returnValues(Promise.resolve());
+
       PageStore.load().then((pageStore) => {
         const subFolder = new PageFolder('1', {});
         pageStore.pageMap.set('1', subFolder);
@@ -257,6 +332,59 @@ describe('PageStore', function() {
             PageFolder._KEY('1'), subFolder._toObject());
           expect(Storage.save).toHaveBeenCalledWith(
             StorageInfo._KEY, pageStore.storageInfo._toObject());
+          done();
+        }).catch((error) => done.fail(error));
+      }).catch((error) => done.fail(error));
+    });
+  });
+
+  describe('deletePage', function() {
+    it('deletes an existing Page', function(done) {
+      spyOnStorageLoadWithArgReturn({
+        [StorageInfo._KEY]: Promise.resolve(
+          {nextId: '2', pageFolderIds: ['0'], pageIds: ['1']}),
+        [Page._KEY('1')]: Promise.resolve({id: '1'}),
+        [PageFolder._KEY('0')]: Promise.resolve(
+          {id: '0', children: ['3', '1', '4']}),
+      });
+      spyOn(Storage, 'save').and.returnValues(Promise.resolve());
+
+      PageStore.load().then((pageStore) => {
+        pageStore.deletePage('1').then(() => {
+          expect(pageStore.storageInfo.pageIds).toEqual([]);
+
+          const root = pageStore.getPage('0');
+          expect(root.children).toEqual(['3', '4']);
+
+          expect(pageStore.pageMap.get('1')).toBeUndefined();
+
+          expect(Storage.save).toHaveBeenCalledWith(
+            PageFolder._KEY('0'), root._toObject());
+          expect(Storage.save).toHaveBeenCalledWith(
+            StorageInfo._KEY, pageStore.storageInfo._toObject());
+          done();
+        }).catch((error) => done.fail(error));
+      }).catch((error) => done.fail(error));
+    });
+
+    it('does nothing if the Page doesn\'t exist', function(done) {
+      spyOnStorageLoadWithArgReturn({
+        [StorageInfo._KEY]: Promise.resolve(
+          {nextId: '2', pageFolderIds: ['0'], pageIds: ['1']}),
+        [Page._KEY('1')]: Promise.resolve({id: '1'}),
+        [PageFolder._KEY('0')]: Promise.resolve(
+          {id: '0', children: ['3', '1', '4']}),
+      });
+      spyOn(Storage, 'save').and.returnValues(Promise.resolve());
+
+      PageStore.load().then((pageStore) => {
+        pageStore.deletePage('2').then(() => {
+          expect(pageStore.storageInfo.pageIds).toEqual(['1']);
+
+          const root = pageStore.getPage('0');
+          expect(root.children).toEqual(['3', '1', '4']);
+
+          expect(pageStore.pageMap.get('1').id).toBe('1');
           done();
         }).catch((error) => done.fail(error));
       }).catch((error) => done.fail(error));

@@ -85,4 +85,16 @@ export class StorageInfo {
     this.pageIds.push(pageId);
     return pageId;
   }
+
+  /**
+   * Delete a Page from the pageIds array. Don't forget to save() afterwards.
+   *
+   * @param {integer} pageId - ID of the Page to delete.
+   */
+  deletePage(pageId) {
+    const pageIndex = this.pageIds.indexOf(pageId);
+    if (pageIndex >= 0) {
+      this.pageIds.splice(pageIndex, 1);
+    }
+  }
 }

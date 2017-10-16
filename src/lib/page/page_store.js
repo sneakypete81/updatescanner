@@ -84,6 +84,27 @@ export class PageStore {
   }
 
   /**
+   * @returns {Array.<PageFolder>} Array of PageFolder objects in the pageMap.
+   */
+  getPageFolderList() {
+    return Array.from(this.pageMap.values()).filter(
+      (item) => item instanceof PageFolder);
+  }
+
+  /**
+   * Finds the pagent PageFolder for the given ID.
+   *
+   * @param {integer} pageId - ID of the child Page/PageFolder.
+   *
+   * @returns {PageFolder} Parent PageFolder.
+   */
+  findParent(pageId) {
+    return this.getPageFolderList().find(
+      (pageFolder) => pageFolder.children.includes(pageId)
+    );
+  }
+
+  /**
    * Create a new Page object, updating the StorageInfo and PageMap.
    *
    * @param {string} parentId - ID of the parent PageFolder.
@@ -104,9 +125,33 @@ export class PageStore {
     const page = new Page(pageId, {});
 
     // Update the PageMap
+    // @TODO: do we need this, or will the update handle this?
     this.pageMap.set(pageId, page);
 
     return page;
+  }
+
+  /**
+   * Delete a Page from the PageStore.
+   *
+   * @param {integer} pageId - ID of the Page to delete.
+   */
+  async deletePage(pageId) {
+    // Remove the page from StorageInfo
+    this.storageInfo.deletePage(pageId);
+    await this.storageInfo.save();
+
+    // Update the parent PageFolder
+    const pageFolder = this.findParent(pageId);
+    if (pageFolder !== undefined) {
+      const index = pageFolder.children.indexOf(pageId);
+      pageFolder.children.splice(index, 1);
+      await pageFolder.save();
+    }
+
+    // Update the PageMap
+    // @TODO: do we need this, or will the update handle this?
+    this.pageMap.delete(pageId);
   }
 
   /**

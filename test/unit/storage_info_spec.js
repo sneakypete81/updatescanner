@@ -116,4 +116,22 @@ describe('StorageInfo', function() {
       expect(storageInfo.pageIds).toContain('1');
     });
   });
+
+  describe('deletePage', function() {
+    it('deletes an existing page', function() {
+      const storageInfo = new StorageInfo({pageIds: ['1', '5', '3', '9']});
+
+      storageInfo.deletePage('3');
+
+      expect(storageInfo.pageIds).toEqual(['1', '5', '9']);
+    });
+
+    it('does nothing if the requested page doesn\'t exist', function() {
+      const storageInfo = new StorageInfo({pageIds: ['1', '5', '3', '9']});
+
+      storageInfo.deletePage('2');
+
+      expect(storageInfo.pageIds).toEqual(['1', '5', '3', '9']);
+    });
+  });
 });
