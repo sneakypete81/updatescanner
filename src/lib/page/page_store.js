@@ -134,7 +134,7 @@ export class PageStore {
   /**
    * Delete a Page from the PageStore.
    *
-   * @param {integer} pageId - ID of the Page to delete.
+   * @param {string} pageId - ID of the Page to delete.
    */
   async deletePage(pageId) {
     // Remove the page from StorageInfo
@@ -214,8 +214,8 @@ export class PageStore {
    * Given Arrays of Page and Folder IDs, loads the corresponding objects from
    * storage and generates a Map keyed by ID.
    *
-   * @param {Array.<Integer>} pageIds - Array of page IDs.
-   * @param {Array.<Integer>} pageFolderIds - Array of page folder IDs.
+   * @param {Array.<string>} pageIds - Array of page IDs.
+   * @param {Array.<string>} pageFolderIds - Array of page folder IDs.
    *
    * @returns {Promise} A Promise that resolves to the pageMap once all objects
    * have been loaded.

@@ -89,7 +89,7 @@ export class StorageInfo {
   /**
    * Delete a Page from the pageIds array. Don't forget to save() afterwards.
    *
-   * @param {integer} pageId - ID of the Page to delete.
+   * @param {string} pageId - ID of the Page to delete.
    */
   deletePage(pageId) {
     const pageIndex = this.pageIds.indexOf(pageId);
