@@ -87,14 +87,20 @@ export class StorageInfo {
   }
 
   /**
-   * Delete a Page from the pageIds array. Don't forget to save() afterwards.
+   * Delete a Page/PageFolder from the pageIds array.
+   * Don't forget to save() afterwards.
    *
-   * @param {string} pageId - ID of the Page to delete.
+   * @param {string} itemId - ID of the Page/PageFolder to delete.
    */
-  deletePage(pageId) {
-    const pageIndex = this.pageIds.indexOf(pageId);
+  deleteItem(itemId) {
+    const pageIndex = this.pageIds.indexOf(itemId);
     if (pageIndex >= 0) {
       this.pageIds.splice(pageIndex, 1);
+    }
+
+    const pageFolderIndex = this.pageFolderIds.indexOf(itemId);
+    if (pageFolderIndex >= 0) {
+      this.pageFolderIds.splice(pageFolderIndex, 1);
     }
   }
 }

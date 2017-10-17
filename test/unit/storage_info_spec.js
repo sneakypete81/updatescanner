@@ -117,21 +117,34 @@ describe('StorageInfo', function() {
     });
   });
 
-  describe('deletePage', function() {
-    it('deletes an existing page', function() {
+  describe('deleteItem', function() {
+    it('deletes an existing Page', function() {
       const storageInfo = new StorageInfo({pageIds: ['1', '5', '3', '9']});
 
-      storageInfo.deletePage('3');
+      storageInfo.deleteItem('3');
 
       expect(storageInfo.pageIds).toEqual(['1', '5', '9']);
     });
 
-    it('does nothing if the requested page doesn\'t exist', function() {
-      const storageInfo = new StorageInfo({pageIds: ['1', '5', '3', '9']});
+    it('deletes an existing PageFolder', function() {
+      const storageInfo = new StorageInfo(
+        {pageFolderIds: ['1', '5', '3', '9']});
 
-      storageInfo.deletePage('2');
+      storageInfo.deleteItem('9');
+
+      expect(storageInfo.pageFolderIds).toEqual(['1', '5', '3']);
+    });
+
+    it('does nothing if the requested Page doesn\'t exist', function() {
+      const storageInfo = new StorageInfo({
+        pageIds: ['1', '5', '3', '9'],
+        pageFolderIds: ['4', '5'],
+      });
+
+      storageInfo.deleteItem('2');
 
       expect(storageInfo.pageIds).toEqual(['1', '5', '3', '9']);
+      expect(storageInfo.pageFolderIds).toEqual(['4', '5']);
     });
   });
 });

@@ -342,15 +342,16 @@ describe('PageStore', function() {
     it('deletes an existing Page', function(done) {
       spyOnStorageLoadWithArgReturn({
         [StorageInfo._KEY]: Promise.resolve(
-          {nextId: '2', pageFolderIds: ['0'], pageIds: ['1']}),
-        [Page._KEY('1')]: Promise.resolve({id: '1'}),
+          {pageFolderIds: ['0'], pageIds: ['1']}),
         [PageFolder._KEY('0')]: Promise.resolve(
           {id: '0', children: ['3', '1', '4']}),
+        [Page._KEY('1')]: Promise.resolve(
+          {id: '1'}),
       });
       spyOn(Storage, 'save').and.returnValues(Promise.resolve());
 
       PageStore.load().then((pageStore) => {
-        pageStore.deletePage('1').then(() => {
+        pageStore.deleteItem('1').then(() => {
           expect(pageStore.storageInfo.pageIds).toEqual([]);
 
           const root = pageStore.getItem('0');
@@ -367,18 +368,82 @@ describe('PageStore', function() {
       }).catch((error) => done.fail(error));
     });
 
-    it('does nothing if the Page doesn\'t exist', function(done) {
+    it('deletes an empty PageFolder', function(done) {
       spyOnStorageLoadWithArgReturn({
-        [StorageInfo._KEY]: Promise.resolve(
-          {nextId: '2', pageFolderIds: ['0'], pageIds: ['1']}),
-        [Page._KEY('1')]: Promise.resolve({id: '1'}),
+        [StorageInfo._KEY]: Promise.resolve({pageFolderIds: ['0', '1']}),
         [PageFolder._KEY('0')]: Promise.resolve(
           {id: '0', children: ['3', '1', '4']}),
+        [PageFolder._KEY('1')]: Promise.resolve(
+          {id: '1', children: []}),
       });
       spyOn(Storage, 'save').and.returnValues(Promise.resolve());
 
       PageStore.load().then((pageStore) => {
-        pageStore.deletePage('2').then(() => {
+        pageStore.deleteItem('1').then(() => {
+          expect(pageStore.storageInfo.pageFolderIds).toEqual(['0']);
+
+          const root = pageStore.getItem('0');
+          expect(root.children).toEqual(['3', '4']);
+
+          expect(pageStore.pageMap.get('1')).toBeUndefined();
+
+          expect(Storage.save).toHaveBeenCalledWith(
+            PageFolder._KEY('0'), root._toObject());
+          expect(Storage.save).toHaveBeenCalledWith(
+            StorageInfo._KEY, pageStore.storageInfo._toObject());
+          done();
+        }).catch((error) => done.fail(error));
+      }).catch((error) => done.fail(error));
+    });
+
+    it('deletes a PageFolder with sub-folders', function(done) {
+      spyOnStorageLoadWithArgReturn({
+        [StorageInfo._KEY]: Promise.resolve(
+          {pageFolderIds: ['0', '1', '2']}),
+        [PageFolder._KEY('0')]: Promise.resolve(
+          {id: '0', children: ['3', '1', '4']}),
+        [PageFolder._KEY('1')]: Promise.resolve(
+          {id: '1', children: ['2']}),
+        [PageFolder._KEY('2')]: Promise.resolve(
+          {id: '2', children: ['5']}),
+        [Page._KEY('5')]: Promise.resolve(
+          {id: '5'}),
+      });
+      spyOn(Storage, 'save').and.returnValues(Promise.resolve());
+
+      PageStore.load().then((pageStore) => {
+        pageStore.deleteItem('1').then(() => {
+          expect(pageStore.storageInfo.pageFolderIds).toEqual(['0']);
+          expect(pageStore.storageInfo.pageIds).toEqual([]);
+
+          const root = pageStore.getItem('0');
+          expect(root.children).toEqual(['3', '4']);
+
+          expect(pageStore.pageMap.get('1')).toBeUndefined();
+          expect(pageStore.pageMap.get('2')).toBeUndefined();
+          expect(pageStore.pageMap.get('5')).toBeUndefined();
+
+          expect(Storage.save).toHaveBeenCalledWith(
+            PageFolder._KEY('0'), root._toObject());
+          expect(Storage.save).toHaveBeenCalledWith(
+            StorageInfo._KEY, pageStore.storageInfo._toObject());
+          done();
+        }).catch((error) => done.fail(error));
+      }).catch((error) => done.fail(error));
+    });
+
+    it('does nothing if the item doesn\'t exist', function(done) {
+      spyOnStorageLoadWithArgReturn({
+        [StorageInfo._KEY]: Promise.resolve(
+          {pageFolderIds: ['0'], pageIds: ['1']}),
+        [PageFolder._KEY('0')]: Promise.resolve(
+          {id: '0', children: ['3', '1', '4']}),
+        [Page._KEY('1')]: Promise.resolve({id: '1'}),
+      });
+      spyOn(Storage, 'save').and.returnValues(Promise.resolve());
+
+      PageStore.load().then((pageStore) => {
+        pageStore.deleteItem('2').then(() => {
           expect(pageStore.storageInfo.pageIds).toEqual(['1']);
 
           const root = pageStore.getItem('0');

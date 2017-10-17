@@ -132,26 +132,35 @@ export class PageStore {
   }
 
   /**
-   * Delete a Page from the PageStore.
+   * Delete a Page/PageFolder from the PageStore.
    *
-   * @param {string} pageId - ID of the Page to delete.
+   * @param {string} itemId - ID of the Page/PageFolder to delete.
    */
-  async deletePage(pageId) {
+  async deleteItem(itemId) {
+    const item = this.pageMap.get(itemId);
+
     // Remove the page from StorageInfo
-    this.storageInfo.deletePage(pageId);
+    this.storageInfo.deleteItem(itemId);
     await this.storageInfo.save();
 
     // Update the parent PageFolder
-    const pageFolder = this.findParent(pageId);
+    const pageFolder = this.findParent(itemId);
     if (pageFolder !== undefined) {
-      const index = pageFolder.children.indexOf(pageId);
+      const index = pageFolder.children.indexOf(itemId);
       pageFolder.children.splice(index, 1);
       await pageFolder.save();
     }
 
     // Update the PageMap
     // @TODO: do we need this, or will the update handle this?
-    this.pageMap.delete(pageId);
+    this.pageMap.delete(itemId);
+
+    // Recursively delete any children
+    if (item instanceof PageFolder) {
+      for (const child of item.children) {
+        await this.deleteItem(child);
+      }
+    }
   }
 
   /**
