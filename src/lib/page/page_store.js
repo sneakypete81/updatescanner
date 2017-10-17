@@ -67,12 +67,12 @@ export class PageStore {
   /**
    * Get a Page/PageFolder object.
    *
-   * @param {string} pageId - ID of the Page to return.
+   * @param {string} itemId - ID of the Page to return.
    *
    * @returns {Page|PageFolder} Object with the specified ID.
    */
-  getPage(pageId) {
-    return this.pageMap.get(pageId);
+  getItem(itemId) {
+    return this.pageMap.get(itemId);
   }
 
   /**
@@ -94,13 +94,13 @@ export class PageStore {
   /**
    * Finds the pagent PageFolder for the given ID.
    *
-   * @param {integer} pageId - ID of the child Page/PageFolder.
+   * @param {string} itemId - ID of the child Page/PageFolder.
    *
    * @returns {PageFolder} Parent PageFolder.
    */
-  findParent(pageId) {
+  findParent(itemId) {
     return this.getPageFolderList().find(
-      (pageFolder) => pageFolder.children.includes(pageId)
+      (pageFolder) => pageFolder.children.includes(itemId)
     );
   }
 

@@ -353,7 +353,7 @@ describe('PageStore', function() {
         pageStore.deletePage('1').then(() => {
           expect(pageStore.storageInfo.pageIds).toEqual([]);
 
-          const root = pageStore.getPage('0');
+          const root = pageStore.getItem('0');
           expect(root.children).toEqual(['3', '4']);
 
           expect(pageStore.pageMap.get('1')).toBeUndefined();
@@ -381,7 +381,7 @@ describe('PageStore', function() {
         pageStore.deletePage('2').then(() => {
           expect(pageStore.storageInfo.pageIds).toEqual(['1']);
 
-          const root = pageStore.getPage('0');
+          const root = pageStore.getItem('0');
           expect(root.children).toEqual(['3', '1', '4']);
 
           expect(pageStore.pageMap.get('1').id).toBe('1');

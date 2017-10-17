@@ -66,7 +66,7 @@ export class Main {
       }
       case actionEnum.SHOW_DIFF:
       {
-        this._showDiff(this.pageStore.getPage(params.get(paramEnum.ID)));
+        this._showDiff(this.pageStore.getItem(params.get(paramEnum.ID)));
         break;
       }
     }

@@ -70,7 +70,7 @@ export class Sidebar {
    */
   _handleSelect(pageId) {
     if (!this.isRefreshing) {
-      const page = this.pageStore.getPage(pageId);
+      const page = this.pageStore.getItem(pageId);
       if (page instanceof Page) {
         openMain({[paramEnum.ACTION]: actionEnum.SHOW_DIFF,
           [paramEnum.ID]: page.id});
