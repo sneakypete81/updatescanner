@@ -3,6 +3,12 @@ import {Storage} from 'util/storage';
 import * as log from 'util/log';
 
 describe('StorageInfo', function() {
+  beforeEach(function() {
+    spyOn(Storage, 'addListener').and.callFake((listener) => {
+      this.storageListener = listener;
+    });
+  });
+
   describe('load', function() {
     it('loads StorageInfo from storage', function(done) {
       const data = {
@@ -145,6 +151,49 @@ describe('StorageInfo', function() {
 
       expect(storageInfo.pageIds).toEqual(['1', '5', '3', '9']);
       expect(storageInfo.pageFolderIds).toEqual(['4', '5']);
+    });
+  });
+
+  describe('_addStorageListener', function() {
+    it('updates the StorageInfo object when a StorageInfo update event fires',
+      function() {
+        const storageInfo = new StorageInfo({
+          pageIds: ['1', '5', '3', '9'],
+          pageFolderIds: ['4', '5'],
+        });
+
+        const newData = {
+          pageIds: ['9', '8', '7'],
+          pageFolderIds: ['0'],
+        };
+
+        this.storageListener({
+          [StorageInfo._KEY]: {newValue: newData},
+        });
+
+        expect(storageInfo.pageIds).toEqual(newData.pageIds);
+        expect(storageInfo.pageFolderIds).toEqual(newData.pageFolderIds);
+      }
+    );
+
+    it('doesn\'t update the storageInfo object when a different event fires',
+      function() {
+        const storageInfo = new StorageInfo({
+          pageIds: ['1', '5', '3', '9'],
+          pageFolderIds: ['4', '5'],
+        });
+
+        const newData = {
+          pageIds: ['9', '8', '7'],
+          pageFolderIds: ['0'],
+        };
+
+        this.storageListener({
+          ['invalidKey']: {newValue: newData},
+        });
+
+        expect(storageInfo.pageIds).toEqual(['1', '5', '3', '9']);
+        expect(storageInfo.pageFolderIds).toEqual(['4', '5']);
     });
   });
 });

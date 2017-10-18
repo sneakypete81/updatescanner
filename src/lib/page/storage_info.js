@@ -23,6 +23,16 @@ export class StorageInfo {
    * @param {Object} data - Serialised StorageInfo object.
    */
   constructor(data={}) {
+    this._set(data);
+    this._addStorageListener();
+  }
+
+  /**
+   * Updates the StorageInfo attributes.
+   *
+   * @param {Object} data - Data object to update from.
+   */
+  _set(data) {
     this.version = data.version || StorageInfo._VERSION;
     this.pageIds = data.pageIds || [];
     this.pageFolderIds = data.pageFolderIds || [];
@@ -102,5 +112,19 @@ export class StorageInfo {
     if (pageFolderIndex >= 0) {
       this.pageFolderIds.splice(pageFolderIndex, 1);
     }
+  }
+
+  /**
+   * Listen to Storage changes, handling any StorageInfo updates.
+   */
+  _addStorageListener() {
+    Storage.addListener((changes) => {
+      // Iterate over changes, handling any Page updates
+      for (const key of Object.keys(changes)) {
+        if (key == StorageInfo._KEY) {
+          this._set(changes[key].newValue);
+        }
+      }
+    });
   }
 }
