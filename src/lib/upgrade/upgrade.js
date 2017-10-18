@@ -16,7 +16,7 @@ export class Upgrade {
       const root = findRoot(bookmarks.children);
 
       const pageStore = await PageStore.load();
-      importPages(pageStore, root);
+      importPages(pageStore, root, PageStore.ROOT_ID);
     });
   }
 }
@@ -70,14 +70,18 @@ function findRoot(bookmarks) {
  *
  * @param {PageStore} pageStore - PageStore to import bookmarks into..
  * @param {Object} root - Update Scanner root bookmarks object.
+ * @param {string} parentId - ID of the parent PageFolder object.
  */
-async function importPages(pageStore, root) {
+async function importPages(pageStore, root, parentId) {
   root.children.forEach(async (child) => {
     if (child.hasOwnProperty('children')) {
-      importPages(pageStore, child);
+      const pageFolder = await pageStore.createPageFolder(parentId);
+      pageFolder.title = child.title;
+      pageFolder.save();
+      importPages(pageStore, child, pageFolder.id);
     } else {
       const annos = extractAnnos(child);
-      const page = await pageStore.createPage(PageStore.ROOT_ID);
+      const page = await pageStore.createPage(parentId);
       page.title = child.title;
       page.url = child.uri;
       page.scanRateMinutes = annos['updatescan/scan_rate_mins'];
