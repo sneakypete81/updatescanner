@@ -338,7 +338,7 @@ describe('PageStore', function() {
     });
   });
 
-  describe('deletePage', function() {
+  describe('deleteItem', function() {
     it('deletes an existing Page', function(done) {
       spyOnStorageLoadWithArgReturn({
         [StorageInfo._KEY]: Promise.resolve(
@@ -349,6 +349,7 @@ describe('PageStore', function() {
           {id: '1'}),
       });
       spyOn(Storage, 'save').and.returnValues(Promise.resolve());
+      spyOn(Storage, 'remove').and.returnValues(Promise.resolve());
 
       PageStore.load().then((pageStore) => {
         pageStore.deleteItem('1').then(() => {
@@ -358,6 +359,8 @@ describe('PageStore', function() {
           expect(root.children).toEqual(['3', '4']);
 
           expect(pageStore.pageMap.get('1')).toBeUndefined();
+
+          expect(Storage.remove).toHaveBeenCalledWith(Page._KEY('1'));
 
           expect(Storage.save).toHaveBeenCalledWith(
             PageFolder._KEY('0'), root._toObject());
@@ -377,6 +380,7 @@ describe('PageStore', function() {
           {id: '1', children: []}),
       });
       spyOn(Storage, 'save').and.returnValues(Promise.resolve());
+      spyOn(Storage, 'remove').and.returnValues(Promise.resolve());
 
       PageStore.load().then((pageStore) => {
         pageStore.deleteItem('1').then(() => {
@@ -386,6 +390,8 @@ describe('PageStore', function() {
           expect(root.children).toEqual(['3', '4']);
 
           expect(pageStore.pageMap.get('1')).toBeUndefined();
+
+          expect(Storage.remove).toHaveBeenCalledWith(PageFolder._KEY('1'));
 
           expect(Storage.save).toHaveBeenCalledWith(
             PageFolder._KEY('0'), root._toObject());
@@ -398,8 +404,10 @@ describe('PageStore', function() {
 
     it('deletes a PageFolder with sub-folders', function(done) {
       spyOnStorageLoadWithArgReturn({
-        [StorageInfo._KEY]: Promise.resolve(
-          {pageFolderIds: ['0', '1', '2']}),
+        [StorageInfo._KEY]: Promise.resolve({
+          pageFolderIds: ['0', '1', '2'],
+          pageIds: ['5'],
+        }),
         [PageFolder._KEY('0')]: Promise.resolve(
           {id: '0', children: ['3', '1', '4']}),
         [PageFolder._KEY('1')]: Promise.resolve(
@@ -410,6 +418,7 @@ describe('PageStore', function() {
           {id: '5'}),
       });
       spyOn(Storage, 'save').and.returnValues(Promise.resolve());
+      spyOn(Storage, 'remove').and.returnValues(Promise.resolve());
 
       PageStore.load().then((pageStore) => {
         pageStore.deleteItem('1').then(() => {
@@ -422,6 +431,10 @@ describe('PageStore', function() {
           expect(pageStore.pageMap.get('1')).toBeUndefined();
           expect(pageStore.pageMap.get('2')).toBeUndefined();
           expect(pageStore.pageMap.get('5')).toBeUndefined();
+
+          expect(Storage.remove).toHaveBeenCalledWith(PageFolder._KEY('1'));
+          expect(Storage.remove).toHaveBeenCalledWith(PageFolder._KEY('2'));
+          expect(Storage.remove).toHaveBeenCalledWith(Page._KEY('5'));
 
           expect(Storage.save).toHaveBeenCalledWith(
             PageFolder._KEY('0'), root._toObject());
@@ -518,6 +531,31 @@ describe('PageStore', function() {
       spyOn(log, 'log');
 
       PageStore.saveHtml('2', PageStore.htmlTypes.NEW, 'Some HTML').then(() => {
+        expect(log.log.calls.argsFor(0)).toMatch('AN_ERROR');
+        done();
+      }).catch((error) => done.fail(error));
+    });
+  });
+
+  describe('deleteHtml', function() {
+    it('deletes HTML from storage', function(done) {
+      const id = '24';
+      spyOn(Storage, 'remove').and.returnValues(Promise.resolve());
+
+      PageStore.deleteHtml(id).then(() => {
+        expect(Storage.remove).toHaveBeenCalledWith(
+          PageStore._HTML_KEY(id, PageStore.htmlTypes.OLD));
+        expect(Storage.remove).toHaveBeenCalledWith(
+          PageStore._HTML_KEY(id, PageStore.htmlTypes.NEW));
+        done();
+      }).catch((error) => done.fail(error));
+    });
+
+    it('silently logs an error if the delete operation fails', function(done) {
+      spyOn(Storage, 'remove').and.returnValues(Promise.reject('AN_ERROR'));
+      spyOn(log, 'log');
+
+      PageStore.deleteHtml('2').then(() => {
         expect(log.log.calls.argsFor(0)).toMatch('AN_ERROR');
         done();
       }).catch((error) => done.fail(error));

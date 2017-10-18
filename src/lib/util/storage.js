@@ -34,6 +34,18 @@ export class Storage {
   }
 
   /**
+   * Deletes an item from storage.
+   *
+   * @param {string} key - Storage key of the object to delete.
+   *
+   * @returns {Promise} A promise that will be fulfilled when the operation is
+   * completed, or rejected if the operation fails.
+   */
+  static remove(key) {
+    return browser.storage.local.remove(key);
+  }
+
+  /**
    * Adds a listener that fires whenever a Storage item is updated.
    * See https://developer.mozilla.org/en-US/Add-ons/WebExtensions/API/storage/onChanged.
    *

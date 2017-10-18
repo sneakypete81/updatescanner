@@ -151,4 +151,19 @@ export class Page {
     }
     return {};
   }
+
+  /**
+   * Delete the Page from storage.
+   *
+   * @returns {Promise} An empty Promise that fultils when the operation is
+   * finished. Errors are logged and ignored.
+   */
+  async delete() {
+    try {
+      await Storage.remove(Page._KEY(this.id));
+    } catch (error) {
+      log(`ERROR: Page.delete: ${error}`);
+    }
+    return {};
+  }
 }

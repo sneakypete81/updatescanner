@@ -155,6 +155,16 @@ export class PageStore {
     // @TODO: do we need this, or will the update handle this?
     this.pageMap.delete(itemId);
 
+    // Delete the item itself
+    if (item !== undefined) {
+      item.delete();
+    }
+
+    // Delete HTML associated with the Page
+    if (item instanceof Page) {
+      PageStore.deleteHtml(itemId);
+    }
+
     // Recursively delete any children
     if (item instanceof PageFolder) {
       for (const child of item.children) {
@@ -292,6 +302,28 @@ export class PageStore {
       log('ERROR:PageStore.loadHtml:' + error);
       return null;
     }
+  }
+
+  /**
+   * Delete the saved HTML for a given ID. Errors are ignored.
+   *
+   * @param {string} id - ID of the Page.
+   *
+   * @returns {Promise} An empty Promise that fulfils when the save succeeds.
+   * Errors are logged and discarded.
+   */
+  static async deleteHtml(id) {
+    try {
+      await Storage.remove(PageStore._HTML_KEY(id, PageStore.htmlTypes.OLD));
+    } catch (error) {
+      log('ERROR:PageStore.deleteHtml:' + error);
+    }
+    try {
+      await Storage.remove(PageStore._HTML_KEY(id, PageStore.htmlTypes.NEW));
+    } catch (error) {
+      log('ERROR:PageStore.deleteHtml:' + error);
+    }
+    return {};
   }
 
   /**

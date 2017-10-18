@@ -48,7 +48,7 @@ describe('Page', function() {
   describe('save', function() {
     it('saves a Page to storage', function(done) {
       spyOn(Storage, 'save').and.returnValues(Promise.resolve());
-      const id = 33;
+      const id = '33';
       const data = {title: 'A Page',
                     url: 'https://www.example.com/test',
                     changeThreshold: 1234,
@@ -74,7 +74,36 @@ describe('Page', function() {
       spyOn(Storage, 'save').and.returnValues(Promise.reject('AN_ERROR'));
       spyOn(log, 'log');
 
-      new Page('37', {}).save().then(() => {
+      const page = new Page('37', {});
+
+      page.save().then(() => {
+        expect(log.log.calls.argsFor(0)).toMatch('AN_ERROR');
+        done();
+      })
+      .catch((error) => done.fail(error));
+    });
+  });
+
+  describe('delete', function() {
+    it('deletes a Page from storage', function(done) {
+      spyOn(Storage, 'remove').and.returnValues(Promise.resolve());
+
+      const page = new Page('33', {});
+
+      page.delete().then(() => {
+        expect(Storage.remove).toHaveBeenCalledWith(Page._KEY(page.id));
+        done();
+      })
+      .catch((error) => done.fail(error));
+    });
+
+    it('silently logs an error if the delete operation fails', function(done) {
+      spyOn(Storage, 'remove').and.returnValues(Promise.reject('AN_ERROR'));
+      spyOn(log, 'log');
+
+      const page = new Page('37', {});
+
+      page.delete().then(() => {
         expect(log.log.calls.argsFor(0)).toMatch('AN_ERROR');
         done();
       })

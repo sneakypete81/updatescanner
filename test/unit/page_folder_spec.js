@@ -74,6 +74,34 @@ describe('PageFolder', function() {
     });
   });
 
+  describe('delete', function() {
+    it('deletes a PageFolder from storage', function(done) {
+      spyOn(Storage, 'remove').and.returnValues(Promise.resolve());
+
+      const pageFolder = new PageFolder('33', {});
+
+      pageFolder.delete().then(() => {
+        expect(Storage.remove).toHaveBeenCalledWith(
+          PageFolder._KEY(pageFolder.id));
+        done();
+      })
+      .catch((error) => done.fail(error));
+    });
+
+    it('silently logs an error if the delete operation fails', function(done) {
+      spyOn(Storage, 'remove').and.returnValues(Promise.reject('AN_ERROR'));
+      spyOn(log, 'log');
+
+      const pageFolder = new PageFolder('37', {});
+
+      pageFolder.delete().then(() => {
+        expect(log.log.calls.argsFor(0)).toMatch('AN_ERROR');
+        done();
+      })
+      .catch((error) => done.fail(error));
+    });
+  });
+
   describe('idFromKey', function() {
     it('extracts the id from a PageFolder key', function() {
       const key = PageFolder._KEY('987');

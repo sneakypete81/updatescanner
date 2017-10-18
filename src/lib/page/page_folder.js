@@ -90,4 +90,19 @@ export class PageFolder {
     }
     return {};
   }
+
+  /**
+   * Delete the PageFolder from storage.
+   *
+   * @returns {Promise} An empty Promise that fultils when the operation is
+   * finished. Errors are logged and ignored.
+   */
+  async delete() {
+    try {
+      await Storage.remove(PageFolder._KEY(this.id));
+    } catch (error) {
+      log(`ERROR: PageFolder.delete: ${error}`);
+    }
+    return {};
+  }
 }
