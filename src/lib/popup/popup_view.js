@@ -63,9 +63,9 @@ function createListItem(page) {
 
   const icon = document.createElement('div');
   icon.className = 'icon';
-  const image = document.createElement('img');
-  image.src = '/images/updatescanner_18.png';
-  icon.appendChild(image);
+  // const image = document.createElement('img');
+  // image.src = '/images/updatescanner_18.png';
+  // icon.appendChild(image);
 
   const text = document.createElement('div');
   text.className = 'text';
