@@ -84,8 +84,8 @@ export class StorageInfo {
   }
 
   /**
-   * Generate an ID for a new page, and add it to the pageIds array. Don't
-   * forget to save() afterwards.
+   * Generate an ID for a new page, and add it to the pageIds array.
+   * Don't forget to save() afterwards.
    *
    * @returns {string} - ID of the new page.
    */
@@ -94,6 +94,19 @@ export class StorageInfo {
     this.nextId = (parseInt(pageId) + 1).toString();
     this.pageIds.push(pageId);
     return pageId;
+  }
+
+  /**
+   * Generate an ID for a new pageFolder, and add it to the pageFolderIds array.
+   * Don't forget to save() afterwards.
+   *
+   * @returns {string} - ID of the new page.
+   */
+  createPageFolder() {
+    const pageFolderId = this.nextId;
+    this.nextId = (parseInt(pageFolderId) + 1).toString();
+    this.pageFolderIds.push(pageFolderId);
+    return pageFolderId;
   }
 
   /**

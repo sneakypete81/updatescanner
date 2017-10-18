@@ -106,6 +106,7 @@ export class PageStore {
 
   /**
    * Create a new Page object, updating the StorageInfo and PageMap.
+   * Don't forget to page.save() afterwards.
    *
    * @param {string} parentId - ID of the parent PageFolder.
    *
@@ -117,9 +118,9 @@ export class PageStore {
     await this.storageInfo.save();
 
     // Update the parent PageFolder
-    const pageFolder = this.pageMap.get(parentId);
-    pageFolder.children.push(pageId);
-    await pageFolder.save();
+    const parent = this.pageMap.get(parentId);
+    parent.children.push(pageId);
+    await parent.save();
 
     // Create the Page
     const page = new Page(pageId, {});
@@ -131,6 +132,33 @@ export class PageStore {
     return page;
   }
 
+  /**
+   * Create a new PageFolder object, updating the StorageInfo and PageMap.
+   * Don't forget to pageFolder.save() afterwards.
+   *
+   * @param {string} parentId - ID of the parent PageFolder.
+   *
+   * @returns {Promise} A Promise that fulfils with the new PageFolder object.
+   */
+  async createPageFolder(parentId) {
+    // Update StorageInfo with the new PageFolder, returning the new ID
+    const pageFolderId = this.storageInfo.createPageFolder();
+    await this.storageInfo.save();
+
+    // Update the parent PageFolder
+    const parent = this.pageMap.get(parentId);
+    parent.children.push(pageFolderId);
+    await parent.save();
+
+    // Create the Page
+    const pageFolder = new PageFolder(pageFolderId, {});
+
+    // Update the PageMap
+    // @TODO: do we need this, or will the update handle this?
+    this.pageMap.set(pageFolderId, pageFolder);
+
+    return pageFolder;
+  }
   /**
    * Delete a Page/PageFolder from the PageStore.
    *

@@ -123,6 +123,25 @@ describe('StorageInfo', function() {
     });
   });
 
+  describe('createPageFolder', function() {
+    it('returns and increments nextId', function() {
+      const storageInfo = new StorageInfo({nextId: '9'});
+
+      const id = storageInfo.createPageFolder();
+
+      expect(id).toEqual('9');
+      expect(storageInfo.nextId).toEqual('10');
+    });
+
+    it('appends the ID to the pageFolderIds array', function() {
+      const storageInfo = new StorageInfo({nextId: '1'});
+
+      storageInfo.createPageFolder();
+
+      expect(storageInfo.pageFolderIds).toContain('1');
+    });
+  });
+
   describe('deleteItem', function() {
     it('deletes an existing Page', function() {
       const storageInfo = new StorageInfo({pageIds: ['1', '5', '3', '9']});
