@@ -39,7 +39,7 @@ function preload() {
     'page_folder:0': {title: 'root', children: ['1', '2', '3', '5']},
     'page_folder:3': {title: 'Subfolder', children: ['4']},
     'page:1': {
-      title: 'Update Scanner Website',
+      title: 'Update Scanner Website with a very very very long title',
       url: 'https://addons.mozilla.org/firefox/addon/update-scanner/',
       state: 'changed',
       oldScanTime: 1486026360682,
