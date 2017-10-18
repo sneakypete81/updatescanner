@@ -52,8 +52,12 @@ export class Main {
       case actionEnum.NEW_PAGE:
       {
         this.currentPage = await this.pageStore.createPage(PageStore.ROOT_ID);
-        this.currentPage.title = params.get(paramEnum.TITLE);
-        this.currentPage.url = params.get(paramEnum.URL);
+
+        const url = params.get(paramEnum.URL);
+        if (!url.startsWith('about') && !url.startsWith('moz-extension')) {
+          this.currentPage.title = params.get(paramEnum.TITLE);
+          this.currentPage.url = params.get(paramEnum.URL);
+        }
         view.viewDiff(this.currentPage, '');
 
         const newSettings = await dialog.open(this.currentPage);
