@@ -81,10 +81,10 @@ export class Sidebar {
   /**
    * Called whenever the Delete context menu item is selected.
    *
-   * @param {string} pageId - Page ID to delete.
+   * @param {string} itemId - Page/PageFolder ID to delete.
    */
-  _handleDelete(pageId) {
-    console.log('@TODO: Delete Page #' + pageId);
+  _handleDelete(itemId) {
+    this.pageStore.deleteItem(itemId);
   }
   /**
    * Called when a Page is updated in Storage. Refresh the sidebar if its state
