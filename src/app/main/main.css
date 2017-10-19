@@ -3,13 +3,12 @@ html, body, #content {
 }
 
 #content {
-  display: flex;
-  flex-direction: column;
   overflow-y: hidden;
+  display: grid;
+  grid-template-rows: auto 1fr;
 }
 
 #header {
-  flex: 0 0 auto;
   display: grid;
   grid-template-columns: auto minmax(30em, 1fr) auto;
   padding: 1em;
@@ -89,14 +88,6 @@ a:hover {
   margin-top: 5px;
 }
 
-#main {
-  flex: 1 1 auto;
-  position: relative;/* need this to position inner content */
-}
-
-#frameContainer {
-  height: 100%;
-}
 
 .frame {
   width: 100%;
