@@ -44,12 +44,12 @@
     <form id="settings-form", method="dialog">
       <h1>Page Settings</h1>
       <fieldset>
-        <label class="flex">
+        <label>
           <span>Title:</span>
           <input name="title" type="text"></input>
         </label>
 
-        <label class="flex">
+        <label>
           <span>URL:</span>
           <input name="url" type="text" placeholder="https://www.example.com"></input>
         </label>
@@ -57,7 +57,7 @@
 
       <fieldset>
         <legend>Autoscan:</legend>
-        <div class="flex">
+        <div class="slider">
           <span class="range-label-min">Often</span>
           <input name="autoscan" type="range"></input>
           <span class="range-label-max">Never</span>
@@ -67,7 +67,7 @@
 
       <fieldset>
         <legend>Change Threshold:</legend>
-        <div class="flex">
+        <div class="slider">
           <span class="range-label-min">Low</span>
           <input name="threshold" type="range"></input>
           <span class="range-label-max">High</span>
