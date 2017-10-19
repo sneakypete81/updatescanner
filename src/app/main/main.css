@@ -10,35 +10,24 @@ html, body, #content {
 
 #header {
   flex: 0 0 auto;
+  display: grid;
+  grid-template-columns: auto minmax(30em, 1fr) auto;
   padding: 1em;
   border-bottom: #d4d4d4 solid 1px;
   background-color: #fbfbfb;
 }
 
-#main {
-  flex: 1 1 auto;
-  position: relative;/* need this to position inner content */
-}
-
-/* Horizontal placement of icon and title/subtitle */
-#header > div {
-  display: inline-block;
-  vertical-align: top;
-}
-
 #icon {
   height: 48px;
   width: 48px;
-  margin-top: 5px;
-  margin-right: 10px;
+  margin-top: 3px;
+  margin-right: 15px;
   background-image: url('/images/updatescanner_48.png');
   background-position: center center;
   background-repeat: no-repeat;
 }
 
 h1 {
-  /* Place menu button beside the title */
-  display: inline-block;
   font-size: 22px;
   margin-top: 0;
   margin-bottom: 10px;
@@ -53,7 +42,12 @@ a:hover {
   text-decoration: underline;
 }
 
-.menu-container {
+#subtitle {
+  color: #595959;
+}
+
+#menu-container {
+  float: right;
   position: relative;
   display: inline-block;
   vertical-align: top;
@@ -62,6 +56,7 @@ a:hover {
 #menuButton {
   height: 24px;
   width: 24px;
+  margin: 0px;
   background-image: url('/images/options.png');
   background-position: center center;
   background-repeat: no-repeat;
@@ -73,10 +68,10 @@ a:hover {
   display: none;
   position: absolute;
   padding: inherit;
-  margin: inherit;
-  margin-top: 2px;
+  width: 164px;
+  margin-left: -140px;
+  margin-top: 0px;
   background-color: #fbfbfb;
-  min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
@@ -90,13 +85,13 @@ a:hover {
   background-color: #e3e3e3;
 }
 
-#subtitle {
-  color: #595959;
+#view-dropdown {
+  margin-top: 5px;
 }
 
-#view-dropdown {
-  float: right;
-  margin-top: 30px;
+#main {
+  flex: 1 1 auto;
+  position: relative;/* need this to position inner content */
 }
 
 #frameContainer {
