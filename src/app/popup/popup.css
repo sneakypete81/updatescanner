@@ -49,10 +49,12 @@ html body {
   background-image: url('/images/sidebar_32.png');
 }
 
-#more > .footer-button-icon {
-  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICA8cGF0aCBkPSJNOCwxMkwzLDcsNCw2bDQsNCw0LTQsMSwxWiIgZmlsbD0iIzZBNkE2QSIgLz4KPC9zdmc+Cg==);
+#help > .footer-button-icon {
+  background-image: url('/images/help_32.png');
 }
 
 .footer-button-text {
+  margin-top: 5px;
+  font-size: 12px;
   text-align: center;
 }

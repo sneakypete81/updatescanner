@@ -25,6 +25,7 @@ export class Popup {
     view.bindShowAllClick(this._handleShowAllClick.bind(this));
     view.bindNewClick(this._handleNewClick.bind(this));
     view.bindSidebarClick(this._handleSidebarClick.bind(this));
+    view.bindHelpClick(this._handleHelpClick.bind(this));
     view.bindPageClick(this._handlePageClick.bind(this));
 
     this._refreshPageList();
@@ -61,6 +62,14 @@ export class Popup {
    */
   _handleSidebarClick() {
     browser.sidebarAction.open();
+    window.close();
+  }
+
+  /**
+   * Called when the Help button is clicked, to open the help website.
+   */
+  _handleHelpClick() {
+    browser.tabs.create({url: 'https://sneakypete81.github.io/updatescanner/'});
     window.close();
   }
 

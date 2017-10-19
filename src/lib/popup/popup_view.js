@@ -22,6 +22,13 @@ export function bindSidebarClick(handler) {
 }
 
 /**
+ * @param {Function} handler - Called when the Help button is clicked.
+ */
+export function bindHelpClick(handler) {
+  $on(qs('#help'), 'click', handler);
+}
+
+/**
  * @param {Function} handler - Called when a Page list item is clicked.
  */
 export function bindPageClick(handler) {
