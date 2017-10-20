@@ -64,7 +64,9 @@ export function bindViewDropdownChange(handler) {
  */
 export function viewDiff(page, html) {
   setTitle(page.title, page.url);
-  if (page.newScanTime != null) {
+  if (page.newScanTime == null) {
+    setSubtitle('This page has not yet been scanned.');
+  } else {
     const scanTime = timeSince(new Date(page.newScanTime));
     setSubtitle(`This page was last scanned ${scanTime}. ` +
       'The changes are highlighted.');
@@ -81,7 +83,9 @@ export function viewDiff(page, html) {
  */
 export function viewOld(page, html) {
   setTitle(page.title, page.url);
-  if (page.oldScanTime !== null) {
+  if (page.oldScanTime === null) {
+    setSubtitle('There is no old version of this page available yet.');
+  } else {
     const scanTime = timeSince(new Date(page.oldScanTime));
     setSubtitle(`This is the old version of the page, scanned ${scanTime}.`);
   }
@@ -97,7 +101,9 @@ export function viewOld(page, html) {
  */
 export function viewNew(page, html) {
   setTitle(page.title, page.url);
-  if (page.newScanTime !== null) {
+  if (page.newScanTime == null) {
+    setSubtitle('This page has not yet been scanned.');
+  } else {
     const scanTime = timeSince(new Date(page.newScanTime));
     setSubtitle(`This is the new version of the page, scanned ${scanTime}.`);
   }
