@@ -9,27 +9,38 @@
 
 <body>
   <div id="intro">
-    <h1>Welcome to Update Scanner 4!</h1>
-    Update Scanner has been updated to a WebExtension. If you have used Update
-    Scanner before, you can import your previous scan list by following these
-    instructions.
+    <h1>Welcome to Update Scanner 4</h1>
+    <div class="subtitle">
+      Update Scanner is now a WebExtension.
+    </div>
+    If you have used Update Scanner before, you can import your previous scan
+    list by following these instructions.
   </div>
 
   <div class="step">
     <h2>Export your Bookmarks</h2>
     <ul>
-      <li>Open the Bookmark Manager by clicking the bookmark icon and clicking "Show
-        All Bookmarks".</li>
-      <li>From the "Import and Backup" menu, choose "Backup".</li>
-      <li>Save your bookmark file somewhere handy.</li>
+      <li>Open the Bookmark Manager by clicking the bookmark icon and selecting
+        "Show All Bookmarks".</li>
+      <li>From the "Import and Backup" menu, select "Backup".</li>
+      <li>Save your Bookmarks file somewhere handy.</li>
     </ol>
   </div>
 
   <div class="step">
     <h2>Import into Update Scanner 4</h2>
     <form id="jsonFile" name="jsonFile" enctype="multipart/form-data" method="post">
-      <input type="file" id="fileInput">
-      <input type="button" id="loadButton" value="Import">
+      <label id="upload-button" for="file-upload">
+          Select Bookmarks File...
+      </label>
+      <input id="file-upload" class="hidden" type="file" accept=".json"/>
+
+      <div id="upgrade-failed" class="hidden">
+        Error: No Update Scanner bookmarks were found.
+      </div>
+      <div id="upgrade-complete" class="hidden">
+        Your bookmarks have been imported successfully.
+      </div>
     </form>
   </div>
 

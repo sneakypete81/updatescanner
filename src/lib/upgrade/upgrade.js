@@ -10,15 +10,40 @@ export class Upgrade {
    * Initialise the upgrade page's content.
    */
   init() {
-    $on(qs('#loadButton'), 'click', async (event) => {
-      const file = qs('#fileInput').files[0];
+    $on(qs('#file-upload'), 'change', async (event) => {
+      hideElement(qs('#upload-button'));
+      hideElement(qs('#upgrade-failed'));
+
+      const file = qs('#file-upload').files[0];
       const bookmarks = await loadBookmarks(file);
       const root = findRoot(bookmarks.children);
 
-      const pageStore = await PageStore.load();
-      importPages(pageStore, root, PageStore.ROOT_ID);
+      if (root === undefined) {
+        showElement(qs('#upload-button'));
+        showElement(qs('#upgrade-failed'));
+      } else {
+        const pageStore = await PageStore.load();
+        await importPages(pageStore, root, PageStore.ROOT_ID);
+
+        showElement(qs('#upgrade-complete'));
+      }
     });
   }
+}
+
+
+/**
+ * @param {Element} element - Element to show.
+ */
+function showElement(element) {
+  element.className = '';
+}
+
+/**
+ * @param {Element} element - Element to hide.
+ */
+function hideElement(element) {
+  element.className = 'hidden';
 }
 
 /**
@@ -34,7 +59,7 @@ async function loadBookmarks(file) {
   } catch (e) {
     console.log(e);
   }
-  return {};
+  return {children: []};
 }
 
 /**
