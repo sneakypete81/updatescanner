@@ -34,7 +34,16 @@ export class SidebarView {
       ],
     });
 
+    // Prevent the contextmenu from being shown - we use our own
     document.addEventListener('contextmenu', (evt) => evt.preventDefault());
+
+    // Open links in the main window, not the sidebar
+    document.addEventListener('click', (evt) => {
+      if (evt.target.className == 'link') {
+        browser.tabs.create({url: evt.target.href});
+        evt.preventDefault();
+      }
+    });
   }
 
   /**
