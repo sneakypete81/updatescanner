@@ -53,7 +53,7 @@ export class Popup {
       [paramEnum.ACTION]: actionEnum.NEW_PAGE,
       [paramEnum.TITLE]: tabs[0].title,
       [paramEnum.URL]: tabs[0].url,
-    });
+    }, true);
     window.close();
   }
 
