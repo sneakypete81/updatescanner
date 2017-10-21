@@ -46,26 +46,14 @@ export class Main {
    * @param {string} searchString - Query portion of the URL, starting with the
    * '?' character.
    */
-  async _handleUrlParams(searchString) {
+  _handleUrlParams(searchString) {
     const params = new URLSearchParams(searchString);
     switch (params.get(paramEnum.ACTION)) {
       case actionEnum.NEW_PAGE:
       {
-        this.currentPage = await this.pageStore.createPage(PageStore.ROOT_ID);
-
+        const title = params.get(paramEnum.TITLE);
         const url = params.get(paramEnum.URL);
-        if (!url.startsWith('about') && !url.startsWith('moz-extension')) {
-          this.currentPage.title = params.get(paramEnum.TITLE);
-          this.currentPage.url = params.get(paramEnum.URL);
-        }
-        view.viewDiff(this.currentPage, '');
-
-        const newSettings = await dialog.open(this.currentPage);
-        if (newSettings !== null) {
-          this._updateCurrentPage(newSettings);
-        } else {
-          document.location.replace('about:blank');
-        }
+        this._createNewPage(title, url);
         break;
       }
       case actionEnum.SHOW_DIFF:
@@ -73,6 +61,28 @@ export class Main {
         this._showDiff(this.pageStore.getItem(params.get(paramEnum.ID)));
         break;
       }
+    }
+  }
+
+  /**
+   * _Show the Dialog to create a new Page.
+   *
+   * @param {string} title - Default title field.
+   * @param {string} url - Default url field.
+   */
+  async _createNewPage(title, url) {
+    if (url.startsWith('about') || url.startsWith('moz-extension')) {
+      title = undefined;
+      url = undefined;
+    }
+    // view.viewDiff(this.currentPage, '');
+
+    const newSettings = await dialog.open({title: title, url: url});
+    if (newSettings === null) {
+      document.location.replace('about:blank');
+    } else {
+      this.currentPage = await this.pageStore.createPage(PageStore.ROOT_ID);
+      this._updateCurrentPage(newSettings);
     }
   }
 
