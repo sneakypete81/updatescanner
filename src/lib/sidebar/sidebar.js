@@ -49,6 +49,8 @@ export class Sidebar {
     this.sidebar.registerNewPageFolderHandler(
       (itemId) => this._handleNewPageFolder(itemId));
     this.sidebar.registerDeleteHandler((itemId) => this._handleDelete(itemId));
+    this.sidebar.registerSettingsHandler(
+      (itemId) => this._handleSettings(itemId));
     this.sidebar.registerRefreshDoneHandler(() => this._handleRefreshDone());
   }
 
@@ -94,7 +96,7 @@ export class Sidebar {
       [paramEnum.ACTION]: actionEnum.NEW_PAGE,
       [paramEnum.PARENT_ID]: parentPosition.parentId,
       [paramEnum.INSERT_AFTER_INDEX]: parentPosition.insertAfterIndex,
-    }, true);
+    });
   }
 
   /**
@@ -106,6 +108,17 @@ export class Sidebar {
     this.pageStore.deleteItem(itemId);
   }
 
+  /**
+   * Called whenever the Settings context menu item is selected.
+   *
+   * @param {string} itemId - Page/PageFolder ID.
+   */
+  _handleSettings(itemId) {
+    openMain({
+      [paramEnum.ACTION]: actionEnum.SHOW_SETTINGS,
+      [paramEnum.ID]: itemId,
+    });
+  }
   /**
    * Called when a Page is updated in Storage. Refresh the sidebar if its state
    * changed.

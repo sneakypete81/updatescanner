@@ -14,9 +14,10 @@ export class SidebarView {
    * the Sidebar.
    */
   constructor(sidebarDivSelector) {
-    this._deleteHandler = null;
     this._newPageHandler = null;
     this._newPageFolderHandler = null;
+    this._deleteHandler = null;
+    this._settingsHandler = null;
 
     this._sidebarDivSelector = sidebarDivSelector;
     $(this._sidebarDivSelector).jstree({
@@ -137,6 +138,11 @@ export class SidebarView {
           label: 'Delete',
           action: () => this._deleteHandler(node),
         },
+        settings: {
+          separator_before: true,
+          label: 'Settings...',
+          action: () => this._settingsHandler(node),
+        },
       };
     };
   }
@@ -196,5 +202,15 @@ export class SidebarView {
    */
   registerDeleteHandler(handler) {
     this._deleteHandler = (node) => handler(node.id);
+  }
+
+  /**
+   * Registers the provided handler function to be called whenever the
+   * 'Settings' context menu item is selected..
+   *
+   * @param {Object} handler - Callback to use when 'Settings' is selected.
+   */
+  registerSettingsHandler(handler) {
+    this._settingsHandler = (node) => handler(node.id);
   }
 }

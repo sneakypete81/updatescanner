@@ -64,6 +64,11 @@ export class Main {
         this._showDiff(this.pageStore.getItem(params.get(paramEnum.ID)));
         break;
       }
+      case actionEnum.SHOW_SETTINGS:
+      {
+        this._showSettings(this.pageStore.getItem(params.get(paramEnum.ID)));
+        break;
+      }
     }
   }
 
@@ -86,8 +91,6 @@ export class Main {
       title = undefined;
       url = undefined;
     }
-    // view.viewDiff(this.currentPage, '');
-
     const newSettings = await dialog.open({title: title, url: url});
     if (newSettings === null) {
       document.location.replace('about:blank');
@@ -102,10 +105,7 @@ export class Main {
    * Called whenever the 'Page Settings' item is chosen from the menu.
    */
   async _handleMenuSettings() {
-    const newSettings = await dialog.open(this.currentPage);
-    if (newSettings !== null) {
-      this._updateCurrentPage(newSettings);
-    }
+    this._showSettings(this.currentPage);
   }
 
   /**
@@ -148,6 +148,20 @@ export class Main {
     this.currentPage = page;
     this.viewType = view.ViewTypes.DIFF;
     return this._refreshView();
+  }
+
+  /**
+   * Show the Pgae settings dialog.
+   *
+   * @param {Page} page - Page to load.
+   */
+  async _showSettings(page) {
+    this.currentPage = page;
+    const newSettings = await dialog.open(page);
+    if (newSettings !== null) {
+      this._updateCurrentPage(newSettings);
+    }
+    document.location.replace(getMainDiffUrl(this.currentPage.id));
   }
 
   /**

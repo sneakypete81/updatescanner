@@ -20,6 +20,7 @@ export const paramEnum = {
 export const actionEnum = {
   NEW_PAGE: 'new_page',
   SHOW_DIFF: 'show_diff',
+  SHOW_SETTINGS: 'show_settings',
 };
 
 
