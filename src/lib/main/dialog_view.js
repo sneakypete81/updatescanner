@@ -1,6 +1,7 @@
 import dialogPolyfill from 'dialog-polyfill';
 import {qs, $on} from 'util/view_helpers';
 import {Page} from 'page/page';
+import {PageFolder} from 'page/page_folder';
 
 /**
  * Initialise the dialog box.
@@ -22,15 +23,14 @@ export function init() {
 }
 
 /**
- * Show the settings dialog for the specified page.
+ * Show the settings dialog for the specified Page.
  *
  * @param {Page} page - Page object to view.
  *
  * @returns {Promise} Promise that resolves with an object containing the
  * updated page settings.
  */
-export function open(page) {
-  // Now dialog acts like a native <dialog>.
+export function openPageDialog(page) {
   const dialog = qs('#settings-dialog');
   const form = qs('#settings-form');
 
@@ -47,6 +47,8 @@ export function open(page) {
   form.elements['threshold'].value = thresholdSliderValue;
   updateThresholdDescription(thresholdSliderValue);
 
+  qs('#folder-heading').className = 'hide';
+
   dialog.showModal();
 
   return new Promise((resolve, reject) => {
@@ -60,6 +62,38 @@ export function open(page) {
           changeThreshold:
             ThresholdSliderToChars[form.elements['threshold'].value],
         });
+      } else {
+        resolve(null);
+      }
+    });
+  });
+}
+
+/**
+ * Show the settings dialog for the specified PageFolder.
+ *
+ * @param {PageFolder} pageFolder - PageFolder object to view.
+ *
+ * @returns {Promise} Promise that resolves with an object containing the
+ * updated pageFolder settings.
+ */
+export function openPageFolderDialog(pageFolder) {
+  const dialog = qs('#settings-dialog');
+  const form = qs('#settings-form');
+
+  form.elements['title'].value = pageFolder.title || PageFolder.DEFAULTS.title;
+
+  qs('#page-heading').className = 'hide';
+  qs('#urlFieldset').className = 'hide';
+  qs('#autoscanFieldset').className = 'hide';
+  qs('#thresholdFieldset').className = 'hide';
+
+  dialog.showModal();
+
+  return new Promise((resolve, reject) => {
+    $on(dialog, 'close', () => {
+      if (dialog.returnValue == 'ok') {
+        resolve({title: form.elements['title'].value});
       } else {
         resolve(null);
       }

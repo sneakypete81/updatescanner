@@ -66,7 +66,12 @@ export class Main {
       }
       case actionEnum.SHOW_SETTINGS:
       {
-        this._showSettings(this.pageStore.getItem(params.get(paramEnum.ID)));
+        const item = this.pageStore.getItem(params.get(paramEnum.ID));
+        if (item instanceof Page) {
+          this._showPageSettings(item);
+        } else {
+          this._showPageFolderSettings(item);
+        }
         break;
       }
     }
@@ -91,7 +96,7 @@ export class Main {
       title = undefined;
       url = undefined;
     }
-    const newSettings = await dialog.open({title: title, url: url});
+    const newSettings = await dialog.openPageDialog({title: title, url: url});
     if (newSettings === null) {
       document.location.replace('about:blank');
     } else {
@@ -105,7 +110,7 @@ export class Main {
    * Called whenever the 'Page Settings' item is chosen from the menu.
    */
   async _handleMenuSettings() {
-    this._showSettings(this.currentPage);
+    this._showPageSettings(this.currentPage);
   }
 
   /**
@@ -153,15 +158,29 @@ export class Main {
   /**
    * Show the Pgae settings dialog.
    *
-   * @param {Page} page - Page to load.
+   * @param {Page} page - Page to edit.
    */
-  async _showSettings(page) {
+  async _showPageSettings(page) {
     this.currentPage = page;
-    const newSettings = await dialog.open(page);
+    const newSettings = await dialog.openPageDialog(page);
     if (newSettings !== null) {
       this._updateCurrentPage(newSettings);
     }
     document.location.replace(getMainDiffUrl(this.currentPage.id));
+  }
+
+  /**
+   * Show the PgaeFolder settings dialog.
+   *
+   * @param {PageFolder} pageFolder - PageFolder to edit.
+   */
+  async _showPageFolderSettings(pageFolder) {
+    const newSettings = await dialog.openPageFolderDialog(pageFolder);
+    if (newSettings !== null) {
+      pageFolder.title = newSettings.title;
+      pageFolder.save();
+    }
+    document.location.replace('about:blank');
   }
 
   /**
