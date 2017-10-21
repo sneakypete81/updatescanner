@@ -18,6 +18,7 @@ export class SidebarView {
     this.sidebarDivSelector = sidebarDivSelector;
     $(this.sidebarDivSelector).jstree({
       core: {
+        multiple: false,
         themes: {
           icons: false,
           dots: false,
