@@ -14,9 +14,12 @@ export class SidebarView {
    * the Sidebar.
    */
   constructor(sidebarDivSelector) {
-    this.deleteHandler = null;
-    this.sidebarDivSelector = sidebarDivSelector;
-    $(this.sidebarDivSelector).jstree({
+    this._deleteHandler = null;
+    this._newPageHandler = null;
+    this._newPageFolderHandler = null;
+
+    this._sidebarDivSelector = sidebarDivSelector;
+    $(this._sidebarDivSelector).jstree({
       core: {
         multiple: false,
         themes: {
@@ -27,7 +30,7 @@ export class SidebarView {
 
       contextmenu: {
         select_node: false,
-        items: this._getSidebarItems(),
+        items: this._getContextMenuItems(),
       },
 
       plugins: [
@@ -55,7 +58,7 @@ export class SidebarView {
    */
   load(pageMap, rootId) {
     const root = pageMap.get(rootId);
-    $(this.sidebarDivSelector).jstree(true).settings.core.data =
+    $(this._sidebarDivSelector).jstree(true).settings.core.data =
       this._generateTree(pageMap, root).children;
   }
 
@@ -63,7 +66,7 @@ export class SidebarView {
    * Refresh the tree view.
    */
   refresh() {
-    $(this.sidebarDivSelector).jstree(true).refresh();
+    $(this._sidebarDivSelector).jstree(true).refresh();
   }
 
   /**
@@ -116,14 +119,23 @@ export class SidebarView {
   }
 
   /**
-   * @returns {Object} Object containing sidebar configuration items.
+   * @returns {Object} Object containing sidebar context menu items.
    */
-  _getSidebarItems() {
+  _getContextMenuItems() {
     return (node) => {
       return {
+        newPage: {
+          label: 'New Page...',
+          action: () => this._newPageHandler(node),
+        },
+        newPageFolder: {
+          label: 'New Folder...',
+          action: () => this._newPageFolderHandler(node),
+        },
         delete: {
+          separator_before: true,
           label: 'Delete',
-          action: () => this.deleteHandler(node),
+          action: () => this._deleteHandler(node),
         },
       };
     };
@@ -137,7 +149,7 @@ export class SidebarView {
    * changes.
    */
   registerSelectHandler(handler) {
-    $(this.sidebarDivSelector).on('changed.jstree', (evt, data) => {
+    $(this._sidebarDivSelector).on('changed.jstree', (evt, data) => {
       if (data.selected.length == 1) {
         const id = data.selected[0];
         handler(id);
@@ -152,20 +164,37 @@ export class SidebarView {
    * @param {Object} handler - Callback to use whenever a refresh completes.
    */
   registerRefreshDoneHandler(handler) {
-    $(this.sidebarDivSelector).on('refresh.jstree', (evt, data) => {
+    $(this._sidebarDivSelector).on('refresh.jstree', (evt, data) => {
       handler();
     });
   }
 
   /**
+   * Registers the provided handler function to be called to create a new Page.
+   *
+   * @param {Object} handler - Callback to use to create a new Page.
+   */
+  registerNewPageHandler(handler) {
+    this._newPageHandler = (node) => handler(node.id);
+  }
+
+  /**
+   * Registers the provided handler function to be called to create a
+   * new PageFolder.
+   *
+   * @param {Object} handler - Callback to use to create a new PageFolder.
+   */
+  registerNewPageFolderHandler(handler) {
+    this._newPageFolderHandler = (node) => handler(node.id);
+  }
+
+  /**
    * Registers the provided handler function to be called whenever a tree
-   * node is to be deleted..
+   * node is to be deleted.
    *
    * @param {Object} handler - Callback to use whenever a node is to be deleted.
    */
   registerDeleteHandler(handler) {
-    this.deleteHandler = (node) => {
-      handler(node.id);
-    };
+    this._deleteHandler = (node) => handler(node.id);
   }
 }

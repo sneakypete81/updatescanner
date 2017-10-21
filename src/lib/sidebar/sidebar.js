@@ -1,6 +1,7 @@
 import {SidebarView} from 'sidebar/sidebar_view';
 import {PageStore} from 'page/page_store';
 import {Page} from 'page/page';
+import {PageFolder} from 'page/page_folder';
 import {openMain, paramEnum, actionEnum} from 'main/main_url';
 
 const REFRESH_ALARM_ID = 'updatescanner-sidebar-refresh';
@@ -42,8 +43,12 @@ export class Sidebar {
 
     this._refreshSidebar();
 
-    this.sidebar.registerSelectHandler((pageId) => this._handleSelect(pageId));
-    this.sidebar.registerDeleteHandler((pageId) => this._handleDelete(pageId));
+    this.sidebar.registerSelectHandler((itemId) => this._handleSelect(itemId));
+    this.sidebar.registerNewPageHandler(
+      (itemId) => this._handleNewPage(itemId));
+    this.sidebar.registerNewPageFolderHandler(
+      (itemId) => this._handleNewPageFolder(itemId));
+    this.sidebar.registerDeleteHandler((itemId) => this._handleDelete(itemId));
     this.sidebar.registerRefreshDoneHandler(() => this._handleRefreshDone());
   }
 
@@ -66,16 +71,30 @@ export class Sidebar {
   /**
    * Called whenever a single item in the sidebar is selected.
    *
-   * @param {string} pageId - Selected Page ID.
+   * @param {string} itemId - Selected Page/PageFolder ID.
    */
-  _handleSelect(pageId) {
+  _handleSelect(itemId) {
     if (!this.isRefreshing) {
-      const page = this.pageStore.getItem(pageId);
-      if (page instanceof Page) {
+      const item = this.pageStore.getItem(itemId);
+      if (item instanceof Page) {
         openMain({[paramEnum.ACTION]: actionEnum.SHOW_DIFF,
-          [paramEnum.ID]: page.id});
+          [paramEnum.ID]: item.id});
       }
     }
+  }
+
+  /**
+   * Called whenever the New Page context menu item is selected.
+   *
+   * @param {string} itemId - Node that was right-clicked.
+   */
+  _handleNewPage(itemId) {
+    const parentPosition = this._getParentPositionOf(itemId);
+    openMain({
+      [paramEnum.ACTION]: actionEnum.NEW_PAGE,
+      [paramEnum.PARENT_ID]: parentPosition.parentId,
+      [paramEnum.INSERT_AFTER_INDEX]: parentPosition.insertAfterIndex,
+    }, true);
   }
 
   /**
@@ -86,6 +105,7 @@ export class Sidebar {
   _handleDelete(itemId) {
     this.pageStore.deleteItem(itemId);
   }
+
   /**
    * Called when a Page is updated in Storage. Refresh the sidebar if its state
    * changed.
@@ -97,6 +117,29 @@ export class Sidebar {
     if (!this.isRefreshPending) {
       this.isRefreshPending = true;
       browser.alarms.create(REFRESH_ALARM_ID, REFRESH_ALARM_TIMING);
+    }
+  }
+
+  /**
+   * @param {string} itemId - Sidebar item that was clicked.
+   *
+   * @returns {Object} Object indicating where to insert a new item.
+   * Attribute parentId - Parent PageFolder of the new item.
+   * Attribute insertAfterIndex - Child index of the new item.
+   */
+  _getParentPositionOf(itemId) {
+    const item = this.pageStore.getItem(itemId);
+    if (item instanceof PageFolder) {
+      return {
+        parentId: itemId,
+        insertAfterIndex: -1,
+      };
+    } else {
+      const parent = this.pageStore.findParent(itemId);
+      return {
+        parentId: parent.id,
+        insertAfterIndex: parent.children.indexOf(itemId),
+      };
     }
   }
 }

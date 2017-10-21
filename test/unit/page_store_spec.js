@@ -334,6 +334,30 @@ describe('PageStore', function() {
         }).catch((error) => done.fail(error));
       }).catch((error) => done.fail(error));
     });
+
+    it('creates a new Page between other Pages in a subfolder', function(done) {
+      spyOnStorageLoadWithArgReturn({
+        [StorageInfo._KEY]: Promise.resolve({nextId: '2'}),
+      });
+      spyOn(Storage, 'save').and.returnValues(Promise.resolve());
+
+      PageStore.load().then((pageStore) => {
+        const subFolder = new PageFolder('1', {children: ['11', '22', '33']});
+        pageStore.pageMap.set('1', subFolder);
+
+        pageStore.createPage('1', 1).then((page) => {
+          expect(page.id).toEqual('2');
+
+          expect(subFolder.children).toEqual(['11', '22', '2', '33']);
+
+          expect(Storage.save).toHaveBeenCalledWith(
+            PageFolder._KEY('1'), subFolder._toObject());
+          expect(Storage.save).toHaveBeenCalledWith(
+            StorageInfo._KEY, pageStore.storageInfo._toObject());
+          done();
+        }).catch((error) => done.fail(error));
+      }).catch((error) => done.fail(error));
+    });
   });
 
   describe('createPageFolder', function() {

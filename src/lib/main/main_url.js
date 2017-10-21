@@ -8,6 +8,8 @@ export const paramEnum = {
   ID: 'id',
   TITLE: 'title',
   URL: 'url',
+  PARENT_ID: 'parentId',
+  INSERT_AFTER_INDEX: 'insertAfterIndex',
 };
 
 /**

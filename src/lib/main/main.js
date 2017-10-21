@@ -51,9 +51,12 @@ export class Main {
     switch (params.get(paramEnum.ACTION)) {
       case actionEnum.NEW_PAGE:
       {
-        const title = params.get(paramEnum.TITLE);
-        const url = params.get(paramEnum.URL);
-        this._createNewPage(title, url);
+        this._createNewPage(
+          params.get(paramEnum.TITLE),
+          params.get(paramEnum.URL),
+          params.get(paramEnum.PARENT_ID),
+          parseInt(params.get(paramEnum.INSERT_AFTER_INDEX)),
+        );
         break;
       }
       case actionEnum.SHOW_DIFF:
@@ -69,8 +72,16 @@ export class Main {
    *
    * @param {string} title - Default title field.
    * @param {string} url - Default url field.
+   * @param {string} parentId - Parent folder of the new Page.
+   * @param {integer} insertAfterIndex - Add the page after this item in the
+   * parent folder. If negative, the Page will be added to the end of the parent
+   * folder.
    */
-  async _createNewPage(title, url) {
+  async _createNewPage(title, url, parentId, insertAfterIndex) {
+    url = url || '';
+    parentId = parentId || PageStore.ROOT_ID;
+    insertAfterIndex = insertAfterIndex || -1;
+
     if (url.startsWith('about') || url.startsWith('moz-extension')) {
       title = undefined;
       url = undefined;
@@ -81,7 +92,8 @@ export class Main {
     if (newSettings === null) {
       document.location.replace('about:blank');
     } else {
-      this.currentPage = await this.pageStore.createPage(PageStore.ROOT_ID);
+      this.currentPage = await this.pageStore.createPage(
+        parentId, insertAfterIndex);
       this._updateCurrentPage(newSettings);
     }
   }
