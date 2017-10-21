@@ -1,5 +1,6 @@
 import dialogPolyfill from 'dialog-polyfill';
 import {qs, $on} from 'util/view_helpers';
+import {Page} from 'page/page';
 
 /**
  * Initialise the dialog box.
@@ -33,22 +34,19 @@ export function open(page) {
   const dialog = qs('#settings-dialog');
   const form = qs('#settings-form');
 
-  if (page.title !== null) {
-    form.elements['title'].value = page.title;
-  }
-  if (page.url !== null) {
-    form.elements['url'].value = page.url;
-  }
-  if (page.scanRateMinutes !== null) {
-    const sliderValue = autoscanMinsToSlider(page.scanRateMinutes);
-    form.elements['autoscan'].value = sliderValue;
-    updateAutoscanDescription(sliderValue);
-  }
-  if (page.changeThreshold !== null) {
-    const sliderValue = thresholdCharsToSlider(page.changeThreshold);
-    form.elements['threshold'].value = sliderValue;
-    updateThresholdDescription(sliderValue);
-  }
+  form.elements['title'].value = page.title || Page.DEFAULTS.title;
+  form.elements['url'].value = page.url || Page.DEFAULTS.url;
+
+  const autoscanSliderValue = autoscanMinsToSlider(
+    page.scanRateMinutes || Page.DEFAULTS.scanRateMinutes);
+  form.elements['autoscan'].value = autoscanSliderValue;
+  updateAutoscanDescription(autoscanSliderValue);
+
+  const thresholdSliderValue = thresholdCharsToSlider(
+    page.changeThreshold || Page.DEFAULTS.changeThreshold);
+  form.elements['threshold'].value = thresholdSliderValue;
+  updateThresholdDescription(thresholdSliderValue);
+
   dialog.showModal();
 
   return new Promise((resolve, reject) => {

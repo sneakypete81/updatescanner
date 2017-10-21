@@ -6,6 +6,25 @@ import {log} from 'util/log';
  */
 export class Page {
   /**
+   * @returns {Object} Default values for new Pages.
+   */
+  static get DEFAULTS() {
+    return {
+      title: 'New Page',
+      url: null,
+      scanRateMinutes: 24 * 60,
+      changeThreshold: 100,
+      ignoreNumbers: false,
+      state: Page.stateEnum.NO_CHANGE,
+      error: null,
+      errorMessage: null,
+      lastAutoscanTime: null,
+      oldScanTime: null,
+      newScanTime: null,
+    };
+  }
+
+  /**
    * @returns {Object} Enumeration of Page change states. Any value other
    * than NO_CHANGE or CHANGE indicates an error.
    */
@@ -73,30 +92,30 @@ export class Page {
    * (ms since Unix epoch).
    */
   constructor(id, {
-    title = 'New Page',
-    url = null,
-    scanRateMinutes = 24 * 60,
-    changeThreshold = 100,
-    ignoreNumbers = false,
-    state = Page.stateEnum.NO_CHANGE,
-    error = null,
-    errorMessage = null,
-    lastAutoscanTime = null,
-    oldScanTime = null,
-    newScanTime = null,
+    title,
+    url,
+    scanRateMinutes,
+    changeThreshold,
+    ignoreNumbers,
+    state,
+    error,
+    errorMessage,
+    lastAutoscanTime,
+    oldScanTime,
+    newScanTime,
   }) {
-    this.id = id;
-    this.title = title;
-    this.url = url;
-    this.scanRateMinutes = scanRateMinutes;
-    this.changeThreshold = changeThreshold;
-    this.ignoreNumbers = ignoreNumbers;
-    this.state = state;
-    this.error = error;
-    this.errorMessage = errorMessage;
-    this.lastAutoscanTime = lastAutoscanTime;
-    this.oldScanTime = oldScanTime;
-    this.newScanTime = newScanTime;
+    this.id = id || Page.DEFAULTS.id;
+    this.title = title || Page.DEFAULTS.title;
+    this.url = url || Page.DEFAULTS.url;
+    this.scanRateMinutes = scanRateMinutes || Page.DEFAULTS.scanRateMinutes;
+    this.changeThreshold = changeThreshold || Page.DEFAULTS.changeThreshold;
+    this.ignoreNumbers = ignoreNumbers || Page.DEFAULTS.ignoreNumbers;
+    this.state = state || Page.DEFAULTS.state;
+    this.error = error || Page.DEFAULTS.error;
+    this.errorMessage = errorMessage || Page.DEFAULTS.errorMessage;
+    this.lastAutoscanTime = lastAutoscanTime || Page.DEFAULTS.lastAutoscanTime;
+    this.oldScanTime = oldScanTime || Page.DEFAULTS.oldScanTime;
+    this.newScanTime = newScanTime || Page.DEFAULTS.newScanTime;
   }
 
   /**
