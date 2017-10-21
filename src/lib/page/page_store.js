@@ -122,14 +122,9 @@ export class PageStore {
     parent.children.push(pageId);
     await parent.save();
 
-    // Create the Page
-    const page = new Page(pageId, {});
-
-    // Update the PageMap
-    // @TODO: do we need this, or will the update handle this?
-    this.pageMap.set(pageId, page);
-
-    return page;
+    // Create the Page. This will cause _handlePageUpdate to update the
+    // PageMap.
+    return new Page(pageId, {});
   }
 
   /**
@@ -150,14 +145,9 @@ export class PageStore {
     parent.children.push(pageFolderId);
     await parent.save();
 
-    // Create the Page
-    const pageFolder = new PageFolder(pageFolderId, {});
-
-    // Update the PageMap
-    // @TODO: do we need this, or will the update handle this?
-    this.pageMap.set(pageFolderId, pageFolder);
-
-    return pageFolder;
+    // Create the Page. This will cause _handlePageUpdate to update the
+    // PageMap.
+    return new PageFolder(pageFolderId, {});
   }
   /**
    * Delete a Page/PageFolder from the PageStore.
@@ -179,11 +169,8 @@ export class PageStore {
       await pageFolder.save();
     }
 
-    // Update the PageMap
-    // @TODO: do we need this, or will the update handle this?
-    this.pageMap.delete(itemId);
-
-    // Delete the item itself
+    // Delete the item itself. This will cause _handlePageUpdate to update the
+    // PageMap.
     if (item !== undefined) {
       item.delete();
     }

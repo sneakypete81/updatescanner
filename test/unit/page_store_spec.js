@@ -298,7 +298,6 @@ describe('PageStore', function() {
       PageStore.load().then((pageStore) => {
         pageStore.createPage(PageStore.ROOT_ID).then((page) => {
           expect(page.id).toEqual('1');
-          expect(pageStore.pageMap.get('1')).toEqual(page);
 
           const rootFolder = pageStore.pageMap.get(PageStore.ROOT_ID);
           expect(rootFolder.children).toContain('1');
@@ -324,7 +323,6 @@ describe('PageStore', function() {
 
         pageStore.createPage('1').then((page) => {
           expect(page.id).toEqual('2');
-          expect(pageStore.pageMap.get('2')).toEqual(page);
 
           expect(subFolder.children).toContain('2');
 
@@ -348,7 +346,6 @@ describe('PageStore', function() {
       PageStore.load().then((pageStore) => {
         pageStore.createPageFolder(PageStore.ROOT_ID).then((pageFolder) => {
           expect(pageFolder.id).toEqual('1');
-          expect(pageStore.pageMap.get('1')).toEqual(pageFolder);
 
           const rootFolder = pageStore.pageMap.get(PageStore.ROOT_ID);
           expect(rootFolder.children).toContain('1');
@@ -374,7 +371,6 @@ describe('PageStore', function() {
 
         pageStore.createPageFolder('1').then((pageFolder) => {
           expect(pageFolder.id).toEqual('2');
-          expect(pageStore.pageMap.get('2')).toEqual(pageFolder);
 
           expect(subFolder.children).toContain('2');
 
@@ -408,8 +404,6 @@ describe('PageStore', function() {
           const root = pageStore.getItem('0');
           expect(root.children).toEqual(['3', '4']);
 
-          expect(pageStore.pageMap.get('1')).toBeUndefined();
-
           expect(Storage.remove).toHaveBeenCalledWith(Page._KEY('1'));
 
           expect(Storage.save).toHaveBeenCalledWith(
@@ -438,8 +432,6 @@ describe('PageStore', function() {
 
           const root = pageStore.getItem('0');
           expect(root.children).toEqual(['3', '4']);
-
-          expect(pageStore.pageMap.get('1')).toBeUndefined();
 
           expect(Storage.remove).toHaveBeenCalledWith(PageFolder._KEY('1'));
 
@@ -478,10 +470,6 @@ describe('PageStore', function() {
           const root = pageStore.getItem('0');
           expect(root.children).toEqual(['3', '4']);
 
-          expect(pageStore.pageMap.get('1')).toBeUndefined();
-          expect(pageStore.pageMap.get('2')).toBeUndefined();
-          expect(pageStore.pageMap.get('5')).toBeUndefined();
-
           expect(Storage.remove).toHaveBeenCalledWith(PageFolder._KEY('1'));
           expect(Storage.remove).toHaveBeenCalledWith(PageFolder._KEY('2'));
           expect(Storage.remove).toHaveBeenCalledWith(Page._KEY('5'));
@@ -511,8 +499,6 @@ describe('PageStore', function() {
 
           const root = pageStore.getItem('0');
           expect(root.children).toEqual(['3', '1', '4']);
-
-          expect(pageStore.pageMap.get('1').id).toBe('1');
           done();
         }).catch((error) => done.fail(error));
       }).catch((error) => done.fail(error));
