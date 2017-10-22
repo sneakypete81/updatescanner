@@ -92,30 +92,30 @@ export class Page {
    * (ms since Unix epoch).
    */
   constructor(id, {
-    title,
-    url,
-    scanRateMinutes,
-    changeThreshold,
-    ignoreNumbers,
-    state,
-    error,
-    errorMessage,
-    lastAutoscanTime,
-    oldScanTime,
-    newScanTime,
+    title=Page.DEFAULTS.title,
+    url=Page.DEFAULTS.url,
+    scanRateMinutes=Page.DEFAULTS.scanRateMinutes,
+    changeThreshold=Page.DEFAULTS.changeThreshold,
+    ignoreNumbers=Page.DEFAULTS.ignoreNumbers,
+    state=Page.DEFAULTS.state,
+    error=Page.DEFAULTS.error,
+    errorMessage=Page.DEFAULTS.errorMessage,
+    lastAutoscanTime=Page.DEFAULTS.lastAutoscanTime,
+    oldScanTime=Page.DEFAULTS.oldScanTime,
+    newScanTime=Page.DEFAULTS.newScanTime,
   }) {
-    this.id = id || Page.DEFAULTS.id;
-    this.title = title || Page.DEFAULTS.title;
-    this.url = url || Page.DEFAULTS.url;
-    this.scanRateMinutes = scanRateMinutes || Page.DEFAULTS.scanRateMinutes;
-    this.changeThreshold = changeThreshold || Page.DEFAULTS.changeThreshold;
-    this.ignoreNumbers = ignoreNumbers || Page.DEFAULTS.ignoreNumbers;
-    this.state = state || Page.DEFAULTS.state;
-    this.error = error || Page.DEFAULTS.error;
-    this.errorMessage = errorMessage || Page.DEFAULTS.errorMessage;
-    this.lastAutoscanTime = lastAutoscanTime || Page.DEFAULTS.lastAutoscanTime;
-    this.oldScanTime = oldScanTime || Page.DEFAULTS.oldScanTime;
-    this.newScanTime = newScanTime || Page.DEFAULTS.newScanTime;
+    this.id = id;
+    this.title = title;
+    this.url = url;
+    this.scanRateMinutes = scanRateMinutes;
+    this.changeThreshold = changeThreshold;
+    this.ignoreNumbers = ignoreNumbers;
+    this.state = state;
+    this.error = error;
+    this.errorMessage = errorMessage;
+    this.lastAutoscanTime = lastAutoscanTime;
+    this.oldScanTime = oldScanTime;
+    this.newScanTime = newScanTime;
   }
 
   /**

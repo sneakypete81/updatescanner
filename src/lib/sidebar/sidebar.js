@@ -100,6 +100,20 @@ export class Sidebar {
   }
 
   /**
+   * Called whenever the New Folder context menu item is selected.
+   *
+   * @param {string} itemId - Node that was right-clicked.
+   */
+  _handleNewPageFolder(itemId) {
+    const parentPosition = this._getParentPositionOf(itemId);
+    openMain({
+      [paramEnum.ACTION]: actionEnum.NEW_PAGE_FOLDER,
+      [paramEnum.PARENT_ID]: parentPosition.parentId,
+      [paramEnum.INSERT_AFTER_INDEX]: parentPosition.insertAfterIndex,
+    });
+  }
+
+  /**
    * Called whenever the Delete context menu item is selected.
    *
    * @param {string} itemId - Page/PageFolder ID to delete.

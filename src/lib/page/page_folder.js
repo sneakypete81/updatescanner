@@ -6,6 +6,15 @@ import {log} from 'util/log';
  */
 export class PageFolder {
   /**
+   * @returns {Object} Default values for new Pages.
+   */
+  static get DEFAULTS() {
+    return {
+      title: 'New Folder',
+    };
+  }
+
+  /**
    * @param {string} id - ID of the PageFolder.
    * @returns {string} Storage key for the PageFolder object.
    */
@@ -41,7 +50,7 @@ export class PageFolder {
    * @param {string} id - ID of the PageFolder.
    * @param {Object} data - Serialised PageFoler object from storage.
    */
-  constructor(id, {title='New Folder', children=[]}) {
+  constructor(id, {title=PageFolder.DEFAULTS.title, children=[]}) {
     this.id = id;
     this.title = title;
     this.children = children;

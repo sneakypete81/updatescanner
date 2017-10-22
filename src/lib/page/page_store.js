@@ -139,17 +139,24 @@ export class PageStore {
    * Don't forget to pageFolder.save() afterwards.
    *
    * @param {string} parentId - ID of the parent PageFolder.
+   * @param {integer} insertAfterIndex - Add the page after this item in the
+   * parent folder. If negative, the Page will be added to the end of the parent
+   * folder.
    *
    * @returns {Promise} A Promise that fulfils with the new PageFolder object.
    */
-  async createPageFolder(parentId) {
+  async createPageFolder(parentId, insertAfterIndex) {
     // Update StorageInfo with the new PageFolder, returning the new ID
     const pageFolderId = this.storageInfo.createPageFolder();
     await this.storageInfo.save();
 
     // Update the parent PageFolder
     const parent = this.pageMap.get(parentId);
-    parent.children.push(pageFolderId);
+    if (insertAfterIndex < 0) {
+      parent.children.push(pageFolderId);
+    } else {
+      parent.children.splice(insertAfterIndex + 1, 0, pageFolderId);
+    }
     await parent.save();
 
     // Create the Page. This will cause _handlePageUpdate to update the

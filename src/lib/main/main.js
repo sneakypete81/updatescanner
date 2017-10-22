@@ -59,6 +59,15 @@ export class Main {
         );
         break;
       }
+      case actionEnum.NEW_PAGE_FOLDER:
+      {
+        this._createNewPageFolder(
+          params.get(paramEnum.TITLE),
+          params.get(paramEnum.PARENT_ID),
+          parseInt(params.get(paramEnum.INSERT_AFTER_INDEX)),
+        );
+        break;
+      }
       case actionEnum.SHOW_DIFF:
       {
         this._showDiff(this.pageStore.getItem(params.get(paramEnum.ID)));
@@ -104,6 +113,29 @@ export class Main {
         parentId, insertAfterIndex);
       this._updateCurrentPage(newSettings);
     }
+  }
+
+  /**
+   * _Show the Dialog to create a new PageFolder.
+   *
+   * @param {string} title - Default title field.
+   * @param {string} parentId - Parent folder of the new PageFolder.
+   * @param {integer} insertAfterIndex - Add the PageFolder after this item in
+   * the parent folder. If negative, the PageFolder will be added to the end of
+   * the parent folder.
+   */
+  async _createNewPageFolder(title, parentId, insertAfterIndex) {
+    parentId = parentId || PageStore.ROOT_ID;
+    insertAfterIndex = insertAfterIndex || -1;
+
+    const newSettings = await dialog.openPageFolderDialog({title: title});
+    if (newSettings !== null) {
+      const pageFolder = await this.pageStore
+        .createPageFolder(parentId, insertAfterIndex);
+      pageFolder.title = newSettings.title;
+      pageFolder.save();
+    }
+    document.location.replace('about:blank');
   }
 
   /**
