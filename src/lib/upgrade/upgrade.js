@@ -36,14 +36,18 @@ export class Upgrade {
  * @param {Element} element - Element to show.
  */
 function showElement(element) {
-  element.className = '';
+  if (element.classList.contains('hidden')) {
+    element.classList.remove('hidden');
+  }
 }
 
 /**
  * @param {Element} element - Element to hide.
  */
 function hideElement(element) {
-  element.className = 'hidden';
+  if (!element.classList.contains('hidden')) {
+    element.classList.add('hidden');
+  }
 }
 
 /**
