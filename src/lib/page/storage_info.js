@@ -32,11 +32,16 @@ export class StorageInfo {
    *
    * @param {Object} data - Data object to update from.
    */
-  _set(data) {
-    this.version = data.version || StorageInfo._VERSION;
-    this.pageIds = data.pageIds || [];
-    this.pageFolderIds = data.pageFolderIds || [];
-    this.nextId = data.nextId || '1';
+  _set({
+    version=StorageInfo._VERSION,
+    pageIds=[],
+    pageFolderIds=[],
+    nextId='1',
+  }) {
+    this.version = version;
+    this.pageIds = pageIds;
+    this.pageFolderIds = pageFolderIds;
+    this.nextId = nextId;
   }
 
   /**

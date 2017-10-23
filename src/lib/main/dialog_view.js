@@ -1,7 +1,5 @@
 import dialogPolyfill from 'dialog-polyfill';
 import {qs, $on} from 'util/view_helpers';
-import {Page} from 'page/page';
-import {PageFolder} from 'page/page_folder';
 
 /**
  * Initialise the dialog box.
@@ -34,16 +32,14 @@ export function openPageDialog(page) {
   const dialog = qs('#settings-dialog');
   const form = qs('#settings-form');
 
-  form.elements['title'].value = page.title || Page.DEFAULTS.title;
-  form.elements['url'].value = page.url || Page.DEFAULTS.url;
+  form.elements['title'].value = page.title;
+  form.elements['url'].value = page.url;
 
-  const autoscanSliderValue = autoscanMinsToSlider(
-    page.scanRateMinutes || Page.DEFAULTS.scanRateMinutes);
+  const autoscanSliderValue = autoscanMinsToSlider(page.scanRateMinutes);
   form.elements['autoscan'].value = autoscanSliderValue;
   updateAutoscanDescription(autoscanSliderValue);
 
-  const thresholdSliderValue = thresholdCharsToSlider(
-    page.changeThreshold || Page.DEFAULTS.changeThreshold);
+  const thresholdSliderValue = thresholdCharsToSlider(page.changeThreshold);
   form.elements['threshold'].value = thresholdSliderValue;
   updateThresholdDescription(thresholdSliderValue);
 
@@ -81,7 +77,7 @@ export function openPageFolderDialog(pageFolder) {
   const dialog = qs('#settings-dialog');
   const form = qs('#settings-form');
 
-  form.elements['title'].value = pageFolder.title || PageFolder.DEFAULTS.title;
+  form.elements['title'].value = pageFolder.title;
 
   qs('#page-heading').className = 'hide';
   qs('#urlFieldset').className = 'hide';

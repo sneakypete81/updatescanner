@@ -3,6 +3,7 @@ import * as dialog from 'main/dialog_view';
 import {getMainDiffUrl, paramEnum, actionEnum} from 'main/main_url';
 import {PageStore} from 'page/page_store';
 import {Page} from 'page/page';
+import {PageFolder} from 'page/page_folder';
 import {diff} from 'diff/diff';
 import {log} from 'util/log';
 
@@ -117,16 +118,16 @@ export class Main {
    * parent folder. If negative, the Page will be added to the end of the parent
    * folder.
    */
-  async _createNewPage(title, url, parentId, insertAfterIndex) {
-    url = url || '';
-    parentId = parentId || PageStore.ROOT_ID;
-    insertAfterIndex = insertAfterIndex || -1;
-
+  async _createNewPage(title, url='',
+                       parentId=PageStore.ROOT_ID, insertAfterIndex=-1) {
     if (url.startsWith('about') || url.startsWith('moz-extension')) {
       title = undefined;
       url = undefined;
     }
-    const newSettings = await dialog.openPageDialog({title: title, url: url});
+
+    const temporaryPage = new Page(-1, {title: title, url: url});
+    const newSettings = await dialog.openPageDialog(temporaryPage);
+
     if (newSettings === null) {
       document.location.replace('about:blank');
     } else {
@@ -145,11 +146,11 @@ export class Main {
    * the parent folder. If negative, the PageFolder will be added to the end of
    * the parent folder.
    */
-  async _createNewPageFolder(title, parentId, insertAfterIndex) {
-    parentId = parentId || PageStore.ROOT_ID;
-    insertAfterIndex = insertAfterIndex || -1;
-
-    const newSettings = await dialog.openPageFolderDialog({title: title});
+  async _createNewPageFolder(title,
+                             parentId=PageStore.ROOT_ID,
+                             insertAfterIndex=-1) {
+    const temporaryPageFolder = new PageFolder(-1, {title: title});
+    const newSettings = await dialog.openPageFolderDialog(temporaryPageFolder);
     if (newSettings !== null) {
       const pageFolder = await this.pageStore
         .createPageFolder(parentId, insertAfterIndex);
@@ -209,7 +210,7 @@ export class Main {
   }
 
   /**
-   * Show the Pgae settings dialog.
+   * Show the Page settings dialog.
    *
    * @param {Page} page - Page to edit.
    */
