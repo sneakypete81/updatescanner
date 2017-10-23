@@ -48,34 +48,36 @@ export class Main {
    */
   _handleUrlParams(searchString) {
     const params = new URLSearchParams(searchString);
-    switch (params.get(paramEnum.ACTION)) {
+    switch (this._getUrlParam(params, paramEnum.ACTION)) {
       case actionEnum.NEW_PAGE:
       {
         this._createNewPage(
-          params.get(paramEnum.TITLE),
-          params.get(paramEnum.URL),
-          params.get(paramEnum.PARENT_ID),
-          parseInt(params.get(paramEnum.INSERT_AFTER_INDEX)),
+          this._getUrlParam(params, paramEnum.TITLE),
+          this._getUrlParam(params, paramEnum.URL),
+          this._getUrlParam(params, paramEnum.PARENT_ID),
+          parseInt(this._getUrlParam(params, paramEnum.INSERT_AFTER_INDEX)),
         );
         break;
       }
       case actionEnum.NEW_PAGE_FOLDER:
       {
         this._createNewPageFolder(
-          params.get(paramEnum.TITLE),
-          params.get(paramEnum.PARENT_ID),
-          parseInt(params.get(paramEnum.INSERT_AFTER_INDEX)),
+          this._getUrlParam(params, paramEnum.TITLE),
+          this._getUrlParam(params, paramEnum.PARENT_ID),
+          parseInt(this._getUrlParam(params, paramEnum.INSERT_AFTER_INDEX)),
         );
         break;
       }
       case actionEnum.SHOW_DIFF:
       {
-        this._showDiff(this.pageStore.getItem(params.get(paramEnum.ID)));
+        this._showDiff(this.pageStore.getItem(
+          this._getUrlParam(params, paramEnum.ID)));
         break;
       }
       case actionEnum.SHOW_SETTINGS:
       {
-        const item = this.pageStore.getItem(params.get(paramEnum.ID));
+        const item = this.pageStore.getItem(
+          this._getUrlParam(params, paramEnum.ID));
         if (item instanceof Page) {
           this._showPageSettings(item);
         } else {
@@ -84,6 +86,25 @@ export class Main {
         break;
       }
     }
+  }
+
+
+  /**
+   * Returns a  value from the URL parameters, or undefined if the specified
+   * key doesn't exist. This is useful because URLSearchParams.get() returns
+   * null if the key doesn't exist.
+   *
+   * @param {URLSearchParams} params - URLSearchParams object to use.
+   * @param {string} key - Parameter key to use.
+   *
+   * @returns {string} Value associated with the given key, or undefined if it
+   * doesn't exist.
+   */
+  _getUrlParam(params, key) {
+    if (params.has(key)) {
+      return params.get(key);
+    }
+    return undefined;
   }
 
   /**
