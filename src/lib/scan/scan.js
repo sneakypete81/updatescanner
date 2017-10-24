@@ -70,7 +70,8 @@ async function scanPage(page) {
  */
 async function processHtml(page, scannedHtml) {
   const prevHtml = await PageStore.loadHtml(page.id, PageStore.htmlTypes.NEW);
-  updatePageState(page, prevHtml, scannedHtml);
+  const stripped = stripHtml(prevHtml, scannedHtml, page.ignoreNumbers);
+  updatePageState(page, stripped.prevHtml, stripped.scannedHtml);
 }
 
 /**
@@ -146,9 +147,66 @@ function getChangeType(str1, str2, changeThreshold) {
   }
 }
 
+/**
+ * Strips whitespace, (most) scripts, tags and (optionally) numbers from the
+ * input HTML.
+ *
+ * @param {string} prevHtml - HTML from storage.
+ * @param {string} scannedHtml - Scanned HTML to process.
+ * @param {boolean} ignoreNumbers - True if numbers should be stripped.
+ *
+ * @returns {Object} Object containing the updated prevHtml and scannedHtml.
+ */
+function stripHtml(prevHtml, scannedHtml, ignoreNumbers) {
+  prevHtml = stripTags(stripScript(stripWhitespace(prevHtml)));
+  scannedHtml = stripTags(stripScript(stripWhitespace(scannedHtml)));
+  if (ignoreNumbers) {
+    prevHtml = stripNumbers(prevHtml);
+    scannedHtml = stripNumbers(scannedHtml);
+  }
+  return {prevHtml: prevHtml, scannedHtml: scannedHtml};
+}
+
+/**
+ * @param {string} html - HTML to process.
+ *
+ * @returns {string} HTML with whitespace removed.
+ */
+function stripWhitespace(html) {
+  return html.replace(/\s+/g, '');
+}
+
+/**
+ * @param {string} html - HTML to process.
+ *
+ * @returns {string} HTML with (most) sctipts removed.
+ */
+function stripScript(html) {
+  return html.replace(/<script.*?>.*?<\/script>/gi, '');
+}
+
+/**
+ * @param {string} html - HTML to process.
+ *
+ * @returns {string} HTML with tags removed.
+ */
+function stripTags(html) {
+  return html.replace(/(<([^<]+)>)/g, '');
+}
+
+/**
+ * @param {string} html - HTML to process.
+ *
+ * @returns {string} HTML with numbers, commas and full stops removed.
+ */
+function stripNumbers(html) {
+  return html.replace(/[0-9,.]*/g, '');
+}
+
 // Allow private functions to be tested
 export const __ = {
   changeEnum: changeEnum,
   getChangeType: getChangeType,
   updatePageState: updatePageState,
+  stripHtml: stripHtml,
 };

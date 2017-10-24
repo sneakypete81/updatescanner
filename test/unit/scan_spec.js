@@ -181,7 +181,7 @@ describe('scan', function() {
     });
   });
 
-  describe('start', function() {
+  describe('scan', function() {
     it('does nothing when given an empty page list', function(done) {
       spyOn(window, 'fetch');
       spyOn(PageStore, 'loadHtml');
@@ -283,6 +283,60 @@ describe('scan', function() {
         expect(console.matched).toEqual(true);
         done();
       }).catch((error) => done.fail(error));
+    });
+  });
+
+  describe('stripHtml', function() {
+    it('strips whitespace', function() {
+      const prevHtml = 'text with\tspaces\ntabs  \n \r  and newlines';
+      const scannedHtml = 'More text with\tspaces\ntabs  \n \r  and newlines';
+
+      const result = scan.__.stripHtml(prevHtml, scannedHtml, false);
+
+      expect(result.prevHtml).toEqual('textwithspacestabsandnewlines');
+      expect(result.scannedHtml).toEqual('Moretextwithspacestabsandnewlines');
+    });
+
+    it('strips scripts', function() {
+      const prevHtml = 'text with<script blah>inline </script> script ' +
+        '<script> tags</script>s';
+      const scannedHtml = 'text with <script>\nnewlines</script> of various' +
+        '<script>\r\n   types\r\n</script>..';
+
+      const result = scan.__.stripHtml(prevHtml, scannedHtml, false);
+
+      expect(result.prevHtml).toEqual('textwithscripts');
+      expect(result.scannedHtml).toEqual('textwithofvarious..');
+    });
+
+    it('strips tags', function() {
+      const prevHtml = 'text with <b>tags</b> included.';
+      const scannedHtml = '<p>More text with<br/>tags</p>';
+
+      const result = scan.__.stripHtml(prevHtml, scannedHtml, false);
+
+      expect(result.prevHtml).toEqual('textwithtagsincluded.');
+      expect(result.scannedHtml).toEqual('Moretextwithtags');
+    });
+
+    it('strips numbers if Page.ignoreNumbers is true', function() {
+      const prevHtml = 'text with 12.3 numbers, full stops and commas.';
+      const scannedHtml = 'More text with 12.3 numbers, etc.';
+
+      const result = scan.__.stripHtml(prevHtml, scannedHtml, true);
+
+      expect(result.prevHtml).toEqual('textwithnumbersfullstopsandcommas');
+      expect(result.scannedHtml).toEqual('Moretextwithnumbersetc');
+    });
+
+    it('doesn\'t strip numbers if Page.ignoreNumbers is false', function() {
+      const prevHtml = 'text with 12.3 numbers, stops and commas.';
+      const scannedHtml = 'More text with 12.3 numbers, etc.';
+
+      const result = scan.__.stripHtml(prevHtml, scannedHtml, false);
+
+      expect(result.prevHtml).toEqual('textwith12.3numbers,stopsandcommas.');
+      expect(result.scannedHtml).toEqual('Moretextwith12.3numbers,etc.');
     });
   });
 });
