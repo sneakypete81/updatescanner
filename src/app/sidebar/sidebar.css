@@ -5,3 +5,7 @@
 p {
   white-space: pre-line;
 }
+
+.hidden {
+  display: none;
+}

@@ -89,3 +89,25 @@ export function findParentWithClass(element, className) {
   }
   return element;
 }
+
+/**
+ * Removes the 'hidden' class from the element.
+ *
+ * @param {Element} element - Element to show.
+ */
+export function showElement(element) {
+  if (element.classList.contains('hidden')) {
+    element.classList.remove('hidden');
+  }
+}
+
+/**
+ * Adds the 'hidden' class from the element.
+ *
+ * @param {Element} element - Element to hide.
+ */
+export function hideElement(element) {
+  if (!element.classList.contains('hidden')) {
+    element.classList.add('hidden');
+  }
+}

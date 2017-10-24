@@ -4,6 +4,7 @@ import 'jstree';
 import {Page} from 'page/page';
 import {PageFolder} from 'page/page_folder';
 import {log} from 'util/log';
+import {qs, showElement, hideElement} from 'util/view_helpers';
 
 /**
  * Class representing the Update Scanner Sidebar.
@@ -212,5 +213,19 @@ export class SidebarView {
    */
   registerSettingsHandler(handler) {
     this._settingsHandler = (node) => handler(node.id);
+  }
+
+  /**
+   * Show the Upgrade information text in the sidebar.
+   */
+  showUpgradeText() {
+    showElement(qs('#upgrade'));
+  }
+
+  /**
+   * Don't show the Upgrade information text in the sidebar.
+   */
+  hideUpgradeText() {
+    hideElement(qs('#upgrade'));
   }
 }
