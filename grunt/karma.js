@@ -10,7 +10,7 @@ module.exports = {
     autoWatch: true,
     // Windows is not supported by the notification reporter
     reporters: ['dots', 'kjhtml'].concat(
-      isWindows ? [''] : ['notification']),
+      isWindows ? [] : ['notification']),
     preprocessors: {}, // Don't run coverage
   },
 };
