@@ -130,15 +130,20 @@ form h1 {
   margin-left: 0.2em;
 }
 
-.slider {
-  display: flex;
-  margin-left: 0.5em;
-}
-
 fieldset {
   border: none;
   margin-left: 0.5em;
   margin-bottom: 0,5em;
+}
+
+fieldset div {
+  margin-top: 0.5em;
+  margin-left: 1em;
+}
+
+.slider {
+  padding-left: 0.5em;
+  display: flex;
 }
 
 legend {
@@ -158,20 +163,24 @@ label span {
   margin-right: 6px;
 }
 
+.checkbox-label {
+  display: inline-block;
+  font-size: inherit;
+  vertical-align: top;
+}
+
 input {
   flex-grow: 1;
 }
 
 .range-label-min {
   display: inline-block;
-  width: 3em;
   margin-top: 3px;
   text-align: right;
   font-size: smaller;
 }
 
 .range-label-max {
-  width: 3em;
   margin-top: 3px;
   font-size: smaller;
 }

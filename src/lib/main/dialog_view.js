@@ -43,6 +43,8 @@ export function openPageDialog(page) {
   form.elements['threshold'].value = thresholdSliderValue;
   updateThresholdDescription(thresholdSliderValue);
 
+  form.elements['ignore-numbers'].checked = page.ignoreNumbers;
+
   qs('#folder-heading').className = 'hide';
 
   dialog.showModal();
@@ -57,6 +59,8 @@ export function openPageDialog(page) {
             AutoscanSliderToMins[form.elements['autoscan'].value],
           changeThreshold:
             ThresholdSliderToChars[form.elements['threshold'].value],
+          ignoreNumbers:
+            form.elements['ignore-numbers'].checked,
         });
       } else {
         resolve(null);
