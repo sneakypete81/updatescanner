@@ -65,7 +65,6 @@ a:hover {
 
 /* Menu content, hidden by default */
 .menu-content {
-  display: none;
   position: absolute;
   padding: inherit;
   width: 164px;
@@ -202,10 +201,6 @@ form button.browser-style {
   text-align: center;
 }
 
-.show {
-  display: block;
-}
-
-.hide {
+.hidden {
   display: none;
 }

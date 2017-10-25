@@ -1,5 +1,5 @@
 import dialogPolyfill from 'dialog-polyfill';
-import {qs, $on} from 'util/view_helpers';
+import {qs, $on, hideElement} from 'util/view_helpers';
 
 /**
  * Initialise the dialog box.
@@ -45,7 +45,7 @@ export function openPageDialog(page) {
 
   form.elements['ignore-numbers'].checked = page.ignoreNumbers;
 
-  qs('#folder-heading').className = 'hide';
+  hideElement(qs('#folder-heading'));
 
   dialog.showModal();
 
@@ -83,10 +83,10 @@ export function openPageFolderDialog(pageFolder) {
 
   form.elements['title'].value = pageFolder.title;
 
-  qs('#page-heading').className = 'hide';
-  qs('#urlFieldset').className = 'hide';
-  qs('#autoscanFieldset').className = 'hide';
-  qs('#thresholdFieldset').className = 'hide';
+  hideElement(qs('#page-heading'));
+  hideElement(qs('#urlFieldset'));
+  hideElement(qs('#autoscanFieldset'));
+  hideElement(qs('#thresholdFieldset'));
 
   dialog.showModal();
 

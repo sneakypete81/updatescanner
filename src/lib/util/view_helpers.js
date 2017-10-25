@@ -1,4 +1,4 @@
-// From https://github.com/tastejs/todomvc/tree/gh-pages/examples/vanilla-es6/src/helpers.js
+// Some code from https://github.com/tastejs/todomvc/tree/gh-pages/examples/vanilla-es6/src/helpers.js
 //
 // Everything in this file is MIT License unless otherwise specified.
 //
@@ -110,4 +110,13 @@ export function hideElement(element) {
   if (!element.classList.contains('hidden')) {
     element.classList.add('hidden');
   }
+}
+
+/**
+ * Toggles the 'hidden' class of the element.
+ *
+ * @param {Element} element - Element to toggle visibility.
+ */
+export function toggleElement(element) {
+  element.classList.toggle('hidden');
 }

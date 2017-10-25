@@ -1,4 +1,4 @@
-import {qs, $on} from 'util/view_helpers';
+import {qs, $on, hideElement, showElement} from 'util/view_helpers';
 import {readAsText} from 'promise-file-reader';
 import {PageStore} from 'page/page_store';
 
@@ -28,25 +28,6 @@ export class Upgrade {
         showElement(qs('#upgrade-complete'));
       }
     });
-  }
-}
-
-
-/**
- * @param {Element} element - Element to show.
- */
-function showElement(element) {
-  if (element.classList.contains('hidden')) {
-    element.classList.remove('hidden');
-  }
-}
-
-/**
- * @param {Element} element - Element to hide.
- */
-function hideElement(element) {
-  if (!element.classList.contains('hidden')) {
-    element.classList.add('hidden');
   }
 }
 

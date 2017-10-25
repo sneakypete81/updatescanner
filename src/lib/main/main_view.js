@@ -1,4 +1,5 @@
-import {qs, $on} from 'util/view_helpers';
+import {qs, $on, hideElement, toggleElement}
+  from 'util/view_helpers';
 import {timeSince} from 'util/date_format';
 
 export const ViewTypes = {
@@ -22,16 +23,14 @@ function initMenu() {
 
   // Toggle the menu when its button is clicked
   $on(qs('#menuButton'), 'click', (event) => {
-    menu.classList.toggle('show');
+    toggleElement(menu);
     // Prevent the click from immediately closing the dropdown
     event.stopPropagation();
   });
 
   // Hide the menu when something else is clicked
   $on(window, 'click', ({target}) => {
-    if (menu.classList.contains('show')) {
-      menu.classList.remove('show');
-    }
+    hideElement(menu);
   });
 }
 
