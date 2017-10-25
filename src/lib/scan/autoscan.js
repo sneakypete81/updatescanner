@@ -33,6 +33,10 @@ export async function start() {
 function startAlarm(debug) {
   const timing = debug ? DEBUG_ALARM_TIMING : ALARM_TIMING;
   browser.alarms.create(ALARM_ID, timing);
+  if (debug) {
+    log(`Created alarm with timing delay=${timing.delayInMinutes} mins, ` +
+      `period=${timing.periodInMinutes} mins`);
+  }
 }
 
 /**
@@ -53,6 +57,9 @@ function stopAlarm() {
  */
 async function onAlarm(alarm) {
   if (alarm.name == ALARM_ID) {
+    if (await Config.loadSingleSetting('debug')) {
+      log('Checking if scan is required...');
+    }
     const pageList = await loadPageList();
     const scanList = getScanList(pageList);
     if (scanList.length > 0) {
