@@ -70,8 +70,7 @@ async function scanPage(page) {
  */
 async function processHtml(page, scannedHtml) {
   const prevHtml = await PageStore.loadHtml(page.id, PageStore.htmlTypes.NEW);
-  const stripped = stripHtml(prevHtml, scannedHtml, page.ignoreNumbers);
-  updatePageState(page, stripped.prevHtml, stripped.scannedHtml);
+  updatePageState(page, prevHtml, scannedHtml);
 }
 
 /**
@@ -84,7 +83,10 @@ async function processHtml(page, scannedHtml) {
  * @param {string} scannedHtml - Scanned HTML to process.
  */
 function updatePageState(page, prevHtml, scannedHtml) {
-  switch (getChangeType(prevHtml, scannedHtml, page.changeThreshold)) {
+  const stripped = stripHtml(prevHtml, scannedHtml, page.ignoreNumbers);
+  switch (getChangeType(
+    stripped.prevHtml, stripped.scannedHtml, page.changeThreshold
+  )) {
     case changeEnum.NEW_CONTENT:
     case changeEnum.MINOR_CHANGE:
       PageStore.saveHtml(page.id, PageStore.htmlTypes.NEW, scannedHtml);
