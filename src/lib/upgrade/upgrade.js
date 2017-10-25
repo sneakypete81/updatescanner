@@ -13,6 +13,7 @@ export class Upgrade {
     $on(qs('#file-upload'), 'change', async (event) => {
       hideElement(qs('#upload-button'));
       hideElement(qs('#upgrade-failed'));
+      showElement(qs('#importing'));
 
       const file = qs('#file-upload').files[0];
       const bookmarks = await loadBookmarks(file);
@@ -27,6 +28,7 @@ export class Upgrade {
 
         showElement(qs('#upgrade-complete'));
       }
+      hideElement(qs('#importing'));
     });
   }
 }
