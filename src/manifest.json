@@ -23,6 +23,7 @@
     "<all_urls>",
     "storage",
     "alarms",
+    "notifications",
     "tabs"
   ],
 

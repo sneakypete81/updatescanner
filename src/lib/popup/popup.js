@@ -1,4 +1,4 @@
-import {openMain, paramEnum, actionEnum} from 'main/main_url';
+import {openMain, showAllChanges, paramEnum, actionEnum} from 'main/main_url';
 import {PageStore, hasPageStateChanged} from 'page/page_store';
 import {Page} from 'page/page';
 import * as view from 'popup/popup_view';
@@ -77,13 +77,8 @@ export class Popup {
    * Called when the "Show All Updates" button is clicked, to open all changes
    * in new tabs.
    */
-  _handleShowAllClick() {
-    for (const page of this.pageStore.getPageList()) {
-      if (page.state == Page.stateEnum.CHANGED) {
-        openMain({[paramEnum.ACTION]: actionEnum.SHOW_DIFF,
-          [paramEnum.ID]: page.id}, true);
-      }
-    }
+  async _handleShowAllClick() {
+    await showAllChanges();
     window.close();
   }
 

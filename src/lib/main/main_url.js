@@ -1,3 +1,6 @@
+import {Page} from 'page/page';
+import {PageStore} from 'page/page_store';
+
 /**
  * Parameter names for the Main page URL parameters.
  * @readonly
@@ -68,4 +71,17 @@ export function getMainDiffUrl(pageId) {
     [paramEnum.ID]: pageId,
   };
   return getMainUrl(params);
+}
+
+/**
+ * Open all changed pages in new tabs.
+ */
+export async function showAllChanges() {
+  const pageStore = await PageStore.load();
+  for (const page of pageStore.getPageList()) {
+    if (page.state == Page.stateEnum.CHANGED) {
+      openMain({[paramEnum.ACTION]: actionEnum.SHOW_DIFF,
+        [paramEnum.ID]: page.id}, true);
+    }
+  }
 }

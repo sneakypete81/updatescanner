@@ -1,4 +1,5 @@
 import {scan} from 'scan/scan';
+import {showNotification} from 'scan/notification';
 import {PageStore} from 'page/page_store';
 import {Config} from 'util/config';
 import {log} from 'util/log';
@@ -60,26 +61,16 @@ async function onAlarm(alarm) {
     if (await Config.loadSingleSetting('debug')) {
       log('Checking if scan is required...');
     }
-    const pageList = await loadPageList();
-    const scanList = getScanList(pageList);
+    const pageStore = await PageStore.load();
+    const scanList = getScanList(pageStore.getPageList());
     if (scanList.length > 0) {
       log(`Pages to autoscan: ${scanList.length}`);
-      await scan(scanList);
-      log('Autoscan complete.');
+      const newMajorChangeCount = await scan(scanList);
+      log(`Autoscan complete, ${newMajorChangeCount} new changes detected.`);
+      showNotification(newMajorChangeCount);
     }
   }
   return {};
-}
-
-/**
- * Load the list of pages from storage.
- *
- * @returns {Promise} A promise that returns the full list of Pages
- * (and PageFolders).
- */
-async function loadPageList() {
-  const pageStore = await PageStore.load();
-  return pageStore.getPageList();
 }
 
 /**

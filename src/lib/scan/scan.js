@@ -21,14 +21,16 @@ const changeEnum = {
  *
  * @param {Array.<Page>} pageList - Array of pages to scan.
  *
- * @returns {Promise} An empty promise that fulfills once all pages have been
- * scanned and updated.
+ * @returns {integer} The number of new major changes detected.
  */
 export async function scan(pageList) {
+  let newMajorChangeCount = 0;
   for (const page of pageList) {
-    await scanPage(page);
+    if (await scanPage(page)) {
+      newMajorChangeCount++;
+    }
   }
-  return {};
+  return newMajorChangeCount;
 }
 
 /**
@@ -38,8 +40,7 @@ export async function scan(pageList) {
  *
  * @param {Page} page - Page to scan.
  *
- * @returns {Promise} Promise that fulfils once the page has been scanned and
- * updated.
+ * @returns {boolean} True if a new major change is detected.
  */
 async function scanPage(page) {
   try {
@@ -55,6 +56,7 @@ async function scanPage(page) {
     page.error = true;
     page.errorMessage = error.toString();
   }
+  return false;
 }
 
 /**
@@ -67,10 +69,12 @@ async function scanPage(page) {
  *
  * @param {Page} page - Page object to update.
  * @param {string} scannedHtml - HTML to process.
+ *
+ * @returns {boolean} True if a new major change is detected.
  */
 async function processHtml(page, scannedHtml) {
   const prevHtml = await PageStore.loadHtml(page.id, PageStore.htmlTypes.NEW);
-  updatePageState(page, prevHtml, scannedHtml);
+  return await updatePageState(page, prevHtml, scannedHtml);
 }
 
 /**
@@ -81,9 +85,13 @@ async function processHtml(page, scannedHtml) {
  * @param {Page} page - Page object to update.
  * @param {string} prevHtml - HTML from storage.
  * @param {string} scannedHtml - Scanned HTML to process.
+ *
+ * @returns {boolean} True if a new major change is detected.
  */
-function updatePageState(page, prevHtml, scannedHtml) {
+async function updatePageState(page, prevHtml, scannedHtml) {
   const stripped = stripHtml(prevHtml, scannedHtml, page.ignoreNumbers);
+
+  let isNewMajorChange = false;
   switch (getChangeType(
     stripped.prevHtml, stripped.scannedHtml, page.changeThreshold
   )) {
@@ -98,6 +106,7 @@ function updatePageState(page, prevHtml, scannedHtml) {
 
     case changeEnum.MAJOR_CHANGE:
       if (page.state != Page.stateEnum.CHANGED) {
+        isNewMajorChange = true;
         // This is a newly detected change, so update the old HTML.
         PageStore.saveHtml(page.id, PageStore.htmlTypes.OLD, prevHtml);
         page.oldScanTime = page.newScanTime;
@@ -117,8 +126,8 @@ function updatePageState(page, prevHtml, scannedHtml) {
   page.error = false;
   page.errorMessage = '';
 
-  // Commit changes, but don't wait for the save to complete
-  page.save();
+  await page.save();
+  return isNewMajorChange;
 }
 
 /**

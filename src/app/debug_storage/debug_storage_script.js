@@ -1,15 +1,19 @@
 // @TODO: Don't need JQuery
 import $ from 'jquery';
 
+import {showNotification} from 'scan/notification';
+
 const dataText = $('#data');
 const reloadBtn = document.querySelector('#reload');
 const preloadBtn = document.querySelector('#preload');
 const clearBtn = document.querySelector('#clear');
+const notifyBtn = document.querySelector('#notify');
 const addFrm = document.querySelector('#add');
 
 reloadBtn.addEventListener('click', reload);
 preloadBtn.addEventListener('click', preload);
 clearBtn.addEventListener('click', clear);
+notifyBtn.addEventListener('click', notify);
 addFrm.addEventListener('submit', add);
 
 // Display the storage contents once page is loaded
@@ -84,4 +88,8 @@ function add(event) {
   const value = event.target.querySelector('#value').value;
   browser.storage.local.set({[key]: value});
   reload();
+}
+
+function notify() {
+  showNotification(3);
 }

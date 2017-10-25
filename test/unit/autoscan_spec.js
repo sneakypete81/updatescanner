@@ -1,5 +1,6 @@
 import * as autoscan from 'scan/autoscan';
 import * as scan from 'scan/scan';
+import * as notification from 'scan/notification';
 import {PageStore} from 'page/page_store';
 import {Page} from 'page/page';
 import {Config} from 'util/config';
@@ -77,6 +78,9 @@ describe('autoscan', function() {
     beforeEach(function() {
       spyOn(PageStore, 'load').and.returnValue(
         Promise.resolve(new PageStore()));
+      spyOn(Config, 'loadSingleSetting').and.returnValue(
+        Promise.resolve(false));
+      spyOn(notification, 'showNotification');
     });
 
     it('does nothing if the alarm name doesn\'t match', function() {
