@@ -203,6 +203,33 @@ export class PageStore {
   }
 
   /**
+   * Move the specified item to a new position in a different PageFolder.
+   *
+   * @param {string} itemId - ID of the item to move.
+   * @param {string} pageFolderId - ID of the destination PageFolder.
+   * @param {integer} position - New position within the PageFolder.
+   */
+  async moveItem(itemId, pageFolderId, position) {
+    const currentParent = this.findParent(itemId);
+    let currentPosition = currentParent.children.indexOf(itemId);
+    const newParent = this.getItem(pageFolderId);
+
+    // Add the item to the new parent in the specified position
+    newParent.children.splice(position, 0, itemId);
+    await newParent.save();
+
+    // Reemove the item from the current parent
+    if (currentParent !== undefined) {
+      // Increment position if we've already inserted into the same parent
+      if (newParent == currentParent && currentPosition > position) {
+        currentPosition++;
+      }
+      currentParent.children.splice(currentPosition, 1);
+      await currentParent.save();
+    }
+  }
+
+  /**
    * @param {Function} handler - Called when a Page in the PageStore is updated.
    */
   bindPageUpdate(handler) {

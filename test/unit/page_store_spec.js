@@ -529,6 +529,154 @@ describe('PageStore', function() {
     });
   });
 
+  describe('moveItem', function() {
+    it('moves a Page forward within the root', function(done) {
+      spyOnStorageLoadWithArgReturn({
+        [StorageInfo._KEY]: Promise.resolve({
+          pageFolderIds: ['0'],
+          pageIds: ['5', '6', '7'],
+        }),
+        [PageFolder._KEY('0')]: Promise.resolve(
+          {id: '0', children: ['5', '6', '7']}),
+        [Page._KEY('5')]: Promise.resolve({id: '5'}),
+        [Page._KEY('6')]: Promise.resolve({id: '6'}),
+        [Page._KEY('7')]: Promise.resolve({id: '7'}),
+      });
+      spyOn(Storage, 'save').and.returnValues(Promise.resolve());
+
+      PageStore.load().then((pageStore) => {
+        pageStore.moveItem('5', PageStore.ROOT_ID, 3).then(() => {
+          const rootFolder = pageStore.pageMap.get(PageStore.ROOT_ID);
+          expect(rootFolder.children).toEqual(['6', '7', '5']);
+
+          expect(Storage.save).toHaveBeenCalledWith(
+            PageFolder._KEY('0'), rootFolder._toObject());
+          done();
+        }).catch((error) => done.fail(error));
+      }).catch((error) => done.fail(error));
+    });
+
+    it('moves a Page backward within the root', function(done) {
+      spyOnStorageLoadWithArgReturn({
+        [StorageInfo._KEY]: Promise.resolve({
+          pageFolderIds: ['0'],
+          pageIds: ['5', '6', '7'],
+        }),
+        [PageFolder._KEY('0')]: Promise.resolve(
+          {id: '0', children: ['5', '6', '7']}),
+        [Page._KEY('5')]: Promise.resolve({id: '5'}),
+        [Page._KEY('6')]: Promise.resolve({id: '6'}),
+        [Page._KEY('7')]: Promise.resolve({id: '7'}),
+      });
+      spyOn(Storage, 'save').and.returnValues(Promise.resolve());
+
+      PageStore.load().then((pageStore) => {
+        pageStore.moveItem('7', PageStore.ROOT_ID, 0).then(() => {
+          const rootFolder = pageStore.pageMap.get(PageStore.ROOT_ID);
+          expect(rootFolder.children).toEqual(['7', '5', '6']);
+
+          expect(Storage.save).toHaveBeenCalledWith(
+            PageFolder._KEY('0'), rootFolder._toObject());
+          done();
+        }).catch((error) => done.fail(error));
+      }).catch((error) => done.fail(error));
+    });
+
+    it('moves a Page from root to PageFolder', function(done) {
+      spyOnStorageLoadWithArgReturn({
+        [StorageInfo._KEY]: Promise.resolve({
+          pageFolderIds: ['0', '1'],
+          pageIds: ['5', '6', '7'],
+        }),
+        [PageFolder._KEY('0')]: Promise.resolve(
+          {id: '0', children: ['1', '5', '6']}),
+        [PageFolder._KEY('1')]: Promise.resolve(
+          {id: '1', children: ['7']}),
+        [Page._KEY('5')]: Promise.resolve({id: '5'}),
+        [Page._KEY('6')]: Promise.resolve({id: '6'}),
+        [Page._KEY('7')]: Promise.resolve({id: '7'}),
+      });
+      spyOn(Storage, 'save').and.returnValues(Promise.resolve());
+
+      PageStore.load().then((pageStore) => {
+        pageStore.moveItem('5', '1', 0).then(() => {
+          const rootFolder = pageStore.pageMap.get(PageStore.ROOT_ID);
+          expect(rootFolder.children).toEqual(['1', '6']);
+          const pageFolder = pageStore.pageMap.get('1');
+          expect(pageFolder.children).toEqual(['5', '7']);
+
+          expect(Storage.save).toHaveBeenCalledWith(
+            PageFolder._KEY('0'), rootFolder._toObject());
+          expect(Storage.save).toHaveBeenCalledWith(
+            PageFolder._KEY('1'), pageFolder._toObject());
+          done();
+        }).catch((error) => done.fail(error));
+      }).catch((error) => done.fail(error));
+    });
+
+    it('moves a Page from PageFolder to root', function(done) {
+      spyOnStorageLoadWithArgReturn({
+        [StorageInfo._KEY]: Promise.resolve({
+          pageFolderIds: ['0', '1'],
+          pageIds: ['5', '6', '7'],
+        }),
+        [PageFolder._KEY('0')]: Promise.resolve(
+          {id: '0', children: ['1', '5', '6']}),
+        [PageFolder._KEY('1')]: Promise.resolve(
+          {id: '1', children: ['7']}),
+        [Page._KEY('5')]: Promise.resolve({id: '5'}),
+        [Page._KEY('6')]: Promise.resolve({id: '6'}),
+        [Page._KEY('7')]: Promise.resolve({id: '7'}),
+      });
+      spyOn(Storage, 'save').and.returnValues(Promise.resolve());
+
+      PageStore.load().then((pageStore) => {
+        pageStore.moveItem('7', '0', 2).then(() => {
+          const rootFolder = pageStore.pageMap.get(PageStore.ROOT_ID);
+          expect(rootFolder.children).toEqual(['1', '5', '7', '6']);
+          const pageFolder = pageStore.pageMap.get('1');
+          expect(pageFolder.children).toEqual([]);
+
+          expect(Storage.save).toHaveBeenCalledWith(
+            PageFolder._KEY('0'), rootFolder._toObject());
+          expect(Storage.save).toHaveBeenCalledWith(
+            PageFolder._KEY('1'), pageFolder._toObject());
+          done();
+        }).catch((error) => done.fail(error));
+      }).catch((error) => done.fail(error));
+    });
+
+    it('moves a PageFolder within another PageFolder', function(done) {
+      spyOnStorageLoadWithArgReturn({
+        [StorageInfo._KEY]: Promise.resolve({
+          pageFolderIds: ['0', '1', '2'],
+          pageIds: ['5', '6', '7'],
+        }),
+        [PageFolder._KEY('0')]: Promise.resolve(
+          {id: '0', children: ['1', '5', '6']}),
+        [PageFolder._KEY('1')]: Promise.resolve(
+          {id: '1', children: ['2', '7']}),
+        [PageFolder._KEY('2')]: Promise.resolve(
+          {id: '2', children: []}),
+        [Page._KEY('5')]: Promise.resolve({id: '5'}),
+        [Page._KEY('6')]: Promise.resolve({id: '6'}),
+        [Page._KEY('7')]: Promise.resolve({id: '7'}),
+      });
+      spyOn(Storage, 'save').and.returnValues(Promise.resolve());
+
+      PageStore.load().then((pageStore) => {
+        pageStore.moveItem('2', '1', 2).then(() => {
+          const pageFolder = pageStore.pageMap.get('1');
+          expect(pageFolder.children).toEqual(['7', '2']);
+
+          expect(Storage.save).toHaveBeenCalledWith(
+            PageFolder._KEY('1'), pageFolder._toObject());
+          done();
+        }).catch((error) => done.fail(error));
+      }).catch((error) => done.fail(error));
+    });
+  });
+
   describe('loadHtml', function() {
     using([PageStore.htmlTypes.OLD,
            PageStore.htmlTypes.NEW,

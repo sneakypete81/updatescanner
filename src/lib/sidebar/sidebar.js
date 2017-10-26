@@ -44,13 +44,15 @@ export class Sidebar {
     this._refreshSidebar();
 
     this.sidebar.registerSelectHandler((itemId) => this._handleSelect(itemId));
-    this.sidebar.registerNewPageHandler(
-      (itemId) => this._handleNewPage(itemId));
-    this.sidebar.registerNewPageFolderHandler(
-      (itemId) => this._handleNewPageFolder(itemId));
+    this.sidebar.registerNewPageHandler((itemId) =>
+      this._handleNewPage(itemId));
+    this.sidebar.registerNewPageFolderHandler((itemId) =>
+      this._handleNewPageFolder(itemId));
     this.sidebar.registerDeleteHandler((itemId) => this._handleDelete(itemId));
-    this.sidebar.registerSettingsHandler(
-      (itemId) => this._handleSettings(itemId));
+    this.sidebar.registerMoveHandler((itemId, pageFolderId, position) =>
+      this._handleMove(itemId, pageFolderId, position));
+    this.sidebar.registerSettingsHandler((itemId) =>
+      this._handleSettings(itemId));
     this.sidebar.registerRefreshDoneHandler(() => this._handleRefreshDone());
   }
 
@@ -126,6 +128,17 @@ export class Sidebar {
    */
   _handleDelete(itemId) {
     this.pageStore.deleteItem(itemId);
+  }
+
+  /**
+   * Called whenever an item is moved due to a DnD operation.
+   *
+   * @param {string} itemId - ID of the item to move.
+   * @param {string} pageFolderId - ID of the destination PageFolder.
+   * @param {integer} position - Position within the destination PageFolder.
+   */
+  _handleMove(itemId, pageFolderId, position) {
+    this.pageStore.moveItem(itemId, pageFolderId, position);
   }
 
   /**
