@@ -20,7 +20,7 @@ export async function start() {
     log('Debug enabled - using fast scan times.');
   }
 
-  stopAlarm();
+  await stopAlarm();
   startAlarm(debug);
   browser.alarms.onAlarm.addListener((alarm) => onAlarm(alarm));
   return {};
@@ -43,8 +43,8 @@ function startAlarm(debug) {
 /**
  * Stop the Autoscanner alarm.
  */
-function stopAlarm() {
-  browser.alarms.clear(ALARM_ID);
+async function stopAlarm() {
+  await browser.alarms.clear(ALARM_ID);
 }
 
 /**
