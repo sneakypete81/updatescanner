@@ -192,7 +192,6 @@ export class SidebarView {
     }
     // more.core is true if a drop has occurred
     if (more.core) {
-      console.log('Move ' + node.id + ' to ' + parent.id + ' pos ' + position);
       this._moveHandler(
         this._nodeToItemId(node), this._nodeToItemId(parent), position);
     }
