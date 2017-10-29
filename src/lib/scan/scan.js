@@ -184,6 +184,9 @@ function stripHtml(prevHtml, scannedHtml, ignoreNumbers) {
  * @returns {string} HTML with whitespace removed.
  */
 function stripWhitespace(html) {
+  if (html === null) {
+    return null;
+  }
   return html.replace(/\s+/g, '');
 }
 
@@ -193,6 +196,9 @@ function stripWhitespace(html) {
  * @returns {string} HTML with (most) sctipts removed.
  */
 function stripScript(html) {
+  if (html === null) {
+    return null;
+  }
   return html.replace(/<script.*?>.*?<\/script>/gi, '');
 }
 
@@ -202,6 +208,9 @@ function stripScript(html) {
  * @returns {string} HTML with tags removed.
  */
 function stripTags(html) {
+  if (html === null) {
+    return null;
+  }
   return html.replace(/(<([^<]+)>)/g, '');
 }
 
@@ -211,6 +220,9 @@ function stripTags(html) {
  * @returns {string} HTML with numbers, commas and full stops removed.
  */
 function stripNumbers(html) {
+  if (html === null) {
+    return null;
+  }
   return html.replace(/[0-9,.]*/g, '');
 }
 

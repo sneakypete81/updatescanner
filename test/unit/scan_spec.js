@@ -338,5 +338,12 @@ describe('scan', function() {
       expect(result.prevHtml).toEqual('textwith12.3numbers,stopsandcommas.');
       expect(result.scannedHtml).toEqual('Moretextwith12.3numbers,etc.');
     });
+
+    it('handles null HTML input', function() {
+      const result = scan.__.stripHtml(null, null, true);
+
+      expect(result.prevHtml).toBe(null);
+      expect(result.scannedHtml).toBe(null);
+    });
   });
 });
