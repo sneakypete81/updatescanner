@@ -2,6 +2,7 @@ import * as scan from 'scan/scan';
 import * as fuzzy from 'scan/fuzzy';
 import {PageStore} from 'page/page_store';
 import {Page} from 'page/page';
+import * as log from 'util/log';
 
 describe('scan', function() {
   describe('getChangeType', function() {
@@ -185,6 +186,7 @@ describe('scan', function() {
     it('does nothing when given an empty page list', function(done) {
       spyOn(window, 'fetch');
       spyOn(PageStore, 'loadHtml');
+      spyOn(log, 'log');
 
       scan.scan([]).then(() => {
         expect(window.fetch).not.toHaveBeenCalled();
@@ -201,6 +203,7 @@ describe('scan', function() {
         Promise.resolve({ok: true, text: () => html}));
       spyOn(PageStore, 'loadHtml').and.returnValues(Promise.resolve(html));
       spyOn(Page.prototype, 'save');
+      spyOn(log, 'log');
 
       scan.scan([page]).then(() => {
         expect(window.fetch).toHaveBeenCalledWith(page.url);
@@ -221,6 +224,7 @@ describe('scan', function() {
         Promise.resolve({ok: true, text: () => html}));
       spyOn(PageStore, 'loadHtml').and.returnValue(Promise.resolve(html));
       spyOn(Page.prototype, 'save');
+      spyOn(log, 'log');
 
       scan.scan(pages).then(() => {
         expect(window.fetch).toHaveBeenCalledWith(pages[0].url);
@@ -246,18 +250,15 @@ describe('scan', function() {
       spyOn(window, 'fetch').and.returnValues(
         Promise.resolve({ok: false, status: 404, statusText: 'no such page'}));
       spyOn(PageStore, 'loadHtml');
-      spyOn(console, 'log').and.callFake((msg) => {
-        expect(msg).toMatch('no such page');
-        console.matched = true;
-      });
-      console.matched = false;
+      spyOn(log, 'log');
 
       scan.scan([page]).then(() => {
         expect(window.fetch).toHaveBeenCalledWith(page.url);
         expect(PageStore.loadHtml).not.toHaveBeenCalled();
         expect(page.error).toEqual(true);
         expect(page.errorMessage).toEqual('Error: [404] no such page');
-        expect(console.matched).toEqual(true);
+        expect(log.log.calls.allArgs()).toContain(
+          ['Could not scan "example": Error: [404] no such page']);
         done();
       }).catch((error) => done.fail(error));
     });
@@ -269,18 +270,15 @@ describe('scan', function() {
       spyOn(window, 'fetch').and.returnValues(
         Promise.reject('Network error'));
       spyOn(PageStore, 'loadHtml');
-      spyOn(console, 'log').and.callFake((msg) => {
-        expect(msg).toMatch('Network error');
-        console.matched = true;
-      });
-      console.matched = false;
+      spyOn(log, 'log');
 
       scan.scan([page]).then(() => {
         expect(window.fetch).toHaveBeenCalledWith(page.url);
         expect(PageStore.loadHtml).not.toHaveBeenCalled();
         expect(page.error).toEqual(true);
         expect(page.errorMessage).toEqual('Network error');
-        expect(console.matched).toEqual(true);
+        expect(log.log.calls.allArgs()).toContain(
+          ['Could not scan "example": Network error']);
         done();
       }).catch((error) => done.fail(error));
     });

@@ -43,6 +43,7 @@ export async function scan(pageList) {
  * @returns {boolean} True if a new major change is detected.
  */
 async function scanPage(page) {
+  log(`Scanning "${page.title}"...`);
   try {
     const response = await fetch(page.url);
     if (!response.ok) {
