@@ -67,7 +67,9 @@ async function onAlarm(alarm) {
       log(`Pages to autoscan: ${scanList.length}`);
       const newMajorChangeCount = await scan(scanList);
       log(`Autoscan complete, ${newMajorChangeCount} new changes detected.`);
-      showNotification(newMajorChangeCount);
+      if (newMajorChangeCount > 0) {
+        showNotification(newMajorChangeCount);
+      }
     }
   }
   return {};
