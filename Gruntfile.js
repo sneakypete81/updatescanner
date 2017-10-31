@@ -25,8 +25,8 @@ module.exports = function(grunt) {
                                    'rerunning when files change.',
                      ['karma:watch']);
 
-  grunt.registerTask('sign', 'Sign the webextension.',
-                     ['shell:webextSign']);
+  grunt.registerTask('sign', 'Build and sign the webextension.',
+                     ['build', 'shell:webextSign']);
 
   grunt.config('clean', require('./grunt/clean'));
   grunt.config('shell', require('./grunt/shell'));
