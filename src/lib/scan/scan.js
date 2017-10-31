@@ -92,43 +92,31 @@ async function processHtml(page, scannedHtml) {
 async function updatePageState(page, prevHtml, scannedHtml) {
   const stripped = stripHtml(prevHtml, scannedHtml, page.ignoreNumbers);
 
-  let isNewMajorChange = false;
-  switch (getChangeType(
-    stripped.prevHtml, stripped.scannedHtml, page.changeThreshold
-  )) {
-    case changeEnum.NEW_CONTENT:
-    case changeEnum.MINOR_CHANGE:
-      PageStore.saveHtml(page.id, PageStore.htmlTypes.NEW, scannedHtml);
-      // Only update the state if not previously marked as changed.
-      if (page.state != Page.stateEnum.CHANGED) {
-        page.state = Page.stateEnum.NO_CHANGE;
-      }
-      break;
+  const changeType = getChangeType(stripped.prevHtml, stripped.scannedHtml,
+    page.changeThreshold);
 
-    case changeEnum.MAJOR_CHANGE:
-      if (page.state != Page.stateEnum.CHANGED) {
-        isNewMajorChange = true;
-        // This is a newly detected change, so update the old HTML.
-        PageStore.saveHtml(page.id, PageStore.htmlTypes.OLD, prevHtml);
-        page.oldScanTime = page.newScanTime;
-      }
-      PageStore.saveHtml(page.id, PageStore.htmlTypes.NEW, scannedHtml);
-      page.state = Page.stateEnum.CHANGED;
-      break;
-
-    case changeEnum.NO_CHANGE:
-      // Only update the state if not previously marked as changed.
-      if (page.state != Page.stateEnum.CHANGED) {
-        page.state = Page.stateEnum.NO_CHANGE;
-      }
-      break;
+  if (changeType == changeEnum.MAJOR_CHANGE) {
+    if (page.state != Page.stateEnum.CHANGED) {
+      // This is a newly detected change, so update the old HTML.
+      PageStore.saveHtml(page.id, PageStore.htmlTypes.OLD, prevHtml);
+      page.oldScanTime = page.newScanTime;
+    }
+    PageStore.saveHtml(page.id, PageStore.htmlTypes.NEW, scannedHtml);
+    page.state = Page.stateEnum.CHANGED;
+  } else {
+    PageStore.saveHtml(page.id, PageStore.htmlTypes.NEW, scannedHtml);
+    // Only update the state if not previously marked as changed.
+    if (page.state != Page.stateEnum.CHANGED) {
+      page.state = Page.stateEnum.NO_CHANGE;
+    }
   }
+
   page.newScanTime = Date.now();
   page.error = false;
   page.errorMessage = '';
 
   await page.save();
-  return isNewMajorChange;
+  return changeType == changeEnum.MAJOR_CHANGE;
 }
 
 /**

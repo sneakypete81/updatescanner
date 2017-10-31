@@ -61,43 +61,15 @@ describe('scan', function() {
       jasmine.clock().uninstall();
     });
 
-    it('does nothing if the page is unchanged', function() {
+    it('saves content if the page is unchanged', async function() {
       this.page.state = Page.stateEnum.NO_CHANGE;
       const html = 'Here is some <b>HTML</b>';
       spyOn(this.page, 'save');
       spyOn(PageStore, 'saveHtml');
 
-      scan.__.updatePageState(this.page, html, html);
+      const result = await scan.__.updatePageState(this.page, html, html);
 
-      expect(this.page.state).toEqual(Page.stateEnum.NO_CHANGE);
-      expect(this.page.oldScanTime).toEqual(this.oldScanTime);
-      expect(this.page.newScanTime).toEqual(Date.now());
-      expect(PageStore.saveHtml).not.toHaveBeenCalled();
-    });
-
-    it('does nothing if the page is unchanged when previously changed',
-       function() {
-      this.page.state = Page.stateEnum.CHANGED;
-      const html = 'Here is some <b>HTML</b>';
-      spyOn(this.page, 'save');
-      spyOn(PageStore, 'saveHtml');
-
-      scan.__.updatePageState(this.page, html, html);
-
-      expect(this.page.state).toEqual(Page.stateEnum.CHANGED);
-      expect(this.page.oldScanTime).toEqual(this.oldScanTime);
-      expect(this.page.newScanTime).toEqual(Date.now());
-      expect(PageStore.saveHtml).not.toHaveBeenCalled();
-    });
-
-    it('saves new content', function() {
-      this.page.state = Page.stateEnum.NO_CHANGE;
-      const html = 'Here is some <b>HTML</b>';
-      spyOn(this.page, 'save');
-      spyOn(PageStore, 'saveHtml');
-
-      scan.__.updatePageState(this.page, '', html);
-
+      expect(result).toBeFalsy();
       expect(this.page.state).toEqual(Page.stateEnum.NO_CHANGE);
       expect(this.page.oldScanTime).toEqual(this.oldScanTime);
       expect(this.page.newScanTime).toEqual(Date.now());
@@ -106,7 +78,42 @@ describe('scan', function() {
       expect(PageStore.saveHtml).toHaveBeenCalledTimes(1);
     });
 
-    it('saves a minor change without updating state', function() {
+    it('saves content if the page is unchanged when previously changed',
+       async function() {
+      this.page.state = Page.stateEnum.CHANGED;
+      const html = 'Here is some <b>HTML</b>';
+      spyOn(this.page, 'save');
+      spyOn(PageStore, 'saveHtml');
+
+      const result = await scan.__.updatePageState(this.page, html, html);
+
+      expect(result).toBeFalsy();
+      expect(this.page.state).toEqual(Page.stateEnum.CHANGED);
+      expect(this.page.oldScanTime).toEqual(this.oldScanTime);
+      expect(this.page.newScanTime).toEqual(Date.now());
+      expect(PageStore.saveHtml).toHaveBeenCalledWith(
+        '1', PageStore.htmlTypes.NEW, html);
+      expect(PageStore.saveHtml).toHaveBeenCalledTimes(1);
+    });
+
+    it('saves new content', async function() {
+      this.page.state = Page.stateEnum.NO_CHANGE;
+      const html = 'Here is some <b>HTML</b>';
+      spyOn(this.page, 'save');
+      spyOn(PageStore, 'saveHtml');
+
+      const result = await scan.__.updatePageState(this.page, '', html);
+
+      expect(result).toBeFalsy();
+      expect(this.page.state).toEqual(Page.stateEnum.NO_CHANGE);
+      expect(this.page.oldScanTime).toEqual(this.oldScanTime);
+      expect(this.page.newScanTime).toEqual(Date.now());
+      expect(PageStore.saveHtml).toHaveBeenCalledWith(
+        '1', PageStore.htmlTypes.NEW, html);
+      expect(PageStore.saveHtml).toHaveBeenCalledTimes(1);
+    });
+
+    it('saves a minor change without updating state', async function() {
       this.page.state = Page.stateEnum.NO_CHANGE;
       const html1 = 'Here is some <b>HTML</b>';
       const html2 = 'Here is some different <b>HTML</b>';
@@ -114,8 +121,9 @@ describe('scan', function() {
       spyOn(PageStore, 'saveHtml');
       spyOn(fuzzy, 'isMajorChange').and.returnValues(false);
 
-      scan.__.updatePageState(this.page, html1, html2);
+      const result = await scan.__.updatePageState(this.page, html1, html2);
 
+      expect(result).toBeFalsy();
       expect(this.page.state).toEqual(Page.stateEnum.NO_CHANGE);
       expect(this.page.oldScanTime).toEqual(this.oldScanTime);
       expect(this.page.newScanTime).toEqual(Date.now());
@@ -125,7 +133,7 @@ describe('scan', function() {
     });
 
     it('doesn\'t update state for a minor change when previously changed',
-       function() {
+       async function() {
       this.page.state = Page.stateEnum.CHANGED;
       const html1 = 'Here is some <b>HTML</b>';
       const html2 = 'Here is some different <b>HTML</b>';
@@ -133,8 +141,9 @@ describe('scan', function() {
       spyOn(PageStore, 'saveHtml');
       spyOn(fuzzy, 'isMajorChange').and.returnValues(false);
 
-      scan.__.updatePageState(this.page, html1, html2);
+      const result = await scan.__.updatePageState(this.page, html1, html2);
 
+      expect(result).toBeFalsy();
       expect(this.page.state).toEqual(Page.stateEnum.CHANGED);
       expect(this.page.oldScanTime).toEqual(this.oldScanTime);
       expect(this.page.newScanTime).toEqual(Date.now());
@@ -143,7 +152,7 @@ describe('scan', function() {
       expect(PageStore.saveHtml).toHaveBeenCalledTimes(1);
     });
 
-    it('updates old and new HTML for a new major change', function() {
+    it('updates old and new HTML for a new major change', async function() {
       this.page.state = Page.stateEnum.NO_CHANGE;
       const html1 = 'Here is some <b>HTML</b>';
       const html2 = 'Here is some different <b>HTML</b>';
@@ -151,8 +160,9 @@ describe('scan', function() {
       spyOn(PageStore, 'saveHtml');
       spyOn(fuzzy, 'isMajorChange').and.returnValues(true);
 
-      scan.__.updatePageState(this.page, html1, html2);
+      const result = await scan.__.updatePageState(this.page, html1, html2);
 
+      expect(result).toBeTruthy();
       expect(this.page.state).toEqual(Page.stateEnum.CHANGED);
       expect(this.page.oldScanTime).toEqual(this.newScanTime);
       expect(this.page.newScanTime).toEqual(Date.now());
@@ -163,7 +173,8 @@ describe('scan', function() {
       expect(PageStore.saveHtml).toHaveBeenCalledTimes(2);
     });
 
-    it('updates just the new HTML for a repeated major change', function() {
+    it('updates just the new HTML for a repeated major change',
+    async function() {
       this.page.state = Page.stateEnum.CHANGED;
       const html1 = 'Here is some <b>HTML</b>';
       const html2 = 'Here is some different <b>HTML</b>';
@@ -171,8 +182,9 @@ describe('scan', function() {
       spyOn(PageStore, 'saveHtml');
       spyOn(fuzzy, 'isMajorChange').and.returnValues(true);
 
-      scan.__.updatePageState(this.page, html1, html2);
+      const result = await scan.__.updatePageState(this.page, html1, html2);
 
+      expect(result).toBeTruthy();
       expect(this.page.state).toEqual(Page.stateEnum.CHANGED);
       expect(this.page.oldScanTime).toEqual(this.oldScanTime);
       expect(this.page.newScanTime).toEqual(Date.now());
@@ -202,6 +214,7 @@ describe('scan', function() {
       spyOn(window, 'fetch').and.returnValues(
         Promise.resolve({ok: true, text: () => html}));
       spyOn(PageStore, 'loadHtml').and.returnValues(Promise.resolve(html));
+      spyOn(PageStore, 'saveHtml').and.returnValue(Promise.resolve(html));
       spyOn(Page.prototype, 'save');
       spyOn(log, 'log');
 
@@ -223,6 +236,7 @@ describe('scan', function() {
       spyOn(window, 'fetch').and.returnValue(
         Promise.resolve({ok: true, text: () => html}));
       spyOn(PageStore, 'loadHtml').and.returnValue(Promise.resolve(html));
+      spyOn(PageStore, 'saveHtml').and.returnValue(Promise.resolve(html));
       spyOn(Page.prototype, 'save');
       spyOn(log, 'log');
 
