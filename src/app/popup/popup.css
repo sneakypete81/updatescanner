@@ -36,21 +36,23 @@ html body {
 }
 
 .footer-button-icon {
+  background-color: #606060;
   height: 32px;
-  background-position: center center;
-  background-repeat: no-repeat;
+  mask-size: 32px;
+  mask-position: center center;
+  mask-repeat: no-repeat;
 }
 
 #new-button > .footer-button-icon {
-  background-image: url('/images/new_32.png');
+  mask-image: url('/images/new.svg');
 }
 
 #sidebar-button > .footer-button-icon {
-  background-image: url('/images/sidebar_32.png');
+  mask-image: url('/images/sidebars.svg');
 }
 
 #menu-button > .footer-button-icon {
-  background-image: url('/images/help_32.png');
+  mask-image: url('/images/menu.svg');
 }
 
 .footer-button-text {
