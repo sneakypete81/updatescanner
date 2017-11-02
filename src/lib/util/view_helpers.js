@@ -120,3 +120,14 @@ export function hideElement(element) {
 export function toggleElement(element) {
   element.classList.toggle('hidden');
 }
+
+/**
+ * Determine if an element is currently hidden.
+ *
+ * @param {Element} element - Element to examine.
+ *
+ * @returns {boolean} True if the element is currently hidden.
+ */
+export function isHidden(element) {
+  return element.classList.contains('hidden');
+}

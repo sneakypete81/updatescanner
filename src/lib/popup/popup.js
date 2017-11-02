@@ -22,6 +22,7 @@ export class Popup {
     this.pageStore = await PageStore.load();
     this.pageStore.bindPageUpdate(this._handlePageUpdate.bind(this));
 
+    view.init();
     view.bindShowAllClick(this._handleShowAllClick.bind(this));
     view.bindNewClick(this._handleNewClick.bind(this));
     view.bindSidebarClick(this._handleSidebarClick.bind(this));
