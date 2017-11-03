@@ -288,4 +288,13 @@ export class SidebarView {
   hideUpgradeText() {
     hideElement(qs('#upgrade'));
   }
+
+  /**
+   * Show a dialog asking for confirmation before deleting an item.
+   *
+   * @returns {boolean} True if the user confirmed the deletion.
+   */
+  confirmDelete() {
+    return window.confirm('Are you sure you wish to delete the selected item?');
+  }
 }

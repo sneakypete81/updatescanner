@@ -119,7 +119,9 @@ export class Sidebar {
    * @param {string} itemId - Page/PageFolder ID to delete.
    */
   _handleDelete(itemId) {
-    this.pageStore.deleteItem(itemId);
+    if (this.sidebar.confirmDelete()) {
+      this.pageStore.deleteItem(itemId);
+    }
   }
 
   /**
