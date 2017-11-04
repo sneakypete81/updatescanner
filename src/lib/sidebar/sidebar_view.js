@@ -147,11 +147,11 @@ export class SidebarView {
     return (node) => {
       return {
         newPage: {
-          label: 'New Page...',
+          label: 'New Page',
           action: () => this._newPageHandler(node),
         },
         newPageFolder: {
-          label: 'New Folder...',
+          label: 'New Folder',
           action: () => this._newPageFolderHandler(node),
         },
         delete: {
@@ -161,7 +161,7 @@ export class SidebarView {
         },
         settings: {
           separator_before: true,
-          label: 'Settings...',
+          label: 'Settings',
           action: () => this._settingsHandler(node),
         },
       };
