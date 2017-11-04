@@ -73,6 +73,7 @@ export class Popup {
    */
   _handleScanAllClick() {
     browser.runtime.sendMessage({action: backgroundActionEnum.SCAN_ALL});
+    window.close();
   }
 
   /**
