@@ -30,10 +30,17 @@ export function bindSidebarClick(handler) {
 }
 
 /**
- * @param {Function} handler - Called when the Help button is clicked.
+ * @param {Function} handler - Called when the Help menu item is clicked.
  */
 export function bindHelpClick(handler) {
   $on(qs('#help-menu'), 'click', handler);
+}
+
+/**
+ * @param {Function} handler - Called when the Scan All menu item is clicked.
+ */
+export function bindScanAllClick(handler) {
+  $on(qs('#scan-all-menu'), 'click', handler);
 }
 
 /**

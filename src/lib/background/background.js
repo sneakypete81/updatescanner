@@ -1,6 +1,10 @@
+import {backgroundActionEnum} from 'background/actions';
 import * as autoscan from 'scan/autoscan';
+import {scan} from 'scan/scan';
+import {showNotification} from 'scan/notification';
 import {PageStore, hasPageStateChanged} from 'page/page_store';
 import {Page} from 'page/page';
+import {log} from 'util/log';
 
 const activeIcon = {
   18: '/images/updatescanner_18.png',
@@ -28,6 +32,8 @@ export class Background {
     this.pageStore.bindPageUpdate(this._handlePageUpdate.bind(this));
     this._refreshIcon();
 
+    browser.runtime.onMessage.addListener(this._handleMessage.bind(this));
+
     // @FIXME: Autoscan should take pageStore as a parameter
     autoscan.start();
   }
@@ -46,6 +52,17 @@ export class Background {
   }
 
   /**
+   * Called when a message is sent to the background process.
+   *
+   * @param {Object} message - Message content.
+   */
+  async _handleMessage(message) {
+    if (message.action == backgroundActionEnum.SCAN_ALL) {
+      this._scanAll();
+    }
+  }
+
+  /**
    * Refresh the browserAction icon and badge text.
    */
   _refreshIcon() {
@@ -59,5 +76,18 @@ export class Background {
     } else {
       browser.browserAction.setBadgeText({text: updateCount.toString()});
     }
+  }
+
+  /**
+   * Manual scan of all Pages in the PageStore.
+   */
+  async _scanAll() {
+    const scanList = this.pageStore.getPageList();
+    log(`Pages to manually scan: ${scanList.length}`);
+
+    const newMajorChangeCount = await scan(scanList);
+
+    log(`Manual scan complete, ${newMajorChangeCount} new changes detected.`);
+    showNotification(newMajorChangeCount);
   }
 }

@@ -8,10 +8,21 @@ const NOTIFICATION_ID = 'updatescanner';
  * @param {integer} updateCount - Number of updates.
  */
 export function showNotification(updateCount) {
-  const message = (updateCount == 1 ?
-    'A webpage has been updated.' :
-    `${updateCount} webpages have been updated.`);
-  const clickMessage = 'Click this panel to view the changes.';
+  let message;
+  if (updateCount == 0) {
+    message = 'No updates were detected.';
+  } else if (updateCount == 1) {
+    message = 'A webpage has been updated.';
+  } else {
+    message = `${updateCount} webpages have been updated.`;
+  }
+
+  let clickMessage;
+  if (updateCount == 0) {
+    clickMessage = '';
+  } else {
+    clickMessage = 'Click this panel to view the changes.';
+  }
 
   browser.notifications.create(NOTIFICATION_ID, {
     type: 'basic',

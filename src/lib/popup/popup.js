@@ -1,4 +1,5 @@
 import {openMain, showAllChanges, paramEnum, actionEnum} from 'main/main_url';
+import {backgroundActionEnum} from 'background/actions.js';
 import {PageStore, hasPageStateChanged} from 'page/page_store';
 import {Page} from 'page/page';
 import * as view from 'popup/popup_view';
@@ -26,6 +27,7 @@ export class Popup {
     view.bindShowAllClick(this._handleShowAllClick.bind(this));
     view.bindNewClick(this._handleNewClick.bind(this));
     view.bindSidebarClick(this._handleSidebarClick.bind(this));
+    view.bindScanAllClick(this._handleScanAllClick.bind(this));
     view.bindHelpClick(this._handleHelpClick.bind(this));
     view.bindPageClick(this._handlePageClick.bind(this));
 
@@ -67,7 +69,14 @@ export class Popup {
   }
 
   /**
-   * Called when the Help button is clicked, to open the help website.
+   * Called when the Scan All menu item is clicked, to scan all pages.
+   */
+  _handleScanAllClick() {
+    browser.runtime.sendMessage({action: backgroundActionEnum.SCAN_ALL});
+  }
+
+  /**
+   * Called when the Help menu item is clicked, to open the help website.
    */
   _handleHelpClick() {
     browser.tabs.create({url: 'https://sneakypete81.github.io/updatescanner/'});
