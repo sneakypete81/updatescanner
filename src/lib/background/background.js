@@ -86,8 +86,12 @@ export class Background {
     log(`Pages to manually scan: ${scanList.length}`);
 
     const newMajorChangeCount = await scan(scanList);
-
     log(`Manual scan complete, ${newMajorChangeCount} new changes detected.`);
-    showNotification(newMajorChangeCount);
+
+    // If the user has already viewed some changes, don't include in the count
+    const changeCount = this.pageStore.getChangedPageList().length;
+    const notifyChangeCount = Math.min(newMajorChangeCount, changeCount);
+
+    showNotification(notifyChangeCount);
   }
 }

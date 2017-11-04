@@ -77,7 +77,7 @@ describe('autoscan', function() {
   describe('onAlarm', function() {
     beforeEach(function() {
       spyOn(PageStore, 'load').and.returnValue(
-        Promise.resolve(new PageStore()));
+        Promise.resolve(new PageStore(new Map())));
       spyOn(Config, 'loadSingleSetting').and.returnValue(
         Promise.resolve(false));
       spyOn(notification, 'showNotification');

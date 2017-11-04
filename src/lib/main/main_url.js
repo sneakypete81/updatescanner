@@ -1,4 +1,3 @@
-import {Page} from 'page/page';
 import {PageStore} from 'page/page_store';
 
 /**
@@ -78,10 +77,9 @@ export function getMainDiffUrl(pageId) {
  */
 export async function showAllChanges() {
   const pageStore = await PageStore.load();
-  for (const page of pageStore.getPageList()) {
-    if (page.state == Page.stateEnum.CHANGED) {
-      openMain({[paramEnum.ACTION]: actionEnum.SHOW_DIFF,
-        [paramEnum.ID]: page.id}, true);
-    }
+  for (const page of pageStore.getChangedPageList()) {
+    openMain(
+      {[paramEnum.ACTION]: actionEnum.SHOW_DIFF, [paramEnum.ID]: page.id},
+      true);
   }
 }

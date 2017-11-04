@@ -84,6 +84,14 @@ export class PageStore {
   }
 
   /**
+   * @returns {Array.<Page>} Array of Page objects with CHANGED state.
+   */
+  getChangedPageList() {
+    return Array.from(this.pageMap.values()).filter(
+      (item) => (item instanceof Page && item.state == Page.stateEnum.CHANGED));
+  }
+
+  /**
    * @returns {Array.<PageFolder>} Array of PageFolder objects in the pageMap.
    */
   getPageFolderList() {
