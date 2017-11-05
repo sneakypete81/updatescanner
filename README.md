@@ -1,5 +1,7 @@
 # Update Scanner
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/sneakypete81/updatescanner.svg)](https://greenkeeper.io/)
+
 Monitors webpages for updates
 
 [![Build Status](https://travis-ci.org/sneakypete81/updatescanner4.svg?branch=master)](https://travis-ci.org/sneakypete81/updatescanner4)
