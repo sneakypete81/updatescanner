@@ -1,12 +1,13 @@
 # Update Scanner
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/sneakypete81/updatescanner.svg)](https://greenkeeper.io/)
+Monitors webpages for updates.
 
-Monitors webpages for updates
+**Documentation Website: http://sneakypete81.github.io/updatescanner**
 
-[![Build Status](https://travis-ci.org/sneakypete81/updatescanner4.svg?branch=master)](https://travis-ci.org/sneakypete81/updatescanner4)
+## Development
 
-# Development
+[![Build Status](https://travis-ci.org/sneakypete81/updatescanner.svg?branch=master)](https://travis-ci.org/sneakypete81/updatescanner)
+
 You'll need:
 * [Node.js](https://nodejs.org/)
 * [npm](https://www.npmjs.com/)
@@ -27,4 +28,3 @@ Other useful actions:
     grunt run        # Run in Firefox, rebuilding and updating when files changes
     grunt test       # Run all tests
     grunt test:watch # Run all tests automatically whenever files change
-    grunt sign       # Sign the webextension using credentials in .build_settings.json
