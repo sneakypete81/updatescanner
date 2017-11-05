@@ -80,7 +80,8 @@ export class Popup {
    * Called when the Help menu item is clicked, to open the help website.
    */
   _handleHelpClick() {
-    browser.tabs.create({url: 'https://sneakypete81.github.io/updatescanner/'});
+    browser.tabs.create({url:
+      'https://sneakypete81.github.io/updatescanner/updatescanner4.html'});
     window.close();
   }
 
