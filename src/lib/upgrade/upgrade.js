@@ -87,13 +87,13 @@ function findRoot(bookmarks) {
 async function importPages(pageStore, root, parentId) {
   root.children.forEach(async (child) => {
     if (child.hasOwnProperty('children')) {
-      const pageFolder = await pageStore.createPageFolder(parentId);
+      const pageFolder = await pageStore.createPageFolder(parentId, -1);
       pageFolder.title = child.title;
       pageFolder.save();
       importPages(pageStore, child, pageFolder.id);
     } else {
       const annos = extractAnnos(child);
-      const page = await pageStore.createPage(parentId);
+      const page = await pageStore.createPage(parentId, -1);
       page.title = child.title;
       page.url = child.uri;
       page.scanRateMinutes = annos['updatescan/scan_rate_mins'];
