@@ -3,6 +3,7 @@ import * as fuzzy from 'scan/fuzzy';
 import {PageStore} from 'page/page_store';
 import {Page} from 'page/page';
 import * as log from 'util/log';
+import * as promise from 'util/promise';
 
 describe('scan', function() {
   describe('getChangeType', function() {
@@ -199,6 +200,7 @@ describe('scan', function() {
       spyOn(window, 'fetch');
       spyOn(PageStore, 'loadHtml');
       spyOn(log, 'log');
+      spyOn(promise, 'waitForMs');
 
       scan.scan([]).then(() => {
         expect(window.fetch).not.toHaveBeenCalled();
@@ -217,6 +219,7 @@ describe('scan', function() {
       spyOn(PageStore, 'saveHtml').and.returnValue(Promise.resolve(html));
       spyOn(Page.prototype, 'save');
       spyOn(log, 'log');
+      spyOn(promise, 'waitForMs');
 
       scan.scan([page]).then(() => {
         expect(window.fetch).toHaveBeenCalledWith(page.url);
@@ -239,6 +242,7 @@ describe('scan', function() {
       spyOn(PageStore, 'saveHtml').and.returnValue(Promise.resolve(html));
       spyOn(Page.prototype, 'save');
       spyOn(log, 'log');
+      spyOn(promise, 'waitForMs');
 
       scan.scan(pages).then(() => {
         expect(window.fetch).toHaveBeenCalledWith(pages[0].url);
@@ -265,6 +269,7 @@ describe('scan', function() {
         Promise.resolve({ok: false, status: 404, statusText: 'no such page'}));
       spyOn(PageStore, 'loadHtml');
       spyOn(log, 'log');
+      spyOn(promise, 'waitForMs');
 
       scan.scan([page]).then(() => {
         expect(window.fetch).toHaveBeenCalledWith(page.url);
@@ -285,6 +290,7 @@ describe('scan', function() {
         Promise.reject('Network error'));
       spyOn(PageStore, 'loadHtml');
       spyOn(log, 'log');
+      spyOn(promise, 'waitForMs');
 
       scan.scan([page]).then(() => {
         expect(window.fetch).toHaveBeenCalledWith(page.url);

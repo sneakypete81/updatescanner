@@ -2,6 +2,7 @@ import {isMajorChange} from 'scan/fuzzy';
 import {PageStore} from 'page/page_store';
 import {Page} from 'page/page';
 import {log} from 'util/log';
+import {waitForMs} from 'util/promise';
 
 /**
  * Enumeration indicating the similarity of two HTML strings.
@@ -14,6 +15,9 @@ const changeEnum = {
   MAJOR_CHANGE: 'major_change',
   MINOR_CHANGE: 'minor_change',
 };
+
+// Wait between scanning pages
+const SCAN_IDLE_MS = 2000;
 
 /**
  * Start scanning the pages one at a time. HTML is checked for updates and
@@ -29,6 +33,8 @@ export async function scan(pageList) {
     if (await scanPage(page)) {
       newMajorChangeCount++;
     }
+
+    await waitForMs(SCAN_IDLE_MS);
   }
   return newMajorChangeCount;
 }
