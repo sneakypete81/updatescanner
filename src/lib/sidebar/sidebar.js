@@ -3,6 +3,7 @@ import {PageStore} from 'page/page_store';
 import {Page} from 'page/page';
 import {PageFolder} from 'page/page_folder';
 import {openMain, paramEnum, actionEnum} from 'main/main_url';
+import {waitForMs} from 'util/promise';
 
 const REFRESH_TIMEOUT_MS = 200;
 
@@ -153,10 +154,11 @@ export class Sidebar {
    * @param {string} pageId - ID of the changed Page.
    * @param {storage.StorageChange} change - Object representing the change.
    */
-  _handlePageUpdate(pageId, change) {
+  async _handlePageUpdate(pageId, change) {
     if (!this.isRefreshPending) {
       this.isRefreshPending = true;
-      window.setTimeout(() => this._refreshSidebar(), REFRESH_TIMEOUT_MS);
+      await waitForMs(REFRESH_TIMEOUT_MS);
+      this._refreshSidebar();
     }
   }
 
