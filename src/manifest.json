@@ -1,15 +1,15 @@
 {
 
   "manifest_version": 2,
-  "name": "Update Scanner 4",
-  "short_name": "Updatescan4",
-  "version": "0.15",
-  "description": "Monitors webpages for updates",
+  "name": "Update Scanner",
+  "short_name": "Updatescan",
+  "version": "4.0.0beta2",
+  "description": "Monitors webpages for updates.",
   "homepage_url": "https://sneakypete81.github.io/updatescanner/",
 
   "applications": {
     "gecko": {
-      "id": "updatescanner4_test@sneakypete81.github.io",
+      "id": "{c07d1a49-9894-49ff-a594-38960ede8fb9}",
       "strict_min_version": "54.0a1"
     }
   },
