@@ -6,8 +6,11 @@ cache:
     - node_modules
 
 env:
-  - FIREFOX_VERSION=$HOME/firefox-latest/firefox
+  matrix:
+    - FIREFOX_VERSION=$HOME/firefox-latest/firefox
 
+  global:
+    secure: W0Hkbzkm+sJYRRyOsu+cpcshy4XR+XcMBKrjawQddv3tytuD9zBdWvp5uyZhCVQWrvv4JazEb8nKb7lVDnc67gXhSNZIOQH3MsfHb0Pbv0ZixGRfHQuQ5d5H0pDY7Q4B2S8gyoQuNFuQ7d4OJvI4eYSlkPzzwYWusUWQA/c8YWQ=
 
 before_install:
 - npm install -g greenkeeper-lockfile@1
