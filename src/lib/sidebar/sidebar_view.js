@@ -32,6 +32,9 @@ export class SidebarView {
         },
         check_callback: (operation, node, parent, position, more) =>
           this._onTreeChanged(operation, node, parent, position, more),
+
+        // JSTree fails CSP checks if WebWorkers are enabled
+        worker: false,
       },
 
       contextmenu: {
