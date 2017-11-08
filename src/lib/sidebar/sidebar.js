@@ -57,7 +57,7 @@ export class Sidebar {
     this.sidebar.load(this.pageStore.pageMap, PageStore.ROOT_ID);
     this.sidebar.refresh();
 
-    if (this.pageStore.getPageList().length == 0) {
+    if (this.pageStore.getPageList().length < 5) {
       this.sidebar.showUpgradeText();
     } else {
       this.sidebar.hideUpgradeText();
