@@ -22,8 +22,6 @@ export class Sidebar {
     this.sidebar = new SidebarView('#tree');
     this.pageStore = null;
     this.currentPage = null;
-    this.isRefreshPending = false;
-    this.isRefreshing = false;
   }
 
   /**
@@ -45,15 +43,12 @@ export class Sidebar {
       this._handleMove(itemId, pageFolderId, position));
     this.sidebar.registerSettingsHandler((itemId) =>
       this._handleSettings(itemId));
-    this.sidebar.registerRefreshDoneHandler(() => this._handleRefreshDone());
   }
 
   /**
    * Reload the sidebar view.
    */
   _refreshSidebar() {
-    this.isRefreshPending = false;
-    this.isRefreshing = true;
     this.sidebar.load(this.pageStore.pageMap, PageStore.ROOT_ID);
     this.sidebar.refresh();
 
@@ -65,24 +60,15 @@ export class Sidebar {
   }
 
   /**
-   * Called when a sidebar refresh is complete.
-   */
-  _handleRefreshDone() {
-    this.isRefreshing = false;
-  }
-
-  /**
    * Called whenever a single item in the sidebar is selected.
    *
    * @param {string} itemId - Selected Page/PageFolder ID.
    */
   _handleSelect(itemId) {
-    if (!this.isRefreshing) {
-      const item = this.pageStore.getItem(itemId);
-      if (item instanceof Page) {
-        openMain({[paramEnum.ACTION]: actionEnum.SHOW_DIFF,
-          [paramEnum.ID]: item.id});
-      }
+    const item = this.pageStore.getItem(itemId);
+    if (item instanceof Page) {
+      openMain({[paramEnum.ACTION]: actionEnum.SHOW_DIFF,
+        [paramEnum.ID]: item.id});
     }
   }
 
@@ -155,11 +141,8 @@ export class Sidebar {
    * @param {storage.StorageChange} change - Object representing the change.
    */
   async _handlePageUpdate(pageId, change) {
-    if (!this.isRefreshPending) {
-      this.isRefreshPending = true;
-      await waitForMs(REFRESH_TIMEOUT_MS);
-      this._refreshSidebar();
-    }
+    await waitForMs(REFRESH_TIMEOUT_MS);
+    this._refreshSidebar();
   }
 
   /**

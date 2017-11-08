@@ -22,6 +22,8 @@ export class SidebarView {
     this._moveHandler = null;
     this._settingsHandler = null;
 
+    this._refreshing = false;
+
     this._sidebarDivSelector = sidebarDivSelector;
     $(this._sidebarDivSelector).jstree({
       core: {
@@ -73,10 +75,15 @@ export class SidebarView {
   }
 
   /**
-   * Refresh the tree view.
+   * Refresh the tree view. Blocks until the refresh is complete.
    */
   refresh() {
+    this._refreshing = true;
     $(this._sidebarDivSelector).jstree(true).refresh();
+
+    // (almost) immediately signal that we're no longer refreshing.
+    // This gives time for the select event to fire and be ignored.
+    window.setTimeout(() => this._refreshing = false, 0);
   }
 
   /**
@@ -209,22 +216,11 @@ export class SidebarView {
    */
   registerSelectHandler(handler) {
     $(this._sidebarDivSelector).on('changed.jstree', (evt, data) => {
-      if (data.selected.length == 1) {
+      // Ignore if the event was due to a refresh or if nothing is selected.
+      if (!this._refreshing && data.selected.length == 1) {
         const id = data.selected[0];
         handler(id);
       }
-    });
-  }
-
-  /**
-   * Registers the provided handler function to be called whenever a tree
-   * refresh completes.
-   *
-   * @param {Object} handler - Callback to use whenever a refresh completes.
-   */
-  registerRefreshDoneHandler(handler) {
-    $(this._sidebarDivSelector).on('refresh.jstree', (evt, data) => {
-      handler();
     });
   }
 
