@@ -53,11 +53,24 @@ export class SidebarView {
     // Prevent the contextmenu from being shown - we use our own
     document.addEventListener('contextmenu', (evt) => evt.preventDefault());
 
-    // Open links in the main window, not the sidebar
-    document.addEventListener('click', (evt) => {
-      if (evt.target.className == 'link') {
-        browser.tabs.create({url: evt.target.href});
-        evt.preventDefault();
+    // JSTree in the sidebar doesn't handle unusual clicks very well.
+    // Override incorrect click behaviour here.
+    document.addEventListener('click', (event) => {
+      // Open links in the main window, not the sidebar
+      if (event.target.classList.contains('link')) {
+        browser.tabs.create({url: event.target.href});
+        event.preventDefault();
+      }
+
+      // Handle middle-clicks on tree items
+      const isJstreeClick = event.target.classList.contains('jstree-anchor');
+      if (isJstreeClick && event.button == 1) {
+        const data = {
+          selected: [event.target.parentNode.id],
+          event: event,
+        };
+        $(this._sidebarDivSelector).trigger('changed.jstree', data);
+        event.preventDefault();
       }
     });
   }
@@ -215,11 +228,12 @@ export class SidebarView {
    * changes.
    */
   registerSelectHandler(handler) {
-    $(this._sidebarDivSelector).on('changed.jstree', (evt, data) => {
+    $(this._sidebarDivSelector).on('changed.jstree', (event, data) => {
       // Ignore if the event was due to a refresh or if nothing is selected.
       if (!this._refreshing && data.selected.length == 1) {
         const id = data.selected[0];
-        handler(id);
+        // Pass the event that caused the change, not the change event itself
+        handler(data.event, id);
       }
     });
   }

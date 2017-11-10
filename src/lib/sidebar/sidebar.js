@@ -33,7 +33,8 @@ export class Sidebar {
 
     this._refreshSidebar();
 
-    this.sidebar.registerSelectHandler((itemId) => this._handleSelect(itemId));
+    this.sidebar.registerSelectHandler((event, itemId) =>
+      this._handleSelect(event, itemId));
     this.sidebar.registerNewPageHandler((itemId) =>
       this._handleNewPage(itemId));
     this.sidebar.registerNewPageFolderHandler((itemId) =>
@@ -62,13 +63,19 @@ export class Sidebar {
   /**
    * Called whenever a single item in the sidebar is selected.
    *
+   * @param {Event} event - Event associated with the selection action.
    * @param {string} itemId - Selected Page/PageFolder ID.
    */
-  _handleSelect(itemId) {
+  _handleSelect(event, itemId) {
     const item = this.pageStore.getItem(itemId);
     if (item instanceof Page) {
-      openMain({[paramEnum.ACTION]: actionEnum.SHOW_DIFF,
-        [paramEnum.ID]: item.id});
+      const params = {
+        [paramEnum.ACTION]: actionEnum.SHOW_DIFF,
+        [paramEnum.ID]: item.id,
+      };
+
+      const newTab = event.metaKey || event.ctrlKey || (event.button == 1);
+      openMain(params, newTab);
     }
   }
 
