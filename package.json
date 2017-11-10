@@ -35,7 +35,7 @@
     "karma-jasmine-html-reporter": "0.2.2",
     "karma-notification-reporter": "0.1.2",
     "karma-sourcemap-loader": "0.3.7",
-    "karma-webpack": "2.0.5",
+    "karma-webpack": "2.0.6",
     "load-grunt-tasks": "3.5.2",
     "web-ext": "1.9.1",
     "webpack": "3.8.1"
