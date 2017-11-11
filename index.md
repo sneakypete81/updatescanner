@@ -15,20 +15,20 @@ not all of the previous features are finished. If you'd like to help, see our
 ### Installation
 
 Go to the [Update Scanner Addon Page](https://addons.mozilla.org/firefox/addon/update-scanner)
-and click the "Add To Firefox" button.
+and click the **Add To Firefox** button.
 
 ---
 ### Adding a Page
 
-![Toolbar Popup]({{ site.baseurl }}/images/popup.png){:width="270"}
+![Toolbar Popup]({{ site.baseurl }}/images/popup_sm.png)
 
 Go to the web page that you wish to monitor for updates.
-Click the up-arrow icon in the toolbar and press the **"New"** button.
+Click the up-arrow icon in the toolbar and press the **New** button.
 
 ---
 ### Editing Page Settings
 
-![Page Settings]({{ site.baseurl }}/images/page_settings.png){:width="370"}
+![Page Settings]({{ site.baseurl }}/images/page_settings_sm.png)
 
 You can choose how often the site will be checked for changes, and whether to
 ignore minor updates.
@@ -36,21 +36,21 @@ ignore minor updates.
 ---
 ### Notifications
 
-![Notification]({{ site.baseurl }}/images/notification.png){:width="320"}
+![Notification]({{ site.baseurl }}/images/notification_sm.png)
 
 When an update is detected, you will see a notification panel.
 Click the notification to see the changes highlighted in yellow.
 
-![Changed Text]({{ site.baseurl }}/images/changed_text.png){:width="620"}
+![Changed Text]({{ site.baseurl }}/images/changed_text_sm.png)
 
  You can also see a list of updated pages by clicking the up-arrow toolbar icon.
 
 ---
 ### Sidebar
 
-![Sidebar]({{ site.baseurl }}/images/sidebar.png){:width="220"}
+![Sidebar]({{ site.baseurl }}/images/sidebar_sm.png)
 
 To open the sidebar, click the up-arrow icon in the toolbar and press the
-**"Sidebar"** button.
+**Sidebar** button.
 Updated items are shown in bold.
 Select an item in the sidebar to see the most recent changes.
