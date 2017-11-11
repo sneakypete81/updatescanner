@@ -173,6 +173,8 @@ p img {
   vertical-align: middle;
   text-align: center;
   border: none;
+  /* Update Scanner Edit: border around images */
+  border: 1px solid #909090;
 }
 
 pre, code {
