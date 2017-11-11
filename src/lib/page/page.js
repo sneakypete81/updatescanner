@@ -15,6 +15,12 @@ export class Page {
       scanRateMinutes: 24 * 60,
       changeThreshold: 100,
       ignoreNumbers: false,
+      encoding: null,
+      highlightChanges: true,
+      highlightColour: '#ffff66',
+      markChanges: false,
+      doPost: false,
+      postParams: null,
       state: Page.stateEnum.NO_CHANGE,
       error: null,
       errorMessage: null,
@@ -79,6 +85,13 @@ export class Page {
    * signalling that a change has occurred.
    * @property {boolean} ignoreNumbers - Don't trigger if only a number has
    * changed.
+   * @property {string} encoding - Text encoding of the page.
+   * @property {boolean} highlightChanges - Whether to highlight changed text.
+   * @property {string} highlightColour - HTML colour string to use for
+   * highlighting.
+   * @property {boolean} markChanges - Whether to mark changes with << >>.
+   * @property {boolean} doPost - Perform a POST request instead of a GET.
+   * @property {boolean} postParams - POST parameters to use if doPost is true.
    * @property {stateEnum} state - Current scan state of the page.
    * @property {boolean} error - Indicates whether the last scan failed due to
    * an error.
@@ -97,6 +110,12 @@ export class Page {
     scanRateMinutes=Page.DEFAULTS.scanRateMinutes,
     changeThreshold=Page.DEFAULTS.changeThreshold,
     ignoreNumbers=Page.DEFAULTS.ignoreNumbers,
+    encoding=Page.DEFAULTS.encoding,
+    highlightChanges=Page.DEFAULTS.highlightChanges,
+    highlightColour=Page.DEFAULTS.highlightColour,
+    markChanges=Page.DEFAULTS.markChanges,
+    doPost=Page.DEFAULTS.doPost,
+    postParams=Page.DEFAULTS.postParams,
     state=Page.DEFAULTS.state,
     error=Page.DEFAULTS.error,
     errorMessage=Page.DEFAULTS.errorMessage,
@@ -110,6 +129,12 @@ export class Page {
     this.scanRateMinutes = scanRateMinutes;
     this.changeThreshold = changeThreshold;
     this.ignoreNumbers = ignoreNumbers;
+    this.encoding = encoding,
+    this.highlightChanges = highlightChanges,
+    this.highlightColour = highlightColour,
+    this.markChanges = markChanges,
+    this.doPost = doPost,
+    this.postParams = postParams,
     this.state = state;
     this.error = error;
     this.errorMessage = errorMessage;
@@ -129,6 +154,12 @@ export class Page {
             scanRateMinutes: this.scanRateMinutes,
             changeThreshold: this.changeThreshold,
             ignoreNumbers: this.ignoreNumbers,
+            encoding: this.encoding,
+            highlightChanges: this.highlightChanges,
+            highlightColour: this.highlightColour,
+            markChanges: this.markChanges,
+            doPost: this.doPost,
+            postParams: this.postParams,
             state: this.state,
             error: this.error,
             errorMessage: this.errorMessage,
