@@ -1,16 +1,12 @@
 # Update Scanner
 
-Monitors webpages for updates.
+Firefox addon to monitors web pages for updates.
 
 **Documentation Website: http://sneakypete81.github.io/updatescanner**
 
-## Development
+# Development [![Build Status](https://travis-ci.org/sneakypete81/updatescanner.svg?branch=master)](https://travis-ci.org/sneakypete81/updatescanner)
 
-[![Build Status](https://travis-ci.org/sneakypete81/updatescanner.svg?branch=master)](https://travis-ci.org/sneakypete81/updatescanner)
-
-You'll need:
-* [Node.js](https://nodejs.org/)
-* [npm](https://www.npmjs.com/)
+You'll need [Node.js](https://nodejs.org/) installed.
 
 Clone the source and install all dependencies:
 
