@@ -134,6 +134,7 @@ export class Main {
       this.currentPage = await this.pageStore.createPage(
         parentId, insertAfterIndex);
       this._updateCurrentPage(newSettings);
+      // @TODO: Scan it immediately
     }
   }
 
