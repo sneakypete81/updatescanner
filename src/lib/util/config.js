@@ -11,6 +11,7 @@ export class Config {
   static get _DEFAULTS() {
     return {
       'debug': false, // Enable debug mode
+      'isFirstRun': true, // Is this the first time the extension has run
     };
   }
 

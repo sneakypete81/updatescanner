@@ -5,6 +5,7 @@ import {showNotification} from 'scan/notification';
 import {PageStore, hasPageStateChanged} from 'page/page_store';
 import {Page} from 'page/page';
 import {log} from 'util/log';
+import {Config} from 'util/config';
 
 const activeIcon = {
   18: '/images/updatescanner_18.png',
@@ -30,9 +31,10 @@ export class Background {
   async init() {
     this.pageStore = await PageStore.load();
     this.pageStore.bindPageUpdate(this._handlePageUpdate.bind(this));
-    this._refreshIcon();
-
     browser.runtime.onMessage.addListener(this._handleMessage.bind(this));
+
+    this._refreshIcon();
+    this._checkFirstRun();
 
     // @FIXME: Autoscan should take pageStore as a parameter
     autoscan.start();
@@ -76,6 +78,33 @@ export class Background {
     } else {
       browser.browserAction.setBadgeText({text: updateCount.toString()});
     }
+  }
+
+  /**
+   * If this is the first time the addon has been run, create a Page with
+   * the Update Scanner website and scan it immediately.
+   */
+  async _checkFirstRun() {
+    const config = await new Config().load();
+    if (config.get('isFirstRun')) {
+      const page = await this._createWebsitePage();
+      scan([page]);
+      config.set('isFirstRun', false);
+      config.save();
+    }
+  }
+
+  /**
+   * Create a new Update Scanner website Page.
+   *
+   * @returns {Page} Created Page.
+   */
+  async _createWebsitePage() {
+    const page = await this.pageStore.createPage(PageStore.ROOT_ID);
+    page.title = 'Update Scanner Website';
+    page.url = 'https://sneakypete81.github.io/updatescanner/';
+    await page.save();
+    return page;
   }
 
   /**
