@@ -19,9 +19,9 @@ export class Config {
    */
   constructor() {
     this._data = {};
-    this._listening = false;
   }
 
+  // @TODO: we don't really need this
   /**
    * Loads the configuration settings from storage and gets the specified
    * config setting. If the setting doesn't exist in storage, a sensible
@@ -36,6 +36,7 @@ export class Config {
     const storageData = await Storage.load('config') || {};
     return Config._getWithDefault(storageData, name);
   }
+
   /**
    * Load the configuration settings from storage.
    *
@@ -44,11 +45,6 @@ export class Config {
    */
   async load() {
     this._data = await Storage.load('config') || {};
-
-    if (!this._listening) {
-      Storage.addListener(this._storageChangeHandler);
-      this._listening = true;
-    }
     return this;
   }
 
@@ -112,22 +108,6 @@ export class Config {
     }
 
     this._data[name] = value;
-  }
-
-  /**
-   * Updates the config data when the data in Storage changes.
-   * See https://developer.mozilla.org/en-US/Add-ons/WebExtensions/API/storage/onChanged.
-   *
-   * @param {Object} changes - Object describing the change.
-   */
-  _storageChangeHandler(changes) {
-    if (changes.hasOwnProperty('config')) {
-      if (changes.config.hasOwnProperty('newValue')) {
-        this._data = changes.config.newValue;
-      } else {
-        this._data = {};
-      }
-    }
   }
 }
 
