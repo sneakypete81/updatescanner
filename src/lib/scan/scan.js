@@ -102,7 +102,7 @@ async function updatePageState(page, prevHtml, scannedHtml) {
     page.changeThreshold);
 
   if (changeType == changeEnum.MAJOR_CHANGE) {
-    if (page.state != Page.stateEnum.CHANGED) {
+    if (!page.isChanged()) {
       // This is a newly detected change, so update the old HTML.
       PageStore.saveHtml(page.id, PageStore.htmlTypes.OLD, prevHtml);
       page.oldScanTime = page.newScanTime;
@@ -112,7 +112,7 @@ async function updatePageState(page, prevHtml, scannedHtml) {
   } else {
     PageStore.saveHtml(page.id, PageStore.htmlTypes.NEW, scannedHtml);
     // Only update the state if not previously marked as changed.
-    if (page.state != Page.stateEnum.CHANGED) {
+    if (!page.isChanged()) {
       page.state = Page.stateEnum.NO_CHANGE;
     }
   }

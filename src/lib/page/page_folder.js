@@ -11,7 +11,17 @@ export class PageFolder {
   static get DEFAULTS() {
     return {
       title: 'New Folder',
+      state: PageFolder.stateEnum.NO_CHANGE,
     };
+  }
+
+  /**
+   * @returns {Object} Enumeration of PageFolder change states.
+   */
+  static get stateEnum() {
+    return {NO_CHANGE: 'no_change',
+            CHANGED: 'changed',
+          };
   }
 
   /**
@@ -50,9 +60,14 @@ export class PageFolder {
    * @param {string} id - ID of the PageFolder.
    * @param {Object} data - Serialised PageFoler object from storage.
    */
-  constructor(id, {title=PageFolder.DEFAULTS.title, children=[]}) {
+  constructor(id, {
+    title=PageFolder.DEFAULTS.title,
+    state=PageFolder.DEFAULTS.state,
+    children=[],
+  }) {
     this.id = id;
     this.title = title;
+    this.state = state;
     this.children = children;
   }
 
@@ -63,6 +78,7 @@ export class PageFolder {
    */
   _toObject() {
     return {title: this.title,
+            state: this.state,
             children: this.children,
             };
   }
@@ -113,5 +129,12 @@ export class PageFolder {
       log(`ERROR: PageFolder.delete: ${error}`);
     }
     return {};
+  }
+
+  /**
+   * @returns {bool} True if the PageFolder state is CHANGED.
+   */
+  isChanged() {
+    return this.state == PageFolder.stateEnum.CHANGED;
   }
 }

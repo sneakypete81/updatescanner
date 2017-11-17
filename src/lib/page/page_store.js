@@ -88,7 +88,7 @@ export class PageStore {
    */
   getChangedPageList() {
     return Array.from(this.pageMap.values()).filter(
-      (item) => (item instanceof Page && item.state == Page.stateEnum.CHANGED));
+      (item) => (item instanceof Page && item.isChanged()));
   }
 
   /**
@@ -411,4 +411,13 @@ export class PageStore {
 export function hasPageStateChanged(change) {
   return (change.oldValue === undefined || change.newValue === undefined ||
     (change.oldValue.state != change.newValue.state));
+}
+
+/**
+ * @param {Page|PageFolder} item - Item to check.
+ *
+ * @returns {boolean} True if the item state is CHANGED.
+ */
+export function isItemChanged(item) {
+  return item.isChanged();
 }

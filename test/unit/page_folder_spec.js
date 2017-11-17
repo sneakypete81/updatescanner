@@ -7,6 +7,7 @@ describe('PageFolder', function() {
     it('loads a PageFolder from storage', function(done) {
       const id = '42';
       const data = {title: 'Folder Title',
+                    state: PageFolder.stateEnum.CHANGED,
                     children: ['1', '2', '3'],
                     };
       spyOn(Storage, 'load').and.returnValues(Promise.resolve(data));
@@ -14,6 +15,7 @@ describe('PageFolder', function() {
       PageFolder.load(id).then((pageFolder) => {
         expect(Storage.load).toHaveBeenCalledWith(PageFolder._KEY(id));
         expect(pageFolder.title).toEqual(data.title);
+        expect(pageFolder.state).toEqual(data.state);
         expect(pageFolder.children).toEqual(data.children);
         done();
       })
@@ -51,6 +53,7 @@ describe('PageFolder', function() {
       spyOn(Storage, 'save').and.returnValues(Promise.resolve());
       const id = 33;
       const data = {title: 'A PageFolder',
+                    state: PageFolder.stateEnum.CHANGED,
                     children: ['23', '34'],
                   };
       const pageFolder = new PageFolder(id, data);

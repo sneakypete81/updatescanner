@@ -202,7 +202,7 @@ export class Main {
    * @returns {Promise} A Promise that fulfils once the view has been updated.
    */
   _showDiff(page) {
-    if (page.state == Page.stateEnum.CHANGED) {
+    if (page.isChanged()) {
       page.state = Page.stateEnum.NO_CHANGE;
       page.save();
     }

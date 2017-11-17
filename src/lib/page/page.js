@@ -204,4 +204,11 @@ export class Page {
     }
     return {};
   }
+
+  /**
+   * @returns {bool} True if the Page state is CHANGED.
+   */
+  isChanged() {
+    return this.state == Page.stateEnum.CHANGED;
+  }
 }

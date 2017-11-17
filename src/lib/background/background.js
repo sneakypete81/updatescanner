@@ -2,8 +2,7 @@ import {backgroundActionEnum} from 'background/actions';
 import * as autoscan from 'scan/autoscan';
 import {scan} from 'scan/scan';
 import {showNotification} from 'scan/notification';
-import {PageStore, hasPageStateChanged} from 'page/page_store';
-import {Page} from 'page/page';
+import {PageStore, hasPageStateChanged, isItemChanged} from 'page/page_store';
 import {log} from 'util/log';
 import {Config} from 'util/config';
 
@@ -69,8 +68,7 @@ export class Background {
    */
   _refreshIcon() {
     const updateCount = this.pageStore.getPageList()
-      .filter((page) => page.state == Page.stateEnum.CHANGED)
-      .length;
+      .filter(isItemChanged).length;
 
     browser.browserAction.setIcon({path: activeIcon});
     if (updateCount == 0) {

@@ -1,7 +1,6 @@
 import {openMain, showAllChanges, paramEnum, actionEnum} from 'main/main_url';
 import {backgroundActionEnum} from 'background/actions.js';
-import {PageStore, hasPageStateChanged} from 'page/page_store';
-import {Page} from 'page/page';
+import {PageStore, hasPageStateChanged, isItemChanged} from 'page/page_store';
 import * as view from 'popup/popup_view';
 
 /**
@@ -39,11 +38,9 @@ export class Popup {
    */
   _refreshPageList() {
     view.clearPageList();
-    for (const page of this.pageStore.getPageList()) {
-      if (page.state == Page.stateEnum.CHANGED) {
-        view.addPage(page);
-      }
-    }
+    this.pageStore.getPageList()
+      .filter(isItemChanged)
+      .map(view.addPage);
   }
 
   /**
