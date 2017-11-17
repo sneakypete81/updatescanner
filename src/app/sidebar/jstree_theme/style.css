@@ -28,7 +28,8 @@
 .jstree-anchor:hover,
 .jstree-anchor:active {
   text-decoration: none;
-  color: inherit;
+/* UpdateScanner: allow text color to be changed */
+/*  color: inherit; */
 }
 .jstree-icon {
   display: inline-block;

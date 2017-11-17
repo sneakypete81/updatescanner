@@ -2,6 +2,10 @@
   font-weight:bold;
 }
 
+.error > .jstree-anchor {
+  color: #b1b1b3;
+}
+
 p {
   white-space: pre-line;
 }
