@@ -225,7 +225,7 @@ describe('scan', function() {
         expect(window.fetch).toHaveBeenCalledWith(page.url);
         expect(PageStore.loadHtml).toHaveBeenCalledWith(
           '1', PageStore.htmlTypes.NEW);
-        expect(page.error).toEqual(false);
+        expect(page.state).toEqual(Page.stateEnum.NO_CHANGE);
         done();
       }).catch((error) => done.fail(error));
     });
@@ -254,9 +254,9 @@ describe('scan', function() {
           '2', PageStore.htmlTypes.NEW);
         expect(PageStore.loadHtml).toHaveBeenCalledWith(
           '3', PageStore.htmlTypes.NEW);
-        expect(pages[0].error).toEqual(false);
-        expect(pages[1].error).toEqual(false);
-        expect(pages[2].error).toEqual(false);
+        expect(pages[0].state).toEqual(Page.stateEnum.NO_CHANGE);
+        expect(pages[1].state).toEqual(Page.stateEnum.NO_CHANGE);
+        expect(pages[2].state).toEqual(Page.stateEnum.NO_CHANGE);
         done();
       }).catch((error) => done.fail(error));
     });
@@ -274,8 +274,7 @@ describe('scan', function() {
       scan.scan([page]).then(() => {
         expect(window.fetch).toHaveBeenCalledWith(page.url);
         expect(PageStore.loadHtml).not.toHaveBeenCalled();
-        expect(page.error).toEqual(true);
-        expect(page.errorMessage).toEqual('Error: [404] no such page');
+        expect(page.state).toEqual(Page.stateEnum.ERROR);
         expect(log.log.calls.allArgs()).toContain(
           ['Could not scan "example": Error: [404] no such page']);
         done();
@@ -295,8 +294,7 @@ describe('scan', function() {
       scan.scan([page]).then(() => {
         expect(window.fetch).toHaveBeenCalledWith(page.url);
         expect(PageStore.loadHtml).not.toHaveBeenCalled();
-        expect(page.error).toEqual(true);
-        expect(page.errorMessage).toEqual('Network error');
+        expect(page.state).toEqual(Page.stateEnum.ERROR);
         expect(log.log.calls.allArgs()).toContain(
           ['Could not scan "example": Network error']);
         done();

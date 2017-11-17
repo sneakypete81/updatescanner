@@ -60,8 +60,8 @@ async function scanPage(page) {
     return processHtml(page, html);
   } catch (error) {
     log(`Could not scan "${page.title}": ${error}`);
-    page.error = true;
-    page.errorMessage = error.toString();
+    page.state = Page.stateEnum.ERROR;
+    page.save();
   }
   return false;
 }
@@ -118,8 +118,6 @@ async function updatePageState(page, prevHtml, scannedHtml) {
   }
 
   page.newScanTime = Date.now();
-  page.error = false;
-  page.errorMessage = '';
 
   await page.save();
   return changeType == changeEnum.MAJOR_CHANGE;

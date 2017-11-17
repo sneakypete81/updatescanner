@@ -22,8 +22,6 @@ export class Page {
       doPost: false,
       postParams: null,
       state: Page.stateEnum.NO_CHANGE,
-      error: null,
-      errorMessage: null,
       lastAutoscanTime: null,
       oldScanTime: null,
       newScanTime: null,
@@ -93,10 +91,6 @@ export class Page {
    * @property {boolean} doPost - Perform a POST request instead of a GET.
    * @property {boolean} postParams - POST parameters to use if doPost is true.
    * @property {stateEnum} state - Current scan state of the page.
-   * @property {boolean} error - Indicates whether the last scan failed due to
-   * an error.
-   * @property {string} errorMessage - If error is true, contains the error
-   * message from the last scan.
    * @property {integer} lastAutoscanTime - Time that this page was last
    * autoscanned (ms since Unix epoch).
    * @property {integer} oldScanTime - Time when the OLD HTML was last updated
@@ -117,8 +111,6 @@ export class Page {
     doPost=Page.DEFAULTS.doPost,
     postParams=Page.DEFAULTS.postParams,
     state=Page.DEFAULTS.state,
-    error=Page.DEFAULTS.error,
-    errorMessage=Page.DEFAULTS.errorMessage,
     lastAutoscanTime=Page.DEFAULTS.lastAutoscanTime,
     oldScanTime=Page.DEFAULTS.oldScanTime,
     newScanTime=Page.DEFAULTS.newScanTime,
@@ -136,8 +128,6 @@ export class Page {
     this.doPost = doPost,
     this.postParams = postParams,
     this.state = state;
-    this.error = error;
-    this.errorMessage = errorMessage;
     this.lastAutoscanTime = lastAutoscanTime;
     this.oldScanTime = oldScanTime;
     this.newScanTime = newScanTime;
@@ -161,8 +151,6 @@ export class Page {
             doPost: this.doPost,
             postParams: this.postParams,
             state: this.state,
-            error: this.error,
-            errorMessage: this.errorMessage,
             lastAutoscanTime: this.lastAutoscanTime,
             oldScanTime: this.oldScanTime,
             newScanTime: this.newScanTime,

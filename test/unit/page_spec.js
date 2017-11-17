@@ -4,44 +4,51 @@ import * as log from 'util/log';
 
 describe('Page', function() {
   describe('load', function() {
-    it('loads a Page from storage', function(done) {
+    it('loads a Page from storage', async function() {
       const id = '42';
       const data = {title: 'Page Title',
                     url: 'https://example.com/test',
                     };
       spyOn(Storage, 'load').and.returnValues(Promise.resolve(data));
 
-      Page.load(id).then((page) => {
-        expect(Storage.load).toHaveBeenCalledWith(Page._KEY(id));
-        expect(page.id).toEqual(id);
-        expect(page.title).toEqual(data.title);
-        expect(page.url).toEqual(data.url);
-        done();
-      })
-      .catch((error) => done.fail(error));
+      const page = await Page.load(id);
+      expect(Storage.load).toHaveBeenCalledWith(Page._KEY(id));
+      expect(page.id).toEqual(id);
+      expect(page.title).toEqual(data.title);
+      expect(page.url).toEqual(data.url);
     });
 
     it('returns the default Page if there is no object in storage',
-       function(done) {
+       async function() {
       spyOn(Storage, 'load').and.returnValues(Promise.resolve(undefined));
 
-      Page.load('42').then((page) => {
-        expect(page.title).toEqual('New Page');
-        done();
-      })
-      .catch((error) => done.fail(error));
+      const page = await Page.load('42');
+      expect(page.title).toEqual('New Page');
     });
 
-    it('returns the default Page if the storage load fails', function(done) {
+    it('returns the default Page if the storage load fails', async function() {
       spyOn(Storage, 'load').and.returnValues(Promise.reject('ERROR_MESSAGE'));
       spyOn(log, 'log');
 
-      Page.load('42').then((page) => {
-        expect(page.title).toEqual('New Page');
-        expect(log.log.calls.argsFor(0)).toMatch('ERROR_MESSAGE');
-        done();
-      })
-      .catch((error) => done.fail(error));
+      const page = await Page.load('42');
+      expect(page.title).toEqual('New Page');
+      expect(log.log.calls.argsFor(0)).toMatch('ERROR_MESSAGE');
+    });
+
+    it('ignores invalid Page attributes', async function() {
+      const id = '42';
+      const data = {title: 'Page Title',
+                    url: 'https://example.com/test',
+                    invalidAttribute: 'boo',
+                    };
+      spyOn(Storage, 'load').and.returnValues(Promise.resolve(data));
+
+      const page = await Page.load(id);
+      expect(Storage.load).toHaveBeenCalledWith(Page._KEY(id));
+      expect(page.id).toEqual(id);
+      expect(page.title).toEqual(data.title);
+      expect(page.url).toEqual(data.url);
+      expect(page.invalidAttribute).toBe(undefined);
     });
   });
 
@@ -61,8 +68,6 @@ describe('Page', function() {
                     doPost: true,
                     postParams: 'foo=bar',
                     state: Page.stateEnum.NO_CHANGE,
-                    error: true,
-                    errorMessage: 'This is an error',
                     lastAutoscanTime: 10209876,
                     oldScanTime: 9381234,
                     newScanTime: 40834321,
