@@ -29,7 +29,8 @@ export class Sidebar {
    */
   async init() {
     this.pageStore = await PageStore.load();
-    this.pageStore.bindPageUpdate(this._handlePageUpdate.bind(this));
+    this.pageStore.bindPageUpdate(this._handleItemUpdate.bind(this));
+    this.pageStore.bindPageFolderUpdate(this._handleItemUpdate.bind(this));
 
     this._refreshSidebar();
 
@@ -141,13 +142,12 @@ export class Sidebar {
     });
   }
   /**
-   * Called when a Page is updated in Storage. Refresh the sidebar if its state
-   * changed.
+   * Called when a Page/PageFolder is updated in Storage to refresh the sidebar.
    *
-   * @param {string} pageId - ID of the changed Page.
+   * @param {string} itemId - ID of the changed Item.
    * @param {storage.StorageChange} change - Object representing the change.
    */
-  async _handlePageUpdate(pageId, change) {
+  async _handleItemUpdate(itemId, change) {
     await waitForMs(REFRESH_TIMEOUT_MS);
     this._refreshSidebar();
   }

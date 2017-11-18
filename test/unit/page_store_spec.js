@@ -820,17 +820,17 @@ describe('PageStore', function() {
 
     it('calls the handler when a PageFolder update event fires', function() {
       const pageStore = new PageStore(new Map(), {});
-      this.pageIds = [];
+      this.folderIds = [];
       this.changes = [];
 
-      pageStore.bindPageUpdate((pageId, change) => {
-        this.pageIds.push(pageId);
+      pageStore.bindPageFolderUpdate((folderId, change) => {
+        this.folderIds.push(folderId);
         this.changes.push(change);
       });
 
       this.storageListener({[PageFolder._KEY('23')]: 'Change!'});
 
-      expect(this.pageIds).toEqual(['23']);
+      expect(this.folderIds).toEqual(['23']);
       expect(this.changes).toEqual(['Change!']);
     });
 

@@ -33,6 +33,7 @@ export class PageStore {
     this.pageMap = pageMap;
     this.storageInfo = storageInfo;
     this._pageUpdateHandler = null;
+    this._pageFolderUpdateHandler = null;
 
     this._addStorageListener();
   }
@@ -137,7 +138,7 @@ export class PageStore {
     }
     await parent.save();
 
-    // Create the Page. This will cause _handlePageUpdate to update the
+    // Create the Page. This will cause _handleItemUpdate to update the
     // PageMap.
     return new Page(pageId, {});
   }
@@ -167,7 +168,7 @@ export class PageStore {
     }
     await parent.save();
 
-    // Create the Page. This will cause _handlePageUpdate to update the
+    // Create the Page. This will cause _handleItemUpdate to update the
     // PageMap.
     return new PageFolder(pageFolderId, {});
   }
@@ -191,7 +192,7 @@ export class PageStore {
       await pageFolder.save();
     }
 
-    // Delete the item itself. This will cause _handlePageUpdate to update the
+    // Delete the item itself. This will cause _handleItemUpdate to update the
     // PageMap.
     if (item !== undefined) {
       item.delete();
@@ -245,6 +246,14 @@ export class PageStore {
   }
 
   /**
+   * @param {Function} handler - Called when a PageFolder in the PageStore is
+   * updated.
+   */
+  bindPageFolderUpdate(handler) {
+    this._pageFolderUpdateHandler = handler;
+  }
+
+  /**
    * Listen to Storage changes, handling any Page updates.
    */
   _addStorageListener() {
@@ -253,10 +262,10 @@ export class PageStore {
       for (const key of Object.keys(changes)) {
         if (Page.isPageKey(key)) {
           const pageId = Page.idFromKey(key);
-          this._handlePageUpdate(pageId, changes[key], true);
+          this._handleItemUpdate(pageId, changes[key], true);
         } else if (PageFolder.isPageFolderKey(key)) {
           const pageFolderId = PageFolder.idFromKey(key);
-          this._handlePageUpdate(pageFolderId, changes[key], false);
+          this._handleItemUpdate(pageFolderId, changes[key], false);
         }
       }
     });
@@ -266,30 +275,36 @@ export class PageStore {
    * Handle Page/PageFolder changes by updating the PageMap and calling
    * _pageUpdateHandler.
    *
-   * @param {string} pageId - ID of the page that changed.
+   * @param {string} itemId - ID of the Page/PageFolder that changed.
    * @param {storage.StorageChange} change - Object representing the change.
    * @param {bool} isPage - True if the item is a page, False if a pageFolder.
    */
-  _handlePageUpdate(pageId, change, isPage) {
+  _handleItemUpdate(itemId, change, isPage) {
     if (change.newValue === undefined) {
       // Page has been deleted
-      this.pageMap.delete(pageId);
+      this.pageMap.delete(itemId);
       // Don't allow Root to be deleted
-      if (pageId == PageStore.ROOT_ID) {
-        this.pageMap.set(pageId, new PageFolder(pageId, {title: 'root'}));
+      if (itemId == PageStore.ROOT_ID) {
+        this.pageMap.set(itemId, new PageFolder(itemId, {title: 'root'}));
       }
     } else {
       // Update the pageMap with the new Page/PageFolder
       if (isPage) {
-        this.pageMap.set(pageId, new Page(pageId, change.newValue));
+        this.pageMap.set(itemId, new Page(itemId, change.newValue));
       } else {
-        this.pageMap.set(pageId, new PageFolder(pageId, change.newValue));
+        this.pageMap.set(itemId, new PageFolder(itemId, change.newValue));
       }
     }
 
     // Call the handler, if one is registered
-    if (this._pageUpdateHandler !== null) {
-      this._pageUpdateHandler(pageId, change);
+    if (isPage) {
+      if (this._pageUpdateHandler !== null) {
+        this._pageUpdateHandler(itemId, change);
+      }
+    } else {
+      if (this._pageFolderUpdateHandler !== null) {
+        this._pageFolderUpdateHandler(itemId, change);
+      }
     }
   }
 
