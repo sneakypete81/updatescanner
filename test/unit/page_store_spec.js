@@ -273,6 +273,26 @@ describe('PageStore', function() {
     });
   });
 
+  describe('isPageFolderId', function() {
+    it('returns true if the item is a PageFolder', function() {
+      const pageStore = new PageStore(new Map());
+      pageStore.pageMap.set('1', new PageFolder('1', {}));
+
+      const isFolder = pageStore.isPageFolderId('1');
+
+      expect(isFolder).toBeTruthy();
+    });
+
+    it('returns false if the item is a Page', function() {
+      const pageStore = new PageStore(new Map());
+      pageStore.pageMap.set('1', new Page('1', {}));
+
+      const isFolder = pageStore.isPageFolderId('1');
+
+      expect(isFolder).toBeFalsy();
+    });
+  });
+
   describe('findParent', function() {
     it('returns the parent of a Page', function() {
       const pageStore = new PageStore(new Map());
@@ -557,6 +577,75 @@ describe('PageStore', function() {
           done();
         }).catch((error) => done.fail(error));
       }).catch((error) => done.fail(error));
+    });
+  });
+
+  describe('refreshFolderState', function() {
+    it('updates folder state if children\'s state becomes changed', function() {
+      const pageStore = new PageStore(new Map());
+      const root = new PageFolder('0', {
+        children: ['1', '2'], state: PageFolder.stateEnum.NO_CHANGE});
+      pageStore.pageMap.set('0', root);
+      pageStore.pageMap.set('1', new Page('1', {
+        state: Page.stateEnum.NO_CHANGE}));
+      pageStore.pageMap.set('2', new PageFolder('2', {
+        children: ['3'], state: PageFolder.stateEnum.NO_CHANGE}));
+      pageStore.pageMap.set('3', new Page('3', {
+        state: Page.stateEnum.CHANGED}));
+
+      spyOn(Storage, 'save').and.returnValues(Promise.resolve());
+
+      pageStore.refreshFolderState();
+      expect(Storage.save).toHaveBeenCalledTimes(2);
+      expect(pageStore.getItem('0').isChanged()).toBeTruthy();
+      expect(pageStore.getItem('1').isChanged()).toBeFalsy();
+      expect(pageStore.getItem('2').isChanged()).toBeTruthy();
+      expect(pageStore.getItem('3').isChanged()).toBeTruthy();
+    });
+
+    it('updates folder state if children\'s state becomes unchanged',
+    function() {
+      const pageStore = new PageStore(new Map());
+      const root = new PageFolder('0', {
+        children: ['1', '2'], state: PageFolder.stateEnum.CHANGED});
+      pageStore.pageMap.set('0', root);
+      pageStore.pageMap.set('1', new Page('1', {
+        state: Page.stateEnum.NO_CHANGE}));
+      pageStore.pageMap.set('2', new PageFolder('2', {
+        children: ['3'], state: PageFolder.stateEnum.CHANGED}));
+      pageStore.pageMap.set('3', new Page('3', {
+        state: Page.stateEnum.NO_CHANGE}));
+
+      spyOn(Storage, 'save').and.returnValues(Promise.resolve());
+
+      pageStore.refreshFolderState();
+      expect(Storage.save).toHaveBeenCalledTimes(2);
+      expect(pageStore.getItem('0').isChanged()).toBeFalsy();
+      expect(pageStore.getItem('1').isChanged()).toBeFalsy();
+      expect(pageStore.getItem('2').isChanged()).toBeFalsy();
+      expect(pageStore.getItem('3').isChanged()).toBeFalsy();
+    });
+
+    it('does nothing if folder state is correct', function() {
+      const pageStore = new PageStore(new Map());
+      const root = new PageFolder('0', {
+        children: ['1', '2'], state: PageFolder.stateEnum.CHANGED});
+      pageStore.pageMap.set('0', root);
+      pageStore.pageMap.set('1', new Page('1', {
+        state: Page.stateEnum.CHANGED}));
+      pageStore.pageMap.set('2', new PageFolder('2', {
+        children: ['3'], state: PageFolder.stateEnum.NO_CHANGE}));
+      pageStore.pageMap.set('3', new Page('3', {
+        state: Page.stateEnum.NO_CHANGE}));
+
+      spyOn(Storage, 'save').and.returnValues(Promise.resolve());
+
+      pageStore.refreshFolderState();
+      expect(Storage.save).not.toHaveBeenCalled();
+      expect(pageStore.getItem('0').isChanged()).toBeTruthy();
+      expect(pageStore.getItem('1').isChanged()).toBeTruthy();
+      expect(pageStore.getItem('2').isChanged()).toBeFalsy();
+      expect(pageStore.getItem('3').isChanged()).toBeFalsy();
     });
   });
 

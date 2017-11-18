@@ -101,6 +101,15 @@ export class PageStore {
   }
 
   /**
+   * @param {string} id - ID of the item to check.
+   *
+   * @returns {bool} True if the item is a PageFolder.
+   */
+  isPageFolderId(id) {
+    return this.getItem(id) instanceof PageFolder;
+  }
+
+  /**
    * Finds the pagent PageFolder for the given ID.
    *
    * @param {string} itemId - ID of the child Page/PageFolder.
@@ -212,6 +221,33 @@ export class PageStore {
   }
 
   /**
+   * Update the state of each folder based on the state of its children. Used
+   * to ensure folders with changed pages are shown bold.
+   *
+   * @param {string} folderId - ID of the base folder to refresh
+   *  (default: ROOT_ID).
+   */
+  refreshFolderState(folderId=PageStore.ROOT_ID) {
+    // First update all subfolders recursively.
+    const folder = this.getItem(folderId);
+    const subFolders = folder.children.filter((id) => this.isPageFolderId(id));
+    for (const subFolder of subFolders) {
+      this.refreshFolderState(subFolder);
+    }
+
+    // Now check if any of the children are marked as changed.
+    const childrenChanged = folder.children.some(
+      (id) => this.getItem(id).isChanged());
+
+    // Update the folder state accordingly.
+    if (folder.isChanged() != childrenChanged) {
+      folder.state = childrenChanged ?
+        PageFolder.stateEnum.CHANGED : PageFolder.stateEnum.NO_CHANGE;
+      folder.save();
+    }
+  }
+
+  /**
    * Move the specified item to a new position in a different PageFolder.
    *
    * @param {string} itemId - ID of the item to move.
@@ -227,7 +263,7 @@ export class PageStore {
     newParent.children.splice(position, 0, itemId);
     await newParent.save();
 
-    // Reemove the item from the current parent
+    // Remove the item from the current parent
     if (currentParent !== undefined) {
       // Increment position if we've already inserted into the same parent
       if (newParent == currentParent && currentPosition > position) {
@@ -236,6 +272,8 @@ export class PageStore {
       currentParent.children.splice(currentPosition, 1);
       await currentParent.save();
     }
+    // Ensure folder changed states are updated
+    this.refreshFolderState();
   }
 
   /**

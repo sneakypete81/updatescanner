@@ -114,6 +114,7 @@ export class SidebarView {
     result.text = root.title;
     result.children = [];
     result.data = {isFolder: true};
+    result.li_attr = {class: this._getStateClass(root.state)};
     const children = root.children || [];
     for (let i = 0; i < children.length; i++) {
       const child = pageMap.get(children[i]);

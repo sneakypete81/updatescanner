@@ -33,6 +33,7 @@ export class Background {
     browser.runtime.onMessage.addListener(this._handleMessage.bind(this));
 
     this._refreshIcon();
+    this.pageStore.refreshFolderState();
     this._checkFirstRun();
 
     // @FIXME: Autoscan should take pageStore as a parameter
@@ -49,6 +50,7 @@ export class Background {
   _handlePageUpdate(pageId, change) {
     if (hasPageStateChanged(change)) {
       this._refreshIcon();
+      this.pageStore.refreshFolderState();
     }
   }
 
