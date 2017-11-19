@@ -118,6 +118,8 @@ export function viewNew(page, html) {
  * @param {string} url - URL of the page.
  */
 function setTitle(title, url) {
+  document.title = `Update Scanner - ${title}`;
+
   const titleElement = qs('#title');
   titleElement.textContent = title;
   titleElement.href = url;
