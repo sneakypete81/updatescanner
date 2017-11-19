@@ -15,6 +15,7 @@
 <!ENTITY characters.label "caracteres">
 <!ENTITY ignoreNumbers.label "Ignorar alterações numéricas">
 <!ENTITY advanced.label "Avançado...">
+<!ENTITY requestMethod.label "Método de Requisição">
 <!ENTITY charEncoding.label "Codificação dos Caracteres">
 <!ENTITY autoDetect.label "Detectar automaticamente">
 <!ENTITY use.label "Usar:">

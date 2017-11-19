@@ -160,6 +160,8 @@ scanner : function()
                       UpdateScanner.File.USreadFile(filebase+".new"),
                       UpdateScanner.Places.queryAnno(itemId, UpdateScanner.Places.ANNO_THRESHOLD, UpdateScanner.Defaults.DEF_THRESHOLD),
                       UpdateScanner.Places.queryAnno(itemId, UpdateScanner.Places.ANNO_IGNORE_NUMBERS, UpdateScanner.Defaults.DEF_IGNORE_NUMBERS),
+                      UpdateScanner.Places.queryAnno(itemId, UpdateScanner.Places.ANNO_REQUEST_METHOD, UpdateScanner.Defaults.DEF_REQUEST_METHOD),
+                      UpdateScanner.Places.queryAnno(itemId, UpdateScanner.Places.ANNO_POST_PARAMS, UpdateScanner.Defaults.DEF_POST_PARAMS),
                       UpdateScanner.Places.queryAnno(itemId, UpdateScanner.Places.ANNO_ENCODING, UpdateScanner.Defaults.DEF_ENCODING));
 
         } else if (itemType == bmsvc.TYPE_FOLDER) {
@@ -173,10 +175,10 @@ scanner : function()
     }
 
     this.addURL = function(id, title, url, content, threshold,
-                           ignoreNumbers, encoding)
+                           ignoreNumbers, requestMethod, postParams, encoding)
     {
         var page = new me._uscanItem(id, title, url, content, threshold,
-                                 ignoreNumbers, encoding);
+                                 ignoreNumbers, requestMethod, postParams, encoding);
         itemlist.push(page);
     }
 
@@ -297,7 +299,7 @@ scanner : function()
     {
         var page;
         if (itemlist.length > 0) {
-            while (!me._attemptGet(itemlist[0].url, itemlist[0].encoding)) {
+            while (!me._attemptRequest(itemlist[0].url, itemlist[0].requestMethod, itemlist[0].postParams, itemlist[0].encoding)) {
                 page = itemlist.shift();      // extract the next item
                 changedCallback(page.id, "", usc.STATUS_ERROR,
                     Components.classes["@mozilla.org/intl/stringbundle;1"]
@@ -327,17 +329,28 @@ scanner : function()
         }
     }
 
-    this._attemptGet = function(url, encoding)
+    this._attemptRequest = function(url, requestMethod, postParams, encoding)
     {
+        var data = null;
+        if (requestMethod == "post" && (postParams != null || postParams != "")) {
+            data = postParams;
+        }
         try {
             httpreq = new XMLHttpRequest();
-            httpreq.open("GET", url, true);
+
+            if (requestMethod == "post") {
+                httpreq.open("POST", url, true);
+                httpreq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+            } else {
+                httpreq.open("GET", url, true);
+            }
+
             if (encoding != "auto") {
                 // Force parser to use a specific encoding
                 httpreq.overrideMimeType('text/html; charset='+encoding);
             }
             httpreq.onreadystatechange=me._next;
-            httpreq.send(null);
+            httpreq.send(data);
             return true;
         } catch (e) {
             return false;
@@ -345,7 +358,7 @@ scanner : function()
     }
 
     this._uscanItem = function(id, title, url, content, threshold,
-                   ignoreNumbers, encoding)
+                   ignoreNumbers, requestMethod, postParams, encoding)
     {
         this.id = id;
         this.title = title;
@@ -353,6 +366,8 @@ scanner : function()
         this.content = content;
         this.threshold = threshold;
         this.ignoreNumbers = ignoreNumbers;
+        this.requestMethod = requestMethod;
+        this.postParams = postParams;
         this.encoding = encoding;
     }
 

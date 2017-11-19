@@ -75,11 +75,17 @@ notify : function(timer)
     var newContent="";
     var oldContent="";
     var enableDiffLinks = true;
+    var requestMethod="";
+    var postParams = null;
 
     var filebase = UpdateScanner.Places.queryAnno(id, UpdateScanner.Places.ANNO_SIGNATURE, "");
     if (filebase != "") {
         oldContent  = UpdateScanner.File.USreadFile(filebase+".old");
         newContent  = UpdateScanner.File.USreadFile(filebase+".new");
+    }
+    requestMethod = UpdateScanner.Places.queryAnno(id, UpdateScanner.Places.ANNO_REQUEST_METHOD, UpdateScanner.Defaults.DEF_REQUEST_METHOD);
+    if (requestMethod == "post") {
+        postParams = UpdateScanner.Places.queryAnno(id, UpdateScanner.Places.ANNO_POST_PARAMS, null);
     }
     if (newContent=="") {
         view="notChecked";
@@ -123,6 +129,9 @@ notify : function(timer)
         document.getElementById("dateOld").value=oldDate;
         thisContent = oldContent;
         break;
+    case "current":
+        this._redirectToCurrentPage(url, requestMethod, postParams);
+        break;
     case "error":
         document.getElementById("sectionError").hidden=false;
         break;
@@ -157,6 +166,7 @@ _writeViewFrame : function (view, url, enableDiffLinks)
     viewDoc.write("<html><head>");
     viewDoc.write("<link rel='stylesheet' href='chrome://updatescan/skin/diffPage.css' type='text/css'/>");
     viewDoc.write("</head><body>");
+
     viewDoc.write("<b>"+viewStr+":</b>&nbsp;\n");
 
     if (view == "old")
@@ -180,8 +190,11 @@ _writeViewFrame : function (view, url, enableDiffLinks)
     else
         viewDoc.write("<span style='color:#808080'>"+changes+"</span>\n&nbsp;");
 
+    if (view == "current")
+        viewDoc.write("<b>"+currentPage+"</b>\n");
+    else
+        viewDoc.write("<a href='"+this.baseUrl+"current' target='_top'>"+currentPage+"</a>\n");
 
-    viewDoc.write("<a href='"+url+"' target='_top'>"+currentPage+"</a>\n");
     viewDoc.write("</body></html>");
     viewDoc.close();
 },
@@ -227,4 +240,23 @@ _writeContentFrame : function (url, thisContent)
     event.initEvent("US_event", true, false);
     element.dispatchEvent(event);
 },
+
+_redirectToCurrentPage : function (url, requestMethod, postParams)
+{
+    var tabBrowser = Cc["@mozilla.org/appshell/window-mediator;1"].getService(Ci.nsIWindowMediator).getMostRecentWindow("navigator:browser").gBrowser;
+    var currentBrowser = tabBrowser.getBrowserForDocument(document);
+
+    if (requestMethod == "post") {
+        var stringStream = Cc["@mozilla.org/io/string-input-stream;1"].createInstance(Ci.nsIStringInputStream);
+        var postData = Cc["@mozilla.org/network/mime-input-stream;1"].createInstance(Ci.nsIMIMEInputStream);
+
+        stringStream.data = postParams;
+
+        postData.addHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+        postData.addContentLength = true;
+        postData.setData(stringStream);
+    }
+
+    currentBrowser.loadURIWithFlags(url, Ci.nsIWebNavigation.LOAD_FLAGS_REPLACE_HISTORY, null, null, postData);
+}
 };

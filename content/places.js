@@ -13,6 +13,8 @@ UpdateScanner.Places = {
 
   ANNO_ROOT : "updatescan/root", // int, a Places itemId
   ANNO_STATUS : "updatescan/status", // string
+  ANNO_REQUEST_METHOD : "updatescan/request_method", // string
+  ANNO_POST_PARAMS : "updatescan/post_params", // string
   ANNO_ENCODING : "updatescan/encoding", // string
   ANNO_THRESHOLD: "updatescan/threshold", // int
   ANNO_IGNORE_NUMBERS : "updatescan/ignore_numbers", // boolean

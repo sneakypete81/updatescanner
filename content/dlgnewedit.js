@@ -61,6 +61,15 @@ initDialog : function()
     document.getElementById("ignoreNumbers").checked = args.ignoreNumbers;
     document.getElementById("ignoreNumbers2").checked = args.ignoreNumbers;
 
+    if (args.requestMethod == "get") {
+        document.getElementById("requestMethod")
+                .selectedIndex = 0;
+    } else {
+        document.getElementById("requestMethod")
+                .selectedIndex = 1;
+        document.getElementById("postParams").value = args.postParams;
+    }
+
     if (args.encoding == "auto") {
         document.getElementById("autoCharEncoding")
                 .selectedIndex = 0;
@@ -152,6 +161,15 @@ Ok : function()
             return false;
         }
     }
+
+    if (document.getElementById("requestMethod").selectedIndex == 0) {
+        args.requestMethod = "get";
+        args.postParams = "";
+    } else {
+        args.requestMethod = "post";
+        args.postParams = document.getElementById("postParams").value;
+    }
+
     if (document.getElementById("autoCharEncoding").selectedIndex == 0) {
         args.encoding = "auto";
     } else {
@@ -342,6 +360,17 @@ highlightChangesChanged : function()
     var enabled = document.getElementById("highlightChanges");
     document.getElementById("highlightColour").disabled = !enabled.checked;
     document.getElementById("markChanges").disabled = !enabled.checked;
+},
+
+requestMethodChanged : function()
+{
+    var method=document.getElementById("requestMethod");
+    var postParams = document.getElementById("postParams");
+    if  (method.selectedIndex == 1) {
+        postParams.disabled = false;
+    } else {
+        postParams.disabled = true;
+    }
 },
 
 charEncodingChanged : function()
