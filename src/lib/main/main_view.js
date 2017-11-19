@@ -63,7 +63,10 @@ export function bindViewDropdownChange(handler) {
  */
 export function viewDiff(page, html) {
   setTitle(page.title, page.url);
-  if (page.newScanTime == null) {
+  if (page.isError()) {
+    setSubtitle('This page returned an error when scanned. ' +
+      'Click the title above to see what\'s wrong.');
+  } else if (page.newScanTime == null) {
     setSubtitle('This page has not yet been scanned.');
   } else {
     const scanTime = timeSince(new Date(page.newScanTime));

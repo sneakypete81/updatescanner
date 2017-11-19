@@ -211,4 +211,11 @@ export class Page {
   isChanged() {
     return this.state == Page.stateEnum.CHANGED;
   }
+
+  /**
+   * @returns {bool} True if the Page state is ERROR.
+   */
+  isError() {
+    return this.state == Page.stateEnum.ERROR;
+  }
 }
