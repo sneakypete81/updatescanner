@@ -314,5 +314,5 @@ async function loadHtml(page, htmlType) {
  */
 function _updateHeader(page, html) {
   // @TODO: Only add if there's no existing <base href> tag
-  return `<base href="${page.url}">` + html;
+  return `<base href="${page.url}" target="_top">` + html;
 }

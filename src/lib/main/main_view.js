@@ -153,7 +153,7 @@ function loadSandboxedIframe(html) {
   const iframe = document.createElement('iframe');
   iframe.id = 'frame';
   iframe.classList.add('frame');
-  iframe.sandbox = '';
+  iframe.sandbox = 'allow-top-navigation';
   iframe.srcdoc = html;
   qs('#frameContainer').appendChild(iframe);
 }
