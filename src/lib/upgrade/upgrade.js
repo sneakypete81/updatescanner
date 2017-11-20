@@ -85,12 +85,12 @@ function findRoot(bookmarks) {
  * @param {string} parentId - ID of the parent PageFolder object.
  */
 async function importPages(pageStore, root, parentId) {
-  root.children.forEach(async (child) => {
+  for (const child of root.children) {
     if (child.hasOwnProperty('children')) {
       const pageFolder = await pageStore.createPageFolder(parentId, -1);
       pageFolder.title = child.title;
-      pageFolder.save();
-      importPages(pageStore, child, pageFolder.id);
+      await pageFolder.save();
+      await importPages(pageStore, child, pageFolder.id);
     } else {
       const annos = extractAnnos(child);
       const page = await pageStore.createPage(parentId, -1);
@@ -105,9 +105,9 @@ async function importPages(pageStore, root, parentId) {
       page.markChanges = (annos['updatesscan/mark_changes']);
       page.doPost = (annos['updatesscan/request_method'] == 'post');
       page.postParams = (annos['updatesscan/post_params']);
-      page.save();
+      await page.save();
     }
-  });
+  }
 }
 
 /**
@@ -118,9 +118,11 @@ async function importPages(pageStore, root, parentId) {
  */
 function extractAnnos(bookmark) {
   let annos = {};
-  bookmark.annos.forEach((anno) => {
-    annos[anno.name] = anno.value;
-  });
+  if (bookmark.hasOwnProperty('annos')) {
+    bookmark.annos.forEach((anno) => {
+      annos[anno.name] = anno.value;
+    });
+  }
 
   return annos;
 }
