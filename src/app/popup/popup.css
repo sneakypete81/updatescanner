@@ -8,7 +8,7 @@ html body {
   background-color: #d7d7db;
   min-height: 10em;
   max-height: 30em;
-  overflow: scroll;
+  overflow: auto;
 }
 
 .panel-list-content {
