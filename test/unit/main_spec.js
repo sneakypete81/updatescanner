@@ -28,7 +28,8 @@ describe('Main', function() {
       spyOn(Storage, 'load').and.returnValue(Promise.resolve(html));
       spyOn(diff, 'diff').and.returnValues('diffHtml');
       spyOn(mainView, 'viewDiff').and.callFake((pageArg, htmlArg) => {
-        expect(htmlArg).toEqual('<base href="test.com/blah">diffHtml');
+        expect(htmlArg).toEqual(
+          '<base href="test.com/blah" target="_top">diffHtml');
         expect(pageArg).toEqual(page);
         expect(Storage.load).toHaveBeenCalledWith('html:old:' + id);
         expect(Storage.load).toHaveBeenCalledWith('html:new:' + id);
@@ -53,7 +54,7 @@ describe('Main', function() {
       main._showDiff(page).then(() => {
         expect(log.log).toHaveBeenCalled();
         expect(mainView.viewDiff).toHaveBeenCalledWith(
-          page, '<base href="test.com/blah">');
+          page, '<base href="test.com/blah" target="_top">');
         done();
       });
     });
