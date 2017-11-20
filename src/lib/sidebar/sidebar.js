@@ -22,6 +22,7 @@ export class Sidebar {
     this.sidebar = new SidebarView('#tree');
     this.pageStore = null;
     this.currentPage = null;
+    this._isUpdating = false;
   }
 
   /**
@@ -148,8 +149,12 @@ export class Sidebar {
    * @param {storage.StorageChange} change - Object representing the change.
    */
   async _handleItemUpdate(itemId, change) {
-    await waitForMs(REFRESH_TIMEOUT_MS);
-    this._refreshSidebar();
+    if (!this._isUpdating) {
+      this._isUpdating = true;
+      await waitForMs(REFRESH_TIMEOUT_MS);
+      this._isUpdating = false;
+      this._refreshSidebar();
+    }
   }
 
   /**
