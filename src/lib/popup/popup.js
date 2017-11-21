@@ -83,7 +83,7 @@ export class Popup {
    */
   _handleHelpClick() {
     browser.tabs.create({url:
-      'https://sneakypete81.github.io/updatescanner/updatescanner4.html'});
+      'https://sneakypete81.github.io/updatescanner/'});
     window.close();
   }
 
