@@ -8,7 +8,7 @@
 </head>
 
 <body>
-  <div class="panel">
+  <div id="main-panel" class="panel">
     <div class="panel-section panel-section-header">
       <div class="icon-section-header"></div>
       <div class="text-section-header">Update Scanner</div>
@@ -22,11 +22,15 @@
       <div id="show-all-button" class="panel-section-footer-button default">Show All Updates</div>
     </div>
 
-    <div id="menu-container">
-      <ul id="menu" class="menu-content hidden">
-        <li id="scan-all-menu">Scan All Pages</li>
-        <li id="help-menu">Help</li>
-      </ul>
+    <div>
+      <div id="menu-container">
+        <ul id="menu" class="menu-content hidden">
+          <li id="scan-all-menu">Scan All Pages</li>
+          <li id="backup-menu">Backup Pages...</li>
+          <li id="restore-menu">Restore Pages...</li>
+          <li id="help-menu">Help</li>
+        </ul>
+      </div>
     </div>
 
     <div class="panel-section panel-section-footer">
@@ -43,6 +47,26 @@
       <div id="menu-button" class="panel-section-footer-button">
         <div class="footer-button-icon"></div>
         <div class="footer-button-text">Menu</div>
+      </div>
+    </div>
+  </div>
+
+<!-- -->
+
+  <div id="backup-panel" class="panel hidden">
+    <div class="panel-section panel-section-header">
+      <div class="text-section-header">Backup &amp; Restore</div>
+    </div>
+
+    <div class="panel-section panel-section-content">
+      This will save your pages to a local file, which can later be restored
+      if necessary.
+    </div>
+    <a id="backup-link" style="hidden"></a>
+
+    <div class="panel-section panel-section-footer">
+      <div id="backup-button" class="panel-section-footer-button default">
+        Backup Pages
       </div>
     </div>
   </div>

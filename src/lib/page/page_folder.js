@@ -77,10 +77,24 @@ export class PageFolder {
    * @returns {Object} Object suitable for storage.
    */
   _toObject() {
-    return {title: this.title,
-            state: this.state,
-            children: this.children,
-            };
+    return {
+      title: this.title,
+      state: this.state,
+      children: this.children,
+      };
+  }
+
+  /**
+   * @returns {Object} Object suitable for backups, excluding current scan
+   * state and child IDs.
+   */
+  backup() {
+    return {
+      type: 'PageFolder',
+      title: this.title,
+      // state: this.state,
+      // children: this.children,
+      };
   }
 
   /**

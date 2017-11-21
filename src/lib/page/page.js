@@ -139,22 +139,48 @@ export class Page {
    * @returns {Object} Object suitable for storage.
    */
   _toObject() {
-    return {title: this.title,
-            url: this.url,
-            scanRateMinutes: this.scanRateMinutes,
-            changeThreshold: this.changeThreshold,
-            ignoreNumbers: this.ignoreNumbers,
-            encoding: this.encoding,
-            highlightChanges: this.highlightChanges,
-            highlightColour: this.highlightColour,
-            markChanges: this.markChanges,
-            doPost: this.doPost,
-            postParams: this.postParams,
-            state: this.state,
-            lastAutoscanTime: this.lastAutoscanTime,
-            oldScanTime: this.oldScanTime,
-            newScanTime: this.newScanTime,
-            };
+    return {
+      title: this.title,
+      url: this.url,
+      scanRateMinutes: this.scanRateMinutes,
+      changeThreshold: this.changeThreshold,
+      ignoreNumbers: this.ignoreNumbers,
+      encoding: this.encoding,
+      highlightChanges: this.highlightChanges,
+      highlightColour: this.highlightColour,
+      markChanges: this.markChanges,
+      doPost: this.doPost,
+      postParams: this.postParams,
+      state: this.state,
+      lastAutoscanTime: this.lastAutoscanTime,
+      oldScanTime: this.oldScanTime,
+      newScanTime: this.newScanTime,
+      };
+  }
+
+  /**
+   * @returns {Object} Object suitable for backups, excluding current scan
+   * state.
+   */
+  backup() {
+    return {
+      type: 'Page',
+      title: this.title,
+      url: this.url,
+      scanRateMinutes: this.scanRateMinutes,
+      changeThreshold: this.changeThreshold,
+      ignoreNumbers: this.ignoreNumbers,
+      encoding: this.encoding,
+      highlightChanges: this.highlightChanges,
+      highlightColour: this.highlightColour,
+      markChanges: this.markChanges,
+      doPost: this.doPost,
+      postParams: this.postParams,
+      // state: this.state,
+      // lastAutoscanTime: this.lastAutoscanTime,
+      // oldScanTime: this.oldScanTime,
+      // newScanTime: this.newScanTime,
+      };
   }
 
   /**

@@ -1,11 +1,13 @@
 import {qs, $on, $delegate, findParentWithClass,
   showElement, hideElement, isHidden} from 'util/view_helpers';
+import {waitForMs} from 'util/promise';
 
 /**
  * Initialise the Popup view.
  */
 export function init() {
   $on(qs('#menu-button'), 'click', toggleMenu);
+  $on(qs('#backup-menu'), 'click', showBackupPanel);
 }
 
 /**
@@ -34,6 +36,20 @@ export function bindSidebarClick(handler) {
  */
 export function bindHelpClick(handler) {
   $on(qs('#help-menu'), 'click', handler);
+}
+
+/**
+ * @param {Function} handler - Called when the Backup button is clicked.
+ */
+export function bindBackupClick(handler) {
+  $on(qs('#backup-button'), 'click', handler);
+}
+
+/**
+ * @param {Function} handler - Called when the Restore menu item is clicked.
+ */
+export function bindRestoreClick(handler) {
+  $on(qs('#restore-menu'), 'click', handler);
 }
 
 /**
@@ -69,6 +85,22 @@ export function addPage(page) {
  */
 export function clearPageList() {
   qs('#list').innerHTML = '';
+}
+
+
+/**
+ * Download a Url object. Used for downloading backup JSON files. Awaits until
+ * the click event has fired, so it's save to release the ObjectURL.
+ *
+ * @param {Url} url - Url object to download.
+ */
+export async function downloadUrl(url) {
+  const link = qs('#backup-link');
+  link.href = url;
+  link.download = 'test.json';
+  link.click();
+
+  await waitForMs(0);
 }
 
 /**
@@ -114,4 +146,12 @@ function toggleMenu(event) {
     hideElement(menu);
     body.removeEventListener('click', toggleMenu);
   }
+}
+
+/**
+ * @param {type} event - Event used to initiate the action.
+ */
+function showBackupPanel(event) {
+  hideElement(qs('#main-panel'));
+  showElement(qs('#backup-panel'));
 }

@@ -1,6 +1,7 @@
 import {openMain, showAllChanges, paramEnum, actionEnum} from 'main/main_url';
 import {backgroundActionEnum} from 'background/actions.js';
 import {PageStore, hasPageStateChanged, isItemChanged} from 'page/page_store';
+import {createBackupJson} from 'backup/backup';
 import * as view from 'popup/popup_view';
 
 /**
@@ -27,6 +28,8 @@ export class Popup {
     view.bindNewClick(this._handleNewClick.bind(this));
     view.bindSidebarClick(this._handleSidebarClick.bind(this));
     view.bindScanAllClick(this._handleScanAllClick.bind(this));
+    view.bindBackupClick(this._handleBackupClick.bind(this));
+    view.bindRestoreClick(this._handleRestoreClick.bind(this));
     view.bindHelpClick(this._handleHelpClick.bind(this));
     view.bindPageClick(this._handlePageClick.bind(this));
 
@@ -76,6 +79,27 @@ export class Popup {
   _handleScanAllClick() {
     browser.runtime.sendMessage({action: backgroundActionEnum.SCAN_ALL});
     window.close();
+  }
+
+  /**
+   * Called when the Backup menu item is clicked, to backup pages to a file.
+   */
+  async _handleBackupClick() {
+    const blob = new Blob(
+      [createBackupJson(this.pageStore)],
+      {type: 'application/json'}
+    );
+    const url = URL.createObjectURL(blob);
+
+    await view.downloadUrl(url);
+    URL.revokeObjectURL(url);
+  }
+
+  /**
+   * Called when the Restore menu item is clicked, to restore pages from a file.
+   */
+  _handleRestoreClick() {
+    // @TODO
   }
 
   /**

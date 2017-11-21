@@ -1,13 +1,33 @@
 html body {
-  width: 20em;
   overflow: hidden;
 }
 
+.panel {
+  display: flex;
+  flex-direction: column;
+  width: 20em;
+  min-height: 30em;
+}
+
+.icon-section-header {
+  background-image: url('/images/updatescanner_32.png');
+}
+
+.panel-section-content {
+  flex: auto;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.panel-section-text {
+  text-align: center;
+}
+
 .panel-section-list {
+  flex: auto;
   padding: 0;
   background-color: #d7d7db;
-  min-height: 10em;
-  max-height: 30em;
   overflow: auto;
 }
 
@@ -19,10 +39,6 @@ html body {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-}
-
-.icon-section-header {
-  background-image: url('/images/updatescanner_32.png');
 }
 
 .panel-section-footer {
