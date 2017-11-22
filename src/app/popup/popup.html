@@ -26,8 +26,8 @@
       <div id="menu-container">
         <ul id="menu" class="menu-content hidden">
           <li id="scan-all-menu">Scan All Pages</li>
-          <li id="backup-menu">Backup Pages...</li>
-          <li id="restore-menu">Restore Pages...</li>
+          <li id="backup-menu">Backup Pages</li>
+          <li id="restore-menu">Restore Pages</li>
           <li id="help-menu">Help</li>
         </ul>
       </div>
@@ -55,7 +55,7 @@
 
   <div id="backup-panel" class="panel hidden">
     <div class="panel-section panel-section-header">
-      <div class="text-section-header">Backup &amp; Restore</div>
+      <div class="text-section-header">Backup Pages</div>
     </div>
 
     <div class="panel-section panel-section-content">
@@ -72,6 +72,33 @@
     <div class="panel-section panel-section-footer">
       <div id="backup-button" class="panel-section-footer-button default">
         Backup Pages
+      </div>
+    </div>
+  </div>
+
+  <!-- -->
+
+  <div id="restore-panel" class="panel hidden">
+    <div class="panel-section panel-section-header">
+      <div class="text-section-header">Restore Pages</div>
+    </div>
+
+    <div class="panel-section panel-section-content">
+      <p>
+        This will restore your pages from a backup file.
+        It can also be used to import your pages from a Update Scanner v3
+        bookmarks backup file.
+      </p>
+      <p class="warning">
+        <img src="/images/warning-16.svg"?>
+        Existing pages will be overwritten.
+        Please make a backup first!
+      </p>
+    </div>
+
+    <div class="panel-section panel-section-footer">
+      <div id="restore-button" class="panel-section-footer-button default">
+        Restore Pages
       </div>
     </div>
   </div>

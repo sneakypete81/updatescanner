@@ -13,13 +13,6 @@ html body {
   background-image: url('/images/updatescanner_32.png');
 }
 
-.panel-section-content {
-  flex: auto;
-  display: block;
-  padding: 10px;
-  padding-top: 2em;
-}
-
 .panel-section-list {
   flex: auto;
   padding: 0;
@@ -35,6 +28,27 @@ html body {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+.panel-section-content {
+  flex: auto;
+  display: block;
+  padding-top: 2em;
+}
+
+p {
+  padding: 10px;
+}
+
+.warning {
+  margin-top: 2.5em;
+  background-color: #ffe900;
+  display: flex;
+  text-align: center;
+}
+
+.warning > img {
+  width: 32px;
 }
 
 .panel-section-footer {

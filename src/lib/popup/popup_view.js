@@ -8,6 +8,7 @@ import {waitForMs} from 'util/promise';
 export function init() {
   $on(qs('#menu-button'), 'click', toggleMenu);
   $on(qs('#backup-menu'), 'click', showBackupPanel);
+  $on(qs('#restore-menu'), 'click', showRestorePanel);
 }
 
 /**
@@ -150,9 +151,17 @@ function toggleMenu(event) {
 }
 
 /**
- * @param {type} event - Event used to initiate the action.
+ * Display the Backup panel.
  */
-function showBackupPanel(event) {
+function showBackupPanel() {
   hideElement(qs('#main-panel'));
   showElement(qs('#backup-panel'));
+}
+
+/**
+ * Display the Restore panel.
+ */
+function showRestorePanel() {
+  hideElement(qs('#main-panel'));
+  showElement(qs('#restore-panel'));
 }
