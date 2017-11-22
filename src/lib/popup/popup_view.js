@@ -93,11 +93,12 @@ export function clearPageList() {
  * the click event has fired, so it's save to release the ObjectURL.
  *
  * @param {Url} url - Url object to download.
+ * @param {string} filename - Default filename for the download.
  */
-export async function downloadUrl(url) {
+export async function downloadUrl(url, filename) {
   const link = qs('#backup-link');
   link.href = url;
-  link.download = 'test.json';
+  link.download = filename;
   link.click();
 
   await waitForMs(0);

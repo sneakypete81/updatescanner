@@ -6,7 +6,7 @@ html body {
   display: flex;
   flex-direction: column;
   width: 20em;
-  min-height: 30em;
+  height: 30em;
 }
 
 .icon-section-header {
@@ -15,13 +15,9 @@ html body {
 
 .panel-section-content {
   flex: auto;
-  display: flex;
-  align-items: center;
+  display: block;
   padding: 10px;
-}
-
-.panel-section-text {
-  text-align: center;
+  padding-top: 2em;
 }
 
 .panel-section-list {

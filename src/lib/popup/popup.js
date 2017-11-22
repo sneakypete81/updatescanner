@@ -91,7 +91,7 @@ export class Popup {
     );
     const url = URL.createObjectURL(blob);
 
-    await view.downloadUrl(url);
+    await view.downloadUrl(url, 'Update Scanner Backup.json');
     URL.revokeObjectURL(url);
   }
 
