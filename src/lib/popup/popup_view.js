@@ -50,7 +50,7 @@ export function bindBackupClick(handler) {
  * @param {Function} handler - Called when the Restore menu item is clicked.
  */
 export function bindRestoreClick(handler) {
-  $on(qs('#restore-menu'), 'click', handler);
+  $on(qs('#restore-button'), 'click', handler);
 }
 
 /**
@@ -103,6 +103,16 @@ export async function downloadUrl(url, filename) {
   link.click();
 
   await waitForMs(0);
+}
+
+/**
+ * Show a dialog asking for confirmation before restoring pages.
+ *
+ * @returns {boolean} True if the user confirmed the restore.
+ */
+export function confirmRestore() {
+  return window.confirm(
+    'This will overwrite your existing pages - are you sure?');
 }
 
 /**

@@ -87,24 +87,11 @@ export class Background {
   async _checkFirstRun() {
     const config = await new Config().load();
     if (config.get('isFirstRun')) {
-      const page = await this._createWebsitePage();
+      const page = await this.pageStore.createWebsitePage();
       scan([page]);
       config.set('isFirstRun', false);
       config.save();
     }
-  }
-
-  /**
-   * Create a new Update Scanner website Page.
-   *
-   * @returns {Page} Created Page.
-   */
-  async _createWebsitePage() {
-    const page = await this.pageStore.createPage(PageStore.ROOT_ID);
-    page.title = 'Update Scanner Website';
-    page.url = 'https://sneakypete81.github.io/updatescanner/';
-    await page.save();
-    return page;
   }
 
   /**

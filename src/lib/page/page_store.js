@@ -130,10 +130,11 @@ export class PageStore {
    * @param {integer} insertAfterIndex - Add the page after this item in the
    * parent folder. If negative, the Page will be added to the end of the parent
    * folder.
+   * @param {Object} data - Values to initialise the Page object (optional).
    *
    * @returns {Promise} A Promise that fulfils with the new Page object.
    */
-  async createPage(parentId, insertAfterIndex) {
+  async createPage(parentId, insertAfterIndex, data={}) {
     // Update StorageInfo with the new Page, returning the new Page ID
     const pageId = this.storageInfo.createPage();
     await this.storageInfo.save();
@@ -149,7 +150,7 @@ export class PageStore {
 
     // Create the Page. This will cause _handleItemUpdate to update the
     // PageMap.
-    return new Page(pageId, {});
+    return new Page(pageId, data);
   }
 
   /**
@@ -274,6 +275,19 @@ export class PageStore {
     }
     // Ensure folder changed states are updated
     this.refreshFolderState();
+  }
+
+  /**
+   * Create a new Update Scanner website Page.
+   *
+   * @returns {Page} Created Page.
+   */
+  async createWebsitePage() {
+    const page = await this.createPage(PageStore.ROOT_ID);
+    page.title = 'Update Scanner Website';
+    page.url = 'https://sneakypete81.github.io/updatescanner/';
+    await page.save();
+    return page;
   }
 
   /**

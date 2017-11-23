@@ -39,22 +39,20 @@
 
   <div class="step">
     <h2>Import into Update Scanner 4</h2>
-    <form id="jsonFile" name="jsonFile" enctype="multipart/form-data" method="post">
-      <label id="upload-button" for="file-upload">
-          Select Bookmarks File...
-      </label>
-      <input id="file-upload" class="hidden" type="file" accept=".json"/>
+    <label id="upload-button" for="file-upload">
+        Select Bookmarks File...
+    </label>
+    <input id="file-upload" class="hidden" type="file" accept=".json"/>
 
-      <div id="importing" class="hidden">
-        Importing pages...
-      </div>
-      <div id="upgrade-failed" class="hidden">
-        Error: No Update Scanner bookmarks were found.
-      </div>
-      <div id="upgrade-complete" class="hidden">
-        Your bookmarks have been imported successfully.
-      </div>
-    </form>
+    <div id="importing" class="hidden">
+      Importing pages...
+    </div>
+    <div id="upgrade-failed" class="hidden">
+      Error: No Update Scanner bookmarks were found.
+    </div>
+    <div id="upgrade-complete" class="hidden">
+      Your bookmarks have been imported successfully.
+    </div>
   </div>
 
   <!-- Output script from webpack -->
