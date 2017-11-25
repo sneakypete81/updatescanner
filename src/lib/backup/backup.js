@@ -1,8 +1,8 @@
 import {PageStore} from 'page/page_store';
 import {PageFolder} from 'page/page_folder';
 
-const JSON_BACKUP_ID = 'https://github.com/sneakypete81/updatescanner/@JSON_BACKUP_ID';
-const JSON_BACKUP_VERSION = 1;
+export const JSON_BACKUP_ID = 'https://github.com/sneakypete81/updatescanner/@JSON_BACKUP_ID';
+export const JSON_BACKUP_VERSION = 1;
 
 /**
  * Returns a JSON string to use for backing up the PageStore.

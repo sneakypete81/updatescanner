@@ -106,16 +106,6 @@ export async function downloadUrl(url, filename) {
 }
 
 /**
- * Show a dialog asking for confirmation before restoring pages.
- *
- * @returns {boolean} True if the user confirmed the restore.
- */
-export function confirmRestore() {
-  return window.confirm(
-    'This will overwrite your existing pages - are you sure?');
-}
-
-/**
  * Create a new list item for a Page.
  *
  * @param {Page} page - Page object to use for the list item.

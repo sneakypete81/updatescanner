@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+  <title>Update Scanner - Restore Pages</title>
+  <link rel="stylesheet" href="chrome://browser/content/extension.css">
+  <link rel="stylesheet" href="backup_restore.css">
+</head>
+
+<body>
+  <div>
+    <div id="restoring" class="hidden">
+      Restoring pages...
+    </div>
+    <div id="restore-failed" class="hidden">
+    </div>
+    <div id="restore-complete" class="hidden">
+      Your pages have been restored successfully.
+    </div>
+  </div>
+
+  <!-- Output script from webpack -->
+  <script src="backup_restore_script.js"></script>
+
+</body>
+</html>

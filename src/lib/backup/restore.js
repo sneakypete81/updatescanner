@@ -1,6 +1,32 @@
+import fileDialog from 'file-dialog';
 import {readAsText} from 'promise-file-reader';
+import * as view from 'backup/restore_view';
 import {PageStore} from 'page/page_store';
 import {JSON_BACKUP_ID, JSON_BACKUP_VERSION} from 'backup/backup';
+
+
+/**
+ * Ask the user to select a file to restore, check for confirmation, then
+ * import Page/PageFolders, overwriting all existing items.
+ */
+export async function restore() {
+  const files = await fileDialog({accept: '.json'});
+  if (view.confirmRestore()) {
+    view.showRestoring();
+
+    // Delete all existing items
+    const pageStore = await PageStore.load();
+    await pageStore.deleteItem(PageStore.ROOT_ID);
+
+    try {
+      await restoreBackupFromFile(pageStore, files[0]);
+      view.showComplete();
+    } catch (error) {
+      console.log.bind(console);
+      view.showFailed();
+    }
+  }
+}
 
 /**
  * Restore a backup from the specified file to the PageStore. Supports the
@@ -10,16 +36,14 @@ import {JSON_BACKUP_ID, JSON_BACKUP_VERSION} from 'backup/backup';
  *
  * @param  {PageStore} pageStore - Import items to this PageStore.
  * @param  {File} file - File object uploaded by the user.
- * @returns {string} Error message, or null if the operation succeeds.
  */
-export async function restoreBackupFromFile(pageStore, file) {
+async function restoreBackupFromFile(pageStore, file) {
   const json = await parseFile(file);
   if (isBackupValid(json)) {
-    restoreBackupFromJson(pageStore, json);
+    await restoreBackupFromJson(pageStore, json.data);
   } else {
-    restoreBookmarksFromJson(pageStore, json);
+    await restoreBookmarksFromJson(pageStore, json);
   }
-  return null;
 }
 
 /**
@@ -80,10 +104,3 @@ async function restoreBackupFromJson(
  */
 async function restoreBookmarksFromJson(pageStore, json) {
 }
-
-  // if (view.confirmRestore()) {
-  //   await this.pageStore.deleteItem(PageStore.ROOT_ID);
-  //   await this.pageStore.createWebsitePage();
-  //   view.confirmRestore();
-  //   restoreBackupFromFile(this.pageStore, file);
-  // }
