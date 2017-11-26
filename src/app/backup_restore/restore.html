@@ -9,12 +9,16 @@
 
 <body>
   <div>
-    <div id="restoring" class="hidden">
-      Restoring pages...
+    <div id="restoring" class="message hidden">
+      <img id="img-loading" src="/images/loading.svg"/>
+      Restoring pages, please wait...
     </div>
-    <div id="restore-failed" class="hidden">
+    <div id="restore-failed" class="message hidden">
+      <div id="img-failed" class="image"></div>
+      Failed to restore pages.
     </div>
-    <div id="restore-complete" class="hidden">
+    <div id="restore-complete" class="message hidden">
+      <div id="img-complete" class="image"></div>
       Your pages have been restored successfully.
     </div>
   </div>

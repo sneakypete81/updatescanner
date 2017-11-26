@@ -2,4 +2,4 @@
 /dist/
 /build/
 /coverage/
-.build_settings.json
+.build_settings.json*

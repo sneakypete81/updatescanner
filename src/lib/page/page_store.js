@@ -190,33 +190,36 @@ export class PageStore {
   async deleteItem(itemId) {
     const item = this.pageMap.get(itemId);
 
-    // Remove the page from StorageInfo
-    this.storageInfo.deleteItem(itemId);
-    await this.storageInfo.save();
-
-    // Update the parent PageFolder
-    const pageFolder = this.findParent(itemId);
-    if (pageFolder !== undefined) {
-      const index = pageFolder.children.indexOf(itemId);
-      pageFolder.children.splice(index, 1);
-      await pageFolder.save();
-    }
-
-    // Delete the item itself. This will cause _handleItemUpdate to update the
-    // PageMap.
-    if (item !== undefined) {
-      item.delete();
-    }
-
-    // Delete HTML associated with the Page
-    if (item instanceof Page) {
-      PageStore.deleteHtml(itemId);
-    }
-
     // Recursively delete any children
     if (item instanceof PageFolder) {
       for (const child of item.children) {
         await this.deleteItem(child);
+      }
+    }
+
+    // Don't delete the root
+    if (itemId != PageStore.ROOT_ID) {
+      // Remove the page from StorageInfo
+      this.storageInfo.deleteItem(itemId);
+      await this.storageInfo.save();
+
+      // Update the parent PageFolder
+      const pageFolder = this.findParent(itemId);
+      if (pageFolder !== undefined) {
+        const index = pageFolder.children.indexOf(itemId);
+        pageFolder.children.splice(index, 1);
+        await pageFolder.save();
+      }
+
+      // Delete the item itself. This will cause _handleItemUpdate to update the
+      // PageMap.
+      if (item !== undefined) {
+        item.delete();
+      }
+
+      // Delete HTML associated with the Page
+      if (item instanceof Page) {
+        PageStore.deleteHtml(itemId);
       }
     }
   }

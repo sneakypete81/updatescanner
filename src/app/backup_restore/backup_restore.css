@@ -3,6 +3,35 @@ body {
   margin-left: 2em;
 }
 
+.message {
+  margin-top: 10em;
+  text-align: center;
+}
+
+/* Special case for loading spinner */
+img {
+  vertical-align: middle;
+  margin: 0.5em;
+}
+
+/* Failed/Complete images */
+.image {
+  height: 32px;
+  mask-size: 32px;
+  mask-position: center center;
+  mask-repeat: no-repeat;
+}
+
+#img-failed {
+  mask-image: url('/images/warning-16.svg');
+  background-color: #d70022;
+}
+
+#img-complete {
+  mask-image: url('/images/check-16.svg');
+  background-color: #12bc00
+}
+
 .hidden {
   display: none;
 }

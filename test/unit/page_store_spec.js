@@ -460,7 +460,7 @@ describe('PageStore', function() {
   });
 
   describe('deleteItem', function() {
-    it('deletes an existing Page', function(done) {
+    it('deletes an existing Page', async function() {
       spyOnStorageLoadWithArgReturn({
         [StorageInfo._KEY]: Promise.resolve(
           {pageFolderIds: ['0'], pageIds: ['1']}),
@@ -472,25 +472,23 @@ describe('PageStore', function() {
       spyOn(Storage, 'save').and.returnValues(Promise.resolve());
       spyOn(Storage, 'remove').and.returnValues(Promise.resolve());
 
-      PageStore.load().then((pageStore) => {
-        pageStore.deleteItem('1').then(() => {
-          expect(pageStore.storageInfo.pageIds).toEqual([]);
+      const pageStore = await PageStore.load();
+      await pageStore.deleteItem('1');
 
-          const root = pageStore.getItem('0');
-          expect(root.children).toEqual(['3', '4']);
+      expect(pageStore.storageInfo.pageIds).toEqual([]);
 
-          expect(Storage.remove).toHaveBeenCalledWith(Page._KEY('1'));
+      const root = pageStore.getItem('0');
+      expect(root.children).toEqual(['3', '4']);
 
-          expect(Storage.save).toHaveBeenCalledWith(
-            PageFolder._KEY('0'), root._toObject());
-          expect(Storage.save).toHaveBeenCalledWith(
-            StorageInfo._KEY, pageStore.storageInfo._toObject());
-          done();
-        }).catch((error) => done.fail(error));
-      }).catch((error) => done.fail(error));
+      expect(Storage.remove).toHaveBeenCalledWith(Page._KEY('1'));
+
+      expect(Storage.save).toHaveBeenCalledWith(
+        PageFolder._KEY('0'), root._toObject());
+      expect(Storage.save).toHaveBeenCalledWith(
+        StorageInfo._KEY, pageStore.storageInfo._toObject());
     });
 
-    it('deletes an empty PageFolder', function(done) {
+    it('deletes an empty PageFolder', async function() {
       spyOnStorageLoadWithArgReturn({
         [StorageInfo._KEY]: Promise.resolve({pageFolderIds: ['0', '1']}),
         [PageFolder._KEY('0')]: Promise.resolve(
@@ -501,25 +499,23 @@ describe('PageStore', function() {
       spyOn(Storage, 'save').and.returnValues(Promise.resolve());
       spyOn(Storage, 'remove').and.returnValues(Promise.resolve());
 
-      PageStore.load().then((pageStore) => {
-        pageStore.deleteItem('1').then(() => {
-          expect(pageStore.storageInfo.pageFolderIds).toEqual(['0']);
+      const pageStore = await PageStore.load();
+      await pageStore.deleteItem('1');
 
-          const root = pageStore.getItem('0');
-          expect(root.children).toEqual(['3', '4']);
+      expect(pageStore.storageInfo.pageFolderIds).toEqual(['0']);
 
-          expect(Storage.remove).toHaveBeenCalledWith(PageFolder._KEY('1'));
+      const root = pageStore.getItem('0');
+      expect(root.children).toEqual(['3', '4']);
 
-          expect(Storage.save).toHaveBeenCalledWith(
-            PageFolder._KEY('0'), root._toObject());
-          expect(Storage.save).toHaveBeenCalledWith(
-            StorageInfo._KEY, pageStore.storageInfo._toObject());
-          done();
-        }).catch((error) => done.fail(error));
-      }).catch((error) => done.fail(error));
+      expect(Storage.remove).toHaveBeenCalledWith(PageFolder._KEY('1'));
+
+      expect(Storage.save).toHaveBeenCalledWith(
+        PageFolder._KEY('0'), root._toObject());
+      expect(Storage.save).toHaveBeenCalledWith(
+        StorageInfo._KEY, pageStore.storageInfo._toObject());
     });
 
-    it('deletes a PageFolder with sub-folders', function(done) {
+    it('deletes a PageFolder with sub-folders', async function() {
       spyOnStorageLoadWithArgReturn({
         [StorageInfo._KEY]: Promise.resolve({
           pageFolderIds: ['0', '1', '2'],
@@ -537,28 +533,26 @@ describe('PageStore', function() {
       spyOn(Storage, 'save').and.returnValues(Promise.resolve());
       spyOn(Storage, 'remove').and.returnValues(Promise.resolve());
 
-      PageStore.load().then((pageStore) => {
-        pageStore.deleteItem('1').then(() => {
-          expect(pageStore.storageInfo.pageFolderIds).toEqual(['0']);
-          expect(pageStore.storageInfo.pageIds).toEqual([]);
+      const pageStore = await PageStore.load();
+      await pageStore.deleteItem('1');
 
-          const root = pageStore.getItem('0');
-          expect(root.children).toEqual(['3', '4']);
+      expect(pageStore.storageInfo.pageFolderIds).toEqual(['0']);
+      expect(pageStore.storageInfo.pageIds).toEqual([]);
 
-          expect(Storage.remove).toHaveBeenCalledWith(PageFolder._KEY('1'));
-          expect(Storage.remove).toHaveBeenCalledWith(PageFolder._KEY('2'));
-          expect(Storage.remove).toHaveBeenCalledWith(Page._KEY('5'));
+      const root = pageStore.getItem('0');
+      expect(root.children).toEqual(['3', '4']);
 
-          expect(Storage.save).toHaveBeenCalledWith(
-            PageFolder._KEY('0'), root._toObject());
-          expect(Storage.save).toHaveBeenCalledWith(
-            StorageInfo._KEY, pageStore.storageInfo._toObject());
-          done();
-        }).catch((error) => done.fail(error));
-      }).catch((error) => done.fail(error));
+      expect(Storage.remove).toHaveBeenCalledWith(PageFolder._KEY('1'));
+      expect(Storage.remove).toHaveBeenCalledWith(PageFolder._KEY('2'));
+      expect(Storage.remove).toHaveBeenCalledWith(Page._KEY('5'));
+
+      expect(Storage.save).toHaveBeenCalledWith(
+        PageFolder._KEY('0'), root._toObject());
+      expect(Storage.save).toHaveBeenCalledWith(
+        StorageInfo._KEY, pageStore.storageInfo._toObject());
     });
 
-    it('does nothing if the item doesn\'t exist', function(done) {
+    it('does nothing if the item doesn\'t exist', async function() {
       spyOnStorageLoadWithArgReturn({
         [StorageInfo._KEY]: Promise.resolve(
           {pageFolderIds: ['0'], pageIds: ['1']}),
@@ -568,15 +562,50 @@ describe('PageStore', function() {
       });
       spyOn(Storage, 'save').and.returnValues(Promise.resolve());
 
-      PageStore.load().then((pageStore) => {
-        pageStore.deleteItem('2').then(() => {
-          expect(pageStore.storageInfo.pageIds).toEqual(['1']);
+      const pageStore = await PageStore.load();
+      await pageStore.deleteItem('2');
 
-          const root = pageStore.getItem('0');
-          expect(root.children).toEqual(['3', '1', '4']);
-          done();
-        }).catch((error) => done.fail(error));
-      }).catch((error) => done.fail(error));
+      expect(pageStore.storageInfo.pageIds).toEqual(['1']);
+
+      const root = pageStore.getItem('0');
+      expect(root.children).toEqual(['3', '1', '4']);
+    });
+
+    it('doesn\'t delete the root, only all children', async function() {
+      spyOnStorageLoadWithArgReturn({
+        [StorageInfo._KEY]: Promise.resolve({
+          pageFolderIds: [PageStore.ROOT_ID, '1', '2'],
+          pageIds: ['5'],
+        }),
+        [PageFolder._KEY(PageStore.ROOT_ID)]: Promise.resolve(
+          {id: PageStore.ROOT_ID, children: ['1']}),
+        [PageFolder._KEY('1')]: Promise.resolve(
+          {id: '1', children: ['2']}),
+        [PageFolder._KEY('2')]: Promise.resolve(
+          {id: '2', children: ['5']}),
+        [Page._KEY('5')]: Promise.resolve(
+          {id: '5'}),
+      });
+      spyOn(Storage, 'save').and.returnValues(Promise.resolve());
+      spyOn(Storage, 'remove').and.returnValues(Promise.resolve());
+
+      const pageStore = await PageStore.load();
+      await pageStore.deleteItem(PageStore.ROOT_ID);
+
+      expect(pageStore.storageInfo.pageFolderIds).toEqual([PageStore.ROOT_ID]);
+      expect(pageStore.storageInfo.pageIds).toEqual([]);
+
+      const root = pageStore.getItem(PageStore.ROOT_ID);
+      expect(root.children).toEqual([]);
+
+      expect(Storage.remove).toHaveBeenCalledWith(PageFolder._KEY('1'));
+      expect(Storage.remove).toHaveBeenCalledWith(PageFolder._KEY('2'));
+      expect(Storage.remove).toHaveBeenCalledWith(Page._KEY('5'));
+
+      expect(Storage.save).toHaveBeenCalledWith(
+        PageFolder._KEY('0'), root._toObject());
+      expect(Storage.save).toHaveBeenCalledWith(
+        StorageInfo._KEY, pageStore.storageInfo._toObject());
     });
   });
 
