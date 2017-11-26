@@ -959,6 +959,12 @@
         "supports-color": "2.0.0"
       }
     },
+    "chardet": {
+      "version": "0.4.0",
+      "resolved": "https://registry.npmjs.org/chardet/-/chardet-0.4.0.tgz",
+      "integrity": "sha1-C74TVaxE16PtSpJXB8TvcPgZD2w=",
+      "dev": true
+    },
     "chokidar": {
       "version": "1.7.0",
       "resolved": "https://registry.npmjs.org/chokidar/-/chokidar-1.7.0.tgz",
@@ -1654,13 +1660,12 @@
       }
     },
     "doctrine": {
-      "version": "2.0.0",
-      "resolved": "https://registry.npmjs.org/doctrine/-/doctrine-2.0.0.tgz",
-      "integrity": "sha1-xz2NKQnSIpHhoAejlYBNqLZl/mM=",
+      "version": "2.0.2",
+      "resolved": "https://registry.npmjs.org/doctrine/-/doctrine-2.0.2.tgz",
+      "integrity": "sha512-y0tm5Pq6ywp3qSTZ1vPgVdAnbDEoeoc5wlOHXoY1c4Wug/a7JvqHIl7BTvwodaHmejWkK/9dSb3sCYfyo/om8A==",
       "dev": true,
       "requires": {
-        "esutils": "2.0.2",
-        "isarray": "1.0.0"
+        "esutils": "2.0.2"
       }
     },
     "dom-serialize": {
@@ -2123,18 +2128,18 @@
       }
     },
     "eslint": {
-      "version": "4.11.0",
-      "resolved": "https://registry.npmjs.org/eslint/-/eslint-4.11.0.tgz",
-      "integrity": "sha512-UWbhQpaKlm8h5x/VLwm0S1kheMrDj8jPwhnBMjr/Dlo3qqT7MvcN/UfKAR3E1N4lr4YNtOvS4m3hwsrVc/ky7g==",
+      "version": "4.12.0",
+      "resolved": "https://registry.npmjs.org/eslint/-/eslint-4.12.0.tgz",
+      "integrity": "sha512-Ohv4NU0FffkEe4so8DBrdfRUbGUtM4XnBTDll2pY7OdW3VkjBOZPerx3Bmuhg6S6D6r8+cli0EezN0xawUfYwg==",
       "dev": true,
       "requires": {
-        "ajv": "5.3.0",
+        "ajv": "5.5.0",
         "babel-code-frame": "6.22.0",
         "chalk": "2.3.0",
         "concat-stream": "1.6.0",
         "cross-spawn": "5.1.0",
         "debug": "3.1.0",
-        "doctrine": "2.0.0",
+        "doctrine": "2.0.2",
         "eslint-scope": "3.7.1",
         "espree": "3.5.2",
         "esquery": "1.0.0",
@@ -2143,7 +2148,7 @@
         "file-entry-cache": "2.0.0",
         "functional-red-black-tree": "1.0.1",
         "glob": "7.1.2",
-        "globals": "9.17.0",
+        "globals": "11.0.1",
         "ignore": "3.3.5",
         "imurmurhash": "0.1.4",
         "inquirer": "3.3.0",
@@ -2174,9 +2179,9 @@
           "dev": true
         },
         "ajv": {
-          "version": "5.3.0",
-          "resolved": "https://registry.npmjs.org/ajv/-/ajv-5.3.0.tgz",
-          "integrity": "sha1-RBT/dKUIecII7l/cgm4ywwNUnto=",
+          "version": "5.5.0",
+          "resolved": "https://registry.npmjs.org/ajv/-/ajv-5.5.0.tgz",
+          "integrity": "sha1-6yhAdG6dxIvV4GOjbj/UAMXqtak=",
           "dev": true,
           "requires": {
             "co": "4.6.0",
@@ -2234,6 +2239,12 @@
           "version": "4.0.0",
           "resolved": "https://registry.npmjs.org/esprima/-/esprima-4.0.0.tgz",
           "integrity": "sha512-oftTcaMu/EGrEIu904mWteKIv8vMuOgGYo7EhVJJN00R/EED9DCua/xxHRdYnKtcECzVg7xOWhflvJMnqcFZjw==",
+          "dev": true
+        },
+        "globals": {
+          "version": "11.0.1",
+          "resolved": "https://registry.npmjs.org/globals/-/globals-11.0.1.tgz",
+          "integrity": "sha1-Eqh7sBDlFUOWrMU14eQ/x1Ow5eg=",
           "dev": true
         },
         "has-flag": {
@@ -2590,13 +2601,13 @@
       "dev": true
     },
     "external-editor": {
-      "version": "2.0.5",
-      "resolved": "https://registry.npmjs.org/external-editor/-/external-editor-2.0.5.tgz",
-      "integrity": "sha512-Msjo64WT5W+NhOpQXh0nOHm+n0RfU1QUwDnKYvJ8dEJ8zlwLrqXNTv5mSUTJpepf41PDJGyhueTw2vNZW+Fr/w==",
+      "version": "2.1.0",
+      "resolved": "https://registry.npmjs.org/external-editor/-/external-editor-2.1.0.tgz",
+      "integrity": "sha512-E44iT5QVOUJBKij4IIV3uvxuNlbKS38Tw1HiupxEIHPv9qtC2PrDYohbXV5U+1jnfIXttny8gUhj+oZvflFlzA==",
       "dev": true,
       "requires": {
+        "chardet": "0.4.0",
         "iconv-lite": "0.4.17",
-        "jschardet": "1.6.0",
         "tmp": "0.0.33"
       }
     },
@@ -3262,7 +3273,7 @@
       "dev": true,
       "requires": {
         "chalk": "2.1.0",
-        "eslint": "4.11.0"
+        "eslint": "4.12.0"
       },
       "dependencies": {
         "ansi-styles": {
@@ -3668,7 +3679,7 @@
         "chalk": "2.3.0",
         "cli-cursor": "2.1.0",
         "cli-width": "2.2.0",
-        "external-editor": "2.0.5",
+        "external-editor": "2.1.0",
         "figures": "2.0.0",
         "lodash": "4.17.4",
         "mute-stream": "0.0.7",
@@ -4252,12 +4263,6 @@
       "integrity": "sha1-peZUwuWi3rXyAdls77yoDA7y9RM=",
       "dev": true,
       "optional": true
-    },
-    "jschardet": {
-      "version": "1.6.0",
-      "resolved": "https://registry.npmjs.org/jschardet/-/jschardet-1.6.0.tgz",
-      "integrity": "sha512-xYuhvQ7I9PDJIGBWev9xm0+SMSed3ZDBAmvVjbFR1ZRLAF+vlXcQu6cRI9uAlj81rzikElRVteehwV7DuX2ZmQ==",
-      "dev": true
     },
     "jsesc": {
       "version": "1.3.0",
