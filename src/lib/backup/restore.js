@@ -3,7 +3,7 @@ import {readAsText} from 'promise-file-reader';
 import * as view from 'backup/restore_view';
 import {PageStore} from 'page/page_store';
 import {JSON_BACKUP_ID, JSON_BACKUP_VERSION} from 'backup/backup';
-
+import {restoreBookmarksFromJson} from 'backup/restore_bookmarks';
 
 /**
  * Ask the user to select a file to restore, check for confirmation, then
@@ -93,14 +93,4 @@ async function restoreBackupFromJson(
       await page.save();
     }
   }
-}
-
-/**
- * Recursively import Pages/PageFolders from a Bookmarks JSON object into
- * the PageStore. Used to upgrade from UpdateScanner v3.
- *
- * @param {PageStore} pageStore - PageStore to import into.
- * @param {Object} json - JSON object to import from.
- */
-async function restoreBookmarksFromJson(pageStore, json) {
 }
