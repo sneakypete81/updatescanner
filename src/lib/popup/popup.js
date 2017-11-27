@@ -3,6 +3,7 @@ import {backgroundActionEnum} from 'background/actions.js';
 import {PageStore, hasPageStateChanged, isItemChanged} from 'page/page_store';
 import {createBackupJson} from 'backup/backup';
 import {openRestoreUrl} from 'backup/backup_url';
+import {waitForMs} from 'util/promise';
 import * as view from 'popup/popup_view';
 
 /**
@@ -21,6 +22,9 @@ export class Popup {
    * Initialises the popup data and event handlers.
    */
   async init() {
+    // Small delay to allow popup to render
+    await waitForMs(100);
+
     this.pageStore = await PageStore.load();
     this.pageStore.bindPageUpdate(this._handlePageUpdate.bind(this));
 
