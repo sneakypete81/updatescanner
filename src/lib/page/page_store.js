@@ -182,6 +182,7 @@ export class PageStore {
     // PageMap.
     return new PageFolder(pageFolderId, {});
   }
+
   /**
    * Delete a Page/PageFolder from the PageStore.
    *
@@ -192,7 +193,9 @@ export class PageStore {
 
     // Recursively delete any children
     if (item instanceof PageFolder) {
-      for (const child of item.children) {
+      // Take a copy of the children array, to avoid problems when we delete
+      const children = item.children.slice();
+      for (const child of children) {
         await this.deleteItem(child);
       }
     }
@@ -214,12 +217,12 @@ export class PageStore {
       // Delete the item itself. This will cause _handleItemUpdate to update the
       // PageMap.
       if (item !== undefined) {
-        item.delete();
+        await item.delete();
       }
 
       // Delete HTML associated with the Page
       if (item instanceof Page) {
-        PageStore.deleteHtml(itemId);
+        await PageStore.deleteHtml(itemId);
       }
     }
   }
