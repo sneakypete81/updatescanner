@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
 <html>
+<!-- TODO: instructions for restore instead -->
 <head>
   <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
   <title>Update Scanner Upgrade</title>
@@ -19,7 +20,8 @@
       </div>
     </div>
     If you have used Update Scanner before, you can import your previous scan
-    list by following these instructions.
+    list by following these instructions. Note that this only imports your
+    Update Scanner list, and not the rest of your bookmarks.
   </div>
 
   <div>
@@ -39,24 +41,11 @@
 
   <div class="step">
     <h2>Import into Update Scanner 4</h2>
-    <label id="upload-button" for="file-upload">
-        Select Bookmarks File...
-    </label>
-    <input id="file-upload" class="hidden" type="file" accept=".json"/>
-
-    <div id="importing" class="hidden">
-      Importing pages...
-    </div>
-    <div id="upgrade-failed" class="hidden">
-      Error: No Update Scanner bookmarks were found.
-    </div>
-    <div id="upgrade-complete" class="hidden">
-      Your bookmarks have been imported successfully.
-    </div>
+    <ul>
+      <li>Click the Update Scanner toolbar icon, choose "Menu" then
+        "Restore Pages".</li>
+      <li>Browse to your Bookmarks file.</li>
+    </ul>
   </div>
-
-  <!-- Output script from webpack -->
-  <script src="upgrade_script.js"></script>
-
 </body>
 </html>

@@ -64,12 +64,12 @@ async function importPages(pageStore, root, parentId) {
       page.scanRateMinutes = annos['updatescan/scan_rate_mins'];
       page.changeThreshold = annos['updatescan/threshold'];
       page.ignoreNumbers = (annos['updatescan/ignore_numbers'] == 1);
-      page.encoding = (annos['updatesscan/encoding']);
-      page.highlightChanges = (annos['updatesscan/highlight_changes']);
-      page.highlightColour = (annos['updatesscan/highlight_colour']);
-      page.markChanges = (annos['updatesscan/mark_changes']);
-      page.doPost = (annos['updatesscan/request_method'] == 'post');
-      page.postParams = (annos['updatesscan/post_params']);
+      page.encoding = (annos['updatescan/encoding']);
+      page.highlightChanges = (annos['updatescan/highlight_changes'] == 1);
+      page.highlightColour = (annos['updatescan/highlight_colour']);
+      page.markChanges = (annos['updatescan/mark_changes'] == 1);
+      page.doPost = (annos['updatescan/request_method'] == 'post');
+      page.postParams = (annos['updatescan/post_params']);
       await page.save();
     }
   }

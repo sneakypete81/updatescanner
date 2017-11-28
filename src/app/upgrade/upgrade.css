@@ -20,26 +20,10 @@ h1 {
   margin-bottom: 1em;
 }
 
+div {
+  margin-bottom: 1em;
+}
+
 li {
   margin-bottom: 0.5em;
-}
-
-form {
-  margin-top: 2em;
-  margin-left: 2em;
-}
-
-#upload-button {
-  border: 1px solid #ccc;
-  padding: 6px 12px;
-  cursor: pointer;
-}
-
-#upgrade-failed {
-  margin-top: 1em;
-  color: #FF4136;
-}
-
-.hidden {
-  display: none;
 }
