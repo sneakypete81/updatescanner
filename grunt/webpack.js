@@ -16,7 +16,7 @@ module.exports = {
       popup: './src/app/popup/popup_script.js',
       debug_storage: './src/app/debug_storage/debug_storage_script.js',
       sidebar: './src/app/sidebar/sidebar_script.js',
-      backup_restore: './src/app/backup_restore/backup_restore_script.js',
+      restore: './src/app/restore/restore_script.js',
     },
 
     output: {

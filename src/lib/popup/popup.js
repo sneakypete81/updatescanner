@@ -2,7 +2,7 @@ import {openMain, showAllChanges, paramEnum, actionEnum} from 'main/main_url';
 import {backgroundActionEnum} from 'background/actions.js';
 import {PageStore, hasPageStateChanged, isItemChanged} from 'page/page_store';
 import {createBackupJson} from 'backup/backup';
-import {openRestoreUrl} from 'backup/backup_url';
+import {openRestoreUrl} from 'backup/restore_url';
 import {waitForMs} from 'util/promise';
 import * as view from 'popup/popup_view';
 
