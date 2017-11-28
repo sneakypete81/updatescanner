@@ -10,18 +10,27 @@ export function confirmRestore() {
     'Restoring will overwrite your existing pages - are you sure?');
 }
 
+/**
+ * Display the "Restoring" progress message.
+ */
 export function showRestoring() {
   showElement(qs('#restoring'));
   hideElement(qs('#restore-complete'));
   hideElement(qs('#restore-failed'));
 }
 
+/**
+ * Display the "Restore Complete" message.
+ */
 export function showComplete() {
   hideElement(qs('#restoring'));
   showElement(qs('#restore-complete'));
   hideElement(qs('#restore-failed'));
 }
 
+/**
+ * Display the "Restore Failed" message.
+ */
 export function showFailed() {
   hideElement(qs('#restoring'));
   hideElement(qs('#restore-complete'));
