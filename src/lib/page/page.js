@@ -202,6 +202,24 @@ export class Page {
   }
 
   /**
+   * Check if the Page still exists in storage. This might not be the case if
+   * it was deleted by another process, for example.
+   *
+   * @returns {Promise} A Promise that fulfils with a boolean indicating Whether
+   * the page exists in storage.
+   */
+  async existsInStorage() {
+    try {
+      const data = await Storage.load(Page._KEY(this.id));
+      console.log(data);
+      return (data !== undefined);
+    } catch (error) {
+      log(`ERROR: Page.existsInStorage: ${error}`);
+    }
+    return false;
+  }
+
+  /**
    * Save the Page to storage.
    *
    * @returns {Promise} An empty Promise that fulfils when the operation is

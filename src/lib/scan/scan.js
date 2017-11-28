@@ -60,8 +60,11 @@ async function scanPage(page) {
     return processHtml(page, html);
   } catch (error) {
     log(`Could not scan "${page.title}": ${error}`);
-    page.state = Page.stateEnum.ERROR;
-    page.save();
+    // Only save if the page still exists
+    if (await page.existsInStorage()) {
+      page.state = Page.stateEnum.ERROR;
+      page.save();
+    }
   }
   return false;
 }
@@ -80,6 +83,12 @@ async function scanPage(page) {
  * @returns {boolean} True if a new major change is detected.
  */
 async function processHtml(page, scannedHtml) {
+  // Do nothing if the page no longer exists
+  const existsInStorage = await page.existsInStorage();
+  if (!existsInStorage) {
+    return false;
+  }
+
   const prevHtml = await PageStore.loadHtml(page.id, PageStore.htmlTypes.NEW);
   return await updatePageState(page, prevHtml, scannedHtml);
 }
