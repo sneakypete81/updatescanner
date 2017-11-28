@@ -218,6 +218,8 @@ describe('scan', function() {
       spyOn(PageStore, 'loadHtml').and.returnValues(Promise.resolve(html));
       spyOn(PageStore, 'saveHtml').and.returnValue(Promise.resolve(html));
       spyOn(Page.prototype, 'save');
+      spyOn(Page.prototype, 'existsInStorage')
+        .and.returnValue(Promise.resolve(true));
       spyOn(log, 'log');
       spyOn(promise, 'waitForMs');
 
@@ -241,6 +243,8 @@ describe('scan', function() {
       spyOn(PageStore, 'loadHtml').and.returnValue(Promise.resolve(html));
       spyOn(PageStore, 'saveHtml').and.returnValue(Promise.resolve(html));
       spyOn(Page.prototype, 'save');
+      spyOn(Page.prototype, 'existsInStorage')
+        .and.returnValue(Promise.resolve(true));
       spyOn(log, 'log');
       spyOn(promise, 'waitForMs');
 
@@ -268,6 +272,8 @@ describe('scan', function() {
       spyOn(window, 'fetch').and.returnValues(
         Promise.resolve({ok: false, status: 404, statusText: 'no such page'}));
       spyOn(PageStore, 'loadHtml');
+      spyOn(Page.prototype, 'existsInStorage')
+        .and.returnValue(Promise.resolve(true));
       spyOn(log, 'log');
       spyOn(promise, 'waitForMs');
 
@@ -288,6 +294,8 @@ describe('scan', function() {
       spyOn(window, 'fetch').and.returnValues(
         Promise.reject('Network error'));
       spyOn(PageStore, 'loadHtml');
+      spyOn(Page.prototype, 'existsInStorage')
+        .and.returnValue(Promise.resolve(true));
       spyOn(log, 'log');
       spyOn(promise, 'waitForMs');
 
