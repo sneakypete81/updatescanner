@@ -38,7 +38,7 @@
     "karma-webpack": "2.0.6",
     "load-grunt-tasks": "3.5.2",
     "web-ext": "1.9.1",
-    "webpack": "3.8.1"
+    "webpack": "3.9.0"
   },
   "scripts": {
     "build": "grunt build",
