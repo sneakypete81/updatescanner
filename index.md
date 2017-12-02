@@ -7,16 +7,16 @@ title: Update Scanner
 ---
 ### Thanks!
 
-Many thanks to everyone who has contributed to the Update Scanner 4 WebExtension. If you previously had trouble upgrading from Update Scanner 3, please try again with the latest version:
+*Many thanks to everyone who has contributed to the Update Scanner 4 WebExtension. If you previously had trouble upgrading from Update Scanner 3, please try again with the latest version:*
 
 * Click the Update Scanner toolbar icon to open the popup.
 * Click the **Menu** button, select **Import Pages** and follow the instructions.
 
-I'm taking a break until 2018, thanks for your patience as we continue to port features to the new WebExtension.
+*I'm taking a break until 2018, thanks for your patience as we continue to port features to the new WebExtension.*
 
-Happy Holidays!
+*Happy Holidays!*
 
-Pete, December 2017
+*Pete, December 2017*
 
 ---
 Due to changes in Firefox, Update Scanner has been completely rewritten, and
