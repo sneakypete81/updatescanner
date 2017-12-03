@@ -10,7 +10,7 @@ title: Update Scanner
 *Many thanks to everyone who has contributed to the Update Scanner 4 WebExtension. If you previously had trouble upgrading from Update Scanner 3, please try again with the latest version:*
 
 * Click the Update Scanner toolbar icon to open the popup.
-* Click the **Menu** button, select **Import Pages** and follow the instructions.
+* Click the **Menu** button, select **Restore Pages** and follow the instructions.
 
 *I'm taking a break until 2018, thanks for your patience as we continue to port features to the new WebExtension.*
 
