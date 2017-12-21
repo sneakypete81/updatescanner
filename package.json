@@ -29,7 +29,7 @@
     "jasmine": "2.8.0",
     "jasmine-data-provider": "2.2.0",
     "jasmine-jquery": "2.1.1",
-    "karma": "1.7.1",
+    "karma": "2.0.0",
     "karma-coverage": "1.1.1",
     "karma-firefox-launcher": "1.0.1",
     "karma-jasmine": "1.1.0",
