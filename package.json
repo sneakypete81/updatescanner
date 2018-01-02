@@ -9,7 +9,7 @@
     "dialog-polyfill": "0.4.9",
     "file-dialog": "0.0.7",
     "jquery": "3.3.1",
-    "jstree": "3.3.4",
+    "jstree": "3.3.5",
     "promise-file-reader": "1.0.2"
   },
   "devDependencies": {
