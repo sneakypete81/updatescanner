@@ -6370,9 +6370,9 @@
       }
     },
     "jstree": {
-      "version": "3.3.4",
-      "resolved": "https://registry.npmjs.org/jstree/-/jstree-3.3.4.tgz",
-      "integrity": "sha1-PQibuWI71vPyX2TE5M5UezDUAmQ=",
+      "version": "3.3.5",
+      "resolved": "https://registry.npmjs.org/jstree/-/jstree-3.3.5.tgz",
+      "integrity": "sha1-nFeNsy0KZDd1zd2AIK1ZkvQRnBM=",
       "requires": {
         "jquery": "3.3.1"
       }
