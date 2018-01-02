@@ -2670,6 +2670,11 @@
         "escape-string-regexp": "1.0.5"
       }
     },
+    "file-dialog": {
+      "version": "0.0.7",
+      "resolved": "https://registry.npmjs.org/file-dialog/-/file-dialog-0.0.7.tgz",
+      "integrity": "sha512-eRo8DZbV7G0ADtaUPvGAb5ZXB+jN1ehVeYanIHDt2wEokjiXTy5kzMvtiPw4nEtt08IxJqqMeeFZNP34XLNjRw=="
+    },
     "file-entry-cache": {
       "version": "2.0.0",
       "resolved": "https://registry.npmjs.org/file-entry-cache/-/file-entry-cache-2.0.0.tgz",
@@ -4359,9 +4364,9 @@
       }
     },
     "jstree": {
-      "version": "3.3.4",
-      "resolved": "https://registry.npmjs.org/jstree/-/jstree-3.3.4.tgz",
-      "integrity": "sha1-PQibuWI71vPyX2TE5M5UezDUAmQ=",
+      "version": "3.3.5",
+      "resolved": "https://registry.npmjs.org/jstree/-/jstree-3.3.5.tgz",
+      "integrity": "sha1-nFeNsy0KZDd1zd2AIK1ZkvQRnBM=",
       "requires": {
         "jquery": "3.2.1"
       }
