@@ -4144,7 +4144,8 @@
         "jsbn": {
           "version": "0.1.1",
           "bundled": true,
-          "dev": true
+          "dev": true,
+          "optional": true
         },
         "json-schema": {
           "version": "0.2.3",
@@ -6223,9 +6224,9 @@
       }
     },
     "jquery": {
-      "version": "3.2.1",
-      "resolved": "https://registry.npmjs.org/jquery/-/jquery-3.2.1.tgz",
-      "integrity": "sha1-XE2d5lKvbNCncBVKYxu6ErAVx4c="
+      "version": "3.3.1",
+      "resolved": "https://registry.npmjs.org/jquery/-/jquery-3.3.1.tgz",
+      "integrity": "sha512-Ubldcmxp5np52/ENotGxlLe6aGMvmF4R8S6tZjsP6Knsaxd/xp3Zrh50cG93lR6nPXyUFwzN3ZSOQI0wRJNdGg=="
     },
     "js-base64": {
       "version": "2.3.2",
@@ -6373,7 +6374,7 @@
       "resolved": "https://registry.npmjs.org/jstree/-/jstree-3.3.4.tgz",
       "integrity": "sha1-PQibuWI71vPyX2TE5M5UezDUAmQ=",
       "requires": {
-        "jquery": "3.2.1"
+        "jquery": "3.3.1"
       }
     },
     "jszip": {
