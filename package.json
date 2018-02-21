@@ -10,7 +10,7 @@
     "file-dialog": "0.0.7",
     "jquery": "3.2.1",
     "jstree": "3.3.4",
-    "promise-file-reader": "1.0.0"
+    "promise-file-reader": "1.0.2"
   },
   "devDependencies": {
     "copy-webpack-plugin": "4.5.1",
