@@ -13,7 +13,7 @@
     "promise-file-reader": "1.0.0"
   },
   "devDependencies": {
-    "copy-webpack-plugin": "4.2.3",
+    "copy-webpack-plugin": "4.5.1",
     "eslint": "4.19.0",
     "eslint-config-google": "0.9.1",
     "eslint-plugin-jsdoc": "3.5.0",
