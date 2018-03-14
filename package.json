@@ -38,7 +38,7 @@
     "karma-sourcemap-loader": "0.3.7",
     "karma-webpack": "2.0.13",
     "load-grunt-tasks": "3.5.2",
-    "web-ext": "1.9.1",
+    "web-ext": "2.5.0",
     "webpack": "3.11.0"
   },
   "scripts": {
