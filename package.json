@@ -33,7 +33,7 @@
     "karma-coverage": "1.1.1",
     "karma-firefox-launcher": "1.1.0",
     "karma-jasmine": "1.1.1",
-    "karma-jasmine-html-reporter": "0.2.2",
+    "karma-jasmine-html-reporter": "1.0.0",
     "karma-notification-reporter": "0.1.2",
     "karma-sourcemap-loader": "0.3.7",
     "karma-webpack": "2.0.13",
