@@ -71,7 +71,7 @@ async function scanPage(page) {
 
 /**
  * Load the "NEW" HTML from storage, compare it with the the scanned HTML,
- * update the page state and update the HTML storage as necessary. returns
+ * update the page state and update the HTML storage as necessary. Returns
  * without waiting for the save operations to complete.
  * Note that the "NEW" HTML is used for comparison - this is the HTML that was
  * downloaded during the most recent scan. This is the simplest and most

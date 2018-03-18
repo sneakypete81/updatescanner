@@ -308,8 +308,7 @@ async function loadHtml(page, htmlType) {
  * Update the HTML header with a <base href> for the page.
  *
  * @param {Page} page - Page to update.
- * @param {string} html - HTML page content.
- * type.
+ * @param {string} html - HTML page content type.
  * @returns {string} Updated HTML page content.
  */
 function _updateHeader(page, html) {

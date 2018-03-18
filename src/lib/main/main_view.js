@@ -35,7 +35,7 @@ function initMenu() {
 }
 
 /**
- * @param {Object} handlers - Object containing the following keys:
+ * @param {Object} handlers - Object containing the following keys
  * settingsHandler - Called when the Page Settings menu item is clicked.
  */
 export function bindMenu({settingsHandler}) {
@@ -126,7 +126,7 @@ function setTitle(title, url) {
 }
 
 /**
- * @param {string} subtitle - Subtitle text to use below the main title (eg.
+ * @param {string} subtitle - Subtitle text to use below the main title (eg
  * describing when the page was last updated).
  */
 function setSubtitle(subtitle) {
