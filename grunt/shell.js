@@ -21,8 +21,7 @@ module.exports = {
   webextBuild: {
     command: webExtCmd('build', [
       '--artifacts-dir=dist',
-// required for web-ext >= 2.0.0
-//      '--overwrite-dest',
+      '--overwrite-dest',
     ]),
   },
   webextRun: {
