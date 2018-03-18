@@ -36,12 +36,12 @@ function preload() {
     },
     'storage_info': {
       version: 1,
-      pageIds: ['1', '2', '4', '5'],
+      pageIds: ['1', '2', '4', '5', '6', '7', '8', '9', '10'],
       pageFolderIds: ['0', '3'],
       nextId: '6',
     },
     'page_folder:0': {title: 'root', children: ['1', '2', '3', '5']},
-    'page_folder:3': {title: 'Subfolder', children: ['4']},
+    'page_folder:3': {title: 'Subfolder', children: ['4', '6', '7', '8', '9', '10']},
     'page:1': {
       title: 'Update Scanner Website with a very very very long title',
       url: 'https://addons.mozilla.org/firefox/addon/update-scanner/',
@@ -51,6 +51,7 @@ function preload() {
     },
     'page:2': {
       title: 'Another Page',
+      url: 'https://addons.mozilla.org/firefox/addon/update-scanner/',
       oldScanTime: 1486026360682,
       newScanTime: 1486631108392,
     },
@@ -61,6 +62,36 @@ function preload() {
       newScanTime: 1486631108392,
     },
     'page:5': {
+      title: 'Firefox Addons',
+      url: 'https://addons.mozilla.org/',
+      oldScanTime: 1486026360682,
+      newScanTime: 1486631108392,
+    },
+    'page:6': {
+      title: 'Firefox Addons',
+      url: 'https://addons.mozilla.org/',
+      oldScanTime: 1486026360682,
+      newScanTime: 1486631108392,
+    },
+    'page:7': {
+      title: 'Firefox Addons',
+      url: 'https://addons.mozilla.org/',
+      oldScanTime: 1486026360682,
+      newScanTime: 1486631108392,
+    },
+    'page:8': {
+      title: 'Firefox Addons',
+      url: 'https://addons.mozilla.org/',
+      oldScanTime: 1486026360682,
+      newScanTime: 1486631108392,
+    },
+    'page:9': {
+      title: 'Firefox Addons',
+      url: 'https://addons.mozilla.org/',
+      oldScanTime: 1486026360682,
+      newScanTime: 1486631108392,
+    },
+    'page:10': {
       title: 'Firefox Addons',
       url: 'https://addons.mozilla.org/',
       oldScanTime: 1486026360682,
