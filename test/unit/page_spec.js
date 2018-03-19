@@ -132,7 +132,7 @@ describe('Page', function() {
     it('returns null if the key is invalid', function() {
       const key = 'invalid:987';
       const id = Page.idFromKey(key);
-      expect(id).toBeNull;
+      expect(id).toBeNull();
     });
   });
 
