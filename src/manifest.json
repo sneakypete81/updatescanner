@@ -21,10 +21,11 @@
 
   "permissions": [
     "<all_urls>",
-    "storage",
     "alarms",
     "notifications",
-    "tabs"
+    "storage",
+    "tabs",
+    "unlimitedStorage"
   ],
 
   "background": {
