@@ -1,6 +1,8 @@
 // @TODO: Don't need JQuery
 import $ from 'jquery';
 
+import {PageStore} from 'page/page_store';
+
 import {showNotification} from 'scan/notification';
 
 const dataText = $('#data');
@@ -20,16 +22,18 @@ addFrm.addEventListener('submit', add);
 document.addEventListener('DOMContentLoaded', reload);
 
 
-function reload() {
+async function reload() {
   dataText.innerHTML = '';
-  browser.storage.local.get()
-    .then(function(results) {
-      dataText.text(JSON.stringify(results, null, 4));
-    })
-    .catch(console.log.bind(console));
+  const storageData = await browser.storage.local.get();
+  dataText.text(JSON.stringify(storageData, null, 4));
+
+  const storageDBData = await PageStore.loadHtml('1', PageStore.htmlTypes.NEW);
+  dataText.text(JSON.stringify(storageDBData, null, 4));
 }
 
-function preload() {
+async function preload() {
+  await PageStore.saveHtml('1', PageStore.htmlTypes.NEW, 'This is some HTML');
+
   browser.storage.local.set({
     'config': {
       debug: true,
@@ -41,7 +45,10 @@ function preload() {
       nextId: '6',
     },
     'page_folder:0': {title: 'root', children: ['1', '2', '3', '5']},
-    'page_folder:3': {title: 'Subfolder', children: ['4', '6', '7', '8', '9', '10']},
+    'page_folder:3': {
+      title: 'Subfolder',
+      children: ['4', '6', '7', '8', '9', '10'],
+    },
     'page:1': {
       title: 'Update Scanner Website with a very very very long title',
       url: 'https://addons.mozilla.org/firefox/addon/update-scanner/',

@@ -1,6 +1,6 @@
 import {Main} from 'main/main';
 import {Page} from 'page/page';
-import {Storage} from 'util/storage';
+import {StorageDB} from 'util/storage_db';
 import * as diff from 'diff/diff';
 import * as mainView from 'main/main_view';
 import * as log from 'util/log';
@@ -25,14 +25,14 @@ describe('Main', function() {
       const html = 'hello';
       const main = new Main();
 
-      spyOn(Storage, 'load').and.returnValue(Promise.resolve(html));
+      spyOn(StorageDB, 'load').and.returnValue(Promise.resolve(html));
       spyOn(diff, 'diff').and.returnValues('diffHtml');
       spyOn(mainView, 'viewDiff').and.callFake((pageArg, htmlArg) => {
         expect(htmlArg).toEqual(
           '<base href="test.com/blah" target="_top">diffHtml');
         expect(pageArg).toEqual(page);
-        expect(Storage.load).toHaveBeenCalledWith('html:old:' + id);
-        expect(Storage.load).toHaveBeenCalledWith('html:new:' + id);
+        expect(StorageDB.load).toHaveBeenCalledWith('html:old:' + id);
+        expect(StorageDB.load).toHaveBeenCalledWith('html:new:' + id);
         expect(diff.diff).toHaveBeenCalledWith(page, html, html);
         done();
       });
@@ -45,7 +45,7 @@ describe('Main', function() {
       const main = new Main();
 
       spyOn(mainView, 'viewDiff');
-      spyOn(Storage, 'load').and.returnValue(Promise.resolve(undefined));
+      spyOn(StorageDB, 'load').and.returnValue(Promise.resolve(undefined));
 
       spyOn(log, 'log').and.callFake((msg) => {
         expect(msg).toMatch('Could not load .* from storage');

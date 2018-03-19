@@ -5,6 +5,7 @@ import {Page} from 'page/page';
 import {PageFolder} from 'page/page_folder';
 import {StorageInfo} from 'page/storage_info';
 import {Storage} from 'util/storage';
+import {StorageDB} from 'util/storage_db';
 import * as log from 'util/log';
 
 describe('PageStore', function() {
@@ -471,6 +472,7 @@ describe('PageStore', function() {
       });
       spyOn(Storage, 'save').and.returnValues(Promise.resolve());
       spyOn(Storage, 'remove').and.returnValues(Promise.resolve());
+      spyOn(StorageDB, 'remove').and.returnValues(Promise.resolve());
 
       const pageStore = await PageStore.load();
       await pageStore.deleteItem('1');
@@ -498,6 +500,7 @@ describe('PageStore', function() {
       });
       spyOn(Storage, 'save').and.returnValues(Promise.resolve());
       spyOn(Storage, 'remove').and.returnValues(Promise.resolve());
+      spyOn(StorageDB, 'remove').and.returnValues(Promise.resolve());
 
       const pageStore = await PageStore.load();
       await pageStore.deleteItem('1');
@@ -532,6 +535,7 @@ describe('PageStore', function() {
       });
       spyOn(Storage, 'save').and.returnValues(Promise.resolve());
       spyOn(Storage, 'remove').and.returnValues(Promise.resolve());
+      spyOn(StorageDB, 'remove').and.returnValues(Promise.resolve());
 
       const pageStore = await PageStore.load();
       await pageStore.deleteItem('1');
@@ -588,6 +592,7 @@ describe('PageStore', function() {
       });
       spyOn(Storage, 'save').and.returnValues(Promise.resolve());
       spyOn(Storage, 'remove').and.returnValues(Promise.resolve());
+      spyOn(StorageDB, 'remove').and.returnValues(Promise.resolve());
 
       const pageStore = await PageStore.load();
       await pageStore.deleteItem(PageStore.ROOT_ID);
@@ -834,10 +839,10 @@ describe('PageStore', function() {
       it('retrieves "' + pageType + '" HTML from storage', function(done) {
         const id = 66;
         const html = 'some HTML';
-        spyOn(Storage, 'load').and.returnValues(Promise.resolve(html));
+        spyOn(StorageDB, 'load').and.returnValues(Promise.resolve(html));
 
         PageStore.loadHtml(id, pageType).then((result) => {
-          expect(Storage.load).toHaveBeenCalledWith(
+          expect(StorageDB.load).toHaveBeenCalledWith(
             PageStore._HTML_KEY(id, pageType));
           expect(result).toEqual(html);
           done();
@@ -848,7 +853,7 @@ describe('PageStore', function() {
     it('returns null when the page HTML doesn\'t exist in storage',
        function(done) {
       const id = '42';
-      spyOn(Storage, 'load').and.returnValues(Promise.resolve(undefined));
+      spyOn(StorageDB, 'load').and.returnValues(Promise.resolve(undefined));
 
       PageStore.loadHtml(id, PageStore.htmlTypes.OLD).then((result) => {
         expect(result).toBeNull();
@@ -858,7 +863,7 @@ describe('PageStore', function() {
 
     it('returns null when the load operation fails', function(done) {
       const id = '42';
-      spyOn(Storage, 'load').and.returnValues(Promise.reject('ERROR_MSG'));
+      spyOn(StorageDB, 'load').and.returnValues(Promise.reject('ERROR_MSG'));
       spyOn(log, 'log');
 
       PageStore.loadHtml(id, PageStore.htmlTypes.OLD).then((result) => {
@@ -874,17 +879,17 @@ describe('PageStore', function() {
       const id = '24';
       const html = 'some HTML..';
       const htmlType = PageStore.htmlTypes.OLD;
-      spyOn(Storage, 'save').and.returnValues(Promise.resolve());
+      spyOn(StorageDB, 'save').and.returnValues(Promise.resolve());
 
       PageStore.saveHtml(id, htmlType, html).then(() => {
-        expect(Storage.save).toHaveBeenCalledWith(
+        expect(StorageDB.save).toHaveBeenCalledWith(
           PageStore._HTML_KEY(id, htmlType), html);
         done();
       }).catch((error) => done.fail(error));
     });
 
     it('silently logs an error if the save fails', function(done) {
-      spyOn(Storage, 'save').and.returnValues(Promise.reject('AN_ERROR'));
+      spyOn(StorageDB, 'save').and.returnValues(Promise.reject('AN_ERROR'));
       spyOn(log, 'log');
 
       PageStore.saveHtml('2', PageStore.htmlTypes.NEW, 'Some HTML').then(() => {
@@ -897,19 +902,19 @@ describe('PageStore', function() {
   describe('deleteHtml', function() {
     it('deletes HTML from storage', function(done) {
       const id = '24';
-      spyOn(Storage, 'remove').and.returnValues(Promise.resolve());
+      spyOn(StorageDB, 'remove').and.returnValues(Promise.resolve());
 
       PageStore.deleteHtml(id).then(() => {
-        expect(Storage.remove).toHaveBeenCalledWith(
+        expect(StorageDB.remove).toHaveBeenCalledWith(
           PageStore._HTML_KEY(id, PageStore.htmlTypes.OLD));
-        expect(Storage.remove).toHaveBeenCalledWith(
+        expect(StorageDB.remove).toHaveBeenCalledWith(
           PageStore._HTML_KEY(id, PageStore.htmlTypes.NEW));
         done();
       }).catch((error) => done.fail(error));
     });
 
     it('silently logs an error if the delete operation fails', function(done) {
-      spyOn(Storage, 'remove').and.returnValues(Promise.reject('AN_ERROR'));
+      spyOn(StorageDB, 'remove').and.returnValues(Promise.reject('AN_ERROR'));
       spyOn(log, 'log');
 
       PageStore.deleteHtml('2').then(() => {

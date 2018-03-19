@@ -2,6 +2,7 @@ import {Page} from './page';
 import {PageFolder} from './page_folder';
 import {StorageInfo} from './storage_info';
 import {Storage} from 'util/storage';
+import {StorageDB} from 'util/storage_db';
 import {log} from 'util/log';
 
 /**
@@ -403,19 +404,19 @@ export class PageStore {
   }
 
   /**
-   * Save a Page's HTML to storage.
+   * Save a Page's HTML to storage. Errors are logged and discarded.
    *
    * @param {string} id - ID of the page.
    * @param {string} htmlType - PageStore.htmlTypes string identifying the HTML
    * type.
    * @param {string} html - HTML to save.
-   *
-   * @returns {Promise} An empty Promise that fulfils when the save succeeds.
-   * Errors are logged and discarded.
    */
-  static saveHtml(id, htmlType, html) {
-    return Storage.save(PageStore._HTML_KEY(id, htmlType), html)
-      .catch((error) => log('ERROR:PageStore.saveHtml:' + error));
+  static async saveHtml(id, htmlType, html) {
+    try {
+      await StorageDB.save(PageStore._HTML_KEY(id, htmlType), html);
+    } catch (error) {
+      log('ERROR:PageStore.saveHtml:' + error);
+    }
   }
 
   /**
@@ -430,7 +431,7 @@ export class PageStore {
    */
   static async loadHtml(id, htmlType) {
     try {
-      const html = await Storage.load(PageStore._HTML_KEY(id, htmlType));
+      const html = await StorageDB.load(PageStore._HTML_KEY(id, htmlType));
       if (html === undefined) {
         return null;
       }
@@ -451,12 +452,12 @@ export class PageStore {
    */
   static async deleteHtml(id) {
     try {
-      await Storage.remove(PageStore._HTML_KEY(id, PageStore.htmlTypes.OLD));
+      await StorageDB.remove(PageStore._HTML_KEY(id, PageStore.htmlTypes.OLD));
     } catch (error) {
       log('ERROR:PageStore.deleteHtml:' + error);
     }
     try {
-      await Storage.remove(PageStore._HTML_KEY(id, PageStore.htmlTypes.NEW));
+      await StorageDB.remove(PageStore._HTML_KEY(id, PageStore.htmlTypes.NEW));
     } catch (error) {
       log('ERROR:PageStore.deleteHtml:' + error);
     }
