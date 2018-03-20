@@ -12,11 +12,12 @@ module.exports = {
   options: {
     entry: {
       background: './src/app/background/background_script.js',
+      debug: './src/app/debug/debug_script.js',
       main: './src/app/main/main_script.js',
       popup: './src/app/popup/popup_script.js',
-      debug: './src/app/debug/debug_script.js',
       sidebar: './src/app/sidebar/sidebar_script.js',
       restore: './src/app/restore/restore_script.js',
+      update: './src/app/update/update_script.js',
     },
 
     output: {
