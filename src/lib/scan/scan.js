@@ -1,6 +1,7 @@
 import {isMajorChange} from 'scan/fuzzy';
 import {PageStore} from 'page/page_store';
 import {Page} from 'page/page';
+import {isUpToDate} from 'update/update';
 import {log} from 'util/log';
 import {waitForMs} from 'util/promise';
 
@@ -28,6 +29,11 @@ const SCAN_IDLE_MS = 2000;
  * @returns {integer} The number of new major changes detected.
  */
 export async function scan(pageList) {
+  // Don't scan if the data structures aren't yet updated to the latest version
+  if (!(await isUpToDate())) {
+    return 0;
+  }
+
   let newMajorChangeCount = 0;
   for (const page of pageList) {
     if (await scanPage(page)) {

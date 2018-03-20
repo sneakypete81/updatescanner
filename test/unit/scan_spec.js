@@ -4,6 +4,7 @@ import {PageStore} from 'page/page_store';
 import {Page} from 'page/page';
 import * as log from 'util/log';
 import * as promise from 'util/promise';
+import * as update from 'update/update';
 
 describe('scan', function() {
   describe('getChangeType', function() {
@@ -201,8 +202,24 @@ describe('scan', function() {
       spyOn(PageStore, 'loadHtml');
       spyOn(log, 'log');
       spyOn(promise, 'waitForMs');
+      spyOn(update, 'isUpToDate').and.returnValue(Promise.resolve(true));
 
       scan.scan([]).then(() => {
+        expect(window.fetch).not.toHaveBeenCalled();
+        expect(PageStore.loadHtml).not.toHaveBeenCalled();
+        done();
+      }).catch((error) => done.fail(error));
+    });
+
+    it('does nothing if the data structures are not up to date',
+    function(done) {
+      const page = new Page('1', {url: 'http://www.example.com/'});
+
+      spyOn(window, 'fetch');
+      spyOn(PageStore, 'loadHtml');
+      spyOn(update, 'isUpToDate').and.returnValue(Promise.resolve(false));
+
+      scan.scan([page]).then(() => {
         expect(window.fetch).not.toHaveBeenCalled();
         expect(PageStore.loadHtml).not.toHaveBeenCalled();
         done();
@@ -222,6 +239,7 @@ describe('scan', function() {
         .and.returnValue(Promise.resolve(true));
       spyOn(log, 'log');
       spyOn(promise, 'waitForMs');
+      spyOn(update, 'isUpToDate').and.returnValue(Promise.resolve(true));
 
       scan.scan([page]).then(() => {
         expect(window.fetch).toHaveBeenCalledWith(page.url);
@@ -247,6 +265,7 @@ describe('scan', function() {
         .and.returnValue(Promise.resolve(true));
       spyOn(log, 'log');
       spyOn(promise, 'waitForMs');
+      spyOn(update, 'isUpToDate').and.returnValue(Promise.resolve(true));
 
       scan.scan(pages).then(() => {
         expect(window.fetch).toHaveBeenCalledWith(pages[0].url);
@@ -276,6 +295,7 @@ describe('scan', function() {
         .and.returnValue(Promise.resolve(true));
       spyOn(log, 'log');
       spyOn(promise, 'waitForMs');
+      spyOn(update, 'isUpToDate').and.returnValue(Promise.resolve(true));
 
       scan.scan([page]).then(() => {
         expect(window.fetch).toHaveBeenCalledWith(page.url);
@@ -298,6 +318,7 @@ describe('scan', function() {
         .and.returnValue(Promise.resolve(true));
       spyOn(log, 'log');
       spyOn(promise, 'waitForMs');
+      spyOn(update, 'isUpToDate').and.returnValue(Promise.resolve(true));
 
       scan.scan([page]).then(() => {
         expect(window.fetch).toHaveBeenCalledWith(page.url);
