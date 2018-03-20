@@ -3,6 +3,8 @@ import * as autoscan from 'scan/autoscan';
 import {scan} from 'scan/scan';
 import {showNotification} from 'scan/notification';
 import {PageStore, hasPageStateChanged, isItemChanged} from 'page/page_store';
+import {isUpToDate, latestVersion} from 'update/update';
+import {openUpdate} from 'update/update_url';
 import {log} from 'util/log';
 import {Config} from 'util/config';
 
@@ -34,7 +36,8 @@ export class Background {
 
     this._refreshIcon();
     this.pageStore.refreshFolderState();
-    this._checkFirstRun();
+    await this._checkFirstRun();
+    await this._checkIfUpdateRequired();
 
     // @FIXME: Autoscan should take pageStore as a parameter
     autoscan.start();
@@ -90,7 +93,18 @@ export class Background {
       const page = await this.pageStore.createWebsitePage();
       scan([page]);
       config.set('isFirstRun', false);
-      config.save();
+      config.set('updateVersion', latestVersion);
+      await config.save();
+    }
+  }
+
+  /**
+   * If the data structures aren't up to date, open the Update page to perform
+   * an update.
+   */
+  async _checkIfUpdateRequired() {
+    if (!(await isUpToDate())) {
+      openUpdate();
     }
   }
 
