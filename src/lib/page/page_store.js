@@ -404,7 +404,7 @@ export class PageStore {
   }
 
   /**
-   * Save a Page's HTML to storage. Errors are logged and discarded.
+   * Save a Page's HTML to storageDB. Errors are logged and discarded.
    *
    * @param {string} id - ID of the page.
    * @param {string} htmlType - PageStore.htmlTypes string identifying the HTML
@@ -420,7 +420,7 @@ export class PageStore {
   }
 
   /**
-   * Load a Page's HTML from storage.
+   * Load a Page's HTML from storageDB.
    *
    * @param {string} id - ID of the page.
    * @param {string} htmlType - PageStore.htmlTypes string identifying the HTML
@@ -443,7 +443,7 @@ export class PageStore {
   }
 
   /**
-   * Delete the saved HTML for a given ID. Errors are ignored.
+   * Delete the saved HTML from storageDB. Errors are ignored.
    *
    * @param {string} id - ID of the Page.
    *
@@ -460,6 +460,53 @@ export class PageStore {
       await StorageDB.remove(PageStore._HTML_KEY(id, PageStore.htmlTypes.NEW));
     } catch (error) {
       log('ERROR:PageStore.deleteHtml:' + error);
+    }
+    return {};
+  }
+
+  /**
+   * Load a Page's HTML from the deprecated storage location. Only for use by
+   * the update script.
+   *
+   * @param {string} id - ID of the page.
+   * @param {string} htmlType - PageStore.htmlTypes string identifying the HTML
+   * type.
+   *
+   * @returns {Promise} A Promise that fulfils with the requested HTML, or null
+   * if it can't be loaded from storage.
+   */
+  static async loadHtmlFromDeprecatedStorage(id, htmlType) {
+    try {
+      const html = await Storage.load(PageStore._HTML_KEY(id, htmlType));
+      if (html === undefined) {
+        return null;
+      }
+      return html;
+    } catch (error) {
+      log('ERROR:PageStore.loadHtmlFromDeprecatedStorage:' + error);
+      return null;
+    }
+  }
+
+  /**
+   * Delete the saved HTML from the deprecated storage location. Errors are
+   * ignored. Only for use by the update script.
+   *
+   * @param {string} id - ID of the Page.
+   *
+   * @returns {Promise} An empty Promise that fulfils when the save succeeds.
+   * Errors are logged and discarded.
+   */
+  static async deleteHtmlFromDeprecatedStorage(id) {
+    try {
+      await Storage.remove(PageStore._HTML_KEY(id, PageStore.htmlTypes.OLD));
+    } catch (error) {
+      log('ERROR:PageStore.deleteHtmlFromDeprecatedStorage:' + error);
+    }
+    try {
+      await Storage.remove(PageStore._HTML_KEY(id, PageStore.htmlTypes.NEW));
+    } catch (error) {
+      log('ERROR:PageStore.deleteHtmlFromDeprecatedStorage:' + error);
     }
     return {};
   }
