@@ -211,7 +211,6 @@ export class Page {
   async existsInStorage() {
     try {
       const data = await Storage.load(Page._KEY(this.id));
-      console.log(data);
       return (data !== undefined);
     } catch (error) {
       log(`ERROR: Page.existsInStorage: ${error}`);
