@@ -59,7 +59,7 @@ export class PageStore {
       return new PageStore(pageMap, storageInfo);
     } catch (error) {
       // Not much we can do with an error. Set to an empty pageMap.
-      console.log.bind(console);
+      console.error(error);
       return new PageStore(
         PageStore._generatePageMap([], []), new StorageInfo());
     }

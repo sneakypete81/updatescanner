@@ -22,7 +22,7 @@ export async function restore() {
       await restoreBackupFromFile(pageStore, files[0]);
       view.showComplete();
     } catch (error) {
-      console.log.bind(console);
+      console.error(error);
       view.showFailed();
     }
   }
