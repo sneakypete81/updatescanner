@@ -26,9 +26,6 @@ async function reload() {
   dataText.innerHTML = '';
   const storageData = await browser.storage.local.get();
   dataText.text(JSON.stringify(storageData, null, 4));
-
-  const storageDBData = await PageStore.loadHtml('1', PageStore.htmlTypes.NEW);
-  dataText.text(JSON.stringify(storageDBData, null, 4));
 }
 
 async function preload() {
@@ -104,15 +101,8 @@ async function preload() {
       oldScanTime: 1486026360682,
       newScanTime: 1486631108392,
     },
-    'html:old:1': '<h1>Update Scanner Website</h1>',
-    'html:new:1': '<h1>Update Scanner Website With Changed Text</h1>',
-    'html:old:2': '<h1>Another Page</h1>',
-    'html:new:2': '<h1>Another Page with Changed Text</h1>',
-    'html:new:4': '<h1>An invalid Website In a Subfolder with no OLD HTML</h1>',
-    'html:old:5': '<h1>The Final Site</h1>',
-    'html:new:5': '<h1>The Final Site with Changed Text</h1>',
-    });
-    reload();
+  });
+  reload();
 }
 
 function clear() {
