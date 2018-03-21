@@ -44,21 +44,22 @@ export async function update() {
 async function applyStorageDbUpdate() {
   const pageStore = await PageStore.load();
   for (const page of pageStore.getPageList()) {
-    await moveHtmlToStorageDb(page, PageStore.htmlTypes.OLD);
-    await moveHtmlToStorageDb(page, PageStore.htmlTypes.NEW);
+    await copyHtmlToStorageDb(page, PageStore.htmlTypes.OLD);
+    await copyHtmlToStorageDb(page, PageStore.htmlTypes.NEW);
+    await PageStore.deleteHtmlFromDeprecatedStorage(page.id);
   }
 }
 
 /**
- * Move the specified page's HTML from storage.local to indexedDB.
+ * Copy the specified page's HTML from storage.local to indexedDB.
  *
  * @param {string} page - Page to update.
- * @param {PageStore.htmlTypes} htmlType - Which HTML type to move.
+ * @param {PageStore.htmlTypes} htmlType - Which HTML type to copy.
  */
-async function moveHtmlToStorageDb(page, htmlType) {
+async function copyHtmlToStorageDb(page, htmlType) {
   const html = await PageStore.loadHtmlFromDeprecatedStorage(page.id, htmlType);
+
   if (html !== null) {
     await PageStore.saveHtml(page.id, htmlType, html);
-    await PageStore.deleteHtmlFromDeprecatedStorage(page.id, htmlType);
   }
 }
