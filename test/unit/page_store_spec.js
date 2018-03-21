@@ -831,6 +831,88 @@ describe('PageStore', function() {
     });
   });
 
+  describe('getDescendantPages', function() {
+    it('returns an empty list if there are no pages', function() {
+      const pageStore = new PageStore(new Map());
+      const root = new PageFolder('0', {children: []});
+      pageStore.pageMap.set('0', root);
+
+      const descendants = pageStore.getDescendantPages('0');
+
+      expect(descendants).toEqual([]);
+    });
+
+    it('returns a list of all children', function() {
+      const pageStore = new PageStore(new Map());
+      const root = new PageFolder('0', {children: ['1', '2']});
+      pageStore.pageMap.set('0', root);
+      pageStore.pageMap.set('1', new Page('1', {}));
+      pageStore.pageMap.set('2', new Page('2', {}));
+
+      const descendants = pageStore.getDescendantPages('0');
+
+      expect(descendants).toEqual([
+        pageStore.getItem('1'),
+        pageStore.getItem('2'),
+      ]);
+    });
+
+    it('returns a list of all children and grandchildren', function() {
+      const pageStore = new PageStore(new Map());
+      const root = new PageFolder('0', {children: ['1', '2', '3']});
+      pageStore.pageMap.set('0', root);
+      pageStore.pageMap.set('1', new Page('1', {}));
+      pageStore.pageMap.set('2', new Page('2', {}));
+      pageStore.pageMap.set('3', new PageFolder('3', {children: ['4', '5']}));
+      pageStore.pageMap.set('4', new Page('4', {}));
+      pageStore.pageMap.set('5', new Page('5', {}));
+
+      const descendants = pageStore.getDescendantPages('0');
+
+      expect(descendants).toEqual([
+        pageStore.getItem('1'),
+        pageStore.getItem('2'),
+        pageStore.getItem('4'),
+        pageStore.getItem('5'),
+      ]);
+    });
+
+    it('returns a list of all children of a subfolder', function() {
+      const pageStore = new PageStore(new Map());
+      const root = new PageFolder('0', {children: ['1', '2', '3']});
+      pageStore.pageMap.set('0', root);
+      pageStore.pageMap.set('1', new Page('1', {}));
+      pageStore.pageMap.set('2', new Page('2', {}));
+      pageStore.pageMap.set('3', new PageFolder('3', {children: ['4', '5']}));
+      pageStore.pageMap.set('4', new Page('4', {}));
+      pageStore.pageMap.set('5', new Page('5', {}));
+
+      const descendants = pageStore.getDescendantPages('3');
+
+      expect(descendants).toEqual([
+        pageStore.getItem('4'),
+        pageStore.getItem('5'),
+      ]);
+    });
+
+    it('returns the page when passed a page ID', function() {
+      const pageStore = new PageStore(new Map());
+      const root = new PageFolder('0', {children: ['1', '2', '3']});
+      pageStore.pageMap.set('0', root);
+      pageStore.pageMap.set('1', new Page('1', {}));
+      pageStore.pageMap.set('2', new Page('2', {}));
+      pageStore.pageMap.set('3', new PageFolder('3', {children: ['4', '5']}));
+      pageStore.pageMap.set('4', new Page('4', {}));
+      pageStore.pageMap.set('5', new Page('5', {}));
+
+      const descendants = pageStore.getDescendantPages('5');
+
+      expect(descendants).toEqual([
+        pageStore.getItem('5'),
+      ]);
+    });
+  });
+
   describe('loadHtml', function() {
     using([PageStore.htmlTypes.OLD,
            PageStore.htmlTypes.NEW,

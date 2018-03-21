@@ -285,6 +285,28 @@ export class PageStore {
   }
 
   /**
+   * Return a list of all pages that are descendants of the specified item.
+   *
+   * @param {string} itemId - ID of the top item to process.
+   * @returns {Array.<Page>} Array of Pages beneath the specified item.
+   */
+  getDescendantPages(itemId) {
+    const item = this.getItem(itemId);
+
+    if (item instanceof PageFolder) {
+      let descendantPages = [];
+      for (const childId of item.children) {
+        descendantPages = descendantPages.concat(
+          this.getDescendantPages(childId)
+        );
+      }
+      return descendantPages;
+    } else {
+      return [item];
+    }
+  }
+
+  /**
    * Create a new Update Scanner website Page.
    *
    * @returns {Page} Created Page.
