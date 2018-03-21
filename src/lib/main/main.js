@@ -175,8 +175,8 @@ export class Main {
    */
   async _handleMenuScanPage() {
     browser.runtime.sendMessage({
-      action: backgroundActionEnum.SCAN_PAGE,
-      pageId: this.currentPage.id,
+      action: backgroundActionEnum.SCAN_ITEM,
+      itemId: this.currentPage.id,
     });
   }
 

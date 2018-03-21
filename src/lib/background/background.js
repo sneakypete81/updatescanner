@@ -65,8 +65,8 @@ export class Background {
   async _handleMessage(message) {
     if (message.action == backgroundActionEnum.SCAN_ALL) {
       await this._scanAll();
-    } else if (message.action == backgroundActionEnum.SCAN_PAGE) {
-      await this._scanPage(message.pageId);
+    } else if (message.action == backgroundActionEnum.SCAN_ITEM) {
+      await this._scanItem(message.itemId);
     }
   }
 
@@ -114,9 +114,19 @@ export class Background {
    * Manual scan of all Pages in the PageStore.
    */
   async _scanAll() {
-    const scanList = this.pageStore.getPageList();
-    log(`Pages to manually scan: ${scanList.length}`);
+    this._scanItem(PageStore.ROOT_ID);
+  }
 
+  /**
+   * Manual scan of a single item. If the item is a PageFolder, scan all items
+   * in the folder.
+   *
+   * @param {string} itemId - ID of the item to scan.
+   */
+  async _scanItem(itemId) {
+    const scanList = this.pageStore.getDescendantPages(itemId);
+
+    log(`Pages to manually scan: ${scanList.length}`);
     const newMajorChangeCount = await scan(scanList);
     log(`Manual scan complete, ${newMajorChangeCount} new changes detected.`);
 
@@ -124,17 +134,6 @@ export class Background {
     const changeCount = this.pageStore.getChangedPageList().length;
     const notifyChangeCount = Math.min(newMajorChangeCount, changeCount);
 
-    showNotification(notifyChangeCount);
-  }
-
-  /**
-   * Manual scan of a single page.
-   *
-   * @param {string} pageId - ID of the page to scan.
-   */
-  async _scanPage(pageId) {
-    const page = this.pageStore.getItem(pageId);
-    const notifyChangeCount = await scan([page]);
     showNotification(notifyChangeCount);
   }
 }
