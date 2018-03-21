@@ -3,6 +3,7 @@ import {PageStore} from 'page/page_store';
 import {Page} from 'page/page';
 import {PageFolder} from 'page/page_folder';
 import {openMain, paramEnum, actionEnum} from 'main/main_url';
+import {backgroundActionEnum} from 'background/actions';
 import {waitForMs} from 'util/promise';
 
 const REFRESH_TIMEOUT_MS = 200;
@@ -44,6 +45,8 @@ export class Sidebar {
     this.sidebar.registerDeleteHandler((itemId) => this._handleDelete(itemId));
     this.sidebar.registerMoveHandler((itemId, pageFolderId, position) =>
       this._handleMove(itemId, pageFolderId, position));
+    this.sidebar.registerScanItemHandler((itemId) =>
+      this._handleScanItem(itemId));
     this.sidebar.registerSettingsHandler((itemId) =>
       this._handleSettings(itemId));
   }
@@ -132,6 +135,18 @@ export class Sidebar {
   }
 
   /**
+   * Called whenever the Scan context menu item is selected.
+   *
+   * @param {string} itemId - Page/PageFolder ID.
+   */
+  _handleScanItem(itemId) {
+    browser.runtime.sendMessage({
+      action: backgroundActionEnum.SCAN_ITEM,
+      itemId: itemId,
+    });
+  }
+
+  /**
    * Called whenever the Settings context menu item is selected.
    *
    * @param {string} itemId - Page/PageFolder ID.
@@ -142,6 +157,7 @@ export class Sidebar {
       [paramEnum.ID]: itemId,
     });
   }
+
   /**
    * Called when a Page/PageFolder is updated in Storage to refresh the sidebar.
    *

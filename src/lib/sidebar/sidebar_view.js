@@ -20,6 +20,7 @@ export class SidebarView {
     this._newPageFolderHandler = null;
     this._deleteHandler = null;
     this._moveHandler = null;
+    this._scanItemHandler = null;
     this._settingsHandler = null;
 
     this._refreshing = false;
@@ -183,8 +184,12 @@ export class SidebarView {
           label: 'Delete',
           action: () => this._deleteHandler(node),
         },
-        settings: {
+        scan: {
           separator_before: true,
+          label: 'Scan Now',
+          action: () => this._scanItemHandler(node),
+        },
+        settings: {
           label: 'Settings',
           action: () => this._settingsHandler(node),
         },
@@ -277,6 +282,16 @@ export class SidebarView {
   registerMoveHandler(handler) {
     this._moveHandler = (itemId, parentId, position) =>
       handler(itemId, parentId, position);
+  }
+
+  /**
+   * Registers the provided handler function to be called whenever the
+   * 'Scan' context menu item is selected..
+   *
+   * @param {Object} handler - Callback to use when 'Scan' is selected.
+   */
+  registerScanItemHandler(handler) {
+    this._scanItemHandler = (node) => handler(node.id);
   }
 
   /**
