@@ -217,6 +217,7 @@ describe('scan', function() {
 
       spyOn(window, 'fetch');
       spyOn(PageStore, 'loadHtml');
+      spyOn(promise, 'waitForMs');
       spyOn(update, 'isUpToDate').and.returnValue(Promise.resolve(false));
 
       scan.scan([page]).then(() => {
