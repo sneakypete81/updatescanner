@@ -134,4 +134,33 @@ describe('Scan Queue', function() {
         .toEqual([[page1], [page2], [page3]]);
     });
   });
+
+  describe('bindScanComplete', function() {
+    beforeEach(function() {
+      spyOn(promise, 'waitForMs');
+    });
+
+    it('binds a handler that is called when the scan completes',
+    async function() {
+      const scanQueue = new ScanQueue();
+      const page1 = new Page(1, {});
+      const page2 = new Page(1, {});
+      const page3 = new Page(1, {});
+      scanQueue.add([page1, page2, page3]);
+      spyOn(scan, 'scanPage').and.returnValues(
+        new Promise((resolve) => resolve(true)),
+        new Promise((resolve) => resolve(false)),
+        new Promise((resolve) => resolve(true)),
+      );
+      const handler = jasmine.createSpy();
+
+      scanQueue.bindScanComplete(handler);
+      await scanQueue.scan();
+
+      expect(handler).toHaveBeenCalledWith({
+        majorChanges: 2,
+        scanCount: 3,
+      });
+    });
+  });
 });

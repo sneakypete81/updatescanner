@@ -13,6 +13,19 @@ export class ScanQueue {
    */
   constructor() {
     this.queue = [];
+    this._scanCompleteHandler = null;
+  }
+
+  /**
+   * Bind a handler to call whenever a scan is completed. The handler is passed
+   * an object containing the following
+   *  {integer} majorChanges: Number of major changes detected
+   *  {integer} scanCount: Total number of pages scanned.
+   *
+   * @param {Function} handler - Function to call whenever a scan is completed.
+   */
+  bindScanComplete(handler) {
+    this._scanCompleteHandler = handler;
   }
 
   /**
@@ -35,16 +48,25 @@ export class ScanQueue {
    */
   async scan() {
     let majorChanges = 0;
+    let scanCount = 0;
 
     while (this.queue.length > 0) {
       const majorChange = await scanPage(this.queue.shift());
       if (majorChange) {
         majorChanges++;
       }
+      scanCount++;
 
       if (this.queue.length > 0) {
         await waitForMs(SCAN_IDLE_MS);
       }
+    }
+
+    if (this._scanCompleteHandler !== null) {
+      this._scanCompleteHandler({
+        majorChanges: majorChanges,
+        scanCount: scanCount,
+      });
     }
     return majorChanges;
   }
