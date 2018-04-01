@@ -49,7 +49,7 @@ export async function scan(pageList) {
  *
  * @returns {boolean} True if a new major change is detected.
  */
-async function scanPage(page) {
+export async function scanPage(page) {
   // Don't scan if the data structures aren't yet updated to the latest version
   if (!(await isUpToDate())) {
     return false;
