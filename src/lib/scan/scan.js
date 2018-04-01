@@ -29,11 +29,6 @@ const SCAN_IDLE_MS = 2000;
  * @returns {integer} The number of new major changes detected.
  */
 export async function scan(pageList) {
-  // Don't scan if the data structures aren't yet updated to the latest version
-  if (!(await isUpToDate())) {
-    return 0;
-  }
-
   let newMajorChangeCount = 0;
   for (const page of pageList) {
     if (await scanPage(page)) {
@@ -55,6 +50,11 @@ export async function scan(pageList) {
  * @returns {boolean} True if a new major change is detected.
  */
 async function scanPage(page) {
+  // Don't scan if the data structures aren't yet updated to the latest version
+  if (!(await isUpToDate())) {
+    return false;
+  }
+
   log(`Scanning "${page.title}"...`);
   try {
     const response = await fetch(page.url);
