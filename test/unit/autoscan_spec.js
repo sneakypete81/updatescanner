@@ -1,13 +1,13 @@
+import {Autoscan} from 'scan/autoscan';
 import * as autoscan from 'scan/autoscan';
-import * as scan from 'scan/scan';
-import * as notification from 'scan/notification';
+import {ScanQueue} from 'scan/scan_queue';
 import {PageStore} from 'page/page_store';
 import {Page} from 'page/page';
 import {Config} from 'util/config';
 import {Storage} from 'util/storage';
 import * as log from 'util/log';
 
-describe('autoscan', function() {
+describe('Autoscan', function() {
   beforeEach(function() {
     jasmine.clock().install();
     jasmine.clock().mockDate(new Date(1978, 11, 5, 4, 30));
@@ -22,8 +22,15 @@ describe('autoscan', function() {
   describe('start', function() {
     beforeEach(function() {
       this._browser = window.browser;
-      window.browser = {alarms: {create: {}, clear: {},
-                                 onAlarm: {addListener: {}}}};
+      window.browser = {
+        alarms: {
+          create: {},
+          clear: {},
+          onAlarm: {
+            addListener: {},
+          },
+        },
+      };
       this.calls = [];
       spyOn(browser.alarms, 'create').and.callFake(() => {
         this.calls.push('create');
@@ -38,159 +45,170 @@ describe('autoscan', function() {
       window.browser = this._browser;
     });
 
-    it('clears existing alarms then configures a new alarm', function(done) {
+    it('clears existing alarms then configures a new alarm', async function() {
       spyOn(Config, 'loadSingleSetting').and.returnValues(
         Promise.resolve(false));
 
-      autoscan.start().then(() => {
-        expect(this.calls).toEqual(['clear', 'create']);
-        done();
-      }).catch((error) => done.fail(error));
+      const autoscan = new Autoscan(null, null);
+      await autoscan.start();
+
+      expect(this.calls).toEqual(['clear', 'create']);
     });
 
-    it('uses normal delays when the debug flag is clear', function(done) {
+    it('uses normal delays when the debug flag is clear', async function() {
       spyOn(Config, 'loadSingleSetting').and.returnValues(
         Promise.resolve(false));
 
-      autoscan.start().then(() => {
-        expect(browser.alarms.create).toHaveBeenCalledWith(
-          'updatescanner-autoscan',
-          {delayInMinutes: 1, periodInMinutes: 5});
-        done();
-      }).catch((error) => done.fail(error));
+      const autoscan = new Autoscan(null, null);
+      await autoscan.start();
+
+      expect(browser.alarms.create).toHaveBeenCalledWith(
+        'updatescanner-autoscan',
+        {delayInMinutes: 1, periodInMinutes: 5}
+      );
     });
 
-    it('uses short delays when the debug flag is set', function(done) {
+    it('uses short delays when the debug flag is set', async function() {
       spyOn(log, 'log');
       spyOn(Config, 'loadSingleSetting').and.returnValues(
         Promise.resolve(true));
 
-      autoscan.start().then(() => {
-        expect(browser.alarms.create).toHaveBeenCalledWith(
-          'updatescanner-autoscan',
-          {delayInMinutes: 0.1, periodInMinutes: 0.5});
-        done();
-      }).catch((error) => done.fail(error));
+      const autoscan = new Autoscan(null, null);
+      await autoscan.start();
+
+      expect(browser.alarms.create).toHaveBeenCalledWith(
+        'updatescanner-autoscan',
+        {delayInMinutes: 0.1, periodInMinutes: 0.5}
+      );
     });
   });
 
   describe('onAlarm', function() {
     beforeEach(function() {
-      spyOn(PageStore, 'load').and.returnValue(
-        Promise.resolve(new PageStore(new Map())));
+      this.pageStore = new PageStore(new Map());
+      this.scanQueue = new ScanQueue();
+      spyOn(this.scanQueue, 'add');
+      spyOn(this.scanQueue, 'scan');
       spyOn(Config, 'loadSingleSetting').and.returnValue(
         Promise.resolve(false));
-      spyOn(notification, 'showNotification');
     });
 
     it('does nothing if the alarm name doesn\'t match', function() {
-      spyOn(scan, 'scan').and.returnValues(Promise.resolve());
       spyOn(console, 'log');
+      spyOn(this.pageStore, 'getPageList');
 
-      autoscan.__.onAlarm({name: 'illegal-alarm'});
+      const autoscan = new Autoscan(this.scanQueue, this.pageStore);
+      autoscan.onAlarm({name: 'illegal-alarm'});
 
-      expect(PageStore.load).not.toHaveBeenCalled();
-      expect(scan.scan).not.toHaveBeenCalled();
+      expect(this.pageStore.getPageList).not.toHaveBeenCalled();
+      expect(this.scanQueue.add).not.toHaveBeenCalled();
+      expect(this.scanQueue.scan).not.toHaveBeenCalled();
     });
 
-    it('scans a pending page', function(done) {
-      const pages = [new Page(1, {url: 'http://example.com',
-                                    scanRateMinutes: 15,
-                                    lastAutoscanTime: Date.now()}),
-                    ];
-      spyOn(PageStore.prototype, 'getPageList').and.returnValues(pages);
-      spyOn(Page.prototype, 'save');
-      spyOn(scan, 'scan').and.returnValues(Promise.resolve());
+    it('scans a pending page', function() {
+      const pages = [
+        new Page(1, {
+          url: 'http://example.com',
+          scanRateMinutes: 15,
+          lastAutoscanTime: Date.now(),
+        }),
+      ];
+      spyOn(this.pageStore, 'getPageList').and.returnValues(pages);
       spyOn(console, 'log');
       jasmine.clock().tick(20 * 60 * 1000);
 
-      autoscan.__.onAlarm({name: 'updatescanner-autoscan'}).then(() => {
-        expect(scan.scan).toHaveBeenCalledWith(pages);
-        done();
-      }).catch((error) => done.fail(error));
+      const autoscan = new Autoscan(this.scanQueue, this.pageStore);
+      autoscan.onAlarm({name: 'updatescanner-autoscan'});
+
+      expect(this.scanQueue.add).toHaveBeenCalledWith(pages);
+      expect(this.scanQueue.scan).toHaveBeenCalled();
     });
 
-    it('scans two pending pages', function(done) {
-      const pages = [new Page(1, {url: 'http://example.com',
-                                  scanRateMinutes: 15,
-                                  lastAutoscanTime: Date.now()}),
-                     new Page(2, {url: 'http://test.com',
-                                  scanRateMinutes: 30,
-                                  lastAutoscanTime: Date.now()}),
-                    ];
-      spyOn(PageStore.prototype, 'getPageList').and.returnValues(pages);
-      spyOn(Page.prototype, 'save');
-      spyOn(scan, 'scan').and.returnValues(Promise.resolve());
+    it('scans two pending pages', function() {
+      const pages = [
+        new Page(1, {
+          url: 'http://example.com',
+          scanRateMinutes: 15,
+          lastAutoscanTime: Date.now(),
+        }),
+        new Page(2, {
+          url: 'http://test.com',
+          scanRateMinutes: 30,
+          lastAutoscanTime: Date.now(),
+        }),
+      ];
+      spyOn(this.pageStore, 'getPageList').and.returnValues(pages);
       spyOn(console, 'log');
-
       jasmine.clock().tick(60 * 60 * 1000);
 
-      autoscan.__.onAlarm({name: 'updatescanner-autoscan'}).then(() => {
-        expect(scan.scan).toHaveBeenCalledWith(pages);
-        done();
-      }).catch((error) => done.fail(error));
+      const autoscan = new Autoscan(this.scanQueue, this.pageStore);
+      autoscan.onAlarm({name: 'updatescanner-autoscan'});
+
+      expect(this.scanQueue.add).toHaveBeenCalledWith(pages);
+      expect(this.scanQueue.scan).toHaveBeenCalled();
     });
 
-    it('scans a pending page and ignores a non-pending page', function(done) {
-      const pageToScan = new Page(1, {url: 'http://example.com',
-                                      scanRateMinutes: 15,
-                                      lastAutoscanTime: Date.now()});
-      const pageNotToScan = new Page(2, {url: 'http://test.com',
-                                         scanRateMinutes: 30,
-                                         lastAutoscanTime: Date.now()});
-      const pages = [pageToScan, pageNotToScan];
-
-      spyOn(PageStore.prototype, 'getPageList').and.returnValues(pages);
-      spyOn(Page.prototype, 'save');
-      spyOn(scan, 'scan').and.returnValues(Promise.resolve());
-      spyOn(console, 'log');
-
-      jasmine.clock().tick(20 * 60 * 1000);
-
-      autoscan.__.onAlarm({name: 'updatescanner-autoscan'}).then(() => {
-        expect(scan.scan).toHaveBeenCalledWith([pageToScan]);
-        done();
-      }).catch((error) => done.fail(error));
-    });
-
-    it('updates lastAutoscanTime when a page is scanned', function(done) {
-      const pages = [new Page(1, {url: 'http://example.com',
-                                    scanRateMinutes: 15,
-                                    lastAutoscanTime: Date.now()}),
-                    ];
-      spyOn(PageStore.prototype, 'getPageList').and.returnValues(pages);
-      spyOn(scan, 'scan').and.returnValues(Promise.resolve());
-      spyOn(console, 'log');
-      jasmine.clock().tick(20 * 60 * 1000);
-
-      let savedLastAutoscanTime = null;
-      spyOn(Page.prototype, 'save').and.callFake(() => {
-        savedLastAutoscanTime = pages[0].lastAutoscanTime;
+    it('scans a pending page and ignores a non-pending page', function() {
+      const pageToScan = new Page(1, {
+        url: 'http://example.com',
+        scanRateMinutes: 15,
+        lastAutoscanTime: Date.now(),
       });
-
-      autoscan.__.onAlarm({name: 'updatescanner-autoscan'}).then(() => {
-        expect(Page.prototype.save).toHaveBeenCalled();
-        expect(savedLastAutoscanTime).toEqual(Date.now());
-        done();
-      }).catch((error) => done.fail(error));
-    });
-
-    it('doesn\'t update lastAutoscanTime if a page is skipped', function(done) {
-      const pages = [new Page(1, {url: 'http://example.com',
-                                    scanRateMinutes: 30,
-                                    lastAutoscanTime: Date.now()}),
-                    ];
-      spyOn(PageStore.prototype, 'getPageList').and.returnValues(pages);
-      spyOn(scan, 'scan').and.returnValues(Promise.resolve());
+      const pageNotToScan = new Page(2, {
+        url: 'http://test.com',
+       scanRateMinutes: 30,
+       lastAutoscanTime: Date.now(),
+      });
+      const pages = [pageToScan, pageNotToScan];
+      spyOn(this.pageStore, 'getPageList').and.returnValues(pages);
       spyOn(console, 'log');
       jasmine.clock().tick(20 * 60 * 1000);
 
-      spyOn(Page.prototype, 'save');
+      const autoscan = new Autoscan(this.scanQueue, this.pageStore);
+      autoscan.onAlarm({name: 'updatescanner-autoscan'});
 
-      autoscan.__.onAlarm({name: 'updatescanner-autoscan'}).then(() => {
-        expect(Page.prototype.save).not.toHaveBeenCalled();
-        done();
-      }).catch((error) => done.fail(error));
+      expect(this.scanQueue.add).toHaveBeenCalledWith([pageToScan]);
+      expect(this.scanQueue.scan).toHaveBeenCalled();
+    });
+
+    it('updates lastAutoscanTime when a page is scanned', function() {
+      const pages = [
+        new Page(1, {
+          url: 'http://example.com',
+          scanRateMinutes: 15,
+          lastAutoscanTime: Date.now(),
+        }),
+      ];
+      spyOn(pages[0], 'save');
+      spyOn(this.pageStore, 'getPageList').and.returnValues(pages);
+      spyOn(console, 'log');
+      jasmine.clock().tick(20 * 60 * 1000);
+
+      const autoscan = new Autoscan(this.scanQueue, this.pageStore);
+      autoscan.onAlarm({name: 'updatescanner-autoscan'});
+
+      expect(pages[0].save).toHaveBeenCalled();
+      expect(pages[0].lastAutoscanTime).toEqual(Date.now());
+    });
+
+    it('doesn\'t update lastAutoscanTime if a page is skipped', function() {
+      const pages = [
+        new Page(1, {
+          url: 'http://example.com',
+          scanRateMinutes: 30,
+          lastAutoscanTime: Date.now(),
+        }),
+      ];
+      spyOn(pages[0], 'save');
+      spyOn(this.pageStore, 'getPageList').and.returnValues(pages);
+      spyOn(console, 'log');
+      jasmine.clock().tick(20 * 60 * 1000);
+
+      const autoscan = new Autoscan(this.scanQueue, this.pageStore);
+      autoscan.onAlarm({name: 'updatescanner-autoscan'});
+
+      expect(pages[0].save).not.toHaveBeenCalled();
+      expect(pages[0].lastAutoscanTime).not.toEqual(Date.now());
     });
   });
 
@@ -198,7 +216,8 @@ describe('autoscan', function() {
     it('returns true if an autoscan is just pending', function() {
       const page = new Page(1, {
         lastAutoscanTime: Date.now(),
-        scanRateMinutes: 5});
+        scanRateMinutes: 5,
+      });
       jasmine.clock().tick(5 * 60 * 1000 + 1);
 
       expect(autoscan.__.isAutoscanPending(page)).toBeTruthy();
@@ -207,7 +226,8 @@ describe('autoscan', function() {
     it('returns false if an autoscan is not quite pending', function() {
       const page = new Page(1, {
         lastAutoscanTime: Date.now(),
-        scanRateMinutes: 5});
+        scanRateMinutes: 5,
+      });
       jasmine.clock().tick(5 * 60 * 1000 - 1);
 
       expect(autoscan.__.isAutoscanPending(page)).toBeFalsy();
@@ -216,7 +236,8 @@ describe('autoscan', function() {
     it('returns false if autoscan is disabled for the page', function() {
       const page = new Page(1, {
         lastAutoscanTime: Date.now(),
-        scanRateMinutes: 0});
+        scanRateMinutes: 0,
+      });
       jasmine.clock().tick(5 * 60 * 1000);
 
       expect(autoscan.__.isAutoscanPending(page)).toBeFalsy();

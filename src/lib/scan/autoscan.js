@@ -1,6 +1,3 @@
-import {scan} from 'scan/scan';
-import {showNotification} from 'scan/notification';
-import {PageStore} from 'page/page_store';
 import {Config} from 'util/config';
 import {log} from 'util/log';
 
@@ -9,21 +6,50 @@ const ALARM_TIMING = {delayInMinutes: 1, periodInMinutes: 5};
 const DEBUG_ALARM_TIMING = {delayInMinutes: 0.1, periodInMinutes: 0.5};
 
 /**
- * Starts the Autoscanner.
- *
- * @returns {Promise} Empty promise that resolves when initialisation is
- * complete.
+ * Class to automatically scan pages on a schedule.
  */
-export async function start() {
-  const debug = await Config.loadSingleSetting('debug');
-  if (debug) {
-    log('Debug enabled - using fast scan times.');
+export class Autoscan {
+  /**
+   * @param {ScanQueue} scanQueue - ScanQueue object to use for scanning.
+   * @param {PageStore} pageStore - PageStore object to use for scanning.
+   */
+  constructor(scanQueue, pageStore) {
+    this._scanQueue = scanQueue;
+    this._pageStore = pageStore;
   }
 
-  await stopAlarm();
-  startAlarm(debug);
-  browser.alarms.onAlarm.addListener((alarm) => onAlarm(alarm));
-  return {};
+  /**
+   * Starts the Autoscanner.
+   */
+  async start() {
+    const debug = await Config.loadSingleSetting('debug');
+    if (debug) {
+      log('Debug enabled - using fast scan times.');
+    }
+
+    await stopAlarm();
+    startAlarm(debug);
+    browser.alarms.onAlarm.addListener((alarm) => this.onAlarm(alarm));
+  }
+
+  /**
+   * Callback for when the Autoscanner alarm expires. Checks if any pages need
+   * scanning.
+   *
+   * @param {type} alarm - Alarm object that expired.
+   */
+  onAlarm(alarm) {
+    if (alarm.name != ALARM_ID) {
+      return;
+    }
+
+    const scanList = getScanList(this._pageStore.getPageList());
+    if (scanList.length > 0) {
+      log(`Pages to autoscan: ${scanList.length}`);
+      this._scanQueue.add(scanList);
+      this._scanQueue.scan(); // @TODO: indicate that it's an autoscan
+    }
+  }
 }
 
 /**
@@ -45,39 +71,6 @@ function startAlarm(debug) {
  */
 async function stopAlarm() {
   await browser.alarms.clear(ALARM_ID);
-}
-
-/**
- * Callback for when the Autoscanner alarm expires. Checks if any pages need
- * scanning.
- *
- * @param {type} alarm - Alarm object that expired.
- *
- * @returns {Promise} A Promise that resolves when the autoscan is
- * complete. This will be ignored by the caller, but is useful for testing..
- */
-async function onAlarm(alarm) {
-  if (alarm.name == ALARM_ID) {
-    if (await Config.loadSingleSetting('debug')) {
-      log('Checking if scan is required...');
-    }
-    const pageStore = await PageStore.load();
-    const scanList = getScanList(pageStore.getPageList());
-    if (scanList.length > 0) {
-      log(`Pages to autoscan: ${scanList.length}`);
-      const newMajorChangeCount = await scan(scanList);
-      log(`Autoscan complete, ${newMajorChangeCount} new changes detected.`);
-
-      // If the user has already viewed some changes, don't include in the count
-      const changeCount = pageStore.getChangedPageList().length;
-      const notifyChangeCount = Math.min(newMajorChangeCount, changeCount);
-
-      if (notifyChangeCount > 0) {
-        showNotification(notifyChangeCount);
-      }
-    }
-  }
-  return {};
 }
 
 /**
@@ -121,6 +114,5 @@ function isAutoscanPending(page) {
 
 // Allow private functions to be tested
 export const __ = {
-  onAlarm: onAlarm,
   isAutoscanPending: isAutoscanPending,
 };

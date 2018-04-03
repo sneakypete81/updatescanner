@@ -1,6 +1,6 @@
 import {backgroundActionEnum} from 'background/actions';
-import * as autoscan from 'scan/autoscan';
-import {scan} from 'scan/scan';
+import {Autoscan} from 'scan/autoscan';
+import {ScanQueue} from 'scan/scan_queue';
 import {showNotification} from 'scan/notification';
 import {PageStore, hasPageStateChanged, isItemChanged} from 'page/page_store';
 import {isUpToDate, latestVersion} from 'update/update';
@@ -24,6 +24,7 @@ export class Background {
    */
   constructor() {
     this.pageStore = null;
+    this.scanQueue = null;
   }
 
   /**
@@ -34,12 +35,15 @@ export class Background {
     this.pageStore.bindPageUpdate(this._handlePageUpdate.bind(this));
     browser.runtime.onMessage.addListener(this._handleMessage.bind(this));
 
+    this.scanQueue = new ScanQueue();
+    this.scanQueue.bindScanComplete(this._handleScanComplete.bind(this));
+
     this._refreshIcon();
     this.pageStore.refreshFolderState();
     await this._checkFirstRun();
     await this._checkIfUpdateRequired();
 
-    // @FIXME: Autoscan should take pageStore as a parameter
+    const autoscan = new Autoscan(this.scanQueue, this.pageStore);
     autoscan.start();
   }
 
@@ -62,11 +66,11 @@ export class Background {
    *
    * @param {Object} message - Message content.
    */
-  async _handleMessage(message) {
+  _handleMessage(message) {
     if (message.action == backgroundActionEnum.SCAN_ALL) {
-      await this._scanAll();
+      this._scanAll();
     } else if (message.action == backgroundActionEnum.SCAN_ITEM) {
-      await this._scanItem(message.itemId);
+      this._scanItem(message.itemId);
     }
   }
 
@@ -93,7 +97,8 @@ export class Background {
     const config = await new Config().load();
     if (config.get('isFirstRun')) {
       const page = await this.pageStore.createWebsitePage();
-      scan([page]);
+      this.scanQueue.add([page]);
+      this.scanQueue.scan();
       config.set('isFirstRun', false);
       config.set('updateVersion', latestVersion);
       await config.save();
@@ -113,7 +118,7 @@ export class Background {
   /**
    * Manual scan of all Pages in the PageStore.
    */
-  async _scanAll() {
+  _scanAll() {
     this._scanItem(PageStore.ROOT_ID);
   }
 
@@ -123,16 +128,26 @@ export class Background {
    *
    * @param {string} itemId - ID of the item to scan.
    */
-  async _scanItem(itemId) {
+  _scanItem(itemId) {
     const scanList = this.pageStore.getDescendantPages(itemId);
 
     log(`Pages to manually scan: ${scanList.length}`);
-    const newMajorChangeCount = await scan(scanList);
-    log(`Manual scan complete, ${newMajorChangeCount} new changes detected.`);
+    this.scanQueue.add(scanList);
+    this.scanQueue.scan();
+  }
+
+  /**
+   * Called whenever a scan is complete.
+   *
+   * @param {ScanResult} result - Object containing the result of the scan.
+   */
+  _handleScanComplete({majorChanges, scanCount}) {
+    log(`Scan complete, ${majorChanges} new changes.`);
+    log(`${scanCount} pages scanned.`);
 
     // If the user has already viewed some changes, don't include in the count
     const changeCount = this.pageStore.getChangedPageList().length;
-    const notifyChangeCount = Math.min(newMajorChangeCount, changeCount);
+    const notifyChangeCount = Math.min(majorChanges, changeCount);
 
     showNotification(notifyChangeCount);
   }
