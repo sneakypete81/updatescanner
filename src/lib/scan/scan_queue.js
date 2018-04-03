@@ -5,6 +5,18 @@ import {waitForMs} from 'util/promise';
 const SCAN_IDLE_MS = 2000;
 
 /**
+ * @typedef {Object} ScanResult
+ * @property {integer} majorChanges Number of pages that had major changes
+ * when scanned.
+ * @property {integer} scanCount Number of pages that were scanned.
+ */
+
+/**
+* @callback ScanCompleteHandler
+* @param {ScanResult} scanResult Object containing the result of the scan.
+*/
+
+/**
  * Class to maintain a queue of pages to scan.
  */
 export class ScanQueue {
@@ -14,15 +26,13 @@ export class ScanQueue {
   constructor() {
     this.queue = [];
     this._scanCompleteHandler = null;
+    this._isScanning = false;
   }
 
   /**
-   * Bind a handler to call whenever a scan is completed. The handler is passed
-   * an object containing the following
-   *  {integer} majorChanges: Number of major changes detected
-   *  {integer} scanCount: Total number of pages scanned.
+   * Bind a handler to call whenever a scan is completed.
    *
-   * @param {Function} handler - Function to call whenever a scan is completed.
+   * @param {ScanCompleteHandler} handler - Called when a scan completes.
    */
   bindScanComplete(handler) {
     this._scanCompleteHandler = handler;
@@ -42,11 +52,32 @@ export class ScanQueue {
   }
 
   /**
-   * Start scanning the pages in the queue.
-   *
-   * @returns {integer} Number of pages that had major changes when scanned.
+   * Start scanning the pages in the queue. When the scan is complete, call
+   * the scanComplete handler. Does nothing if a scan is already in progress.
    */
   async scan() {
+    if (this._isScanning) {
+      return;
+    }
+
+    this._isScanning = true;
+    const {majorChanges, scanCount} = await this._processScanQueue();
+    this._isScanning = false;
+
+    if (this._scanCompleteHandler !== null) {
+      this._scanCompleteHandler({
+        majorChanges: majorChanges,
+        scanCount: scanCount,
+      });
+    }
+  }
+
+  /**
+   * Scan all pages in the queue. Pages added during the scan are scanned too.
+   *
+   * @returns {ScanResult} Result of the scan.
+   */
+  async _processScanQueue() {
     let majorChanges = 0;
     let scanCount = 0;
 
@@ -61,13 +92,6 @@ export class ScanQueue {
         await waitForMs(SCAN_IDLE_MS);
       }
     }
-
-    if (this._scanCompleteHandler !== null) {
-      this._scanCompleteHandler({
-        majorChanges: majorChanges,
-        scanCount: scanCount,
-      });
-    }
-    return majorChanges;
+    return {majorChanges: majorChanges, scanCount: scanCount};
   }
 }
