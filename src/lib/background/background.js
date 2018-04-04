@@ -97,11 +97,12 @@ export class Background {
     const config = await new Config().load();
     if (config.get('isFirstRun')) {
       const page = await this.pageStore.createWebsitePage();
-      this.scanQueue.add([page]);
-      this.scanQueue.scan();
       config.set('isFirstRun', false);
       config.set('updateVersion', latestVersion);
       await config.save();
+
+      this.scanQueue.add([page]);
+      this.scanQueue.scan();
     }
   }
 
