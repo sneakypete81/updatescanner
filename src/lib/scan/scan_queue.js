@@ -27,6 +27,7 @@ export class ScanQueue {
     this.queue = [];
     this._scanCompleteHandler = null;
     this._isScanning = false;
+    this._isManualScan = false;
   }
 
   /**
@@ -68,10 +69,20 @@ export class ScanQueue {
       this._scanCompleteHandler({
         majorChanges: majorChanges,
         scanCount: scanCount,
+        isManualScan: this._isManualScan,
       });
     }
+    this._isManualScan = false;
   }
 
+  /**
+   * Identical to the scan function, but when the scanComplete handler is called
+   * the isManualScan property is set.
+   */
+  async manualScan() {
+    this._isManualScan = true;
+    await this.scan();
+  }
   /**
    * Scan all pages in the queue. Pages added during the scan are scanned too.
    *

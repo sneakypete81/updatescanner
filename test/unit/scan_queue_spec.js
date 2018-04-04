@@ -160,6 +160,25 @@ describe('Scan Queue', function() {
       expect(handler).toHaveBeenCalledWith({
         majorChanges: 2,
         scanCount: 3,
+        isManualScan: false,
+      });
+    });
+
+    it('signals to the handler then a manual scan is performed',
+    async function() {
+      const scanQueue = new ScanQueue();
+      const page1 = new Page(1, {});
+      scanQueue.add([page1]);
+      const handler = jasmine.createSpy();
+      spyOn(scan, 'scanPage');
+
+      scanQueue.bindScanComplete(handler);
+      await scanQueue.manualScan();
+
+      expect(handler).toHaveBeenCalledWith({
+        majorChanges: 0,
+        scanCount: 1,
+        isManualScan: true,
       });
     });
   });

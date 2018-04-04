@@ -134,7 +134,7 @@ export class Background {
 
     log(`Pages to manually scan: ${scanList.length}`);
     this.scanQueue.add(scanList);
-    this.scanQueue.scan();
+    this.scanQueue.manualScan();
   }
 
   /**
@@ -142,7 +142,7 @@ export class Background {
    *
    * @param {ScanResult} result - Object containing the result of the scan.
    */
-  _handleScanComplete({majorChanges, scanCount}) {
+  _handleScanComplete({majorChanges, scanCount, isManualScan}) {
     log(`Scan complete, ${majorChanges} new changes.`);
     log(`${scanCount} pages scanned.`);
 
@@ -150,6 +150,8 @@ export class Background {
     const changeCount = this.pageStore.getChangedPageList().length;
     const notifyChangeCount = Math.min(majorChanges, changeCount);
 
-    showNotification(notifyChangeCount);
+    if (notifyChangeCount > 0 || isManualScan) {
+      showNotification(notifyChangeCount);
+    }
   }
 }

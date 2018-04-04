@@ -47,7 +47,7 @@ export class Autoscan {
     if (scanList.length > 0) {
       log(`Pages to autoscan: ${scanList.length}`);
       this._scanQueue.add(scanList);
-      this._scanQueue.scan(); // @TODO: indicate that it's an autoscan
+      this._scanQueue.scan();
     }
   }
 }
