@@ -1,7 +1,6 @@
 import * as view from 'main/main_view';
 import * as dialog from 'main/dialog_view';
 import {getMainDiffUrl, paramEnum, actionEnum} from 'main/main_url';
-import {backgroundActionEnum} from 'background/actions';
 import {PageStore} from 'page/page_store';
 import {Page} from 'page/page';
 import {PageFolder} from 'page/page_folder';
@@ -34,7 +33,6 @@ export class Main {
     view.init();
     view.bindMenu({
       settingsHandler: this._handleMenuSettings.bind(this),
-      scanPageHandler: this._handleMenuScanPage.bind(this),
     });
     view.bindViewDropdownChange(this._handleViewDropdownChange.bind(this));
 
@@ -168,16 +166,6 @@ export class Main {
    */
   async _handleMenuSettings() {
     this._showPageSettings(this.currentPage);
-  }
-
-  /**
-   * Called whenever the 'Scan Page' item is chosen from the menu.
-   */
-  async _handleMenuScanPage() {
-    browser.runtime.sendMessage({
-      action: backgroundActionEnum.SCAN_ITEM,
-      itemId: this.currentPage.id,
-    });
   }
 
   /**

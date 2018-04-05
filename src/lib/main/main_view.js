@@ -38,12 +38,9 @@ function initMenu() {
  * @param {Object} handlers - Object containing the following keys
  * settingsHandler - Called when the Page Settings menu item is clicked.
  */
-export function bindMenu({settingsHandler, scanPageHandler}) {
+export function bindMenu({settingsHandler}) {
   $on(qs('#page-settings'), 'click', (event) => {
     settingsHandler();
-  });
-  $on(qs('#scan-page'), 'click', (event) => {
-    scanPageHandler();
   });
 }
 
