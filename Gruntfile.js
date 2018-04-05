@@ -15,6 +15,10 @@ module.exports = function(grunt) {
     ['clean', 'webpack:build', 'shell:webextBuild']
   );
 
+  grunt.registerTask('build:beta',
+    'Build the webextension as a self-hosted beta (including selfupdate_url).',
+    ['clean', 'webpack:build', 'patch-manifest', 'shell:webextBuild']
+  );
 
   grunt.registerTask('run',
     'Run the webextension with Firefox, watching and rebuilding when ' +
@@ -39,7 +43,12 @@ module.exports = function(grunt) {
 
   grunt.registerTask('sign',
     'Build and sign a beta webextension.',
-    ['build', 'shell:webextSign']
+    ['build:beta', 'shell:webextSign']
+  );
+
+  grunt.registerTask('patch-manifest',
+    'Add update_url to build/manifest.json',
+    require('./grunt/patch-manifest')
   );
 
   grunt.config('clean', require('./grunt/clean'));
