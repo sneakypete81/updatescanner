@@ -44,7 +44,7 @@
   },
 
   "sidebar_action": {
-    "default_title" : "Update Scanner",
+    "default_title": "Update Scanner",
     "default_panel": "app/sidebar/sidebar.html",
     "default_icon": {
       "18": "images/updatescanner_18.png",

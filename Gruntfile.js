@@ -5,28 +5,42 @@ module.exports = function(grunt) {
   require('load-grunt-tasks')(grunt);
   grunt.initConfig();
 
-  grunt.registerTask('default', 'Build, Lint and test the webextension.',
-                     ['build', 'lint', 'test']);
+  grunt.registerTask('default',
+    'Build, Lint and test the webextension.',
+    ['build', 'lint', 'test']
+  );
 
-  grunt.registerTask('build', 'Build the webextension.',
-                     ['clean', 'webpack:build', 'shell:webextBuild']);
+  grunt.registerTask('build',
+    'Build the webextension.',
+    ['clean', 'webpack:build', 'shell:webextBuild']
+  );
 
-  grunt.registerTask('run', 'Run the webextension with Firefox, watching ' +
-                            'and rebuilding when files change.',
-                     ['clean', 'webpack:build', 'concurrent:run']);
 
-  grunt.registerTask('lint', 'Check for linter warnings.',
-                     ['eslint', 'shell:webextLint']);
+  grunt.registerTask('run',
+    'Run the webextension with Firefox, watching and rebuilding when ' +
+    'files change.',
+    ['clean', 'webpack:build', 'concurrent:run']
+  );
 
-  grunt.registerTask('test', 'Run the unit tests.',
-                     ['karma:unit']);
+  grunt.registerTask('lint',
+    'Check for linter warnings.',
+    ['eslint', 'shell:webextLint']
+  );
 
-  grunt.registerTask('test:watch', 'Run the unit tests, watching and ' +
-                                   'rerunning when files change.',
-                     ['karma:watch']);
+  grunt.registerTask('test',
+    'Run the unit tests.',
+    ['karma:unit']
+  );
 
-  grunt.registerTask('sign', 'Build and sign the webextension.',
-                     ['build', 'shell:webextSign']);
+  grunt.registerTask('test:watch',
+    'Run the unit tests, watching and rerunning when files change.',
+    ['karma:watch']
+  );
+
+  grunt.registerTask('sign',
+    'Build and sign a beta webextension.',
+    ['build', 'shell:webextSign']
+  );
 
   grunt.config('clean', require('./grunt/clean'));
   grunt.config('shell', require('./grunt/shell'));
@@ -38,7 +52,9 @@ module.exports = function(grunt) {
     // Run webpack in watch mode alongside webext run
     run: {
       tasks: ['webpack:watch', 'shell:webextRun'],
-      options: {logConcurrentOutput: true},
+      options: {
+        logConcurrentOutput: true,
+      },
     },
   });
 };
