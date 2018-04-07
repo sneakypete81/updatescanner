@@ -1,19 +1,19 @@
 module.exports = {
-  parserOptions: {
+  'parserOptions': {
     'sourceType': 'module',
     'ecmaVersion': 2017,
   },
 
-  extends: [
+  'extends': [
     'eslint:recommended',
     'google',
   ],
 
-  plugins: [
+  'plugins': [
     'jsdoc',
   ],
 
-  rules: {
+  'rules': {
     // Don't allow assignment in conditionals
     'no-cond-assign': ['error', 'except-parens'],
     // We're allowed to log to console
