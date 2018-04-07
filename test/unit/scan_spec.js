@@ -4,6 +4,7 @@ import {PageStore} from 'page/page_store';
 import {Page} from 'page/page';
 import * as log from 'util/log';
 import * as promise from 'util/promise';
+import * as encoding from 'util/encoding';
 import * as update from 'update/update';
 
 describe('scan', function() {
@@ -213,7 +214,9 @@ describe('scan', function() {
 
     it('does nothing if the data structures are not up to date',
     function(done) {
-      const page = new Page('1', {url: 'http://www.example.com/'});
+      const page = new Page('1', {
+        url: 'http://www.example.com/', encoding: 'utf-8',
+      });
 
       spyOn(window, 'fetch');
       spyOn(PageStore, 'loadHtml');
@@ -228,7 +231,9 @@ describe('scan', function() {
     });
 
     it('Scans a single page', function(done) {
-      const page = new Page('1', {url: 'http://www.example.com/'});
+      const page = new Page('1', {
+        url: 'http://www.example.com/', encoding: 'utf-8',
+      });
       const html = 'Some <b>HTML</b>';
 
       spyOn(window, 'fetch').and.returnValues(
@@ -252,9 +257,11 @@ describe('scan', function() {
     });
 
     it('Scans multiple pages', function(done) {
-      const pages = [new Page('1', {url: 'http://www.example.com/'}),
-                     new Page('2', {url: 'http://www.example2.com/'}),
-                     new Page('3', {url: 'http://www.example3.com/'})];
+      const pages = [
+        new Page('1', {url: 'http://www.example.com/', encoding: 'utf-8'}),
+        new Page('2', {url: 'http://www.example2.com/', encoding: 'utf-8'}),
+        new Page('3', {url: 'http://www.example3.com/', encoding: 'utf-8'}),
+      ];
       const html = 'Some <b>HTML</b>';
 
       spyOn(window, 'fetch').and.returnValue(
@@ -286,8 +293,9 @@ describe('scan', function() {
     });
 
     it('Logs and saves HTTP error status codes', function(done) {
-      const page = new Page('1', {title: 'example',
-                                  url: 'http://www.example.com/'});
+      const page = new Page('1', {
+        title: 'example', url: 'http://www.example.com/', encoding: 'utf-8',
+      });
 
       spyOn(window, 'fetch').and.returnValues(
         Promise.resolve({ok: false, status: 404, statusText: 'no such page'}));
@@ -309,8 +317,9 @@ describe('scan', function() {
     });
 
     it('Logs and saves network errors', function(done) {
-      const page = new Page('1', {title: 'example',
-                                  url: 'http://www.example.com/'});
+      const page = new Page('1', {
+        title: 'example', url: 'http://www.example.com/', encoding: 'utf-8',
+      });
 
       spyOn(window, 'fetch').and.returnValues(
         Promise.reject('Network error'));
@@ -390,6 +399,49 @@ describe('scan', function() {
 
       expect(result.prevHtml).toBe(null);
       expect(result.scannedHtml).toBe(null);
+    });
+  });
+
+  describe('getHtmlFromResponse', function() {
+    it('applies the encoding in the Page object', async function() {
+      const page = new Page(1, {encoding: 'encoding'});
+      const response = {arrayBuffer: () => Promise.resolve('buffer')};
+      spyOn(encoding, 'applyEncoding').and.returnValue('html');
+
+      const html = await scan.__.getHtmlFromResponse(response, page);
+
+      expect(html).toEqual('html');
+      expect(encoding.applyEncoding).toHaveBeenCalledWith('buffer', 'encoding');
+    });
+
+    it('autodetects the encoding if not specified in the Page object',
+    async function() {
+      const page = new Page(1, {});
+      const response = {
+        arrayBuffer: () => Promise.resolve('buffer'),
+        headers: 'headers',
+      };
+      spyOn(encoding, 'detectEncoding').and.returnValue('encoding');
+      spyOn(encoding, 'applyEncoding').and.returnValue('html');
+      spyOn(page, 'save');
+
+      const html = await scan.__.getHtmlFromResponse(response, page);
+
+      expect(html).toEqual('html');
+      expect(encoding.applyEncoding).toHaveBeenCalledWith('buffer', 'utf-8');
+      expect(encoding.detectEncoding).toHaveBeenCalledWith('headers', 'html');
+      expect(encoding.applyEncoding).toHaveBeenCalledWith('buffer', 'encoding');
+      expect(page.save).toHaveBeenCalled;
+      expect(page.encoding).toEqual('encoding');
+    });
+
+    it('uses response.text() for utf-8 encodings', async function() {
+      const page = new Page(1, {encoding: 'utf-8'});
+      const response = {text: () => Promise.resolve('html')};
+
+      const html = await scan.__.getHtmlFromResponse(response, page);
+
+      expect(html).toEqual('html');
     });
   });
 });

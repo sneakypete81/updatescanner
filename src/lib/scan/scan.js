@@ -4,6 +4,7 @@ import {Page} from 'page/page';
 import {isUpToDate} from 'update/update';
 import {log} from 'util/log';
 import {waitForMs} from 'util/promise';
+import {detectEncoding, applyEncoding} from 'util/encoding';
 
 /**
  * Enumeration indicating the similarity of two HTML strings.
@@ -62,8 +63,9 @@ export async function scanPage(page) {
       throw Error(`[${response.status}] ${response.statusText}`);
     }
 
-    const html = await response.text();
+    const html = await getHtmlFromResponse(response, page);
     return processHtml(page, html);
+
   } catch (error) {
     log(`Could not scan "${page.title}": ${error}`);
     // Only save if the page still exists
@@ -73,6 +75,31 @@ export async function scanPage(page) {
     }
   }
   return false;
+}
+
+/**
+ * Given an HTTP Response, extract the HTML and apply character encoding.
+ * If the page encoding attribute is not set, autodetect it and update the page.
+ *
+ * @param {Response} response - HTTP response.
+ * @param {Page} page - Page object associated with the scan.
+ *
+ * @returns {string} HTML page content.
+ */
+async function getHtmlFromResponse(response, page) {
+  // This is probably faster for the most common case (utf-8)
+  if (page.encoding == 'utf-8') {
+    return await response.text();
+  }
+
+  const buffer = await response.arrayBuffer();
+
+  if (page.encoding === null || page.encoding == 'auto') {
+    const rawHtml = applyEncoding(buffer, 'utf-8');
+    page.encoding = detectEncoding(response.headers, rawHtml);
+    page.save();
+  }
+  return applyEncoding(buffer, page.encoding);
 }
 
 /**
@@ -240,4 +267,5 @@ export const __ = {
   getChangeType: getChangeType,
   updatePageState: updatePageState,
   stripHtml: stripHtml,
+  getHtmlFromResponse: getHtmlFromResponse,
 };
