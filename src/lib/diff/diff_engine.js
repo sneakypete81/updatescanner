@@ -113,7 +113,7 @@ wDiffBlockMinLength : 3,
 wDiffWordDiff : false,
 
 // enable recursive diff to resolve problematic sequences
-wDiffRecursiveDiff : true,
+wDiffRecursiveDiff : false,
 
 // enable block move display
 wDiffShowBlockMoves : false,
@@ -391,7 +391,7 @@ _WDiffText : function(text, newStart, newEnd, oldStart, oldEnd, recursionLevel)
 
 // recursively diff still unresolved regions downwards
 
-    if (me._wDiffRecursiveDiff) {
+    if (me.wDiffRecursiveDiff) {
         i = newStart;
         j = oldStart;
         while (i < newEnd) {
@@ -435,7 +435,7 @@ _WDiffText : function(text, newStart, newEnd, oldStart, oldEnd, recursionLevel)
 
 // recursively diff still unresolved regions upwards
 
-    if (me._wDiffRecursiveDiff) {
+    if (me.wDiffRecursiveDiff) {
         i = newEnd - 1;
         j = oldEnd - 1;
         while (i >= newStart) {
