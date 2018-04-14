@@ -3,6 +3,7 @@ Thanks for creating a new issue!
 Before continuing, please use the search box in the header above to check if someone has already reported it.
 
 To help explain the issue, please include the following:
+ * OS version:
  * Firefox version:
  * Update Scanner version:
 
