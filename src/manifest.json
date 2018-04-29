@@ -25,7 +25,9 @@
     "notifications",
     "storage",
     "tabs",
-    "unlimitedStorage"
+    "unlimitedStorage",
+    "*://twitter.com/*",
+    "*://www.facebook.com/*"
   ],
 
   "background": {
