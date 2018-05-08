@@ -1,6 +1,11 @@
 import {Storage} from '/lib/util/storage.js';
 import {log} from '/lib/util/log.js';
 
+// Allow function mocking
+export const __ = {
+  log: (...args) => log(...args),
+};
+
 /**
  * Class representing a folder of Pages.
  */
@@ -110,7 +115,7 @@ export class PageFolder {
       const data = await Storage.load(PageFolder._KEY(id)) || {};
       return new PageFolder(id, data);
     } catch (error) {
-      log(`ERROR: PageFolder.load: ${error}`);
+      __.log(`ERROR: PageFolder.load: ${error}`);
       return new PageFolder(id, {});
     }
   }
@@ -125,7 +130,7 @@ export class PageFolder {
     try {
       await Storage.save(PageFolder._KEY(this.id), this._toObject());
     } catch (error) {
-      log(`ERROR: PageFolder.save: ${error}`);
+      __.log(`ERROR: PageFolder.save: ${error}`);
     }
     return {};
   }
@@ -140,7 +145,7 @@ export class PageFolder {
     try {
       await Storage.remove(PageFolder._KEY(this.id));
     } catch (error) {
-      log(`ERROR: PageFolder.delete: ${error}`);
+      __.log(`ERROR: PageFolder.delete: ${error}`);
     }
     return {};
   }

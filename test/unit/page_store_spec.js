@@ -1,12 +1,12 @@
 import using from 'jasmine-data-provider';
 
 import {PageStore, hasPageStateChanged} from 'page/page_store';
+import * as pageStoreModule from 'page/page_store';
 import {Page} from 'page/page';
 import {PageFolder} from 'page/page_folder';
 import {StorageInfo} from 'page/storage_info';
 import {Storage} from 'util/storage';
 import {StorageDB} from 'util/storage_db';
-import * as log from 'util/log';
 
 describe('PageStore', function() {
   const spyOnStorageLoadWithArgReturn = (returnMap) => {
@@ -946,11 +946,11 @@ describe('PageStore', function() {
     it('returns null when the load operation fails', function(done) {
       const id = '42';
       spyOn(StorageDB, 'load').and.returnValues(Promise.reject('ERROR_MSG'));
-      spyOn(log, 'log');
+      spyOn(pageStoreModule.__, 'log');
 
       PageStore.loadHtml(id, PageStore.htmlTypes.OLD).then((result) => {
         expect(result).toBeNull();
-        expect(log.log.calls.argsFor(0)).toMatch('ERROR_MSG');
+        expect(pageStoreModule.__.log.calls.argsFor(0)).toMatch('ERROR_MSG');
         done();
       }).catch((error) => done.fail(error));
     });
@@ -972,10 +972,10 @@ describe('PageStore', function() {
 
     it('silently logs an error if the save fails', function(done) {
       spyOn(StorageDB, 'save').and.returnValues(Promise.reject('AN_ERROR'));
-      spyOn(log, 'log');
+      spyOn(pageStoreModule.__, 'log');
 
       PageStore.saveHtml('2', PageStore.htmlTypes.NEW, 'Some HTML').then(() => {
-        expect(log.log.calls.argsFor(0)).toMatch('AN_ERROR');
+        expect(pageStoreModule.__.log.calls.argsFor(0)).toMatch('AN_ERROR');
         done();
       }).catch((error) => done.fail(error));
     });
@@ -997,10 +997,10 @@ describe('PageStore', function() {
 
     it('silently logs an error if the delete operation fails', function(done) {
       spyOn(StorageDB, 'remove').and.returnValues(Promise.reject('AN_ERROR'));
-      spyOn(log, 'log');
+      spyOn(pageStoreModule.__, 'log');
 
       PageStore.deleteHtml('2').then(() => {
-        expect(log.log.calls.argsFor(0)).toMatch('AN_ERROR');
+        expect(pageStoreModule.__.log.calls.argsFor(0)).toMatch('AN_ERROR');
         done();
       }).catch((error) => done.fail(error));
     });

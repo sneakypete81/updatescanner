@@ -1,6 +1,12 @@
 import {scanPage} from './scan.js';
 import {waitForMs} from '/lib/util/promise.js';
 
+// Allow function mocking
+export const __ = {
+  scanPage: (...args) => scanPage(...args),
+  waitForMs: (...args) => waitForMs(...args),
+};
+
 // Wait between scanning pages
 const SCAN_IDLE_MS = 2000;
 
@@ -93,14 +99,14 @@ export class ScanQueue {
     let scanCount = 0;
 
     while (this.queue.length > 0) {
-      const majorChange = await scanPage(this.queue.shift());
+      const majorChange = await __.scanPage(this.queue.shift());
       if (majorChange) {
         majorChanges++;
       }
       scanCount++;
 
       if (this.queue.length > 0) {
-        await waitForMs(SCAN_IDLE_MS);
+        await __.waitForMs(SCAN_IDLE_MS);
       }
     }
     return {majorChanges: majorChanges, scanCount: scanCount};

@@ -1,11 +1,10 @@
 import {Autoscan} from 'scan/autoscan';
-import * as autoscan from 'scan/autoscan';
+import * as autoscanModule from 'scan/autoscan';
 import {ScanQueue} from 'scan/scan_queue';
 import {PageStore} from 'page/page_store';
 import {Page} from 'page/page';
 import {Config} from 'util/config';
 import {Storage} from 'util/storage';
-import * as log from 'util/log';
 
 describe('Autoscan', function() {
   beforeEach(function() {
@@ -69,7 +68,7 @@ describe('Autoscan', function() {
     });
 
     it('uses short delays when the debug flag is set', async function() {
-      spyOn(log, 'log');
+      spyOn(autoscanModule.__, 'log');
       spyOn(Config, 'loadSingleSetting').and.returnValues(
         Promise.resolve(true));
 
@@ -220,7 +219,7 @@ describe('Autoscan', function() {
       });
       jasmine.clock().tick(5 * 60 * 1000 + 1);
 
-      expect(autoscan.__.isAutoscanPending(page)).toBeTruthy();
+      expect(autoscanModule.__.isAutoscanPending(page)).toBeTruthy();
     });
 
     it('returns false if an autoscan is not quite pending', function() {
@@ -230,7 +229,7 @@ describe('Autoscan', function() {
       });
       jasmine.clock().tick(5 * 60 * 1000 - 1);
 
-      expect(autoscan.__.isAutoscanPending(page)).toBeFalsy();
+      expect(autoscanModule.__.isAutoscanPending(page)).toBeFalsy();
     });
 
     it('returns false if autoscan is disabled for the page', function() {
@@ -240,13 +239,13 @@ describe('Autoscan', function() {
       });
       jasmine.clock().tick(5 * 60 * 1000);
 
-      expect(autoscan.__.isAutoscanPending(page)).toBeFalsy();
+      expect(autoscanModule.__.isAutoscanPending(page)).toBeFalsy();
     });
 
     it('returns true if the page has not yet been scanned', function() {
       const page = new Page(1, {scanRateMinutes: 5});
 
-      expect(autoscan.__.isAutoscanPending(page)).toBeTruthy();
+      expect(autoscanModule.__.isAutoscanPending(page)).toBeTruthy();
     });
   });
 });

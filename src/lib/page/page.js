@@ -1,6 +1,11 @@
 import {Storage} from '/lib/util/storage.js';
 import {log} from '/lib/util/log.js';
 
+// Allow function mocking
+export const __ = {
+  log: (...args) => log(...args),
+};
+
 /**
  * Class representing a webpage.
  */
@@ -196,7 +201,7 @@ export class Page {
       const data = await Storage.load(Page._KEY(id)) || {};
       return new Page(id, data);
     } catch (error) {
-      log(`ERROR: Page.load: ${error}`);
+      __.log(`ERROR: Page.load: ${error}`);
       return new Page(id, {});
     }
   }
@@ -213,7 +218,7 @@ export class Page {
       const data = await Storage.load(Page._KEY(this.id));
       return (data !== undefined);
     } catch (error) {
-      log(`ERROR: Page.existsInStorage: ${error}`);
+      __.log(`ERROR: Page.existsInStorage: ${error}`);
     }
     return false;
   }
@@ -228,7 +233,7 @@ export class Page {
     try {
       await Storage.save(Page._KEY(this.id), this._toObject());
     } catch (error) {
-      log(`ERROR: Page.save: ${error}`);
+      __.log(`ERROR: Page.save: ${error}`);
     }
     return {};
   }
@@ -243,7 +248,7 @@ export class Page {
     try {
       await Storage.remove(Page._KEY(this.id));
     } catch (error) {
-      log(`ERROR: Page.delete: ${error}`);
+      __.log(`ERROR: Page.delete: ${error}`);
     }
     return {};
   }

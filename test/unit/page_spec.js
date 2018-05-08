@@ -1,6 +1,6 @@
 import {Page} from 'page/page';
+import * as pageModule from 'page/page';
 import {Storage} from 'util/storage';
-import * as log from 'util/log';
 
 describe('Page', function() {
   describe('load', function() {
@@ -28,11 +28,11 @@ describe('Page', function() {
 
     it('returns the default Page if the storage load fails', async function() {
       spyOn(Storage, 'load').and.returnValues(Promise.reject('ERROR_MESSAGE'));
-      spyOn(log, 'log');
+      spyOn(pageModule.__, 'log');
 
       const page = await Page.load('42');
       expect(page.title).toEqual('New Page');
-      expect(log.log.calls.argsFor(0)).toMatch('ERROR_MESSAGE');
+      expect(pageModule.__.log.calls.argsFor(0)).toMatch('ERROR_MESSAGE');
     });
 
     it('ignores invalid Page attributes', async function() {
@@ -83,12 +83,12 @@ describe('Page', function() {
 
     it('silently logs an error if the save fails', function(done) {
       spyOn(Storage, 'save').and.returnValues(Promise.reject('AN_ERROR'));
-      spyOn(log, 'log');
+      spyOn(pageModule.__, 'log');
 
       const page = new Page('37', {});
 
       page.save().then(() => {
-        expect(log.log.calls.argsFor(0)).toMatch('AN_ERROR');
+        expect(pageModule.__.log.calls.argsFor(0)).toMatch('AN_ERROR');
         done();
       })
       .catch((error) => done.fail(error));
@@ -110,12 +110,12 @@ describe('Page', function() {
 
     it('silently logs an error if the delete operation fails', function(done) {
       spyOn(Storage, 'remove').and.returnValues(Promise.reject('AN_ERROR'));
-      spyOn(log, 'log');
+      spyOn(pageModule.__, 'log');
 
       const page = new Page('37', {});
 
       page.delete().then(() => {
-        expect(log.log.calls.argsFor(0)).toMatch('AN_ERROR');
+        expect(pageModule.__.log.calls.argsFor(0)).toMatch('AN_ERROR');
         done();
       })
       .catch((error) => done.fail(error));
