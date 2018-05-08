@@ -5,6 +5,11 @@ import {Storage} from '/lib/util/storage.js';
 import {StorageDB} from '/lib/util/storage_db.js';
 import {log} from '/lib/util/log.js';
 
+// Allow function mocking
+export const __ = {
+  log: (...args) => log(...args),
+};
+
 /**
  * Class to manage saving and loading data from storage.
  */
@@ -437,7 +442,7 @@ export class PageStore {
     try {
       await StorageDB.save(PageStore._HTML_KEY(id, htmlType), html);
     } catch (error) {
-      log('ERROR:PageStore.saveHtml:' + error);
+      __.log('ERROR:PageStore.saveHtml:' + error);
     }
   }
 
@@ -459,7 +464,7 @@ export class PageStore {
       }
       return html;
     } catch (error) {
-      log('ERROR:PageStore.loadHtml:' + error);
+      __.log('ERROR:PageStore.loadHtml:' + error);
       return null;
     }
   }
@@ -476,12 +481,12 @@ export class PageStore {
     try {
       await StorageDB.remove(PageStore._HTML_KEY(id, PageStore.htmlTypes.OLD));
     } catch (error) {
-      log('ERROR:PageStore.deleteHtml:' + error);
+      __.log('ERROR:PageStore.deleteHtml:' + error);
     }
     try {
       await StorageDB.remove(PageStore._HTML_KEY(id, PageStore.htmlTypes.NEW));
     } catch (error) {
-      log('ERROR:PageStore.deleteHtml:' + error);
+      __.log('ERROR:PageStore.deleteHtml:' + error);
     }
     return {};
   }
@@ -505,7 +510,7 @@ export class PageStore {
       }
       return html;
     } catch (error) {
-      log('ERROR:PageStore.loadHtmlFromDeprecatedStorage:' + error);
+      __.log('ERROR:PageStore.loadHtmlFromDeprecatedStorage:' + error);
       return null;
     }
   }
@@ -523,12 +528,12 @@ export class PageStore {
     try {
       await Storage.remove(PageStore._HTML_KEY(id, PageStore.htmlTypes.OLD));
     } catch (error) {
-      log('ERROR:PageStore.deleteHtmlFromDeprecatedStorage:' + error);
+      __.log('ERROR:PageStore.deleteHtmlFromDeprecatedStorage:' + error);
     }
     try {
       await Storage.remove(PageStore._HTML_KEY(id, PageStore.htmlTypes.NEW));
     } catch (error) {
-      log('ERROR:PageStore.deleteHtmlFromDeprecatedStorage:' + error);
+      __.log('ERROR:PageStore.deleteHtmlFromDeprecatedStorage:' + error);
     }
     return {};
   }

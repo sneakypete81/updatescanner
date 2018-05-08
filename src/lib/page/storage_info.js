@@ -1,6 +1,11 @@
 import {Storage} from '/lib/util/storage.js';
 import {log} from '/lib/util/log.js';
 
+// Allow function mocking
+export const __ = {
+  log: (...args) => log(...args),
+};
+
 /**
  * Class representing a information about the stored pages.
  */
@@ -68,7 +73,7 @@ export class StorageInfo {
       const data = await Storage.load(StorageInfo._KEY);
       return new StorageInfo(data);
     } catch (error) {
-      log(`ERROR:StorageInfo.load: ${error}`);
+      __.log(`ERROR:StorageInfo.load: ${error}`);
       return new StorageInfo();
     }
   }
@@ -83,7 +88,7 @@ export class StorageInfo {
     try {
       await Storage.save(StorageInfo._KEY, this._toObject());
     } catch (error) {
-      log(`ERROR:StorageInfo.save: ${error}`);
+      __.log(`ERROR:StorageInfo.save: ${error}`);
     }
     return {};
   }

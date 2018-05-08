@@ -1,6 +1,6 @@
 import {PageFolder} from 'page/page_folder';
+import * as pageFolderModule from 'page/page_folder';
 import {Storage} from 'util/storage';
-import * as log from 'util/log';
 
 describe('PageFolder', function() {
   describe('load', function() {
@@ -37,11 +37,12 @@ describe('PageFolder', function() {
     it('returns the default PageFolder if the storage load fails',
        function(done) {
       spyOn(Storage, 'load').and.returnValues(Promise.reject('ERROR_MESSAGE'));
-      spyOn(log, 'log');
+      spyOn(pageFolderModule.__, 'log');
 
       PageFolder.load('42').then((pageFolder) => {
         expect(pageFolder.title).toEqual('New Folder');
-        expect(log.log.calls.argsFor(0)).toMatch('ERROR_MESSAGE');
+        expect(pageFolderModule.__.log.calls.argsFor(0))
+          .toMatch('ERROR_MESSAGE');
         done();
       })
       .catch((error) => done.fail(error));
@@ -67,10 +68,10 @@ describe('PageFolder', function() {
 
     it('silently logs an error if the save fails', function(done) {
       spyOn(Storage, 'save').and.returnValues(Promise.reject('AN_ERROR'));
-      spyOn(log, 'log');
+      spyOn(pageFolderModule.__, 'log');
 
       new PageFolder('37', {}).save().then(() => {
-        expect(log.log.calls.argsFor(0)).toMatch('AN_ERROR');
+        expect(pageFolderModule.__.log.calls.argsFor(0)).toMatch('AN_ERROR');
         done();
       })
       .catch((error) => done.fail(error));
@@ -93,12 +94,12 @@ describe('PageFolder', function() {
 
     it('silently logs an error if the delete operation fails', function(done) {
       spyOn(Storage, 'remove').and.returnValues(Promise.reject('AN_ERROR'));
-      spyOn(log, 'log');
+      spyOn(pageFolderModule.__, 'log');
 
       const pageFolder = new PageFolder('37', {});
 
       pageFolder.delete().then(() => {
-        expect(log.log.calls.argsFor(0)).toMatch('AN_ERROR');
+        expect(pageFolderModule.__.log.calls.argsFor(0)).toMatch('AN_ERROR');
         done();
       })
       .catch((error) => done.fail(error));
