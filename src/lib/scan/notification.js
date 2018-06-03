@@ -1,4 +1,4 @@
-import {showAllChanges} from 'main/main_url';
+import {showAllChanges} from '/lib/main/main_url.js';
 
 const NOTIFICATION_ID = 'updatescanner';
 

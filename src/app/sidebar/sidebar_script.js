@@ -1,4 +1,4 @@
-import {Sidebar} from 'sidebar/sidebar';
+import {Sidebar} from '/lib/sidebar/sidebar.js';
 
 (function() {
   const sidebar = new Sidebar();

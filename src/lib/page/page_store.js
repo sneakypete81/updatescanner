@@ -1,9 +1,9 @@
-import {Page} from './page';
-import {PageFolder} from './page_folder';
-import {StorageInfo} from './storage_info';
-import {Storage} from 'util/storage';
-import {StorageDB} from 'util/storage_db';
-import {log} from 'util/log';
+import {Page} from './page.js';
+import {PageFolder} from './page_folder.js';
+import {StorageInfo} from './storage_info.js';
+import {Storage} from '/lib/util/storage.js';
+import {StorageDB} from '/lib/util/storage_db.js';
+import {log} from '/lib/util/log.js';
 
 /**
  * Class to manage saving and loading data from storage.

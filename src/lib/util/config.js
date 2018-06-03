@@ -1,4 +1,4 @@
-import {Storage} from 'util/storage';
+import {Storage} from './storage.js';
 
 /**
  * Class used to access configuration settings.

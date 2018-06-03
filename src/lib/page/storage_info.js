@@ -1,5 +1,5 @@
-import {Storage} from 'util/storage';
-import {log} from 'util/log';
+import {Storage} from '/lib/util/storage.js';
+import {log} from '/lib/util/log.js';
 
 /**
  * Class representing a information about the stored pages.

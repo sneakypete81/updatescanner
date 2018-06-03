@@ -1,10 +1,12 @@
-import {openMain, showAllChanges, paramEnum, actionEnum} from 'main/main_url';
-import {backgroundActionEnum} from 'background/actions.js';
-import {PageStore, hasPageStateChanged, isItemChanged} from 'page/page_store';
-import {createBackupJson} from 'backup/backup';
-import {openRestoreUrl} from 'backup/restore_url';
-import {waitForMs} from 'util/promise';
-import * as view from 'popup/popup_view';
+import * as view from './popup_view.js';
+import {openMain, showAllChanges, paramEnum, actionEnum}
+  from '/lib/main/main_url.js';
+import {backgroundActionEnum} from '/lib/background/actions.js';
+import {PageStore, hasPageStateChanged, isItemChanged}
+  from '/lib/page/page_store.js';
+import {createBackupJson} from '/lib/backup/backup.js';
+import {openRestoreUrl} from '/lib/backup/restore_url.js';
+import {waitForMs} from '/lib/util/promise.js';
 
 /**
  * Class representing the Update Scanner toolbar popup.

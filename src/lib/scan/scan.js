@@ -1,10 +1,10 @@
-import {isMajorChange} from 'scan/fuzzy';
-import {PageStore} from 'page/page_store';
-import {Page} from 'page/page';
-import {isUpToDate} from 'update/update';
-import {log} from 'util/log';
-import {waitForMs} from 'util/promise';
-import {detectEncoding, applyEncoding} from 'util/encoding';
+import {isMajorChange} from './fuzzy.js';
+import {PageStore} from '/lib/page/page_store.js';
+import {Page} from '/lib/page/page.js';
+import {isUpToDate} from '/lib/update/update.js';
+import {log} from '/lib/util/log.js';
+import {waitForMs} from '/lib/util/promise.js';
+import {detectEncoding, applyEncoding} from '/lib/util/encoding.js';
 
 /**
  * Enumeration indicating the similarity of two HTML strings.

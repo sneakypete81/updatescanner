@@ -1,6 +1,6 @@
-import {qs, $on, hideElement, showElement} from 'util/view_helpers';
-import {readAsText} from 'promise-file-reader';
-import {PageStore} from 'page/page_store';
+import {qs, $on, hideElement, showElement} from '/lib/util/view_helpers.js';
+import {readAsText} from '/lib/util/promise.js';
+import {PageStore} from '/lib/page/page_store.js';
 
 /**
  * Class representing the Update Scanner upgrade page.

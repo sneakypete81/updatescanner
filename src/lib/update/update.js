@@ -1,6 +1,6 @@
-import * as view from 'update/update_view';
-import {PageStore} from 'page/page_store';
-import {Config} from 'util/config';
+import * as view from './update_view.js';
+import {PageStore} from '/lib/page/page_store.js';
+import {Config} from '/lib/util/config.js';
 
 export const latestVersion = 1;
 

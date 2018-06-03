@@ -1,4 +1,4 @@
-import {PageStore} from 'page/page_store';
+import {PageStore} from '/lib/page/page_store.js';
 /**
  * Recursively import Pages/PageFolders from a Bookmarks JSON object into
  * the PageStore. Used to upgrade from UpdateScanner v3.

@@ -1,11 +1,10 @@
-import $ from 'jquery';
-import 'jstree';
+/* eslint-env jquery */
 
-import {Page} from 'page/page';
-import {PageFolder} from 'page/page_folder';
-import {PageStore} from 'page/page_store';
-import {log} from 'util/log';
-import {qs, showElement, hideElement} from 'util/view_helpers';
+import {Page} from '/lib/page/page.js';
+import {PageFolder} from '/lib/page/page_folder.js';
+import {PageStore} from '/lib/page/page_store.js';
+import {log} from '/lib/util/log.js';
+import {qs, showElement, hideElement} from '/lib/util/view_helpers.js';
 
 /**
  * Class representing the Update Scanner Sidebar.

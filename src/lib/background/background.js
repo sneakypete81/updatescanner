@@ -1,12 +1,13 @@
-import {backgroundActionEnum} from 'background/actions';
-import {Autoscan} from 'scan/autoscan';
-import {ScanQueue} from 'scan/scan_queue';
-import {showNotification} from 'scan/notification';
-import {PageStore, hasPageStateChanged, isItemChanged} from 'page/page_store';
-import {isUpToDate, latestVersion} from 'update/update';
-import {openUpdate} from 'update/update_url';
-import {log} from 'util/log';
-import {Config} from 'util/config';
+import {backgroundActionEnum} from './actions.js';
+import {Autoscan} from '/lib/scan/autoscan.js';
+import {ScanQueue} from '/lib/scan/scan_queue.js';
+import {showNotification} from '/lib/scan/notification.js';
+import {PageStore, hasPageStateChanged, isItemChanged}
+  from '/lib/page/page_store.js';
+import {isUpToDate, latestVersion} from '/lib/update/update.js';
+import {openUpdate} from '/lib/update/update_url.js';
+import {log} from '/lib/util/log.js';
+import {Config} from '/lib/util/config.js';
 
 const activeIcon = {
   18: '/images/updatescanner_18.png',

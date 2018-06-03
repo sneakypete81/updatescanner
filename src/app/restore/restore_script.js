@@ -1,4 +1,4 @@
-import {restore} from 'backup/restore';
+import {restore} from '/lib/backup/restore.js';
 
 (function() {
   document.addEventListener('DOMContentLoaded', () => restore());
