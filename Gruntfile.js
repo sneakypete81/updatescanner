@@ -12,18 +12,18 @@ module.exports = function(grunt) {
 
   grunt.registerTask('build',
     'Build the webextension.',
-    ['clean', 'shell:webextBuild']
+    ['clean', 'copy:dependencies', 'shell:webextBuild']
   );
 
   grunt.registerTask('build:beta',
     'Build the webextension as a self-hosted beta (including selfupdate_url).',
-    ['clean', 'patch-manifest', 'shell:webextBuild']
+    ['clean', 'copy:dependencies', 'patch-manifest', 'shell:webextBuild']
   );
 
   grunt.registerTask('run',
     'Run the webextension with Firefox, watching and rebuilding when ' +
     'files change.',
-    ['clean', 'shell:webextRun']
+    ['clean', 'copy:dependencies', 'shell:webextRun']
   );
 
   grunt.registerTask('lint',
@@ -38,12 +38,12 @@ module.exports = function(grunt) {
 
   grunt.registerTask('test:watch',
     'Run the unit tests, watching and rerunning when files change.',
-    ['karma:watch']
+    ['copy:dependencies', 'karma:watch']
   );
 
   grunt.registerTask('sign',
     'Build and sign a beta webextension.',
-    ['build:beta', 'shell:webextSign']
+    ['build:beta', 'copy:dependencies', 'shell:webextSign']
   );
 
   grunt.registerTask('patch-manifest',
@@ -52,6 +52,7 @@ module.exports = function(grunt) {
   );
 
   grunt.config('clean', require('./grunt/clean'));
+  grunt.config('copy', require('./grunt/copy'));
   grunt.config('shell', require('./grunt/shell'));
   grunt.config('eslint', require('./grunt/eslint'));
   grunt.config('karma', require('./grunt/karma'));
