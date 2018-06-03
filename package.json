@@ -14,7 +14,6 @@
     "promise-file-reader": "1.0.2"
   },
   "devDependencies": {
-    "copy-webpack-plugin": "4.5.1",
     "eslint": "4.19.1",
     "eslint-config-google": "0.9.1",
     "eslint-plugin-jsdoc": "3.7.1",
@@ -26,7 +25,6 @@
     "grunt-eslint": "20.2.0",
     "grunt-karma": "2.0.0",
     "grunt-shell": "2.1.0",
-    "grunt-webpack": "3.1.2",
     "istanbul-instrumenter-loader": "3.0.1",
     "jasmine-core": "3.1.0",
     "jasmine-data-provider": "2.2.0",
@@ -38,10 +36,8 @@
     "karma-jasmine-html-reporter": "1.1.0",
     "karma-notification-reporter": "0.1.2",
     "karma-sourcemap-loader": "0.3.7",
-    "karma-webpack": "3.0.0",
     "load-grunt-tasks": "4.0.0",
-    "web-ext": "2.7.0",
-    "webpack": "3.11.0"
+    "web-ext": "2.7.0"
   },
   "scripts": {
     "build": "grunt build",
