@@ -1,11 +1,7 @@
-// @TODO: Don't need JQuery
-import $ from 'jquery';
+import {PageStore} from '/lib/page/page_store.js';
+import {showNotification} from '/lib/scan/notification.js';
 
-import {PageStore} from 'page/page_store';
-
-import {showNotification} from 'scan/notification';
-
-const dataText = $('#data');
+const dataText = document.querySelector('#data');
 const reloadBtn = document.querySelector('#reload');
 const preloadBtn = document.querySelector('#preload');
 const clearBtn = document.querySelector('#clear');
@@ -25,7 +21,7 @@ document.addEventListener('DOMContentLoaded', reload);
 async function reload() {
   dataText.innerHTML = '';
   const storageData = await browser.storage.local.get();
-  dataText.text(JSON.stringify(storageData, null, 4));
+  dataText.textContent = JSON.stringify(storageData, null, 4);
 }
 
 async function preload() {

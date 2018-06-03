@@ -1,5 +1,5 @@
-import {Config} from 'util/config';
-import {log} from 'util/log';
+import {Config} from '/lib/util/config.js';
+import {log} from '/lib/util/log.js';
 
 const ALARM_ID = 'updatescanner-autoscan';
 const ALARM_TIMING = {delayInMinutes: 1, periodInMinutes: 5};

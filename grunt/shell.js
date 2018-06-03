@@ -13,7 +13,7 @@ const settings = require('./settings');
  */
 function webExtCmd(command, args=[]) {
   const webExtBinary = ['node', './node_modules/web-ext/bin/web-ext',
-                        '--source-dir=build'];
+                        '--source-dir=src'];
   return webExtBinary.concat([command]).concat(args).join(' ');
 }
 

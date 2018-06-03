@@ -1,4 +1,4 @@
-import {PageStore} from 'page/page_store';
+import {PageStore} from '/lib/page/page_store.js';
 
 /**
  * Parameter names for the Main page URL parameters.

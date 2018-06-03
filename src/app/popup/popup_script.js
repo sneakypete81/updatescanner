@@ -1,4 +1,4 @@
-import {Popup} from 'popup/popup';
+import {Popup} from '/lib/popup/popup.js';
 
 (function() {
   const popup = new Popup();

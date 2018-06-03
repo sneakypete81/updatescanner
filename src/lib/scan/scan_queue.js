@@ -1,5 +1,5 @@
-import {scanPage} from 'scan/scan';
-import {waitForMs} from 'util/promise';
+import {scanPage} from './scan.js';
+import {waitForMs} from '/lib/util/promise.js';
 
 // Wait between scanning pages
 const SCAN_IDLE_MS = 2000;

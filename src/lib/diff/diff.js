@@ -1,4 +1,4 @@
-import {highlightDiffs} from 'diff/diff_engine';
+import {highlightDiffs} from './diff_engine.js';
 
 /**
  * Perform a diff between two HTML strings, returning highlighted HTML.

@@ -1,5 +1,5 @@
-import {PageStore} from 'page/page_store';
-import {PageFolder} from 'page/page_folder';
+import {PageStore} from '/lib/page/page_store.js';
+import {PageFolder} from '/lib/page/page_folder.js';
 
 export const JSON_BACKUP_ID = 'https://github.com/sneakypete81/updatescanner/@JSON_BACKUP_ID';
 export const JSON_BACKUP_VERSION = 1;

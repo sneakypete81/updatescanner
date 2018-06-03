@@ -1,11 +1,11 @@
-import * as view from 'main/main_view';
-import * as dialog from 'main/dialog_view';
-import {getMainDiffUrl, paramEnum, actionEnum} from 'main/main_url';
-import {PageStore} from 'page/page_store';
-import {Page} from 'page/page';
-import {PageFolder} from 'page/page_folder';
-import {diff} from 'diff/diff';
-import {log} from 'util/log';
+import * as view from './main_view.js';
+import * as dialog from './dialog_view.js';
+import {getMainDiffUrl, paramEnum, actionEnum} from './main_url.js';
+import {PageStore} from '/lib/page/page_store.js';
+import {Page} from '/lib/page/page.js';
+import {PageFolder} from '/lib/page/page_folder.js';
+import {diff} from '/lib/diff/diff.js';
+import {log} from '/lib/util/log.js';
 
 /**
  * Class representing the main Update Scanner content page.

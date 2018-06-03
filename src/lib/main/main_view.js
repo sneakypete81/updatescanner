@@ -1,6 +1,6 @@
 import {qs, $on, hideElement, toggleElement}
-  from 'util/view_helpers';
-import {timeSince} from 'util/date_format';
+  from '/lib/util/view_helpers.js';
+import {timeSince} from '/lib/util/date_format.js';
 
 export const ViewTypes = {
   OLD: 'old',
