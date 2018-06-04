@@ -15,6 +15,11 @@ env:
 before_install:
 - npm install -g greenkeeper-lockfile@1
 
+# Workaround for https://github.com/greenkeeperio/greenkeeper-lockfile/issues/156
+# ("npm ci" doesn't work with greenkeeper)
+install:
+- npm install
+
 before_script:
   - greenkeeper-lockfile-update
   # Use xvfb to run Firefox
