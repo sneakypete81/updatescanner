@@ -1,4 +1,4 @@
-import {detectEncoding, applyEncoding} from 'util/encoding';
+import {detectEncoding, applyEncoding} from '/lib/util/encoding.js';
 
 describe('encoding', function() {
   describe('detectEncoding', function() {
