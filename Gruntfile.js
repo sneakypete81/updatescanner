@@ -43,7 +43,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('sign',
     'Build and sign a beta webextension.',
-    ['build:beta', 'copy:dependencies', 'shell:webextSign']
+    ['build:beta', 'shell:webextSign']
   );
 
   grunt.registerTask('patch-manifest',
