@@ -33,12 +33,12 @@ module.exports = function(grunt) {
 
   grunt.registerTask('test',
     'Run the unit tests.',
-    ['karma:unit']
+    ['clean', 'copy:dependencies', 'karma:unit']
   );
 
   grunt.registerTask('test:watch',
     'Run the unit tests, watching and rerunning when files change.',
-    ['copy:dependencies', 'karma:watch']
+    ['clean', 'copy:dependencies', 'karma:watch']
   );
 
   grunt.registerTask('sign',
