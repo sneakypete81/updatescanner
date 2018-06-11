@@ -1,4 +1,4 @@
-import {timeSince} from 'util/date_format';
+import {timeSince} from '/lib/util/date_format.js';
 
 describe('date_format', function() {
   describe('timeSince', function() {

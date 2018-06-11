@@ -1,6 +1,6 @@
-import {Page} from 'page/page';
-import * as pageModule from 'page/page';
-import {Storage} from 'util/storage';
+import {Page} from '/lib/page/page.js';
+import * as pageModule from '/lib/page/page.js';
+import {Storage} from '/lib/util/storage.js';
 
 describe('Page', function() {
   describe('load', function() {

@@ -1,10 +1,10 @@
-import {Autoscan} from 'scan/autoscan';
-import * as autoscanModule from 'scan/autoscan';
-import {ScanQueue} from 'scan/scan_queue';
-import {PageStore} from 'page/page_store';
-import {Page} from 'page/page';
-import {Config} from 'util/config';
-import {Storage} from 'util/storage';
+import {Autoscan} from '/lib/scan/autoscan.js';
+import * as autoscanModule from '/lib/scan/autoscan.js';
+import {ScanQueue} from '/lib/scan/scan_queue.js';
+import {PageStore} from '/lib/page/page_store.js';
+import {Page} from '/lib/page/page.js';
+import {Config} from '/lib/util/config.js';
+import {Storage} from '/lib/util/storage.js';
 
 describe('Autoscan', function() {
   beforeEach(function() {

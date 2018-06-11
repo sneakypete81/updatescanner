@@ -1,6 +1,6 @@
-import {PageFolder} from 'page/page_folder';
-import * as pageFolderModule from 'page/page_folder';
-import {Storage} from 'util/storage';
+import {PageFolder} from '/lib/page/page_folder.js';
+import * as pageFolderModule from '/lib/page/page_folder.js';
+import {Storage} from '/lib/util/storage.js';
 
 describe('PageFolder', function() {
   describe('load', function() {

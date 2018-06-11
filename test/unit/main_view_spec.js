@@ -1,5 +1,5 @@
-import {viewDiff} from 'main/main_view';
-import {Page} from 'page/page';
+import {viewDiff} from '/lib/main/main_view.js';
+import {Page} from '/lib/page/page.js';
 
 function addElement(type, id) {
   const element = document.createElement(type);

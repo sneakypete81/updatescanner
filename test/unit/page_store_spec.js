@@ -1,12 +1,14 @@
-import using from 'jasmine-data-provider';
+// import using from
+//    '/test/dependencies/include/jasmine-data-provider/src/index.js';
+/* global using */
 
-import {PageStore, hasPageStateChanged} from 'page/page_store';
-import * as pageStoreModule from 'page/page_store';
-import {Page} from 'page/page';
-import {PageFolder} from 'page/page_folder';
-import {StorageInfo} from 'page/storage_info';
-import {Storage} from 'util/storage';
-import {StorageDB} from 'util/storage_db';
+import {PageStore, hasPageStateChanged} from '/lib/page/page_store.js';
+import * as pageStoreModule from '/lib/page/page_store.js';
+import {Page} from '/lib/page/page.js';
+import {PageFolder} from '/lib/page/page_folder.js';
+import {StorageInfo} from '/lib/page/storage_info.js';
+import {Storage} from '/lib/util/storage.js';
+import {StorageDB} from '/lib/util/storage_db.js';
 
 describe('PageStore', function() {
   const spyOnStorageLoadWithArgReturn = (returnMap) => {

@@ -1,6 +1,6 @@
-import {StorageInfo} from 'page/storage_info';
-import * as storageInfoModule from 'page/storage_info';
-import {Storage} from 'util/storage';
+import {StorageInfo} from '/lib/page/storage_info.js';
+import * as storageInfoModule from '/lib/page/storage_info.js';
+import {Storage} from '/lib/util/storage.js';
 
 describe('StorageInfo', function() {
   beforeEach(function() {
