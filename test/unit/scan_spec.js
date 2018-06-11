@@ -1,6 +1,6 @@
-import * as scanModule from 'scan/scan';
-import {PageStore} from 'page/page_store';
-import {Page} from 'page/page';
+import * as scanModule from '/lib/scan/scan.js';
+import {PageStore} from '/lib/page/page_store.js';
+import {Page} from '/lib/page/page.js';
 
 describe('scan', function() {
   describe('getChangeType', function() {

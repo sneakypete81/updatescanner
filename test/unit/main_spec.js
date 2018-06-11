@@ -1,7 +1,7 @@
-import {Main} from 'main/main';
-import * as mainModule from 'main/main';
-import {Page} from 'page/page';
-import {StorageDB} from 'util/storage_db';
+import {Main} from '/lib/main/main.js';
+import * as mainModule from '/lib/main/main.js';
+import {Page} from '/lib/page/page.js';
+import {StorageDB} from '/lib/util/storage_db.js';
 
 describe('Main', function() {
   beforeEach(function() {

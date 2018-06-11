@@ -1,6 +1,6 @@
-import {ScanQueue} from 'scan/scan_queue';
-import * as scanQueueModule from 'scan/scan_queue';
-import {Page} from 'page/page';
+import {ScanQueue} from '/lib/scan/scan_queue.js';
+import * as scanQueueModule from '/lib/scan/scan_queue.js';
+import {Page} from '/lib/page/page.js';
 
 describe('Scan Queue', function() {
   describe('add', function() {

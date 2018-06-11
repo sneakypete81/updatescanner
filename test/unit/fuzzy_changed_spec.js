@@ -1,6 +1,8 @@
-import 'jasmine-jquery';
-import using from 'jasmine-data-provider';
-import * as fuzzy from 'scan/fuzzy';
+// import using from
+//    '/test/dependencies/include/jasmine-data-provider/src/index.js';
+/* global using */
+
+import * as fuzzy from '/lib/scan/fuzzy.js';
 
 describe('fuzzy', function() {
   beforeEach(function() {

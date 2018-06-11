@@ -23,12 +23,25 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       {
+        pattern: 'src/dependencies/include/**/*.js',
+      },
+
+      {
+        pattern: 'src/dependencies/module/**/*.js',
+        type: 'module',
+      },
+
+      {
         pattern: 'src/lib/**/*.js',
         type: 'module',
       },
 
       {
-        pattern: 'test/unit/encoding_spec.js',
+        pattern: 'test/dependencies/**/*.js',
+      },
+
+      {
+        pattern: 'test/unit/*_spec.js',
         type: 'module',
       },
 
@@ -42,6 +55,8 @@ module.exports = function(config) {
     // Fix module paths to match where Karma serves them
     proxies: {
       '/lib/': '/base/src/lib/',
+      '/dependencies/': '/base/src/dependencies/',
+      '/test/': '/base/test/',
     },
 
     // preprocess matching files before serving them to the browser
