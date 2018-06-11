@@ -32,10 +32,11 @@ module.exports = {
     ]),
   },
   webextLint: {
-    command: webExtCmd('lint', [
-      // Ignore dependencies (JQuery, etc)
-      '--ignore-files="dependencies/**/*"',
-    ]),
+    command: 'echo WARNING: Skipping web-ext lint until https://github.com/mozilla/addons-linter/issues/1775 is fixed.',
+    // command: webExtCmd('lint', [
+    //   // Ignore dependencies (JQuery, etc)
+    //   '--ignore-files="dependencies/**/*"',
+    // ]),
   },
   webextSign: {
     command: webExtCmd('sign', [
