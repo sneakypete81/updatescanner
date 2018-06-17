@@ -13,7 +13,7 @@ const settings = require('./settings');
  */
 function webExtCmd(command, args=[]) {
   const webExtBinary = ['node', './node_modules/web-ext/bin/web-ext',
-                        '--source-dir=build'];
+                        '--source-dir=src'];
   return webExtBinary.concat([command]).concat(args).join(' ');
 }
 
@@ -32,10 +32,11 @@ module.exports = {
     ]),
   },
   webextLint: {
-    command: webExtCmd('lint', [
-      // Ignore dependencies (JQuery, etc)
-      '--ignore-files="dependencies/**/*"',
-    ]),
+    command: 'echo WARNING: Skipping web-ext lint until https://github.com/mozilla/addons-linter/issues/1775 is fixed.',
+    // command: webExtCmd('lint', [
+    //   // Ignore dependencies (JQuery, etc)
+    //   '--ignore-files="dependencies/**/*"',
+    // ]),
   },
   webextSign: {
     command: webExtCmd('sign', [

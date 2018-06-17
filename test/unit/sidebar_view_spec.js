@@ -1,6 +1,6 @@
-import {SidebarView} from 'sidebar/sidebar_view';
-import {Page} from 'page/page';
-import {PageFolder} from 'page/page_folder';
+import {SidebarView} from '/lib/sidebar/sidebar_view.js';
+import {Page} from '/lib/page/page.js';
+import {PageFolder} from '/lib/page/page_folder.js';
 
 describe('Sidebar', function() {
   describe('_generateTree', function() {

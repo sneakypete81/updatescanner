@@ -1,6 +1,7 @@
 module.exports = {
   output: [
-    'build/',
     'coverage/',
+    'src/dependencies/',
+    'test/dependencies/',
   ],
 };

@@ -1,4 +1,4 @@
-import {Main} from 'main/main';
+import {Main} from '/lib/main/main.js';
 
 (function() {
   const main = new Main();

@@ -1,4 +1,4 @@
-import {highlightDiffs} from 'diff/diff_engine';
+import {highlightDiffs} from '/lib/diff/diff_engine.js';
 
 describe('diff_engine', function() {
   describe('diff', function() {

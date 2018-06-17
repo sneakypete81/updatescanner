@@ -1,6 +1,6 @@
 import {qs, $on, $delegate, findParentWithClass,
-  showElement, hideElement, isHidden} from 'util/view_helpers';
-import {waitForMs} from 'util/promise';
+  showElement, hideElement, isHidden} from '/lib/util/view_helpers.js';
+import {waitForMs} from '/lib/util/promise.js';
 
 /**
  * Initialise the Popup view.

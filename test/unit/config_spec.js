@@ -1,7 +1,7 @@
 // @TODO: test missing config item as well as missing storage item
 
-import {Config, InvalidConfigNameError} from 'util/config';
-import {Storage} from 'util/storage';
+import {Config, InvalidConfigNameError} from '/lib/util/config.js';
+import {Storage} from '/lib/util/storage.js';
 
 describe('Config', function() {
   describe('load', function() {

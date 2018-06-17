@@ -1,6 +1,4 @@
-import 'jasmine-jquery';
-
-import * as fuzzy from 'scan/fuzzy';
+import * as fuzzy from '/lib/scan/fuzzy.js';
 
 describe('fuzzy', function() {
   beforeEach(function() {

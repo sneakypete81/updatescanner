@@ -1,48 +1,43 @@
-import * as scan from 'scan/scan';
-import * as fuzzy from 'scan/fuzzy';
-import {PageStore} from 'page/page_store';
-import {Page} from 'page/page';
-import * as log from 'util/log';
-import * as promise from 'util/promise';
-import * as encoding from 'util/encoding';
-import * as update from 'update/update';
+import * as scanModule from '/lib/scan/scan.js';
+import {PageStore} from '/lib/page/page_store.js';
+import {Page} from '/lib/page/page.js';
 
 describe('scan', function() {
   describe('getChangeType', function() {
     it('detects identical pages', function() {
       const html = 'Here is some <b>HTML</b>';
 
-      const result = scan.__.getChangeType(html, html, 100);
+      const result = scanModule.__.getChangeType(html, html, 100);
 
-      expect(result).toEqual(scan.__.changeEnum.NO_CHANGE);
+      expect(result).toEqual(scanModule.__.changeEnum.NO_CHANGE);
     });
 
     it('detects new content', function() {
       const html = 'Here is some <b>HTML</b>';
 
-      const result = scan.__.getChangeType(null, html, 100);
+      const result = scanModule.__.getChangeType(null, html, 100);
 
-      expect(result).toEqual(scan.__.changeEnum.NEW_CONTENT);
+      expect(result).toEqual(scanModule.__.changeEnum.NEW_CONTENT);
     });
 
     it('detects minor changes', function() {
       const html1 = 'Here is some <b>HTML</b>';
       const html2 = 'Here is some different <b>HTML</b>';
-      spyOn(fuzzy, 'isMajorChange').and.returnValues(false);
+      spyOn(scanModule.__, 'isMajorChange').and.returnValues(false);
 
-      const result = scan.__.getChangeType(html1, html2, 100);
+      const result = scanModule.__.getChangeType(html1, html2, 100);
 
-      expect(result).toEqual(scan.__.changeEnum.MINOR_CHANGE);
+      expect(result).toEqual(scanModule.__.changeEnum.MINOR_CHANGE);
     });
 
     it('detects major changes', function() {
       const html1 = 'Here is some <b>HTML</b>';
       const html2 = 'Here is some different <b>HTML</b>';
-      spyOn(fuzzy, 'isMajorChange').and.returnValues(true);
+      spyOn(scanModule.__, 'isMajorChange').and.returnValues(true);
 
-      const result = scan.__.getChangeType(html1, html2, 100);
+      const result = scanModule.__.getChangeType(html1, html2, 100);
 
-      expect(result).toEqual(scan.__.changeEnum.MAJOR_CHANGE);
+      expect(result).toEqual(scanModule.__.changeEnum.MAJOR_CHANGE);
     });
   });
 
@@ -70,7 +65,7 @@ describe('scan', function() {
       spyOn(this.page, 'save');
       spyOn(PageStore, 'saveHtml');
 
-      const result = await scan.__.updatePageState(this.page, html, html);
+      const result = await scanModule.__.updatePageState(this.page, html, html);
 
       expect(result).toBeFalsy();
       expect(this.page.state).toEqual(Page.stateEnum.NO_CHANGE);
@@ -88,7 +83,7 @@ describe('scan', function() {
       spyOn(this.page, 'save');
       spyOn(PageStore, 'saveHtml');
 
-      const result = await scan.__.updatePageState(this.page, html, html);
+      const result = await scanModule.__.updatePageState(this.page, html, html);
 
       expect(result).toBeFalsy();
       expect(this.page.state).toEqual(Page.stateEnum.CHANGED);
@@ -105,7 +100,7 @@ describe('scan', function() {
       spyOn(this.page, 'save');
       spyOn(PageStore, 'saveHtml');
 
-      const result = await scan.__.updatePageState(this.page, '', html);
+      const result = await scanModule.__.updatePageState(this.page, '', html);
 
       expect(result).toBeFalsy();
       expect(this.page.state).toEqual(Page.stateEnum.NO_CHANGE);
@@ -122,9 +117,10 @@ describe('scan', function() {
       const html2 = 'Here is some different <b>HTML</b>';
       spyOn(this.page, 'save');
       spyOn(PageStore, 'saveHtml');
-      spyOn(fuzzy, 'isMajorChange').and.returnValues(false);
+      spyOn(scanModule.__, 'isMajorChange').and.returnValues(false);
 
-      const result = await scan.__.updatePageState(this.page, html1, html2);
+      const result = await scanModule.__.updatePageState(
+        this.page, html1, html2);
 
       expect(result).toBeFalsy();
       expect(this.page.state).toEqual(Page.stateEnum.NO_CHANGE);
@@ -142,9 +138,10 @@ describe('scan', function() {
       const html2 = 'Here is some different <b>HTML</b>';
       spyOn(this.page, 'save');
       spyOn(PageStore, 'saveHtml');
-      spyOn(fuzzy, 'isMajorChange').and.returnValues(false);
+      spyOn(scanModule.__, 'isMajorChange').and.returnValues(false);
 
-      const result = await scan.__.updatePageState(this.page, html1, html2);
+      const result = await scanModule.__.updatePageState(
+        this.page, html1, html2);
 
       expect(result).toBeFalsy();
       expect(this.page.state).toEqual(Page.stateEnum.CHANGED);
@@ -161,9 +158,10 @@ describe('scan', function() {
       const html2 = 'Here is some different <b>HTML</b>';
       spyOn(this.page, 'save');
       spyOn(PageStore, 'saveHtml');
-      spyOn(fuzzy, 'isMajorChange').and.returnValues(true);
+      spyOn(scanModule.__, 'isMajorChange').and.returnValues(true);
 
-      const result = await scan.__.updatePageState(this.page, html1, html2);
+      const result = await scanModule.__.updatePageState(
+        this.page, html1, html2);
 
       expect(result).toBeTruthy();
       expect(this.page.state).toEqual(Page.stateEnum.CHANGED);
@@ -183,9 +181,10 @@ describe('scan', function() {
       const html2 = 'Here is some different <b>HTML</b>';
       spyOn(this.page, 'save');
       spyOn(PageStore, 'saveHtml');
-      spyOn(fuzzy, 'isMajorChange').and.returnValues(true);
+      spyOn(scanModule.__, 'isMajorChange').and.returnValues(true);
 
-      const result = await scan.__.updatePageState(this.page, html1, html2);
+      const result = await scanModule.__.updatePageState(
+        this.page, html1, html2);
 
       expect(result).toBeTruthy();
       expect(this.page.state).toEqual(Page.stateEnum.CHANGED);
@@ -201,11 +200,11 @@ describe('scan', function() {
     it('does nothing when given an empty page list', function(done) {
       spyOn(window, 'fetch');
       spyOn(PageStore, 'loadHtml');
-      spyOn(log, 'log');
-      spyOn(promise, 'waitForMs');
-      spyOn(update, 'isUpToDate').and.returnValue(Promise.resolve(true));
+      spyOn(scanModule.__, 'log');
+      spyOn(scanModule.__, 'waitForMs');
+      spyOn(scanModule.__, 'isUpToDate').and.returnValue(Promise.resolve(true));
 
-      scan.scan([]).then(() => {
+      scanModule.scan([]).then(() => {
         expect(window.fetch).not.toHaveBeenCalled();
         expect(PageStore.loadHtml).not.toHaveBeenCalled();
         done();
@@ -220,10 +219,11 @@ describe('scan', function() {
 
       spyOn(window, 'fetch');
       spyOn(PageStore, 'loadHtml');
-      spyOn(promise, 'waitForMs');
-      spyOn(update, 'isUpToDate').and.returnValue(Promise.resolve(false));
+      spyOn(scanModule.__, 'waitForMs');
+      spyOn(scanModule.__, 'isUpToDate')
+        .and.returnValue(Promise.resolve(false));
 
-      scan.scan([page]).then(() => {
+      scanModule.scan([page]).then(() => {
         expect(window.fetch).not.toHaveBeenCalled();
         expect(PageStore.loadHtml).not.toHaveBeenCalled();
         done();
@@ -243,11 +243,11 @@ describe('scan', function() {
       spyOn(Page.prototype, 'save');
       spyOn(Page.prototype, 'existsInStorage')
         .and.returnValue(Promise.resolve(true));
-      spyOn(log, 'log');
-      spyOn(promise, 'waitForMs');
-      spyOn(update, 'isUpToDate').and.returnValue(Promise.resolve(true));
+      spyOn(scanModule.__, 'log');
+      spyOn(scanModule.__, 'waitForMs');
+      spyOn(scanModule.__, 'isUpToDate').and.returnValue(Promise.resolve(true));
 
-      scan.scan([page]).then(() => {
+      scanModule.scan([page]).then(() => {
         expect(window.fetch).toHaveBeenCalledWith(page.url);
         expect(PageStore.loadHtml).toHaveBeenCalledWith(
           '1', PageStore.htmlTypes.NEW);
@@ -271,11 +271,11 @@ describe('scan', function() {
       spyOn(Page.prototype, 'save');
       spyOn(Page.prototype, 'existsInStorage')
         .and.returnValue(Promise.resolve(true));
-      spyOn(log, 'log');
-      spyOn(promise, 'waitForMs');
-      spyOn(update, 'isUpToDate').and.returnValue(Promise.resolve(true));
+      spyOn(scanModule.__, 'log');
+      spyOn(scanModule.__, 'waitForMs');
+      spyOn(scanModule.__, 'isUpToDate').and.returnValue(Promise.resolve(true));
 
-      scan.scan(pages).then(() => {
+      scanModule.scan(pages).then(() => {
         expect(window.fetch).toHaveBeenCalledWith(pages[0].url);
         expect(window.fetch).toHaveBeenCalledWith(pages[1].url);
         expect(window.fetch).toHaveBeenCalledWith(pages[2].url);
@@ -302,15 +302,17 @@ describe('scan', function() {
       spyOn(PageStore, 'loadHtml');
       spyOn(Page.prototype, 'existsInStorage')
         .and.returnValue(Promise.resolve(true));
-      spyOn(log, 'log');
-      spyOn(promise, 'waitForMs');
-      spyOn(update, 'isUpToDate').and.returnValue(Promise.resolve(true));
+      spyOn(page, 'save');
+      spyOn(scanModule.__, 'log');
+      spyOn(scanModule.__, 'waitForMs');
+      spyOn(scanModule.__, 'isUpToDate').and.returnValue(Promise.resolve(true));
 
-      scan.scan([page]).then(() => {
+      scanModule.scan([page]).then(() => {
         expect(window.fetch).toHaveBeenCalledWith(page.url);
         expect(PageStore.loadHtml).not.toHaveBeenCalled();
         expect(page.state).toEqual(Page.stateEnum.ERROR);
-        expect(log.log.calls.allArgs()).toContain(
+        expect(page.save).toHaveBeenCalled();
+        expect(scanModule.__.log.calls.allArgs()).toContain(
           ['Could not scan "example": Error: [404] no such page']);
         done();
       }).catch((error) => done.fail(error));
@@ -326,15 +328,17 @@ describe('scan', function() {
       spyOn(PageStore, 'loadHtml');
       spyOn(Page.prototype, 'existsInStorage')
         .and.returnValue(Promise.resolve(true));
-      spyOn(log, 'log');
-      spyOn(promise, 'waitForMs');
-      spyOn(update, 'isUpToDate').and.returnValue(Promise.resolve(true));
+      spyOn(page, 'save');
+      spyOn(scanModule.__, 'log');
+      spyOn(scanModule.__, 'waitForMs');
+      spyOn(scanModule.__, 'isUpToDate').and.returnValue(Promise.resolve(true));
 
-      scan.scan([page]).then(() => {
+      scanModule.scan([page]).then(() => {
         expect(window.fetch).toHaveBeenCalledWith(page.url);
         expect(PageStore.loadHtml).not.toHaveBeenCalled();
         expect(page.state).toEqual(Page.stateEnum.ERROR);
-        expect(log.log.calls.allArgs()).toContain(
+        expect(page.save).toHaveBeenCalled();
+        expect(scanModule.__.log.calls.allArgs()).toContain(
           ['Could not scan "example": Network error']);
         done();
       }).catch((error) => done.fail(error));
@@ -346,7 +350,7 @@ describe('scan', function() {
       const prevHtml = 'text with\tspaces\ntabs  \n \r  and newlines';
       const scannedHtml = 'More text with\tspaces\ntabs  \n \r  and newlines';
 
-      const result = scan.__.stripHtml(prevHtml, scannedHtml, false);
+      const result = scanModule.__.stripHtml(prevHtml, scannedHtml, false);
 
       expect(result.prevHtml).toEqual('textwithspacestabsandnewlines');
       expect(result.scannedHtml).toEqual('Moretextwithspacestabsandnewlines');
@@ -358,7 +362,7 @@ describe('scan', function() {
       const scannedHtml = 'text with <script>\nnewlines</script> of various' +
         '<script>\r\n   types\r\n</script>..';
 
-      const result = scan.__.stripHtml(prevHtml, scannedHtml, false);
+      const result = scanModule.__.stripHtml(prevHtml, scannedHtml, false);
 
       expect(result.prevHtml).toEqual('textwithscripts');
       expect(result.scannedHtml).toEqual('textwithofvarious..');
@@ -368,7 +372,7 @@ describe('scan', function() {
       const prevHtml = 'text with <b>tags</b> included.';
       const scannedHtml = '<p>More text with<br/>tags</p>';
 
-      const result = scan.__.stripHtml(prevHtml, scannedHtml, false);
+      const result = scanModule.__.stripHtml(prevHtml, scannedHtml, false);
 
       expect(result.prevHtml).toEqual('textwithtagsincluded.');
       expect(result.scannedHtml).toEqual('Moretextwithtags');
@@ -378,7 +382,7 @@ describe('scan', function() {
       const prevHtml = 'text with 12.3 numbers, full stops and commas.';
       const scannedHtml = 'More text with 12.3 numbers, etc.';
 
-      const result = scan.__.stripHtml(prevHtml, scannedHtml, true);
+      const result = scanModule.__.stripHtml(prevHtml, scannedHtml, true);
 
       expect(result.prevHtml).toEqual('textwithnumbersfullstopsandcommas');
       expect(result.scannedHtml).toEqual('Moretextwithnumbersetc');
@@ -388,14 +392,14 @@ describe('scan', function() {
       const prevHtml = 'text with 12.3 numbers, stops and commas.';
       const scannedHtml = 'More text with 12.3 numbers, etc.';
 
-      const result = scan.__.stripHtml(prevHtml, scannedHtml, false);
+      const result = scanModule.__.stripHtml(prevHtml, scannedHtml, false);
 
       expect(result.prevHtml).toEqual('textwith12.3numbers,stopsandcommas.');
       expect(result.scannedHtml).toEqual('Moretextwith12.3numbers,etc.');
     });
 
     it('handles null HTML input', function() {
-      const result = scan.__.stripHtml(null, null, true);
+      const result = scanModule.__.stripHtml(null, null, true);
 
       expect(result.prevHtml).toBe(null);
       expect(result.scannedHtml).toBe(null);
@@ -406,12 +410,13 @@ describe('scan', function() {
     it('applies the encoding in the Page object', async function() {
       const page = new Page(1, {encoding: 'encoding'});
       const response = {arrayBuffer: () => Promise.resolve('buffer')};
-      spyOn(encoding, 'applyEncoding').and.returnValue('html');
+      spyOn(scanModule.__, 'applyEncoding').and.returnValue('html');
 
-      const html = await scan.__.getHtmlFromResponse(response, page);
+      const html = await scanModule.__.getHtmlFromResponse(response, page);
 
       expect(html).toEqual('html');
-      expect(encoding.applyEncoding).toHaveBeenCalledWith('buffer', 'encoding');
+      expect(scanModule.__.applyEncoding)
+        .toHaveBeenCalledWith('buffer', 'encoding');
     });
 
     it('autodetects the encoding if not specified in the Page object',
@@ -421,16 +426,19 @@ describe('scan', function() {
         arrayBuffer: () => Promise.resolve('buffer'),
         headers: 'headers',
       };
-      spyOn(encoding, 'detectEncoding').and.returnValue('encoding');
-      spyOn(encoding, 'applyEncoding').and.returnValue('html');
+      spyOn(scanModule.__, 'detectEncoding').and.returnValue('encoding');
+      spyOn(scanModule.__, 'applyEncoding').and.returnValue('html');
       spyOn(page, 'save');
 
-      const html = await scan.__.getHtmlFromResponse(response, page);
+      const html = await scanModule.__.getHtmlFromResponse(response, page);
 
       expect(html).toEqual('html');
-      expect(encoding.applyEncoding).toHaveBeenCalledWith('buffer', 'utf-8');
-      expect(encoding.detectEncoding).toHaveBeenCalledWith('headers', 'html');
-      expect(encoding.applyEncoding).toHaveBeenCalledWith('buffer', 'encoding');
+      expect(scanModule.__.applyEncoding)
+        .toHaveBeenCalledWith('buffer', 'utf-8');
+      expect(scanModule.__.detectEncoding)
+        .toHaveBeenCalledWith('headers', 'html');
+      expect(scanModule.__.applyEncoding)
+        .toHaveBeenCalledWith('buffer', 'encoding');
       expect(page.save).toHaveBeenCalled;
       expect(page.encoding).toEqual('encoding');
     });
@@ -439,7 +447,7 @@ describe('scan', function() {
       const page = new Page(1, {encoding: 'utf-8'});
       const response = {text: () => Promise.resolve('html')};
 
-      const html = await scan.__.getHtmlFromResponse(response, page);
+      const html = await scanModule.__.getHtmlFromResponse(response, page);
 
       expect(html).toEqual('html');
     });

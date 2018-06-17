@@ -1,9 +1,7 @@
-import {Main} from 'main/main';
-import {Page} from 'page/page';
-import {StorageDB} from 'util/storage_db';
-import * as diff from 'diff/diff';
-import * as mainView from 'main/main_view';
-import * as log from 'util/log';
+import {Main} from '/lib/main/main.js';
+import * as mainModule from '/lib/main/main.js';
+import {Page} from '/lib/page/page.js';
+import {StorageDB} from '/lib/util/storage_db.js';
 
 describe('Main', function() {
   beforeEach(function() {
@@ -26,14 +24,14 @@ describe('Main', function() {
       const main = new Main();
 
       spyOn(StorageDB, 'load').and.returnValue(Promise.resolve(html));
-      spyOn(diff, 'diff').and.returnValues('diffHtml');
-      spyOn(mainView, 'viewDiff').and.callFake((pageArg, htmlArg) => {
+      spyOn(mainModule.__, 'diff').and.returnValues('diffHtml');
+      spyOn(mainModule.__, 'viewDiff').and.callFake((pageArg, htmlArg) => {
         expect(htmlArg).toEqual(
           '<base href="test.com/blah" target="_top">diffHtml');
         expect(pageArg).toEqual(page);
         expect(StorageDB.load).toHaveBeenCalledWith('html:old:' + id);
         expect(StorageDB.load).toHaveBeenCalledWith('html:new:' + id);
-        expect(diff.diff).toHaveBeenCalledWith(page, html, html);
+        expect(mainModule.__.diff).toHaveBeenCalledWith(page, html, html);
         done();
       });
 
@@ -44,16 +42,16 @@ describe('Main', function() {
       const page = new Page(42, {url: 'test.com/blah'});
       const main = new Main();
 
-      spyOn(mainView, 'viewDiff');
+      spyOn(mainModule.__, 'viewDiff');
       spyOn(StorageDB, 'load').and.returnValue(Promise.resolve(undefined));
 
-      spyOn(log, 'log').and.callFake((msg) => {
+      spyOn(mainModule.__, 'log').and.callFake((msg) => {
         expect(msg).toMatch('Could not load .* from storage');
       });
 
       main._showDiff(page).then(() => {
-        expect(log.log).toHaveBeenCalled();
-        expect(mainView.viewDiff).toHaveBeenCalledWith(
+        expect(mainModule.__.log).toHaveBeenCalled();
+        expect(mainModule.__.viewDiff).toHaveBeenCalledWith(
           page, '<base href="test.com/blah" target="_top">');
         done();
       });

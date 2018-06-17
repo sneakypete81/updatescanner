@@ -1,5 +1,6 @@
-import {getFileStorage} from 'idb-file-storage';
-import {readAsText} from 'promise-file-reader';
+import {readAsText} from './promise.js';
+import {getFileStorage} from
+  '/dependencies/module/idb-file-storage/src/idb-file-storage.js';
 
 /**
  * @returns {Object} The storage object for UpdateScanner.

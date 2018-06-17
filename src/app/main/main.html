@@ -93,8 +93,11 @@
     </form>
   </dialog>
 
-  <!-- Output script from webpack -->
-  <script src="main_script.js"></script>
+  <!-- Dependencies -->
+  <!-- See https://bugzilla.mozilla.org/show_bug.cgi?id=840640 -->
+  <script src="/dependencies/include/dialog-polyfill/dialog-polyfill.js"></script>
+
+  <script src="main_script.js" type="module"></script>
 
 </body>
 </html>

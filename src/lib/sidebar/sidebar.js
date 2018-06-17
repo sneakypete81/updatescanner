@@ -1,10 +1,10 @@
-import {SidebarView} from 'sidebar/sidebar_view';
-import {PageStore} from 'page/page_store';
-import {Page} from 'page/page';
-import {PageFolder} from 'page/page_folder';
-import {openMain, paramEnum, actionEnum} from 'main/main_url';
-import {backgroundActionEnum} from 'background/actions';
-import {waitForMs} from 'util/promise';
+import {SidebarView} from './sidebar_view.js';
+import {PageStore} from '/lib/page/page_store.js';
+import {Page} from '/lib/page/page.js';
+import {PageFolder} from '/lib/page/page_folder.js';
+import {openMain, paramEnum, actionEnum} from '/lib/main/main_url.js';
+import {backgroundActionEnum} from '/lib/background/actions.js';
+import {waitForMs} from '/lib/util/promise.js';
 
 const REFRESH_TIMEOUT_MS = 200;
 

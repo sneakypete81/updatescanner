@@ -1,5 +1,13 @@
-import {Config} from 'util/config';
-import {log} from 'util/log';
+import {Config} from '/lib/util/config.js';
+import {log} from '/lib/util/log.js';
+
+// Allow function mocking
+export const __ = {
+  log: (...args) => log(...args),
+
+  // Allow private functions to be tested
+  isAutoscanPending: isAutoscanPending,
+};
 
 const ALARM_ID = 'updatescanner-autoscan';
 const ALARM_TIMING = {delayInMinutes: 1, periodInMinutes: 5};
@@ -24,7 +32,7 @@ export class Autoscan {
   async start() {
     const debug = await Config.loadSingleSetting('debug');
     if (debug) {
-      log('Debug enabled - using fast scan times.');
+      __.log('Debug enabled - using fast scan times.');
     }
 
     await stopAlarm();
@@ -45,7 +53,7 @@ export class Autoscan {
 
     const scanList = getScanList(this._pageStore.getPageList());
     if (scanList.length > 0) {
-      log(`Pages to autoscan: ${scanList.length}`);
+      __.log(`Pages to autoscan: ${scanList.length}`);
       this._scanQueue.add(scanList);
       this._scanQueue.scan();
     }
@@ -61,7 +69,7 @@ function startAlarm(debug) {
   const timing = debug ? DEBUG_ALARM_TIMING : ALARM_TIMING;
   browser.alarms.create(ALARM_ID, timing);
   if (debug) {
-    log(`Created alarm with timing delay=${timing.delayInMinutes} mins, ` +
+    __.log(`Created alarm with timing delay=${timing.delayInMinutes} mins, ` +
       `period=${timing.periodInMinutes} mins`);
   }
 }
@@ -111,8 +119,3 @@ function isAutoscanPending(page) {
   const timeSinceLastAutoscan = Date.now() - page.lastAutoscanTime;
   return (timeSinceLastAutoscan >= page.scanRateMinutes * 60 * 1000);
 }
-
-// Allow private functions to be tested
-export const __ = {
-  isAutoscanPending: isAutoscanPending,
-};

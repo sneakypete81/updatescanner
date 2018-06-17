@@ -1,7 +1,6 @@
-import {ScanQueue} from 'scan/scan_queue';
-import {Page} from 'page/page';
-import * as scan from 'scan/scan';
-import * as promise from 'util/promise';
+import {ScanQueue} from '/lib/scan/scan_queue.js';
+import * as scanQueueModule from '/lib/scan/scan_queue.js';
+import {Page} from '/lib/page/page.js';
 
 describe('Scan Queue', function() {
   describe('add', function() {
@@ -51,27 +50,27 @@ describe('Scan Queue', function() {
 
   describe('scan', function() {
     beforeEach(function() {
-      spyOn(promise, 'waitForMs');
+      spyOn(scanQueueModule.__, 'waitForMs');
     });
 
     it('does nothing if the queue is empty', async function() {
       const scanQueue = new ScanQueue();
-      spyOn(scan, 'scanPage');
+      spyOn(scanQueueModule.__, 'scanPage');
 
       await scanQueue.scan();
 
-      expect(scan.scanPage).not.toHaveBeenCalled();
+      expect(scanQueueModule.__.scanPage).not.toHaveBeenCalled();
     });
 
     it('scans a single page', async function() {
       const scanQueue = new ScanQueue();
       const page = new Page(1, {});
       scanQueue.add([page]);
-      spyOn(scan, 'scanPage');
+      spyOn(scanQueueModule.__, 'scanPage');
 
       await scanQueue.scan();
 
-      expect(scan.scanPage).toHaveBeenCalledWith(page);
+      expect(scanQueueModule.__.scanPage).toHaveBeenCalledWith(page);
     });
 
     it('scans two pages', async function() {
@@ -79,12 +78,12 @@ describe('Scan Queue', function() {
       const page1 = new Page(1, {});
       const page2 = new Page(2, {});
       scanQueue.add([page1, page2]);
-      spyOn(scan, 'scanPage');
+      spyOn(scanQueueModule.__, 'scanPage');
 
       await scanQueue.scan();
 
-      expect(scan.scanPage).toHaveBeenCalledWith(page1);
-      expect(scan.scanPage).toHaveBeenCalledWith(page2);
+      expect(scanQueueModule.__.scanPage).toHaveBeenCalledWith(page1);
+      expect(scanQueueModule.__.scanPage).toHaveBeenCalledWith(page2);
     });
 
     it('waits for 2s between scanning pages', async function() {
@@ -93,11 +92,12 @@ describe('Scan Queue', function() {
       const page2 = new Page(2, {});
       const page3 = new Page(3, {});
       scanQueue.add([page1, page2, page3]);
-      spyOn(scan, 'scanPage');
+      spyOn(scanQueueModule.__, 'scanPage');
 
       await scanQueue.scan();
 
-      expect(promise.waitForMs.calls.allArgs()).toEqual([[2000], [2000]]);
+      expect(scanQueueModule.__.waitForMs.calls.allArgs())
+        .toEqual([[2000], [2000]]);
     });
 
     it('scans a page added after the scan has started', async function() {
@@ -106,15 +106,15 @@ describe('Scan Queue', function() {
       const page2 = new Page(2, {});
       const page3 = new Page(3, {});
       scanQueue.add([page1, page2]);
-      spyOn(scan, 'scanPage').and.callFake(() => {
+      spyOn(scanQueueModule.__, 'scanPage').and.callFake(() => {
         // Add another page to the queue mid-scan
         scanQueue.add([page3]);
-        scan.scanPage.and.stub();
+        scanQueueModule.__.scanPage.and.stub();
       });
 
       await scanQueue.scan();
 
-      expect(scan.scanPage.calls.allArgs())
+      expect(scanQueueModule.__.scanPage.calls.allArgs())
         .toEqual([[page1], [page2], [page3]]);
     });
 
@@ -123,7 +123,7 @@ describe('Scan Queue', function() {
       const page1 = new Page(1, {});
       const page2 = new Page(2, {});
       scanQueue.add([page1, page2]);
-      spyOn(scan, 'scanPage').and.callFake(() => {
+      spyOn(scanQueueModule.__, 'scanPage').and.callFake(() => {
         // Call scan again (nothing should happen)
         scanQueue.scan();
       });
@@ -137,7 +137,7 @@ describe('Scan Queue', function() {
 
   describe('bindScanComplete', function() {
     beforeEach(function() {
-      spyOn(promise, 'waitForMs');
+      spyOn(scanQueueModule.__, 'waitForMs');
     });
 
     it('binds a handler that is called when the scan completes',
@@ -147,7 +147,7 @@ describe('Scan Queue', function() {
       const page2 = new Page(1, {});
       const page3 = new Page(1, {});
       scanQueue.add([page1, page2, page3]);
-      spyOn(scan, 'scanPage').and.returnValues(
+      spyOn(scanQueueModule.__, 'scanPage').and.returnValues(
         new Promise((resolve) => resolve(true)),
         new Promise((resolve) => resolve(false)),
         new Promise((resolve) => resolve(true)),
@@ -170,7 +170,7 @@ describe('Scan Queue', function() {
       const page1 = new Page(1, {});
       scanQueue.add([page1]);
       const handler = jasmine.createSpy();
-      spyOn(scan, 'scanPage');
+      spyOn(scanQueueModule.__, 'scanPage');
 
       scanQueue.bindScanComplete(handler);
       await scanQueue.manualScan();

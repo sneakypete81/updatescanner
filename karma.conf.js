@@ -3,8 +3,6 @@
 // Karma configuration
 // Generated on Thu Nov 24 2016 11:02:43 GMT+0000 (GMT)
 
-const path = require('path');
-
 module.exports = function(config) {
   config.set({
 
@@ -17,61 +15,60 @@ module.exports = function(config) {
     // Just include jasmine-jquery.js in the files below.
     frameworks: ['jasmine'],
 
+    // Temporary workaround for ES Module support.
+    // (from https://github.com/karma-runner/karma/pull/2834)
+    customContextFile: 'test/unit/context.html',
+    customDebugFile: 'test/unit/debug.html',
+
     // list of files / patterns to load in the browser
     files: [
-      // Single target that imports all _spec files
-      {pattern: 'test/unit/test_index.js', watched: false},
+      {
+        pattern: 'src/dependencies/include/**/*.js',
+      },
+
+      {
+        pattern: 'src/dependencies/module/**/*.js',
+        type: 'module',
+      },
+
+      {
+        pattern: 'src/lib/**/*.js',
+        type: 'module',
+      },
+
+      {
+        pattern: 'test/dependencies/**/*.js',
+      },
+
+      {
+        pattern: 'test/unit/*_spec.js',
+        type: 'module',
+      },
 
       // Serve fixtures, but don't include them in the runner
       {
         pattern: 'test/unit/fixtures/**',
-        watched: true, served: true, included: false,
+        included: false,
       },
     ],
+
+    // Fix module paths to match where Karma serves them
+    proxies: {
+      '/lib/': '/base/src/lib/',
+      '/dependencies/': '/base/src/dependencies/',
+      '/test/': '/base/test/',
+    },
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      // Use webpack to handle ES6 imports in spec files
-      'test/unit/test_index.js': ['webpack', 'sourcemap'],
-    },
-
-    webpack: {
-      resolve: {
-        modules: [
-          path.resolve(__dirname, 'src/lib'),
-          'node_modules',
-        ],
-      },
-
-      module: {
-        rules: [{
-          test: /\.js$/,
-          include: path.resolve(__dirname, 'src/lib'),
-          loader: 'istanbul-instrumenter-loader',
-          enforce: 'pre',
-          query: {esModules: true},
-        }],
-      },
-
-      devtool: 'inline-source-map',
-    },
-
-    webpackMiddleware: {
-      stats: 'minimal',
     },
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['dots', 'coverage'],
+    reporters: ['dots'],
 
-    coverageReporter: {
-      reporters: [
-        {type: 'html'},
-        {type: 'text'},
-      ],
-    },
     // web server port
     port: 9876,
 

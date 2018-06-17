@@ -1,12 +1,11 @@
-import dialogPolyfill from 'dialog-polyfill';
-import {qs, $on, hideElement} from 'util/view_helpers';
+import {qs, $on, hideElement} from '/lib/util/view_helpers.js';
 
 /**
  * Initialise the dialog box.
  */
 export function init() {
   const dialog = qs('#settings-dialog');
-  dialogPolyfill.registerDialog(dialog);
+  window.dialogPolyfill.registerDialog(dialog);
 
   const form = qs('#settings-form');
   form.elements['autoscan'].max = AutoscanSliderToMins.length - 1;

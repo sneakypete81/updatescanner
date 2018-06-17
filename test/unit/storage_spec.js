@@ -1,4 +1,4 @@
-import {Storage} from 'util/storage';
+import {Storage} from '/lib/util/storage.js';
 
 describe('Storage', function() {
   beforeEach(function() {

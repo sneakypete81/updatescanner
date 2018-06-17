@@ -3,3 +3,5 @@
 /build/
 /coverage/
 .build_settings.json*
+/src/dependencies/
+/test/dependencies/

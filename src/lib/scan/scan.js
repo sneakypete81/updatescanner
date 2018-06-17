@@ -1,10 +1,10 @@
-import {isMajorChange} from 'scan/fuzzy';
-import {PageStore} from 'page/page_store';
-import {Page} from 'page/page';
-import {isUpToDate} from 'update/update';
-import {log} from 'util/log';
-import {waitForMs} from 'util/promise';
-import {detectEncoding, applyEncoding} from 'util/encoding';
+import {isMajorChange} from './fuzzy.js';
+import {PageStore} from '/lib/page/page_store.js';
+import {Page} from '/lib/page/page.js';
+import {isUpToDate} from '/lib/update/update.js';
+import {log} from '/lib/util/log.js';
+import {waitForMs} from '/lib/util/promise.js';
+import {detectEncoding, applyEncoding} from '/lib/util/encoding.js';
 
 /**
  * Enumeration indicating the similarity of two HTML strings.
@@ -16,6 +16,23 @@ const changeEnum = {
   NO_CHANGE: 'no_change',
   MAJOR_CHANGE: 'major_change',
   MINOR_CHANGE: 'minor_change',
+};
+
+// Allow function mocking
+export const __ = {
+  log: (...args) => log(...args),
+  detectEncoding: (...args) => detectEncoding(...args),
+  applyEncoding: (...args) => applyEncoding(...args),
+  isMajorChange: (...args) => isMajorChange(...args),
+  waitForMs: (...args) => waitForMs(...args),
+  isUpToDate: (...args) => isUpToDate(...args),
+
+  // Allow private functions to be tested
+  changeEnum: changeEnum,
+  getChangeType: getChangeType,
+  updatePageState: updatePageState,
+  stripHtml: stripHtml,
+  getHtmlFromResponse: getHtmlFromResponse,
 };
 
 // Wait between scanning pages
@@ -36,7 +53,7 @@ export async function scan(pageList) {
       newMajorChangeCount++;
     }
 
-    await waitForMs(SCAN_IDLE_MS);
+    await __.waitForMs(SCAN_IDLE_MS);
   }
   return newMajorChangeCount;
 }
@@ -52,11 +69,11 @@ export async function scan(pageList) {
  */
 export async function scanPage(page) {
   // Don't scan if the data structures aren't yet updated to the latest version
-  if (!(await isUpToDate())) {
+  if (!(await __.isUpToDate())) {
     return false;
   }
 
-  log(`Scanning "${page.title}"...`);
+  __.log(`Scanning "${page.title}"...`);
   try {
     const response = await fetch(page.url);
     if (!response.ok) {
@@ -67,7 +84,7 @@ export async function scanPage(page) {
     return processHtml(page, html);
 
   } catch (error) {
-    log(`Could not scan "${page.title}": ${error}`);
+    __.log(`Could not scan "${page.title}": ${error}`);
     // Only save if the page still exists
     if (await page.existsInStorage()) {
       page.state = Page.stateEnum.ERROR;
@@ -95,11 +112,11 @@ async function getHtmlFromResponse(response, page) {
   const buffer = await response.arrayBuffer();
 
   if (page.encoding === null || page.encoding == 'auto') {
-    const rawHtml = applyEncoding(buffer, 'utf-8');
-    page.encoding = detectEncoding(response.headers, rawHtml);
+    const rawHtml = __.applyEncoding(buffer, 'utf-8');
+    page.encoding = __.detectEncoding(response.headers, rawHtml);
     page.save();
   }
-  return applyEncoding(buffer, page.encoding);
+  return __.applyEncoding(buffer, page.encoding);
 }
 
 /**
@@ -184,7 +201,7 @@ function getChangeType(str1, str2, changeThreshold) {
   } else if (str1 == str2) {
     // HTML is unchanged.
     return changeEnum.NO_CHANGE;
-  } else if (isMajorChange(str1, str2, changeThreshold)) {
+  } else if (__.isMajorChange(str1, str2, changeThreshold)) {
     // Change is larger than changeThreshold.
     return changeEnum.MAJOR_CHANGE;
   } else {
@@ -260,12 +277,3 @@ function stripNumbers(html) {
   }
   return html.replace(/[0-9,.]*/g, '');
 }
-
-// Allow private functions to be tested
-export const __ = {
-  changeEnum: changeEnum,
-  getChangeType: getChangeType,
-  updatePageState: updatePageState,
-  stripHtml: stripHtml,
-  getHtmlFromResponse: getHtmlFromResponse,
-};

@@ -1,4 +1,4 @@
-import {qs, showElement, hideElement} from 'util/view_helpers';
+import {qs, showElement, hideElement} from '/lib/util/view_helpers.js';
 
 /**
  * Display the "Updating" progress message.

@@ -1,11 +1,18 @@
-import * as view from 'main/main_view';
-import * as dialog from 'main/dialog_view';
-import {getMainDiffUrl, paramEnum, actionEnum} from 'main/main_url';
-import {PageStore} from 'page/page_store';
-import {Page} from 'page/page';
-import {PageFolder} from 'page/page_folder';
-import {diff} from 'diff/diff';
-import {log} from 'util/log';
+import * as view from './main_view.js';
+import * as dialog from './dialog_view.js';
+import {getMainDiffUrl, paramEnum, actionEnum} from './main_url.js';
+import {PageStore} from '/lib/page/page_store.js';
+import {Page} from '/lib/page/page.js';
+import {PageFolder} from '/lib/page/page_folder.js';
+import {diff} from '/lib/diff/diff.js';
+import {log} from '/lib/util/log.js';
+
+// Allow function mocking
+export const __ = {
+  diff: (...args) => diff(...args),
+  viewDiff: (...args) => view.viewDiff(...args),
+  log: (...args) => log(...args),
+};
 
 /**
  * Class representing the main Update Scanner content page.
@@ -266,7 +273,7 @@ export class Main {
       default:
       {
         const html = _updateHeader(page, await loadDiff(page));
-        view.viewDiff(page, html);
+        __.viewDiff(page, html);
       }
     }
   }
@@ -283,7 +290,7 @@ export class Main {
 async function loadDiff(page) {
   const oldHtml = await loadHtml(page, PageStore.htmlTypes.OLD);
   const newHtml = await loadHtml(page, PageStore.htmlTypes.NEW);
-  return diff(page, oldHtml, newHtml);
+  return __.diff(page, oldHtml, newHtml);
 }
 
 /**
@@ -299,7 +306,7 @@ async function loadHtml(page, htmlType) {
   const html = await PageStore.loadHtml(page.id, htmlType);
 
   if (html === null) {
-    log(`Could not load '${page.title}' ${htmlType} HTML from storage`);
+    __.log(`Could not load '${page.title}' ${htmlType} HTML from storage`);
   }
   return html;
 }
