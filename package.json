@@ -6,7 +6,7 @@
     "url": "git://github.com/sneakypete81/updatescanner.git"
   },
   "dependencies": {
-    "dialog-polyfill": "0.4.9",
+    "dialog-polyfill": "0.4.10",
     "file-dialog": "0.0.7",
     "idb-file-storage": "0.1.0",
     "jquery": "3.3.1",
