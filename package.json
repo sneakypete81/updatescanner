@@ -13,7 +13,7 @@
     "jstree": "3.3.5"
   },
   "devDependencies": {
-    "eslint": "4.19.1",
+    "eslint": "5.0.0",
     "eslint-config-google": "0.9.1",
     "eslint-plugin-jsdoc": "3.7.1",
     "grunt": "1.0.3",
