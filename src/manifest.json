@@ -1,24 +1,20 @@
 {
-
   "manifest_version": 2,
   "name": "Update Scanner",
   "short_name": "Updatescan",
   "version": "4.3.1beta1",
   "description": "Monitors webpages for updates.",
   "homepage_url": "https://sneakypete81.github.io/updatescanner/",
-
   "applications": {
     "gecko": {
       "id": "{c07d1a49-9894-49ff-a594-38960ede8fb9}",
       "strict_min_version": "60.0"
     }
   },
-
   "icons": {
     "48": "images/updatescanner_48.png",
     "96": "images/updatescanner_96.png"
   },
-
   "permissions": [
     "<all_urls>",
     "alarms",
@@ -29,11 +25,9 @@
     "*://twitter.com/*",
     "*://www.facebook.com/*"
   ],
-
   "background": {
     "page": "app/background/background.html"
   },
-
   "browser_action": {
     "default_title": "Update Scanner",
     "browser_style": true,
@@ -44,7 +38,6 @@
       "64": "images/updatescanner_64.png"
     }
   },
-
   "sidebar_action": {
     "default_title": "Update Scanner",
     "default_panel": "app/sidebar/sidebar.html",
@@ -54,7 +47,6 @@
       "64": "images/updatescanner_64.png"
     }
   },
-
   "commands": {
     "_execute_sidebar_action": {
       "suggested_key": {

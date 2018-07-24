@@ -14,12 +14,12 @@ module.exports = function(grunt) {
   //   'Build the webextension.',
   //   ['clean', 'copy:dependencies', 'shell:webextBuild']
   // );
-
-  grunt.registerTask('build:beta',
-    'Build the webextension as a self-hosted beta (including selfupdate_url).',
-    ['clean', 'copy:dependencies', 'patch-manifest', 'shell:webextBuild']
-  );
-
+  //
+  // grunt.registerTask('build:beta',
+  // 'Build the webextension as a self-hosted beta (including selfupdate_url).',
+  //   ['clean', 'copy:dependencies', 'patch-manifest', 'shell:webextBuild']
+  // );
+  //
   // grunt.registerTask('run',
   //   'Run the webextension with Firefox, watching and rebuilding when ' +
   //   'files change.',
@@ -46,11 +46,11 @@ module.exports = function(grunt) {
     ['build:beta', 'shell:webextSign']
   );
 
-  grunt.registerTask('patch-manifest',
-    'Add update_url to build/manifest.json',
-    require('./grunt/patch-manifest')
-  );
-
+  // grunt.registerTask('patch-manifest',
+  //   'Add update_url to build/manifest.json',
+  //   require('./grunt/patch-manifest')
+  // );
+  //
   // grunt.config('clean', require('./grunt/clean'));
   // grunt.config('copy', require('./grunt/copy'));
   // grunt.config('shell', require('./grunt/shell'));
