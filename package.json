@@ -32,12 +32,15 @@
     "karma-jasmine-html-reporter": "1.2.0",
     "karma-notification-reporter": "0.1.2",
     "load-grunt-tasks": "4.0.0",
+    "rimraf": "2.6.2",
     "web-ext": "2.7.0"
   },
+  "config": {},
   "scripts": {
-    "build": "grunt build",
-    "run": "grunt run",
-    "lint": "grunt lint",
-    "test": "grunt test"
+    "all": "node scripts/build.js && node scripts/lint.js && node scripts/test.js",
+    "build": "node scripts/build.js",
+    "lint": "node scripts/lint.js",
+    "test": "node scripts/test.js",
+    "run": "node scripts/run.js"
   }
 }
