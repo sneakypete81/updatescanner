@@ -1,5 +1,5 @@
-require('./clean.js');
-require('./copy-dependencies.js');
+require('./clean');
+require('./copy-dependencies');
 
 const fs = require('fs');
 const MANIFEST_FILE = 'src/manifest.json';

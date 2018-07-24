@@ -1,5 +1,5 @@
-require('./clean.js');
-require('./copy-dependencies.js');
+require('./clean');
+require('./copy-dependencies');
 
 console.log('Running tests...');
 
