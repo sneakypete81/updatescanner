@@ -1,7 +1,7 @@
+const webExt = require('web-ext').default;
+
 exports.build = function() {
   console.log('Running "web-ext build"...');
-
-  const webExt = require('web-ext').default;
   return webExt.cmd.build({
     sourceDir: 'src',
     artifactsDir: 'dist',
@@ -14,8 +14,6 @@ exports.lint = function() {
               'https://github.com/mozilla/addons-linter/issues/1775 is fixed.');
 
   // console.log('Running web-ext lint...');
-  //
-  // const webExt = require('web-ext').default;
   // return webExt.cmd.lint({
   //   sourceDir: 'src',
   // }, {
@@ -25,10 +23,17 @@ exports.lint = function() {
 
 exports.run = function() {
   console.log('Running "web-ext run"...');
-
-  const webExt = require('web-ext').default;
   return webExt.cmd.run({
     sourceDir: 'src',
     pref: 'javascript.options.strict=false',
+  });
+};
+
+exports.sign = function() {
+  console.log('Running "web-ext sign"...');
+  return webExt.cmd.sign({
+    artifactsDir: 'dist',
+    apiKey: 'none',
+    apiSecret: 'none',
   });
 };
