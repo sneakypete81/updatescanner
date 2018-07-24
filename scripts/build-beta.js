@@ -17,14 +17,8 @@ console.log('Adding update_url to manifest...');
 manifest.applications.gecko.update_url = UPDATE_URL;
 fs.writeFileSync(MANIFEST_FILE, JSON.stringify(manifest, null, 2));
 
-console.log('Running "web-ext build"...');
+require('./web-ext.js').build().then(() => {
 
-const webExt = require('web-ext').default;
-webExt.cmd.build({
-  sourceDir: 'src',
-  artifactsDir: 'dist',
-  overwriteDest: true,
-}).then(() => {
   console.log('Removing update_url from manifest...');
 
   delete manifest.applications.gecko.update_url;
