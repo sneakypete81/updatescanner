@@ -40,12 +40,12 @@ module.exports = function(grunt) {
     'Run the unit tests, watching and rerunning when files change.',
     ['clean', 'copy:dependencies', 'karma:watch']
   );
-
-  grunt.registerTask('sign',
-    'Build and sign a beta webextension.',
-    ['build:beta', 'shell:webextSign']
-  );
-
+  //
+  // grunt.registerTask('sign',
+  //   'Build and sign a beta webextension.',
+  //   ['build:beta', 'shell:webextSign']
+  // );
+  //
   // grunt.registerTask('patch-manifest',
   //   'Add update_url to build/manifest.json',
   //   require('./grunt/patch-manifest')

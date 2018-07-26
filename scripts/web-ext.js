@@ -32,6 +32,7 @@ exports.run = function() {
 exports.sign = function() {
   console.log('Running "web-ext sign"...');
   return webExt.cmd.sign({
+    sourceDir: 'src',
     artifactsDir: 'dist',
     apiKey: 'none',
     apiSecret: 'none',
