@@ -35,11 +35,11 @@ module.exports = function(grunt) {
   //   'Run the unit tests.',
   //   ['clean', 'copy:dependencies', 'karma:unit']
   // );
-
-  grunt.registerTask('test:watch',
-    'Run the unit tests, watching and rerunning when files change.',
-    ['clean', 'copy:dependencies', 'karma:watch']
-  );
+  //
+  // grunt.registerTask('test:watch',
+  //   'Run the unit tests, watching and rerunning when files change.',
+  //   ['clean', 'copy:dependencies', 'karma:watch']
+  // );
   //
   // grunt.registerTask('sign',
   //   'Build and sign a beta webextension.',

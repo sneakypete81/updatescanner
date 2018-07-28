@@ -42,6 +42,7 @@
     "build:beta": "node scripts/build-beta.js",
     "lint": "node scripts/lint.js",
     "test": "node scripts/test.js",
+    "test:watch": "node scripts/test-watch.js",
     "run": "node scripts/run.js",
     "sign": "node scripts/sign.js"
   }
