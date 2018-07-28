@@ -29,7 +29,7 @@ exports.run = function() {
   });
 };
 
-exports.sign = function() {
+exports.sign = function(apiKey, apiSecret) {
   console.log('Running "web-ext sign"...');
   return webExt.cmd.sign({
     sourceDir: 'src',
