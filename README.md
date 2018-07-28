@@ -13,14 +13,13 @@ Clone the source and install all dependencies:
     git clone https://github.com/sneakypete81/updatescanner.git
     cd updatescanner
     npm install
-    npm install grunt-cli --global
 
 Build, lint and test the webextension:
 
-    grunt
+    npm run all
 
 Other useful actions:
 
-    grunt run        # Run in Firefox, rebuilding and updating when files change
-    grunt test       # Run all tests
-    grunt test:watch # Run all tests automatically whenever files change
+    npm run run        # Run in Firefox, rebuilding and updating when files change
+    npm run test       # Run all tests
+    npm run test:watch # Run all tests automatically whenever files change
