@@ -2092,7 +2092,7 @@
     },
     "detect-indent": {
       "version": "4.0.0",
-      "resolved": "https://registry.npmjs.org/detect-indent/-/detect-indent-4.0.0.tgz",
+      "resolved": "http://registry.npmjs.org/detect-indent/-/detect-indent-4.0.0.tgz",
       "integrity": "sha1-920GQ1LN9Docts5hnE7jqUdd4gg=",
       "dev": true,
       "requires": {
@@ -5575,9 +5575,9 @@
       "dev": true
     },
     "jasmine-core": {
-      "version": "3.1.0",
-      "resolved": "https://registry.npmjs.org/jasmine-core/-/jasmine-core-3.1.0.tgz",
-      "integrity": "sha1-pHheE11d9lAk38kiSVPfWFvSdmw=",
+      "version": "3.2.0",
+      "resolved": "https://registry.npmjs.org/jasmine-core/-/jasmine-core-3.2.0.tgz",
+      "integrity": "sha512-35OOToo2lFczwZ/FdJkUOO/Gsp9FW7viWChYA7OgBfpjgTxbxmNKyNrGS3HHREHay5nJwJvu4RqAlvcBcCAWeA==",
       "dev": true
     },
     "jasmine-data-provider": {
@@ -5658,7 +5658,7 @@
     },
     "jsesc": {
       "version": "1.3.0",
-      "resolved": "https://registry.npmjs.org/jsesc/-/jsesc-1.3.0.tgz",
+      "resolved": "http://registry.npmjs.org/jsesc/-/jsesc-1.3.0.tgz",
       "integrity": "sha1-RsP+yMGJKxKwgz25vHYiF226s0s=",
       "dev": true
     },
@@ -5712,7 +5712,7 @@
     },
     "json5": {
       "version": "0.5.1",
-      "resolved": "https://registry.npmjs.org/json5/-/json5-0.5.1.tgz",
+      "resolved": "http://registry.npmjs.org/json5/-/json5-0.5.1.tgz",
       "integrity": "sha1-Hq3nrMASA0rYTiOWdn6tn6VJWCE=",
       "dev": true
     },
