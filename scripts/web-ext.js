@@ -1,3 +1,4 @@
+const path = require('path');
 const webExt = require('web-ext').default;
 
 exports.build = function() {
@@ -24,7 +25,7 @@ exports.lint = function() {
 exports.run = function() {
   console.log('Running "web-ext run"...');
   return webExt.cmd.run({
-    sourceDir: 'src',
+    sourceDir: path.resolve('src'),
     pref: 'javascript.options.strict=false',
   });
 };
