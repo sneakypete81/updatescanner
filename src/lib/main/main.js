@@ -19,7 +19,6 @@ export const __ = {
  */
 export class Main {
   /**
-   * @property {Sidebar} sidebar - Object representing the sidebar element.
    * @property {PageStore} pageStore - Object used for saving and loading data
    * from storage.
    * @property {Page} currentPage - Currently selected page.
@@ -32,7 +31,7 @@ export class Main {
   }
 
   /**
-   * Initialise the main page's sidebar and content iframe.
+   * Initialise the main page's content iframe.
    */
   async init() {
     this.pageStore = await PageStore.load();
