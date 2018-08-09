@@ -170,7 +170,7 @@ export class Main {
   /**
    * Called whenever the 'Page Settings' item is chosen from the menu.
    */
-  async _handleMenuSettings() {
+  _handleMenuSettings() {
     this._showPageSettings(this.currentPage);
   }
 
