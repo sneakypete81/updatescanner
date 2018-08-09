@@ -36,12 +36,12 @@ function initMenu() {
 
 /**
  * @param {Object} handlers - Object containing the following keys
- * settingsHandler - Called when the Page Settings menu item is clicked.
+ * settingsHandler - Called when the Page Settings menu item is clicked
+ * debugHandler - Called when the Debug Info menu item is clicked.
  */
-export function bindMenu({settingsHandler}) {
-  $on(qs('#page-settings'), 'click', (event) => {
-    settingsHandler();
-  });
+export function bindMenu({settingsHandler, debugHandler}) {
+  $on(qs('#page-settings'), 'click', settingsHandler);
+  $on(qs('#debug-info'), 'click', debugHandler);
 }
 
 /**

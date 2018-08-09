@@ -1,6 +1,7 @@
 import * as view from './main_view.js';
 import * as dialog from './dialog_view.js';
 import {getMainDiffUrl, paramEnum, actionEnum} from './main_url.js';
+import {openDebugInfo} from '/lib/debug_info/debug_info_url.js';
 import {PageStore} from '/lib/page/page_store.js';
 import {Page} from '/lib/page/page.js';
 import {PageFolder} from '/lib/page/page_folder.js';
@@ -39,6 +40,7 @@ export class Main {
     view.init();
     view.bindMenu({
       settingsHandler: this._handleMenuSettings.bind(this),
+      debugHandler: this._handleMenuDebug.bind(this),
     });
     view.bindViewDropdownChange(this._handleViewDropdownChange.bind(this));
 
@@ -172,6 +174,13 @@ export class Main {
    */
   _handleMenuSettings() {
     this._showPageSettings(this.currentPage);
+  }
+
+  /**
+   * Called whenever the 'Debug Info' item is chosen from the menu.
+   */
+  _handleMenuDebug() {
+    openDebugInfo(this.currentPage.id);
   }
 
   /**

@@ -1,0 +1,15 @@
+body {
+  display: block;
+  margin: 2em;
+}
+
+pre {
+  background-color: lightgrey;
+  padding: 1em;
+  height: 20em;
+  overflow: scroll;
+}
+
+.hidden {
+  display: none;
+}
