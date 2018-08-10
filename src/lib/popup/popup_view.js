@@ -88,10 +88,9 @@ export function clearPageList() {
   qs('#list').innerHTML = '';
 }
 
-
 /**
  * Download a Url object. Used for downloading backup JSON files. Awaits until
- * the click event has fired, so it's save to release the ObjectURL.
+ * the click event has fired, so it's safe to release the ObjectURL.
  *
  * @param {Url} url - Url object to download.
  * @param {string} filename - Default filename for the download.
