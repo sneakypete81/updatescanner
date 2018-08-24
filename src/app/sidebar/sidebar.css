@@ -1,5 +1,9 @@
+#tree {
+  font-weight: normal;
+}
+
 .changed > .jstree-anchor {
-  font-weight:bold;
+  font-weight: bold;
 }
 
 .error > .jstree-anchor {
