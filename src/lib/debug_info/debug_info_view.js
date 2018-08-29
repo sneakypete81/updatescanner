@@ -19,9 +19,41 @@ export function bind({downloadOldHandler, downloadNewHandler}) {
  * @param {string} newHtml - New HTML data to display.
  */
 export function update(page, oldHtml, newHtml) {
-  qs('#title').textContent = 'Debug Info: ' + page.title;
+  qs('#title').textContent = `${page.title} - Debug Info`;
+  qs('#details').textContent = formatDetails(page);
   qs('#html-old').textContent = oldHtml;
   qs('#html-new').textContent = newHtml;
+}
+
+/**
+ * Returns a string containing preformatted Page attributes.
+ *
+ * @param {Page} page - Page object to format.
+ *
+ * @returns {string} String containing preformatted Page attributes.
+ */
+function formatDetails(page) {
+  const lastAutoscanTime = page.lastAutoscanTime ?
+    new Date(page.lastAutoscanTime).toString() : null;
+  const oldScanTime = page.oldScanTime ?
+    new Date(page.oldScanTime).toString() : null;
+  const newScanTime = page.newScanTime ?
+    new Date(page.newScanTime).toString() : null;
+
+  return `${page.url}
+scanRateMinutes:  ${page.scanRateMinutes}
+changeThreshold:  ${page.changeThreshold}
+ignoreNumbers:    ${page.ignoreNumbers}
+encoding:         ${page.encoding}
+highlightChanges: ${page.highlightChanges}
+highlightColour:  ${page.highlightColour}
+markChanges:      ${page.markChanges}
+doPost:           ${page.doPost}
+postParams:       ${page.postParams}
+state:            ${page.state}
+lastAutoscanTime: ${lastAutoscanTime}
+oldScanTime:      ${oldScanTime}
+newScanTime:      ${newScanTime}`;
 }
 
 /**
