@@ -23,3 +23,4 @@ Other useful actions:
     npm run run        # Run in Firefox, rebuilding and updating when files change
     npm run test       # Run all tests
     npm run test:watch # Run all tests automatically whenever files change
+    npm run lint       # Run all lint checks
