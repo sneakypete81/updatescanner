@@ -11,15 +11,12 @@ exports.build = function() {
 };
 
 exports.lint = function() {
-  console.log('WARNING: Skipping web-ext lint until ' +
-              'https://github.com/mozilla/addons-linter/issues/1775 is fixed.');
-
-  // console.log('Running web-ext lint...');
-  // return webExt.cmd.lint({
-  //   sourceDir: 'src',
-  // }, {
-  //   shouldExitProgram: false,
-  // });
+  console.log('Running web-ext lint...');
+  return webExt.cmd.lint({
+    sourceDir: 'src',
+  }, {
+    shouldExitProgram: false,
+  });
 };
 
 exports.run = function() {
