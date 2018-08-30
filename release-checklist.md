@@ -2,7 +2,7 @@
 
  * Update the `version` field in `src/manifest.js`
  * Update `strict_min_version` too, if required
- * Run `npm run all` and test the generated ZIP file
+ * Run `npm run all` and manually test the generated ZIP file
 
 
  * *BETA ONLY:* Add an entry to `updates.json`
@@ -17,4 +17,4 @@
    https://github.com/sneakypete81/updatescanner/issues/36) issue
 
 
- * Upload to AMO - **Be sure to select the correct hosting option:**
+ * *NON-BETA ONLY:* Upload to AMO - **Be sure to select the correct hosting option:**
