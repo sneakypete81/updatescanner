@@ -32,7 +32,7 @@ exports.sign = function(apiKey, apiSecret) {
   return webExt.cmd.sign({
     sourceDir: 'src',
     artifactsDir: 'dist',
-    apiKey: 'none',
-    apiSecret: 'none',
+    apiKey: apiKey,
+    apiSecret: apiSecret,
   });
 };
