@@ -14,7 +14,7 @@
   },
   "devDependencies": {
     "eslint": "5.0.1",
-    "eslint-config-google": "0.9.1",
+    "eslint-config-google": "0.10.0",
     "eslint-plugin-jsdoc": "3.7.1",
     "jasmine-core": "3.2.1",
     "jasmine-data-provider": "2.2.0",
