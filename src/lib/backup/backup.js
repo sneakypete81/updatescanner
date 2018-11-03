@@ -35,6 +35,9 @@ function generateTree(pageStore, rootId=PageStore.ROOT_ID) {
 
   for (const childId of pageFolder.children) {
     const child = pageStore.getItem(childId);
+    if (child == null) {
+      continue; 
+    }
     if (child instanceof PageFolder) {
       result.children.push(generateTree(pageStore, childId));
     } else {
