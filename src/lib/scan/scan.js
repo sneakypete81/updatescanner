@@ -72,7 +72,9 @@ export async function scanPage(page) {
   if (!(await __.isUpToDate())) {
     return false;
   }
-
+  if (!page){
+    return false; 
+  }
   __.log(`Scanning "${page.title}"...`);
   try {
     const response = await fetch(page.url);
