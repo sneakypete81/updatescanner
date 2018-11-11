@@ -6,3 +6,4 @@
 /src/dependencies/
 /test/dependencies/
 /src/.web-extension-id
+.vscode/
