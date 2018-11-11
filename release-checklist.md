@@ -4,6 +4,8 @@
 * Update `strict_min_version` too, if required
 * Run `npm run all` and manually test the generated ZIP file
 
+* *BETA ONLY:* Go to AMO and ensure hosted option is set to "On your own"
+  https://addons.mozilla.org/en-US/developers/addon/update-scanner/versions/submit/distribution?channel=unlisted
 * *BETA ONLY:* Add an entry to `updates.json`
 * *BETA ONLY:* Run `npm run sign`
 
@@ -15,3 +17,4 @@
   https://github.com/sneakypete81/updatescanner/issues/36) issue
 
 * *NON-BETA ONLY:* Upload to AMO - **Be sure to select the correct hosting option:**
+  https://addons.mozilla.org/en-US/developers/addon/update-scanner/versions/submit/distribution?channel=listed
