@@ -108,7 +108,7 @@ export class SidebarView {
    * pageMap.
    */
   _generateTree(pageMap, root) {
-    let result = {};
+    const result = {};
     result.id = root.id;
     result.text = root.title;
     result.children = [];

@@ -90,7 +90,7 @@ async function stopAlarm() {
  * @returns {Array.<Page>} List of Page objects that need scanning.
  */
 function getScanList(pageList) {
-  let scanList = [];
+  const scanList = [];
   for (const item of pageList) {
     if (isAutoscanPending(item)) {
       scanList.push(item);

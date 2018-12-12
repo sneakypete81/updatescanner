@@ -82,7 +82,7 @@ async function importPages(pageStore, root, parentId) {
  * @returns {Object} Object containing the bookmark's annotations.
  */
 function extractAnnos(bookmark) {
-  let annos = {};
+  const annos = {};
   if (bookmark.hasOwnProperty('annos')) {
     bookmark.annos.forEach((anno) => {
       annos[anno.name] = anno.value;
