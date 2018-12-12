@@ -4,7 +4,6 @@ import {Page} from '/lib/page/page.js';
 import {PageFolder} from '/lib/page/page_folder.js';
 import {PageStore} from '/lib/page/page_store.js';
 import {log} from '/lib/util/log.js';
-import {qs, showElement, hideElement} from '/lib/util/view_helpers.js';
 
 /**
  * Class representing the Update Scanner Sidebar.
@@ -301,20 +300,6 @@ export class SidebarView {
    */
   registerSettingsHandler(handler) {
     this._settingsHandler = (node) => handler(node.id);
-  }
-
-  /**
-   * Show the Upgrade information text in the sidebar.
-   */
-  showUpgradeText() {
-    showElement(qs('#upgrade'));
-  }
-
-  /**
-   * Don't show the Upgrade information text in the sidebar.
-   */
-  hideUpgradeText() {
-    hideElement(qs('#upgrade'));
   }
 
   /**

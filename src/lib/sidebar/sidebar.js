@@ -57,12 +57,6 @@ export class Sidebar {
   _refreshSidebar() {
     this.sidebar.load(this.pageStore.pageMap, PageStore.ROOT_ID);
     this.sidebar.refresh();
-
-    if (this.pageStore.getPageList().length < 5) {
-      this.sidebar.showUpgradeText();
-    } else {
-      this.sidebar.hideUpgradeText();
-    }
   }
 
   /**
