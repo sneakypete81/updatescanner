@@ -15,11 +15,6 @@ module.exports = function(config) {
     // Just include jasmine-jquery.js in the files below.
     frameworks: ['jasmine'],
 
-    // Temporary workaround for ES Module support.
-    // (from https://github.com/karma-runner/karma/pull/2834)
-    customContextFile: 'test/unit/context.html',
-    customDebugFile: 'test/unit/debug.html',
-
     // list of files / patterns to load in the browser
     files: [
       {
