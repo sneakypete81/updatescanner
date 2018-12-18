@@ -34,5 +34,6 @@ exports.sign = function(apiKey, apiSecret) {
     artifactsDir: 'dist',
     apiKey: apiKey,
     apiSecret: apiSecret,
+    channel: 'unlisted',
   });
 };

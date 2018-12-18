@@ -4,8 +4,6 @@
 * Update `strict_min_version` too, if required
 * Run `npm run all` and manually test the generated ZIP file
 
-* *BETA ONLY:* Go to AMO and ensure hosted option is set to "On your own"
-  https://addons.mozilla.org/en-US/developers/addon/update-scanner/versions/submit/distribution?channel=unlisted
 * *BETA ONLY:* Add an entry to `updates.json`
 * *BETA ONLY:* Run `npm run sign`
 
