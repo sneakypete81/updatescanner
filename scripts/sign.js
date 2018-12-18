@@ -1,8 +1,9 @@
 require('./clean');
 require('./copy-dependencies');
 
-const manifestPatcher = require('./manifest-patcher.js');
+const manifestPatcher = require('./manifest-patcher');
 const settings = require('./settings');
+const renameSignedXpi = require('./rename-signed-xpi');
 
 const sign = async function() {
   // Update the manifest file to include an update_url for self-hosting.
@@ -15,6 +16,7 @@ const sign = async function() {
     );
   } finally {
     manifestPatcher.unPatch();
+    renameSignedXpi.rename();
   }
 };
 

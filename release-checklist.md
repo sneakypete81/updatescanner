@@ -9,8 +9,7 @@
 
 * Commit, tag and push to Github
 * Create a release on Github
-* *BETA ONLY:* Attach the signed XPI to the release, and ensure it ends in
-  `-an.fx.xpi` (`+` replaced by `.`)
+* *BETA ONLY:* Attach the signed XPI to the release
 * *BETA ONLY:* Update the [Beta Testers Wanted](
   https://github.com/sneakypete81/updatescanner/issues/36) issue
 
