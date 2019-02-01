@@ -25,14 +25,14 @@ describe('Storage', function() {
     });
 
     it('rejects the promise if the save operation fails', function(done) {
-      spyOn(browser.storage.local, 'set')
-        .and.returnValues(Promise.reject('ERROR_MESSAGE'));
+      spyOn(browser.storage.local, 'set').and
+        .returnValues(Promise.reject(new Error('ERROR_MESSAGE')));
 
       Storage.save('test', 'data').then((result) => {
         done.fail('Promise was not rejected.');
       })
       .catch((error) => {
-        expect(error).toEqual('ERROR_MESSAGE');
+        expect(error).toEqual(new Error('ERROR_MESSAGE'));
         done();
       });
     });
@@ -65,14 +65,14 @@ describe('Storage', function() {
     });
 
     it('rejects the promise if the load operation fails', function(done) {
-      spyOn(browser.storage.local, 'get')
-        .and.returnValues(Promise.reject('ERROR_MESSAGE'));
+      spyOn(browser.storage.local, 'get').and
+        .returnValues(Promise.reject(new Error('ERROR_MESSAGE')));
 
       Storage.load('test').then((result) => {
         done.fail('Promise was not rejected.');
       })
       .catch((error) => {
-        expect(error).toEqual('ERROR_MESSAGE');
+        expect(error).toEqual(new Error('ERROR_MESSAGE'));
         done();
       });
     });
@@ -92,14 +92,14 @@ describe('Storage', function() {
     });
 
     it('rejects the promise if the remove operation fails', function(done) {
-      spyOn(browser.storage.local, 'remove')
-        .and.returnValues(Promise.reject('ERROR_MESSAGE'));
+      spyOn(browser.storage.local, 'remove').and
+        .returnValues(Promise.reject(new Error('ERROR_MESSAGE')));
 
       Storage.remove('test').then((result) => {
         done.fail('Promise was not rejected.');
       })
       .catch((error) => {
-        expect(error).toEqual('ERROR_MESSAGE');
+        expect(error).toEqual(new Error('ERROR_MESSAGE'));
         done();
       });
     });

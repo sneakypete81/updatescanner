@@ -27,7 +27,8 @@ describe('Page', function() {
     });
 
     it('returns the default Page if the storage load fails', async function() {
-      spyOn(Storage, 'load').and.returnValues(Promise.reject('ERROR_MESSAGE'));
+      spyOn(Storage, 'load').and
+        .returnValues(Promise.reject(new Error('ERROR_MESSAGE')));
       spyOn(pageModule.__, 'log');
 
       const page = await Page.load('42');
@@ -82,7 +83,8 @@ describe('Page', function() {
     });
 
     it('silently logs an error if the save fails', function(done) {
-      spyOn(Storage, 'save').and.returnValues(Promise.reject('AN_ERROR'));
+      spyOn(Storage, 'save').and
+        .returnValues(Promise.reject(new Error('AN_ERROR')));
       spyOn(pageModule.__, 'log');
 
       const page = new Page('37', {});
@@ -109,7 +111,8 @@ describe('Page', function() {
     });
 
     it('silently logs an error if the delete operation fails', function(done) {
-      spyOn(Storage, 'remove').and.returnValues(Promise.reject('AN_ERROR'));
+      spyOn(Storage, 'remove').and
+        .returnValues(Promise.reject(new Error('AN_ERROR')));
       spyOn(pageModule.__, 'log');
 
       const page = new Page('37', {});
