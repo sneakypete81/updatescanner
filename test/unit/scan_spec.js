@@ -323,11 +323,11 @@ describe('scan', function() {
         title: 'example', url: 'http://www.example.com/', encoding: 'utf-8',
       });
 
-      spyOn(window, 'fetch').and.returnValues(
-        Promise.reject('Network error'));
+      spyOn(window, 'fetch').and
+        .returnValues(Promise.reject(new Error('Network error')));
       spyOn(PageStore, 'loadHtml');
-      spyOn(Page.prototype, 'existsInStorage')
-        .and.returnValue(Promise.resolve(true));
+      spyOn(Page.prototype, 'existsInStorage').and
+        .returnValue(Promise.resolve(true));
       spyOn(page, 'save');
       spyOn(scanModule.__, 'log');
       spyOn(scanModule.__, 'waitForMs');
@@ -339,7 +339,7 @@ describe('scan', function() {
         expect(page.state).toEqual(Page.stateEnum.ERROR);
         expect(page.save).toHaveBeenCalled();
         expect(scanModule.__.log.calls.allArgs()).toContain(
-          ['Could not scan "example": Network error']);
+          ['Could not scan "example": Error: Network error']);
         done();
       }).catch((error) => done.fail(error));
     });

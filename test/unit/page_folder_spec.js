@@ -36,7 +36,8 @@ describe('PageFolder', function() {
 
     it('returns the default PageFolder if the storage load fails',
        function(done) {
-      spyOn(Storage, 'load').and.returnValues(Promise.reject('ERROR_MESSAGE'));
+      spyOn(Storage, 'load').and
+        .returnValues(Promise.reject(new Error('ERROR_MESSAGE')));
       spyOn(pageFolderModule.__, 'log');
 
       PageFolder.load('42').then((pageFolder) => {
@@ -67,7 +68,8 @@ describe('PageFolder', function() {
     });
 
     it('silently logs an error if the save fails', function(done) {
-      spyOn(Storage, 'save').and.returnValues(Promise.reject('AN_ERROR'));
+      spyOn(Storage, 'save').and
+        .returnValues(Promise.reject(new Error('AN_ERROR')));
       spyOn(pageFolderModule.__, 'log');
 
       new PageFolder('37', {}).save().then(() => {
@@ -93,7 +95,8 @@ describe('PageFolder', function() {
     });
 
     it('silently logs an error if the delete operation fails', function(done) {
-      spyOn(Storage, 'remove').and.returnValues(Promise.reject('AN_ERROR'));
+      spyOn(Storage, 'remove').and
+        .returnValues(Promise.reject(new Error('AN_ERROR')));
       spyOn(pageFolderModule.__, 'log');
 
       const pageFolder = new PageFolder('37', {});
