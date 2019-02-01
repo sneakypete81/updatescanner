@@ -5,7 +5,7 @@ html body {
 .panel {
   display: flex;
   flex-direction: column;
-  width: 20em;
+  min-width: 20em;
   height: 30em;
   background-color: #ffffff;
 }
@@ -55,6 +55,8 @@ p {
 .panel-section-footer {
   height: auto;
   min-height: 41px;
+  border-radius: 0;
+  border: 0;
 }
 
 .footer-button-icon {
@@ -63,6 +65,10 @@ p {
   mask-size: 32px;
   mask-position: center center;
   mask-repeat: no-repeat;
+}
+
+#show-all-button {
+  box-shadow: none;
 }
 
 #new-button > .footer-button-icon {
@@ -111,4 +117,10 @@ p {
 
 .menu-content li:hover {
   background-color: rgba(12, 12, 13, 0.1);
+}
+
+@media (max-width: 425px) {
+  .panel {
+    width: auto !important;
+  }
 }
