@@ -6,7 +6,8 @@ html body {
   display: flex;
   flex-direction: column;
   min-width: 20em;
-  height: 30em;
+  min-height: 30em;
+  height: 100vh;
   background-color: #ffffff;
 }
 
