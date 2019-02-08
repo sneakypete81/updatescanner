@@ -5,6 +5,7 @@ import {isUpToDate} from '/lib/update/update.js';
 import {log} from '/lib/util/log.js';
 import {waitForMs} from '/lib/util/promise.js';
 import {detectEncoding, applyEncoding} from '/lib/util/encoding.js';
+import {loadScanInterval} from '/lib/util/interval.js';
 
 /**
  * Enumeration indicating the similarity of two HTML strings.
@@ -36,7 +37,7 @@ export const __ = {
 };
 
 // Wait between scanning pages
-const SCAN_IDLE_MS = 2000;
+let SCAN_IDLE_MS = 2000;
 
 /**
  * Start scanning the pages one at a time. HTML is checked for updates and
@@ -48,6 +49,8 @@ const SCAN_IDLE_MS = 2000;
  */
 export async function scan(pageList) {
   let newMajorChangeCount = 0;
+  SCAN_IDLE_MS = await loadScanInterval();
+
   for (const page of pageList) {
     if (await scanPage(page)) {
       newMajorChangeCount++;
