@@ -7,6 +7,8 @@ import {PageStore, hasPageStateChanged, isItemChanged}
 import {createBackupJson} from '/lib/backup/backup.js';
 import {openRestoreUrl} from '/lib/backup/restore_url.js';
 import {waitForMs} from '/lib/util/promise.js';
+import {saveScanInterval} from '/lib/util/interval.js';
+import {qs} from '/lib/util/view_helpers.js';
 
 /**
  * Class representing the Update Scanner toolbar popup.
@@ -37,6 +39,7 @@ export class Popup {
     view.bindScanAllClick(this._handleScanAllClick.bind(this));
     view.bindBackupClick(this._handleBackupClick.bind(this));
     view.bindRestoreClick(this._handleRestoreClick.bind(this));
+    view.bindIntervalClick(this._handleIntervalClick.bind(this));
     view.bindHelpClick(this._handleHelpClick.bind(this));
     view.bindPageClick(this._handlePageClick.bind(this));
 
@@ -107,6 +110,19 @@ export class Popup {
    */
   async _handleRestoreClick() {
     openRestoreUrl();
+  }
+
+  /**
+   * Called when the Interval menu item is clicked, to set the scan interval.
+   * Gets the interval value from the form in the interval-panel.
+   */
+  async _handleIntervalClick() {
+    const passthis = qs('#interval-value').value;
+    try {
+      saveScanInterval(passthis);
+    } catch (error) {
+      console.log(`ERROR: Popup.handleintervalclick: ${error}`);
+    }
   }
 
   /**
