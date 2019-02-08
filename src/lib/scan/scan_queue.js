@@ -1,5 +1,6 @@
 import {scanPage} from './scan.js';
 import {waitForMs} from '/lib/util/promise.js';
+import {loadScanInterval} from '/lib/util/interval.js';
 
 // Allow function mocking
 export const __ = {
@@ -8,7 +9,7 @@ export const __ = {
 };
 
 // Wait between scanning pages
-const SCAN_IDLE_MS = 2000;
+let SCAN_IDLE_MS = 2000;
 
 /**
  * @typedef {Object} ScanResult
@@ -97,6 +98,7 @@ export class ScanQueue {
   async _processScanQueue() {
     let majorChanges = 0;
     let scanCount = 0;
+    SCAN_IDLE_MS = await loadScanInterval();
 
     while (this.queue.length > 0) {
       const majorChange = await __.scanPage(this.queue.shift());
