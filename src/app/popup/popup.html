@@ -28,6 +28,7 @@
           <li id="scan-all-menu">Scan All Pages</li>
           <li id="backup-menu">Backup Pages</li>
           <li id="restore-menu">Restore Pages</li>
+          <li id="interval-menu">Set Scan Interval</li>
           <li id="help-menu">Help</li>
         </ul>
       </div>
@@ -99,6 +100,32 @@
     <div class="panel-section panel-section-footer">
       <div id="restore-button" class="panel-section-footer-button default">
         Restore Pages
+      </div>
+    </div>
+  </div>
+  
+  <!-- -->
+  
+  <div id="interval-panel" class="panel hidden">
+    <div class="panel-section panel-section-header">
+      <div class="text-section-header">Set Scan Interval</div>
+    </div>
+
+    <div class="panel-section panel-section-content">
+      <p>
+        Here you can set the time Update Scanner will wait in seconds before scanning the next page in the scan queue. <br>
+        The default time is 2 seconds. <br>
+        Any time lower than this will silently be increased to 2 seconds.
+      </p>
+      <br>
+      <div style="text-align:center">
+      <input id="interval-value" type="number" name="interval-value" value="2">
+      </div>
+    </div>
+
+    <div class="panel-section panel-section-footer">
+      <div id="interval-button" class="panel-section-footer-button default">
+        Set Interval
       </div>
     </div>
   </div>
