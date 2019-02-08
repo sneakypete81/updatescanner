@@ -8,6 +8,7 @@ import {isUpToDate, latestVersion} from '/lib/update/update.js';
 import {openUpdate} from '/lib/update/update_url.js';
 import {log} from '/lib/util/log.js';
 import {Config} from '/lib/util/config.js';
+import {saveScanFirstRun} from '/lib/util/interval.js';
 
 const activeIcon = {
   18: '/images/updatescanner_18.png',
@@ -93,6 +94,7 @@ export class Background {
   /**
    * If this is the first time the addon has been run, create a Page with
    * the Update Scanner website and scan it immediately.
+   * Then, set the scan interval to it's default (2 seconds).
    */
   async _checkFirstRun() {
     const config = await new Config().load();
@@ -101,6 +103,7 @@ export class Background {
       config.set('isFirstRun', false);
       config.set('updateVersion', latestVersion);
       await config.save();
+      saveScanFirstRun();
 
       this.scanQueue.add([page]);
       this.scanQueue.scan();
