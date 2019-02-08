@@ -9,6 +9,7 @@ export function init() {
   $on(qs('#menu-button'), 'click', toggleMenu);
   $on(qs('#backup-menu'), 'click', showBackupPanel);
   $on(qs('#restore-menu'), 'click', showRestorePanel);
+  $on(qs('#interval-menu'), 'click', showIntervalPanel);
 }
 
 /**
@@ -58,6 +59,13 @@ export function bindRestoreClick(handler) {
  */
 export function bindScanAllClick(handler) {
   $on(qs('#scan-all-menu'), 'click', handler);
+}
+
+/**
+ * @param {Function} handler - Called when the Interval menu item is clicked.
+ */
+export function bindIntervalClick(handler) {
+  $on(qs('#interval-button'), 'click', handler);
 }
 
 /**
@@ -163,4 +171,12 @@ function showBackupPanel() {
 function showRestorePanel() {
   hideElement(qs('#main-panel'));
   showElement(qs('#restore-panel'));
+}
+
+/**
+ * Display the Set Interval panel.
+ */
+function showIntervalPanel() {
+  hideElement(qs('#main-panel'));
+  showElement(qs('#interval-panel'));
 }
