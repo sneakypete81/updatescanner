@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Update Scanner",
   "short_name": "Updatescan",
-  "version": "4.3.2beta2",
+  "version": "4.3.2",
   "description": "Monitors webpages for updates.",
   "homepage_url": "https://sneakypete81.github.io/updatescanner/",
   "applications": {
