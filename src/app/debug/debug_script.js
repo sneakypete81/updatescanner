@@ -4,12 +4,14 @@ import {showNotification} from '/lib/scan/notification.js';
 const dataText = document.querySelector('#data');
 const reloadBtn = document.querySelector('#reload');
 const preloadBtn = document.querySelector('#preload');
+const addPageBtn = document.querySelector('#add-page');
 const clearBtn = document.querySelector('#clear');
 const notifyBtn = document.querySelector('#notify');
 const addFrm = document.querySelector('#add');
 
 reloadBtn.addEventListener('click', reload);
 preloadBtn.addEventListener('click', preload);
+addPageBtn.addEventListener('click', addPage);
 clearBtn.addEventListener('click', clear);
 notifyBtn.addEventListener('click', notify);
 addFrm.addEventListener('submit', add);
@@ -98,6 +100,19 @@ async function preload() {
       newScanTime: 1486631108392,
     },
   });
+  reload();
+}
+
+async function addPage() {
+  const pageStore = await PageStore.load();
+
+  const page = await pageStore.createPage(PageStore.ROOT_ID, -1, {
+    title: 'Test Page',
+    url: 'https://www.google.com',
+    state: 'changed',
+  });
+  page.save();
+
   reload();
 }
 
