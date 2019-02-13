@@ -134,8 +134,11 @@ export class Popup {
    */
   _handlePageClick(pageId) {
     if (pageId !== undefined) {
-      openMain({[paramEnum.ACTION]: actionEnum.SHOW_DIFF,
-        [paramEnum.ID]: pageId});
+      const params = {
+        [paramEnum.ACTION]: actionEnum.SHOW_DIFF,
+        [paramEnum.ID]: pageId,
+      };
+      openMain(params, true);
     }
   }
 
