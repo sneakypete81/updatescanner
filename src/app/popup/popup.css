@@ -60,6 +60,10 @@ p {
   border: 0;
 }
 
+.panel-section-footer:last-child {
+  min-height: 76px;
+}
+
 .footer-button-icon {
   background-color: rgba(12, 12, 13, 0.8);
   height: 32px;
