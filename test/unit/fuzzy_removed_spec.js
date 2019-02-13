@@ -68,7 +68,7 @@ describe('fuzzy', function() {
     ], function(data) {
       it('returns ' + data.major + ' when ' + data.slice + ' characters are ' +
          'removed from the middle with threshold=' + data.threshold,
-         function() {
+      function() {
         const html1 = readFixtures('amo.html');
         const html2 = html1.slice(0, data.pos) +
                       html1.slice(data.pos + data.slice);
@@ -90,7 +90,7 @@ describe('fuzzy', function() {
     ], function(data) {
       it('returns ' + data.major + ' when ' + data.slice + ' characters are ' +
          'removed from two places with threshold=' + data.threshold,
-         function() {
+      function() {
         const html1 = readFixtures('amo.html');
         const html2 = html1.slice(0, data.pos1) +
                       html1.slice(data.pos1 + data.slice, data.pos2) +

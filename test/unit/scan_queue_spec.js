@@ -141,45 +141,45 @@ describe('Scan Queue', function() {
     });
 
     it('binds a handler that is called when the scan completes',
-    async function() {
-      const scanQueue = new ScanQueue();
-      const page1 = new Page(1, {});
-      const page2 = new Page(1, {});
-      const page3 = new Page(1, {});
-      scanQueue.add([page1, page2, page3]);
-      spyOn(scanQueueModule.__, 'scanPage').and.returnValues(
-        new Promise((resolve) => resolve(true)),
-        new Promise((resolve) => resolve(false)),
-        new Promise((resolve) => resolve(true)),
-      );
-      const handler = jasmine.createSpy();
+      async function() {
+        const scanQueue = new ScanQueue();
+        const page1 = new Page(1, {});
+        const page2 = new Page(1, {});
+        const page3 = new Page(1, {});
+        scanQueue.add([page1, page2, page3]);
+        spyOn(scanQueueModule.__, 'scanPage').and.returnValues(
+          new Promise((resolve) => resolve(true)),
+          new Promise((resolve) => resolve(false)),
+          new Promise((resolve) => resolve(true)),
+        );
+        const handler = jasmine.createSpy();
 
-      scanQueue.bindScanComplete(handler);
-      await scanQueue.scan();
+        scanQueue.bindScanComplete(handler);
+        await scanQueue.scan();
 
-      expect(handler).toHaveBeenCalledWith({
-        majorChanges: 2,
-        scanCount: 3,
-        isManualScan: false,
+        expect(handler).toHaveBeenCalledWith({
+          majorChanges: 2,
+          scanCount: 3,
+          isManualScan: false,
+        });
       });
-    });
 
     it('signals to the handler then a manual scan is performed',
-    async function() {
-      const scanQueue = new ScanQueue();
-      const page1 = new Page(1, {});
-      scanQueue.add([page1]);
-      const handler = jasmine.createSpy();
-      spyOn(scanQueueModule.__, 'scanPage');
+      async function() {
+        const scanQueue = new ScanQueue();
+        const page1 = new Page(1, {});
+        scanQueue.add([page1]);
+        const handler = jasmine.createSpy();
+        spyOn(scanQueueModule.__, 'scanPage');
 
-      scanQueue.bindScanComplete(handler);
-      await scanQueue.manualScan();
+        scanQueue.bindScanComplete(handler);
+        await scanQueue.manualScan();
 
-      expect(handler).toHaveBeenCalledWith({
-        majorChanges: 0,
-        scanCount: 1,
-        isManualScan: true,
+        expect(handler).toHaveBeenCalledWith({
+          majorChanges: 0,
+          scanCount: 1,
+          isManualScan: true,
+        });
       });
-    });
   });
 });

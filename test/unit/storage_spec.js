@@ -21,7 +21,7 @@ describe('Storage', function() {
         expect(browser.storage.local.set).toHaveBeenCalledWith({[key]: data});
         done();
       })
-      .catch((error) => done.fail(error));
+        .catch((error) => done.fail(error));
     });
 
     it('rejects the promise if the save operation fails', function(done) {
@@ -31,10 +31,10 @@ describe('Storage', function() {
       Storage.save('test', 'data').then((result) => {
         done.fail('Promise was not rejected.');
       })
-      .catch((error) => {
-        expect(error).toEqual(new Error('ERROR_MESSAGE'));
-        done();
-      });
+        .catch((error) => {
+          expect(error).toEqual(new Error('ERROR_MESSAGE'));
+          done();
+        });
     });
   });
 
@@ -50,7 +50,7 @@ describe('Storage', function() {
         expect(browser.storage.local.get).toHaveBeenCalledWith(key);
         done();
       })
-      .catch((error) => done.fail(error));
+        .catch((error) => done.fail(error));
     });
 
     it('returns undefined if the key doesn\'t exist', function(done) {
@@ -61,7 +61,7 @@ describe('Storage', function() {
         expect(result).toBeUndefined();
         done();
       })
-      .catch((error) => done.fail(error));
+        .catch((error) => done.fail(error));
     });
 
     it('rejects the promise if the load operation fails', function(done) {
@@ -71,10 +71,10 @@ describe('Storage', function() {
       Storage.load('test').then((result) => {
         done.fail('Promise was not rejected.');
       })
-      .catch((error) => {
-        expect(error).toEqual(new Error('ERROR_MESSAGE'));
-        done();
-      });
+        .catch((error) => {
+          expect(error).toEqual(new Error('ERROR_MESSAGE'));
+          done();
+        });
     });
   });
 
@@ -88,7 +88,7 @@ describe('Storage', function() {
         expect(browser.storage.local.remove).toHaveBeenCalledWith(key);
         done();
       })
-      .catch((error) => done.fail(error));
+        .catch((error) => done.fail(error));
     });
 
     it('rejects the promise if the remove operation fails', function(done) {
@@ -98,10 +98,10 @@ describe('Storage', function() {
       Storage.remove('test').then((result) => {
         done.fail('Promise was not rejected.');
       })
-      .catch((error) => {
-        expect(error).toEqual(new Error('ERROR_MESSAGE'));
-        done();
-      });
+        .catch((error) => {
+          expect(error).toEqual(new Error('ERROR_MESSAGE'));
+          done();
+        });
     });
   });
 });

@@ -24,9 +24,10 @@ export class PageFolder {
    * @returns {Object} Enumeration of PageFolder change states.
    */
   static get stateEnum() {
-    return {NO_CHANGE: 'no_change',
-            CHANGED: 'changed',
-          };
+    return {
+      NO_CHANGE: 'no_change',
+      CHANGED: 'changed',
+    };
   }
 
   /**
@@ -86,7 +87,7 @@ export class PageFolder {
       title: this.title,
       state: this.state,
       children: this.children,
-      };
+    };
   }
 
   /**
@@ -99,7 +100,7 @@ export class PageFolder {
       title: this.title,
       // state: this.state,
       // children: this.children,
-      };
+    };
   }
 
   /**

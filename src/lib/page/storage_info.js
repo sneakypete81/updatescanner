@@ -55,11 +55,12 @@ export class StorageInfo {
    * @returns {Object} Object suitable for storage.
    */
   _toObject() {
-    return {version: this.version,
-            pageIds: this.pageIds,
-            pageFolderIds: this.pageFolderIds,
-            nextId: this.nextId,
-            };
+    return {
+      version: this.version,
+      pageIds: this.pageIds,
+      pageFolderIds: this.pageFolderIds,
+      nextId: this.nextId,
+    };
   }
 
   /**

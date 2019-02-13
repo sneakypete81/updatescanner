@@ -68,7 +68,7 @@ describe('fuzzy', function() {
     ], function(data) {
       it('returns ' + data.major + ' when ' + data.slice + ' characters are ' +
          'inserted at the middle with threshold=' + data.threshold,
-         function() {
+      function() {
         const html1 = readFixtures('amo.html');
         const html2 = html1.slice(0, data.pos) +
                       Array(data.slice + 1).join('d') +
@@ -91,7 +91,7 @@ describe('fuzzy', function() {
     ], function(data) {
       it('returns ' + data.major + ' when ' + data.slice + ' characters are ' +
          'inserted at two places with threshold=' + data.threshold,
-         function() {
+      function() {
         const html1 = readFixtures('amo.html');
         const html2 = html1.slice(0, data.pos1) +
                       Array(data.slice + 1).join('d') +

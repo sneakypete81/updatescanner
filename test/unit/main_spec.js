@@ -17,26 +17,26 @@ describe('Main', function() {
 
   describe('_showDiff', function() {
     it('Updates the view with a diff of the old and new HTML from storage',
-    function(done) {
-      const id = '42';
-      const page = new Page(id, {url: 'test.com/blah'});
-      const html = 'hello';
-      const main = new Main();
+      function(done) {
+        const id = '42';
+        const page = new Page(id, {url: 'test.com/blah'});
+        const html = 'hello';
+        const main = new Main();
 
-      spyOn(StorageDB, 'load').and.returnValue(Promise.resolve(html));
-      spyOn(mainModule.__, 'diff').and.returnValues('diffHtml');
-      spyOn(mainModule.__, 'viewDiff').and.callFake((pageArg, htmlArg) => {
-        expect(htmlArg).toEqual(
-          '<base href="test.com/blah" target="_top">diffHtml');
-        expect(pageArg).toEqual(page);
-        expect(StorageDB.load).toHaveBeenCalledWith('html:old:' + id);
-        expect(StorageDB.load).toHaveBeenCalledWith('html:new:' + id);
-        expect(mainModule.__.diff).toHaveBeenCalledWith(page, html, html);
-        done();
+        spyOn(StorageDB, 'load').and.returnValue(Promise.resolve(html));
+        spyOn(mainModule.__, 'diff').and.returnValues('diffHtml');
+        spyOn(mainModule.__, 'viewDiff').and.callFake((pageArg, htmlArg) => {
+          expect(htmlArg).toEqual(
+            '<base href="test.com/blah" target="_top">diffHtml');
+          expect(pageArg).toEqual(page);
+          expect(StorageDB.load).toHaveBeenCalledWith('html:old:' + id);
+          expect(StorageDB.load).toHaveBeenCalledWith('html:new:' + id);
+          expect(mainModule.__.diff).toHaveBeenCalledWith(page, html, html);
+          done();
+        });
+
+        main._showDiff(page);
       });
-
-      main._showDiff(page);
-    });
 
     it('logs to the console if the page\'s html isn\'t found', function(done) {
       const page = new Page(42, {url: 'test.com/blah'});

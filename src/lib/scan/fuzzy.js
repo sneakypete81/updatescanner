@@ -120,9 +120,9 @@ function firstDifference(str1, str2) {
   const minlen = Math.min(str1.length, str2.length);
 
   for (let i = 0; i < minlen; i++) {
-   if (str1[i] != str2[i]) {
-     return i;
-   }
+    if (str1[i] != str2[i]) {
+      return i;
+    }
   }
   return minlen;
 }

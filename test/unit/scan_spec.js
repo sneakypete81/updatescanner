@@ -77,22 +77,23 @@ describe('scan', function() {
     });
 
     it('saves content if the page is unchanged when previously changed',
-       async function() {
-      this.page.state = Page.stateEnum.CHANGED;
-      const html = 'Here is some <b>HTML</b>';
-      spyOn(this.page, 'save');
-      spyOn(PageStore, 'saveHtml');
+      async function() {
+        this.page.state = Page.stateEnum.CHANGED;
+        const html = 'Here is some <b>HTML</b>';
+        spyOn(this.page, 'save');
+        spyOn(PageStore, 'saveHtml');
 
-      const result = await scanModule.__.updatePageState(this.page, html, html);
+        const result = await scanModule.__
+          .updatePageState(this.page, html, html);
 
-      expect(result).toBeFalsy();
-      expect(this.page.state).toEqual(Page.stateEnum.CHANGED);
-      expect(this.page.oldScanTime).toEqual(this.oldScanTime);
-      expect(this.page.newScanTime).toEqual(Date.now());
-      expect(PageStore.saveHtml).toHaveBeenCalledWith(
-        '1', PageStore.htmlTypes.NEW, html);
-      expect(PageStore.saveHtml).toHaveBeenCalledTimes(1);
-    });
+        expect(result).toBeFalsy();
+        expect(this.page.state).toEqual(Page.stateEnum.CHANGED);
+        expect(this.page.oldScanTime).toEqual(this.oldScanTime);
+        expect(this.page.newScanTime).toEqual(Date.now());
+        expect(PageStore.saveHtml).toHaveBeenCalledWith(
+          '1', PageStore.htmlTypes.NEW, html);
+        expect(PageStore.saveHtml).toHaveBeenCalledTimes(1);
+      });
 
     it('saves new content', async function() {
       this.page.state = Page.stateEnum.NO_CHANGE;
@@ -132,25 +133,25 @@ describe('scan', function() {
     });
 
     it('doesn\'t update state for a minor change when previously changed',
-       async function() {
-      this.page.state = Page.stateEnum.CHANGED;
-      const html1 = 'Here is some <b>HTML</b>';
-      const html2 = 'Here is some different <b>HTML</b>';
-      spyOn(this.page, 'save');
-      spyOn(PageStore, 'saveHtml');
-      spyOn(scanModule.__, 'isMajorChange').and.returnValues(false);
+      async function() {
+        this.page.state = Page.stateEnum.CHANGED;
+        const html1 = 'Here is some <b>HTML</b>';
+        const html2 = 'Here is some different <b>HTML</b>';
+        spyOn(this.page, 'save');
+        spyOn(PageStore, 'saveHtml');
+        spyOn(scanModule.__, 'isMajorChange').and.returnValues(false);
 
-      const result = await scanModule.__.updatePageState(
-        this.page, html1, html2);
+        const result = await scanModule.__.updatePageState(
+          this.page, html1, html2);
 
-      expect(result).toBeFalsy();
-      expect(this.page.state).toEqual(Page.stateEnum.CHANGED);
-      expect(this.page.oldScanTime).toEqual(this.oldScanTime);
-      expect(this.page.newScanTime).toEqual(Date.now());
-      expect(PageStore.saveHtml).toHaveBeenCalledWith(
-        '1', PageStore.htmlTypes.NEW, html2);
-      expect(PageStore.saveHtml).toHaveBeenCalledTimes(1);
-    });
+        expect(result).toBeFalsy();
+        expect(this.page.state).toEqual(Page.stateEnum.CHANGED);
+        expect(this.page.oldScanTime).toEqual(this.oldScanTime);
+        expect(this.page.newScanTime).toEqual(Date.now());
+        expect(PageStore.saveHtml).toHaveBeenCalledWith(
+          '1', PageStore.htmlTypes.NEW, html2);
+        expect(PageStore.saveHtml).toHaveBeenCalledTimes(1);
+      });
 
     it('updates old and new HTML for a new major change', async function() {
       this.page.state = Page.stateEnum.NO_CHANGE;
@@ -175,25 +176,25 @@ describe('scan', function() {
     });
 
     it('updates just the new HTML for a repeated major change',
-    async function() {
-      this.page.state = Page.stateEnum.CHANGED;
-      const html1 = 'Here is some <b>HTML</b>';
-      const html2 = 'Here is some different <b>HTML</b>';
-      spyOn(this.page, 'save');
-      spyOn(PageStore, 'saveHtml');
-      spyOn(scanModule.__, 'isMajorChange').and.returnValues(true);
+      async function() {
+        this.page.state = Page.stateEnum.CHANGED;
+        const html1 = 'Here is some <b>HTML</b>';
+        const html2 = 'Here is some different <b>HTML</b>';
+        spyOn(this.page, 'save');
+        spyOn(PageStore, 'saveHtml');
+        spyOn(scanModule.__, 'isMajorChange').and.returnValues(true);
 
-      const result = await scanModule.__.updatePageState(
-        this.page, html1, html2);
+        const result = await scanModule.__.updatePageState(
+          this.page, html1, html2);
 
-      expect(result).toBeTruthy();
-      expect(this.page.state).toEqual(Page.stateEnum.CHANGED);
-      expect(this.page.oldScanTime).toEqual(this.oldScanTime);
-      expect(this.page.newScanTime).toEqual(Date.now());
-      expect(PageStore.saveHtml).toHaveBeenCalledWith(
-        '1', PageStore.htmlTypes.NEW, html2);
-      expect(PageStore.saveHtml).toHaveBeenCalledTimes(1);
-    });
+        expect(result).toBeTruthy();
+        expect(this.page.state).toEqual(Page.stateEnum.CHANGED);
+        expect(this.page.oldScanTime).toEqual(this.oldScanTime);
+        expect(this.page.newScanTime).toEqual(Date.now());
+        expect(PageStore.saveHtml).toHaveBeenCalledWith(
+          '1', PageStore.htmlTypes.NEW, html2);
+        expect(PageStore.saveHtml).toHaveBeenCalledTimes(1);
+      });
   });
 
   describe('scan', function() {
@@ -212,23 +213,23 @@ describe('scan', function() {
     });
 
     it('does nothing if the data structures are not up to date',
-    function(done) {
-      const page = new Page('1', {
-        url: 'http://www.example.com/', encoding: 'utf-8',
+      function(done) {
+        const page = new Page('1', {
+          url: 'http://www.example.com/', encoding: 'utf-8',
+        });
+
+        spyOn(window, 'fetch');
+        spyOn(PageStore, 'loadHtml');
+        spyOn(scanModule.__, 'waitForMs');
+        spyOn(scanModule.__, 'isUpToDate')
+          .and.returnValue(Promise.resolve(false));
+
+        scanModule.scan([page]).then(() => {
+          expect(window.fetch).not.toHaveBeenCalled();
+          expect(PageStore.loadHtml).not.toHaveBeenCalled();
+          done();
+        }).catch((error) => done.fail(error));
       });
-
-      spyOn(window, 'fetch');
-      spyOn(PageStore, 'loadHtml');
-      spyOn(scanModule.__, 'waitForMs');
-      spyOn(scanModule.__, 'isUpToDate')
-        .and.returnValue(Promise.resolve(false));
-
-      scanModule.scan([page]).then(() => {
-        expect(window.fetch).not.toHaveBeenCalled();
-        expect(PageStore.loadHtml).not.toHaveBeenCalled();
-        done();
-      }).catch((error) => done.fail(error));
-    });
 
     it('Scans a single page', function(done) {
       const page = new Page('1', {
@@ -420,28 +421,28 @@ describe('scan', function() {
     });
 
     it('autodetects the encoding if not specified in the Page object',
-    async function() {
-      const page = new Page(1, {});
-      const response = {
-        arrayBuffer: () => Promise.resolve('buffer'),
-        headers: 'headers',
-      };
-      spyOn(scanModule.__, 'detectEncoding').and.returnValue('encoding');
-      spyOn(scanModule.__, 'applyEncoding').and.returnValue('html');
-      spyOn(page, 'save');
+      async function() {
+        const page = new Page(1, {});
+        const response = {
+          arrayBuffer: () => Promise.resolve('buffer'),
+          headers: 'headers',
+        };
+        spyOn(scanModule.__, 'detectEncoding').and.returnValue('encoding');
+        spyOn(scanModule.__, 'applyEncoding').and.returnValue('html');
+        spyOn(page, 'save');
 
-      const html = await scanModule.__.getHtmlFromResponse(response, page);
+        const html = await scanModule.__.getHtmlFromResponse(response, page);
 
-      expect(html).toEqual('html');
-      expect(scanModule.__.applyEncoding)
-        .toHaveBeenCalledWith('buffer', 'utf-8');
-      expect(scanModule.__.detectEncoding)
-        .toHaveBeenCalledWith('headers', 'html');
-      expect(scanModule.__.applyEncoding)
-        .toHaveBeenCalledWith('buffer', 'encoding');
-      expect(page.save).toHaveBeenCalled;
-      expect(page.encoding).toEqual('encoding');
-    });
+        expect(html).toEqual('html');
+        expect(scanModule.__.applyEncoding)
+          .toHaveBeenCalledWith('buffer', 'utf-8');
+        expect(scanModule.__.detectEncoding)
+          .toHaveBeenCalledWith('headers', 'html');
+        expect(scanModule.__.applyEncoding)
+          .toHaveBeenCalledWith('buffer', 'encoding');
+        expect(page.save).toHaveBeenCalled;
+        expect(page.encoding).toEqual('encoding');
+      });
 
     it('uses response.text() for utf-8 encodings', async function() {
       const page = new Page(1, {encoding: 'utf-8'});

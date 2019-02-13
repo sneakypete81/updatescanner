@@ -38,10 +38,11 @@ export class Page {
    * than NO_CHANGE or CHANGE indicates an error.
    */
   static get stateEnum() {
-    return {NO_CHANGE: 'no_change',
-            CHANGED: 'changed',
-            ERROR: 'error',
-          };
+    return {
+      NO_CHANGE: 'no_change',
+      CHANGED: 'changed',
+      ERROR: 'error',
+    };
   }
 
   /**
@@ -160,7 +161,7 @@ export class Page {
       lastAutoscanTime: this.lastAutoscanTime,
       oldScanTime: this.oldScanTime,
       newScanTime: this.newScanTime,
-      };
+    };
   }
 
   /**
@@ -185,7 +186,7 @@ export class Page {
       // lastAutoscanTime: this.lastAutoscanTime,
       // oldScanTime: this.oldScanTime,
       // newScanTime: this.newScanTime,
-      };
+    };
   }
 
   /**

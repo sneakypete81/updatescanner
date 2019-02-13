@@ -155,8 +155,8 @@ describe('Autoscan', function() {
       });
       const pageNotToScan = new Page(2, {
         url: 'http://test.com',
-       scanRateMinutes: 30,
-       lastAutoscanTime: Date.now(),
+        scanRateMinutes: 30,
+        lastAutoscanTime: Date.now(),
       });
       const pages = [pageToScan, pageNotToScan];
       spyOn(this.pageStore, 'getPageList').and.returnValues(pages);

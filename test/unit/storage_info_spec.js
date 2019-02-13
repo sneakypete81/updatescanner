@@ -27,36 +27,36 @@ describe('StorageInfo', function() {
         expect(storageInfo.nextId).toEqual(data.nextId);
         done();
       })
-      .catch((error) => done.fail(error));
+        .catch((error) => done.fail(error));
     });
 
     it('returns default StorageInfo if there is no object in storage',
-       function(done) {
-      spyOn(Storage, 'load').and.returnValues(Promise.resolve(undefined));
+      function(done) {
+        spyOn(Storage, 'load').and.returnValues(Promise.resolve(undefined));
 
-      StorageInfo.load().then((storageInfo) => {
-        expect(storageInfo.version).toEqual(StorageInfo._VERSION);
-        expect(storageInfo.pageIds).toEqual([]);
-        expect(storageInfo.pageFolderIds).toEqual([]);
-        expect(storageInfo.nextId).toEqual('1');
-        done();
-      })
-      .catch((error) => done.fail(error));
-    });
+        StorageInfo.load().then((storageInfo) => {
+          expect(storageInfo.version).toEqual(StorageInfo._VERSION);
+          expect(storageInfo.pageIds).toEqual([]);
+          expect(storageInfo.pageFolderIds).toEqual([]);
+          expect(storageInfo.nextId).toEqual('1');
+          done();
+        })
+          .catch((error) => done.fail(error));
+      });
 
     it('returns default StorageInfo if there is an empty object in storage',
-       function(done) {
-      spyOn(Storage, 'load').and.returnValues(Promise.resolve({}));
+      function(done) {
+        spyOn(Storage, 'load').and.returnValues(Promise.resolve({}));
 
-      StorageInfo.load().then((storageInfo) => {
-        expect(storageInfo.version).toEqual(StorageInfo._VERSION);
-        expect(storageInfo.pageIds).toEqual([]);
-        expect(storageInfo.pageFolderIds).toEqual([]);
-        expect(storageInfo.nextId).toEqual('1');
-        done();
-      })
-      .catch((error) => done.fail(error));
-    });
+        StorageInfo.load().then((storageInfo) => {
+          expect(storageInfo.version).toEqual(StorageInfo._VERSION);
+          expect(storageInfo.pageIds).toEqual([]);
+          expect(storageInfo.pageFolderIds).toEqual([]);
+          expect(storageInfo.nextId).toEqual('1');
+          done();
+        })
+          .catch((error) => done.fail(error));
+      });
 
     it('returns default StorageInfo if the storage load fails', function(done) {
       spyOn(Storage, 'load').and
@@ -72,7 +72,7 @@ describe('StorageInfo', function() {
           .toMatch('ERROR_MESSAGE');
         done();
       })
-      .catch((error) => done.fail(error));
+        .catch((error) => done.fail(error));
     });
   });
 
@@ -91,7 +91,7 @@ describe('StorageInfo', function() {
         expect(Storage.save).toHaveBeenCalledWith(StorageInfo._KEY, data);
         done();
       })
-      .catch((error) => done.fail(error));
+        .catch((error) => done.fail(error));
     });
 
     it('silently logs an error if the save fails', function(done) {
@@ -103,7 +103,7 @@ describe('StorageInfo', function() {
         expect(storageInfoModule.__.log.calls.argsFor(0)).toMatch('AN_ERROR');
         done();
       })
-      .catch((error) => done.fail(error));
+        .catch((error) => done.fail(error));
     });
   });
 
@@ -216,6 +216,6 @@ describe('StorageInfo', function() {
 
         expect(storageInfo.pageIds).toEqual(['1', '5', '3', '9']);
         expect(storageInfo.pageFolderIds).toEqual(['4', '5']);
-    });
+      });
   });
 });

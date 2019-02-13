@@ -20,8 +20,12 @@ module.exports = {
     'no-console': 'off',
     // Don't prohibit whitespace around code blocks
     'padded-blocks': 'off',
-    // Don't enforce 4-space line continuation indent
-    'indent': 0,
+    // Preferred indentation rules
+    'indent': ['error', 2, {
+      'FunctionExpression': {'parameters': 'first'},
+      'SwitchCase': 1,
+      'VariableDeclarator': 1,
+    }],
     // Downgrade JSDoc requirement to a warning
     'require-jsdoc': 'warn',
     // Use @returns if the function returns

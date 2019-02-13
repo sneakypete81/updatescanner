@@ -6,9 +6,10 @@ describe('Page', function() {
   describe('load', function() {
     it('loads a Page from storage', async function() {
       const id = '42';
-      const data = {title: 'Page Title',
-                    url: 'https://example.com/test',
-                    };
+      const data = {
+        title: 'Page Title',
+        url: 'https://example.com/test',
+      };
       spyOn(Storage, 'load').and.returnValues(Promise.resolve(data));
 
       const page = await Page.load(id);
@@ -19,12 +20,12 @@ describe('Page', function() {
     });
 
     it('returns the default Page if there is no object in storage',
-       async function() {
-      spyOn(Storage, 'load').and.returnValues(Promise.resolve(undefined));
+      async function() {
+        spyOn(Storage, 'load').and.returnValues(Promise.resolve(undefined));
 
-      const page = await Page.load('42');
-      expect(page.title).toEqual('New Page');
-    });
+        const page = await Page.load('42');
+        expect(page.title).toEqual('New Page');
+      });
 
     it('returns the default Page if the storage load fails', async function() {
       spyOn(Storage, 'load').and
@@ -38,10 +39,11 @@ describe('Page', function() {
 
     it('ignores invalid Page attributes', async function() {
       const id = '42';
-      const data = {title: 'Page Title',
-                    url: 'https://example.com/test',
-                    invalidAttribute: 'boo',
-                    };
+      const data = {
+        title: 'Page Title',
+        url: 'https://example.com/test',
+        invalidAttribute: 'boo',
+      };
       spyOn(Storage, 'load').and.returnValues(Promise.resolve(data));
 
       const page = await Page.load(id);
@@ -57,29 +59,30 @@ describe('Page', function() {
     it('saves a Page to storage', function(done) {
       spyOn(Storage, 'save').and.returnValues(Promise.resolve());
       const id = '33';
-      const data = {title: 'A Page',
-                    url: 'https://www.example.com/test',
-                    changeThreshold: 1234,
-                    scanRateMinutes: 64,
-                    ignoreNumbers: true,
-                    encoding: 'utf-8',
-                    highlightChanges: true,
-                    highlightColour: 'green',
-                    markChanges: false,
-                    doPost: true,
-                    postParams: 'foo=bar',
-                    state: Page.stateEnum.NO_CHANGE,
-                    lastAutoscanTime: 10209876,
-                    oldScanTime: 9381234,
-                    newScanTime: 40834321,
-                    };
+      const data = {
+        title: 'A Page',
+        url: 'https://www.example.com/test',
+        changeThreshold: 1234,
+        scanRateMinutes: 64,
+        ignoreNumbers: true,
+        encoding: 'utf-8',
+        highlightChanges: true,
+        highlightColour: 'green',
+        markChanges: false,
+        doPost: true,
+        postParams: 'foo=bar',
+        state: Page.stateEnum.NO_CHANGE,
+        lastAutoscanTime: 10209876,
+        oldScanTime: 9381234,
+        newScanTime: 40834321,
+      };
       const page = new Page(id, data);
 
       page.save().then(() => {
         expect(Storage.save).toHaveBeenCalledWith(Page._KEY(id), data);
         done();
       })
-      .catch((error) => done.fail(error));
+        .catch((error) => done.fail(error));
     });
 
     it('silently logs an error if the save fails', function(done) {
@@ -93,7 +96,7 @@ describe('Page', function() {
         expect(pageModule.__.log.calls.argsFor(0)).toMatch('AN_ERROR');
         done();
       })
-      .catch((error) => done.fail(error));
+        .catch((error) => done.fail(error));
     });
   });
 
@@ -107,7 +110,7 @@ describe('Page', function() {
         expect(Storage.remove).toHaveBeenCalledWith(Page._KEY(page.id));
         done();
       })
-      .catch((error) => done.fail(error));
+        .catch((error) => done.fail(error));
     });
 
     it('silently logs an error if the delete operation fails', function(done) {
@@ -121,7 +124,7 @@ describe('Page', function() {
         expect(pageModule.__.log.calls.argsFor(0)).toMatch('AN_ERROR');
         done();
       })
-      .catch((error) => done.fail(error));
+        .catch((error) => done.fail(error));
     });
   });
 

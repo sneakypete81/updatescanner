@@ -17,15 +17,15 @@ describe('Config', function() {
     });
 
     it('loads a config setting from storage with chained construction',
-        function(done) {
-      spyOn(Storage, 'load').and.returnValues(Promise.resolve({debug: true}));
+      function(done) {
+        spyOn(Storage, 'load').and.returnValues(Promise.resolve({debug: true}));
 
-      new Config().load().then((config) => {
-        expect(Storage.load).toHaveBeenCalledWith('config');
-        expect(config.get('debug')).toEqual(true);
-        done();
-      }).catch((error) => done.fail(error));
-    });
+        new Config().load().then((config) => {
+          expect(Storage.load).toHaveBeenCalledWith('config');
+          expect(config.get('debug')).toEqual(true);
+          done();
+        }).catch((error) => done.fail(error));
+      });
   });
 
   describe('save', function() {

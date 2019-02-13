@@ -3,6 +3,6 @@
  *
  * @param {string} message - Message to log.
  */
- export function log(message) {
+export function log(message) {
   console.log(message);
 }
