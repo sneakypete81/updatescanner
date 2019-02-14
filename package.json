@@ -35,6 +35,7 @@
     "test": "node scripts/test.js",
     "test:watch": "node scripts/test-watch.js",
     "run": "node scripts/run.js",
-    "sign": "node scripts/sign.js"
+    "sign": "node scripts/sign.js",
+    "bump": "node scripts/bump.js"
   }
 }
