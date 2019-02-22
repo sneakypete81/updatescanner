@@ -5,12 +5,9 @@
 
 * Run `npm run bump`
 * *BETA ONLY:* Run `npm run sign`
-
 * Push to Github
-* Create a release on Github
-* *BETA ONLY:* Attach the signed XPI to the release
-* *BETA ONLY:* Update the [Beta Testers Wanted](
-  https://github.com/sneakypete81/updatescanner/issues/36) issue
+
+* Run `npm run release`
 
 * *NON-BETA ONLY:* Upload to AMO - **Be sure to select the correct hosting option:**
   <https://addons.mozilla.org/en-US/developers/addon/update-scanner/versions/submit/distribution?channel=listed>

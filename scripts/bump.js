@@ -1,14 +1,19 @@
 const readline = require('readline');
-const {execFileSync, spawnSync} = require('child_process');
+const {execFileSync} = require('child_process');
 const manifestPatcher = require('./lib/manifest-patcher');
 const updatePatcher = require('./lib/update-patcher');
+const changelog = require('./lib/changelog');
 
 /**
- * @returns {boolean} True if the Git workspace contains no modified files.
+ * @returns {boolean} True if the Git workspace contains no modified files
+ * (apart from CHANGELOG.md).
  */
-function gitIsClean() {
-  const result = spawnSync('git', ['diff', 'HEAD', '--quiet']);
-  return result.status == 0;
+function gitIsCleanExceptChangelog() {
+  const stdout = execFileSync(
+    'git', ['status', '--porcelain'],
+    {encoding: 'utf8'});
+  console.log(stdout);
+  return (stdout == '' || stdout == ' M CHANGELOG.md\n');
 }
 
 /**
@@ -38,8 +43,8 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
-if (!gitIsClean()) {
-  throw Error('Git workspace contains modified files.');
+if (!gitIsCleanExceptChangelog()) {
+  throw Error('Git workspace must be clean (except CHANGELOG.md)');
 }
 
 const oldVersion = manifestPatcher.get('version');
@@ -47,6 +52,10 @@ console.log(`Current version: ${oldVersion}`);
 
 rl.question('New version: ', (newVersion) => {
   rl.close();
+
+  if (!changelog.versionExists(newVersion)) {
+    throw Error(`No CHANGELOG.md entry for ${newVersion}`);
+  }
 
   manifestPatcher.set('version', newVersion);
 
