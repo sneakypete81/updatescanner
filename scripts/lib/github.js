@@ -9,6 +9,7 @@ const octokit = new Octokit({
 
 const OWNER = 'sneakypete81';
 const REPO = 'updatescanner';
+const BETA_ISSUE = 36;
 
 exports.release = async function(version, changeText) {
   console.log(`Creating Github release ${version}...`);
@@ -55,7 +56,7 @@ exports.updateBetaIssue = async function(version, changeText) {
   const commentParams = {
     owner: OWNER,
     repo: REPO,
-    number: '1',
+    number: BETA_ISSUE,
     body: (
       `${version} is now available to install from ${downloadUrl}\n\n` +
       changeText
