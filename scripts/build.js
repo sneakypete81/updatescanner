@@ -1,3 +1,3 @@
 require('./clean');
 require('./copy-dependencies');
-require('./web-ext').build();
+require('./lib/web-ext').build();

@@ -1,7 +1,7 @@
 const readline = require('readline');
 const {execFileSync, spawnSync} = require('child_process');
-const manifestPatcher = require('./manifest-patcher');
-const updatePatcher = require('./update-patcher');
+const manifestPatcher = require('./lib/manifest-patcher');
+const updatePatcher = require('./lib/update-patcher');
 
 /**
  * @returns {boolean} True if the Git workspace contains no modified files.

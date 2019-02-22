@@ -1,2 +1,2 @@
 require('./eslint');
-require('./web-ext').lint();
+require('./lib/web-ext').lint();

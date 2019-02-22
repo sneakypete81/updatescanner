@@ -3,4 +3,4 @@ require('./copy-dependencies');
 
 console.log('Running tests...');
 
-require('./karma').run();
+require('./lib/karma').run();

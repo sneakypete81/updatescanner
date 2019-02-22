@@ -5,7 +5,7 @@ const UPDATES_FILE = 'updates.json';
  * @returns {Object} Contents of the updates file.
  */
 function readUpdates() {
-  return require(`../${UPDATES_FILE}`);
+  return require(`../../${UPDATES_FILE}`);
 }
 
 /**

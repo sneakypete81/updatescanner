@@ -6,7 +6,7 @@ const UPDATE_URL = 'https://raw.githubusercontent.com/sneakypete81/updatescanner
  * @returns {Object} Contents of the manifest file.
  */
 function readManifest() {
-  return require(`../${MANIFEST_FILE}`);
+  return require(`../../${MANIFEST_FILE}`);
 }
 
 /**
