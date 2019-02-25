@@ -60,7 +60,7 @@ p {
   border: 0;
 }
 
-.panel-section-footer:last-child {
+.bottom-button-row {
   min-height: 76px;
 }
 
