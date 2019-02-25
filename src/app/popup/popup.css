@@ -127,5 +127,6 @@ p {
 @media (max-width: 425px) {
   .panel {
     width: auto !important;
+    max-width: 425px;
   }
 }
