@@ -8,7 +8,10 @@ const release = async function() {
   const changeText = changelog.getChangeText(version);
 
   await github.release(version, changeText, isBeta);
-  await github.updateBetaIssue(version, changeText);
+
+  if (isBeta) {
+    await github.updateBetaIssue(version, changeText);
+  }
 };
 
 release();
