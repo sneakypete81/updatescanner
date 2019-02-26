@@ -6,6 +6,7 @@ html body {
   display: flex;
   flex-direction: column;
   min-width: 20em;
+  max-width: 425px;
   min-height: 30em;
   height: 100vh;
   background-color: #ffffff;
@@ -124,9 +125,3 @@ p {
   background-color: rgba(12, 12, 13, 0.1);
 }
 
-@media (max-width: 425px) {
-  .panel {
-    width: auto !important;
-    max-width: 425px;
-  }
-}
