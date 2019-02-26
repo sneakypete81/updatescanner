@@ -1,7 +1,8 @@
 # Update Scanner Changelog
 
-## 4.3.3beta2
+## 4.3.3beta3
 
+* Further Popup styling tweaks
 * Popup now displays correctly in overflow menu (#322 thanks to @Jackymancs4)
 * Popup no longer truncates buttons (#326 #178 thanks to @Jackymancs4)
 * Open a new tab when a page is clicked in the popup (#286)
