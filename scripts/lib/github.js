@@ -11,7 +11,7 @@ const OWNER = 'sneakypete81';
 const REPO = 'updatescanner';
 const BETA_ISSUE = 36;
 
-exports.release = async function(version, changeText) {
+exports.release = async function(version, changeText, isBeta) {
   console.log(`Creating Github release ${version}...`);
 
   const xpiPath = `dist/update_scanner-${version}-an.fx.xpi`;
@@ -24,6 +24,7 @@ exports.release = async function(version, changeText) {
     repo: REPO,
     tag_name: version,
     body: changeText,
+    prerelease: isBeta,
   };
   const {
     data: {upload_url: uploadUrl},
