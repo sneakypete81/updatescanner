@@ -71,13 +71,8 @@ export class Popup {
    * Called when the Sidebar button is clicked, to open the sidebar.
    */
   _handleSidebarClick() {
-    // @TODO: This is a temporary measure until we set min FF to 57.
-    if (browser.sidebarAction.open === undefined) {
-      alert('Sorry, this button only works in Firefox 57 and above.');
-    } else {
-      browser.sidebarAction.open();
-      window.close();
-    }
+    browser.sidebarAction.open();
+    window.close();
   }
 
   /**
