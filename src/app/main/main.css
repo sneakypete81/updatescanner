@@ -50,7 +50,6 @@ a:hover {
 #menu-container {
   float: right;
   position: relative;
-  display: inline-block;
   vertical-align: top;
 }
 
@@ -120,9 +119,6 @@ dialog + .backdrop { /* polyfill */
   right: 0;
   bottom: 0;
   background-color: rgba(255, 255, 255, 0.8);
-}
-
-form {
 }
 
 form h1 {
