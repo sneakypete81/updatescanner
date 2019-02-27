@@ -29,6 +29,7 @@ html, body, #content {
 h1 {
   font-size: x-large;
   font-weight: normal;
+  color: #4040b0;
   margin-top: 0;
   margin-bottom: 10px;
 }
