@@ -154,6 +154,9 @@ export class PageStore {
     }
     await parent.save();
 
+    // Delete any residual HTML associated with the pageId
+    await PageStore.deleteHtml(pageId);
+
     // Create the Page. This will cause _handleItemUpdate to update the
     // PageMap.
     return new Page(pageId, data);

@@ -407,6 +407,25 @@ describe('PageStore', function() {
         expect(Storage.save).toHaveBeenCalledWith(
           StorageInfo._KEY, pageStore.storageInfo._toObject());
       });
+
+    it('deletes any residual stored HTML when reusing a page ID?',
+      async function() {
+        spyOnStorageLoadWithArgReturn({
+          [StorageInfo._KEY]: Promise.resolve(undefined),
+        });
+        spyOn(Storage, 'save').and.returnValues(Promise.resolve());
+        spyOn(StorageDB, 'remove').and.returnValues(Promise.resolve());
+
+        const pageStore = await PageStore.load();
+        const page = await pageStore.createPage(PageStore.ROOT_ID);
+
+        expect(page.id).toEqual('1');
+
+        expect(StorageDB.remove).toHaveBeenCalledWith(
+          PageStore._HTML_KEY('1', PageStore.htmlTypes.OLD));
+        expect(StorageDB.remove).toHaveBeenCalledWith(
+          PageStore._HTML_KEY('1', PageStore.htmlTypes.NEW));
+      });
   });
 
   describe('createPageFolder', function() {
