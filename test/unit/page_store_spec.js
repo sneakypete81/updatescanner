@@ -343,75 +343,70 @@ describe('PageStore', function() {
   });
 
   describe('createPage', function() {
-    it('creates a new Page at the tree root', function(done) {
+    it('creates a new Page at the tree root', async function() {
       spyOnStorageLoadWithArgReturn({
         [StorageInfo._KEY]: Promise.resolve(undefined),
       });
       spyOn(Storage, 'save').and.returnValues(Promise.resolve());
 
-      PageStore.load().then((pageStore) => {
-        pageStore.createPage(PageStore.ROOT_ID).then((page) => {
-          expect(page.id).toEqual('1');
+      const pageStore = await PageStore.load();
+      const page = await pageStore.createPage(PageStore.ROOT_ID);
 
-          const rootFolder = pageStore.pageMap.get(PageStore.ROOT_ID);
-          expect(rootFolder.children).toContain('1');
+      expect(page.id).toEqual('1');
 
-          expect(Storage.save).toHaveBeenCalledWith(
-            PageFolder._KEY('0'), rootFolder._toObject());
-          expect(Storage.save).toHaveBeenCalledWith(
-            StorageInfo._KEY, pageStore.storageInfo._toObject());
-          done();
-        }).catch((error) => done.fail(error));
-      }).catch((error) => done.fail(error));
+      const rootFolder = pageStore.pageMap.get(PageStore.ROOT_ID);
+      expect(rootFolder.children).toContain('1');
+
+      expect(Storage.save).toHaveBeenCalledWith(
+        PageFolder._KEY('0'), rootFolder._toObject());
+      expect(Storage.save).toHaveBeenCalledWith(
+        StorageInfo._KEY, pageStore.storageInfo._toObject());
     });
 
-    it('creates a new Page in a subfolder', function(done) {
+    it('creates a new Page in a subfolder', async function() {
       spyOnStorageLoadWithArgReturn({
         [StorageInfo._KEY]: Promise.resolve({nextId: '2'}),
       });
       spyOn(Storage, 'save').and.returnValues(Promise.resolve());
 
-      PageStore.load().then((pageStore) => {
-        const subFolder = new PageFolder('1', {});
-        pageStore.pageMap.set('1', subFolder);
+      const pageStore = await PageStore.load();
+      const subFolder = new PageFolder('1', {});
+      pageStore.pageMap.set('1', subFolder);
 
-        pageStore.createPage('1').then((page) => {
-          expect(page.id).toEqual('2');
+      const page = await pageStore.createPage('1');
 
-          expect(subFolder.children).toContain('2');
+      expect(page.id).toEqual('2');
 
-          expect(Storage.save).toHaveBeenCalledWith(
-            PageFolder._KEY('1'), subFolder._toObject());
-          expect(Storage.save).toHaveBeenCalledWith(
-            StorageInfo._KEY, pageStore.storageInfo._toObject());
-          done();
-        }).catch((error) => done.fail(error));
-      }).catch((error) => done.fail(error));
+      expect(subFolder.children).toContain('2');
+
+      expect(Storage.save).toHaveBeenCalledWith(
+        PageFolder._KEY('1'), subFolder._toObject());
+      expect(Storage.save).toHaveBeenCalledWith(
+        StorageInfo._KEY, pageStore.storageInfo._toObject());
     });
 
-    it('creates a new Page between other Pages in a subfolder', function(done) {
-      spyOnStorageLoadWithArgReturn({
-        [StorageInfo._KEY]: Promise.resolve({nextId: '2'}),
-      });
-      spyOn(Storage, 'save').and.returnValues(Promise.resolve());
+    it('creates a new Page between other Pages in a subfolder',
+      async function() {
+        spyOnStorageLoadWithArgReturn({
+          [StorageInfo._KEY]: Promise.resolve({nextId: '2'}),
+        });
+        spyOn(Storage, 'save').and.returnValues(Promise.resolve());
 
-      PageStore.load().then((pageStore) => {
+        const pageStore = await PageStore.load();
         const subFolder = new PageFolder('1', {children: ['11', '22', '33']});
         pageStore.pageMap.set('1', subFolder);
 
-        pageStore.createPage('1', 1).then((page) => {
-          expect(page.id).toEqual('2');
+        const page = await pageStore.createPage('1', 1);
 
-          expect(subFolder.children).toEqual(['11', '22', '2', '33']);
+        expect(page.id).toEqual('2');
 
-          expect(Storage.save).toHaveBeenCalledWith(
-            PageFolder._KEY('1'), subFolder._toObject());
-          expect(Storage.save).toHaveBeenCalledWith(
-            StorageInfo._KEY, pageStore.storageInfo._toObject());
-          done();
-        }).catch((error) => done.fail(error));
-      }).catch((error) => done.fail(error));
-    });
+        expect(subFolder.children).toEqual(['11', '22', '2', '33']);
+
+        expect(Storage.save).toHaveBeenCalledWith(
+          PageFolder._KEY('1'), subFolder._toObject());
+        expect(Storage.save).toHaveBeenCalledWith(
+          StorageInfo._KEY, pageStore.storageInfo._toObject());
+      });
   });
 
   describe('createPageFolder', function() {
