@@ -8,24 +8,9 @@ cache:
 addons:
   firefox: latest
 
-env:
-  global:
-    secure: W0Hkbzkm+sJYRRyOsu+cpcshy4XR+XcMBKrjawQddv3tytuD9zBdWvp5uyZhCVQWrvv4JazEb8nKb7lVDnc67gXhSNZIOQH3MsfHb0Pbv0ZixGRfHQuQ5d5H0pDY7Q4B2S8gyoQuNFuQ7d4OJvI4eYSlkPzzwYWusUWQA/c8YWQ=
-
-before_install:
-- npm install -g greenkeeper-lockfile@1
-
-# Workaround for https://github.com/greenkeeperio/greenkeeper-lockfile/issues/156
-# ("npm ci" doesn't work with greenkeeper)
-install:
-- npm install
-
 before_script:
-  - greenkeeper-lockfile-update
   # Use xvfb to run Firefox
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
 
 script: npm run all
-
-after_script: greenkeeper-lockfile-upload
