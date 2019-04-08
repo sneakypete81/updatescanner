@@ -2,7 +2,7 @@ import * as view from './popup_view.js';
 import {openMain, showAllChanges, paramEnum, actionEnum}
   from '/lib/main/main_url.js';
 import {backgroundActionEnum} from '/lib/background/actions.js';
-import {PageStore, hasPageStateChanged, isItemChanged}
+import {PageStore, hasPageStateChanged}
   from '/lib/page/page_store.js';
 import {createBackupJson} from '/lib/backup/backup.js';
 import {openRestoreUrl} from '/lib/backup/restore_url.js';
@@ -35,6 +35,7 @@ export class Popup {
     view.bindNewClick(this._handleNewClick.bind(this));
     view.bindSidebarClick(this._handleSidebarClick.bind(this));
     view.bindScanAllClick(this._handleScanAllClick.bind(this));
+    view.bindMarkAllReadClick(this._handleMarkAllReadClick.bind(this));
     view.bindBackupClick(this._handleBackupClick.bind(this));
     view.bindRestoreClick(this._handleRestoreClick.bind(this));
     view.bindHelpClick(this._handleHelpClick.bind(this));
@@ -44,13 +45,11 @@ export class Popup {
   }
 
   /**
-   * Update the page list to show all pages in the 'changed'' state.
+   * Update the page list to show all pages in the 'changed' state.
    */
   _refreshPageList() {
     view.clearPageList();
-    this.pageStore.getPageList()
-      .filter(isItemChanged)
-      .map(view.addPage);
+    this.pageStore.getChangedPageList().map(view.addPage);
   }
 
   /**
@@ -81,6 +80,14 @@ export class Popup {
   _handleScanAllClick() {
     browser.runtime.sendMessage({action: backgroundActionEnum.SCAN_ALL});
     window.close();
+  }
+
+  /**
+   * Called when the Mark All Read menu item is clicked, to mark all changed
+   * pages as unchanged.
+   */
+  _handleMarkAllReadClick() {
+    this.pageStore.markAllRead();
   }
 
   /**

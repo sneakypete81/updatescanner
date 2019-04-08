@@ -276,6 +276,37 @@ describe('PageStore', function() {
     });
   });
 
+  describe('markAllSeen', function() {
+    it('returns an empty array when there are no Pages in the map',
+      function() {
+        const pageStore = new PageStore(new Map());
+        pageStore.pageMap.set('1',
+          new PageFolder('1', {state: Page.stateEnum.NO_CHANGE}));
+
+        const pageList = pageStore.getChangedPageList();
+        expect(false).toEqual(true);
+        expect(pageList).toEqual([]);
+      });
+
+    it('returns an array containing all changed Pages in the map', function() {
+      const pageStore = new PageStore(new Map());
+      pageStore.pageMap.set('1',
+        new PageFolder('1', {state: Page.stateEnum.NO_CHANGE}));
+      pageStore.pageMap.set('2',
+        new Page('2', {state: Page.stateEnum.CHANGED}));
+      pageStore.pageMap.set('3',
+        new PageFolder('3', {state: Page.stateEnum.CHANGED}));
+      pageStore.pageMap.set('4',
+        new Page('4', {state: Page.stateEnum.NO_CHANGE}));
+      pageStore.pageMap.set('5',
+        new Page('5', {state: Page.stateEnum.CHANGED}));
+
+      const pageList = pageStore.getChangedPageList();
+      expect(pageList).toEqual(
+        [pageStore.getItem('2'), pageStore.getItem('5')]);
+    });
+  });
+
   describe('isPageFolderId', function() {
     it('returns true if the item is a PageFolder', function() {
       const pageStore = new PageStore(new Map());

@@ -61,6 +61,13 @@ export function bindScanAllClick(handler) {
 }
 
 /**
+ * @param {Function} handler - Called when the Mark All Read item is clicked.
+ */
+export function bindMarkAllReadClick(handler) {
+  $on(qs('#mark-all-read'), 'click', handler);
+}
+
+/**
  * @param {Function} handler - Called when a Page list item is clicked.
  */
 export function bindPageClick(handler) {
