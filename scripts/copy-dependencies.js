@@ -3,12 +3,12 @@ console.log('Copying dependencies...');
 const fs = require('fs');
 
 const includeDependencies = [
-  {dirs: ['dialog-polyfill'], file: 'dialog-polyfill.js'},
   {dirs: ['jquery', 'dist'], file: 'jquery.min.js'},
   {dirs: ['jstree', 'dist'], file: 'jstree.min.js'},
 ];
 
 const moduleDependencies = [
+  {dirs: ['dialog-polyfill', 'dist'], file: 'dialog-polyfill.esm.js'},
   {dirs: ['idb-file-storage', 'src'], file: 'idb-file-storage.js'},
 ];
 
