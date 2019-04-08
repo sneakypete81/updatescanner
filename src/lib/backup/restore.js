@@ -2,9 +2,8 @@ import * as view from './restore_view.js';
 import {JSON_BACKUP_ID, JSON_BACKUP_VERSION} from './backup.js';
 import {restoreBookmarksFromJson} from './restore_bookmarks.js';
 import {readAsText} from '/lib/util/promise.js';
+import {fileDialog} from '/lib/util/file_dialog.js';
 import {PageStore} from '/lib/page/page_store.js';
-
-/* global fileDialog */
 
 /**
  * Ask the user to select a file to restore, check for confirmation, then

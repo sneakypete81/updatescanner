@@ -7,7 +7,6 @@
   },
   "dependencies": {
     "dialog-polyfill": "0.4.10",
-    "file-dialog": "0.0.7",
     "idb-file-storage": "0.1.0",
     "jquery": "3.3.1",
     "jstree": "3.3.7"

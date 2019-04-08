@@ -4,7 +4,6 @@ const fs = require('fs');
 
 const includeDependencies = [
   {dirs: ['dialog-polyfill'], file: 'dialog-polyfill.js'},
-  {dirs: ['file-dialog'], file: '/index.js'},
   {dirs: ['jquery', 'dist'], file: 'jquery.min.js'},
   {dirs: ['jstree', 'dist'], file: 'jstree.min.js'},
 ];
