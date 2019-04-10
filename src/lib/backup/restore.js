@@ -6,13 +6,16 @@ import {fileDialog} from '/lib/util/file_dialog.js';
 import {PageStore} from '/lib/page/page_store.js';
 
 /**
- * Ask the user to select a file to restore, check for confirmation, then
- * import Page/PageFolders, overwriting all existing items.
+ * Initialise the page.
  */
 export function init() {
   view.showUploadButton(restore);
 }
 
+/**
+ * Ask the user to select a file to restore, check for confirmation, then
+ * import Page/PageFolders, overwriting all existing items.
+ */
 async function restore() {
   const files = await fileDialog({accept: '.json'});
   if (view.confirmRestore()) {

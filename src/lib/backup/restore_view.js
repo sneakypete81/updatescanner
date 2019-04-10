@@ -1,5 +1,8 @@
 import {$on, qs, showElement, hideElement} from '/lib/util/view_helpers.js';
 
+/**
+ * @param {Function} clickHandler - Called when the Upload button is clicked.
+ */
 export function showUploadButton(clickHandler) {
   showElement(qs('#uploading'));
 
