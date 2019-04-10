@@ -8,6 +8,10 @@ body {
   text-align: center;
 }
 
+button {
+  padding: 12px 24px;
+}
+
 /* Special case for loading spinner */
 img {
   vertical-align: middle;

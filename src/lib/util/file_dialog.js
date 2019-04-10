@@ -28,9 +28,6 @@ export function fileDialog({multiple, accept}) {
     });
 
     // Simluate click event
-    const evt = document.createEvent('MouseEvents');
-    evt.initMouseEvent('click', true, true, window, 1, 0, 0, 0, 0,
-      false, false, false, false, 0, null);
-    input.dispatchEvent(evt);
+    input.click();
   });
 }

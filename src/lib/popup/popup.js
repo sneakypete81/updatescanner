@@ -102,6 +102,7 @@ export class Popup {
    */
   async _handleRestoreClick() {
     openRestoreUrl();
+    window.close();
   }
 
   /**

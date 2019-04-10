@@ -1,5 +1,5 @@
-import {restore} from '/lib/backup/restore.js';
+import {init} from '/lib/backup/restore.js';
 
 (function() {
-  document.addEventListener('DOMContentLoaded', () => restore());
+  document.addEventListener('DOMContentLoaded', () => init());
 })();

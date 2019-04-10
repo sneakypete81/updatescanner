@@ -9,7 +9,11 @@ import {PageStore} from '/lib/page/page_store.js';
  * Ask the user to select a file to restore, check for confirmation, then
  * import Page/PageFolders, overwriting all existing items.
  */
-export async function restore() {
+export function init() {
+  view.showUploadButton(restore);
+}
+
+async function restore() {
   const files = await fileDialog({accept: '.json'});
   if (view.confirmRestore()) {
     view.showRestoring();

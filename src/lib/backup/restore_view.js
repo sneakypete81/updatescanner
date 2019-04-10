@@ -1,4 +1,10 @@
-import {qs, showElement, hideElement} from '/lib/util/view_helpers.js';
+import {$on, qs, showElement, hideElement} from '/lib/util/view_helpers.js';
+
+export function showUploadButton(clickHandler) {
+  showElement(qs('#uploading'));
+
+  $on(qs('#upload-button'), 'click', clickHandler);
+}
 
 /**
  * Show a dialog asking for confirmation before restoring pages.
@@ -15,6 +21,7 @@ export function confirmRestore() {
  */
 export function showRestoring() {
   showElement(qs('#restoring'));
+  hideElement(qs('#uploading'));
   hideElement(qs('#restore-complete'));
   hideElement(qs('#restore-failed'));
 }
@@ -24,6 +31,7 @@ export function showRestoring() {
  */
 export function showComplete() {
   hideElement(qs('#restoring'));
+  hideElement(qs('#uploading'));
   showElement(qs('#restore-complete'));
   hideElement(qs('#restore-failed'));
 }
@@ -33,6 +41,7 @@ export function showComplete() {
  */
 export function showFailed() {
   hideElement(qs('#restoring'));
+  hideElement(qs('#uploading'));
   hideElement(qs('#restore-complete'));
   showElement(qs('#restore-failed'));
 }
