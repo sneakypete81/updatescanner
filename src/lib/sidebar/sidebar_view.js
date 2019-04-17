@@ -4,6 +4,11 @@ import {Page} from '/lib/page/page.js';
 import {PageFolder} from '/lib/page/page_folder.js';
 import {PageStore} from '/lib/page/page_store.js';
 import {log} from '/lib/util/log.js';
+import {qs, $on} from '/lib/util/view_helpers.js';
+
+// See https://bugzilla.mozilla.org/show_bug.cgi?id=840640
+import dialogPolyfill from
+  '/dependencies/module/dialog-polyfill/dist/dialog-polyfill.esm.js';
 
 /**
  * Class representing the Update Scanner Sidebar.
@@ -48,7 +53,12 @@ export class SidebarView {
         'dnd',
       ],
     });
+  }
 
+  /**
+   * Initialise the sidebar.
+   */
+  init() {
     // Prevent the contextmenu from being shown - we use our own
     document.addEventListener('contextmenu', (evt) => evt.preventDefault());
 
@@ -72,6 +82,8 @@ export class SidebarView {
         event.preventDefault();
       }
     });
+
+    this._initDialog();
   }
 
   /**
@@ -303,11 +315,29 @@ export class SidebarView {
   }
 
   /**
+   * Initialise the dialog box.
+   */
+  _initDialog() {
+    const dialog = qs('#dialog-confirm');
+    dialogPolyfill.registerDialog(dialog);
+  }
+
+  /**
    * Show a dialog asking for confirmation before deleting an item.
    *
    * @returns {boolean} True if the user confirmed the deletion.
    */
-  confirmDelete() {
-    return window.confirm('Are you sure you wish to delete the selected item?');
+  async confirmDelete() {
+    const dialog = qs('#dialog-confirm');
+    const message = qs('#dialog-confirm-message');
+
+    message.textContent = 'Delete this item - are you sure?';
+    dialog.showModal();
+
+    return new Promise((resolve, reject) => {
+      $on(dialog, 'close', () => {
+        resolve(dialog.returnValue == 'delete');
+      });
+    });
   }
 }

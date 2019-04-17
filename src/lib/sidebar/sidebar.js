@@ -34,6 +34,7 @@ export class Sidebar {
     this.pageStore.bindPageUpdate(this._handleItemUpdate.bind(this));
     this.pageStore.bindPageFolderUpdate(this._handleItemUpdate.bind(this));
 
+    this.sidebar.init();
     this._refreshSidebar();
 
     this.sidebar.registerSelectHandler((event, itemId) =>
@@ -111,8 +112,8 @@ export class Sidebar {
    *
    * @param {string} itemId - Page/PageFolder ID to delete.
    */
-  _handleDelete(itemId) {
-    if (this.sidebar.confirmDelete()) {
+  async _handleDelete(itemId) {
+    if (await this.sidebar.confirmDelete()) {
       this.pageStore.deleteItem(itemId);
     }
   }
