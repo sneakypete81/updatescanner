@@ -1,6 +1,6 @@
 # Update Scanner Changelog
 
-## 4.4.0beta2
+## 4.4.0beta3
 
 * Open a new tab when a page is clicked in the popup (#286)
 * Popup no longer truncates buttons (#326 #178 thanks to @Jackymancs4)
@@ -10,6 +10,7 @@
 * Make page heading slightly blue, as a hint that it's clickable (#299)
 * Fix missing Restore dialog for Linux (#371)
 * Stop popup blocker from preventing restore (#371)
+* Fix delete confirmation dialog in sidebar (#381)
 
 ## 4.3.2
 
