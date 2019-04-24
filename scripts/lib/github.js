@@ -14,11 +14,6 @@ const BETA_ISSUE = 36;
 exports.release = async function(version, changeText, isBeta) {
   console.log(`Creating Github release ${version}...`);
 
-  const xpiPath = `dist/update_scanner-${version}-an.fx.xpi`;
-  if (!fs.existsSync(xpiPath)) {
-    throw Error(`${xpiPath} does not exist.`);
-  }
-
   const releaseParams = {
     owner: OWNER,
     repo: REPO,
@@ -31,11 +26,16 @@ exports.release = async function(version, changeText, isBeta) {
   } = await octokit.repos.createRelease(releaseParams);
 
   if (version.includes('beta')) {
+    const xpiPath = `dist/update_scanner-${version}-an.fx.xpi`;
     uploadXpi(xpiPath, uploadUrl);
   }
 };
 
 const uploadXpi = async function(xpiPath, uploadUrl) {
+  if (!fs.existsSync(xpiPath)) {
+    throw Error(`${xpiPath} does not exist.`);
+  }
+
   const filename = path.basename(xpiPath);
   console.log(`Uploading ${filename}...`);
 
