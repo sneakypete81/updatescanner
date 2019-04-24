@@ -6,6 +6,7 @@
 
 * Update `CHANGELOG.md`
 * Run `npm run bump`
+* Run `npm run all`
 * *BETA ONLY:* Run `npm run sign`
 * Push to Github
 
