@@ -18,6 +18,7 @@
     "eslint-plugin-jsdoc": "^4.8.3",
     "geckodriver": "^1.16.2",
     "jasmine": "^3.4.0",
+    "jasmine-console-reporter": "^3.1.0",
     "jasmine-data-provider": "^2.2.0",
     "jasmine-jquery": "^2.1.1",
     "karma": "^4.1.0",
