@@ -1,12 +1,15 @@
 const {until} = require('selenium-webdriver');
-const {buildAddonDriver, ADDON_FILE} = require('./helpers/addon_driver');
-const {TOOLBAR_BUTTON} = require('./helpers/toolbar');
+const {buildAddonDriver, Context, ADDON_FILE, BUILD_TIMEOUT} =
+  require('./lib/addon_driver');
+const {TOOLBAR_BUTTON} = require('./lib/toolbar');
 
 describe('Popup', function() {
   beforeEach(async function() {
-    this.driver = buildAddonDriver();
+    this.driver = await buildAddonDriver();
+    this.driver.setContext(Context.CHROME);
     await this.driver.installAddon(ADDON_FILE, true);
-  });
+  }, BUILD_TIMEOUT);
+
 
   afterEach(function() {
     this.driver.quit();

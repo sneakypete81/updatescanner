@@ -9,6 +9,4 @@ jasmine.loadConfig({
   random: false,
 });
 
-console.log(__dirname);
-
 jasmine.execute();
