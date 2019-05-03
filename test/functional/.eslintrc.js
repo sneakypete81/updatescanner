@@ -1,7 +1,7 @@
 module.exports = {
   extends: ['../.eslintrc.js'],
 
-  // We use require, not import - that means we can avoid webpacking.
+  // We use require, not import
   parserOptions: {
     'sourceType': 'script',
   },

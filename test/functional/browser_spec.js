@@ -1,21 +1,21 @@
-const {until, By, Key} = require('selenium-webdriver');
-const {buildAddonDriver, Context, BUILD_TIMEOUT} =
-  require('./lib/addon_driver');
+const firefox = require('./lib/firefox');
 
-describe('Browser', function() {
-  beforeEach(async function() {
-    this.driver = await buildAddonDriver();
-  }, BUILD_TIMEOUT);
+describe('browser', () => {
+  it('can control Firefox', () => {
+    browser.url('https://www.google.com');
+    const title = browser.getTitle();
 
-  afterEach(function() {
-    this.driver.quit();
+    expect(title).toEqual('Google');
   });
 
-  it('can control Firefox', async function() {
-    this.driver.setContext(Context.CONTENT);
-    this.driver.get('http://www.google.com/ncr');
-    this.driver.findElement(By.name('q')).sendKeys('webdriver', Key.RETURN);
+  it('can be set to chrome context', async () => {
+    await firefox.setContext('chrome');
 
-    await this.driver.wait(until.titleIs('webdriver - Google Search'));
+    try {
+      expect(await firefox.getContext()).toEqual('chrome');
+
+    } finally {
+      await firefox.setContext('content');
+    }
   });
 });
