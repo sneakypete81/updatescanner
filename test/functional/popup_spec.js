@@ -2,21 +2,22 @@ const firefox = require('./lib/firefox');
 const ChromePage = require('./pages/chrome.page');
 
 describe('popup', () => {
-  let addonId = null;
 
   beforeEach(async () => {
-    addonId = await firefox.installAddon(
+    this.addonId = await firefox.installAddon(
       __dirname + '/../../src');
     await firefox.setContext('chrome');
   });
+
   afterEach(async () => {
-    await firefox.uninstallAddon(addonId);
+    await firefox.uninstallAddon(this.addonId);
     await firefox.setContext('content');
   });
 
-  it('should have a toolbar button', () => {
-    const toolTip = ChromePage.updateScannerButton.getAttribute('tooltiptext');
+  it('has a toolbar button with a tooltip', () => {
+    const button = ChromePage.updateScannerButton;
 
-    expect(toolTip).toEqual('Update Scanner');
+    expect(button.isDisplayed()).toBe(true);
+    expect(button.getAttribute('tooltiptext')).toBe('Update Scanner');
   });
 });
