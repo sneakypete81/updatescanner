@@ -6,7 +6,6 @@ const cli = new CLIEngine({
   ignorePattern: [
     'node_modules/',
     'coverage/',
-    'build/',
     'src/dependencies',
     'test/dependencies',
   ],
