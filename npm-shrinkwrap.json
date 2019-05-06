@@ -610,14 +610,33 @@
       }
     },
     "@wdio/sync": {
-      "version": "5.8.0",
-      "resolved": "https://registry.npmjs.org/@wdio/sync/-/sync-5.8.0.tgz",
-      "integrity": "sha512-m4D1gWb0iu1AMX2IkhZBjGMC76Ja12aYmunZadlNp0em7qKSJubxpWps6+Ngdpd/VOUpVNJmDSjA0kTa+lp5kw==",
+      "version": "5.8.1",
+      "resolved": "https://registry.npmjs.org/@wdio/sync/-/sync-5.8.1.tgz",
+      "integrity": "sha512-UfCEgq4sWzYAMQ0BNJK6f1KzmV5s0Y/TO3n0WeyzMSFfeUe/9XtD01fYLeR+AF95zqrVDVSpdPNp8ggWXxPEow==",
       "dev": true,
       "requires": {
-        "@wdio/config": "^5.8.0",
+        "@wdio/config": "^5.8.1",
         "@wdio/logger": "^5.8.0",
         "fibers": "^4.0.0"
+      },
+      "dependencies": {
+        "@wdio/config": {
+          "version": "5.8.1",
+          "resolved": "https://registry.npmjs.org/@wdio/config/-/config-5.8.1.tgz",
+          "integrity": "sha512-/1DTXXnsJa04fQXRQz0uwqlkE3Vc9hY9c8P6LJ5vIQOL4tK1MuiHWHpdfywPZlc1Kr8g5oJLSygX9WrSFCZHsA==",
+          "dev": true,
+          "requires": {
+            "@wdio/logger": "^5.8.0",
+            "deepmerge": "^2.0.1",
+            "glob": "^7.1.2"
+          }
+        },
+        "deepmerge": {
+          "version": "2.2.1",
+          "resolved": "https://registry.npmjs.org/deepmerge/-/deepmerge-2.2.1.tgz",
+          "integrity": "sha512-R9hc1Xa/NOBi9WRVUWg19rl1UB7Tt4kuPd+thNJgFZoxXsTz7ncaPaeIm+40oSGuP33DfMb4sZt1QIGiJzC4EA==",
+          "dev": true
+        }
       }
     },
     "@wdio/utils": {
@@ -3693,9 +3712,9 @@
       }
     },
     "fibers": {
-      "version": "4.0.0",
-      "resolved": "https://registry.npmjs.org/fibers/-/fibers-4.0.0.tgz",
-      "integrity": "sha512-By4/A0GDWa3BF8rTHG9ocV3N88J5aR6jttrXKRe4EB4q0x1G4Xjg8ZP+VXuE2YAKfpU0dWqAMt7MRTJra58X6Q==",
+      "version": "4.0.1",
+      "resolved": "https://registry.npmjs.org/fibers/-/fibers-4.0.1.tgz",
+      "integrity": "sha512-H79EJn7DMWXk48ygmC82bMP8KNcFBZF1CPfwBpYF6cO85hGWoIrlu7eyX9ayxfjP9Nsl0JXxdI6fpYU4DWVw2w==",
       "dev": true,
       "requires": {
         "detect-libc": "^1.0.3"
