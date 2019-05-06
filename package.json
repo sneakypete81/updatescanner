@@ -38,6 +38,7 @@
   "config": {},
   "scripts": {
     "all": "node scripts/build.js && node scripts/lint.js && node scripts/test.js",
+    "ci": "node scripts/build.js && node scripts/lint.js && node scripts/test.js && node scripts/test-func.js",
     "build": "node scripts/build.js",
     "lint": "node scripts/lint.js",
     "test": "node scripts/test.js",
