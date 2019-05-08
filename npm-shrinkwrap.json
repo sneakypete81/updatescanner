@@ -169,9 +169,9 @@
       "dev": true
     },
     "@wdio/cli": {
-      "version": "5.8.2",
-      "resolved": "https://registry.npmjs.org/@wdio/cli/-/cli-5.8.2.tgz",
-      "integrity": "sha512-iOSG7L0D3U/xaB9rk6yesTWo72WQlv2nFX0lkCNahgzV4gsrTZWzWrQ0IeC39DGNIfGj5zYDxyq1cEm6LzwgCg==",
+      "version": "5.8.3",
+      "resolved": "https://registry.npmjs.org/@wdio/cli/-/cli-5.8.3.tgz",
+      "integrity": "sha512-nJnrpC/V4qg2L66I/MtqctvcfX65SOp6k+IjioNoDm5oo4B31eB2xbp8nCjVLAaY91GQ+wDxV0eFCncTZeAUSw==",
       "dev": true,
       "requires": {
         "@wdio/config": "^5.8.1",
@@ -189,7 +189,7 @@
         "lodash.pickby": "^4.6.0",
         "lodash.union": "^4.6.0",
         "log-update": "^2.3.0",
-        "webdriverio": "^5.8.2",
+        "webdriverio": "^5.8.3",
         "yargs": "^11.1.0",
         "yarn-install": "^1.0.0"
       },
@@ -9051,9 +9051,9 @@
       }
     },
     "webdriver": {
-      "version": "5.8.2",
-      "resolved": "https://registry.npmjs.org/webdriver/-/webdriver-5.8.2.tgz",
-      "integrity": "sha512-G6SVRl00Q+xqH2+Z6thuRrof1AcEs99rv6gKiKwklTcX2ATqkD/ySjC11QXex7A5HOC8GXc1ev1ONGua1d05HQ==",
+      "version": "5.8.3",
+      "resolved": "https://registry.npmjs.org/webdriver/-/webdriver-5.8.3.tgz",
+      "integrity": "sha512-8qrQehwPm1R8kOFS+7hXDUyOE/sVJwFNs1wT1b7CFw+KvMHo9p9C37ppzDXq3pS2FbZ7kFttUiEwyXQCIg34uQ==",
       "dev": true,
       "requires": {
         "@wdio/config": "^5.8.1",
@@ -9072,9 +9072,9 @@
       }
     },
     "webdriverio": {
-      "version": "5.8.2",
-      "resolved": "https://registry.npmjs.org/webdriverio/-/webdriverio-5.8.2.tgz",
-      "integrity": "sha512-IDbsOnBRVhgm1YS3NBRpIvR8Vu4tkGOx6RgHpmzG6ATCCg4vnpXXe9d5YnEj11EamZEinnPzlQsvPdxjgwEzoQ==",
+      "version": "5.8.3",
+      "resolved": "https://registry.npmjs.org/webdriverio/-/webdriverio-5.8.3.tgz",
+      "integrity": "sha512-3xkpLae8D5FuQov9m20vrR95JQVhHKCHzclc3rhUe0EnqS4MrvtTuny7dMg1pLDoIYdROnFnjOVwuUE63znmFg==",
       "dev": true,
       "requires": {
         "@wdio/config": "^5.8.1",
@@ -9089,7 +9089,7 @@
         "resq": "^1.4.0-rc.1",
         "rgb2hex": "^0.1.0",
         "serialize-error": "^3.0.0",
-        "webdriver": "^5.8.2"
+        "webdriver": "^5.8.3"
       }
     },
     "webidl-conversions": {
