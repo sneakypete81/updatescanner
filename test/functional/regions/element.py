@@ -1,17 +1,21 @@
 from pathlib import Path
 import time
+import warnings
 
 import pyautogui
+
+from . import config
 
 IMAGE_DIR = Path(__file__).parent / "images"
 SCREENSHOT_DIR = Path(__file__).parent / "screenshots"
 
 
 class Element:
-    def __init__(self, name, region, click_offset=None):
+    def __init__(self, name, region, expected_rect=None, click_offset=None):
         self.name = name
         self.image_path = (IMAGE_DIR / name).with_suffix(".png")
-        self.scaled_region = tuple([item * 2 for item in region])
+        self.region = region
+        self.expected_rect = expected_rect
 
         if click_offset is None:
             click_offset = (0, 0)
@@ -24,38 +28,65 @@ class Element:
 
     def click(self):
         try:
-            x, y = self._locate_center_on_screen()
+            x, y = self._locate_centre()
         except Exception:
             self.save_last_screenshot()
             raise
 
         pyautogui.click(
-            x/2 + self.click_offset[0],
-            y/2 + self.click_offset[1])
+            (x + self.click_offset[0]) // config.SCREENSHOT_SCALING,
+            (y + self.click_offset[1]) // config.SCREENSHOT_SCALING)
 
     def is_visible(self, timeout_seconds=0):
         start_time = time.monotonic()
 
         while True:
             try:
-                self._locate_center_on_screen()
+                self._locate_centre()
                 return True
 
             except ElementNotFoundError:
                 if time.monotonic() - start_time > timeout_seconds:
                     return False
 
-    def _locate_center_on_screen(self):
-        screenshot = pyautogui.screenshot(region=self.scaled_region)
+    def _locate_centre(self):
+        if self._location_matches_expected():
+            return pyautogui.center(self.expected_rect)
+
+        # Element is not where we expected it to be, so search the region
+        result = self._locate_in_screen_region()
+
+        if result != self.expected_rect:
+            warnings.warn(
+                "Location of {} {} doesn't match expected {}".format(
+                    self.name, result, self.expected_rect))
+
+        return pyautogui.center(result)
+
+    def _location_matches_expected(self):
+        if self.expected_rect is None:
+            return False
+
+        screenshot = pyautogui.screenshot(region=self.expected_rect)
+        self._last_screenshot = screenshot
+
+        result = pyautogui.locate(str(self.image_path), screenshot)
+        return result is not None
+
+    def _locate_in_screen_region(self):
+        screenshot = pyautogui.screenshot(region=self.region)
         self._last_screenshot = screenshot
 
         result = pyautogui.locate(str(self.image_path), screenshot)
         if result is None:
             raise ElementNotFoundError(self)
 
-        return pyautogui.center(result)
+        return result
 
     def save_last_screenshot(self):
+        if self._last_screenshot is None:
+            return
+
         SCREENSHOT_DIR.mkdir(exist_ok=True)
         screenshot_path = self._find_unique_screenshot_path()
         self._last_screenshot.save(screenshot_path)

@@ -2,7 +2,7 @@ import pytest
 from pathlib import Path
 
 from gecko_driver import GeckoDriver
-from regions import browser
+from regions import config
 
 BASE_URI = "http://localhost:4444"
 ADDON_PATH = Path(__file__).parent.parent.parent / "src"
@@ -21,7 +21,7 @@ def _gecko_session():
     gecko = GeckoDriver(BASE_URI)
     gecko.new_session()
     try:
-        gecko.set_window_rect(*browser.region)
+        gecko.set_window_rect(*config.BROWSER_REGION)
         yield gecko
 
     finally:

@@ -1,3 +1,4 @@
+import time
 import pytest
 from hamcrest import assert_that, is_
 
@@ -12,5 +13,7 @@ class TestPopup:
 
     def test_popup_is_shown_when_the_toolbar_button_is_clicked(self):
         browser.update_scanner_button.click()
+        # This speeds up the test by avoiding a time consuming screenshot scan
+        time.sleep(0.5)
 
         assert_that(browser.empty_popup, is_(eventually_visible()))

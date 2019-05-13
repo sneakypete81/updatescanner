@@ -1,11 +1,17 @@
 from .element import Element
+from . import config
 
-
-region = (0, 0, 1024, 600)
+region = tuple([
+    item * config.SCREENSHOT_SCALING for item in config.BROWSER_REGION])
 
 browser = Element(
     'browser', region)
 update_scanner_button = Element(
-    'update_scanner_button', region, click_offset=(-20, 0))
+    'update_scanner_button',
+    region,
+    expected_rect=(1907, 122, 128, 64),
+    click_offset=(-40, 0))
 empty_popup = Element(
-    'empty_popup', region)
+    'empty_popup',
+    region,
+    expected_rect=(1460, 188, 520, 780))

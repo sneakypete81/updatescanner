@@ -22,7 +22,6 @@ const test = async function() {
     console.log('Stopping Geckodriver...');
     geckodriver.stop();
   }
-  // process.exit();
 };
 
 test();
