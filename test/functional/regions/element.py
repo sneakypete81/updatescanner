@@ -12,7 +12,8 @@ CLICK_RETRY_SECONDS = 10
 
 
 class Element:
-    def __init__(self, name, region, expected_rect=None, click_offset=None):
+    def __init__(self, name, region, expected_rect=None,
+                 click_offset=None, post_click_delay_seconds=None):
         self.name = name
         self.image_path = (IMAGE_DIR / name).with_suffix(".png")
         self.region = region
@@ -21,6 +22,7 @@ class Element:
         if click_offset is None:
             click_offset = (0, 0)
         self.click_offset = click_offset
+        self.post_click_delay_seconds = post_click_delay_seconds
 
         self._last_screenshot = None
 
@@ -37,6 +39,9 @@ class Element:
         pyautogui.click(
             (x + self.click_offset[0]) // config.SCREENSHOT_SCALING,
             (y + self.click_offset[1]) // config.SCREENSHOT_SCALING)
+
+        if self.post_click_delay_seconds is not None:
+            time.sleep(self.post_click_delay_seconds)
 
     def is_visible(self, timeout_seconds=0):
         try:
