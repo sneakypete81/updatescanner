@@ -16,3 +16,14 @@ class TestPopup:
         time.sleep(0.5)
 
         assert_that(popup.empty_popup, is_(eventually_visible()))
+
+    def test_sidebar_can_be_opened_from_the_popup(self):
+        time.sleep(0.5)
+        sidebar.close_button.click()
+        browser.update_scanner_button.click()
+        time.sleep(0.5)
+
+        popup.open_sidebar_button.click()
+        time.sleep(0.5)
+
+        assert_that(sidebar.title, is_(eventually_visible()))
