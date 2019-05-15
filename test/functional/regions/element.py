@@ -12,12 +12,11 @@ CLICK_RETRY_SECONDS = 10
 
 
 class Element:
-    def __init__(self, name, region, expected_rect=None,
+    def __init__(self, name, expected_region=None,
                  click_offset=None, post_click_delay_seconds=None):
         self.name = name
         self.image_path = (IMAGE_DIR / name).with_suffix(".png")
-        self.region = region
-        self.expected_rect = expected_rect
+        self.expected_region = expected_region
 
         if click_offset is None:
             click_offset = (0, 0)
@@ -62,30 +61,31 @@ class Element:
 
     def _locate_centre(self):
         if self._location_matches_expected():
-            return pyautogui.center(self.expected_rect)
+            return pyautogui.center(self.expected_region)
 
         # Element is not where we expected it to be, so search the region
         result = self._locate_in_screen_region()
 
-        if result != self.expected_rect:
+        if result != self.expected_region:
             warnings.warn(
                 "Location of {} {} doesn't match expected {}".format(
-                    self.name, tuple(result), self.expected_rect))
+                    self.name, tuple(result), self.expected_region))
 
         return pyautogui.center(result)
 
     def _location_matches_expected(self):
-        if self.expected_rect is None:
+        if self.expected_region is None:
             return False
 
-        screenshot = pyautogui.screenshot(region=self.expected_rect)
+        screenshot = pyautogui.screenshot(region=self.expected_region)
         self._last_screenshot = screenshot
 
         result = pyautogui.locate(str(self.image_path), screenshot)
         return result is not None
 
     def _locate_in_screen_region(self):
-        screenshot = pyautogui.screenshot(region=self.region)
+        screenshot = pyautogui.screenshot(
+            region=config.BROWSER_SCREENSHOT_REGION)
         self._last_screenshot = screenshot
 
         result = pyautogui.locate(str(self.image_path), screenshot)
