@@ -162,12 +162,6 @@
         "url-template": "^2.0.8"
       }
     },
-    "@types/jasmine": {
-      "version": "3.3.12",
-      "resolved": "https://registry.npmjs.org/@types/jasmine/-/jasmine-3.3.12.tgz",
-      "integrity": "sha512-lXvr2xFQEVQLkIhuGaR3GC1L9lMU1IxeWnAF/wNY5ZWpC4p9dgxkKkzMp7pntpAdv9pZSnYqgsBkCg32MXSZMg==",
-      "dev": true
-    },
     "@types/node": {
       "version": "11.9.4",
       "resolved": "https://registry.npmjs.org/@types/node/-/node-11.9.4.tgz",
@@ -390,34 +384,14 @@
       }
     },
     "@wdio/jasmine-framework": {
-      "version": "5.8.1",
-      "resolved": "https://registry.npmjs.org/@wdio/jasmine-framework/-/jasmine-framework-5.8.1.tgz",
-      "integrity": "sha512-Kcacry4WYh4/tVnU9pcu/N1CvIfS38XYR9e6yHpOAg1ks9c7iFZFifrVX73HGNHKzYGjiO1qGQEC2LGAvmcslQ==",
+      "version": "5.8.4",
+      "resolved": "https://registry.npmjs.org/@wdio/jasmine-framework/-/jasmine-framework-5.8.4.tgz",
+      "integrity": "sha512-Nnwb5r5X0c8Ohks9vtiZG0gi5Z8rVGOP8iQS1PkcqI0j0VokwxX/ie83vbPsJbd9GiZ3V/FR3qppRbvVpsq/pQ==",
       "dev": true,
       "requires": {
-        "@types/jasmine": "^3.3.8",
         "@wdio/config": "^5.8.1",
         "@wdio/logger": "^5.8.0",
         "jasmine": "^3.3.0"
-      },
-      "dependencies": {
-        "@wdio/config": {
-          "version": "5.8.1",
-          "resolved": "https://registry.npmjs.org/@wdio/config/-/config-5.8.1.tgz",
-          "integrity": "sha512-/1DTXXnsJa04fQXRQz0uwqlkE3Vc9hY9c8P6LJ5vIQOL4tK1MuiHWHpdfywPZlc1Kr8g5oJLSygX9WrSFCZHsA==",
-          "dev": true,
-          "requires": {
-            "@wdio/logger": "^5.8.0",
-            "deepmerge": "^2.0.1",
-            "glob": "^7.1.2"
-          }
-        },
-        "deepmerge": {
-          "version": "2.2.1",
-          "resolved": "https://registry.npmjs.org/deepmerge/-/deepmerge-2.2.1.tgz",
-          "integrity": "sha512-R9hc1Xa/NOBi9WRVUWg19rl1UB7Tt4kuPd+thNJgFZoxXsTz7ncaPaeIm+40oSGuP33DfMb4sZt1QIGiJzC4EA==",
-          "dev": true
-        }
       }
     },
     "@wdio/local-runner": {
