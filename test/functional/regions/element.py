@@ -52,7 +52,7 @@ class Element:
             try:
                 return self._locate_centre()
 
-            except ElementNotFoundError:
+            except (ElementNotFoundError, FileNotFoundError):
                 if time.monotonic() - start_time > timeout_seconds:
                     raise
 
