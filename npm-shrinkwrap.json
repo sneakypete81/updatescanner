@@ -421,14 +421,14 @@
       }
     },
     "@wdio/local-runner": {
-      "version": "5.8.3",
-      "resolved": "https://registry.npmjs.org/@wdio/local-runner/-/local-runner-5.8.3.tgz",
-      "integrity": "sha512-vrqHYBe7haKPF2Y8f2Ytp2U2SI8ufSNztOaRqU/dfzOkXNJgqx3E8GzZ8Y1x4V8ZvnKdI8wbe089N2+eoHnqFA==",
+      "version": "5.8.4",
+      "resolved": "https://registry.npmjs.org/@wdio/local-runner/-/local-runner-5.8.4.tgz",
+      "integrity": "sha512-Dp+Riz0M2uzzj3ahIJFrdg0zHIUYPfJ2d5UXI/LiLYtXtJ6mkF7pF5VrWWpMXbBXWf5SBSNFoO9jJrXfrrpphg==",
       "dev": true,
       "requires": {
         "@wdio/logger": "^5.8.0",
         "@wdio/repl": "^5.8.1",
-        "@wdio/runner": "^5.8.3",
+        "@wdio/runner": "^5.8.4",
         "async-exit-hook": "^2.0.1",
         "stream-buffers": "^3.0.2"
       }
@@ -477,9 +477,9 @@
       }
     },
     "@wdio/runner": {
-      "version": "5.8.3",
-      "resolved": "https://registry.npmjs.org/@wdio/runner/-/runner-5.8.3.tgz",
-      "integrity": "sha512-2jnAQWjtgkClhW+AqVC87Gb60WHcWsaNCV7GNHwwUXTTqIDwIT2l4FlbwYWVQRgJNvIzLt90WrMfEmRhnVLnVg==",
+      "version": "5.8.4",
+      "resolved": "https://registry.npmjs.org/@wdio/runner/-/runner-5.8.4.tgz",
+      "integrity": "sha512-LCAgk2h/KZRnNK+o/9ZjYBpu00g/lZjED1ZacHQpMfwDa76pmqEXoP1c+6PvU3ULyFaxts6zC911JEAjWh/w8w==",
       "dev": true,
       "requires": {
         "@wdio/config": "^5.8.1",
@@ -487,7 +487,7 @@
         "@wdio/utils": "^5.8.1",
         "deepmerge": "^2.0.1",
         "gaze": "^1.1.2",
-        "webdriverio": "^5.8.3"
+        "webdriverio": "^5.8.4"
       },
       "dependencies": {
         "deepmerge": {
@@ -495,6 +495,27 @@
           "resolved": "https://registry.npmjs.org/deepmerge/-/deepmerge-2.2.1.tgz",
           "integrity": "sha512-R9hc1Xa/NOBi9WRVUWg19rl1UB7Tt4kuPd+thNJgFZoxXsTz7ncaPaeIm+40oSGuP33DfMb4sZt1QIGiJzC4EA==",
           "dev": true
+        },
+        "webdriverio": {
+          "version": "5.8.4",
+          "resolved": "https://registry.npmjs.org/webdriverio/-/webdriverio-5.8.4.tgz",
+          "integrity": "sha512-EAZRSVZ51tIOgtPvzkOSAN8G+q87twDPbZPu7w0cnEGkdpQYiybr78lXbG8vwTo+JG+cp6/KkyKrSAwh3kh6XQ==",
+          "dev": true,
+          "requires": {
+            "@wdio/config": "^5.8.1",
+            "@wdio/logger": "^5.8.0",
+            "@wdio/repl": "^5.8.1",
+            "css-value": "^0.0.1",
+            "grapheme-splitter": "^1.0.2",
+            "lodash.isobject": "^3.0.2",
+            "lodash.isplainobject": "^4.0.6",
+            "lodash.merge": "^4.6.1",
+            "lodash.zip": "^4.2.0",
+            "resq": "^1.4.0-rc.1",
+            "rgb2hex": "^0.1.0",
+            "serialize-error": "^3.0.0",
+            "webdriver": "^5.8.3"
+          }
         }
       }
     },
