@@ -1,6 +1,6 @@
 from hamcrest.core.base_matcher import BaseMatcher
 
-EVENTUAL_TIMEOUT_SECONDS = 10
+EVENTUAL_TIMEOUT_SECONDS = 20
 
 
 class _Visible(BaseMatcher):

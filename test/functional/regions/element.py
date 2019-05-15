@@ -5,7 +5,7 @@ import pyautogui
 
 from . import config
 
-CLICK_RETRY_SECONDS = 10
+CLICK_RETRY_SECONDS = 20
 
 
 class Element:
