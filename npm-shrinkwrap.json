@@ -175,9 +175,9 @@
       "dev": true
     },
     "@wdio/cli": {
-      "version": "5.8.3",
-      "resolved": "https://registry.npmjs.org/@wdio/cli/-/cli-5.8.3.tgz",
-      "integrity": "sha512-nJnrpC/V4qg2L66I/MtqctvcfX65SOp6k+IjioNoDm5oo4B31eB2xbp8nCjVLAaY91GQ+wDxV0eFCncTZeAUSw==",
+      "version": "5.8.4",
+      "resolved": "https://registry.npmjs.org/@wdio/cli/-/cli-5.8.4.tgz",
+      "integrity": "sha512-f/ueUaEFqBwQFDmxifDO06X5xiZA9JLJkKJVbIJGBdMARqjnky5NIakCqjouGRbsfOIw/dBMIZg4gV8rSTKSww==",
       "dev": true,
       "requires": {
         "@wdio/config": "^5.8.1",
@@ -195,7 +195,7 @@
         "lodash.pickby": "^4.6.0",
         "lodash.union": "^4.6.0",
         "log-update": "^2.3.0",
-        "webdriverio": "^5.8.3",
+        "webdriverio": "^5.8.4",
         "yargs": "^11.1.0",
         "yarn-install": "^1.0.0"
       },
@@ -9065,9 +9065,9 @@
       }
     },
     "webdriverio": {
-      "version": "5.8.3",
-      "resolved": "https://registry.npmjs.org/webdriverio/-/webdriverio-5.8.3.tgz",
-      "integrity": "sha512-3xkpLae8D5FuQov9m20vrR95JQVhHKCHzclc3rhUe0EnqS4MrvtTuny7dMg1pLDoIYdROnFnjOVwuUE63znmFg==",
+      "version": "5.8.4",
+      "resolved": "https://registry.npmjs.org/webdriverio/-/webdriverio-5.8.4.tgz",
+      "integrity": "sha512-EAZRSVZ51tIOgtPvzkOSAN8G+q87twDPbZPu7w0cnEGkdpQYiybr78lXbG8vwTo+JG+cp6/KkyKrSAwh3kh6XQ==",
       "dev": true,
       "requires": {
         "@wdio/config": "^5.8.1",
