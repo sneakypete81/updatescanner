@@ -63,11 +63,7 @@ class Element:
         # Element is not where we expected it to be, so search the region
         result = self._locate_in_screen_region()
 
-        if result != self.expected_region:
-            warnings.warn(
-                "Location of {} {} doesn't match expected {}".format(
-                    self.name, tuple(result), self.expected_region))
-
+        self._issue_warnings(result)
         return pyautogui.center(result)
 
     def _location_matches_expected(self):
@@ -91,6 +87,22 @@ class Element:
 
         return result
 
+    def _issue_warnings(self, result):
+        if result == self.expected_region:
+            if config.WARN_FOR_DELAYED_DETECTIONS:
+                warnings.warn(
+                    f"Element {self.name} was not found immediately. "
+                    f"Perhaps add a post_click_delay to the previous click.")
+        else:
+            if self.expected_region is None:
+                warnings.warn(
+                    f"Location of {self.name} {tuple(result)} "
+                    f"has not been defined.")
+            else:
+                warnings.warn(
+                    f"Location of {self.name} {tuple(result)} "
+                    f"doesn't match expected {self.expected_region}.")
+
     def save_last_screenshot(self):
         if self._last_screenshot is None:
             return
@@ -99,8 +111,8 @@ class Element:
         screenshot_path = self._find_unique_screenshot_path()
         self._last_screenshot.save(screenshot_path)
 
-        print("Expected Image: {}".format(self.image_path))
-        print("Screenshot: {}".format(screenshot_path))
+        print(f"Expected Image: {self.image_path}")
+        print(f"Screenshot: {screenshot_path}")
 
     def _find_unique_screenshot_path(self):
         prefix = config.SCREENSHOT_DIR / self.name

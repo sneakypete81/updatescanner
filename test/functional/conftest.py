@@ -34,3 +34,5 @@ def pytest_sessionstart(session):
     Delete all previous screenshots at the start of the test session
     """
     shutil.rmtree(config.SCREENSHOT_DIR, ignore_errors=True)
+
+    # config.warn_for_delayed_detections(True)

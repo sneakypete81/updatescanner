@@ -12,3 +12,10 @@ BROWSER_REGION = (0, 0, 1024, 600)
 BROWSER_SCREENSHOT_REGION = tuple(
     [a * SCREENSHOT_SCALING for a in BROWSER_REGION]
 )
+
+WARN_FOR_DELAYED_DETECTIONS = False
+
+
+def warn_for_delayed_detections(value):
+    global WARN_FOR_DELAYED_DETECTIONS
+    WARN_FOR_DELAYED_DETECTIONS = value
