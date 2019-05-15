@@ -23,7 +23,7 @@ class Element:
         self._last_screenshot = None
 
     def __str__(self):
-        return "<Element name='{}'>".format(self.name)
+        return f"<Element name='{self.name}'>"
 
     def click(self, timeout_seconds=CLICK_RETRY_SECONDS):
         try:
