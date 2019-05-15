@@ -1,4 +1,3 @@
-from pathlib import Path
 import time
 import warnings
 
@@ -6,8 +5,6 @@ import pyautogui
 
 from . import config
 
-IMAGE_DIR = Path(__file__).parent / "images"
-SCREENSHOT_DIR = Path(__file__).parent / "screenshots"
 CLICK_RETRY_SECONDS = 10
 
 
@@ -15,7 +12,7 @@ class Element:
     def __init__(self, name, expected_region=None,
                  click_offset=None, post_click_delay_seconds=None):
         self.name = name
-        self.image_path = (IMAGE_DIR / name).with_suffix(".png")
+        self.image_path = (config.IMAGE_DIR / name).with_suffix(".png")
         self.expected_region = expected_region
 
         if click_offset is None:
@@ -98,7 +95,7 @@ class Element:
         if self._last_screenshot is None:
             return
 
-        SCREENSHOT_DIR.mkdir(exist_ok=True)
+        config.SCREENSHOT_DIR.mkdir(exist_ok=True)
         screenshot_path = self._find_unique_screenshot_path()
         self._last_screenshot.save(screenshot_path)
 
@@ -106,7 +103,7 @@ class Element:
         print("Screenshot: {}".format(screenshot_path))
 
     def _find_unique_screenshot_path(self):
-        prefix = SCREENSHOT_DIR / self.name
+        prefix = config.SCREENSHOT_DIR / self.name
         screenshot_path = prefix.with_suffix(".png")
         if not screenshot_path.exists():
             return screenshot_path

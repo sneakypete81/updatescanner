@@ -1,5 +1,6 @@
 import pytest
 from pathlib import Path
+import shutil
 
 from gecko_driver import GeckoDriver
 from regions import config
@@ -26,3 +27,10 @@ def _gecko_session():
 
     finally:
         gecko.delete_session()
+
+
+def pytest_sessionstart(session):
+    """
+    Delete all previous screenshots at the start of the test session
+    """
+    shutil.rmtree(config.SCREENSHOT_DIR, ignore_errors=True)
