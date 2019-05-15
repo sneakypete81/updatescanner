@@ -8,6 +8,7 @@ from . import config
 
 IMAGE_DIR = Path(__file__).parent / "images"
 SCREENSHOT_DIR = Path(__file__).parent / "screenshots"
+CLICK_RETRY_SECONDS = 10
 
 
 class Element:
@@ -26,9 +27,9 @@ class Element:
     def __str__(self):
         return "<Element name='{}'>".format(self.name)
 
-    def click(self):
+    def click(self, timeout_seconds=CLICK_RETRY_SECONDS):
         try:
-            x, y = self._locate_centre()
+            x, y = self._locate_centre_with_retry(timeout_seconds)
         except Exception:
             self.save_last_screenshot()
             raise
@@ -38,16 +39,21 @@ class Element:
             (y + self.click_offset[1]) // config.SCREENSHOT_SCALING)
 
     def is_visible(self, timeout_seconds=0):
-        start_time = time.monotonic()
+        try:
+            self._locate_centre_with_retry(timeout_seconds)
+            return True
+        except ElementNotFoundError:
+            return False
 
+    def _locate_centre_with_retry(self, timeout_seconds):
+        start_time = time.monotonic()
         while True:
             try:
-                self._locate_centre()
-                return True
+                return self._locate_centre()
 
             except ElementNotFoundError:
                 if time.monotonic() - start_time > timeout_seconds:
-                    return False
+                    raise
 
     def _locate_centre(self):
         if self._location_matches_expected():
@@ -59,7 +65,7 @@ class Element:
         if result != self.expected_rect:
             warnings.warn(
                 "Location of {} {} doesn't match expected {}".format(
-                    self.name, result, self.expected_rect))
+                    self.name, tuple(result), self.expected_rect))
 
         return pyautogui.center(result)
 
