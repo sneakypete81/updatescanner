@@ -17,7 +17,7 @@
     "@wdio/jasmine-framework": "^5.9.1",
     "@wdio/local-runner": "^5.8.6",
     "@wdio/spec-reporter": "^5.8.0",
-    "@wdio/sync": "^5.8.6",
+    "@wdio/sync": "^5.9.1",
     "eslint": "^5.16.0",
     "eslint-config-google": "^0.13.0",
     "eslint-plugin-jsdoc": "^5.0.2",
