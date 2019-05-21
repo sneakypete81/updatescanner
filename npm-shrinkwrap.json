@@ -390,14 +390,45 @@
       }
     },
     "@wdio/jasmine-framework": {
-      "version": "5.8.4",
-      "resolved": "https://registry.npmjs.org/@wdio/jasmine-framework/-/jasmine-framework-5.8.4.tgz",
-      "integrity": "sha512-Nnwb5r5X0c8Ohks9vtiZG0gi5Z8rVGOP8iQS1PkcqI0j0VokwxX/ie83vbPsJbd9GiZ3V/FR3qppRbvVpsq/pQ==",
+      "version": "5.9.1",
+      "resolved": "https://registry.npmjs.org/@wdio/jasmine-framework/-/jasmine-framework-5.9.1.tgz",
+      "integrity": "sha512-8hxWcEKSbcpQkFfzbMbIfg0oGDspXYzt3Vh8Vvej8eGawxGiz5nIOZXUe4ukzALPfQSyIREsDwbeqzVEF8XqsA==",
       "dev": true,
       "requires": {
-        "@wdio/config": "^5.8.1",
-        "@wdio/logger": "^5.8.0",
+        "@wdio/config": "^5.9.1",
+        "@wdio/logger": "^5.9.0",
         "jasmine": "^3.3.0"
+      },
+      "dependencies": {
+        "@wdio/config": {
+          "version": "5.9.1",
+          "resolved": "https://registry.npmjs.org/@wdio/config/-/config-5.9.1.tgz",
+          "integrity": "sha512-u5dqcTpUk4eXILEy5ytKX+0s7vXVHAwU/GghhbWrbL3mDTvZ65Wn6IyDGtBLckY6lfa2KF5Tswk0cg9mCw0mnA==",
+          "dev": true,
+          "requires": {
+            "@wdio/logger": "^5.9.0",
+            "deepmerge": "^2.0.1",
+            "glob": "^7.1.2"
+          }
+        },
+        "@wdio/logger": {
+          "version": "5.9.0",
+          "resolved": "https://registry.npmjs.org/@wdio/logger/-/logger-5.9.0.tgz",
+          "integrity": "sha512-L08MyO844LoTOnOZFxbupbTeqMAH7ZmrrNtN5AXpk3hJP7t4i5A+7eCiNWMpUpmOGHzM+04W27mYdaSei7imKg==",
+          "dev": true,
+          "requires": {
+            "chalk": "^2.3.0",
+            "loglevel": "^1.6.0",
+            "loglevel-plugin-prefix": "^0.5.3",
+            "strip-ansi": "^4.0.0"
+          }
+        },
+        "deepmerge": {
+          "version": "2.2.1",
+          "resolved": "https://registry.npmjs.org/deepmerge/-/deepmerge-2.2.1.tgz",
+          "integrity": "sha512-R9hc1Xa/NOBi9WRVUWg19rl1UB7Tt4kuPd+thNJgFZoxXsTz7ncaPaeIm+40oSGuP33DfMb4sZt1QIGiJzC4EA==",
+          "dev": true
+        }
       }
     },
     "@wdio/local-runner": {
