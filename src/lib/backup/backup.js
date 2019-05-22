@@ -26,7 +26,7 @@ export function createBackupJson(pageStore) {
  *
  * @param  {PageStore} pageStore - PageStore object to backup.
  * @param  {string} rootId - ID of the root element.
- * @returns {Object} Nested tree of objects representing the PageStore.
+ * @returns {object} Nested tree of objects representing the PageStore.
  */
 function generateTree(pageStore, rootId=PageStore.ROOT_ID) {
   const pageFolder = pageStore.getItem(rootId);

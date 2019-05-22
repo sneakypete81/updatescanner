@@ -4,7 +4,7 @@
  *
  * Adapted from https://www.npmjs.com/package/file-dialog v0.0.7 (MIT license).
  *
- * @param {Object} args - Object with the following options
+ * @param {object} args - Object with the following options
  *          {bool} multiple - Allow multiple files to be selected
  *          {string} accept - File extensions to accept.
  * @returns {Promise} Promise that resolves with the list of uploaded files.

@@ -11,7 +11,7 @@ export const __ = {
  */
 export class PageFolder {
   /**
-   * @returns {Object} Default values for new Pages.
+   * @returns {object} Default values for new Pages.
    */
   static get DEFAULTS() {
     return {
@@ -21,7 +21,7 @@ export class PageFolder {
   }
 
   /**
-   * @returns {Object} Enumeration of PageFolder change states.
+   * @returns {object} Enumeration of PageFolder change states.
    */
   static get stateEnum() {
     return {
@@ -64,7 +64,7 @@ export class PageFolder {
 
   /**
    * @param {string} id - ID of the PageFolder.
-   * @param {Object} data - Serialised PageFoler object from storage.
+   * @param {object} data - Serialised PageFoler object from storage.
    */
   constructor(id, {
     title=PageFolder.DEFAULTS.title,
@@ -80,7 +80,7 @@ export class PageFolder {
   /**
    * Convert the PageFolder instance to an object suitable for storage.
    *
-   * @returns {Object} Object suitable for storage.
+   * @returns {object} Object suitable for storage.
    */
   _toObject() {
     return {
@@ -91,7 +91,7 @@ export class PageFolder {
   }
 
   /**
-   * @returns {Object} Object suitable for backups, excluding current scan
+   * @returns {object} Object suitable for backups, excluding current scan
    * state and child IDs.
    */
   backup() {

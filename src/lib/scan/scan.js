@@ -220,7 +220,7 @@ function getChangeType(str1, str2, changeThreshold) {
  * @param {string} scannedHtml - Scanned HTML to process.
  * @param {boolean} ignoreNumbers - True if numbers should be stripped.
  *
- * @returns {Object} Object containing the updated prevHtml and scannedHtml.
+ * @returns {object} Object containing the updated prevHtml and scannedHtml.
  */
 function stripHtml(prevHtml, scannedHtml, ignoreNumbers) {
   prevHtml = stripTags(stripScript(stripWhitespace(prevHtml)));

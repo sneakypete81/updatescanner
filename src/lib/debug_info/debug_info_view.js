@@ -2,7 +2,7 @@ import {$on, qs} from '/lib/util/view_helpers.js';
 import {waitForMs} from '/lib/util/promise.js';
 
 /**
- * @param {Object} handlers - Object containing the following keys
+ * @param {object} handlers - Object containing the following keys
  * downloadOldHandler - Called when the Old HTML Download button is clicked
  * downloadNewHandler - Called when the New HTML Download button is clicked.
  */

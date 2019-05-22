@@ -25,7 +25,7 @@ export class StorageInfo {
   }
 
   /**
-   * @param {Object} data - Serialised StorageInfo object.
+   * @param {object} data - Serialised StorageInfo object.
    */
   constructor(data={}) {
     this._set(data);
@@ -35,7 +35,7 @@ export class StorageInfo {
   /**
    * Updates the StorageInfo attributes.
    *
-   * @param {Object} data - Data object to update from.
+   * @param {object} data - Data object to update from.
    */
   _set({
     version=StorageInfo._VERSION,
@@ -52,7 +52,7 @@ export class StorageInfo {
   /**
    * Convert the StorageInfo instance to an object suitable for storage.
    *
-   * @returns {Object} Object suitable for storage.
+   * @returns {object} Object suitable for storage.
    */
   _toObject() {
     return {

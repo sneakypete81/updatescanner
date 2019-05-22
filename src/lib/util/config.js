@@ -5,7 +5,7 @@ import {Storage} from './storage.js';
  */
 export class Config {
   /**
-   * @returns {Object} Dictionary of default values for all valid config names.
+   * @returns {object} Dictionary of default values for all valid config names.
    * By convention, all config names are lowercase and hythenated.
    */
   static get _DEFAULTS() {
@@ -67,7 +67,7 @@ export class Config {
    *
    * @param {string} name - Name of the config setting.
    *
-   * @returns {Object} The requested config setting.
+   * @returns {object} The requested config setting.
    */
   get(name) {
     return Config._getWithDefault(this._data, name);
@@ -82,7 +82,7 @@ export class Config {
    * @param {type} storageData - Config data from storage.
    * @param {type} name - Name of the config setting.
    *
-   * @returns {Object} The requested config setting.
+   * @returns {object} The requested config setting.
    */
   static _getWithDefault(storageData, name) {
     if (!Config._DEFAULTS.hasOwnProperty(name)) {
@@ -102,7 +102,7 @@ export class Config {
    * storage.
    *
    * @param {string} name - Name of the config setting.
-   * @param {Object} value - New value of the config setting.
+   * @param {object} value - New value of the config setting.
    */
   set(name, value) {
     if (!Config._DEFAULTS.hasOwnProperty(name)) {

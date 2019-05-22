@@ -4,7 +4,7 @@ import {PageStore} from '/lib/page/page_store.js';
  * the PageStore. Used to upgrade from UpdateScanner v3.
  *
  * @param {PageStore} pageStore - PageStore to import into.
- * @param {Object} json - JSON object to import from.
+ * @param {object} json - JSON object to import from.
  */
 export async function restoreBookmarksFromJson(pageStore, json) {
   const root = findRoot(json.children);
@@ -17,8 +17,8 @@ export async function restoreBookmarksFromJson(pageStore, json) {
 /**
  * Find the Update Scanner root bookmark folder.
  *
- * @param {Object} bookmarks - Bookmark object to search.
- * @returns {Object} Root Bookmark folder.
+ * @param {object} bookmarks - Bookmark object to search.
+ * @returns {object} Root Bookmark folder.
  */
 function findRoot(bookmarks) {
   for (let bookmarkIdx=0; bookmarkIdx < bookmarks.length; bookmarkIdx++) {
@@ -46,7 +46,7 @@ function findRoot(bookmarks) {
  * Import Update Scanner pages from a bookmarks object.
  *
  * @param {PageStore} pageStore - PageStore to import bookmarks into..
- * @param {Object} root - Update Scanner root bookmarks object.
+ * @param {object} root - Update Scanner root bookmarks object.
  * @param {string} parentId - ID of the parent PageFolder object.
  */
 async function importPages(pageStore, root, parentId) {
@@ -78,8 +78,8 @@ async function importPages(pageStore, root, parentId) {
 /**
  * Extract a bookmark's annotations into an object.
  *
- * @param {Object} bookmark - Bookmark object to process.
- * @returns {Object} Object containing the bookmark's annotations.
+ * @param {object} bookmark - Bookmark object to process.
+ * @returns {object} Object containing the bookmark's annotations.
  */
 function extractAnnos(bookmark) {
   const annos = {};

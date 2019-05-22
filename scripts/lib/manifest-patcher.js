@@ -3,14 +3,14 @@ const MANIFEST_FILE = 'src/manifest.json';
 const UPDATE_URL = 'https://raw.githubusercontent.com/sneakypete81/updatescanner/master/updates.json';
 
 /**
- * @returns {Object} Contents of the manifest file.
+ * @returns {object} Contents of the manifest file.
  */
 function readManifest() {
   return require(`../../${MANIFEST_FILE}`);
 }
 
 /**
- * @param {Object} manifest - Contents of the manifest file.
+ * @param {object} manifest - Contents of the manifest file.
  */
 function writeManifest(manifest) {
   fs.writeFileSync(MANIFEST_FILE, JSON.stringify(manifest, null, 2));
