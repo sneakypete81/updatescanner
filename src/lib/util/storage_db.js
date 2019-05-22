@@ -3,14 +3,14 @@ import {getFileStorage} from
   '/dependencies/module/idb-file-storage/src/idb-file-storage.js';
 
 /**
- * @returns {Object} The storage object for UpdateScanner.
+ * @returns {object} The storage object for UpdateScanner.
  */
 async function _getStorage() {
   return await getFileStorage({name: 'updatescanner', persistent: true});
 }
 
 /**
- * @param {Object} storage - Storage object.
+ * @param {object} storage - Storage object.
  * @param {string} key - Storage key.
  *
  * @returns {bool} True if the specified key exists in storage.
@@ -29,7 +29,7 @@ export class StorageDB {
    * Save an object to storage.
    *
    * @param {string} key - Storage key returned by _pageKey(), htmlKey(), etc.
-   * @param {Object} data - Object to save.
+   * @param {object} data - Object to save.
    */
   static async save(key, data) {
     const storage = await _getStorage();

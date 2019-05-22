@@ -65,7 +65,7 @@ export class Background {
   /**
    * Called when a message is sent to the background process.
    *
-   * @param {Object} message - Message content.
+   * @param {object} message - Message content.
    */
   _handleMessage(message) {
     if (message.action == backgroundActionEnum.SCAN_ALL) {

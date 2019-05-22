@@ -171,7 +171,7 @@ export class Sidebar {
   /**
    * @param {string} itemId - Sidebar item that was clicked.
    *
-   * @returns {Object} Object indicating where to insert a new item.
+   * @returns {object} Object indicating where to insert a new item.
    * Attribute parentId - Parent PageFolder of the new item.
    * Attribute insertAfterIndex - Child index of the new item.
    */

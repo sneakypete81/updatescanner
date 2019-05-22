@@ -22,7 +22,7 @@ export class PageStore {
   }
 
   /**
-   * @returns {Object} Enumeration of HTML page types.
+   * @returns {object} Enumeration of HTML page types.
    */
   static get htmlTypes() {
     return {
@@ -136,7 +136,7 @@ export class PageStore {
    * @param {integer} insertAfterIndex - Add the page after this item in the
    * parent folder. If negative, the Page will be added to the end of the parent
    * folder.
-   * @param {Object} data - Values to initialise the Page object (optional).
+   * @param {object} data - Values to initialise the Page object (optional).
    *
    * @returns {Promise} A Promise that fulfils with the new Page object.
    */

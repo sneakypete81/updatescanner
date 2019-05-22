@@ -116,7 +116,7 @@ export class SidebarView {
    * @param {Map} pageMap - Map of Page and PageFolder objects, keyed by ID.
    * @param {Page|PageFolder} root - Node to use as the root of the tree.
    *
-   * @returns {Object} Object containing the JSTree data generated from the
+   * @returns {object} Object containing the JSTree data generated from the
    * pageMap.
    */
   _generateTree(pageMap, root) {
@@ -163,7 +163,7 @@ export class SidebarView {
   }
 
   /**
-   * @param {Object} node - JSTree node.
+   * @param {object} node - JSTree node.
    *
    * @returns {string} ItemId for the specified node.
    */
@@ -176,7 +176,7 @@ export class SidebarView {
   }
 
   /**
-   * @returns {Object} Object containing sidebar context menu items.
+   * @returns {object} Object containing sidebar context menu items.
    */
   _getContextMenuItems() {
     return (node) => {
@@ -213,10 +213,10 @@ export class SidebarView {
    * for full details.
    *
    * @param {string} operation - Operation performed on the tree (move_node).
-   * @param {Object} node - Node that moved.
-   * @param {Object} parent - New parent of the node.
+   * @param {object} node - Node that moved.
+   * @param {object} parent - New parent of the node.
    * @param {integer} position - New position within the parent.
-   * @param {Object} more - Other data associated with the operation.
+   * @param {object} more - Other data associated with the operation.
    *
    * @returns {boolean} True if the operation is allowed.
    */
@@ -240,7 +240,7 @@ export class SidebarView {
    * Registers the provided handler function to be called whenever a single
    * item in the sidebar is selected.
    *
-   * @param {Object} handler - Callback to use whenever the sidebar selection
+   * @param {object} handler - Callback to use whenever the sidebar selection
    * changes.
    */
   registerSelectHandler(handler) {
@@ -257,7 +257,7 @@ export class SidebarView {
   /**
    * Registers the provided handler function to be called to create a new Page.
    *
-   * @param {Object} handler - Callback to use to create a new Page.
+   * @param {object} handler - Callback to use to create a new Page.
    */
   registerNewPageHandler(handler) {
     this._newPageHandler = (node) => handler(node.id);
@@ -267,7 +267,7 @@ export class SidebarView {
    * Registers the provided handler function to be called to create a
    * new PageFolder.
    *
-   * @param {Object} handler - Callback to use to create a new PageFolder.
+   * @param {object} handler - Callback to use to create a new PageFolder.
    */
   registerNewPageFolderHandler(handler) {
     this._newPageFolderHandler = (node) => handler(node.id);
@@ -277,7 +277,7 @@ export class SidebarView {
    * Registers the provided handler function to be called whenever a tree
    * node is to be deleted.
    *
-   * @param {Object} handler - Callback to use whenever a node is to be deleted.
+   * @param {object} handler - Callback to use whenever a node is to be deleted.
    */
   registerDeleteHandler(handler) {
     this._deleteHandler = (node) => handler(node.id);
@@ -287,7 +287,7 @@ export class SidebarView {
    * Registers the provided handler function to be called whenever a tree
    * node is to be moved due to a DnD operaion.
    *
-   * @param {Object} handler - Callback to use whenever a node is to be moved.
+   * @param {object} handler - Callback to use whenever a node is to be moved.
    */
   registerMoveHandler(handler) {
     this._moveHandler = (itemId, parentId, position) =>
@@ -298,7 +298,7 @@ export class SidebarView {
    * Registers the provided handler function to be called whenever the
    * 'Scan' context menu item is selected..
    *
-   * @param {Object} handler - Callback to use when 'Scan' is selected.
+   * @param {object} handler - Callback to use when 'Scan' is selected.
    */
   registerScanItemHandler(handler) {
     this._scanItemHandler = (node) => handler(node.id);
@@ -308,7 +308,7 @@ export class SidebarView {
    * Registers the provided handler function to be called whenever the
    * 'Settings' context menu item is selected..
    *
-   * @param {Object} handler - Callback to use when 'Settings' is selected.
+   * @param {object} handler - Callback to use when 'Settings' is selected.
    */
   registerSettingsHandler(handler) {
     this._settingsHandler = (node) => handler(node.id);

@@ -186,7 +186,7 @@ export class Main {
   /**
    * Update the current Page with new settings from the Settings dialog.
    *
-   * @param {Object} newSettings - Settings to apply to the current page.
+   * @param {object} newSettings - Settings to apply to the current page.
    */
   _updateCurrentPage(newSettings) {
     this.currentPage.title = newSettings.title;

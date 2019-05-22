@@ -30,7 +30,7 @@ export const actionEnum = {
 /**
  * Open the Main page URL, passing the specified parameters.
  *
- * @param {Object} params - Object containing paramEnum key/values.
+ * @param {object} params - Object containing paramEnum key/values.
  * @param {boolean} newTab - Open the page in a new tab.
  */
 export function openMain(params, newTab) {
@@ -45,7 +45,7 @@ export function openMain(params, newTab) {
 /**
  * Returns the URL to open the Main page, passing the specified parameters.
  *
- * @param {Object} params - Object containing paramEnum key/values.
+ * @param {object} params - Object containing paramEnum key/values.
  *
  * @returns {string} URL of the Main page.
  */

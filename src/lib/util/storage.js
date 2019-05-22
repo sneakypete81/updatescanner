@@ -6,7 +6,7 @@ export class Storage {
    * Save an object to storage.
    *
    * @param {string} key - Storage key returned by _pageKey(), htmlKey(), etc.
-   * @param {Object} data - Object to save.
+   * @param {object} data - Object to save.
    *
    * @returns {Promise} An empty Promise that will be fulfilled when the save
    * has completed, or rejected if the operation fails.

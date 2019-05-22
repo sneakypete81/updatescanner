@@ -2,14 +2,14 @@ const fs = require('fs');
 const UPDATES_FILE = 'updates.json';
 
 /**
- * @returns {Object} Contents of the updates file.
+ * @returns {object} Contents of the updates file.
  */
 function readUpdates() {
   return require(`../../${UPDATES_FILE}`);
 }
 
 /**
- * @param {Object} updates - Contents of the updates file.
+ * @param {object} updates - Contents of the updates file.
  */
 function writeUpdates(updates) {
   fs.writeFileSync(UPDATES_FILE, JSON.stringify(updates, null, 2));

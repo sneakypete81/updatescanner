@@ -35,7 +35,7 @@ function initMenu() {
 }
 
 /**
- * @param {Object} handlers - Object containing the following keys
+ * @param {object} handlers - Object containing the following keys
  * settingsHandler - Called when the Page Settings menu item is clicked
  * debugHandler - Called when the Debug Info menu item is clicked.
  */

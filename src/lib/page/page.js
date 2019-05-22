@@ -11,7 +11,7 @@ export const __ = {
  */
 export class Page {
   /**
-   * @returns {Object} Default values for new Pages.
+   * @returns {object} Default values for new Pages.
    */
   static get DEFAULTS() {
     return {
@@ -34,7 +34,7 @@ export class Page {
   }
 
   /**
-   * @returns {Object} Enumeration of Page change states. Any value other
+   * @returns {object} Enumeration of Page change states. Any value other
    * than NO_CHANGE or CHANGE indicates an error.
    */
   static get stateEnum() {
@@ -78,7 +78,7 @@ export class Page {
 
   /**
    * @param {string} id - ID of the page.
-   * @param {Object} data - Serialised Page object from storage.
+   * @param {object} data - Serialised Page object from storage.
    *
    * @property {string} id - ID of the page.
    * @property {string} title - Title of the page.
@@ -142,7 +142,7 @@ export class Page {
   /**
    * Convert the Page instance to an object suitable for storage.
    *
-   * @returns {Object} Object suitable for storage.
+   * @returns {object} Object suitable for storage.
    */
   _toObject() {
     return {
@@ -165,7 +165,7 @@ export class Page {
   }
 
   /**
-   * @returns {Object} Object suitable for backups, excluding current scan
+   * @returns {object} Object suitable for backups, excluding current scan
    * state.
    */
   backup() {
