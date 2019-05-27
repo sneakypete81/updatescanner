@@ -442,20 +442,20 @@
       }
     },
     "@wdio/config": {
-      "version": "5.9.1",
-      "resolved": "https://registry.npmjs.org/@wdio/config/-/config-5.9.1.tgz",
-      "integrity": "sha512-u5dqcTpUk4eXILEy5ytKX+0s7vXVHAwU/GghhbWrbL3mDTvZ65Wn6IyDGtBLckY6lfa2KF5Tswk0cg9mCw0mnA==",
+      "version": "5.9.3",
+      "resolved": "https://registry.npmjs.org/@wdio/config/-/config-5.9.3.tgz",
+      "integrity": "sha512-b2g3llMVgjS0iBYuZudV4VPj7nwPuSFKGsmHi1l9YhSd7TN996IiK/drckz6s4xLfOvzKwND9mRLd7RYjX+OwA==",
       "dev": true,
       "requires": {
-        "@wdio/logger": "^5.9.0",
-        "deepmerge": "^2.0.1",
+        "@wdio/logger": "^5.9.3",
+        "deepmerge": "^3.2.0",
         "glob": "^7.1.2"
       },
       "dependencies": {
         "deepmerge": {
-          "version": "2.2.1",
-          "resolved": "https://registry.npmjs.org/deepmerge/-/deepmerge-2.2.1.tgz",
-          "integrity": "sha512-R9hc1Xa/NOBi9WRVUWg19rl1UB7Tt4kuPd+thNJgFZoxXsTz7ncaPaeIm+40oSGuP33DfMb4sZt1QIGiJzC4EA==",
+          "version": "3.2.0",
+          "resolved": "https://registry.npmjs.org/deepmerge/-/deepmerge-3.2.0.tgz",
+          "integrity": "sha512-6+LuZGU7QCNUnAJyX8cIrlzoEgggTM6B7mm+znKOX4t5ltluT9KLjN6g61ECMS0LTsLW7yDpNoxhix5FZcrIow==",
           "dev": true
         }
       }
@@ -503,37 +503,60 @@
       }
     },
     "@wdio/local-runner": {
-      "version": "5.9.1",
-      "resolved": "https://registry.npmjs.org/@wdio/local-runner/-/local-runner-5.9.1.tgz",
-      "integrity": "sha512-RrWqgacwlkBGTwf3W8ZsOzVJKNS8IQ+pGCu+FphYz/AOQ8DjVGlNXnkCUbBdSMoy57Z8DrwEjO3Wxltt7b60ZA==",
+      "version": "5.9.3",
+      "resolved": "https://registry.npmjs.org/@wdio/local-runner/-/local-runner-5.9.3.tgz",
+      "integrity": "sha512-WCj3izb+G8pm20yVSDeF+HzaD1VNxbaqKkGUoMyIIfHT1iNVWmKOGrIJ/Uv3Fu3n+zNiJGqv8O+b6d0cz/DpIA==",
       "dev": true,
       "requires": {
-        "@wdio/logger": "^5.9.0",
-        "@wdio/repl": "^5.9.1",
-        "@wdio/runner": "^5.9.1",
+        "@wdio/logger": "^5.9.3",
+        "@wdio/repl": "^5.9.3",
+        "@wdio/runner": "^5.9.3",
         "async-exit-hook": "^2.0.1",
         "stream-buffers": "^3.0.2"
       }
     },
     "@wdio/logger": {
-      "version": "5.9.0",
-      "resolved": "https://registry.npmjs.org/@wdio/logger/-/logger-5.9.0.tgz",
-      "integrity": "sha512-L08MyO844LoTOnOZFxbupbTeqMAH7ZmrrNtN5AXpk3hJP7t4i5A+7eCiNWMpUpmOGHzM+04W27mYdaSei7imKg==",
+      "version": "5.9.3",
+      "resolved": "https://registry.npmjs.org/@wdio/logger/-/logger-5.9.3.tgz",
+      "integrity": "sha512-tpvu/wQqLAaShIIqZr7e/xl3lt9IeE6z/9DN59r+6xTC+RfD8YJ3D1n/c2jOsGbs/IW8RSWRvOERBWvpPcyQxw==",
       "dev": true,
       "requires": {
         "chalk": "^2.3.0",
         "loglevel": "^1.6.0",
-        "loglevel-plugin-prefix": "^0.5.3",
-        "strip-ansi": "^4.0.0"
+        "loglevel-plugin-prefix": "^0.8.4",
+        "strip-ansi": "^5.2.0"
+      },
+      "dependencies": {
+        "ansi-regex": {
+          "version": "4.1.0",
+          "resolved": "https://registry.npmjs.org/ansi-regex/-/ansi-regex-4.1.0.tgz",
+          "integrity": "sha512-1apePfXM1UOSqw0o9IiFAovVz9M5S1Dg+4TrDwfMewQ6p/rmMueb7tWZjQ1rx4Loy1ArBggoqGpfqqdI4rondg==",
+          "dev": true
+        },
+        "loglevel-plugin-prefix": {
+          "version": "0.8.4",
+          "resolved": "https://registry.npmjs.org/loglevel-plugin-prefix/-/loglevel-plugin-prefix-0.8.4.tgz",
+          "integrity": "sha512-WpG9CcFAOjz/FtNht+QJeGpvVl/cdR6P0z6OcXSkr8wFJOsV2GRj2j10JLfjuA4aYkcKCNIEqRGCyTife9R8/g==",
+          "dev": true
+        },
+        "strip-ansi": {
+          "version": "5.2.0",
+          "resolved": "https://registry.npmjs.org/strip-ansi/-/strip-ansi-5.2.0.tgz",
+          "integrity": "sha512-DuRs1gKbBqsMKIZlrffwlug8MHkcnpjs5VPmL1PAh+mA30U0DTotfDZ0d2UUsXpPmPmMMJ6W773MaA3J+lbiWA==",
+          "dev": true,
+          "requires": {
+            "ansi-regex": "^4.1.0"
+          }
+        }
       }
     },
     "@wdio/repl": {
-      "version": "5.9.1",
-      "resolved": "https://registry.npmjs.org/@wdio/repl/-/repl-5.9.1.tgz",
-      "integrity": "sha512-GUZ35ZLfNAIwKH/3TNrrusisMVX5Ukm9aLjbCRRKUCqGudD9yMFnkw1iJgfWFk38OnEcGS7plgdAJJooQx5Kqw==",
+      "version": "5.9.3",
+      "resolved": "https://registry.npmjs.org/@wdio/repl/-/repl-5.9.3.tgz",
+      "integrity": "sha512-hwPCBhrdqsoLM38vX59n7IwKs/k0r2Jb1DngI3YqzMEA7bOzUlhPVAx2xvkQRRGWeadKT+CWMfVruLKJs1fqpg==",
       "dev": true,
       "requires": {
-        "@wdio/config": "^5.9.1"
+        "@wdio/config": "^5.9.3"
       }
     },
     "@wdio/reporter": {
@@ -559,23 +582,23 @@
       }
     },
     "@wdio/runner": {
-      "version": "5.9.1",
-      "resolved": "https://registry.npmjs.org/@wdio/runner/-/runner-5.9.1.tgz",
-      "integrity": "sha512-guEml6vv2bQxZYMR7VBDjxzbDy8XJWaLuFvktJWuaETbNCKo9D6nNBORGz04E+FdXhttjgIL3tHIATf/OzKUxw==",
+      "version": "5.9.3",
+      "resolved": "https://registry.npmjs.org/@wdio/runner/-/runner-5.9.3.tgz",
+      "integrity": "sha512-W0H0yKS/FD9yIUkEZF7de1smLEka1LoArvNZY8su5Ofrwq+ifn/vZDLxnFoH0XlDpCMGBGkUBjgthoPcnzg+8Q==",
       "dev": true,
       "requires": {
-        "@wdio/config": "^5.9.1",
-        "@wdio/logger": "^5.9.0",
-        "@wdio/utils": "^5.9.0",
-        "deepmerge": "^2.0.1",
+        "@wdio/config": "^5.9.3",
+        "@wdio/logger": "^5.9.3",
+        "@wdio/utils": "^5.9.3",
+        "deepmerge": "^3.2.0",
         "gaze": "^1.1.2",
-        "webdriverio": "^5.9.1"
+        "webdriverio": "^5.9.3"
       },
       "dependencies": {
         "deepmerge": {
-          "version": "2.2.1",
-          "resolved": "https://registry.npmjs.org/deepmerge/-/deepmerge-2.2.1.tgz",
-          "integrity": "sha512-R9hc1Xa/NOBi9WRVUWg19rl1UB7Tt4kuPd+thNJgFZoxXsTz7ncaPaeIm+40oSGuP33DfMb4sZt1QIGiJzC4EA==",
+          "version": "3.2.0",
+          "resolved": "https://registry.npmjs.org/deepmerge/-/deepmerge-3.2.0.tgz",
+          "integrity": "sha512-6+LuZGU7QCNUnAJyX8cIrlzoEgggTM6B7mm+znKOX4t5ltluT9KLjN6g61ECMS0LTsLW7yDpNoxhix5FZcrIow==",
           "dev": true
         }
       }
@@ -634,12 +657,12 @@
       }
     },
     "@wdio/utils": {
-      "version": "5.9.0",
-      "resolved": "https://registry.npmjs.org/@wdio/utils/-/utils-5.9.0.tgz",
-      "integrity": "sha512-yDomtpjFzyMjhuTrKnbonimSJeMt5M+sYvT+2smt3nIDbT34RlF91m4k6f9hH3zUcEoA2XOI5WZGyszKpnPXtA==",
+      "version": "5.9.3",
+      "resolved": "https://registry.npmjs.org/@wdio/utils/-/utils-5.9.3.tgz",
+      "integrity": "sha512-Je3SNF+QNwpjDkLEG2sUryZmSx03hDIuHub80VcGdsUD4nUP2M/qW9eEX6G7NGacrjRQapwksOag1UlUbP3oeQ==",
       "dev": true,
       "requires": {
-        "@wdio/logger": "^5.9.0",
+        "@wdio/logger": "^5.9.3",
         "deepmerge": "^3.2.0"
       },
       "dependencies": {
@@ -8794,6 +8817,12 @@
         "prelude-ls": "~1.1.2"
       }
     },
+    "type-fest": {
+      "version": "0.3.1",
+      "resolved": "https://registry.npmjs.org/type-fest/-/type-fest-0.3.1.tgz",
+      "integrity": "sha512-cUGJnCdr4STbePCgqNFbpVNCepa+kAVohJs1sLhxzdH+gnEoOd8VhbYa7pD3zZYGiURWM2xzEII3fQcRizDkYQ==",
+      "dev": true
+    },
     "type-is": {
       "version": "1.6.16",
       "resolved": "https://registry.npmjs.org/type-is/-/type-is-1.6.16.tgz",
@@ -9161,14 +9190,14 @@
       }
     },
     "webdriverio": {
-      "version": "5.9.1",
-      "resolved": "https://registry.npmjs.org/webdriverio/-/webdriverio-5.9.1.tgz",
-      "integrity": "sha512-QYlIIrfqr7I0OSkg9HsZyOGpo7d8MlrH7ueo5MHsgNR2QgZG1OxHk/1edV3Te9Q2AUcpCmIKO1IOAJDxlYA+Rw==",
+      "version": "5.9.3",
+      "resolved": "https://registry.npmjs.org/webdriverio/-/webdriverio-5.9.3.tgz",
+      "integrity": "sha512-k109kwTtcbXkSoasVBjrgYcEs/T5ob4RKaE2UZnxPWQHPxAOgJZ+AgU0UsnuWp+PntoiIcZ2lPzsNlzMemgnEQ==",
       "dev": true,
       "requires": {
-        "@wdio/config": "^5.9.1",
-        "@wdio/logger": "^5.9.0",
-        "@wdio/repl": "^5.9.1",
+        "@wdio/config": "^5.9.3",
+        "@wdio/logger": "^5.9.3",
+        "@wdio/repl": "^5.9.3",
         "css-value": "^0.0.1",
         "grapheme-splitter": "^1.0.2",
         "lodash.isobject": "^3.0.2",
@@ -9177,8 +9206,38 @@
         "lodash.zip": "^4.2.0",
         "resq": "^1.5.0",
         "rgb2hex": "^0.1.0",
-        "serialize-error": "^3.0.0",
-        "webdriver": "^5.9.1"
+        "serialize-error": "^4.1.0",
+        "webdriver": "^5.9.3"
+      },
+      "dependencies": {
+        "deepmerge": {
+          "version": "3.2.0",
+          "resolved": "https://registry.npmjs.org/deepmerge/-/deepmerge-3.2.0.tgz",
+          "integrity": "sha512-6+LuZGU7QCNUnAJyX8cIrlzoEgggTM6B7mm+znKOX4t5ltluT9KLjN6g61ECMS0LTsLW7yDpNoxhix5FZcrIow==",
+          "dev": true
+        },
+        "serialize-error": {
+          "version": "4.1.0",
+          "resolved": "https://registry.npmjs.org/serialize-error/-/serialize-error-4.1.0.tgz",
+          "integrity": "sha512-5j9GgyGsP9vV9Uj1S0lDCvlsd+gc2LEPVK7HHHte7IyPwOD4lVQFeaX143gx3U5AnoCi+wbcb3mvaxVysjpxEw==",
+          "dev": true,
+          "requires": {
+            "type-fest": "^0.3.0"
+          }
+        },
+        "webdriver": {
+          "version": "5.9.3",
+          "resolved": "https://registry.npmjs.org/webdriver/-/webdriver-5.9.3.tgz",
+          "integrity": "sha512-PSg7AxB3JTnK8Qxw61jJVJRA2bZXO206M2fB1Npf1aL8m2qloydId3e6jhVE6mZkECAPOQr0QQkO+iVGKorMZQ==",
+          "dev": true,
+          "requires": {
+            "@wdio/config": "^5.9.3",
+            "@wdio/logger": "^5.9.3",
+            "deepmerge": "^3.2.0",
+            "lodash.merge": "^4.6.1",
+            "request": "^2.83.0"
+          }
+        }
       }
     },
     "webidl-conversions": {
