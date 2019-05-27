@@ -615,45 +615,14 @@
       }
     },
     "@wdio/sync": {
-      "version": "5.9.1",
-      "resolved": "https://registry.npmjs.org/@wdio/sync/-/sync-5.9.1.tgz",
-      "integrity": "sha512-l3ghY44iEePjcWDFdJw8zPQVeagpuxsZvFv/pzKQrZh0+IKpFavPxnnWn1aZ9B3GqBSrkShY2d94+y/GPFJdzA==",
+      "version": "5.9.3",
+      "resolved": "https://registry.npmjs.org/@wdio/sync/-/sync-5.9.3.tgz",
+      "integrity": "sha512-Q25tMw3DYNkjL3b1X9BOfBvQtwA+6UfKPF+1VUKf3Uqeu7mF/SBA8A+A4Dcn88VZIr/qpqgKgLWaTM7lds8iXw==",
       "dev": true,
       "requires": {
-        "@wdio/config": "^5.9.1",
-        "@wdio/logger": "^5.9.0",
+        "@wdio/config": "^5.9.3",
+        "@wdio/logger": "^5.9.3",
         "fibers": "^4.0.0"
-      },
-      "dependencies": {
-        "@wdio/config": {
-          "version": "5.9.1",
-          "resolved": "https://registry.npmjs.org/@wdio/config/-/config-5.9.1.tgz",
-          "integrity": "sha512-u5dqcTpUk4eXILEy5ytKX+0s7vXVHAwU/GghhbWrbL3mDTvZ65Wn6IyDGtBLckY6lfa2KF5Tswk0cg9mCw0mnA==",
-          "dev": true,
-          "requires": {
-            "@wdio/logger": "^5.9.0",
-            "deepmerge": "^2.0.1",
-            "glob": "^7.1.2"
-          }
-        },
-        "@wdio/logger": {
-          "version": "5.9.0",
-          "resolved": "https://registry.npmjs.org/@wdio/logger/-/logger-5.9.0.tgz",
-          "integrity": "sha512-L08MyO844LoTOnOZFxbupbTeqMAH7ZmrrNtN5AXpk3hJP7t4i5A+7eCiNWMpUpmOGHzM+04W27mYdaSei7imKg==",
-          "dev": true,
-          "requires": {
-            "chalk": "^2.3.0",
-            "loglevel": "^1.6.0",
-            "loglevel-plugin-prefix": "^0.5.3",
-            "strip-ansi": "^4.0.0"
-          }
-        },
-        "deepmerge": {
-          "version": "2.2.1",
-          "resolved": "https://registry.npmjs.org/deepmerge/-/deepmerge-2.2.1.tgz",
-          "integrity": "sha512-R9hc1Xa/NOBi9WRVUWg19rl1UB7Tt4kuPd+thNJgFZoxXsTz7ncaPaeIm+40oSGuP33DfMb4sZt1QIGiJzC4EA==",
-          "dev": true
-        }
       }
     },
     "@wdio/utils": {
