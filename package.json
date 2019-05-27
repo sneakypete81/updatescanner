@@ -20,7 +20,7 @@
     "@wdio/sync": "^5.9.3",
     "eslint": "^5.16.0",
     "eslint-config-google": "^0.13.0",
-    "eslint-plugin-jsdoc": "^6.0.3",
+    "eslint-plugin-jsdoc": "^7.0.2",
     "geckodriver": "^1.16.2",
     "jasmine-core": "^3.4.0",
     "jasmine-data-provider": "^2.2.0",
