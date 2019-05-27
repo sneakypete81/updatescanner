@@ -461,45 +461,14 @@
       }
     },
     "@wdio/jasmine-framework": {
-      "version": "5.9.1",
-      "resolved": "https://registry.npmjs.org/@wdio/jasmine-framework/-/jasmine-framework-5.9.1.tgz",
-      "integrity": "sha512-8hxWcEKSbcpQkFfzbMbIfg0oGDspXYzt3Vh8Vvej8eGawxGiz5nIOZXUe4ukzALPfQSyIREsDwbeqzVEF8XqsA==",
+      "version": "5.9.3",
+      "resolved": "https://registry.npmjs.org/@wdio/jasmine-framework/-/jasmine-framework-5.9.3.tgz",
+      "integrity": "sha512-y33b8v3w/fQU5+B1Xvqd6W6rDf8OHtgOuXbzGmjx3wL1QrDL+FK03+S7MOK0EJQHZrpqzE13MgcykQotZEcEIg==",
       "dev": true,
       "requires": {
-        "@wdio/config": "^5.9.1",
-        "@wdio/logger": "^5.9.0",
+        "@wdio/config": "^5.9.3",
+        "@wdio/logger": "^5.9.3",
         "jasmine": "^3.3.0"
-      },
-      "dependencies": {
-        "@wdio/config": {
-          "version": "5.9.1",
-          "resolved": "https://registry.npmjs.org/@wdio/config/-/config-5.9.1.tgz",
-          "integrity": "sha512-u5dqcTpUk4eXILEy5ytKX+0s7vXVHAwU/GghhbWrbL3mDTvZ65Wn6IyDGtBLckY6lfa2KF5Tswk0cg9mCw0mnA==",
-          "dev": true,
-          "requires": {
-            "@wdio/logger": "^5.9.0",
-            "deepmerge": "^2.0.1",
-            "glob": "^7.1.2"
-          }
-        },
-        "@wdio/logger": {
-          "version": "5.9.0",
-          "resolved": "https://registry.npmjs.org/@wdio/logger/-/logger-5.9.0.tgz",
-          "integrity": "sha512-L08MyO844LoTOnOZFxbupbTeqMAH7ZmrrNtN5AXpk3hJP7t4i5A+7eCiNWMpUpmOGHzM+04W27mYdaSei7imKg==",
-          "dev": true,
-          "requires": {
-            "chalk": "^2.3.0",
-            "loglevel": "^1.6.0",
-            "loglevel-plugin-prefix": "^0.5.3",
-            "strip-ansi": "^4.0.0"
-          }
-        },
-        "deepmerge": {
-          "version": "2.2.1",
-          "resolved": "https://registry.npmjs.org/deepmerge/-/deepmerge-2.2.1.tgz",
-          "integrity": "sha512-R9hc1Xa/NOBi9WRVUWg19rl1UB7Tt4kuPd+thNJgFZoxXsTz7ncaPaeIm+40oSGuP33DfMb4sZt1QIGiJzC4EA==",
-          "dev": true
-        }
       }
     },
     "@wdio/local-runner": {
@@ -6093,12 +6062,6 @@
       "version": "1.6.1",
       "resolved": "https://registry.npmjs.org/loglevel/-/loglevel-1.6.1.tgz",
       "integrity": "sha1-4PyVEztu8nbNyIh82vJKpvFW+Po=",
-      "dev": true
-    },
-    "loglevel-plugin-prefix": {
-      "version": "0.5.3",
-      "resolved": "https://registry.npmjs.org/loglevel-plugin-prefix/-/loglevel-plugin-prefix-0.5.3.tgz",
-      "integrity": "sha512-zRAJw3WYCQAJ6xfEIi04/oqlmR6jkwg3hmBcMW82Zic3iPWyju1gwntcgic0m5NgqYNJ62alCmb0g/div26WjQ==",
       "dev": true
     },
     "lowercase-keys": {
