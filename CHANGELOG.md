@@ -1,5 +1,10 @@
 # Update Scanner Changelog
 
+## 4.5.0beta1
+
+* Add support for Notification Sound extension (#445)
+  * <https://addons.mozilla.org/firefox/addon/notification-sound>
+
 ## 4.4.0
 
 * Open a new tab when a page is clicked in the popup (#286)
