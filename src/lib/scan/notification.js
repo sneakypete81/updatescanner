@@ -7,7 +7,7 @@ const NOTIFICATION_ID = 'updatescanner';
  *
  * @param {integer} updateCount - Number of updates.
  */
-export function showNotification(updateCount) {
+export async function showNotification(updateCount) {
   let message;
   if (updateCount == 0) {
     message = 'No updates were detected.';
@@ -33,6 +33,14 @@ export function showNotification(updateCount) {
 
   if (!browser.notifications.onClicked.hasListener(handleNotificationClick)) {
     browser.notifications.onClicked.addListener(handleNotificationClick);
+  }
+
+  // Send message to https://addons.mozilla.org/firefox/addon/notification-sound, if it's installed.
+  try {
+    await browser.runtime.sendMessage(
+      '@notification-sound', 'new-notification');
+  } catch (error) {
+    // Ignore if the notification-sound extension isn't installed
   }
 }
 
