@@ -8,7 +8,7 @@
 * Run `npm run bump`
 * Run `npm run all`
 * *BETA ONLY:* Run `npm run sign`
-* Push to Github
+* Run `git push && git push --tags`
 
 * Run `npm run release`
 
