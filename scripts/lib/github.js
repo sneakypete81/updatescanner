@@ -57,7 +57,7 @@ exports.updateBetaIssue = async function(version, changeText) {
   const commentParams = {
     owner: OWNER,
     repo: REPO,
-    number: BETA_ISSUE,
+    issue_number: BETA_ISSUE,
     body: (
       `${version} is now available to install from ${downloadUrl}\n\n` +
       changeText
