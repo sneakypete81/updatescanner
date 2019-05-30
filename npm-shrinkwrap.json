@@ -148,9 +148,9 @@
       }
     },
     "@octokit/rest": {
-      "version": "16.27.0",
-      "resolved": "https://registry.npmjs.org/@octokit/rest/-/rest-16.27.0.tgz",
-      "integrity": "sha512-UvCxVOCfHzEhOaltSKQBy81kMqQ+hglF3rAR4STut4WWr2tXvVnrIkGxeblO0TvmTt5zuxfgQfgG5kAHUT44RA==",
+      "version": "16.27.1",
+      "resolved": "https://registry.npmjs.org/@octokit/rest/-/rest-16.27.1.tgz",
+      "integrity": "sha512-/2XdHf/rjD0qw5mxiMP7ipo3vSx2WS716fOOydAIHFdl18Q06hkpz+5RAmfdrM34aoEd3NUExikAifz3kg9Fzw==",
       "dev": true,
       "requires": {
         "@octokit/request": "^4.0.1",
