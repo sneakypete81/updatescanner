@@ -1,5 +1,10 @@
-from .element import Element
+from clickshot import Region, ElementConfig
 
-updatescanner_website_page = Element(
-    'content-updatescanner_website_page',
-    expected_region=(587, 486, 1070, 253))
+from .config import config
+
+content = Region("content", config).configure([
+    ElementConfig(
+        "updatescanner_website_page",
+        expected_rect=(587, 486, 1070, 253),
+    ),
+])

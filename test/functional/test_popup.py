@@ -1,9 +1,10 @@
-import time
 import pytest
 from hamcrest import assert_that, is_
+from clickshot.matchers import visible, eventually_visible
 
-from matchers import visible, eventually_visible
-from regions import browser, popup, sidebar
+from regions.browser import browser
+from regions.popup import popup
+from regions.sidebar import sidebar
 
 
 @pytest.mark.usefixtures("firefox")
@@ -17,7 +18,6 @@ class TestPopup:
         assert_that(popup.empty_popup, is_(eventually_visible()))
 
     def test_sidebar_can_be_opened_from_the_popup(self):
-        time.sleep(0.5)
         sidebar.close_button.click()
         browser.update_scanner_button.click()
 

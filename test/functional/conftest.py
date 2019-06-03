@@ -7,6 +7,7 @@ from regions import config
 
 BASE_URI = "http://localhost:4444"
 ADDON_PATH = Path(__file__).parent.parent.parent / "src"
+SCREENSHOT_DIR = Path(__file__).parent / "regions" / "screenshots"
 
 
 @pytest.fixture()
@@ -33,6 +34,6 @@ def pytest_sessionstart(session):
     """
     Delete all previous screenshots at the start of the test session
     """
-    shutil.rmtree(config.SCREENSHOT_DIR, ignore_errors=True)
+    shutil.rmtree(SCREENSHOT_DIR, ignore_errors=True)
 
     # config.warn_for_delayed_detections(True)

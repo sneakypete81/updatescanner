@@ -1,7 +1,11 @@
-from .element import Element
+from clickshot import Region, ElementConfig
 
-update_scanner_button = Element(
-    'browser-update_scanner_button',
-    expected_region=(1907, 122, 128, 64),
-    click_offset=(-40, 0),
-    post_click_delay_seconds=0.5)
+from .config import config
+
+browser = Region("browser", config).configure([
+    ElementConfig(
+        "update_scanner_button",
+        expected_rect=(1907, 122, 128, 64),
+        click_offset=(-40, 0),
+    ),
+])

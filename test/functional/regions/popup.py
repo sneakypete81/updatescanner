@@ -1,9 +1,17 @@
-from .element import Element
+from clickshot import Region, ElementConfig
 
-empty_popup = Element(
-    'popup-empty_popup',
-    expected_region=(1460, 188, 520, 780))
+from .config import config
 
-open_sidebar_button = Element(
-    'popup-open_sidebar_button',
-    expected_region=(1664, 836, 100, 112))
+popup = Region("popup", config).configure([
+    ElementConfig(
+        "empty_popup",
+        expected_rect=(1460, 188, 520, 780),
+    ),
+    ElementConfig(
+        "open_sidebar_button",
+        expected_rect=(1664, 836, 100, 112),
+    ),
+    ElementConfig(
+        "add_button",
+    )
+])

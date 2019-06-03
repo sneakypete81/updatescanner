@@ -1,15 +1,19 @@
-from .element import Element
+from clickshot import Region, ElementConfig
 
-title = Element(
-    'sidebar-title',
-    expected_region=(18, 213, 395, 48))
+from .config import config
 
-close_button = Element(
-    'sidebar-close_button',
-    expected_region=(18, 213, 395, 48),
-    click_offset=(164, 0))
-
-updatescanner_website_item = Element(
-    'sidebar-updatescanner_website_item',
-    expected_region=(41, 291, 323, 29),
-    post_click_delay_seconds=2)
+sidebar = Region("sidebar", config).configure([
+    ElementConfig(
+        "title",
+        expected_rect=(18, 213, 395, 48),
+    ),
+    ElementConfig(
+        "close_button",
+        expected_rect=(18, 213, 395, 48),
+        click_offset=(164, 0),
+    ),
+    ElementConfig(
+        "updatescanner_website_item",
+        expected_rect=(41, 291, 323, 29),
+    ),
+])
