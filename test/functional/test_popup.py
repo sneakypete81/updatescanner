@@ -5,6 +5,7 @@ from clickshot.matchers import visible, eventually_visible
 from regions.browser import browser
 from regions.popup import popup
 from regions.sidebar import sidebar
+from regions.page_properties import page_properties
 
 
 @pytest.mark.usefixtures("firefox")
@@ -24,3 +25,12 @@ class TestPopup:
         popup.open_sidebar_button.click()
 
         assert_that(sidebar.title, is_(eventually_visible()))
+
+    def test_item_can_be_added_from_the_popup(self):
+        browser.visit_url("https://time.is")
+        browser.update_scanner_button.click()
+
+        popup.add_button.click()
+        page_properties.ok_button.click()
+
+        assert_that(sidebar.time_is_website_item, is_(eventually_visible()))

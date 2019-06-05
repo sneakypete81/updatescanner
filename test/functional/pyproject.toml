@@ -9,11 +9,11 @@ license = "GPL-3.0"
 python = "^3.7"
 flake8 = "^3.7"
 pytest = "^4.6"
-pyobjc = "^5.2"
+pyobjc = "^5.2" # TODO: Remove!
 PyHamcrest = "^1.9"
 requests = "^2.22"
 
-clickshot = {path = "/Users/auser/Projects/clickshot/"}
+clickshot = "0.1.0"
 opencv-python = "^4.1"
 
 [tool.poetry.dev-dependencies]

@@ -15,7 +15,7 @@ const test = async function() {
 
   try {
     childProcess.execFileSync(
-      'pipenv', ['run', 'pytest'],
+      'poetry', ['run', 'pytest'],
       {cwd: FUNC_TEST_PATH, stdio: 'inherit'}
     );
   } finally {

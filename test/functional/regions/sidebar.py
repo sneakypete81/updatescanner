@@ -16,4 +16,8 @@ sidebar = Region("sidebar", config).configure([
         "updatescanner_website_item",
         expected_rect=(41, 291, 323, 29),
     ),
+    ElementConfig(
+        "time_is_website_item",
+        expected_rect=(46, 290, 93, 30),
+    ),
 ])

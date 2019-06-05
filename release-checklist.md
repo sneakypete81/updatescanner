@@ -25,13 +25,13 @@ Test using Win10 x64 with the latest (non-Beta) Firefox.
 
 ### Startup
 
-* Create a fresh profile and install the release candidate.
-* Check that the sidebar is opened automatically.
-* Click the website sidebar item, check that it displays.
+* X Create a fresh profile and install the release candidate.
+* X Check that the sidebar is opened automatically.
+* X Click the website sidebar item, check that it displays.
 
 ### Page View
 
-* Visit <https://time.is> and add it using the popup.
+* X Visit <https://time.is> and add it using the popup.
 * Go to "Page Settings" and set Scan=5min, Threshold=All.
 * Check that a link works on the change view, then go back.
 * Click the title, then go back.
@@ -53,7 +53,7 @@ Test using Win10 x64 with the latest (non-Beta) Firefox.
 
 ### Popup
 
-* Close the sidebar, open the popup, and click the sidebar button.
+* X Close the sidebar, open the popup, and click the sidebar button.
 * Open the popup and click the TimeIs item.
 * Open the popup and Scan All Pages.
 * Open the popup and Show All Updates.
