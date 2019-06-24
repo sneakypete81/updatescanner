@@ -85,11 +85,11 @@ export class Config {
    * @returns {object} The requested config setting.
    */
   static _getWithDefault(storageData, name) {
-    if (!Config._DEFAULTS.hasOwnProperty(name)) {
+    if (!Object.prototype.hasOwnProperty.call(Config._DEFAULTS, name)) {
       throw new InvalidConfigNameError(name);
     }
 
-    if (storageData.hasOwnProperty(name)) {
+    if (Object.prototype.hasOwnProperty.call(storageData, name)) {
       return storageData[name];
     } else {
       return Config._DEFAULTS[name];
@@ -105,7 +105,7 @@ export class Config {
    * @param {object} value - New value of the config setting.
    */
   set(name, value) {
-    if (!Config._DEFAULTS.hasOwnProperty(name)) {
+    if (!Object.prototype.hasOwnProperty.call(Config._DEFAULTS, name)) {
       throw new InvalidConfigNameError(name);
     }
 
