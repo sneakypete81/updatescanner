@@ -6,3 +6,7 @@
 /test/dependencies/
 /src/.web-extension-id
 .vscode/
+**/.pytest_cache
+**/__pycache__
+/test/functional/.python-version
+/test/functional/regions/screenshots/
