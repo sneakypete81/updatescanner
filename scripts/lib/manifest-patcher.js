@@ -18,9 +18,12 @@ function writeManifest(manifest) {
 
 exports.patch = function() {
   const manifest = readManifest();
+  const isPreRelease = ['alpha', 'beta'].some(
+    (str) => manifest.version.includes(str)
+  );
 
-  if (!manifest.version.includes('beta')) {
-    throw Error('Only beta versions can be self-hosted');
+  if (!isPreRelease) {
+    throw Error('Only alpha/beta versions can be self-hosted');
   }
 
   console.log('Adding update_url to manifest...');
