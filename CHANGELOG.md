@@ -1,9 +1,10 @@
 # Update Scanner Changelog
 
-## 4.5.0beta1
+## 4.5.1alpha1
 
 * Add support for Notification Sound extension (#445)
   * <https://addons.mozilla.org/firefox/addon/notification-sound>
+* Fix potential race conditions in async functions
 
 ## 4.4.0
 
