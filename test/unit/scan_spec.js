@@ -62,6 +62,7 @@ describe('scan', function() {
     it('saves content if the page is unchanged', async function() {
       this.page.state = Page.stateEnum.NO_CHANGE;
       const html = 'Here is some <b>HTML</b>';
+      spyOn(Page, 'load').and.returnValue(Promise.resolve(this.page));
       spyOn(this.page, 'save');
       spyOn(PageStore, 'saveHtml');
 
@@ -80,6 +81,7 @@ describe('scan', function() {
       async function() {
         this.page.state = Page.stateEnum.CHANGED;
         const html = 'Here is some <b>HTML</b>';
+        spyOn(Page, 'load').and.returnValue(Promise.resolve(this.page));
         spyOn(this.page, 'save');
         spyOn(PageStore, 'saveHtml');
 
@@ -98,6 +100,7 @@ describe('scan', function() {
     it('saves new content', async function() {
       this.page.state = Page.stateEnum.NO_CHANGE;
       const html = 'Here is some <b>HTML</b>';
+      spyOn(Page, 'load').and.returnValue(Promise.resolve(this.page));
       spyOn(this.page, 'save');
       spyOn(PageStore, 'saveHtml');
 
@@ -116,6 +119,7 @@ describe('scan', function() {
       this.page.state = Page.stateEnum.NO_CHANGE;
       const html1 = 'Here is some <b>HTML</b>';
       const html2 = 'Here is some different <b>HTML</b>';
+      spyOn(Page, 'load').and.returnValue(Promise.resolve(this.page));
       spyOn(this.page, 'save');
       spyOn(PageStore, 'saveHtml');
       spyOn(scanModule.__, 'isMajorChange').and.returnValues(false);
@@ -137,6 +141,7 @@ describe('scan', function() {
         this.page.state = Page.stateEnum.CHANGED;
         const html1 = 'Here is some <b>HTML</b>';
         const html2 = 'Here is some different <b>HTML</b>';
+        spyOn(Page, 'load').and.returnValue(Promise.resolve(this.page));
         spyOn(this.page, 'save');
         spyOn(PageStore, 'saveHtml');
         spyOn(scanModule.__, 'isMajorChange').and.returnValues(false);
@@ -157,6 +162,7 @@ describe('scan', function() {
       this.page.state = Page.stateEnum.NO_CHANGE;
       const html1 = 'Here is some <b>HTML</b>';
       const html2 = 'Here is some different <b>HTML</b>';
+      spyOn(Page, 'load').and.returnValue(Promise.resolve(this.page));
       spyOn(this.page, 'save');
       spyOn(PageStore, 'saveHtml');
       spyOn(scanModule.__, 'isMajorChange').and.returnValues(true);
@@ -180,6 +186,7 @@ describe('scan', function() {
         this.page.state = Page.stateEnum.CHANGED;
         const html1 = 'Here is some <b>HTML</b>';
         const html2 = 'Here is some different <b>HTML</b>';
+        spyOn(Page, 'load').and.returnValue(Promise.resolve(this.page));
         spyOn(this.page, 'save');
         spyOn(PageStore, 'saveHtml');
         spyOn(scanModule.__, 'isMajorChange').and.returnValues(true);
@@ -241,6 +248,7 @@ describe('scan', function() {
         Promise.resolve({ok: true, text: () => html}));
       spyOn(PageStore, 'loadHtml').and.returnValues(Promise.resolve(html));
       spyOn(PageStore, 'saveHtml').and.returnValue(Promise.resolve(html));
+      spyOn(Page, 'load').and.returnValue(Promise.resolve(page));
       spyOn(Page.prototype, 'save');
       spyOn(Page.prototype, 'existsInStorage')
         .and.returnValue(Promise.resolve(true));
@@ -269,6 +277,7 @@ describe('scan', function() {
         Promise.resolve({ok: true, text: () => html}));
       spyOn(PageStore, 'loadHtml').and.returnValue(Promise.resolve(html));
       spyOn(PageStore, 'saveHtml').and.returnValue(Promise.resolve(html));
+      spyOn(Page, 'load').and.callFake((id) => Promise.resolve(pages[id - 1]));
       spyOn(Page.prototype, 'save');
       spyOn(Page.prototype, 'existsInStorage')
         .and.returnValue(Promise.resolve(true));
@@ -303,6 +312,7 @@ describe('scan', function() {
       spyOn(PageStore, 'loadHtml');
       spyOn(Page.prototype, 'existsInStorage')
         .and.returnValue(Promise.resolve(true));
+      spyOn(Page, 'load').and.returnValue(Promise.resolve(page));
       spyOn(page, 'save');
       spyOn(scanModule.__, 'log');
       spyOn(scanModule.__, 'waitForMs');
@@ -329,6 +339,7 @@ describe('scan', function() {
       spyOn(PageStore, 'loadHtml');
       spyOn(Page.prototype, 'existsInStorage').and
         .returnValue(Promise.resolve(true));
+      spyOn(Page, 'load').and.returnValue(Promise.resolve(page));
       spyOn(page, 'save');
       spyOn(scanModule.__, 'log');
       spyOn(scanModule.__, 'waitForMs');
@@ -429,6 +440,7 @@ describe('scan', function() {
         };
         spyOn(scanModule.__, 'detectEncoding').and.returnValue('encoding');
         spyOn(scanModule.__, 'applyEncoding').and.returnValue('html');
+        spyOn(Page, 'load').and.returnValue(Promise.resolve(page));
         spyOn(page, 'save');
 
         const html = await scanModule.__.getHtmlFromResponse(response, page);

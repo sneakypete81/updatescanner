@@ -142,6 +142,7 @@ export class PageStore {
    */
   async createPage(parentId, insertAfterIndex, data={}) {
     // Update StorageInfo with the new Page, returning the new Page ID
+    this.storageInfo = await StorageInfo.load();
     const pageId = this.storageInfo.createPage();
     await this.storageInfo.save();
 
@@ -175,6 +176,7 @@ export class PageStore {
    */
   async createPageFolder(parentId, insertAfterIndex) {
     // Update StorageInfo with the new PageFolder, returning the new ID
+    this.storageInfo = await StorageInfo.load();
     const pageFolderId = this.storageInfo.createPageFolder();
     await this.storageInfo.save();
 
@@ -212,6 +214,7 @@ export class PageStore {
     // Don't delete the root
     if (itemId != PageStore.ROOT_ID) {
       // Remove the page from StorageInfo
+      this.storageInfo = await StorageInfo.load();
       this.storageInfo.deleteItem(itemId);
       await this.storageInfo.save();
 
@@ -277,7 +280,6 @@ export class PageStore {
 
     // Add the item to the new parent in the specified position
     newParent.children.splice(position, 0, itemId);
-    await newParent.save();
 
     // Remove the item from the current parent
     if (currentParent !== undefined) {
@@ -286,8 +288,15 @@ export class PageStore {
         currentPosition++;
       }
       currentParent.children.splice(currentPosition, 1);
-      await currentParent.save();
+
+      await Promise.all([
+        currentParent.save(),
+        newParent.save(),
+      ]);
+    } else {
+      await newParent.save();
     }
+
     // Ensure folder changed states are updated
     this.refreshFolderState();
   }

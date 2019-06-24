@@ -89,8 +89,9 @@ export async function scanPage(page) {
     __.log(`Could not scan "${page.title}": ${error}`);
     // Only save if the page still exists
     if (await page.existsInStorage()) {
-      page.state = Page.stateEnum.ERROR;
-      page.save();
+      const updatedPage = await Page.load(page.id);
+      updatedPage.state = Page.stateEnum.ERROR;
+      updatedPage.save();
     }
   }
   return false;
@@ -115,8 +116,9 @@ async function getHtmlFromResponse(response, page) {
 
   if (page.encoding === null || page.encoding == 'auto') {
     const rawHtml = __.applyEncoding(buffer, 'utf-8');
-    page.encoding = __.detectEncoding(response.headers, rawHtml);
-    page.save();
+    const updatedPage = await Page.load(page.id);
+    updatedPage.encoding = __.detectEncoding(response.headers, rawHtml);
+    updatedPage.save();
   }
   return __.applyEncoding(buffer, page.encoding);
 }
@@ -157,30 +159,34 @@ async function processHtml(page, scannedHtml) {
  * @returns {boolean} True if a new major change is detected.
  */
 async function updatePageState(page, prevHtml, scannedHtml) {
-  const stripped = stripHtml(prevHtml, scannedHtml, page.ignoreNumbers);
+  const updatedPage = await Page.load(page.id);
+  const stripped = stripHtml(prevHtml, scannedHtml, updatedPage.ignoreNumbers);
 
-  const changeType = getChangeType(stripped.prevHtml, stripped.scannedHtml,
-    page.changeThreshold);
+  const changeType = getChangeType(
+    stripped.prevHtml,
+    stripped.scannedHtml,
+    updatedPage.changeThreshold,
+  );
 
   if (changeType == changeEnum.MAJOR_CHANGE) {
-    if (!page.isChanged()) {
+    if (!updatedPage.isChanged()) {
       // This is a newly detected change, so update the old HTML.
-      PageStore.saveHtml(page.id, PageStore.htmlTypes.OLD, prevHtml);
-      page.oldScanTime = page.newScanTime;
+      PageStore.saveHtml(updatedPage.id, PageStore.htmlTypes.OLD, prevHtml);
+      updatedPage.oldScanTime = updatedPage.newScanTime;
     }
-    PageStore.saveHtml(page.id, PageStore.htmlTypes.NEW, scannedHtml);
-    page.state = Page.stateEnum.CHANGED;
+    PageStore.saveHtml(updatedPage.id, PageStore.htmlTypes.NEW, scannedHtml);
+    updatedPage.state = Page.stateEnum.CHANGED;
   } else {
-    PageStore.saveHtml(page.id, PageStore.htmlTypes.NEW, scannedHtml);
+    PageStore.saveHtml(updatedPage.id, PageStore.htmlTypes.NEW, scannedHtml);
     // Only update the state if not previously marked as changed.
-    if (!page.isChanged()) {
-      page.state = Page.stateEnum.NO_CHANGE;
+    if (!updatedPage.isChanged()) {
+      updatedPage.state = Page.stateEnum.NO_CHANGE;
     }
   }
 
-  page.newScanTime = Date.now();
+  updatedPage.newScanTime = Date.now();
 
-  await page.save();
+  await updatedPage.save();
   return changeType == changeEnum.MAJOR_CHANGE;
 }
 

@@ -188,7 +188,8 @@ export class Main {
    *
    * @param {object} newSettings - Settings to apply to the current page.
    */
-  _updateCurrentPage(newSettings) {
+  async _updateCurrentPage(newSettings) {
+    this.currentPage = await Page.load(this.currentPage.id);
     this.currentPage.title = newSettings.title;
     this.currentPage.url = newSettings.url;
     this.currentPage.scanRateMinutes = newSettings.scanRateMinutes;
@@ -241,15 +242,16 @@ export class Main {
   }
 
   /**
-   * Show the PgaeFolder settings dialog.
+   * Show the PageFolder settings dialog.
    *
    * @param {PageFolder} pageFolder - PageFolder to edit.
    */
   async _showPageFolderSettings(pageFolder) {
     const newSettings = await dialog.openPageFolderDialog(pageFolder);
     if (newSettings !== null) {
-      pageFolder.title = newSettings.title;
-      pageFolder.save();
+      const updatedPageFolder = await PageFolder.load(pageFolder.id);
+      updatedPageFolder.title = newSettings.title;
+      updatedPageFolder.save();
     }
     document.location.replace('about:blank');
   }
