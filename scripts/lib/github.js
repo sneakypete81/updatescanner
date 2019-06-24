@@ -11,7 +11,7 @@ const OWNER = 'sneakypete81';
 const REPO = 'updatescanner';
 const BETA_ISSUE = 36;
 
-exports.release = async function(version, changeText, isBeta) {
+exports.release = async function(version, changeText, isPrerelease) {
   console.log(`Creating Github release ${version}...`);
 
   const releaseParams = {
@@ -19,13 +19,13 @@ exports.release = async function(version, changeText, isBeta) {
     repo: REPO,
     tag_name: version,
     body: changeText,
-    prerelease: isBeta,
+    prerelease: isPrerelease,
   };
   const {
     data: {upload_url: uploadUrl},
   } = await octokit.repos.createRelease(releaseParams);
 
-  if (version.includes('beta')) {
+  if (isPrerelease) {
     const xpiPath = `dist/update_scanner-${version}-an.fx.xpi`;
     uploadXpi(xpiPath, uploadUrl);
   }
