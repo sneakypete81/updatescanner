@@ -23,7 +23,7 @@ export async function restoreBookmarksFromJson(pageStore, json) {
 function findRoot(bookmarks) {
   for (let bookmarkIdx=0; bookmarkIdx < bookmarks.length; bookmarkIdx++) {
     const bookmark = bookmarks[bookmarkIdx];
-    if (bookmark.hasOwnProperty('annos')) {
+    if (Object.prototype.hasOwnProperty.call(bookmark, 'annos')) {
       for (let annoIdx=0; annoIdx < bookmark.annos.length; annoIdx++) {
         const anno = bookmark.annos[annoIdx];
         if (anno.name == 'updatescan/root') {
@@ -32,7 +32,7 @@ function findRoot(bookmarks) {
       }
     }
 
-    if (bookmark.hasOwnProperty('children')) {
+    if (Object.prototype.hasOwnProperty.call(bookmark, 'children')) {
       const result = findRoot(bookmark.children);
       if (result !== undefined) {
         return result;
@@ -51,7 +51,7 @@ function findRoot(bookmarks) {
  */
 async function importPages(pageStore, root, parentId) {
   for (const child of root.children) {
-    if (child.hasOwnProperty('children')) {
+    if (Object.prototype.hasOwnProperty.call(child, 'children')) {
       const pageFolder = await pageStore.createPageFolder(parentId, -1);
       pageFolder.title = child.title;
       await pageFolder.save();
@@ -83,7 +83,7 @@ async function importPages(pageStore, root, parentId) {
  */
 function extractAnnos(bookmark) {
   const annos = {};
-  if (bookmark.hasOwnProperty('annos')) {
+  if (Object.prototype.hasOwnProperty.call(bookmark, 'annos')) {
     bookmark.annos.forEach((anno) => {
       annos[anno.name] = anno.value;
     });
