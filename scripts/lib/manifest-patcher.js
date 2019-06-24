@@ -25,7 +25,7 @@ exports.patch = function() {
 
   console.log('Adding update_url to manifest...');
 
-  manifest.applications.gecko.update_url = UPDATE_URL;
+  manifest.browser_specific_settings.gecko.update_url = UPDATE_URL;
   writeManifest(manifest);
 };
 
@@ -34,7 +34,7 @@ exports.unPatch = function() {
 
   console.log('Removing update_url from manifest...');
 
-  delete manifest.applications.gecko.update_url;
+  delete manifest.browser_specific_settings.gecko.update_url;
   writeManifest(manifest);
 };
 
