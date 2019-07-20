@@ -11,7 +11,7 @@ export const __ = {
 const SCAN_IDLE_MS = 2000;
 
 /**
- * @typedef {Object} ScanResult
+ * @typedef {object} ScanResult
  * @property {integer} majorChanges Number of pages that had major changes
  * when scanned.
  * @property {integer} scanCount Number of pages that were scanned.
@@ -19,7 +19,7 @@ const SCAN_IDLE_MS = 2000;
 
 /**
 * @callback ScanCompleteHandler
-* @param {ScanResult} scanResult Object containing the result of the scan.
+* @param {ScanResult} scanResult - Object containing the result of the scan.
 */
 
 /**
