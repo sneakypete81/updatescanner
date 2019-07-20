@@ -8,6 +8,7 @@ import {detectEncoding, applyEncoding} from '/lib/util/encoding.js';
 
 /**
  * Enumeration indicating the similarity of two HTML strings.
+ *
  * @readonly
  * @enum {string}
  */

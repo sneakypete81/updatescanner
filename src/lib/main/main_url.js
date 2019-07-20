@@ -2,6 +2,7 @@ import {PageStore} from '/lib/page/page_store.js';
 
 /**
  * Parameter names for the Main page URL parameters.
+ *
  * @readonly
  * @enum {string}
  */
@@ -16,6 +17,7 @@ export const paramEnum = {
 
 /**
  * Values for the Main page action URL parameter.
+ *
  * @readonly
  * @enum {string}
  */
