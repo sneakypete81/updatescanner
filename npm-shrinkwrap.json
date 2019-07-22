@@ -3497,16 +3497,17 @@
       "dev": true
     },
     "eslint-plugin-jsdoc": {
-      "version": "15.5.3",
-      "resolved": "https://registry.npmjs.org/eslint-plugin-jsdoc/-/eslint-plugin-jsdoc-15.5.3.tgz",
-      "integrity": "sha512-lw8wYa1UFV53JLoqKOQR8YBkKlE/aguR+HGyytL9VKsVvm83DK8ReYnNNDRKik3MF661cGuaUuGfIEcdqg9l4A==",
+      "version": "15.6.1",
+      "resolved": "https://registry.npmjs.org/eslint-plugin-jsdoc/-/eslint-plugin-jsdoc-15.6.1.tgz",
+      "integrity": "sha512-n2jA4rGvSo9K4fxeccof+QimNsEmJ6/YNQWNYeF6HWGTJdbw1iWPQbv0j1mp711DQsFrUSTEcafJiKFtURYlUQ==",
       "dev": true,
       "requires": {
-        "comment-parser": "^0.6.0",
+        "comment-parser": "^0.6.1",
         "debug": "^4.1.1",
         "flat-map-polyfill": "^0.3.8",
         "jsdoctypeparser": "5.0.1",
-        "lodash": "^4.17.14",
+        "lodash": "^4.17.15",
+        "object.entries-ponyfill": "^1.0.1",
         "regextras": "^0.6.1"
       },
       "dependencies": {
@@ -6925,6 +6926,12 @@
       "requires": {
         "isobject": "^3.0.0"
       }
+    },
+    "object.entries-ponyfill": {
+      "version": "1.0.1",
+      "resolved": "https://registry.npmjs.org/object.entries-ponyfill/-/object.entries-ponyfill-1.0.1.tgz",
+      "integrity": "sha1-Kavfd8v70mVm3RqiTp2I9lQz0lY=",
+      "dev": true
     },
     "object.pick": {
       "version": "1.3.0",
