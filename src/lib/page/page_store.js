@@ -189,9 +189,12 @@ export class PageStore {
     }
     await parent.save();
 
-    // Create the Page. This will cause _handleItemUpdate to update the
-    // PageMap.
-    return new PageFolder(pageFolderId, {});
+    // Create the Page and update the PageMap immediately, to allow
+    // children to be safely added straight away.
+    const pageFolder = new PageFolder(pageFolderId, {});
+    await pageFolder.save();
+    this.pageMap.set(pageFolderId, pageFolder);
+    return pageFolder;
   }
 
   /**

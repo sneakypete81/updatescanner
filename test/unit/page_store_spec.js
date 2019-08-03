@@ -474,6 +474,18 @@ describe('PageStore', function() {
         }).catch((error) => done.fail(error));
       }).catch((error) => done.fail(error));
     });
+
+    it('updates the PageMap immediately', async function() {
+      spyOnStorageLoadWithArgReturn({
+        [StorageInfo._KEY]: Promise.resolve(undefined),
+      });
+      spyOn(Storage, 'save').and.returnValues(Promise.resolve());
+
+      const pageStore = await PageStore.load();
+      const pageFolder = await pageStore.createPageFolder(PageStore.ROOT_ID);
+
+      expect(pageStore.pageMap.get('1')).toEqual(pageFolder);
+    });
   });
 
   describe('deleteItem', function() {
