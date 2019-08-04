@@ -1,5 +1,9 @@
 # Update Scanner Changelog
 
+## 4.5.1alpha2
+
+* Fix problem when restoring folders (#495)
+
 ## 4.5.1alpha1
 
 * Add support for Notification Sound extension (#445)
