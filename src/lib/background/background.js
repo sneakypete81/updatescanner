@@ -8,6 +8,7 @@ import {isUpToDate, latestVersion} from '/lib/update/update.js';
 import {openUpdate} from '/lib/update/update_url.js';
 import {log} from '/lib/util/log.js';
 import {Config} from '/lib/util/config.js';
+import {store} from '/lib/redux/store.js';
 
 const activeIcon = {
   18: '/images/updatescanner_18.png',
@@ -46,6 +47,8 @@ export class Background {
 
     const autoscan = new Autoscan(this.scanQueue, this.pageStore);
     autoscan.start();
+
+    console.log(store.getState());
   }
 
   /**

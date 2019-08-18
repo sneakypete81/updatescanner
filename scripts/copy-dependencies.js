@@ -5,6 +5,7 @@ const fs = require('fs');
 const includeDependencies = [
   {dirs: ['jquery', 'dist'], file: 'jquery.min.js'},
   {dirs: ['jstree', 'dist'], file: 'jstree.min.js'},
+  {dirs: ['redux', 'dist'], file: 'redux.min.js'},
 ];
 
 const moduleDependencies = [

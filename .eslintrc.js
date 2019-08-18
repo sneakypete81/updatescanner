@@ -1,7 +1,7 @@
 module.exports = {
   'parserOptions': {
     'sourceType': 'module',
-    'ecmaVersion': 2017,
+    'ecmaVersion': 2018,
   },
 
   'extends': [
