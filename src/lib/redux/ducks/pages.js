@@ -27,6 +27,16 @@ export default function reducer(state=initialState, action) {
   return actionHandler(state, action);
 }
 
+/**
+ * Action to add a new page to the store.
+ *
+ * @param {object} page - Page object to add.
+ * @returns {object} Action to dispatch.
+ */
+export function addPage({page, parentId}) {
+  return {type: ADD_PAGE, page, parentId};
+}
+
 const handleAddPage = (state, action) => {
   const id = getNextId(state);
   return {

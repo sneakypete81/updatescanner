@@ -9,6 +9,7 @@ import {openUpdate} from '/lib/update/update_url.js';
 import {log} from '/lib/util/log.js';
 import {Config} from '/lib/util/config.js';
 import {store} from '/lib/redux/store.js';
+import {addPage} from '/lib/redux/ducks/pages.js';
 
 const activeIcon = {
   18: '/images/updatescanner_18.png',
@@ -34,21 +35,22 @@ export class Background {
    */
   async init() {
     this.pageStore = await PageStore.load();
-    this.pageStore.bindPageUpdate(this._handlePageUpdate.bind(this));
+    // this.pageStore.bindPageUpdate(this._handlePageUpdate.bind(this));
     browser.runtime.onMessage.addListener(this._handleMessage.bind(this));
 
     this.scanQueue = new ScanQueue();
     this.scanQueue.bindScanComplete(this._handleScanComplete.bind(this));
 
-    this._refreshIcon();
-    this.pageStore.refreshFolderState();
+    // this._refreshIcon();
+    // this.pageStore.refreshFolderState();
     await this._checkFirstRun();
     await this._checkIfUpdateRequired();
 
     const autoscan = new Autoscan(this.scanQueue, this.pageStore);
     autoscan.start();
 
-    console.log(store.getState());
+    this._render();
+    store.subscribe(() => this._render());
   }
 
   /**
@@ -79,6 +81,14 @@ export class Background {
   }
 
   /**
+   * Called whenever the UI needs to be re-rendered from the Redux store.
+   */
+  _render() {
+    console.log("updated state:")
+    console.log(store.getState());
+  }
+
+  /**
    * Refresh the browserAction icon and badge text.
    */
   _refreshIcon() {
@@ -100,13 +110,19 @@ export class Background {
   async _checkFirstRun() {
     const config = await new Config().load();
     if (config.get('isFirstRun')) {
-      const page = await this.pageStore.createWebsitePage();
+      store.dispatch(addPage({
+        page: {
+          title: 'Update Scanner Website',
+          url: 'https://sneakypete81.github.io/updatescanner/',
+        },
+        parentId: 0,
+      }));
+
       config.set('isFirstRun', false);
       config.set('updateVersion', latestVersion);
       await config.save();
 
-      this.scanQueue.add([page]);
-      this.scanQueue.scan();
+      this._scanAll();
     }
   }
 
