@@ -4,7 +4,18 @@ const DELETE_ITEM = 'pages/DELETE_ITEM';
 const EDIT_PAGE = 'pages/EDIT_PAGE';
 const EDIT_FOLDER = 'pages/EDIT_FOLDER';
 
-const initialState = {0: {title: 'root', children: []}};
+const type = {
+  PAGE: 'page',
+  FOLDER: 'folder',
+};
+
+export const status = {
+  NO_CHANGE: 'no_change',
+  CHANGED: 'changed',
+  ERROR: 'error',
+};
+
+const initialState = {0: {title: 'root', type: type.FOLDER, children: []}};
 
 /**
  * @param {object} state - Current state.
@@ -41,13 +52,13 @@ const handleAddPage = (state, action) => {
   const id = getNextId(state);
   return {
     ...addChild(state, action.parentId, id),
-    [id]: action.page,
+    [id]: {...action.page, type: type.PAGE},
   };
 };
 
 const handleAddFolder = (state, action) => {
   const id = getNextId(state);
-  const newFolder = {...action.folder, children: []};
+  const newFolder = {...action.folder, type: type.FOLDER, children: []};
   return {
     ...addChild(state, action.parentId, id),
     [id]: newFolder,
@@ -79,6 +90,22 @@ const handleEditFolder = (state, action) => {
   return {...state, [id]: newPage};
 };
 
+
+const getState = (state) => state.pages;
+
+export const getPageIds = window.Reselect.createSelector(
+  getState,
+  (state) => Object.keys(state).filter(
+    (id) => state[id].type === type.PAGE
+  ),
+);
+
+export const getChangedPageIds = window.Reselect.createSelector(
+  getState, getPageIds,
+  (state, pageIds) => pageIds.filter(
+    (id) => state[id].status === status.CHANGED
+  ),
+);
 
 const getNextId = (state) => Math.max(...Object.keys(state)) + 1;
 

@@ -5465,8 +5465,7 @@
     "js-tokens": {
       "version": "4.0.0",
       "resolved": "https://registry.npmjs.org/js-tokens/-/js-tokens-4.0.0.tgz",
-      "integrity": "sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==",
-      "dev": true
+      "integrity": "sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ=="
     },
     "js-yaml": {
       "version": "3.13.1",
@@ -7411,6 +7410,11 @@
       "resolved": "https://registry.npmjs.org/requires-port/-/requires-port-1.0.0.tgz",
       "integrity": "sha1-kl0mAdOaxIXgkc8NpcbmlNw9yv8=",
       "dev": true
+    },
+    "reselect": {
+      "version": "4.0.0",
+      "resolved": "https://registry.npmjs.org/reselect/-/reselect-4.0.0.tgz",
+      "integrity": "sha512-qUgANli03jjAyGlnbYVAV5vvnOmJnODyABz51RdBN7M4WaVu8mecZWgyQNkG8Yqe3KRGRt0l4K4B3XVEULC4CA=="
     },
     "resolve": {
       "version": "1.12.0",

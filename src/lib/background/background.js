@@ -2,14 +2,13 @@ import {backgroundActionEnum} from './actions.js';
 import {Autoscan} from '/lib/scan/autoscan.js';
 import {ScanQueue} from '/lib/scan/scan_queue.js';
 import {showNotification} from '/lib/scan/notification.js';
-import {PageStore, hasPageStateChanged, isItemChanged}
-  from '/lib/page/page_store.js';
+import {PageStore} from '/lib/page/page_store.js';
 import {isUpToDate, latestVersion} from '/lib/update/update.js';
 import {openUpdate} from '/lib/update/update_url.js';
 import {log} from '/lib/util/log.js';
 import {Config} from '/lib/util/config.js';
 import {store} from '/lib/redux/store.js';
-import {addPage} from '/lib/redux/ducks/pages.js';
+import {addPage, getChangedPageIds} from '/lib/redux/ducks/pages.js';
 
 const activeIcon = {
   18: '/images/updatescanner_18.png',
@@ -24,6 +23,7 @@ export class Background {
   /**
    * @property {PageStore} pageStore - Object used for saving and loading data
    * from storage.
+   * @property {ScanQueue} scanQueue - Queue of pages to be scanned.
    */
   constructor() {
     this.pageStore = null;
@@ -35,14 +35,11 @@ export class Background {
    */
   async init() {
     this.pageStore = await PageStore.load();
-    // this.pageStore.bindPageUpdate(this._handlePageUpdate.bind(this));
     browser.runtime.onMessage.addListener(this._handleMessage.bind(this));
 
     this.scanQueue = new ScanQueue();
     this.scanQueue.bindScanComplete(this._handleScanComplete.bind(this));
 
-    // this._refreshIcon();
-    // this.pageStore.refreshFolderState();
     await this._checkFirstRun();
     await this._checkIfUpdateRequired();
 
@@ -51,20 +48,6 @@ export class Background {
 
     this._render();
     store.subscribe(() => this._render());
-  }
-
-  /**
-   * Called when a Page is updated in Storage. Refresh the icon if its state
-   * changed.
-   *
-   * @param {string} pageId - ID of the changed Page.
-   * @param {storage.StorageChange} change - Object representing the change.
-   */
-  _handlePageUpdate(pageId, change) {
-    if (hasPageStateChanged(change)) {
-      this._refreshIcon();
-      this.pageStore.refreshFolderState();
-    }
   }
 
   /**
@@ -84,17 +67,18 @@ export class Background {
    * Called whenever the UI needs to be re-rendered from the Redux store.
    */
   _render() {
-    console.log("updated state:")
+    console.log("updated state:");
     console.log(store.getState());
+    console.log(getChangedPageIds(store.getState()));
+    this._updateIcon(getChangedPageIds(store.getState()).length);
   }
 
   /**
-   * Refresh the browserAction icon and badge text.
+   * Update the browserAction icon and badge text.
+   *
+   * @param {int} updateCount - Number of updated pages.
    */
-  _refreshIcon() {
-    const updateCount = this.pageStore.getPageList()
-      .filter(isItemChanged).length;
-
+  _updateIcon(updateCount) {
     browser.browserAction.setIcon({path: activeIcon});
     if (updateCount == 0) {
       browser.browserAction.setBadgeText({text: ''});
@@ -167,7 +151,7 @@ export class Background {
     log(`${scanCount} pages scanned.`);
 
     // If the user has already viewed some changes, don't include in the count
-    const changeCount = this.pageStore.getChangedPageList().length;
+    const changeCount = getChangedPageIds(store.getState()).length;
     const notifyChangeCount = Math.min(majorChanges, changeCount);
 
     if (notifyChangeCount > 0 || isManualScan) {
