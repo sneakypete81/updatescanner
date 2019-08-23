@@ -107,6 +107,24 @@ export const getChangedPageIds = window.Reselect.createSelector(
   ),
 );
 
+export const getDescendentPageIds = (state, itemId) => {
+  const reducer = (accumulator, id) => {
+    const item = state.pages[id];
+
+    if (item.type === type.FOLDER) {
+      const descendentPageIds = item.children.reduce(reducer, []);
+      return accumulator.concat(descendentPageIds);
+
+    } else if (item.type === type.PAGE) {
+      accumulator.push(id);
+      return accumulator;
+    }
+    return accumulator;
+  };
+
+  return [itemId].reduce(reducer, []);
+};
+
 const getNextId = (state) => Math.max(...Object.keys(state)) + 1;
 
 const addChild = (state, parentId, childId) => {

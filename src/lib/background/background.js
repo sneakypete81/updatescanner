@@ -8,7 +8,9 @@ import {openUpdate} from '/lib/update/update_url.js';
 import {log} from '/lib/util/log.js';
 import {Config} from '/lib/util/config.js';
 import {store} from '/lib/redux/store.js';
-import {addPage, getChangedPageIds} from '/lib/redux/ducks/pages.js';
+import {
+  addPage, getChangedPageIds, getDescendentPageIds,
+} from '/lib/redux/ducks/pages.js';
 
 const activeIcon = {
   18: '/images/updatescanner_18.png',
@@ -124,7 +126,7 @@ export class Background {
    * Manual scan of all Pages in the PageStore.
    */
   _scanAll() {
-    this._scanItem(PageStore.ROOT_ID);
+    this._scanItem(0);
   }
 
   /**
@@ -134,10 +136,10 @@ export class Background {
    * @param {string} itemId - ID of the item to scan.
    */
   _scanItem(itemId) {
-    const scanList = this.pageStore.getDescendantPages(itemId);
+    const pageIds = getDescendentPageIds(store.getState(), itemId);
 
-    log(`Pages to manually scan: ${scanList.length}`);
-    this.scanQueue.add(scanList);
+    log(`Pages to manually scan: ${pageIds.length}`);
+    this.scanQueue.add(pageIds);
     this.scanQueue.manualScan();
   }
 
