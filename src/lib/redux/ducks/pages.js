@@ -74,6 +74,18 @@ const handleDeleteItem = (state, action) => {
   return newState;
 };
 
+/**
+ * Action to edit an existing page.
+ *
+ * @param {integer} id - ID of the page to edit.
+ * @param {object} page - Object whose properties will be used to update
+ * the page.
+ * @returns {object} Action to dispatch.
+ */
+export function editPage(id, page) {
+  return {type: EDIT_PAGE, id, page};
+}
+
 const handleEditPage = (state, action) => {
   const id = action.id;
   const newPage = {...state[id], ...action.page};
