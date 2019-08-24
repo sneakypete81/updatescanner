@@ -1,5 +1,7 @@
 import {Config} from '/lib/util/config.js';
 import {log} from '/lib/util/log.js';
+import {store} from '/lib/redux/store.js';
+import {getPageIds, getPage} from '/lib/redux/ducks/pages.js';
 
 // Allow function mocking
 export const __ = {
@@ -19,11 +21,9 @@ const DEBUG_ALARM_TIMING = {delayInMinutes: 0.1, periodInMinutes: 0.5};
 export class Autoscan {
   /**
    * @param {ScanQueue} scanQueue - ScanQueue object to use for scanning.
-   * @param {PageStore} pageStore - PageStore object to use for scanning.
    */
-  constructor(scanQueue, pageStore) {
+  constructor(scanQueue) {
     this._scanQueue = scanQueue;
-    this._pageStore = pageStore;
   }
 
   /**
@@ -51,7 +51,7 @@ export class Autoscan {
       return;
     }
 
-    const scanList = getScanList(this._pageStore.getPageList());
+    const scanList = getScanList();
     if (scanList.length > 0) {
       __.log(`Pages to autoscan: ${scanList.length}`);
       this._scanQueue.add(scanList);
@@ -84,31 +84,22 @@ async function stopAlarm() {
 /**
  * Determine which pages need to be scanned.
  *
- * @param {Array.<Page|PageFolder>} pageList - List of Pages/PageFolders
- * loaded from storage.
- *
- * @returns {Array.<Page>} List of Page objects that need scanning.
+ * @returns {Array.<integer>} List of page IDs that need scanning.
  */
-function getScanList(pageList) {
-  const scanList = [];
-  for (const item of pageList) {
-    if (isAutoscanPending(item)) {
-      scanList.push(item);
-      item.lastAutoscanTime = Date.now();
-      item.save();
-    }
-  }
-  return scanList;
+function getScanList() {
+  const pageIds = getPageIds(store.getState());
+  return pageIds.filter((id) => isAutoscanPending(id));
 }
 
 /**
  * Determine whether it's time to autoscan a page.
  *
- * @param {Page} page - Page to check.
+ * @param {integer} pageId - ID of the page to check.
  *
  * @returns {boolean} True if it's time to autoscan the page.
  */
-function isAutoscanPending(page) {
+export function isAutoscanPending(pageId) {
+  const page = getPage(store.getState(), pageId);
   if (page.scanRateMinutes == 0) {
     // Autoscanning is disabled for this page
     return false;

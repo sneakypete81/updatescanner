@@ -6,6 +6,7 @@ import {waitForMs} from '/lib/util/promise.js';
 import {detectEncoding, applyEncoding} from '/lib/util/encoding.js';
 import {store} from '/lib/redux/store.js';
 import {getPage, editPage, status} from '/lib/redux/ducks/pages.js';
+import {isAutoscanPending} from './autoscan.js';
 
 /**
  * Enumeration indicating the similarity of two HTML strings.
@@ -90,7 +91,12 @@ export async function scanPage(pageId) {
 
   } catch (error) {
     __.log(`Could not scan "${page.title}": ${error}`);
-    store.dispatch(editPage(pageId, {status: status.ERROR}));
+
+    const edits = {status: status.ERROR};
+    if (isAutoscanPending(pageId)) {
+      edits.lastAutoscanTime = Date.now();
+    }
+    store.dispatch(editPage(pageId, edits));
   }
   return false;
 }
@@ -184,7 +190,11 @@ async function updatePageState(pageId, prevHtml, scannedHtml) {
     }
   }
 
-  edits.newScanTime = Date.now();
+  const now = Date.now();
+  edits.newScanTime = now;
+  if (isAutoscanPending(pageId)) {
+    edits.lastAutoscanTime = now;
+  }
 
   store.dispatch(editPage(pageId, edits));
   return changeType == changeEnum.MAJOR_CHANGE;

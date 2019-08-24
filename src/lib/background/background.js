@@ -40,7 +40,7 @@ export class Background {
     await this._checkFirstRun();
     await this._checkIfUpdateRequired();
 
-    const autoscan = new Autoscan(this.scanQueue, this.pageStore);
+    const autoscan = new Autoscan(this.scanQueue);
     autoscan.start();
 
     this._render();
