@@ -7,7 +7,10 @@ const DELETE_ITEM = 'pages/DELETE_ITEM';
 const EDIT_PAGE = 'pages/EDIT_PAGE';
 const EDIT_FOLDER = 'pages/EDIT_FOLDER';
 
-const initialState = {0: {title: 'root', type: type.FOLDER, children: []}};
+const initialState = {
+  0: {title: 'root', type: type.FOLDER, children: []},
+  nextId: 1,
+};
 
 /**
  * @param {object} state - Current state.
@@ -44,19 +47,21 @@ export function addPage({page, parentId}) {
 }
 
 const handleAddPage = (state, action) => {
-  const id = getNextId(state);
+  const id = state.nextId;
   return {
     ...addChild(state, action.parentId, id),
     [id]: {...action.page},
+    nextId: id + 1,
   };
 };
 
 const handleAddFolder = (state, action) => {
-  const id = getNextId(state);
+  const id = state.nextId;
   const newFolder = {...action.folder, type: type.FOLDER, children: []};
   return {
     ...addChild(state, action.parentId, id),
     [id]: newFolder,
+    nextId: id + 1,
   };
 };
 
@@ -137,8 +142,6 @@ export const getDescendentPageIds = (state, itemId) => {
 
   return [itemId].reduce(reducer, []);
 };
-
-const getNextId = (state) => Math.max(...Object.keys(state)) + 1;
 
 const addChild = (state, parentId, childId) => {
   const newChildren = [...state[parentId].children, childId];
