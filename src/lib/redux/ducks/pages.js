@@ -1,19 +1,11 @@
+import {type} from './type.js';
+import {validatePage, validatePageWithDefaults, status} from './page.js';
+export {status};
 const ADD_PAGE = 'pages/ADD_PAGE';
 const ADD_FOLDER = 'pages/ADD_FOLDER';
 const DELETE_ITEM = 'pages/DELETE_ITEM';
 const EDIT_PAGE = 'pages/EDIT_PAGE';
 const EDIT_FOLDER = 'pages/EDIT_FOLDER';
-
-const type = {
-  PAGE: 'page',
-  FOLDER: 'folder',
-};
-
-export const status = {
-  NO_CHANGE: 'no_change',
-  CHANGED: 'changed',
-  ERROR: 'error',
-};
 
 const initialState = {0: {title: 'root', type: type.FOLDER, children: []}};
 
@@ -45,14 +37,17 @@ export default function reducer(state=initialState, action) {
  * @returns {object} Action to dispatch.
  */
 export function addPage({page, parentId}) {
-  return {type: ADD_PAGE, page, parentId};
+  return {
+    type: ADD_PAGE,
+    page: validatePageWithDefaults(page),
+    parentId};
 }
 
 const handleAddPage = (state, action) => {
   const id = getNextId(state);
   return {
     ...addChild(state, action.parentId, id),
-    [id]: {...action.page, type: type.PAGE},
+    [id]: {...action.page},
   };
 };
 
@@ -83,7 +78,11 @@ const handleDeleteItem = (state, action) => {
  * @returns {object} Action to dispatch.
  */
 export function editPage(id, page) {
-  return {type: EDIT_PAGE, id, page};
+  return {
+    type: EDIT_PAGE,
+    id,
+    page: validatePage(page),
+  };
 }
 
 const handleEditPage = (state, action) => {
