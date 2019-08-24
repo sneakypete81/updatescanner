@@ -6,12 +6,12 @@ const includeDependencies = [
   {dirs: ['jquery', 'dist'], file: 'jquery.min.js'},
   {dirs: ['jstree', 'dist'], file: 'jstree.min.js'},
   {dirs: ['redux', 'dist'], file: 'redux.min.js'},
-  {dirs: ['reselect', 'dist'], file: 'reselect.min.js'},
 ];
 
 const moduleDependencies = [
   {dirs: ['dialog-polyfill', 'dist'], file: 'dialog-polyfill.esm.js'},
   {dirs: ['idb-file-storage', 'src'], file: 'idb-file-storage.js'},
+  {dirs: ['reselect', 'src'], file: 'index.js'},
 ];
 
 const testDependencies = [

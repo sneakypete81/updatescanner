@@ -1,6 +1,8 @@
 import {type} from './type.js';
 import {validatePage, validatePageWithDefaults, status} from './page.js';
 export {status};
+import {createSelector} from '/dependencies/module/reselect/src/index.js';
+
 const ADD_PAGE = 'pages/ADD_PAGE';
 const ADD_FOLDER = 'pages/ADD_FOLDER';
 const DELETE_ITEM = 'pages/DELETE_ITEM';
@@ -111,14 +113,14 @@ const getState = (state) => state.pages;
 
 export const getPage = (state, id) => getState(state)[id];
 
-export const getPageIds = window.Reselect.createSelector(
+export const getPageIds = createSelector(
   getState,
   (state) => Object.keys(state).filter(
     (id) => state[id].type === type.PAGE
   ),
 );
 
-export const getChangedPageIds = window.Reselect.createSelector(
+export const getChangedPageIds = createSelector(
   getState, getPageIds,
   (state, pageIds) => pageIds.filter(
     (id) => state[id].status === status.CHANGED
