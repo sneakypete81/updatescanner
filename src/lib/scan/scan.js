@@ -106,19 +106,21 @@ export async function scanPage(pageId) {
  */
 async function getHtmlFromResponse(response, pageId) {
   const page = getPage(store.getState(), pageId);
+  let encoding = page.encoding;
+
   // This is probably faster for the most common case (utf-8)
-  if (page.encoding == 'utf-8') {
+  if (encoding == 'utf-8') {
     return await response.text();
   }
 
   const buffer = await response.arrayBuffer();
 
-  if (page.encoding === null || page.encoding == 'auto') {
+  if (encoding === null || encoding == 'auto') {
     const rawHtml = __.applyEncoding(buffer, 'utf-8');
-    const encoding = __.detectEncoding(response.headers, rawHtml);
+    encoding = __.detectEncoding(response.headers, rawHtml);
     store.dispatch(editPage(pageId, {encoding}));
   }
-  return __.applyEncoding(buffer, page.encoding);
+  return __.applyEncoding(buffer, encoding);
 }
 
 /**
