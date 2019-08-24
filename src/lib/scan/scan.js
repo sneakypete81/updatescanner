@@ -1,10 +1,11 @@
 import {isMajorChange} from './fuzzy.js';
 import {PageStore} from '/lib/page/page_store.js';
-import {Page} from '/lib/page/page.js';
 import {isUpToDate} from '/lib/update/update.js';
 import {log} from '/lib/util/log.js';
 import {waitForMs} from '/lib/util/promise.js';
 import {detectEncoding, applyEncoding} from '/lib/util/encoding.js';
+import {store} from '/lib/redux/store.js';
+import {getPage, editPage, status} from '/lib/redux/ducks/pages.js';
 
 /**
  * Enumeration indicating the similarity of two HTML strings.
@@ -43,14 +44,14 @@ const SCAN_IDLE_MS = 2000;
  * Start scanning the pages one at a time. HTML is checked for updates and
  * saved to the PageStore, and the Page objects updated and saved accordingly.
  *
- * @param {Array.<Page>} pageList - Array of pages to scan.
+ * @param {Array.<integer>} pageIds - Array of pages IDs to scan.
  *
  * @returns {integer} The number of new major changes detected.
  */
-export async function scan(pageList) {
+export async function scan(pageIds) {
   let newMajorChangeCount = 0;
-  for (const page of pageList) {
-    if (await scanPage(page)) {
+  for (const id of pageIds) {
+    if (await scanPage(id)) {
       newMajorChangeCount++;
     }
 
@@ -64,16 +65,17 @@ export async function scan(pageList) {
  * and updating and save the Page object accordingly. Errors are logged and
  * ignored.
  *
- * @param {Page} page - Page to scan.
+ * @param {int} pageId - Page ID to scan.
  *
  * @returns {boolean} True if a new major change is detected.
  */
-export async function scanPage(page) {
+export async function scanPage(pageId) {
   // Don't scan if the data structures aren't yet updated to the latest version
   if (!(await __.isUpToDate())) {
     return false;
   }
-  if (!page) {
+  const page = getPage(store.getState(), pageId);
+  if (page === undefined) {
     return false;
   }
   __.log(`Scanning "${page.title}"...`);
@@ -83,17 +85,12 @@ export async function scanPage(page) {
       throw Error(`[${response.status}] ${response.statusText}`);
     }
 
-    const html = await getHtmlFromResponse(response, page);
-    return processHtml(page, html);
+    const html = await getHtmlFromResponse(response, pageId);
+    return processHtml(pageId, html);
 
   } catch (error) {
     __.log(`Could not scan "${page.title}": ${error}`);
-    // Only save if the page still exists
-    if (await page.existsInStorage()) {
-      const updatedPage = await Page.load(page.id);
-      updatedPage.state = Page.stateEnum.ERROR;
-      updatedPage.save();
-    }
+    store.dispatch(editPage(pageId, {status: status.ERROR}));
   }
   return false;
 }
@@ -103,11 +100,12 @@ export async function scanPage(page) {
  * If the page encoding attribute is not set, autodetect it and update the page.
  *
  * @param {Response} response - HTTP response.
- * @param {Page} page - Page object associated with the scan.
+ * @param {integer} pageId - Id of the page being scanned.
  *
  * @returns {string} HTML page content.
  */
-async function getHtmlFromResponse(response, page) {
+async function getHtmlFromResponse(response, pageId) {
+  const page = getPage(store.getState(), pageId);
   // This is probably faster for the most common case (utf-8)
   if (page.encoding == 'utf-8') {
     return await response.text();
@@ -117,9 +115,8 @@ async function getHtmlFromResponse(response, page) {
 
   if (page.encoding === null || page.encoding == 'auto') {
     const rawHtml = __.applyEncoding(buffer, 'utf-8');
-    const updatedPage = await Page.load(page.id);
-    updatedPage.encoding = __.detectEncoding(response.headers, rawHtml);
-    updatedPage.save();
+    const encoding = __.detectEncoding(response.headers, rawHtml);
+    store.dispatch(editPage(pageId, {encoding}));
   }
   return __.applyEncoding(buffer, page.encoding);
 }
@@ -132,20 +129,19 @@ async function getHtmlFromResponse(response, page) {
  * downloaded during the most recent scan. This is the simplest and most
  * resource-efficient approach.
  *
- * @param {Page} page - Page object to update.
+ * @param {integer} pageId - ID of the page to update.
  * @param {string} scannedHtml - HTML to process.
  *
  * @returns {boolean} True if a new major change is detected.
  */
-async function processHtml(page, scannedHtml) {
+async function processHtml(pageId, scannedHtml) {
   // Do nothing if the page no longer exists
-  const existsInStorage = await page.existsInStorage();
-  if (!existsInStorage) {
+  if (getPage(store.getState(), pageId) === undefined) {
     return false;
   }
 
-  const prevHtml = await PageStore.loadHtml(page.id, PageStore.htmlTypes.NEW);
-  return await updatePageState(page, prevHtml, scannedHtml);
+  const prevHtml = await PageStore.loadHtml(pageId, PageStore.htmlTypes.NEW);
+  return await updatePageState(pageId, prevHtml, scannedHtml);
 }
 
 /**
@@ -153,41 +149,42 @@ async function processHtml(page, scannedHtml) {
  * state and save the HTML to storage. The method returns without waiting for
  * the save operations to complete.
  *
- * @param {Page} page - Page object to update.
+ * @param {integer} pageId - ID of the page to update.
  * @param {string} prevHtml - HTML from storage.
  * @param {string} scannedHtml - Scanned HTML to process.
  *
  * @returns {boolean} True if a new major change is detected.
  */
-async function updatePageState(page, prevHtml, scannedHtml) {
-  const updatedPage = await Page.load(page.id);
-  const stripped = stripHtml(prevHtml, scannedHtml, updatedPage.ignoreNumbers);
+async function updatePageState(pageId, prevHtml, scannedHtml) {
+  const page = getPage(store.getState(), pageId);
+  const stripped = stripHtml(prevHtml, scannedHtml, page.ignoreNumbers);
 
   const changeType = getChangeType(
     stripped.prevHtml,
     stripped.scannedHtml,
-    updatedPage.changeThreshold,
+    page.changeThreshold,
   );
 
+  const edits = {};
   if (changeType == changeEnum.MAJOR_CHANGE) {
-    if (!updatedPage.isChanged()) {
+    if (page.status != status.CHANGED) {
       // This is a newly detected change, so update the old HTML.
-      PageStore.saveHtml(updatedPage.id, PageStore.htmlTypes.OLD, prevHtml);
-      updatedPage.oldScanTime = updatedPage.newScanTime;
+      PageStore.saveHtml(pageId, PageStore.htmlTypes.OLD, prevHtml);
+      edits.oldScanTime = page.newScanTime;
     }
-    PageStore.saveHtml(updatedPage.id, PageStore.htmlTypes.NEW, scannedHtml);
-    updatedPage.state = Page.stateEnum.CHANGED;
+    PageStore.saveHtml(pageId, PageStore.htmlTypes.NEW, scannedHtml);
+    edits.status = status.CHANGED;
   } else {
-    PageStore.saveHtml(updatedPage.id, PageStore.htmlTypes.NEW, scannedHtml);
+    PageStore.saveHtml(pageId, PageStore.htmlTypes.NEW, scannedHtml);
     // Only update the state if not previously marked as changed.
-    if (!updatedPage.isChanged()) {
-      updatedPage.state = Page.stateEnum.NO_CHANGE;
+    if (page.status != status.CHANGED) {
+      edits.status = status.NO_CHANGE;
     }
   }
 
-  updatedPage.newScanTime = Date.now();
+  edits.newScanTime = Date.now();
 
-  await updatedPage.save();
+  store.dispatch(editPage(pageId, edits));
   return changeType == changeEnum.MAJOR_CHANGE;
 }
 

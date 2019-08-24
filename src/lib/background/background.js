@@ -2,7 +2,6 @@ import {backgroundActionEnum} from './actions.js';
 import {Autoscan} from '/lib/scan/autoscan.js';
 import {ScanQueue} from '/lib/scan/scan_queue.js';
 import {showNotification} from '/lib/scan/notification.js';
-import {PageStore} from '/lib/page/page_store.js';
 import {isUpToDate, latestVersion} from '/lib/update/update.js';
 import {openUpdate} from '/lib/update/update_url.js';
 import {log} from '/lib/util/log.js';
@@ -23,12 +22,9 @@ const activeIcon = {
  */
 export class Background {
   /**
-   * @property {PageStore} pageStore - Object used for saving and loading data
-   * from storage.
    * @property {ScanQueue} scanQueue - Queue of pages to be scanned.
    */
   constructor() {
-    this.pageStore = null;
     this.scanQueue = null;
   }
 
@@ -36,7 +32,6 @@ export class Background {
    * Start the background processes and listeners.
    */
   async init() {
-    this.pageStore = await PageStore.load();
     browser.runtime.onMessage.addListener(this._handleMessage.bind(this));
 
     this.scanQueue = new ScanQueue();
@@ -71,6 +66,7 @@ export class Background {
   _render() {
     console.log("updated state:");
     console.log(store.getState());
+    console.log("changed pages:");
     console.log(getChangedPageIds(store.getState()));
     this._updateIcon(getChangedPageIds(store.getState()).length);
   }
@@ -123,7 +119,7 @@ export class Background {
   }
 
   /**
-   * Manual scan of all Pages in the PageStore.
+   * Manual scan of all pages.
    */
   _scanAll() {
     this._scanItem(0);

@@ -48,12 +48,12 @@ export class ScanQueue {
   /**
    * Add a list of pages to the queue. Ignore pages that are already queued.
    *
-   * @param {Array.<Page>} pageList - List of pages to add to the queue.
+   * @param {Array.<integer>} pageIds - List of page IDs to add to the queue.
    */
-  add(pageList) {
-    for (const page of pageList) {
-      if (!this.queue.includes(page)) {
-        this.queue.push(page);
+  add(pageIds) {
+    for (const id of pageIds) {
+      if (!this.queue.includes(id)) {
+        this.queue.push(id);
       }
     }
   }
