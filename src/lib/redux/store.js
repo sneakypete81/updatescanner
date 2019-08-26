@@ -5,3 +5,4 @@ const reducer = window.Redux.combineReducers({
 });
 
 export const store = window.Redux.createStore(reducer);
+WebextRedux.wrapStore(store);

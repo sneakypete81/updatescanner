@@ -1,28 +1,35 @@
 import {PageStore} from '/lib/page/page_store.js';
+import {addPage} from '/lib/redux/ducks/pages.js';
 import {showNotification} from '/lib/scan/notification.js';
 
+const store = new WebextRedux.Store();
+
 const dataText = document.querySelector('#data');
-const reloadBtn = document.querySelector('#reload');
 const preloadBtn = document.querySelector('#preload');
 const addPageBtn = document.querySelector('#add-page');
 const clearBtn = document.querySelector('#clear');
 const notifyBtn = document.querySelector('#notify');
 const addFrm = document.querySelector('#add');
 
-reloadBtn.addEventListener('click', reload);
 preloadBtn.addEventListener('click', preload);
-addPageBtn.addEventListener('click', addPage);
+addPageBtn.addEventListener('click', handleAddPage);
 clearBtn.addEventListener('click', clear);
 notifyBtn.addEventListener('click', notify);
 addFrm.addEventListener('submit', add);
 
 // Display the storage contents once page is loaded
-document.addEventListener('DOMContentLoaded', reload);
+document.addEventListener('DOMContentLoaded', init);
 
+async function init() {
+  // wait for the store to connect to the background page
+  await store.ready();
+  await render();
+  store.subscribe(() => render());
+}
 
-async function reload() {
+async function render() {
   dataText.innerHTML = '';
-  const storageData = await browser.storage.local.get();
+  const storageData = await store.getState();
   dataText.textContent = JSON.stringify(storageData, null, 4);
 }
 
@@ -100,25 +107,21 @@ async function preload() {
       newScanTime: 1486631108392,
     },
   });
-  reload();
 }
 
-async function addPage() {
-  const pageStore = await PageStore.load();
-
-  const page = await pageStore.createPage(PageStore.ROOT_ID, -1, {
-    title: 'Test Page',
-    url: 'https://www.google.com',
-    state: 'changed',
-  });
-  page.save();
-
-  reload();
+async function handleAddPage() {
+  store.dispatch(addPage({
+    page: {
+      title: 'Test Page',
+      url: 'https://www.google.com',
+      status: 'changed',
+    },
+    parentId: 0,
+  }));
 }
 
 function clear() {
   browser.storage.local.clear();
-  reload();
 }
 
 function add(event) {
@@ -126,7 +129,6 @@ function add(event) {
   const key = event.target.querySelector('#key').value;
   const value = event.target.querySelector('#value').value;
   browser.storage.local.set({[key]: value});
-  reload();
 }
 
 function notify() {
