@@ -131,11 +131,11 @@ export const getDescendentPageIds = (state, itemId) => {
   const reducer = (accumulator, id) => {
     const item = state.pages[id];
 
-    if (item.type === type.FOLDER) {
+    if (isFolder(item)) {
       const descendentPageIds = item.children.reduce(reducer, []);
       return accumulator.concat(descendentPageIds);
 
-    } else if (item.type === type.PAGE) {
+    } else if (isPage(item)) {
       accumulator.push(id);
       return accumulator;
     }
@@ -144,6 +144,9 @@ export const getDescendentPageIds = (state, itemId) => {
 
   return [itemId].reduce(reducer, []);
 };
+
+export const isPage = (item) => item.type == type.PAGE;
+export const isFolder = (item) => item.type == type.FOLDER;
 
 const addChild = (state, parentId, childId) => {
   const newChildren = [...state[parentId].children, childId];
