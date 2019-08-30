@@ -20,6 +20,7 @@ export class Sidebar {
    * @property {view.ViewTypes} viewType - Currently selected view type.
    */
   constructor() {
+    this.store = new WebextRedux.Store();
     this.sidebar = new SidebarView('#tree');
     this.pageStore = null;
     this.currentPage = null;
@@ -30,12 +31,13 @@ export class Sidebar {
    * Initialise the sidebar.
    */
   async init() {
+    // wait for the store to connect to the background page
     this.pageStore = await PageStore.load();
-    this.pageStore.bindPageUpdate(this._handleItemUpdate.bind(this));
-    this.pageStore.bindPageFolderUpdate(this._handleItemUpdate.bind(this));
+    // this.pageStore.bindPageUpdate(this._handleItemUpdate.bind(this));
+    // this.pageStore.bindPageFolderUpdate(this._handleItemUpdate.bind(this));
 
     this.sidebar.init();
-    this._refreshSidebar();
+    // this._refreshSidebar();
 
     this.sidebar.registerSelectHandler((event, itemId) =>
       this._handleSelect(event, itemId));
@@ -50,15 +52,19 @@ export class Sidebar {
       this._handleScanItem(itemId));
     this.sidebar.registerSettingsHandler((itemId) =>
       this._handleSettings(itemId));
+
+    await this.store.ready();
+    await this.sidebar.render(this.store);
+    this.store.subscribe(() => this.sidebar.render(this.store));
   }
 
   /**
    * Reload the sidebar view.
    */
-  _refreshSidebar() {
-    this.sidebar.load(this.pageStore.pageMap, PageStore.ROOT_ID);
-    this.sidebar.refresh();
-  }
+  // _refreshSidebar() {
+  //   this.sidebar.load(this.pageStore.pageMap, PageStore.ROOT_ID);
+  //   this.sidebar.refresh();
+  // }
 
   /**
    * Called whenever a single item in the sidebar is selected.
@@ -164,7 +170,7 @@ export class Sidebar {
       this._isUpdating = true;
       await waitForMs(REFRESH_TIMEOUT_MS);
       this._isUpdating = false;
-      this._refreshSidebar();
+      // this._refreshSidebar();
     }
   }
 

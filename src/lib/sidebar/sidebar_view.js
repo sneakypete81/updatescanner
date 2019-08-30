@@ -5,6 +5,8 @@ import {PageFolder} from '/lib/page/page_folder.js';
 import {PageStore} from '/lib/page/page_store.js';
 import {log} from '/lib/util/log.js';
 import {qs, $on} from '/lib/util/view_helpers.js';
+import {getItem, isPage, isFolder} from '/lib/redux/ducks/pages.js';
+import {status} from '/lib/redux/ducks/page.js';
 
 // See https://bugzilla.mozilla.org/show_bug.cgi?id=840640
 import dialogPolyfill from
@@ -87,21 +89,14 @@ export class SidebarView {
   }
 
   /**
-   * Load the sidebar with the specified tree of pages.
+   * Render the tree of pages from the store.
    *
-   * @param {Map} pageMap - Map of Page and PageFolder objects, keyed by ID.
-   * @param {string} rootId - ID of the root PageFolder.
+   * @param {object} store - Redux store containing the pages.
    */
-  load(pageMap, rootId) {
-    const root = pageMap.get(rootId);
+  render(store) {
     $(this._sidebarDivSelector).jstree(true).settings.core.data =
-      this._generateTree(pageMap, root).children;
-  }
+      this._generateTree(store, 0).children;
 
-  /**
-   * Refresh the tree view. Blocks until the refresh is complete.
-   */
-  refresh() {
     this._refreshing = true;
     $(this._sidebarDivSelector).jstree(true).refresh();
 
@@ -113,50 +108,42 @@ export class SidebarView {
   /**
    * Generate a JSTree data object from a pageMap object.
    *
-   * @param {Map} pageMap - Map of Page and PageFolder objects, keyed by ID.
-   * @param {Page|PageFolder} root - Node to use as the root of the tree.
+   * @param {object} store - Redux store containing the pages.
+   * @param {object} rootId - ID to use as the root of the tree.
    *
    * @returns {object} Object containing the JSTree data generated from the
-   * pageMap.
+   * store.
    */
-  _generateTree(pageMap, root) {
-    const result = {};
-    result.id = root.id;
-    result.text = root.title;
-    result.children = [];
-    result.data = {isFolder: true};
-    result.li_attr = {class: this._getStateClass(root.state)};
-    const children = root.children || [];
-    for (let i = 0; i < children.length; i++) {
-      const child = pageMap.get(children[i]);
-      if (child instanceof Page) {
-        result.children.push({
-          id: child.id,
-          text: child.title,
-          data: {isFolder: false},
-          li_attr: {
-            class: this._getStateClass(child.state),
-          },
-        });
-      } else if (child instanceof PageFolder) {
-        result.children.push(this._generateTree(pageMap, child));
-      } else {
-        log('Unknown node type: ' + child);
+  _generateTree(store, rootId) {
+    const reducer = (accumulator, id) => {
+      const item = getItem(store.getState(), id);
+
+      const result = {
+        id,
+        text: item.title,
+        data: {isFolder: isFolder(item)},
+        li_attr: {class: this._getStateClass(item.status)},
+      };
+      if (isFolder(item)) {
+        result.children = item.children.reduce(reducer, []);
       }
-    }
-    return result;
+      accumulator.push(result);
+      return accumulator;
+    };
+
+    return [rootId].reduce(reducer, [])[0];
   }
 
   /**
-   * @param {Page.stateEnum} state - State of the page.
+   * @param {string} pageStatus - Current status of the page.
    *
    * @returns {string} CSS class to use for the tree element.
    */
-  _getStateClass(state) {
-    switch (state) {
-      case Page.stateEnum.CHANGED:
+  _getStateClass(pageStatus) {
+    switch (pageStatus) {
+      case status.CHANGED:
         return 'changed';
-      case Page.stateEnum.ERROR:
+      case status.ERROR:
         return 'error';
     }
     return '';
