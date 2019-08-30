@@ -5,7 +5,7 @@ import {log} from '/lib/util/log.js';
 import {waitForMs} from '/lib/util/promise.js';
 import {detectEncoding, applyEncoding} from '/lib/util/encoding.js';
 import {store} from '/lib/redux/store.js';
-import {getPage, editPage, status} from '/lib/redux/ducks/pages.js';
+import {getItem, editPage, status} from '/lib/redux/ducks/pages.js';
 import {isAutoscanPending} from './autoscan.js';
 
 /**
@@ -75,7 +75,7 @@ export async function scanPage(pageId) {
   if (!(await __.isUpToDate())) {
     return false;
   }
-  const page = getPage(store.getState(), pageId);
+  const page = getItem(store.getState(), pageId);
   if (page === undefined) {
     return false;
   }
@@ -111,7 +111,7 @@ export async function scanPage(pageId) {
  * @returns {string} HTML page content.
  */
 async function getHtmlFromResponse(response, pageId) {
-  const page = getPage(store.getState(), pageId);
+  const page = getItem(store.getState(), pageId);
   let encoding = page.encoding;
 
   // This is probably faster for the most common case (utf-8)
@@ -144,7 +144,7 @@ async function getHtmlFromResponse(response, pageId) {
  */
 async function processHtml(pageId, scannedHtml) {
   // Do nothing if the page no longer exists
-  if (getPage(store.getState(), pageId) === undefined) {
+  if (getItem(store.getState(), pageId) === undefined) {
     return false;
   }
 
@@ -164,7 +164,7 @@ async function processHtml(pageId, scannedHtml) {
  * @returns {boolean} True if a new major change is detected.
  */
 async function updatePageState(pageId, prevHtml, scannedHtml) {
-  const page = getPage(store.getState(), pageId);
+  const page = getItem(store.getState(), pageId);
   const stripped = stripHtml(prevHtml, scannedHtml, page.ignoreNumbers);
 
   const changeType = getChangeType(

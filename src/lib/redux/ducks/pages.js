@@ -111,7 +111,7 @@ const handleEditFolder = (state, action) => {
 
 const getState = (state) => state.pages;
 
-export const getPage = (state, id) => getState(state)[id];
+export const getItem = (state, id) => getState(state)[id];
 
 export const getPageIds = createSelector(
   getState,

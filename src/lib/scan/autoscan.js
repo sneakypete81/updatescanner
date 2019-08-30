@@ -1,7 +1,7 @@
 import {Config} from '/lib/util/config.js';
 import {log} from '/lib/util/log.js';
 import {store} from '/lib/redux/store.js';
-import {getPageIds, getPage} from '/lib/redux/ducks/pages.js';
+import {getPageIds, getItem} from '/lib/redux/ducks/pages.js';
 
 // Allow function mocking
 export const __ = {
@@ -99,7 +99,7 @@ function getScanList() {
  * @returns {boolean} True if it's time to autoscan the page.
  */
 export function isAutoscanPending(pageId) {
-  const page = getPage(store.getState(), pageId);
+  const page = getItem(store.getState(), pageId);
   if (page.scanRateMinutes == 0) {
     // Autoscanning is disabled for this page
     return false;
