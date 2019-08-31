@@ -20,7 +20,7 @@ export class Sidebar {
    * @property {view.ViewTypes} viewType - Currently selected view type.
    */
   constructor() {
-    this.store = new WebextRedux.Store();
+    this.store = new window.WebextRedux.Store();
     this.sidebar = new SidebarView('#tree');
     this.pageStore = null;
     this.currentPage = null;

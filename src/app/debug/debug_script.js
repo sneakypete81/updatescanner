@@ -2,7 +2,7 @@ import {PageStore} from '/lib/page/page_store.js';
 import {addPage} from '/lib/redux/ducks/pages.js';
 import {showNotification} from '/lib/scan/notification.js';
 
-const store = new WebextRedux.Store();
+const store = new window.WebextRedux.Store();
 
 const dataText = document.querySelector('#data');
 const preloadBtn = document.querySelector('#preload');
