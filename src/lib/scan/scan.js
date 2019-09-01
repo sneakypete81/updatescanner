@@ -45,7 +45,7 @@ const SCAN_IDLE_MS = 2000;
  * Start scanning the pages one at a time. HTML is checked for updates and
  * saved to the PageStore, and the Page objects updated and saved accordingly.
  *
- * @param {Array.<integer>} pageIds - Array of pages IDs to scan.
+ * @param {Array.<string>} pageIds - Array of pages IDs to scan.
  *
  * @returns {integer} The number of new major changes detected.
  */
@@ -66,7 +66,7 @@ export async function scan(pageIds) {
  * and updating and save the Page object accordingly. Errors are logged and
  * ignored.
  *
- * @param {int} pageId - Page ID to scan.
+ * @param {string} pageId - Page ID to scan.
  *
  * @returns {boolean} True if a new major change is detected.
  */
@@ -106,7 +106,7 @@ export async function scanPage(pageId) {
  * If the page encoding attribute is not set, autodetect it and update the page.
  *
  * @param {Response} response - HTTP response.
- * @param {integer} pageId - Id of the page being scanned.
+ * @param {string} pageId - Id of the page being scanned.
  *
  * @returns {string} HTML page content.
  */
@@ -137,7 +137,7 @@ async function getHtmlFromResponse(response, pageId) {
  * downloaded during the most recent scan. This is the simplest and most
  * resource-efficient approach.
  *
- * @param {integer} pageId - ID of the page to update.
+ * @param {string} pageId - ID of the page to update.
  * @param {string} scannedHtml - HTML to process.
  *
  * @returns {boolean} True if a new major change is detected.
@@ -157,7 +157,7 @@ async function processHtml(pageId, scannedHtml) {
  * state and save the HTML to storage. The method returns without waiting for
  * the save operations to complete.
  *
- * @param {integer} pageId - ID of the page to update.
+ * @param {string} pageId - ID of the page to update.
  * @param {string} prevHtml - HTML from storage.
  * @param {string} scannedHtml - Scanned HTML to process.
  *

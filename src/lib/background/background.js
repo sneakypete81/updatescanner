@@ -8,7 +8,7 @@ import {log} from '/lib/util/log.js';
 import {Config} from '/lib/util/config.js';
 import {store} from '/lib/redux/store.js';
 import {
-  addPage, getChangedPageIds, getDescendentPageIds,
+  addPage, getChangedPageIds, getDescendentPageIds, ROOT_ID,
 } from '/lib/redux/ducks/pages.js';
 
 const activeIcon = {
@@ -97,7 +97,7 @@ export class Background {
           title: 'Update Scanner Website',
           url: 'https://sneakypete81.github.io/updatescanner/',
         },
-        parentId: 0,
+        parentId: ROOT_ID,
       }));
 
       config.set('isFirstRun', false);
@@ -122,7 +122,7 @@ export class Background {
    * Manual scan of all pages.
    */
   _scanAll() {
-    this._scanItem(0);
+    this._scanItem(ROOT_ID);
   }
 
   /**

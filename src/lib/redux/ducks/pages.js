@@ -9,9 +9,11 @@ const DELETE_ITEM = 'pages/DELETE_ITEM';
 const EDIT_PAGE = 'pages/EDIT_PAGE';
 const EDIT_FOLDER = 'pages/EDIT_FOLDER';
 
+export const ROOT_ID = '0';
+
 const initialState = {
-  0: {title: 'root', type: type.FOLDER, children: []},
-  nextId: 1,
+  [ROOT_ID]: {title: 'root', type: type.FOLDER, children: []},
+  nextId: '1',
 };
 
 /**
@@ -38,7 +40,9 @@ export default function reducer(state=initialState, action) {
 /**
  * Action to add a new page to the store.
  *
- * @param {object} page - Page object to add.
+ * @param {pbject} args - Arguments object.
+ * @param {object} args.page - Page object to add.
+ * @param {string} args.parentId - ID of the parent folder for the page.
  * @returns {object} Action to dispatch.
  */
 export function addPage({page, parentId}) {
@@ -49,26 +53,28 @@ export function addPage({page, parentId}) {
 }
 
 const handleAddPage = (state, action) => {
-  const id = state.nextId;
+  const id = String(state.nextId);
+  const parentId = String(action.parentId);
   return {
-    ...addChild(state, action.parentId, id),
+    ...addChild(state, parentId, id),
     [id]: {...action.page},
-    nextId: id + 1,
+    nextId: String(Number(id) + 1),
   };
 };
 
 const handleAddFolder = (state, action) => {
-  const id = state.nextId;
+  const id = String(state.nextId);
+  const parentId = String(action.parentId);
   const newFolder = {...action.folder, type: type.FOLDER, children: []};
   return {
-    ...addChild(state, action.parentId, id),
+    ...addChild(state, parentId, id),
     [id]: newFolder,
-    nextId: id + 1,
+    nextId: String(Number(id) + 1),
   };
 };
 
 const handleDeleteItem = (state, action) => {
-  const id = action.id;
+  const id = String(action.id);
   const parentId = findParentId(state, id);
   const newState = removeChild(state, parentId, id);
 
@@ -79,7 +85,7 @@ const handleDeleteItem = (state, action) => {
 /**
  * Action to edit an existing page.
  *
- * @param {integer} id - ID of the page to edit.
+ * @param {string} id - ID of the page to edit.
  * @param {object} page - Object whose properties will be used to update
  * the page.
  * @returns {object} Action to dispatch.
@@ -93,13 +99,13 @@ export function editPage(id, page) {
 }
 
 const handleEditPage = (state, action) => {
-  const id = action.id;
+  const id = String(action.id);
   const newPage = {...state[id], ...action.page};
   return {...state, [id]: newPage};
 };
 
 const handleEditFolder = (state, action) => {
-  const id = action.id;
+  const id = String(action.id);
   const newPage = {
     ...state[id],
     ...action.folder,
@@ -142,7 +148,7 @@ export const getDescendentPageIds = (state, itemId) => {
     return accumulator;
   };
 
-  return [itemId].reduce(reducer, []);
+  return [String(itemId)].reduce(reducer, []);
 };
 
 export const isPage = (item) => item.type == type.PAGE;

@@ -84,7 +84,7 @@ async function stopAlarm() {
 /**
  * Determine which pages need to be scanned.
  *
- * @returns {Array.<integer>} List of page IDs that need scanning.
+ * @returns {Array.<string>} List of page IDs that need scanning.
  */
 function getScanList() {
   const pageIds = getPageIds(store.getState());
@@ -94,7 +94,7 @@ function getScanList() {
 /**
  * Determine whether it's time to autoscan a page.
  *
- * @param {integer} pageId - ID of the page to check.
+ * @param {string} pageId - ID of the page to check.
  *
  * @returns {boolean} True if it's time to autoscan the page.
  */

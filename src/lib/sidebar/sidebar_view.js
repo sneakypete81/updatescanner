@@ -6,7 +6,7 @@ import {PageStore} from '/lib/page/page_store.js';
 import {log} from '/lib/util/log.js';
 import {qs, $on} from '/lib/util/view_helpers.js';
 import {getItem, isPage, isFolder} from '/lib/redux/ducks/pages.js';
-import {status} from '/lib/redux/ducks/page.js';
+import {status, ROOT_ID} from '/lib/redux/ducks/pages.js';
 
 // See https://bugzilla.mozilla.org/show_bug.cgi?id=840640
 import dialogPolyfill from
@@ -95,7 +95,7 @@ export class SidebarView {
    */
   render(store) {
     $(this._sidebarDivSelector).jstree(true).settings.core.data =
-      this._generateTree(store, 0).children;
+      this._generateTree(store, ROOT_ID).children;
 
     this._refreshing = true;
     $(this._sidebarDivSelector).jstree(true).refresh();
@@ -109,7 +109,7 @@ export class SidebarView {
    * Generate a JSTree data object from a pageMap object.
    *
    * @param {object} store - Redux store containing the pages.
-   * @param {object} rootId - ID to use as the root of the tree.
+   * @param {string} rootId - ID to use as the root of the tree.
    *
    * @returns {object} Object containing the JSTree data generated from the
    * store.
@@ -156,9 +156,9 @@ export class SidebarView {
    */
   _nodeToItemId(node) {
     if (node.id == '#') {
-      return PageStore.ROOT_ID;
+      return ROOT_ID;
     } else {
-      return node.id;
+      return String(node.id);
     }
   }
 
