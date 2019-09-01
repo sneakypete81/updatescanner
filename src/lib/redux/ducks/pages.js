@@ -11,17 +11,17 @@ const EDIT_FOLDER = 'pages/EDIT_FOLDER';
 
 export const ROOT_ID = '0';
 
-const initialState = {
+const initialPages = {
   [ROOT_ID]: {title: 'root', type: type.FOLDER, children: []},
   nextId: '1',
 };
 
 /**
- * @param {object} state - Current state.
+ * @param {object} pages - Current pages state.
  * @param {object} action - Action to apply.
- * @returns {object} - New state.
+ * @returns {object} - New pages state.
  */
-export default function reducer(state=initialState, action) {
+export default function reducer(pages=initialPages, action) {
   const actionHandlers = {
     [ADD_PAGE]: handleAddPage,
     [ADD_FOLDER]: handleAddFolder,
@@ -32,9 +32,9 @@ export default function reducer(state=initialState, action) {
 
   const actionHandler = actionHandlers[action.type];
   if (actionHandler === undefined) {
-    return state;
+    return pages;
   }
-  return actionHandler(state, action);
+  return actionHandler(pages, action);
 }
 
 /**
@@ -52,34 +52,34 @@ export function addPage({page, parentId}) {
     parentId};
 }
 
-const handleAddPage = (state, action) => {
-  const id = String(state.nextId);
+const handleAddPage = (pages, action) => {
+  const id = String(pages.nextId);
   const parentId = String(action.parentId);
   return {
-    ...addChild(state, parentId, id),
+    ...addChild(pages, parentId, id),
     [id]: {...action.page},
     nextId: String(Number(id) + 1),
   };
 };
 
-const handleAddFolder = (state, action) => {
-  const id = String(state.nextId);
+const handleAddFolder = (pages, action) => {
+  const id = String(pages.nextId);
   const parentId = String(action.parentId);
   const newFolder = {...action.folder, type: type.FOLDER, children: []};
   return {
-    ...addChild(state, parentId, id),
+    ...addChild(pages, parentId, id),
     [id]: newFolder,
     nextId: String(Number(id) + 1),
   };
 };
 
-const handleDeleteItem = (state, action) => {
+const handleDeleteItem = (pages, action) => {
   const id = String(action.id);
-  const parentId = findParentId(state, id);
-  const newState = removeChild(state, parentId, id);
+  const parentId = findParentId(pages, id);
+  const newPages = removeChild(pages, parentId, id);
 
-  mutateToDeleteItem(newState, id);
-  return newState;
+  mutateToDeleteItem(newPages, id);
+  return newPages;
 };
 
 /**
@@ -98,44 +98,47 @@ export function editPage(id, page) {
   };
 }
 
-const handleEditPage = (state, action) => {
+const handleEditPage = (pages, action) => {
   const id = String(action.id);
-  const newPage = {...state[id], ...action.page};
-  return {...state, [id]: newPage};
+  const newPage = {...pages[id], ...action.page};
+  return {...pages, [id]: newPage};
 };
 
-const handleEditFolder = (state, action) => {
+const handleEditFolder = (pages, action) => {
   const id = String(action.id);
   const newPage = {
-    ...state[id],
+    ...pages[id],
     ...action.folder,
-    children: state[id].children,
+    children: pages[id].children,
   };
-  return {...state, [id]: newPage};
+  return {...pages, [id]: newPage};
 };
 
 
-const getState = (state) => state.pages;
+const getPages = (state) => state.pages;
 
-export const getItem = (state, id) => getState(state)[id];
+export const getItem = (state, id) => getPages(state)[id];
 
-export const getPageIds = createSelector(
-  getState,
-  (state) => Object.keys(state).filter(
-    (id) => state[id].type === type.PAGE
-  ),
-);
+const pageIds = (pages) =>
+  Object.keys(pages).filter(
+    (id) => isPage(pages[id])
+  );
+
+export const getPageIds = createSelector(getPages, pageIds);
 
 export const getChangedPageIds = createSelector(
-  getState, getPageIds,
-  (state, pageIds) => pageIds.filter(
-    (id) => state[id].status === status.CHANGED
+  getPages,
+  getPageIds,
+  (pages, pageIds) => pageIds.filter(
+    (id) => pages[id].status == status.CHANGED
   ),
 );
 
 export const getDescendentPageIds = (state, itemId) => {
+  const pages = getPages(state);
+
   const reducer = (accumulator, id) => {
-    const item = state.pages[id];
+    const item = pages[id];
 
     if (isFolder(item)) {
       const descendentPageIds = item.children.reduce(reducer, []);
@@ -154,33 +157,36 @@ export const getDescendentPageIds = (state, itemId) => {
 export const isPage = (item) => item.type == type.PAGE;
 export const isFolder = (item) => item.type == type.FOLDER;
 
-const addChild = (state, parentId, childId) => {
-  const newChildren = [...state[parentId].children, childId];
-  const newParent = {...state[parentId], children: newChildren};
-  return {...state, [parentId]: newParent};
+const addChild = (pages, parentId, childId) => {
+  const newChildren = [...pages[parentId].children, childId];
+  const newParent = {...pages[parentId], children: newChildren};
+  return {...pages, [parentId]: newParent};
 };
 
-const removeChild = (state, parentId, childId) => {
-  const parent = state[parentId];
+const removeChild = (pages, parentId, childId) => {
+  const parent = pages[parentId];
   const newChildren = parent.children.filter((id) => id !== childId);
   const newParent = {...parent, children: newChildren};
-  return {...state, [parentId]: newParent};
+  return {...pages, [parentId]: newParent};
 };
 
-const mutateToDeleteItem = (mutableState, id) => {
-  const item = mutableState[id];
-  delete mutableState[id];
-  if (Object.prototype.hasOwnProperty.call(item, 'children')) {
+const mutateToDeleteItem = (mutablePages, id) => {
+  const item = mutablePages[id];
+  delete mutablePages[id];
+  if (isFolder(item)) {
     item.children.forEach(
-      (childId) => mutateToDeleteItem(mutableState, childId)
+      (childId) => mutateToDeleteItem(mutablePages, childId)
     );
   }
 };
 
-const findParentId = (state, id) =>
-  getFolderIds(state).find((folderId) => state[folderId].children.includes(id));
+const findParentId = (pages, id) =>
+  folderIds(pages).find((folderId) => pages[folderId].children.includes(id));
 
-const getFolderIds = (state) =>
-  Object.keys(state).filter(
-    (id) => Object.prototype.hasOwnProperty.call(state[id], 'children')
+const folderIds = (pages) =>
+  Object.keys(pages).filter(
+    (id) => isFolder(pages[id])
   );
+
+export const getFolderIds = createSelector(getPages, folderIds);
+
