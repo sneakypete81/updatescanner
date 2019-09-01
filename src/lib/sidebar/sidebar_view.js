@@ -1,12 +1,7 @@
 /* eslint-env jquery */
 
-import {Page} from '/lib/page/page.js';
-import {PageFolder} from '/lib/page/page_folder.js';
-import {PageStore} from '/lib/page/page_store.js';
-import {log} from '/lib/util/log.js';
 import {qs, $on} from '/lib/util/view_helpers.js';
-import {getItem, isPage, isFolder} from '/lib/redux/ducks/pages.js';
-import {status, ROOT_ID} from '/lib/redux/ducks/pages.js';
+import {getItem, isFolder, status, ROOT_ID} from '/lib/redux/ducks/pages.js';
 
 // See https://bugzilla.mozilla.org/show_bug.cgi?id=840640
 import dialogPolyfill from
@@ -106,7 +101,7 @@ export class SidebarView {
   }
 
   /**
-   * Generate a JSTree data object from a pageMap object.
+   * Generate a JSTree data object from the store state.
    *
    * @param {object} store - Redux store containing the pages.
    * @param {string} rootId - ID to use as the root of the tree.
@@ -247,7 +242,7 @@ export class SidebarView {
    * @param {object} handler - Callback to use to create a new Page.
    */
   registerNewPageHandler(handler) {
-    this._newPageHandler = (node) => handler(node.id);
+    this._newPageHandler = (node) => handler(this._nodeToItemId(node));
   }
 
   /**
@@ -257,7 +252,7 @@ export class SidebarView {
    * @param {object} handler - Callback to use to create a new PageFolder.
    */
   registerNewPageFolderHandler(handler) {
-    this._newPageFolderHandler = (node) => handler(node.id);
+    this._newPageFolderHandler = (node) => handler(this._nodeToItemId(node));
   }
 
   /**
@@ -267,7 +262,7 @@ export class SidebarView {
    * @param {object} handler - Callback to use whenever a node is to be deleted.
    */
   registerDeleteHandler(handler) {
-    this._deleteHandler = (node) => handler(node.id);
+    this._deleteHandler = (node) => handler(this._nodeToItemId(node));
   }
 
   /**
@@ -288,7 +283,7 @@ export class SidebarView {
    * @param {object} handler - Callback to use when 'Scan' is selected.
    */
   registerScanItemHandler(handler) {
-    this._scanItemHandler = (node) => handler(node.id);
+    this._scanItemHandler = (node) => handler(this._nodeToItemId(node));
   }
 
   /**
@@ -298,7 +293,7 @@ export class SidebarView {
    * @param {object} handler - Callback to use when 'Settings' is selected.
    */
   registerSettingsHandler(handler) {
-    this._settingsHandler = (node) => handler(node.id);
+    this._settingsHandler = (node) => handler(this._nodeToItemId(node));
   }
 
   /**

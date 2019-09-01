@@ -73,6 +73,19 @@ const handleAddFolder = (pages, action) => {
   };
 };
 
+/**
+ * Action to delete a page or folder from the store.
+ *
+ * @param {string} id - ID of the item to delete.
+ * @returns {object} Action to dispatch.
+ */
+export function deleteItem(id) {
+  return {
+    type: DELETE_ITEM,
+    id,
+  };
+}
+
 const handleDeleteItem = (pages, action) => {
   const id = String(action.id);
   const parentId = findParentId(pages, id);

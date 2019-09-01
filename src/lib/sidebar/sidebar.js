@@ -1,21 +1,16 @@
 import {SidebarView} from './sidebar_view.js';
-import {PageStore} from '/lib/page/page_store.js';
-import {Page} from '/lib/page/page.js';
 import {PageFolder} from '/lib/page/page_folder.js';
 import {openMain, paramEnum, actionEnum} from '/lib/main/main_url.js';
 import {backgroundActionEnum} from '/lib/background/actions.js';
-import {waitForMs} from '/lib/util/promise.js';
-
-const REFRESH_TIMEOUT_MS = 200;
+import {getItem, deleteItem, isPage} from '/lib/redux/ducks/pages.js';
 
 /**
  * Class representing the main Update Scanner content page.
  */
 export class Sidebar {
   /**
+   * @property {object} store - Redux store containing page data.
    * @property {Sidebar} sidebar - Object representing the sidebar element.
-   * @property {PageStore} pageStore - Object used for saving and loading data
-   * from storage.
    * @property {Page} currentPage - Currently selected page.
    * @property {view.ViewTypes} viewType - Currently selected view type.
    */
@@ -31,14 +26,7 @@ export class Sidebar {
    * Initialise the sidebar.
    */
   async init() {
-    // wait for the store to connect to the background page
-    this.pageStore = await PageStore.load();
-    // this.pageStore.bindPageUpdate(this._handleItemUpdate.bind(this));
-    // this.pageStore.bindPageFolderUpdate(this._handleItemUpdate.bind(this));
-
     this.sidebar.init();
-    // this._refreshSidebar();
-
     this.sidebar.registerSelectHandler((event, itemId) =>
       this._handleSelect(event, itemId));
     this.sidebar.registerNewPageHandler((itemId) =>
@@ -53,18 +41,11 @@ export class Sidebar {
     this.sidebar.registerSettingsHandler((itemId) =>
       this._handleSettings(itemId));
 
+    // wait for the store to connect to the background page
     await this.store.ready();
     await this.sidebar.render(this.store);
     this.store.subscribe(() => this.sidebar.render(this.store));
   }
-
-  /**
-   * Reload the sidebar view.
-   */
-  // _refreshSidebar() {
-  //   this.sidebar.load(this.pageStore.pageMap, PageStore.ROOT_ID);
-  //   this.sidebar.refresh();
-  // }
 
   /**
    * Called whenever a single item in the sidebar is selected.
@@ -73,11 +54,11 @@ export class Sidebar {
    * @param {string} itemId - Selected Page/PageFolder ID.
    */
   _handleSelect(event, itemId) {
-    const item = this.pageStore.getItem(itemId);
-    if (item instanceof Page) {
+    const item = getItem(this.store.getState(), itemId);
+    if (isPage(item)) {
       const params = {
         [paramEnum.ACTION]: actionEnum.SHOW_DIFF,
-        [paramEnum.ID]: item.id,
+        [paramEnum.ID]: itemId,
       };
 
       const newTab = event.metaKey || event.ctrlKey || (event.button == 1);
@@ -120,7 +101,7 @@ export class Sidebar {
    */
   async _handleDelete(itemId) {
     if (await this.sidebar.confirmDelete()) {
-      this.pageStore.deleteItem(itemId);
+      this.store.dispatch(deleteItem(itemId));
     }
   }
 
@@ -157,21 +138,6 @@ export class Sidebar {
       [paramEnum.ACTION]: actionEnum.SHOW_SETTINGS,
       [paramEnum.ID]: itemId,
     });
-  }
-
-  /**
-   * Called when a Page/PageFolder is updated in Storage to refresh the sidebar.
-   *
-   * @param {string} itemId - ID of the changed Item.
-   * @param {storage.StorageChange} change - Object representing the change.
-   */
-  async _handleItemUpdate(itemId, change) {
-    if (!this._isUpdating) {
-      this._isUpdating = true;
-      await waitForMs(REFRESH_TIMEOUT_MS);
-      this._isUpdating = false;
-      // this._refreshSidebar();
-    }
   }
 
   /**
