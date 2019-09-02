@@ -2,34 +2,24 @@ import * as view from './popup_view.js';
 import {openMain, showAllChanges, paramEnum, actionEnum}
   from '/lib/main/main_url.js';
 import {backgroundActionEnum} from '/lib/background/actions.js';
-import {PageStore, hasPageStateChanged, isItemChanged}
-  from '/lib/page/page_store.js';
 import {createBackupJson} from '/lib/backup/backup.js';
 import {openRestoreUrl} from '/lib/backup/restore_url.js';
-import {waitForMs} from '/lib/util/promise.js';
 
 /**
  * Class representing the Update Scanner toolbar popup.
  */
 export class Popup {
   /**
-   * @property {PageStore} pageStore - Object used for saving and loading data
-   * from storage.
+   * @property {object} store - Redux store containing page data.
    */
   constructor() {
-    this.pageStore = null;
+    this.store = new window.WebextRedux.Store();
   }
 
   /**
    * Initialises the popup data and event handlers.
    */
   async init() {
-    // Small delay to allow popup to render
-    await waitForMs(100);
-
-    this.pageStore = await PageStore.load();
-    this.pageStore.bindPageUpdate(this._handlePageUpdate.bind(this));
-
     view.init();
     view.bindShowAllClick(this._handleShowAllClick.bind(this));
     view.bindNewClick(this._handleNewClick.bind(this));
@@ -40,17 +30,10 @@ export class Popup {
     view.bindHelpClick(this._handleHelpClick.bind(this));
     view.bindPageClick(this._handlePageClick.bind(this));
 
-    this._refreshPageList();
-  }
-
-  /**
-   * Update the page list to show all pages in the 'changed'' state.
-   */
-  _refreshPageList() {
-    view.clearPageList();
-    this.pageStore.getPageList()
-      .filter(isItemChanged)
-      .map(view.addPage);
+    // wait for the store to connect to the background page
+    await this.store.ready();
+    await view.render(this.store);
+    this.store.subscribe(() => view.render(this.store));
   }
 
   /**
@@ -135,19 +118,6 @@ export class Popup {
         [paramEnum.ID]: pageId,
       };
       openMain(params, true);
-    }
-  }
-
-  /**
-   * Called when a Page is updated in Storage. Refresh the page list if its
-   * state changed.
-   *
-   * @param {string} pageId - ID of the changed Page.
-   * @param {storage.StorageChange} change - Object representing the change.
-   */
-  _handlePageUpdate(pageId, change) {
-    if (hasPageStateChanged(change)) {
-      this._refreshPageList();
     }
   }
 }
