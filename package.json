@@ -15,7 +15,7 @@
     "@octokit/rest": "^16.28.7",
     "eslint": "^6.2.2",
     "eslint-config-google": "^0.13.0",
-    "eslint-plugin-jsdoc": "^15.8.4",
+    "eslint-plugin-jsdoc": "^15.9.1",
     "jasmine-core": "^3.4.0",
     "jasmine-data-provider": "^2.2.0",
     "jasmine-jquery": "^2.1.1",
