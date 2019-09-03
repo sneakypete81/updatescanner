@@ -1,6 +1,7 @@
 import {qs, $on, hideElement, toggleElement}
   from '/lib/util/view_helpers.js';
 import {timeSince} from '/lib/util/date_format.js';
+import {status} from '/lib/redux/ducks/pages.js';
 
 export const ViewTypes = {
   OLD: 'old',
@@ -63,7 +64,7 @@ export function bindViewDropdownChange(handler) {
  */
 export function viewDiff(page, html) {
   setTitle(page.title, page.url);
-  if (page.isError()) {
+  if (page.status == status.ERROR) {
     setSubtitle('This page returned an error when scanned. ' +
       'Click the title above to see what\'s wrong.');
   } else if (page.newScanTime == null) {

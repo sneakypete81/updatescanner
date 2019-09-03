@@ -7,6 +7,7 @@ import {Page} from '/lib/page/page.js';
 import {PageFolder} from '/lib/page/page_folder.js';
 import {diff} from '/lib/diff/diff.js';
 import {log} from '/lib/util/log.js';
+import {getItem, status, editPage} from '/lib/redux/ducks/pages.js';
 
 // Allow function mocking
 export const __ = {
@@ -20,14 +21,13 @@ export const __ = {
  */
 export class Main {
   /**
-   * @property {PageStore} pageStore - Object used for saving and loading data
-   * from storage.
-   * @property {Page} currentPage - Currently selected page.
+   * @property {object} store - Redux store containing page data.
+   * @property {string} currentPageId - Currently selected page.
    * @property {view.ViewTypes} viewType - Currently selected view type.
    */
   constructor() {
-    this.pageStore = null;
-    this.currentPage = null;
+    this.store = new window.WebextRedux.Store();
+    this.currentPageId = null;
     this.viewType = view.ViewTypes.DIFF;
   }
 
@@ -35,8 +35,6 @@ export class Main {
    * Initialise the main page's content iframe.
    */
   async init() {
-    this.pageStore = await PageStore.load();
-
     view.init();
     view.bindMenu({
       settingsHandler: this._handleMenuSettings.bind(this),
@@ -45,6 +43,9 @@ export class Main {
     view.bindViewDropdownChange(this._handleViewDropdownChange.bind(this));
 
     dialog.init();
+
+    // wait for the store to connect to the background page
+    await this.store.ready();
 
     this._handleUrlParams(window.location.search);
   }
@@ -79,8 +80,7 @@ export class Main {
       }
       case actionEnum.SHOW_DIFF:
       {
-        this._showDiff(this.pageStore.getItem(
-          this._getUrlParam(params, paramEnum.ID)));
+        this._showDiff(this._getUrlParam(params, paramEnum.ID));
         break;
       }
       case actionEnum.SHOW_SETTINGS:
@@ -213,18 +213,16 @@ export class Main {
   /**
    * Show the diff view of the Page, and update the page state to NO_CHANGE.
    *
-   * @param {Page} page - Page to view.
-   *
-   * @returns {Promise} A Promise that fulfils once the view has been updated.
+   * @param {string} pageId - ID of the Page to view.
    */
-  _showDiff(page) {
-    if (page.isChanged()) {
-      page.state = Page.stateEnum.NO_CHANGE;
-      page.save();
+  async _showDiff(pageId) {
+    const page = getItem(this.store.getState(), pageId);
+    if (page.status == status.CHANGED) {
+      this.store.dispatch(editPage(pageId, {status: status.NO_CHANGE}));
     }
-    this.currentPage = page;
+    this.currentPageId = pageId;
     this.viewType = view.ViewTypes.DIFF;
-    return this._refreshView();
+    await this._refreshView();
   }
 
   /**
@@ -260,21 +258,24 @@ export class Main {
    * Refresh the view, reloading any necessary HTML from storage.
    */
   async _refreshView() {
-    const page = this.currentPage;
+    const pageId = this.currentPageId;
+    const page = getItem(this.store.getState(), pageId);
 
     switch (this.viewType) {
       case view.ViewTypes.OLD:
       {
-        const html = _updateHeader(page,
-          await loadHtml(page, PageStore.htmlTypes.OLD) || '');
+        const rawHtml = await loadHtml(
+          pageId, page.title, PageStore.htmlTypes.OLD) || '';
+        const html = _updateHeader(page.url, rawHtml);
         view.viewOld(page, html);
         break;
       }
 
       case view.ViewTypes.NEW:
       {
-        const html = _updateHeader(page,
-          await loadHtml(page, PageStore.htmlTypes.NEW) || '');
+        const rawHtml = await loadHtml(
+          pageId, page.title, PageStore.htmlTypes.NEW) || '';
+        const html = _updateHeader(page.url, rawHtml);
         view.viewNew(page, html);
         break;
       }
@@ -282,7 +283,8 @@ export class Main {
       case view.ViewTypes.DIFF:
       default:
       {
-        const html = _updateHeader(page, await loadDiff(page));
+        const rawHtml = await loadDiff(pageId, page.title);
+        const html = _updateHeader(page.url, rawHtml);
         __.viewDiff(page, html);
       }
     }
@@ -293,30 +295,32 @@ export class Main {
  * Load the HTMLs of the specified page, perform a diff and return the
  * highlighted HTML.
  *
- * @param {Page} page - Page object to load.
+ * @param {string} pageId - ID of the Page to load.
+ * @param {string} title - Title of the Page to load.
  *
  * @returns {Promise} A promise that fulfils with the highlighted HTML string.
  */
-async function loadDiff(page) {
-  const oldHtml = await loadHtml(page, PageStore.htmlTypes.OLD);
-  const newHtml = await loadHtml(page, PageStore.htmlTypes.NEW);
-  return __.diff(page, oldHtml, newHtml);
+async function loadDiff(pageId, title) {
+  const oldHtml = await loadHtml(pageId, title, PageStore.htmlTypes.OLD);
+  const newHtml = await loadHtml(pageId, title, PageStore.htmlTypes.NEW);
+  return __.diff(oldHtml, newHtml);
 }
 
 /**
  * Load the specified Page HTML from the PageStore.
  *
- * @param {Page} page - Page to load.
+ * @param {string} pageId - ID of the Page to load.
+ * @param {string} title - Title of the Page to load.
  * @param {string} htmlType - PageStore.htmlTypes string identifying the HTML
  * type.
  * @returns {Promise} A Promise to be fulfilled with the requested HTML, or
  * null if the HTML does not exist in storage.
  */
-async function loadHtml(page, htmlType) {
-  const html = await PageStore.loadHtml(page.id, htmlType);
+async function loadHtml(pageId, title, htmlType) {
+  const html = await PageStore.loadHtml(pageId, htmlType);
 
   if (html === null) {
-    __.log(`Could not load '${page.title}' ${htmlType} HTML from storage`);
+    __.log(`Could not load '${title}' ${htmlType} HTML from storage`);
   }
   return html;
 }
@@ -324,11 +328,11 @@ async function loadHtml(page, htmlType) {
 /**
  * Update the HTML header with a <base href> for the page.
  *
- * @param {Page} page - Page to update.
+ * @param {string} url - URL of the page.
  * @param {string} html - HTML page content type.
  * @returns {string} Updated HTML page content.
  */
-function _updateHeader(page, html) {
+function _updateHeader(url, html) {
   // @TODO: Only add if there's no existing <base href> tag
-  return `<base href="${page.url}" target="_top">` + html;
+  return `<base href="${url}" target="_top">` + html;
 }
