@@ -1,7 +1,6 @@
 import {qs, $on, $delegate, findParentWithClass,
   showElement, hideElement, isHidden} from '/lib/util/view_helpers.js';
 import {waitForMs} from '/lib/util/promise.js';
-import {getItem, getChangedPageIds} from '/lib/redux/ducks/pages.js';
 
 /**
  * Initialise the Popup view.
@@ -11,21 +10,6 @@ export function init() {
   $on(qs('#backup-menu'), 'click', showBackupPanel);
   $on(qs('#restore-menu'), 'click', showRestorePanel);
 }
-
-/**
- * Render the page list to show all pages in the 'changed'' state.
- *
- * @param {object} store - Redux store containing the pages.
- */
-export function render(store) {
-  const pageIds = getChangedPageIds(store.getState());
-
-  clearPageList();
-  pageIds.map(
-    (id) => addPage(id, getItem(store.getState(), id).title)
-  );
-}
-
 
 /**
  * @param {Function} handler - Called when the ShowAll button is clicked.
@@ -107,7 +91,7 @@ export async function downloadUrl(url, filename) {
 /**
  * Remove all items from the list of updated pages.
  */
-function clearPageList() {
+export function clearPageList() {
   qs('#list').innerHTML = '';
 }
 
@@ -117,7 +101,7 @@ function clearPageList() {
  * @param {string} pageId - ID of the page.
  * @param {string} title - Title of the page.
  */
-function addPage(pageId, title) {
+export function addPage(pageId, title) {
   qs('#list').appendChild(createListItem(pageId, title));
 }
 

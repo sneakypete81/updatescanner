@@ -4,6 +4,7 @@ import {openMain, showAllChanges, paramEnum, actionEnum}
 import {backgroundActionEnum} from '/lib/background/actions.js';
 import {createBackupJson} from '/lib/backup/backup.js';
 import {openRestoreUrl} from '/lib/backup/restore_url.js';
+import {getItem, getChangedPageIds} from '/lib/redux/ducks/pages.js';
 
 /**
  * Class representing the Update Scanner toolbar popup.
@@ -32,8 +33,20 @@ export class Popup {
 
     // wait for the store to connect to the background page
     await this.store.ready();
-    await view.render(this.store);
-    this.store.subscribe(() => view.render(this.store));
+    this._render();
+    this.store.subscribe(() => this._render());
+  }
+
+  /**
+   * Render the page list to show all pages in the 'changed'' state.
+   */
+  _render() {
+    const pageIds = getChangedPageIds(this.store.getState());
+
+    view.clearPageList();
+    pageIds.map(
+      (id) => view.addPage(id, getItem(this.store.getState(), id).title)
+    );
   }
 
   /**
