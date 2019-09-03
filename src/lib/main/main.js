@@ -7,7 +7,9 @@ import {Page} from '/lib/page/page.js';
 import {PageFolder} from '/lib/page/page_folder.js';
 import {diff} from '/lib/diff/diff.js';
 import {log} from '/lib/util/log.js';
-import {getItem, status, editPage} from '/lib/redux/ducks/pages.js';
+import {
+  getItem, status, editPage, isPage, isFolder,
+} from '/lib/redux/ducks/pages.js';
 
 // Allow function mocking
 export const __ = {
@@ -85,12 +87,12 @@ export class Main {
       }
       case actionEnum.SHOW_SETTINGS:
       {
-        const item = this.pageStore.getItem(
-          this._getUrlParam(params, paramEnum.ID));
-        if (item instanceof Page) {
-          this._showPageSettings(item);
-        } else {
-          this._showPageFolderSettings(item);
+        const id = this._getUrlParam(params, paramEnum.ID);
+        const item = getItem(this.store.getState(), id);
+        if (isPage(item)) {
+          this._showPageSettings(id);
+        } else if (isFolder(item)) {
+          this._showPageFolderSettings(id);
         }
         break;
       }
@@ -173,7 +175,7 @@ export class Main {
    * Called whenever the 'Page Settings' item is chosen from the menu.
    */
   _handleMenuSettings() {
-    this._showPageSettings(this.currentPage);
+    this._showPageSettings(this.currentPageId);
   }
 
   /**
@@ -228,15 +230,17 @@ export class Main {
   /**
    * Show the Page settings dialog.
    *
-   * @param {Page} page - Page to edit.
+   * @param {string} pageId - ID of the Page to edit.
    */
-  async _showPageSettings(page) {
-    this.currentPage = page;
+  async _showPageSettings(pageId) {
+    this.currentPageId = pageId;
+    const page = getItem(this.store.getState(), pageId);
+
     const newSettings = await dialog.openPageDialog(page);
     if (newSettings !== null) {
-      this._updateCurrentPage(newSettings);
+      await this.store.dispatch(editPage(pageId, newSettings));
     }
-    document.location.replace(getMainDiffUrl(this.currentPage.id));
+    document.location.replace(getMainDiffUrl(this.currentPageId));
   }
 
   /**

@@ -26,7 +26,7 @@ export function init() {
 /**
  * Show the settings dialog for the specified Page.
  *
- * @param {Page} page - Page object to view.
+ * @param {object} page - Page object to view.
  *
  * @returns {Promise} Promise that resolves with an object containing the
  * updated page settings.
