@@ -113,7 +113,12 @@ export function editPage(id, page) {
 
 const handleEditPage = (pages, action) => {
   const id = String(action.id);
-  const newPage = {...pages[id], ...action.page};
+  const page = pages[id];
+  if (!isPage(page)) {
+    return pages;
+  }
+
+  const newPage = {...page, ...action.page};
   return {...pages, [id]: newPage};
 };
 
