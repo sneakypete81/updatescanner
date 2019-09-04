@@ -3,12 +3,11 @@ import * as dialog from './dialog_view.js';
 import {getMainDiffUrl, paramEnum, actionEnum} from './main_url.js';
 import {openDebugInfo} from '/lib/debug_info/debug_info_url.js';
 import {PageStore} from '/lib/page/page_store.js';
-import {Page} from '/lib/page/page.js';
-import {PageFolder} from '/lib/page/page_folder.js';
 import {diff} from '/lib/diff/diff.js';
 import {log} from '/lib/util/log.js';
 import {
-  getItem, status, editPage, editFolder, isPage, isFolder,
+  getItem, getNextId, status, addPage, addFolder, editPage, editFolder,
+  isPage, isFolder,
 } from '/lib/redux/ducks/pages.js';
 
 // Allow function mocking
@@ -66,8 +65,7 @@ export class Main {
         this._createNewPage(
           this._getUrlParam(params, paramEnum.TITLE),
           this._getUrlParam(params, paramEnum.URL),
-          this._getUrlParam(params, paramEnum.PARENT_ID),
-          parseInt(this._getUrlParam(params, paramEnum.INSERT_AFTER_INDEX)),
+          this._getUrlParam(params, paramEnum.INSERT_AFTER),
         );
         break;
       }
@@ -75,8 +73,7 @@ export class Main {
       {
         this._createNewPageFolder(
           this._getUrlParam(params, paramEnum.TITLE),
-          this._getUrlParam(params, paramEnum.PARENT_ID),
-          parseInt(this._getUrlParam(params, paramEnum.INSERT_AFTER_INDEX)),
+          this._getUrlParam(params, paramEnum.INSERT_AFTER),
         );
         break;
       }
@@ -123,27 +120,25 @@ export class Main {
    *
    * @param {string} title - Default title field.
    * @param {string} url - Default url field.
-   * @param {string} parentId - Parent folder of the new Page.
-   * @param {integer} insertAfterIndex - Add the page after this item in the
-   * parent folder. If negative, the Page will be added to the end of the parent
-   * folder.
+   * @param {string} insertAfter - Add the page after this item ID.
+   * If undefined, the Page will be added to the end of the parent folder.
    */
-  async _createNewPage(title, url='',
-                       parentId=PageStore.ROOT_ID, insertAfterIndex=-1) {
+  async _createNewPage(title='', url='', insertAfter) {
+    const page = {title, url};
     if (url.startsWith('about') || url.startsWith('moz-extension')) {
-      title = undefined;
-      url = undefined;
+      page.title = '';
+      page.url = '';
     }
 
-    const temporaryPage = new Page(-1, {title: title, url: url});
-    const newSettings = await dialog.openPageDialog(temporaryPage);
+    const newSettings = await dialog.openPageDialog(page);
 
     if (newSettings === null) {
       document.location.replace('about:blank');
     } else {
-      this.currentPage = await this.pageStore.createPage(
-        parentId, insertAfterIndex);
-      this._updateCurrentPage(newSettings);
+      this.currentPageId = getNextId(this.store.getState());
+      await this.store.dispatch(addPage({page: newSettings, parentId:'0'}));
+
+      document.location.replace(getMainDiffUrl(this.currentPageId));
       // @TODO: Scan it immediately
     }
   }
@@ -152,21 +147,16 @@ export class Main {
    * _Show the Dialog to create a new PageFolder.
    *
    * @param {string} title - Default title field.
-   * @param {string} parentId - Parent folder of the new PageFolder.
-   * @param {integer} insertAfterIndex - Add the PageFolder after this item in
-   * the parent folder. If negative, the PageFolder will be added to the end of
-   * the parent folder.
+   * @param {string} insertAfter - Add the folder after this item ID.
+   * If undefined, the folder will be added to the end of the parent folder.
    */
-  async _createNewPageFolder(title,
-                             parentId=PageStore.ROOT_ID,
-                             insertAfterIndex=-1) {
-    const temporaryPageFolder = new PageFolder(-1, {title: title});
-    const newSettings = await dialog.openPageFolderDialog(temporaryPageFolder);
+  async _createNewPageFolder(title='', insertAfter) {
+    const folder = {title};
+    const newSettings = await dialog.openPageFolderDialog(folder);
     if (newSettings !== null) {
-      const pageFolder = await this.pageStore
-        .createPageFolder(parentId, insertAfterIndex);
-      pageFolder.title = newSettings.title;
-      pageFolder.save();
+      await this.store.dispatch(
+        addFolder({title: newSettings.title, parentId:'0'})
+      );
     }
     document.location.replace('about:blank');
   }
@@ -183,23 +173,6 @@ export class Main {
    */
   _handleMenuDebug() {
     openDebugInfo(this.currentPage.id);
-  }
-
-  /**
-   * Update the current Page with new settings from the Settings dialog.
-   *
-   * @param {object} newSettings - Settings to apply to the current page.
-   */
-  async _updateCurrentPage(newSettings) {
-    this.currentPage = await Page.load(this.currentPage.id);
-    this.currentPage.title = newSettings.title;
-    this.currentPage.url = newSettings.url;
-    this.currentPage.scanRateMinutes = newSettings.scanRateMinutes;
-    this.currentPage.changeThreshold = newSettings.changeThreshold;
-    this.currentPage.ignoreNumbers = newSettings.ignoreNumbers;
-    this.currentPage.save();
-
-    document.location.replace(getMainDiffUrl(this.currentPage.id));
   }
 
   /**

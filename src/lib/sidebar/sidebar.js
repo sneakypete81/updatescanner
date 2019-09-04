@@ -1,5 +1,4 @@
 import {SidebarView} from './sidebar_view.js';
-import {PageFolder} from '/lib/page/page_folder.js';
 import {openMain, paramEnum, actionEnum} from '/lib/main/main_url.js';
 import {backgroundActionEnum} from '/lib/background/actions.js';
 import {getItem, deleteItem, isPage} from '/lib/redux/ducks/pages.js';
@@ -72,11 +71,9 @@ export class Sidebar {
    * @param {string} itemId - Node that was right-clicked.
    */
   _handleNewPage(itemId) {
-    const parentPosition = this._getParentPositionOf(itemId);
     openMain({
       [paramEnum.ACTION]: actionEnum.NEW_PAGE,
-      [paramEnum.PARENT_ID]: parentPosition.parentId,
-      [paramEnum.INSERT_AFTER_INDEX]: parentPosition.insertAfterIndex,
+      [paramEnum.INSERT_AFTER]: itemId,
     });
   }
 
@@ -86,11 +83,9 @@ export class Sidebar {
    * @param {string} itemId - Node that was right-clicked.
    */
   _handleNewPageFolder(itemId) {
-    const parentPosition = this._getParentPositionOf(itemId);
     openMain({
       [paramEnum.ACTION]: actionEnum.NEW_PAGE_FOLDER,
-      [paramEnum.PARENT_ID]: parentPosition.parentId,
-      [paramEnum.INSERT_AFTER_INDEX]: parentPosition.insertAfterIndex,
+      [paramEnum.INSERT_AFTER]: itemId,
     });
   }
 
@@ -138,28 +133,5 @@ export class Sidebar {
       [paramEnum.ACTION]: actionEnum.SHOW_SETTINGS,
       [paramEnum.ID]: itemId,
     });
-  }
-
-  /**
-   * @param {string} itemId - Sidebar item that was clicked.
-   *
-   * @returns {object} Object indicating where to insert a new item.
-   * Attribute parentId - Parent PageFolder of the new item.
-   * Attribute insertAfterIndex - Child index of the new item.
-   */
-  _getParentPositionOf(itemId) {
-    const item = this.pageStore.getItem(itemId);
-    if (item instanceof PageFolder) {
-      return {
-        parentId: itemId,
-        insertAfterIndex: -1,
-      };
-    } else {
-      const parent = this.pageStore.findParent(itemId);
-      return {
-        parentId: parent.id,
-        insertAfterIndex: parent.children.indexOf(itemId),
-      };
-    }
   }
 }

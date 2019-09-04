@@ -40,7 +40,7 @@ export default function reducer(pages=initialPages, action) {
 /**
  * Action to add a new page to the store.
  *
- * @param {pbject} args - Arguments object.
+ * @param {object} args - Arguments object.
  * @param {object} args.page - Page object to add.
  * @param {string} args.parentId - ID of the parent folder for the page.
  * @returns {object} Action to dispatch.
@@ -62,10 +62,25 @@ const handleAddPage = (pages, action) => {
   };
 };
 
+/**
+ * Action to add a new folder to the store.
+ *
+ * @param {object} args - Arguments object.
+ * @param {object} args.title - Folder title.
+ * @param {string} args.parentId - ID of the parent folder for the folder.
+ * @returns {object} Action to dispatch.
+ */
+export function addFolder({title, parentId}) {
+  return {
+    type: ADD_FOLDER,
+    title,
+    parentId};
+}
+
 const handleAddFolder = (pages, action) => {
   const id = String(pages.nextId);
   const parentId = String(action.parentId);
-  const newFolder = {...action.folder, type: type.FOLDER, children: []};
+  const newFolder = {title: action.title, type: type.FOLDER, children: []};
   return {
     ...addChild(pages, parentId, id),
     [id]: newFolder,
@@ -192,6 +207,7 @@ export const isPage = (item) => item.type == type.PAGE;
 export const isFolder = (item) => item.type == type.FOLDER;
 
 export const getItem = (state, id) => getPages(state)[id];
+export const getNextId = (state) => getPages(state).nextId;
 
 export const getPageIds = createSelector(getPages, pageIds);
 
