@@ -50,7 +50,7 @@ highlightColour:  ${page.highlightColour}
 markChanges:      ${page.markChanges}
 doPost:           ${page.doPost}
 postParams:       ${page.postParams}
-state:            ${page.state}
+status:           ${page.status}
 lastAutoscanTime: ${lastAutoscanTime}
 oldScanTime:      ${oldScanTime}
 newScanTime:      ${newScanTime}`;

@@ -172,7 +172,7 @@ export class Main {
    * Called whenever the 'Debug Info' item is chosen from the menu.
    */
   _handleMenuDebug() {
-    openDebugInfo(this.currentPage.id);
+    openDebugInfo(this.currentPageId);
   }
 
   /**

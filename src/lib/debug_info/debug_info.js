@@ -1,6 +1,7 @@
 import {paramEnum} from './debug_info_url.js';
 import * as view from './debug_info_view.js';
 import {PageStore} from '/lib/page/page_store.js';
+import {getItem} from '/lib/redux/ducks/pages.js';
 
 /**
  * Class representing the Debug Info page.
@@ -20,17 +21,19 @@ export class DebugInfo {
    * Initialise the page content.
    */
   async init() {
-    const id = this._getUrlId(window.location.search);
+    const pageId = this._getUrlId(window.location.search);
+    const store = new window.WebextRedux.Store();
+    // wait for the store to connect to the background page
+    await store.ready();
 
-    const pageStore = await PageStore.load();
-    this.page = pageStore.getItem(id);
+    this.page = getItem(store.getState(), pageId);
 
     view.bind({
       downloadNewHandler: this._handleDownloadNew.bind(this),
       downloadOldHandler: this._handleDownloadOld.bind(this),
     });
 
-    this.showInfo();
+    this.showInfo(pageId);
   }
 
   /**
@@ -48,12 +51,14 @@ export class DebugInfo {
 
   /**
    * Display debug info for the page.
+   *
+   * @param {string} pageId - ID of the page to display.
    */
-  async showInfo() {
+  async showInfo(pageId) {
     this.oldHtml = await PageStore.loadHtml(
-      this.page.id, PageStore.htmlTypes.OLD) || '';
+      pageId, PageStore.htmlTypes.OLD) || '';
     this.newHtml = await PageStore.loadHtml(
-      this.page.id, PageStore.htmlTypes.NEW) || '';
+      pageId, PageStore.htmlTypes.NEW) || '';
 
     view.update(this.page, this.oldHtml, this.newHtml);
   }
