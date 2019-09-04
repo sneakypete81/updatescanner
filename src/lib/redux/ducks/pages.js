@@ -117,14 +117,30 @@ const handleEditPage = (pages, action) => {
   return {...pages, [id]: newPage};
 };
 
+/**
+ * Action to edit an existing Folder.
+ *
+ * @param {string} id - ID of the folder to edit.
+ * @param {string} title - New folder title.
+ * @returns {object} Action to dispatch.
+ */
+export function editFolder(id, title) {
+  return {
+    type: EDIT_FOLDER,
+    id,
+    title,
+  };
+}
+
 const handleEditFolder = (pages, action) => {
   const id = String(action.id);
-  const newPage = {
-    ...pages[id],
-    ...action.folder,
-    children: pages[id].children,
-  };
-  return {...pages, [id]: newPage};
+  const folder = pages[id];
+  if (!isFolder(folder)) {
+    return pages;
+  }
+
+  const newFolder = {...folder, title: action.title};
+  return {...pages, [id]: newFolder};
 };
 
 

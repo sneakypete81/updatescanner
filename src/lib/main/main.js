@@ -8,7 +8,7 @@ import {PageFolder} from '/lib/page/page_folder.js';
 import {diff} from '/lib/diff/diff.js';
 import {log} from '/lib/util/log.js';
 import {
-  getItem, status, editPage, isPage, isFolder,
+  getItem, status, editPage, editFolder, isPage, isFolder,
 } from '/lib/redux/ducks/pages.js';
 
 // Allow function mocking
@@ -246,14 +246,13 @@ export class Main {
   /**
    * Show the PageFolder settings dialog.
    *
-   * @param {PageFolder} pageFolder - PageFolder to edit.
+   * @param {string} pageFolderId - ID of the PageFolder to edit.
    */
-  async _showPageFolderSettings(pageFolder) {
-    const newSettings = await dialog.openPageFolderDialog(pageFolder);
+  async _showPageFolderSettings(pageFolderId) {
+    const folder = getItem(this.store.getState(), pageFolderId);
+    const newSettings = await dialog.openPageFolderDialog(folder);
     if (newSettings !== null) {
-      const updatedPageFolder = await PageFolder.load(pageFolder.id);
-      updatedPageFolder.title = newSettings.title;
-      updatedPageFolder.save();
+      await this.store.dispatch(editFolder(pageFolderId, newSettings.title));
     }
     document.location.replace('about:blank');
   }

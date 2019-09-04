@@ -26,7 +26,7 @@ export function init() {
 /**
  * Show the settings dialog for the specified Page.
  *
- * @param {object} page - Page object to view.
+ * @param {object} page - Page object to edit.
  *
  * @returns {Promise} Promise that resolves with an object containing the
  * updated page settings.
@@ -75,7 +75,7 @@ export function openPageDialog(page) {
 /**
  * Show the settings dialog for the specified PageFolder.
  *
- * @param {PageFolder} pageFolder - PageFolder object to view.
+ * @param {object} pageFolder - PageFolder object to edit.
  *
  * @returns {Promise} Promise that resolves with an object containing the
  * updated pageFolder settings.
