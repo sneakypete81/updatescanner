@@ -12,7 +12,7 @@
     "jstree": "3.3.8"
   },
   "devDependencies": {
-    "@octokit/rest": "^16.28.8",
+    "@octokit/rest": "^16.28.9",
     "eslint": "^6.3.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-jsdoc": "^15.9.1",
