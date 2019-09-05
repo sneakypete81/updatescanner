@@ -2,6 +2,7 @@ import {type} from './type.js';
 import {validatePage, validatePageWithDefaults, status} from './page.js';
 export {status};
 import {createSelector} from '/dependencies/module/reselect/src/index.js';
+import {PageStore} from '/lib/page/page_store.js';
 
 const ADD_PAGE = 'pages/ADD_PAGE';
 const ADD_FOLDER = 'pages/ADD_FOLDER';
@@ -55,6 +56,10 @@ export function addPage({page, parentId}) {
 const handleAddPage = (pages, action) => {
   const id = String(pages.nextId);
   const parentId = String(action.parentId);
+
+  // Delete any residual HTML associated with the ID
+  PageStore.deleteHtml(id);
+
   return {
     ...addChild(pages, parentId, id),
     [id]: {...action.page},
@@ -95,6 +100,10 @@ const handleAddFolder = (pages, action) => {
  * @returns {object} Action to dispatch.
  */
 export function deleteItem(id) {
+
+  // Delete any residual HTML associated with the ID
+  PageStore.deleteHtml(id);
+
   return {
     type: DELETE_ITEM,
     id,
