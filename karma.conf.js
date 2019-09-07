@@ -36,6 +36,10 @@ module.exports = function(config) {
       },
 
       {
+        pattern: 'test/unit/stubs/**/*.js',
+      },
+
+      {
         pattern: 'test/unit/*_spec.js',
         type: 'module',
       },
