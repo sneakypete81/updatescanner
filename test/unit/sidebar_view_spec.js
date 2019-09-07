@@ -1,14 +1,13 @@
 import {SidebarView} from '/lib/sidebar/sidebar_view.js';
-import {Page} from '/lib/page/page.js';
-import {PageFolder} from '/lib/page/page_folder.js';
 
 describe('Sidebar', function() {
   describe('_generateTree', function() {
     it('generates a tree with an empty root', function() {
-      const map = new Map([
-        ['0', new PageFolder('0', {title: 'root', children: []})],
-      ]);
-      const tree = new SidebarView()._generateTree(map, map.get('0'));
+      const store = {getState: () => ({pages: {
+        '0': {title: 'root', type: 'folder', children: []},
+      }})};
+
+      const tree = new SidebarView()._generateTree(store, '0');
 
       expect(tree.id).toEqual('0');
       expect(tree.text).toEqual('root');
@@ -16,11 +15,12 @@ describe('Sidebar', function() {
     });
 
     it('generates a tree with a single page', function() {
-      const map = new Map([
-        ['0', new PageFolder('0', {title: 'root', children: ['1']})],
-        ['1', new Page('1', {title: 'Page1'})],
-      ]);
-      const tree = new SidebarView()._generateTree(map, map.get('0'));
+      const store = {getState: () => ({pages: {
+        '0': {title: 'root', type: 'folder', children: ['1']},
+        '1': {title: 'Page1', type: 'page'},
+      }})};
+
+      const tree = new SidebarView()._generateTree(store, '0');
 
       expect(tree.id).toEqual('0');
       expect(tree.text).toEqual('root');
@@ -30,11 +30,12 @@ describe('Sidebar', function() {
     });
 
     it('generates a tree with a single folder', function() {
-      const map = new Map([
-        ['0', new PageFolder('0', {title: 'root', children: ['1']})],
-        ['1', new PageFolder('1', {title: 'subfolder', children: []})],
-      ]);
-      const tree = new SidebarView()._generateTree(map, map.get('0'));
+      const store = {getState: () => ({pages: {
+        '0': {title: 'root', type: 'folder', children: ['1']},
+        '1': {title: 'subfolder', type: 'folder', children: []},
+      }})};
+
+      const tree = new SidebarView()._generateTree(store, '0');
 
       expect(tree.id).toEqual('0');
       expect(tree.text).toEqual('root');
@@ -45,13 +46,14 @@ describe('Sidebar', function() {
     });
 
     it('generates a tree with pages and folders', function() {
-      const map = new Map([
-        ['0', new PageFolder('0', {title: 'root', children: ['1', '2']})],
-        ['1', new PageFolder('1', {title: 'subfolder', children: ['3']})],
-        ['2', new Page('2', {title: 'Page2'})],
-        ['3', new Page('3', {title: 'Page3'})],
-      ]);
-      const tree = new SidebarView()._generateTree(map, map.get('0'));
+      const store = {getState: () => ({pages: {
+        '0': {title: 'root', type: 'folder', children: ['1', '2']},
+        '1': {title: 'subfolder', type: 'folder', children: ['3']},
+        '2': {title: 'Page2', type: 'page'},
+        '3': {title: 'Page3', type: 'page'},
+      }})};
+
+      const tree = new SidebarView()._generateTree(store, '0');
 
       expect(tree.id).toEqual('0');
       expect(tree.text).toEqual('root');
