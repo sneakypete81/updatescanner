@@ -136,7 +136,7 @@ export class Main {
       document.location.replace('about:blank');
     } else {
       this.currentPageId = getNextId(this.store.getState());
-      await this.store.dispatch(addPage({page: newSettings, parentId:'0'}));
+      await this.store.dispatch(addPage({page: newSettings, parentId: '0'}));
 
       document.location.replace(getMainDiffUrl(this.currentPageId));
       // @TODO: Scan it immediately
@@ -155,7 +155,7 @@ export class Main {
     const newSettings = await dialog.openPageFolderDialog(folder);
     if (newSettings !== null) {
       await this.store.dispatch(
-        addFolder({title: newSettings.title, parentId:'0'})
+        addFolder({title: newSettings.title, parentId: '0'})
       );
     }
     document.location.replace('about:blank');

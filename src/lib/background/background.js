@@ -64,9 +64,9 @@ export class Background {
    * Called whenever the UI needs to be re-rendered from the Redux store.
    */
   _render() {
-    console.log("updated state:");
+    console.log('updated state:');
     console.log(store.getState());
-    console.log("changed pages:");
+    console.log('changed pages:');
     console.log(getChangedPageIds(store.getState()));
     this._updateIcon(getChangedPageIds(store.getState()).length);
   }
