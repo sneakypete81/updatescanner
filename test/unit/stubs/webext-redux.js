@@ -1,2 +1,4 @@
-window.WebextRedux.wrapStore = () => {};
-window.WebextRedux.Store = class {};
+window.WebextRedux = {
+  wrapStore: () => {},
+  Store: class {},
+};
