@@ -69,6 +69,7 @@ describe('scan', function() {
       );
       spyOn(scanModule.__.store, 'dispatch');
       spyOn(PageStore, 'saveHtml');
+      spyOn(scanModule.__, 'isAutoscanPending').and.returnValue(false);
 
       const result = await scanModule.__.updatePageState(this.id, html, html);
 
@@ -95,6 +96,7 @@ describe('scan', function() {
           {pages: {[this.id]: this.page}});
         spyOn(scanModule.__.store, 'dispatch');
         spyOn(PageStore, 'saveHtml');
+        spyOn(scanModule.__, 'isAutoscanPending').and.returnValue(false);
 
         const result = await scanModule.__
           .updatePageState(this.id, html, html);
@@ -122,6 +124,7 @@ describe('scan', function() {
       );
       spyOn(scanModule.__.store, 'dispatch');
       spyOn(PageStore, 'saveHtml');
+      spyOn(scanModule.__, 'isAutoscanPending').and.returnValue(false);
 
       const result = await scanModule.__.updatePageState(this.id, '', html);
 
@@ -150,6 +153,7 @@ describe('scan', function() {
       spyOn(scanModule.__.store, 'dispatch');
       spyOn(PageStore, 'saveHtml');
       spyOn(scanModule.__, 'isMajorChange').and.returnValues(false);
+      spyOn(scanModule.__, 'isAutoscanPending').and.returnValue(false);
 
       const result = await scanModule.__.updatePageState(this.id, html1, html2);
 
@@ -177,6 +181,7 @@ describe('scan', function() {
           {pages: {[this.id]: this.page}});
         spyOn(scanModule.__.store, 'dispatch');
         spyOn(PageStore, 'saveHtml');
+        spyOn(scanModule.__, 'isAutoscanPending').and.returnValue(false);
         spyOn(scanModule.__, 'isMajorChange').and.returnValues(false);
 
         const result = await scanModule.__.updatePageState(
@@ -205,6 +210,7 @@ describe('scan', function() {
       );
       spyOn(scanModule.__.store, 'dispatch');
       spyOn(PageStore, 'saveHtml');
+      spyOn(scanModule.__, 'isAutoscanPending').and.returnValue(false);
       spyOn(scanModule.__, 'isMajorChange').and.returnValues(true);
 
       const result = await scanModule.__.updatePageState(
@@ -237,6 +243,7 @@ describe('scan', function() {
           {pages: {[this.id]: this.page}});
         spyOn(scanModule.__.store, 'dispatch');
         spyOn(PageStore, 'saveHtml');
+        spyOn(scanModule.__, 'isAutoscanPending').and.returnValue(false);
         spyOn(scanModule.__, 'isMajorChange').and.returnValues(true);
 
         const result = await scanModule.__.updatePageState(
@@ -383,6 +390,7 @@ describe('scan', function() {
       spyOn(scanModule.__, 'log');
       spyOn(scanModule.__, 'waitForMs');
       spyOn(scanModule.__, 'isUpToDate').and.returnValue(Promise.resolve(true));
+      spyOn(scanModule.__, 'isAutoscanPending').and.returnValue(false);
 
       await scanModule.scan([id]);
 
@@ -412,6 +420,7 @@ describe('scan', function() {
       spyOn(scanModule.__, 'log');
       spyOn(scanModule.__, 'waitForMs');
       spyOn(scanModule.__, 'isUpToDate').and.returnValue(Promise.resolve(true));
+      spyOn(scanModule.__, 'isAutoscanPending').and.returnValue(false);
 
       await scanModule.scan(['1']);
 
