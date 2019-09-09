@@ -29,6 +29,11 @@ export const __ = {
   isMajorChange: (...args) => isMajorChange(...args),
   waitForMs: (...args) => waitForMs(...args),
   isUpToDate: (...args) => isUpToDate(...args),
+  isAutoscanPending: (...args) => isAutoscanPending(...args),
+  store: {
+    getState: (...args) => store.getState(...args),
+    dispatch: (...args) => store.dispatch(...args),
+  },
 
   // Allow private functions to be tested
   changeEnum: changeEnum,
@@ -75,7 +80,7 @@ export async function scanPage(pageId) {
   if (!(await __.isUpToDate())) {
     return false;
   }
-  const page = getItem(store.getState(), pageId);
+  const page = getItem(__.store.getState(), pageId);
   if (page === undefined) {
     return false;
   }
@@ -93,10 +98,10 @@ export async function scanPage(pageId) {
     __.log(`Could not scan "${page.title}": ${error}`);
 
     const edits = {status: status.ERROR};
-    if (isAutoscanPending(pageId)) {
+    if (__.isAutoscanPending(pageId)) {
       edits.lastAutoscanTime = Date.now();
     }
-    store.dispatch(editPage(pageId, edits));
+    __.store.dispatch(editPage(pageId, edits));
   }
   return false;
 }
@@ -111,7 +116,7 @@ export async function scanPage(pageId) {
  * @returns {string} HTML page content.
  */
 async function getHtmlFromResponse(response, pageId) {
-  const page = getItem(store.getState(), pageId);
+  const page = getItem(__.store.getState(), pageId);
   let encoding = page.encoding;
 
   // This is probably faster for the most common case (utf-8)
@@ -124,7 +129,7 @@ async function getHtmlFromResponse(response, pageId) {
   if (encoding === null || encoding == 'auto') {
     const rawHtml = __.applyEncoding(buffer, 'utf-8');
     encoding = __.detectEncoding(response.headers, rawHtml);
-    store.dispatch(editPage(pageId, {encoding}));
+    __.store.dispatch(editPage(pageId, {encoding}));
   }
   return __.applyEncoding(buffer, encoding);
 }
@@ -144,7 +149,7 @@ async function getHtmlFromResponse(response, pageId) {
  */
 async function processHtml(pageId, scannedHtml) {
   // Do nothing if the page no longer exists
-  if (getItem(store.getState(), pageId) === undefined) {
+  if (getItem(__.store.getState(), pageId) === undefined) {
     return false;
   }
 
@@ -164,7 +169,7 @@ async function processHtml(pageId, scannedHtml) {
  * @returns {boolean} True if a new major change is detected.
  */
 async function updatePageState(pageId, prevHtml, scannedHtml) {
-  const page = getItem(store.getState(), pageId);
+  const page = getItem(__.store.getState(), pageId);
   const stripped = stripHtml(prevHtml, scannedHtml, page.ignoreNumbers);
 
   const changeType = getChangeType(
@@ -192,11 +197,11 @@ async function updatePageState(pageId, prevHtml, scannedHtml) {
 
   const now = Date.now();
   edits.newScanTime = now;
-  if (isAutoscanPending(pageId)) {
+  if (__.isAutoscanPending(pageId)) {
     edits.lastAutoscanTime = now;
   }
 
-  store.dispatch(editPage(pageId, edits));
+  __.store.dispatch(editPage(pageId, edits));
   return changeType == changeEnum.MAJOR_CHANGE;
 }
 

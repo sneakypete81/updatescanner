@@ -6,6 +6,9 @@ import {getPageIds, getItem} from '/lib/redux/ducks/pages.js';
 // Allow function mocking
 export const __ = {
   log: (...args) => log(...args),
+  store: {
+    getState: (...args) => store.getState(...args),
+  },
 
   // Allow private functions to be tested
   isAutoscanPending: isAutoscanPending,
@@ -87,7 +90,7 @@ async function stopAlarm() {
  * @returns {Array.<string>} List of page IDs that need scanning.
  */
 function getScanList() {
-  const pageIds = getPageIds(store.getState());
+  const pageIds = getPageIds(__.store.getState());
   return pageIds.filter((id) => isAutoscanPending(id));
 }
 
@@ -99,7 +102,7 @@ function getScanList() {
  * @returns {boolean} True if it's time to autoscan the page.
  */
 export function isAutoscanPending(pageId) {
-  const page = getItem(store.getState(), pageId);
+  const page = getItem(__.store.getState(), pageId);
   if (page.scanRateMinutes == 0) {
     // Autoscanning is disabled for this page
     return false;

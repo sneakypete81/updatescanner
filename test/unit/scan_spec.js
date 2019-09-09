@@ -1,6 +1,6 @@
 import * as scanModule from '/lib/scan/scan.js';
 import {PageStore} from '/lib/page/page_store.js';
-import {Page} from '/lib/page/page.js';
+import {status} from '/lib/redux/ducks/pages.js';
 
 describe('scan', function() {
   describe('getChangeType', function() {
@@ -45,11 +45,12 @@ describe('scan', function() {
     beforeEach(function() {
       this.oldScanTime = new Date(1978, 11, 1, 4, 30).getTime();
       this.newScanTime = new Date(1978, 11, 5, 7, 15).getTime();
-      this.page = new Page('1', {
+      this.id = '1';
+      this.page = {
         changeThreshold: 100,
         oldScanTime: this.oldScanTime,
         newScanTime: this.newScanTime,
-      });
+      };
 
       jasmine.clock().install();
       jasmine.clock().mockDate(new Date(1978, 11, 6, 19, 9));
@@ -60,18 +61,26 @@ describe('scan', function() {
     });
 
     it('saves content if the page is unchanged', async function() {
-      this.page.state = Page.stateEnum.NO_CHANGE;
+      this.page.status = status.NO_CHANGE;
       const html = 'Here is some <b>HTML</b>';
-      spyOn(Page, 'load').and.returnValue(Promise.resolve(this.page));
-      spyOn(this.page, 'save');
+
+      spyOn(scanModule.__.store, 'getState').and.returnValue(
+        {pages: {[this.id]: this.page}}
+      );
+      spyOn(scanModule.__.store, 'dispatch');
       spyOn(PageStore, 'saveHtml');
 
-      const result = await scanModule.__.updatePageState(this.page, html, html);
+      const result = await scanModule.__.updatePageState(this.id, html, html);
 
       expect(result).toBeFalsy();
-      expect(this.page.state).toEqual(Page.stateEnum.NO_CHANGE);
-      expect(this.page.oldScanTime).toEqual(this.oldScanTime);
-      expect(this.page.newScanTime).toEqual(Date.now());
+      expect(scanModule.__.store.dispatch).toHaveBeenCalledWith({
+        type: 'pages/EDIT_PAGE',
+        id: this.id,
+        page: {
+          status: status.NO_CHANGE,
+          newScanTime: Date.now(),
+        },
+      });
       expect(PageStore.saveHtml).toHaveBeenCalledWith(
         '1', PageStore.htmlTypes.NEW, html);
       expect(PageStore.saveHtml).toHaveBeenCalledTimes(1);
@@ -79,58 +88,80 @@ describe('scan', function() {
 
     it('saves content if the page is unchanged when previously changed',
       async function() {
-        this.page.state = Page.stateEnum.CHANGED;
+        this.page.status = status.CHANGED;
         const html = 'Here is some <b>HTML</b>';
-        spyOn(Page, 'load').and.returnValue(Promise.resolve(this.page));
-        spyOn(this.page, 'save');
+
+        spyOn(scanModule.__.store, 'getState').and.returnValue(
+          {pages: {[this.id]: this.page}});
+        spyOn(scanModule.__.store, 'dispatch');
         spyOn(PageStore, 'saveHtml');
 
         const result = await scanModule.__
-          .updatePageState(this.page, html, html);
+          .updatePageState(this.id, html, html);
 
         expect(result).toBeFalsy();
-        expect(this.page.state).toEqual(Page.stateEnum.CHANGED);
-        expect(this.page.oldScanTime).toEqual(this.oldScanTime);
-        expect(this.page.newScanTime).toEqual(Date.now());
+        expect(scanModule.__.store.dispatch).toHaveBeenCalledWith({
+          type: 'pages/EDIT_PAGE',
+          id: this.id,
+          page: {
+            newScanTime: Date.now(),
+          },
+        });
+
         expect(PageStore.saveHtml).toHaveBeenCalledWith(
           '1', PageStore.htmlTypes.NEW, html);
         expect(PageStore.saveHtml).toHaveBeenCalledTimes(1);
       });
 
     it('saves new content', async function() {
-      this.page.state = Page.stateEnum.NO_CHANGE;
+      this.page.status = status.NO_CHANGE;
       const html = 'Here is some <b>HTML</b>';
-      spyOn(Page, 'load').and.returnValue(Promise.resolve(this.page));
-      spyOn(this.page, 'save');
+
+      spyOn(scanModule.__.store, 'getState').and.returnValue(
+        {pages: {[this.id]: this.page}}
+      );
+      spyOn(scanModule.__.store, 'dispatch');
       spyOn(PageStore, 'saveHtml');
 
-      const result = await scanModule.__.updatePageState(this.page, '', html);
+      const result = await scanModule.__.updatePageState(this.id, '', html);
 
       expect(result).toBeFalsy();
-      expect(this.page.state).toEqual(Page.stateEnum.NO_CHANGE);
-      expect(this.page.oldScanTime).toEqual(this.oldScanTime);
-      expect(this.page.newScanTime).toEqual(Date.now());
+      expect(scanModule.__.store.dispatch).toHaveBeenCalledWith({
+        type: 'pages/EDIT_PAGE',
+        id: this.id,
+        page: {
+          status: status.NO_CHANGE,
+          newScanTime: Date.now(),
+        },
+      });
       expect(PageStore.saveHtml).toHaveBeenCalledWith(
         '1', PageStore.htmlTypes.NEW, html);
       expect(PageStore.saveHtml).toHaveBeenCalledTimes(1);
     });
 
     it('saves a minor change without updating state', async function() {
-      this.page.state = Page.stateEnum.NO_CHANGE;
+      this.page.status = status.NO_CHANGE;
       const html1 = 'Here is some <b>HTML</b>';
       const html2 = 'Here is some different <b>HTML</b>';
-      spyOn(Page, 'load').and.returnValue(Promise.resolve(this.page));
-      spyOn(this.page, 'save');
+
+      spyOn(scanModule.__.store, 'getState').and.returnValue(
+        {pages: {[this.id]: this.page}}
+      );
+      spyOn(scanModule.__.store, 'dispatch');
       spyOn(PageStore, 'saveHtml');
       spyOn(scanModule.__, 'isMajorChange').and.returnValues(false);
 
-      const result = await scanModule.__.updatePageState(
-        this.page, html1, html2);
+      const result = await scanModule.__.updatePageState(this.id, html1, html2);
 
       expect(result).toBeFalsy();
-      expect(this.page.state).toEqual(Page.stateEnum.NO_CHANGE);
-      expect(this.page.oldScanTime).toEqual(this.oldScanTime);
-      expect(this.page.newScanTime).toEqual(Date.now());
+      expect(scanModule.__.store.dispatch).toHaveBeenCalledWith({
+        type: 'pages/EDIT_PAGE',
+        id: this.id,
+        page: {
+          status: status.NO_CHANGE,
+          newScanTime: Date.now(),
+        },
+      });
       expect(PageStore.saveHtml).toHaveBeenCalledWith(
         '1', PageStore.htmlTypes.NEW, html2);
       expect(PageStore.saveHtml).toHaveBeenCalledTimes(1);
@@ -138,42 +169,57 @@ describe('scan', function() {
 
     it('doesn\'t update state for a minor change when previously changed',
       async function() {
-        this.page.state = Page.stateEnum.CHANGED;
+        this.page.status = status.CHANGED;
         const html1 = 'Here is some <b>HTML</b>';
         const html2 = 'Here is some different <b>HTML</b>';
-        spyOn(Page, 'load').and.returnValue(Promise.resolve(this.page));
-        spyOn(this.page, 'save');
+
+        spyOn(scanModule.__.store, 'getState').and.returnValue(
+          {pages: {[this.id]: this.page}});
+        spyOn(scanModule.__.store, 'dispatch');
         spyOn(PageStore, 'saveHtml');
         spyOn(scanModule.__, 'isMajorChange').and.returnValues(false);
 
         const result = await scanModule.__.updatePageState(
-          this.page, html1, html2);
+          this.id, html1, html2);
 
         expect(result).toBeFalsy();
-        expect(this.page.state).toEqual(Page.stateEnum.CHANGED);
-        expect(this.page.oldScanTime).toEqual(this.oldScanTime);
-        expect(this.page.newScanTime).toEqual(Date.now());
+        expect(scanModule.__.store.dispatch).toHaveBeenCalledWith({
+          type: 'pages/EDIT_PAGE',
+          id: this.id,
+          page: {
+            newScanTime: Date.now(),
+          },
+        });
         expect(PageStore.saveHtml).toHaveBeenCalledWith(
           '1', PageStore.htmlTypes.NEW, html2);
         expect(PageStore.saveHtml).toHaveBeenCalledTimes(1);
       });
 
     it('updates old and new HTML for a new major change', async function() {
-      this.page.state = Page.stateEnum.NO_CHANGE;
+      this.page.status = status.NO_CHANGE;
       const html1 = 'Here is some <b>HTML</b>';
       const html2 = 'Here is some different <b>HTML</b>';
-      spyOn(Page, 'load').and.returnValue(Promise.resolve(this.page));
-      spyOn(this.page, 'save');
+
+      spyOn(scanModule.__.store, 'getState').and.returnValue(
+        {pages: {[this.id]: this.page}}
+      );
+      spyOn(scanModule.__.store, 'dispatch');
       spyOn(PageStore, 'saveHtml');
       spyOn(scanModule.__, 'isMajorChange').and.returnValues(true);
 
       const result = await scanModule.__.updatePageState(
-        this.page, html1, html2);
+        this.id, html1, html2);
 
       expect(result).toBeTruthy();
-      expect(this.page.state).toEqual(Page.stateEnum.CHANGED);
-      expect(this.page.oldScanTime).toEqual(this.newScanTime);
-      expect(this.page.newScanTime).toEqual(Date.now());
+      expect(scanModule.__.store.dispatch).toHaveBeenCalledWith({
+        type: 'pages/EDIT_PAGE',
+        id: this.id,
+        page: {
+          status: status.CHANGED,
+          oldScanTime: this.page.newScanTime,
+          newScanTime: Date.now(),
+        },
+      });
       expect(PageStore.saveHtml).toHaveBeenCalledWith(
         '1', PageStore.htmlTypes.OLD, html1);
       expect(PageStore.saveHtml).toHaveBeenCalledWith(
@@ -183,21 +229,28 @@ describe('scan', function() {
 
     it('updates just the new HTML for a repeated major change',
       async function() {
-        this.page.state = Page.stateEnum.CHANGED;
+        this.page.status = status.CHANGED;
         const html1 = 'Here is some <b>HTML</b>';
         const html2 = 'Here is some different <b>HTML</b>';
-        spyOn(Page, 'load').and.returnValue(Promise.resolve(this.page));
-        spyOn(this.page, 'save');
+
+        spyOn(scanModule.__.store, 'getState').and.returnValue(
+          {pages: {[this.id]: this.page}});
+        spyOn(scanModule.__.store, 'dispatch');
         spyOn(PageStore, 'saveHtml');
         spyOn(scanModule.__, 'isMajorChange').and.returnValues(true);
 
         const result = await scanModule.__.updatePageState(
-          this.page, html1, html2);
+          this.id, html1, html2);
 
         expect(result).toBeTruthy();
-        expect(this.page.state).toEqual(Page.stateEnum.CHANGED);
-        expect(this.page.oldScanTime).toEqual(this.oldScanTime);
-        expect(this.page.newScanTime).toEqual(Date.now());
+        expect(scanModule.__.store.dispatch).toHaveBeenCalledWith({
+          type: 'pages/EDIT_PAGE',
+          id: this.id,
+          page: {
+            status: status.CHANGED,
+            newScanTime: Date.now(),
+          },
+        });
         expect(PageStore.saveHtml).toHaveBeenCalledWith(
           '1', PageStore.htmlTypes.NEW, html2);
         expect(PageStore.saveHtml).toHaveBeenCalledTimes(1);
@@ -205,25 +258,31 @@ describe('scan', function() {
   });
 
   describe('scan', function() {
-    it('does nothing when given an empty page list', function(done) {
+    beforeEach(function() {
+      jasmine.clock().install();
+      jasmine.clock().mockDate(new Date(1978, 11, 6, 19, 9));
+    });
+
+    afterEach(function() {
+      jasmine.clock().uninstall();
+    });
+
+    it('does nothing when given an empty page list', async function() {
       spyOn(window, 'fetch');
       spyOn(PageStore, 'loadHtml');
       spyOn(scanModule.__, 'log');
       spyOn(scanModule.__, 'waitForMs');
       spyOn(scanModule.__, 'isUpToDate').and.returnValue(Promise.resolve(true));
 
-      scanModule.scan([]).then(() => {
-        expect(window.fetch).not.toHaveBeenCalled();
-        expect(PageStore.loadHtml).not.toHaveBeenCalled();
-        done();
-      }).catch((error) => done.fail(error));
+      await scanModule.scan([]);
+
+      expect(window.fetch).not.toHaveBeenCalled();
+      expect(PageStore.loadHtml).not.toHaveBeenCalled();
     });
 
     it('does nothing if the data structures are not up to date',
-      function(done) {
-        const page = new Page('1', {
-          url: 'http://www.example.com/', encoding: 'utf-8',
-        });
+      async function() {
+        const id = '1';
 
         spyOn(window, 'fetch');
         spyOn(PageStore, 'loadHtml');
@@ -231,129 +290,201 @@ describe('scan', function() {
         spyOn(scanModule.__, 'isUpToDate')
           .and.returnValue(Promise.resolve(false));
 
-        scanModule.scan([page]).then(() => {
-          expect(window.fetch).not.toHaveBeenCalled();
-          expect(PageStore.loadHtml).not.toHaveBeenCalled();
-          done();
-        }).catch((error) => done.fail(error));
+        await scanModule.scan([id]);
+
+        expect(window.fetch).not.toHaveBeenCalled();
+        expect(PageStore.loadHtml).not.toHaveBeenCalled();
       });
 
-    it('Scans a single page', function(done) {
-      const page = new Page('1', {
-        url: 'http://www.example.com/', encoding: 'utf-8',
-      });
+    it('Scans a single page', async function() {
+      const id = '1';
+      const page = {url: 'http://www.example.com/', encoding: 'utf-8'};
       const html = 'Some <b>HTML</b>';
 
       spyOn(window, 'fetch').and.returnValues(
         Promise.resolve({ok: true, text: () => html}));
       spyOn(PageStore, 'loadHtml').and.returnValues(Promise.resolve(html));
       spyOn(PageStore, 'saveHtml').and.returnValue(Promise.resolve(html));
-      spyOn(Page, 'load').and.returnValue(Promise.resolve(page));
-      spyOn(Page.prototype, 'save');
-      spyOn(Page.prototype, 'existsInStorage')
-        .and.returnValue(Promise.resolve(true));
+      spyOn(scanModule.__.store, 'getState').and.returnValue(
+        {pages: {[id]: page}});
+      spyOn(scanModule.__.store, 'dispatch');
       spyOn(scanModule.__, 'log');
       spyOn(scanModule.__, 'waitForMs');
       spyOn(scanModule.__, 'isUpToDate').and.returnValue(Promise.resolve(true));
+      spyOn(scanModule.__, 'isAutoscanPending').and.returnValue(false);
 
-      scanModule.scan([page]).then(() => {
-        expect(window.fetch).toHaveBeenCalledWith(page.url);
-        expect(PageStore.loadHtml).toHaveBeenCalledWith(
-          '1', PageStore.htmlTypes.NEW);
-        expect(page.state).toEqual(Page.stateEnum.NO_CHANGE);
-        done();
-      }).catch((error) => done.fail(error));
+      await scanModule.scan([id]);
+
+      expect(window.fetch).toHaveBeenCalledWith(page.url);
+      expect(PageStore.loadHtml).toHaveBeenCalledWith(
+        '1', PageStore.htmlTypes.NEW);
+      expect(scanModule.__.store.dispatch).toHaveBeenCalledWith({
+        type: 'pages/EDIT_PAGE',
+        id,
+        page: {
+          status: status.NO_CHANGE,
+          newScanTime: Date.now(),
+        },
+      });
     });
 
-    it('Scans multiple pages', function(done) {
-      const pages = [
-        new Page('1', {url: 'http://www.example.com/', encoding: 'utf-8'}),
-        new Page('2', {url: 'http://www.example2.com/', encoding: 'utf-8'}),
-        new Page('3', {url: 'http://www.example3.com/', encoding: 'utf-8'}),
-      ];
+    it('Scans multiple pages', async function() {
+      const pages = {
+        '1': {url: 'http://www.example.com/', encoding: 'utf-8'},
+        '2': {url: 'http://www.example2.com/', encoding: 'utf-8'},
+        '3': {url: 'http://www.example3.com/', encoding: 'utf-8'},
+      };
       const html = 'Some <b>HTML</b>';
 
       spyOn(window, 'fetch').and.returnValue(
         Promise.resolve({ok: true, text: () => html}));
       spyOn(PageStore, 'loadHtml').and.returnValue(Promise.resolve(html));
       spyOn(PageStore, 'saveHtml').and.returnValue(Promise.resolve(html));
-      spyOn(Page, 'load').and.callFake((id) => Promise.resolve(pages[id - 1]));
-      spyOn(Page.prototype, 'save');
-      spyOn(Page.prototype, 'existsInStorage')
-        .and.returnValue(Promise.resolve(true));
+      spyOn(scanModule.__.store, 'getState').and.returnValue({pages});
+      spyOn(scanModule.__.store, 'dispatch');
       spyOn(scanModule.__, 'log');
       spyOn(scanModule.__, 'waitForMs');
       spyOn(scanModule.__, 'isUpToDate').and.returnValue(Promise.resolve(true));
+      spyOn(scanModule.__, 'isAutoscanPending').and.returnValue(false);
 
-      scanModule.scan(pages).then(() => {
-        expect(window.fetch).toHaveBeenCalledWith(pages[0].url);
-        expect(window.fetch).toHaveBeenCalledWith(pages[1].url);
-        expect(window.fetch).toHaveBeenCalledWith(pages[2].url);
-        expect(PageStore.loadHtml).toHaveBeenCalledWith(
-          '1', PageStore.htmlTypes.NEW);
-        expect(PageStore.loadHtml).toHaveBeenCalledWith(
-          '2', PageStore.htmlTypes.NEW);
-        expect(PageStore.loadHtml).toHaveBeenCalledWith(
-          '3', PageStore.htmlTypes.NEW);
-        expect(pages[0].state).toEqual(Page.stateEnum.NO_CHANGE);
-        expect(pages[1].state).toEqual(Page.stateEnum.NO_CHANGE);
-        expect(pages[2].state).toEqual(Page.stateEnum.NO_CHANGE);
-        done();
-      }).catch((error) => done.fail(error));
+      await scanModule.scan(Object.keys(pages));
+
+      expect(window.fetch).toHaveBeenCalledWith(pages['1'].url);
+      expect(window.fetch).toHaveBeenCalledWith(pages['2'].url);
+      expect(window.fetch).toHaveBeenCalledWith(pages['3'].url);
+      expect(PageStore.loadHtml).toHaveBeenCalledWith(
+        '1', PageStore.htmlTypes.NEW);
+      expect(PageStore.loadHtml).toHaveBeenCalledWith(
+        '2', PageStore.htmlTypes.NEW);
+      expect(PageStore.loadHtml).toHaveBeenCalledWith(
+        '3', PageStore.htmlTypes.NEW);
+      for (const id of Object.keys(pages)) {
+        expect(scanModule.__.store.dispatch).toHaveBeenCalledWith({
+          type: 'pages/EDIT_PAGE',
+          id,
+          page: {
+            status: status.NO_CHANGE,
+            newScanTime: Date.now(),
+          },
+        });
+      }
     });
 
-    it('Logs and saves HTTP error status codes', function(done) {
-      const page = new Page('1', {
-        title: 'example', url: 'http://www.example.com/', encoding: 'utf-8',
-      });
+    it('Logs and saves HTTP error status codes', async function() {
+      const id = '1';
+      const page = {title: 'example', url: 'http://www.example.com/', encoding: 'utf-8'};
 
       spyOn(window, 'fetch').and.returnValues(
         Promise.resolve({ok: false, status: 404, statusText: 'no such page'}));
       spyOn(PageStore, 'loadHtml');
-      spyOn(Page.prototype, 'existsInStorage')
-        .and.returnValue(Promise.resolve(true));
-      spyOn(Page, 'load').and.returnValue(Promise.resolve(page));
-      spyOn(page, 'save');
+      spyOn(scanModule.__.store, 'getState').and.returnValue(
+        {pages: {[id]: page}});
+      spyOn(scanModule.__.store, 'dispatch');
       spyOn(scanModule.__, 'log');
       spyOn(scanModule.__, 'waitForMs');
       spyOn(scanModule.__, 'isUpToDate').and.returnValue(Promise.resolve(true));
 
-      scanModule.scan([page]).then(() => {
-        expect(window.fetch).toHaveBeenCalledWith(page.url);
-        expect(PageStore.loadHtml).not.toHaveBeenCalled();
-        expect(page.state).toEqual(Page.stateEnum.ERROR);
-        expect(page.save).toHaveBeenCalled();
-        expect(scanModule.__.log.calls.allArgs()).toContain(
-          ['Could not scan "example": Error: [404] no such page']);
-        done();
-      }).catch((error) => done.fail(error));
+      await scanModule.scan([id]);
+
+      expect(window.fetch).toHaveBeenCalledWith(page.url);
+      expect(PageStore.loadHtml).not.toHaveBeenCalled();
+      expect(scanModule.__.store.dispatch).toHaveBeenCalledWith({
+        type: 'pages/EDIT_PAGE',
+        id,
+        page: {
+          status: status.ERROR,
+        },
+      });
+      expect(scanModule.__.log.calls.allArgs()).toContain(
+        ['Could not scan "example": Error: [404] no such page']);
     });
 
-    it('Logs and saves network errors', function(done) {
-      const page = new Page('1', {
-        title: 'example', url: 'http://www.example.com/', encoding: 'utf-8',
-      });
+    it('Logs and saves network errors', async function() {
+      const id = '1';
+      const page = {title: 'example', url: 'http://www.example.com/', encoding: 'utf-8'};
 
       spyOn(window, 'fetch').and
         .returnValues(Promise.reject(new Error('Network error')));
       spyOn(PageStore, 'loadHtml');
-      spyOn(Page.prototype, 'existsInStorage').and
-        .returnValue(Promise.resolve(true));
-      spyOn(Page, 'load').and.returnValue(Promise.resolve(page));
-      spyOn(page, 'save');
+      spyOn(scanModule.__.store, 'getState').and.returnValue(
+        {pages: {[id]: page}});
+      spyOn(scanModule.__.store, 'dispatch');
       spyOn(scanModule.__, 'log');
       spyOn(scanModule.__, 'waitForMs');
       spyOn(scanModule.__, 'isUpToDate').and.returnValue(Promise.resolve(true));
 
-      scanModule.scan([page]).then(() => {
-        expect(window.fetch).toHaveBeenCalledWith(page.url);
-        expect(PageStore.loadHtml).not.toHaveBeenCalled();
-        expect(page.state).toEqual(Page.stateEnum.ERROR);
-        expect(page.save).toHaveBeenCalled();
-        expect(scanModule.__.log.calls.allArgs()).toContain(
-          ['Could not scan "example": Error: Network error']);
-        done();
-      }).catch((error) => done.fail(error));
+      await scanModule.scan(['1']);
+
+      expect(window.fetch).toHaveBeenCalledWith(page.url);
+      expect(PageStore.loadHtml).not.toHaveBeenCalled();
+      expect(scanModule.__.store.dispatch).toHaveBeenCalledWith({
+        type: 'pages/EDIT_PAGE',
+        id,
+        page: {
+          status: status.ERROR,
+        },
+      });
+      expect(scanModule.__.log.calls.allArgs()).toContain(
+        ['Could not scan "example": Error: Network error']);
+    });
+
+    it('updates lastAutoscanTime if autoscan is due', async function() {
+      const id = '1';
+      const page = {url: 'http://www.example.com/', encoding: 'utf-8'};
+      const html = 'Some <b>HTML</b>';
+
+      spyOn(window, 'fetch').and.returnValues(
+        Promise.resolve({ok: true, text: () => html}));
+      spyOn(PageStore, 'loadHtml').and.returnValues(Promise.resolve(html));
+      spyOn(PageStore, 'saveHtml').and.returnValue(Promise.resolve(html));
+      spyOn(scanModule.__.store, 'getState').and.returnValue(
+        {pages: {[id]: page}});
+      spyOn(scanModule.__.store, 'dispatch');
+      spyOn(scanModule.__, 'log');
+      spyOn(scanModule.__, 'waitForMs');
+      spyOn(scanModule.__, 'isUpToDate').and.returnValue(Promise.resolve(true));
+      spyOn(scanModule.__, 'isAutoscanPending').and.returnValue(true);
+
+      await scanModule.scan([id]);
+
+      expect(scanModule.__.store.dispatch).toHaveBeenCalledWith({
+        type: 'pages/EDIT_PAGE',
+        id,
+        page: {
+          status: status.NO_CHANGE,
+          newScanTime: Date.now(),
+          lastAutoscanTime: Date.now(),
+        },
+      });
+    });
+
+    it('updates lastAutoscanTime if a scan error occurs', async function() {
+      const id = '1';
+      const page = {title: 'example', url: 'http://www.example.com/', encoding: 'utf-8'};
+
+      spyOn(window, 'fetch').and.returnValues(
+        Promise.resolve({ok: false, status: 404, statusText: 'no such page'}));
+      spyOn(PageStore, 'loadHtml');
+      spyOn(scanModule.__.store, 'getState').and.returnValue(
+        {pages: {[id]: page}});
+      spyOn(scanModule.__.store, 'dispatch');
+      spyOn(scanModule.__, 'log');
+      spyOn(scanModule.__, 'waitForMs');
+      spyOn(scanModule.__, 'isUpToDate').and.returnValue(Promise.resolve(true));
+      spyOn(scanModule.__, 'isAutoscanPending').and.returnValue(true);
+
+      await scanModule.scan([id]);
+
+      expect(scanModule.__.store.dispatch).toHaveBeenCalledWith({
+        type: 'pages/EDIT_PAGE',
+        id,
+        page: {
+          status: status.ERROR,
+          lastAutoscanTime: Date.now(),
+        },
+      });
+      expect(scanModule.__.log.calls.allArgs()).toContain(
+        ['Could not scan "example": Error: [404] no such page']);
     });
   });
 
@@ -420,11 +551,16 @@ describe('scan', function() {
 
   describe('getHtmlFromResponse', function() {
     it('applies the encoding in the Page object', async function() {
-      const page = new Page(1, {encoding: 'encoding'});
+      const id = '1';
+      const page = {encoding: 'encoding'};
       const response = {arrayBuffer: () => Promise.resolve('buffer')};
-      spyOn(scanModule.__, 'applyEncoding').and.returnValue('html');
 
-      const html = await scanModule.__.getHtmlFromResponse(response, page);
+      spyOn(scanModule.__, 'applyEncoding').and.returnValue('html');
+      spyOn(scanModule.__.store, 'getState').and.returnValue(
+        {pages: {[id]: page}});
+      spyOn(scanModule.__.store, 'dispatch');
+
+      const html = await scanModule.__.getHtmlFromResponse(response, id);
 
       expect(html).toEqual('html');
       expect(scanModule.__.applyEncoding)
@@ -433,17 +569,19 @@ describe('scan', function() {
 
     it('autodetects the encoding if not specified in the Page object',
       async function() {
-        const page = new Page(1, {});
+        const id = '1';
+        const page = {encoding: null};
         const response = {
           arrayBuffer: () => Promise.resolve('buffer'),
           headers: 'headers',
         };
         spyOn(scanModule.__, 'detectEncoding').and.returnValue('encoding');
         spyOn(scanModule.__, 'applyEncoding').and.returnValue('html');
-        spyOn(Page, 'load').and.returnValue(Promise.resolve(page));
-        spyOn(page, 'save');
+        spyOn(scanModule.__.store, 'getState').and.returnValue(
+          {pages: {[id]: page}});
+        spyOn(scanModule.__.store, 'dispatch');
 
-        const html = await scanModule.__.getHtmlFromResponse(response, page);
+        const html = await scanModule.__.getHtmlFromResponse(response, id);
 
         expect(html).toEqual('html');
         expect(scanModule.__.applyEncoding)
@@ -452,15 +590,24 @@ describe('scan', function() {
           .toHaveBeenCalledWith('headers', 'html');
         expect(scanModule.__.applyEncoding)
           .toHaveBeenCalledWith('buffer', 'encoding');
-        expect(page.save).toHaveBeenCalled;
-        expect(page.encoding).toEqual('encoding');
+        expect(scanModule.__.store.dispatch).toHaveBeenCalledWith({
+          type: 'pages/EDIT_PAGE',
+          id,
+          page: {
+            encoding: 'encoding',
+          },
+        });
       });
 
     it('uses response.text() for utf-8 encodings', async function() {
-      const page = new Page(1, {encoding: 'utf-8'});
+      const id = '1';
+      const page = {encoding: 'utf-8'};
       const response = {text: () => Promise.resolve('html')};
 
-      const html = await scanModule.__.getHtmlFromResponse(response, page);
+      spyOn(scanModule.__.store, 'getState').and.returnValue(
+        {pages: {[id]: page}});
+
+      const html = await scanModule.__.getHtmlFromResponse(response, id);
 
       expect(html).toEqual('html');
     });
