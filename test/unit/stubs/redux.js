@@ -1,0 +1,4 @@
+window.Redux = {
+  combineReducers: () => {},
+  createStore: () => {},
+};

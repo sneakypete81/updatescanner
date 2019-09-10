@@ -18,7 +18,7 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       {
-        pattern: 'src/dependencies/include/!(webext-redux)/**/*.js',
+        pattern: 'src/dependencies/include/!(redux|webext-redux)/**/*.js',
       },
 
       {
