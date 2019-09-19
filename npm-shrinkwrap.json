@@ -108,9 +108,9 @@
       }
     },
     "@octokit/request": {
-      "version": "5.0.3",
-      "resolved": "https://registry.npmjs.org/@octokit/request/-/request-5.0.3.tgz",
-      "integrity": "sha512-4vRqNNf4lYqhpuiqimew2pxxwCvTShwENza25h+UMNBUvKm50K03LJ8PL7Iu6l9qboo1D0mI5DMrGwR0Tr/nKw==",
+      "version": "5.1.0",
+      "resolved": "https://registry.npmjs.org/@octokit/request/-/request-5.1.0.tgz",
+      "integrity": "sha512-I15T9PwjFs4tbWyhtFU2Kq7WDPidYMvRB7spmxoQRZfxSmiqullG+Nz+KbSmpkfnlvHwTr1e31R5WReFRKMXjg==",
       "dev": true,
       "requires": {
         "@octokit/endpoint": "^5.1.0",
@@ -150,9 +150,9 @@
       }
     },
     "@octokit/rest": {
-      "version": "16.28.9",
-      "resolved": "https://registry.npmjs.org/@octokit/rest/-/rest-16.28.9.tgz",
-      "integrity": "sha512-IKGnX+Tvzt7XHhs8f4ajqxyJvYAMNX5nWfoJm4CQj8LZToMiaJgutf5KxxpxoC3y5w7JTJpW5rnWnF4TsIvCLA==",
+      "version": "16.29.0",
+      "resolved": "https://registry.npmjs.org/@octokit/rest/-/rest-16.29.0.tgz",
+      "integrity": "sha512-t01+Hz6sUJx2/HzY4KSgmST5n7KcTYr8i6+UwqS6TkgyjyA6YmeTxVhZrQUobEXaDdQFxs1dRhh1hgmOo6OF9Q==",
       "dev": true,
       "requires": {
         "@octokit/request": "^5.0.0",
