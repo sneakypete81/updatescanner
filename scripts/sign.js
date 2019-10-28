@@ -13,7 +13,7 @@ const sign = async function() {
   try {
     await webExt.sign(
       settings.get('api_key'),
-      settings.get('api_secret')
+      settings.get('api_secret'),
     );
   } finally {
     manifestPatcher.unPatch();

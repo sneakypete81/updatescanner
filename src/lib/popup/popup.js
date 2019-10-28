@@ -89,7 +89,7 @@ export class Popup {
   async _handleBackupClick() {
     const blob = new Blob(
       [createBackupJson(this.pageStore)],
-      {type: 'application/json'}
+      {type: 'application/json'},
     );
     const url = URL.createObjectURL(blob);
 

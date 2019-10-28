@@ -87,7 +87,7 @@ function isBackupValid(json) {
  * @param {string} parentId - ID of the parent PageFolder object.
  */
 async function restoreBackupFromJson(
-  pageStore, json, parentId=PageStore.ROOT_ID
+  pageStore, json, parentId=PageStore.ROOT_ID,
 ) {
   for (const child of json.children) {
     if (child.type == 'PageFolder') {

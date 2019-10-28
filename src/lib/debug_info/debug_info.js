@@ -79,7 +79,7 @@ export class DebugInfo {
   async _download(html, filename) {
     const blob = new Blob(
       [html],
-      {type: 'text/html'}
+      {type: 'text/html'},
     );
     const url = URL.createObjectURL(blob);
     await view.downloadUrl(url, filename);

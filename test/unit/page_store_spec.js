@@ -40,7 +40,7 @@ describe('PageStore', function() {
           expect(pageStore.storageInfo.pageFolderIds).toEqual(['0']);
           done();
         }).catch((error) => done.fail(error));
-      }
+      },
     );
 
     it('retrieves an empty pageMap from storage', function(done) {
@@ -259,7 +259,7 @@ describe('PageStore', function() {
         const pageFolderList = pageStore.getPageFolderList();
 
         expect(pageFolderList).toEqual([root]);
-      }
+      },
     );
 
     it('returns an array containing all PageFolders in the map', function() {

@@ -124,7 +124,7 @@ export class PageStore {
    */
   findParent(itemId) {
     return this.getPageFolderList().find(
-      (pageFolder) => pageFolder.children.includes(itemId)
+      (pageFolder) => pageFolder.children.includes(itemId),
     );
   }
 
@@ -317,7 +317,7 @@ export class PageStore {
       let descendantPages = [];
       for (const childId of item.children) {
         descendantPages = descendantPages.concat(
-          this.getDescendantPages(childId)
+          this.getDescendantPages(childId),
         );
       }
       return descendantPages;

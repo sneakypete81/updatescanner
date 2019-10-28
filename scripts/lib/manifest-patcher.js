@@ -19,7 +19,7 @@ function writeManifest(manifest) {
 exports.patch = function() {
   const manifest = readManifest();
   const isPreRelease = ['alpha', 'beta'].some(
-    (str) => manifest.version.includes(str)
+    (str) => manifest.version.includes(str),
   );
 
   if (!isPreRelease) {

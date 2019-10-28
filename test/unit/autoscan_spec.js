@@ -63,7 +63,7 @@ describe('Autoscan', function() {
 
       expect(browser.alarms.create).toHaveBeenCalledWith(
         'updatescanner-autoscan',
-        {delayInMinutes: 1, periodInMinutes: 5}
+        {delayInMinutes: 1, periodInMinutes: 5},
       );
     });
 
@@ -77,7 +77,7 @@ describe('Autoscan', function() {
 
       expect(browser.alarms.create).toHaveBeenCalledWith(
         'updatescanner-autoscan',
-        {delayInMinutes: 0.1, periodInMinutes: 0.5}
+        {delayInMinutes: 0.1, periodInMinutes: 0.5},
       );
     });
   });

@@ -7,7 +7,7 @@ const release = async function() {
 
   const isBeta = version.includes('beta');
   const isPreRelease = ['alpha', 'beta'].some(
-    (str) => version.includes(str)
+    (str) => version.includes(str),
   );
 
   const changeText = changelog.getChangeText(version);
