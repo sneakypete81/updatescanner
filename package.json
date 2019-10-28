@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "@octokit/rest": "^16.34.0",
-    "eslint": "^6.5.1",
+    "eslint": "^6.6.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-jsdoc": "^15.12.1",
     "jasmine-core": "^3.5.0",
