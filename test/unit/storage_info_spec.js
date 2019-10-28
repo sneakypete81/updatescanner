@@ -195,7 +195,7 @@ describe('StorageInfo', function() {
 
         expect(storageInfo.pageIds).toEqual(newData.pageIds);
         expect(storageInfo.pageFolderIds).toEqual(newData.pageFolderIds);
-      }
+      },
     );
 
     it('doesn\'t update the storageInfo object when a different event fires',

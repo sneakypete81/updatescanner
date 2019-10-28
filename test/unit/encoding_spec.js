@@ -4,7 +4,7 @@ describe('encoding', function() {
   describe('detectEncoding', function() {
     it('extracts encoding from headers', function() {
       const headers = new Headers(
-        {'Content-Type': 'text/html; charset=utf-8;'}
+        {'Content-Type': 'text/html; charset=utf-8;'},
       );
 
       const encoding = detectEncoding(headers, '');
