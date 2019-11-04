@@ -31,16 +31,11 @@ function copyDependency(dependency, src, dest) {
   let fullPath = '';
   for (const dir of dependency.dirs) {
     fullPath += '/' + dir;
-    fs.mkdirSync(dest + '/' + fullPath);
+    fs.mkdirSync(dest + '/' + fullPath, {recursive: true});
   }
   fullPath += '/' + dependency.file;
   fs.copyFileSync(src + '/' + fullPath, dest + '/' + fullPath);
 }
-
-fs.mkdirSync('src/dependencies');
-fs.mkdirSync('src/dependencies/include');
-fs.mkdirSync('src/dependencies/module');
-fs.mkdirSync('test/dependencies');
 
 for (const dependency of includeDependencies) {
   copyDependency(dependency, 'node_modules', 'src/dependencies/include');
