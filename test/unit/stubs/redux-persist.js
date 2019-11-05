@@ -1,0 +1,4 @@
+window.ReduxPersist = {
+  persistReducer: () => {},
+  persistStore: () => {},
+};
