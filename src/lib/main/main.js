@@ -155,7 +155,7 @@ export class Main {
     const newSettings = await dialog.openPageFolderDialog(folder);
     if (newSettings !== null) {
       await this.store.dispatch(
-        addFolder({title: newSettings.title, parentId: '0'})
+        addFolder({title: newSettings.title, parentId: '0'}),
       );
     }
     document.location.replace('about:blank');

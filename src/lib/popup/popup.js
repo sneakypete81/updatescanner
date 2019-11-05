@@ -45,7 +45,7 @@ export class Popup {
 
     view.clearPageList();
     pageIds.map(
-      (id) => view.addPage(id, getItem(this.store.getState(), id).title)
+      (id) => view.addPage(id, getItem(this.store.getState(), id).title),
     );
   }
 

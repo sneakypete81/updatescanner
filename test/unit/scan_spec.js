@@ -65,7 +65,7 @@ describe('scan', function() {
       const html = 'Here is some <b>HTML</b>';
 
       spyOn(scanModule.__.store, 'getState').and.returnValue(
-        {pages: {[this.id]: this.page}}
+        {pages: {[this.id]: this.page}},
       );
       spyOn(scanModule.__.store, 'dispatch');
       spyOn(PageStore, 'saveHtml');
@@ -120,7 +120,7 @@ describe('scan', function() {
       const html = 'Here is some <b>HTML</b>';
 
       spyOn(scanModule.__.store, 'getState').and.returnValue(
-        {pages: {[this.id]: this.page}}
+        {pages: {[this.id]: this.page}},
       );
       spyOn(scanModule.__.store, 'dispatch');
       spyOn(PageStore, 'saveHtml');
@@ -148,7 +148,7 @@ describe('scan', function() {
       const html2 = 'Here is some different <b>HTML</b>';
 
       spyOn(scanModule.__.store, 'getState').and.returnValue(
-        {pages: {[this.id]: this.page}}
+        {pages: {[this.id]: this.page}},
       );
       spyOn(scanModule.__.store, 'dispatch');
       spyOn(PageStore, 'saveHtml');
@@ -206,7 +206,7 @@ describe('scan', function() {
       const html2 = 'Here is some different <b>HTML</b>';
 
       spyOn(scanModule.__.store, 'getState').and.returnValue(
-        {pages: {[this.id]: this.page}}
+        {pages: {[this.id]: this.page}},
       );
       spyOn(scanModule.__.store, 'dispatch');
       spyOn(PageStore, 'saveHtml');

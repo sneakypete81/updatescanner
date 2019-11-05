@@ -177,12 +177,12 @@ const getPages = (state) => state.pages;
 
 const pageIds = (pages) =>
   Object.keys(pages).filter(
-    (id) => isPage(pages[id])
+    (id) => isPage(pages[id]),
   );
 
 const folderIds = (pages) =>
   Object.keys(pages).filter(
-    (id) => isFolder(pages[id])
+    (id) => isFolder(pages[id]),
   );
 
 const addChild = (pages, parentId, childId) => {
@@ -203,7 +203,7 @@ const mutateToDeleteItem = (mutablePages, id) => {
   delete mutablePages[id];
   if (isFolder(item)) {
     item.children.forEach(
-      (childId) => mutateToDeleteItem(mutablePages, childId)
+      (childId) => mutateToDeleteItem(mutablePages, childId),
     );
   }
 };
@@ -226,7 +226,7 @@ export const getChangedPageIds = createSelector(
   getPages,
   getPageIds,
   (pages, pageIds) => pageIds.filter(
-    (id) => pages[id].status == status.CHANGED
+    (id) => pages[id].status == status.CHANGED,
   ),
 );
 
