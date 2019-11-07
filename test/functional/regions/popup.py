@@ -13,6 +13,6 @@ popup = Region("popup", config).configure([
     ),
     ElementConfig(
         "add_button",
-        expected_rect=(1462, 820, 151, 145),
+        expected_rect=(1458, 820, 151, 145),
     )
 ])
