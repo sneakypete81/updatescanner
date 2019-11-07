@@ -6,6 +6,7 @@
 /test/dependencies/
 /src/.web-extension-id
 .vscode/
+.DS_Store
 **/.pytest_cache
 **/__pycache__
 /test/functional/.python-version
