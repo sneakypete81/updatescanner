@@ -12,6 +12,7 @@ const sign = async function() {
 
   try {
     await webExt.sign(
+      settings.get('addon_id'),
       settings.get('api_key'),
       settings.get('api_secret'),
     );
