@@ -32,6 +32,7 @@ describe('PageStore', function() {
         spyOnStorageLoadWithArgReturn({
           [StorageInfo._KEY]: Promise.resolve(undefined),
         });
+        spyOn(Storage, 'save').and.returnValues(Promise.resolve());
 
         PageStore.load().then((pageStore) => {
           expect(pageStore.pageMap.get('0')).toEqual(
@@ -47,6 +48,7 @@ describe('PageStore', function() {
       spyOnStorageLoadWithArgReturn({
         [StorageInfo._KEY]: Promise.resolve({pageIds: [], pageFolderIds: []}),
       });
+      spyOn(Storage, 'save').and.returnValues(Promise.resolve());
 
       PageStore.load().then((pageStore) => {
         expect(pageStore.pageMap.get('0')).toEqual(
@@ -65,6 +67,7 @@ describe('PageStore', function() {
         [Page._KEY('1')]: Promise.resolve({title: 'Page 1'}),
         [Page._KEY('2')]: Promise.resolve({title: 'Page 2'}),
       });
+      spyOn(Storage, 'save').and.returnValues(Promise.resolve());
 
       PageStore.load().then((pageStore) => {
         expect(pageStore.pageMap.get('0')).toEqual(
@@ -90,6 +93,7 @@ describe('PageStore', function() {
           [PageFolder._KEY('3')]: Promise.resolve(
             {title: 'subfolder', children: ['2']}),
         });
+        spyOn(Storage, 'save').and.returnValues(Promise.resolve());
 
         PageStore.load().then((pageStore) => {
           expect(pageStore.pageMap.get('1')).toEqual(
@@ -110,6 +114,7 @@ describe('PageStore', function() {
       spyOnStorageLoadWithArgReturn({
         [StorageInfo._KEY]: Promise.resolve(storageInfo),
       });
+      spyOn(Storage, 'save').and.returnValues(Promise.resolve());
 
       PageStore.load().then((pageStore) => {
         expect(pageStore.storageInfo).toEqual(new StorageInfo(storageInfo));

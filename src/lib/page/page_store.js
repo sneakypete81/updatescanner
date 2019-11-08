@@ -62,7 +62,9 @@ export class PageStore {
         storageInfo.pageFolderIds.push(PageStore.ROOT_ID);
       }
 
+      await storageInfo.save();
       return new PageStore(pageMap, storageInfo);
+
     } catch (error) {
       // Not much we can do with an error. Set to an empty pageMap.
       console.error(error);
