@@ -8,7 +8,7 @@ license = "GPL-3.0"
 [tool.poetry.dependencies]
 python = "^3.7"
 flake8 = "^3.7"
-pytest = "^4.6"
+pytest = "^5.2"
 pyobjc = "^5.2" # TODO: Remove!
 PyHamcrest = "^1.9"
 requests = "^2.22"
