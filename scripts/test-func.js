@@ -16,7 +16,7 @@ const test = async function() {
   try {
     childProcess.execFileSync(
       'poetry', ['run', 'pytest'],
-      {cwd: FUNC_TEST_PATH, stdio: 'inherit'}
+      {cwd: FUNC_TEST_PATH, stdio: 'inherit'},
     );
   } finally {
     console.log('Stopping Geckodriver...');
