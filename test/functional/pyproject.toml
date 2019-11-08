@@ -13,7 +13,7 @@ pyobjc = "^5.2" # TODO: Remove!
 PyHamcrest = "^1.9"
 requests = "^2.22"
 
-clickshot = "0.1.0"
+clickshot = "0.1.1"
 opencv-python = "^4.1"
 
 [tool.poetry.dev-dependencies]

@@ -36,7 +36,7 @@ description = "Easy GUI testing with pyautogui"
 name = "clickshot"
 optional = false
 python-versions = ">=3.6,<4.0"
-version = "0.1.0"
+version = "0.1.1"
 
 [package.dependencies]
 PyAutoGUI = "0.9.42"
@@ -1757,7 +1757,7 @@ version = "0.6.0"
 more-itertools = "*"
 
 [metadata]
-content-hash = "e28519c5a306819a812c3b48106d24727289811669bfdab536f02c682723f979"
+content-hash = "32f38d0d9f2fe4c52442edbee26fba9dd70ec76b45359d6362622cc58e07fee1"
 python-versions = "^3.7"
 
 [metadata.hashes]
@@ -1765,7 +1765,7 @@ atomicwrites = ["03472c30eb2c5d1ba9227e4c2ca66ab8287fbfbbda3888aa93dc2e28fc6811b
 attrs = ["08a96c641c3a74e44eb59afb61a24f2cb9f4d7188748e76ba4bb5edfa3cb7d1c", "f7b7ce16570fe9965acd6d30101a28f62fb4a7f9e926b3bbc9b61f8b04247e72"]
 certifi = ["e4f3620cfea4f83eedc95b24abd9cd56f3c4b146dd0177e83a21b4eb49e21e50", "fd7c7c74727ddcf00e9acd26bba8da604ffec95bf1c2144e67aff7a8b50e6cef"]
 chardet = ["84ab92ed1c4d4f16916e05906b6b75a6c0fb5db821cc65e70cbd64a3e2a5eaae", "fc323ffcaeaed0e0a02bf4d117757b98aed530d9ed4531e3e15460124c106691"]
-clickshot = ["73d34f48ba1c870fc8880b95c0706e5f9a44f630c384cff4e3c2ca0ab472f5fe", "c615ff11f7d4bbd5113064d74957e18f9b33d029d9450254c8e09de40710fffe"]
+clickshot = ["28950261fac9005dcdb5366c4e95b8e970e53539a491cd798ccd136f3aad9f24", "5da60cdc883b0eab161562fed312f421ac196713f0d315e506faedb19f10d7b9"]
 colorama = ["05eed71e2e327246ad6b38c540c4a3117230b19679b875190486ddd2d721422d", "f8ac84de7840f5b9c4e3347b3c1eaa50f7e49c2b07596221daec5edaabbd7c48"]
 entrypoints = ["589f874b313739ad35be6e0cd7efde2a4e9b6fea91edcc34e58ecbb8dbe56d19", "c70dd71abe5a8c85e55e12c19bd91ccfeec11a6e99044204511f9ed547d48451"]
 flake8 = ["45681a117ecc81e870cbf1262835ae4af5e7a8b08e40b944a8a6e6b895914cfb", "49356e766643ad15072a789a20915d3c91dc89fd313ccd71802303fd67e4deca"]
