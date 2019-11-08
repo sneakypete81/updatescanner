@@ -1,5 +1,9 @@
 # Update Scanner Changelog
 
+## 4.5.1alpha3
+
+* Fix for no root folder after fresh installation
+
 ## 4.5.1alpha2
 
 * Fix problem when restoring folders (#495)
