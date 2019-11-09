@@ -14,7 +14,7 @@ SCREENSHOT_DIR = Path(__file__).parent / "regions" / "screenshots"
 def firefox(_gecko_session):
     _gecko_session.navigate_to("about:blank")
     addon_id = _gecko_session.install_addon(str(ADDON_PATH))
-    yield
+    yield _gecko_session
 
     _gecko_session.uninstall_addon(addon_id)
 

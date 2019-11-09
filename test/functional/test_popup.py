@@ -26,8 +26,8 @@ class TestPopup:
 
         assert_that(sidebar.title, is_(eventually_visible()))
 
-    def test_item_can_be_added_from_the_popup(self):
-        browser.visit_url("https://time.is")
+    def test_item_can_be_added_from_the_popup(self, firefox):
+        firefox.navigate_to("https://time.is")
         browser.update_scanner_button.click()
 
         popup.add_button.click()
