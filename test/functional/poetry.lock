@@ -263,119 +263,135 @@ category = "main"
 description = "Python<->ObjC Interoperability Module"
 name = "pyobjc"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = "5.3"
-pyobjc-framework-AVFoundation = "5.3"
-pyobjc-framework-AVKit = "5.3"
-pyobjc-framework-Accounts = "5.3"
-pyobjc-framework-AdSupport = "5.3"
-pyobjc-framework-AddressBook = "5.3"
-pyobjc-framework-AppleScriptKit = "5.3"
-pyobjc-framework-AppleScriptObjC = "5.3"
-pyobjc-framework-ApplicationServices = "5.3"
-pyobjc-framework-Automator = "5.3"
-pyobjc-framework-BusinessChat = "5.3"
-pyobjc-framework-CFNetwork = "5.3"
-pyobjc-framework-CalendarStore = "5.3"
-pyobjc-framework-CloudKit = "5.3"
-pyobjc-framework-Cocoa = "5.3"
-pyobjc-framework-Collaboration = "5.3"
-pyobjc-framework-ColorSync = "5.3"
-pyobjc-framework-Contacts = "5.3"
-pyobjc-framework-ContactsUI = "5.3"
-pyobjc-framework-CoreAudio = "5.3"
-pyobjc-framework-CoreAudioKit = "5.3"
-pyobjc-framework-CoreBluetooth = "5.3"
-pyobjc-framework-CoreData = "5.3"
-pyobjc-framework-CoreLocation = "5.3"
-pyobjc-framework-CoreML = "5.3"
-pyobjc-framework-CoreMedia = "5.3"
-pyobjc-framework-CoreMediaIO = "5.3"
-pyobjc-framework-CoreServices = "5.3"
-pyobjc-framework-CoreSpotlight = "5.3"
-pyobjc-framework-CoreText = "5.3"
-pyobjc-framework-CoreWLAN = "5.3"
-pyobjc-framework-CryptoTokenKit = "5.3"
-pyobjc-framework-DVDPlayback = "5.3"
-pyobjc-framework-DictionaryServices = "5.3"
-pyobjc-framework-DiscRecording = "5.3"
-pyobjc-framework-DiscRecordingUI = "5.3"
-pyobjc-framework-DiskArbitration = "5.3"
-pyobjc-framework-EventKit = "5.3"
-pyobjc-framework-ExceptionHandling = "5.3"
-pyobjc-framework-ExternalAccessory = "5.3"
-pyobjc-framework-FSEvents = "5.3"
-pyobjc-framework-FinderSync = "5.3"
-pyobjc-framework-GameCenter = "5.3"
-pyobjc-framework-GameController = "5.3"
-pyobjc-framework-GameKit = "5.3"
-pyobjc-framework-GameplayKit = "5.3"
-pyobjc-framework-IMServicePlugIn = "5.3"
-pyobjc-framework-IOSurface = "5.3"
-pyobjc-framework-ImageCaptureCore = "5.3"
-pyobjc-framework-InputMethodKit = "5.3"
-pyobjc-framework-InstallerPlugins = "5.3"
-pyobjc-framework-InstantMessage = "5.3"
-pyobjc-framework-Intents = "5.3"
-pyobjc-framework-InterfaceBuilderKit = "5.3"
-pyobjc-framework-LatentSemanticMapping = "5.3"
-pyobjc-framework-LaunchServices = "5.3"
-pyobjc-framework-LocalAuthentication = "5.3"
-pyobjc-framework-MapKit = "5.3"
-pyobjc-framework-MediaAccessibility = "5.3"
-pyobjc-framework-MediaLibrary = "5.3"
-pyobjc-framework-MediaPlayer = "5.3"
-pyobjc-framework-MediaToolbox = "5.3"
-pyobjc-framework-Message = "5.3"
-pyobjc-framework-ModelIO = "5.3"
-pyobjc-framework-MultipeerConnectivity = "5.3"
-pyobjc-framework-NaturalLanguage = "5.3"
-pyobjc-framework-NetFS = "5.3"
-pyobjc-framework-Network = "5.3"
-pyobjc-framework-NetworkExtension = "5.3"
-pyobjc-framework-NotificationCenter = "5.3"
-pyobjc-framework-OSAKit = "5.3"
-pyobjc-framework-OpenDirectory = "5.3"
-pyobjc-framework-Photos = "5.3"
-pyobjc-framework-PhotosUI = "5.3"
-pyobjc-framework-PreferencePanes = "5.3"
-pyobjc-framework-PubSub = "5.3"
-pyobjc-framework-QTKit = "5.3"
-pyobjc-framework-Quartz = "5.3"
-pyobjc-framework-SafariServices = "5.3"
-pyobjc-framework-SceneKit = "5.3"
-pyobjc-framework-ScreenSaver = "5.3"
-pyobjc-framework-ScriptingBridge = "5.3"
-pyobjc-framework-SearchKit = "5.3"
-pyobjc-framework-Security = "5.3"
-pyobjc-framework-SecurityFoundation = "5.3"
-pyobjc-framework-SecurityInterface = "5.3"
-pyobjc-framework-ServerNotification = "5.3"
-pyobjc-framework-ServiceManagement = "5.3"
-pyobjc-framework-Social = "5.3"
-pyobjc-framework-SpriteKit = "5.3"
-pyobjc-framework-StoreKit = "5.3"
-pyobjc-framework-SyncServices = "5.3"
-pyobjc-framework-SystemConfiguration = "5.3"
-pyobjc-framework-UserNotifications = "5.3"
-pyobjc-framework-VideoSubscriberAccount = "5.3"
-pyobjc-framework-VideoToolbox = "5.3"
-pyobjc-framework-Vision = "5.3"
-pyobjc-framework-WebKit = "5.3"
-pyobjc-framework-XgridFoundation = "5.3"
-pyobjc-framework-iTunesLibrary = "5.3"
-pyobjc-framework-libdispatch = "5.3"
+pyobjc-core = "6.1"
+pyobjc-framework-AVFoundation = "6.1"
+pyobjc-framework-AVKit = "6.1"
+pyobjc-framework-Accounts = "6.1"
+pyobjc-framework-AdSupport = "6.1"
+pyobjc-framework-AddressBook = "6.1"
+pyobjc-framework-AppleScriptKit = "6.1"
+pyobjc-framework-AppleScriptObjC = "6.1"
+pyobjc-framework-ApplicationServices = "6.1"
+pyobjc-framework-AuthenticationServices = "6.1"
+pyobjc-framework-Automator = "6.1"
+pyobjc-framework-BusinessChat = "6.1"
+pyobjc-framework-CFNetwork = "6.1"
+pyobjc-framework-CalendarStore = "6.1"
+pyobjc-framework-CloudKit = "6.1"
+pyobjc-framework-Cocoa = "6.1"
+pyobjc-framework-Collaboration = "6.1"
+pyobjc-framework-ColorSync = "6.1"
+pyobjc-framework-Contacts = "6.1"
+pyobjc-framework-ContactsUI = "6.1"
+pyobjc-framework-CoreAudio = "6.1"
+pyobjc-framework-CoreAudioKit = "6.1"
+pyobjc-framework-CoreBluetooth = "6.1"
+pyobjc-framework-CoreData = "6.1"
+pyobjc-framework-CoreHaptics = "6.1"
+pyobjc-framework-CoreLocation = "6.1"
+pyobjc-framework-CoreML = "6.1"
+pyobjc-framework-CoreMedia = "6.1"
+pyobjc-framework-CoreMediaIO = "6.1"
+pyobjc-framework-CoreMotion = "6.1"
+pyobjc-framework-CoreServices = "6.1"
+pyobjc-framework-CoreSpotlight = "6.1"
+pyobjc-framework-CoreText = "6.1"
+pyobjc-framework-CoreWLAN = "6.1"
+pyobjc-framework-CryptoTokenKit = "6.1"
+pyobjc-framework-DVDPlayback = "6.1"
+pyobjc-framework-DeviceCheck = "6.1"
+pyobjc-framework-DictionaryServices = "6.1"
+pyobjc-framework-DiscRecording = "6.1"
+pyobjc-framework-DiscRecordingUI = "6.1"
+pyobjc-framework-DiskArbitration = "6.1"
+pyobjc-framework-EventKit = "6.1"
+pyobjc-framework-ExceptionHandling = "6.1"
+pyobjc-framework-ExecutionPolicy = "6.1"
+pyobjc-framework-ExternalAccessory = "6.1"
+pyobjc-framework-FSEvents = "6.1"
+pyobjc-framework-FileProvider = "6.1"
+pyobjc-framework-FileProviderUI = "6.1"
+pyobjc-framework-FinderSync = "6.1"
+pyobjc-framework-GameCenter = "6.1"
+pyobjc-framework-GameController = "6.1"
+pyobjc-framework-GameKit = "6.1"
+pyobjc-framework-GameplayKit = "6.1"
+pyobjc-framework-IMServicePlugIn = "6.1"
+pyobjc-framework-IOSurface = "6.1"
+pyobjc-framework-ImageCaptureCore = "6.1"
+pyobjc-framework-InputMethodKit = "6.1"
+pyobjc-framework-InstallerPlugins = "6.1"
+pyobjc-framework-InstantMessage = "6.1"
+pyobjc-framework-Intents = "6.1"
+pyobjc-framework-InterfaceBuilderKit = "6.1"
+pyobjc-framework-LatentSemanticMapping = "6.1"
+pyobjc-framework-LaunchServices = "6.1"
+pyobjc-framework-LinkPresentation = "6.1"
+pyobjc-framework-LocalAuthentication = "6.1"
+pyobjc-framework-MapKit = "6.1"
+pyobjc-framework-MediaAccessibility = "6.1"
+pyobjc-framework-MediaLibrary = "6.1"
+pyobjc-framework-MediaPlayer = "6.1"
+pyobjc-framework-MediaToolbox = "6.1"
+pyobjc-framework-Message = "6.1"
+pyobjc-framework-MetalKit = "6.1"
+pyobjc-framework-ModelIO = "6.1"
+pyobjc-framework-MultipeerConnectivity = "6.1"
+pyobjc-framework-NaturalLanguage = "6.1"
+pyobjc-framework-NetFS = "6.1"
+pyobjc-framework-Network = "6.1"
+pyobjc-framework-NetworkExtension = "6.1"
+pyobjc-framework-NotificationCenter = "6.1"
+pyobjc-framework-OSAKit = "6.1"
+pyobjc-framework-OSLog = "6.1"
+pyobjc-framework-OpenDirectory = "6.1"
+pyobjc-framework-PencilKit = "6.1"
+pyobjc-framework-Photos = "6.1"
+pyobjc-framework-PhotosUI = "6.1"
+pyobjc-framework-PreferencePanes = "6.1"
+pyobjc-framework-PubSub = "6.1"
+pyobjc-framework-PushKit = "6.1"
+pyobjc-framework-QTKit = "6.1"
+pyobjc-framework-Quartz = "6.1"
+pyobjc-framework-QuickLookThumbnailing = "6.1"
+pyobjc-framework-SafariServices = "6.1"
+pyobjc-framework-SceneKit = "6.1"
+pyobjc-framework-ScreenSaver = "6.1"
+pyobjc-framework-ScriptingBridge = "6.1"
+pyobjc-framework-SearchKit = "6.1"
+pyobjc-framework-Security = "6.1"
+pyobjc-framework-SecurityFoundation = "6.1"
+pyobjc-framework-SecurityInterface = "6.1"
+pyobjc-framework-ServerNotification = "6.1"
+pyobjc-framework-ServiceManagement = "6.1"
+pyobjc-framework-Social = "6.1"
+pyobjc-framework-SoundAnalysis = "6.1"
+pyobjc-framework-Speech = "6.1"
+pyobjc-framework-SpriteKit = "6.1"
+pyobjc-framework-StoreKit = "6.1"
+pyobjc-framework-SyncServices = "6.1"
+pyobjc-framework-SystemConfiguration = "6.1"
+pyobjc-framework-SystemExtensions = "6.1"
+pyobjc-framework-UserNotifications = "6.1"
+pyobjc-framework-VideoSubscriberAccount = "6.1"
+pyobjc-framework-VideoToolbox = "6.1"
+pyobjc-framework-Vision = "6.1"
+pyobjc-framework-WebKit = "6.1"
+pyobjc-framework-XgridFoundation = "6.1"
+pyobjc-framework-iTunesLibrary = "6.1"
+pyobjc-framework-libdispatch = "6.1"
 
 [[package]]
 category = "main"
 description = "Python<->ObjC Interoperability Module"
 name = "pyobjc-core"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [[package]]
 category = "main"
@@ -383,24 +399,24 @@ description = "Wrappers for the framework Accounts on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"12.0\" or platform_system == \"Darwin\" and platform_release >= \"14.0\" or platform_release >= \"12.0\" or platform_release >= \"14.0\""
 name = "pyobjc-framework-accounts"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
 description = "Wrappers for the framework AddressBook on macOS"
 name = "pyobjc-framework-addressbook"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -408,24 +424,24 @@ description = "Wrappers for the framework AdSupport on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"18.0\" or platform_release >= \"18.0\""
 name = "pyobjc-framework-adsupport"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
 description = "Wrappers for the framework AppleScriptKit on macOS"
 name = "pyobjc-framework-applescriptkit"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -433,37 +449,50 @@ description = "Wrappers for the framework AppleScriptObjC on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"10.0\" or platform_release >= \"10.0\""
 name = "pyobjc-framework-applescriptobjc"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
 description = "Wrappers for the framework ApplicationServices on macOS"
 name = "pyobjc-framework-applicationservices"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
-pyobjc-framework-Quartz = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
+pyobjc-framework-Quartz = ">=6.1"
+
+[[package]]
+category = "main"
+description = "Wrappers for the framework AuthenticationServices on macOS"
+marker = "platform_system == \"Darwin\" and platform_release >= \"19.0\" or platform_release >= \"19.0\""
+name = "pyobjc-framework-authenticationservices"
+optional = false
+python-versions = ">=3.6"
+version = "6.1"
+
+[package.dependencies]
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
 description = "Wrappers for the framework Automator on macOS"
 name = "pyobjc-framework-automator"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -471,13 +500,14 @@ description = "Wrappers for the framework AVFoundation on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"11.0\" or platform_system == \"Darwin\" and platform_release >= \"16.0\" or platform_release >= \"11.0\" or platform_release >= \"16.0\""
 name = "pyobjc-framework-avfoundation"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
-pyobjc-framework-Quartz = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
+pyobjc-framework-CoreMedia = ">=6.1"
+pyobjc-framework-Quartz = ">=6.1"
 
 [[package]]
 category = "main"
@@ -485,13 +515,13 @@ description = "Wrappers for the framework AVKit on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"13.0\" or platform_release >= \"13.0\""
 name = "pyobjc-framework-avkit"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
-pyobjc-framework-Quartz = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
+pyobjc-framework-Quartz = ">=6.1"
 
 [[package]]
 category = "main"
@@ -499,12 +529,12 @@ description = "Wrappers for the framework BusinessChat on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"18.0\" or platform_release >= \"18.0\""
 name = "pyobjc-framework-businesschat"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -512,24 +542,24 @@ description = "Wrappers for the framework CalendarStore on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"9.0\" or platform_release >= \"9.0\""
 name = "pyobjc-framework-calendarstore"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
 description = "Wrappers for the framework CFNetwork on macOS"
 name = "pyobjc-framework-cfnetwork"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -537,26 +567,26 @@ description = "Wrappers for the framework CloudKit on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"14.0\" or platform_release >= \"14.0\""
 name = "pyobjc-framework-cloudkit"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Accounts = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
-pyobjc-framework-CoreData = ">=5.3"
-pyobjc-framework-CoreLocation = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Accounts = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
+pyobjc-framework-CoreData = ">=6.1"
+pyobjc-framework-CoreLocation = ">=6.1"
 
 [[package]]
 category = "main"
 description = "Wrappers for the Cocoa frameworks on macOS"
 name = "pyobjc-framework-cocoa"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
+pyobjc-core = ">=6.1"
 
 [[package]]
 category = "main"
@@ -564,12 +594,12 @@ description = "Wrappers for the framework Collaboration on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"9.0\" or platform_release >= \"9.0\""
 name = "pyobjc-framework-collaboration"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -577,12 +607,12 @@ description = "Wrappers for the framework ColorSync on Mac OS X"
 marker = "platform_system == \"Darwin\" and platform_release >= \"17.0\" or platform_release >= \"17.0\""
 name = "pyobjc-framework-colorsync"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -590,12 +620,12 @@ description = "Wrappers for the framework Contacts on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"15.0\" or platform_release >= \"15.0\""
 name = "pyobjc-framework-contacts"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -603,38 +633,38 @@ description = "Wrappers for the framework ContactsUI on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"15.0\" or platform_release >= \"15.0\""
 name = "pyobjc-framework-contactsui"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
-pyobjc-framework-Contacts = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
+pyobjc-framework-Contacts = ">=6.1"
 
 [[package]]
 category = "main"
 description = "Wrappers for the framework CoreAudio on macOS"
 name = "pyobjc-framework-coreaudio"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
 description = "Wrappers for the framework CoreAudioKit on macOS"
 name = "pyobjc-framework-coreaudiokit"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
-pyobjc-framework-CoreAudio = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
+pyobjc-framework-CoreAudio = ">=6.1"
 
 [[package]]
 category = "main"
@@ -642,24 +672,37 @@ description = "Wrappers for the framework CoreBluetooth on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"14.0\" or platform_release >= \"14.0\""
 name = "pyobjc-framework-corebluetooth"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
 description = "Wrappers for the framework CoreData on macOS"
 name = "pyobjc-framework-coredata"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
+
+[[package]]
+category = "main"
+description = "Wrappers for the framework CoreHaptics on macOS"
+marker = "platform_system == \"Darwin\" and platform_release >= \"19.0\" or platform_release >= \"19.0\""
+name = "pyobjc-framework-corehaptics"
+optional = false
+python-versions = ">=3.6"
+version = "6.1"
+
+[package.dependencies]
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -667,25 +710,25 @@ description = "Wrappers for the framework CoreLocation on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"10.0\" or platform_system == \"Darwin\" and platform_release >= \"13.0\" or platform_system == \"Darwin\" and platform_release >= \"14.0\" or platform_release >= \"10.0\" or platform_release >= \"13.0\" or platform_release >= \"14.0\""
 name = "pyobjc-framework-corelocation"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
 description = "Wrappers for the framework CoreMedia on macOS"
-marker = "platform_system == \"Darwin\" and platform_release >= \"11.0\" or platform_system == \"Darwin\" and platform_release >= \"12.0\" or platform_release >= \"11.0\" or platform_release >= \"12.0\""
+marker = "platform_system == \"Darwin\" and platform_release >= \"11.0\" or platform_system == \"Darwin\" and platform_release >= \"12.0\" or platform_system == \"Darwin\" and platform_release >= \"16.0\" or platform_system == \"Darwin\" and platform_release >= \"19.0\" or platform_release >= \"11.0\" or platform_release >= \"12.0\" or platform_release >= \"16.0\" or platform_release >= \"19.0\""
 name = "pyobjc-framework-coremedia"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -693,12 +736,12 @@ description = "Wrappers for the framework CoreMediaIO on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"11.0\" or platform_release >= \"11.0\""
 name = "pyobjc-framework-coremediaio"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -706,24 +749,37 @@ description = "Wrappers for the framework CoreML on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"17.0\" or platform_release >= \"17.0\""
 name = "pyobjc-framework-coreml"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
+
+[[package]]
+category = "main"
+description = "Wrappers for the framework CoreMotion on macOS"
+marker = "platform_system == \"Darwin\" and platform_release >= \"19.0\" or platform_release >= \"19.0\""
+name = "pyobjc-framework-coremotion"
+optional = false
+python-versions = ">=3.6"
+version = "6.1"
+
+[package.dependencies]
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
 description = "Wrappers for the framework CoreServices on macOS"
 name = "pyobjc-framework-coreservices"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-FSEvents = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-FSEvents = ">=6.1"
 
 [[package]]
 category = "main"
@@ -731,25 +787,25 @@ description = "Wrappers for the framework CoreSpotlight on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"17.0\" or platform_release >= \"17.0\""
 name = "pyobjc-framework-corespotlight"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
 description = "Wrappers for the framework CoreText on macOS"
 name = "pyobjc-framework-coretext"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
-pyobjc-framework-Quartz = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
+pyobjc-framework-Quartz = ">=6.1"
 
 [[package]]
 category = "main"
@@ -757,12 +813,12 @@ description = "Wrappers for the framework CoreWLAN on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"10.0\" or platform_release >= \"10.0\""
 name = "pyobjc-framework-corewlan"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -770,12 +826,25 @@ description = "Wrappers for the framework CryptoTokenKit on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"14.0\" or platform_release >= \"14.0\""
 name = "pyobjc-framework-cryptotokenkit"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
+
+[[package]]
+category = "main"
+description = "Wrappers for the framework DeviceCheck on macOS"
+marker = "platform_system == \"Darwin\" and platform_release >= \"19.0\" or platform_release >= \"19.0\""
+name = "pyobjc-framework-devicecheck"
+optional = false
+python-versions = ">=3.6"
+version = "6.1"
+
+[package.dependencies]
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -783,61 +852,61 @@ description = "Wrappers for the framework DictionaryServices on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"9.0\" or platform_release >= \"9.0\""
 name = "pyobjc-framework-dictionaryservices"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-CoreServices = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-CoreServices = ">=6.1"
 
 [[package]]
 category = "main"
 description = "Wrappers for the framework DiscRecording on macOS"
 name = "pyobjc-framework-discrecording"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
 description = "Wrappers for the framework DiscRecordingUI on macOS"
 name = "pyobjc-framework-discrecordingui"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
-pyobjc-framework-DiscRecording = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
+pyobjc-framework-DiscRecording = ">=6.1"
 
 [[package]]
 category = "main"
 description = "Wrappers for the framework DiskArbitration on macOS"
 name = "pyobjc-framework-diskarbitration"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
 description = "Wrappers for the framework DVDPlayback on macOS"
 name = "pyobjc-framework-dvdplayback"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -845,24 +914,37 @@ description = "Wrappers for the framework Accounts on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"12.0\" or platform_release >= \"12.0\""
 name = "pyobjc-framework-eventkit"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
 description = "Wrappers for the framework ExceptionHandling on macOS"
 name = "pyobjc-framework-exceptionhandling"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
+
+[[package]]
+category = "main"
+description = "Wrappers for the framework ExecutionPolicy on macOS"
+marker = "platform_system == \"Darwin\" and platform_release >= \"19.0\" or platform_release >= \"19.0\""
+name = "pyobjc-framework-executionpolicy"
+optional = false
+python-versions = ">=3.6"
+version = "6.1"
+
+[package.dependencies]
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -870,12 +952,38 @@ description = "Wrappers for the framework ExternalAccessory on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"17.0\" or platform_release >= \"17.0\""
 name = "pyobjc-framework-externalaccessory"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
+
+[[package]]
+category = "main"
+description = "Wrappers for the framework FileProvider on macOS"
+marker = "platform_system == \"Darwin\" and platform_release >= \"19.0\" or platform_release >= \"19.0\""
+name = "pyobjc-framework-fileprovider"
+optional = false
+python-versions = ">=3.6"
+version = "6.1"
+
+[package.dependencies]
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
+
+[[package]]
+category = "main"
+description = "Wrappers for the framework FileProviderUI on macOS"
+marker = "platform_system == \"Darwin\" and platform_release >= \"19.0\" or platform_release >= \"19.0\""
+name = "pyobjc-framework-fileproviderui"
+optional = false
+python-versions = ">=3.6"
+version = "6.1"
+
+[package.dependencies]
+pyobjc-core = ">=6.1"
+pyobjc-framework-FileProvider = ">=6.1"
 
 [[package]]
 category = "main"
@@ -883,24 +991,24 @@ description = "Wrappers for the framework FinderSync on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"14.0\" or platform_release >= \"14.0\""
 name = "pyobjc-framework-findersync"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
 description = "Wrappers for the framework FSEvents on macOS"
 name = "pyobjc-framework-fsevents"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -908,12 +1016,12 @@ description = "Wrappers for the framework GameCenter on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"12.0\" or platform_release >= \"12.0\""
 name = "pyobjc-framework-gamecenter"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -921,12 +1029,12 @@ description = "Wrappers for the framework GameController on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"13.0\" or platform_release >= \"13.0\""
 name = "pyobjc-framework-gamecontroller"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -934,13 +1042,13 @@ description = "Wrappers for the framework GameKit on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"12.0\" or platform_release >= \"12.0\""
 name = "pyobjc-framework-gamekit"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
-pyobjc-framework-Quartz = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
+pyobjc-framework-Quartz = ">=6.1"
 
 [[package]]
 category = "main"
@@ -948,13 +1056,13 @@ description = "Wrappers for the framework GameplayKit on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"15.0\" or platform_release >= \"15.0\""
 name = "pyobjc-framework-gameplaykit"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
-pyobjc-framework-SpriteKit = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
+pyobjc-framework-SpriteKit = ">=6.1"
 
 [[package]]
 category = "main"
@@ -962,12 +1070,12 @@ description = "Wrappers for the framework ImageCaptureCore on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"10.0\" or platform_release >= \"10.0\""
 name = "pyobjc-framework-imagecapturecore"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -975,12 +1083,12 @@ description = "Wrappers for the framework IMServicePlugIn on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"11.0\" or platform_release >= \"11.0\""
 name = "pyobjc-framework-imserviceplugin"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -988,24 +1096,24 @@ description = "Wrappers for the framework InputMethodKit on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"9.0\" or platform_release >= \"9.0\""
 name = "pyobjc-framework-inputmethodkit"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
 description = "Wrappers for the framework InstallerPlugins on macOS"
 name = "pyobjc-framework-installerplugins"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -1013,13 +1121,13 @@ description = "Wrappers for the framework InstantMessage on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"9.0\" or platform_release >= \"9.0\""
 name = "pyobjc-framework-instantmessage"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
-pyobjc-framework-Quartz = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
+pyobjc-framework-Quartz = ">=6.1"
 
 [[package]]
 category = "main"
@@ -1027,12 +1135,12 @@ description = "Wrappers for the framework Intents on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"16.0\" or platform_release >= \"16.0\""
 name = "pyobjc-framework-intents"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -1040,12 +1148,12 @@ description = "Wrappers for the framework InterfaceBuilderKit on macOS"
 marker = "platform_release >= \"9.0\" and platform_release < \"11.0\" and platform_system == \"Darwin\" or platform_release >= \"9.0\" and platform_release < \"11.0\""
 name = "pyobjc-framework-interfacebuilderkit"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -1053,12 +1161,12 @@ description = "Wrappers for the framework IOSurface on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"10.0\" or platform_release >= \"10.0\""
 name = "pyobjc-framework-iosurface"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -1066,36 +1174,36 @@ description = "Wrappers for the framework iTunesLibrary on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"10.0\" or platform_release >= \"10.0\""
 name = "pyobjc-framework-ituneslibrary"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
 description = "Wrappers for the framework LatentSemanticMapping on macOS"
 name = "pyobjc-framework-latentsemanticmapping"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
 description = "Wrappers for the framework LaunchServices on macOS"
 name = "pyobjc-framework-launchservices"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-CoreServices = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-CoreServices = ">=6.1"
 
 [[package]]
 category = "main"
@@ -1103,11 +1211,25 @@ description = "Wrappers for libdispatch on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"12.0\" or platform_release >= \"12.0\""
 name = "pyobjc-framework-libdispatch"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
+pyobjc-core = ">=6.1"
+
+[[package]]
+category = "main"
+description = "Wrappers for the framework LinkPresentation on macOS"
+marker = "platform_system == \"Darwin\" and platform_release >= \"19.0\" or platform_release >= \"19.0\""
+name = "pyobjc-framework-linkpresentation"
+optional = false
+python-versions = ">=3.6"
+version = "6.1"
+
+[package.dependencies]
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
+pyobjc-framework-Quartz = ">=6.1"
 
 [[package]]
 category = "main"
@@ -1115,12 +1237,12 @@ description = "Wrappers for the framework LocalAuthentication on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"14.0\" or platform_release >= \"14.0\""
 name = "pyobjc-framework-localauthentication"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -1128,14 +1250,14 @@ description = "Wrappers for the framework MapKit on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"13.0\" or platform_release >= \"13.0\""
 name = "pyobjc-framework-mapkit"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
-pyobjc-framework-CoreLocation = ">=5.3"
-pyobjc-framework-Quartz = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
+pyobjc-framework-CoreLocation = ">=6.1"
+pyobjc-framework-Quartz = ">=6.1"
 
 [[package]]
 category = "main"
@@ -1143,12 +1265,12 @@ description = "Wrappers for the framework MediaAccessibility on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"13.0\" or platform_release >= \"13.0\""
 name = "pyobjc-framework-mediaaccessibility"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -1156,13 +1278,13 @@ description = "Wrappers for the framework MediaLibrary on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"13.0\" or platform_release >= \"13.0\""
 name = "pyobjc-framework-medialibrary"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
-pyobjc-framework-Quartz = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
+pyobjc-framework-Quartz = ">=6.1"
 
 [[package]]
 category = "main"
@@ -1170,12 +1292,12 @@ description = "Wrappers for the framework MediaPlayer on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"16.0\" or platform_release >= \"16.0\""
 name = "pyobjc-framework-mediaplayer"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-AVFoundation = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-AVFoundation = ">=6.1"
 
 [[package]]
 category = "main"
@@ -1183,12 +1305,12 @@ description = "Wrappers for the framework MediaToolbox on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"13.0\" or platform_release >= \"13.0\""
 name = "pyobjc-framework-mediatoolbox"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -1196,12 +1318,25 @@ description = "Wrappers for the framework Message on macOS"
 marker = "platform_system == \"Darwin\" and platform_release < \"13.0\" or platform_release < \"13.0\""
 name = "pyobjc-framework-message"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
+
+[[package]]
+category = "main"
+description = "Wrappers for the framework MetalKit on macOS"
+marker = "platform_system == \"Darwin\" and platform_release >= \"15.0\" or platform_release >= \"15.0\""
+name = "pyobjc-framework-metalkit"
+optional = false
+python-versions = ">=3.6"
+version = "6.1"
+
+[package.dependencies]
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -1209,13 +1344,13 @@ description = "Wrappers for the framework ModelIO on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"15.0\" or platform_release >= \"15.0\""
 name = "pyobjc-framework-modelio"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
-pyobjc-framework-Quartz = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
+pyobjc-framework-Quartz = ">=6.1"
 
 [[package]]
 category = "main"
@@ -1223,12 +1358,12 @@ description = "Wrappers for the framework MultipeerConnectivity on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"14.0\" or platform_release >= \"14.0\""
 name = "pyobjc-framework-multipeerconnectivity"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -1236,12 +1371,12 @@ description = "Wrappers for the framework NaturalLanguage on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"18.0\" or platform_release >= \"18.0\""
 name = "pyobjc-framework-naturallanguage"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -1249,12 +1384,12 @@ description = "Wrappers for the framework NetFS on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"10.0\" or platform_release >= \"10.0\""
 name = "pyobjc-framework-netfs"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -1262,12 +1397,12 @@ description = "Wrappers for the framework Network on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"18.0\" or platform_release >= \"18.0\""
 name = "pyobjc-framework-network"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -1275,12 +1410,12 @@ description = "Wrappers for the framework NetworkExtension on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"15.0\" or platform_release >= \"15.0\""
 name = "pyobjc-framework-networkextension"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -1288,12 +1423,12 @@ description = "Wrappers for the framework NotificationCenter on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"14.0\" or platform_release >= \"14.0\""
 name = "pyobjc-framework-notificationcenter"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -1301,24 +1436,52 @@ description = "Wrappers for the framework OpenDirectory on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"10.0\" or platform_release >= \"10.0\""
 name = "pyobjc-framework-opendirectory"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
 description = "Wrappers for the framework OSAKit on macOS"
 name = "pyobjc-framework-osakit"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
+
+[[package]]
+category = "main"
+description = "Wrappers for the framework OSLog on macOS"
+marker = "platform_system == \"Darwin\" and platform_release >= \"19.0\" or platform_release >= \"19.0\""
+name = "pyobjc-framework-oslog"
+optional = false
+python-versions = ">=3.6"
+version = "6.1"
+
+[package.dependencies]
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
+pyobjc-framework-CoreMedia = ">=6.1"
+pyobjc-framework-Quartz = ">=6.1"
+
+[[package]]
+category = "main"
+description = "Wrappers for the framework PencilKit on macOS"
+marker = "platform_system == \"Darwin\" and platform_release >= \"19.0\" or platform_release >= \"19.0\""
+name = "pyobjc-framework-pencilkit"
+optional = false
+python-versions = ">=3.6"
+version = "6.1"
+
+[package.dependencies]
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -1326,12 +1489,12 @@ description = "Wrappers for the framework Photos on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"15.0\" or platform_release >= \"15.0\""
 name = "pyobjc-framework-photos"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -1339,24 +1502,24 @@ description = "Wrappers for the framework PhotosUI on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"15.0\" or platform_release >= \"15.0\""
 name = "pyobjc-framework-photosui"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
 description = "Wrappers for the framework PreferencePanes on macOS"
 name = "pyobjc-framework-preferencepanes"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -1364,38 +1527,65 @@ description = "Wrappers for the framework PubSub on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"9.0\" or platform_release >= \"9.0\""
 name = "pyobjc-framework-pubsub"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
+
+[[package]]
+category = "main"
+description = "Wrappers for the framework PushKit on macOS"
+marker = "platform_system == \"Darwin\" and platform_release >= \"19.0\" or platform_release >= \"19.0\""
+name = "pyobjc-framework-pushkit"
+optional = false
+python-versions = ">=3.6"
+version = "6.1"
+
+[package.dependencies]
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
 description = "Wrappers for the framework QTKit on macOS"
-marker = "platform_system == \"Darwin\" and platform_release >= \"9.0\" or platform_release >= \"9.0\""
+marker = "platform_release >= \"9.0\" and platform_release < \"19.0\" and platform_system == \"Darwin\" or platform_release >= \"9.0\" and platform_release < \"19.0\""
 name = "pyobjc-framework-qtkit"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
-pyobjc-framework-Quartz = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
+pyobjc-framework-Quartz = ">=6.1"
 
 [[package]]
 category = "main"
 description = "Wrappers for the Quartz frameworks on macOS"
 name = "pyobjc-framework-quartz"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
+
+[[package]]
+category = "main"
+description = "Wrappers for the framework QuickLookThumbnailing on macOS"
+marker = "platform_system == \"Darwin\" and platform_release >= \"19.0\" or platform_release >= \"19.0\""
+name = "pyobjc-framework-quicklookthumbnailing"
+optional = false
+python-versions = ">=3.6"
+version = "6.1"
+
+[package.dependencies]
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
+pyobjc-framework-Quartz = ">=6.1"
 
 [[package]]
 category = "main"
@@ -1403,12 +1593,12 @@ description = "Wrappers for the framework SafariServices on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"15.0\" or platform_release >= \"15.0\""
 name = "pyobjc-framework-safariservices"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -1416,25 +1606,25 @@ description = "Wrappers for the framework SceneKit on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"11.0\" or platform_release >= \"11.0\""
 name = "pyobjc-framework-scenekit"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
-pyobjc-framework-Quartz = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
+pyobjc-framework-Quartz = ">=6.1"
 
 [[package]]
 category = "main"
 description = "Wrappers for the framework ScreenSaver on macOS"
 name = "pyobjc-framework-screensaver"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -1442,62 +1632,62 @@ description = "Wrappers for the framework ScriptingBridge on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"9.0\" or platform_release >= \"9.0\""
 name = "pyobjc-framework-scriptingbridge"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
 description = "Wrappers for the framework SearchKit on macOS"
 name = "pyobjc-framework-searchkit"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-CoreServices = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-CoreServices = ">=6.1"
 
 [[package]]
 category = "main"
 description = "Wrappers for the framework Security on macOS"
 name = "pyobjc-framework-security"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
 description = "Wrappers for the framework SecurityFoundation on macOS"
 name = "pyobjc-framework-securityfoundation"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
-pyobjc-framework-Security = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
+pyobjc-framework-Security = ">=6.1"
 
 [[package]]
 category = "main"
 description = "Wrappers for the framework SecurityInterface on macOS"
 name = "pyobjc-framework-securityinterface"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
-pyobjc-framework-Security = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
+pyobjc-framework-Security = ">=6.1"
 
 [[package]]
 category = "main"
@@ -1505,12 +1695,12 @@ description = "Wrappers for the framework ServerNotification on macOS"
 marker = "platform_release >= \"10.0\" and platform_release < \"13.0\" and platform_system == \"Darwin\" or platform_release >= \"10.0\" and platform_release < \"13.0\""
 name = "pyobjc-framework-servernotification"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -1518,12 +1708,12 @@ description = "Wrappers for the framework ServiceManagement on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"10.0\" or platform_release >= \"10.0\""
 name = "pyobjc-framework-servicemanagement"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -1531,12 +1721,38 @@ description = "Wrappers for the framework Social on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"12.0\" or platform_release >= \"12.0\""
 name = "pyobjc-framework-social"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
+
+[[package]]
+category = "main"
+description = "Wrappers for the framework SoundAnalysis on macOS"
+marker = "platform_system == \"Darwin\" and platform_release >= \"19.0\" or platform_release >= \"19.0\""
+name = "pyobjc-framework-soundanalysis"
+optional = false
+python-versions = ">=3.6"
+version = "6.1"
+
+[package.dependencies]
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
+
+[[package]]
+category = "main"
+description = "Wrappers for the framework Speech on macOS"
+marker = "platform_system == \"Darwin\" and platform_release >= \"19.0\" or platform_release >= \"19.0\""
+name = "pyobjc-framework-speech"
+optional = false
+python-versions = ">=3.6"
+version = "6.1"
+
+[package.dependencies]
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -1544,13 +1760,13 @@ description = "Wrappers for the framework SpriteKit on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"13.0\" or platform_system == \"Darwin\" and platform_release >= \"15.0\" or platform_release >= \"13.0\" or platform_release >= \"15.0\""
 name = "pyobjc-framework-spritekit"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
-pyobjc-framework-Quartz = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
+pyobjc-framework-Quartz = ">=6.1"
 
 [[package]]
 category = "main"
@@ -1558,37 +1774,50 @@ description = "Wrappers for the framework StoreKit on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"11.0\" or platform_release >= \"11.0\""
 name = "pyobjc-framework-storekit"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
 description = "Wrappers for the framework SyncServices on macOS"
 name = "pyobjc-framework-syncservices"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
-pyobjc-framework-CoreData = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
+pyobjc-framework-CoreData = ">=6.1"
 
 [[package]]
 category = "main"
 description = "Wrappers for the framework SystemConfiguration on macOS"
 name = "pyobjc-framework-systemconfiguration"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
+
+[[package]]
+category = "main"
+description = "Wrappers for the framework SystemExtensions on macOS"
+marker = "platform_system == \"Darwin\" and platform_release >= \"19.0\" or platform_release >= \"19.0\""
+name = "pyobjc-framework-systemextensions"
+optional = false
+python-versions = ">=3.6"
+version = "6.1"
+
+[package.dependencies]
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -1596,12 +1825,12 @@ description = "Wrappers for the framework UserNotifications on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"18.0\" or platform_release >= \"18.0\""
 name = "pyobjc-framework-usernotifications"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -1609,12 +1838,12 @@ description = "Wrappers for the framework VideoSubscriberAccount on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"18.0\" or platform_release >= \"18.0\""
 name = "pyobjc-framework-videosubscriberaccount"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -1622,14 +1851,14 @@ description = "Wrappers for the framework VideoToolbox on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"12.0\" or platform_release >= \"12.0\""
 name = "pyobjc-framework-videotoolbox"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
-pyobjc-framework-CoreMedia = ">=5.3"
-pyobjc-framework-Quartz = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
+pyobjc-framework-CoreMedia = ">=6.1"
+pyobjc-framework-Quartz = ">=6.1"
 
 [[package]]
 category = "main"
@@ -1637,26 +1866,26 @@ description = "Wrappers for the framework Vision on macOS"
 marker = "platform_system == \"Darwin\" and platform_release >= \"17.0\" or platform_release >= \"17.0\""
 name = "pyobjc-framework-vision"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
-pyobjc-framework-CoreML = ">=5.3"
-pyobjc-framework-Quartz = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
+pyobjc-framework-CoreML = ">=6.1"
+pyobjc-framework-Quartz = ">=6.1"
 
 [[package]]
 category = "main"
 description = "Wrappers for the framework WebKit on macOS"
 name = "pyobjc-framework-webkit"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -1664,12 +1893,12 @@ description = "Wrappers for the framework XgridFoundation on macOS"
 marker = "platform_system == \"Darwin\" and platform_release < \"12.0\" or platform_release < \"12.0\""
 name = "pyobjc-framework-xgridfoundation"
 optional = false
-python-versions = "*"
-version = "5.3"
+python-versions = ">=3.6"
+version = "6.1"
 
 [package.dependencies]
-pyobjc-core = ">=5.3"
-pyobjc-framework-Cocoa = ">=5.3"
+pyobjc-core = ">=6.1"
+pyobjc-framework-Cocoa = ">=6.1"
 
 [[package]]
 category = "main"
@@ -1802,7 +2031,7 @@ version = "0.6.0"
 more-itertools = "*"
 
 [metadata]
-content-hash = "fba790d42ff5c2196a457da69a24634bacbaab8e0ee33166576456fb8e101769"
+content-hash = "fb23b0a7b298631d1f24031ef991d06832381a4c4dbd043cfa4b997f916e980b"
 python-versions = "^3.7"
 
 [metadata.hashes]
@@ -1831,108 +2060,124 @@ pyflakes = ["17dbeb2e3f4d772725c777fabc446d5634d1038f234e77343108ce445ea69ce0", 
 pygetwindow = ["e012c13e3845044f7a3cfba77bd83ee558ba5df450c3b6da04a011bb92cf9b96"]
 pyhamcrest = ["6b672c02fdf7470df9674ab82263841ce8333fb143f32f021f6cb26f0e512420", "7a4bdade0ed98c699d728191a058a60a44d2f9c213c51e2dd1e6fb42f2c6128a", "8ffaa0a53da57e89de14ced7185ac746227a8894dbd5a3c718bf05ddbd1d56cd", "bac0bea7358666ce52e3c6c85139632ed89f115e9af52d44b3c36e0bf8cf16a9", "f30e9a310bcc1808de817a92e95169ffd16b60cbc5a016a49c8d0e8ababfae79"]
 pymsgbox = ["7df5ed66c8a80fd36b83b278ba164e7a1d135c8fb8bdf38b291e46bf31d28085"]
-pyobjc = ["0d639bbc6dd1816bb243cd883d352c268339f13408c0430f24b527dd5393f5bb", "36d1fc059093a6ecd21a179cfe2605e7c057b1240b1e3af5dcc321b57d742d70", "5bce303379631c4a1beaea42bba7c9d1b9a0636a4745d78dd132a6cca2507aa4"]
-pyobjc-core = ["00f4e9526036d33f4b4c770dee76a4f26756e5f79e586be8a05bbe1d9ff312ec", "07554c7fb02a980a2a648f567441cd0bf031a15a7afe284cda197bd4d8b443e3", "2a32cf7f2285d9dc4785ea48a7f482a71ad4e7d161fd95bf5e58e9305a69cf09", "5b5d9d7e8c5d11b1efff84daf5f24d5e10c235f3dc66c7948b978e8ef277f2ca", "b96a79e04f88cb6920ff3c5d067d44dc28102daab0b34ff4e6f8c498af5e3f80", "bd2fa9f241f7a6745adf5f0b3d5de0fbdfd377bf384950921d3c5f6b1d440545", "c35069cca043e2941cda65220b854002e6db91cd2b2f96c6259d0eac558a96e1", "c6abe99229cd4fde824651e36f1d9cfbd6054f537db97b507e1e2c55b9dbb3aa", "c7a8941fb9ef200d8f63370cf7b20f63cc4a6d2a9c37d7ea33d1c358c4ec5fe4", "e35a397935ced28df5decb4ce080ffb64252eddeda757a55c53a39326c9c5147"]
-pyobjc-framework-accounts = ["25a9b856f786ea63477aea31b07406af9779a0ac98b5b93c83de716855a3aae8", "45a25df071b6524c2b8fbbe28c0ee20e751c487872626ee5a740a4a64ef38f28"]
-pyobjc-framework-addressbook = ["0394680f82348f3e99b48e5ca4482431982bd4e7c5d34cdefaa043711bf71f25", "0f245f7aaf8075c969882555824bdc7f3ee40ff9d4c502aa53ccf9f003979717", "10a92186e683fdf21882d0ff38ecea66628bb21da85b72ce8c720ae64f5869b5", "549cca349662e81ba04af74e7b3f4533aec1c73dc36b0400e226d396c13a196f", "65c930c54ca0be93dffd4ab45ba6ba45585bac849d3659bac29a60a8e04cf668", "b140f08fe6abe074494daeabb0aebd408dc1ec8c5ca1e01c62520e3b3dfc7ece", "becd73f7e9459c9034c2af2d32b98817dd03e62a2441d4789ed2523dac2e4614", "d78c7d6dfd08ca26796f3f7cb7f179f83542cd770a04030365585538ad07606c", "dc6def3045df4246691310352c42eea1d58193a3b49ef2bb7bacee359011664c", "eaff4a09e65008bab00f12e21d52d181bd666e8deb063dec03078a7602351e38"]
-pyobjc-framework-adsupport = ["42c4fc24ae507ec9f1787d4ce5cc06f54c651047f53c49740bab3442140f61a5", "aa75287661d4040af6318af9e92f865f44a2c27fff4c192bb7a62ee492859b05"]
-pyobjc-framework-applescriptkit = ["218f8defdb207de854139135b6988a800791762706ccaf8cdc17757c53e7a8b1", "6d8d72ba7b03a308ede5a398d518856207223f7ef4f8b3b68b96d09c54b0eb51"]
-pyobjc-framework-applescriptobjc = ["6842af0ac8bfaa6559eb870201b8cc366a1e6110fb466ed545a0addde2701c9b", "bcae9f460faaf4ff82445be178dd5e578b092a61d6d095efff17564aeebe4495"]
-pyobjc-framework-applicationservices = ["1bfa30da6b54978cbc6ebe47cbf7aaed6ede96a13e900e3a20bc12a46867756f", "44f4f66c6e97ff0d670aab97cf8684585a2b8ec314c333536f257996729fed99"]
-pyobjc-framework-automator = ["38acd8bcf5bf62313abf199418888d56dc1f0569ebbc20894dd12fbfe28ca681", "6632da00da8d1e1e1ee527a3386a2534a0db64922f69a66998ce16aa09747902"]
-pyobjc-framework-avfoundation = ["18a8a074f3b98718638752eacb27670cb4211a461ded9d0d0bcbe1a4854f8722", "2168019139dd0cbe68857f31748a0e67d67e430d717bfc88f0331907923f3fdd", "3c728c2986842f4975311589e05cb28bd18df85d29866c6af4e74374c431130e", "5ceefbfaf7402bc732d4de8c545d9bf80aaaf2fd7c5d3c177337c525e6a3f605", "8c8e54aaafe5cdca31a8ac257ae7722e6d0d37196439b26ffa8fbdde46ef0fb6", "b0f072393405c206f3cc2748a8e269e1b1737283960c94ba8d9fdd13f785ad65", "c755faa2ec49e1e25854c13f8c37d2a74c37e4e3732d437e7ff7eae0328ca68a", "d511e77489d24a37c1214740086b64967013f8e0b65bba32fb096af83dae4847", "da65b9540857ebc02faf460bb5dc97dfdcdfaa7b141125d8dd49efe2b0a16e28", "feb247c20ddcaa3d09b8404db1443f4b70eaf13e325535db0dcb70487262a417"]
-pyobjc-framework-avkit = ["1787dd2d1077107be5f5c8f9cab1c4391e26adced386adc2e8a513f0fc209cc1", "2423ab09590e3fafc3abf23746f359f4d66bcd5d6c42d2712473b584898eacfc", "475b520b54e6620f9ce5c4d98da3d90039eec1499060a74119a26052e5f9ff47", "62ff65ec0dfba6041dce5e6981990671b6b3f807084e14a8e2e1bcd3a909b16f", "7432ff5ea9222446d703853b8ca21e9f61af5678702fac3c63aec0594cee6303", "7a6e73150db646b8e557b0e9885f9c31b41d60b8ab402a8126feb6f573038f24", "7b190c0c365271c0ec9699bb49d5efae0c0f69cb605583039bd5a5177398969c", "a5614b660aa8c0f497ed62c6e6cf33c5fd473c7e4b1154f21bae0887a832a8b3", "df35e0c0fc40272d98c3f8052d06739391bf74de298da31be402f5f5ef3950df", "e89cb77dff967fbb078cf76c7baf31b32b2a97fb26cd5e943d0ad19d4bd00fdb"]
-pyobjc-framework-businesschat = ["03ca3dbeba8924d2d5a2cb94f664247aa2d46a2336c9ed70141e17280e30180e", "6c1f1d5b8cb3dfcbf851fa7da7e1b936c73b348e42de9d4b536a7bfbcca5caf7"]
-pyobjc-framework-calendarstore = ["b67b77b5d4efe68cbb6ed08003db9fda1e2d9ccea9b88446316792c393d33c4e", "e5a70b768a8e6193f96f0cae944f24ccf586869be6c07e6dcf6eac8258ed7c82"]
-pyobjc-framework-cfnetwork = ["03d50790d8b99e03775837bcd747bb73b0f2315811381dcd07e4c076c0273daf", "056330ecf5cba5a79a1edf05b9c09b17347b80704acdc4a7105da7859a607d21", "119b2940d7d49f7408d8a9459cb0c3f5efa2cd831fc674f26bf76ae22ac77d02", "1dbd07c73ad14e7b82ce9ba4cc6a0c3d3409c3fa517b973f41fa376a4f23d402", "2b85c858431999ce5d0046d0e52387a5e4cb8149996bed3d9c862cde9c72f0cc", "64fc1699e594e0de8daf4b23d46f179592f55d00a02d1220d709c2f117fc45e3", "927d970cce04b470daa806d2747c3f8d31da107782984bb6a04080c729b2a031", "ce55b2ed2019c3ca7454cdf8b9cb8ed3be0453b6df9f703f5820d79f7aac5a37", "d819f8833de34a6af09ced571dd8f83bb45b082d138fdb6d601662da158c482c", "ff1da65d371540b071eae4bb1894f1810be561cb3b020da6b8ffc27c4ee4ee5b"]
-pyobjc-framework-cloudkit = ["bee6be4862fa8a07e1ec7136e6917ee0df6d5cf46eec2f03fc9c24212b735fce", "c2359af1ed97f7d3a3e209c8602098e35d0d7616fce07eaed26424d7a7a9f9f3"]
-pyobjc-framework-cocoa = ["0a28b167c7cec5af0323166a08c8e7914da83f2205be14eb3bd9eb6c9fa69dc6", "0b2d2f4a95d2634d1545c2d5cc949cb1b1bbfd73393d3c3b483be2a18906e568", "162e54d3fc06144de3ae244b53d3c2fe27fc99c80923f2ad6f4c884de7f4624b", "38739b4fd0adeaf20ca243b4602bc8212211267d42f75b977ad16cfd9ac9751c", "4a87394366e969d72ac1eb3fef69555a4bb7bfcfc6e6d35cdf014b07997e29bc", "5d809f2868ad1e3552cf6ddd82e6299f3927c33047969d0eab93344d2c892c5f", "6cc5496e5556c848ca3ab3eeba3b66481d91f53a9a49fd068dadbe87c9e3ca68", "ae070efea17e62cdf6e9ca90924ffe02bf85e5437eb860ca4739873bc5162020", "ef4fea8d83252dbd23bfe5322eec52f7be491f733c34c6b18763157104908e1d", "fe1831a2f5b9970522ab958bb3d91da4d522142213d825e8f04e427f782d63be"]
-pyobjc-framework-collaboration = ["4c316273a1fe5f960711303e63189954ff72d02c2871faa96fe1634faea2e865", "a08cd9cd52753d9e840abab8424d56529c75a602c4d85ffe3f57d18ee8c0a3f8"]
-pyobjc-framework-colorsync = ["38094ecedd4bc4650f8a55283d6ac9f7438b5026b82feeeb18ad17f40c4cbee0", "5266d5a90226f82af1e14c6097fbc055c4d77e722d8b6e121ae227d5994f398c"]
-pyobjc-framework-contacts = ["2894621aa936361df4bae5d92a1857abb9efabe5b0ba75c6f1a2eccfb3f80f53", "33714bad38839b61f3b43ddc2ecd790c0cb12989046a271ca168f2b242d909e4", "49d2f0c936342b9bd929b5449b47cd609d34d1c0407f9fe151bd11f8f670c4f7", "4f782e0a65de6abe4e58e2b98c5e3cef46d685c5d95cd712e9be317cbf91ca8f", "51847cca1a90b9f90321c8717c538dc2dbd922a9c5467d1530ebe9fc5a1b0cc4", "52623f2121dc81f47f5b48351eebe3eaa87df5af390fbec6a273355573ed9b3c", "6be9b305a0c2b7717d65f2ef3c3a55a756126064d2d9ddbcd444c2285b7a8793", "da5048546074c331832211d5ea2aa7175a30360fb8b03d4e70fe9d3fcd87aa6c", "def4218f559b40d423019d8b4662bd24c433e8664e35673a164ea6d57a957fff", "f7cbaa27d7b222139c0f6212dc35ee022fa6ad779a7aa33ebdf4c980725f3122"]
-pyobjc-framework-contactsui = ["51da5378920d603f6450bb58cb5ff49beb644dba93140ae9ab04697236634196", "6647159c8ded23d61f7d60a036ca118e82f5828757190c58dce27c882e1614fa", "78a4e9151d7ce424233a406000fe53cd28af96dd191540efc86ae57943808a7e", "c0997390731eb71cfd9522a2a2d97c482edc8f941ad73625de6b7ee33010318a", "c405684b95a414700b9594dc59a5018339f7f919a93d24e362e23e811612165e", "ce3eecea69ef66cf5e50532b8d48f808c2e0a6afc080d14f13feae33263e29b7", "d3a014d7581c68de871cde73c5188902817b5286c2b8d4144fe83a976a06d26a", "dbf6d1c39d2e368b657a3e936fc09274aa7e529f310a5849f09477a632b495f8", "f48392d5a464f9cfd0b90a2122f591c3b92297d0f881db68542523981eab11bf", "fc3518f38c9fd41550ca6cfe205cbf16256bda1066c0a8c3b3c52f3ed35352b5"]
-pyobjc-framework-coreaudio = ["04f97e8718f59e2aba72738048a33d277b2b1a7a40ebf5ee6e3248a9c75e2173", "40172b632e4e43d5f6d6151f6cb7b174c11fc7c2dccc95700d3ae0d0a277190b", "41a988fe1af783abb7d0b12f250a5343ac464f0e52375d2fe177f4bea9e92f6d", "4796475aea2d239050b1ad1be055df2397c7ba1414a466892dc87416c63f1e0e", "5f71c63ea7812c3b2b6a5e999b00019e83c81537bfeb1a36415f89dd27bb01cd", "6a8ef331311eaa6dc57df40fcae930551152aa3efe59090632d4dbf527f68dd4", "a142ae928a8d3491ce9cf1db803c6f3361a21cfd81374c4039b7e50bef213d9b", "bae16f56bf61ad1e044586cebdbeea1618dda9a249eba462ea30ea9a5ee4da62", "cfd3e9b6c044df9e5fd515991162153861c29be14618edc38c6dbd4beba34576", "d1957ba395be962c46c3b1cb703ebf225b7c72e27f74fb1300ca4c0b5392647c"]
-pyobjc-framework-coreaudiokit = ["07045b603db097bcd4e0675288c3e8a67b6e6cb61bfd683c45829861d5158266", "14c6a6d40b23c92e2d0d017c0bf48adb494ac4866c52b0907ee4afa0975636a7", "1a005ca2d3bdf4d1db579cb3d35fdc3aab43e71586441543d39b3896d3793b8f", "1d4b2490fd5cd149f9bfb3cfe750a8ebd9556ef4d0d8e72e8cc511298c4c4854", "24ba67e1bc64ccc97640ee909c9beabbf7ac3bea34b672fff46782d7b77275e9", "7ab8cba9444d3b8d1920a24f1dd3575b3e160a95e74960c7e76d656eb0d0d4fa", "8c303741ea0449f5a4790203012a80316b3d11360619f59dd33400a55a97464c", "92b18e8a19320d041421e51231f03988ced217afe230fe06bb30bd8d230a76d1", "ac78ad0098f88a611dfd69232fad8f120d32196bd2fb91fde3bbe3d567182be4", "c3e5e4f9e108eafa84c30c45a6db2d763b74469f2cbfdedce4f18984fe23edfb"]
-pyobjc-framework-corebluetooth = ["02ecad83e264fd5dd014f6a664652855ecbfb0d8ca36f954d561b8d7d4a71344", "05261f902db61ac8dd63922799aca6459dc92910503fb3df7088b072d08ac036", "187e32f6e0ac8a523371a03cad53ae076cd93dfa7a2e6f01968a74581785377a", "1dca73508774d0f543eddffd3ddb3878c5406e392cda8e4803bf1cadfd76b23c", "1f679ee43b56c85cf200b841ccf0646ac9170cb228235bf5b7bddc2d09705841", "23fcf3a4f9f5558366dc6f12c694efca6c60f27895a90ee538815b8b12cded41", "57e6ce7bf711e3bece9b449133f0d889019c43aa91fa20b4ae2c4e47a616fe03", "7be4c135645ad2427b119cc2f3aa222b9b5ade807344a05cd58fbda57008ec9e", "b062994f49879bdc679a09a57f847b1d67cc7ed15077ac0800cae56f79e82fdb", "bacd6c54b6e76aa76583f316f07fba82052ad9e5dc8164e18827e5d9175d3777"]
-pyobjc-framework-coredata = ["027466fb017e09bc83d399962e6f7512791edf3e0b6efe7564707dc1c48a7505", "5d50af71c41f98b0f9ce6ba00f98c8e587e516bd06fdbaa7e3375f03f6891c76", "801b4a87f523b1d63fdab3dee40a7a4d534c325ca220485bbdc0b3186b0e683c", "8310f60a8eb2a441422030718dd11884ff9ec09fa35f8c1df69c851bb0f35947", "8533f15af2ade77c10c680c05957badee63d5105aeb986a07d5ea3604c8e55c5", "a67dd3c3a6ac748d3a1e7e3aa45df354bcd3e011c6d432d873928a1019e49d07", "b358c4c04d12aeaaaff6efda89187ba07528bed2581b458368b7c59b300fc46f", "c2401416e5c7b9e789ff34b6c81ff0ebe8555927e048fdb0f4e06a6e9a648bec", "cd7d5e547f412e2a38a80502725ee1df7029523726caca4e2a4758b0911db8ed", "fef5ad6be4180c6deb395e559965e7bb7042a3ad74112496e5c6dc48784c7f31"]
-pyobjc-framework-corelocation = ["0449c6bc78b4fa6adab4b09d6708dff371dfe7c498bf793c290c44894b860791", "858f09080e4e7439552af9ac0f92d6650505bb98fbd33f86bd04c4a591e855c9", "86d348cb29c185b649f25b3a279643689b4c30637f3a78419bf0fbe41f50a97a", "8908f07525585c616eecdb3e2d024f58ce426cb2052f6a0261cc824054fa538d", "8f55c9940f8cbe17e4a6bfe7c1327ba641fb17b69edcd4bf4afa1d21eab0818e", "a85ef342d2accec6960cb244df854f038dc0e89e7070b67e981b26b38757b038", "b286d84f40563147935de8f6ffd1ce7dda4cf484edad1a08597b8bcf647e8f21", "c96533627c7df13b7969b708240c55754b4739538eb622c07e80fe65ac73c717", "eaec00ccbdecb42d898d26bee61205ea7069531122f1864bdd01f85c4bbdc29a", "ec52f963cf0b37dca2e2d0bc98c26faec5784f049d9cebf359c7273a1bb73ad4"]
-pyobjc-framework-coremedia = ["0c8b5370c0f8d3d699fa786f3d1314ac5e03238f83c0cfe785d40d3bdb4d7655", "1ec00129607e7506993310e05dc61c31d56f1d8f94ad1e4fbcf4552319fb4a57", "276842befd6ca2fef7901570a5cdb3647af6d80b7e668286b1124aaa7d19ec12", "867478c19b25ba0f1eebc7cafb88504dee91b89b991a61d2b204fd7198349b3a", "8c020a5112f536bcd0b4053786c0f7b56e45cd2d29db15b8e9b708dc6c44548a", "9c6110a6eb1a459aa566c7963a74706eadaa1134ca6182b0def2b3ecab56f4d3", "ba7fbad8c1012d49a4a38579e39db942f5f04b4f4b6d66b520afb65aafa549e2", "baf4a08db3972c0731a7612a1bba7d290cb4393ebd6c09c7e2c5f7af864fe465", "bd70e83d7d7a28fa721aa8c7f158681c0a835eb2349df8fd79ec1a7a917e026f", "be6ca5313cb530213e069f0acbd77c7cfa04f130e1b56116febd4606d1d4bc3e"]
-pyobjc-framework-coremediaio = ["1879176d0c7b0977e30eeb19e909b2133c6a89625df5a73eb1beeaccaf644b6f", "2f0ed391e77e7b9b60542eef4a88659eb18bcaa23359c55a1f05f3cc84303627", "30e2446b6d4c180cfa7c506b54fe10e2a3e979c56acd69bc2e6daa92298d068a", "4effcf0cc1acfd4a0288e54367239a170780d17d1ed4c659c3e4a47744b5f228", "7511a56aad00a253c4668adbbd7d42d1a8aba798037af99b6aeb554d6467b900", "89e4c2dde6ecef0102feb7d3a4bf101425c79c2946303e8d511cb5e5aead94c0", "97bec56c0fb98c2c0bd12298574c28111095b4c6274a2f2573a001158451ef28", "d191b102520e94a52f9b866e3a24ad7637c94dec41b2519f5cb487be937e404f", "e5d2ac8baf6a51f2ed0dee53cc9639ad411529ab068c8d300f5c7d953c373515", "f1cc4d77e8d1ad7533e87e522d3e79cfe4d8bb2a552438f447ea3476f09cd228"]
-pyobjc-framework-coreml = ["072c9466da783cac445d915b83bf64de329e21ac164b17160d2e038ca002b787", "0c2c5621dc9418d322477f99c4ff157722eb30b0ffee19d3a1b1f8d3c8303956", "0d35e39ca617d444452af9803e4d5130761988bf6d52be618bca6a757476cd5e", "0dd0e230ca04ea90485bd0216c3e060b7de85bbf9b440e5cb0baedb103da631f", "2c0a58a860d4d37f791edbe8649697f57e61af5aededb1dbca510b5700cebd0e", "568110ff6aa60126e9660da1474c6e353cb360e18935553eaf1b8273a90a6ff4", "6f87a7672f2db62a69ae42649625cbf9d41e4bdbe6e053652d4b3cb7f05d36ff", "a744b2dde3718b72bd581acea62c2c5c6aa138d2ee62278a17d7f30931489f47", "a972e4e125fd7fe4c488206bf7eb40fe00d645af7dd6d6f8911cee8163b56f33", "dd49dbafcfe54632d2a4b244f84e6a23a43387a46bcc71c73dc32d4f96e6e19e"]
-pyobjc-framework-coreservices = ["3c97f8011c9fb3bb0695169708f188e73ed779e210b58f709b1d7a38f1aeecb3", "818c48b4d14d6f9d2ff7a31a052af8b708ea698ca22555481ef27c17c2686328", "846ad9e85c666bfb58fadfce3d34ff84994dc8299512a9ff1155594c759a064a", "8b70bb69560b5e7f045696fc27d24c2deccd573a315c634b0c7cf7e4af817e2f", "915322d55bdf43a4f837616e9da4f3899f87cf536ee92fe33c04806dcea6c8e1", "995cc17b26033823c9a771d558fdea87cfab97c8ef0300d420ee1e550151e4de", "aedf4841971652831f4a8d50e9c5485b6d443e19c97cfadc085f16342f2cd6ad", "b3238fc90ff4597d096cb6af05894b4595404ab8565434877b7e1a369d445a30", "c272a524e1a827a04b400802a0c958d763055e530ed05c443ebc7f69d9eab819", "f72d7b77ca06038703ab4ec630edb72b4f37c11ec9d28d5dacec3d4ed7eac6d6"]
-pyobjc-framework-corespotlight = ["0a76ea0562056611af1d1db38cf7e26c4dad6e19ddd7e3b7f11b786cf0d0b541", "32e9cbb0f4fe10231ba8db2f158106500ad746f50e04aaa07eee3c4946a75ddf", "38782e65faafa872932962165e97bf91d1f5ef5dd59d5346356f4fbfaa993939", "94a55358fb7a8bea8dd43692a16263ce2fd009e2ed65dff5ce4704decef76e54", "a2ec245882784356705db791238ad220ffa1fee2411f55ea40bd0d593cbd5a60", "aa99fbba616ae59dd126ac3e38c979d12791a80d8e85e52c44e5f7232bc80791", "bfff772d1f279b98761fd10204c37c4e528c8c7a0cccbfa24deba5e8a68d052d", "cb7deaa4b6262318f40dc46930e285f7e2b8cb977fa9170dc7d3a8fdeb2c6e92", "e457647e6665487442607a80ee90f11274156359f4a9f92cc8f594b61d35d587", "ee76129eeb8bd1cc98a8f252cf1028d0b30cc46341ef8d390f036147d9ac6f88"]
-pyobjc-framework-coretext = ["15b56241a8eaa93ec7b3de7dd6be0d13cdfe810b885c853bc75ca187d4535004", "1ba169672166a03197f48d959ffdfe0134156820064ea642bbe761c67d511bb9", "38a24e0bcb9398de3f9dab062d7bf29a32841acff970ab0b3b940c4c4b5a848a", "564961c098a82d89d8ef8e2a179fd93f892c4f9a6651c0dd3da5b4148b7a694c", "6604f1c1b4687d0ddacd17d25473091dc447dd5528314c20b375874fae0a8354", "6f9d44494c02980576b5a2e95c2d5b6a547bd8a1e6698c80ce875d9686ca0c71", "797c5f5724c3649b8c8f50ff876477586f52d83777bfd7567b4f9d7b092ff4c1", "8d7db9a0ff37f6d7ba5acb28506d818a54c4960fd1a6b2295511aa4d273e8ad5", "9784c94d5ca8dcf6af3fe37ddbe112ac77b48eff340677a97e0060f5b673b4c2", "be05588428acd5f8774840d440b14cd765f47c607a030ba19ef7679de1eef3f4"]
-pyobjc-framework-corewlan = ["17cfca29a479fe402c5da9ecfe781007dcfd0a1842c0604e2f8802f343b6d0b7", "228b1efb21c02ac4d0216d028cf419fb8f8619bfdd38abb11f60ddbf72cedd99", "287ff4891d9d1c2800241c31977534d2f2fc080ce787ae6510fad737c4ea8763", "46eea7badb9299223a923dd8f42fac1a171183f9130338113f835d53c7ff446a", "6b950aa984066687de27cf61f3bbb26746c0025a96abfa70584b1e91f80d3992", "71a8ea55c5adc28d10ba37836d77f08ee6e0598bebc1957855262a360a01484d", "991f6263eab70e0d98b6a3a6ea7888dabbd8b83004df634b74da20c63bbaae95", "d2f8033df09c10e64e7c57a68784210c7da6b13356b5b25bed40112e3f169703", "fb79265dd9801acb9e822cce19bbf870335042da243413aa3cf99bf0061f693b", "fd80163651c2504bf57d0c262c7c8c5f385250cb8802f2f286970cac55d25d51"]
-pyobjc-framework-cryptotokenkit = ["0b9c2afc0121d14eedcb5fa1cf4c58447c211b09c4068009295d5e6ca0449b49", "1a0a24e98a6d2743d489541bc3ddb35ee24f663ad8a11ce56fe8008a6260b6f5", "1a5173c8044b2b4c0884933f76a0d725dcd5d12739723d6d7ab844e45a0f2f80", "1e9ac5251fd11780df69ecb18d1bda83ddc810be18dbe23f6f54cb0349e85645", "4bae53769a023c8f03aacd754f41dee99ca0c761938fd7a177300daa74a9fd6a", "540cd6ee99c6a7343078cda1539c403b0384951986f1bf4fc9f40cd19fc43acb", "5e5f301d661261bcb8a3b97b8be66b7d3c7b63fd7d6268253b2d800ddebeb71f", "80a23afc16a9629069a71bb9a95d7e830ff2445fb8ac3a7f69fbf2f070d24837", "af0a3281a65b3c74621cda968d8d1e079c21e0b40f300919b76b40cde2935479", "b8deb5ff63e1de4ed3ef07927b90afbb36af8bf72e3baf246cbbe742a6fbaca5"]
-pyobjc-framework-dictionaryservices = ["77afa5f601b3e394c783d43351aa0aed3a49ae30e2dab769990ec694b0801eab", "cca5c6c4baed761a58b942ba54fe13e3a66a5d67ac33e286403e3ce3b96bc26a"]
-pyobjc-framework-discrecording = ["283f41dfc1c0f4d62c0e34f9b249f3423853a7c96984a1d2e1a47d1cc8638d02", "309e161ad44727014626145863284a4d33ee286efc5d60c9549e8b6e40d528c6", "463c1b74e5c3d7700444f6549ef63dd9725021aac55725f27b13e8902efa5ca8", "8957bddd112698a00c9bf856e7c6d14698dddcbdac1e9b86ed1fce8db5dd9c8f", "a4c88976cabd3be6bdc45c2d3a896c6004922903479896c7fb88c802d5342b65", "a67d6e3db23fe0a70de2e7bafd91566bf82ccd6a2d8c1bc13de76809ba2c6a9e", "b8f4d85cc9b83cb282299084acbe4b119d45746438a0ac10e59cd72cd766ac5a", "cf780d66ec499ddb58159a17c1e4a51c22391f61c7022df653faabf1c5ec1635", "d855489d121b645c8f3f5d8e3506b1e0d0c905140c6714a62d8e8c5acc0e7de5", "dd2d2987e61f4d67ab8af4c41dd8f77d726889cf2b235d570370f622a19d0c9c"]
-pyobjc-framework-discrecordingui = ["65e05a5f12552c905f957e9f8feb23820add3d2be0714eb6fefca901f2aeb0b6", "6e3ef51032858f5b1a0da9bebb1348d9e6f3882781f582d032620800854cb79a"]
-pyobjc-framework-diskarbitration = ["c9d0bbdec33b60c2a58723f7dada3d4241ecc43fb4a95d50be7765f62e48869d", "fe9c25253e09e52aff1cba37b87ab9a063342d1402fd0bc0f7ed5a5f2fd8dde3"]
-pyobjc-framework-dvdplayback = ["1a7569ef66ce6d310f19957dc97cf942a92ead291fc91ab8de3e62407a83796f", "744f2f58b498659d490e0201240f5f72f5d599fc796cf94f7ed557787918798c"]
-pyobjc-framework-eventkit = ["05630331d37a9aad1c9049e40942ac851ab31c47a27c2e1013d48e9380d35bb7", "87f85cb5e6c7ffea7804f4ed80ba96c45b64418c382e7dbbf254e043c45fd6be"]
-pyobjc-framework-exceptionhandling = ["9633a6edf4cb09e51f1b25a6d331b06154375311c205ad0ae46b5314b9c689b9", "f1fa66f8c0f2d0b6e4ab5ae513d89f604712a5cc31ddf2fe232c7d8b5f40ea1b"]
-pyobjc-framework-externalaccessory = ["17a391a0c664ef5a75aa3a3dabb17bc4f559a8bfacb0071b15e3f58c899e9674", "294e6efc695ea70262505af40d24cd95a2a6b55d54e4cdf6e423174a47b13fea", "538282f4cfed532ac552a4fe50c559ed5ce1f000230caa887c1db6f51021a8c2", "5d1f922fb923272e07348cc797273e6906905b0451ced3262ef22518db107651", "92769443a0579b39107e9dc4f3e89bc612196a02f8a4da521b4eaabd555d91db", "b124196a0e5e1ba1355cbc365cba16397766dc2ba08739ef7352c37d2c815d5d", "b38a97d5611b2f2db67aa7228548f6dcfa6ccc672a7f8a0ccb9080780cefcff7", "be78b9751e01c0e32e04b9048e01521f48fd016b71b718195e7fd4d3a5519f81", "c5b9ba8c34079c45707aa2bd3e7ad800c89d1cbb36244175fc22de8eeaa753e3", "f7aaea7eb8b25df9d7cb3007a55168000fe22ca98047c415bc042cb23ad08e54"]
-pyobjc-framework-findersync = ["318a87d29e36a5e93087927df624227866a55c2e8fe07631eda09357f1f3ac43", "83a1bc18a7021c11fc0828f013a28d4ebb394a2baa5615b111fabbb1c34476db"]
-pyobjc-framework-fsevents = ["3ed8a03d010ffa23eeb66d15228861d9aa14b74610655cf5ee34934fa88dc5e1", "43956a26252d07ef16dbc43e0802ac2ffc3314b520995349ebde2a274ae9e85c", "4dfe9cca606266713de42aee0f49c776d9d12a9ff52db7e75aa7996acc545238", "4e9c5cc0e905fe0ccdcb1b86692b4b94765cfa2e86973a9d6d38a2ce084e7a63", "6d4cf920f6b8ef3b2a5595a0d37e98127e73be0782b7f9c8c16efd1c4182da18", "7c2b9495910a0ea13de28cab4d0640a22dd2fae12f85cb9cf0e9b4270c8a005f", "8e6f704d22a02e9fbe03e6c30b9932539980763487cf76b704fb7d911ad649fa", "a47ef252d274b139bef3fd72c7bd59db6fff35de31c8df98d9ae66d8253c7380", "af0686089e8dfc1c0335c0f723e856e00bc2b131a7b72a15deea33901a10084c", "b5570c4184c75690b3f8e5ed5034021369ae664f33539dc85e41c3a6c7e6d88c"]
-pyobjc-framework-gamecenter = ["08e4f9937d969993ef0ccb9211ff4992c6b7984970cc57fd8df3214ec2e3cf5a", "11bc1a31cfcc8745abe736a5a65a3d66e1025b5fafe7aaf376dae8aab14dad6f", "313f53062895df9181214c684c0c9e1ff8d07a598f30911c1e5ca3bf0942d277", "3ed77601ab7011db176d7622081cba92d688826fface37e5be161ed6e3366e6a", "76d0684e84d511468e792a20e5ee4356ad9fbdccfda3f645871b08e3e134a29c", "904dd6a5335789f49170904f5963cab6cd3eca33bc4f3e9ec49c44ed52116ce6", "93c77b36a7f2c692d2e451b0bbfa57d60e0e08e72bebdd6bf56333f57bfbda9a", "e97cd42fd5c23ba503dce194d92179269baf2861c2bf35e5c69c6d785d3122c6", "f850a8291a38c360895c7ae8cf751de25ee1aa023db8e6c4b3eaeb06f4f8640e", "fa9f9012570b1be6c009de90fdd536a2fb11724180110dd10d8fb35a4d6c2611"]
-pyobjc-framework-gamecontroller = ["6b34b0a431dae98b7e922c0aa11c419717223a7ecb5e45c0784b5e7c56ed5988", "c536422d8b2b797bfe562935c8341d8a56994e7525b75549b6287ebcf0f5b08b"]
-pyobjc-framework-gamekit = ["05860f1cd22cc1cae45c86a8d725bd86128809f3da8bf43b765a07f8e15864c5", "064cd89ca4daaf6854fe9776afb177af780edb21b0bf3cd100b1e457ca0d7f22", "5686a6dc1c773e4af3ac49174ccd6bf1da45646fac9dbc239a6e168fe857e806", "670a53048c673d9bfaa56d1a2d98dfbf9e190b559f37336bf9aab7f9bb0400df", "8cd02941a530d21feca7191caffd89915940059870e25dc572cb7a9208971655", "94bffafff4fffea842d824eaefb7f4cb30d53424f90a2857a6651a9e35b88df0", "bda17f02d9ae23e38c172e3270facca571e65195d89c28fa2d2f337858def66d", "c7bbb903ccddce6eaf7ed98a6cec7929ce6a0d3862ea5d9d54cd363741aaf3ab", "d2e51da72f77a1d92425cd9fbb1967539e85ae953182b6d3b827fa7872531212", "e66cf8ac5b0206140b840757e314c59a9294c0008b7f0ad93185b0dfd08ae6b1"]
-pyobjc-framework-gameplaykit = ["44809867f7bb803cc6222ef184ad009a27d43632d458990362767f458e44335c", "458a0b6b9aa3ddb8bffeeb877c0222798ac8732da6406058f42e54b777b30373", "568d294a210dda1ad86aaf0c529bb893a38b79ce467ff799761dec9d9531a179", "6ab4b59f71d7183154bd7952d8b747eff485bdaac2e0bda67a5ae75d9ecde877", "80682a071840862f805534af14b470bdb611126440c77badb9a493745dedd9bf", "81fc1c9c7dab7d5116286c636ed27f9617b4afe2d9ebceea0f04957250b66e79", "996d9f5899239dbf1d312850b37c406f1490791462bb95031e80023b1fcfacdd", "c2e3bb04913a60683e9d97693d88512a20bfdf1b4470a95d4489ec8cfd75c3aa", "cf468e6e634b16a0e7b57f511a69e059fc96b02e248a58dcc3f98cec7e3d5be7", "fa25eed7cbc9925be119a914058800b157fc80ff17315901e1059772b3b0c47a"]
-pyobjc-framework-imagecapturecore = ["43ab8724ed44a8cee7f82f9aeb962a11cfe7b8b4cfa56d503ea55bf22cca83da", "4e68cb1a56622676bd7d0bc8cc3fe2e4678d7dd6931548e2de1c36ed3b37d767", "5476934fb03cc53cbd9d08e77a4f16a0ecbc2d5c50e9632c5ce00c66f35794d5", "6a08c0e75ac168e21dbf84259bf8d957c331e7218dadd07eb2ea535644a72124", "946536e2c37e5032a356c61066f670b9870a68d77c9c88487914dc699b087e1f", "c1d3abb3df9d638023f61147ed489dea4920b2f4fa6d1fd41f676ec03d970e72", "d1f725f7f30900ff77ab929ad1bb1d863ddd516f5621bf991fe6fe2e03c29725", "d9cd1fefae9b19be92394c46bb3634f240f81ad8039256dfe02d845f1aa040f3", "e5353913e49fed8ff6b3884cffeea48869f857c444b5a8b3171daac3feda1910", "e5be3d5cdcee77f9a7646f7e37022de9d695f3a98696bc10148d96fcf3e4c129"]
-pyobjc-framework-imserviceplugin = ["12b8cdb4e4930150bbbd14b93808ef2dd2b61c57cede9544ce52c3eb9fd5e9e1", "18db0b18c9ad3573787602c3ab78eb4b09b2d3a8c3e6876f77246b54a36b6abd", "1bc6d987f155dd484e9d826b70c0a51605ea4fbc152ffde2192e1d2ce957ec6c", "451e39e2a14f00db82db81f2c2f47141713e60b9bdf3ab7da1076572cce0dbe7", "4b0615d072dd8e2cf3157250f5f14175fa6f87b67e5a40a95f477ddb21a3060e", "757ab22fb7d66b8e7b0147a9b5bd95bf754e57cc94b0bd2924dff5d65a45df80", "9e70061683550f32b8603f30ea53f9868ef2be2c9c3513bdd6b4c54bb3fbf36b", "af0c9092d828acffe023b0b31d5e38fa44518574548db1d0c3a264b925f95624", "b8738de7c36e254396fe53e8b8d624d47028b206a31eb532796fbecb062c03a3", "e4ac9d8690f1efd63da5d671b60c61b84e5e4a10259e8eeefbbcb8a0d4849005"]
-pyobjc-framework-inputmethodkit = ["0dc55b72d7bfbc41a566c87b8495c87d911d19b9c75e5ca04296f9a2ccc685a9", "225a59cf3a80b956b0595d150b526a37cac045f40479ab0403138b6c38bb714c", "28298be20b8500f9f455169ff38e8906fb672c579957312d8e1cc5c7532b15c4", "3e7785f033a85a169f600a6be8e882ad58f907423b940c63c5fcf0466343f49b", "632c9ad5394bb6eac9bbe74d05194b0981f4c44aa14efa3fb0818fdc321d2e0f", "76fa43cf3adfd7d515dbe316e4b8a542f78734ffa5d89b3743e32347d2b1db7a", "862fa0e3cdc6c042d0ffa41c49dd7661abcaff466162c3ca5b074eef7a87b2f3", "b7b017fdf71a9d26e0618a7f1f203f660278496652b702d0cf0c3d014eaafb69", "bc4f1bb262a6d4006ed2bcab4d29624e87c41375a4071930bac8242e2e5bb6fa", "f0b5d098a41f1d15a9d1002c6ec4d79f110b71a5bf087bac18926963b3f815a3"]
-pyobjc-framework-installerplugins = ["27df88b4af8431fe923712a82ec0cb8775f87406c4057699cd096b2f46db9090", "60b6574463d7824098ef9f759ddf62deb4c6f381e06a191d3657cc3b72aea0f8"]
-pyobjc-framework-instantmessage = ["8c164e26978d758fed56cf0b9dfe57508633a9845fd9523daa1ddcf3bc50b340", "97af8673b32f5bad6ad0249fa9552820029f83f2bbcdc0bac28d6974f7871935"]
-pyobjc-framework-intents = ["0ffaf5b7df79634fed6f2e8dea8987844e0c4e6a9a81c0d7b0f53e61eea2ec00", "168ec0c360c8c7f0579e32f38cf2945b28bf0b55155971e75f432d7b92ae12bd", "3d94ee336c26d59c6283df1c655630c71d0740d49b5579926d10795e97f90d40", "7652e42cc6e72b3958541775feb63798deb9554587c601c442872d4034f93313", "85a72798cb0e0ad28f4f2f7b89e8337b5ed492d52e4809759b2368e2785caccf", "8e025ff0c77f8fa02c8e91ec58ef1cf059091b30b64d919a37d4635ba3bb0793", "9d230cffe714a916e3f4d1ea505e9bfce96ef0a95e424576e31444a5f8746281", "bff1e809d27d8a8b28dc0e364358d2f7a370a5516c6096924a7f426a03859a62", "cdad6089dfe3ccdc351c7b843e46b6c09861607c5c791059a4596d3374f25ae9", "eddba6e108b1bcf1ab46d5403caf2165458bf7b9d3ba04e35db9237916afa363"]
-pyobjc-framework-interfacebuilderkit = ["318c8c37e72dff871b673cb3facd32943654ee7864856bb4f017fe0d5af70b21", "86f066e45bc225605e49841661899d6e9af18d3e7c911e7454471ec6b1917235"]
-pyobjc-framework-iosurface = ["063c2121d63648a31213d8c5decf98bc40739fab33592285c3d7f38aedee3c4b", "bf1cc5b77c5a83369c1732a21931d3dec7fff0f97405795b4e730ed5a530cc56"]
-pyobjc-framework-ituneslibrary = ["1e65d2b61b027f11e224b0c2bb66fe4f196de081afc4606316487d5ac2bccf1e", "4a5644f96e675b371060f493c262f5ac29e2472da04dfc81a0fcfbbf527e73fa"]
-pyobjc-framework-latentsemanticmapping = ["42f98ab5ba00ec7c9c55ac451dc7e8997de6b592af9ae2d336078857ea5a55ad", "4c903b6f696709d5d7e8130eaf0d4740506474a43a8b12ea279a784c497a503d"]
-pyobjc-framework-launchservices = ["b9f2bc1aae6c45d088028f632500254f9f007d4712a388c4ede3b2f7998c686c", "c048e7e28c042cf9fa283152279cadeebda7001889c3fb345aa7c3ebfa2f2346"]
-pyobjc-framework-libdispatch = ["2ec73398c420ee5d52fbea2d52950bea417a032a36b416f69ac744e73e344dc6", "3ded2461ca807986568d18a5c93e0f7ab3d262a8f2706c735ec527cb36d063a4", "52441bb39ec33c7e47914dbf63c47905cf9ca2293902d7dfbec2d808b789fe21", "8404733ec21adcfb5623fbbacaa81c44579bf22083ac28b2976994d14c741362", "a75db3230cad7f21f65d4632a77ae1c237a3be821542ea9b12485b14b63148bc", "b7f443361b38e1c94d5a5ab0547d8c06c0d8bec20a38a797748a4c708ead9e9a", "d9cdbc66888ea65157e0f3a5ad2c75b75b1e82ea75ea4dc0d62b626bdc4e5381", "df66e799f7217c142b5eab221db300424e3d7612cad52833c53d785f74d1617b", "e2ab54c0cac5b0c3fdad03e5c78c62f9646e32295da194c5be6f4f72136f19dc", "fa3274cba2c12662055a2237be51db013155a4fffd059e07c07fdfd9c189dd27"]
-pyobjc-framework-localauthentication = ["5bba75ab7ac160b1c4cd69ba9fa88e3a789d3526155eb9890e9a470ee163b447", "7756645a5008b4a5f6c9eaf674e9c2cdc102a6c2d2e716f0094f9c58392ea6c6"]
-pyobjc-framework-mapkit = ["28003d6aaac12549453cc6e553cffaa46c477a410cedb7fbc7d84cc9d39d7552", "362476db7c0697744f2df24f1379df7b6c083da2105057112e821c0d4cf980f1", "55799836a575cffd30d25b442a4bc17cabaf327fe9f993437f27728f991b4cd9", "73686f09f67b2ca48f56375d1c7692f567419e9427a4b61c0d1ca2affa267ed1", "7419838520bc3b49f577b8ce4ecd344e58886e844586d87b6b7e8201322566b6", "74ed6c2a4f60ba59558c420cdd31a2ab82f85ecb8dd2c1e4c6c2343a45b3d4d6", "9efd1a71f743b6dfb69e619221504536129978af148c4d20f1a415dd7976d27e", "aebe531bbda3254efab16abc9a785d469e62605bbeb1afc967eb24a7488d13a7", "d1300d81e960c2f6cc1468f18a9d057b649915b9103c77e7c702aa0d775c2192", "df0296af72e80d971a92ff1094e9867add9719134265d35732870fb3a1e6800b"]
-pyobjc-framework-mediaaccessibility = ["09665ace2ff5585e7815c7bad5d6a8ad0833e6bcd378f6ca58cd238a0c3458a6", "66db8eeb929f35624b47485b6082f338aee146c28f644c3dfbf7ead93979ed0b"]
-pyobjc-framework-medialibrary = ["19204ee9952bccac9040ed8fffa7bf918ecedd7be688d63d6537fe61f35b35eb", "f162a68ff57e08c4ef38ae834f93297cb763540ffc50cc470f4a7c3ce7c32354"]
-pyobjc-framework-mediaplayer = ["10e0a02d6583aeb50b858d0c6353bb876467206a7c93cb314b8be2b123021ed0", "136242effa1e3c04122df0a275545f09ad6b3915132871f1eb830edc3deec704"]
-pyobjc-framework-mediatoolbox = ["48af141dff62ca1dbe6c35dac627c96affca536cc84cdc2595e127c5c68d6796", "6461ff3a5010237acb61b74efdfbcf0f2f444a62b73f33c688b0cd73c166f926", "6d4b12a81ee8e15e189dd5f9cef99b1613b3d95b3153a8b1113e13e7cac1b95f", "7c1c70f75105a7895255f556368fc54bfccbb33eca63df2322af25fc448938e0", "9c06f447080a106f4c561bdb1c3e9149b804ee2adc9ecfe59bcdc69e71e73744", "a77270f7f0f9efb6cfca8e5fb47853b9201808eba13be1d5f690d452a8d86f45", "a9f8c813615f00432ac2d55c2e043a557eecee167b5ecb70750501eecaea317f", "b95b661368fab119e04cf173ec70393fbffb4252b75d9caeff0cb827d8f39a68", "bf57037039c7eb40dad06682fb65f705ddae4326aa9de39c683b6d0db6725225", "ce089b4566b238483d87073facbdaa443c9c7a43cdbd4b3ec3067c9b5d68d0a3"]
-pyobjc-framework-message = ["bb2f38b249b897ec610f47afdb29838c100c67d0b30e14ecfbf197ea3ac8b0f2", "ecb9a160422a3e7838bdf3056e582379ce8ecdca40060367330b93aa40d4ea95"]
-pyobjc-framework-modelio = ["0c75b5c5c653bace548426060c6a73f372d3b3942f04e46362ac343ecd5eba0a", "177b63c90602b32696c5372f13c1e14b1927dd7a9623015ab4a413c1303808ba", "3de42f20155128628a2ddd6aae56fd5853e52feff289ae790490d897b991f138", "49006071b010cb3f7f797822efb17a9710394b8ac3b015c953f2ecee9c08d682", "6427e572a0932ddf20b981d46b6ff47f4d4226c53a42c1bb0edfcead59fba3e8", "80a41f5aa8e095a93753a5f7bda27146c305a55845862c298ccc3e0b5360f589", "80f46b2b9c67ba8f6abbdd3aa2aec479da963cc89e4186dd4434e44b6c3ede63", "92dfde371e463884a5ad8e401dc2513660cfc101b81081682da2b62ccd5a5d23", "bf0e2636427980a86ffae897c8df0511158e6a4fc2dc1529375a800f8a3bc654", "ed2bac16ec461b6fc61001de8e950b2d3d84844d32ee111b7e392d31873daab9"]
-pyobjc-framework-multipeerconnectivity = ["404895efe9d25558051bafb6dedad83b0a8e991767ffee4da796d1e2ec74b1b4", "ae79d963a621412abe135e3e21a78743c77b9b34ae5c28e29d097849e5ba8f17", "b38cd016b0ddc4cec6e87edc9be4146daff381286e70df875e63e3b4ce344c0f", "bb298ed1fa815fce9bbc5b84d7cd24d7ac85f4302f1fea642b2aec419f38c9c9", "c15d3576b434a2cb0b3a655316e397fb6c047bbc2d46b65677777fab57d90b14", "c365923b6517b1c80328084a9496539cb84c30927c5f67dcfe0312172506e084", "c869787e301a548dcb6d4a3b45781d5db095937900d4f07d835a72040e871219", "d24263cfa8ff7fa6ba9605d2ae580fdac2b754939a43766304398d3059e56ca4", "e16983d156f708c7186076a8eba028f88bec6ebc5bdbbf71628afd06438140e6", "ef8e8fe4e4e4203534143a15caa62ec1787ab145c2ea9c158c513531a06d6e39"]
-pyobjc-framework-naturallanguage = ["00f89143dbe2b0379448f564390c3cc27b87db3cacc6b79e92ed555d1c0d831b", "5b5fb2af5211887c20fcd6c1f052743ba59ae4feff33cf5f45d8663f1814db72"]
-pyobjc-framework-netfs = ["68cd392545e10188180b6788240cb4919f291aac5eb08884ab7c713575f4443b", "afaba5ca64cd1521977b37f9f234819f44efc993fd8c576c999064ce6a96de4b"]
-pyobjc-framework-network = ["2d6f709a1933638a2b263f5147f98914911258568c37d1231f8d7152927cece8", "469226dfcf1911b572b74a79b99447b8197b2c458a991fa03581810fbfff6eb3", "6ad2b818d9a6402447c063aafbc9ad4c0e89b9458ed0518a7fbec021f874a9cd", "6fdcd3ed6279cb03ed9c0e5e0eb1ccbab798fd5620e5be46f11982ae48ff640b", "afcc67b9edd7b3ed600d7d0f6359a88d2d24886e1e689e938c957f30d44700b0"]
-pyobjc-framework-networkextension = ["23cd91c0838126031a70f52c0064d3f2208b3d1dd1d1ba3504cd9eefe361cbbc", "2510f728e378e4fa2c42b60d5bc9cf4357215a021a71ed4d7235b1b2d4d9989a", "4d31e19a919e801d1a3fbd33a01d0700356e9649304cb4e57c243ab3cbf59021", "6d2184e9938074378fca9d47783744054b5729ea9ce2696f07b22ecae6e5cd21", "719a6b58e7e1e5c2a48fdfdbb994ca2fe49b1cff60055948e2413e32e4077340", "736654eaae347982f0729ccbb74aa942683eabe2c6e6344d065775d1c23c63d9", "7ce74ca6f661cbf50e1029bb80c592fa01cefe7d9dd246b8ac931e489a1eaca0", "a3cedb4de35a4cc65b328c6bd4010d50d3f481348d2327064a2cd73e2eae262b", "dab130488863442d8ad93b02957456de200f115d68b1d01019b802f7342839ea", "e6c63ed99addb1fb73d238fc96045e6951b694122ba1abd94815b3a998d43b21"]
-pyobjc-framework-notificationcenter = ["0cc26985aec7dd5b4d71da1aa1b49eaa7bfcc855323d6d1a0e4d585e060edbfb", "3bee6af40b318afa4a04e72ad2d34474e3dceff59f5c318c513511b0b2a52fbf", "487e334af46d9d78fd59cb1fb7d72c1420c4a758974b403f5cb65fb61f430ef8", "64bf84a018381cbd89dff0a0600c010be927727d45091c373a1508eab5cc6bde", "843c316770def2b1170b2b782b249d5b9d80f7276f8409c9aea2a733bca25cda", "a7815f4baed725dd7c3c3efc710d24bb15f758b951fed55f34a61bfbd228fd67", "c55460b7e7448b4499e6c7fd3293dea39bd27d006fc029982be56bef7cbd77ec", "c9d59a4883788902afe8b07537c3678b715ee50fe04d82998705977e1fde414f", "d02ee094ed69081b2d87ce6a9c2c149585c25e91e3466e068cf73af50a08c756", "faec4515266bd41c55b34f68616853d6ea3fecbbdc2e9fa0e6408174bde2270e"]
-pyobjc-framework-opendirectory = ["d06b1e0dc141b4d8a4bc36d7950f2080acdaed77050d1bfc1e86c7548295ea0b", "d917e413f7179a147d25a8dd447a46e64e1ec7bad6b0d92e15bd0a5a83e9a177"]
-pyobjc-framework-osakit = ["03d640d02b48f43d7ca545a3aa9be36f07654124333072eca48253f3ccc6b61d", "7debf774b794094d221bb424fce52735cf2a76bc9504ab0d4815a45062eb98c9"]
-pyobjc-framework-photos = ["23ca3db5de16009c249a825ed1ea1697362d8c2061f905394ff7cb9611eb60b2", "2f05ab7e7ec84a8207ae07509afba147ef3dfc8f842e7b4a56c38456ac631c89", "30eabf09132389266f3f68887508ec52e2e0287266fff00e42feff08d14f6a2a", "46fe29990108b5485279bff78bc2305a42edcf1bd812e4fbf6641f1d347063cf", "57578696e1dd39e5ca54a14a5eb31353237bf614bae7cd562beb8e721270366d", "5f57d47f4dcbe5970912421d52cda784bf98ca89ba5505ffed7e1f266d1b502f", "8eadc00d9843f62573923be3bd745c9b2f324588b66198395b15b7b73eb5c706", "b1fbe7726820c5cc414037a6cc17d9702898595b948c544b785dd71df4eca30e", "ccd73060a2103fbbd61292824d20ca7e78011f0424400641f7075095cbc0a7ee", "f69350cc9b1c732ba8746365a3e9afa1d2df0c30b138200574c93fcce22474fe"]
-pyobjc-framework-photosui = ["06528ae1a2a9ff2f743ed779f9a0c38e235804763c269b1c2309f7b54a6faca1", "0ee4986509468142aa532869561b8acdc5772d700b34cab2f9b616525fd16f03", "3207985d6406e2eb41d081821d7b36ea5a3aa557e183d2c68dff057fa4c14b18", "50d5948274cd3e9ba40f3bec9dd94f14a8b8ca6198633de385e4039e29eb79fe", "5141593c6cc8c4ba153e6d84eee7d2ee9f1d1af4b69bde0104d462e6c243330e", "7da938bbbbb94a3f7cfd631359366914fd178940f37a15ec2f6b865638d96d63", "c325bbd85231b8c5488b742a40b26bcf59379dbe987b7139f5c7be6a7b11986f", "eae77c157541d859ead93d3a8048f0bac31d9b1c4c005e264563ae1bc5f0f69d", "f97ef2ee5506bfa03ae1f3f01d2caf462c69ffd6fb46e25d9bcdea571b43562c", "fbae0844af7a75e36e21a862ddef5b73b1c1e839c7d1984689e45ebf412518b6"]
-pyobjc-framework-preferencepanes = ["1b2580872368090915faf63075cd62ab63eb5719f0cc9702b49790ee4b7e662c", "8e0733a17cb271cbd84afab3aa3f5781f0c5283c9f1956d213c158e6d8be5a32"]
-pyobjc-framework-pubsub = ["21138c8ce1e34de676083047fe7b5a3208b1efd26afb1d32c11b5de46e73fc18", "63586f0310e47385fe7bd70b5dd1bb746e3c7b983afe26169f837a3b0ef1aabb"]
-pyobjc-framework-qtkit = ["02f2067896b706fbb792852fdd904b191d1a16a61cbaf5d0a97e05d1741c760f", "0fe1f3a0b22925c656c55a50b334150ad8ae354178cbb4873d0ec880f5ab3936", "169753363f2db48eb9a750bd1ab4a3d8353c6989c561c50980d9c7c58d73d2d6", "3599f090885138f13acbe7a4aea26b1e5ea10347332baede3626ffe9b374119a", "4120f6000444746deebaef6c25d4385b3344e239b9b068026eaa371fc6b8cf52", "540940455b080d498d027ddf3f782eb49f8a4e2ffed5806721de5a9e8c5d6242", "898fe7cc9251124ca03eba3c94be3b88d15fb87e2fb627ec25831272cb549a27", "b61beb07c18cb1c04df0ad252d630eade845a5cdd10fea17f23853d248a366df", "c936cd13e652fbe5d45f4b6b49996a83209808e04c91e27ea5a91f07b999630e", "d831c3d444364dc8b419db59dc023a4ff826392f1d602d36103085182a1e34dd"]
-pyobjc-framework-quartz = ["4c7593cdc489d0eeb9a3ec89a4c325925e33d6d548030859f14718a626193d8c", "5d8d6ef6aa3fb9346150d018a0c4050e71dbc84d624d11cb78f867b9c0212c42", "6c5f7513391fcca2773223dcde37e5ba8c4e470821a08e8ee0a50194380e8a7f", "8aff4e4f99822d047606073b476443023db73a20c7603cdea7d531dd3c6d904c", "8c4962a51ac4699e91ac99bf4ba8270b2d444b4ec8de901d4d774af49c9cb15c", "a2347421d5358d16eb976d0739c6c300179db656e49a86a5ef8c666bca0e0e54", "ade3fdf8887b366e66a18093eb93846efb627b3155cca460b756347226e77510", "b3792746cf63ed3a760e97bec2e8933b11d0ff5cfa87d78dab8cb4febcd5795a", "c8cbc601edb049ad276d084b4a6df678460eff5bc5a0462de0ef39054993ae61", "fb89be73ca9dff503375e7a73be5a957bf97c8308259ab733ddfdcc2f70a3fa4"]
-pyobjc-framework-safariservices = ["1396e3a5f76fa538eaa6ee51612ce0026557243f14b9e214e092d47ee4bce2ee", "1486cba0cccfef9a6957e6cadca1efb437c14577b6f0a81a9c569c754d4b88c4", "1e2b6d5fe8284bd64a8c38e6821e649fd7fe65f0bb6f07551600bcd8e0193e88", "67c6e889e87be619dd2a5fffac83ef17e1a0b3321cbe989434ab23eca82f4d72", "7169a66d3457196b3bb642e72bc1667efdcbb2842d59eac8226ec0ff39e870e4", "736855970288fea00b41e407e58d7423906902797a967b523fe42dcdf8d54b04", "bccf7fe014c4a254dc1dfca248af639e9abe18dcd1a1928075235e74b31b8155", "ceb45cb62128105da1d30bff075cc5dc04a6705deb536092621ce5102164301a", "cfa2ba45ec16f106e9d4a82423d3f7007d2942f36e603e5cdee79101fa2ad5cb", "dc2a8ab01c8f879081141c678a2748c247b9eb59731c2e0bc8760a3248def43c"]
-pyobjc-framework-scenekit = ["178d6aca8f44c17cb7e8155cd6b44247d914f84371f83fdfaed0744b97785883", "60f199e319ea98b5a0832d77afac3fc822d2e6b1addbb407583b065f59ca7c7a", "732a9e47295e970a09b6547d346586cf8e9338a79dfffa7ae19c2cc6b8c3531f", "76585b613300ed09362d6f2fe9c5e50700169355e6f0ce28c355d28f840965cf", "83b5b6f78d14040bfcc1c60f5f88aed43e5bfd7d601023d3e69849ff98ecdacc", "b155e949e9a9a4dcdf228867564f24a6ef9999782e75cd8df3851c92ec388d9b", "b51fb832169bc29f7a5ecd60f1fbfc93da2c6f4d390300ff607860cd4f2df6ba", "e804927ee741ec1198a3ed92405962747a5ba58daea7383ba62dc49972509099", "f338efcd7d305584db09c8dd105149165103638005bcc2a5cdcbc54a4d6628d8", "fc0c8b880758c39d041ddc6974b83183364e65098d3f2415ea2f6f56fc820bf4"]
-pyobjc-framework-screensaver = ["2a0c1a6aa8206e76aed5329a6dce863f69ecbad71788e77a3dbf0629d34bd3a5", "56048603a025f8eeda618ce84ad7eb820ba4974460bdef56066a845c254af883", "638283cd631bddfdec8f89aeee2a9f6879e75cfbd6283613c7e3e8a780ba5e33", "917c7bd8ada8401820351c6420f76b3d4a073d7832eefcd0d20dc14ae13c5f6b", "9f6f8cb00041b264f405ec096ba504bae2111ef4659350827069aa8190e2767a", "b15385dcbeaee2708569357f0414824616da9d9cc933d5071ee921813558cbbe", "b522ddc48cbeef32d876f12e51150bb2b1ea7024d21f89a39e9ed28a7494625d", "b5b652bbf8462aa9ebba0cec74cf1a56049eeb68e90345b1a76a7ffc4bc895f7", "d037373d9480653878d3a046735e93ec409d8c0e3c98f0b43e41dd1cd12317e5", "ecabe28e2565cd81d4ca0fe7e56b1c9bdd8f5c64ace28c93503982b87dc45be8"]
-pyobjc-framework-scriptingbridge = ["0b6605bc8b3a8a8558f56980fb7d6e43abef110b53c464709631e00b3bac29ab", "10fe8903543b3889f58635576f94b9c2c4020690e4d4c18e3d00b4cf48533036", "17e6ba41bec0e88fd49bd7294f7633fb256f6ca06cd58295eb9eafbebb5a051c", "3277dcdd92b483a8a50629b0f2bdaf2c13683008f0e08fbd3bc78f6ca1dcab07", "3310ab07bb491e04e835a4a8f6bcfbcdc005733d7721198c3277a258a1f9479f", "680c1f0ba6608edd55994af04bea54f98e0f84f6bc347f3eb08933e10ec24262", "705bba2be275ee31ddb83355416e56c4dea21107131f3b7eaa15c0b8b6849920", "a41c33a0c2a3bc59113217d8ce063a48dd639484e0bbddea610816c0876fbfa9", "e248e5ae1f7958ff59bb42841759c9c5de290fbc76d21fee4ab528f5e4fcfbc4", "ebcf06fd8c2f0127a547d1354438eb8d319592047a6d09d1f93e217da472a79c"]
-pyobjc-framework-searchkit = ["05b868dc9745895cbd321338b7c57f27f52ced2cff4b2c6b14a6591390e97171", "8466371923534c97ec34db627f263cc49f64eecc478094373b2894c11bc4c9f4"]
-pyobjc-framework-security = ["04cda3f4db7c9e98f90cefcb827b3ffe5e6e1ad6f525ccae2f6734541a80276c", "05c753e89de446b96766b234806e9fd5cb8d668583fd85277cc593b4c31ce773", "1ae0e27a09f88aaf50894e468380452f99fe32c4fec0245421e7602e217857f9", "27fc593b52744b662b32881cecef6664e05ddd9b171d503fbef41a452102edee", "70a34a2a5474f46a71e8d9ce1be1fa6c66e0f27b9469313071e35e832d4ca556", "834963fa47535d81549871eec56d5dc9573a2ecb6f804b76a0e01610c1c0eed0", "8f167ce48e9996c5a560b50e94a4c866d20e4ae2f1d386b71eb3dd90cdea7e0d", "954401d3673ff7f4ce30039f0c1cc62974fa5bccb52c804e20125e9abf94520a", "9bf4f927b3360af9424057ecfa952c753dd94bd65c2508230b29410158d4d78d", "da2e011169e1536239c45d2d199aae5d74646343a255a3c320526bb86f0b1bb5"]
-pyobjc-framework-securityfoundation = ["09aa12da22be978dc87e281f4f8e55691b30b469c74c120f6e7e1e2dafde6977", "ddc20db0d65850b22472bcb380e09e1bfbdae9b13b81781304cdd20b0add5dd5"]
-pyobjc-framework-securityinterface = ["20953e0c9661689c3bd1577027e1fdc24bbe2bd2e0b77fa39a40c73769f793f5", "523e6125123428dffdbc6542f00f8c226d97bffdf29433e6ae2cf65c0a64cfa8", "5330f04ab7a5240280de2b93ae00319dc173b1d288876c39fe611ff0f4d215fa", "9b8ea7d90a8e7f07e8346d5a707506ae36d80b0ed067f38502ca18dc4329e82f", "9ccc1365f81a6b4cd41aa859a4473b745c42ce80507871fd698896ab74c27690", "bfc681caccb7eda804fda0d66350fc565f722b20d73e6b2a69e5b3a81ccb0ca8", "c8eae83c702b6c8d2995f12d366af6617f045a88d55c6cc38e07c0b9dbf6c890", "ce9182a61cbf61579c0d4c40760ebedd735dfceb20594e3252e6a447d68ebac4", "e246b538a596165b1fff97a6ff73381203af96be6cf138d9616e79412d747886", "ff84306c16297ec6eeab03574e58b5f6ddb1bd4f0720338e831d45621f3164b0"]
-pyobjc-framework-servernotification = ["bcc309b0c7517d43cee332c0f0348b1079dbe6b32f57df6e1f368fa9f3350dc9", "fd03532d5db4cd897b8a0009287444479af7e32a7de2eca225e8d34cfc493ba9"]
-pyobjc-framework-servicemanagement = ["68693c8cfb21e358a666c501014270933b795a27efef8d12277c92552cd51ca2", "aad8a7295eefb5aaedb23b60f776dcde193d0e3bd06b2029a407b599eaf01fbe"]
-pyobjc-framework-social = ["360ece6aee50f5da91da9e121ad4207e012f2c11e34b8604743960f6a70bf779", "9ee6348b95d9bd112952fd146025a36fa3c7e471b76fc8b7e9231893bc5a231e"]
-pyobjc-framework-spritekit = ["0e54e7c01b4d35730fe987101fbb5d9211ce5aabca85d0f9c1ef0c5f8357fe07", "15e1a6a3aa184b00987619c3950486e15f858c8cb70ca2662398c1e052677ca7", "21133c8156cf7d8a2a42cf9b280e596e36d45e2c60fc97eb871c393d09bcf880", "3512e06f5e0f5e9635020593d7e454205fc13a663fd99cc640da30267ab8da5c", "3cba76b1c4728248c261d4c1e918457a137d6a6c98af5fe699a246bba0ff51a6", "44854c512a05cd7b6005db92c841cda2958e1bedfcb198b106817e35527725ba", "4edf914992c35af84e6051053b0a908035fc2df3673324f02f6ac5258b228376", "a308f10c7969088f744457ea6304c86e606e2b2a933e0227d5dda0ff80266c98", "b14e84a9e1658b4a6ffeca843146b82dba5c992536b8fd4a42e1653c798bba75", "eef5f4ef8ebc0429b4d97e89512782392a2375a6d9da0f6f4a8f69cf204a2752"]
-pyobjc-framework-storekit = ["06418f8c665de38f76fa63353e96ac10b9df3182acdc87bac19bcad7c3a13165", "27730ec1b90dee37fa6ce182482ffe31a7f0d3eca1fc41861c5b40f1ffe60a97", "47fb7d284b34482ba0529850e4860be528ba1400165621d69c38e2d6a8dfd72a", "6572912b8ec8796c5e64fb15b368a887c16f69bc66fc4d58975d6181f925bfaa", "8f4a930f64dc715baed19d510859946f8356eb188a8c522b97104915a5f171b5", "93e95817f30e3fc3d5587ef1f39253260d3488c225e55242bb513e12d1ea37f2", "a3f08fc637fd512e02720dc1da2714af19235fb8b15b97a2e27953ab124e2e46", "be89c4ec71f0eab881bad82146f8b7641056760021e07f746464157f5dc6b918", "db4a5853605ba94295cb19fd8ef65ddf65518e72078cd370c143fcfb27855bb3", "f9b7d0d2aca851f4c1ee2bf156aa2d3667e2882f2432bdc4b107fdcec2b8ee4a"]
-pyobjc-framework-syncservices = ["04518c272741cb1ddbbe4af1282afd447a94c3eb666056258c1d500d2d32723b", "153dcca26fb1c7a61eaf9c346b73add04407919a08f431627f467ffd8d1d78d7", "16185f6eede0a8db7a2d766e13e2f5f327a41b58f6ada87344adadf56976716a", "25fa65126cf85a1a3e5d98d0fa3d52ac7a8c2cc7803482b4c9e3b353d5ced547", "4af960d78a3ca43dcdf124af93850b92c8da525f45dc1223459c752086895721", "7466b22adcbffe5f7fdef119e900c7d715dc1f88580c510bd754cd69232242ef", "7bd24a432feed9c4466965fc19b56ffad2d0f8bfca09df103df3ec4a6d09ef86", "9fd1ab0f99bdfe97edfda1c619256d0edf8b7d72d72631875ceb3d22e49b8fa7", "b9dc8ed9bf2220061b7f8dfeb260afb81048be0b97f192ab3b553e16c313f859", "df16362bb92fa35ccf69775f87d111320cee8ecb3debfe43933d18d99db1294b"]
-pyobjc-framework-systemconfiguration = ["4d7ba392612caefe6b6000e139261a67dbcb7d010b9c796e246ca1b36ff2ae67", "5221acedac450d9e1a131722108abba774875a8e7f7e1e43893fe46c4ea2d601", "5372d9e7a69509a94bc078d894547717befd1b2354b7c784219d0efca6482076", "5d91f27e3f98fd7437b3b7266e42e09ca394b8ec0a6a844283daaf6e455db90f", "756221c3b34899c6810701f7728fbd414e8fcfd103802aaa3aeaeaac9e5a5d63", "7af514797c7854f39083c1f94eb2f5ebca0faac216f3c04488cc8c319c83d5a6", "9cf44dd03f2b43868abb713f10a9807fe85963720ffaa0b051bf2a9a778e2deb", "9f83e12a5be8d6c78277925cb5d13975e43416191f2e7d73dcabdab850780472", "ab12bee36098099f43caeb77b54bace8431c5d94c0ec6187e1ef39d1bc10ae3a", "fa19235259d3d48fd553d497469807f2e1ddeedb0449c36273d731d59ae9a93f"]
-pyobjc-framework-usernotifications = ["06e4b227f7b13e528444470b69eb69d0c0cc8abd93ddebe38ad2305e034fb72f", "188f60360eb4aa85855e058a6bcf970129afd79002e45670691314de741b80e3", "2414e9d2a1ab81603b04f3de83acd6dde958e72e2930a8ab1b8b2bc69cc058f5", "30f10b037fed75eb13836171819eded333e0904361ef1920553baf0e39423e6f", "3984e71e73893be2e10fcb63a45a0c53d37595f8d386794e7997127db7c76697"]
-pyobjc-framework-videosubscriberaccount = ["5c1427bab34a860fd13f7f1494751aadd49c7c9935ea5f211a2364ae3222b2d0", "d076fd4d18c5b7545f8790c3500d018ab6139d9c4e5aea471493be4e9a12b57b"]
-pyobjc-framework-videotoolbox = ["1a1f81b0b02d36bb0390234e953cbc6317f9481bda3f52951d520d0379a84d98", "1c825f9643ef18748bd402404048f808c0f6f2502d7b6ec4998c007e6c08b591", "1cc3678494e7bbb52a56ad3212bcf0c9a23785c2dae4ef1e2b532214ba277fb6", "3c31dfdf33ac88c77aad210c31dc360ab09f8fb271f5aaedeba39042efd89708", "3d6ab948e003acaf20e43e618096079fcb3ecd8591410a4e990ea5007016d259", "44b4320766a54ce97550200efff18a365f063d50afe5e2becbbf6b6211633244", "6930159efef17f7209e75004bd41cd5d9814e5f5c6e74e89639bf4664e0c7268", "6db374616d815a4314e96887b38628359753d78648acf8e589c27afd36ff2a7d", "eb4c6d2e7304e39cb09402c7352aea4281c6a4f09470440a22ab110f1f9f3b7b", "f0e3a49d12f364705c6860ba57062470f87c692eca81a22f5f838f26d3218d61"]
-pyobjc-framework-vision = ["31c8377ff629f7c9e94981b8488258116062d0cbb8661d45ef699a1afc719f02", "56af94dfb090bf874c03b2c356e889bc10a8a1a6a4c223235424115466034714", "5e8db656b6aeb0326f8f7233f24b6083f9b16b875529401099c71a527f114e13", "60b3292ed0dec95926037391f97c023f794a28569d050a0cf71f43d086b4946a", "63e450add9be70a49978027457fc004d627c85e5642b7a95a2a9158ec72de25a", "7fb7174c38692448b8b992d5bb1eb0431004bcdf18db50b94b029fbc6a9711a9", "91df872a7d5c93ce24d6499970e12760d98f87ccf5dfbcffe64503693c3121fa", "bbe13aa60947d06761b713f69c21b75c300cb38e09c2c152aed2d4e404f7e3e9", "ec030defb52892cd54da7fefb51094bf68f5ecb0973af11e611f0d54f3101156", "f876bfd19a61a7d49965736b094914c1d4ae246495d5dc4cfce3befaf730840c"]
-pyobjc-framework-webkit = ["3b7ad4ad1a2a103d74541ad8166a9a047eb3ae161dc6770ac756a1d344719e9d", "453e287360d9e574d164465600a541114c767b21448f061c29a341e8a21ecd69", "5b0bc79e7ec696b52fc44bf8197c0192f6dd825d37d2dffda9d1a948de8959c6", "6229fce9f886ec32d180ba8ffa26e94abec25765e5db6c0975663f16e1d349a0", "6aaeae1c9df7f5f7b697ff6330e6e1b099abf2cb042ab6c234f3415ae9da4d03", "816f5cd596bf16ba1106301baa338cbe8911d6f1fd3aa4753b0982f67fc4383c", "835890b48b44a052e4cd4270d26e9519848af8e17f5a02451048fc4c4ad32bf5", "9e5f29e13011f86bb52ff821b450ae659a41505ca0b708c08a9460602aca244d", "b0dd141ef1d51e45750e2dc2e180051d9b8311d65b6cd43e8c9af31a868e1d83", "efa5c3e776daf24886d9a921045e4ccfa54f29b73b10b2fdf297175c086edf7f"]
-pyobjc-framework-xgridfoundation = ["4699d6833f7ff3402e73a3f92a8d022f965552040d015c30409976b41c6302f9", "88acc0a77679fcce402cca7965e9d97dc04e2f017fbf1e34f472f925d85347e1"]
+pyobjc = ["53ae86caaedc48350c6e93d6e778a0c5044e802340b6d6a679e55014758be540", "c78056797592fcd351c60604c5a65ad5d259afd908ee1e160364ac7728959e03"]
+pyobjc-core = ["1a0fbf012fb575e0adf8c18cfd4453e657cc2c0deb2660c529bf524ba4c9149a", "470ccd754efb468a59426942673dfc3c5c59f33a5b8cae8a7fc1be975c2d4128", "751cdeb436cb181af2e2413015b072075590577c410c7f345080a38dd028b8ec", "8ccf44511cbe438fa6562c423c0c5f1dad7cfc0eadd6d8f112840f8845b44fda"]
+pyobjc-framework-accounts = ["8c9aac07aa925ed85e919fe4fe9d4641e3b4935eb5da52f7fd10de35e441996d", "b942ea42df8a7fcb9f420e8d557977df3d863a0657788069ea1d8f334a107bfc"]
+pyobjc-framework-addressbook = ["4112afc0100cb45289763ea5c301dd6fc33b51808efa44e8a5f8bc39c0c1f0f8", "41882a5ed1712bde42d2f880c9cd515818489e5496e49788b7610beff4eee2db", "82cbd54c1ff0ef198e88fdb86a544a6ade8ebca4f4ccf0bd2eaaa071d7c8f803", "8a4b31d8948689aa2e14ff4bc80df6b22602dccaa13e3e8197ea11661e5a043e"]
+pyobjc-framework-adsupport = ["05799d0710d0da5729cce02f4524b1ed41baddd3830aa1d1daa6932556915b7a", "ececd35be21d82b665c41637dd880a7f7160f0bad74e082a575a2ba2f40722ee"]
+pyobjc-framework-applescriptkit = ["5a8ee279614d49c19a3b3901731be6da64f93c016928736c0d608e240915859e", "c4d56eb616765f5e8bffdf9c0e443d89f4ab663ff8a13880f95135598e20baea"]
+pyobjc-framework-applescriptobjc = ["4f40e073946b40c8d838f8de7f2435e590e7d5d5a2d760a383a60b03d56e53be", "fb24b969a2ebe5660f21e7f2a51b98f0b2f3a6bf47757db3655408f3a1bb84d8"]
+pyobjc-framework-applicationservices = ["5145ca98e0a21013916f316c296d7e5d857a5bc8f45040d6343810a633415cee", "a806238ca2d0846d0d4f4d9a71545e481c7d7f173a19d5123c2e68770b2b15e4"]
+pyobjc-framework-authenticationservices = ["9bc6af94dbe7b96bc9969dcef2a6e093813728e18c8c4c312a940e0a12237941", "a21cecf05095061ad0826dc44342f9a4625818d7c0bee1424049d6cb2ef4c6d7", "e2e7b1e73868941b1938aef441606dbcc1c0e6ce42ba97a98bc54fb8c4fa169e", "f9e745b6139fa7ad65a85763309a38e346df2991a05994271b3254ddd13aad0a"]
+pyobjc-framework-automator = ["26fb720c50c1e3b44ebe2fbe3dc0a9fa9dd884ec85ad3a9b9405e04bd097fe12", "aaa0f6a4fd6473d9b7391baf0af6d005933ded371752996603a19d0b449146a1"]
+pyobjc-framework-avfoundation = ["58a492716b8ee5b44ad99a63dbf2039f2e0e05707345c571c90134b0378ac9e5", "c025af92f32b70e4901b566714f602f2c6a0dad4dc15a4a0d89d5c77fc3fb240", "d14b81d7d683e91d5872ea5e81e3de4ea6de56423e75fbb3b6d391f2a4b09aff", "e7e0d9ba71f4c2c6f43c67e52485d1e58c4796226800e36387521ac166f6f0ee"]
+pyobjc-framework-avkit = ["3fdf370d7cf00c36b7ae5def460878765617d06580aee7331dfdc7f7a7ce3676", "4a3a6fc0866ac3986f613fa40a57faa8503fe2d0a76b8fcecc5e11a9b9c6aacd", "75e09ee885a366d64a2fda1f24da46821ad34a844a344946f352e9c40ddc3087", "ca5e035ec4ac3a2ed289194a96de3e72db2df132085c46ac031273f6ae7fb04e"]
+pyobjc-framework-businesschat = ["7501a8026851e89ca791d51b36876421471bc819dc4877505acd64931a877c16", "e8ac6cb747306ed747326a18e4f4ffd1131903aac20cd6800efea2ce969d211a"]
+pyobjc-framework-calendarstore = ["1db147c879efca295daf7e3cb72dd38dae29806b99080c181cb9ba0cc7b32915", "c9570ec5442bb72417d0d9ec10c7a8eaa09aecc00fe0e1fd40d64db806065948"]
+pyobjc-framework-cfnetwork = ["6521c2ed64fbd6d3223b1e21337ce5a6ba1d243d6f67f3d33d2713f273e83675", "874af02566707328e0787460092e135bc38546a3e1961c3291de6b63abfccbc6", "93855207395fefc88efd4d2e5af32968f0d930dd98a29e626157a72609916064", "bdc023a99dd46d4bebeacaaf0f62dfec37545a4e5585850e421992b596c7d4ee"]
+pyobjc-framework-cloudkit = ["41ae20421f315edfa83bf3a2c37456eb326a89a08c49771c428ebd6e82796c3c", "c90b7c6b6cc134f8bc7f4a51033c4f337c59a73ce59242b504a860eb3343a4ab"]
+pyobjc-framework-cocoa = ["1dc428f867d35007ddf9de5b24eff5bfdf65c58b1d610abcb08bebd94c343312", "245e19156739f8068db474ad9561079cc698f08ef525e299b8eedc5531e02801", "32ba4d0ce811e2088bf0fc360c9545c06586934e895f7133655b8f2182e7019a", "c4077d2e6f96e4f3fd9780d66778cf51d27f414822498b24410e9df7a6a4d531"]
+pyobjc-framework-collaboration = ["56d8849038c8a11b9fe14cf67a19a2b2ccb209c334985ab772641b3320a208b3", "9710dd3249554fec5c43d435ecabac9df6768f29f8836274a7be7a204911f5f4"]
+pyobjc-framework-colorsync = ["2ab290aa18d6d4223ab94804a3f28e7080a1cf16b8a27d5930adda14977f4032", "8197df64cd32399cbb54f0ebb250f5cb0e553c910f60d5d8678d1528141bf216"]
+pyobjc-framework-contacts = ["29005c2200f9522445a9bb47bb5943b7ce490f1236975b10a8f6b1214b6d41f0", "348dd2e40babf62e395fd034a3288950302e4c4f9161f31fddac30ac6f10f6f4", "4f7a576614dfb188d96a2b28927790fea368ca23460c4477ea34bb0dacce755d", "815bfb65a6c2b89e5a746524160bccc6c53494c539d22f596b41f5ab46a7af09"]
+pyobjc-framework-contactsui = ["7b7d048090c76087c8255fba194d95e659f96c9f9940c42b456e4e54cb687303", "84a50bbff80d7d304b605f955cfd40a5ea6405ef31d98aca59ceee6d989da5b5", "94e6ce9484628345db84e9ed5e1b350d9c397ce12edb3d7100f7953e302f149e", "f57153e3b613ddbd5814836f5846a9449d34a6d7691166dcea71397cfdd07054"]
+pyobjc-framework-coreaudio = ["41d9384770ac8cef7e7a001505a87daa9ee1c0fff3e996e7e05984fd60bd91cc", "c2623edf7d5da2556a96dad11fff36534e0e469380c48ad003623757f5f4dc70", "edf663928d46f29879a94bff707470d44c839ca83e1ad83723a4a43f4c18daf5", "f801c54be057388e88ec3b8d3183cf5907f46d1bfc7c8135bef2f2acbf9147de"]
+pyobjc-framework-coreaudiokit = ["0f3dc7452a83a01ed6cca3f1902140cca52e4983b554ff81ef93f1a0f6f10c09", "8bd14b47ce764702ceb8966c3c9d1def0b8fceba6e2ef7b7264f6ff2ca052ea0", "9e9c48696b2f4e6b5c67a8c9571c9e05cabaf5246dc72d1ac79a50f681cca846", "ec21de9063d45d0767030f44de8b2261dcc2d42a729ffcd8ca3a0a0db6c9c33c"]
+pyobjc-framework-corebluetooth = ["0daf0a65ffe52092550809fd1459236b30b9b3a7ac4742fe98974759d0f68a30", "2eddd058d6bd024298ebf4dd5d17a78b91fa3df0d8a2f71639432fa8e86c40db", "96845b2717d7df8bf387df802ed8d4685f1748a86467bb202f90b966e5c17acf", "9e632ba2100e561ba37fd554fa8f1bd4941a8529d82f053987246c3d5b54d173"]
+pyobjc-framework-coredata = ["10498ad5246c2de47a18d963d213ab699c2938f9257bf896d40329b2a86bf22e", "149da3bd40e5f67658631d9bb8963a502c57a68286bce5eeb3a9bb04de9302dc", "8a527a3b2e51d8bd43ba2531617b517c895f140136a7db3072a04554410ff47f", "f68b1469101446462554a005a5f061a7cb5100f3eb58382f649671abfecbe51c"]
+pyobjc-framework-corehaptics = ["4b7ce1ed5ebed452b5ab3a9268da8f07327733c72777786968a64b3cc30c2479", "925854a5998a705fbb8f49d1c5cc0ee55de5ee9cd3a61ce360ea655dc2a19b39"]
+pyobjc-framework-corelocation = ["1beec81d5272960d5a5f5f84204fa7ddfaf7c6356e49a7719c0eb731a26071bc", "485259974bc63da1d18862a1ffbc5aec3e05763e645971ac44da01158bd81bfb", "7292e9df92bcc6897e3ca2a567ef69595c7b2c95384bec95c96f0f4785d0983e", "d381dd1f2a1a713132f7df97dc96b741f7e1027f93d9e9dedad3512f191e11eb"]
+pyobjc-framework-coremedia = ["0fb15c2f37b127b88b2388035685f3d5a5070f5bcb9615567d2a54e4fb62d4cf", "3193b41cc90886d4c6046c5badcdf8412e4a2fe4d17f98170ac02b566234e6a0", "73f58a88ec988735edc74f90df09effcd78da4fe837cc103cf3197f206576dce", "7c03088d3defa0639f826cfe0298c1971901392949481040abcdc825ab49e56b"]
+pyobjc-framework-coremediaio = ["3d54b1dd68ceb5b09533932aeefa633b8c47f6c223f7ac3c63e9a6472f594144", "56f3de49e5fd2dfd88f94bc27299ca7368f000002b64f0b6e6ad0f2144bb4e8a", "91d49223a3d2ca7199f5f194c5a1cd2e7de5ec2d6e0acf7357f57b66f095b310", "d485f206ea8308035e1d3f1aae4822538cae4cd002d5eac55973be60c221ccbe"]
+pyobjc-framework-coreml = ["0b912775fd250b867152c5cbe5e391616576225067f4b0cedfa10b27f256aaec", "2c2cb0003a06263678621a67718bab2f7382efaf54afa290add0fa57c789a175", "3b7c353d3683db7be043f8e119a342ac38fa734e5c3544bb93681dc43b7fd586", "81e14c5f03c6409c1a746652f7a6ff89edc50fd281f362f183b55b8fb2d0006b"]
+pyobjc-framework-coremotion = ["40aa38fc5283a3bf8250d26b0c49b054bbe56c9c8587f2bd983197df2c8a1d27", "8a3d4450498691ef7d6eb328d200a2357407d17c4e5b88126040a9a52517d3a6"]
+pyobjc-framework-coreservices = ["0e28004a6fcc3d8928d7c8ddac2059651847851e2bad7fe2d1ed7fd12615065c", "416c47d12640ddcdb773eee6a99e09d26326dadb15056d0f7734eff913d4ce7b", "665f979403ebae16b4d9945d24829c12c2aeccc0338cd04a268a324b6cc654a2", "a2977e948027677fca574a6c3fc4654f6644700bf9d2afa87c64afa2acf4b66e"]
+pyobjc-framework-corespotlight = ["5616da3d75cdf0f4d1ba3f9fc2902ec19e1b460c86e39edd41e10e970c072c6d", "94d15ca098efd6e36b637c8924608616f6e268aebece7b6361ea3e12b7ded626", "a6aba1aef3f9896ceb9aba0b7d1f4ea84e3aa4a2f1c0200a05651cc4b30a3a54", "fd30df8c34aa2382df33cec3eff0f9f872ed4c5ee5df731a8cf967f42d713ccb"]
+pyobjc-framework-coretext = ["3f2bbf997b43577827b8fecbc42f0d6ec986d7af1ec37673a1e3e707a6a1a70f", "51d062a45779b052a804108c90127f1a48bf99450af143a96938f9d5eac6ee40", "788dd1f8f23dbfbf6877eb4172eac229aedc17127da48a343f529aec30889810", "ff63ec4b6a6b59b9646ab8476d0add0d3a8f81c7aba2ae8bd79e7e1932829b0a"]
+pyobjc-framework-corewlan = ["11698c8272907015ef81ca47398f33c9486ce8836435fb62f7fa6fa07f0c47b2", "642e3d11a8ca8a18d6fdcc90750d004ff00fbd1ae1283e4b7ec888985b9c0857", "87a674cbf2e1503ac158e5fdfe47a7c498a59fe7984af372cb1d45dc8cfe58e8", "e5c3a3ed3cea1f845a8a1221ec97e7497b8d143c7101e9e33cd1e4e210cb5fb6"]
+pyobjc-framework-cryptotokenkit = ["23c2cafee2dfb17a1c1dcdcf968b3851770e663eee52a364b49e4c5890f7153c", "75112776a6eb94e85b6f48dea360b8038b547a33269120949993fac80c5b386a", "9a307afe0e9bbb5ee229b2b8a908e0501a33565281581abfae8bb31e0c97978c", "c46ea6e79f53ea97466c3733a350bb150682fd7995cc5f1b4617f7f3cc105048"]
+pyobjc-framework-devicecheck = ["574dcc41c0440137047fc164b39b3d41830f35f4d6612809e5ee59e4b181f885", "abe0e960ed00dcc7cdadf759b9e0bc50662ba10f7ba1ff4bbbe9129ff8046240"]
+pyobjc-framework-dictionaryservices = ["2e6fdb8bcff1257f2aafadfdce3f667499e0b8bb621470493b33b10c1e3331ac", "84286364f17dc75d2f0978027d79311d5d563994d660c0b3fd83b5e7742ab1b0"]
+pyobjc-framework-discrecording = ["31f77536254c04d4616317587f39b835ca332a1dcf4ef42875729a67b408fe26", "8f3855f3f662a5f4a6034a8f59620cf2a9b3805ed49edac49c86235aadb22973", "cb84a15d967d1586aa740f058fef5b6d2575c582f43f5e2f38d5a4051525dc36", "e9abee987e030c2d30c39061dd1ddb17dfd898fa76507780054230f5420b6850"]
+pyobjc-framework-discrecordingui = ["03d0ea07666919a78fb723f1082898b1d72c4a3b8be9adcb836b11ee75023848", "217e8ec9ec70c30fb1ae0e5acf1c690001cc12446efe50b8aeff66a7623c1d24"]
+pyobjc-framework-diskarbitration = ["295c6579b92016845b5e64ff7977565fb1c39d4984c2c21f000b456e7f93d01a", "8372c7c79eaccdb0f1a8fdc75a823633949b1436ddfd7a98389c41953cad1e8b"]
+pyobjc-framework-dvdplayback = ["3a02ec1b241094cefd8f04715207995a10464810b86660beadec481336b7a78c", "528e15e14aeb092dc8f902adeb57581e58ee393f7a963127836354bd2fc8e223"]
+pyobjc-framework-eventkit = ["7a91c8f0f188a4bc161588038c2042e39927cfa9fde238a3aba026e405eaa6ff", "817c0386a2bef2041ae22f06eec155aae0a89a762bab2f69f06fd420dff6399c"]
+pyobjc-framework-exceptionhandling = ["106f76103a1f8aa4ef90c7d3ee4ef5ae132fdde8a0b76f7ab44c52f18af8f1cb", "489f97f37a4f0fe21d18ab5e63418ecea7c18294f1ae88c843064a7da67f7ea7"]
+pyobjc-framework-executionpolicy = ["a76d5f099c735896696bca12be4e723d0bbc80d93190495afc4dfa0e8d2fee21", "fef6f1a3b69b3c3bbf85478a8c210e4f7cf8bdf46f831a067eb563b762f9abdb"]
+pyobjc-framework-externalaccessory = ["4866b8a3a1bec8f793f45b57bf4c715046dfd87211bf7aee00a857026f548c22", "57326dd6b1da46b8def7cd355698cff51b1d475f841e7e291944c812f73b004b", "7082fd6f3f11d50eaf58db920bde3f8a5877fbd4edf31827af8f96893dddaa7c", "ab7de06c19c02723333724de13c126bb50e208f5d9143a14909980c470014237"]
+pyobjc-framework-fileprovider = ["04f5fc4735b6f962b0b091ad994a560d83a9dfcded36e05a322c0536d20b589e", "6dcbf98b3a64318124111c1ed3312a56903bc0e28e991f545059c403fbe7b326"]
+pyobjc-framework-fileproviderui = ["88bbcf7057e764b6b758a988004fc092190678bbd8f8731f9f2728322ad337cf", "be179ae1f4439516d93a4655f59cb890101bddb4d08693ace8750a5af662ffb3"]
+pyobjc-framework-findersync = ["661262a1bd20b49c397b9fccade4fb441bc5682fadb6db47529fcd9b24b32d76", "f4286b13fdc367cb530af8cc4e61e916efb3d8b2a20aa8a17033d9f0faac4364"]
+pyobjc-framework-fsevents = ["3a403ce5997cc01f23f1a70f8b4c919311b9a6b1fdd3c3d02d19079d711f954c", "7a635c86af744a1d17f0c6c3913bef87b5fd146e0311c03229eba9e512b81520", "94c6953774b6d69e59d9781951f05ef57e352b3c530d4c236f463444852c3a88", "d2ae8748d1791dc9e3d19b41d3873283ac34ed17ff8fca70f1a199336a0477b5"]
+pyobjc-framework-gamecenter = ["8faf658598cde2ae497afa76e2a6f8ab3b2d4b48e40cb9226fddbddf29561b2b", "c05ccb29376489db63f1420f703dea3c9b38f7d5d19e0a71e0c8f54ec52e1c51", "c7c4ffb26bb9553df4c1b29abece60a0fdfc12bdb0a23a18811a766b4b166d48", "c8304929519470b2373cc4f788228dc72ac9041a3a45217eee0fdda767851b0f"]
+pyobjc-framework-gamecontroller = ["b365be6ee349ed2991e861f11c7a174cced83d3a14a2bf30929a09eed5ab598c", "d222a7f257ed76f1c19fe477684ac7b5fefff8defc35da0216638da9935a9060"]
+pyobjc-framework-gamekit = ["4d741863a84f78ec107693a12f4c1cd22216e5f21ce1520adb98d8d63b414529", "62a543b1be6c414318c33f9ef0f5c926c0bf64fecd689e55e56edfaa1cd22281", "911a73656d8846aa627e3069a3c8b963caebb97f756c1576be9b01852fac5599", "d1c6c012aa10b29543a68667587838f5850d256cdeaf83e377943fe4a3a05576"]
+pyobjc-framework-gameplaykit = ["06e22767eaa73473e211af148137c9ec29d1bd1f130ce1a73958aad2a7048ea2", "52a1346722354355fd1be5936bdf5a6b030a55bd43dc2b0df68821c0aa8d28a1", "c024499bb84d5fe8c331e4453f6d0561b58e44d6556672aedd67ab8f7f773a9d", "cbf8ff30077d49fe27558526c27d70d01f4b3aafd5660fc87a737b992dc476d3"]
+pyobjc-framework-imagecapturecore = ["4cb6aa3ae8781153c38959d0a79a322b6a0f462d88f5fad283f19b56e175d1cc", "4d149b01bfe4724a638ae6362505e0251620ad1e7ca28aa954a1d3549ad72794", "caae612f671ef3043d475a376b4378cd4002659172d4b52465781c43e6d5ae9e", "fa850d613e6a9b349b5cf8e4351494a87c088d97974b04ea6dfe133357bb9f2c"]
+pyobjc-framework-imserviceplugin = ["016017b0cbf38a8cfba7e1660b865a52dc7b182b062d7a5cb0bb3f9319d4f3c5", "127c4706f9c60e8a1fbd557a14ffc6426eea27529e986a538222e69a18d2d66a", "146958a43dc1eafedf2411f39c048cae05ad3f820a614cbb3c6d94362ab10d53", "ab328ed6bef6a75e7dc4719b3355d4e6fd36ebb77586ede2cb2ee8b5b2275fac"]
+pyobjc-framework-inputmethodkit = ["31ed7c69c60519e0b3c3d56b06144692e6273dd7c573158ffccfd975aa20cb87", "64b03ebcdca65d18af7cbb62b8cd097770ff3da873c39374780d77acd9211ce3", "ecdf9d6cd33b40c6aa2dc0a816656cf1909479e6106fad9abbb4b275d10f0bcd", "eee20834e2e9577c01ffccd9ffe8d2a4bbb6c6e2fd0e1c291d681a98d1c1de48"]
+pyobjc-framework-installerplugins = ["1026974e4aedb50d2e793dda3457fe7edc26d239d936efb0c0841ac3fdad9ab4", "1419c4fe927b98d324e9bb9923c7a28efcc8a6df692cc8bd008952dd3297dd9a"]
+pyobjc-framework-instantmessage = ["cc0f56bf4d3a7e57d5f1dde2fc60abcf69b6f9e3bb684572f07e51b1a044d982", "e8001e5afda255d35c56c4b0941ed2d47499f6328397759bd5ba1df3734de817"]
+pyobjc-framework-intents = ["23012d9bab3034f493d841a801f5b32ca46db3498169a29beb0d384c9698ee31", "4086be5b3a0a30aa98a9c0de0e3b4793d79b5dcbdd1d9da5bc892c353a460803", "5cd34de967fa9fa27be9f8cbecb8b392e5fbd88f1cc1e23b417cbf5252a1edd2", "ceeedbffc4733e2bafc4441f8563b4608663c72f6394cbbef639818b8817e07d"]
+pyobjc-framework-interfacebuilderkit = ["75a8f45aa69e432a5de2daeea45970247e997f750a4cf8cec489e2b9b22b0b43", "e1924625dfc6c91533e9735a872560a7090ab9b3d58abb7278ab3359a8aa07b7"]
+pyobjc-framework-iosurface = ["b9cd35e2f6382a09e5620dff57006c5f1d69a29fcbeaebf646f645bed5583509", "c0613af73c4f2c991e1c9e2d660c23e60e33a2bd4f5119d296253bcca26b08d5"]
+pyobjc-framework-ituneslibrary = ["4e030b2f7637cd0af8bcb00a6dacc38c3ddd654fa50370429b2792788735013f", "dc3fb67cb23173b6e8a02796f3b98f9ecbced809d8d7a378877e37d94bed2694"]
+pyobjc-framework-latentsemanticmapping = ["700042df8fffbc2793818ddac7bce36be4d315ae7cffea60f6d7fa7bf8bca06f", "d3c02ae3ef12c405a9cfa02975a2f4a142b6967bec57b0cf3788453ecd87a676"]
+pyobjc-framework-launchservices = ["1c1896f356e9c7ac6255863422565ed922589c10bba3dc2850729df666794346", "944b8ce7fb4215019bb55bd48b46685032d8db3fc2ff8cd80dfe56356cd99fd2"]
+pyobjc-framework-libdispatch = ["404be05b5910f8a744ee3ec71ec17ca0a657bbef5de311cca4c8825146aa2f2d", "cd06fb2f1c638cc282a1850adf13a5be15c8675b55ccf3afcf5e3c3a800c35fe", "efa497241b2d9ed699ff6a0ab9618e11c3bb0ce1c4cfe3b213070d71f8d31ba6", "f04d21a13a6074227f9d372b5703582c77126ff0fec61c4148819002d3975895"]
+pyobjc-framework-linkpresentation = ["35cb3cc9f1e3368419c5459acee0a9a56df297084c6c006447056d39e092c591", "dc9be0d6e9ed8c4ce0f706152b653ee7861313b3c9654d22e3768993c6fd330d"]
+pyobjc-framework-localauthentication = ["850d2dc3fb62df4d41795ffb070b1ec4a5168dcee61c397fdf94dc2b79cd2c1f", "cce6a221e8094bb57f3d2b6a85a3af02b94ef1731ffa7ba0b95382fda6444db1"]
+pyobjc-framework-mapkit = ["18e26a5a29707e99ac5f40c6cf18c9c0daaa2e4405f77d536645d335a1085fbc", "308bf987569e1ad2775ac0e614fc7d3b3f1255d28e81043d96a9e67e42de5937", "d3a5f1f880f94482b2fb64050cd97c5921842442c5f8e107a25fdefeea75ebec", "fd19c76354a101324e88418498fd26eb3bd7eae1d0b28976766133fe1bd276bc"]
+pyobjc-framework-mediaaccessibility = ["4072d869b61e6616e242ff6b9ba32e273f9017476fdb0af3cf753d1040aa81c0", "7f0842fd9762b46447c7a57d2027f6becbf446e6488b33c75bc225cb4b24057c"]
+pyobjc-framework-medialibrary = ["ae2233a141df38bf88a916b623bb88c1e56d1e4101edc7237d0fef1a44d32654", "e36d5833fd5f8d44603ddf41784262a28c9f6294997061d2721afd343ac4c1da"]
+pyobjc-framework-mediaplayer = ["ba2f13ce0e283ea493c7cf8f0c854bc05ff5f811d80162ce22749dae917d189e", "ce5f779c8465e553d73e308c52b0295cf7dae3f1352f469c500e53af57a25fce"]
+pyobjc-framework-mediatoolbox = ["13cb321ced59263da4140fb683cf97371d2c89ddfee1a7e6fb77b01005dd8bf4", "2c79f04c60c76f2d02cbaec93c59515722c025eec8f98be8fc97f9a3210fc2f9", "b32a653c56b49b25d3660a82341c25e5f3dd2babdc633dbcc4daa0a6e58c0ecf", "c2d62b6787fca6020713deb2896af6f8dbef3a937552a16456eed65aae8b7436"]
+pyobjc-framework-message = ["6129895d747d5f8a8c08acc42d9bf38c0ea575d1cff9da75386f5427c2889974", "ca36cf0e1c1183cef53866375be046c5ab5a9425f2c6390b01b475355bf33be5"]
+pyobjc-framework-metalkit = ["63f18c3d3c6dc611c36471c83103e0bd7a6b0033bc20bff3a528697747544022", "c67941b79ca7c06f1a6224fa2b7c1c159135dd1339dc32488d91f064ebe8b5e4", "c98601875657c8b0230fdd27da4c17851a6474321f1ff8e99d8f08acec021eec", "fb2ec06e551f7d8ea3627cad2c00c9f0b4e7b7b171390ef7ee99797cf068e3ca"]
+pyobjc-framework-modelio = ["3ead4097c7db30676b770efc98ec995414b6c5a1ff0063719cee7b8fb45d7eac", "83a5b0cbea88f03b7ac19f833ff48ee45fdde62956791fb8f31f25b0149d6cd5", "cbeadae7d0ab81261926e3da9e77b9ea2c95557c89a4ccdbe65ac07d36e02a32", "eb341e6a5178ab81b38d3e24c5e065dc73e10dcbfae13299625e875881048e23"]
+pyobjc-framework-multipeerconnectivity = ["022ff76e2aed29b6c54b48d0522c05c1b497c6a6564a2765b8bddfb72b53c475", "138f76ae4c7594b13fd914bc8300aa50c7c7ab227563206ec0255a7f47a2bac7", "2a22284b41dd9a2596e10ae10727fac32f84dba43d4907e9ab5f451511d14d17", "c969026f0b0304febe1d5956f1eab63c64b8a1d1fcd6e4e132c89d1ac8846ac6"]
+pyobjc-framework-naturallanguage = ["e0eea42b97fdca1991a8eab51e9671f1edeea022077b05932272a09a596d4fe4", "e9426d0e8c43e08f61c408b28ac916903480c1ddb32209d649557209c78f10fe"]
+pyobjc-framework-netfs = ["2a868b0693104ba61eb9cb82c0e0b463d77b27c07d0573c9108f8d3bd1f71575", "72eae000fb90ef1906818709547bddb74752c1ed955c792c2f01cae45c0c1b66"]
+pyobjc-framework-network = ["1e97d32a2d49e783015f56a9da4863739631c2560166a5227fcb2b9a59e7c7bc", "273e3957b3eba70fdda08aa9b62eb3d7c05f07adc167fcb84f40bef59c44dc47", "7068ae962af95f34c03d2dd226ccf5a7e313ee01832f79f21ab23533f8e1418f", "cefb7f32a983a2f2609251d7e85f36afe780fe644f3f47b99ab67510a799a8d6"]
+pyobjc-framework-networkextension = ["1d1d4e6cd2ce71fe901a6a56f0fc20e5acf9de7c67278968ef9f5f8712402384", "245bd7ef119818b161cac31e5aa187697060c1d06f7973a963242b291afd967b", "4609f3572827fea323d823ab6f295b70e5c736e261d4d73e9318b23411180fa1", "4663320824e01e5f7d64edd724651198736aed5a698af2077c97411eccee7f0a"]
+pyobjc-framework-notificationcenter = ["0943de417c167e98df1a309d0d9f83b8fb80e214f2deff9815be983edb8b18e8", "5a937875752acc0d7bc0081937d1ee928bf386133e5608e5e1a4890d7c695121", "6e06e808089d2a842a76e57f6a1e153d095eb009fd8cb87a0ed0fac4a0a8913c", "afb92594ec49e3040f09fd19f5767ea75460e0348f35d1aa95e8c6884df2092a"]
+pyobjc-framework-opendirectory = ["43ebb059580fbb79beca8fc8c3910178aebd99d809be124bbef302e8a264eb2a", "7511a71099ad848a868ea615d69f54e4e62cf1a7a79a9f203e46bcf18053b6c6"]
+pyobjc-framework-osakit = ["26ef911078c94ff01069ecb73c7022a30c7b56c895dc60d3cd1862d47b5d4bd6", "aa23272c9fb5ec0eda5ff53988a9913a63d02406e3b430ff351e4d4f4485b103"]
+pyobjc-framework-oslog = ["15c1f0431120c9c1fd7160a9c754c1090c4b111c6069472c51638497eb862f7a", "a37b86f3fdbd014e84f3b1b04650d0a28bbdce8d07b10d3c71d701f533706941", "e31cc535686504b1eabed0c921543c100d381bcbe7bca45a3c26273b3ddf78b0", "ebddf08eb58f1bcc02f36bf685ffeedb354c69e6fb91bb0844051ee4aac09cfd"]
+pyobjc-framework-pencilkit = ["7cfd87c4d96c809f27c938b0d7f55877cbea980cab52b47b44a55cc8c90f7240", "9d1e9ee13fb2c12f958112e2ce02976bd37946f9215b4f0d136a21db839e2050"]
+pyobjc-framework-photos = ["120efcd7aaa6af11100a093d118600b2c23bbafb834c9fdd544814bf9428b454", "6117ef34b3a57755eb3ad1995e5e65e974c7ea37ec7aa28625e0f85b2aa9f822", "abea3cc88a08a269fe88fbcc2509f28b3c8c8e9a6ca48b5ca0e4def8f7f4f5ba", "e2bda80c8e4df43bb629c97f32cd5f17c27172b9dfe7a84121617ed91ac61ca0"]
+pyobjc-framework-photosui = ["41433c3c61bc99e8d9c2f5e8b22c8522bae4da9c1c5d6eac819e77990dbdcdb2", "5a6bf6b4ed1ef71db0353053c6306656b5885335f60118fd1c702cfd01556ba4", "9d5c16f15064072749f5efe79c9e64a0da5b2b0aed402a2f08cacdd00ffdf032", "c416df2a40be8e18b2f6f8bba658605f3076dd4e841c60548fcff03473d3e80a"]
+pyobjc-framework-preferencepanes = ["0385ead3c9652ddafca7f9c6081f149d6cf58cfde3e931a26ec134c9edd51a93", "530fba5e887acbfc04ab04d7bf447fa2876613712d5435745bece71b927a4e27"]
+pyobjc-framework-pubsub = ["42d437dc9f2096fbf09cae994fd8ac99588ff6735685131ccd70636aa35b18d0", "4b0e5b1387404e3d331a5a2a4a1171a1b0321b4f9e1ce839bd412fd19215bc2d"]
+pyobjc-framework-pushkit = ["2f48426cedf4388b996f68345d7b622fa7d26927823ab92852243d526cd8d8f2", "3aa79e7e578518b9926ebc17d28f92129a684fee3ab53df7038dcb640ee85d13", "5bcd38f8f6db355ee8849cdf141583ba6e487e3415e1a879d8603ccac0e62d1f", "a69efd56fdd52004a62356daf13b650d92b162fde26c6edc971cdd400ac2febb"]
+pyobjc-framework-qtkit = ["26d74aa7209827e624eaae03a4a69f2ea5b38746d6af7f55fc6a7709a8809859", "2e684d3f0af10e0eb9ef2770da4da3ed0623db300095da6fc158a1d03430d6e9", "30f74d30e7d9e6c423708d8a4be8dbd130da2be2e933e231125cd85f268c1530", "fb79585b2096bf2bfba9d70cc8e66ce59377fef19da7c53be811f69015ac69fe"]
+pyobjc-framework-quartz = ["033d1f207d7f59fabe98fff71f472bd9b9286a2cfecbc9e732006df4bdbed417", "089676c603527350dcff9701c22335335e3f3112b471996cdc57939b9c542932", "dc96a7c8b22264579f5438e2f9fc6c7f905412c5b297a750acce00f50aa87ca5", "f9f251d0572a0b8b643c990dcbed2b55127cebaf8102487189cbffaedb2bd696"]
+pyobjc-framework-quicklookthumbnailing = ["2b1bc7b160aed94983bfcd1aae47bb6d8a812ce3138e351521677e6b21fc3b16", "9af3eb8a11b202b28553d5cf72870b68122dacb6877d37ff703f27db0944b1fd"]
+pyobjc-framework-safariservices = ["0d87e92c2c3410f58fd32523fe251a28fbb7771c6a81068438f45d41b6f40986", "21cd5974c6766b84a21202109d543be590bf722f621df1d0c1cb4cd265a030f3", "35bd982471c8a76e3dc12ad1c8bed609d8ce257947e02024dcb3e277e5d6d92e", "e532a6e696e35713728ccd11c49aa5508ccb2432476422801faacc2cf9f397f2"]
+pyobjc-framework-scenekit = ["27f532f29b8b86f82ddec7149009cae20042a9cf5c074e180d0a0015b3fcc4a3", "c38354c154448a78caf399072eea9e5b0aa0b4dd2d613b6e36c2af6f7c1c506b", "c7d616d9d7eb46d44b4159ea2deb4c15f1fbd75431160bc49ef27da93c7ab9c3", "d200f475a2194fa7bb15fd8d48d7675a90996bded76e52acf06e2b89584db1c5"]
+pyobjc-framework-screensaver = ["ae88dac8a42da5af46df582c6a9418b25a48b2e56cbaea1fe392506be07d6ad6", "b614e7e0228633726f6dd95ee4223aeeb4d3300220a8981ff547b9bbc705fa6b", "c0071a332b0356d30d9e9dd4091e8eaba63163b2e87464760f0ce4f07992ba5a", "d136f4b89314377e21585a3240c1505d515d8cc47a5dd1c451744859179c8d5e"]
+pyobjc-framework-scriptingbridge = ["219ff637ff937866c5b2d979ffc88231b88a0a0c29591251cee6652454a6cc92", "5f4b2f62fe99cbb3feaa4afe55fef686b6ef3be2abaa5f55ed3a8fef40dc6046", "affff06c35551a7cac5fb8bb5363b50eca0dc189df78fa343356e1eeda0492cd", "b3f9342733697f81b6e54e052648ac89beb234057502aa43c1861a243b0f0f61"]
+pyobjc-framework-searchkit = ["144d4f42054b83650dabd994ccb94492242aefeffd5184550f601a2c70f06598", "9b35944d08daff030e183b4f36a1503cee9347cb99366e9a33e9ecedd1684ee5"]
+pyobjc-framework-security = ["9a6dc54fc07219bfb14b6ecd694959fc6510b77dff63ec099b4fae9bb6db2acb", "bd6996ccc73b5c4abc24f250c8b27d66ac4b04da1588a7b29fce0941d50e7e10", "be9a10f766d934df505716a18bb847cb0f601f6d16a5d461d6bf25da21045961", "d00ba539f3b76824c857a92d0dfed6aac65481a91091a0c8e1b069829203f685"]
+pyobjc-framework-securityfoundation = ["20b81f0144dcca8fb25b4897286cc008307e84e9bdafc972fd4ed219ad2504bb", "58d609b90b16990c56b5e19503a420f077a612c1d9a233138aa19a3db56a4efc"]
+pyobjc-framework-securityinterface = ["56c3b28abb7473fc17501d70097c589669e59ba8d432e7f4329d4f10308b5896", "afb6311fd87051d5586523bc78ad11dafba242e04fb66e337a7d4936cb75d34c", "b1031d2c4b34d48c6b5ff94adf185f3693392cfc98822ac370902835603c2233", "e3303e73dec22229ba05e2beac30a6b4f064b20e8133820f2f4ad7e9cff686fb"]
+pyobjc-framework-servernotification = ["49c695baf8f678ca83c80a97c3c6b5b8bb40a7c7097d165c299cc3f077bf214a", "8d373b961e6390d2274c3a5341e53614e72e673b8c612ec757f94806a93f27a9"]
+pyobjc-framework-servicemanagement = ["0c50126dafe23b75a21b837327b6a59ae574c8be55a53d672647b6a094d52a39", "9d2bd4a8f9848d9aa5aac02330e9b4aa5bec49d1f72c9e1f5bbbb0cb2c32bb8f"]
+pyobjc-framework-social = ["130befd0d052a48ff534c44e46fa6a86d1a571c1264efa3f4b177b6635f36bea", "54c4684046f4f6bd5ca4ae4cca1bdc4a9195e180310295d7e2b07a0f658ead41"]
+pyobjc-framework-soundanalysis = ["6585bd1a94ced39be2cae0b413af505fd6114e4413bcb99db68c19191eb2ba63", "b96132e21e7a610043c7b1febbd3b5e5c5b7f551d4eeb1b356da1336e9476b26"]
+pyobjc-framework-speech = ["87a4fc0973a4d26ccd1daadeafcd410e30c40b5d21e8241d8c7d477e3a46c15f", "a5c93c8da7c17fa39a109488541c6b78d352f1f8084a5bc23aa3d756659113aa", "ba7c27f4ffd708acab2589979a067077cc3886aec0851b2ad8821bd7bc736417", "f0e89b6761f8e3707eaa11187c3ec77a2921abe58eb09e63c2335e3cf1053cfc"]
+pyobjc-framework-spritekit = ["1a19328f92a1acc539d555844e953ba1ed6b3caf686cce0d376c803a5972367c", "1c4f96b5db1395a95e0242ca9fd5317648d2b29198f5f5c0d98d87ef015ed409", "6bf39b2a640d3a1f02260e2d83490b16bf927977fb6eed44819237f45251be6a", "be2878d59d5c9ee97bca5f401ea19b7c4621f69e7c5bda06b95d061bca90ed57"]
+pyobjc-framework-storekit = ["180098f05852c32f71edf7d1940fd40a69768f3954b9b120f5f5f3e7cc476d6a", "435a4b1057ba5b3215e418ede7fca4b9173e0f0678d25506145a8006c81e7f89", "73037a28f60db5bc08647e46bd152d8167c85d9451a83b42b734f025dcca7d4c", "882488cd8b579185bc63bb3d1e2e1a6bba2dce51dc979a88421034da47fe8f96"]
+pyobjc-framework-syncservices = ["79e939b21ad120826c5a6d179d1d790be4da93e88a2ed5868b11f19b436cd76f", "812102ae7bc4343266d81b95d9721c1e314b581dc18de9c82fdce160e1fa05c6", "a6d2bf252575a7a20b681ea4a25877d54a9b0dd73e56da6f09d218e86e096720", "f1fbde8e70649d3f647e1544bd6eef8d65a620616be035ca00ff107d0ec957a1"]
+pyobjc-framework-systemconfiguration = ["07f1cf37ad1af293fc6f91da59796df5cb5f1584ff6c40f93ede10ae6aafb51a", "2d5da94f569fd0cdea981035b343a18275378c433e998a92926b788534320cbf", "801a1d7802b019c05cdf452245f830bfa3b2a8782fa2e334fc12d9fbff9f6f49", "feb3d11f4a011e492cd00468791707aea65941cd5076f8c765bc1f3ad46b6cec"]
+pyobjc-framework-systemextensions = ["00ee17c92cc7a3ac693b5b938cc428a0c0e9aaa55830e637d60b31c1df1b2e88", "19454695520bdf2d4fc8f11b5dc7df697403fa44c551db0fd6bf0220183852a1", "61251419f1ccd11c5d9f39808a314f13bb06295ab8f2eb2c1c4a6f8bebb2d046", "76bc970e3586f9a670bf7b1da3942dfa9ead3ee06cfa851d0774fb5a758e2952"]
+pyobjc-framework-usernotifications = ["265df0b1d953dfc7e34340615563b53cf2bf75191da2d9d32f4ca755a6c9b8e7", "27647799e00c7af1da693ddbe0cd7f1420f2d8d7b86f98841e05f3f89f2164bd", "6fe457dc2fa6df5cbecfdd0fe8f179dff792dc47995f7deaabbf8bb7ff6a80c5", "b8408543c66801530b3a854847c126708afc9052c432a13a6693b55a8cf0329c"]
+pyobjc-framework-videosubscriberaccount = ["2ccbd009db28140a68243297456589b6d85d4074ab2b73d0a7a7ef040c532af2", "3a745ed2e219a89093d3a183eea4454d23267fa32cf1a373484be2cdd82f67af"]
+pyobjc-framework-videotoolbox = ["0f0a0f19a6364e3f9e3e204c0f7d0da74516962add48181da70d33ff994800d7", "1e0f7548ef0350100ac6f197bbc5f9bc529844858f006bdda2d7100b863e0e19", "5e249acd219acdb4bb1782cdfbd24612562881eb3761e2d8bdd3ec003e1fe685", "6f3020e5917bc18a196e7b5be0e60c012c53db9ae6053bd52929187d84985e09"]
+pyobjc-framework-vision = ["36805760028479c81d620af1aef9fcea470cec3a984935d21c5750dcd07c8dfc", "6665f5e286ae91290828b37cbd0df152dbfe5de3b17cc1b57c0dc86a46d71223", "c6f84656b19c938aa48f6c51db0197469a8adb1303afa321c75e904799f2ccd8", "ff6c97b23d318f99cc242f568e2b941bb3ccee4f3f0b0845a7c01832529c6fb3"]
+pyobjc-framework-webkit = ["2aac74abb3932d5f5fd73aa388a31ad5df1dcb0ca8bbd7549ebfae8486c64b36", "4813d923469cef5f0a94810039934070740f9a1338bae7100f99cfa8f1f9aa1e", "a4308b4c122f78fadddd7b45ffa35366b854527fab7d3645d0ab26a0fd683b40", "feecc3a6c87ee61f6bfe111881a7c5c6a1659ed0a89f0e17283b2a6fd8cc941b"]
+pyobjc-framework-xgridfoundation = ["5bc6cb9e14016705f909f61e33e34fa385aa53a80ce991c750aa0d18ec407806", "cebf5025a4b37cc5cba39ba690add180b66270ee0ce003e1855741733429f598"]
 pyparsing = ["4acadc9a2b96c19fe00932a38ca63e601180c39a189a696abce1eaab641447e1", "61b5ed888beab19ddccab3478910e2076a6b5a0295dffc43021890e136edf764"]
 pyperclip = ["979325468ccf682104d5dcaf753f869868100631301d3e72f47babdea5700d1c"]
 pyrect = ["3b2fa7353ce32a11aa6b0a15495968d2a763423c8947ae248b92c037def4e202"]
