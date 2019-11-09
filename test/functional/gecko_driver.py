@@ -45,6 +45,14 @@ class GeckoDriver:
             {"x": x, "y": y, "width": width, "height": height}
         )
 
+    def navigate_to(self, url):
+        assert self.session_id is not None
+        return self._request(
+            POST,
+            make_path("session", self.session_id, "url"),
+            {"url": url}
+        )
+
     def _request(self, method, endpoint, data):
         resp = requests.request(
             method,
