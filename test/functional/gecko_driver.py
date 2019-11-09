@@ -56,7 +56,10 @@ class GeckoDriver:
     @staticmethod
     def _process_resp(resp):
         if resp.status_code != 200:
-            print(resp.json()['value'])
+            try:
+                print(resp.json()['value'])
+            except Exception:
+                pass
             raise resp.raise_for_status()
         return resp.json()
 
