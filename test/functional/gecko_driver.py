@@ -17,14 +17,14 @@ class GeckoDriver:
 
     def delete_session(self):
         assert self.session_id is not None
-        self._request(DELETE, "session/" + self.session_id, {})
+        self._request(DELETE, make_path("session", self.session_id), {})
         self.session_id = None
 
     def install_addon(self, path):
         assert self.session_id is not None
         id = self._request(
             POST,
-            "session/" + self.session_id + "/moz/addon/install",
+            make_path("session", self.session_id, "moz", "addon", "install"),
             {"path": path, "temporary": True},
         )
         return id
@@ -33,7 +33,7 @@ class GeckoDriver:
         assert self.session_id is not None
         self._request(
             POST,
-            "session/" + self.session_id + "/moz/addon/uninstall",
+            make_path("session", self.session_id, "moz", "addon", "uninstall"),
             {"id": id}
         )
 
@@ -41,14 +41,14 @@ class GeckoDriver:
         assert self.session_id is not None
         self._request(
             POST,
-            "session/" + self.session_id + "/window/rect",
+            make_path("session", self.session_id, "window", "rect"),
             {"x": x, "y": y, "width": width, "height": height}
         )
 
     def _request(self, method, endpoint, data):
         resp = requests.request(
             method,
-            self.base_uri + "/" + endpoint,
+            make_path(self.base_uri, endpoint),
             json=data,
         )
         return self._process_resp(resp)["value"]
@@ -59,3 +59,7 @@ class GeckoDriver:
             print(resp.json()['value'])
             raise resp.raise_for_status()
         return resp.json()
+
+
+def make_path(*parts):
+    return "/".join(parts)
