@@ -5,7 +5,7 @@ from .config import config
 popup = Region("popup", config).configure([
     ElementConfig(
         "empty_popup",
-        expected_rect=(1460, 188, 520, 780),
+        expected_rect=(1456, 188, 520, 780),
     ),
     ElementConfig(
         "open_sidebar_button",
