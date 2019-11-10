@@ -3,6 +3,7 @@ from hamcrest import assert_that, is_
 import pyautogui
 import pytest
 
+from regions.content import content
 from regions.debug_info import debug_info
 from regions.page_settings import page_settings
 from regions.page_view import page_view
@@ -42,3 +43,10 @@ class TestPageView:
         assert_that(debug_info.title, is_(eventually_visible()))
         assert_that(debug_info.scan_rate_minutes_5, is_(visible()))
         assert_that(debug_info.change_threshold_0, is_(visible()))
+
+    def test_links_work_in_pages(self):
+        sidebar.updatescanner_website_item.click()
+        content.updatescanner_website_install_link.click()
+
+        assert_that(content.amo_website_page, is_(eventually_visible()))
+
