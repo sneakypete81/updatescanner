@@ -4,7 +4,7 @@ from .config import config
 
 browser = Region("browser", config).configure([
     ElementConfig(
-        "update_scanner_button",
+        "updatescanner_button",
         expected_rect=(1907, 122, 128, 64),
         click_offset=(-40, 0),
     ),

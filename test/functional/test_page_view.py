@@ -16,7 +16,7 @@ class TestPageView:
         page_view.settings_button.click()
         page_view.page_settings_menu_item.click()
 
-        assert_that(page_settings.update_scanner_website, is_(eventually_visible()))
+        assert_that(page_settings.updatescanner_website, is_(eventually_visible()))
 
     def test_debug_info_can_be_opened(self):
         sidebar.updatescanner_website_item.click()

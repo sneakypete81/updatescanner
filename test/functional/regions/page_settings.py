@@ -8,7 +8,7 @@ page_settings = Region("page_settings", config).configure([
         expected_rect=(846, 322, 326, 72),
     ),
     ElementConfig(
-        "update_scanner_website",
+        "updatescanner_website",
         expected_rect=(834, 310, 812, 825),
     ),
     ElementConfig(
