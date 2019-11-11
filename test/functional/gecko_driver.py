@@ -47,10 +47,18 @@ class GeckoDriver:
 
     def navigate_to(self, url):
         assert self.session_id is not None
-        return self._request(
+        self._request(
             POST,
             make_path("session", self.session_id, "url"),
             {"url": url}
+        )
+
+    def get_current_url(self):
+        assert self.session_id is not None
+        return self._request(
+            GET,
+            make_path("session", self.session_id, "url"),
+            {}
         )
 
     def _request(self, method, endpoint, data):

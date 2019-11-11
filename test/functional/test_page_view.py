@@ -3,6 +3,7 @@ from hamcrest import assert_that, is_
 import pyautogui
 import pytest
 
+from helpers import wait_until
 from regions.content import content
 from regions.debug_info import debug_info
 from regions.page_settings import page_settings
@@ -50,3 +51,12 @@ class TestPageView:
 
         assert_that(content.amo_website_page, is_(eventually_visible()))
 
+    def test_clicking_title_loads_source_website(self, firefox):
+        sidebar.updatescanner_website_item.click()
+        page_view.updatescanner_title.click()
+
+        wait_until(
+            firefox.get_current_url, 
+            equals="https://sneakypete81.github.io/updatescanner/",
+            timeout_seconds=30,
+        )

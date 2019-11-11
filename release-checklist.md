@@ -34,7 +34,7 @@ Test using Win10 x64 with the latest (non-Beta) Firefox.
 * X Visit <https://time.is> and add it using the popup.
 * X Go to "Page Settings" and set Scan=5min, Threshold=All.
 * X Check that a link works on the change view, then go back.
-* Click the title, then go back.
+* X Click the title, then go back.
 * Wait for a change then click the notification.
 * Check the Old/New/Changes dropdown.
 * X Check the Debug Info.
