@@ -1,6 +1,7 @@
 import pytest
 from pathlib import Path
 import shutil
+from werkzeug.wrappers import Response
 
 from gecko_driver import GeckoDriver
 from regions import config
@@ -36,3 +37,30 @@ def pytest_sessionstart(session):
     Delete all previous screenshots at the start of the test session
     """
     shutil.rmtree(SCREENSHOT_DIR, ignore_errors=True)
+
+
+class ChangingWebsite:
+    def __init__(self):
+        self.serve_count = 0
+
+    def handler(self, request):
+        self.serve_count += 1
+        return Response(
+            response=(
+                f"<html>"
+                f"<head><title>Changing Website</title></head>"
+                f"<body>This page has been served {self.serve_count} times.</body>"
+                f"</html>"
+            ),
+            status=200,
+            content_type="text/html",
+        )
+
+
+@pytest.fixture()
+def changing_website(httpserver):
+    url_path = "/changing"
+    httpserver.expect_request(url_path).respond_with_handler(
+        ChangingWebsite().handler
+    )
+    return httpserver.url_for(url_path)
