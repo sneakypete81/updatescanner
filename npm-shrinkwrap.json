@@ -3404,17 +3404,19 @@
       "dev": true
     },
     "eslint-plugin-jsdoc": {
-      "version": "17.1.1",
-      "resolved": "https://registry.npmjs.org/eslint-plugin-jsdoc/-/eslint-plugin-jsdoc-17.1.1.tgz",
-      "integrity": "sha512-astLOTsj87UIzvDyiuAKbkgQgtChutazTDVxdG254tAtcvIVlWnPmlN7/dLnMYld/aHBhB4SWiUalMuKwTaynQ==",
+      "version": "18.0.0",
+      "resolved": "https://registry.npmjs.org/eslint-plugin-jsdoc/-/eslint-plugin-jsdoc-18.0.0.tgz",
+      "integrity": "sha512-uRGHKFYWjyvpHz7AiYJwmzi0lrIAKGyO7qZfIyYNI5XYBTwEoxQKdR/upf4Pd3hXWumBGvp2dn7OuuxCB2dBtw==",
       "dev": true,
       "requires": {
         "comment-parser": "^0.7.0",
         "debug": "^4.1.1",
-        "jsdoctypeparser": "^5.1.1",
+        "jsdoctypeparser": "^6.0.0",
         "lodash": "^4.17.15",
         "object.entries-ponyfill": "^1.0.1",
-        "regextras": "^0.6.1"
+        "regextras": "^0.6.1",
+        "semver": "^6.3.0",
+        "spdx-license-list": "^6.1.0"
       },
       "dependencies": {
         "debug": {
@@ -3430,6 +3432,12 @@
           "version": "2.1.2",
           "resolved": "https://registry.npmjs.org/ms/-/ms-2.1.2.tgz",
           "integrity": "sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==",
+          "dev": true
+        },
+        "semver": {
+          "version": "6.3.0",
+          "resolved": "https://registry.npmjs.org/semver/-/semver-6.3.0.tgz",
+          "integrity": "sha512-b39TBaTSfV6yBrapU89p5fKekE2m/NwnDocOVruQFS1/veMgdzuPcnOM34M6CwxW8jH/lxEa5rBoDeUwu5HHTw==",
           "dev": true
         }
       }
@@ -5580,9 +5588,9 @@
       "dev": true
     },
     "jsdoctypeparser": {
-      "version": "5.1.1",
-      "resolved": "https://registry.npmjs.org/jsdoctypeparser/-/jsdoctypeparser-5.1.1.tgz",
-      "integrity": "sha512-APGygIJrT5bbz5lsVt8vyLJC0miEbQf/z9ZBfTr4RYvdia8AhWMRlYgivvwHG5zKD/VW3d6qpChCy64hpQET3A==",
+      "version": "6.0.0",
+      "resolved": "https://registry.npmjs.org/jsdoctypeparser/-/jsdoctypeparser-6.0.0.tgz",
+      "integrity": "sha512-61VtBXLkHfOFSIdp/VDVNMksxK0ID0cPTNvxDR92tPA6K7r2AX0OcJegYxhJIwtpWKU4p3D9L3U02hhlP1kQLQ==",
       "dev": true
     },
     "json-buffer": {
@@ -8251,6 +8259,12 @@
         "concat-stream": "^1.4.7",
         "os-shim": "^0.1.2"
       }
+    },
+    "spdx-license-list": {
+      "version": "6.1.0",
+      "resolved": "https://registry.npmjs.org/spdx-license-list/-/spdx-license-list-6.1.0.tgz",
+      "integrity": "sha512-xiaE3KtBiylVmZrlux8tHR28HZgZ921HTXbx2fEZaDloRjbBOro79LeKttcQJ5MSDYFKG7in9v2GTAEhcR9/Qg==",
+      "dev": true
     },
     "split": {
       "version": "0.3.3",
