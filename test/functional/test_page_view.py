@@ -56,7 +56,7 @@ class TestPageView:
         page_view.updatescanner_title.click()
 
         wait_until(
-            firefox.get_current_url, 
+            firefox.get_current_url,
             equals="https://sneakypete81.github.io/updatescanner/",
             timeout_seconds=30,
         )
