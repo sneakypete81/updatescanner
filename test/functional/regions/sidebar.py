@@ -20,4 +20,12 @@ sidebar = Region("sidebar", config).configure([
         "time_is_website_item",
         expected_rect=(46, 290, 93, 30),
     ),
+    ElementConfig(
+        "bold_test_website_item",
+        expected_rect=(24, 337, 221, 33),
+    ),
+    ElementConfig(
+        "selected_test_website_item",
+        expected_rect=(24, 337, 221, 33),
+    ),
 ])
