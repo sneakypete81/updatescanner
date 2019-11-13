@@ -1,5 +1,6 @@
-import pytest
 from pathlib import Path
+import pyautogui
+import pytest
 import shutil
 from werkzeug.wrappers import Response
 
@@ -11,8 +12,20 @@ ADDON_PATH = Path(__file__).parent.parent.parent / "src"
 SCREENSHOT_DIR = Path(__file__).parent / "regions" / "screenshots"
 
 
+@pytest.fixture(autouse=True)
+def reset_mouse_location():
+    """
+    Move the mouse to a safe location at the start of each test.
+    """
+    pyautogui.moveTo(10, 10)
+
+
 @pytest.fixture()
 def firefox(_gecko_session):
+    """
+    Fixture to setup and control Firefox. Automatically installs/removes the addon
+    between test runs.
+    """
     addon_id = _gecko_session.install_addon(str(ADDON_PATH))
     yield _gecko_session
 
@@ -22,6 +35,9 @@ def firefox(_gecko_session):
 
 @pytest.fixture(scope="session")
 def _gecko_session():
+    """
+    Create a geckodriver instance at the start of the test session.
+    """
     gecko = GeckoDriver(BASE_URI)
     gecko.new_session()
     try:
