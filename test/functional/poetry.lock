@@ -1980,7 +1980,7 @@ description = "pytest: simple powerful testing with Python"
 name = "pytest"
 optional = false
 python-versions = ">=3.5"
-version = "5.2.2"
+version = "5.2.3"
 
 [package.dependencies]
 atomicwrites = ">=1.0"
@@ -2234,7 +2234,7 @@ pyparsing = ["4acadc9a2b96c19fe00932a38ca63e601180c39a189a696abce1eaab641447e1",
 pyperclip = ["979325468ccf682104d5dcaf753f869868100631301d3e72f47babdea5700d1c"]
 pyrect = ["3b2fa7353ce32a11aa6b0a15495968d2a763423c8947ae248b92c037def4e202"]
 pyscreeze = ["ada7fd6fd03b71de3e65da356964f5e105d026f9292f6eea4e1f473353a23033"]
-pytest = ["27abc3fef618a01bebb1f0d6d303d2816a99aa87a5968ebc32fe971be91eb1e6", "58cee9e09242937e136dbb3dab466116ba20d6b7828c7620f23947f37eb4dae4"]
+pytest = ["15837d2880cb94821087bc07476892ea740696b20e90288fd6c19e44b435abdb", "b6cf7ad9064049ee486586b3a0ddd70dc5136c40e1147e7d286efd77ba66c5eb"]
 pytest-httpserver = ["7feab352b2626d1a0ecdebffcac5e5875979f08ad7e621b2289980ce8f6ebc5b", "c7269aed8b4f2d24e41eaa2034dd9ab7ae02b0cb6e71afeae93127832920ec8d"]
 python3-xlib = ["dc4245f3ae4aa5949c1d112ee4723901ade37a96721ba9645f2bfa56e5b383f8"]
 pytweening = ["4b608a570f4dccf2201e898f643c2a12372eb1d71a3dbc7e778771b603ca248b"]
