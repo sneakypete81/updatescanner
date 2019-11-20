@@ -1,6 +1,7 @@
 [[package]]
 category = "main"
 description = "Atomic file writes."
+marker = "sys_platform == \"win32\""
 name = "atomicwrites"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
@@ -1980,7 +1981,7 @@ description = "pytest: simple powerful testing with Python"
 name = "pytest"
 optional = false
 python-versions = ">=3.5"
-version = "5.2.4"
+version = "5.3.0"
 
 [package.dependencies]
 atomicwrites = ">=1.0"
@@ -2083,7 +2084,7 @@ version = "0.6.0"
 more-itertools = "*"
 
 [metadata]
-content-hash = "311e27dad19f29c8ec00063f6dbf5e9e4df387c2195d68440d40e3cef8385ad0"
+content-hash = "c59bf87b2cec876a492a26f2c6547e81dd70423d2e75c68750cf103ba8e493ce"
 python-versions = "^3.7"
 
 [metadata.hashes]
@@ -2234,7 +2235,7 @@ pyparsing = ["4acadc9a2b96c19fe00932a38ca63e601180c39a189a696abce1eaab641447e1",
 pyperclip = ["979325468ccf682104d5dcaf753f869868100631301d3e72f47babdea5700d1c"]
 pyrect = ["3b2fa7353ce32a11aa6b0a15495968d2a763423c8947ae248b92c037def4e202"]
 pyscreeze = ["ada7fd6fd03b71de3e65da356964f5e105d026f9292f6eea4e1f473353a23033"]
-pytest = ["8e256fe71eb74e14a4d20a5987bb5e1488f0511ee800680aaedc62b9358714e8", "ff0090819f669aaa0284d0f4aad1a6d9d67a6efdc6dd4eb4ac56b704f890a0d6"]
+pytest = ["1897d74f60a5d8be02e06d708b41bf2445da2ee777066bd68edf14474fc201eb", "f6a567e20c04259d41adce9a360bd8991e6aa29dd9695c5e6bd25a9779272673"]
 pytest-httpserver = ["7feab352b2626d1a0ecdebffcac5e5875979f08ad7e621b2289980ce8f6ebc5b", "c7269aed8b4f2d24e41eaa2034dd9ab7ae02b0cb6e71afeae93127832920ec8d"]
 python3-xlib = ["dc4245f3ae4aa5949c1d112ee4723901ade37a96721ba9645f2bfa56e5b383f8"]
 pytweening = ["4b608a570f4dccf2201e898f643c2a12372eb1d71a3dbc7e778771b603ca248b"]
