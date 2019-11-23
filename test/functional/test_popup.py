@@ -29,13 +29,13 @@ class TestPopup:
         assert_that(sidebar.title, is_(eventually_visible()))
 
     def test_item_can_be_added_from_the_popup(self, firefox):
-        firefox.navigate_to("https://time.is")
+        firefox.navigate_to("http://example.com")
         browser.updatescanner_button.click()
 
         popup.add_button.click()
         page_settings.ok_button.click()
 
-        assert_that(sidebar.time_is_website_item, is_(eventually_visible()))
+        assert_that(sidebar.example_website_item, is_(eventually_visible()))
 
     def test_changed_page_is_bold(self, firefox):
         add_test_website(firefox)

@@ -1,6 +1,6 @@
 from clickshot.matchers import visible, eventually_visible
 from hamcrest import assert_that, is_
-import pyautogui
+from pynput import keyboard
 import pytest
 
 from helpers import wait_until
@@ -33,9 +33,10 @@ class TestPageView:
         page_view.page_settings_menu_item.click()
 
         page_settings.autoscan_often.click()
-        pyautogui.press(["left"]*10)
+        left_ten_times()
         page_settings.change_threshold_low.click()
-        pyautogui.press(["left"]*10)
+        left_ten_times()
+
         page_settings.ok_button.click()
 
         page_view.settings_button.click()
@@ -60,3 +61,10 @@ class TestPageView:
             equals="https://sneakypete81.github.io/updatescanner/",
             timeout_seconds=30,
         )
+
+
+def left_ten_times():
+    kbd = keyboard.Controller()
+    for _ in range(10):
+        kbd.press(keyboard.Key.left)
+        kbd.release(keyboard.Key.left)

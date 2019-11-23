@@ -1,5 +1,5 @@
 from pathlib import Path
-import pyautogui
+from pynput import mouse
 import pytest
 import shutil
 from werkzeug.wrappers import Response
@@ -17,7 +17,7 @@ def reset_mouse_location():
     """
     Move the mouse to a safe location at the start of each test.
     """
-    pyautogui.moveTo(10, 10)
+    mouse.Controller().position = (10, 10)
 
 
 @pytest.fixture()

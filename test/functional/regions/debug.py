@@ -1,4 +1,4 @@
-from clickshot import Region, ElementConfig
+from clickshot import Region
 from hamcrest import assert_that, starts_with
 from urllib.parse import urlsplit, urlunsplit
 
@@ -18,9 +18,4 @@ class Debug(Region):
         firefox.navigate_to(urlunsplit(split_url))
 
 
-debug = Debug("debug", config).configure([
-    ElementConfig(
-        "add_page",
-        expected_rect=(736, 358, 165, 40),
-    ),
-])
+debug = Debug("debug", config)
