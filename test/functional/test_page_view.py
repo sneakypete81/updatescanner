@@ -1,6 +1,6 @@
+from clickshot import Keyboard, Key
 from clickshot.matchers import visible, eventually_visible
 from hamcrest import assert_that, is_
-from pynput import keyboard
 import pytest
 
 from helpers import wait_until
@@ -64,7 +64,7 @@ class TestPageView:
 
 
 def left_ten_times():
-    kbd = keyboard.Controller()
+    kbd = Keyboard()
     for _ in range(10):
-        kbd.press(keyboard.Key.left)
-        kbd.release(keyboard.Key.left)
+        kbd.press(Key.left)
+        kbd.release(Key.left)

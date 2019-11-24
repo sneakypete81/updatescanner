@@ -1,5 +1,5 @@
 from pathlib import Path
-from pynput import mouse
+from clickshot import Mouse
 import pytest
 import shutil
 from werkzeug.wrappers import Response
@@ -17,7 +17,7 @@ def reset_mouse_location():
     """
     Move the mouse to a safe location at the start of each test.
     """
-    mouse.Controller().position = (10, 10)
+    Mouse().position = (10, 10)
 
 
 @pytest.fixture()
