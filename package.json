@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "@octokit/rest": "^16.35.0",
-    "eslint": "^6.6.0",
+    "eslint": "^6.7.1",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-jsdoc": "^18.1.4",
     "geckodriver": "^1.16.2",
