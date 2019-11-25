@@ -13,7 +13,7 @@ pytest-httpserver = "^0.3.4"
 PyHamcrest = "^1.9"
 requests = "^2.22"
 
-clickshot = "0.3.0"
+clickshot = "0.4.0"
 
 [tool.poetry.dev-dependencies]
 
