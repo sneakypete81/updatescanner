@@ -1,9 +1,11 @@
+import {log} from '/lib/util/log.js';
+
 /**
  *
  * @param {string} condition - Condition
  * @param {string} startFrom - Index from which to start
  */
-async function nextPart(condition, startFrom) {
+function nextPart(condition, startFrom) {
   for (let i = startFrom; i < condition.length; i++) {
     const char = condition[i];
     if (char == '.' || char == '#' || char == '[') {
@@ -22,26 +24,29 @@ async function nextPart(condition, startFrom) {
  *
  * @returns {Array} - Array of matches.
  */
-export function matchHtmlWithCondition(html, condition) {
+export async function matchHtmlWithCondition(html, condition) {
   let i = 0;
   const length = condition.length;
 
-  const classNameRegex = '(-?[_a-zA-Z]+[_a-zA-Z0-9-]* *)*';
-
   while (i < length) {
-    const nextIndex = nextPart(condition, i);
+    const startAt = i + 1;
+    const nextIndex = nextPart(condition, startAt);
     const type = condition[i];
 
     if (type == '.') {
-      const startAt = i + 1;
-      const className = condition.substring(startAt, nextIndex - startAt);
+      const className = condition.substring(startAt, nextIndex - startAt + 1);
 
-      const result = html.matchAll(
-        `class="${classNameRegex}${className}${classNameRegex}"`,
+      const matches = html.matchAll(
+        `(?=<[^>]+(?=[\\s+\\"\\']${className}[\\s+\\"\\']).+)([^>]+>)`,
         'g',
       );
+      const result = [];
 
-      return result.map((value, index, array) => html.lastIndexOf('<', index));
+      for (const match of matches) {
+        result.push(match.index);
+      }
+
+      return result;
     } else if (type == '#') {
     } else if (type == '[') {
     } else {
