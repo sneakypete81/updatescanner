@@ -149,21 +149,140 @@ async function processHtml(page, scannedHtml) {
   return await processHtmlWithConditions(page, scannedHtml, prevHtml);
 }
 
+String.prototype.regexIndexOf = function(regex, startpos) {
+  var indexOf = this.substring(startpos || 0).search(regex);
+  return indexOf >= 0 ? indexOf + (startpos || 0) : indexOf;
+};
+
+function getElementName(html, index) {
+  let endIndex = html.regexIndexOf('[ >]', index);
+  let startIndex;
+  if (html[index] === '<') {
+    startIndex = index + 1;
+  } else {
+    startIndex = index;
+  }
+
+  return html.substring(startIndex, endIndex);
+}
+
+function subDom(html, index) {
+  const start = html.lastIndexOf('<', index);
+  if (start < 0) {
+    return html;
+  }
+
+  const stack = [];
+
+  for (let i = start; i < html.length - 1; i++) {
+    const char = html[i];
+    if (char === '<' && html[i + 1] === '/') {
+      const elementName = getElementName(html, i + 2);
+      const lastIndex = stack.lastIndexOf(elementName);
+      stack.length = Math.max(0, lastIndex);
+    } else if (char === '<') {
+      const elementName = getElementName(html, i + 1);
+      stack.push(elementName);
+    }
+
+    if (stack.length === 0) {
+      // todo add <> matching to ensure the right one is selected
+      const tagEnd = html.indexOf('>', i) + 1;
+      return html.substring(start, tagEnd);
+    }
+  }
+
+  return html;
+}
+
 /**
  *
  * @param {string} page
  * @param {*} scannedHtml
  * @param {*} prevHtml
+ *
+ * @returns{boolean} True if a new major change is detected.
  */
 async function processHtmlWithConditions(page, scannedHtml, prevHtml) {
-  if (page.conditions) {
-    const conditionsSplit = page.conditions.remove(' ').split(',');
-    conditionsSplit.forEach(element => {
-      __.log(matchHtmlWithCondition(scannedHtml, element));
+  if (page.conditions && prevHtml != null) {
+    const conditionsSplit = page.conditions.replace(' ', '').split(',');
+    conditionsSplit.forEach(async (element) => {
+      const matches = await matchHtmlWithCondition(scannedHtml, element);
+      const previousMatches = await matchHtmlWithCondition(prevHtml, element);
+      if (matches.length != previousMatches.length) {
+        return false;
+      } else {
+        const prevParts = [];
+        const scannedParts = [];
+
+        for (let i = 0; i < matches.length; i++) {
+          let scanned = subDom(scannedHtml, matches[i]);
+          scannedParts.push(scanned);
+
+          let prev = subDom(prevHtml, previousMatches[i]);
+          prevParts.push(prev);
+        }
+
+        return updatePagePartsState(
+          page,
+          prevHtml,
+          scannedHtml,
+          prevParts,
+          scannedParts,
+        );
+      }
     });
   } else {
     return updatePageState(page, prevHtml, scannedHtml);
   }
+}
+
+async function updatePagePartsState(
+  page,
+  prevHtml,
+  scannedHtml,
+  prevParts,
+  scannedParts,
+) {
+  const updatedPage = await Page.load(page.id);
+
+  PageStore.saveHtml(updatedPage.id, PageStore.htmlTypes.NEW, scannedHtml);
+
+  let changeType;
+
+  for (let i = 0; i < prevParts.length; i++) {
+    const stripped = stripHtml(
+      prevParts[i],
+      scannedParts[i],
+      updatedPage.ignoreNumbers,
+    );
+
+    changeType = getChangeType(
+      stripped.prevHtml,
+      stripped.scannedHtml,
+      updatedPage.changeThreshold,
+    );
+
+    if (changeType == changeEnum.MAJOR_CHANGE) {
+      updatedPage.state = Page.stateEnum.CHANGED;
+      if (!updatedPage.isChanged()) {
+        // This is a newly detected change, so update the old HTML.
+        PageStore.saveHtml(updatedPage.id, PageStore.htmlTypes.OLD, prevHtml);
+        updatedPage.oldScanTime = updatedPage.newScanTime;
+        break;
+      }
+    } else {
+      // Only update the state if not previously marked as changed.
+      if (!updatedPage.isChanged()) {
+        updatedPage.state = Page.stateEnum.NO_CHANGE;
+      }
+    }
+  }
+
+  updatedPage.newScanTime = Date.now();
+
+  await updatedPage.save();
+  return changeType == changeEnum.MAJOR_CHANGE;
 }
 
 /**
