@@ -3434,9 +3434,9 @@
       "dev": true
     },
     "eslint-plugin-jsdoc": {
-      "version": "19.0.0",
-      "resolved": "https://registry.npmjs.org/eslint-plugin-jsdoc/-/eslint-plugin-jsdoc-19.0.0.tgz",
-      "integrity": "sha512-Xe+mci5g48XIn/49zx0mfqmXziwHd91SdFYjR+FPqpkf/xbnkZW2IkGlmrCuxU5xMM5QZ0BEe0/eUoCeM9G9Lw==",
+      "version": "19.2.0",
+      "resolved": "https://registry.npmjs.org/eslint-plugin-jsdoc/-/eslint-plugin-jsdoc-19.2.0.tgz",
+      "integrity": "sha512-QdNifBFLXCDGdy+26RXxcrqzEZarFWNybCZQVqJQYEYPlxd6lm+LPkrs6mCOhaGc2wqC6zqpedBQFX8nQJuKSw==",
       "dev": true,
       "requires": {
         "comment-parser": "^0.7.2",
