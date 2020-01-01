@@ -202,6 +202,7 @@ export class Main {
     this.currentPage.scanRateMinutes = newSettings.scanRateMinutes;
     this.currentPage.changeThreshold = newSettings.changeThreshold;
     this.currentPage.ignoreNumbers = newSettings.ignoreNumbers;
+    this.currentPage.conditions = newSettings.conditions;
     this.currentPage.save();
 
     document.location.replace(getMainDiffUrl(this.currentPage.id));

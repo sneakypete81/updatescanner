@@ -40,6 +40,8 @@ export function openPageDialog(page) {
   form.elements['title'].value = page.title;
   form.elements['url'].value = page.url;
 
+  form.elements['conditions'].value = page.conditions;
+
   const autoscanSliderValue = autoscanMinsToSlider(page.scanRateMinutes);
   form.elements['autoscan'].value = autoscanSliderValue;
   updateAutoscanDescription(autoscanSliderValue);
@@ -65,6 +67,7 @@ export function openPageDialog(page) {
           changeThreshold:
             ThresholdSliderToChars[form.elements['threshold'].value],
           ignoreNumbers: form.elements['ignore-numbers'].checked,
+          conditions: form.elements['conditions'].value,
         });
       } else {
         resolve(null);

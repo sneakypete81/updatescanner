@@ -30,6 +30,7 @@ export class Page {
       lastAutoscanTime: null,
       oldScanTime: null,
       newScanTime: null,
+      conditions: null,
     };
   }
 
@@ -104,6 +105,7 @@ export class Page {
    * (ms since Unix epoch).
    * @property {number} newScanTime - Time when the NEW HTML was last updated
    * (ms since Unix epoch).
+   * @property {string} conditions - Conditions separated by comma used in diff.
    */
   constructor(
     id,
@@ -123,6 +125,7 @@ export class Page {
       lastAutoscanTime = Page.DEFAULTS.lastAutoscanTime,
       oldScanTime = Page.DEFAULTS.oldScanTime,
       newScanTime = Page.DEFAULTS.newScanTime,
+      conditions = Page.DEFAULTS.conditions,
     },
   ) {
     this.id = id;
@@ -131,16 +134,17 @@ export class Page {
     this.scanRateMinutes = scanRateMinutes;
     this.changeThreshold = changeThreshold;
     this.ignoreNumbers = ignoreNumbers;
-    this.encoding = encoding;
-    this.highlightChanges = highlightChanges;
-    this.highlightColour = highlightColour;
-    this.markChanges = markChanges;
-    this.doPost = doPost;
-    this.postParams = postParams;
-    this.state = state;
+    (this.encoding = encoding),
+    (this.highlightChanges = highlightChanges),
+    (this.highlightColour = highlightColour),
+    (this.markChanges = markChanges),
+    (this.doPost = doPost),
+    (this.postParams = postParams),
+    (this.state = state);
     this.lastAutoscanTime = lastAutoscanTime;
     this.oldScanTime = oldScanTime;
     this.newScanTime = newScanTime;
+    this.conditions = conditions;
   }
 
   /**
@@ -165,6 +169,7 @@ export class Page {
       lastAutoscanTime: this.lastAutoscanTime,
       oldScanTime: this.oldScanTime,
       newScanTime: this.newScanTime,
+      conditions: this.conditions,
     };
   }
 
@@ -186,6 +191,7 @@ export class Page {
       markChanges: this.markChanges,
       doPost: this.doPost,
       postParams: this.postParams,
+      conditions: this.conditions,
       // state: this.state,
       // lastAutoscanTime: this.lastAutoscanTime,
       // oldScanTime: this.oldScanTime,
