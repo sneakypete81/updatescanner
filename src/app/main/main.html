@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
 <html>
+
 <head>
   <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
   <title>Update Scanner</title>
@@ -42,7 +43,7 @@
   </div>
 
   <dialog id="settings-dialog">
-    <form id="settings-form", method="dialog">
+    <form id="settings-form" , method="dialog">
       <h1 id="page-heading">Page Settings</h1>
       <h1 id="folder-heading">Folder Settings</h1>
       <fieldset id="titleFieldset">
@@ -84,6 +85,13 @@
         </div>
       </fieldset>
 
+      <fieldset id="conditionsFieldset">
+        <legend>Conditions:</legend>
+        <label>
+          <input name="conditions" type="text"></input>
+        </label>
+      </fieldset>
+
       <fieldset id="scanOptions">
       </fieldset>
 
@@ -97,4 +105,5 @@
   <script src="main_script.js" type="module"></script>
 
 </body>
+
 </html>

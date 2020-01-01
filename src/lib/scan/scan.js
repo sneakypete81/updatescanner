@@ -5,6 +5,7 @@ import {isUpToDate} from '/lib/update/update.js';
 import {log} from '/lib/util/log.js';
 import {waitForMs} from '/lib/util/promise.js';
 import {detectEncoding, applyEncoding} from '/lib/util/encoding.js';
+import {matchHtmlWithCondition} from './condition_matcher.js';
 
 /**
  * Enumeration indicating the similarity of two HTML strings.
@@ -85,7 +86,6 @@ export async function scanPage(page) {
 
     const html = await getHtmlFromResponse(response, page);
     return processHtml(page, html);
-
   } catch (error) {
     __.log(`Could not scan "${page.title}": ${error}`);
     // Only save if the page still exists
@@ -145,7 +145,25 @@ async function processHtml(page, scannedHtml) {
   }
 
   const prevHtml = await PageStore.loadHtml(page.id, PageStore.htmlTypes.NEW);
-  return await updatePageState(page, prevHtml, scannedHtml);
+
+  return await processHtmlWithConditions(page, scannedHtml, prevHtml);
+}
+
+/**
+ *
+ * @param {string} page
+ * @param {*} scannedHtml
+ * @param {*} prevHtml
+ */
+async function processHtmlWithConditions(page, scannedHtml, prevHtml) {
+  if (page.conditions) {
+    const conditionsSplit = page.conditions.remove(' ').split(',');
+    conditionsSplit.forEach(element => {
+      __.log(matchHtmlWithCondition(scannedHtml, element));
+    });
+  } else {
+    return updatePageState(page, prevHtml, scannedHtml);
+  }
 }
 
 /**

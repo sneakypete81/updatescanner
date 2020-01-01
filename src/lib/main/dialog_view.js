@@ -1,8 +1,7 @@
 import {qs, $on, hideElement} from '/lib/util/view_helpers.js';
 
 // See https://bugzilla.mozilla.org/show_bug.cgi?id=840640
-import dialogPolyfill from
-  '/dependencies/module/dialog-polyfill/dist/dialog-polyfill.esm.js';
+import dialogPolyfill from '/dependencies/module/dialog-polyfill/dist/dialog-polyfill.esm.js';
 
 /**
  * Initialise the dialog box.
@@ -16,9 +15,11 @@ export function init() {
   form.elements['threshold'].max = ThresholdSliderToChars.length - 1;
 
   $on(form.elements['autoscan'], 'input', ({target}) =>
-    updateAutoscanDescription(target.value));
+    updateAutoscanDescription(target.value),
+  );
   $on(form.elements['threshold'], 'input', ({target}) =>
-    updateThresholdDescription(target.value));
+    updateThresholdDescription(target.value),
+  );
 
   $on(form, 'reset', () => dialog.close());
 }
@@ -37,6 +38,8 @@ export function openPageDialog(page) {
 
   form.elements['title'].value = page.title;
   form.elements['url'].value = page.url;
+
+  form.elements['conditions'].value = page.conditions;
 
   const autoscanSliderValue = autoscanMinsToSlider(page.scanRateMinutes);
   form.elements['autoscan'].value = autoscanSliderValue;
@@ -62,8 +65,8 @@ export function openPageDialog(page) {
             AutoscanSliderToMins[form.elements['autoscan'].value],
           changeThreshold:
             ThresholdSliderToChars[form.elements['threshold'].value],
-          ignoreNumbers:
-            form.elements['ignore-numbers'].checked,
+          ignoreNumbers: form.elements['ignore-numbers'].checked,
+          conditions: form.elements['conditions'].value,
         });
       } else {
         resolve(null);

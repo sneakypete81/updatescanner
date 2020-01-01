@@ -30,6 +30,7 @@ export class Page {
       lastAutoscanTime: null,
       oldScanTime: null,
       newScanTime: null,
+      conditions: null,
     };
   }
 
@@ -103,40 +104,46 @@ export class Page {
    * (ms since Unix epoch).
    * @property {integer} newScanTime - Time when the NEW HTML was last updated
    * (ms since Unix epoch).
+   * @property {string} conditions - Conditions separated by comma used in diff.
    */
-  constructor(id, {
-    title=Page.DEFAULTS.title,
-    url=Page.DEFAULTS.url,
-    scanRateMinutes=Page.DEFAULTS.scanRateMinutes,
-    changeThreshold=Page.DEFAULTS.changeThreshold,
-    ignoreNumbers=Page.DEFAULTS.ignoreNumbers,
-    encoding=Page.DEFAULTS.encoding,
-    highlightChanges=Page.DEFAULTS.highlightChanges,
-    highlightColour=Page.DEFAULTS.highlightColour,
-    markChanges=Page.DEFAULTS.markChanges,
-    doPost=Page.DEFAULTS.doPost,
-    postParams=Page.DEFAULTS.postParams,
-    state=Page.DEFAULTS.state,
-    lastAutoscanTime=Page.DEFAULTS.lastAutoscanTime,
-    oldScanTime=Page.DEFAULTS.oldScanTime,
-    newScanTime=Page.DEFAULTS.newScanTime,
-  }) {
+  constructor(
+    id,
+    {
+      title = Page.DEFAULTS.title,
+      url = Page.DEFAULTS.url,
+      scanRateMinutes = Page.DEFAULTS.scanRateMinutes,
+      changeThreshold = Page.DEFAULTS.changeThreshold,
+      ignoreNumbers = Page.DEFAULTS.ignoreNumbers,
+      encoding = Page.DEFAULTS.encoding,
+      highlightChanges = Page.DEFAULTS.highlightChanges,
+      highlightColour = Page.DEFAULTS.highlightColour,
+      markChanges = Page.DEFAULTS.markChanges,
+      doPost = Page.DEFAULTS.doPost,
+      postParams = Page.DEFAULTS.postParams,
+      state = Page.DEFAULTS.state,
+      lastAutoscanTime = Page.DEFAULTS.lastAutoscanTime,
+      oldScanTime = Page.DEFAULTS.oldScanTime,
+      newScanTime = Page.DEFAULTS.newScanTime,
+      conditions = Page.DEFAULTS.conditions,
+    },
+  ) {
     this.id = id;
     this.title = title;
     this.url = url;
     this.scanRateMinutes = scanRateMinutes;
     this.changeThreshold = changeThreshold;
     this.ignoreNumbers = ignoreNumbers;
-    this.encoding = encoding,
-    this.highlightChanges = highlightChanges,
-    this.highlightColour = highlightColour,
-    this.markChanges = markChanges,
-    this.doPost = doPost,
-    this.postParams = postParams,
-    this.state = state;
+    (this.encoding = encoding),
+      (this.highlightChanges = highlightChanges),
+      (this.highlightColour = highlightColour),
+      (this.markChanges = markChanges),
+      (this.doPost = doPost),
+      (this.postParams = postParams),
+      (this.state = state);
     this.lastAutoscanTime = lastAutoscanTime;
     this.oldScanTime = oldScanTime;
     this.newScanTime = newScanTime;
+    this.conditions = conditions;
   }
 
   /**
@@ -161,6 +168,7 @@ export class Page {
       lastAutoscanTime: this.lastAutoscanTime,
       oldScanTime: this.oldScanTime,
       newScanTime: this.newScanTime,
+      conditions: this.conditions,
     };
   }
 
@@ -182,6 +190,7 @@ export class Page {
       markChanges: this.markChanges,
       doPost: this.doPost,
       postParams: this.postParams,
+      conditions: this.conditions,
       // state: this.state,
       // lastAutoscanTime: this.lastAutoscanTime,
       // oldScanTime: this.oldScanTime,
@@ -199,7 +208,7 @@ export class Page {
    */
   static async load(id) {
     try {
-      const data = await Storage.load(Page._KEY(id)) || {};
+      const data = (await Storage.load(Page._KEY(id))) || {};
       return new Page(id, data);
     } catch (error) {
       __.log(`ERROR: Page.load: ${error}`);
@@ -217,7 +226,7 @@ export class Page {
   async existsInStorage() {
     try {
       const data = await Storage.load(Page._KEY(this.id));
-      return (data !== undefined);
+      return data !== undefined;
     } catch (error) {
       __.log(`ERROR: Page.existsInStorage: ${error}`);
     }
