@@ -182,7 +182,6 @@ async function processHtmlWithConditions(page, scannedHtml, prevHtml) {
       );
     });
     const value = await somePromise(promises);
-    console.log('result', value, conditionsSplit);
     return value;
   } else {
     return updatePageState(page, prevHtml, scannedHtml);
@@ -216,6 +215,7 @@ async function updatePagePartsState(
   let changeType;
 
   if (scannedParts.length != prevParts.length) {
+    updatedPage.state = Page.stateEnum.CHANGED;
     // there is a change in the number of parts, so update the old HTML.
     PageStore.saveHtml(updatedPage.id, PageStore.htmlTypes.OLD, prevHtml);
     updatedPage.oldScanTime = updatedPage.newScanTime;
