@@ -5,9 +5,12 @@ export const __ = {
 };
 
 /**
+ * Finds next part of an condition. Supports dots, hashes and square brackets.
  *
  * @param {string} condition - Condition.
  * @param {string} startFrom - Index from which to start.
+ *
+ * @returns {integer} Index of next supported symbol.
  */
 function nextPart(condition, startFrom) {
   for (let i = startFrom; i < condition.length; i++) {
@@ -19,14 +22,40 @@ function nextPart(condition, startFrom) {
   return condition.length;
 }
 
+/**
+ * Substrings value of conditions part.
+ *
+ * @param {string} condition - Condition.
+ * @param {integer} startAtIndex - Start index of condition part.
+ * @param {integer} nextIndex - Index of next condition part.
+ *
+ * @returns {string} Condition part.
+ */
 function getValue(condition, startAtIndex, nextIndex) {
   return condition.substring(startAtIndex, nextIndex - startAtIndex + 1);
 }
 
-function getTagWithAttributeValue(attribute, value) {
-  return `(?=<[^>]+${attribute}=(?=[\\s+\\"\\']${value}[\\s+\\"\\']).+)([^>]+>)`;
+/**
+ * Returns regex to find attribute with value in any HTML tag.
+ *
+ * @param {string} attr - Attribute name.
+ * @param {string} value - Attribute value.
+ *
+ * @returns {string} Regular expression that can be used in matches.
+ */
+function getTagWithAttributeValue(attr, value) {
+  return `(?=<[^>]+${attr}=(?=[\\s+\\"\\']${value}[\\s+\\"\\']).+)([^>]+>)`;
 }
 
+/**
+ * Uses match all to find attribute with value in any HTML tag.
+ *
+ * @param {string} html - HTML.
+ * @param {string} attributeName - Attribute name.
+ * @param {string} value - Attribute value.
+ *
+ * @returns {Iterator} - Regex matchAll iterator.
+ */
 function match(html, attributeName, value) {
   return html.matchAll(getTagWithAttributeValue(attributeName, value), 'g');
 }
