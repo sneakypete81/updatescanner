@@ -5,7 +5,7 @@ import {isUpToDate} from '/lib/update/update.js';
 import {log} from '/lib/util/log.js';
 import {waitForMs} from '/lib/util/promise.js';
 import {detectEncoding, applyEncoding} from '/lib/util/encoding.js';
-import {matchHtmlWithCondition, subDom} from './condition_matcher.js';
+import {matchHtmlWithCondition} from './condition_matcher.js';
 
 /**
  * Enumeration indicating the similarity of two HTML strings.
@@ -162,32 +162,28 @@ async function processHtml(page, scannedHtml) {
 async function processHtmlWithConditions(page, scannedHtml, prevHtml) {
   if (page.conditions && prevHtml != null) {
     const conditionsSplit = page.conditions.replace(' ', '').split(',');
-    conditionsSplit.forEach(async (element) => {
-      const matches = await matchHtmlWithCondition(scannedHtml, element);
-      const previousMatches = await matchHtmlWithCondition(prevHtml, element);
-      if (matches.length != previousMatches.length) {
-        return false;
-      } else {
-        const prevParts = [];
-        const scannedParts = [];
+    const never = new Promise(() => {});
 
-        for (let i = 0; i < matches.length; i++) {
-          const scanned = subDom(scannedHtml, matches[i]);
-          scannedParts.push(scanned);
+    const somePromise = (promises) =>
+      Promise.race([
+        Promise.race(promises.map(async (p) => !!(await p) || never)),
+        Promise.all(promises).then((r) => r.some(Boolean)),
+      ]);
 
-          const prev = subDom(prevHtml, previousMatches[i]);
-          prevParts.push(prev);
-        }
-
-        return updatePagePartsState(
-          page,
-          prevHtml,
-          scannedHtml,
-          prevParts,
-          scannedParts,
-        );
-      }
+    const promises = conditionsSplit.map(async (value) => {
+      const scannedParts = await matchHtmlWithCondition(scannedHtml, value);
+      const prevParts = await matchHtmlWithCondition(prevHtml, value);
+      return updatePagePartsState(
+        page,
+        prevHtml,
+        scannedHtml,
+        prevParts,
+        scannedParts,
+      );
     });
+    const value = await somePromise(promises);
+    console.log('result', value, conditionsSplit);
+    return value;
   } else {
     return updatePageState(page, prevHtml, scannedHtml);
   }
@@ -219,31 +215,37 @@ async function updatePagePartsState(
 
   let changeType;
 
-  for (let i = 0; i < prevParts.length; i++) {
-    const stripped = stripHtml(
-      prevParts[i],
-      scannedParts[i],
-      updatedPage.ignoreNumbers,
-    );
+  if (scannedParts.length != prevParts.length) {
+    // there is a change in the number of parts, so update the old HTML.
+    PageStore.saveHtml(updatedPage.id, PageStore.htmlTypes.OLD, prevHtml);
+    updatedPage.oldScanTime = updatedPage.newScanTime;
+  } else {
+    for (let i = 0; i < prevParts.length; i++) {
+      const stripped = stripHtml(
+        prevParts[i],
+        scannedParts[i],
+        updatedPage.ignoreNumbers,
+      );
 
-    changeType = getChangeType(
-      stripped.prevHtml,
-      stripped.scannedHtml,
-      updatedPage.changeThreshold,
-    );
+      changeType = getChangeType(
+        stripped.prevHtml,
+        stripped.scannedHtml,
+        updatedPage.changeThreshold,
+      );
 
-    if (changeType == changeEnum.MAJOR_CHANGE) {
-      updatedPage.state = Page.stateEnum.CHANGED;
-      if (!updatedPage.isChanged()) {
-        // This is a newly detected change, so update the old HTML.
-        PageStore.saveHtml(updatedPage.id, PageStore.htmlTypes.OLD, prevHtml);
-        updatedPage.oldScanTime = updatedPage.newScanTime;
-        break;
-      }
-    } else {
-      // Only update the state if not previously marked as changed.
-      if (!updatedPage.isChanged()) {
-        updatedPage.state = Page.stateEnum.NO_CHANGE;
+      if (changeType == changeEnum.MAJOR_CHANGE) {
+        updatedPage.state = Page.stateEnum.CHANGED;
+        if (!updatedPage.isChanged()) {
+          // This is a newly detected change, so update the old HTML.
+          PageStore.saveHtml(updatedPage.id, PageStore.htmlTypes.OLD, prevHtml);
+          updatedPage.oldScanTime = updatedPage.newScanTime;
+          break;
+        }
+      } else {
+        // Only update the state if not previously marked as changed.
+        if (!updatedPage.isChanged()) {
+          updatedPage.state = Page.stateEnum.NO_CHANGE;
+        }
       }
     }
   }
