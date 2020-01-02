@@ -5,7 +5,7 @@ import {isUpToDate} from '/lib/update/update.js';
 import {log} from '/lib/util/log.js';
 import {waitForMs} from '/lib/util/promise.js';
 import {detectEncoding, applyEncoding} from '/lib/util/encoding.js';
-import {matchHtmlWithCondition} from './condition_matcher.js';
+import {matchHtmlWithCondition, subDom} from './condition_matcher.js';
 
 /**
  * Enumeration indicating the similarity of two HTML strings.
@@ -149,59 +149,15 @@ async function processHtml(page, scannedHtml) {
   return await processHtmlWithConditions(page, scannedHtml, prevHtml);
 }
 
-String.prototype.regexIndexOf = function(regex, startpos) {
-  var indexOf = this.substring(startpos || 0).search(regex);
-  return indexOf >= 0 ? indexOf + (startpos || 0) : indexOf;
-};
-
-function getElementName(html, index) {
-  let endIndex = html.regexIndexOf('[ >]', index);
-  let startIndex;
-  if (html[index] === '<') {
-    startIndex = index + 1;
-  } else {
-    startIndex = index;
-  }
-
-  return html.substring(startIndex, endIndex);
-}
-
-function subDom(html, index) {
-  const start = html.lastIndexOf('<', index);
-  if (start < 0) {
-    return html;
-  }
-
-  const stack = [];
-
-  for (let i = start; i < html.length - 1; i++) {
-    const char = html[i];
-    if (char === '<' && html[i + 1] === '/') {
-      const elementName = getElementName(html, i + 2);
-      const lastIndex = stack.lastIndexOf(elementName);
-      stack.length = Math.max(0, lastIndex);
-    } else if (char === '<') {
-      const elementName = getElementName(html, i + 1);
-      stack.push(elementName);
-    }
-
-    if (stack.length === 0) {
-      // todo add <> matching to ensure the right one is selected
-      const tagEnd = html.indexOf('>', i) + 1;
-      return html.substring(start, tagEnd);
-    }
-  }
-
-  return html;
-}
-
 /**
+ * Processes HTML with conditions specified in page settings. If conditions
+ * do not exist or page was not scanned yet standard update is called.
  *
- * @param {string} page
- * @param {*} scannedHtml
- * @param {*} prevHtml
+ * @param {Page} page - Page object to update.
+ * @param {string} scannedHtml - HTML to process.
+ * @param {string} prevHtml - Previous HTML.
  *
- * @returns{boolean} True if a new major change is detected.
+ * @returns {boolean} True if a new major change is detected.
  */
 async function processHtmlWithConditions(page, scannedHtml, prevHtml) {
   if (page.conditions && prevHtml != null) {
@@ -216,10 +172,10 @@ async function processHtmlWithConditions(page, scannedHtml, prevHtml) {
         const scannedParts = [];
 
         for (let i = 0; i < matches.length; i++) {
-          let scanned = subDom(scannedHtml, matches[i]);
+          const scanned = subDom(scannedHtml, matches[i]);
           scannedParts.push(scanned);
 
-          let prev = subDom(prevHtml, previousMatches[i]);
+          const prev = subDom(prevHtml, previousMatches[i]);
           prevParts.push(prev);
         }
 
@@ -237,6 +193,19 @@ async function processHtmlWithConditions(page, scannedHtml, prevHtml) {
   }
 }
 
+/**
+ * Compare the scanned HTML with the "NEW" HTML from storage, update the page
+ * state and save the HTML to storage. The method returns without waiting for
+ * the save operations to complete.
+ *
+ * @param {Page} page - Page object to update.
+ * @param {string} prevHtml - HTML from storage.
+ * @param {string} scannedHtml - Scanned HTML to process.
+ * @param {Array} prevParts - Parts matching conditions from HTML from storage.
+ * @param {Array} scannedParts - Parts matching conditions from scanned HTML.
+ *
+ * @returns {boolean} True if a new major change is detected.
+ */
 async function updatePagePartsState(
   page,
   prevHtml,
