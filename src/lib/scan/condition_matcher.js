@@ -6,8 +6,8 @@ export const __ = {
 
 /**
  *
- * @param {string} condition - Condition
- * @param {string} startFrom - Index from which to start
+ * @param {string} condition - Condition.
+ * @param {string} startFrom - Index from which to start.
  */
 function nextPart(condition, startFrom) {
   for (let i = startFrom; i < condition.length; i++) {
@@ -20,7 +20,7 @@ function nextPart(condition, startFrom) {
 }
 
 function getValue(condition, startAtIndex, nextIndex) {
-  return condition.substring(startAtIndex, nextIndex - startAt + 1);
+  return condition.substring(startAtIndex, nextIndex - startAtIndex + 1);
 }
 
 function getTagWithAttributeValue(attribute, value) {
