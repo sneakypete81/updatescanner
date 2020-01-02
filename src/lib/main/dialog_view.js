@@ -1,7 +1,8 @@
 import {qs, $on, hideElement} from '/lib/util/view_helpers.js';
 
 // See https://bugzilla.mozilla.org/show_bug.cgi?id=840640
-import dialogPolyfill from '/dependencies/module/dialog-polyfill/dist/dialog-polyfill.esm.js';
+import dialogPolyfill
+  from '/dependencies/module/dialog-polyfill/dist/dialog-polyfill.esm.js';
 
 /**
  * Initialise the dialog box.
