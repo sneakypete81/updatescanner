@@ -143,7 +143,7 @@ function getElementName(html, index) {
  *
  * @returns {string} Sub DOM HTML or original HTML if any problem occured.
  */
-export async function subDom(html, index) {
+async function subDom(html, index) {
   if (index == 0) return html;
 
   const start = html.lastIndexOf('<', index);
@@ -187,12 +187,7 @@ export async function matchHtmlWithCondition(html, condition) {
   let i = 0;
   const length = condition.length;
 
-  let result = [
-    {
-      index: 0,
-      html: html,
-    },
-  ];
+  let result = [html];
   const matchArray = [];
 
   while (i < length) {
@@ -208,18 +203,17 @@ export async function matchHtmlWithCondition(html, condition) {
       const indexString = condition.substring(startAt, endBracketIndex);
       try {
         const index = parseInt(indexString);
-        matchArray.push(matchIndex(html, index));
+        matchArray.push(matchIndex(result, index));
       } catch (exception) {
         __.log(exception);
         return html;
       }
     } else {
       for (let k = 0; k < result.length; k++) {
-        const item = result[k];
-        const subHTML = await subDom(item.html, item.index);
+        const itemHTML = result[k];
         let matches;
         if (type == '.') {
-          matches = matchClass(subHTML, partValue);
+          matches = matchClass(itemHTML, partValue);
         } else if (type == '#') {
           matches = matchId(html, partValue);
         } else {
@@ -227,15 +221,13 @@ export async function matchHtmlWithCondition(html, condition) {
         }
 
         for (const match of matches) {
-          matchArray.push({
-            index: match.index,
-            html: subHTML,
-          });
+          const matchHTML = await subDom(itemHTML, match.index);
+          matchArray.push(matchHTML);
         }
       }
     }
 
-    result = matchArray;
+    result = [...matchArray];
 
     i = nextIndex;
   }
