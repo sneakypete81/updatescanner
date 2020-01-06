@@ -22,7 +22,7 @@
     "jasmine-jquery": "^2.1.1",
     "karma": "^4.4.1",
     "karma-firefox-launcher": "^1.2.0",
-    "karma-jasmine": "^2.0.1",
+    "karma-jasmine": "^3.0.0",
     "karma-jasmine-html-reporter": "^1.5.1",
     "karma-notification-reporter": "^0.1.2",
     "rimraf": "^3.0.0",
