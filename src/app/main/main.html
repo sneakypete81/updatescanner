@@ -96,19 +96,23 @@
                  type="text"/>
 
           <div>
-            <label for="content-mode">Content mode:</label>
-            <select id="content-mode" name="content-mode">
-              <option value="html">HTML match</option>
-              <option value="text">Text match</option>
-            </select>
+            <label>
+              <span>Content mode:</span>
+              <select id="content-mode" name="content-mode">
+                <option value="html">HTML match</option>
+                <option value="text">Text match</option>
+              </select>
+            </label>
           </div>
           <div>
-            <label for="match-mode">Match mode:</label>
-            <select id="match-mode" name="match-mode">
-              <option value="first">From first</option>
-              <option value="last">From last</option>
-              <option value="lookup">Lookup</option>
-            </select>
+            <label>
+              <span>Match mode:</span>
+              <select id="match-mode" name="match-mode">
+                <option value="first">From first</option>
+                <option value="last">From last</option>
+                <option value="lookup">Lookup</option>
+              </select>
+            </label>
             <label for="match-mode">Determines direction from which
               matching will start. (Eg. old: 1234 new: 24 -> from first: 1 is
               not 3 match fails, from last: 4 is 4 but 2 is not 3 so match
