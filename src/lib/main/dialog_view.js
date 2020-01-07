@@ -42,6 +42,8 @@ export function openPageDialog(page) {
 
   form.elements['conditions'].value = page.conditions;
   form.elements['content-mode'].value = page.contentMode;
+  form.elements['match-mode'].value = page.matchMode;
+  form.elements['match-count'].value = page.matchCount;
 
   const autoscanSliderValue = autoscanMinsToSlider(page.scanRateMinutes);
   form.elements['autoscan'].value = autoscanSliderValue;

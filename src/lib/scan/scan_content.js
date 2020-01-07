@@ -1,5 +1,6 @@
 import {log} from '/lib/util/log.js';
 import {isMajorChange} from './fuzzy';
+import {Page} from '../page/page';
 
 export const __ = {
   log: (...args) => log(...args),
@@ -51,18 +52,17 @@ export class ContentData {
  * two HTML strings are.
  */
 export function getChanges(prevData, scannedHTML, page) {
-  const contentMode = Math.abs(page.contentMode);
-  const ignoreCount = page.contentMode < 0;
+  const contentMode = page.contentMode;
 
   if (contentMode === 0) {
     // count only
     return getCountChange(prevData, scannedHTML);
   } else if (contentMode === 1) {
     // html match
-    return getHTMLChange(prevData, scannedHTML, ignoreCount, false, page);
+    return getHTMLChange(page, prevData, scannedHTML, false);
   } else if (contentMode === 3) {
     // content match
-    return getHTMLChange(prevData, scannedHTML, ignoreCount, true, page);
+    return getHTMLChange(page, prevData, scannedHTML, true);
   } else {
     __.log(`Unsupported content mode ${contentMode}.`);
   }
@@ -95,31 +95,38 @@ function getCountChange(prevData, scannedData) {
 /**
  * Detects change in HTML content.
  *
- * @param {ContentData} prevData - Data for previous HTML.
- * @param {ContentData} scannedData - Data for scanned HTML.
- * @param {boolean} ignoreCount - Ignore count of data.
- * @param {boolean} ignoreTags - Ignore tags.
  * @param {Page} page - Page.
  *
+ * @param {ContentData} prevData - Data for previous HTML.
+ * @param {ContentData} scannedData - Data for scanned HTML.
+ * @param {boolean} ignoreTags - Ignore tags.
  * @returns {changeEnum} - ChangeEnum string indicating how similar the
  * two HTML strings are.
  */
-function getHTMLChange(prevData, scannedData, ignoreCount, ignoreTags, page) {
-  if (!ignoreCount) {
+function getHTMLChange(page, prevData, scannedData, ignoreTags) {
+  if (page.matchCount) {
     const countChange = getCountChange(prevData, scannedData);
-    if (countChange === changeEnum.MAJOR_CHANGE) return countChange;
+    if (countChange === changeEnum.MAJOR_CHANGE) {
+      return countChange;
+    }
   }
 
   const prevParts = prevData.parts || [prevData.html];
   const scannedParts = scannedData.parts || [scannedData.html];
-  const length = Math.min(prevParts.length, scannedParts.length);
 
   let maxChangeDetected = changeEnum.NO_CHANGE;
 
-  for (let i = 0; i < length; i++) {
-    const prevStrip = stripHtml(prevParts[i], page.ignoreNumbers, ignoreTags);
+  const iterator = getIteratorFunction(page, prevParts, scannedParts);
+
+
+  for (const it of iterator) {
+    const prevStrip = stripHtml(
+      prevParts[it.prevIndex],
+      page.ignoreNumbers,
+      ignoreTags,
+    );
     const scanStrip = stripHtml(
-      scannedParts[i],
+      scannedParts[it.scannedIndex],
       page.ignoreNumbers,
       ignoreTags,
     );
@@ -135,6 +142,68 @@ function getHTMLChange(prevData, scannedData, ignoreCount, ignoreTags, page) {
   }
 
   return maxChangeDetected;
+}
+
+/**
+ * Returns iterator function as specified by pages setting of match mode.
+ *
+ * @param {Page} page - Page.
+ * @param {Array} prevParts - Parts from previous scan.
+ * @param {Array} scannedParts - Parts from this scan.
+ * @returns {Generator} Function for iterating over
+ *   parts.
+ */
+function getIteratorFunction(page, prevParts, scannedParts) {
+  const matchMode = page.matchMode;
+  const matchModeEnum = Page.matchModeEnum;
+
+  let iteratorFunction;
+
+  if (matchMode === matchModeEnum.FIRST) {
+    iteratorFunction = function* (prevParts, scannedParts) {
+      const length = Math.min(prevParts.length, scannedParts.length);
+      for (let i = 0; i < length; i++) {
+        yield {
+          prevIndex: i,
+          scannedIndex: i,
+        };
+      }
+    };
+  } else if (matchMode === matchModeEnum.LAST) {
+    iteratorFunction = function* (prevParts, scannedParts) {
+      const length = Math.min(prevParts.length, scannedParts.length);
+      for (let i = length - 1; i >= 0; i--) {
+        yield {
+          prevIndex: i,
+          scannedIndex: i,
+        };
+      }
+    };
+  } else if (matchMode === matchModeEnum.LOOKUP) {
+    iteratorFunction = function* (prevParts, scannedParts) {
+      const length = Math.min(prevParts.length, scannedParts.length);
+      for (let i = 0; i < length; i++) {
+        const index = Math.max(prevParts.indexOf(scannedParts[i]), 0);
+        yield {
+          prevIndex: index,
+          scannedIndex: i,
+        };
+      }
+    };
+  }
+
+  /**
+   * This callback is displayed as part of the Requester class.
+   *
+   * @generator
+   * @function iteratorFunction
+   *
+   * @param {Array} prevParts - Previous parts.
+   * @param {Array} scannedParts - Scanned parts.
+   * @param {number} length - Integer representing length.
+   * @yields {{prevIndex: number, scannedIndex: number}}
+   */
+  return iteratorFunction(prevParts, scannedParts);
 }
 
 /**
