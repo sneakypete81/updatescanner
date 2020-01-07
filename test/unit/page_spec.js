@@ -19,13 +19,15 @@ describe('Page', function() {
       expect(page.url).toEqual(data.url);
     });
 
-    it('returns the default Page if there is no object in storage',
+    it(
+      'returns the default Page if there is no object in storage',
       async function() {
         spyOn(Storage, 'load').and.returnValues(Promise.resolve(undefined));
 
         const page = await Page.load('42');
         expect(page.title).toEqual('New Page');
-      });
+      },
+    );
 
     it('returns the default Page if the storage load fails', async function() {
       spyOn(Storage, 'load').and.returnValues(
@@ -77,6 +79,7 @@ describe('Page', function() {
         oldScanTime: 9381234,
         newScanTime: 40834321,
         conditions: '#id',
+        contentMode: 2,
       };
       const page = new Page(id, data);
 
