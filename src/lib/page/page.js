@@ -31,6 +31,7 @@ export class Page {
       oldScanTime: null,
       newScanTime: null,
       conditions: null,
+      contentMode: 2,
     };
   }
 
@@ -57,7 +58,8 @@ export class Page {
   /**
    * @param {string} key - Storage key for the Page object.
    *
-   * @returns {string} Page ID, or null if the key is not for a Page object.
+   * @returns {?string} Page ID, or null if the key is not for a Page
+   * object.
    */
   static idFromKey(key) {
     const matches = key.match('^page:(.*)$');
@@ -71,7 +73,7 @@ export class Page {
   /**
    * @param {string} key - Storage key.
    *
-   * @returns {bool} True if the key is for a Page object.
+   * @returns {boolean} True if the key is for a Page object.
    */
   static isPageKey(key) {
     return Page.idFromKey(key) !== null;
@@ -97,7 +99,7 @@ export class Page {
    * @property {boolean} markChanges - Whether to mark changes with << >>.
    * @property {boolean} doPost - Perform a POST request instead of a GET.
    * @property {boolean} postParams - POST parameters to use if doPost is true.
-   * @property {stateEnum} state - Current scan state of the page.
+   * @property {Page.stateEnum} state - Current scan state of the page.
    * @property {integer} lastAutoscanTime - Time that this page was last
    * autoscanned (ms since Unix epoch).
    * @property {integer} oldScanTime - Time when the OLD HTML was last updated
@@ -125,6 +127,7 @@ export class Page {
       oldScanTime = Page.DEFAULTS.oldScanTime,
       newScanTime = Page.DEFAULTS.newScanTime,
       conditions = Page.DEFAULTS.conditions,
+      contentMode = Page.DEFAULTS.contentMode,
     },
   ) {
     this.id = id;
@@ -144,6 +147,7 @@ export class Page {
     this.oldScanTime = oldScanTime;
     this.newScanTime = newScanTime;
     this.conditions = conditions;
+    this.contentMode = contentMode;
   }
 
   /**
@@ -169,6 +173,7 @@ export class Page {
       oldScanTime: this.oldScanTime,
       newScanTime: this.newScanTime,
       conditions: this.conditions,
+      contentMode: this.contentMode,
     };
   }
 
@@ -191,6 +196,7 @@ export class Page {
       doPost: this.doPost,
       postParams: this.postParams,
       conditions: this.conditions,
+      contentMode: this.contentMode,
       // state: this.state,
       // lastAutoscanTime: this.lastAutoscanTime,
       // oldScanTime: this.oldScanTime,
@@ -251,7 +257,7 @@ export class Page {
   /**
    * Delete the Page from storage.
    *
-   * @returns {Promise} An empty Promise that fultils when the operation is
+   * @returns {Promise} An empty Promise that fulfils when the operation is
    * finished. Errors are logged and ignored.
    */
   async delete() {
@@ -264,16 +270,16 @@ export class Page {
   }
 
   /**
-   * @returns {bool} True if the Page state is CHANGED.
+   * @returns {boolean} True if the Page state is CHANGED.
    */
   isChanged() {
-    return this.state == Page.stateEnum.CHANGED;
+    return this.state === Page.stateEnum.CHANGED;
   }
 
   /**
-   * @returns {bool} True if the Page state is ERROR.
+   * @returns {boolean} True if the Page state is ERROR.
    */
   isError() {
-    return this.state == Page.stateEnum.ERROR;
+    return this.state === Page.stateEnum.ERROR;
   }
 }

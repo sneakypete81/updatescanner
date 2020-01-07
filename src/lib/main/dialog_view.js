@@ -41,6 +41,7 @@ export function openPageDialog(page) {
   form.elements['url'].value = page.url;
 
   form.elements['conditions'].value = page.conditions;
+  form.elements['content-mode'].value = page.contentMode;
 
   const autoscanSliderValue = autoscanMinsToSlider(page.scanRateMinutes);
   form.elements['autoscan'].value = autoscanSliderValue;
@@ -58,7 +59,7 @@ export function openPageDialog(page) {
 
   return new Promise((resolve, reject) => {
     $on(dialog, 'close', () => {
-      if (dialog.returnValue == 'ok') {
+      if (dialog.returnValue === 'ok') {
         resolve({
           title: form.elements['title'].value,
           url: form.elements['url'].value,
@@ -68,6 +69,7 @@ export function openPageDialog(page) {
             ThresholdSliderToChars[form.elements['threshold'].value],
           ignoreNumbers: form.elements['ignore-numbers'].checked,
           conditions: form.elements['conditions'].value,
+          contentMode: form.elements['content-mode'].value,
         });
       } else {
         resolve(null);
@@ -99,7 +101,7 @@ export function openPageFolderDialog(pageFolder) {
 
   return new Promise((resolve, reject) => {
     $on(dialog, 'close', () => {
-      if (dialog.returnValue == 'ok') {
+      if (dialog.returnValue === 'ok') {
         resolve({title: form.elements['title'].value});
       } else {
         resolve(null);
