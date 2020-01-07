@@ -5,7 +5,7 @@ import {log} from '/lib/util/log.js';
 import {waitForMs} from '/lib/util/promise.js';
 import {applyEncoding, detectEncoding} from '/lib/util/encoding.js';
 import {matchHtmlWithCondition} from './condition_matcher.js';
-import {getChanges, ContentData, changeEnum} from './content_scan';
+import {getChanges, ContentData, changeEnum} from './scan_content';
 
 
 // Allow function mocking
