@@ -79,6 +79,7 @@ describe('Page', function() {
         oldScanTime: 9381234,
         newScanTime: 40834321,
         conditions: '#id',
+        contentMode: 2,
       };
       const page = new Page(id, data);
 

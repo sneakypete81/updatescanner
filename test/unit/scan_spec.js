@@ -3,44 +3,6 @@ import {PageStore} from '/lib/page/page_store.js';
 import {Page} from '/lib/page/page.js';
 
 describe('scan', function() {
-  describe('getChangeType', function() {
-    it('detects identical pages', function() {
-      const html = 'Here is some <b>HTML</b>';
-
-      const result = scanModule.__.getChangeType(html, html, 100);
-
-      expect(result).toEqual(scanModule.__.changeEnum.NO_CHANGE);
-    });
-
-    it('detects new content', function() {
-      const html = 'Here is some <b>HTML</b>';
-
-      const result = scanModule.__.getChangeType(null, html, 100);
-
-      expect(result).toEqual(scanModule.__.changeEnum.NEW_CONTENT);
-    });
-
-    it('detects minor changes', function() {
-      const html1 = 'Here is some <b>HTML</b>';
-      const html2 = 'Here is some different <b>HTML</b>';
-      spyOn(scanModule.__, 'isMajorChange').and.returnValues(false);
-
-      const result = scanModule.__.getChangeType(html1, html2, 100);
-
-      expect(result).toEqual(scanModule.__.changeEnum.MINOR_CHANGE);
-    });
-
-    it('detects major changes', function() {
-      const html1 = 'Here is some <b>HTML</b>';
-      const html2 = 'Here is some different <b>HTML</b>';
-      spyOn(scanModule.__, 'isMajorChange').and.returnValues(true);
-
-      const result = scanModule.__.getChangeType(html1, html2, 100);
-
-      expect(result).toEqual(scanModule.__.changeEnum.MAJOR_CHANGE);
-    });
-  });
-
   describe('updatePageState', function() {
     beforeEach(function() {
       this.oldScanTime = new Date(1978, 11, 1, 4, 30).getTime();
