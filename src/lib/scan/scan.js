@@ -4,7 +4,7 @@ import {Page} from '/lib/page/page.js';
 import {isUpToDate} from '/lib/update/update.js';
 import {log} from '/lib/util/log.js';
 import {waitForMs} from '/lib/util/promise.js';
-import {detectEncoding, applyEncoding} from '/lib/util/encoding.js';
+import {applyEncoding, detectEncoding} from '/lib/util/encoding.js';
 import {matchHtmlWithCondition} from './condition_matcher.js';
 
 /**
@@ -109,13 +109,13 @@ export async function scanPage(page) {
  */
 async function getHtmlFromResponse(response, page) {
   // This is probably faster for the most common case (utf-8)
-  if (page.encoding == 'utf-8') {
+  if (page.encoding === 'utf-8') {
     return await response.text();
   }
 
   const buffer = await response.arrayBuffer();
 
-  if (page.encoding === null || page.encoding == 'auto') {
+  if (page.encoding === null || page.encoding === 'auto') {
     const rawHtml = __.applyEncoding(buffer, 'utf-8');
     const updatedPage = await Page.load(page.id);
     updatedPage.encoding = __.detectEncoding(response.headers, rawHtml);
@@ -146,7 +146,7 @@ async function processHtml(page, scannedHtml) {
 
   const prevHtml = await PageStore.loadHtml(page.id, PageStore.htmlTypes.NEW);
 
-  return await processHtmlWithConditions(page, scannedHtml, prevHtml);
+  return processHtmlWithConditions(page, scannedHtml, prevHtml);
 }
 
 /**
@@ -162,7 +162,8 @@ async function processHtml(page, scannedHtml) {
 async function processHtmlWithConditions(page, scannedHtml, prevHtml) {
   if (page.conditions && prevHtml != null) {
     const conditionsSplit = page.conditions.replace(' ', '').split(',');
-    const never = new Promise(() => {});
+    const never = new Promise(() => {
+    });
 
     const somePromise = (promises) =>
       Promise.race([
@@ -181,8 +182,7 @@ async function processHtmlWithConditions(page, scannedHtml, prevHtml) {
         scannedParts,
       );
     });
-    const value = await somePromise(promises);
-    return value;
+    return await somePromise(promises);
   } else {
     return updatePageState(page, prevHtml, scannedHtml);
   }
@@ -210,14 +210,16 @@ async function updatePagePartsState(
 ) {
   const updatedPage = await Page.load(page.id);
 
-  PageStore.saveHtml(updatedPage.id, PageStore.htmlTypes.NEW, scannedHtml);
+  await PageStore
+    .saveHtml(updatedPage.id, PageStore.htmlTypes.NEW, scannedHtml);
 
   let changeType;
 
-  if (scannedParts.length != prevParts.length) {
+  if (scannedParts.length !== prevParts.length) {
     updatedPage.state = Page.stateEnum.CHANGED;
     // there is a change in the number of parts, so update the old HTML.
-    PageStore.saveHtml(updatedPage.id, PageStore.htmlTypes.OLD, prevHtml);
+    await PageStore
+      .saveHtml(updatedPage.id, PageStore.htmlTypes.OLD, prevHtml);
     updatedPage.oldScanTime = updatedPage.newScanTime;
   } else {
     for (let i = 0; i < prevParts.length; i++) {
@@ -233,11 +235,12 @@ async function updatePagePartsState(
         updatedPage.changeThreshold,
       );
 
-      if (changeType == changeEnum.MAJOR_CHANGE) {
+      if (changeType === changeEnum.MAJOR_CHANGE) {
         updatedPage.state = Page.stateEnum.CHANGED;
         if (!updatedPage.isChanged()) {
           // This is a newly detected change, so update the old HTML.
-          PageStore.saveHtml(updatedPage.id, PageStore.htmlTypes.OLD, prevHtml);
+          await PageStore
+            .saveHtml(updatedPage.id, PageStore.htmlTypes.OLD, prevHtml);
           updatedPage.oldScanTime = updatedPage.newScanTime;
           break;
         }
@@ -253,7 +256,7 @@ async function updatePagePartsState(
   updatedPage.newScanTime = Date.now();
 
   await updatedPage.save();
-  return changeType == changeEnum.MAJOR_CHANGE;
+  return changeType === changeEnum.MAJOR_CHANGE;
 }
 
 /**
@@ -277,16 +280,19 @@ async function updatePageState(page, prevHtml, scannedHtml) {
     updatedPage.changeThreshold,
   );
 
-  if (changeType == changeEnum.MAJOR_CHANGE) {
+  if (changeType === changeEnum.MAJOR_CHANGE) {
     if (!updatedPage.isChanged()) {
       // This is a newly detected change, so update the old HTML.
-      PageStore.saveHtml(updatedPage.id, PageStore.htmlTypes.OLD, prevHtml);
+      await PageStore
+        .saveHtml(updatedPage.id, PageStore.htmlTypes.OLD, prevHtml);
       updatedPage.oldScanTime = updatedPage.newScanTime;
     }
-    PageStore.saveHtml(updatedPage.id, PageStore.htmlTypes.NEW, scannedHtml);
+    await PageStore
+      .saveHtml(updatedPage.id, PageStore.htmlTypes.NEW, scannedHtml);
     updatedPage.state = Page.stateEnum.CHANGED;
   } else {
-    PageStore.saveHtml(updatedPage.id, PageStore.htmlTypes.NEW, scannedHtml);
+    await PageStore
+      .saveHtml(updatedPage.id, PageStore.htmlTypes.NEW, scannedHtml);
     // Only update the state if not previously marked as changed.
     if (!updatedPage.isChanged()) {
       updatedPage.state = Page.stateEnum.NO_CHANGE;
@@ -296,7 +302,7 @@ async function updatePageState(page, prevHtml, scannedHtml) {
   updatedPage.newScanTime = Date.now();
 
   await updatedPage.save();
-  return changeType == changeEnum.MAJOR_CHANGE;
+  return changeType === changeEnum.MAJOR_CHANGE;
 }
 
 /**
@@ -305,7 +311,7 @@ async function updatePageState(page, prevHtml, scannedHtml) {
  *
  * @param {string} str1 - First HTML string for comparison.
  * @param {string} str2 - Second HTML string for comparison.
- * @param {integer} changeThreshold - Number of characters that must change to
+ * @param {number} changeThreshold - Number of characters that must change to
  * indicate a major change.
  *
  * @returns {string} ChangeEnum string indicating how similar the
@@ -315,7 +321,7 @@ function getChangeType(str1, str2, changeThreshold) {
   if (str1 === null) {
     // This is the first scan.
     return changeEnum.NEW_CONTENT;
-  } else if (str1 == str2) {
+  } else if (str1 === str2) {
     // HTML is unchanged.
     return changeEnum.NO_CHANGE;
   } else if (__.isMajorChange(str1, str2, changeThreshold)) {

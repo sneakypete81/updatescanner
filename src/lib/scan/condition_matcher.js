@@ -8,14 +8,14 @@ export const __ = {
  * Finds next part of an condition. Supports dots, hashes and square brackets.
  *
  * @param {string} condition - Condition.
- * @param {string} startFrom - Index from which to start.
+ * @param {number} startFrom - Index from which to start.
  *
- * @returns {integer} Index of next supported symbol.
+ * @returns {number} Index of next supported symbol.
  */
 function nextPart(condition, startFrom) {
   for (let i = startFrom; i < condition.length; i++) {
     const char = condition[i];
-    if (char == '.' || char == '#' || char == '[') {
+    if (char === '.' || char === '#' || char === '[') {
       return i;
     }
   }
@@ -26,8 +26,8 @@ function nextPart(condition, startFrom) {
  * Substrings value of conditions part.
  *
  * @param {string} condition - Condition.
- * @param {integer} startAtIndex - Start index of condition part.
- * @param {integer} nextIndex - Index of next condition part.
+ * @param {number} startAtIndex - Start index of condition part.
+ * @param {number} nextIndex - Index of next condition part.
  *
  * @returns {string} Condition part.
  */
@@ -66,7 +66,7 @@ function match(html, attributeName, value) {
  * @param {string} html - HTML.
  * @param {string} className - Name of the class.
  *
- * @returns {Iterator} Non-resetable iterator with matches.
+ * @returns {Iterator} Non-resettable iterator with matches.
  */
 function matchClass(html, className) {
   return match(html, 'class', className);
@@ -78,7 +78,7 @@ function matchClass(html, className) {
  * @param {string} html - HTML.
  * @param {string} idName - Name of the id.
  *
- * @returns {Iterator} Non-resetable iterator with matches.
+ * @returns {Iterator} Non-resettable iterator with matches.
  */
 function matchId(html, idName) {
   return match(html, 'id', idName);
@@ -88,7 +88,7 @@ function matchId(html, idName) {
  * Returns single item for all matches.
  *
  * @param {Array} matches - List of previous matches.
- * @param {string} index - Index of item we look for.
+ * @param {number} index - Index of item we look for.
  *
  * @returns {Any} Item at given index in array or
  * first or last element if index was out of bounds.
@@ -103,13 +103,13 @@ function matchIndex(matches, index) {
  *
  * @param {string} text - Text in which to look for matches.
  * @param {string} regex - Regular expression for lookup.
- * @param {integer} startpos - Starting position.
+ * @param {number} startPos - Starting position.
  *
- * @returns {integer} Index of expression matching regex.
+ * @returns {number} Index of expression matching regex.
  */
-function regexIndexOf(text, regex, startpos) {
-  const indexOf = text.substring(startpos || 0).search(regex);
-  return indexOf >= 0 ? indexOf + (startpos || 0) : indexOf;
+function regexIndexOf(text, regex, startPos) {
+  const indexOf = text.substring(startPos || 0).search(regex);
+  return indexOf >= 0 ? indexOf + (startPos || 0) : indexOf;
 }
 
 /**
@@ -117,7 +117,7 @@ function regexIndexOf(text, regex, startpos) {
  * or right after the <.
  *
  * @param {string} html - HTML in which the element should be looked up.
- * @param {integer} index - Index where to start.
+ * @param {number} index - Index where to start.
  *
  * @returns {string} Element name.
  */
@@ -139,12 +139,12 @@ function getElementName(html, index) {
  * In simple terms it's sort of like substring for DOM.
  *
  * @param {string} html - HTML from which the sub DOM should be created.
- * @param {integer} index - Index where the sub DOM should start.
+ * @param {number} index - Index where the sub DOM should start.
  *
- * @returns {string} Sub DOM HTML or original HTML if any problem occured.
+ * @returns {string} Sub DOM HTML or original HTML if any problem occurred.
  */
 async function subDom(html, index) {
-  if (index == 0) return html;
+  if (index === 0) return html;
 
   const start = html.lastIndexOf('<', index);
   if (start < 0) {
@@ -198,7 +198,7 @@ export async function matchHtmlWithCondition(html, condition) {
 
     matchArray.length = 0;
 
-    if (type == '[') {
+    if (type === '[') {
       const endBracketIndex = condition.indexOf(']', startAt);
       const indexString = condition.substring(startAt, endBracketIndex);
       try {
@@ -212,9 +212,9 @@ export async function matchHtmlWithCondition(html, condition) {
       for (let k = 0; k < result.length; k++) {
         const itemHTML = result[k];
         let matches;
-        if (type == '.') {
+        if (type === '.') {
           matches = matchClass(itemHTML, partValue);
-        } else if (type == '#') {
+        } else if (type === '#') {
           matches = matchId(html, partValue);
         } else {
           return html;

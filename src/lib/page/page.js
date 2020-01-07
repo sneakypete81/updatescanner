@@ -92,7 +92,7 @@ export class Page {
    * signalling that a change has occurred.
    * @property {boolean} ignoreNumbers - Don't trigger if only a number has
    * changed.
-   * @property {string} encoding - Text encoding of the page.
+   * @property {?string} encoding - Text encoding of the page.
    * @property {boolean} highlightChanges - Whether to highlight changed text.
    * @property {string} highlightColour - HTML colour string to use for
    * highlighting.
