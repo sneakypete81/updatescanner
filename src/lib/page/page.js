@@ -31,7 +31,9 @@ export class Page {
       oldScanTime: null,
       newScanTime: null,
       conditions: null,
-      contentMode: 2,
+      contentMode: Page.contentModeEnum.CONTENT,
+      matchMode: Page.matchModeEnum.FIRST,
+      matchCount: true,
     };
   }
 
@@ -44,6 +46,31 @@ export class Page {
       NO_CHANGE: 'no_change',
       CHANGED: 'changed',
       ERROR: 'error',
+    };
+  }
+
+  /**
+   *
+   * @returns {{HTML: string, CONTENT: string}} Enumeration of Page content
+   *   mode.
+   */
+  static get contentModeEnum() {
+    return {
+      HTML: 'html',
+      TEXT: 'text',
+    };
+  }
+
+  /**
+   *
+   * @returns {{LOOKUP: string, LAST: string, FIRST: string}} Enumeration
+   *   of Page match mode.
+   */
+  static get matchModeEnum() {
+    return {
+      FIRST: 'first',
+      LAST: 'last',
+      LOOKUP: 'lookup',
     };
   }
 
@@ -86,9 +113,9 @@ export class Page {
    * @property {string} id - ID of the page.
    * @property {string} title - Title of the page.
    * @property {string} url - URL of the page.
-   * @property {integer} scanRateMinutes - Number of minutes between scans. Zero
+   * @property {number} scanRateMinutes - Number of minutes between scans. Zero
    * means manual scan only.
-   * @property {integer} changeThreshold - Number of characters changed before
+   * @property {number} changeThreshold - Number of characters changed before
    * signalling that a change has occurred.
    * @property {boolean} ignoreNumbers - Don't trigger if only a number has
    * changed.
@@ -100,13 +127,17 @@ export class Page {
    * @property {boolean} doPost - Perform a POST request instead of a GET.
    * @property {boolean} postParams - POST parameters to use if doPost is true.
    * @property {Page.stateEnum} state - Current scan state of the page.
-   * @property {integer} lastAutoscanTime - Time that this page was last
+   * @property {number} lastAutoscanTime - Time that this page was last
    * autoscanned (ms since Unix epoch).
-   * @property {integer} oldScanTime - Time when the OLD HTML was last updated
+   * @property {number} oldScanTime - Time when the OLD HTML was last updated
    * (ms since Unix epoch).
-   * @property {integer} newScanTime - Time when the NEW HTML was last updated
+   * @property {number} newScanTime - Time when the NEW HTML was last updated
    * (ms since Unix epoch).
    * @property {string} conditions - Conditions separated by comma used in diff.
+   * @property {number} contentMode - Mode used for content comparison.
+   * @property {number} matchMode - Mode that determines order in which parts
+   * are looked at.
+   * @property {boolean} matchCount - True if part count should match.
    */
   constructor(
     id,
@@ -128,6 +159,8 @@ export class Page {
       newScanTime = Page.DEFAULTS.newScanTime,
       conditions = Page.DEFAULTS.conditions,
       contentMode = Page.DEFAULTS.contentMode,
+      matchMode = Page.DEFAULTS.matchMode,
+      matchCount = Page.DEFAULTS.matchCount,
     },
   ) {
     this.id = id;
@@ -148,6 +181,8 @@ export class Page {
     this.newScanTime = newScanTime;
     this.conditions = conditions;
     this.contentMode = contentMode;
+    this.matchMode = matchMode;
+    this.matchCount = matchCount;
   }
 
   /**
@@ -174,6 +209,8 @@ export class Page {
       newScanTime: this.newScanTime,
       conditions: this.conditions,
       contentMode: this.contentMode,
+      matchMode: this.matchMode,
+      matchCount: this.matchCount,
     };
   }
 
@@ -197,6 +234,8 @@ export class Page {
       postParams: this.postParams,
       conditions: this.conditions,
       contentMode: this.contentMode,
+      matchMode: this.matchMode,
+      matchCount: this.matchCount,
       // state: this.state,
       // lastAutoscanTime: this.lastAutoscanTime,
       // oldScanTime: this.oldScanTime,

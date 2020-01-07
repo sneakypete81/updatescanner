@@ -42,6 +42,8 @@ export function openPageDialog(page) {
 
   form.elements['conditions'].value = page.conditions;
   form.elements['content-mode'].value = page.contentMode;
+  form.elements['match-mode'].value = page.matchMode;
+  form.elements['match-count'].value = page.matchCount;
 
   const autoscanSliderValue = autoscanMinsToSlider(page.scanRateMinutes);
   form.elements['autoscan'].value = autoscanSliderValue;
@@ -130,7 +132,7 @@ const AutoscanSliderNever = AutoscanSliderToMins.indexOf(0);
  * @returns {integer} Slider value representing the given number of minutes.
  */
 function autoscanMinsToSlider(minutes) {
-  if (minutes == 0) {
+  if (minutes === 0) {
     return AutoscanSliderNever;
   }
 

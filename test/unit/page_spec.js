@@ -79,7 +79,9 @@ describe('Page', function() {
         oldScanTime: 9381234,
         newScanTime: 40834321,
         conditions: '#id',
-        contentMode: 2,
+        contentMode: Page.contentModeEnum.HTML,
+        matchMode: Page.matchModeEnum.LOOKUP,
+        matchCount: true,
       };
       const page = new Page(id, data);
 

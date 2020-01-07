@@ -92,27 +92,32 @@
             Comma separated conditions.
             Currently supported are #id_name, .class_name, .class_name[index]
             including nesting #id_name.class_name.</label>
-          <input style="width: 100%" id="conditions" name="conditions" type="text"/>
+          <input style="width: 100%" id="conditions" name="conditions"
+                 type="text"/>
 
           <div>
-            <label for="content-mode">Content mode</label>
+            <label for="content-mode">Content mode:</label>
             <select id="content-mode" name="content-mode">
-              <option value="0">
-                Match count only
-              </option>
-              <option value="1">
-                HTML match
-              </option>
-              <option value="2">
-                Content match
-              </option>
-              <option value="-3">
-                Content match with lookup ignore count
-              </option>
-              <option value="3">
-                Content match with lookup and count
-              </option>
+              <option value="html">HTML match</option>
+              <option value="text">Text match</option>
             </select>
+          </div>
+          <div>
+            <label for="match-mode">Match mode:</label>
+            <select id="match-mode" name="match-mode">
+              <option value="first">From first</option>
+              <option value="last">From last</option>
+              <option value="lookup">Lookup</option>
+            </select>
+            <label for="match-mode">Determines direction from which
+              matching will start. (Eg. old: 1234 new: 24 -> from first: 1 is
+              not 3 match fails, from last: 4 is 4 but 2 is not 3 so match
+              fails, lookup: found 4 and also found 2 so match succeeds)</label>
+          </div>
+          <div>
+            <input type="checkbox" id="match-count" name="match-count">
+            <label for="match-count" class="checkbox-label">Consider change in
+              number of matches a major change.</label>
           </div>
         </fieldset>
 
