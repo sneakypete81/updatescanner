@@ -159,7 +159,7 @@ label {
 
 label span {
   display: inline-block;
-  width  : 2.5em;
+  min-width  : 2.5em;
   text-align: right;
   margin-right: 6px;
 }
