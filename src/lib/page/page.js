@@ -31,6 +31,7 @@ export class Page {
       oldScanTime: null,
       newScanTime: null,
       conditions: null,
+      contentMode: 2,
     };
   }
 
@@ -126,6 +127,7 @@ export class Page {
       oldScanTime = Page.DEFAULTS.oldScanTime,
       newScanTime = Page.DEFAULTS.newScanTime,
       conditions = Page.DEFAULTS.conditions,
+      contentMode = Page.DEFAULTS.contentMode,
     },
   ) {
     this.id = id;
@@ -145,6 +147,7 @@ export class Page {
     this.oldScanTime = oldScanTime;
     this.newScanTime = newScanTime;
     this.conditions = conditions;
+    this.contentMode = contentMode;
   }
 
   /**
@@ -170,6 +173,7 @@ export class Page {
       oldScanTime: this.oldScanTime,
       newScanTime: this.newScanTime,
       conditions: this.conditions,
+      contentMode: this.contentMode,
     };
   }
 
@@ -192,6 +196,7 @@ export class Page {
       doPost: this.doPost,
       postParams: this.postParams,
       conditions: this.conditions,
+      contentMode: this.contentMode,
       // state: this.state,
       // lastAutoscanTime: this.lastAutoscanTime,
       // oldScanTime: this.oldScanTime,

@@ -146,6 +146,11 @@ legend {
   font-size: larger;
 }
 
+.description {
+  font-size: smaller;
+  color: rgba(0, 0, 0, 0.8);
+}
+
 label {
   display: flex;
   margin-bottom: 12px;
