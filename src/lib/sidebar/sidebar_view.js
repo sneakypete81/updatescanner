@@ -7,8 +7,8 @@ import {log} from '/lib/util/log.js';
 import {qs, $on} from '/lib/util/view_helpers.js';
 
 // See https://bugzilla.mozilla.org/show_bug.cgi?id=840640
-import dialogPolyfill from
-    '/dependencies/module/dialog-polyfill/dist/dialog-polyfill.esm.js';
+import dialogPolyfill
+  from '/dependencies/module/dialog-polyfill/dist/dialog-polyfill.esm.js';
 
 /**
  * Class representing the Update Scanner Sidebar.
@@ -277,7 +277,8 @@ export class SidebarView {
    * Registers the provided handler function to be called whenever a tree
    * node is to be deleted.
    *
-   * @param {Function} handler - Callback to use whenever a node is to be deleted.
+   * @param {Function} handler - Callback to use whenever a node is to be
+   * deleted.
    */
   registerDeleteHandler(handler) {
     this._deleteHandler = (node) => handler(node.id);
