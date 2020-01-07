@@ -31,7 +31,7 @@ export class Page {
       oldScanTime: null,
       newScanTime: null,
       conditions: null,
-      contentMode: Page.contentModeEnum.CONTENT,
+      contentMode: Page.contentModeEnum.TEXT,
       matchMode: Page.matchModeEnum.FIRST,
       matchCount: true,
     };
@@ -51,7 +51,7 @@ export class Page {
 
   /**
    *
-   * @returns {{HTML: string, CONTENT: string}} Enumeration of Page content
+   * @returns {{HTML: string, TEXT: string}} Enumeration of Page content
    *   mode.
    */
   static get contentModeEnum() {
