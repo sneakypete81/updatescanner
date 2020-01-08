@@ -99,7 +99,7 @@ async function getHtmlFromResponse(response, page) {
 
   const buffer = await response.arrayBuffer();
 
-  if (page.encoding === null || page.encoding === 'auto') {
+  if (page.encoding == null || page.encoding === 'auto') {
     const rawHtml = __.applyEncoding(buffer, 'utf-8');
     const updatedPage = await Page.load(page.id);
     updatedPage.encoding = __.detectEncoding(response.headers, rawHtml);

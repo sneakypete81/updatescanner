@@ -137,7 +137,7 @@ export class Main {
     const temporaryPage = new Page(-1, {title: title, url: url});
     const newSettings = await dialog.openPageDialog(temporaryPage);
 
-    if (newSettings === null) {
+    if (newSettings == null) {
       document.location.replace('about:blank');
     } else {
       this.currentPage = await this.pageStore.createPage(
@@ -324,7 +324,7 @@ async function loadDiff(page) {
 async function loadHtml(page, htmlType) {
   const html = await PageStore.loadHtml(page.id, htmlType);
 
-  if (html === null) {
+  if (html == null) {
     __.log(`Could not load '${page.title}' ${htmlType} HTML from storage`);
   }
   return html;

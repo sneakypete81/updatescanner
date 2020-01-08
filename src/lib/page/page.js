@@ -90,7 +90,7 @@ export class Page {
    */
   static idFromKey(key) {
     const matches = key.match('^page:(.*)$');
-    if (matches === null) {
+    if (matches == null) {
       return null;
     } else {
       return matches[1];
