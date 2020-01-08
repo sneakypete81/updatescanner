@@ -10,7 +10,7 @@ python = "^3.7"
 flake8 = "^3.7"
 pytest = "^5.3"
 pytest-httpserver = "^0.3.4"
-PyHamcrest = "^1.9"
+PyHamcrest = "^1.10"
 requests = "^2.22"
 
 clickshot = "0.4.0"

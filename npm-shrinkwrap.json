@@ -3434,9 +3434,9 @@
       "dev": true
     },
     "eslint-plugin-jsdoc": {
-      "version": "20.0.1",
-      "resolved": "https://registry.npmjs.org/eslint-plugin-jsdoc/-/eslint-plugin-jsdoc-20.0.1.tgz",
-      "integrity": "sha512-03izXNlXgeHuSxvjRHdSlzptYU6Ik3rcUCSLVEYwKKs2Dx54Rz1aExVrjNXGuNkW6/IHLUo1nsY9XtPzlJ2jmA==",
+      "version": "20.0.3",
+      "resolved": "https://registry.npmjs.org/eslint-plugin-jsdoc/-/eslint-plugin-jsdoc-20.0.3.tgz",
+      "integrity": "sha512-h/f9skf8oFmYg7jJfV2P43ciBV78q0dxkpnL++zPJrbuV4ZRCSlFmQWjjlNgNfYLGfAl166SNjGg7veEEVX9oA==",
       "dev": true,
       "requires": {
         "comment-parser": "^0.7.2",
@@ -5960,20 +5960,12 @@
       }
     },
     "karma-firefox-launcher": {
-      "version": "1.2.0",
-      "resolved": "https://registry.npmjs.org/karma-firefox-launcher/-/karma-firefox-launcher-1.2.0.tgz",
-      "integrity": "sha512-j9Zp8M8+VLq1nI/5xZGfzeaEPtGQ/vk3G+Y8vpmFWLvKLNZ2TDjD6cu2dUu7lDbu1HXNgatsAX4jgCZTkR9qhQ==",
+      "version": "1.3.0",
+      "resolved": "https://registry.npmjs.org/karma-firefox-launcher/-/karma-firefox-launcher-1.3.0.tgz",
+      "integrity": "sha512-Fi7xPhwrRgr+94BnHX0F5dCl1miIW4RHnzjIGxF8GaIEp7rNqX7LSi7ok63VXs3PS/5MQaQMhGxw+bvD+pibBQ==",
       "dev": true,
       "requires": {
         "is-wsl": "^2.1.0"
-      },
-      "dependencies": {
-        "is-wsl": {
-          "version": "2.1.0",
-          "resolved": "https://registry.npmjs.org/is-wsl/-/is-wsl-2.1.0.tgz",
-          "integrity": "sha512-pFTjpv/x5HRj8kbZ/Msxi9VrvtOMRBqaDi3OIcbwPI3OuH+r3lLxVWukLITBaOGJIbA/w2+M1eVmVa4XNQlAmQ==",
-          "dev": true
-        }
       }
     },
     "karma-jasmine": {
