@@ -74,7 +74,17 @@ export function getChanges(prevData, scannedData, page) {
 
   const ignoreTags = contentMode === contentModeEnum.TEXT;
 
-  return getHTMLChange(page, prevParts, scannedParts, ignoreTags);
+  const htmlChange = getHTMLChange(page, prevParts, scannedParts, ignoreTags);
+  if (htmlChange === changeEnum.NO_CHANGE &&
+    prevData.parts != null &&
+    scannedData.parts != null &&
+    prevData.html !== scannedData.html) {
+    // Return minor change if no change was found in parts, but some change was
+    // found anywhere on the page.
+    return changeEnum.MINOR_CHANGE;
+  } else {
+    return htmlChange;
+  }
 }
 
 /**
