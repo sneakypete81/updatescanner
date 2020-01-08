@@ -113,6 +113,10 @@ function getHTMLChange(page, prevData, scannedData, ignoreTags) {
     }
   }
 
+  if (page.contentMode === Page.contentModeEnum.IGNORE) {
+    return changeEnum.NO_CHANGE;
+  }
+
   const prevParts = prevData.parts || [prevData.html];
   const scannedParts = scannedData.parts || [scannedData.html];
 
