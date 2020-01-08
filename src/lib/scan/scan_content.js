@@ -18,9 +18,9 @@ export const changeEnum = {
 export const __ = {
   log: (...args) => log(...args),
   isMajorChange: (...args) => isMajorChange(...args),
-  getChangeType: getChangeType,
   changeEnum: changeEnum,
   stripHtml: stripHtml,
+  getChanges: getChanges,
 };
 
 /**
@@ -34,7 +34,7 @@ export class ContentData {
    * @param {string} html - Page HTML.
    * @param {?Array} parts - HTML split.
    */
-  constructor(html, parts) {
+  constructor(html, parts = null) {
     this.html = html || '';
     this.parts = parts || null;
   }
@@ -45,29 +45,36 @@ export class ContentData {
  * Detects changes based on two HTML data and page.
  *
  * @param {ContentData} prevData - Data for previous HTML.
- * @param {ContentData} scannedHTML - Data for scanned HTML.
+ * @param {ContentData} scannedData - Data for scanned HTML.
  * @param {Page} page - Page.
  *
  * @returns {string|changeEnum} ChangeEnum string indicating how similar the
  * two HTML strings are.
  */
-export function getChanges(prevData, scannedHTML, page) {
-  const contentMode = page.contentMode;
-
-  if (contentMode === 0) {
-    // count only
-    return getCountChange(prevData, scannedHTML);
-  } else if (contentMode === 1) {
-    // html match
-    return getHTMLChange(page, prevData, scannedHTML, false);
-  } else if (contentMode === 3) {
-    // content match
-    return getHTMLChange(page, prevData, scannedHTML, true);
-  } else {
-    __.log(`Unsupported content mode ${contentMode}.`);
-    // original method is default
-    return getHTMLChange(page, prevData, scannedHTML, true);
+export function getChanges(prevData, scannedData, page) {
+  if (prevData.html == null || prevData.html === '') {
+    return changeEnum.NEW_CONTENT;
   }
+
+  if (page.matchCount || page.matchCount == null) {
+    const countChange = getCountChange(prevData, scannedData);
+    if (countChange === changeEnum.MAJOR_CHANGE) {
+      return countChange;
+    }
+  }
+
+  const contentModeEnum = Page.contentModeEnum;
+  const contentMode = page.contentMode || contentModeEnum.TEXT;
+  if (contentMode === contentModeEnum.IGNORE) {
+    return changeEnum.NO_CHANGE;
+  }
+
+  const prevParts = prevData.parts || [prevData.html];
+  const scannedParts = scannedData.parts || [scannedData.html];
+
+  const ignoreTags = contentMode === contentModeEnum.TEXT;
+
+  return getHTMLChange(page, prevParts, scannedParts, ignoreTags);
 }
 
 /**
@@ -99,31 +106,15 @@ function getCountChange(prevData, scannedData) {
  *
  * @param {Page} page - Page.
  *
- * @param {ContentData} prevData - Data for previous HTML.
- * @param {ContentData} scannedData - Data for scanned HTML.
+ * @param {string[]} prevParts - Parts for previous HTML.
+ * @param {string[]} scannedParts - Parts for scanned HTML.
  * @param {boolean} ignoreTags - Ignore tags.
  * @returns {changeEnum} - ChangeEnum string indicating how similar the
  * two HTML strings are.
  */
-function getHTMLChange(page, prevData, scannedData, ignoreTags) {
-  if (page.matchCount) {
-    const countChange = getCountChange(prevData, scannedData);
-    if (countChange === changeEnum.MAJOR_CHANGE) {
-      return countChange;
-    }
-  }
-
-  if (page.contentMode === Page.contentModeEnum.IGNORE) {
-    return changeEnum.NO_CHANGE;
-  }
-
-  const prevParts = prevData.parts || [prevData.html];
-  const scannedParts = scannedData.parts || [scannedData.html];
-
+function getHTMLChange(page, prevParts, scannedParts, ignoreTags) {
   let maxChangeDetected = changeEnum.NO_CHANGE;
-
   const iterator = getIteratorFunction(page, prevParts, scannedParts);
-
 
   for (const it of iterator) {
     const prevStrip = stripHtml(
@@ -138,7 +129,7 @@ function getHTMLChange(page, prevData, scannedData, ignoreTags) {
     );
 
     if (prevStrip !== scanStrip) {
-      if (__.isMajorChange(prevStrip, scanStrip, page.ignoreNumbers)) {
+      if (__.isMajorChange(prevStrip, scanStrip, page.changeThreshold)) {
         maxChangeDetected = changeEnum.MAJOR_CHANGE;
         break;
       } else {
@@ -215,35 +206,6 @@ function getIteratorFunction(page, prevParts, scannedParts) {
 }
 
 /**
- * Given two downloaded HTML strings, return a changeEnum value indicating how
- * similar they are.
- *
- * @param {?string} str1 - First HTML string for comparison.
- * @param {!string} str2 - Second HTML string for comparison.
- * @param {number} changeThreshold - Number of characters that must change to
- * indicate a major change.
- *
- * @returns {string} ChangeEnum string indicating how similar the
- * two HTML strings are.
- */
-function getChangeType(str1, str2, changeThreshold) {
-  if (str1 === null) {
-    // This is the first scan.
-    return changeEnum.NEW_CONTENT;
-  } else if (str1 === str2) {
-    // HTML is unchanged.
-    return changeEnum.NO_CHANGE;
-  } else if (__.isMajorChange(str1, str2, changeThreshold)) {
-    // Change is larger than changeThreshold.
-    return changeEnum.MAJOR_CHANGE;
-  } else {
-    // Change is smaller than changeThreshold.
-    return changeEnum.MINOR_CHANGE;
-  }
-}
-
-
-/**
  * Strips whitespace, (most) scripts, tags and (optionally) numbers from the
  * input HTML.
  *
@@ -255,7 +217,7 @@ function getChangeType(str1, str2, changeThreshold) {
  */
 function stripHtml(inHtml, ignoreNumbers, ignoreTags) {
   let html = inHtml;
-  if (html === null || html === undefined) return null;
+  if (html == null) return null;
 
   // for proper number stripping, whitespaces need to be intact.
   if (ignoreNumbers) {

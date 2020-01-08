@@ -6,6 +6,7 @@ import {waitForMs} from '/lib/util/promise.js';
 import {applyEncoding, detectEncoding} from '/lib/util/encoding.js';
 import {matchHtmlWithCondition} from './condition_matcher.js';
 import {getChanges, ContentData, changeEnum} from './scan_content.js';
+import {isMajorChange} from './fuzzy.js';
 
 
 // Allow function mocking
@@ -15,6 +16,7 @@ export const __ = {
   applyEncoding: (...args) => applyEncoding(...args),
   waitForMs: (...args) => waitForMs(...args),
   isUpToDate: (...args) => isUpToDate(...args),
+  isMajorChange: (...args) => isMajorChange(...args),
 
   // Allow private functions to be tested
   updatePageState: updatePageState,
@@ -191,7 +193,7 @@ async function updatePageState(page, prevHtmlData, scannedHtmlData) {
   const changeType = getChanges(
     prevHtmlData,
     scannedHtmlData,
-    updatedPage.changeThreshold,
+    updatedPage,
   );
 
   if (changeType === changeEnum.MAJOR_CHANGE) {
