@@ -133,10 +133,12 @@ export class Page {
    * (ms since Unix epoch).
    * @property {number} newScanTime - Time when the NEW HTML was last updated
    * (ms since Unix epoch).
-   * @property {string} conditions - Conditions separated by comma used in diff.
-   * @property {number} contentMode - Mode used for content comparison.
-   * @property {number} matchMode - Mode that determines order in which parts
-   * are looked at.
+   * @property {string} conditions - Conditions separated by comma used in
+   *   diff.
+   * @property {contentModeEnum|string} contentMode - Mode used for content
+   *   comparison.
+   * @property {matchModeEnum|string} matchMode - Mode that determines order in
+   *   which parts are looked at.
    * @property {boolean} matchCount - True if part count should match.
    */
   constructor(
