@@ -63,6 +63,10 @@ export function getChanges(prevData, scannedData, page) {
     }
   }
 
+  if (prevData.html === scannedData.html) {
+    return changeEnum.NO_CHANGE;
+  }
+
   const contentModeEnum = Page.contentModeEnum;
   const contentMode = page.contentMode || contentModeEnum.TEXT;
   if (contentMode === contentModeEnum.IGNORE) {
@@ -75,16 +79,12 @@ export function getChanges(prevData, scannedData, page) {
   const ignoreTags = contentMode === contentModeEnum.TEXT;
 
   const htmlChange = getHTMLChange(page, prevParts, scannedParts, ignoreTags);
-  if (htmlChange === changeEnum.NO_CHANGE &&
-    prevData.parts != null &&
-    scannedData.parts != null &&
-    prevData.html !== scannedData.html) {
-    // Return minor change if no change was found in parts, but some change was
-    // found anywhere on the page.
-    return changeEnum.MINOR_CHANGE;
-  } else {
-    return htmlChange;
-  }
+
+  // If no change was detected in parts, just return minor change because we
+  // already know there was a change somewhere in the html
+  return htmlChange === changeEnum.NO_CHANGE ?
+    changeEnum.MINOR_CHANGE :
+    htmlChange;
 }
 
 /**
