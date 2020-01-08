@@ -1,20 +1,31 @@
 import * as scanContentModule from '/lib/scan/scan_content.js';
 import {Page} from '/lib/page/page.js';
+import {ContentData} from '/lib/scan/scan_content.js';
 
 describe('scan_content', function() {
   describe('getChangeType', function() {
     it('detects identical pages', function() {
       const html = 'Here is some <b>HTML</b>';
+      const page = new Page('test', {changeThreshold: 100});
 
-      const result = scanContentModule.__.getChangeType(html, html, 100);
+      const result = scanContentModule.__.getChanges(
+        new ContentData(html),
+        new ContentData(html),
+        page,
+      );
 
       expect(result).toEqual(scanContentModule.__.changeEnum.NO_CHANGE);
     });
 
     it('detects new content', function() {
       const html = 'Here is some <b>HTML</b>';
+      const page = new Page('test', {changeThreshold: 100});
 
-      const result = scanContentModule.__.getChangeType(null, html, 100);
+      const result = scanContentModule.__.getChanges(
+        new ContentData(null),
+        new ContentData(html),
+        page,
+      );
 
       expect(result).toEqual(scanContentModule.__.changeEnum.NEW_CONTENT);
     });
@@ -22,9 +33,15 @@ describe('scan_content', function() {
     it('detects minor changes', function() {
       const html1 = 'Here is some <b>HTML</b>';
       const html2 = 'Here is some different <b>HTML</b>';
+      const page = new Page('test', {changeThreshold: 100});
+
       spyOn(scanContentModule.__, 'isMajorChange').and.returnValues(false);
 
-      const result = scanContentModule.__.getChangeType(html1, html2, 100);
+      const result = scanContentModule.__.getChanges(
+        new ContentData(html1),
+        new ContentData(html2),
+        page,
+      );
 
       expect(result).toEqual(scanContentModule.__.changeEnum.MINOR_CHANGE);
     });
@@ -32,9 +49,17 @@ describe('scan_content', function() {
     it('detects major changes', function() {
       const html1 = 'Here is some <b>HTML</b>';
       const html2 = 'Here is some different <b>HTML</b>';
-      spyOn(scanContentModule.__, 'isMajorChange').and.returnValues(true);
+      const page = new Page('test', {changeThreshold: 100});
 
-      const result = scanContentModule.__.getChangeType(html1, html2, 100);
+      spyOn(scanContentModule.__, 'isMajorChange')
+        .and
+        .returnValues(true);
+
+      const result = scanContentModule.__.getChanges(
+        new ContentData(html1),
+        new ContentData(html2),
+        page,
+      );
 
       expect(result).toEqual(scanContentModule.__.changeEnum.MAJOR_CHANGE);
     });
@@ -61,133 +86,58 @@ describe('scan_content', function() {
     });
 
     it('strips scripts', function() {
-      const prevHtml = 'text with<script blah>inline </script> script ' +
+      const html = 'text with<script blah>inline </script> script ' +
         '<script> tags</script>s';
-      const scannedHtml = 'text with <script>\nnewlines</script> of various' +
+      const html2 = 'text with <script>\nnewlines</script> of various' +
         '<script>\r\n   types\r\n</script>..';
 
-      const result = scanContentModule.__.stripHtml(
-        prevHtml,
-        scannedHtml,
-        true,
-        false,
-      );
+      const result = scanContentModule.__.stripHtml(html, false, false);
+      const result2 = scanContentModule.__.stripHtml(html2, false, false);
 
-      expect(result.prevHtml).toEqual('textwithscripts');
-      expect(result.scannedHtml).toEqual('textwithofvarious..');
+      expect(result).toEqual('textwithscripts');
+      expect(result2).toEqual('textwithofvarious..');
     });
 
     it('strips tags', function() {
-      const prevHtml = 'text with <b>tags</b> included.';
-      const scannedHtml = '<p>More text with<br/>tags</p>';
+      const html = 'text with <b>tags</b> included.';
+      const html2 = '<p>More text with<br/>tags</p>';
 
-      const result = scanContentModule.__.stripHtml(
-        prevHtml,
-        scannedHtml,
-        true,
-        false,
-      );
+      const result = scanContentModule.__.stripHtml(html, false, true);
+      const result2 = scanContentModule.__.stripHtml(html2, false, true);
 
-      expect(result.prevHtml).toEqual('textwithtagsincluded.');
-      expect(result.scannedHtml).toEqual('Moretextwithtags');
+      expect(result).toEqual('textwithtagsincluded.');
+      expect(result2).toEqual('Moretextwithtags');
     });
 
     it('strips numbers if Page.ignoreNumbers is true', function() {
-      const prevHtml = 'text with 12.3 numbers, full stops and commas.';
-      const scannedHtml = 'More text with 12.3 numbers, etc.';
+      const html = 'text with 12.3 numbers, 190 000 000, ' +
+        '18,7, full stops and commas.';
 
       const result = scanContentModule.__.stripHtml(
-        prevHtml,
-        scannedHtml,
+        html,
         true,
         true,
       );
 
-      expect(result.prevHtml).toEqual('textwithnumbersfullstopsandcommas');
-      expect(result.scannedHtml).toEqual('Moretextwithnumbersetc');
+      expect(result).toEqual('textwithnumbers,,,fullstopsandcommas.');
     });
 
     it('doesn\'t strip numbers if Page.ignoreNumbers is false', function() {
-      const prevHtml = 'text with 12.3 numbers, stops and commas.';
-      const scannedHtml = 'More text with 12.3 numbers, etc.';
+      const html = 'text with 12.3 numbers, stops and commas.';
 
       const result = scanContentModule.__.stripHtml(
-        prevHtml,
-        scannedHtml,
+        html,
+        false,
         false,
       );
 
-      expect(result.prevHtml).toEqual('textwith12.3numbers,stopsandcommas.');
-      expect(result.scannedHtml).toEqual('Moretextwith12.3numbers,etc.');
+      expect(result).toEqual('textwith12.3numbers,stopsandcommas.');
     });
 
     it('handles null HTML input', function() {
-      const result = scanContentModule.__.stripHtml(null, null, true);
+      const result = scanContentModule.__.stripHtml(null, true, true);
 
-      expect(result.prevHtml).toBe(null);
-      expect(result.scannedHtml).toBe(null);
-    });
-  });
-
-  describe('getHtmlFromResponse', function() {
-    it('applies the encoding in the Page object', async function() {
-      const page = new Page(1, {encoding: 'encoding'});
-      const response = {arrayBuffer: () => Promise.resolve('buffer')};
-      spyOn(scanContentModule.__, 'applyEncoding').and.returnValue('html');
-
-      const html = await scanContentModule.__.getHtmlFromResponse(
-        response,
-        page,
-      );
-
-      expect(html).toEqual('html');
-      expect(scanContentModule.__.applyEncoding)
-        .toHaveBeenCalledWith('buffer', 'encoding');
-    });
-
-    it(
-      'autodetects the encoding if not specified in the Page object',
-      async function() {
-        const page = new Page(1, {});
-        const response = {
-          arrayBuffer: () => Promise.resolve('buffer'),
-          headers: 'headers',
-        };
-        spyOn(
-          scanContentModule.__,
-          'detectEncoding',
-        ).and.returnValue('encoding');
-        spyOn(scanContentModule.__, 'applyEncoding').and.returnValue('html');
-        spyOn(Page, 'load').and.returnValue(Promise.resolve(page));
-        spyOn(page, 'save');
-
-        const html = await scanContentModule.__.getHtmlFromResponse(
-          response,
-          page,
-        );
-
-        expect(html).toEqual('html');
-        expect(scanContentModule.__.applyEncoding)
-          .toHaveBeenCalledWith('buffer', 'utf-8');
-        expect(scanContentModule.__.detectEncoding)
-          .toHaveBeenCalledWith('headers', 'html');
-        expect(scanContentModule.__.applyEncoding)
-          .toHaveBeenCalledWith('buffer', 'encoding');
-        expect(page.save).toHaveBeenCalled;
-        expect(page.encoding).toEqual('encoding');
-      },
-    );
-
-    it('uses response.text() for utf-8 encodings', async function() {
-      const page = new Page(1, {encoding: 'utf-8'});
-      const response = {text: () => Promise.resolve('html')};
-
-      const html = await scanContentModule.__.getHtmlFromResponse(
-        response,
-        page,
-      );
-
-      expect(html).toEqual('html');
+      expect(result).toBe(null);
     });
   });
 });

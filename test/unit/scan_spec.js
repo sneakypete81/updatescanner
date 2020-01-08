@@ -1,6 +1,8 @@
 import * as scanModule from '/lib/scan/scan.js';
+import * as scanContentModule from '/lib/scan/scan_content.js';
 import {PageStore} from '/lib/page/page_store.js';
 import {Page} from '/lib/page/page.js';
+import {ContentData} from '/lib/scan/scan_content.js';
 
 describe('scan', function() {
   describe('updatePageState', function() {
@@ -28,7 +30,11 @@ describe('scan', function() {
       spyOn(this.page, 'save');
       spyOn(PageStore, 'saveHtml');
 
-      const result = await scanModule.__.updatePageState(this.page, html, html);
+      const result = await scanModule.__.updatePageState(
+        this.page,
+        new ContentData(html),
+        new ContentData(html),
+      );
 
       expect(result).toBeFalsy();
       expect(this.page.state).toEqual(Page.stateEnum.NO_CHANGE);
@@ -49,7 +55,11 @@ describe('scan', function() {
         spyOn(PageStore, 'saveHtml');
 
         const result = await scanModule.__
-          .updatePageState(this.page, html, html);
+          .updatePageState(
+            this.page,
+            new ContentData(html),
+            new ContentData(html),
+          );
 
         expect(result).toBeFalsy();
         expect(this.page.state).toEqual(Page.stateEnum.CHANGED);
@@ -68,7 +78,11 @@ describe('scan', function() {
       spyOn(this.page, 'save');
       spyOn(PageStore, 'saveHtml');
 
-      const result = await scanModule.__.updatePageState(this.page, '', html);
+      const result = await scanModule.__.updatePageState(
+        this.page,
+        new ContentData(''),
+        new ContentData(html),
+      );
 
       expect(result).toBeFalsy();
       expect(this.page.state).toEqual(Page.stateEnum.NO_CHANGE);
@@ -86,10 +100,10 @@ describe('scan', function() {
       spyOn(Page, 'load').and.returnValue(Promise.resolve(this.page));
       spyOn(this.page, 'save');
       spyOn(PageStore, 'saveHtml');
-      spyOn(scanModule.__, 'isMajorChange').and.returnValues(false);
+      spyOn(scanContentModule.__, 'isMajorChange').and.returnValues(false);
 
       const result = await scanModule.__.updatePageState(
-        this.page, html1, html2);
+        this.page, new ContentData(html1), new ContentData(html2));
 
       expect(result).toBeFalsy();
       expect(this.page.state).toEqual(Page.stateEnum.NO_CHANGE);
@@ -109,10 +123,13 @@ describe('scan', function() {
         spyOn(Page, 'load').and.returnValue(Promise.resolve(this.page));
         spyOn(this.page, 'save');
         spyOn(PageStore, 'saveHtml');
-        spyOn(scanModule.__, 'isMajorChange').and.returnValues(false);
+        spyOn(scanContentModule.__, 'isMajorChange').and.returnValues(false);
 
         const result = await scanModule.__.updatePageState(
-          this.page, html1, html2);
+          this.page,
+          new ContentData(html1),
+          new ContentData(html2),
+        );
 
         expect(result).toBeFalsy();
         expect(this.page.state).toEqual(Page.stateEnum.CHANGED);
@@ -131,10 +148,13 @@ describe('scan', function() {
       spyOn(Page, 'load').and.returnValue(Promise.resolve(this.page));
       spyOn(this.page, 'save');
       spyOn(PageStore, 'saveHtml');
-      spyOn(scanModule.__, 'isMajorChange').and.returnValues(true);
+      spyOn(scanContentModule.__, 'isMajorChange').and.returnValues(true);
 
       const result = await scanModule.__.updatePageState(
-        this.page, html1, html2);
+        this.page,
+        new ContentData(html1),
+        new ContentData(html2),
+      );
 
       expect(result).toBeTruthy();
       expect(this.page.state).toEqual(Page.stateEnum.CHANGED);
@@ -151,15 +171,19 @@ describe('scan', function() {
       'updates just the new HTML for a repeated major change',
       async function() {
         this.page.state = Page.stateEnum.CHANGED;
+        this.page.changeThreshold = 1;
         const html1 = 'Here is some <b>HTML</b>';
         const html2 = 'Here is some different <b>HTML</b>';
         spyOn(Page, 'load').and.returnValue(Promise.resolve(this.page));
         spyOn(this.page, 'save');
         spyOn(PageStore, 'saveHtml');
-        spyOn(scanModule.__, 'isMajorChange').and.returnValues(true);
+        spyOn(scanContentModule.__, 'isMajorChange').and.returnValues(true);
 
         const result = await scanModule.__.updatePageState(
-          this.page, html1, html2);
+          this.page,
+          new ContentData(html1, null),
+          new ContentData(html2, null),
+        );
 
         expect(result).toBeTruthy();
         expect(this.page.state).toEqual(Page.stateEnum.CHANGED);
