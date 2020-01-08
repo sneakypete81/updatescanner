@@ -1,14 +1,6 @@
 import {log} from '/lib/util/log.js';
-import {isMajorChange} from './fuzzy';
-import {Page} from '../page/page';
-
-export const __ = {
-  log: (...args) => log(...args),
-  isMajorChange: (...args) => isMajorChange(...args),
-  getChangeType: getChangeType,
-  changeEnum: changeEnum,
-  stripHtml: stripHtml,
-};
+import {isMajorChange} from './fuzzy.js';
+import {Page} from '../page/page.js';
 
 /**
  * Enumeration indicating the similarity of two HTML strings.
@@ -21,6 +13,14 @@ export const changeEnum = {
   NO_CHANGE: 'no_change',
   MAJOR_CHANGE: 'major_change',
   MINOR_CHANGE: 'minor_change',
+};
+
+export const __ = {
+  log: (...args) => log(...args),
+  isMajorChange: (...args) => isMajorChange(...args),
+  getChangeType: getChangeType,
+  changeEnum: changeEnum,
+  stripHtml: stripHtml,
 };
 
 /**
@@ -65,6 +65,8 @@ export function getChanges(prevData, scannedHTML, page) {
     return getHTMLChange(page, prevData, scannedHTML, true);
   } else {
     __.log(`Unsupported content mode ${contentMode}.`);
+    // original method is default
+    return getHTMLChange(page, prevData, scannedHTML, true);
   }
 }
 
@@ -154,8 +156,8 @@ function getHTMLChange(page, prevData, scannedData, ignoreTags) {
  *   parts.
  */
 function getIteratorFunction(page, prevParts, scannedParts) {
-  const matchMode = page.matchMode;
   const matchModeEnum = Page.matchModeEnum;
+  const matchMode = page.matchMode || matchModeEnum.FIRST;
 
   let iteratorFunction;
 
@@ -190,6 +192,8 @@ function getIteratorFunction(page, prevParts, scannedParts) {
         };
       }
     };
+  } else {
+    __.log(`Unknown match mode ${matchMode}`);
   }
 
   /**
@@ -210,8 +214,8 @@ function getIteratorFunction(page, prevParts, scannedParts) {
  * Given two downloaded HTML strings, return a changeEnum value indicating how
  * similar they are.
  *
- * @param {string} str1 - First HTML string for comparison.
- * @param {string} str2 - Second HTML string for comparison.
+ * @param {?string} str1 - First HTML string for comparison.
+ * @param {!string} str2 - Second HTML string for comparison.
  * @param {number} changeThreshold - Number of characters that must change to
  * indicate a major change.
  *
@@ -239,7 +243,7 @@ function getChangeType(str1, str2, changeThreshold) {
  * Strips whitespace, (most) scripts, tags and (optionally) numbers from the
  * input HTML.
  *
- * @param {string} prevHtml - HTML from storage.
+ * @param {?string} prevHtml - HTML from storage.
  * @param {boolean} ignoreNumbers - True if numbers should be stripped.
  * @param {boolean} ignoreTags - True if tags should be stripped.
  *
@@ -257,7 +261,7 @@ function stripHtml(prevHtml, ignoreNumbers, ignoreTags) {
 }
 
 /**
- * @param {string} html - HTML to process.
+ * @param {?string} html - HTML to process.
  *
  * @returns {string} HTML with whitespace removed.
  */
@@ -269,7 +273,7 @@ function stripWhitespace(html) {
 }
 
 /**
- * @param {string} html - HTML to process.
+ * @param {?string} html - HTML to process.
  *
  * @returns {string} HTML with (most) scripts removed.
  */
@@ -281,7 +285,7 @@ function stripScript(html) {
 }
 
 /**
- * @param {string} html - HTML to process.
+ * @param {?string} html - HTML to process.
  *
  * @returns {string} HTML with tags removed.
  */
@@ -293,7 +297,7 @@ function stripTags(html) {
 }
 
 /**
- * @param {string} html - HTML to process.
+ * @param {?string} html - HTML to process.
  *
  * @returns {string} HTML with numbers, commas and full stops removed.
  */
