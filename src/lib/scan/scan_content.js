@@ -243,67 +243,61 @@ function getChangeType(str1, str2, changeThreshold) {
  * Strips whitespace, (most) scripts, tags and (optionally) numbers from the
  * input HTML.
  *
- * @param {?string} prevHtml - HTML from storage.
+ * @param {?string} inHtml - HTML to strip.
  * @param {boolean} ignoreNumbers - True if numbers should be stripped.
  * @param {boolean} ignoreTags - True if tags should be stripped.
  *
  * @returns {object} Object containing the updated prevHtml and scannedHtml.
  */
-function stripHtml(prevHtml, ignoreNumbers, ignoreTags) {
-  let html = stripScript(stripWhitespace(prevHtml));
-  if (ignoreTags) {
-    html = stripTags(html);
-  }
+function stripHtml(inHtml, ignoreNumbers, ignoreTags) {
+  let html = inHtml;
+  if (html === null || html === undefined) return null;
+
+  // for proper number stripping, whitespaces need to be intact.
   if (ignoreNumbers) {
     html = stripNumbers(html);
+  }
+
+  html = stripScript(stripWhitespace(html));
+
+  if (ignoreTags) {
+    html = stripTags(html);
   }
   return html;
 }
 
 /**
- * @param {?string} html - HTML to process.
+ * @param {string} html - HTML to process.
  *
  * @returns {string} HTML with whitespace removed.
  */
 function stripWhitespace(html) {
-  if (html === null) {
-    return null;
-  }
   return html.replace(/\s+/g, '');
 }
 
 /**
- * @param {?string} html - HTML to process.
+ * @param {string} html - HTML to process.
  *
  * @returns {string} HTML with (most) scripts removed.
  */
 function stripScript(html) {
-  if (html === null) {
-    return null;
-  }
   return html.replace(/<script.*?>.*?<\/script>/gi, '');
 }
 
 /**
- * @param {?string} html - HTML to process.
+ * @param {string} html - HTML to process.
  *
  * @returns {string} HTML with tags removed.
  */
 function stripTags(html) {
-  if (html === null) {
-    return null;
-  }
   return html.replace(/(<([^<]+)>)/g, '');
 }
 
 /**
- * @param {?string} html - HTML to process.
+ * @param {string} html - HTML to process.
  *
  * @returns {string} HTML with numbers, commas and full stops removed.
  */
 function stripNumbers(html) {
-  if (html === null) {
-    return null;
-  }
-  return html.replace(/[0-9,.]*/g, '');
+  return html.replace(/([0-9]+([,.]?[0-9])?)*/g, '');
 }
