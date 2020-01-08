@@ -10,5 +10,5 @@ require('./lib/karma').run({
   autoWatch: true,
   // Windows is not supported by the notification reporter
   reporters: ['dots', 'kjhtml'].concat(
-    isWindows ? [] : ['notification']),
+    isWindows ? [] : ['notify']),
 });
