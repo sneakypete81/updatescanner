@@ -46,9 +46,6 @@ export function openPageDialog(page) {
 
   form.elements['conditions'].value = page.conditions;
   form.elements['scan-mode'].value = getScanMode(page);
-  // form.elements['content-mode'].value = page.contentMode;
-  // form.elements['match-mode'].value = page.matchMode;
-  // form.elements['match-count'].value = page.matchCount;
 
   const autoscanSliderValue = autoscanMinsToSlider(page.scanRateMinutes);
   form.elements['autoscan'].value = autoscanSliderValue;
@@ -80,7 +77,7 @@ export function openPageDialog(page) {
           conditions: form.elements['conditions'].value,
           contentMode: modeData.contentMode,
           matchMode: modeData.matchMode,
-          matchCount: modeData.matchCount,
+          requireExactMatchCount: modeData.requireExactMatchCount,
           partialScan: modeData.partialScan,
         });
       } else {
@@ -172,7 +169,7 @@ const ScanModeMap = new Map([
     description: '',
     options: {
       partialScan: false,
-      matchCount: false,
+      requireExactMatchCount: false,
       contentMode: Page.contentModeEnum.TEXT,
       matchMode: Page.matchModeEnum.FIRST,
     },
@@ -182,7 +179,7 @@ const ScanModeMap = new Map([
     selector.`,
     options: {
       partialScan: true,
-      matchCount: false,
+      requireExactMatchCount: false,
       contentMode: Page.contentModeEnum.TEXT,
       matchMode: Page.matchModeEnum.FIRST,
     },
@@ -192,7 +189,7 @@ const ScanModeMap = new Map([
     Content is ignored.`,
     options: {
       partialScan: true,
-      matchCount: true,
+      requireExactMatchCount: true,
       contentMode: Page.contentModeEnum.IGNORE,
       matchMode: Page.matchModeEnum.FIRST,
     },

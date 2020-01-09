@@ -33,7 +33,7 @@ export class Page {
       conditions: null,
       contentMode: Page.contentModeEnum.TEXT,
       matchMode: Page.matchModeEnum.FIRST,
-      matchCount: true,
+      requireExactMatchCount: true,
       partialScan: false,
     };
   }
@@ -140,7 +140,8 @@ export class Page {
    *   comparison.
    * @property {matchModeEnum|string} matchMode - Mode that determines order in
    *   which parts are looked at.
-   * @property {boolean} matchCount - True if part count should match.
+   * @property {boolean} requireExactMatchCount - True if part count should
+   *   match.
    * @property {boolean} partialScan - True if conditions should be used for
    *   selecting parts of the page to scan.
    */
@@ -165,7 +166,7 @@ export class Page {
       conditions = Page.DEFAULTS.conditions,
       contentMode = Page.DEFAULTS.contentMode,
       matchMode = Page.DEFAULTS.matchMode,
-      matchCount = Page.DEFAULTS.matchCount,
+      requireExactMatchCount = Page.DEFAULTS.requireExactMatchCount,
       partialScan = Page.DEFAULTS.partialScan,
     },
   ) {
@@ -188,7 +189,7 @@ export class Page {
     this.conditions = conditions;
     this.contentMode = contentMode;
     this.matchMode = matchMode;
-    this.matchCount = matchCount;
+    this.requireExactMatchCount = requireExactMatchCount;
     this.partialScan = partialScan;
   }
 
@@ -217,7 +218,7 @@ export class Page {
       conditions: this.conditions,
       contentMode: this.contentMode,
       matchMode: this.matchMode,
-      matchCount: this.matchCount,
+      requireExactMatchCount: this.requireExactMatchCount,
       partialScan: this.partialScan,
     };
   }
@@ -243,7 +244,7 @@ export class Page {
       conditions: this.conditions,
       contentMode: this.contentMode,
       matchMode: this.matchMode,
-      matchCount: this.matchCount,
+      requireExactMatchCount: this.requireExactMatchCount,
       partialScan: this.partialScan,
       // state: this.state,
       // lastAutoscanTime: this.lastAutoscanTime,

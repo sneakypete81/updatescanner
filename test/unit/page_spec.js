@@ -81,7 +81,7 @@ describe('Page', function() {
         conditions: '#id',
         contentMode: Page.contentModeEnum.HTML,
         matchMode: Page.matchModeEnum.LOOKUP,
-        matchCount: true,
+        requireExactMatchCount: true,
         partialScan: true,
       };
       const page = new Page(id, data);
