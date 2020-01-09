@@ -3,7 +3,7 @@ import {Page} from '/lib/page/page.js';
 import {ContentData} from '/lib/scan/scan_content.js';
 
 describe('scan_content', function() {
-  describe('getChangeType', function() {
+  describe('getChanges', function() {
     it('detects identical pages', function() {
       const html = 'Here is some <b>HTML</b>';
       const page = new Page('test', {changeThreshold: 100});
@@ -63,6 +63,234 @@ describe('scan_content', function() {
 
       expect(result).toEqual(scanContentModule.__.changeEnum.MAJOR_CHANGE);
     });
+  });
+
+  describe('getChangesParts', function() {
+    it('detects identical page parts', function() {
+      const html = 'Here is some <b>HTML</b>';
+      const htmlParts = html.split(' ');
+      const page = new Page('test', {changeThreshold: 100});
+
+      const result = scanContentModule.__.getChanges(
+        new ContentData(html, htmlParts),
+        new ContentData(html, htmlParts),
+        page,
+      );
+
+      expect(result).toEqual(scanContentModule.__.changeEnum.NO_CHANGE);
+    });
+
+    it('detects minor part changes', function() {
+      const html1 = 'Here is some <b>HTML</b>';
+      const html1Parts = html1.split(' ');
+      const html2 = 'Here is some different <b>HTML</b>';
+      const html2Parts = html2.split(' ');
+      const page = new Page('test', {changeThreshold: 100, matchCount: false});
+
+      spyOn(scanContentModule.__, 'isMajorChange').and.returnValues(false);
+
+      const result = scanContentModule.__.getChanges(
+        new ContentData(html1, html1Parts),
+        new ContentData(html2, html2Parts),
+        page,
+      );
+
+      expect(result).toEqual(scanContentModule.__.changeEnum.MINOR_CHANGE);
+    });
+
+    it('detects major changes', function() {
+      const html1 = 'Here is some <b>HTML</b>';
+      const html1Parts = html1.split(' ');
+      const html2 = 'Here is some different <b>HTML</b>';
+      const html2Parts = html2.split(' ');
+      const page = new Page('test', {changeThreshold: 100});
+
+      spyOn(scanContentModule.__, 'isMajorChange')
+        .and
+        .returnValues(true);
+
+      const result = scanContentModule.__.getChanges(
+        new ContentData(html1, html1Parts),
+        new ContentData(html2, html2Parts),
+        page,
+      );
+
+      expect(result).toEqual(scanContentModule.__.changeEnum.MAJOR_CHANGE);
+    });
+
+    it('detects count change as major change', function() {
+      const html1 = '<>';
+      const html1Parts = ['<>'];
+      const html2 = '<>';
+      const html2Parts = ['<', '>'];
+      const page = new Page('test', {matchCount: true});
+
+      const result = scanContentModule.__.getChanges(
+        new ContentData(html1, html1Parts),
+        new ContentData(html2, html2Parts),
+        page,
+      );
+
+      expect(result).toEqual(scanContentModule.__.changeEnum.MAJOR_CHANGE);
+    });
+  });
+
+  describe('getIteratorFunction', function() {
+    it('detect first iterator function', function() {
+      const html1Parts = [5, 4, 3, 2, 1];
+      const html2Parts = [1, 2, 3, 4, 5];
+      const page = new Page('test', {matchMode: Page.matchModeEnum.FIRST});
+
+      const iterator = scanContentModule.__.getIteratorFunction(
+        page,
+        html1Parts,
+        html2Parts,
+      );
+
+      const resultPrev = [];
+      const resultScanned = [];
+      for (const item of iterator) {
+        resultPrev.push(html1Parts[item.prevIndex]);
+        resultScanned.push(html2Parts[item.scannedIndex]);
+      }
+
+      expect(resultPrev).toEqual(html1Parts);
+      expect(resultScanned).toEqual(html2Parts);
+    });
+
+    it('detect last iterator function', function() {
+      const html1Parts = [5, 4, 3, 2, 1];
+      const html2Parts = [1, 2, 3, 4, 5];
+      const page = new Page('test', {matchMode: Page.matchModeEnum.LAST});
+
+      const iterator = scanContentModule.__.getIteratorFunction(
+        page,
+        html1Parts,
+        html2Parts,
+      );
+
+      const resultPrev = [];
+      const resultScanned = [];
+      for (const item of iterator) {
+        resultPrev.push(html1Parts[item.prevIndex]);
+        resultScanned.push(html2Parts[item.scannedIndex]);
+      }
+
+      expect(resultPrev).toEqual(html2Parts);
+      expect(resultScanned).toEqual(html1Parts);
+    });
+
+    it('detect lookup iterator function', function() {
+      const html1Parts = [5, 4, 3, 2, 1];
+      const html2Parts = [1, 2, 3, 4, 5];
+      const page = new Page('test', {matchMode: Page.matchModeEnum.LOOKUP});
+
+      const iterator = scanContentModule.__.getIteratorFunction(
+        page,
+        html1Parts,
+        html2Parts,
+      );
+
+      const resultPrev = [];
+      const resultScanned = [];
+      for (const item of iterator) {
+        resultPrev.push(html1Parts[item.prevIndex]);
+        resultScanned.push(html2Parts[item.scannedIndex]);
+      }
+
+      expect(resultPrev).toEqual(html1Parts);
+      expect(resultScanned).toEqual(html1Parts);
+    });
+  });
+
+  describe('contentMode', function() {
+    it('detects no change with content mode text', function() {
+      const html1 = '<div>some text</div>';
+      const html2 = '<span>some text</span>';
+      const page = new Page(
+        'test',
+        {contentMode: Page.contentModeEnum.TEXT},
+      );
+
+      const result = scanContentModule.__.getChanges(
+        new ContentData(html1),
+        new ContentData(html2),
+        page,
+      );
+
+      expect(result).toEqual(scanContentModule.__.changeEnum.NO_CHANGE);
+    });
+
+    it('detects major change with content mode HTML', function() {
+      const html1 = '<div>some text</div>';
+      const html2 = '<span>some text</span>';
+      const page = new Page(
+        'test',
+        {contentMode: Page.contentModeEnum.HTML},
+      );
+
+      spyOn(scanContentModule.__, 'isMajorChange')
+        .and
+        .returnValues(true);
+
+      const result = scanContentModule.__.getChanges(
+        new ContentData(html1),
+        new ContentData(html2),
+        page,
+      );
+
+      expect(result).toEqual(scanContentModule.__.changeEnum.MAJOR_CHANGE);
+    });
+
+    it('detects no change with content mode IGNORE', function() {
+      const html1 = '<div>some text</div>';
+      const html2 = '<span>some other text</span>';
+      const page = new Page(
+        'test',
+        {contentMode: Page.contentModeEnum.IGNORE},
+      );
+
+      spyOn(scanContentModule.__, 'isMajorChange')
+        .and
+        .returnValues(true);
+
+      const result = scanContentModule.__.getChanges(
+        new ContentData(html1),
+        new ContentData(html2),
+        page,
+      );
+
+      expect(result).toEqual(scanContentModule.__.changeEnum.NO_CHANGE);
+    });
+
+    it(
+      'detects minor change outside with content mode IGNORE and match count',
+      function() {
+        const html1 = '<div>some text</div>';
+        const html1Split = ['<div>', '</div>'];
+        const html2 = '<span>some other text</span>';
+        const html2Split = ['<div>', '</div>'];
+        const page = new Page(
+          'test',
+          {
+            matchCount: true,
+            contentMode: Page.contentModeEnum.IGNORE,
+          },
+        );
+
+        spyOn(scanContentModule.__, 'isMajorChange')
+          .and
+          .returnValues(true);
+
+        const result = scanContentModule.__.getChanges(
+          new ContentData(html1, html1Split),
+          new ContentData(html2, html2Split),
+          page,
+        );
+
+        expect(result).toEqual(scanContentModule.__.changeEnum.NO_CHANGE);
+      },
+    );
   });
 
   describe('stripHtml', function() {
