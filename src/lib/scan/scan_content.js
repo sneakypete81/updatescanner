@@ -77,15 +77,43 @@ export function getChanges(prevData, scannedData, page) {
   const prevParts = prevData.parts || [prevData.html];
   const scannedParts = scannedData.parts || [scannedData.html];
 
-  const ignoreTags = contentMode === contentModeEnum.TEXT;
+  const ignoreTags = contentMode !== contentModeEnum.HTML;
 
   const htmlChange = getHTMLChange(page, prevParts, scannedParts, ignoreTags);
 
   // If no change was detected in parts, just return minor change because we
   // already know there was a change somewhere in the html
-  return htmlChange === changeEnum.NO_CHANGE ?
+  if (htmlChange === changeEnum.NO_CHANGE) {
+    return getChangeInStrippedHtml(page, prevData.html, scannedData.html);
+  } else {
+    return htmlChange;
+  }
+}
+
+/**
+ * Returns true if prev and scanned HTML are not equal after stripping.
+ *
+ * @param {Page} page - Page.
+ * @param {string} prevHtml - Previous HTML.
+ * @param {string} scannedHtml - Scanned HTML.
+ * @returns {changeEnum} True if change is detected.
+ */
+function getChangeInStrippedHtml(page, prevHtml, scannedHtml) {
+  const ignoreTags = page.contentMode !== Page.contentModeEnum.HTML;
+  const prevStrip = stripHtml(
+    prevHtml,
+    page.ignoreNumbers,
+    ignoreTags,
+  );
+  const scanStrip = stripHtml(
+    scannedHtml,
+    page.ignoreNumbers,
+    ignoreTags,
+  );
+
+  return prevStrip !== scanStrip ?
     changeEnum.MINOR_CHANGE :
-    htmlChange;
+    changeEnum.NO_CHANGE;
 }
 
 /**
