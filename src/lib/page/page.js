@@ -34,6 +34,7 @@ export class Page {
       contentMode: Page.contentModeEnum.TEXT,
       matchMode: Page.matchModeEnum.FIRST,
       matchCount: true,
+      partialScan: false,
     };
   }
 
@@ -140,6 +141,8 @@ export class Page {
    * @property {matchModeEnum|string} matchMode - Mode that determines order in
    *   which parts are looked at.
    * @property {boolean} matchCount - True if part count should match.
+   * @property {boolean} partialScan - True if conditions should be used for
+   *   selecting parts of the page to scan.
    */
   constructor(
     id,
@@ -163,6 +166,7 @@ export class Page {
       contentMode = Page.DEFAULTS.contentMode,
       matchMode = Page.DEFAULTS.matchMode,
       matchCount = Page.DEFAULTS.matchCount,
+      partialScan = Page.DEFAULTS.partialScan,
     },
   ) {
     this.id = id;
@@ -185,6 +189,7 @@ export class Page {
     this.contentMode = contentMode;
     this.matchMode = matchMode;
     this.matchCount = matchCount;
+    this.partialScan = partialScan;
   }
 
   /**
@@ -213,6 +218,7 @@ export class Page {
       contentMode: this.contentMode,
       matchMode: this.matchMode,
       matchCount: this.matchCount,
+      partialScan: this.partialScan,
     };
   }
 
@@ -238,6 +244,7 @@ export class Page {
       contentMode: this.contentMode,
       matchMode: this.matchMode,
       matchCount: this.matchCount,
+      partialScan: this.partialScan,
       // state: this.state,
       // lastAutoscanTime: this.lastAutoscanTime,
       // oldScanTime: this.oldScanTime,

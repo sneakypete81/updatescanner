@@ -87,41 +87,28 @@
         </fieldset>
 
         <fieldset id="conditionsFieldset">
-          <legend>Conditions:</legend>
-          <label class="description" for="conditions">
-            Comma separated conditions.
-            Currently supported are #id_name, .class_name, .class_name[index]
-            including nesting #id_name.class_name.</label>
-          <input style="width: 100%" id="conditions" name="conditions"
-                 type="text"/>
+          <div>
+            <label for="scan-mode">Scan mode:</label>
+            <select id="scan-mode" name="scan-mode">
+              <option value="anywhere">Anywhere in the page</option>
+              <option value="inside-elements">Inside the selected HTML
+                elements
+              </option>
+              <option value="count-only">That change the number of HTML elements
+                (content is ignored)
+              </option>
+            </select>
+            <output name="scan-mode-description"></output>
+          </div>
 
           <div>
-            <label>
-              <span>Content mode:</span>
-              <select id="content-mode" name="content-mode">
-                <option value="html">HTML match</option>
-                <option value="text">Text match</option>
-              </select>
-            </label>
-          </div>
-          <div>
-            <label>
-              <span>Match mode:</span>
-              <select id="match-mode" name="match-mode">
-                <option value="first">From first</option>
-                <option value="last">From last</option>
-                <option value="lookup">Lookup</option>
-              </select>
-            </label>
-            <label for="match-mode">Determines direction from which
-              matching will start. (Eg. old: 1234 new: 24 -> from first: 1 is
-              not 3 match fails, from last: 4 is 4 but 2 is not 3 so match
-              fails, lookup: found 4 and also found 2 so match succeeds)</label>
-          </div>
-          <div>
-            <input type="checkbox" id="match-count" name="match-count">
-            <label for="match-count" class="checkbox-label">Consider change in
-              number of matches a major change.</label>
+            <label for="conditions">HTML elements selector:</label>
+            <input style="width: 100%" id="conditions" name="conditions"
+                   type="text"/>
+            <label class="description" for="conditions">
+              Comma separated conditions.
+              Currently supported are #id_name, .class_name, .class_name[index]
+              including nesting #id_name.class_name.</label>
           </div>
         </fieldset>
 

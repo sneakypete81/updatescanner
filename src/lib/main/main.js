@@ -203,7 +203,11 @@ export class Main {
     this.currentPage.changeThreshold = newSettings.changeThreshold;
     this.currentPage.ignoreNumbers = newSettings.ignoreNumbers;
     this.currentPage.conditions = newSettings.conditions;
-    this.currentPage.save();
+    this.currentPage.contentMode = newSettings.contentMode;
+    this.currentPage.matchMode = newSettings.matchMode;
+    this.currentPage.matchCount = newSettings.matchCount;
+    this.currentPage.partialScan = newSettings.partialScan;
+    await this.currentPage.save();
 
     document.location.replace(getMainDiffUrl(this.currentPage.id));
   }
