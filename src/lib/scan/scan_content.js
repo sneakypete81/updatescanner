@@ -21,6 +21,7 @@ export const __ = {
   changeEnum: changeEnum,
   stripHtml: stripHtml,
   getChanges: getChanges,
+  getIteratorFunction: getIteratorFunction,
 };
 
 /**
@@ -190,10 +191,11 @@ function getIteratorFunction(page, prevParts, scannedParts) {
     iteratorFunction = function* (prevParts, scannedParts) {
       const length = Math.min(prevParts.length, scannedParts.length);
       for (let i = 0; i < length; i++) {
-        const index = Math.max(prevParts.indexOf(scannedParts[i]), 0);
+        const index = scannedParts.indexOf(prevParts[i]);
         yield {
-          prevIndex: index,
-          scannedIndex: i,
+          // Always return valid index
+          prevIndex: i,
+          scannedIndex: Math.max(index, 0),
         };
       }
     };
