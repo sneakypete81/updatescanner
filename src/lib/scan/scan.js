@@ -166,7 +166,7 @@ async function processHtmlWithConditions(page, scannedHtml, prevHtml) {
         new ContentData(scannedHtml, scannedParts),
       );
     });
-    return await somePromise(promises);
+    return somePromise(promises);
   } else {
     return updatePageState(
       page,
