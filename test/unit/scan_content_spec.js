@@ -85,7 +85,10 @@ describe('scan_content', function() {
       const html1Parts = html1.split(' ');
       const html2 = 'Here is some different <b>HTML</b>';
       const html2Parts = html2.split(' ');
-      const page = new Page('test', {changeThreshold: 100, matchCount: false});
+      const page = new Page(
+        'test',
+        {changeThreshold: 100, requireExactMatchCount: false},
+      );
 
       spyOn(scanContentModule.__, 'isMajorChange').and.returnValues(false);
 
@@ -123,7 +126,7 @@ describe('scan_content', function() {
       const html1Parts = ['<>'];
       const html2 = '<>';
       const html2Parts = ['<', '>'];
-      const page = new Page('test', {matchCount: true});
+      const page = new Page('test', {requireExactMatchCount: true});
 
       const result = scanContentModule.__.getChanges(
         new ContentData(html1, html1Parts),
@@ -273,7 +276,7 @@ describe('scan_content', function() {
         const page = new Page(
           'test',
           {
-            matchCount: true,
+            requireExactMatchCount: true,
             contentMode: Page.contentModeEnum.IGNORE,
           },
         );
