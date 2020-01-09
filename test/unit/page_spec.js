@@ -82,6 +82,7 @@ describe('Page', function() {
         contentMode: Page.contentModeEnum.HTML,
         matchMode: Page.matchModeEnum.LOOKUP,
         matchCount: true,
+        partialScan: true,
       };
       const page = new Page(id, data);
 

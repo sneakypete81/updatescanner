@@ -3,6 +3,7 @@ import {qs, $on, hideElement} from '/lib/util/view_helpers.js';
 // See https://bugzilla.mozilla.org/show_bug.cgi?id=840640
 import dialogPolyfill
   from '/dependencies/module/dialog-polyfill/dist/dialog-polyfill.esm.js';
+import {Page} from '../page/page.js';
 
 /**
  * Initialise the dialog box.
@@ -20,6 +21,9 @@ export function init() {
   );
   $on(form.elements['threshold'], 'input', ({target}) =>
     updateThresholdDescription(target.value),
+  );
+  $on(form.elements['scan-mode'], 'input', ({target}) =>
+    updateScanModeDescription(target.value),
   );
 
   $on(form, 'reset', () => dialog.close());
@@ -41,9 +45,10 @@ export function openPageDialog(page) {
   form.elements['url'].value = page.url;
 
   form.elements['conditions'].value = page.conditions;
-  form.elements['content-mode'].value = page.contentMode;
-  form.elements['match-mode'].value = page.matchMode;
-  form.elements['match-count'].value = page.matchCount;
+  form.elements['scan-mode'].value = getScanMode(page);
+  // form.elements['content-mode'].value = page.contentMode;
+  // form.elements['match-mode'].value = page.matchMode;
+  // form.elements['match-count'].value = page.matchCount;
 
   const autoscanSliderValue = autoscanMinsToSlider(page.scanRateMinutes);
   form.elements['autoscan'].value = autoscanSliderValue;
@@ -62,6 +67,8 @@ export function openPageDialog(page) {
   return new Promise((resolve, reject) => {
     $on(dialog, 'close', () => {
       if (dialog.returnValue === 'ok') {
+        const mode = form.elements['scan-mode'].value;
+        const modeData = ScanModeMap.get(mode).options;
         resolve({
           title: form.elements['title'].value,
           url: form.elements['url'].value,
@@ -71,7 +78,10 @@ export function openPageDialog(page) {
             ThresholdSliderToChars[form.elements['threshold'].value],
           ignoreNumbers: form.elements['ignore-numbers'].checked,
           conditions: form.elements['conditions'].value,
-          contentMode: form.elements['content-mode'].value,
+          contentMode: modeData.contentMode,
+          matchMode: modeData.matchMode,
+          matchCount: modeData.matchCount,
+          partialScan: modeData.partialScan,
         });
       } else {
         resolve(null);
@@ -155,6 +165,75 @@ function autoscanMinsToSlider(minutes) {
 function updateAutoscanDescription(sliderValue) {
   qs('#settings-form').elements['autoscan-description'].value =
     AutoscanSliderDescriptions[sliderValue];
+}
+
+const ScanModeMap = new Map([
+  ['anywhere', {
+    description: '',
+    options: {
+      partialScan: false,
+      matchCount: false,
+      contentMode: Page.contentModeEnum.TEXT,
+      matchMode: Page.matchModeEnum.FIRST,
+    },
+  }],
+  ['inside-elements', {
+    description: `Check only inside selected elements using HTML elements 
+    selector.`,
+    options: {
+      partialScan: true,
+      matchCount: false,
+      contentMode: Page.contentModeEnum.TEXT,
+      matchMode: Page.matchModeEnum.FIRST,
+    },
+  }],
+  ['count-only', {
+    description: `Check only for change in number of HTML element matches.
+    Content is ignored.`,
+    options: {
+      partialScan: true,
+      matchCount: true,
+      contentMode: Page.contentModeEnum.IGNORE,
+      matchMode: Page.matchModeEnum.FIRST,
+    },
+  }],
+]);
+
+/**
+ *
+ * @param {string} mode - Scan mode name.
+ */
+function updateScanModeDescription(mode) {
+  const form = qs('#settings-form');
+  form.elements['scan-mode-description'].value =
+    ScanModeMap.get(mode).description;
+}
+
+/**
+ * Returns scan mode from page.
+ *
+ * @param {Page} page - Page.
+ * @returns {string} Mode name.
+ */
+function getScanMode(page) {
+  const scanModeMapIterator = ScanModeMap.entries();
+  for (const item of scanModeMapIterator) {
+    const data = item[1];
+    const options = data.options;
+    let isEqual = true;
+    for (const propertyName in options) {
+      if (options[propertyName] !== page[propertyName]) {
+        isEqual = false;
+        break;
+      }
+    }
+
+    if (isEqual) {
+      return item[0];
+    }
+  }
+
+  return ScanModeMap.keys().next().value;
 }
 
 const ThresholdSliderMap = new Map([
