@@ -206,9 +206,6 @@ export async function matchHtmlWithSelector(html, selector) {
 
     matchArray.length = 0;
 
-    console.log(`matching ${type} with value ${partValue} (startAt: ${startAt},
-     nextIndex ${nextIndex})`);
-
     if (type === '[') {
       const endBracketIndex = selector.indexOf(']', startAt);
       const indexString = selector.substring(startAt, endBracketIndex);
@@ -243,8 +240,6 @@ export async function matchHtmlWithSelector(html, selector) {
     }
 
     result = [...matchArray];
-
-    console.log(result);
 
     i = nextIndex;
   }
