@@ -169,7 +169,6 @@ const ScanModeMap = new Map([
     description: '',
     options: {
       partialScan: false,
-      requireExactMatchCount: false,
       contentMode: Page.contentModeEnum.TEXT,
       matchMode: Page.matchModeEnum.FIRST,
     },
@@ -179,7 +178,7 @@ const ScanModeMap = new Map([
     selector.`,
     options: {
       partialScan: true,
-      requireExactMatchCount: false,
+      requireExactMatchCount: true,
       contentMode: Page.contentModeEnum.TEXT,
       matchMode: Page.matchModeEnum.FIRST,
     },
