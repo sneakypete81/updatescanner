@@ -34,7 +34,7 @@ function nextPart(selector, startFrom) {
  * @returns {string} Selector part.
  */
 function getValue(selector, startAtIndex, nextIndex) {
-  return selector.substring(startAtIndex, nextIndex - startAtIndex + 1);
+  return selector.substring(startAtIndex, nextIndex);
 }
 
 /**
@@ -46,7 +46,9 @@ function getValue(selector, startAtIndex, nextIndex) {
  * @returns {string} Regular expression that can be used in matches.
  */
 function getTagWithAttributeValue(attr, value) {
-  return `(?=<[^>]+${attr}=(?=[\\s+\\"\\']${value}[\\s+\\"\\']).+)([^>]+>)`;
+  const classNameRegex = '((-?[_a-zA-Z]+[_a-zA-Z0-9-]*)? *)*';
+  const inner = `${classNameRegex}${value}${classNameRegex}`;
+  return `(?=<[^>]+${attr}=(?=[\\s+\\"\\']${inner}[\\s+\\"\\']).+)([^>]+>)`;
 }
 
 /**
@@ -204,6 +206,9 @@ export async function matchHtmlWithSelector(html, selector) {
 
     matchArray.length = 0;
 
+    console.log(`matching ${type} with value ${partValue} (startAt: ${startAt},
+     nextIndex ${nextIndex})`);
+
     if (type === '[') {
       const endBracketIndex = selector.indexOf(']', startAt);
       const indexString = selector.substring(startAt, endBracketIndex);
@@ -238,6 +243,8 @@ export async function matchHtmlWithSelector(html, selector) {
     }
 
     result = [...matchArray];
+
+    console.log(result);
 
     i = nextIndex;
   }
