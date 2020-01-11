@@ -92,11 +92,14 @@ function matchId(html, idName) {
  * @param {Array} matches - List of previous matches.
  * @param {number} index - Index of item we look for.
  *
- * @returns {Any} Item at given index in array or
+ * @returns {?string} Item at given index in array or
  * first or last element if index was out of bounds.
  */
 function matchIndex(matches, index) {
-  index = Math.max(Math.min(matches.length, index), 0);
+  if (matches.length === 0 || index < 0 || index >= matches.length) {
+    return null;
+  }
+
   return matches[index];
 }
 
@@ -183,7 +186,8 @@ async function subDom(html, index) {
  * @param {string} selector - Regex selector (supports classes,
  * ids and indexes).
  *
- * @returns {Array} - Array of matches.
+ * @returns {Array<string>} - Array of matches. If syntax error occurs, array
+ *   with original HTML is returned.
  */
 export async function matchHtmlWithSelector(html, selector) {
   let i = 0;
@@ -205,7 +209,10 @@ export async function matchHtmlWithSelector(html, selector) {
       const indexString = selector.substring(startAt, endBracketIndex);
       try {
         const index = parseInt(indexString);
-        matchArray.push(matchIndex(result, index));
+        const matchedItemAtIndex = matchIndex(result, index);
+        if (matchedItemAtIndex !== null) {
+          matchArray.push(matchedItemAtIndex);
+        }
       } catch (exception) {
         __.log(exception);
         return [html];
