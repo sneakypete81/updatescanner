@@ -23,7 +23,7 @@ function nextPart(condition, startFrom) {
 }
 
 /**
- * Substrings value of conditions part.
+ * Substrings value of selectors part.
  *
  * @param {string} condition - Condition.
  * @param {number} startAtIndex - Start index of condition part.

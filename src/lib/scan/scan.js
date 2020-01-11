@@ -136,7 +136,7 @@ async function processHtml(page, scannedHtml) {
 }
 
 /**
- * Processes HTML with conditions specified in page settings. If conditions
+ * Processes HTML with selectors specified in page settings. If selectors
  * do not exist or page was not scanned yet standard update is called.
  *
  * @param {Page} page - Page object to update.
@@ -146,8 +146,8 @@ async function processHtml(page, scannedHtml) {
  * @returns {boolean} True if a new major change is detected.
  */
 async function processHtmlWithConditions(page, scannedHtml, prevHtml) {
-  if (page.conditions && prevHtml != null) {
-    const conditionsSplit = page.conditions.replace(' ', '').split(',');
+  if (page.selectors && prevHtml != null) {
+    const selectorsSplit = page.selectors.replace(' ', '').split(',');
     const never = new Promise(() => {
     });
 
@@ -157,7 +157,7 @@ async function processHtmlWithConditions(page, scannedHtml, prevHtml) {
         Promise.all(promises).then((r) => r.some(Boolean)),
       ]);
 
-    const promises = conditionsSplit.map(async (value) => {
+    const promises = selectorsSplit.map(async (value) => {
       const scannedParts = await matchHtmlWithCondition(scannedHtml, value);
       const prevParts = await matchHtmlWithCondition(prevHtml, value);
       return updatePageState(

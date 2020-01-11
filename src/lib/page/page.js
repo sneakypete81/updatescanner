@@ -30,7 +30,7 @@ export class Page {
       lastAutoscanTime: null,
       oldScanTime: null,
       newScanTime: null,
-      conditions: null,
+      selectors: null,
       contentMode: Page.contentModeEnum.TEXT,
       matchMode: Page.matchModeEnum.FIRST,
       requireExactMatchCount: false,
@@ -134,15 +134,14 @@ export class Page {
    * (ms since Unix epoch).
    * @property {number} newScanTime - Time when the NEW HTML was last updated
    * (ms since Unix epoch).
-   * @property {string} conditions - Conditions separated by comma used in
-   *   diff.
+   * @property {string} selectors - Selectors separated by comma.
    * @property {contentModeEnum|string} contentMode - Mode used for content
    *   comparison.
    * @property {matchModeEnum|string} matchMode - Mode that determines order in
    *   which parts are looked at.
    * @property {boolean} requireExactMatchCount - True if part count should
    *   match.
-   * @property {boolean} partialScan - True if conditions should be used for
+   * @property {boolean} partialScan - True if selectors should be used for
    *   selecting parts of the page to scan.
    */
   constructor(
@@ -163,7 +162,7 @@ export class Page {
       lastAutoscanTime = Page.DEFAULTS.lastAutoscanTime,
       oldScanTime = Page.DEFAULTS.oldScanTime,
       newScanTime = Page.DEFAULTS.newScanTime,
-      conditions = Page.DEFAULTS.conditions,
+      selectors = Page.DEFAULTS.selectors,
       contentMode = Page.DEFAULTS.contentMode,
       matchMode = Page.DEFAULTS.matchMode,
       requireExactMatchCount = Page.DEFAULTS.requireExactMatchCount,
@@ -186,7 +185,7 @@ export class Page {
     this.lastAutoscanTime = lastAutoscanTime;
     this.oldScanTime = oldScanTime;
     this.newScanTime = newScanTime;
-    this.conditions = conditions;
+    this.selectors = selectors;
     this.contentMode = contentMode;
     this.matchMode = matchMode;
     this.requireExactMatchCount = requireExactMatchCount;
@@ -215,7 +214,7 @@ export class Page {
       lastAutoscanTime: this.lastAutoscanTime,
       oldScanTime: this.oldScanTime,
       newScanTime: this.newScanTime,
-      conditions: this.conditions,
+      selectors: this.selectors,
       contentMode: this.contentMode,
       matchMode: this.matchMode,
       requireExactMatchCount: this.requireExactMatchCount,
@@ -241,7 +240,7 @@ export class Page {
       markChanges: this.markChanges,
       doPost: this.doPost,
       postParams: this.postParams,
-      conditions: this.conditions,
+      selectors: this.selectors,
       contentMode: this.contentMode,
       matchMode: this.matchMode,
       requireExactMatchCount: this.requireExactMatchCount,

@@ -44,7 +44,7 @@ export function openPageDialog(page) {
   form.elements['title'].value = page.title;
   form.elements['url'].value = page.url;
 
-  form.elements['conditions'].value = page.conditions;
+  form.elements['selectors'].value = page.selectors;
   form.elements['scan-mode'].value = getScanMode(page);
 
   const autoscanSliderValue = autoscanMinsToSlider(page.scanRateMinutes);
@@ -74,7 +74,7 @@ export function openPageDialog(page) {
           changeThreshold:
             ThresholdSliderToChars[form.elements['threshold'].value],
           ignoreNumbers: form.elements['ignore-numbers'].checked,
-          conditions: form.elements['conditions'].value,
+          selectors: form.elements['selectors'].value,
           contentMode: modeData.contentMode,
           matchMode: modeData.matchMode,
           requireExactMatchCount: modeData.requireExactMatchCount,
