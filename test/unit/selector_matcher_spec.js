@@ -9,7 +9,7 @@ describe('selector_matcher', function() {
 ${expectedMatch}<div class="name" id="tag">tag</div></main>`;
       const match = await scanContentModule.__.matchHtmlWithSelector(
         html,
-        '.name[1]',
+        '.name:nth-child(2)',
       );
       expect(match).toEqual([expectedMatch]);
     });
@@ -46,7 +46,7 @@ ${thirdMatch}`;
 <div class="name">content</div>${match}</main>`;
       const result = await scanContentModule.__.matchHtmlWithSelector(
         html,
-        '#tag.class',
+        '#tag .class',
       );
 
       expect(result).toEqual([]);
@@ -58,7 +58,7 @@ ${thirdMatch}`;
 <div class="name">content</div>${match}</main>`;
       const result = await scanContentModule.__.matchHtmlWithSelector(
         html,
-        '#tag.class[42]',
+        '#tag .class:nth-child(42)',
       );
 
       expect(result).toEqual([]);
@@ -76,31 +76,6 @@ ${thirdMatch}`;
     });
 
     it('match nested', async function() {
-      const decoy = '<div class="    __confuse target me ">MISS!</div>';
-      const decoyId = '<aside id="target">MISS!</aside>';
-      const match = '<div class="     __confuse target me ">HIT!</div>';
-      const html = `
-<main class="wrap">
-  <img class="img" src="#">
-  ${decoy}
-  ${decoy}
-  <span id="theuniverse">
-    ${decoy}
-    ${decoyId}
-    ${match}
-    ${decoy}
-    ${decoy}
-  </span>
-</main>`;
-      const result = await scanContentModule.__.matchHtmlWithSelector(
-        html,
-        '.wrap#theuniverse.target[1]',
-      );
-
-      expect(result).toEqual([match]);
-    });
-
-    /* it('future improvements nested test', async function() {
       const decoy = '<div class="wrap target" id="theuniverse">MISS!</div>';
       const match = '<div class="wrap target" id="theuniverse">HIT!</div>';
       const html = `
@@ -117,10 +92,10 @@ ${thirdMatch}`;
 </main>`;
       const result = await scanContentModule.__.matchHtmlWithSelector(
         html,
-        '.wrap#theuniverse[1]',
+        '.wrap #theuniverse #theuniverse:nth-child(2)',
       );
 
       expect(result).toEqual([match]);
-    });*/
+    });
   });
 });
