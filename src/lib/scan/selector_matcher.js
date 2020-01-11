@@ -2,37 +2,39 @@ import {log} from '/lib/util/log.js';
 
 export const __ = {
   log: (...args) => log(...args),
+  matchHtmlWithSelector: matchHtmlWithSelector,
 };
 
 /**
- * Finds next part of an condition. Supports dots, hashes and square brackets.
+ * Finds next part of a selector. Supports dots, hashes and square brackets.
  *
- * @param {string} condition - Condition.
+ * @param {string} selector - Selector.
  * @param {number} startFrom - Index from which to start.
  *
  * @returns {number} Index of next supported symbol.
  */
-function nextPart(condition, startFrom) {
-  for (let i = startFrom; i < condition.length; i++) {
-    const char = condition[i];
+function nextPart(selector, startFrom) {
+  for (let i = startFrom; i < selector.length; i++) {
+    const char = selector[i];
     if (char === '.' || char === '#' || char === '[') {
       return i;
     }
   }
-  return condition.length;
+  return selector.length;
 }
 
 /**
  * Substrings value of selectors part.
+ * Eg. #id_name where id_name is the value.
  *
- * @param {string} condition - Condition.
- * @param {number} startAtIndex - Start index of condition part.
- * @param {number} nextIndex - Index of next condition part.
+ * @param {string} selector - Selector.
+ * @param {number} startAtIndex - Start index of selector part.
+ * @param {number} nextIndex - Index of next selector part.
  *
- * @returns {string} Condition part.
+ * @returns {string} Selector part.
  */
-function getValue(condition, startAtIndex, nextIndex) {
-  return condition.substring(startAtIndex, nextIndex - startAtIndex + 1);
+function getValue(selector, startAtIndex, nextIndex) {
+  return selector.substring(startAtIndex, nextIndex - startAtIndex + 1);
 }
 
 /**
@@ -175,38 +177,38 @@ async function subDom(html, index) {
 }
 
 /**
- * Matches html based on condition and returns array of matches.
+ * Matches html based on selector and returns array of matches.
  *
  * @param {string} html - HTML structure.
- * @param {string} condition - Regex condition (supports classes,
+ * @param {string} selector - Regex selector (supports classes,
  * ids and indexes).
  *
  * @returns {Array} - Array of matches.
  */
-export async function matchHtmlWithCondition(html, condition) {
+export async function matchHtmlWithSelector(html, selector) {
   let i = 0;
-  const length = condition.length;
+  const length = selector.length;
 
   let result = [html];
   const matchArray = [];
 
   while (i < length) {
     const startAt = i + 1;
-    const nextIndex = nextPart(condition, startAt);
-    const type = condition[i];
-    const partValue = getValue(condition, startAt, nextIndex);
+    const nextIndex = nextPart(selector, startAt);
+    const type = selector[i];
+    const partValue = getValue(selector, startAt, nextIndex);
 
     matchArray.length = 0;
 
     if (type === '[') {
-      const endBracketIndex = condition.indexOf(']', startAt);
-      const indexString = condition.substring(startAt, endBracketIndex);
+      const endBracketIndex = selector.indexOf(']', startAt);
+      const indexString = selector.substring(startAt, endBracketIndex);
       try {
         const index = parseInt(indexString);
         matchArray.push(matchIndex(result, index));
       } catch (exception) {
         __.log(exception);
-        return html;
+        return [html];
       }
     } else {
       for (let k = 0; k < result.length; k++) {
@@ -217,7 +219,8 @@ export async function matchHtmlWithCondition(html, condition) {
         } else if (type === '#') {
           matches = matchId(html, partValue);
         } else {
-          return html;
+          __.log(`unknown type ${type}`);
+          return [html];
         }
 
         for (const match of matches) {

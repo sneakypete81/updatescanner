@@ -4,7 +4,7 @@ import {isUpToDate} from '/lib/update/update.js';
 import {log} from '/lib/util/log.js';
 import {waitForMs} from '/lib/util/promise.js';
 import {applyEncoding, detectEncoding} from '/lib/util/encoding.js';
-import {matchHtmlWithCondition} from './condition_matcher.js';
+import {matchHtmlWithSelector} from './selector_matcher.js';
 import {getChanges, ContentData, changeEnum} from './scan_content.js';
 import {isMajorChange} from './fuzzy.js';
 
@@ -158,8 +158,8 @@ async function processHtmlWithConditions(page, scannedHtml, prevHtml) {
       ]);
 
     const promises = selectorsSplit.map(async (value) => {
-      const scannedParts = await matchHtmlWithCondition(scannedHtml, value);
-      const prevParts = await matchHtmlWithCondition(prevHtml, value);
+      const scannedParts = await matchHtmlWithSelector(scannedHtml, value);
+      const prevParts = await matchHtmlWithSelector(prevHtml, value);
       return updatePageState(
         page,
         new ContentData(prevHtml, prevParts),
