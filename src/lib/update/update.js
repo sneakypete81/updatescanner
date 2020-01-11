@@ -13,7 +13,7 @@ export async function isUpToDate() {
   const config = await new Config().load();
   const currentVersion = config.get('updateVersion');
 
-  return currentVersion == latestVersion;
+  return currentVersion === latestVersion;
 }
 
 /**
