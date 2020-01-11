@@ -1,4 +1,4 @@
-import * as scanContentModule from '/lib/scan/selector_matcher.js';
+import * as selectorMatcherModule from '/lib/scan/selector_matcher.js';
 
 
 describe('selector_matcher', function() {
@@ -7,7 +7,7 @@ describe('selector_matcher', function() {
       const expectedMatch = '<div class="name">content</div>';
       const html = `<main><img class="img"><div class="name">content</div>
 ${expectedMatch}<div class="name" id="tag">tag</div></main>`;
-      const match = await scanContentModule.__.matchHtmlWithSelector(
+      const match = await selectorMatcherModule.matchHtmlWithSelector(
         html,
         '.name:nth-child(2)',
       );
@@ -20,7 +20,7 @@ ${expectedMatch}<div class="name" id="tag">tag</div></main>`;
       const thirdMatch = '<div class="name" id="tag">tag</div>';
       const html = `<main><img class="img">${firstMatch}${secondMatch}</main>
 ${thirdMatch}`;
-      const result = await scanContentModule.__.matchHtmlWithSelector(
+      const result = await selectorMatcherModule.matchHtmlWithSelector(
         html,
         '.name',
       );
@@ -32,7 +32,7 @@ ${thirdMatch}`;
       const match = '<div class="name" id="tag">tag</div>';
       const html = `<main><img class="img"><div class="name">content</div>
 <div class="name">content</div>${match}</main>`;
-      const result = await scanContentModule.__.matchHtmlWithSelector(
+      const result = await selectorMatcherModule.matchHtmlWithSelector(
         html,
         '#tag',
       );
@@ -44,7 +44,7 @@ ${thirdMatch}`;
       const match = '<div class="name" id="tag">tag</div>';
       const html = `<main><img class="img"><div class="name">content</div>
 <div class="name">content</div>${match}</main>`;
-      const result = await scanContentModule.__.matchHtmlWithSelector(
+      const result = await selectorMatcherModule.matchHtmlWithSelector(
         html,
         '#tag .class',
       );
@@ -56,7 +56,7 @@ ${thirdMatch}`;
       const match = '<div class="name" id="tag">tag</div>';
       const html = `<main><img class="img"><div class="name">content</div>
 <div class="name">content</div>${match}</main>`;
-      const result = await scanContentModule.__.matchHtmlWithSelector(
+      const result = await selectorMatcherModule.matchHtmlWithSelector(
         html,
         '#tag .class:nth-child(42)',
       );
@@ -67,7 +67,7 @@ ${thirdMatch}`;
     it('unpaired tag match', async function() {
       const match = '<img class="img" src="#" alt="whatever">';
       const html = `<main class="wrap">${match}</main>`;
-      const result = await scanContentModule.__.matchHtmlWithSelector(
+      const result = await selectorMatcherModule.matchHtmlWithSelector(
         html,
         '.img',
       );
@@ -90,7 +90,7 @@ ${thirdMatch}`;
     ${decoy}
   </span>
 </main>`;
-      const result = await scanContentModule.__.matchHtmlWithSelector(
+      const result = await selectorMatcherModule.matchHtmlWithSelector(
         html,
         '.wrap #theuniverse #theuniverse:nth-child(2)',
       );
