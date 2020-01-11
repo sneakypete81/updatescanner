@@ -64,9 +64,21 @@ ${thirdMatch}`;
       expect(result).toEqual([]);
     });
 
+    it('unpaired tag match', async function() {
+      const match = '<img class="img" src="#" alt="whatever">';
+      const html = `<main class="wrap">${match}</main>`;
+      const result = await scanContentModule.__.matchHtmlWithSelector(
+        html,
+        '.img',
+      );
+
+      expect(result).toEqual([match]);
+    });
+
     it('match nested', async function() {
-      const decoy = '<div class=" __confuse target me ">MISS!</div>';
-      const match = '<div class=" __confuse target me ">HIT!</div>';
+      const decoy = '<div class="    __confuse target me ">MISS!</div>';
+      const decoyId = '<aside id="target">MISS!</aside>';
+      const match = '<div class="     __confuse target me ">HIT!</div>';
       const html = `
 <main class="wrap">
   <img class="img" src="#">
@@ -74,6 +86,7 @@ ${thirdMatch}`;
   ${decoy}
   <span id="theuniverse">
     ${decoy}
+    ${decoyId}
     ${match}
     ${decoy}
     ${decoy}
