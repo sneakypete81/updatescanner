@@ -1,7 +1,7 @@
 import {log} from '/lib/util/log.js';
 
 export const __ = {
-  log: (...args) => log(...args)
+  log: (...args) => log(...args),
 };
 
 /**
