@@ -1,8 +1,7 @@
 import {log} from '/lib/util/log.js';
 
 export const __ = {
-  log: (...args) => log(...args),
-  matchHtmlWithSelector: matchHtmlWithSelector,
+  log: (...args) => log(...args)
 };
 
 /**
