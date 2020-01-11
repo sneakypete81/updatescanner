@@ -166,6 +166,9 @@ async function subDom(html, index) {
       const elementName = getElementName(html, i + 2);
       const lastIndex = stack.lastIndexOf(elementName);
       stack.length = Math.max(0, lastIndex);
+      if (stack.length === 0) {
+        --i;
+      }
     } else if (char === '<') {
       const elementName = getElementName(html, i + 1);
       stack.push(elementName);
