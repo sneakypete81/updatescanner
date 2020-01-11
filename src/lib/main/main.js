@@ -202,7 +202,7 @@ export class Main {
     this.currentPage.scanRateMinutes = newSettings.scanRateMinutes;
     this.currentPage.changeThreshold = newSettings.changeThreshold;
     this.currentPage.ignoreNumbers = newSettings.ignoreNumbers;
-    this.currentPage.conditions = newSettings.conditions;
+    this.currentPage.selectors = newSettings.selectors;
     this.currentPage.contentMode = newSettings.contentMode;
     this.currentPage.matchMode = newSettings.matchMode;
     this.currentPage.requireExactMatchCount =

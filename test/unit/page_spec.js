@@ -78,7 +78,7 @@ describe('Page', function() {
         lastAutoscanTime: 10209876,
         oldScanTime: 9381234,
         newScanTime: 40834321,
-        conditions: '#id',
+        selectors: '#id',
         contentMode: Page.contentModeEnum.HTML,
         matchMode: Page.matchModeEnum.LOOKUP,
         requireExactMatchCount: true,
