@@ -33,7 +33,7 @@ export class Page {
       conditions: null,
       contentMode: Page.contentModeEnum.TEXT,
       matchMode: Page.matchModeEnum.FIRST,
-      requireExactMatchCount: true,
+      requireExactMatchCount: false,
       partialScan: false,
     };
   }
