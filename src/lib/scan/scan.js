@@ -17,6 +17,7 @@ export const __ = {
   waitForMs: (...args) => waitForMs(...args),
   isUpToDate: (...args) => isUpToDate(...args),
   isMajorChange: (...args) => isMajorChange(...args),
+  matchHtmlWithSelector: (...args) => matchHtmlWithSelector(...args),
 
   // Allow private functions to be tested
   updatePageState: updatePageState,
@@ -140,38 +141,25 @@ async function processHtml(page, scannedHtml) {
  * do not exist or page was not scanned yet standard update is called.
  *
  * @param {Page} page - Page object to update.
- * @param {string} scannedHtml - HTML to process.
+ * @param {string} scanHtml - HTML to process.
  * @param {string} prevHtml - Previous HTML.
  *
  * @returns {boolean} True if a new major change is detected.
  */
-async function processHtmlWithConditions(page, scannedHtml, prevHtml) {
+async function processHtmlWithConditions(page, scanHtml, prevHtml) {
   if (page.selectors && prevHtml != null) {
-    const selectorsSplit = page.selectors.replace(' ', '').split(',');
-    const never = new Promise(() => {
-    });
-
-    const somePromise = (promises) =>
-      Promise.race([
-        Promise.race(promises.map(async (p) => !!(await p) || never)),
-        Promise.all(promises).then((r) => r.some(Boolean)),
-      ]);
-
-    const promises = selectorsSplit.map(async (value) => {
-      const scannedParts = await matchHtmlWithSelector(scannedHtml, value);
-      const prevParts = await matchHtmlWithSelector(prevHtml, value);
-      return updatePageState(
-        page,
-        new ContentData(prevHtml, prevParts),
-        new ContentData(scannedHtml, scannedParts),
-      );
-    });
-    return somePromise(promises);
+    const scanParts = await __.matchHtmlWithSelector(scanHtml, page.selectors);
+    const prevParts = await __.matchHtmlWithSelector(prevHtml, page.selectors);
+    return updatePageState(
+      page,
+      new ContentData(prevHtml, prevParts),
+      new ContentData(scanHtml, scanParts),
+    );
   } else {
     return updatePageState(
       page,
       new ContentData(prevHtml, null),
-      new ContentData(scannedHtml, null),
+      new ContentData(scanHtml, null),
     );
   }
 }
