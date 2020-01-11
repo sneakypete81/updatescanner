@@ -46,7 +46,7 @@ function getValue(selector, startAtIndex, nextIndex) {
  * @returns {string} Regular expression that can be used in matches.
  */
 function getTagWithAttributeValue(attr, value) {
-  const classNameRegex = '((-?[_a-zA-Z]+[_a-zA-Z0-9-]*)? *)*';
+  const classNameRegex = '((-?[_a-zA-Z]+[_a-zA-Z0-9-]*)? )*';
   const inner = `${classNameRegex}${value}${classNameRegex}`;
   return `(?=<[^>]+${attr}=(?=[\\s+\\"\\']${inner}[\\s+\\"\\']).+)([^>]+>)`;
 }
