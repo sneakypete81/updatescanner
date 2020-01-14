@@ -45,7 +45,10 @@ export function openPageDialog(page) {
   form.elements['url'].value = page.url;
 
   form.elements['selectors'].value = page.selectors;
-  form.elements['scan-mode'].value = getScanMode(page);
+
+  const scanModeName = getScanModeName(page);
+  form.elements['scan-mode'].value = scanModeName;
+  updateScanModeDescription(scanModeName);
 
   const autoscanSliderValue = autoscanMinsToSlider(page.scanRateMinutes);
   form.elements['autoscan'].value = autoscanSliderValue;
@@ -196,13 +199,34 @@ const ScanModeMap = new Map([
 ]);
 
 /**
- *
- * @param {string} mode - Scan mode name.
+ * Returns description for selectors input field.
+ * @param {boolean} partialScan - True if partial scan is active.
+ * @returns {string} Description for selectors.
  */
-function updateScanModeDescription(mode) {
+function getSelectorsDescription(partialScan) {
+  if (partialScan) {
+    return `CSS selectors for more information see 
+<a href="https://www.w3schools.com/cssref/css_selectors.asp">
+https://www.w3schools.com/cssref/css_selectors.asp</a>`;
+  } else {
+    return `Selectors not available in "Anywhere" scan mode.`;
+  }
+}
+
+/**
+ *
+ * @param {string} modeName - Scan mode name.
+ */
+function updateScanModeDescription(modeName) {
   const form = qs('#settings-form');
-  form.elements['scan-mode-description'].value =
-    ScanModeMap.get(mode).description;
+  const mode = ScanModeMap.get(modeName);
+  form.elements['scan-mode-description'].value = mode.description;
+
+  const partialScan = mode.options.partialScan;
+  form.elements['selectors-description'].innerHTML = getSelectorsDescription(
+    partialScan);
+
+  form.elements['selectors'].disabled = !partialScan;
 }
 
 /**
@@ -211,7 +235,7 @@ function updateScanModeDescription(mode) {
  * @param {Page} page - Page.
  * @returns {string} Mode name.
  */
-function getScanMode(page) {
+function getScanModeName(page) {
   const scanModeMapIterator = ScanModeMap.entries();
   for (const item of scanModeMapIterator) {
     const data = item[1];
