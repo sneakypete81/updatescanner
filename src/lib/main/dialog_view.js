@@ -215,6 +215,22 @@ https://www.w3schools.com/cssref/css_selectors.asp</a>`;
 }
 
 /**
+ * Replaces innerHTML for element without directly assigning it to innerHTML.
+ *
+ * @param {Element} element - HTML element.
+ * @param {string} html - Raw HTML.
+ */
+function replaceInnerHTML(element, html) {
+  html = '<span>' + html + '</span>';
+  const parser = new DOMParser();
+  const parsed = parser.parseFromString(html, 'text/html');
+  const content = parsed.getElementsByTagName('span')[0];
+
+  element.innerHTML = '';
+  element.appendChild(content);
+}
+
+/**
  *
  * @param {string} modeName - Scan mode name.
  */
@@ -224,8 +240,8 @@ function updateScanModeDescription(modeName) {
   form.elements['scan-mode-description'].value = mode.description;
 
   const partialScan = mode.options.partialScan;
-  form.elements['selectors-description'].innerHTML = getSelectorsDescription(
-    partialScan);
+  const selectorDescription = getSelectorsDescription(partialScan);
+  replaceInnerHTML(form.elements['selectors-description'], selectorDescription);
 
   form.elements['selectors'].disabled = !partialScan;
 }
