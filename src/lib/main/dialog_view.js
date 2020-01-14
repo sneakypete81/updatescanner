@@ -200,6 +200,7 @@ const ScanModeMap = new Map([
 
 /**
  * Returns description for selectors input field.
+ *
  * @param {boolean} partialScan - True if partial scan is active.
  * @returns {string} Description for selectors.
  */
