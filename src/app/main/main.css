@@ -149,6 +149,7 @@ legend {
 .description {
   font-size: smaller;
   color: rgba(0, 0, 0, 0.8);
+  text-align: left;
 }
 
 label {
@@ -159,7 +160,7 @@ label {
 
 label span {
   display: inline-block;
-  min-width  : 2.5em;
+  min-width: 2.5em;
   text-align: right;
   margin-right: 6px;
 }

@@ -85,33 +85,26 @@
               numbers</label>
           </div>
         </fieldset>
+        <fieldset id="scanModeFieldset">
+          <label for="scan-mode">Scan mode:</label>
+          <select id="scan-mode" name="scan-mode">
+            <option value="anywhere">Anywhere in the page</option>
+            <option value="inside-elements">Inside the selected HTML
+              elements
+            </option>
+            <option value="count-only">That change the number of HTML elements
+              (content is ignored)
+            </option>
+          </select>
+          <output name="scan-mode-description"></output>
+        </fieldset>
 
         <fieldset id="selectorsFieldset">
-          <div>
-            <label for="scan-mode">Scan mode:</label>
-            <select id="scan-mode" name="scan-mode">
-              <option value="anywhere">Anywhere in the page</option>
-              <option value="inside-elements">Inside the selected HTML
-                elements
-              </option>
-              <option value="count-only">That change the number of HTML elements
-                (content is ignored)
-              </option>
-            </select>
-            <output name="scan-mode-description"></output>
-          </div>
-
-          <div>
-            <label for="selectors">HTML elements selector:</label>
-            <input style="width: 100%" id="selectors" name="selectors"
-                   type="text"/>
-            <label class="description" for="selectors">
-              CSS selectors for more information see <a
-                    href="https://www.w3schools.com/cssref/css_selectors.asp">
-              https://www.w3schools.com/cssref/css_selectors.asp
-            </a>
-            </label>
-          </div>
+          <label for="selectors">HTML elements selector:</label>
+          <input style="width: 100%" id="selectors" name="selectors"
+                 type="text"/>
+          <output name="selectors-description" class="description"
+                  for="selectors"></output>
         </fieldset>
 
         <fieldset id="scanOptions">
