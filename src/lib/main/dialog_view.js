@@ -124,6 +124,101 @@ export function openPageFolderDialog(pageFolder) {
   });
 }
 
+/**
+ * Show the settings dialog for the specified PageFolder.
+ *
+ * @param {Array<Page>} pageArray - Array containing selected pages.
+ *
+ * @returns {Promise} Promise that resolves with an object containing the
+ * updated pageFolder settings.
+ */
+export function openMultipleDialog(pageArray) {
+  const dialog = qs('#settings-dialog');
+  const form = qs('#settings-form');
+
+  form.elements['selectors'].value = '';
+
+  const scanModeName = getScanModeName(page);
+  form.elements['scan-mode'].value = scanModeName;
+  updateScanModeDescription(scanModeName);
+
+  const autoscanSliderValue = autoscanMinsToSlider(page.scanRateMinutes);
+  form.elements['autoscan'].value = autoscanSliderValue;
+  updateAutoscanDescription(autoscanSliderValue);
+
+  const thresholdSliderValue = thresholdCharsToSlider(page.changeThreshold);
+  form.elements['threshold'].value = thresholdSliderValue;
+  updateThresholdDescription(thresholdSliderValue);
+
+  form.elements['ignore-numbers'].checked = page.ignoreNumbers;
+
+  hideElement(qs('#folder-heading'));
+
+  dialog.showModal();
+
+  return new Promise((resolve, reject) => {
+    $on(dialog, 'close', () => {
+      if (dialog.returnValue === 'ok') {
+        const mode = form.elements['scan-mode'].value;
+        const modeData = ScanModeMap.get(mode).options;
+        resolve({
+          scanRateMinutes:
+            AutoscanSliderToMins[form.elements['autoscan'].value],
+          changeThreshold:
+            ThresholdSliderToChars[form.elements['threshold'].value],
+          ignoreNumbers: form.elements['ignore-numbers'].checked,
+          selectors: form.elements['selectors'].value,
+          contentMode: modeData.contentMode,
+          matchMode: modeData.matchMode,
+          requireExactMatchCount: modeData.requireExactMatchCount,
+          partialScan: modeData.partialScan,
+        });
+      } else {
+        resolve(null);
+      }
+    });
+  });
+}
+
+/**
+ * Returns common page data from multiple pages.
+ *
+ * @param {Array<Page>} pageArray - Page array.
+ */
+function getDataFromMultiple(pageArray) {
+  const first = pageArray[0];
+  const result = {
+    scanMode: getScanModeName(first),
+    selectors: first.selectors,
+    ignoreNumbers: first.ignoreNumbers,
+    changeThreshold: first.changeThreshold,
+    scanRateMinutes: first.scanRateMinutes,
+  };
+  for (let i = 1; i < pageArray.length; i++) {
+    const page = pageArray[i];
+    if (page.selectors !== result.selectors) {
+      result.selectors = null;
+    }
+
+    const scanMode = getScanModeName(page);
+    if (result.scanMode !== scanMode) {
+      result.scanMode = null;
+    }
+
+    if (result.ignoreNumbers !== page.ignoreNumbers) {
+      result.ignoreNumbers = null;
+    }
+
+    if (result.changeThreshold !== page.changeThreshold) {
+      result.changeThreshold = null;
+    }
+
+    if (result.scanRateMinutes !== page.scanRateMinutes) {
+      result.scanRateMinutes = null;
+    }
+  }
+}
+
 const AutoscanSliderMap = new Map([
   [5, 'Scan every 5 minutes'],
   [15, 'Scan every 15 minutes'],

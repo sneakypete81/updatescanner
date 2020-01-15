@@ -37,8 +37,8 @@ export class Sidebar {
     await this.sidebar.init();
     this._refreshSidebar();
 
-    this.sidebar.registerSelectHandler((event, itemId) =>
-      this._handleSelect(event, itemId));
+    this.sidebar.registerSelectHandler((event, itemIdArray) =>
+      this._handleSelect(event, itemIdArray));
     this.sidebar.registerNewPageHandler((itemId) =>
       this._handleNewPage(itemId));
     this.sidebar.registerNewPageFolderHandler((itemId) =>
@@ -64,9 +64,10 @@ export class Sidebar {
    * Called whenever a single item in the sidebar is selected.
    *
    * @param {Event} event - Event associated with the selection action.
-   * @param {string} itemId - Selected Page/PageFolder ID.
+   * @param {Array<string>} itemIdArray - Selected Page/PageFolder ID.
    */
-  _handleSelect(event, itemId) {
+  _handleSelect(event, itemIdArray) {
+    const itemId = itemIdArray[0];
     const item = this.pageStore.getItem(itemId);
     if (item instanceof Page) {
       const params = {

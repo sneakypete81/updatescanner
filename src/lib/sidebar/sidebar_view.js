@@ -31,7 +31,7 @@ export class SidebarView {
     this._sidebarDivSelector = sidebarDivSelector;
     $(this._sidebarDivSelector).jstree({
       core: {
-        multiple: false,
+        multiple: true,
         themes: {
           icons: false,
           dots: false,
@@ -215,7 +215,7 @@ export class SidebarView {
    * @param {string} operation - Operation performed on the tree (move_node).
    * @param {object} node - Node that moved.
    * @param {object} parent - New parent of the node.
-   * @param {integer} position - New position within the parent.
+   * @param {number} position - New position within the parent.
    * @param {object} more - Other data associated with the operation.
    *
    * @returns {boolean} True if the operation is allowed.
@@ -240,16 +240,15 @@ export class SidebarView {
    * Registers the provided handler function to be called whenever a single
    * item in the sidebar is selected.
    *
-   * @param {object} handler - Callback to use whenever the sidebar selection
+   * @param {Function} handler - Callback to use whenever the sidebar selection
    * changes.
    */
   registerSelectHandler(handler) {
     $(this._sidebarDivSelector).on('changed.jstree', (event, data) => {
       // Ignore if the event was due to a refresh or if nothing is selected.
-      if (!this._refreshing && data.selected.length === 1) {
-        const id = data.selected[0];
+      if (!this._refreshing && data.selected.length >= 1) {
         // Pass the event that caused the change, not the change event itself
-        handler(data.event, id);
+        handler(data.event, data.selected);
       }
     });
   }
