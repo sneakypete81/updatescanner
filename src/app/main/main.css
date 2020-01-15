@@ -211,3 +211,7 @@ form button.browser-style {
 .hidden {
   display: none;
 }
+
+.disabled {
+  opacity: 0.5;
+}

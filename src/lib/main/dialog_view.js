@@ -237,14 +237,60 @@ function replaceInnerHTML(element, html) {
 function updateScanModeDescription(modeName) {
   const form = qs('#settings-form');
   const mode = ScanModeMap.get(modeName);
-  form.elements['scan-mode-description'].value = mode.description;
+  const descriptionElement = form.elements['scan-mode-description'];
+  descriptionElement.value = mode.description;
 
   const partialScan = mode.options.partialScan;
   const selectorDescription = getSelectorsDescription(partialScan);
   replaceInnerHTML(form.elements['selectors-description'], selectorDescription);
+  setDisableOnInput(form.elements['selectors'], !partialScan);
 
-  form.elements['selectors'].disabled = !partialScan;
+  updateThresholdDisabledState(mode.options);
 }
+
+/**
+ * Sets disabled on input or wrapper and all it's input children.
+ *
+ * @param {Element} parent - Parent element.
+ * @param {boolean} disabled - True if input should be disabled
+ */
+function setDisableOnInput(parent, disabled) {
+  if (parent.tagName === 'INPUT') {
+    parent.disabled = disabled;
+  } else {
+    const disabledClass = 'disabled';
+    const hasRightClass =
+      parent.classList.contains(disabledClass) === disabled;
+
+    if (!hasRightClass) {
+      if (disabled) {
+        parent.classList.add(disabledClass);
+      } else {
+        parent.classList.remove(disabledClass);
+      }
+    }
+
+    parent.querySelectorAll('input, select').forEach((node) => {
+      node.disabled = disabled;
+    });
+  }
+}
+
+/**
+ * Updates disabled state for threshold input.
+ *
+ * @param {Object} modeOptions - Mode options.
+ */
+function updateThresholdDisabledState(modeOptions) {
+  const thresholdFieldset = qs('#thresholdFieldset');
+  thresholdFieldset.classList.remove('disabled');
+  if (modeOptions.contentMode === Page.contentModeEnum.IGNORE) {
+    setDisableOnInput(thresholdFieldset, true);
+  } else {
+    setDisableOnInput(thresholdFieldset, false);
+  }
+}
+
 
 /**
  * Returns scan mode from page.
