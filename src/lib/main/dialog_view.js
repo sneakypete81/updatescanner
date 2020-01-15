@@ -252,7 +252,7 @@ function updateScanModeDescription(modeName) {
  * Sets disabled on input or wrapper and all it's input children.
  *
  * @param {Element} parent - Parent element.
- * @param {boolean} disabled - True if input should be disabled
+ * @param {boolean} disabled - True if input should be disabled.
  */
 function setDisableOnInput(parent, disabled) {
   if (parent.tagName === 'INPUT') {
@@ -279,7 +279,7 @@ function setDisableOnInput(parent, disabled) {
 /**
  * Updates disabled state for threshold input.
  *
- * @param {Object} modeOptions - Mode options.
+ * @param {object} modeOptions - Mode options.
  */
 function updateThresholdDisabledState(modeOptions) {
   const thresholdFieldset = qs('#thresholdFieldset');
