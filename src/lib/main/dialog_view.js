@@ -108,6 +108,8 @@ export function openPageFolderDialog(pageFolder) {
   hideElement(qs('#urlFieldset'));
   hideElement(qs('#autoscanFieldset'));
   hideElement(qs('#thresholdFieldset'));
+  hideElement(qs('#selectorsFieldset'));
+  hideElement(qs('#scanModeFieldset'));
 
   dialog.showModal();
 
