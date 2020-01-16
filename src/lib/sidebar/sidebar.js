@@ -43,13 +43,14 @@ export class Sidebar {
       this._handleNewPage(itemId));
     this.sidebar.registerNewPageFolderHandler((itemId) =>
       this._handleNewPageFolder(itemId));
-    this.sidebar.registerDeleteHandler((itemId) => this._handleDelete(itemId));
+    this.sidebar.registerDeleteHandler((itemIdList) => this._handleDelete(
+      itemIdList));
     this.sidebar.registerMoveHandler((itemId, pageFolderId, position) =>
       this._handleMove(itemId, pageFolderId, position));
-    this.sidebar.registerScanItemHandler((itemId) =>
-      this._handleScanItem(itemId));
-    this.sidebar.registerSettingsHandler((itemId) =>
-      this._handleSettings(itemId));
+    this.sidebar.registerScanItemHandler((itemIdList) =>
+      this._handleScanItems(itemIdList));
+    this.sidebar.registerSettingsHandler((itemIdList) =>
+      this._handleSettings(itemIdList));
   }
 
   /**
@@ -111,11 +112,13 @@ export class Sidebar {
   /**
    * Called whenever the Delete context menu item is selected.
    *
-   * @param {string} itemId - Page/PageFolder ID to delete.
+   * @param {Array<string>} itemIdArray - Page/PageFolder ID to delete.
    */
-  async _handleDelete(itemId) {
-    if (await this.sidebar.confirmDelete()) {
-      await this.pageStore.deleteItem(itemId);
+  async _handleDelete(itemIdArray) {
+    if (await this.sidebar.confirmDelete(itemIdArray.length)) {
+      for (let i = 0; i < itemIdArray.length; i++) {
+        await this.pageStore.deleteItem(itemIdArray[i]);
+      }
     }
   }
 
@@ -133,21 +136,22 @@ export class Sidebar {
   /**
    * Called whenever the Scan context menu item is selected.
    *
-   * @param {string} itemId - Page/PageFolder ID.
+   * @param {Array<string>} itemIdArray - Page/PageFolder ID.
    */
-  _handleScanItem(itemId) {
+  _handleScanItems(itemIdArray) {
     browser.runtime.sendMessage({
-      action: backgroundActionEnum.SCAN_ITEM,
-      itemId: itemId,
+      action: backgroundActionEnum.SCAN_ITEMS,
+      itemIdArray: itemIdArray,
     });
   }
 
   /**
    * Called whenever the Settings context menu item is selected.
    *
-   * @param {string} itemId - Page/PageFolder ID.
+   * @param {Array<string>} itemId - Page/PageFolder ID.
    */
   _handleSettings(itemId) {
+    console.log(itemId);
     openMain({
       [paramEnum.ACTION]: actionEnum.SHOW_SETTINGS,
       [paramEnum.ID]: itemId,

@@ -136,21 +136,22 @@ export function openMultipleDialog(pageArray) {
   const dialog = qs('#settings-dialog');
   const form = qs('#settings-form');
 
-  form.elements['selectors'].value = '';
+  const condensed = getDataFromMultiple(pageArray);
 
-  const scanModeName = getScanModeName(page);
-  form.elements['scan-mode'].value = scanModeName;
-  updateScanModeDescription(scanModeName);
+  form.elements['selectors'].value = condensed.selectors;
 
-  const autoscanSliderValue = autoscanMinsToSlider(page.scanRateMinutes);
+  form.elements['scan-mode'].value = condensed.scanMode;
+  updateScanModeDescription(condensed.scanMode);
+
+  const autoscanSliderValue = autoscanMinsToSlider(condensed.scanRateMinutes);
   form.elements['autoscan'].value = autoscanSliderValue;
   updateAutoscanDescription(autoscanSliderValue);
 
-  const thresholdSliderValue = thresholdCharsToSlider(page.changeThreshold);
+  const thresholdSliderValue = thresholdCharsToSlider(condensed.changeThreshold);
   form.elements['threshold'].value = thresholdSliderValue;
   updateThresholdDescription(thresholdSliderValue);
 
-  form.elements['ignore-numbers'].checked = page.ignoreNumbers;
+  form.elements['ignore-numbers'].checked = condensed.ignoreNumbers;
 
   hideElement(qs('#folder-heading'));
 
@@ -184,6 +185,9 @@ export function openMultipleDialog(pageArray) {
  * Returns common page data from multiple pages.
  *
  * @param {Array<Page>} pageArray - Page array.
+ * @returns {{scanMode: string, selectors: string,ignoreNumbers: boolean,
+ *   changeThreshold: number,scanRateMinutes: number}} Object containing
+ *   generalized values for all items in array.
  */
 function getDataFromMultiple(pageArray) {
   const first = pageArray[0];
@@ -194,6 +198,7 @@ function getDataFromMultiple(pageArray) {
     changeThreshold: first.changeThreshold,
     scanRateMinutes: first.scanRateMinutes,
   };
+
   for (let i = 1; i < pageArray.length; i++) {
     const page = pageArray[i];
     if (page.selectors !== result.selectors) {
@@ -217,6 +222,8 @@ function getDataFromMultiple(pageArray) {
       result.scanRateMinutes = null;
     }
   }
+
+  return result;
 }
 
 const AutoscanSliderMap = new Map([

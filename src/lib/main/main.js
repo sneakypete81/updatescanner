@@ -119,7 +119,7 @@ export class Main {
    * @param {string} title - Default title field.
    * @param {string} url - Default url field.
    * @param {string} parentId - Parent folder of the new Page.
-   * @param {integer} insertAfterIndex - Add the page after this item in the
+   * @param {number} insertAfterIndex - Add the page after this item in the
    * parent folder. If negative, the Page will be added to the end of the parent
    * folder.
    */
@@ -154,7 +154,7 @@ export class Main {
    *
    * @param {string} title - Default title field.
    * @param {string} parentId - Parent folder of the new PageFolder.
-   * @param {integer} insertAfterIndex - Add the PageFolder after this item in
+   * @param {number} insertAfterIndex - Add the PageFolder after this item in
    * the parent folder. If negative, the PageFolder will be added to the end of
    * the parent folder.
    */

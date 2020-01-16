@@ -180,30 +180,74 @@ export class SidebarView {
    */
   _getContextMenuItems() {
     return (node) => {
-      return {
-        newPage: {
-          label: 'New Page',
-          action: () => this._newPageHandler(node),
-        },
-        newPageFolder: {
-          label: 'New Folder',
-          action: () => this._newPageFolderHandler(node),
-        },
-        delete: {
-          separator_before: true,
-          label: 'Delete',
-          action: () => this._deleteHandler(node),
-        },
-        scan: {
-          separator_before: true,
-          label: 'Scan Now',
-          action: () => this._scanItemHandler(node),
-        },
-        settings: {
-          label: 'Settings',
-          action: () => this._settingsHandler(node),
-        },
-      };
+      const idList = $(this._sidebarDivSelector).jstree(true).get_selected();
+      if (idList.length === 1) {
+        return this._getSingleContextMenuItems(node);
+      } else if (idList.length > 1) {
+        return this._getMultiContextItems(node, idList);
+      } else {
+        return {};
+      }
+    };
+  }
+
+  /**
+   *
+   * @param {Array<number>} idList - List of selected ids. Always contains a
+   *   single item.
+   * @returns {object} Object containing sidebar context menu items.
+   * @private
+   */
+  _getSingleContextMenuItems(idList) {
+    return {
+      newPage: {
+        label: 'New Page',
+        action: () => this._newPageHandler(idList[0]),
+      },
+      newPageFolder: {
+        label: 'New Folder',
+        action: () => this._newPageFolderHandler(idList[0]),
+      },
+      delete: {
+        separator_before: true,
+        label: 'Delete',
+        action: () => this._deleteHandler(idList),
+      },
+      scan: {
+        separator_before: true,
+        label: 'Scan Now',
+        action: () => this._scanItemHandler(idList),
+      },
+      settings: {
+        label: 'Settings',
+        action: () => this._settingsHandler(idList),
+      },
+    };
+  }
+
+  /**
+   *
+   * @param {object} node - Node.
+   * @param {Array<number>} idList - Array containing ids of selected items.
+   * @returns {object} Object containing sidebar context menu items.
+   * @private
+   */
+  _getMultiContextItems(node, idList) {
+    return {
+      delete: {
+        separator_before: true,
+        label: 'Delete',
+        action: () => this._deleteHandler(idList),
+      },
+      scan: {
+        separator_before: true,
+        label: 'Scan Now',
+        action: () => this._scanItemHandler(idList),
+      },
+      settings: {
+        label: 'Settings',
+        action: () => this._settingsHandler(idList),
+      },
     };
   }
 
@@ -259,7 +303,7 @@ export class SidebarView {
    * @param {Function} handler - Callback to use to create a new Page.
    */
   registerNewPageHandler(handler) {
-    this._newPageHandler = (node) => handler(node.id);
+    this._newPageHandler = (id) => handler(id);
   }
 
   /**
@@ -269,7 +313,7 @@ export class SidebarView {
    * @param {Function} handler - Callback to use to create a new PageFolder.
    */
   registerNewPageFolderHandler(handler) {
-    this._newPageFolderHandler = (node) => handler(node.id);
+    this._newPageFolderHandler = (id) => handler(id);
   }
 
   /**
@@ -280,7 +324,7 @@ export class SidebarView {
    * deleted.
    */
   registerDeleteHandler(handler) {
-    this._deleteHandler = (node) => handler(node.id);
+    this._deleteHandler = (idList) => handler(idList);
   }
 
   /**
@@ -301,7 +345,7 @@ export class SidebarView {
    * @param {Function} handler - Callback to use when 'Scan' is selected.
    */
   registerScanItemHandler(handler) {
-    this._scanItemHandler = (node) => handler(node.id);
+    this._scanItemHandler = (idList) => handler(idList);
   }
 
   /**
@@ -311,7 +355,7 @@ export class SidebarView {
    * @param {Function} handler - Callback to use when 'Settings' is selected.
    */
   registerSettingsHandler(handler) {
-    this._settingsHandler = (node) => handler(node.id);
+    this._settingsHandler = (idList) => handler(idList);
   }
 
   /**
@@ -325,13 +369,18 @@ export class SidebarView {
   /**
    * Show a dialog asking for confirmation before deleting an item.
    *
+   * @param {number} count - Number of items to delete.
    * @returns {boolean} True if the user confirmed the deletion.
    */
-  async confirmDelete() {
+  async confirmDelete(count) {
     const dialog = qs('#dialog-confirm');
     const message = qs('#dialog-confirm-message');
 
-    message.textContent = 'Delete this item - are you sure?';
+    if (count === 1) {
+      message.textContent = 'Delete this item - are you sure?';
+    } else {
+      message.textContent = `Delete ${count} items - are you sure?`;
+    }
     dialog.showModal();
 
     return new Promise((resolve, reject) => {
