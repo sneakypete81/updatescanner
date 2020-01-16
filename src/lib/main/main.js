@@ -274,7 +274,6 @@ export class Main {
    */
   async _updatePageList(pageArray, newSettings) {
     for (let i = 0; i < pageArray.length; i++) {
-      console.log(pageArray[i], newSettings);
       await this._updatePage(pageArray[i], newSettings);
     }
   }

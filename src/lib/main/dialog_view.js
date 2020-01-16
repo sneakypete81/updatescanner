@@ -40,6 +40,7 @@ export function init() {
 export function openPageDialog(page) {
   const dialog = qs('#settings-dialog');
   const form = qs('#settings-form');
+  qs('#heading').textContent = 'Page Settings';
 
   form.elements['title'].value = page.title;
   form.elements['url'].value = page.url;
@@ -59,8 +60,6 @@ export function openPageDialog(page) {
   updateThresholdDescription(thresholdSliderValue);
 
   form.elements['ignore-numbers'].checked = page.ignoreNumbers;
-
-  hideElement(qs('#folder-heading'));
 
   dialog.showModal();
 
@@ -101,10 +100,10 @@ export function openPageDialog(page) {
 export function openPageFolderDialog(pageFolder) {
   const dialog = qs('#settings-dialog');
   const form = qs('#settings-form');
+  qs('#heading').textContent = 'Folder Settings';
 
   form.elements['title'].value = pageFolder.title;
 
-  hideElement(qs('#page-heading'));
   hideElement(qs('#urlFieldset'));
   hideElement(qs('#autoscanFieldset'));
   hideElement(qs('#thresholdFieldset'));
@@ -136,6 +135,8 @@ export function openMultipleDialog(pageArray) {
   const dialog = qs('#settings-dialog');
   const form = qs('#settings-form');
 
+  qs('#heading').textContent = 'Multi-page Settings';
+
   const condensed = getDataFromMultiple(pageArray);
 
   form.elements['selectors'].value = condensed.selectors;
@@ -154,9 +155,8 @@ export function openMultipleDialog(pageArray) {
 
   form.elements['ignore-numbers'].checked = condensed.ignoreNumbers;
 
-  hideElement(qs('#page-heading'));
   hideElement(qs('#urlFieldset'));
-  hideElement(qs('#folder-heading'));
+  hideElement(qs('#titleFieldset'));
 
   dialog.showModal();
 
