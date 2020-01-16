@@ -147,12 +147,15 @@ export function openMultipleDialog(pageArray) {
   form.elements['autoscan'].value = autoscanSliderValue;
   updateAutoscanDescription(autoscanSliderValue);
 
-  const thresholdSliderValue = thresholdCharsToSlider(condensed.changeThreshold);
+  const thresholdSliderValue =
+    thresholdCharsToSlider(condensed.changeThreshold);
   form.elements['threshold'].value = thresholdSliderValue;
   updateThresholdDescription(thresholdSliderValue);
 
   form.elements['ignore-numbers'].checked = condensed.ignoreNumbers;
 
+  hideElement(qs('#page-heading'));
+  hideElement(qs('#urlFieldset'));
   hideElement(qs('#folder-heading'));
 
   dialog.showModal();

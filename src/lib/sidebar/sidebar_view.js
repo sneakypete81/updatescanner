@@ -182,7 +182,7 @@ export class SidebarView {
     return (node) => {
       const idList = $(this._sidebarDivSelector).jstree(true).get_selected();
       if (idList.length === 1) {
-        return this._getSingleContextMenuItems(node);
+        return this._getSingleContextMenuItems(idList);
       } else if (idList.length > 1) {
         return this._getMultiContextItems(node, idList);
       } else {

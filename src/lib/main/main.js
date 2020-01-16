@@ -82,13 +82,19 @@ export class Main {
         break;
       }
       case actionEnum.SHOW_SETTINGS: {
-        const item = this.pageStore.getItem(
-          this._getUrlParam(params, paramEnum.ID),
-        );
-        if (item instanceof Page) {
-          this._showPageSettings(item);
-        } else {
-          this._showPageFolderSettings(item);
+        const itemIdArray = JSON.parse(this._getUrlParam(params, paramEnum.ID));
+
+        if (itemIdArray.length === 1) {
+          const item = this.pageStore.getItem(itemIdArray[0]);
+          if (item instanceof Page) {
+            this._showPageSettings(item);
+          } else {
+            this._showPageFolderSettings(item);
+          }
+        } else if (itemIdArray.length > 1) {
+          const pageArray = itemIdArray.map((item) => this.pageStore.getItem(
+            item));
+          this._showMultiPageSettings(pageArray);
         }
         break;
       }
@@ -197,20 +203,80 @@ export class Main {
    */
   async _updateCurrentPage(newSettings) {
     this.currentPage = await Page.load(this.currentPage.id);
-    this.currentPage.title = newSettings.title;
-    this.currentPage.url = newSettings.url;
-    this.currentPage.scanRateMinutes = newSettings.scanRateMinutes;
-    this.currentPage.changeThreshold = newSettings.changeThreshold;
-    this.currentPage.ignoreNumbers = newSettings.ignoreNumbers;
-    this.currentPage.selectors = newSettings.selectors;
-    this.currentPage.contentMode = newSettings.contentMode;
-    this.currentPage.matchMode = newSettings.matchMode;
-    this.currentPage.requireExactMatchCount =
-      newSettings.requireExactMatchCount;
-    this.currentPage.partialScan = newSettings.partialScan;
+    this._updatePage(this.currentPage, newSettings);
     await this.currentPage.save();
 
     document.location.replace(getMainDiffUrl(this.currentPage.id));
+  }
+
+  /**
+   *
+   * @param {*} oldValue - Old value.
+   * @param {*} newValue - New value.
+   * @returns {*} New value if new value is not null, old value otherwise.
+   * @private
+   */
+  _getNewValue(oldValue, newValue) {
+    return newValue == null ? oldValue : newValue;
+  }
+
+  /**
+   * Update the current Page with new settings from the Settings dialog.
+   *
+   * @param {Page} page - Page to update.
+   * @param {object} newSettings - Settings to apply to the current page.
+   */
+  async _updatePage(page, newSettings) {
+    page = await Page.load(page.id);
+    page.title = this._getNewValue(page.title, newSettings.title);
+    page.url = this._getNewValue(page.url, newSettings.url);
+    page.scanRateMinutes = this._getNewValue(
+      page.scanRateMinutes,
+      newSettings.scanRateMinutes,
+    );
+    page.changeThreshold = this._getNewValue(
+      page.changeThreshold,
+      newSettings.changeThreshold,
+    );
+    page.ignoreNumbers = this._getNewValue(
+      page.ignoreNumbers,
+      newSettings.ignoreNumbers,
+    );
+    page.selectors = this._getNewValue(
+      page.selectors,
+      newSettings.selectors,
+    );
+    page.contentMode = this._getNewValue(
+      page.contentMode,
+      newSettings.contentMode,
+    );
+    page.matchMode = this._getNewValue(
+      page.matchMode,
+      newSettings.matchMode,
+    );
+    page.requireExactMatchCount = this._getNewValue(
+      page.requireExactMatchCount,
+      newSettings.requireExactMatchCount,
+    );
+    page.partialScan = this._getNewValue(
+      page.partialScan,
+      newSettings.partialScan,
+    );
+    await page.save();
+  }
+
+  /**
+   * Updates all pages in list with new settings.
+   *
+   * @param {Array<Page>} pageArray - Array of pages to update.
+   * @param {object} newSettings - Update object containing new options.
+   * @private
+   */
+  async _updatePageList(pageArray, newSettings) {
+    for (let i = 0; i < pageArray.length; i++) {
+      console.log(pageArray[i], newSettings);
+      await this._updatePage(pageArray[i], newSettings);
+    }
   }
 
   /**
@@ -267,6 +333,18 @@ export class Main {
       updatedPageFolder.save();
     }
     document.location.replace('about:blank');
+  }
+
+  /**
+   * Show the PageFolder settings dialog.
+   *
+   * @param {Array<Page>} pageArray - PageFolder to edit.
+   */
+  async _showMultiPageSettings(pageArray) {
+    const newSettings = await dialog.openMultipleDialog(pageArray);
+    if (newSettings !== null) {
+      this._updatePageList(pageArray, newSettings);
+    }
   }
 
   /**

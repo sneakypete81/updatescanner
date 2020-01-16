@@ -148,13 +148,12 @@ export class Sidebar {
   /**
    * Called whenever the Settings context menu item is selected.
    *
-   * @param {Array<string>} itemId - Page/PageFolder ID.
+   * @param {Array<string>} itemIdArray - Page/PageFolder ID.
    */
-  _handleSettings(itemId) {
-    console.log(itemId);
+  _handleSettings(itemIdArray) {
     openMain({
       [paramEnum.ACTION]: actionEnum.SHOW_SETTINGS,
-      [paramEnum.ID]: itemId,
+      [paramEnum.ID]: JSON.stringify(itemIdArray),
     });
   }
 
