@@ -68,6 +68,8 @@ export class Sidebar {
    * @param {Array<string>} itemIdArray - Selected Page/PageFolder ID.
    */
   _handleSelect(event, itemIdArray) {
+    if (event.shiftKey) return;
+
     const itemId = itemIdArray[0];
     const item = this.pageStore.getItem(itemId);
     if (item instanceof Page) {
