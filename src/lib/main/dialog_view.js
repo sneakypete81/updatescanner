@@ -32,19 +32,23 @@ export function init() {
 /**
  * Show the settings dialog for the specified Page.
  *
- * @param {Page} page - Page object to view.
+ * @param {PageNode} pageNode - Page object to view.
  *
  * @returns {Promise} Promise that resolves with an object containing the
  * updated page settings.
  */
-export function openPageDialog(page) {
+export function openPageDialog(pageNode) {
+  const page = pageNode.page;
   const dialog = qs('#settings-dialog');
   const form = qs('#settings-form');
   qs('#heading').textContent = 'Page Settings';
 
+
   initializeSinglePageInput(form, page);
   const changeObject = {};
-  initializeMultiPageInput(form, page, changeObject, false);
+  // Needed to resolve some dialog specific properties
+  const initial = getDataFromMultiple([page]);
+  initializeMultiPageInput(form, initial, changeObject, false);
 
   dialog.showModal();
 
@@ -77,10 +81,17 @@ export function openPageFolderDialog(pageFolder) {
 
   initializeFolderPageInput(form, pageFolder.page);
 
-  const multipleInit = getDataFromMultiple(pageFolder.descendants);
-
   const changeObject = {};
-  initializeMultiPageInput(form, multipleInit, changeObject, false);
+  if (pageFolder.descendants.length > 0) {
+    const multipleInit = getDataFromMultiple(pageFolder.descendants);
+
+    initializeMultiPageInput(form, multipleInit, changeObject, false);
+  } else {
+    hideElement(qs('#autoscanFieldset'));
+    hideElement(qs('#thresholdFieldset'));
+    hideElement(qs('#selectorsFieldset'));
+    hideElement(qs('#scanModeFieldset'));
+  }
 
   hideElement(qs('#urlFieldset'));
 
@@ -91,7 +102,9 @@ export function openPageFolderDialog(pageFolder) {
       if (dialog.returnValue === 'ok') {
         const result = {};
         getFolderPageInputResult(form, result);
-        getMultiPageInputResult(changeObject, result);
+        if (pageFolder.descendants.length > 0) {
+          getMultiPageInputResult(changeObject, result);
+        }
         resolve(result);
       } else {
         resolve(null);
@@ -198,7 +211,6 @@ function initializeMultiPageInput(
   changeObject,
   allowIndeterminate,
 ) {
-  console.log(initial);
   initializeAndListenOnChanges(
     form.elements['selectors'],
     'value',

@@ -130,8 +130,10 @@ export class Main {
       url = undefined;
     }
 
-    const temporaryPage = new Page(-1, {title: title, url: url});
-    const newSettings = await dialog.openPageDialog(temporaryPage);
+    const tmpPageNode = createTreeForPage(-1, this.pageStore);
+    tmpPageNode.page.title = title;
+    tmpPageNode.page.url = url;
+    const newSettings = await dialog.openPageDialog(tmpPageNode);
 
     if (newSettings == null) {
       document.location.replace('about:blank');
@@ -159,8 +161,10 @@ export class Main {
     parentId = PageStore.ROOT_ID,
     insertAfterIndex = -1,
   ) {
-    const temporaryPageFolder = new PageFolder(-1, {title: title});
-    const newSettings = await dialog.openPageFolderDialog(temporaryPageFolder);
+    const temporaryPageFolderNode = createTreeForPage(-1, this.pageStore);
+    temporaryPageFolderNode.page.title = title;
+    const newSettings =
+      await dialog.openPageFolderDialog(temporaryPageFolderNode);
     if (newSettings !== null) {
       const pageFolder = await this.pageStore.createPageFolder(
         parentId,
@@ -263,10 +267,16 @@ export class Main {
    * @private
    */
   async _updatePageList(pageNodeArray, newSettings) {
-    if (pageNodeArray.length === 1 && pageNodeArray[0] instanceof PageFolder) {
-      const updatedPageFolder = await PageFolder.load(pageNodeArray[0].id);
+    if (pageNodeArray.length === 1 &&
+      pageNodeArray[0].page instanceof PageFolder) {
+      const updatedPageFolder = await PageFolder.load(pageNodeArray[0].page.id);
       updatedPageFolder.title = newSettings.title;
-      updatedPageFolder.save();
+      newSettings.title = null;
+      await updatedPageFolder.save();
+    }
+
+    if (pageNodeArray.length > 1) {
+      this._ensureValidMultiPageSettings(newSettings);
     }
 
     for (let i = 0; i < pageNodeArray.length; i++) {
@@ -278,6 +288,24 @@ export class Main {
       } else {
         await this._updatePage(node.page, newSettings);
       }
+    }
+  }
+
+  /**
+   * Ensures that pages are not accidentally overwritten in batch.
+   *
+   * @param {object} settings - Settings.
+   * @private
+   */
+  _ensureValidMultiPageSettings(settings) {
+    if (settings.title != null) {
+      __.log('Title was not null in multi page mode. Removing.');
+      settings.title = null;
+    }
+
+    if (settings.url != null) {
+      __.log('URL was not null in multi page mode. Removing.');
+      settings.url = null;
     }
   }
 
@@ -314,18 +342,16 @@ export class Main {
    * @private
    */
   async _showSettings(idArray) {
-    console.log(idArray);
     const nodeArray = idArray.map((id) =>
       createTreeForPage(id, this.pageStore));
 
-    console.log(nodeArray);
     let newSettings;
     if (nodeArray.length === 1) {
       const node = nodeArray[0];
       if (node.isFolder) {
-        newSettings = await dialog.openPageFolderDialog(node.page);
+        newSettings = await dialog.openPageFolderDialog(node);
       } else {
-        newSettings = await dialog.openPageDialog(node.page);
+        newSettings = await dialog.openPageDialog(node);
       }
     } else {
       newSettings = await dialog.openMultipleDialog(nodeArray);
