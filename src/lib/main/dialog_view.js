@@ -166,6 +166,9 @@ export function openMultipleDialog(pageArray) {
     'autoscanSliderValue',
   );
   updateAutoscanDescription(autoscanSliderValue);
+  if (condensed.scanRateMinutes == null) {
+    form.elements['autoscan-description'].value = 'Various';
+  }
 
   const thresholdSliderValue =
     thresholdCharsToSlider(condensed.changeThreshold);
@@ -177,6 +180,9 @@ export function openMultipleDialog(pageArray) {
     result,
     'thresholdSliderValue',
   );
+  if (condensed.changeThreshold == null) {
+    form.elements['threshold-description'].value = 'Various';
+  }
 
   updateOnChange(
     form.elements['ignore-numbers'],
@@ -219,7 +225,7 @@ export function openMultipleDialog(pageArray) {
  *
  * @param {Element} element - Element.
  * @param {string} elementPropertyName - Element property (eg. value, checked).
- * @param {string|number|boolean} initialValue - Initial value.
+ * @param {?string|number|boolean} initialValue - Initial value.
  * @param {object} config - Configuration object used to save new value.
  * @param {string} propertyName - Configuration property name.
  */
@@ -231,12 +237,12 @@ function updateOnChange(
   propertyName,
 ) {
   element[elementPropertyName] = initialValue;
+  if (initialValue == null) {
+    element.indeterminate = true;
+  }
   element.addEventListener(
     'change',
-    () => {
-      console.log(element[elementPropertyName]);
-      config[propertyName] = element[elementPropertyName];
-    },
+    () => config[propertyName] = element[elementPropertyName],
   );
 }
 
