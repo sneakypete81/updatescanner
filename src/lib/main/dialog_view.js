@@ -278,7 +278,7 @@ function initializeMultiPageInput(
  *
  */
 function getMultiPageInputResult(changeObject, result) {
-  const mode = result.scanMode;
+  const mode = changeObject.scanMode;
   const modeData = mode == null ? {} : ScanModeMap.get(mode).options;
   result.scanRateMinutes =
     AutoscanSliderToMins[changeObject.autoscanSliderValue];
