@@ -44,7 +44,7 @@ export class SidebarView {
       },
 
       contextmenu: {
-        select_node: false,
+        select_node: true,
         items: this._getContextMenuItems(),
       },
 
@@ -182,7 +182,7 @@ export class SidebarView {
     return (node) => {
       const idList = $(this._sidebarDivSelector).jstree(true).get_selected();
       if (idList.length === 1) {
-        return this._getSingleContextMenuItems(idList);
+        return this._getSingleContextMenuItems(idList[0]);
       } else if (idList.length > 1) {
         return this._getMultiContextItems(node, idList);
       } else {
@@ -193,34 +193,33 @@ export class SidebarView {
 
   /**
    *
-   * @param {Array<number>} idList - List of selected ids. Always contains a
-   *   single item.
+   * @param {number} id - Id of selected item.
    * @returns {object} Object containing sidebar context menu items.
    * @private
    */
-  _getSingleContextMenuItems(idList) {
+  _getSingleContextMenuItems(id) {
     return {
       newPage: {
         label: 'New Page',
-        action: () => this._newPageHandler(idList[0]),
+        action: () => this._newPageHandler(id),
       },
       newPageFolder: {
         label: 'New Folder',
-        action: () => this._newPageFolderHandler(idList[0]),
+        action: () => this._newPageFolderHandler(id),
       },
       delete: {
         separator_before: true,
         label: 'Delete',
-        action: () => this._deleteHandler(idList),
+        action: () => this._deleteHandler([id]),
       },
       scan: {
         separator_before: true,
         label: 'Scan Now',
-        action: () => this._scanItemHandler(idList),
+        action: () => this._scanItemHandler([id]),
       },
       settings: {
         label: 'Settings',
-        action: () => this._settingsHandler(idList),
+        action: () => this._settingsHandler([id]),
       },
     };
   }
