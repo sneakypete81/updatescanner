@@ -181,72 +181,30 @@ export class SidebarView {
   _getContextMenuItems() {
     return (node) => {
       const idList = $(this._sidebarDivSelector).jstree(true).get_selected();
-      if (idList.length === 1) {
-        return this._getSingleContextMenuItems(idList[0]);
-      } else if (idList.length > 1) {
-        return this._getMultiContextItems(node, idList);
-      } else {
-        return {};
-      }
-    };
-  }
-
-  /**
-   *
-   * @param {number} id - Id of selected item.
-   * @returns {object} Object containing sidebar context menu items.
-   * @private
-   */
-  _getSingleContextMenuItems(id) {
-    return {
-      newPage: {
-        label: 'New Page',
-        action: () => this._newPageHandler(id),
-      },
-      newPageFolder: {
-        label: 'New Folder',
-        action: () => this._newPageFolderHandler(id),
-      },
-      delete: {
-        separator_before: true,
-        label: 'Delete',
-        action: () => this._deleteHandler([id]),
-      },
-      scan: {
-        separator_before: true,
-        label: 'Scan Now',
-        action: () => this._scanItemHandler([id]),
-      },
-      settings: {
-        label: 'Settings',
-        action: () => this._settingsHandler([id]),
-      },
-    };
-  }
-
-  /**
-   *
-   * @param {object} node - Node.
-   * @param {Array<number>} idList - Array containing ids of selected items.
-   * @returns {object} Object containing sidebar context menu items.
-   * @private
-   */
-  _getMultiContextItems(node, idList) {
-    return {
-      delete: {
-        separator_before: true,
-        label: 'Delete',
-        action: () => this._deleteHandler(idList),
-      },
-      scan: {
-        separator_before: true,
-        label: 'Scan Now',
-        action: () => this._scanItemHandler(idList),
-      },
-      settings: {
-        label: 'Settings',
-        action: () => this._settingsHandler(idList),
-      },
+      return {
+        newPage: {
+          label: 'New Page',
+          action: () => this._newPageHandler(node.id),
+        },
+        newPageFolder: {
+          label: 'New Folder',
+          action: () => this._newPageFolderHandler(node.id),
+        },
+        delete: {
+          separator_before: true,
+          label: 'Delete',
+          action: () => this._deleteHandler(idList),
+        },
+        scan: {
+          separator_before: true,
+          label: 'Scan Now',
+          action: () => this._scanItemHandler(idList),
+        },
+        settings: {
+          label: 'Settings',
+          action: () => this._settingsHandler(idList),
+        },
+      };
     };
   }
 
