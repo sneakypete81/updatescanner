@@ -137,23 +137,54 @@ export function openMultipleDialog(pageArray) {
 
   qs('#heading').textContent = 'Multi-page Settings';
 
+  const result = {};
   const condensed = getDataFromMultiple(pageArray);
 
-  form.elements['selectors'].value = condensed.selectors;
+  updateOnChange(
+    form.elements['selectors'],
+    'value',
+    condensed.selectors,
+    result,
+    'selectors',
+  );
 
-  form.elements['scan-mode'].value = condensed.scanMode;
+  updateOnChange(
+    form.elements['scan-mode'],
+    'value',
+    condensed.scanMode,
+    result,
+    'scanMode',
+  );
   updateScanModeDescription(condensed.scanMode);
 
   const autoscanSliderValue = autoscanMinsToSlider(condensed.scanRateMinutes);
-  form.elements['autoscan'].value = autoscanSliderValue;
+  updateOnChange(
+    form.elements['autoscan'],
+    'value',
+    autoscanSliderValue,
+    result,
+    'autoscanSliderValue',
+  );
   updateAutoscanDescription(autoscanSliderValue);
 
   const thresholdSliderValue =
     thresholdCharsToSlider(condensed.changeThreshold);
-  form.elements['threshold'].value = thresholdSliderValue;
   updateThresholdDescription(thresholdSliderValue);
+  updateOnChange(
+    form.elements['threshold'],
+    'value',
+    thresholdSliderValue,
+    result,
+    'thresholdSliderValue',
+  );
 
-  form.elements['ignore-numbers'].checked = condensed.ignoreNumbers;
+  updateOnChange(
+    form.elements['ignore-numbers'],
+    'checked',
+    condensed.ignoreNumbers,
+    result,
+    'ignoreNumbers',
+  );
 
   hideElement(qs('#urlFieldset'));
   hideElement(qs('#titleFieldset'));
@@ -163,15 +194,15 @@ export function openMultipleDialog(pageArray) {
   return new Promise((resolve, reject) => {
     $on(dialog, 'close', () => {
       if (dialog.returnValue === 'ok') {
-        const mode = form.elements['scan-mode'].value;
-        const modeData = ScanModeMap.get(mode).options;
+        const mode = result.scanMode;
+        const modeData = mode == null ? {} : ScanModeMap.get(mode).options;
         resolve({
           scanRateMinutes:
-            AutoscanSliderToMins[form.elements['autoscan'].value],
+            AutoscanSliderToMins[result.autoscanSliderValue],
           changeThreshold:
-            ThresholdSliderToChars[form.elements['threshold'].value],
-          ignoreNumbers: form.elements['ignore-numbers'].checked,
-          selectors: form.elements['selectors'].value,
+            ThresholdSliderToChars[result.thresholdSliderValue],
+          ignoreNumbers: result.ignoreNumbers,
+          selectors: result.selectors,
           contentMode: modeData.contentMode,
           matchMode: modeData.matchMode,
           requireExactMatchCount: modeData.requireExactMatchCount,
@@ -182,6 +213,31 @@ export function openMultipleDialog(pageArray) {
       }
     });
   });
+}
+
+/**
+ *
+ * @param {Element} element - Element.
+ * @param {string} elementPropertyName - Element property (eg. value, checked).
+ * @param {string|number|boolean} initialValue - Initial value.
+ * @param {object} config - Configuration object used to save new value.
+ * @param {string} propertyName - Configuration property name.
+ */
+function updateOnChange(
+  element,
+  elementPropertyName,
+  initialValue,
+  config,
+  propertyName,
+) {
+  element[elementPropertyName] = initialValue;
+  element.addEventListener(
+    'change',
+    () => {
+      console.log(element[elementPropertyName]);
+      config[propertyName] = element[elementPropertyName];
+    },
+  );
 }
 
 /**
