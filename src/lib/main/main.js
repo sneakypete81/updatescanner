@@ -7,6 +7,7 @@ import {Page} from '/lib/page/page.js';
 import {PageFolder} from '/lib/page/page_folder.js';
 import {diff} from '/lib/diff/diff.js';
 import {log} from '/lib/util/log.js';
+import {createTreeForPage} from './page_tree.js';
 
 // Allow function mocking
 export const __ = {
@@ -84,18 +85,7 @@ export class Main {
       case actionEnum.SHOW_SETTINGS: {
         const itemIdArray = JSON.parse(this._getUrlParam(params, paramEnum.ID));
 
-        if (itemIdArray.length === 1) {
-          const item = this.pageStore.getItem(itemIdArray[0]);
-          if (item instanceof Page) {
-            this._showPageSettings(item);
-          } else {
-            this._showPageFolderSettings(item);
-          }
-        } else if (itemIdArray.length > 1) {
-          const pageArray = itemIdArray.map((item) => this.pageStore.getItem(
-            item));
-          this._showMultiPageSettings(pageArray);
-        }
+        this._showSettings(itemIdArray);
         break;
       }
     }
@@ -268,13 +258,29 @@ export class Main {
   /**
    * Updates all pages in list with new settings.
    *
-   * @param {Array<Page>} pageArray - Array of pages to update.
+   * @param {Array<PageNode>} pageNodeArray - Array of pages to update.
    * @param {object} newSettings - Update object containing new options.
    * @private
    */
-  async _updatePageList(pageArray, newSettings) {
-    for (let i = 0; i < pageArray.length; i++) {
-      await this._updatePage(pageArray[i], newSettings);
+  async _updatePageList(pageNodeArray, newSettings) {
+    if (pageNodeArray.length === 1 && pageNodeArray[0] instanceof PageFolder) {
+      console.log('Updating folder name');
+      const updatedPageFolder = await PageFolder.load(pageNodeArray[0].id);
+      updatedPageFolder.title = newSettings.title;
+      updatedPageFolder.save();
+    }
+
+    for (let i = 0; i < pageNodeArray.length; i++) {
+      const node = pageNodeArray[i];
+      if (node.isFolder) {
+        for (let k = 0; k < node.descendants.length; k++) {
+          console.log('Updating page', node.descendants[k].title);
+          await this._updatePage(node.descendants[k], newSettings);
+        }
+      } else {
+        console.log('Updating page', node.page.title);
+        await this._updatePage(node.page, newSettings);
+      }
     }
   }
 
@@ -306,43 +312,36 @@ export class Main {
   }
 
   /**
-   * Show the Page settings dialog.
    *
-   * @param {Page} page - Page to edit.
+   * @param {Array<string>} idArray - Page id array.
+   * @private
    */
-  async _showPageSettings(page) {
-    this.currentPage = page;
-    const newSettings = await dialog.openPageDialog(page);
-    if (newSettings !== null) {
-      this._updateCurrentPage(newSettings);
-    }
-    document.location.replace(getMainDiffUrl(this.currentPage.id));
-  }
+  async _showSettings(idArray) {
+    console.log(idArray);
+    const nodeArray = idArray.map((id) =>
+      createTreeForPage(id, this.pageStore));
 
-  /**
-   * Show the PageFolder settings dialog.
-   *
-   * @param {PageFolder} pageFolder - PageFolder to edit.
-   */
-  async _showPageFolderSettings(pageFolder) {
-    const newSettings = await dialog.openPageFolderDialog(pageFolder);
-    if (newSettings !== null) {
-      const updatedPageFolder = await PageFolder.load(pageFolder.id);
-      updatedPageFolder.title = newSettings.title;
-      updatedPageFolder.save();
+    console.log(nodeArray);
+    let newSettings;
+    if (nodeArray.length === 1) {
+      const node = nodeArray[0];
+      if (node.isFolder) {
+        newSettings = await dialog.openPageFolderDialog(node.page);
+      } else {
+        newSettings = await dialog.openPageDialog(node.page);
+      }
+    } else {
+      newSettings = await dialog.openMultipleDialog(nodeArray);
     }
-    document.location.replace('about:blank');
-  }
 
-  /**
-   * Show the PageFolder settings dialog.
-   *
-   * @param {Array<Page>} pageArray - PageFolder to edit.
-   */
-  async _showMultiPageSettings(pageArray) {
-    const newSettings = await dialog.openMultipleDialog(pageArray);
     if (newSettings !== null) {
-      this._updatePageList(pageArray, newSettings);
+      await this._updatePageList(nodeArray, newSettings);
+    }
+
+    if (nodeArray.length === 1 && !nodeArray[0].isFolder) {
+      document.location.replace(getMainDiffUrl(nodeArray[0].page.id));
+    } else {
+      document.location.replace('about:blank');
     }
   }
 

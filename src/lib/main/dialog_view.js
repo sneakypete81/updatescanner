@@ -126,18 +126,20 @@ export function openPageFolderDialog(pageFolder) {
 /**
  * Show the settings dialog for the specified PageFolder.
  *
- * @param {Array<Page>} pageArray - Array containing selected pages.
+ * @param {Array<PageNode>} pageNodeArray - Array containing selected pages.
  *
  * @returns {Promise} Promise that resolves with an object containing the
  * updated pageFolder settings.
  */
-export function openMultipleDialog(pageArray) {
+export function openMultipleDialog(pageNodeArray) {
   const dialog = qs('#settings-dialog');
   const form = qs('#settings-form');
 
   qs('#heading').textContent = 'Multi-page Settings';
 
   const result = {};
+  const pageArray = pageNodeArray.flatMap((node) =>
+    node.isFolder ? node.descendants : node.page);
   const condensed = getDataFromMultiple(pageArray);
 
   updateOnChange(
