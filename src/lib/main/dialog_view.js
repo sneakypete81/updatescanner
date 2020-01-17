@@ -23,7 +23,7 @@ export function init() {
     updateThresholdDescription(target.value),
   );
   $on(form.elements['scan-mode'], 'input', ({target}) =>
-    updateScanModeDescription(target.value),
+    updateScanMode(target.value),
   );
 
   $on(form, 'reset', () => dialog.close());
@@ -49,7 +49,7 @@ export function openPageDialog(page) {
 
   const scanModeName = getScanModeName(page);
   form.elements['scan-mode'].value = scanModeName;
-  updateScanModeDescription(scanModeName);
+  updateScanMode(scanModeName);
 
   const autoscanSliderValue = autoscanMinsToSlider(page.scanRateMinutes);
   form.elements['autoscan'].value = autoscanSliderValue;
@@ -155,7 +155,7 @@ export function openMultipleDialog(pageArray) {
     result,
     'scanMode',
   );
-  updateScanModeDescription(condensed.scanMode);
+  updateScanMode(condensed.scanMode);
 
   const autoscanSliderValue = autoscanMinsToSlider(condensed.scanRateMinutes);
   updateOnChange(
@@ -224,7 +224,7 @@ export function openMultipleDialog(pageArray) {
 /**
  *
  * @param {Element} element - Element.
- * @param {string} elementPropertyName - Element property (eg. value, checked).
+ * @param {string} elementPropertyName - Element property (eg. Value, checked).
  * @param {?string|number|boolean} initialValue - Initial value.
  * @param {object} config - Configuration object used to save new value.
  * @param {string} propertyName - Configuration property name.
@@ -239,10 +239,17 @@ function updateOnChange(
   element[elementPropertyName] = initialValue;
   if (initialValue == null) {
     element.indeterminate = true;
+    element.placeholder = 'Various';
   }
   element.addEventListener(
-    'change',
-    () => config[propertyName] = element[elementPropertyName],
+    'input',
+    () => {
+      if (initialValue == null) {
+        element.placeholder = '';
+      }
+      config[propertyName] = element[elementPropertyName];
+      console.log(element);
+    },
   );
 }
 
@@ -400,21 +407,45 @@ function replaceInnerHTML(element, html) {
 }
 
 /**
+ *  Updates scan mode description, threshold state and other related inputs.
  *
- * @param {string} modeName - Scan mode name.
+ * @param {?string} modeName - Scan mode name.
  */
-function updateScanModeDescription(modeName) {
-  const form = qs('#settings-form');
-  const mode = ScanModeMap.get(modeName);
-  const descriptionElement = form.elements['scan-mode-description'];
-  descriptionElement.value = mode.description;
+function updateScanMode(modeName) {
+  if (modeName == null) {
+    setVariousScanMode();
+  } else {
+    const form = qs('#settings-form');
+    const mode = ScanModeMap.get(modeName);
+    const descriptionElement = form.elements['scan-mode-description'];
+    descriptionElement.value = mode.description;
 
-  const partialScan = mode.options.partialScan;
+    const partialScan = mode.options.partialScan;
+    const selectorDescription = getSelectorsDescription(partialScan);
+    replaceInnerHTML(
+      form.elements['selectors-description'],
+      selectorDescription,
+    );
+    setDisableOnInput(form.elements['selectors'], !partialScan);
+
+    updateThresholdDisabledState(mode.options);
+  }
+}
+
+/**
+ * Sets scan mode to various, meaning it differs for multiple items.
+ */
+function setVariousScanMode() {
+  const form = qs('#settings-form');
+  const descriptionElement = form.elements['scan-mode-description'];
+  descriptionElement.value = 'Various';
+
+  const partialScan = true;
   const selectorDescription = getSelectorsDescription(partialScan);
   replaceInnerHTML(form.elements['selectors-description'], selectorDescription);
   setDisableOnInput(form.elements['selectors'], !partialScan);
 
-  updateThresholdDisabledState(mode.options);
+  updateThresholdDisabledState({contentMode: Page.contentModeEnum.TEXT});
 }
 
 /**
