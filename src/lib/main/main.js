@@ -264,7 +264,6 @@ export class Main {
    */
   async _updatePageList(pageNodeArray, newSettings) {
     if (pageNodeArray.length === 1 && pageNodeArray[0] instanceof PageFolder) {
-      console.log('Updating folder name');
       const updatedPageFolder = await PageFolder.load(pageNodeArray[0].id);
       updatedPageFolder.title = newSettings.title;
       updatedPageFolder.save();
@@ -274,11 +273,9 @@ export class Main {
       const node = pageNodeArray[i];
       if (node.isFolder) {
         for (let k = 0; k < node.descendants.length; k++) {
-          console.log('Updating page', node.descendants[k].title);
           await this._updatePage(node.descendants[k], newSettings);
         }
       } else {
-        console.log('Updating page', node.page.title);
         await this._updatePage(node.page, newSettings);
       }
     }
