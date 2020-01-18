@@ -74,7 +74,6 @@ export class Background {
    *   response back to the sender.
    */
   _handleMessage(message, sender, sendResponse) {
-    console.log('received message', message);
     if (message.action === backgroundActionEnum.SCAN_ALL) {
       this._scanAll();
     } else if (message.action === backgroundActionEnum.SCAN_ITEM) {
