@@ -1,6 +1,9 @@
-import {qs, $on, $delegate, findParentWithClass,
-  showElement, hideElement, isHidden} from '/lib/util/view_helpers.js';
+import {
+  qs, $on, $delegate, findParentWithClass,
+  showElement, hideElement, isHidden,
+} from '/lib/util/view_helpers.js';
 import {waitForMs} from '/lib/util/promise.js';
+import {scanQueueStateEnum} from '/lib/scan/scan_queue.js';
 
 /**
  * Initialise the Popup view.
@@ -102,6 +105,20 @@ export async function downloadUrl(url, filename) {
   link.click();
 
   await waitForMs(0);
+}
+
+/**
+ * Updates scan state UI based on scan queue state.
+ *
+ * @param {scanQueueStateEnum|string} state - Scan queue state.
+ */
+export function setScanState(state) {
+  const scanStateUI = qs('#scan-state');
+  if (state === scanQueueStateEnum.ACTIVE) {
+    showElement(scanStateUI);
+  } else if (state === scanQueueStateEnum.INACTIVE) {
+    hideElement(scanStateUI);
+  }
 }
 
 /**

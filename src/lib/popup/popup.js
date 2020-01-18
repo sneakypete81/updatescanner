@@ -7,6 +7,7 @@ import {PageStore, hasPageStateChanged, isItemChanged}
 import {createBackupJson} from '/lib/backup/backup.js';
 import {openRestoreUrl} from '/lib/backup/restore_url.js';
 import {waitForMs} from '/lib/util/promise.js';
+import {uiActionsEnum} from '/lib/background/actions.js';
 
 /**
  * Class representing the Update Scanner toolbar popup.
@@ -39,6 +40,10 @@ export class Popup {
     view.bindRestoreClick(this._handleRestoreClick.bind(this));
     view.bindHelpClick(this._handleHelpClick.bind(this));
     view.bindPageClick(this._handlePageClick.bind(this));
+
+    browser.runtime.onMessage.addListener(this._handleMessage.bind(this));
+    browser.runtime.sendMessage({action: uiActionsEnum.QUEUE_STATE_REQUEST})
+      .then(this._handleMessage.bind(this));
 
     this._refreshPageList();
   }
@@ -109,8 +114,10 @@ export class Popup {
    * Called when the Help menu item is clicked, to open the help website.
    */
   _handleHelpClick() {
-    browser.tabs.create({url:
-      'https://sneakypete81.github.io/updatescanner/'});
+    browser.tabs.create({
+      url:
+        'https://sneakypete81.github.io/updatescanner/',
+    });
     window.close();
   }
 
@@ -149,5 +156,27 @@ export class Popup {
     if (hasPageStateChanged(change)) {
       this._refreshPageList();
     }
+  }
+
+  /**
+   * Called when message is sent to the UI.
+   *
+   * @param {object} message - Message content.
+   * @private
+   */
+  _handleMessage(message) {
+    if (message.action === uiActionsEnum.QUEUE_STATE_CHANGED) {
+      this._handleQueueChange(message.queueState);
+    }
+  }
+
+  /**
+   * Called when scan queue state changes.
+   *
+   * @param {scanQueueStateEnum} scanQueueState - Scan queue state.
+   * @private
+   */
+  _handleQueueChange(scanQueueState) {
+    view.setScanState(scanQueueState);
   }
 }

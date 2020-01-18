@@ -1,4 +1,4 @@
-import {backgroundActionEnum} from './actions.js';
+import {backgroundActionEnum, uiActionsEnum} from './actions.js';
 import {Autoscan} from '/lib/scan/autoscan.js';
 import {ScanQueue} from '/lib/scan/scan_queue.js';
 import {showNotification} from '/lib/scan/notification.js';
@@ -38,6 +38,9 @@ export class Background {
 
     this.scanQueue = new ScanQueue();
     this.scanQueue.bindScanComplete(this._handleScanComplete.bind(this));
+    this.scanQueue.bindQueueStateChange(
+      this._handleScanQueueStateChange.bind(this),
+    );
 
     this._refreshIcon();
     this.pageStore.refreshFolderState();
@@ -66,12 +69,21 @@ export class Background {
    * Called when a message is sent to the background process.
    *
    * @param {object} message - Message content.
+   * @param {object} sender - Object giving details about the message sender.
+   * @param {Function} sendResponse - Function that can be used to send a
+   *   response back to the sender.
    */
-  _handleMessage(message) {
-    if (message.action == backgroundActionEnum.SCAN_ALL) {
+  _handleMessage(message, sender, sendResponse) {
+    console.log('received message', message);
+    if (message.action === backgroundActionEnum.SCAN_ALL) {
       this._scanAll();
-    } else if (message.action == backgroundActionEnum.SCAN_ITEM) {
+    } else if (message.action === backgroundActionEnum.SCAN_ITEM) {
       this._scanItem(message.itemId);
+    } else if (message.action === uiActionsEnum.QUEUE_STATE_REQUEST) {
+      this._handleScanQueueStateChange(
+        this.scanQueue.getScanState(),
+        sendResponse,
+      );
     }
   }
 
@@ -83,7 +95,7 @@ export class Background {
       .filter(isItemChanged).length;
 
     browser.browserAction.setIcon({path: activeIcon});
-    if (updateCount == 0) {
+    if (updateCount === 0) {
       browser.browserAction.setBadgeText({text: ''});
     } else {
       browser.browserAction.setBadgeText({text: updateCount.toString()});
@@ -153,6 +165,26 @@ export class Background {
 
     if (notifyChangeCount > 0 || isManualScan) {
       showNotification(notifyChangeCount);
+    }
+  }
+
+  /**
+   * Called whenever scan queue state changes and sends message to other
+   * listeners.
+   *
+   * @param {scanQueueStateEnum} state - Scan queue state.
+   * @param {?Function} sendResponse - Response function.
+   * @private
+   */
+  _handleScanQueueStateChange(state, sendResponse) {
+    const message = {
+      action: uiActionsEnum.QUEUE_STATE_CHANGED,
+      queueState: state,
+    };
+    if (sendResponse != null) {
+      sendResponse(message);
+    } else {
+      browser.runtime.sendMessage(message);
     }
   }
 }

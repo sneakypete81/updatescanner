@@ -11,16 +11,31 @@ export const __ = {
 const SCAN_IDLE_MS = 2000;
 
 /**
+ * Scan queue state name mappings.
+ *
+ * @type {{ACTIVE: string, INACTIVE: string}} Enum.
+ */
+export const scanQueueStateEnum = {
+  ACTIVE: 'active',
+  INACTIVE: 'inactive',
+};
+
+/**
  * @typedef {object} ScanResult
- * @property {integer} majorChanges Number of pages that had major changes
+ * @property {number} majorChanges Number of pages that had major changes
  * when scanned.
- * @property {integer} scanCount Number of pages that were scanned.
+ * @property {number} scanCount Number of pages that were scanned.
  */
 
 /**
-* @callback ScanCompleteHandler
-* @param {ScanResult} scanResult - Object containing the result of the scan.
-*/
+ * @callback ScanCompleteHandler
+ * @param {ScanResult} scanResult - Object containing the result of the scan.
+ */
+
+/**
+ * @callback QueueStateHandler
+ * @param {scanQueueStateEnum} state - New queue state.
+ */
 
 /**
  * Class to maintain a queue of pages to scan.
@@ -32,6 +47,7 @@ export class ScanQueue {
   constructor() {
     this.queue = [];
     this._scanCompleteHandler = null;
+    this._queueStateChangeHandler = null;
     this._isScanning = false;
     this._isManualScan = false;
   }
@@ -43,6 +59,15 @@ export class ScanQueue {
    */
   bindScanComplete(handler) {
     this._scanCompleteHandler = handler;
+  }
+
+  /**
+   *  Bind a handler to call whenever queue state changes.
+   *
+   * @param {QueueStateHandler} handler - Called when queue state changes.
+   */
+  bindQueueStateChange(handler) {
+    this._queueStateChangeHandler = handler;
   }
 
   /**
@@ -67,9 +92,9 @@ export class ScanQueue {
       return;
     }
 
-    this._isScanning = true;
+    this._changeScanState(true);
     const {majorChanges, scanCount} = await this._processScanQueue();
-    this._isScanning = false;
+    this._changeScanState(false);
 
     if (this._scanCompleteHandler !== null) {
       this._scanCompleteHandler({
@@ -82,6 +107,32 @@ export class ScanQueue {
   }
 
   /**
+   * Updates scan state and notifies listeners.
+   *
+   * @param {boolean} isScanning - True if scanning is active.
+   * @private
+   */
+  _changeScanState(isScanning) {
+    this._isScanning = isScanning;
+    if (this._queueStateChangeHandler != null) {
+      this._queueStateChangeHandler(this.getScanState());
+    }
+  }
+
+  /**
+   * Returns current scan state.
+   *
+   * @returns {scanQueueStateEnum|string} Scan queue state enum.
+   */
+  getScanState() {
+    if (this._isScanning) {
+      return scanQueueStateEnum.ACTIVE;
+    } else {
+      return scanQueueStateEnum.INACTIVE;
+    }
+  }
+
+  /**
    * Identical to the scan function, but when the scanComplete handler is called
    * the isManualScan property is set.
    */
@@ -89,6 +140,7 @@ export class ScanQueue {
     this._isManualScan = true;
     await this.scan();
   }
+
   /**
    * Scan all pages in the queue. Pages added during the scan are scanned too.
    *
