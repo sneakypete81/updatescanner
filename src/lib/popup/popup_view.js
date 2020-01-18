@@ -110,8 +110,8 @@ export async function downloadUrl(url, filename) {
 /**
  * Updates scan state UI based on scan queue state.
  *
- * @param {{state: string, queueLength: number, scanned: number}} queueData -
- *   Scan queue data.
+ * @param {{state: string, queueLength: number,
+ * scanned: number}} queueData - Scan queue data.
  */
 export function setScanState(queueData) {
   const scanStateUI = qs('#scan-state');
