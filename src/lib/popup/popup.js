@@ -166,17 +166,17 @@ export class Popup {
    */
   _handleMessage(message) {
     if (message.action === uiActionsEnum.QUEUE_STATE_CHANGED) {
-      this._handleQueueChange(message.queueState);
+      this._handleQueueChange(message.data);
     }
   }
 
   /**
    * Called when scan queue state changes.
    *
-   * @param {scanQueueStateEnum} scanQueueState - Scan queue state.
+   * @param {scanQueueStateEnum} queueData - Scan queue state.
    * @private
    */
-  _handleQueueChange(scanQueueState) {
-    view.setScanState(scanQueueState);
+  _handleQueueChange(queueData) {
+    view.setScanState(queueData);
   }
 }

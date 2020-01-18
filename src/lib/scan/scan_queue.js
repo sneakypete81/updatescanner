@@ -49,6 +49,7 @@ export class ScanQueue {
     this._scanCompleteHandler = null;
     this._queueStateChangeHandler = null;
     this._isScanning = false;
+    this._scanCompleteCount = 0;
     this._isManualScan = false;
   }
 
@@ -92,9 +93,9 @@ export class ScanQueue {
       return;
     }
 
-    this._changeScanState(true);
+    this._changeScanState(true, 0);
     const {majorChanges, scanCount} = await this._processScanQueue();
-    this._changeScanState(false);
+    this._changeScanState(false, 0);
 
     if (this._scanCompleteHandler !== null) {
       this._scanCompleteHandler({
@@ -110,10 +111,12 @@ export class ScanQueue {
    * Updates scan state and notifies listeners.
    *
    * @param {boolean} isScanning - True if scanning is active.
+   * @param {number} scannedCount - Number of already scanned items.
    * @private
    */
-  _changeScanState(isScanning) {
+  _changeScanState(isScanning, scannedCount) {
     this._isScanning = isScanning;
+    this._scanCompleteCount = scannedCount;
     if (this._queueStateChangeHandler != null) {
       this._queueStateChangeHandler(this.getScanState());
     }
@@ -122,13 +125,22 @@ export class ScanQueue {
   /**
    * Returns current scan state.
    *
-   * @returns {scanQueueStateEnum|string} Scan queue state enum.
+   * @returns {{state: string, queueLength: number, scanned: number}} Scan
+   *   queue state enum.
    */
   getScanState() {
     if (this._isScanning) {
-      return scanQueueStateEnum.ACTIVE;
+      return {
+        state: scanQueueStateEnum.ACTIVE,
+        queueLength: this.queue.length,
+        scanned: this._scanCompleteCount,
+      };
     } else {
-      return scanQueueStateEnum.INACTIVE;
+      return {
+        state: scanQueueStateEnum.INACTIVE,
+        queueLength: 0,
+        scanned: 0,
+      };
     }
   }
 
@@ -156,11 +168,13 @@ export class ScanQueue {
         majorChanges++;
       }
       scanCount++;
+      this._changeScanState(true, scanCount);
 
       if (this.queue.length > 0) {
         await __.waitForMs(SCAN_IDLE_MS);
       }
     }
+
     return {majorChanges: majorChanges, scanCount: scanCount};
   }
 }

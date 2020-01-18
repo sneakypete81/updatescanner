@@ -110,13 +110,19 @@ export async function downloadUrl(url, filename) {
 /**
  * Updates scan state UI based on scan queue state.
  *
- * @param {scanQueueStateEnum|string} state - Scan queue state.
+ * @param {{state: string, queueLength: number, scanned: number}} queueData -
+ *   Scan queue data.
  */
-export function setScanState(state) {
+export function setScanState(queueData) {
   const scanStateUI = qs('#scan-state');
-  if (state === scanQueueStateEnum.ACTIVE) {
+  const textWrapper = qs('.text-section-header', scanStateUI);
+  if (queueData.state === scanQueueStateEnum.ACTIVE) {
     showElement(scanStateUI);
-  } else if (state === scanQueueStateEnum.INACTIVE) {
+    const total = queueData.scanned + queueData.queueLength;
+    const progress = Math.floor((queueData.scanned / total) * 100);
+    textWrapper.textContent =
+      `Scan in progress ${progress}% (${queueData.scanned}/${total})`;
+  } else if (queueData.state === scanQueueStateEnum.INACTIVE) {
     hideElement(scanStateUI);
   }
 }

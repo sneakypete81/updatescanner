@@ -172,14 +172,14 @@ export class Background {
    * Called whenever scan queue state changes and sends message to other
    * listeners.
    *
-   * @param {scanQueueStateEnum} state - Scan queue state.
+   * @param {object} stateData - Scan queue state data.
    * @param {?Function} sendResponse - Response function.
    * @private
    */
-  _handleScanQueueStateChange(state, sendResponse) {
+  _handleScanQueueStateChange(stateData, sendResponse) {
     const message = {
       action: uiActionsEnum.QUEUE_STATE_CHANGED,
-      queueState: state,
+      data: stateData,
     };
     if (sendResponse != null) {
       sendResponse(message);
