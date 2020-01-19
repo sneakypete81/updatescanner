@@ -1,6 +1,6 @@
 import {backgroundActionEnum, uiActionsEnum} from './actions.js';
 import {Autoscan} from '/lib/scan/autoscan.js';
-import {ScanQueue} from '/lib/scan/scan_queue.js';
+import {ScanQueue, scanQueueStateEnum} from '/lib/scan/scan_queue.js';
 import {showNotification} from '/lib/scan/notification.js';
 import {PageStore, hasPageStateChanged, isItemChanged}
   from '/lib/page/page_store.js';
@@ -9,10 +9,18 @@ import {openUpdate} from '/lib/update/update_url.js';
 import {log} from '/lib/util/log.js';
 import {Config} from '/lib/util/config.js';
 
-const activeIcon = {
+const defaultIcon = {
   18: '/images/updatescanner_18.png',
   48: '/images/updatescanner_48.png',
   64: '/images/updatescanner_64.png',
+  96: '/images/updatescanner_96.png',
+};
+
+const scanIcon = {
+  18: '/images/updatescanner_18_scan.png',
+  48: '/images/updatescanner_48_scan.png',
+  64: '/images/updatescanner_64_scan.png',
+  96: '/images/updatescanner_96_scan.png',
 };
 
 /**
@@ -42,6 +50,7 @@ export class Background {
       this._handleScanQueueStateChange.bind(this),
     );
 
+    browser.browserAction.setIcon({path: defaultIcon});
     this._refreshIcon();
     this.pageStore.refreshFolderState();
     await this._checkFirstRun();
@@ -94,7 +103,6 @@ export class Background {
     const updateCount = this.pageStore.getPageList()
       .filter(isItemChanged).length;
 
-    browser.browserAction.setIcon({path: activeIcon});
     if (updateCount === 0) {
       browser.browserAction.setBadgeText({text: ''});
     } else {
@@ -185,6 +193,12 @@ export class Background {
       sendResponse(message);
     } else {
       browser.runtime.sendMessage(message);
+    }
+
+    if (stateData.state === scanQueueStateEnum.ACTIVE) {
+      browser.browserAction.setIcon({path: scanIcon});
+    } else {
+      browser.browserAction.setIcon({path: defaultIcon});
     }
   }
 }
