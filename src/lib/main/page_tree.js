@@ -9,12 +9,14 @@ class PageNode {
    * @param {Page|PageFolder} page - Page.
    * @property {boolean} isFolder - True if page in this node is folder.
    * @property {?Array<Page>} descendants - Array containing descendants.
-   *   Null if not a folder.
+   *   Null if not a folder or descendants were not loaded.
    */
   constructor(page) {
     this.page = page;
     this.isFolder = page instanceof PageFolder;
-    this.descendants = null;
+    if (this.isFolder) {
+      this.descendants = null;
+    }
   }
 }
 
@@ -30,6 +32,20 @@ export function createTreeForPage(pageId, pageStore) {
   const rootNode = new PageNode(rootPage);
   if (rootNode.isFolder) {
     rootNode.descendants = pageStore.getDescendantPages(pageId);
+  }
+  return rootNode;
+}
+
+/**
+ * Creates a node for a new page.
+ *
+ * @param {Page|PageFolder} page - Page object.
+ * @returns {PageNode} Page node for root page.
+ */
+export function createNodeForNewPage(page) {
+  const rootNode = new PageNode(page);
+  if (rootNode.isFolder) {
+    rootNode.descendants = [];
   }
   return rootNode;
 }

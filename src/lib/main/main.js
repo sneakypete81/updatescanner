@@ -7,7 +7,7 @@ import {Page} from '/lib/page/page.js';
 import {PageFolder} from '/lib/page/page_folder.js';
 import {diff} from '/lib/diff/diff.js';
 import {log} from '/lib/util/log.js';
-import {createTreeForPage} from './page_tree.js';
+import {createTreeForPage, createNodeForNewPage} from './page_tree.js';
 
 // Allow function mocking
 export const __ = {
@@ -130,9 +130,8 @@ export class Main {
       url = undefined;
     }
 
-    const tmpPageNode = createTreeForPage(-1, this.pageStore);
-    tmpPageNode.page.title = title;
-    tmpPageNode.page.url = url;
+    const newPage = new Page(-1, {title: title, url: url});
+    const tmpPageNode = createNodeForNewPage(newPage);
     const newSettings = await dialog.openPageDialog(tmpPageNode);
 
     if (newSettings == null) {
@@ -161,8 +160,8 @@ export class Main {
     parentId = PageStore.ROOT_ID,
     insertAfterIndex = -1,
   ) {
-    const temporaryPageFolderNode = createTreeForPage(-1, this.pageStore);
-    temporaryPageFolderNode.page.title = title;
+    const newPage = new PageFolder(-1, {title: title});
+    const temporaryPageFolderNode = createNodeForNewPage(newPage);
     const newSettings =
       await dialog.openPageFolderDialog(temporaryPageFolderNode);
     if (newSettings !== null) {
