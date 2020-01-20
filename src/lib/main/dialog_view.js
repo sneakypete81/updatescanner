@@ -1,8 +1,8 @@
 import {qs, $on, hideElement} from '/lib/util/view_helpers.js';
 
 // See https://bugzilla.mozilla.org/show_bug.cgi?id=840640
-import dialogPolyfill from
-  '/dependencies/module/dialog-polyfill/dist/dialog-polyfill.esm.js';
+import dialogPolyfill
+  from '/dependencies/module/dialog-polyfill/dist/dialog-polyfill.esm.js';
 
 /**
  * Initialise the dialog box.
@@ -16,9 +16,11 @@ export function init() {
   form.elements['threshold'].max = ThresholdSliderToChars.length - 1;
 
   $on(form.elements['autoscan'], 'input', ({target}) =>
-    updateAutoscanDescription(target.value));
+    updateAutoscanDescription(target.value),
+  );
   $on(form.elements['threshold'], 'input', ({target}) =>
-    updateThresholdDescription(target.value));
+    updateThresholdDescription(target.value),
+  );
 
   $on(form, 'reset', () => dialog.close());
 }
@@ -62,8 +64,7 @@ export function openPageDialog(page) {
             AutoscanSliderToMins[form.elements['autoscan'].value],
           changeThreshold:
             ThresholdSliderToChars[form.elements['threshold'].value],
-          ignoreNumbers:
-            form.elements['ignore-numbers'].checked,
+          ignoreNumbers: form.elements['ignore-numbers'].checked,
         });
       } else {
         resolve(null);
@@ -119,9 +120,9 @@ const AutoscanSliderDescriptions = [...AutoscanSliderMap.values()];
 const AutoscanSliderNever = AutoscanSliderToMins.indexOf(0);
 
 /**
- * @param {integer} minutes - Number of minutes between scans.
+ * @param {number} minutes - Number of minutes between scans.
  *
- * @returns {integer} Slider value representing the given number of minutes.
+ * @returns {number} Slider value representing the given number of minutes.
  */
 function autoscanMinsToSlider(minutes) {
   if (minutes == 0) {
@@ -142,7 +143,7 @@ function autoscanMinsToSlider(minutes) {
 /**
  * Update the Autoscan description text based on the current slider value.
  *
- * @param {integer} sliderValue - Autoscan slider value.
+ * @param {number} sliderValue - Autoscan slider value.
  */
 function updateAutoscanDescription(sliderValue) {
   qs('#settings-form').elements['autoscan-description'].value =
@@ -161,9 +162,9 @@ const ThresholdSliderToChars = [...ThresholdSliderMap.keys()];
 const ThresholdSliderDescriptions = [...ThresholdSliderMap.values()];
 
 /**
- * @param {integer} changeThreshold - Change threshold measured in characters.
+ * @param {number} changeThreshold - Change threshold measured in characters.
  *
- * @returns {integer} Slider value representing the given number of characters.
+ * @returns {number} Slider value representing the given number of characters.
  */
 function thresholdCharsToSlider(changeThreshold) {
   // Walk through the options, returning the first one that matches
@@ -178,7 +179,7 @@ function thresholdCharsToSlider(changeThreshold) {
 /**
  * Update the Threshold description text based on the current slider value.
  *
- * @param {integer} sliderValue - Threshold slider value.
+ * @param {number} sliderValue - Threshold slider value.
  */
 function updateThresholdDescription(sliderValue) {
   qs('#settings-form').elements['threshold-description'].value =

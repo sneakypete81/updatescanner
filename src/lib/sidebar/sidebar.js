@@ -123,7 +123,7 @@ export class Sidebar {
    *
    * @param {string} itemId - ID of the item to move.
    * @param {string} pageFolderId - ID of the destination PageFolder.
-   * @param {integer} position - Position within the destination PageFolder.
+   * @param {number} position - Position within the destination PageFolder.
    */
   _handleMove(itemId, pageFolderId, position) {
     this.pageStore.moveItem(itemId, pageFolderId, position);

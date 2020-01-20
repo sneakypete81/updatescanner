@@ -5,7 +5,7 @@ const NOTIFICATION_ID = 'updatescanner';
 /**
  * Show an OS notification that webpage updates have been detected.
  *
- * @param {integer} updateCount - Number of updates.
+ * @param {number} updateCount - Number of updates.
  */
 export async function showNotification(updateCount) {
   let message;

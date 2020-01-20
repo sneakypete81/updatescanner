@@ -18,9 +18,9 @@ const SCAN_IDLE_MS = 2000;
  */
 
 /**
-* @callback ScanCompleteHandler
-* @param {ScanResult} scanResult - Object containing the result of the scan.
-*/
+ * @callback ScanCompleteHandler
+ * @param {ScanResult} scanResult - Object containing the result of the scan.
+ */
 
 /**
  * Class to maintain a queue of pages to scan.
@@ -89,6 +89,7 @@ export class ScanQueue {
     this._isManualScan = true;
     await this.scan();
   }
+
   /**
    * Scan all pages in the queue. Pages added during the scan are scanned too.
    *

@@ -77,7 +77,8 @@ describe('scan', function() {
       expect(PageStore.saveHtml).toHaveBeenCalledTimes(1);
     });
 
-    it('saves content if the page is unchanged when previously changed',
+    it(
+      'saves content if the page is unchanged when previously changed',
       async function() {
         this.page.state = Page.stateEnum.CHANGED;
         const html = 'Here is some <b>HTML</b>';
@@ -95,7 +96,8 @@ describe('scan', function() {
         expect(PageStore.saveHtml).toHaveBeenCalledWith(
           '1', PageStore.htmlTypes.NEW, html);
         expect(PageStore.saveHtml).toHaveBeenCalledTimes(1);
-      });
+      },
+    );
 
     it('saves new content', async function() {
       this.page.state = Page.stateEnum.NO_CHANGE;
@@ -136,7 +138,8 @@ describe('scan', function() {
       expect(PageStore.saveHtml).toHaveBeenCalledTimes(1);
     });
 
-    it('doesn\'t update state for a minor change when previously changed',
+    it(
+      'doesn\'t update state for a minor change when previously changed',
       async function() {
         this.page.state = Page.stateEnum.CHANGED;
         const html1 = 'Here is some <b>HTML</b>';
@@ -156,7 +159,8 @@ describe('scan', function() {
         expect(PageStore.saveHtml).toHaveBeenCalledWith(
           '1', PageStore.htmlTypes.NEW, html2);
         expect(PageStore.saveHtml).toHaveBeenCalledTimes(1);
-      });
+      },
+    );
 
     it('updates old and new HTML for a new major change', async function() {
       this.page.state = Page.stateEnum.NO_CHANGE;
@@ -181,7 +185,8 @@ describe('scan', function() {
       expect(PageStore.saveHtml).toHaveBeenCalledTimes(2);
     });
 
-    it('updates just the new HTML for a repeated major change',
+    it(
+      'updates just the new HTML for a repeated major change',
       async function() {
         this.page.state = Page.stateEnum.CHANGED;
         const html1 = 'Here is some <b>HTML</b>';
@@ -201,7 +206,8 @@ describe('scan', function() {
         expect(PageStore.saveHtml).toHaveBeenCalledWith(
           '1', PageStore.htmlTypes.NEW, html2);
         expect(PageStore.saveHtml).toHaveBeenCalledTimes(1);
-      });
+      },
+    );
   });
 
   describe('scan', function() {
@@ -219,7 +225,8 @@ describe('scan', function() {
       }).catch((error) => done.fail(error));
     });
 
-    it('does nothing if the data structures are not up to date',
+    it(
+      'does nothing if the data structures are not up to date',
       function(done) {
         const page = new Page('1', {
           url: 'http://www.example.com/', encoding: 'utf-8',
@@ -236,7 +243,8 @@ describe('scan', function() {
           expect(PageStore.loadHtml).not.toHaveBeenCalled();
           done();
         }).catch((error) => done.fail(error));
-      });
+      },
+    );
 
     it('Scans a single page', function(done) {
       const page = new Page('1', {
@@ -424,26 +432,36 @@ describe('scan', function() {
       const response = {arrayBuffer: () => Promise.resolve('buffer')};
       spyOn(scanModule.__, 'applyEncoding').and.returnValue('html');
 
-      const html = await scanModule.__.getHtmlFromResponse(response, page);
+      const html = await scanModule.__.getHtmlFromResponse(
+        response,
+        page,
+      );
 
       expect(html).toEqual('html');
       expect(scanModule.__.applyEncoding)
         .toHaveBeenCalledWith('buffer', 'encoding');
     });
 
-    it('autodetects the encoding if not specified in the Page object',
+    it(
+      'autodetects the encoding if not specified in the Page object',
       async function() {
         const page = new Page(1, {});
         const response = {
           arrayBuffer: () => Promise.resolve('buffer'),
           headers: 'headers',
         };
-        spyOn(scanModule.__, 'detectEncoding').and.returnValue('encoding');
+        spyOn(
+          scanModule.__,
+          'detectEncoding',
+        ).and.returnValue('encoding');
         spyOn(scanModule.__, 'applyEncoding').and.returnValue('html');
         spyOn(Page, 'load').and.returnValue(Promise.resolve(page));
         spyOn(page, 'save');
 
-        const html = await scanModule.__.getHtmlFromResponse(response, page);
+        const html = await scanModule.__.getHtmlFromResponse(
+          response,
+          page,
+        );
 
         expect(html).toEqual('html');
         expect(scanModule.__.applyEncoding)
@@ -454,13 +472,17 @@ describe('scan', function() {
           .toHaveBeenCalledWith('buffer', 'encoding');
         expect(page.save).toHaveBeenCalled;
         expect(page.encoding).toEqual('encoding');
-      });
+      },
+    );
 
     it('uses response.text() for utf-8 encodings', async function() {
       const page = new Page(1, {encoding: 'utf-8'});
       const response = {text: () => Promise.resolve('html')};
 
-      const html = await scanModule.__.getHtmlFromResponse(response, page);
+      const html = await scanModule.__.getHtmlFromResponse(
+        response,
+        page,
+      );
 
       expect(html).toEqual('html');
     });

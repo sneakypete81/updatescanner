@@ -4,11 +4,11 @@
  *
  * @param {string} str1 - First string for comparison.
  * @param {string} str2 - Second string for comparison.
- * @param {integer} changeThreshold - Number of characters that must change to
+ * @param {number} changeThreshold - Number of characters that must change to
  * indicate a major change.
  *
  * @returns {boolean} Returns true if the two strings differ by more than
- * changeThreshold charagers.
+ * changeThreshold characters.
  */
 export function isMajorChange(str1='', str2='', changeThreshold) {
   const safeStr1 = str1;
@@ -19,7 +19,7 @@ export function isMajorChange(str1='', str2='', changeThreshold) {
   }
 
   // Start with sliceLength=0 and slowly increase it until it reaches the
-  // changeTheshold. If a match isn't found by then, it's a major change.
+  // changeThreshold. If a match isn't found by then, it's a major change.
   let sliceLength = 0;
 
   while (sliceLength < changeThreshold) {
@@ -44,7 +44,7 @@ export function isMajorChange(str1='', str2='', changeThreshold) {
  *
  * @param {string} str1 - First string for comparison.
  * @param {string} str2 - Second string for comparison.
- * @param {integer} sliceLength - Maximum number of characters to remove when
+ * @param {number} sliceLength - Maximum number of characters to remove when
  * looking for a match.
  *
  * @returns {boolean} Returns true if a match can be made by removing slices of
@@ -101,11 +101,11 @@ function matchSlice(str1, str2, sliceLength) {
  * @param {string} str1 - First string for comparison.
  * @param {string} str2 - Second string for comparison.
  *
- * @returns {integer} Difference in length of the two strings.
+ * @returns {number} Difference in length of the two strings.
  */
 function lengthDifference(str1, str2) {
   return Math.max(str1.length, str2.length) -
-         Math.min(str1.length, str2.length);
+    Math.min(str1.length, str2.length);
 }
 
 /**
@@ -114,7 +114,7 @@ function lengthDifference(str1, str2) {
  * @param {string} str1 - First string for comparison.
  * @param {string} str2 - Second string for comparison.
  *
- * @returns {integer} First index where the two strings don't match.
+ * @returns {number} First index where the two strings don't match.
  */
 function firstDifference(str1, str2) {
   const minlen = Math.min(str1.length, str2.length);
