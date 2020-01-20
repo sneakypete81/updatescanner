@@ -4,7 +4,7 @@ import {Page} from '/lib/page/page.js';
 import {isUpToDate} from '/lib/update/update.js';
 import {log} from '/lib/util/log.js';
 import {waitForMs} from '/lib/util/promise.js';
-import {detectEncoding, applyEncoding} from '/lib/util/encoding.js';
+import {applyEncoding, detectEncoding} from '/lib/util/encoding.js';
 
 /**
  * Enumeration indicating the similarity of two HTML strings.
@@ -45,7 +45,7 @@ const SCAN_IDLE_MS = 2000;
  *
  * @param {Array.<Page>} pageList - Array of pages to scan.
  *
- * @returns {integer} The number of new major changes detected.
+ * @returns {number} The number of new major changes detected.
  */
 export async function scan(pageList) {
   let newMajorChangeCount = 0;
@@ -109,13 +109,13 @@ export async function scanPage(page) {
  */
 async function getHtmlFromResponse(response, page) {
   // This is probably faster for the most common case (utf-8)
-  if (page.encoding == 'utf-8') {
+  if (page.encoding === 'utf-8') {
     return await response.text();
   }
 
   const buffer = await response.arrayBuffer();
 
-  if (page.encoding === null || page.encoding == 'auto') {
+  if (page.encoding == null || page.encoding === 'auto') {
     const rawHtml = __.applyEncoding(buffer, 'utf-8');
     const updatedPage = await Page.load(page.id);
     updatedPage.encoding = __.detectEncoding(response.headers, rawHtml);
@@ -169,7 +169,7 @@ async function updatePageState(page, prevHtml, scannedHtml) {
     updatedPage.changeThreshold,
   );
 
-  if (changeType == changeEnum.MAJOR_CHANGE) {
+  if (changeType === changeEnum.MAJOR_CHANGE) {
     if (!updatedPage.isChanged()) {
       // This is a newly detected change, so update the old HTML.
       PageStore.saveHtml(updatedPage.id, PageStore.htmlTypes.OLD, prevHtml);

@@ -56,11 +56,12 @@ export class Page {
   /**
    * @param {string} key - Storage key for the Page object.
    *
-   * @returns {string} Page ID, or null if the key is not for a Page object.
+   * @returns {?string} Page ID, or null if the key is not for a Page
+   * object.
    */
   static idFromKey(key) {
     const matches = key.match('^page:(.*)$');
-    if (matches === null) {
+    if (matches == null) {
       return null;
     } else {
       return matches[1];
@@ -70,7 +71,7 @@ export class Page {
   /**
    * @param {string} key - Storage key.
    *
-   * @returns {bool} True if the key is for a Page object.
+   * @returns {boolean} True if the key is for a Page object.
    */
   static isPageKey(key) {
     return Page.idFromKey(key) !== null;
@@ -83,56 +84,59 @@ export class Page {
    * @property {string} id - ID of the page.
    * @property {string} title - Title of the page.
    * @property {string} url - URL of the page.
-   * @property {integer} scanRateMinutes - Number of minutes between scans. Zero
+   * @property {number} scanRateMinutes - Number of minutes between scans. Zero
    * means manual scan only.
-   * @property {integer} changeThreshold - Number of characters changed before
+   * @property {number} changeThreshold - Number of characters changed before
    * signalling that a change has occurred.
    * @property {boolean} ignoreNumbers - Don't trigger if only a number has
    * changed.
-   * @property {string} encoding - Text encoding of the page.
+   * @property {?string} encoding - Text encoding of the page.
    * @property {boolean} highlightChanges - Whether to highlight changed text.
    * @property {string} highlightColour - HTML colour string to use for
    * highlighting.
    * @property {boolean} markChanges - Whether to mark changes with << >>.
    * @property {boolean} doPost - Perform a POST request instead of a GET.
    * @property {boolean} postParams - POST parameters to use if doPost is true.
-   * @property {stateEnum} state - Current scan state of the page.
-   * @property {integer} lastAutoscanTime - Time that this page was last
+   * @property {Page.stateEnum} state - Current scan state of the page.
+   * @property {number} lastAutoscanTime - Time that this page was last
    * autoscanned (ms since Unix epoch).
-   * @property {integer} oldScanTime - Time when the OLD HTML was last updated
+   * @property {number} oldScanTime - Time when the OLD HTML was last updated
    * (ms since Unix epoch).
-   * @property {integer} newScanTime - Time when the NEW HTML was last updated
+   * @property {number} newScanTime - Time when the NEW HTML was last updated
    * (ms since Unix epoch).
    */
-  constructor(id, {
-    title=Page.DEFAULTS.title,
-    url=Page.DEFAULTS.url,
-    scanRateMinutes=Page.DEFAULTS.scanRateMinutes,
-    changeThreshold=Page.DEFAULTS.changeThreshold,
-    ignoreNumbers=Page.DEFAULTS.ignoreNumbers,
-    encoding=Page.DEFAULTS.encoding,
-    highlightChanges=Page.DEFAULTS.highlightChanges,
-    highlightColour=Page.DEFAULTS.highlightColour,
-    markChanges=Page.DEFAULTS.markChanges,
-    doPost=Page.DEFAULTS.doPost,
-    postParams=Page.DEFAULTS.postParams,
-    state=Page.DEFAULTS.state,
-    lastAutoscanTime=Page.DEFAULTS.lastAutoscanTime,
-    oldScanTime=Page.DEFAULTS.oldScanTime,
-    newScanTime=Page.DEFAULTS.newScanTime,
-  }) {
+  constructor(
+    id,
+    {
+      title = Page.DEFAULTS.title,
+      url = Page.DEFAULTS.url,
+      scanRateMinutes = Page.DEFAULTS.scanRateMinutes,
+      changeThreshold = Page.DEFAULTS.changeThreshold,
+      ignoreNumbers = Page.DEFAULTS.ignoreNumbers,
+      encoding = Page.DEFAULTS.encoding,
+      highlightChanges = Page.DEFAULTS.highlightChanges,
+      highlightColour = Page.DEFAULTS.highlightColour,
+      markChanges = Page.DEFAULTS.markChanges,
+      doPost = Page.DEFAULTS.doPost,
+      postParams = Page.DEFAULTS.postParams,
+      state = Page.DEFAULTS.state,
+      lastAutoscanTime = Page.DEFAULTS.lastAutoscanTime,
+      oldScanTime = Page.DEFAULTS.oldScanTime,
+      newScanTime = Page.DEFAULTS.newScanTime,
+    },
+  ) {
     this.id = id;
     this.title = title;
     this.url = url;
     this.scanRateMinutes = scanRateMinutes;
     this.changeThreshold = changeThreshold;
     this.ignoreNumbers = ignoreNumbers;
-    this.encoding = encoding,
-    this.highlightChanges = highlightChanges,
-    this.highlightColour = highlightColour,
-    this.markChanges = markChanges,
-    this.doPost = doPost,
-    this.postParams = postParams,
+    this.encoding = encoding;
+    this.highlightChanges = highlightChanges;
+    this.highlightColour = highlightColour;
+    this.markChanges = markChanges;
+    this.doPost = doPost;
+    this.postParams = postParams;
     this.state = state;
     this.lastAutoscanTime = lastAutoscanTime;
     this.oldScanTime = oldScanTime;
@@ -199,7 +203,7 @@ export class Page {
    */
   static async load(id) {
     try {
-      const data = await Storage.load(Page._KEY(id)) || {};
+      const data = (await Storage.load(Page._KEY(id))) || {};
       return new Page(id, data);
     } catch (error) {
       __.log(`ERROR: Page.load: ${error}`);
@@ -217,7 +221,7 @@ export class Page {
   async existsInStorage() {
     try {
       const data = await Storage.load(Page._KEY(this.id));
-      return (data !== undefined);
+      return data !== undefined;
     } catch (error) {
       __.log(`ERROR: Page.existsInStorage: ${error}`);
     }
@@ -242,7 +246,7 @@ export class Page {
   /**
    * Delete the Page from storage.
    *
-   * @returns {Promise} An empty Promise that fultils when the operation is
+   * @returns {Promise} An empty Promise that fulfils when the operation is
    * finished. Errors are logged and ignored.
    */
   async delete() {
@@ -255,16 +259,16 @@ export class Page {
   }
 
   /**
-   * @returns {bool} True if the Page state is CHANGED.
+   * @returns {boolean} True if the Page state is CHANGED.
    */
   isChanged() {
-    return this.state == Page.stateEnum.CHANGED;
+    return this.state === Page.stateEnum.CHANGED;
   }
 
   /**
-   * @returns {bool} True if the Page state is ERROR.
+   * @returns {boolean} True if the Page state is ERROR.
    */
   isError() {
-    return this.state == Page.stateEnum.ERROR;
+    return this.state === Page.stateEnum.ERROR;
   }
 }

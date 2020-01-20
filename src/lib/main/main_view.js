@@ -85,7 +85,7 @@ export function viewDiff(page, html) {
  */
 export function viewOld(page, html) {
   setTitle(page.title, page.url);
-  if (page.oldScanTime === null) {
+  if (page.oldScanTime == null) {
     setSubtitle('There is no old version of this page available yet.');
   } else {
     const scanTime = timeSince(new Date(page.oldScanTime));
