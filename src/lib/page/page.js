@@ -61,7 +61,7 @@ export class Page {
    */
   static idFromKey(key) {
     const matches = key.match('^page:(.*)$');
-    if (matches === null) {
+    if (matches == null) {
       return null;
     } else {
       return matches[1];
@@ -262,13 +262,13 @@ export class Page {
    * @returns {boolean} True if the Page state is CHANGED.
    */
   isChanged() {
-    return this.state == Page.stateEnum.CHANGED;
+    return this.state === Page.stateEnum.CHANGED;
   }
 
   /**
    * @returns {boolean} True if the Page state is ERROR.
    */
   isError() {
-    return this.state == Page.stateEnum.ERROR;
+    return this.state === Page.stateEnum.ERROR;
   }
 }

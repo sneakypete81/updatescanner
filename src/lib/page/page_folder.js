@@ -46,7 +46,7 @@ export class PageFolder {
    */
   static idFromKey(key) {
     const matches = key.match('^page_folder:(.*)$');
-    if (matches === null) {
+    if (matches == null) {
       return null;
     } else {
       return matches[1];

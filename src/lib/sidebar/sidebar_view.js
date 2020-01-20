@@ -73,7 +73,7 @@ export class SidebarView {
 
       // Handle middle-clicks on tree items
       const isJstreeClick = event.target.classList.contains('jstree-anchor');
-      if (isJstreeClick && event.button == 1) {
+      if (isJstreeClick && event.button === 1) {
         const data = {
           selected: [event.target.parentNode.id],
           event: event,
@@ -168,7 +168,7 @@ export class SidebarView {
    * @returns {string} ItemId for the specified node.
    */
   _nodeToItemId(node) {
-    if (node.id == '#') {
+    if (node.id === '#') {
       return PageStore.ROOT_ID;
     } else {
       return node.id;
@@ -222,11 +222,11 @@ export class SidebarView {
    */
   _onTreeChanged(operation, node, parent, position, more) {
     // Only the move operation is valid
-    if (operation != 'move_node') {
+    if (operation !== 'move_node') {
       return false;
     }
     // Only allow DnD onto a Folder
-    if (parent.id != '#' && !parent.data.isFolder) {
+    if (parent.id !== '#' && !parent.data.isFolder) {
       return false;
     }
     // more.core is true if a drop has occurred
@@ -246,7 +246,7 @@ export class SidebarView {
   registerSelectHandler(handler) {
     $(this._sidebarDivSelector).on('changed.jstree', (event, data) => {
       // Ignore if the event was due to a refresh or if nothing is selected.
-      if (!this._refreshing && data.selected.length == 1) {
+      if (!this._refreshing && data.selected.length === 1) {
         const id = data.selected[0];
         // Pass the event that caused the change, not the change event itself
         handler(data.event, id);
@@ -337,7 +337,7 @@ export class SidebarView {
 
     return new Promise((resolve, reject) => {
       $on(dialog, 'close', () => {
-        resolve(dialog.returnValue == 'delete');
+        resolve(dialog.returnValue === 'delete');
       });
     });
   }

@@ -109,13 +109,13 @@ export async function scanPage(page) {
  */
 async function getHtmlFromResponse(response, page) {
   // This is probably faster for the most common case (utf-8)
-  if (page.encoding == 'utf-8') {
+  if (page.encoding === 'utf-8') {
     return await response.text();
   }
 
   const buffer = await response.arrayBuffer();
 
-  if (page.encoding === null || page.encoding == 'auto') {
+  if (page.encoding == null || page.encoding === 'auto') {
     const rawHtml = __.applyEncoding(buffer, 'utf-8');
     const updatedPage = await Page.load(page.id);
     updatedPage.encoding = __.detectEncoding(response.headers, rawHtml);
@@ -169,7 +169,7 @@ async function updatePageState(page, prevHtml, scannedHtml) {
     updatedPage.changeThreshold,
   );
 
-  if (changeType == changeEnum.MAJOR_CHANGE) {
+  if (changeType === changeEnum.MAJOR_CHANGE) {
     if (!updatedPage.isChanged()) {
       // This is a newly detected change, so update the old HTML.
       PageStore.saveHtml(updatedPage.id, PageStore.htmlTypes.OLD, prevHtml);

@@ -113,7 +113,7 @@ function isAutoscanPending(page) {
     // Autoscanning is disabled for this page
     return false;
   }
-  if (page.lastAutoscanTime === null) {
+  if (page.lastAutoscanTime == null) {
     return true;
   }
   const timeSinceLastAutoscan = Date.now() - page.lastAutoscanTime;

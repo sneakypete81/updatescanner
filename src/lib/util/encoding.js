@@ -48,14 +48,14 @@ export function applyEncoding(buffer, encoding) {
  */
 function detectEncodingFromHeaders(headers) {
   const contentType = headers.get('Content-Type');
-  if (contentType === null) {
+  if (contentType == null) {
     return null;
   }
 
   // Looking for something along the lines of "text/html; charset=xxxxx"
   const re = /.*charset[\s]*=[\s]*([^\s;]+)/i;
   const result = re.exec(contentType);
-  if (result === null) {
+  if (result == null) {
     return null;
   }
   return result[1];

@@ -56,7 +56,7 @@ export function openPageDialog(page) {
 
   return new Promise((resolve, reject) => {
     $on(dialog, 'close', () => {
-      if (dialog.returnValue == 'ok') {
+      if (dialog.returnValue === 'ok') {
         resolve({
           title: form.elements['title'].value,
           url: form.elements['url'].value,
@@ -96,7 +96,7 @@ export function openPageFolderDialog(pageFolder) {
 
   return new Promise((resolve, reject) => {
     $on(dialog, 'close', () => {
-      if (dialog.returnValue == 'ok') {
+      if (dialog.returnValue === 'ok') {
         resolve({title: form.elements['title'].value});
       } else {
         resolve(null);
@@ -125,7 +125,7 @@ const AutoscanSliderNever = AutoscanSliderToMins.indexOf(0);
  * @returns {number} Slider value representing the given number of minutes.
  */
 function autoscanMinsToSlider(minutes) {
-  if (minutes == 0) {
+  if (minutes === 0) {
     return AutoscanSliderNever;
   }
 

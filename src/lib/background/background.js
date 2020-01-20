@@ -68,9 +68,9 @@ export class Background {
    * @param {object} message - Message content.
    */
   _handleMessage(message) {
-    if (message.action == backgroundActionEnum.SCAN_ALL) {
+    if (message.action === backgroundActionEnum.SCAN_ALL) {
       this._scanAll();
-    } else if (message.action == backgroundActionEnum.SCAN_ITEM) {
+    } else if (message.action === backgroundActionEnum.SCAN_ITEM) {
       this._scanItem(message.itemId);
     }
   }
@@ -83,7 +83,7 @@ export class Background {
       .filter(isItemChanged).length;
 
     browser.browserAction.setIcon({path: activeIcon});
-    if (updateCount == 0) {
+    if (updateCount === 0) {
       browser.browserAction.setBadgeText({text: ''});
     } else {
       browser.browserAction.setBadgeText({text: updateCount.toString()});

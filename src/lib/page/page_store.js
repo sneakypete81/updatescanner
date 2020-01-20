@@ -387,7 +387,7 @@ export class PageStore {
       // Page has been deleted
       this.pageMap.delete(itemId);
       // Don't allow Root to be deleted
-      if (itemId == PageStore.ROOT_ID) {
+      if (itemId === PageStore.ROOT_ID) {
         this.pageMap.set(itemId, new PageFolder(itemId, {title: 'root'}));
       }
     } else {
