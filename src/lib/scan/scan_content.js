@@ -57,7 +57,7 @@ export function getChanges(prevData, scannedData, page) {
     return changeEnum.NEW_CONTENT;
   }
 
-  if (page.requireExactMatchCount || page.requireExactMatchCount == null) {
+  if (page.requireExactMatchCount) {
     const countChange = getCountChange(prevData, scannedData);
     if (countChange === changeEnum.MAJOR_CHANGE) {
       return countChange;
