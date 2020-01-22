@@ -204,7 +204,6 @@ export class Main {
     this.currentPage.ignoreNumbers = newSettings.ignoreNumbers;
     this.currentPage.selectors = newSettings.selectors;
     this.currentPage.contentMode = newSettings.contentMode;
-    this.currentPage.matchMode = newSettings.matchMode;
     this.currentPage.requireExactMatchCount =
       newSettings.requireExactMatchCount;
     this.currentPage.partialScan = newSettings.partialScan;

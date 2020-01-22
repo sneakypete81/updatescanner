@@ -79,7 +79,6 @@ export function openPageDialog(page) {
           ignoreNumbers: form.elements['ignore-numbers'].checked,
           selectors: form.elements['selectors'].value,
           contentMode: modeData.contentMode,
-          matchMode: modeData.matchMode,
           requireExactMatchCount: modeData.requireExactMatchCount,
           partialScan: modeData.partialScan,
         });

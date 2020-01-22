@@ -148,7 +148,6 @@ export class Page {
       newScanTime = Page.DEFAULTS.newScanTime,
       selectors = Page.DEFAULTS.selectors,
       contentMode = Page.DEFAULTS.contentMode,
-      matchMode = Page.DEFAULTS.matchMode,
       requireExactMatchCount = Page.DEFAULTS.requireExactMatchCount,
       partialScan = Page.DEFAULTS.partialScan,
     },
@@ -171,7 +170,6 @@ export class Page {
     this.newScanTime = newScanTime;
     this.selectors = selectors;
     this.contentMode = contentMode;
-    this.matchMode = matchMode;
     this.requireExactMatchCount = requireExactMatchCount;
     this.partialScan = partialScan;
   }
@@ -200,7 +198,6 @@ export class Page {
       newScanTime: this.newScanTime,
       selectors: this.selectors,
       contentMode: this.contentMode,
-      matchMode: this.matchMode,
       requireExactMatchCount: this.requireExactMatchCount,
       partialScan: this.partialScan,
     };
@@ -226,7 +223,6 @@ export class Page {
       postParams: this.postParams,
       selectors: this.selectors,
       contentMode: this.contentMode,
-      matchMode: this.matchMode,
       requireExactMatchCount: this.requireExactMatchCount,
       partialScan: this.partialScan,
       // state: this.state,
