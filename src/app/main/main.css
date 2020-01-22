@@ -142,14 +142,12 @@ fieldset div {
   display: flex;
 }
 
-legend {
-  font-size: larger;
+.selectors-description {
+  margin-top: 8px;
 }
 
-.description {
-  font-size: smaller;
-  color: rgba(0, 0, 0, 0.8);
-  text-align: left;
+legend {
+  font-size: larger;
 }
 
 label {
@@ -176,7 +174,7 @@ input {
 }
 
 select {
-  width: 100%;
+  max-width: 100%;
 }
 
 .range-label-min {
