@@ -175,7 +175,6 @@ const ScanModeMap = new Map([
     options: {
       partialScan: false,
       contentMode: Page.contentModeEnum.TEXT,
-      matchMode: Page.matchModeEnum.FIRST,
     },
   }],
   ['inside-elements', {
@@ -185,7 +184,6 @@ const ScanModeMap = new Map([
       partialScan: true,
       requireExactMatchCount: true,
       contentMode: Page.contentModeEnum.TEXT,
-      matchMode: Page.matchModeEnum.FIRST,
     },
   }],
   ['count-only', {
@@ -195,7 +193,6 @@ const ScanModeMap = new Map([
       partialScan: true,
       requireExactMatchCount: true,
       contentMode: Page.contentModeEnum.IGNORE,
-      matchMode: Page.matchModeEnum.FIRST,
     },
   }],
 ]);

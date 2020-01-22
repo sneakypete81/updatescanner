@@ -190,46 +190,15 @@ function getHTMLChange(page, prevParts, scannedParts, ignoreTags) {
  *   parts.
  */
 function getIteratorFunction(page, prevParts, scannedParts) {
-  const matchModeEnum = Page.matchModeEnum;
-  const matchMode = page.matchMode || matchModeEnum.FIRST;
-
-  let iteratorFunction;
-
-  if (matchMode === matchModeEnum.FIRST) {
-    iteratorFunction = function* (prevParts, scannedParts) {
-      const length = Math.min(prevParts.length, scannedParts.length);
-      for (let i = 0; i < length; i++) {
-        yield {
-          prevIndex: i,
-          scannedIndex: i,
-        };
-      }
-    };
-  } else if (matchMode === matchModeEnum.LAST) {
-    iteratorFunction = function* (prevParts, scannedParts) {
-      const length = Math.min(prevParts.length, scannedParts.length);
-      for (let i = length - 1; i >= 0; i--) {
-        yield {
-          prevIndex: i,
-          scannedIndex: i,
-        };
-      }
-    };
-  } else if (matchMode === matchModeEnum.LOOKUP) {
-    iteratorFunction = function* (prevParts, scannedParts) {
-      const length = Math.min(prevParts.length, scannedParts.length);
-      for (let i = 0; i < length; i++) {
-        const index = scannedParts.indexOf(prevParts[i]);
-        yield {
-          // Always return valid index
-          prevIndex: i,
-          scannedIndex: Math.max(index, 0),
-        };
-      }
-    };
-  } else {
-    __.log(`Unknown match mode ${matchMode}`);
-  }
+  const iteratorFunction = function* (prevParts, scannedParts) {
+    const length = Math.min(prevParts.length, scannedParts.length);
+    for (let i = 0; i < length; i++) {
+      yield {
+        prevIndex: i,
+        scannedIndex: i,
+      };
+    }
+  };
 
   /**
    * This callback is displayed as part of the Requester class.

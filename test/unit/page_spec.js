@@ -80,7 +80,6 @@ describe('Page', function() {
         newScanTime: 40834321,
         selectors: '#id',
         contentMode: Page.contentModeEnum.HTML,
-        matchMode: Page.matchModeEnum.LOOKUP,
         requireExactMatchCount: true,
         partialScan: true,
       };

@@ -32,7 +32,6 @@ export class Page {
       newScanTime: null,
       selectors: null,
       contentMode: Page.contentModeEnum.TEXT,
-      matchMode: Page.matchModeEnum.FIRST,
       requireExactMatchCount: false,
       partialScan: false,
     };
@@ -59,19 +58,6 @@ export class Page {
       IGNORE: 'ignore',
       HTML: 'html',
       TEXT: 'text',
-    };
-  }
-
-  /**
-   *
-   * @returns {{LOOKUP: string, LAST: string, FIRST: string}} Enumeration
-   *   of Page match mode.
-   */
-  static get matchModeEnum() {
-    return {
-      FIRST: 'first',
-      LAST: 'last',
-      LOOKUP: 'lookup',
     };
   }
 
@@ -137,8 +123,6 @@ export class Page {
    * @property {string} selectors - Selectors separated by comma.
    * @property {contentModeEnum|string} contentMode - Mode used for content
    *   comparison.
-   * @property {matchModeEnum|string} matchMode - Mode that determines order in
-   *   which parts are looked at.
    * @property {boolean} requireExactMatchCount - True if part count should
    *   match.
    * @property {boolean} partialScan - True if selectors should be used for
