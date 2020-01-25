@@ -206,6 +206,7 @@ function updateModeUI(modeName) {
   const mode = ScanModeMap.get(modeName);
   updateInputDisabledStates(mode);
   updateScanModeDescription(mode);
+  updateSelectorsDescription(mode.options.partialScan);
 }
 
 /**
@@ -215,10 +216,25 @@ function updateModeUI(modeName) {
  */
 function updateInputDisabledStates(mode) {
   const form = qs('#settings-form');
-  const partialScan = mode.options.partialScan;
 
-  setDisableOnInput(form.elements['selectors'], !partialScan);
+  setDisableOnInput(form.elements['selectors'], !mode.options.partialScan);
   updateThresholdDisabledState(mode.options);
+}
+
+/**
+ * Updates selector description.
+ *
+ * @param {boolean} partialScan - True if partial scan is enabled.
+ */
+function updateSelectorsDescription(partialScan) {
+  const form = qs('#settings-form');
+  const selectorsElement = form.elements['selectors'];
+  if (partialScan) {
+    selectorsElement.placeholder = '';
+  } else {
+    selectorsElement.placeholder =
+      `Selectors not available in "Anywhere" scan mode.`;
+  }
 }
 
 /**

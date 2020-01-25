@@ -146,6 +146,10 @@ fieldset div {
   margin-top: 8px;
 }
 
+#selectors::placeholder {
+  font-size: smaller;
+}
+
 legend {
   font-size: larger;
 }
