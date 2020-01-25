@@ -17,13 +17,13 @@ export function init() {
   form.elements['threshold'].max = ThresholdSliderToChars.length - 1;
 
   $on(form.elements['autoscan'], 'input', ({target}) =>
-    updateAutoscanDescription(target.value),
+      updateAutoscanDescription(target.value),
   );
   $on(form.elements['threshold'], 'input', ({target}) =>
-    updateThresholdDescription(target.value),
+      updateThresholdDescription(target.value),
   );
   $on(form.elements['scan-mode'], 'input', ({target}) =>
-    updateScanModeDescription(target.value),
+      updateModeUI(target.value),
   );
 
   $on(form, 'reset', () => dialog.close());
@@ -48,7 +48,7 @@ export function openPageDialog(page) {
 
   const scanModeName = getScanModeName(page);
   form.elements['scan-mode'].value = scanModeName;
-  updateScanModeDescription(scanModeName);
+  updateModeUI(scanModeName);
 
   const autoscanSliderValue = autoscanMinsToSlider(page.scanRateMinutes);
   form.elements['autoscan'].value = autoscanSliderValue;
@@ -73,9 +73,9 @@ export function openPageDialog(page) {
           title: form.elements['title'].value,
           url: form.elements['url'].value,
           scanRateMinutes:
-            AutoscanSliderToMins[form.elements['autoscan'].value],
+              AutoscanSliderToMins[form.elements['autoscan'].value],
           changeThreshold:
-            ThresholdSliderToChars[form.elements['threshold'].value],
+              ThresholdSliderToChars[form.elements['threshold'].value],
           ignoreNumbers: form.elements['ignore-numbers'].checked,
           selectors: form.elements['selectors'].value,
           contentMode: modeData.contentMode,
@@ -165,7 +165,7 @@ function autoscanMinsToSlider(minutes) {
  */
 function updateAutoscanDescription(sliderValue) {
   qs('#settings-form').elements['autoscan-description'].value =
-    AutoscanSliderDescriptions[sliderValue];
+      AutoscanSliderDescriptions[sliderValue];
 }
 
 const ScanModeMap = new Map([
@@ -197,22 +197,6 @@ const ScanModeMap = new Map([
 ]);
 
 /**
- * Returns description for selectors input field.
- *
- * @param {boolean} partialScan - True if partial scan is active.
- * @returns {string} Description for selectors.
- */
-function getSelectorsDescription(partialScan) {
-  if (partialScan) {
-    return `CSS selectors for more information see 
-<a href="https://www.w3schools.com/cssref/css_selectors.asp">
-https://www.w3schools.com/cssref/css_selectors.asp</a>`;
-  } else {
-    return `Selectors not available in "Anywhere" scan mode.`;
-  }
-}
-
-/**
  * Replaces innerHTML for element without directly assigning it to innerHTML.
  *
  * @param {Element} element - HTML element.
@@ -229,21 +213,38 @@ function replaceInnerHTML(element, html) {
 }
 
 /**
- *
- * @param {string} modeName - Scan mode name.
+ * Updates UI based on the mode. Disables fields not allowed in the
+ * mode and mode description.
+ * @param {string} modeName - Name of the current mode.
  */
-function updateScanModeDescription(modeName) {
-  const form = qs('#settings-form');
+function updateModeUI(modeName) {
   const mode = ScanModeMap.get(modeName);
+  updateInputDisabledStates(mode);
+  updateScanModeDescription(mode);
+}
+
+/**
+ * Updates input disabled states based on new mode.
+ *
+ * @param {object} mode - Scan mode.
+ */
+function updateInputDisabledStates(mode) {
+  const form = qs('#settings-form');
+  const partialScan = mode.options.partialScan;
+
+  setDisableOnInput(form.elements['selectors'], !partialScan);
+  updateThresholdDisabledState(mode.options);
+}
+
+/**
+ * Updates scan mode description.
+ *
+ * @param {object} mode - Scan mode.
+ */
+function updateScanModeDescription(mode) {
+  const form = qs('#settings-form');
   const descriptionElement = form.elements['scan-mode-description'];
   descriptionElement.value = mode.description;
-
-  const partialScan = mode.options.partialScan;
-  const selectorDescription = getSelectorsDescription(partialScan);
-  replaceInnerHTML(form.elements['selectors-description'], selectorDescription);
-  setDisableOnInput(form.elements['selectors'], !partialScan);
-
-  updateThresholdDisabledState(mode.options);
 }
 
 /**
@@ -258,7 +259,7 @@ function setDisableOnInput(parent, disabled) {
   } else {
     const disabledClass = 'disabled';
     const hasRightClass =
-      parent.classList.contains(disabledClass) === disabled;
+        parent.classList.contains(disabledClass) === disabled;
 
     if (!hasRightClass) {
       if (disabled) {
@@ -350,7 +351,7 @@ function thresholdCharsToSlider(changeThreshold) {
  */
 function updateThresholdDescription(sliderValue) {
   qs('#settings-form').elements['threshold-description'].value =
-    ThresholdSliderDescriptions[sliderValue][0];
+      ThresholdSliderDescriptions[sliderValue][0];
   qs('#settings-form').elements['threshold-subdescription'].value =
-    ThresholdSliderDescriptions[sliderValue][1];
+      ThresholdSliderDescriptions[sliderValue][1];
 }
