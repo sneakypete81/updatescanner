@@ -197,24 +197,9 @@ const ScanModeMap = new Map([
 ]);
 
 /**
- * Replaces innerHTML for element without directly assigning it to innerHTML.
- *
- * @param {Element} element - HTML element.
- * @param {string} html - Raw HTML.
- */
-function replaceInnerHTML(element, html) {
-  html = '<span>' + html + '</span>';
-  const parser = new DOMParser();
-  const parsed = parser.parseFromString(html, 'text/html');
-  const content = parsed.getElementsByTagName('span')[0];
-
-  element.innerHTML = '';
-  element.appendChild(content);
-}
-
-/**
  * Updates UI based on the mode. Disables fields not allowed in the
  * mode and mode description.
+ *
  * @param {string} modeName - Name of the current mode.
  */
 function updateModeUI(modeName) {
