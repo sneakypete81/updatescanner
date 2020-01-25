@@ -17,13 +17,13 @@ export function init() {
   form.elements['threshold'].max = ThresholdSliderToChars.length - 1;
 
   $on(form.elements['autoscan'], 'input', ({target}) =>
-      updateAutoscanDescription(target.value),
+    updateAutoscanDescription(target.value),
   );
   $on(form.elements['threshold'], 'input', ({target}) =>
-      updateThresholdDescription(target.value),
+    updateThresholdDescription(target.value),
   );
   $on(form.elements['scan-mode'], 'input', ({target}) =>
-      updateModeUI(target.value),
+    updateModeUI(target.value),
   );
 
   $on(form, 'reset', () => dialog.close());
@@ -73,9 +73,9 @@ export function openPageDialog(page) {
           title: form.elements['title'].value,
           url: form.elements['url'].value,
           scanRateMinutes:
-              AutoscanSliderToMins[form.elements['autoscan'].value],
+            AutoscanSliderToMins[form.elements['autoscan'].value],
           changeThreshold:
-              ThresholdSliderToChars[form.elements['threshold'].value],
+            ThresholdSliderToChars[form.elements['threshold'].value],
           ignoreNumbers: form.elements['ignore-numbers'].checked,
           selectors: form.elements['selectors'].value,
           contentMode: modeData.contentMode,
@@ -165,7 +165,7 @@ function autoscanMinsToSlider(minutes) {
  */
 function updateAutoscanDescription(sliderValue) {
   qs('#settings-form').elements['autoscan-description'].value =
-      AutoscanSliderDescriptions[sliderValue];
+    AutoscanSliderDescriptions[sliderValue];
 }
 
 const ScanModeMap = new Map([
@@ -259,7 +259,7 @@ function setDisableOnInput(parent, disabled) {
   } else {
     const disabledClass = 'disabled';
     const hasRightClass =
-        parent.classList.contains(disabledClass) === disabled;
+      parent.classList.contains(disabledClass) === disabled;
 
     if (!hasRightClass) {
       if (disabled) {
@@ -351,7 +351,7 @@ function thresholdCharsToSlider(changeThreshold) {
  */
 function updateThresholdDescription(sliderValue) {
   qs('#settings-form').elements['threshold-description'].value =
-      ThresholdSliderDescriptions[sliderValue][0];
+    ThresholdSliderDescriptions[sliderValue][0];
   qs('#settings-form').elements['threshold-subdescription'].value =
-      ThresholdSliderDescriptions[sliderValue][1];
+    ThresholdSliderDescriptions[sliderValue][1];
 }

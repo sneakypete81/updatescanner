@@ -1,127 +1,126 @@
 <!DOCTYPE HTML>
 <html lang="en">
-  <head>
-    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-    <title>Update Scanner</title>
-    <link rel="stylesheet" href="chrome://browser/content/extension.css">
-    <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="jstree_theme/style.css">
-  </head>
+<head>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+  <title>Update Scanner</title>
+  <link rel="stylesheet" href="chrome://browser/content/extension.css">
+  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="jstree_theme/style.css">
+</head>
 
-  <body>
-    <div id="content">
-      <div id="header">
-        <div id="icon"></div>
+<body>
+  <div id="content">
+    <div id="header">
+      <div id="icon"></div>
 
+      <div>
         <div>
-          <div>
-            <h1><a id="title"></a></h1>
-          </div>
-          <div id="subtitle"><span id="highlight"></span></div>
+          <h1><a id="title"></a></h1>
         </div>
-
-        <div id="header-right">
-          <div id="menu-container">
-            <button id="menuButton" class="browser-style"></button>
-            <ul id="menu" class="menu-content hidden">
-              <li id="debug-info">Debug Info</li>
-              <li id="page-settings">Page Settings</li>
-            </ul>
-          </div>
-          <div>
-            <select id="view-dropdown">
-              <option value="old">View Old Page</option>
-              <option value="new">View New Page</option>
-              <option value="diff">View Changes</option>
-            </select>
-          </div>
-        </div>
+        <div id="subtitle"><span id="highlight"></span></div>
       </div>
 
-      <div id="frameContainer"></div>
+      <div id="header-right">
+        <div id="menu-container">
+          <button id="menuButton" class="browser-style"></button>
+          <ul id="menu" class="menu-content hidden">
+            <li id="debug-info">Debug Info</li>
+            <li id="page-settings">Page Settings</li>
+          </ul>
+        </div>
+        <div>
+          <select id="view-dropdown">
+            <option value="old">View Old Page</option>
+            <option value="new">View New Page</option>
+            <option value="diff">View Changes</option>
+          </select>
+        </div>
+      </div>
     </div>
 
-    <dialog id="settings-dialog">
-      <form id="settings-form" method="dialog">
-        <h1 id="page-heading">Page Settings</h1>
-        <h1 id="folder-heading">Folder Settings</h1>
-        <fieldset id="titleFieldset">
-          <label>
-            <span>Title:</span>
-            <input name="title" type="text"/>
-          </label>
-        </fieldset>
+    <div id="frameContainer"></div>
+  </div>
 
-        <fieldset id="urlFieldset">
-          <label>
-            <span>URL:</span>
-            <input name="url" type="text"
-                   placeholder="https://www.example.com"/>
-          </label>
-        </fieldset>
+  <dialog id="settings-dialog">
+    <form id="settings-form" method="dialog">
+      <h1 id="page-heading">Page Settings</h1>
+      <h1 id="folder-heading">Folder Settings</h1>
+      <fieldset id="titleFieldset">
+        <label>
+          <span>Title:</span>
+          <input name="title" type="text"/>
+        </label>
+      </fieldset>
 
-        <fieldset id="autoscanFieldset">
-          <legend>Autoscan:</legend>
-          <div class="slider">
-            <span class="range-label-min">Often</span>
-            <input name="autoscan" type="range"/>
-            <span class="range-label-max">Never</span>
-          </div>
-          <output name="autoscan-description" for="autoscan">...</output>
-        </fieldset>
+      <fieldset id="urlFieldset">
+        <label>
+          <span>URL:</span>
+          <input name="url" type="text"
+                 placeholder="https://www.example.com"/>
+        </label>
+      </fieldset>
 
-        <fieldset id="thresholdFieldset">
-          <legend>Change Threshold:</legend>
-          <div class="slider">
-            <span class="range-label-min">Low</span>
-            <input name="threshold" type="range"/>
-            <span class="range-label-max">High</span>
-          </div>
-          <output name="threshold-description" for="autoscan">...</output>
-          <output name="threshold-subdescription" for="autoscan">(...)</output>
-          <div>
-            <input type="checkbox" id="ignore-numbers" name="ignore-numbers">
-            <label for="ignore-numbers" class="checkbox-label">Ignore changes to
-              numbers</label>
-          </div>
-        </fieldset>
-
-        <fieldset id="scanModeFieldset">
-          <label for="scan-mode">Scan mode:</label>
-          <select id="scan-mode" name="scan-mode">
-            <option value="anywhere">Anywhere in the page</option>
-            <option value="inside-elements">Inside the selected HTML elements
-            </option>
-            <option value="count-only">Only count HTML elements</option>
-          </select>
-          <output name="scan-mode-description"></output>
-        </fieldset>
-
-        <fieldset id="selectorsFieldset">
-          <label for="selectors">CSS selectors:</label>
-          <input style="width: 100%" id="selectors" name="selectors"
-                 type="text"/>
-          <output name="selectors-description" for="selectors">
-            CSS selectors for more information see
-            <a href="https://www.w3schools.com/cssref/css_selectors.asp">
- https://www.w3schools.com/cssref/css_selectors.asp</a>
-          </output>
-        </fieldset>
-
-        <fieldset id="scanOptions">
-        </fieldset>
-
-        <div id="dialog-buttons">
-          <button class="browser-style" id="cancel-button" type="reset">Cancel
-          </button>
-          <button class="browser-style default" type="submit" value="ok">Ok
-          </button>
+      <fieldset id="autoscanFieldset">
+        <legend>Autoscan:</legend>
+        <div class="slider">
+          <span class="range-label-min">Often</span>
+          <input name="autoscan" type="range"/>
+          <span class="range-label-max">Never</span>
         </div>
-      </form>
-    </dialog>
+        <output name="autoscan-description" for="autoscan">...</output>
+      </fieldset>
 
-    <script src="main_script.js" type="module"></script>
+      <fieldset id="thresholdFieldset">
+        <legend>Change Threshold:</legend>
+        <div class="slider">
+          <span class="range-label-min">Low</span>
+          <input name="threshold" type="range"/>
+          <span class="range-label-max">High</span>
+        </div>
+        <output name="threshold-description" for="autoscan">...</output>
+        <output name="threshold-subdescription" for="autoscan">(...)</output>
+        <div>
+          <input type="checkbox" id="ignore-numbers" name="ignore-numbers">
+          <label for="ignore-numbers" class="checkbox-label">Ignore changes to
+            numbers</label>
+        </div>
+      </fieldset>
 
-  </body>
+      <fieldset id="scanModeFieldset">
+        <label for="scan-mode">Scan mode:</label>
+        <select id="scan-mode" name="scan-mode">
+          <option value="anywhere">Anywhere in the page</option>
+          <option value="inside-elements">Inside the selected HTML elements
+          </option>
+          <option value="count-only">Only count HTML elements</option>
+        </select>
+        <output name="scan-mode-description"></output>
+      </fieldset>
 
+      <fieldset id="selectorsFieldset">
+        <label for="selectors">CSS selectors:</label>
+        <input style="width: 100%" id="selectors" name="selectors"
+               type="text"/>
+        <output name="selectors-description" for="selectors">
+          CSS selectors for more information see
+          <a href="https://www.w3schools.com/cssref/css_selectors.asp">
+            https://www.w3schools.com/cssref/css_selectors.asp</a>
+        </output>
+      </fieldset>
+
+      <fieldset id="scanOptions">
+      </fieldset>
+
+      <div id="dialog-buttons">
+        <button class="browser-style" id="cancel-button" type="reset">Cancel
+        </button>
+        <button class="browser-style default" type="submit" value="ok">Ok
+        </button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="main_script.js" type="module"></script>
+
+</body>
 </html>
