@@ -1,46 +1,10 @@
 import * as scanModule from '/lib/scan/scan.js';
+import * as scanContentModule from '/lib/scan/scan_content.js';
 import {PageStore} from '/lib/page/page_store.js';
 import {Page} from '/lib/page/page.js';
+import {ContentData} from '/lib/scan/scan_content.js';
 
 describe('scan', function() {
-  describe('getChangeType', function() {
-    it('detects identical pages', function() {
-      const html = 'Here is some <b>HTML</b>';
-
-      const result = scanModule.__.getChangeType(html, html, 100);
-
-      expect(result).toEqual(scanModule.__.changeEnum.NO_CHANGE);
-    });
-
-    it('detects new content', function() {
-      const html = 'Here is some <b>HTML</b>';
-
-      const result = scanModule.__.getChangeType(null, html, 100);
-
-      expect(result).toEqual(scanModule.__.changeEnum.NEW_CONTENT);
-    });
-
-    it('detects minor changes', function() {
-      const html1 = 'Here is some <b>HTML</b>';
-      const html2 = 'Here is some different <b>HTML</b>';
-      spyOn(scanModule.__, 'isMajorChange').and.returnValues(false);
-
-      const result = scanModule.__.getChangeType(html1, html2, 100);
-
-      expect(result).toEqual(scanModule.__.changeEnum.MINOR_CHANGE);
-    });
-
-    it('detects major changes', function() {
-      const html1 = 'Here is some <b>HTML</b>';
-      const html2 = 'Here is some different <b>HTML</b>';
-      spyOn(scanModule.__, 'isMajorChange').and.returnValues(true);
-
-      const result = scanModule.__.getChangeType(html1, html2, 100);
-
-      expect(result).toEqual(scanModule.__.changeEnum.MAJOR_CHANGE);
-    });
-  });
-
   describe('updatePageState', function() {
     beforeEach(function() {
       this.oldScanTime = new Date(1978, 11, 1, 4, 30).getTime();
@@ -66,7 +30,11 @@ describe('scan', function() {
       spyOn(this.page, 'save');
       spyOn(PageStore, 'saveHtml');
 
-      const result = await scanModule.__.updatePageState(this.page, html, html);
+      const result = await scanModule.__.updatePageState(
+        this.page,
+        new ContentData(html),
+        new ContentData(html),
+      );
 
       expect(result).toBeFalsy();
       expect(this.page.state).toEqual(Page.stateEnum.NO_CHANGE);
@@ -87,7 +55,11 @@ describe('scan', function() {
         spyOn(PageStore, 'saveHtml');
 
         const result = await scanModule.__
-          .updatePageState(this.page, html, html);
+          .updatePageState(
+            this.page,
+            new ContentData(html),
+            new ContentData(html),
+          );
 
         expect(result).toBeFalsy();
         expect(this.page.state).toEqual(Page.stateEnum.CHANGED);
@@ -106,7 +78,11 @@ describe('scan', function() {
       spyOn(this.page, 'save');
       spyOn(PageStore, 'saveHtml');
 
-      const result = await scanModule.__.updatePageState(this.page, '', html);
+      const result = await scanModule.__.updatePageState(
+        this.page,
+        new ContentData(''),
+        new ContentData(html),
+      );
 
       expect(result).toBeFalsy();
       expect(this.page.state).toEqual(Page.stateEnum.NO_CHANGE);
@@ -124,10 +100,10 @@ describe('scan', function() {
       spyOn(Page, 'load').and.returnValue(Promise.resolve(this.page));
       spyOn(this.page, 'save');
       spyOn(PageStore, 'saveHtml');
-      spyOn(scanModule.__, 'isMajorChange').and.returnValues(false);
+      spyOn(scanContentModule.__, 'isMajorChange').and.returnValues(false);
 
       const result = await scanModule.__.updatePageState(
-        this.page, html1, html2);
+        this.page, new ContentData(html1), new ContentData(html2));
 
       expect(result).toBeFalsy();
       expect(this.page.state).toEqual(Page.stateEnum.NO_CHANGE);
@@ -147,10 +123,13 @@ describe('scan', function() {
         spyOn(Page, 'load').and.returnValue(Promise.resolve(this.page));
         spyOn(this.page, 'save');
         spyOn(PageStore, 'saveHtml');
-        spyOn(scanModule.__, 'isMajorChange').and.returnValues(false);
+        spyOn(scanContentModule.__, 'isMajorChange').and.returnValues(false);
 
         const result = await scanModule.__.updatePageState(
-          this.page, html1, html2);
+          this.page,
+          new ContentData(html1),
+          new ContentData(html2),
+        );
 
         expect(result).toBeFalsy();
         expect(this.page.state).toEqual(Page.stateEnum.CHANGED);
@@ -169,10 +148,13 @@ describe('scan', function() {
       spyOn(Page, 'load').and.returnValue(Promise.resolve(this.page));
       spyOn(this.page, 'save');
       spyOn(PageStore, 'saveHtml');
-      spyOn(scanModule.__, 'isMajorChange').and.returnValues(true);
+      spyOn(scanContentModule.__, 'isMajorChange').and.returnValues(true);
 
       const result = await scanModule.__.updatePageState(
-        this.page, html1, html2);
+        this.page,
+        new ContentData(html1),
+        new ContentData(html2),
+      );
 
       expect(result).toBeTruthy();
       expect(this.page.state).toEqual(Page.stateEnum.CHANGED);
@@ -189,15 +171,19 @@ describe('scan', function() {
       'updates just the new HTML for a repeated major change',
       async function() {
         this.page.state = Page.stateEnum.CHANGED;
+        this.page.changeThreshold = 1;
         const html1 = 'Here is some <b>HTML</b>';
         const html2 = 'Here is some different <b>HTML</b>';
         spyOn(Page, 'load').and.returnValue(Promise.resolve(this.page));
         spyOn(this.page, 'save');
         spyOn(PageStore, 'saveHtml');
-        spyOn(scanModule.__, 'isMajorChange').and.returnValues(true);
+        spyOn(scanContentModule.__, 'isMajorChange').and.returnValues(true);
 
         const result = await scanModule.__.updatePageState(
-          this.page, html1, html2);
+          this.page,
+          new ContentData(html1, null),
+          new ContentData(html2, null),
+        );
 
         expect(result).toBeTruthy();
         expect(this.page.state).toEqual(Page.stateEnum.CHANGED);
@@ -362,67 +348,6 @@ describe('scan', function() {
           ['Could not scan "example": Error: Network error']);
         done();
       }).catch((error) => done.fail(error));
-    });
-  });
-
-  describe('stripHtml', function() {
-    it('strips whitespace', function() {
-      const prevHtml = 'text with\tspaces\ntabs  \n \r  and newlines';
-      const scannedHtml = 'More text with\tspaces\ntabs  \n \r  and newlines';
-
-      const result = scanModule.__.stripHtml(prevHtml, scannedHtml, false);
-
-      expect(result.prevHtml).toEqual('textwithspacestabsandnewlines');
-      expect(result.scannedHtml).toEqual('Moretextwithspacestabsandnewlines');
-    });
-
-    it('strips scripts', function() {
-      const prevHtml = 'text with<script blah>inline </script> script ' +
-        '<script> tags</script>s';
-      const scannedHtml = 'text with <script>\nnewlines</script> of various' +
-        '<script>\r\n   types\r\n</script>..';
-
-      const result = scanModule.__.stripHtml(prevHtml, scannedHtml, false);
-
-      expect(result.prevHtml).toEqual('textwithscripts');
-      expect(result.scannedHtml).toEqual('textwithofvarious..');
-    });
-
-    it('strips tags', function() {
-      const prevHtml = 'text with <b>tags</b> included.';
-      const scannedHtml = '<p>More text with<br/>tags</p>';
-
-      const result = scanModule.__.stripHtml(prevHtml, scannedHtml, false);
-
-      expect(result.prevHtml).toEqual('textwithtagsincluded.');
-      expect(result.scannedHtml).toEqual('Moretextwithtags');
-    });
-
-    it('strips numbers if Page.ignoreNumbers is true', function() {
-      const prevHtml = 'text with 12.3 numbers, full stops and commas.';
-      const scannedHtml = 'More text with 12.3 numbers, etc.';
-
-      const result = scanModule.__.stripHtml(prevHtml, scannedHtml, true);
-
-      expect(result.prevHtml).toEqual('textwithnumbersfullstopsandcommas');
-      expect(result.scannedHtml).toEqual('Moretextwithnumbersetc');
-    });
-
-    it('doesn\'t strip numbers if Page.ignoreNumbers is false', function() {
-      const prevHtml = 'text with 12.3 numbers, stops and commas.';
-      const scannedHtml = 'More text with 12.3 numbers, etc.';
-
-      const result = scanModule.__.stripHtml(prevHtml, scannedHtml, false);
-
-      expect(result.prevHtml).toEqual('textwith12.3numbers,stopsandcommas.');
-      expect(result.scannedHtml).toEqual('Moretextwith12.3numbers,etc.');
-    });
-
-    it('handles null HTML input', function() {
-      const result = scanModule.__.stripHtml(null, null, true);
-
-      expect(result.prevHtml).toBe(null);
-      expect(result.scannedHtml).toBe(null);
     });
   });
 

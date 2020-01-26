@@ -1,38 +1,26 @@
-import {isMajorChange} from './fuzzy.js';
 import {PageStore} from '/lib/page/page_store.js';
 import {Page} from '/lib/page/page.js';
 import {isUpToDate} from '/lib/update/update.js';
 import {log} from '/lib/util/log.js';
 import {waitForMs} from '/lib/util/promise.js';
 import {applyEncoding, detectEncoding} from '/lib/util/encoding.js';
+import {matchHtmlWithSelector} from './selector_matcher.js';
+import {getChanges, ContentData, changeEnum} from './scan_content.js';
+import {isMajorChange} from './fuzzy.js';
 
-/**
- * Enumeration indicating the similarity of two HTML strings.
- *
- * @readonly
- * @enum {string}
- */
-const changeEnum = {
-  NEW_CONTENT: 'new_content',
-  NO_CHANGE: 'no_change',
-  MAJOR_CHANGE: 'major_change',
-  MINOR_CHANGE: 'minor_change',
-};
 
 // Allow function mocking
 export const __ = {
   log: (...args) => log(...args),
   detectEncoding: (...args) => detectEncoding(...args),
   applyEncoding: (...args) => applyEncoding(...args),
-  isMajorChange: (...args) => isMajorChange(...args),
   waitForMs: (...args) => waitForMs(...args),
   isUpToDate: (...args) => isUpToDate(...args),
+  isMajorChange: (...args) => isMajorChange(...args),
+  matchHtmlWithSelector: (...args) => matchHtmlWithSelector(...args),
 
   // Allow private functions to be tested
-  changeEnum: changeEnum,
-  getChangeType: getChangeType,
   updatePageState: updatePageState,
-  stripHtml: stripHtml,
   getHtmlFromResponse: getHtmlFromResponse,
 };
 
@@ -85,7 +73,6 @@ export async function scanPage(page) {
 
     const html = await getHtmlFromResponse(response, page);
     return processHtml(page, html);
-
   } catch (error) {
     __.log(`Could not scan "${page.title}": ${error}`);
     // Only save if the page still exists
@@ -145,7 +132,36 @@ async function processHtml(page, scannedHtml) {
   }
 
   const prevHtml = await PageStore.loadHtml(page.id, PageStore.htmlTypes.NEW);
-  return await updatePageState(page, prevHtml, scannedHtml);
+
+  return processHtmlWithConditions(page, scannedHtml, prevHtml);
+}
+
+/**
+ * Processes HTML with selectors specified in page settings. If selectors
+ * do not exist or page was not scanned yet standard update is called.
+ *
+ * @param {Page} page - Page object to update.
+ * @param {string} scanHtml - HTML to process.
+ * @param {string} prevHtml - Previous HTML.
+ *
+ * @returns {boolean} True if a new major change is detected.
+ */
+async function processHtmlWithConditions(page, scanHtml, prevHtml) {
+  if (page.selectors && prevHtml != null) {
+    const scanParts = await __.matchHtmlWithSelector(scanHtml, page.selectors);
+    const prevParts = await __.matchHtmlWithSelector(prevHtml, page.selectors);
+    return updatePageState(
+      page,
+      new ContentData(prevHtml, prevParts),
+      new ContentData(scanHtml, scanParts),
+    );
+  } else {
+    return updatePageState(
+      page,
+      new ContentData(prevHtml, null),
+      new ContentData(scanHtml, null),
+    );
+  }
 }
 
 /**
@@ -154,31 +170,33 @@ async function processHtml(page, scannedHtml) {
  * the save operations to complete.
  *
  * @param {Page} page - Page object to update.
- * @param {string} prevHtml - HTML from storage.
- * @param {string} scannedHtml - Scanned HTML to process.
+ * @param {ContentData} prevHtmlData - HTML from storage.
+ * @param {ContentData} scannedHtmlData - Scanned HTML to process.
  *
  * @returns {boolean} True if a new major change is detected.
  */
-async function updatePageState(page, prevHtml, scannedHtml) {
+async function updatePageState(page, prevHtmlData, scannedHtmlData) {
   const updatedPage = await Page.load(page.id);
-  const stripped = stripHtml(prevHtml, scannedHtml, updatedPage.ignoreNumbers);
 
-  const changeType = getChangeType(
-    stripped.prevHtml,
-    stripped.scannedHtml,
-    updatedPage.changeThreshold,
+  const changeType = getChanges(
+    prevHtmlData,
+    scannedHtmlData,
+    updatedPage,
   );
 
   if (changeType === changeEnum.MAJOR_CHANGE) {
     if (!updatedPage.isChanged()) {
       // This is a newly detected change, so update the old HTML.
-      PageStore.saveHtml(updatedPage.id, PageStore.htmlTypes.OLD, prevHtml);
+      await PageStore
+        .saveHtml(updatedPage.id, PageStore.htmlTypes.OLD, prevHtmlData.html);
       updatedPage.oldScanTime = updatedPage.newScanTime;
     }
-    PageStore.saveHtml(updatedPage.id, PageStore.htmlTypes.NEW, scannedHtml);
+    await PageStore
+      .saveHtml(updatedPage.id, PageStore.htmlTypes.NEW, scannedHtmlData.html);
     updatedPage.state = Page.stateEnum.CHANGED;
   } else {
-    PageStore.saveHtml(updatedPage.id, PageStore.htmlTypes.NEW, scannedHtml);
+    await PageStore
+      .saveHtml(updatedPage.id, PageStore.htmlTypes.NEW, scannedHtmlData.html);
     // Only update the state if not previously marked as changed.
     if (!updatedPage.isChanged()) {
       updatedPage.state = Page.stateEnum.NO_CHANGE;
@@ -188,101 +206,5 @@ async function updatePageState(page, prevHtml, scannedHtml) {
   updatedPage.newScanTime = Date.now();
 
   await updatedPage.save();
-  return changeType == changeEnum.MAJOR_CHANGE;
-}
-
-/**
- * Given two downloaded HTML strings, return a changeEnum value indicating how
- * similar they are.
- *
- * @param {string} str1 - First HTML string for comparison.
- * @param {string} str2 - Second HTML string for comparison.
- * @param {integer} changeThreshold - Number of characters that must change to
- * indicate a major change.
- *
- * @returns {string} ChangeEnum string indicating how similar the
- * two HTML strings are.
- */
-function getChangeType(str1, str2, changeThreshold) {
-  if (str1 === null) {
-    // This is the first scan.
-    return changeEnum.NEW_CONTENT;
-  } else if (str1 == str2) {
-    // HTML is unchanged.
-    return changeEnum.NO_CHANGE;
-  } else if (__.isMajorChange(str1, str2, changeThreshold)) {
-    // Change is larger than changeThreshold.
-    return changeEnum.MAJOR_CHANGE;
-  } else {
-    // Change is smaller than changeThreshold.
-    return changeEnum.MINOR_CHANGE;
-  }
-}
-
-/**
- * Strips whitespace, (most) scripts, tags and (optionally) numbers from the
- * input HTML.
- *
- * @param {string} prevHtml - HTML from storage.
- * @param {string} scannedHtml - Scanned HTML to process.
- * @param {boolean} ignoreNumbers - True if numbers should be stripped.
- *
- * @returns {object} Object containing the updated prevHtml and scannedHtml.
- */
-function stripHtml(prevHtml, scannedHtml, ignoreNumbers) {
-  prevHtml = stripTags(stripScript(stripWhitespace(prevHtml)));
-  scannedHtml = stripTags(stripScript(stripWhitespace(scannedHtml)));
-  if (ignoreNumbers) {
-    prevHtml = stripNumbers(prevHtml);
-    scannedHtml = stripNumbers(scannedHtml);
-  }
-  return {prevHtml: prevHtml, scannedHtml: scannedHtml};
-}
-
-/**
- * @param {string} html - HTML to process.
- *
- * @returns {string} HTML with whitespace removed.
- */
-function stripWhitespace(html) {
-  if (html === null) {
-    return null;
-  }
-  return html.replace(/\s+/g, '');
-}
-
-/**
- * @param {string} html - HTML to process.
- *
- * @returns {string} HTML with (most) sctipts removed.
- */
-function stripScript(html) {
-  if (html === null) {
-    return null;
-  }
-  return html.replace(/<script.*?>.*?<\/script>/gi, '');
-}
-
-/**
- * @param {string} html - HTML to process.
- *
- * @returns {string} HTML with tags removed.
- */
-function stripTags(html) {
-  if (html === null) {
-    return null;
-  }
-  return html.replace(/(<([^<]+)>)/g, '');
-}
-
-/**
- * @param {string} html - HTML to process.
- *
- * @returns {string} HTML with numbers, commas and full stops removed.
- */
-function stripNumbers(html) {
-  if (html === null) {
-    return null;
-  }
-  return html.replace(/[0-9,.]*/g, '');
+  return changeType === changeEnum.MAJOR_CHANGE;
 }

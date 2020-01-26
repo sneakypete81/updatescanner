@@ -30,6 +30,10 @@ export class Page {
       lastAutoscanTime: null,
       oldScanTime: null,
       newScanTime: null,
+      selectors: null,
+      contentMode: Page.contentModeEnum.TEXT,
+      requireExactMatchCount: false,
+      partialScan: false,
     };
   }
 
@@ -42,6 +46,18 @@ export class Page {
       NO_CHANGE: 'no_change',
       CHANGED: 'changed',
       ERROR: 'error',
+    };
+  }
+
+  /**
+   * @returns {{HTML: string, TEXT: string, IGNORE: string}} Enumeration of
+   *   page content mode.
+   */
+  static get contentModeEnum() {
+    return {
+      IGNORE: 'ignore',
+      HTML: 'html',
+      TEXT: 'text',
     };
   }
 
@@ -104,6 +120,13 @@ export class Page {
    * (ms since Unix epoch).
    * @property {number} newScanTime - Time when the NEW HTML was last updated
    * (ms since Unix epoch).
+   * @property {string} selectors - Selectors separated by comma.
+   * @property {contentModeEnum|string} contentMode - Mode used for content
+   *   comparison.
+   * @property {boolean} requireExactMatchCount - True if part count should
+   *   match.
+   * @property {boolean} partialScan - True if selectors should be used for
+   *   selecting parts of the page to scan.
    */
   constructor(
     id,
@@ -123,6 +146,10 @@ export class Page {
       lastAutoscanTime = Page.DEFAULTS.lastAutoscanTime,
       oldScanTime = Page.DEFAULTS.oldScanTime,
       newScanTime = Page.DEFAULTS.newScanTime,
+      selectors = Page.DEFAULTS.selectors,
+      contentMode = Page.DEFAULTS.contentMode,
+      requireExactMatchCount = Page.DEFAULTS.requireExactMatchCount,
+      partialScan = Page.DEFAULTS.partialScan,
     },
   ) {
     this.id = id;
@@ -141,6 +168,10 @@ export class Page {
     this.lastAutoscanTime = lastAutoscanTime;
     this.oldScanTime = oldScanTime;
     this.newScanTime = newScanTime;
+    this.selectors = selectors;
+    this.contentMode = contentMode;
+    this.requireExactMatchCount = requireExactMatchCount;
+    this.partialScan = partialScan;
   }
 
   /**
@@ -165,6 +196,10 @@ export class Page {
       lastAutoscanTime: this.lastAutoscanTime,
       oldScanTime: this.oldScanTime,
       newScanTime: this.newScanTime,
+      selectors: this.selectors,
+      contentMode: this.contentMode,
+      requireExactMatchCount: this.requireExactMatchCount,
+      partialScan: this.partialScan,
     };
   }
 
@@ -186,6 +221,10 @@ export class Page {
       markChanges: this.markChanges,
       doPost: this.doPost,
       postParams: this.postParams,
+      selectors: this.selectors,
+      contentMode: this.contentMode,
+      requireExactMatchCount: this.requireExactMatchCount,
+      partialScan: this.partialScan,
       // state: this.state,
       // lastAutoscanTime: this.lastAutoscanTime,
       // oldScanTime: this.oldScanTime,

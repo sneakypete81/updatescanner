@@ -10,7 +10,7 @@
  * @returns {boolean} Returns true if the two strings differ by more than
  * changeThreshold characters.
  */
-export function isMajorChange(str1='', str2='', changeThreshold) {
+export function isMajorChange(str1 = '', str2 = '', changeThreshold) {
   const safeStr1 = str1;
   const safeStr2 = str2;
 
