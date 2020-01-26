@@ -54,7 +54,7 @@ export function openPageDialog(pageNode) {
   form.elements['scan-mode'].value = scanModeName;
   updateModeUI(scanModeName);
 
-    dialog.showModal();
+  dialog.showModal();
 
   return new Promise((resolve, reject) => {
     $on(dialog, 'close', () => {
