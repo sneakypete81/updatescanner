@@ -77,9 +77,7 @@ export function getChanges(prevData, scannedData, page) {
   const prevParts = prevData.parts || [prevData.html];
   const scannedParts = scannedData.parts || [scannedData.html];
 
-  const ignoreTags = contentMode !== contentModeEnum.HTML;
-
-  const htmlChange = getHTMLChange(page, prevParts, scannedParts, ignoreTags);
+  const htmlChange = getHTMLChange(page, prevParts, scannedParts, true);
 
   // If no change was detected in parts, just return minor change because we
   // already know there was a change somewhere in the html

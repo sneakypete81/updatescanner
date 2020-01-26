@@ -445,6 +445,14 @@ const ScanModeMap = new Map([
       contentMode: Page.contentModeEnum.IGNORE,
     },
   }],
+  ['various', {
+    description: '',
+    options: {
+      partialScan: true,
+      requireExactMatchCount: false,
+      contentMode: Page.contentModeEnum.TEXT,
+    },
+  }],
 ]);
 
 /**
@@ -454,6 +462,8 @@ const ScanModeMap = new Map([
  * @param {string} modeName - Name of the current mode.
  */
 function updateModeUI(modeName) {
+  modeName = modeName || 'various';
+
   const mode = ScanModeMap.get(modeName);
   updateInputDisabledStates(mode);
   updateScanModeDescription(mode);

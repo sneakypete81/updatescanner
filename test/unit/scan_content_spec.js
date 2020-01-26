@@ -156,27 +156,6 @@ describe('scan_content', function() {
       expect(result).toEqual(scanContentModule.__.changeEnum.NO_CHANGE);
     });
 
-    it('detects major change with content mode HTML', function() {
-      const html1 = '<div>some text</div>';
-      const html2 = '<span>some text</span>';
-      const page = new Page(
-        'test',
-        {contentMode: Page.contentModeEnum.HTML},
-      );
-
-      spyOn(scanContentModule.__, 'isMajorChange')
-        .and
-        .returnValues(true);
-
-      const result = scanContentModule.__.getChanges(
-        new ContentData(html1),
-        new ContentData(html2),
-        page,
-      );
-
-      expect(result).toEqual(scanContentModule.__.changeEnum.MAJOR_CHANGE);
-    });
-
     it('detects no change with content mode IGNORE', function() {
       const html1 = '<div>some text</div>';
       const html2 = '<span>some other text</span>';
