@@ -23,7 +23,7 @@ export function init() {
     updateThresholdDescription(target.value),
   );
   $on(form.elements['scan-mode'], 'input', ({target}) =>
-    updateScanMode(target.value),
+    updateModeUI(target.value),
   );
 
   $on(form, 'reset', () => dialog.close());
@@ -50,7 +50,11 @@ export function openPageDialog(pageNode) {
   const initial = getDataFromMultiple([page]);
   initializeMultiPageInput(form, initial, changeObject, false);
 
-  dialog.showModal();
+  const scanModeName = getScanModeName(page);
+  form.elements['scan-mode'].value = scanModeName;
+  updateModeUI(scanModeName);
+
+    dialog.showModal();
 
   return new Promise((resolve, reject) => {
     $on(dialog, 'close', () => {
@@ -228,7 +232,7 @@ function initializeMultiPageInput(
     'scanMode',
     allowIndeterminate,
   );
-  updateScanMode(initial.scanMode);
+  updateModeUI(initial.scanMode);
 
   const autoscanSliderValue = autoscanMinsToSlider(initial.scanRateMinutes);
   initializeAndListenOnChanges(
@@ -421,7 +425,6 @@ const ScanModeMap = new Map([
     options: {
       partialScan: false,
       contentMode: Page.contentModeEnum.TEXT,
-      matchMode: Page.matchModeEnum.FIRST,
     },
   }],
   ['inside-elements', {
@@ -431,7 +434,6 @@ const ScanModeMap = new Map([
       partialScan: true,
       requireExactMatchCount: true,
       contentMode: Page.contentModeEnum.TEXT,
-      matchMode: Page.matchModeEnum.FIRST,
     },
   }],
   ['count-only', {
@@ -441,83 +443,60 @@ const ScanModeMap = new Map([
       partialScan: true,
       requireExactMatchCount: true,
       contentMode: Page.contentModeEnum.IGNORE,
-      matchMode: Page.matchModeEnum.FIRST,
     },
   }],
 ]);
 
 /**
- * Returns description for selectors input field.
+ * Updates UI based on the mode. Disables fields not allowed in the
+ * mode and mode description.
  *
- * @param {boolean} partialScan - True if partial scan is active.
- * @returns {string} Description for selectors.
+ * @param {string} modeName - Name of the current mode.
  */
-function getSelectorsDescription(partialScan) {
+function updateModeUI(modeName) {
+  const mode = ScanModeMap.get(modeName);
+  updateInputDisabledStates(mode);
+  updateScanModeDescription(mode);
+  updateSelectorsDescription(mode.options.partialScan);
+}
+
+/**
+ * Updates input disabled states based on new mode.
+ *
+ * @param {object} mode - Scan mode.
+ */
+function updateInputDisabledStates(mode) {
+  const form = qs('#settings-form');
+
+  setDisableOnInput(form.elements['selectors'], !mode.options.partialScan);
+  updateThresholdDisabledState(mode.options);
+}
+
+/**
+ * Updates selector description.
+ *
+ * @param {boolean} partialScan - True if partial scan is enabled.
+ */
+function updateSelectorsDescription(partialScan) {
+  const form = qs('#settings-form');
+  const selectorsElement = form.elements['selectors'];
   if (partialScan) {
-    return `CSS selectors for more information see 
-<a href="https://www.w3schools.com/cssref/css_selectors.asp">
-https://www.w3schools.com/cssref/css_selectors.asp</a>`;
+    selectorsElement.placeholder = '';
   } else {
-    return `Selectors not available in "Anywhere" scan mode.`;
+    selectorsElement.placeholder =
+      `Selectors not available in "Anywhere" scan mode.`;
   }
 }
 
 /**
- * Replaces innerHTML for element without directly assigning it to innerHTML.
+ * Updates scan mode description.
  *
- * @param {Element} element - HTML element.
- * @param {string} html - Raw HTML.
+ * @param {object} mode - Scan mode.
  */
-function replaceInnerHTML(element, html) {
-  html = '<span>' + html + '</span>';
-  const parser = new DOMParser();
-  const parsed = parser.parseFromString(html, 'text/html');
-  const content = parsed.getElementsByTagName('span')[0];
-
-  element.innerHTML = '';
-  element.appendChild(content);
-}
-
-/**
- *  Updates scan mode description, threshold state and other related inputs.
- *
- * @param {?string} modeName - Scan mode name.
- */
-function updateScanMode(modeName) {
-  if (modeName == null) {
-    setCustomScanMode();
-  } else {
-    const form = qs('#settings-form');
-    const mode = ScanModeMap.get(modeName);
-    const descriptionElement = form.elements['scan-mode-description'];
-    descriptionElement.value = mode.description;
-
-    const partialScan = mode.options.partialScan;
-    const selectorDescription = getSelectorsDescription(partialScan);
-    replaceInnerHTML(
-      form.elements['selectors-description'],
-      selectorDescription,
-    );
-    setDisableOnInput(form.elements['selectors'], !partialScan);
-
-    updateThresholdDisabledState(mode.options);
-  }
-}
-
-/**
- * Sets scan mode to various, meaning it differs for multiple items.
- */
-function setCustomScanMode() {
+function updateScanModeDescription(mode) {
   const form = qs('#settings-form');
   const descriptionElement = form.elements['scan-mode-description'];
-  descriptionElement.value = 'Custom';
-
-  const partialScan = true;
-  const selectorDescription = getSelectorsDescription(partialScan);
-  replaceInnerHTML(form.elements['selectors-description'], selectorDescription);
-  setDisableOnInput(form.elements['selectors'], !partialScan);
-
-  updateThresholdDisabledState({contentMode: Page.contentModeEnum.TEXT});
+  descriptionElement.value = mode.description;
 }
 
 /**

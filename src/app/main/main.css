@@ -142,14 +142,16 @@ fieldset div {
   display: flex;
 }
 
-legend {
-  font-size: larger;
+.selectors-description {
+  margin-top: 8px;
 }
 
-.description {
+#selectors::placeholder {
   font-size: smaller;
-  color: rgba(0, 0, 0, 0.8);
-  text-align: left;
+}
+
+legend {
+  font-size: larger;
 }
 
 label {
