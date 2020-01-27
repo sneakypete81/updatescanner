@@ -19,17 +19,20 @@ describe('Page', function() {
       expect(page.url).toEqual(data.url);
     });
 
-    it('returns the default Page if there is no object in storage',
+    it(
+      'returns the default Page if there is no object in storage',
       async function() {
         spyOn(Storage, 'load').and.returnValues(Promise.resolve(undefined));
 
         const page = await Page.load('42');
         expect(page.title).toEqual('New Page');
-      });
+      },
+    );
 
     it('returns the default Page if the storage load fails', async function() {
-      spyOn(Storage, 'load').and
-        .returnValues(Promise.reject(new Error('ERROR_MESSAGE')));
+      spyOn(Storage, 'load').and.returnValues(
+        Promise.reject(new Error('ERROR_MESSAGE')),
+      );
       spyOn(pageModule.__, 'log');
 
       const page = await Page.load('42');
@@ -75,27 +78,36 @@ describe('Page', function() {
         lastAutoscanTime: 10209876,
         oldScanTime: 9381234,
         newScanTime: 40834321,
+        selectors: '#id',
+        contentMode: Page.contentModeEnum.HTML,
+        requireExactMatchCount: true,
+        partialScan: true,
       };
       const page = new Page(id, data);
 
-      page.save().then(() => {
-        expect(Storage.save).toHaveBeenCalledWith(Page._KEY(id), data);
-        done();
-      })
+      page
+        .save()
+        .then(() => {
+          expect(Storage.save).toHaveBeenCalledWith(Page._KEY(id), data);
+          done();
+        })
         .catch((error) => done.fail(error));
     });
 
     it('silently logs an error if the save fails', function(done) {
-      spyOn(Storage, 'save').and
-        .returnValues(Promise.reject(new Error('AN_ERROR')));
+      spyOn(Storage, 'save').and.returnValues(
+        Promise.reject(new Error('AN_ERROR')),
+      );
       spyOn(pageModule.__, 'log');
 
       const page = new Page('37', {});
 
-      page.save().then(() => {
-        expect(pageModule.__.log.calls.argsFor(0)).toMatch('AN_ERROR');
-        done();
-      })
+      page
+        .save()
+        .then(() => {
+          expect(pageModule.__.log.calls.argsFor(0)).toMatch('AN_ERROR');
+          done();
+        })
         .catch((error) => done.fail(error));
     });
   });
@@ -106,24 +118,29 @@ describe('Page', function() {
 
       const page = new Page('33', {});
 
-      page.delete().then(() => {
-        expect(Storage.remove).toHaveBeenCalledWith(Page._KEY(page.id));
-        done();
-      })
+      page
+        .delete()
+        .then(() => {
+          expect(Storage.remove).toHaveBeenCalledWith(Page._KEY(page.id));
+          done();
+        })
         .catch((error) => done.fail(error));
     });
 
     it('silently logs an error if the delete operation fails', function(done) {
-      spyOn(Storage, 'remove').and
-        .returnValues(Promise.reject(new Error('AN_ERROR')));
+      spyOn(Storage, 'remove').and.returnValues(
+        Promise.reject(new Error('AN_ERROR')),
+      );
       spyOn(pageModule.__, 'log');
 
       const page = new Page('37', {});
 
-      page.delete().then(() => {
-        expect(pageModule.__.log.calls.argsFor(0)).toMatch('AN_ERROR');
-        done();
-      })
+      page
+        .delete()
+        .then(() => {
+          expect(pageModule.__.log.calls.argsFor(0)).toMatch('AN_ERROR');
+          done();
+        })
         .catch((error) => done.fail(error));
     });
   });

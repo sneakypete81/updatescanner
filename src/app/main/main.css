@@ -129,7 +129,7 @@ form h1 {
 fieldset {
   border: none;
   margin-left: 0.5em;
-  margin-bottom: 0,5em;
+  margin-bottom: 0.5em;
 }
 
 fieldset div {
@@ -140,6 +140,14 @@ fieldset div {
 .slider {
   padding-left: 0.5em;
   display: flex;
+}
+
+.selectors-description {
+  margin-top: 8px;
+}
+
+#selectors::placeholder {
+  font-size: smaller;
 }
 
 legend {
@@ -154,7 +162,7 @@ label {
 
 label span {
   display: inline-block;
-  width  : 2.5em;
+  min-width: 2.5em;
   text-align: right;
   margin-right: 6px;
 }
@@ -167,6 +175,10 @@ label span {
 
 input {
   flex-grow: 1;
+}
+
+select {
+  width: 100%;
 }
 
 .range-label-min {
@@ -200,4 +212,8 @@ form button.browser-style {
 
 .hidden {
   display: none;
+}
+
+.disabled {
+  opacity: 0.5;
 }

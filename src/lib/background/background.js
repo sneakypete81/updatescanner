@@ -82,8 +82,7 @@ export class Background {
    * @param {Function} sendResponse - Function that can be used to send a
    *   response back to the sender.
    */
-  _handleMessage(message, sender, sendResponse) {
-    console.log('received message', message);
+  _handleMessage(message) {
     if (message.action === backgroundActionEnum.SCAN_ALL) {
       this._scanAll();
     } else if (message.action === backgroundActionEnum.SCAN_ITEM) {

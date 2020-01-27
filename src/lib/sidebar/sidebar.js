@@ -34,7 +34,7 @@ export class Sidebar {
     this.pageStore.bindPageUpdate(this._handleItemUpdate.bind(this));
     this.pageStore.bindPageFolderUpdate(this._handleItemUpdate.bind(this));
 
-    this.sidebar.init();
+    await this.sidebar.init();
     this._refreshSidebar();
 
     this.sidebar.registerSelectHandler((event, itemId) =>
@@ -74,7 +74,7 @@ export class Sidebar {
         [paramEnum.ID]: item.id,
       };
 
-      const newTab = event.metaKey || event.ctrlKey || (event.button == 1);
+      const newTab = event.metaKey || event.ctrlKey || (event.button === 1);
       openMain(params, newTab);
     }
   }
@@ -114,7 +114,7 @@ export class Sidebar {
    */
   async _handleDelete(itemId) {
     if (await this.sidebar.confirmDelete()) {
-      this.pageStore.deleteItem(itemId);
+      await this.pageStore.deleteItem(itemId);
     }
   }
 
@@ -123,7 +123,7 @@ export class Sidebar {
    *
    * @param {string} itemId - ID of the item to move.
    * @param {string} pageFolderId - ID of the destination PageFolder.
-   * @param {integer} position - Position within the destination PageFolder.
+   * @param {number} position - Position within the destination PageFolder.
    */
   _handleMove(itemId, pageFolderId, position) {
     this.pageStore.moveItem(itemId, pageFolderId, position);

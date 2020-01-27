@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
 <head>
   <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
   <title>Update Scanner</title>
@@ -42,20 +42,21 @@
   </div>
 
   <dialog id="settings-dialog">
-    <form id="settings-form", method="dialog">
+    <form id="settings-form" method="dialog">
       <h1 id="page-heading">Page Settings</h1>
       <h1 id="folder-heading">Folder Settings</h1>
       <fieldset id="titleFieldset">
         <label>
           <span>Title:</span>
-          <input name="title" type="text"></input>
+          <input name="title" type="text"/>
         </label>
       </fieldset>
 
       <fieldset id="urlFieldset">
         <label>
           <span>URL:</span>
-          <input name="url" type="text" placeholder="https://www.example.com"></input>
+          <input name="url" type="text"
+                 placeholder="https://www.example.com"/>
         </label>
       </fieldset>
 
@@ -63,7 +64,7 @@
         <legend>Autoscan:</legend>
         <div class="slider">
           <span class="range-label-min">Often</span>
-          <input name="autoscan" type="range"></input>
+          <input name="autoscan" type="range"/>
           <span class="range-label-max">Never</span>
         </div>
         <output name="autoscan-description" for="autoscan">...</output>
@@ -73,23 +74,48 @@
         <legend>Change Threshold:</legend>
         <div class="slider">
           <span class="range-label-min">Low</span>
-          <input name="threshold" type="range"></input>
+          <input name="threshold" type="range"/>
           <span class="range-label-max">High</span>
         </div>
         <output name="threshold-description" for="autoscan">...</output>
         <output name="threshold-subdescription" for="autoscan">(...)</output>
         <div>
           <input type="checkbox" id="ignore-numbers" name="ignore-numbers">
-          <label for="ignore-numbers" class="checkbox-label">Ignore changes to numbers</label>
+          <label for="ignore-numbers" class="checkbox-label">Ignore changes to
+            numbers</label>
         </div>
+      </fieldset>
+
+      <fieldset id="scanModeFieldset">
+        <label for="scan-mode">Scan mode:</label>
+        <select id="scan-mode" name="scan-mode">
+          <option value="anywhere">Anywhere in the page</option>
+          <option value="inside-elements">Inside the selected HTML elements
+          </option>
+          <option value="count-only">Only count HTML elements</option>
+        </select>
+        <output name="scan-mode-description"></output>
+      </fieldset>
+
+      <fieldset id="selectorsFieldset">
+        <label for="selectors">CSS selectors:</label>
+        <input style="width: 100%" id="selectors" name="selectors"
+               type="text"/>
+        <output name="selectors-description" for="selectors">
+          CSS selectors for more information see
+          <a href="https://www.w3schools.com/cssref/css_selectors.asp">
+            https://www.w3schools.com/cssref/css_selectors.asp</a>
+        </output>
       </fieldset>
 
       <fieldset id="scanOptions">
       </fieldset>
 
       <div id="dialog-buttons">
-        <button class="browser-style" id="cancel-button" type="reset">Cancel</button>
-        <button class="browser-style default" type="submit" value="ok">Ok</button>
+        <button class="browser-style" id="cancel-button" type="reset">Cancel
+        </button>
+        <button class="browser-style default" type="submit" value="ok">Ok
+        </button>
       </div>
     </form>
   </dialog>

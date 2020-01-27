@@ -4,22 +4,22 @@
  *
  * @param {string} str1 - First string for comparison.
  * @param {string} str2 - Second string for comparison.
- * @param {integer} changeThreshold - Number of characters that must change to
+ * @param {number} changeThreshold - Number of characters that must change to
  * indicate a major change.
  *
  * @returns {boolean} Returns true if the two strings differ by more than
- * changeThreshold charagers.
+ * changeThreshold characters.
  */
-export function isMajorChange(str1='', str2='', changeThreshold) {
+export function isMajorChange(str1 = '', str2 = '', changeThreshold) {
   const safeStr1 = str1;
   const safeStr2 = str2;
 
-  if (changeThreshold == 0) {
-    return (safeStr1 != safeStr2);
+  if (changeThreshold === 0) {
+    return (safeStr1 !== safeStr2);
   }
 
   // Start with sliceLength=0 and slowly increase it until it reaches the
-  // changeTheshold. If a match isn't found by then, it's a major change.
+  // changeThreshold. If a match isn't found by then, it's a major change.
   let sliceLength = 0;
 
   while (sliceLength < changeThreshold) {
@@ -44,7 +44,7 @@ export function isMajorChange(str1='', str2='', changeThreshold) {
  *
  * @param {string} str1 - First string for comparison.
  * @param {string} str2 - Second string for comparison.
- * @param {integer} sliceLength - Maximum number of characters to remove when
+ * @param {number} sliceLength - Maximum number of characters to remove when
  * looking for a match.
  *
  * @returns {boolean} Returns true if a match can be made by removing slices of
@@ -58,7 +58,7 @@ function matchSlice(str1, str2, sliceLength) {
 
   // At each difference, cut out a slice, then see if the remaining text
   // matches up.
-  while (str1 != str2) {
+  while (str1 !== str2) {
     const index = firstDifference(str1, str2);
 
     const shortest = Math.min(str1.length, str2.length);
@@ -75,18 +75,18 @@ function matchSlice(str1, str2, sliceLength) {
     for (let i = 0; ; i++) {
       // Does the match last for 10 characters?
       // First try slicing the start off str1
-      if (str1.slice(i, i + 10) == str2.slice(0, 10)) {
+      if (str1.slice(i, i + 10) === str2.slice(0, 10)) {
         str1 = str1.slice(i);
         break;
       }
       // Now try slicing the start off str2
-      if (str2.slice(i, i + 10) == str1.slice(0, 10)) {
+      if (str2.slice(i, i + 10) === str1.slice(0, 10)) {
         str2 = str2.slice(i);
         break;
       }
 
-      // If we reach the theshold, it's not a match
-      if (i == sliceLength) {
+      // If we reach the threshold, it's not a match
+      if (i === sliceLength) {
         return false;
       }
     }
@@ -101,11 +101,11 @@ function matchSlice(str1, str2, sliceLength) {
  * @param {string} str1 - First string for comparison.
  * @param {string} str2 - Second string for comparison.
  *
- * @returns {integer} Difference in length of the two strings.
+ * @returns {number} Difference in length of the two strings.
  */
 function lengthDifference(str1, str2) {
   return Math.max(str1.length, str2.length) -
-         Math.min(str1.length, str2.length);
+    Math.min(str1.length, str2.length);
 }
 
 /**
@@ -114,13 +114,13 @@ function lengthDifference(str1, str2) {
  * @param {string} str1 - First string for comparison.
  * @param {string} str2 - Second string for comparison.
  *
- * @returns {integer} First index where the two strings don't match.
+ * @returns {number} First index where the two strings don't match.
  */
 function firstDifference(str1, str2) {
   const minlen = Math.min(str1.length, str2.length);
 
   for (let i = 0; i < minlen; i++) {
-    if (str1[i] != str2[i]) {
+    if (str1[i] !== str2[i]) {
       return i;
     }
   }
