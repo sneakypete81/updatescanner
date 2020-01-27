@@ -202,7 +202,12 @@ export class Main {
     this.currentPage.scanRateMinutes = newSettings.scanRateMinutes;
     this.currentPage.changeThreshold = newSettings.changeThreshold;
     this.currentPage.ignoreNumbers = newSettings.ignoreNumbers;
-    this.currentPage.save();
+    this.currentPage.selectors = newSettings.selectors;
+    this.currentPage.contentMode = newSettings.contentMode;
+    this.currentPage.requireExactMatchCount =
+      newSettings.requireExactMatchCount;
+    this.currentPage.partialScan = newSettings.partialScan;
+    await this.currentPage.save();
 
     document.location.replace(getMainDiffUrl(this.currentPage.id));
   }

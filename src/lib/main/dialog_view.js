@@ -3,6 +3,7 @@ import {qs, $on, hideElement} from '/lib/util/view_helpers.js';
 // See https://bugzilla.mozilla.org/show_bug.cgi?id=840640
 import dialogPolyfill
   from '/dependencies/module/dialog-polyfill/dist/dialog-polyfill.esm.js';
+import {Page} from '../page/page.js';
 
 /**
  * Initialise the dialog box.
@@ -20,6 +21,9 @@ export function init() {
   );
   $on(form.elements['threshold'], 'input', ({target}) =>
     updateThresholdDescription(target.value),
+  );
+  $on(form.elements['scan-mode'], 'input', ({target}) =>
+    updateModeUI(target.value),
   );
 
   $on(form, 'reset', () => dialog.close());
@@ -40,6 +44,12 @@ export function openPageDialog(page) {
   form.elements['title'].value = page.title;
   form.elements['url'].value = page.url;
 
+  form.elements['selectors'].value = page.selectors;
+
+  const scanModeName = getScanModeName(page);
+  form.elements['scan-mode'].value = scanModeName;
+  updateModeUI(scanModeName);
+
   const autoscanSliderValue = autoscanMinsToSlider(page.scanRateMinutes);
   form.elements['autoscan'].value = autoscanSliderValue;
   updateAutoscanDescription(autoscanSliderValue);
@@ -57,6 +67,8 @@ export function openPageDialog(page) {
   return new Promise((resolve, reject) => {
     $on(dialog, 'close', () => {
       if (dialog.returnValue === 'ok') {
+        const mode = form.elements['scan-mode'].value;
+        const modeData = ScanModeMap.get(mode).options;
         resolve({
           title: form.elements['title'].value,
           url: form.elements['url'].value,
@@ -65,6 +77,10 @@ export function openPageDialog(page) {
           changeThreshold:
             ThresholdSliderToChars[form.elements['threshold'].value],
           ignoreNumbers: form.elements['ignore-numbers'].checked,
+          selectors: form.elements['selectors'].value,
+          contentMode: modeData.contentMode,
+          requireExactMatchCount: modeData.requireExactMatchCount,
+          partialScan: modeData.partialScan,
         });
       } else {
         resolve(null);
@@ -91,6 +107,8 @@ export function openPageFolderDialog(pageFolder) {
   hideElement(qs('#urlFieldset'));
   hideElement(qs('#autoscanFieldset'));
   hideElement(qs('#thresholdFieldset'));
+  hideElement(qs('#selectorsFieldset'));
+  hideElement(qs('#scanModeFieldset'));
 
   dialog.showModal();
 
@@ -148,6 +166,157 @@ function autoscanMinsToSlider(minutes) {
 function updateAutoscanDescription(sliderValue) {
   qs('#settings-form').elements['autoscan-description'].value =
     AutoscanSliderDescriptions[sliderValue];
+}
+
+const ScanModeMap = new Map([
+  ['anywhere', {
+    description: '',
+    options: {
+      partialScan: false,
+      contentMode: Page.contentModeEnum.TEXT,
+    },
+  }],
+  ['inside-elements', {
+    description: `Check only inside selected elements using HTML elements 
+    selector.`,
+    options: {
+      partialScan: true,
+      requireExactMatchCount: true,
+      contentMode: Page.contentModeEnum.TEXT,
+    },
+  }],
+  ['count-only', {
+    description: `Check only for change in number of HTML element matches.
+    Content is ignored.`,
+    options: {
+      partialScan: true,
+      requireExactMatchCount: true,
+      contentMode: Page.contentModeEnum.IGNORE,
+    },
+  }],
+]);
+
+/**
+ * Updates UI based on the mode. Disables fields not allowed in the
+ * mode and mode description.
+ *
+ * @param {string} modeName - Name of the current mode.
+ */
+function updateModeUI(modeName) {
+  const mode = ScanModeMap.get(modeName);
+  updateInputDisabledStates(mode);
+  updateScanModeDescription(mode);
+  updateSelectorsDescription(mode.options.partialScan);
+}
+
+/**
+ * Updates input disabled states based on new mode.
+ *
+ * @param {object} mode - Scan mode.
+ */
+function updateInputDisabledStates(mode) {
+  const form = qs('#settings-form');
+
+  setDisableOnInput(form.elements['selectors'], !mode.options.partialScan);
+  updateThresholdDisabledState(mode.options);
+}
+
+/**
+ * Updates selector description.
+ *
+ * @param {boolean} partialScan - True if partial scan is enabled.
+ */
+function updateSelectorsDescription(partialScan) {
+  const form = qs('#settings-form');
+  const selectorsElement = form.elements['selectors'];
+  if (partialScan) {
+    selectorsElement.placeholder = '';
+  } else {
+    selectorsElement.placeholder =
+      `Selectors not available in "Anywhere" scan mode.`;
+  }
+}
+
+/**
+ * Updates scan mode description.
+ *
+ * @param {object} mode - Scan mode.
+ */
+function updateScanModeDescription(mode) {
+  const form = qs('#settings-form');
+  const descriptionElement = form.elements['scan-mode-description'];
+  descriptionElement.value = mode.description;
+}
+
+/**
+ * Sets disabled on input or wrapper and all it's input children.
+ *
+ * @param {Element} parent - Parent element.
+ * @param {boolean} disabled - True if input should be disabled.
+ */
+function setDisableOnInput(parent, disabled) {
+  if (parent.tagName === 'INPUT') {
+    parent.disabled = disabled;
+  } else {
+    const disabledClass = 'disabled';
+    const hasRightClass =
+      parent.classList.contains(disabledClass) === disabled;
+
+    if (!hasRightClass) {
+      if (disabled) {
+        parent.classList.add(disabledClass);
+      } else {
+        parent.classList.remove(disabledClass);
+      }
+    }
+
+    parent.querySelectorAll('input, select').forEach((node) => {
+      node.disabled = disabled;
+    });
+  }
+}
+
+/**
+ * Updates disabled state for threshold input.
+ *
+ * @param {object} modeOptions - Mode options.
+ */
+function updateThresholdDisabledState(modeOptions) {
+  const thresholdFieldset = qs('#thresholdFieldset');
+  thresholdFieldset.classList.remove('disabled');
+  if (modeOptions.contentMode === Page.contentModeEnum.IGNORE) {
+    setDisableOnInput(thresholdFieldset, true);
+  } else {
+    setDisableOnInput(thresholdFieldset, false);
+  }
+}
+
+
+/**
+ * Returns scan mode from page.
+ *
+ * @param {Page} page - Page.
+ * @returns {string} Mode name.
+ */
+function getScanModeName(page) {
+  const scanModeMapIterator = ScanModeMap.entries();
+  for (const item of scanModeMapIterator) {
+    const data = item[1];
+    const options = data.options;
+    let isEqual = true;
+    for (const propertyName in options) {
+      if (options[propertyName] !== page[propertyName]) {
+        isEqual = false;
+        break;
+      }
+    }
+
+    if (isEqual) {
+      return item[0];
+    }
+  }
+
+  return ScanModeMap.keys().next().value;
 }
 
 const ThresholdSliderMap = new Map([

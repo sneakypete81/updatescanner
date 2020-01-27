@@ -78,6 +78,10 @@ describe('Page', function() {
         lastAutoscanTime: 10209876,
         oldScanTime: 9381234,
         newScanTime: 40834321,
+        selectors: '#id',
+        contentMode: Page.contentModeEnum.HTML,
+        requireExactMatchCount: true,
+        partialScan: true,
       };
       const page = new Page(id, data);
 
