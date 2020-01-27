@@ -135,7 +135,7 @@ export class Background {
   }
 
   /**
-   * Manual scan of a single item. If the item is a PageFolder, scan all items
+   * Manual scan of multiple items. If the item is a PageFolder, scan all items
    * in the folder.
    *
    * @param {Array<string>} itemIdArray - ID of the item to scan.
