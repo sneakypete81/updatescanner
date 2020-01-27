@@ -466,7 +466,7 @@ function updateModeUI(modeName) {
   const mode = ScanModeMap.get(modeName);
   updateInputDisabledStates(mode);
   updateScanModeDescription(mode);
-  updateSelectorsDescription(mode.options.partialScan);
+  updateSelectorsPlaceholder(mode.options.partialScan);
 }
 
 /**
@@ -486,7 +486,7 @@ function updateInputDisabledStates(mode) {
  *
  * @param {boolean} partialScan - True if partial scan is enabled.
  */
-function updateSelectorsDescription(partialScan) {
+function updateSelectorsPlaceholder(partialScan) {
   const form = qs('#settings-form');
   const selectorsElement = form.elements['selectors'];
   if (partialScan) {
