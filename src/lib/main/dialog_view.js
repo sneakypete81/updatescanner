@@ -291,7 +291,6 @@ function getMultiPageInputResult(changeObject, result) {
   result.ignoreNumbers = changeObject.ignoreNumbers;
   result.selectors = changeObject.selectors;
   result.contentMode = modeData.contentMode;
-  result.matchMode = modeData.matchMode;
   result.requireExactMatchCount = modeData.requireExactMatchCount;
   result.partialScan = modeData.partialScan;
 }

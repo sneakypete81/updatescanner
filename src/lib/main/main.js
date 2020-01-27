@@ -243,10 +243,6 @@ export class Main {
       page.contentMode,
       newSettings.contentMode,
     );
-    page.matchMode = this._getNewValue(
-      page.matchMode,
-      newSettings.matchMode,
-    );
     page.requireExactMatchCount = this._getNewValue(
       page.requireExactMatchCount,
       newSettings.requireExactMatchCount,
