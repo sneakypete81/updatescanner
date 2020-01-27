@@ -3,7 +3,7 @@ import {qs, $on, hideElement} from '/lib/util/view_helpers.js';
 // See https://bugzilla.mozilla.org/show_bug.cgi?id=840640
 import dialogPolyfill
   from '/dependencies/module/dialog-polyfill/dist/dialog-polyfill.esm.js';
-import {Page} from '../page/page.js';
+import {Page} from '/lib/page/page.js';
 
 /**
  * Initialise the dialog box.
@@ -32,56 +32,37 @@ export function init() {
 /**
  * Show the settings dialog for the specified Page.
  *
- * @param {Page} page - Page object to view.
+ * @param {PageNode} pageNode - Page object to view.
  *
  * @returns {Promise} Promise that resolves with an object containing the
  * updated page settings.
  */
-export function openPageDialog(page) {
+export function openPageDialog(pageNode) {
+  const page = pageNode.page;
   const dialog = qs('#settings-dialog');
   const form = qs('#settings-form');
+  qs('#heading').textContent = 'Page Settings';
 
-  form.elements['title'].value = page.title;
-  form.elements['url'].value = page.url;
 
-  form.elements['selectors'].value = page.selectors;
+  initializeSinglePageInput(form, page);
+  const changeObject = {};
+  // Needed to resolve some dialog specific properties
+  const initial = getDataFromMultiple([page]);
+  initializeMultiPageInput(form, initial, changeObject);
 
   const scanModeName = getScanModeName(page);
   form.elements['scan-mode'].value = scanModeName;
   updateModeUI(scanModeName);
-
-  const autoscanSliderValue = autoscanMinsToSlider(page.scanRateMinutes);
-  form.elements['autoscan'].value = autoscanSliderValue;
-  updateAutoscanDescription(autoscanSliderValue);
-
-  const thresholdSliderValue = thresholdCharsToSlider(page.changeThreshold);
-  form.elements['threshold'].value = thresholdSliderValue;
-  updateThresholdDescription(thresholdSliderValue);
-
-  form.elements['ignore-numbers'].checked = page.ignoreNumbers;
-
-  hideElement(qs('#folder-heading'));
 
   dialog.showModal();
 
   return new Promise((resolve, reject) => {
     $on(dialog, 'close', () => {
       if (dialog.returnValue === 'ok') {
-        const mode = form.elements['scan-mode'].value;
-        const modeData = ScanModeMap.get(mode).options;
-        resolve({
-          title: form.elements['title'].value,
-          url: form.elements['url'].value,
-          scanRateMinutes:
-            AutoscanSliderToMins[form.elements['autoscan'].value],
-          changeThreshold:
-            ThresholdSliderToChars[form.elements['threshold'].value],
-          ignoreNumbers: form.elements['ignore-numbers'].checked,
-          selectors: form.elements['selectors'].value,
-          contentMode: modeData.contentMode,
-          requireExactMatchCount: modeData.requireExactMatchCount,
-          partialScan: modeData.partialScan,
-        });
+        const result = {};
+        getSinglePageInputResult(form, result);
+        getMultiPageInputResult(changeObject, result);
+        resolve(result);
       } else {
         resolve(null);
       }
@@ -92,7 +73,7 @@ export function openPageDialog(page) {
 /**
  * Show the settings dialog for the specified PageFolder.
  *
- * @param {PageFolder} pageFolder - PageFolder object to view.
+ * @param {PageNode} pageFolder - PageFolder object to view.
  *
  * @returns {Promise} Promise that resolves with an object containing the
  * updated pageFolder settings.
@@ -100,27 +81,287 @@ export function openPageDialog(page) {
 export function openPageFolderDialog(pageFolder) {
   const dialog = qs('#settings-dialog');
   const form = qs('#settings-form');
+  qs('#heading').textContent = 'Folder Settings';
 
-  form.elements['title'].value = pageFolder.title;
+  initializeFolderPageInput(form, pageFolder.page);
 
-  hideElement(qs('#page-heading'));
+  const changeObject = {};
+  if (pageFolder.descendants.length > 0) {
+    const multipleInit = getDataFromMultiple(pageFolder.descendants);
+
+    initializeMultiPageInput(form, multipleInit, changeObject);
+  } else {
+    hideElement(qs('#autoscanFieldset'));
+    hideElement(qs('#thresholdFieldset'));
+    hideElement(qs('#selectorsFieldset'));
+    hideElement(qs('#scanModeFieldset'));
+  }
+
   hideElement(qs('#urlFieldset'));
-  hideElement(qs('#autoscanFieldset'));
-  hideElement(qs('#thresholdFieldset'));
-  hideElement(qs('#selectorsFieldset'));
-  hideElement(qs('#scanModeFieldset'));
 
   dialog.showModal();
 
   return new Promise((resolve, reject) => {
     $on(dialog, 'close', () => {
       if (dialog.returnValue === 'ok') {
-        resolve({title: form.elements['title'].value});
+        const result = {};
+        getFolderPageInputResult(form, result);
+        if (pageFolder.descendants.length > 0) {
+          getMultiPageInputResult(changeObject, result);
+        }
+        resolve(result);
       } else {
         resolve(null);
       }
     });
   });
+}
+
+/**
+ * Show the settings dialog for the specified PageFolder.
+ *
+ * @param {Array<PageNode>} pageNodeArray - Array containing selected pages.
+ *
+ * @returns {Promise} Promise that resolves with an object containing the
+ * updated pageFolder settings.
+ */
+export function openMultipleDialog(pageNodeArray) {
+  const dialog = qs('#settings-dialog');
+  const form = qs('#settings-form');
+
+  qs('#heading').textContent = 'Multi-page Settings';
+
+  const pageArray = pageNodeArray.flatMap((node) =>
+    node.isFolder ? node.descendants : node.page);
+  const condensed = getDataFromMultiple(pageArray);
+
+  const changeObject = {};
+  initializeMultiPageInput(form, condensed, changeObject);
+
+  hideElement(qs('#urlFieldset'));
+  hideElement(qs('#titleFieldset'));
+
+  dialog.showModal();
+
+  return new Promise((resolve, reject) => {
+    $on(dialog, 'close', () => {
+      if (dialog.returnValue === 'ok') {
+        const result = {};
+        getMultiPageInputResult(changeObject, result);
+        resolve(result);
+      } else {
+        resolve(null);
+      }
+    });
+  });
+}
+
+/**
+ * Initialize input for folder.
+ *
+ * @param {HTMLFormElement} form - Form element.
+ * @param {{title: string}} initial - Initial data.
+ */
+function initializeFolderPageInput(form, initial) {
+  form.elements['title'].value = initial.title;
+}
+
+/**
+ * Writes page input data to result object.
+ *
+ * @param {HTMLFormElement} form - Form element.
+ * @param {object} result - Object to which result data should be written.
+ *
+ */
+function getFolderPageInputResult(form, result) {
+  result.title = form.elements['title'].value;
+}
+
+/**
+ * Initialize input for single page.
+ *
+ * @param {HTMLFormElement} form - Form element.
+ * @param {{title: string, url: string}} initial - Initial data.
+ */
+function initializeSinglePageInput(form, initial) {
+  form.elements['title'].value = initial.title;
+  form.elements['url'].value = initial.url;
+}
+
+/**
+ * Writes page input data to result object.
+ *
+ * @param {HTMLFormElement} form - Form element.
+ * @param {object} result - Object to which result data should be written.
+ *
+ */
+function getSinglePageInputResult(form, result) {
+  result.title = form.elements['title'].value;
+  result.url = form.elements['url'].value;
+}
+
+/**
+ * Initializes multi page input and writes any changes immediately to result.
+ * Every property that does not have null value has been changed.
+ *
+ * @param {HTMLFormElement} form - Form element.
+ * @param {object} initial - Initial data.
+ * @param {object} changeObject - Object to which changes are written.
+ */
+function initializeMultiPageInput(
+  form,
+  initial,
+  changeObject,
+) {
+  initializeAndListenOnChanges(
+    form.elements['selectors'],
+    'value',
+    initial.selectors,
+    changeObject,
+    'selectors',
+  );
+
+  initializeAndListenOnChanges(
+    form.elements['scan-mode'],
+    'value',
+    initial.scanMode,
+    changeObject,
+    'scanMode',
+  );
+  updateModeUI(initial.scanMode);
+
+  const autoscanSliderValue = autoscanMinsToSlider(initial.scanRateMinutes);
+  initializeAndListenOnChanges(
+    form.elements['autoscan'],
+    'value',
+    autoscanSliderValue,
+    changeObject,
+    'autoscanSliderValue',
+  );
+  updateAutoscanDescription(autoscanSliderValue);
+  if (initial.scanRateMinutes == null) {
+    form.elements['autoscan-description'].value = 'Various';
+  }
+
+  const thresholdSliderValue =
+    thresholdCharsToSlider(initial.changeThreshold);
+  updateThresholdDescription(thresholdSliderValue);
+  initializeAndListenOnChanges(
+    form.elements['threshold'],
+    'value',
+    thresholdSliderValue,
+    changeObject,
+    'thresholdSliderValue',
+  );
+  if (initial.changeThreshold == null) {
+    form.elements['threshold-description'].value = 'Various';
+  }
+
+  initializeAndListenOnChanges(
+    form.elements['ignore-numbers'],
+    'checked',
+    initial.ignoreNumbers,
+    changeObject,
+    'ignoreNumbers',
+  );
+}
+
+/**
+ * Writes page input data to result object.
+ *
+ * @param {object} changeObject - Change object passed to initialization
+ *   function.
+ * @param {object} result - Object to which result data should be written.
+ *
+ */
+function getMultiPageInputResult(changeObject, result) {
+  const mode = changeObject.scanMode;
+  const modeData = mode == null ? {} : ScanModeMap.get(mode).options;
+  result.scanRateMinutes =
+    AutoscanSliderToMins[changeObject.autoscanSliderValue];
+  result.changeThreshold =
+    ThresholdSliderToChars[changeObject.thresholdSliderValue];
+  result.ignoreNumbers = changeObject.ignoreNumbers;
+  result.selectors = changeObject.selectors;
+  result.contentMode = modeData.contentMode;
+  result.requireExactMatchCount = modeData.requireExactMatchCount;
+  result.partialScan = modeData.partialScan;
+}
+
+/**
+ *
+ * @param {Element} element - Element.
+ * @param {string} elementPropertyName - Element property (eg. Value, checked).
+ * @param {?string|number|boolean} initialValue - Initial value.
+ * @param {object} config - Configuration object used to save new value.
+ * @param {string} propertyName - Configuration property name.
+ */
+function initializeAndListenOnChanges(
+  element,
+  elementPropertyName,
+  initialValue,
+  config,
+  propertyName,
+) {
+  element[elementPropertyName] = initialValue;
+  if (initialValue == null) {
+    element.indeterminate = true;
+    element.placeholder = 'Various';
+  }
+  element.addEventListener(
+    'input',
+    () => {
+      if (initialValue == null) {
+        element.placeholder = '';
+      }
+      config[propertyName] = element[elementPropertyName];
+    },
+  );
+}
+
+/**
+ * Returns common page data from multiple pages.
+ *
+ * @param {Array<Page>} pageArray - Page array.
+ * @returns {{scanMode: string, selectors: string,ignoreNumbers: boolean,
+ *   changeThreshold: number,scanRateMinutes: number}} Object containing
+ *   generalized values for all items in array.
+ */
+function getDataFromMultiple(pageArray) {
+  const first = pageArray[0];
+  const result = {
+    scanMode: getScanModeName(first),
+    selectors: first.selectors,
+    ignoreNumbers: first.ignoreNumbers,
+    changeThreshold: first.changeThreshold,
+    scanRateMinutes: first.scanRateMinutes,
+  };
+
+  for (let i = 1; i < pageArray.length; i++) {
+    const page = pageArray[i];
+    if (page.selectors !== result.selectors) {
+      result.selectors = null;
+    }
+
+    const scanMode = getScanModeName(page);
+    if (result.scanMode !== scanMode) {
+      result.scanMode = null;
+    }
+
+    if (result.ignoreNumbers !== page.ignoreNumbers) {
+      result.ignoreNumbers = null;
+    }
+
+    if (result.changeThreshold !== page.changeThreshold) {
+      result.changeThreshold = null;
+    }
+
+    if (result.scanRateMinutes !== page.scanRateMinutes) {
+      result.scanRateMinutes = null;
+    }
+  }
+
+  return result;
 }
 
 const AutoscanSliderMap = new Map([
@@ -194,6 +435,14 @@ const ScanModeMap = new Map([
       contentMode: Page.contentModeEnum.IGNORE,
     },
   }],
+  ['various', {
+    description: '',
+    options: {
+      partialScan: true,
+      requireExactMatchCount: false,
+      contentMode: Page.contentModeEnum.TEXT,
+    },
+  }],
 ]);
 
 /**
@@ -203,10 +452,12 @@ const ScanModeMap = new Map([
  * @param {string} modeName - Name of the current mode.
  */
 function updateModeUI(modeName) {
+  modeName = modeName || 'various';
+
   const mode = ScanModeMap.get(modeName);
   updateInputDisabledStates(mode);
   updateScanModeDescription(mode);
-  updateSelectorsDescription(mode.options.partialScan);
+  updateSelectorsPlaceholder(mode.options.partialScan);
 }
 
 /**
@@ -226,7 +477,7 @@ function updateInputDisabledStates(mode) {
  *
  * @param {boolean} partialScan - True if partial scan is enabled.
  */
-function updateSelectorsDescription(partialScan) {
+function updateSelectorsPlaceholder(partialScan) {
   const form = qs('#settings-form');
   const selectorsElement = form.elements['selectors'];
   if (partialScan) {

@@ -135,7 +135,7 @@ export class PageStore {
    * Don't forget to page.save() afterwards.
    *
    * @param {string} parentId - ID of the parent PageFolder.
-   * @param {integer} insertAfterIndex - Add the page after this item in the
+   * @param {number} insertAfterIndex - Add the page after this item in the
    * parent folder. If negative, the Page will be added to the end of the parent
    * folder.
    * @param {object} data - Values to initialise the Page object (optional).
@@ -170,7 +170,7 @@ export class PageStore {
    * Don't forget to pageFolder.save() afterwards.
    *
    * @param {string} parentId - ID of the parent PageFolder.
-   * @param {integer} insertAfterIndex - Add the page after this item in the
+   * @param {number} insertAfterIndex - Add the page after this item in the
    * parent folder. If negative, the Page will be added to the end of the parent
    * folder.
    *

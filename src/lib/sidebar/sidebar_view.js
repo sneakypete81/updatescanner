@@ -31,7 +31,7 @@ export class SidebarView {
     this._sidebarDivSelector = sidebarDivSelector;
     $(this._sidebarDivSelector).jstree({
       core: {
-        multiple: false,
+        multiple: true,
         themes: {
           icons: false,
           dots: false,
@@ -44,7 +44,7 @@ export class SidebarView {
       },
 
       contextmenu: {
-        select_node: false,
+        select_node: true,
         items: this._getContextMenuItems(),
       },
 
@@ -180,28 +180,29 @@ export class SidebarView {
    */
   _getContextMenuItems() {
     return (node) => {
+      const idList = $(this._sidebarDivSelector).jstree(true).get_selected();
       return {
         newPage: {
           label: 'New Page',
-          action: () => this._newPageHandler(node),
+          action: () => this._newPageHandler(node.id),
         },
         newPageFolder: {
           label: 'New Folder',
-          action: () => this._newPageFolderHandler(node),
+          action: () => this._newPageFolderHandler(node.id),
         },
         delete: {
           separator_before: true,
           label: 'Delete',
-          action: () => this._deleteHandler(node),
+          action: () => this._deleteHandler(idList),
         },
         scan: {
           separator_before: true,
           label: 'Scan Now',
-          action: () => this._scanItemHandler(node),
+          action: () => this._scanItemHandler(idList),
         },
         settings: {
           label: 'Settings',
-          action: () => this._settingsHandler(node),
+          action: () => this._settingsHandler(idList),
         },
       };
     };
@@ -215,7 +216,7 @@ export class SidebarView {
    * @param {string} operation - Operation performed on the tree (move_node).
    * @param {object} node - Node that moved.
    * @param {object} parent - New parent of the node.
-   * @param {integer} position - New position within the parent.
+   * @param {number} position - New position within the parent.
    * @param {object} more - Other data associated with the operation.
    *
    * @returns {boolean} True if the operation is allowed.
@@ -240,16 +241,15 @@ export class SidebarView {
    * Registers the provided handler function to be called whenever a single
    * item in the sidebar is selected.
    *
-   * @param {object} handler - Callback to use whenever the sidebar selection
+   * @param {Function} handler - Callback to use whenever the sidebar selection
    * changes.
    */
   registerSelectHandler(handler) {
     $(this._sidebarDivSelector).on('changed.jstree', (event, data) => {
       // Ignore if the event was due to a refresh or if nothing is selected.
-      if (!this._refreshing && data.selected.length === 1) {
-        const id = data.selected[0];
+      if (!this._refreshing && data.selected.length >= 1) {
         // Pass the event that caused the change, not the change event itself
-        handler(data.event, id);
+        handler(data.event, data.selected);
       }
     });
   }
@@ -260,7 +260,7 @@ export class SidebarView {
    * @param {Function} handler - Callback to use to create a new Page.
    */
   registerNewPageHandler(handler) {
-    this._newPageHandler = (node) => handler(node.id);
+    this._newPageHandler = (id) => handler(id);
   }
 
   /**
@@ -270,7 +270,7 @@ export class SidebarView {
    * @param {Function} handler - Callback to use to create a new PageFolder.
    */
   registerNewPageFolderHandler(handler) {
-    this._newPageFolderHandler = (node) => handler(node.id);
+    this._newPageFolderHandler = (id) => handler(id);
   }
 
   /**
@@ -281,7 +281,7 @@ export class SidebarView {
    * deleted.
    */
   registerDeleteHandler(handler) {
-    this._deleteHandler = (node) => handler(node.id);
+    this._deleteHandler = (idList) => handler(idList);
   }
 
   /**
@@ -302,7 +302,7 @@ export class SidebarView {
    * @param {Function} handler - Callback to use when 'Scan' is selected.
    */
   registerScanItemHandler(handler) {
-    this._scanItemHandler = (node) => handler(node.id);
+    this._scanItemHandler = (idList) => handler(idList);
   }
 
   /**
@@ -312,7 +312,7 @@ export class SidebarView {
    * @param {Function} handler - Callback to use when 'Settings' is selected.
    */
   registerSettingsHandler(handler) {
-    this._settingsHandler = (node) => handler(node.id);
+    this._settingsHandler = (idList) => handler(idList);
   }
 
   /**
@@ -326,13 +326,18 @@ export class SidebarView {
   /**
    * Show a dialog asking for confirmation before deleting an item.
    *
+   * @param {number} count - Number of items to delete.
    * @returns {boolean} True if the user confirmed the deletion.
    */
-  async confirmDelete() {
+  async confirmDelete(count) {
     const dialog = qs('#dialog-confirm');
     const message = qs('#dialog-confirm-message');
 
-    message.textContent = 'Delete this item - are you sure?';
+    if (count === 1) {
+      message.textContent = 'Delete this item - are you sure?';
+    } else {
+      message.textContent = `Delete ${count} items - are you sure?`;
+    }
     dialog.showModal();
 
     return new Promise((resolve, reject) => {

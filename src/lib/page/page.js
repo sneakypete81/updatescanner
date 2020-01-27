@@ -50,13 +50,12 @@ export class Page {
   }
 
   /**
-   * @returns {{HTML: string, TEXT: string, IGNORE: string}} Enumeration of
+   * @returns {{TEXT: string, IGNORE: string}} Enumeration of
    *   page content mode.
    */
   static get contentModeEnum() {
     return {
       IGNORE: 'ignore',
-      HTML: 'html',
       TEXT: 'text',
     };
   }

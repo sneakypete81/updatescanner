@@ -7,6 +7,7 @@ import {Page} from '/lib/page/page.js';
 import {PageFolder} from '/lib/page/page_folder.js';
 import {diff} from '/lib/diff/diff.js';
 import {log} from '/lib/util/log.js';
+import {createTreeForPage, createNodeForNewPage} from './page_tree.js';
 
 // Allow function mocking
 export const __ = {
@@ -82,14 +83,9 @@ export class Main {
         break;
       }
       case actionEnum.SHOW_SETTINGS: {
-        const item = this.pageStore.getItem(
-          this._getUrlParam(params, paramEnum.ID),
-        );
-        if (item instanceof Page) {
-          this._showPageSettings(item);
-        } else {
-          this._showPageFolderSettings(item);
-        }
+        const itemIdArray = JSON.parse(this._getUrlParam(params, paramEnum.ID));
+
+        this._showSettings(itemIdArray);
         break;
       }
     }
@@ -119,7 +115,7 @@ export class Main {
    * @param {string} title - Default title field.
    * @param {string} url - Default url field.
    * @param {string} parentId - Parent folder of the new Page.
-   * @param {integer} insertAfterIndex - Add the page after this item in the
+   * @param {number} insertAfterIndex - Add the page after this item in the
    * parent folder. If negative, the Page will be added to the end of the parent
    * folder.
    */
@@ -134,8 +130,9 @@ export class Main {
       url = undefined;
     }
 
-    const temporaryPage = new Page(-1, {title: title, url: url});
-    const newSettings = await dialog.openPageDialog(temporaryPage);
+    const newPage = new Page(-1, {title: title, url: url});
+    const tmpPageNode = createNodeForNewPage(newPage);
+    const newSettings = await dialog.openPageDialog(tmpPageNode);
 
     if (newSettings == null) {
       document.location.replace('about:blank');
@@ -154,7 +151,7 @@ export class Main {
    *
    * @param {string} title - Default title field.
    * @param {string} parentId - Parent folder of the new PageFolder.
-   * @param {integer} insertAfterIndex - Add the PageFolder after this item in
+   * @param {number} insertAfterIndex - Add the PageFolder after this item in
    * the parent folder. If negative, the PageFolder will be added to the end of
    * the parent folder.
    */
@@ -163,8 +160,10 @@ export class Main {
     parentId = PageStore.ROOT_ID,
     insertAfterIndex = -1,
   ) {
-    const temporaryPageFolder = new PageFolder(-1, {title: title});
-    const newSettings = await dialog.openPageFolderDialog(temporaryPageFolder);
+    const newPage = new PageFolder(-1, {title: title});
+    const temporaryPageFolderNode = createNodeForNewPage(newPage);
+    const newSettings =
+      await dialog.openPageFolderDialog(temporaryPageFolderNode);
     if (newSettings !== null) {
       const pageFolder = await this.pageStore.createPageFolder(
         parentId,
@@ -197,19 +196,112 @@ export class Main {
    */
   async _updateCurrentPage(newSettings) {
     this.currentPage = await Page.load(this.currentPage.id);
-    this.currentPage.title = newSettings.title;
-    this.currentPage.url = newSettings.url;
-    this.currentPage.scanRateMinutes = newSettings.scanRateMinutes;
-    this.currentPage.changeThreshold = newSettings.changeThreshold;
-    this.currentPage.ignoreNumbers = newSettings.ignoreNumbers;
-    this.currentPage.selectors = newSettings.selectors;
-    this.currentPage.contentMode = newSettings.contentMode;
-    this.currentPage.requireExactMatchCount =
-      newSettings.requireExactMatchCount;
-    this.currentPage.partialScan = newSettings.partialScan;
+    this._updatePage(this.currentPage, newSettings);
     await this.currentPage.save();
 
     document.location.replace(getMainDiffUrl(this.currentPage.id));
+  }
+
+  /**
+   *
+   * @param {*} oldValue - Old value.
+   * @param {*} newValue - New value.
+   * @returns {*} New value if new value is not null, old value otherwise.
+   * @private
+   */
+  _getNewValue(oldValue, newValue) {
+    return newValue == null ? oldValue : newValue;
+  }
+
+  /**
+   * Update the current Page with new settings from the Settings dialog.
+   *
+   * @param {Page} page - Page to update.
+   * @param {object} newSettings - Settings to apply to the current page.
+   */
+  async _updatePage(page, newSettings) {
+    page = await Page.load(page.id);
+    page.title = this._getNewValue(page.title, newSettings.title);
+    page.url = this._getNewValue(page.url, newSettings.url);
+    page.scanRateMinutes = this._getNewValue(
+      page.scanRateMinutes,
+      newSettings.scanRateMinutes,
+    );
+    page.changeThreshold = this._getNewValue(
+      page.changeThreshold,
+      newSettings.changeThreshold,
+    );
+    page.ignoreNumbers = this._getNewValue(
+      page.ignoreNumbers,
+      newSettings.ignoreNumbers,
+    );
+    page.selectors = this._getNewValue(
+      page.selectors,
+      newSettings.selectors,
+    );
+    page.contentMode = this._getNewValue(
+      page.contentMode,
+      newSettings.contentMode,
+    );
+    page.requireExactMatchCount = this._getNewValue(
+      page.requireExactMatchCount,
+      newSettings.requireExactMatchCount,
+    );
+    page.partialScan = this._getNewValue(
+      page.partialScan,
+      newSettings.partialScan,
+    );
+    await page.save();
+  }
+
+  /**
+   * Updates all pages in list with new settings.
+   *
+   * @param {Array<PageNode>} pageNodeArray - Array of pages to update.
+   * @param {object} newSettings - Update object containing new options.
+   * @private
+   */
+  async _updatePageList(pageNodeArray, newSettings) {
+    if (pageNodeArray.length === 1 &&
+      pageNodeArray[0].page instanceof PageFolder) {
+      const updatedPageFolder = await PageFolder.load(pageNodeArray[0].page.id);
+      updatedPageFolder.title = newSettings.title;
+      newSettings.title = null;
+      await updatedPageFolder.save();
+    }
+
+    if (pageNodeArray.length > 1) {
+      this._ensureValidMultiPageSettings(newSettings);
+    }
+
+    for (let i = 0; i < pageNodeArray.length; i++) {
+      const node = pageNodeArray[i];
+      if (node.isFolder) {
+        for (let k = 0; k < node.descendants.length; k++) {
+          await this._updatePage(node.descendants[k], newSettings);
+        }
+      } else {
+        await this._updatePage(node.page, newSettings);
+      }
+    }
+  }
+
+  /**
+   * Ensures that pages are not accidentally overwritten in batch.
+   *
+   * @param {object} settings - Settings.
+   * @private
+   */
+  _ensureValidMultiPageSettings(settings) {
+    if (settings.title != null) {
+      __.log('Title was not null in multi page mode. Removing.');
+      settings.title = null;
+    }
+
+    if (settings.url != null) {
+      __.log('URL was not null in multi page mode. Removing.');
+      settings.url = null;
+    }
   }
 
   /**
@@ -240,32 +332,35 @@ export class Main {
   }
 
   /**
-   * Show the Page settings dialog.
    *
-   * @param {Page} page - Page to edit.
+   * @param {Array<string>} idArray - Page id array.
+   * @private
    */
-  async _showPageSettings(page) {
-    this.currentPage = page;
-    const newSettings = await dialog.openPageDialog(page);
-    if (newSettings !== null) {
-      this._updateCurrentPage(newSettings);
-    }
-    document.location.replace(getMainDiffUrl(this.currentPage.id));
-  }
+  async _showSettings(idArray) {
+    const nodeArray = idArray.map((id) =>
+      createTreeForPage(id, this.pageStore));
 
-  /**
-   * Show the PageFolder settings dialog.
-   *
-   * @param {PageFolder} pageFolder - PageFolder to edit.
-   */
-  async _showPageFolderSettings(pageFolder) {
-    const newSettings = await dialog.openPageFolderDialog(pageFolder);
-    if (newSettings !== null) {
-      const updatedPageFolder = await PageFolder.load(pageFolder.id);
-      updatedPageFolder.title = newSettings.title;
-      updatedPageFolder.save();
+    let newSettings;
+    if (nodeArray.length === 1) {
+      const node = nodeArray[0];
+      if (node.isFolder) {
+        newSettings = await dialog.openPageFolderDialog(node);
+      } else {
+        newSettings = await dialog.openPageDialog(node);
+      }
+    } else {
+      newSettings = await dialog.openMultipleDialog(nodeArray);
     }
-    document.location.replace('about:blank');
+
+    if (newSettings !== null) {
+      await this._updatePageList(nodeArray, newSettings);
+    }
+
+    if (nodeArray.length === 1 && !nodeArray[0].isFolder) {
+      document.location.replace(getMainDiffUrl(nodeArray[0].page.id));
+    } else {
+      document.location.replace('about:blank');
+    }
   }
 
   /**

@@ -70,8 +70,8 @@ export class Background {
   _handleMessage(message) {
     if (message.action === backgroundActionEnum.SCAN_ALL) {
       this._scanAll();
-    } else if (message.action === backgroundActionEnum.SCAN_ITEM) {
-      this._scanItem(message.itemId);
+    } else if (message.action === backgroundActionEnum.SCAN_ITEMS) {
+      this._scanItems(message.itemIdArray);
     }
   }
 
@@ -131,10 +131,23 @@ export class Background {
    * @param {string} itemId - ID of the item to scan.
    */
   _scanItem(itemId) {
-    const scanList = this.pageStore.getDescendantPages(itemId);
+    this._scanItems([itemId]);
+  }
 
-    log(`Pages to manually scan: ${scanList.length}`);
-    this.scanQueue.add(scanList);
+  /**
+   * Manual scan of multiple items. If the item is a PageFolder, scan all items
+   * in the folder.
+   *
+   * @param {Array<string>} itemIdArray - ID of the item to scan.
+   */
+  _scanItems(itemIdArray) {
+    let count = 0;
+    for (let i = 0; i < itemIdArray.length; i++) {
+      const scanList = this.pageStore.getDescendantPages(itemIdArray[i]);
+      count += scanList.length;
+      this.scanQueue.add(scanList);
+    }
+    log(`Pages to manually scan: ${count}`);
     this.scanQueue.manualScan();
   }
 

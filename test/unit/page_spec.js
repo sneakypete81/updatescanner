@@ -79,7 +79,7 @@ describe('Page', function() {
         oldScanTime: 9381234,
         newScanTime: 40834321,
         selectors: '#id',
-        contentMode: Page.contentModeEnum.HTML,
+        contentMode: Page.contentModeEnum.TEXT,
         requireExactMatchCount: true,
         partialScan: true,
       };
