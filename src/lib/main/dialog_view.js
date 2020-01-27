@@ -3,7 +3,7 @@ import {qs, $on, hideElement} from '/lib/util/view_helpers.js';
 // See https://bugzilla.mozilla.org/show_bug.cgi?id=840640
 import dialogPolyfill
   from '/dependencies/module/dialog-polyfill/dist/dialog-polyfill.esm.js';
-import {Page} from '../page/page.js';
+import {Page} from '/lib/page/page.js';
 
 /**
  * Initialise the dialog box.
@@ -48,7 +48,7 @@ export function openPageDialog(pageNode) {
   const changeObject = {};
   // Needed to resolve some dialog specific properties
   const initial = getDataFromMultiple([page]);
-  initializeMultiPageInput(form, initial, changeObject, false);
+  initializeMultiPageInput(form, initial, changeObject);
 
   const scanModeName = getScanModeName(page);
   form.elements['scan-mode'].value = scanModeName;
@@ -89,7 +89,7 @@ export function openPageFolderDialog(pageFolder) {
   if (pageFolder.descendants.length > 0) {
     const multipleInit = getDataFromMultiple(pageFolder.descendants);
 
-    initializeMultiPageInput(form, multipleInit, changeObject, false);
+    initializeMultiPageInput(form, multipleInit, changeObject);
   } else {
     hideElement(qs('#autoscanFieldset'));
     hideElement(qs('#thresholdFieldset'));
@@ -136,7 +136,7 @@ export function openMultipleDialog(pageNodeArray) {
   const condensed = getDataFromMultiple(pageArray);
 
   const changeObject = {};
-  initializeMultiPageInput(form, condensed, changeObject, true);
+  initializeMultiPageInput(form, condensed, changeObject);
 
   hideElement(qs('#urlFieldset'));
   hideElement(qs('#titleFieldset'));
@@ -207,13 +207,11 @@ function getSinglePageInputResult(form, result) {
  * @param {HTMLFormElement} form - Form element.
  * @param {object} initial - Initial data.
  * @param {object} changeObject - Object to which changes are written.
- * @param {boolean} allowIndeterminate - Should inputs be indeterminate if null.
  */
 function initializeMultiPageInput(
   form,
   initial,
   changeObject,
-  allowIndeterminate,
 ) {
   initializeAndListenOnChanges(
     form.elements['selectors'],
@@ -221,7 +219,6 @@ function initializeMultiPageInput(
     initial.selectors,
     changeObject,
     'selectors',
-    allowIndeterminate,
   );
 
   initializeAndListenOnChanges(
@@ -230,7 +227,6 @@ function initializeMultiPageInput(
     initial.scanMode,
     changeObject,
     'scanMode',
-    allowIndeterminate,
   );
   updateModeUI(initial.scanMode);
 
@@ -241,10 +237,9 @@ function initializeMultiPageInput(
     autoscanSliderValue,
     changeObject,
     'autoscanSliderValue',
-    allowIndeterminate,
   );
   updateAutoscanDescription(autoscanSliderValue);
-  if (initial.scanRateMinutes == null && allowIndeterminate) {
+  if (initial.scanRateMinutes == null) {
     form.elements['autoscan-description'].value = 'Various';
   }
 
@@ -257,9 +252,8 @@ function initializeMultiPageInput(
     thresholdSliderValue,
     changeObject,
     'thresholdSliderValue',
-    allowIndeterminate,
   );
-  if (initial.changeThreshold == null && allowIndeterminate) {
+  if (initial.changeThreshold == null) {
     form.elements['threshold-description'].value = 'Various';
   }
 
@@ -269,7 +263,6 @@ function initializeMultiPageInput(
     initial.ignoreNumbers,
     changeObject,
     'ignoreNumbers',
-    allowIndeterminate,
   );
 }
 
@@ -302,7 +295,6 @@ function getMultiPageInputResult(changeObject, result) {
  * @param {?string|number|boolean} initialValue - Initial value.
  * @param {object} config - Configuration object used to save new value.
  * @param {string} propertyName - Configuration property name.
- * @param {boolean} allowIndeterminate - Should inputs be indeterminate if null.
  */
 function initializeAndListenOnChanges(
   element,
@@ -310,10 +302,9 @@ function initializeAndListenOnChanges(
   initialValue,
   config,
   propertyName,
-  allowIndeterminate,
 ) {
   element[elementPropertyName] = initialValue;
-  if (initialValue == null && allowIndeterminate) {
+  if (initialValue == null) {
     element.indeterminate = true;
     element.placeholder = 'Various';
   }
