@@ -3,6 +3,15 @@
     "{c07d1a49-9894-49ff-a594-38960ede8fb9}": {
       "updates": [
         {
+          "version": "4.6.0beta1",
+          "update_link": "https://github.com/sneakypete81/updatescanner/releases/download/4.6.0beta1/update_scanner-4.6.0beta1-an.fx.xpi",
+          "browser_specific_settings": {
+            "gecko": {
+              "strict_min_version": "60.0"
+            }
+          }
+        },
+        {
           "version": "4.5.0beta1",
           "update_link": "https://github.com/sneakypete81/updatescanner/releases/download/4.5.0beta1/update_scanner-4.5.0beta1-an.fx.xpi",
           "browser_specific_settings": {
