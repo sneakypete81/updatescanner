@@ -5,7 +5,7 @@
         {
           "version": "4.5.0beta1",
           "update_link": "https://github.com/sneakypete81/updatescanner/releases/download/4.5.0beta1/update_scanner-4.5.0beta1-an.fx.xpi",
-          "applications": {
+          "browser_specific_settings": {
             "gecko": {
               "strict_min_version": "60.0"
             }
@@ -14,7 +14,7 @@
         {
           "version": "4.4.0beta3",
           "update_link": "https://github.com/sneakypete81/updatescanner/releases/download/4.4.0beta3/update_scanner-4.4.0beta3-an.fx.xpi",
-          "applications": {
+          "browser_specific_settings": {
             "gecko": {
               "strict_min_version": "60.0"
             }
@@ -23,7 +23,7 @@
         {
           "version": "4.4.0beta2",
           "update_link": "https://github.com/sneakypete81/updatescanner/releases/download/4.4.0beta2/update_scanner-4.4.0beta2-an.fx.xpi",
-          "applications": {
+          "browser_specific_settings": {
             "gecko": {
               "strict_min_version": "60.0"
             }
@@ -32,7 +32,7 @@
         {
           "version": "4.4.0beta1",
           "update_link": "https://github.com/sneakypete81/updatescanner/releases/download/4.4.0beta1/update_scanner-4.4.0beta1-an.fx.xpi",
-          "applications": {
+          "browser_specific_settings": {
             "gecko": {
               "strict_min_version": "60.0"
             }
@@ -41,7 +41,7 @@
         {
           "version": "4.3.3beta3",
           "update_link": "https://github.com/sneakypete81/updatescanner/releases/download/4.3.3beta3/update_scanner-4.3.3beta3-an.fx.xpi",
-          "applications": {
+          "browser_specific_settings": {
             "gecko": {
               "strict_min_version": "60.0"
             }
@@ -50,7 +50,7 @@
         {
           "version": "4.3.3beta2",
           "update_link": "https://github.com/sneakypete81/updatescanner/releases/download/4.3.3beta2/update_scanner-4.3.3beta2-an.fx.xpi",
-          "applications": {
+          "browser_specific_settings": {
             "gecko": {
               "strict_min_version": "60.0"
             }
@@ -59,7 +59,7 @@
         {
           "version": "4.3.3beta1",
           "update_link": "https://github.com/sneakypete81/updatescanner/releases/download/4.3.3beta1/update_scanner-4.3.3beta1-an.fx.xpi",
-          "applications": {
+          "browser_specific_settings": {
             "gecko": {
               "strict_min_version": "60.0"
             }
@@ -68,7 +68,7 @@
         {
           "version": "4.3.2beta2",
           "update_link": "https://github.com/sneakypete81/updatescanner/releases/download/4.3.2beta2/update_scanner-4.3.2beta2-an.fx.xpi",
-          "applications": {
+          "browser_specific_settings": {
             "gecko": {
               "strict_min_version": "60.0"
             }
@@ -77,7 +77,7 @@
         {
           "version": "4.3.2beta1",
           "update_link": "https://github.com/sneakypete81/updatescanner/releases/download/4.3.2beta1/update_scanner-4.3.2beta1-an.fx.xpi",
-          "applications": {
+          "browser_specific_settings": {
             "gecko": {
               "strict_min_version": "60.0"
             }
@@ -86,7 +86,7 @@
         {
           "version": "4.3.1beta2",
           "update_link": "https://github.com/sneakypete81/updatescanner/releases/download/4.3.1beta2/update_scanner-4.3.1beta2-an.fx.xpi",
-          "applications": {
+          "browser_specific_settings": {
             "gecko": {
               "strict_min_version": "60.0"
             }
@@ -95,7 +95,7 @@
         {
           "version": "4.3.1beta1",
           "update_link": "https://github.com/sneakypete81/updatescanner/releases/download/4.3.1beta1/update_scanner-4.3.1beta1-an.fx.xpi",
-          "applications": {
+          "browser_specific_settings": {
             "gecko": {
               "strict_min_version": "57.0"
             }
@@ -104,7 +104,7 @@
         {
           "version": "4.2.1beta1",
           "update_link": "https://github.com/sneakypete81/updatescanner/releases/download/4.2.1beta1/update_scanner-4.2.1beta1-an.fx.xpi",
-          "applications": {
+          "browser_specific_settings": {
             "gecko": {
               "strict_min_version": "57.0"
             }
@@ -113,7 +113,7 @@
         {
           "version": "4.3.0beta1",
           "update_link": "https://github.com/sneakypete81/updatescanner/releases/download/4.3.0beta1/update_scanner-4.3.0beta1-an.fx.xpi",
-          "applications": {
+          "browser_specific_settings": {
             "gecko": {
               "strict_min_version": "57.0"
             }
@@ -122,7 +122,7 @@
         {
           "version": "4.3.0beta2",
           "update_link": "https://github.com/sneakypete81/updatescanner/releases/download/4.3.0beta2/update_scanner-4.3.0beta2-an.fx.xpi",
-          "applications": {
+          "browser_specific_settings": {
             "gecko": {
               "strict_min_version": "57.0"
             }
