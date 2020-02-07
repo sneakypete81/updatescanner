@@ -144,15 +144,18 @@ export class Background {
    * @param {ScanResult} result - Object containing the result of the scan.
    */
   _handleScanComplete({majorChanges, scanCount, isManualScan}) {
-    log(`Scan complete, ${majorChanges} new changes.`);
-    log(`${scanCount} pages scanned.`);
+    // Wait for pageStore to be fully updated before triggering the notification
+    window.setTimeout(() => {
+      log(`Scan complete, ${majorChanges} new changes.`);
+      log(`${scanCount} pages scanned.`);
 
-    // If the user has already viewed some changes, don't include in the count
-    const changeCount = this.pageStore.getChangedPageList().length;
-    const notifyChangeCount = Math.min(majorChanges, changeCount);
+      // If the user has already viewed some changes, don't include in the count
+      const changeCount = this.pageStore.getChangedPageList().length;
+      const notifyChangeCount = Math.min(majorChanges, changeCount);
 
-    if (notifyChangeCount > 0 || isManualScan) {
-      showNotification(notifyChangeCount);
-    }
+      if (notifyChangeCount > 0 || isManualScan) {
+        showNotification(notifyChangeCount);
+      }
+    }, 1000);
   }
 }
