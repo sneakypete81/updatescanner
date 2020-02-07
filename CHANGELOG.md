@@ -1,5 +1,9 @@
 # Update Scanner Changelog
 
+## 4.6.0beta2
+
+* Fix issue that prevented editing of page properties
+
 ## 4.6.0beta1
 
 * Add basic support for element selection (#596 thanks to @adadsamcik)
