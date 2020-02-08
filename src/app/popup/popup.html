@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <link rel="stylesheet" href="chrome://browser/content/extension.css" />
-  <link rel="stylesheet" href="popup.css" />
+  <meta charset="utf-8"/>
+  <link rel="stylesheet" href="chrome://browser/content/extension.css"/>
+  <link rel="stylesheet" href="popup.css"/>
 </head>
 
 <body>
@@ -18,8 +18,14 @@
       <div id="list" class="panel-list-content"></div>
     </div>
 
+    <div class="panel-section panel-section-queue-state hidden" id="scan-state">
+      <div id="scan-state-title" class="text-section-header"></div>
+    </div>
+
     <div class="panel-section panel-section-footer">
-      <div id="show-all-button" class="panel-section-footer-button default">Show All Updates</div>
+      <div id="show-all-button" class="panel-section-footer-button default">
+        Show All Updates
+      </div>
     </div>
 
     <div>
@@ -51,7 +57,7 @@
     </div>
   </div>
 
-<!-- -->
+  <!-- -->
 
   <div id="backup-panel" class="panel hidden">
     <div class="panel-section panel-section-header">

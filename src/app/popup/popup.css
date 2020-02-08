@@ -16,6 +16,17 @@ html body {
   background-image: url('/images/updatescanner_32.png');
 }
 
+.panel-section-queue-state {
+  padding: 4px;
+  width: 100%;
+  background: #ffe900;
+}
+
+.panel-section-queue-state .text-section-header {
+  text-align: center;
+  width: 100%;
+}
+
 .panel-section-list {
   flex: auto;
   padding: 0;

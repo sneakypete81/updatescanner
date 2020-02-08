@@ -1,4 +1,4 @@
-import {backgroundActionEnum} from './actions.js';
+import {backgroundActionEnum, uiActionsEnum} from './actions.js';
 import {Autoscan} from '/lib/scan/autoscan.js';
 import {ScanQueue} from '/lib/scan/scan_queue.js';
 import {showNotification} from '/lib/scan/notification.js';
@@ -38,6 +38,9 @@ export class Background {
 
     this.scanQueue = new ScanQueue();
     this.scanQueue.bindScanComplete(this._handleScanComplete.bind(this));
+    this.scanQueue.bindQueueStateChange(
+      this._handleScanQueueStateChange.bind(this),
+    );
 
     this._refreshIcon();
     this.pageStore.refreshFolderState();
@@ -66,12 +69,20 @@ export class Background {
    * Called when a message is sent to the background process.
    *
    * @param {object} message - Message content.
+   * @param {object} sender - Object giving details about the message sender.
+   * @param {Function} sendResponse - Function that can be used to send a
+   *   response back to the sender.
    */
-  _handleMessage(message) {
+  _handleMessage(message, sender, sendResponse) {
     if (message.action === backgroundActionEnum.SCAN_ALL) {
       this._scanAll();
     } else if (message.action === backgroundActionEnum.SCAN_ITEM) {
       this._scanItem(message.itemId);
+    } else if (message.action === uiActionsEnum.QUEUE_STATE_REQUEST) {
+      this._handleScanQueueStateChange(
+        this.scanQueue.getScanState(),
+        sendResponse,
+      );
     }
   }
 
@@ -157,5 +168,25 @@ export class Background {
         showNotification(notifyChangeCount);
       }
     }, 1000);
+  }
+
+  /**
+   * Called whenever scan queue state changes and sends message to other
+   * listeners.
+   *
+   * @param {object} stateData - Scan queue state data.
+   * @param {?Function} sendResponse - Response function.
+   * @private
+   */
+  _handleScanQueueStateChange(stateData, sendResponse) {
+    const message = {
+      action: uiActionsEnum.QUEUE_STATE_CHANGED,
+      data: stateData,
+    };
+    if (sendResponse != null) {
+      sendResponse(message);
+    } else {
+      browser.runtime.sendMessage(message);
+    }
   }
 }
