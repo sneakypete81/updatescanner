@@ -41,7 +41,7 @@ const uploadXpi = async function(xpiPath, uploadUrl) {
 
   const uploadParams = {
     url: uploadUrl,
-    file: fs.readFileSync(xpiPath),
+    data: fs.readFileSync(xpiPath),
     name: filename,
     headers: {
       'content-type': 'application/x-xpinstall',

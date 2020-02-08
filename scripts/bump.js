@@ -60,9 +60,10 @@ rl.question('New version: ', (newVersion) => {
   manifestPatcher.set('version', newVersion);
 
   if (newVersion.includes('beta')) {
-    const appsProperties = manifestPatcher.get('applications');
-    const strictMinVersion = appsProperties.gecko.strict_min_version;
-    const addonId = appsProperties.gecko.id;
+    const browserSpecificSettings =
+      manifestPatcher.get('browser_specific_settings');
+    const strictMinVersion = browserSpecificSettings.gecko.strict_min_version;
+    const addonId = browserSpecificSettings.gecko.id;
     updatePatcher.addVersion(newVersion, strictMinVersion, addonId);
   }
 
