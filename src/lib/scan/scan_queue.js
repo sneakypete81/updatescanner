@@ -129,19 +129,13 @@ export class ScanQueue {
    *   queue state enum.
    */
   getScanState() {
-    if (this._isScanning) {
-      return {
-        state: scanQueueStateEnum.ACTIVE,
-        queueLength: this.queue.length,
-        scanned: this._scanCompleteCount,
-      };
-    } else {
-      return {
-        state: scanQueueStateEnum.INACTIVE,
-        queueLength: 0,
-        scanned: 0,
-      };
-    }
+    return {
+      state: this._isScanning ?
+        scanQueueStateEnum.ACTIVE :
+        scanQueueStateEnum.INACTIVE,
+      queueLength: this.queue.length,
+      scanned: this._scanCompleteCount,
+    };
   }
 
   /**
