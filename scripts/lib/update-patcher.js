@@ -23,7 +23,7 @@ exports.addVersion = function(newVersion, strictMinVersion, addonId) {
   const newUpdate = {
     version: newVersion,
     update_link: `https://github.com/sneakypete81/updatescanner/releases/download/${newVersion}/update_scanner-${newVersion}-an.fx.xpi`,
-    applications: {gecko: {strict_min_version: strictMinVersion}},
+    browser_specific_settings: {gecko: {strict_min_version: strictMinVersion}},
   };
 
   updates.addons[addonId].updates.unshift(newUpdate);
