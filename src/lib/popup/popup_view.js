@@ -115,7 +115,7 @@ export async function downloadUrl(url, filename) {
  */
 export function setScanState(queueData) {
   const scanStateUI = qs('#scan-state');
-  const textWrapper = qs('.text-section-header', scanStateUI);
+  const textWrapper = qs('#scan-state-title', scanStateUI);
   if (queueData.state === scanQueueStateEnum.ACTIVE) {
     showElement(scanStateUI);
     const total = queueData.scanned + queueData.queueLength;
