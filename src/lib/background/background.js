@@ -50,8 +50,7 @@ export class Background {
       this._handleScanQueueStateChange.bind(this),
     );
 
-    browser.browserAction.setIcon({path: defaultIcon});
-    this._refreshIcon();
+    this._refreshToolbar();
     this.pageStore.refreshFolderState();
     await this._checkFirstRun();
     await this._checkIfUpdateRequired();
@@ -69,7 +68,7 @@ export class Background {
    */
   _handlePageUpdate(pageId, change) {
     if (hasPageStateChanged(change)) {
-      this._refreshIcon();
+      this._refreshToolbar();
       this.pageStore.refreshFolderState();
     }
   }
@@ -98,15 +97,36 @@ export class Background {
   /**
    * Refresh the browserAction icon and badge text.
    */
-  _refreshIcon() {
+  _refreshToolbar() {
     const updateCount = this.pageStore.getPageList()
       .filter(isItemChanged).length;
 
-    if (updateCount === 0) {
-      browser.browserAction.setBadgeText({text: ''});
-    } else {
-      browser.browserAction.setBadgeText({text: updateCount.toString()});
-    }
+    const queueState = this.scanQueue.getScanState();
+    const isActive = queueState.state === scanQueueStateEnum.ACTIVE;
+
+    this._refreshIcon(isActive ? scanIcon : defaultIcon);
+    this._refreshBadge(updateCount === 0 ? '' : updateCount.toString());
+  }
+
+  /**
+   * Refreshes toolbar icon.
+   *
+   * @param {object} iconPath - Path to icon.
+   * @private
+   */
+  _refreshIcon(iconPath) {
+    browser.browserAction.setIcon({path: iconPath});
+  }
+
+  /**
+   * Refreshes toolbar icon badge text.
+   * Empty string removes the badge.
+   *
+   * @param {string} text - Text.
+   * @private
+   */
+  _refreshBadge(text) {
+    browser.browserAction.setBadgeText({text: text});
   }
 
   /**
@@ -197,10 +217,6 @@ export class Background {
       browser.runtime.sendMessage(message);
     }
 
-    if (stateData.state === scanQueueStateEnum.ACTIVE) {
-      browser.browserAction.setIcon({path: scanIcon});
-    } else {
-      browser.browserAction.setIcon({path: defaultIcon});
-    }
+    this._refreshToolbar();
   }
 }
