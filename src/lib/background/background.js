@@ -10,14 +10,14 @@ import {log} from '/lib/util/log.js';
 import {Config} from '/lib/util/config.js';
 
 const defaultIcon = {
-  18: '/images/updatescanner_18.png',
+  18: '/images/updatescanner_16.png',
   48: '/images/updatescanner_48.png',
   64: '/images/updatescanner_64.png',
   96: '/images/updatescanner_96.png',
 };
 
 const scanIcon = {
-  18: '/images/updatescanner_18_scan.png',
+  18: '/images/updatescanner_16_scan.png',
   48: '/images/updatescanner_48_scan.png',
   64: '/images/updatescanner_64_scan.png',
   96: '/images/updatescanner_96_scan.png',
