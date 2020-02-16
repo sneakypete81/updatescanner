@@ -1,6 +1,6 @@
 import {backgroundActionEnum, uiActionsEnum} from './actions.js';
 import {Autoscan} from '/lib/scan/autoscan.js';
-import {ScanQueue} from '/lib/scan/scan_queue.js';
+import {ScanQueue, scanQueueStateEnum} from '/lib/scan/scan_queue.js';
 import {showNotification} from '/lib/scan/notification.js';
 import {PageStore, hasPageStateChanged, isItemChanged}
   from '/lib/page/page_store.js';
@@ -9,10 +9,18 @@ import {openUpdate} from '/lib/update/update_url.js';
 import {log} from '/lib/util/log.js';
 import {Config} from '/lib/util/config.js';
 
-const activeIcon = {
+const defaultIcon = {
   18: '/images/updatescanner_18.png',
   48: '/images/updatescanner_48.png',
   64: '/images/updatescanner_64.png',
+  96: '/images/updatescanner_96.png',
+};
+
+const scanIcon = {
+  18: '/images/updatescanner_18_scan.png',
+  48: '/images/updatescanner_48_scan.png',
+  64: '/images/updatescanner_64_scan.png',
+  96: '/images/updatescanner_96_scan.png',
 };
 
 /**
@@ -42,7 +50,7 @@ export class Background {
       this._handleScanQueueStateChange.bind(this),
     );
 
-    this._refreshIcon();
+    this._refreshToolbar();
     this.pageStore.refreshFolderState();
     await this._checkFirstRun();
     await this._checkIfUpdateRequired();
@@ -60,7 +68,7 @@ export class Background {
    */
   _handlePageUpdate(pageId, change) {
     if (hasPageStateChanged(change)) {
-      this._refreshIcon();
+      this._refreshToolbar();
       this.pageStore.refreshFolderState();
     }
   }
@@ -89,16 +97,36 @@ export class Background {
   /**
    * Refresh the browserAction icon and badge text.
    */
-  _refreshIcon() {
+  _refreshToolbar() {
     const updateCount = this.pageStore.getPageList()
       .filter(isItemChanged).length;
 
-    browser.browserAction.setIcon({path: activeIcon});
-    if (updateCount === 0) {
-      browser.browserAction.setBadgeText({text: ''});
-    } else {
-      browser.browserAction.setBadgeText({text: updateCount.toString()});
-    }
+    const queueState = this.scanQueue.getScanState();
+    const isActive = queueState.state === scanQueueStateEnum.ACTIVE;
+
+    this._refreshIcon(isActive ? scanIcon : defaultIcon);
+    this._refreshBadge(updateCount === 0 ? '' : updateCount.toString());
+  }
+
+  /**
+   * Refreshes toolbar icon.
+   *
+   * @param {object} iconPath - Path to icon.
+   * @private
+   */
+  _refreshIcon(iconPath) {
+    browser.browserAction.setIcon({path: iconPath});
+  }
+
+  /**
+   * Refreshes toolbar icon badge text.
+   * Empty string removes the badge.
+   *
+   * @param {string} text - Text.
+   * @private
+   */
+  _refreshBadge(text) {
+    browser.browserAction.setBadgeText({text: text});
   }
 
   /**
@@ -188,5 +216,7 @@ export class Background {
     } else {
       browser.runtime.sendMessage(message);
     }
+
+    this._refreshToolbar();
   }
 }
