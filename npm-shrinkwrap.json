@@ -90,9 +90,9 @@
       }
     },
     "@octokit/core": {
-      "version": "2.4.1",
-      "resolved": "https://registry.npmjs.org/@octokit/core/-/core-2.4.1.tgz",
-      "integrity": "sha512-cpMyyiD5R0jDoYwtSKcbZYn4xFOw5f72jq/NcnOHt8DV584ff4C1t4whPI8jhXqaSu5vUGVvoke/mUdtO/T2Fg==",
+      "version": "2.4.2",
+      "resolved": "https://registry.npmjs.org/@octokit/core/-/core-2.4.2.tgz",
+      "integrity": "sha512-fUx/Qt774cgiPhb3HRKfdl6iufVL/ltECkwkCg373I4lIPYvAPY4cbidVZqyVqHI+ThAIlFlTW8FT4QHChv3Sg==",
       "dev": true,
       "requires": {
         "@octokit/auth-token": "^2.4.0",
@@ -100,18 +100,18 @@
         "@octokit/request": "^5.3.1",
         "@octokit/types": "^2.0.0",
         "before-after-hook": "^2.1.0",
-        "universal-user-agent": "^4.0.0"
+        "universal-user-agent": "^5.0.0"
       }
     },
     "@octokit/endpoint": {
-      "version": "5.5.2",
-      "resolved": "https://registry.npmjs.org/@octokit/endpoint/-/endpoint-5.5.2.tgz",
-      "integrity": "sha512-ICDcRA0C2vtTZZGud1nXRrBLXZqFayodXAKZfo3dkdcLNqcHsgaz3YSTupbURusYeucSVRjjG+RTcQhx6HPPcg==",
+      "version": "5.5.3",
+      "resolved": "https://registry.npmjs.org/@octokit/endpoint/-/endpoint-5.5.3.tgz",
+      "integrity": "sha512-EzKwkwcxeegYYah5ukEeAI/gYRLv2Y9U5PpIsseGSFDk+G3RbipQGBs8GuYS1TLCtQaqoO66+aQGtITPalxsNQ==",
       "dev": true,
       "requires": {
         "@octokit/types": "^2.0.0",
         "is-plain-object": "^3.0.0",
-        "universal-user-agent": "^4.0.0"
+        "universal-user-agent": "^5.0.0"
       },
       "dependencies": {
         "is-plain-object": {
@@ -140,12 +140,23 @@
         "@octokit/request": "^5.3.0",
         "@octokit/types": "^2.0.0",
         "universal-user-agent": "^4.0.0"
+      },
+      "dependencies": {
+        "universal-user-agent": {
+          "version": "4.0.1",
+          "resolved": "https://registry.npmjs.org/universal-user-agent/-/universal-user-agent-4.0.1.tgz",
+          "integrity": "sha512-LnST3ebHwVL2aNe4mejI9IQh2HfZ1RLo8Io2HugSif8ekzD1TlWpHpColOB/eh8JHMLkGH3Akqf040I+4ylNxg==",
+          "dev": true,
+          "requires": {
+            "os-name": "^3.1.0"
+          }
+        }
       }
     },
     "@octokit/plugin-paginate-rest": {
-      "version": "2.0.1",
-      "resolved": "https://registry.npmjs.org/@octokit/plugin-paginate-rest/-/plugin-paginate-rest-2.0.1.tgz",
-      "integrity": "sha512-xtW3AQoGDD0un/AkPjIndTdFO+O/My0I15TArvrbJirBCV91R1ElrE3gRcsUJENP3t/vveiQ9C6XQjo9sS2xQg==",
+      "version": "2.0.2",
+      "resolved": "https://registry.npmjs.org/@octokit/plugin-paginate-rest/-/plugin-paginate-rest-2.0.2.tgz",
+      "integrity": "sha512-HzODcSUt9mjErly26TlTOGZrhf9bmF/FEDQ2zln1izhgmIV6ulsjsHmgmR4VZ0wzVr/m52Eb6U2XuyS8fkcR1A==",
       "dev": true,
       "requires": {
         "@octokit/types": "^2.0.1"
@@ -158,9 +169,9 @@
       "dev": true
     },
     "@octokit/plugin-rest-endpoint-methods": {
-      "version": "3.1.1",
-      "resolved": "https://registry.npmjs.org/@octokit/plugin-rest-endpoint-methods/-/plugin-rest-endpoint-methods-3.1.1.tgz",
-      "integrity": "sha512-mQT+6FL4dqOaUpzLbi6HW38DkLuOf4b303ryvMsciMbAMLLJr6iWsShWjCUFUsc9NXz49sZNuOMGTNym94Krag==",
+      "version": "3.2.0",
+      "resolved": "https://registry.npmjs.org/@octokit/plugin-rest-endpoint-methods/-/plugin-rest-endpoint-methods-3.2.0.tgz",
+      "integrity": "sha512-k+RLsegQn4s0wvAFYuk3R18FVKRg3ktvzIGW6MkmrSiSXBwYfaEsv4CuPysyef0DL+74DRj/X9MLJYlbleUO+Q==",
       "dev": true,
       "requires": {
         "@octokit/types": "^2.0.1",
@@ -168,9 +179,9 @@
       }
     },
     "@octokit/request": {
-      "version": "5.3.1",
-      "resolved": "https://registry.npmjs.org/@octokit/request/-/request-5.3.1.tgz",
-      "integrity": "sha512-5/X0AL1ZgoU32fAepTfEoggFinO3rxsMLtzhlUX+RctLrusn/CApJuGFCd0v7GMFhF+8UiCsTTfsu7Fh1HnEJg==",
+      "version": "5.3.2",
+      "resolved": "https://registry.npmjs.org/@octokit/request/-/request-5.3.2.tgz",
+      "integrity": "sha512-7NPJpg19wVQy1cs2xqXjjRq/RmtSomja/VSWnptfYwuBxLdbYh2UjhGi0Wx7B1v5Iw5GKhfFDQL7jM7SSp7K2g==",
       "dev": true,
       "requires": {
         "@octokit/endpoint": "^5.5.0",
@@ -180,7 +191,7 @@
         "is-plain-object": "^3.0.0",
         "node-fetch": "^2.3.0",
         "once": "^1.4.0",
-        "universal-user-agent": "^4.0.0"
+        "universal-user-agent": "^5.0.0"
       },
       "dependencies": {
         "is-plain-object": {
@@ -212,9 +223,9 @@
       }
     },
     "@octokit/rest": {
-      "version": "17.0.0",
-      "resolved": "https://registry.npmjs.org/@octokit/rest/-/rest-17.0.0.tgz",
-      "integrity": "sha512-nSlmyy1DBEOsC4voRbk/SN56V/iuZfxZzjFFz+ocb2MAYwHC+z1TyVOMV9W630dVn9ukioJO34VD5NSYwcgFWg==",
+      "version": "17.0.1",
+      "resolved": "https://registry.npmjs.org/@octokit/rest/-/rest-17.0.1.tgz",
+      "integrity": "sha512-5ANlzTxKxkYjh1xLRAJFATv6Lt73WgmUHGZJCPDmKjt/EN4sSaNbdELKnacuUPgkA2COkWtR8eUViWY9SMN1Bg==",
       "dev": true,
       "requires": {
         "@octokit/core": "^2.4.0",
@@ -224,9 +235,9 @@
       }
     },
     "@octokit/types": {
-      "version": "2.1.1",
-      "resolved": "https://registry.npmjs.org/@octokit/types/-/types-2.1.1.tgz",
-      "integrity": "sha512-89LOYH+d/vsbDX785NOfLxTW88GjNd0lWRz1DVPVsZgg9Yett5O+3MOvwo7iHgvUwbFz0mf/yPIjBkUbs4kxoQ==",
+      "version": "2.3.2",
+      "resolved": "https://registry.npmjs.org/@octokit/types/-/types-2.3.2.tgz",
+      "integrity": "sha512-3nyOEch20ISn6MbVt/mBeDOkxO4ljx3oV+CnYNUT8n0JtUuMs0LpewZXpZ4ZWarI72qKc/YkxK9dkfjpncxuvg==",
       "dev": true,
       "requires": {
         "@types/node": ">= 8"
@@ -8687,9 +8698,9 @@
       }
     },
     "universal-user-agent": {
-      "version": "4.0.0",
-      "resolved": "https://registry.npmjs.org/universal-user-agent/-/universal-user-agent-4.0.0.tgz",
-      "integrity": "sha512-eM8knLpev67iBDizr/YtqkJsF3GK8gzDc6st/WKzrTuPtcsOKW/0IdL4cnMBsU69pOx0otavLWBDGTwg+dB0aA==",
+      "version": "5.0.0",
+      "resolved": "https://registry.npmjs.org/universal-user-agent/-/universal-user-agent-5.0.0.tgz",
+      "integrity": "sha512-B5TPtzZleXyPrUMKCpEHFmVhMN6EhmJYjG5PQna9s7mXeSqGTLap4OpqLl5FCEFUI3UBmllkETwKf/db66Y54Q==",
       "dev": true,
       "requires": {
         "os-name": "^3.1.0"
