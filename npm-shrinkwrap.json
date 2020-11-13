@@ -2182,9 +2182,9 @@
       "dev": true
     },
     "dialog-polyfill": {
-      "version": "0.5.0",
-      "resolved": "https://registry.npmjs.org/dialog-polyfill/-/dialog-polyfill-0.5.0.tgz",
-      "integrity": "sha512-fOj68T8KB6UIsDFmK7zYbmORJMLYkRmtsLM1W6wbCVUWu4Hdcud5bqbvuueTxO84JXtK9HcpCHV9vNwlWUdCIw=="
+      "version": "0.5.4",
+      "resolved": "https://registry.npmjs.org/dialog-polyfill/-/dialog-polyfill-0.5.4.tgz",
+      "integrity": "sha512-LqQvIky9+qIFD7MCESOXdMZc4ObCdEbzbuvnPJVCiRXKQMzMjpQKK50UI+2sj0bJBPKn6ugPpMRpuLrgYc4RjA=="
     },
     "dispensary": {
       "version": "0.51.2",
