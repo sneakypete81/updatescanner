@@ -4556,9 +4556,9 @@
       }
     },
     "jstree": {
-      "version": "3.3.8",
-      "resolved": "https://registry.npmjs.org/jstree/-/jstree-3.3.8.tgz",
-      "integrity": "sha512-0/nhGxVLSGfGQyVg+q59ocqSEKWRDKHoA8wNrcOIvlzCCw19tzvcMNGJ19hf+U0b7fycABowkny7fQPcLgUwwA==",
+      "version": "3.3.11",
+      "resolved": "https://registry.npmjs.org/jstree/-/jstree-3.3.11.tgz",
+      "integrity": "sha512-9ZJKroPjCyjb6JLPuAbBrLJKT6pS1f4m5gkwoEagG5oQWtvzm0IiDsntXTxeFtz7AmqrKfij+gLfF9MgWriNxg==",
       "requires": {
         "jquery": ">=1.9.1"
       }
