@@ -15,6 +15,7 @@
     "48": "images/updatescanner_48.png",
     "96": "images/updatescanner_96.png"
   },
+  "content_security_policy": "default-src 'none'; script-src 'self'; object-src 'self'; connect-src 'none'; base-uri 'none';",
   "permissions": [
     "<all_urls>",
     "alarms",
